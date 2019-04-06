@@ -12,6 +12,7 @@
                         <option [selected]="true" value="job">شغل سازمانی</option>
                         <option  value="educationalModule">پودمان آموزشی</option>
                         <option  value="person">اطلاعات پرسنل</option>
+                        <option  value="teacher">مدرسان آموزشی</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -239,6 +240,120 @@
                             <td>
                                 تاریخ استخدام<br/>
                                 اختیاریست<br/>
+                                لطفا به شمسی و فقط و فقط به شکل زیر وارد نمائید.<br/>
+                                1395-12-30<br/>
+                                روز-ماه-سال
+                            </td>
+                            <td>
+                                آخرین مدرک تحصیلی<br/>
+                                اختیاریست<br/>
+                                حتما باید در جدول مدارک تحصیلی ردیفی با این شناسه وجود داشته باشد.<br/>
+                                <a class="enableLink" href="#/qualification-marine-suffix">لینک جدول مدارک تحصیلی</a><br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                آخرین رشته نحصیلی<br/>
+                                اختیاریست<br/>
+                                حتما باید در جدول رشته های تحصیلی ردیفی با این شناسه وجود داشته باشد.<br/>
+                                <a class="enableLink" href="#/field-of-study-marine-suffix">لینک جدول رشته های تحصیلی</a><br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table *ngSwitchCase="'teacher'" class="table table-sm table-striped table-bordered table-responsive" style="width: 100%">
+                        <tr>
+                            <td>
+                                1- phone_number *
+                            </td>
+                            <td>
+                                2- name *
+                            </td>
+                            <td>
+                                3- family *
+                            </td>
+                            <td>
+                                4- father_name *
+                            </td>
+                            <td>
+                                5- scientific_basis *
+                            </td>
+                            <td>
+                                6- inquiry *
+                            </td>
+                            <td>
+                                7- school_confirmation *
+                            </td>
+                            <td>
+                                8- protective_approval *
+                            </td>
+                            <td>
+                                9- teaching_subject *
+                            </td>
+                            <td>
+                                10- expiration_date
+                            </td>
+                            <td>
+                                11- last_qualification_id
+                            </td>
+                            <td>
+                                12- last_field_of_study_id
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                شماره موبایل<br/>
+                                اجباریست<br/>
+                                حتما باید یکتا باشد.<br/>
+                                حداکثر 18 رقمی<br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                نام<br/>
+                                اجباریست<br/>
+                                حداکثر 100 کاراکتر<br/>
+                            </td>
+                            <td>
+                                نام خانوادگی<br/>
+                                اجباریست<br/>
+                                حداکثر 100 کاراکتر<br/>
+                            </td>
+                            <td>
+                                نام پدر<br/>
+                                اجباریست<br/>
+                                حداکثر 100 کاراکتر<br/>
+                            </td>
+                            <td>
+                                پایه علمی<br/>
+                                اجباریست<br/>
+                                حداکثر عدد 30<br/>
+                                فقط عدد میتواند باشد.<br/>
+                            </td>
+                            <td>
+                                استعلام<br/>
+                                اجباریست<br/>
+                                برای داشتن عدد "1"<br/>
+                                و برای نداشتن عدد "0"<br/>
+                            </td>
+                            <td>
+                                تاییدیه مکتبی<br/>
+                                اجباریست<br/>
+                                برای داشتن عدد "1"<br/>
+                                و برای نداشتن عدد "0"<br/>
+                            </td>
+                            <td>
+                                تاییدیه حفاظتی<br/>
+                                اجباریست<br/>
+                                برای داشتن عدد "1"<br/>
+                                و برای نداشتن عدد "0"<br/>
+                            </td>
+                            <td>
+                                موضوع تدریس<br/>
+                                اجباریست<br/>
+                                حداکثر 1024 کاراکتر<br/>
+                            </td>
+                            <td>
+                                تاریخ اتمام اعتبار<br/>
+                                اجباریست<br/>
                                 لطفا به شمسی و فقط و فقط به شکل زیر وارد نمائید.<br/>
                                 1395-12-30<br/>
                                 روز-ماه-سال
