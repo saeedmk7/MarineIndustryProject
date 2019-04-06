@@ -1,0 +1,27 @@
+{
+    "marineindustryprojApp": {
+        "serviceUnit" : {
+            "home": {
+                "title": "واحدهای خدمتی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش واحد خدمتی"
+            },
+            "created": "واحد خدمتی با شناسه {{ param }} ایجاد شد.",
+            "updated": "واحد خدمتی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "واحد خدمتی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف واحد خدمتی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات واحد خدمتی"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "teacher": "Teacher"
+        }
+    }
+}

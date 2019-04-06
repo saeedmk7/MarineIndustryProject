@@ -1,0 +1,32 @@
+
+{
+    "marineindustryprojApp": {
+        "scientificWorkGroup" : {
+            "home": {
+                "title": "Scientific Work Groups",
+                "createLabel": "Create a new Scientific Work Group",
+                "createOrEditLabel": "Create or edit a Scientific Work Group"
+            },
+            "created": "A new Scientific Work Group is created with identifier {{ param }}",
+            "updated": "A Scientific Work Group is updated with identifier {{ param }}",
+            "deleted": "A Scientific Work Group is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Scientific Work Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Scientific Work Group"
+            },
+            "title": "Title",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "job": "Job",
+            "niazsanjiGroup": "Niazsanji Group",
+            "person": "Person",
+            "educationalModule": "Educational Module",
+            "requestEducationalModule": "Request Educational Module"
+        }
+    }
+}

@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pollItem">
+            <h2><span jhiTranslate="marineindustryprojApp.pollItem.detail.title">Poll Item</span> {{pollItem.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.pollItem.title">Title</span></dt>
+                <dd>
+                    <span>{{pollItem.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollItem.displayOrder">Display Order</span></dt>
+                <dd>
+                    <span>{{pollItem.displayOrder}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollItem.coefficient">Coefficient</span></dt>
+                <dd>
+                    <span>{{pollItem.coefficient}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollItem.description">Description</span></dt>
+                <dd>
+                    <span>{{pollItem.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollItem.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{pollItem.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollItem.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{pollItem.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollItem.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{pollItem.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollItem.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{pollItem.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollItem.criterion">Criterion</span></dt>
+                <dd>
+                    <div *ngIf="pollItem.criterionId">
+                        <a [routerLink]="['/criterion-marine-suffix', pollItem.criterionId, 'view']">{{pollItem.criterionTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/poll-item-marine-suffix', pollItem.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

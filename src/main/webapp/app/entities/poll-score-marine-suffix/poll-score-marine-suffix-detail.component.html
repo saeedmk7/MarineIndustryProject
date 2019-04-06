@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pollScore">
+            <h2><span jhiTranslate="marineindustryprojApp.pollScore.detail.title">Poll Score</span> {{pollScore.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.pollScore.recommendation">Recommendation</span></dt>
+                <dd>
+                    <span>{{pollScore.recommendation}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollScore.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{pollScore.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollScore.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{pollScore.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollScore.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{pollScore.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollScore.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{pollScore.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollScore.pollItem">Poll Item</span></dt>
+                <dd>
+                    <div *ngIf="pollScore.pollItemId">
+                        <a [routerLink]="['/poll-item-marine-suffix', pollScore.pollItemId, 'view']">{{pollScore.pollItemTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollScore.scoreItem">Score Item</span></dt>
+                <dd>
+                    <div *ngIf="pollScore.scoreItemId">
+                        <a [routerLink]="['/score-item-marine-suffix', pollScore.scoreItemId, 'view']">{{pollScore.scoreItemTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollScore.poll">Poll</span></dt>
+                <dd>
+                    <div *ngIf="pollScore.pollId">
+                        <a [routerLink]="['/poll-marine-suffix', pollScore.pollId, 'view']">{{pollScore.pollMoreRecommendation}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.pollScore.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="pollScore.personId">
+                        <a [routerLink]="['/person-marine-suffix', pollScore.personId, 'view']">{{pollScore.personFamily}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/poll-score-marine-suffix', pollScore.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

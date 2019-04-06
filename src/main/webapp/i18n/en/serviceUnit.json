@@ -1,0 +1,28 @@
+
+{
+    "marineindustryprojApp": {
+        "serviceUnit" : {
+            "home": {
+                "title": "Service Units",
+                "createLabel": "Create a new Service Unit",
+                "createOrEditLabel": "Create or edit a Service Unit"
+            },
+            "created": "A new Service Unit is created with identifier {{ param }}",
+            "updated": "A Service Unit is updated with identifier {{ param }}",
+            "deleted": "A Service Unit is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Service Unit {{ id }}?"
+            },
+            "detail": {
+                "title": "Service Unit"
+            },
+            "title": "Title",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "teacher": "Teacher"
+        }
+    }
+}

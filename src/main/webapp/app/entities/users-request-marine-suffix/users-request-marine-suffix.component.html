@@ -1,0 +1,124 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.usersRequest.home.title">Users Requests</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-users-request-marine-suffix" [routerLink]="['/users-request-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.usersRequest.home.createLabel">
+            Create new Users Request
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="usersRequests">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.usersRequest.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telephone"><span jhiTranslate="marineindustryprojApp.usersRequest.telephone">Telephone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.usersRequest.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.usersRequest.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.usersRequest.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.usersRequest.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.usersRequest.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="conversation"><span jhiTranslate="marineindustryprojApp.usersRequest.conversation">Conversation</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="requestStatus"><span jhiTranslate="marineindustryprojApp.usersRequest.requestStatus">Request Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th *ngIf="isAdmin"></th>
+            <th jhiSortBy="changeStatusUserLogin"><span jhiTranslate="marineindustryprojApp.usersRequest.changeStatusUserLogin">Change Status User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let usersRequest of usersRequests ;trackBy: trackId" [ngClass]="{'accept': usersRequest.requestStatus === 'ACCEPT','ignore': usersRequest.requestStatus === 'IGNORE'}">
+                <td><a [routerLink]="['/users-request-marine-suffix', usersRequest.id, 'view' ]">{{usersRequest.id}}</a></td>
+                <td>{{usersRequest.title}}</td>
+                <td>{{usersRequest.telephone}}</td>
+                <td>{{usersRequest.description}}</td>
+                <td>{{usersRequest.createUserLogin}}</td>
+                <td>{{usersRequest.createDate}}</td>
+                <!--<td>{{usersRequest.modifyUserLogin}}</td>
+                <td>{{usersRequest.modifyDate | date:'medium'}}</td>
+                <td>{{usersRequest.conversation}}</td>-->
+                <td jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + usersRequest.requestStatus}}">{{usersRequest.requestStatus}}</td>
+                <td *ngIf="isAdmin">
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <fa-icon [icon]="'lightbulb'"></fa-icon>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <button class="dropdown-item" (click)="changeStatus(usersRequest, 'NEW')">{{'marineindustryprojApp.RequestStatus.NEW' | translate}}</button>
+                            <button class="dropdown-item" (click)="changeStatus(usersRequest,'READ')">{{'marineindustryprojApp.RequestStatus.READ' | translate}}</button>
+                            <button class="dropdown-item" (click)="changeStatus(usersRequest,'RETURNED')">{{'marineindustryprojApp.RequestStatus.RETURNED' | translate}}</button>
+                            <button class="dropdown-item" (click)="changeStatus(usersRequest,'IGNORE')">{{'marineindustryprojApp.RequestStatus.IGNORE' | translate}}</button>
+                            <button class="dropdown-item" (click)="changeStatus(usersRequest,'ACCEPT')">{{'marineindustryprojApp.RequestStatus.ACCEPT' | translate}}</button>
+                        </div>
+                    </div>
+                </td>
+                <td>{{usersRequest.changeStatusUserLogin}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../document-marine-suffix', 'usersrequest',usersRequest.id ]"
+                                *ngIf="isAdmin || usersRequest.requestStatus == 'NEW'"
+                                class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.documents">Documents</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/users-request-marine-suffix', usersRequest.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+
+                        <button type="submit"
+                                [routerLink]="['/users-request-marine-suffix', usersRequest.id, 'edit']"
+                                *ngIf="isAdmin || usersRequest.requestStatus == 'NEW' || usersRequest.requestStatus == 'READ'"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" *ngIf="isAdmin"
+                                [routerLink]="['/', { outlets: { popup: 'users-request-marine-suffix/'+ usersRequest.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="10">
+                    <div *ngIf="usersRequests && usersRequests.length">
+
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+</div>

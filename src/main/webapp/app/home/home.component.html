@@ -1,0 +1,193 @@
+<div *ngIf="isAuthenticated()">
+    <div class="row home-row">
+        <div >
+            <div class="divContent" [@enterAnimation]>
+                <div *ngIf="badError" class="alert alert-danger">
+                    <span class="text-center">
+                    {{badError}}
+                        </span>
+                </div>
+
+
+                <ng-container *ngIf="isSuperUsers">
+                    <p style="text-align: center; direction: rtl; font-family: IranSans, SansSerif, IranYekan">
+                        سال نیازسنجی:
+                        <select style="display: inline-block; text-align: center" [(ngModel)]="selectedNiazsanjiYear" id="selectedYear" name="selectedYear" (change)="makeChartResult()">
+                            <option [ngValue]="year" [selected]="year == selectedNiazsanjiYear" *ngFor="let year of years">{{year}}</option>
+                        </select>
+                    </p>
+                    <div [chart]="personHourChart"></div>
+                    <div [chart]="priceCostChart"></div>
+                </ng-container>
+
+                <ng-container *ngIf="isAdmin" [ngSwitch]="pageName">
+                    <div class="div-pic-home" *ngSwitchCase="'home'"  [@enterAnimation]>
+                        <img class="img-home" src="../../content/images/home/ShotTerm-Learning.png"/>
+                        <div (click)="changePage('niazsanjishow')" class="niazsanjiLink" > </div>
+                        <a href="#/final-niazsanji-report-marine-suffix" class="planningLink" > </a>
+                        <div (click)="changePage('niazsanjishow')" class="runningLink" > </div>
+                        <div (click)="changePage('niazsanjishow')" class="reportLink" > </div>
+                    </div>
+                    <div class="div-pic-home" *ngSwitchCase="'niazsanjishow'" [@updownAnimation]>
+                        <div class="Item1 table-home niazsanjiPage">
+                            <table cellspacing="2" cellpadding="0" style="border:0px;">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <a class="HomeBox" href="#/request-niazsanji-fardi-marine-suffix" style="opacity: 1;background-color: orangered;">
+                                            <img src="../../content/images/home/man.png">
+                                            <div class="HomeBoxTitle">درخواست نیازسنجی فردی</div>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="HomeBox" href="#/niazsanji-fardi-marine-suffix" style="opacity: 1;background-color: darkseagreen;">
+                                            <img src="../../content/images/home/archives.png">
+                                            <div class="HomeBoxTitle">فهرست نهایی شده نیازسنجی فردی</div>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a class="HomeBox" href="#/request-organization-niazsanji-marine-suffix" style="opacity: 1;    background-color: darkslateblue;">
+                                            <img src="../../content/images/home/teamwork.png">
+                                            <div class="HomeBoxTitle">تعریف دوره های متمرکز</div>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="HomeBox" href="#/final-organization-niazsanji-marine-suffix" style="opacity: 1;background-color: mediumseagreen;">
+                                            <img src="../../content/images/home/archives.png">
+                                            <div class="HomeBoxTitle">فهرست نهایی شده دوره های متمرکز</div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody></table>
+
+                        </div>
+                        <div>
+                            <button onclick="window.history.back()" class="btn btn-info">بازگشت</button>
+                        </div>
+                    </div>
+                    <div class="div-pic-home" *ngSwitchCase="'niazsanjigroupshow'" [@enterAnimation]>
+                        <div class="table-home niazsanjiPage">
+                            <table cellspacing="2" cellpadding="0" style="border:0px;">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <a class="HomeBox" href="#/niazsanji-group-marine-suffix" style="opacity: 1;background-color: darkseagreen;">
+                                            <img src="../../content/images/home/reunion.png">
+                                            <div class="HomeBoxTitle">تعریف گروهی دوره آموزشی</div>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="HomeBox" href="#/educational-module-job-marine-suffix" style="opacity: 1;background-color: darkslateblue;">
+                                            <img src="../../content/images/home/account.png"/>
+                                            <div class="HomeBoxTitle">تخصیص پودمان به گروه های شغلی</div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody></table>
+                        </div>
+                        <div>
+                            <button onclick="window.history.back()" class="btn btn-info">بازگشت</button>
+                        </div>
+                    </div>
+                </ng-container>
+                <div  class="table-home" [ngClass]="{'other-user-news': !isSuperUsers}">
+                    <table *ngIf="isAdmin" cellspacing="2" cellpadding="0" style="border:0px;">
+                        <tbody><tr>
+                            <td style="width:37%;text-align:center;padding-right:15px">
+                                <a class="HomeBox" href="#" style="opacity: 1;">
+                                    <img src="../../content/images/home/Process.png">
+                                    <div class="HomeBoxTitle">  </div>
+                                </a>
+                                <a class="HomeBox" href="#" style="opacity: 1;">
+                                    <img src="../../content/images/home/Class.png">
+                                    <div class="HomeBoxTitle">  </div>
+                                </a>
+                                <a class="HomeBox" href="#" style="opacity: 1;">
+                                    <img src="../../content/images/home/Evaluation.png">
+                                    <div class="HomeBoxTitle">  </div>
+                                </a>
+                                <a routerLink="person-marine-suffix">
+                                <a class="HomeBox" href="#/person-marine-suffix" style="opacity: 1;">
+                                    <img src="../../content/images/home/Personel.png">
+                                    <div class="HomeBoxTitle">پرسنل</div>
+                                </a>
+                                </a>
+                                <a class="HomeBox" href="#/educational-module-marine-suffix" style="opacity: 1;">
+                                    <img src="../../content/images/home/Course.png">
+                                    <div class="HomeBoxTitle">پودمان ها</div>
+                                </a>
+                                <a class="HomeBox" href="#" style="opacity: 1;">
+                                    <img src="../../content/images/home/Report.png">
+                                    <div class="HomeBoxTitle">گزارشات</div>
+                                </a>
+
+                                <a class="HomeBox" href="#" style="opacity: 1;">
+                                    <img src="../../content/images/home/Help.png">
+                                    <div class="HomeBoxTitle">راهنما</div>
+                                </a>
+                                <a class="HomeBox" href="#/resource-marine-suffix" style="opacity: 1;">
+                                    <img src="../../content/images/home/Library.png">
+                                    <div class="HomeBoxTitle">منابع آموزشی</div>
+                                </a>
+                                <a class="HomeBox" href="#/admin/user-management" style="opacity: 1;">
+                                <img src="../../content/images/home/Password.png">
+                                <div class="HomeBoxTitle">مدیریت کاربران</div>
+                </a>
+                      <!--          <a routerLink="password">
+                                    <div class="HomeBox" style="opacity: 1;">
+                                        <img src="../../content/images/home/Password.png">
+                                        <div class="HomeBoxTitle">مدیریت کاربران</div>
+                                    </div>
+                                </a>-->
+                            </td>
+                        </tr>
+                        </tbody></table>
+                    <div id="news" class="box box-primary"  >
+                        <div class="box-header with-border">
+                            <h3 class="box-title center">اخبار</h3>
+
+                            <div class="box-tools pull-left">
+                                <button type="button" class="btn btn-box-tool" (click)="toggleColappse('collapseExample')" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" (click)="deleteElement('news')" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body" id="collapseExample">
+                            <ul class="products-list product-list-in-box">
+                                <li *ngFor="let announcement of announcements" class="item">
+                                    <div class="product-info">
+                                        <a  href="#/announcement-marine-suffix/{{announcement.id}}/view" class="product-title">
+                                            <span>{{announcement.title}}</span>
+                                            <span class="label label-warning pull-left">{{announcement.createDate}}</span>
+                                            </a>
+                                        <span class="product-description">
+                                  {{announcement.description}}
+                                </span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer text-center">
+                            <a href="#/announcement-marine-suffix" class="uppercase">نمایش تمام اخبار</a>
+                        </div>
+                        <!-- /.box-footer -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</div>
+</div>
+<script>
+    $(function () {
+        $('.HomeBox').on('mouseenter mouseleave', function (e) {
+            $(this).siblings().stop().fadeTo(300, e.type == 'mouseenter' ? 0.5 : 1);
+        });
+    });
+
+</script>

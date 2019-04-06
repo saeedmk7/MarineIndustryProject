@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="organization" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.organization.detail.title">Organization</span> {{organization.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.organization.title">Title</span></dt>
+                <dd>
+                    <span>{{organization.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organization.code">Code</span></dt>
+                <dd>
+                    <span>{{organization.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organization.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{organization.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organization.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{organization.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organization.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{organization.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organization.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{organization.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/organization-marine-suffix', organization.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

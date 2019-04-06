@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="document" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.document.detail.title">Document</span> {{document.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.document.title">Title</span></dt>
+                <dd>
+                    <span>{{document.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.document.fileDoc">File Doc</span></dt>
+                <dd>
+                    <div *ngIf="document.fileDoc">
+                        <a (click)="openFile(document.fileDocContentType, document.fileDoc)" jhiTranslate="entity.action.open">open</a>
+                        {{document.fileDocContentType}}, {{byteSize(document.fileDoc)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.document.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{document.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.document.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{document.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.document.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{document.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.document.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{document.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+           <!-- <button type="button"
+                    [routerLink]="['/document-marine-suffix', document.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>-->
+        </div>
+    </div>
+</div>

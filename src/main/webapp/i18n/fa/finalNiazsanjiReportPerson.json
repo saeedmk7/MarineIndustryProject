@@ -1,0 +1,35 @@
+
+{
+    "marineindustryprojApp": {
+        "finalNiazsanjiReportPerson" : {
+            "home": {
+                "title": "Final Niazsanji Report People",
+                "createLabel": "Create a new Final Niazsanji Report Person",
+                "createOrEditLabel": "Create or edit a Final Niazsanji Report Person"
+            },
+            "created": "A new Final Niazsanji Report Person is created with identifier {{ param }}",
+            "updated": "A Final Niazsanji Report Person is updated with identifier {{ param }}",
+            "deleted": "A Final Niazsanji Report Person is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Final Niazsanji Report Person {{ id }}?"
+            },
+            "detail": {
+                "title": "Final Niazsanji Report Person"
+            },
+            "niazSanjiSource": "Niaz Sanji Source",
+            "priceCost": "Price Cost",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "sourceId": "Source Id",
+            "person": "Person",
+            "finalNiazsanjiReport": "Final Niazsanji Report"
+        }
+    }
+}

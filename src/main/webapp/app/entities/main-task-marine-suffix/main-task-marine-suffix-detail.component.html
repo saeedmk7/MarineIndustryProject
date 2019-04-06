@@ -1,0 +1,90 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="mainTask" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.mainTask.detail.title">Main Task</span> {{mainTask.id}}</h2>
+
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.title">Title</span></dt>
+                <dd>
+                    <span>{{mainTask.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.description">Description</span></dt>
+                <dd>
+                    <span>{{mainTask.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.code">Code</span></dt>
+                <dd>
+                    <span>{{mainTask.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.solution">Solution</span></dt>
+                <dd>
+                    <span>{{mainTask.solution}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{mainTask.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{mainTask.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{mainTask.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{mainTask.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.archived">Archived</span></dt>
+                <dd>
+                    <span>{{mainTask.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{mainTask.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{mainTask.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.status">Status</span></dt>
+                <dd>
+                    <span>{{mainTask.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.subTask">Sub Task</span></dt>
+                <dd>
+                    <span *ngFor="let subTask of mainTask.subTasks; let last = last">
+                        <a [routerLink]="['/sub-task-marine-suffix', subTask?.id, 'view' ]">{{subTask.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.job">Job</span></dt>
+                <dd>
+                    <span *ngFor="let job of mainTask.jobs; let last = last">
+                        <a [routerLink]="['/job-marine-suffix', job?.id, 'view' ]">{{job.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mainTask.person">Person</span></dt>
+                <dd>
+                    <span *ngFor="let person of mainTask.people; let last = last">
+                        <a [routerLink]="['/person-marine-suffix', person?.id, 'view' ]">{{person.family}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/main-task-marine-suffix', mainTask.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+</div>
+        </div>
+    </div>
+</div>

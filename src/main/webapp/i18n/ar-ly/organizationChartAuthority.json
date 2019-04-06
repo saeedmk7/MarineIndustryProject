@@ -1,0 +1,32 @@
+
+{
+    "marineindustryprojApp": {
+        "organizationChartAuthority" : {
+            "home": {
+                "title": "Organization Chart Authorities",
+                "createLabel": "Create a new Organization Chart Authority",
+                "createOrEditLabel": "Create or edit a Organization Chart Authority"
+            },
+            "created": "A new Organization Chart Authority is created with identifier {{ param }}",
+            "updated": "A Organization Chart Authority is updated with identifier {{ param }}",
+            "deleted": "A Organization Chart Authority is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Organization Chart Authority {{ id }}?"
+            },
+            "detail": {
+                "title": "Organization Chart Authority"
+            },
+            "authorityName": "Authority Name",
+            "hasEditPermission": "Has Edit Permission",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "organizationChart": "Organization Chart"
+        }
+    }
+}

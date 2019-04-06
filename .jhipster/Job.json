@@ -1,0 +1,167 @@
+{
+    "name": "Job",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 100
+        },
+        {
+            "fieldName": "jobKey",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength",
+                "minlength"
+            ],
+            "fieldValidateRulesMaxlength": 6,
+            "fieldValidateRulesMinlength": 6
+        },
+        {
+            "fieldName": "jobCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "minlength"
+            ],
+            "fieldValidateRulesMaxlength": 12,
+            "fieldValidateRulesMinlength": 12
+        },
+        {
+            "fieldName": "createUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "createDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "modifyUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "modifyDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "archived",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "archivedUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "archivedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "jobPerson",
+            "otherEntityName": "person",
+            "otherEntityRelationshipName": "job"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "practicaljobPerson",
+            "otherEntityName": "person",
+            "otherEntityRelationshipName": "practicaljob"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "job",
+            "otherEntityName": "job",
+            "otherEntityRelationshipName": "parent"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "job",
+            "relationshipName": "document",
+            "otherEntityName": "document",
+            "otherEntityField": "title",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "raste",
+            "otherEntityName": "raste",
+            "otherEntityField": "title"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "radeh",
+            "otherEntityName": "radeh",
+            "otherEntityField": "title"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "jobType",
+            "otherEntityName": "jobType",
+            "otherEntityField": "title"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "scientificWorkGroup",
+            "otherEntityName": "scientificWorkGroup",
+            "otherEntityField": "title"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "parent",
+            "otherEntityName": "job",
+            "otherEntityField": "title"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "mainTask",
+            "otherEntityName": "mainTask",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "job"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "niazsanjiGroup",
+            "otherEntityName": "niazsanjiGroup",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "job"
+        }
+    ],
+    "changelogDate": "20181006162031",
+    "entityTableName": "job",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "marineSuffix"
+}

@@ -1,0 +1,103 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="niazsanjiGroup" class="detail-page">
+            <h2 style="text-align: center"><span jhiTranslate="marineindustryprojApp.niazsanjiGroup.detail.title">Niazsanji Group</span> {{niazsanjiGroup.id}}</h2>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiGroup.job">Job</span></dt>
+                <dd>
+                    <span *ngFor="let job of niazsanjiGroup.jobs; let last = last">
+                        <a [routerLink]="['/job-marine-suffix', job?.id, 'view' ]">{{job.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiGroup.firstThreeJobCode">First Three Job Code</span></dt>
+                <dd>
+                    <span>{{niazsanjiGroup.firstThreeJobCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiGroup.scientificWorkGroup">Scientific Work Group</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiGroup.scientificWorkGroupId">
+                        <a [routerLink]="['/scientific-work-group-marine-suffix', niazsanjiGroup.scientificWorkGroupId, 'view']">{{niazsanjiGroup.scientificWorkGroupTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiGroup.editorPerson">Editor Person</span></dt>
+                <dd>
+                    <span>{{niazsanjiGroup.editorPerson}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiGroup.reviewDate">Review Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiGroup.reviewDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiGroup.scheduleDate">Schedule Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiGroup.scheduleDate}}</span>
+                </dd>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">ب- پودمان های آموزشی پیشنهادی شغل</div></div>
+                <div class="table-responsive" *ngIf="niazsanjiGroup.educationalModules">
+                    <table class="table table-striped table-bordered table-hover table-sm">
+                        <thead>
+                        <!--<tr><th colspan="5"></th>
+                            <th colspan="3">
+                                مدت پودمان (ساعت)
+                            </th>
+                        </tr>-->
+                        <tr>
+                            <th rowspan="2"><span jhiTranslate="global.field.id">ID</span> </th>
+                            <th rowspan="2"><span jhiTranslate="marineindustryprojApp.educationalModule.title">Title</span> </th>
+                            <th  rowspan="2"><span jhiTranslate="marineindustryprojApp.educationalModule.code">Code</span> </th>
+                            <th rowspan="2"><span jhiTranslate="marineindustryprojApp.educationalModule.centralizedCode">Centralized Code</span> </th>
+                            <th rowspan="2"><span jhiTranslate="marineindustryprojApp.educationalModule.educationalModuleLevel">Educational Module Level</span> </th>
+                            <th><span jhiTranslate="marineindustryprojApp.educationalModule.learningTimeTheorical">learning Time Theorical</span> </th>
+                            <th><span jhiTranslate="marineindustryprojApp.educationalModule.learningTimePractical">learningTimePractical</span> </th>
+                            <th ><span>مدت زمان کل</span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let educationalModule of niazsanjiGroup.educationalModules">
+                            <td><a [routerLink]="['/educational-module-marine-suffix', educationalModule.id, 'view' ]">{{educationalModule.id}}</a></td>
+                            <td>{{educationalModule.title}}</td>
+                            <td>{{educationalModule.code}}</td>
+                            <td>{{educationalModule.centralizedCode}}</td>
+                            <td>{{educationalModule.educationalModuleLevel}}</td>
+                            <td>{{educationalModule.learningTimeTheorical | number:'2.'}}</td>
+                            <td>{{educationalModule.learningTimePractical | number:'2.'}}</td>
+                            <td>{{educationalModule.learningTimePractical + educationalModule.learningTimeTheorical | number:'2.'}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="text-align: center">جمع ساعت آموزش پیش بینی شده</td>
+                            <td>{{tSum | number:'2.'}}</td>
+                            <td>{{pSum | number:'2.'}}</td>
+                            <td>{{tSum + pSum | number:'2.'}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">ج- توضیحات بیشتر</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiGroup.priceCost">Price Cost</span></dt>
+                <dd>
+                    <span>{{niazsanjiGroup.priceCost | number: '2.'}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiGroup.description">Description</span></dt>
+                <dd>
+                    <span>{{niazsanjiGroup.description}}</span>
+                </dd>
+            </dl>
+            <div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button" *ngIf="niazsanjiGroup.status == 0"
+                    [routerLink]="['/niazsanji-group-marine-suffix', niazsanjiGroup.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+            </div>
+        </div>
+    </div>
+</div>

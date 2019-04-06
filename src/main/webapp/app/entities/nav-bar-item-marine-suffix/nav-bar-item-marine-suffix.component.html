@@ -1,0 +1,76 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.navBarItem.home.title">Nav Bar Items</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-nav-bar-item-marine-suffix" [routerLink]="['/nav-bar-item-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.navBarItem.home.createLabel">
+            Create new Nav Bar Item
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="navBarItems">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.navBarItem.title">Title</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.navBarItem.code">Code</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.navBarItem.description">Description</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.navBarItem.url">Url</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.navBarItem.faicon">Faicon</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.navBarItem.isActive">Is Active</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.navBarItem.displayOrder">Display Order</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.navBarItem.createUserLogin">Create User Login</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.navBarItem.createDate">Create Date</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.navBarItem.parent">Parent</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let navBarItem of navBarItems ;trackBy: trackId">
+                <td><a [routerLink]="['/nav-bar-item-marine-suffix', navBarItem.id, 'view' ]">{{navBarItem.id}}</a></td>
+                <td>{{navBarItem.title}}</td>
+                <td>{{navBarItem.code}}</td>
+                <td>{{navBarItem.description}}</td>
+                <td>{{navBarItem.url}}</td>
+                <td>{{navBarItem.faicon}}</td>
+                <td>{{navBarItem.isActive}}</td>
+                <td>{{navBarItem.displayOrder}}</td>
+                <td>{{navBarItem.createUserLogin}}</td>
+                <td>{{navBarItem.createDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="navBarItem.parentId">
+                        <a [routerLink]="['../nav-bar-item-marine-suffix', navBarItem.parentId , 'view' ]" >{{navBarItem.parentTitle}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/nav-bar-item-marine-suffix', navBarItem.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/nav-bar-item-marine-suffix', navBarItem.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'nav-bar-item-marine-suffix/'+ navBarItem.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

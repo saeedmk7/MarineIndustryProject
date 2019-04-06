@@ -1,0 +1,81 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="niazsanjiFardi" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.detail.title">Niazsanji Fardi</span> {{niazsanjiFardi.id}}</h2>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <!--<dt><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.code">Code</span></dt>
+                <dd>
+                    <span>{{niazsanjiFardi.code}}</span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.educationalModuleType">Educational Module Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.EducationalModuleType.' + niazsanjiFardi.educationalModuleType}}">{{niazsanjiFardi.educationalModuleType}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.priceCost">Price Cost</span></dt>
+                <dd>
+                    <span>{{niazsanjiFardi.priceCost | number}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.description">Description</span></dt>
+                <dd>
+                    <span>{{niazsanjiFardi.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiFardi.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiFardi.createDate}}</span>
+                </dd>
+               <!-- <dt><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiFardi.modifyUserLogin}}</span>
+                </dd>-->
+                <!--<dt><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of niazsanjiFardi.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.requestNiazsanjiFardi">Request Niazsanji Fardi</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiFardi.requestNiazsanjiFardiId">
+                        <a [routerLink]="['/request-niazsanji-fardi-marine-suffix', niazsanjiFardi.requestNiazsanjiFardiId, 'view']" class="enableLink">{{niazsanjiFardi.requestNiazsanjiFardiId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.educationalModule">Educational Module</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiFardi.educationalModuleId">
+                        <a [routerLink]="['/educational-module-marine-suffix', niazsanjiFardi.educationalModuleId, 'view']">{{niazsanjiFardi.educationalModuleTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiFardi.personId">
+                        <a [routerLink]="['/person-marine-suffix', niazsanjiFardi.personId, 'view']">{{niazsanjiFardi.personFamily}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiFardi.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', niazsanjiFardi.organizationChartId, 'view']">{{niazsanjiFardi.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+            <div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+           <!-- <button type="button"
+                    [routerLink]="['/niazsanji-fardi-marine-suffix', niazsanjiFardi.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>-->
+        </div>
+        </div>
+    </div>
+</div>

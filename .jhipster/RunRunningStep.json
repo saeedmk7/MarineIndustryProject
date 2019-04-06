@@ -1,0 +1,80 @@
+{
+    "name": "RunRunningStep",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 4096
+        },
+        {
+            "fieldName": "done",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "doneUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "doneDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "createUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "createDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "modifyUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "modifyDate",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "runPhase",
+            "otherEntityName": "runPhase",
+            "otherEntityField": "description"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "runningStep",
+            "otherEntityName": "runningStep",
+            "otherEntityField": "title"
+        }
+    ],
+    "changelogDate": "20181006162115",
+    "entityTableName": "run_running_step",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "marineSuffix"
+}

@@ -1,0 +1,80 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="finalNiazsanjiReportPerson" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.detail.title">Final Niazsanji Report Person</span> {{finalNiazsanjiReportPerson.id}}</h2>
+
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.niazSanjiSource">Niaz Sanji Source</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.NiazSanjiSource.' + finalNiazsanjiReportPerson.niazSanjiSource}}">{{finalNiazsanjiReportPerson.niazSanjiSource}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.priceCost">Price Cost</span></dt>
+                <dd>
+                    <span>{{finalNiazsanjiReportPerson.priceCost}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.description">Description</span></dt>
+                <dd>
+                    <span>{{finalNiazsanjiReportPerson.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{finalNiazsanjiReportPerson.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{finalNiazsanjiReportPerson.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{finalNiazsanjiReportPerson.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{finalNiazsanjiReportPerson.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.archived">Archived</span></dt>
+                <dd>
+                    <span>{{finalNiazsanjiReportPerson.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{finalNiazsanjiReportPerson.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{finalNiazsanjiReportPerson.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.status">Status</span></dt>
+                <dd>
+                    <span>{{finalNiazsanjiReportPerson.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="finalNiazsanjiReportPerson.personId">
+                        <a [routerLink]="['/person-marine-suffix', finalNiazsanjiReportPerson.personId, 'view']">{{finalNiazsanjiReportPerson.personFamily}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.finalNiazsanjiReport">Final Niazsanji Report</span></dt>
+                <dd>
+                    <div *ngIf="finalNiazsanjiReportPerson.finalNiazsanjiReportId">
+                        <a [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReportPerson.finalNiazsanjiReportId, 'view']">{{finalNiazsanjiReportPerson.finalNiazsanjiReportDescription}}</a>
+                    </div>
+                </dd>
+            </dl>
+            <div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/final-niazsanji-report-person-marine-suffix', finalNiazsanjiReportPerson.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
+</div>

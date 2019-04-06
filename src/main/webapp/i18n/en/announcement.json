@@ -1,0 +1,32 @@
+
+{
+    "marineindustryprojApp": {
+        "announcement" : {
+            "home": {
+                "title": "Announcements",
+                "createLabel": "Create a new Announcement",
+                "createOrEditLabel": "Create or edit a Announcement"
+            },
+            "created": "A new Announcement is created with identifier {{ param }}",
+            "updated": "A Announcement is updated with identifier {{ param }}",
+            "deleted": "A Announcement is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Announcement {{ id }}?"
+            },
+            "detail": {
+                "title": "Announcement"
+            },
+            "title": "Title",
+            "code": "Code",
+            "description": "Description",
+            "compeleteText": "Compelete Text",
+            "isActive": "Is Active",
+            "announcementLevel": "Announcement Level",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "document": "Document"
+        }
+    }
+}

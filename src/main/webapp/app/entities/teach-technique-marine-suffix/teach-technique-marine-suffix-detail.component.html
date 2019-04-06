@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="teachTechnique" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.teachTechnique.detail.title">Teach Technique</span> {{teachTechnique.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.teachTechnique.title">Title</span></dt>
+                <dd>
+                    <span>{{teachTechnique.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachTechnique.code">Code</span></dt>
+                <dd>
+                    <span>{{teachTechnique.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachTechnique.description">Description</span></dt>
+                <dd>
+                    <span>{{teachTechnique.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachTechnique.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{teachTechnique.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachTechnique.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{teachTechnique.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachTechnique.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{teachTechnique.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachTechnique.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{teachTechnique.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/teach-technique-marine-suffix', teachTechnique.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

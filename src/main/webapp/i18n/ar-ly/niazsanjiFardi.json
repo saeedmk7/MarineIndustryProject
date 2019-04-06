@@ -1,0 +1,40 @@
+{
+    "marineindustryprojApp": {
+        "niazsanjiFardi": {
+            "home": {
+                "title": "Niazsanji Fardis",
+                "createLabel": "Create a new Niazsanji Fardi",
+                "createOrEditLabel": "Create or edit a Niazsanji Fardi"
+            },
+            "created": "A new Niazsanji Fardi is created with identifier {{ param }}",
+            "updated": "A Niazsanji Fardi is updated with identifier {{ param }}",
+            "deleted": "A Niazsanji Fardi is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Niazsanji Fardi {{ id }}?"
+            },
+            "detail": {
+                "title": "Niazsanji Fardi"
+            },
+            "niazsanjiYear": "Niazsanji Year",
+            "code": "Code",
+            "educationalModuleType": "Educational Module Type",
+            "priceCost": "Price Cost",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "conversation": "Conversation",
+            "changeStatusUserLogin": "Change Status User Login",
+            "document": "Document",
+            "requestNiazsanjiFardi": "Request Niazsanji Fardi",
+            "educationalModule": "Educational Module",
+            "person": "Person",
+            "organizationChart": "Organization Chart"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "fieldOfStudy" : {
+            "home": {
+                "title": "رشته های تحصیلی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش رشته تحصیلی"
+            },
+            "created": "رشته تحصیلی  با شناسه {{ param }} ایجاد شد.",
+            "updated": "رشته تحصیلی  با شناسه {{ param }} ویرایش شد.",
+            "deleted": "رشته تحصیلی  با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف  رشته تحصیلی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات رشته تحصیلی"
+            },
+              "title": "عنوان رشته تحصیلی",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "person": "Person",
+            "teacher": "Teacher"
+        }
+    }
+}

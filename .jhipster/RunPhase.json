@@ -1,0 +1,136 @@
+{
+    "name": "RunPhase",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 4096
+        },
+        {
+            "fieldName": "finalizeCost",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "stepNumber",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "done",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "doneUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "doneDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "createUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "createDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "modifyUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "modifyDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "archived",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "archivedUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "archivedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "runRunningStep",
+            "otherEntityName": "runRunningStep",
+            "otherEntityRelationshipName": "runPhase"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "runPhase",
+            "relationshipName": "document",
+            "otherEntityName": "document",
+            "otherEntityField": "title",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "runPhase",
+            "relationshipName": "person",
+            "otherEntityName": "person",
+            "otherEntityField": "family",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "finalNiazsanjiReport",
+            "otherEntityName": "finalNiazsanjiReport",
+            "otherEntityField": "description"
+        }
+    ],
+    "changelogDate": "20181006162113",
+    "entityTableName": "run_phase",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "marineSuffix"
+}

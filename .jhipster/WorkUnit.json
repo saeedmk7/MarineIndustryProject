@@ -1,0 +1,60 @@
+{
+    "name": "WorkUnit",
+    "fields": [
+        {
+            "fieldName": "code",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "createDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "modifyUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "modifyDate",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "workIndustry",
+            "otherEntityName": "workIndustry",
+            "otherEntityField": "title"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "workGroup",
+            "otherEntityName": "workGroup",
+            "otherEntityField": "title"
+        }
+    ],
+    "changelogDate": "20181006162048",
+    "entityTableName": "work_unit",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "marineSuffix"
+}

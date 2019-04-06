@@ -1,0 +1,159 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="requestNiazsanjiFardi" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.detail.title">Request Niazsanji Fardi</span> {{requestNiazsanjiFardi.id}}</h2>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اولیه نیازسنجی</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="requestNiazsanjiFardi.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', requestNiazsanjiFardi.organizationChartId, 'view']">{{requestNiazsanjiFardi.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="requestNiazsanjiFardi.personId">
+                        <a [routerLink]="['/person-marine-suffix', requestNiazsanjiFardi.personId, 'view']">{{requestNiazsanjiFardi.personFamily}}</a>
+                    </div>
+                </dd>
+                <dt>شغل سازمانی</dt>
+                <dd>
+                    <div *ngIf="requestNiazsanjiFardi.personId">
+                        <a [routerLink]="['/person-marine-suffix', requestNiazsanjiFardi.personId, 'view']">{{requestNiazsanjiFardi["job"]}}</a>
+                    </div>
+                </dd>
+                <dt>شغل عملی</dt>
+                <dd>
+                    <div *ngIf="requestNiazsanjiFardi.personId">
+                        <a [routerLink]="['/person-marine-suffix', requestNiazsanjiFardi.personId, 'view']">{{requestNiazsanjiFardi["practicaljob"]}}</a>
+                    </div>
+                </dd>
+               <!-- <dt><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.code">Code</span></dt>
+                <dd>
+                    <span>{{requestNiazsanjiFardi.code}}</span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{requestNiazsanjiFardi.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.status">Status</span></dt>
+                <dd>
+                   {{requestNiazsanjiFardi.statusMeaning}}
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.description">Description</span></dt>
+                <dd>
+                    <span>{{requestNiazsanjiFardi.description}}</span>
+                </dd>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات دوره های شرکت کرده {{requestNiazsanjiFardi.personFamily}}</div></div>
+                <div class="table-responsive">
+                    <table class="table table-striped  table-bordered table-hover table-sm">
+                        <thead>
+                        <tr >
+                            <th><span jhiTranslate="global.field.id">ID</span> </th>
+                            <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazSanjiSource">Niaz Sanji Source</span> </th>
+                            <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.priceCost">Price Cost</span></th>
+                            <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.educationalModule">Educational Module</span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let finalNiazsanjiReport of finalNiazsanjiReports">
+                            <td><a [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReport.id, 'view' ]">{{finalNiazsanjiReport.id}}</a></td>
+                            <td jhiTranslate="{{'marineindustryprojApp.NiazSanjiSource.' + finalNiazsanjiReport.niazSanjiSource}}">{{finalNiazsanjiReport.niazSanjiSource}}</td>
+                            <td>{{finalNiazsanjiReport.priceCost | number}}</td>
+                            <td>
+                                {{finalNiazsanjiReport.educationalModuleTitle}}
+                                <!--<div *ngIf="finalNiazsanjiReport.educationalModuleId">
+                                    <a [routerLink]="['../educational-module-marine-suffix', finalNiazsanjiReport.educationalModuleId , 'view' ]" >{{finalNiazsanjiReport.educationalModuleTitle}}</a>
+                                </div>-->
+                            </td>
+                        </tr>
+                        <tr *ngIf="hasNoRow" >
+                            <td colspan="5" class="alert-danger">
+                                این فرد تاکنون در دوره ای شرکت نکرده است.
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات پودمان های درخواستی</div></div>
+                <div>
+                    <table class="table table-striped  table-bordered table-hover table-sm">
+                        <thead>
+                        <tr >
+                            <th></th>
+                            <th>پودمان ها</th>
+                            <th>ساعت پودمان</th>
+                            <th>سطح پودمان</th>
+                            <th>هزینه</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
+                            <td>
+                                از پودمان های مصوب
+                            </td>
+                            <td>
+                                <div *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
+                                    <a [routerLink]="['/educational-module-marine-suffix', requestNiazsanjiFardi.approvedEducationalModuleId, 'view']">{{requestNiazsanjiFardi.approvedEducationalModuleTitle}}</a>
+                                </div>
+                            </td>
+                            <td>{{approvedHour | number}}</td>
+                            <td>{{approvedLevel}}</td>
+                            <td>
+                                <!--<input type="number" class="form-control" name="costApprovedEducationalModule" id="field_costApprovedEducationalModule"
+                                       [(ngModel)]="requestNiazsanjiFardi.costApprovedEducationalModule" />-->
+                                <span>{{requestNiazsanjiFardi.costApprovedEducationalModule}}</span>
+                            </td>
+                        </tr>
+                        <tr *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
+                            <td>
+                                از کلیه پودمان ها
+                            </td>
+                            <td>
+                                <div *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
+                                    <a [routerLink]="['/educational-module-marine-suffix', requestNiazsanjiFardi.allEducationalModuleId, 'view']">{{requestNiazsanjiFardi.allEducationalModuleTitle}}</a>
+                                </div>
+                            </td>
+                            <td>{{allHour | number}}</td>
+                            <td>{{allLevel}}</td>
+                            <td>
+                                <span>{{requestNiazsanjiFardi.costAllEducationalModule}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>{{approvedHour + allHour | number}}</td>
+                            <td></td>
+                            <td>{{requestNiazsanjiFardi.costAllEducationalModule + requestNiazsanjiFardi.costApprovedEducationalModule | number}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">گردش درخواست و نظرات</div></div>
+                <textarea [disabled]="true" [rows]="rows" class="form-control">{{requestNiazsanjiFardi.conversation}}</textarea>
+               <!-- <dt><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.requestStatus">Request Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + requestNiazsanjiFardi.requestStatus}}">{{requestNiazsanjiFardi.requestStatus}}</span>
+                </dd>-->
+
+
+            </dl>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+           <!-- <button type="button"
+                    [routerLink]="['/request-niazsanji-fardi-marine-suffix', requestNiazsanjiFardi.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>-->
+</div>
+</div>
+
+    </div>
+</div>

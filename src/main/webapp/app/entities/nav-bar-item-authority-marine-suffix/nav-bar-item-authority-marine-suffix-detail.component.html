@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="navBarItemAuthority">
+            <h2><span jhiTranslate="marineindustryprojApp.navBarItemAuthority.detail.title">Nav Bar Item Authority</span> {{navBarItemAuthority.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItemAuthority.authorityName">Authority Name</span></dt>
+                <dd>
+                    <span>{{navBarItemAuthority.authorityName}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItemAuthority.hasEditPermission">Has Edit Permission</span></dt>
+                <dd>
+                    <span>{{navBarItemAuthority.hasEditPermission}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItemAuthority.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{navBarItemAuthority.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItemAuthority.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{navBarItemAuthority.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItemAuthority.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{navBarItemAuthority.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItemAuthority.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{navBarItemAuthority.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItemAuthority.navBarItem">Nav Bar Item</span></dt>
+                <dd>
+                    <div *ngIf="navBarItemAuthority.navBarItemId">
+                        <a [routerLink]="['/nav-bar-item-marine-suffix', navBarItemAuthority.navBarItemId, 'view']">{{navBarItemAuthority.navBarItemTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/nav-bar-item-authority-marine-suffix', navBarItemAuthority.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

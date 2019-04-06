@@ -1,0 +1,27 @@
+{
+    "marineindustryprojApp": {
+        "activityArea" : {
+            "home": {
+                "title": "حوزه های فعالیت",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش حوزه فعالیت"
+            },
+            "created": "حوزه فعالیت با شناسه {{ param }} ایجاد شد.",
+            "updated": "حوزه فعالیت با شناسه {{ param }} ویرایش شد.",
+            "deleted": "حوزه فعالیت با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف حوزه فعالیت با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات حوزه فعالیت"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "educationalCenter": "مرکز آموزشی"
+        }
+    }
+}

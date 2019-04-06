@@ -1,0 +1,36 @@
+
+{
+    "marineindustryprojApp": {
+        "mainTask" : {
+            "home": {
+                "title": "وظایف اصلی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش وظیفه اصلی"
+            },
+            "created": "وظیفه اصلی با شناسه {{ param }} ایجاد شد.",
+            "updated": "وظیفه اصلی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "وظیفه اصلی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف وظیفه اصلی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات وظیفه اصلی"
+            },
+            "title": "عنوان",
+            "description": "توضیحات",
+            "code": "کد",
+            "solution": "راه حل",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "subTask": "وظیفه فرعی",
+            "job": "مشاغل دارای این وظیفه",
+            "person": "افراد دارای این وظیفه"
+        }
+    }
+}

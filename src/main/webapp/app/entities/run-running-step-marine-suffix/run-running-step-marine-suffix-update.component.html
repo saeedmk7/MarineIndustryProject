@@ -1,0 +1,114 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-run-running-step-marine-suffix-heading" jhiTranslate="marineindustryprojApp.runRunningStep.home.createOrEditLabel">Create or edit a Run Running Step</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!runRunningStep.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="runRunningStep.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runRunningStep.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="runRunningStep.description" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runRunningStep.done" for="field_done">Done</label>
+                    <input type="checkbox" class="form-control" name="done" id="field_done"
+                        [(ngModel)]="runRunningStep.done" />
+                    <div [hidden]="!(editForm.controls.done?.dirty && editForm.controls.done?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.done?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runRunningStep.doneUserLogin" for="field_doneUserLogin">Done User Login</label>
+                    <input type="text" class="form-control" name="doneUserLogin" id="field_doneUserLogin"
+                        [(ngModel)]="runRunningStep.doneUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.doneUserLogin?.dirty && editForm.controls.doneUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.doneUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runRunningStep.doneDate" for="field_doneDate">Done Date</label>
+                    <div class="d-flex">
+                        <input id="field_doneDate" type="datetime-local" class="form-control" name="doneDate" [(ngModel)]="doneDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runRunningStep.createUserLogin" for="field_createUserLogin">Create User Login</label>
+                    <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
+                        [(ngModel)]="runRunningStep.createUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.createUserLogin?.dirty && editForm.controls.createUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runRunningStep.createDate" for="field_createDate">Create Date</label>
+                    <div class="d-flex">
+                        <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="createDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runRunningStep.modifyUserLogin" for="field_modifyUserLogin">Modify User Login</label>
+                    <input type="text" class="form-control" name="modifyUserLogin" id="field_modifyUserLogin"
+                        [(ngModel)]="runRunningStep.modifyUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.modifyUserLogin?.dirty && editForm.controls.modifyUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.modifyUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runRunningStep.modifyDate" for="field_modifyDate">Modify Date</label>
+                    <div class="d-flex">
+                        <input id="field_modifyDate" type="datetime-local" class="form-control" name="modifyDate" [(ngModel)]="modifyDate"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runRunningStep.runPhase" for="field_runPhase">Run Phase</label>
+                    <select class="form-control" id="field_runPhase" name="runPhase" [(ngModel)]="runRunningStep.runPhaseId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="runPhaseOption.id" *ngFor="let runPhaseOption of runphases; trackBy: trackRunPhaseById">{{runPhaseOption.description}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runRunningStep.runningStep" for="field_runningStep">Running Step</label>
+                    <select class="form-control" id="field_runningStep" name="runningStep" [(ngModel)]="runRunningStep.runningStepId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="runningStepOption.id" *ngFor="let runningStepOption of runningsteps; trackBy: trackRunningStepById">{{runningStepOption.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

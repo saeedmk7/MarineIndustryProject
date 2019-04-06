@@ -1,0 +1,82 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.workUnit.home.title">Work Units</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-work-unit-marine-suffix" [routerLink]="['/work-unit-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.workUnit.home.createLabel">
+            Create new Work Unit
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="workUnits">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.workUnit.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.workUnit.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.workUnit.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.workUnit.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.workUnit.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="workIndustryTitle"><span jhiTranslate="marineindustryprojApp.workUnit.workIndustry">Work Industry</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="workGroupTitle"><span jhiTranslate="marineindustryprojApp.workUnit.workGroup">Work Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let workUnit of workUnits ;trackBy: trackId">
+                <td><a [routerLink]="['/work-unit-marine-suffix', workUnit.id, 'view' ]">{{workUnit.id}}</a></td>
+                <td>{{workUnit.code}}</td>
+                <td>{{workUnit.createUserLogin}}</td>
+                <td>{{workUnit.createDate | date:'medium'}}</td>
+                <td>{{workUnit.modifyUserLogin}}</td>
+                <td>{{workUnit.modifyDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="workUnit.workIndustryId">
+                        <a [routerLink]="['../work-industry-marine-suffix', workUnit.workIndustryId , 'view' ]" >{{workUnit.workIndustryTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="workUnit.workGroupId">
+                        <a [routerLink]="['../work-group-marine-suffix', workUnit.workGroupId , 'view' ]" >{{workUnit.workGroupTitle}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/work-unit-marine-suffix', workUnit.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/work-unit-marine-suffix', workUnit.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'work-unit-marine-suffix/'+ workUnit.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="workUnits && workUnits.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

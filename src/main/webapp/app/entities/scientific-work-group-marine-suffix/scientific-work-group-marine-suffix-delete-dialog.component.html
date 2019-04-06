@@ -1,0 +1,19 @@
+<form name="deleteForm" (ngSubmit)="confirmDelete(scientificWorkGroup.id)">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="entity.delete.title">Confirm delete operation</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <mi-alert-error></mi-alert-error>
+        <p id="mi-delete-scientificWorkGroup-heading" jhiTranslate="marineindustryprojApp.scientificWorkGroup.delete.question" translateValues="{id: '{{scientificWorkGroup.id}}'}">Are you sure you want to delete this Scientific Work Group?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button id="mi-confirm-delete-scientificWorkGroup" type="submit" class="btn btn-danger">
+            <fa-icon [icon]="'times'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Delete</span>
+        </button>
+    </div>
+</form>

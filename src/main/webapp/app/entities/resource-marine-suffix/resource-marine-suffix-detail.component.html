@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="resource" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.resource.detail.title">Resource</span> {{resource.id}}</h2>
+
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.resource.title">Title</span></dt>
+                <dd>
+                    <span>{{resource.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.resource.description">Description</span></dt>
+                <dd>
+                    <span>{{resource.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.resource.code">Code</span></dt>
+                <dd>
+                    <span>{{resource.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.resource.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{resource.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.resource.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{resource.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.resource.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{resource.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.resource.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{resource.modifyDate}}</span>
+                </dd>
+            </dl>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/resource-marine-suffix', resource.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+</div>   </div>
+    </div>
+</div>

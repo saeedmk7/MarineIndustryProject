@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "teachTechnique" : {
+            "home": {
+                "title": "تکنیک های آموزش",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش تکنیک آموزش"
+            },
+            "created": "تکنیک آموزش با شناسه {{ param }} ایجاد شد.",
+            "updated": "تکنیک آموزش با شناسه {{ param }} ویرایش شد.",
+            "deleted": "تکنیک آموزش با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف تکنیک آموزش با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات تکنیک آموزش"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "designAndPlanning": "Design And Planning"
+        }
+    }
+}

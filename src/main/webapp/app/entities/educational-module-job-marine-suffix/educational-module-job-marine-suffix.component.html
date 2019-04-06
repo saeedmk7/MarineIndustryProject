@@ -1,0 +1,192 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.educationalModuleJob.home.title">Educational Module Jobs</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-educational-module-job-marine-suffix" [routerLink]="['/educational-module-job-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.educationalModuleJob.home.createLabel">
+            Create new Educational Module Job
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <div class="row">
+        <search-panel class="col-md-12" [searchPanelModel]="searchbarModel"></search-panel>
+    </div>
+    <div>
+            <div class="card border-success">
+                    <a data-toggle="collapse" href="#collapseExample1" class="card-header center" style="background-color: #990000;">
+                        <span class="panel-title">پنل حذف گروهی</span>
+                        <span class="pull-right clickable"><i class="glyphicon glyphicon-ok"></i></span>
+                    </a>
+                <div class="collapse" id="collapseExample1">
+                    <div class="card-body">
+                        <!--<div class="form-group">
+                            <label class="form-control-label" for="field_educationalModule">پودمان آموزشی</label>
+                            <ng-select
+                                [items]="educationalModules"
+                                [multiple]="false"
+                                [closeOnSelect]="true"
+                                [searchable]="true"
+                                [required]="false"
+                                bindLabel="fullTitle"
+                                bindValue="id"
+                                placeholder="انتخاب نمائید."
+                                name="educationalModule"
+                                id="field_educationalModule"
+                                [(ngModel)]="selectedEducationalModule">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_job">شغل</label>
+                            <ng-select
+                                [items]="jobs"
+                                [multiple]="false"
+                                [closeOnSelect]="true"
+                                [searchable]="true"
+                                [required]="false"
+                                bindLabel="fullTitle"
+                                bindValue="id"
+                                placeholder="انتخاب نمائید."
+                                name="job"
+                                id="field_job"
+                                [(ngModel)]="selectedJob">
+                        </div>-->
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_first3jobCode">سه رقم اول کد شغل</label>
+                            <input type="number" maxlength="3" id="field_first3jobCode" minlength="3" [(ngModel)] = "first3JobCode" name="first3jobCode" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted success-color white-text">
+                        <input type="button" (click)="delete()" class="btn-danger" value="حذف">
+                    </div>
+                </div>
+            </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="educationalModuleJobs">
+        <kendo-grid
+            [groupable]="true"
+            [data]="gridView"
+            [height]="700"
+            [group]="groups"
+            (groupChange)="groupChange($event)">
+            <ng-template kendoGridToolbarTemplate>
+                <button type="button" kendoGridExcelCommand icon="file-excel" style="float: left" class="info">خروجی اکسل</button>
+            </ng-template>
+            <kendo-grid-column field="id" title="شناسه" [width]="100"></kendo-grid-column>
+            <!--<kendo-grid-column field="jobTitle" title="عنوان شغل" [width]="300"></kendo-grid-column>-->
+
+            <kendo-grid-column field="first3JobCode" title="سه رقم اول کد شغل" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="jobCode" title="کد مشاغل" [width]="300"></kendo-grid-column>
+            <kendo-grid-column field="jobTitle" title="عنوان شغل" [width]="300"></kendo-grid-column>
+            <kendo-grid-column field="educationalModuleTitle" title="پودمان آموزشی" [width]="300"></kendo-grid-column>
+            <kendo-grid-column field="id" title=" " [width]="100">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <kendo-buttongroup type="submit"
+                            [routerLink]="['/', { outlets: { popup: 'educational-module-job-marine-suffix/'+ dataItem.id + '/delete'} }]"
+                            replaceUrl="true"
+                            queryParamsHandling="merge" style="background-color: #aa0000;color: white"
+                            class="btn btn-danger btn-sm"
+                            >
+                        <fa-icon [icon]="'times'"></fa-icon>
+                        <span class="d-none d-md-inline">حذف</span>
+                    </kendo-buttongroup>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-excel fileName="educationalModuleJobs.xlsx">
+                <kendo-excelexport-column field="id" title="شناسه" [width]="100"></kendo-excelexport-column>
+                <!--<kendo-grid-column field="jobTitle" title="عنوان شغل" [width]="300"></kendo-grid-column>-->
+
+                <kendo-excelexport-column field="first3JobCode" title="سه رقم اول کد شغل" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="jobCode" title="کد مشاغل" [width]="300"></kendo-excelexport-column>
+                <kendo-excelexport-column field="jobTitle" title="عنوان شغل" [width]="300"></kendo-excelexport-column>
+                <kendo-excelexport-column field="educationalModuleTitle" title="پودمان آموزشی" [width]="300"></kendo-excelexport-column>
+            </kendo-grid-excel>
+        </kendo-grid>
+        <!--<table class="table table-striped table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="jobTitle"><span jhiTranslate="marineindustryprojApp.educationalModuleJob.job">Job</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.educationalModuleJob.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let educationalModuleJob of educationalModuleJobs | GroupBy: 'jobId'">
+            <tr [attr.rowspan]="educationalModuleJob.value.length">
+                <td>
+                    {{educationalModuleJob.value[0].jobTitle}}
+                </td>
+            </tr>
+                <tr *ngFor="let value of educationalModuleJob.value">
+                <td>
+                    <div *ngIf="value.educationalModuleId">
+                        <a [routerLink]="['../educational-module-marine-suffix', value.educationalModuleId , 'view' ]" >{{value.educationalModuleTitle}}</a>
+                    </div>
+                </td>
+
+                <td><a [routerLink]="['/educational-module-job-marine-suffix', value.id, 'view' ]">{{value.id}}</a></td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/educational-module-job-marine-suffix', value.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/educational-module-job-marine-suffix', value.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'educational-module-job-marine-suffix/'+ value.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </ng-container>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="3">
+                    <div *ngIf="educationalModules && educationalModules.length">
+
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>-->
+    </div>
+    <!--<div *ngIf="educationalModuleJobs && educationalModuleJobs.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>-->
+</div>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity RunRunningStep.
+    -->
+    <changeSet id="20181006162115-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="run_phase_id"
+                                 baseTableName="run_running_step"
+                                 constraintName="fk_run_running_step_run_phase_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="run_phase"/>
+
+        <addForeignKeyConstraint baseColumnNames="running_step_id"
+                                 baseTableName="run_running_step"
+                                 constraintName="fk_run_running_step_running_step_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="running_step"/>
+
+    </changeSet>
+</databaseChangeLog>

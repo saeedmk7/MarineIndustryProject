@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Person.
+    -->
+    <changeSet id="20181006162029-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="people_id"
+                                 baseTableName="person_document"
+                                 constraintName="fk_person_document_people_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="person_document"
+                                 constraintName="fk_person_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="people_id"
+                                 baseTableName="person_scientific_work_group"
+                                 constraintName="fk_person_scientific_work_group_people_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+        <addForeignKeyConstraint baseColumnNames="scientific_work_groups_id"
+                                 baseTableName="person_scientific_work_group"
+                                 constraintName="fk_person_scientific_work_group_scientific_work_groups_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="scientific_work_group"/>
+        
+        <addForeignKeyConstraint baseColumnNames="last_qualification_id"
+                                 baseTableName="person"
+                                 constraintName="fk_person_last_qualification_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="qualification"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_field_of_study_id"
+                                 baseTableName="person"
+                                 constraintName="fk_person_last_field_of_study_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="field_of_study"/>
+
+        <addForeignKeyConstraint baseColumnNames="employment_type_id"
+                                 baseTableName="person"
+                                 constraintName="fk_person_employment_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employment_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="work_group_id"
+                                 baseTableName="person"
+                                 constraintName="fk_person_work_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="work_group"/>
+
+        <addForeignKeyConstraint baseColumnNames="work_industry_id"
+                                 baseTableName="person"
+                                 constraintName="fk_person_work_industry_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="work_industry"/>
+
+        <addForeignKeyConstraint baseColumnNames="job_id"
+                                 baseTableName="person"
+                                 constraintName="fk_person_job_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="job"/>
+
+        <addForeignKeyConstraint baseColumnNames="practicaljob_id"
+                                 baseTableName="person"
+                                 constraintName="fk_person_practicaljob_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="job"/>
+
+        <addForeignKeyConstraint baseColumnNames="organization_chart_id"
+                                 baseTableName="person"
+                                 constraintName="fk_person_organization_chart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+
+    </changeSet>
+</databaseChangeLog>

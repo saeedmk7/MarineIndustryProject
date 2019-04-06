@@ -1,0 +1,30 @@
+
+{
+    "marineindustryprojApp": {
+        "pollScore" : {
+            "home": {
+                "title": "Poll Scores",
+                "createLabel": "Create a new Poll Score",
+                "createOrEditLabel": "Create or edit a Poll Score"
+            },
+            "created": "A new Poll Score is created with identifier {{ param }}",
+            "updated": "A Poll Score is updated with identifier {{ param }}",
+            "deleted": "A Poll Score is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Poll Score {{ id }}?"
+            },
+            "detail": {
+                "title": "Poll Score"
+            },
+            "recommendation": "Recommendation",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "pollItem": "Poll Item",
+            "scoreItem": "Score Item",
+            "poll": "Poll",
+            "person": "Person"
+        }
+    }
+}

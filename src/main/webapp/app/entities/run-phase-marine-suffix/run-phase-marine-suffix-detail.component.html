@@ -1,0 +1,97 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="runPhase">
+            <h2><span jhiTranslate="marineindustryprojApp.runPhase.detail.title">Run Phase</span> {{runPhase.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.description">Description</span></dt>
+                <dd>
+                    <span>{{runPhase.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.finalizeCost">Finalize Cost</span></dt>
+                <dd>
+                    <span>{{runPhase.finalizeCost}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.stepNumber">Step Number</span></dt>
+                <dd>
+                    <span>{{runPhase.stepNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.done">Done</span></dt>
+                <dd>
+                    <span>{{runPhase.done}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.doneUserLogin">Done User Login</span></dt>
+                <dd>
+                    <span>{{runPhase.doneUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.doneDate">Done Date</span></dt>
+                <dd>
+                    <span>{{runPhase.doneDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{runPhase.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{runPhase.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{runPhase.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{runPhase.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.archived">Archived</span></dt>
+                <dd>
+                    <span>{{runPhase.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{runPhase.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{runPhase.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.status">Status</span></dt>
+                <dd>
+                    <span>{{runPhase.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of runPhase.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.person">Person</span></dt>
+                <dd>
+                    <span *ngFor="let person of runPhase.people; let last = last">
+                        <a [routerLink]="['/person-marine-suffix', person?.id, 'view' ]">{{person.family}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runPhase.finalNiazsanjiReport">Final Niazsanji Report</span></dt>
+                <dd>
+                    <div *ngIf="runPhase.finalNiazsanjiReportId">
+                        <a [routerLink]="['/final-niazsanji-report-marine-suffix', runPhase.finalNiazsanjiReportId, 'view']">{{runPhase.finalNiazsanjiReportDescription}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/run-phase-marine-suffix', runPhase.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

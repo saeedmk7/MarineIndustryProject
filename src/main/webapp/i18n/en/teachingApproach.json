@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "teachingApproach" : {
+            "home": {
+                "title": "Teaching Approaches",
+                "createLabel": "Create a new Teaching Approach",
+                "createOrEditLabel": "Create or edit a Teaching Approach"
+            },
+            "created": "A new Teaching Approach is created with identifier {{ param }}",
+            "updated": "A Teaching Approach is updated with identifier {{ param }}",
+            "deleted": "A Teaching Approach is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Teaching Approach {{ id }}?"
+            },
+            "detail": {
+                "title": "Teaching Approach"
+            },
+            "title": "Title",
+            "code": "Code",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "designAndPlanning": "Design And Planning"
+        }
+    }
+}

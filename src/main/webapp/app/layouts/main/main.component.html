@@ -1,0 +1,14 @@
+<mi-page-ribbon></mi-page-ribbon>
+<div class="container-fluid pad-right-0">
+    <mi-topbar name="topbar"></mi-topbar>
+    <div class="col-lg-2 pad-right-0">
+    <router-outlet name="navbar"></router-outlet>
+    </div>
+    <div class="card jh-card col-lg-10" style="max-height: calc(100vh - 70px);overflow-y: auto;min-height: calc(100vh - 100px)">
+        <router-outlet></router-outlet>
+        <router-outlet name="popup"></router-outlet>
+
+    </div>
+    <mi-footer></mi-footer>
+
+</div>

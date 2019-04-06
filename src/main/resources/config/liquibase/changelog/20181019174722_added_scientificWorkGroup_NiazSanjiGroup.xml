@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity OrganizationChartAuthority.
+    -->
+    <changeSet id="20181019174722" author="saeedMokhtari">
+        <addColumn schemaName="public" tableName="niazsanji_group">
+            <column name="scientific_work_group_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="scientific_work_group_id"
+                                 baseTableName="niazsanji_group"
+                                 constraintName="fk_niazsanji_group_scientific_work_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="scientific_work_group"/>
+
+
+        <addColumn schemaName="public" tableName="request_organization_niazsanji">
+            <column name="price_cost" type="integer">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addColumn schemaName="public" tableName="final_organization_niazsanji">
+            <column name="price_cost" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="teacher_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="teacher_id"
+                                 baseTableName="final_organization_niazsanji"
+                                 constraintName="fk_final_organization_niazsanji_teacher_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teacher"/>
+        
+    </changeSet>
+</databaseChangeLog>

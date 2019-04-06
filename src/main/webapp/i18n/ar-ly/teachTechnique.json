@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "teachTechnique" : {
+            "home": {
+                "title": "Teach Techniques",
+                "createLabel": "Create a new Teach Technique",
+                "createOrEditLabel": "Create or edit a Teach Technique"
+            },
+            "created": "A new Teach Technique is created with identifier {{ param }}",
+            "updated": "A Teach Technique is updated with identifier {{ param }}",
+            "deleted": "A Teach Technique is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Teach Technique {{ id }}?"
+            },
+            "detail": {
+                "title": "Teach Technique"
+            },
+            "title": "Title",
+            "code": "Code",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "designAndPlanning": "Design And Planning"
+        }
+    }
+}

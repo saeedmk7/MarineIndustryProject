@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="poll">
+            <h2><span jhiTranslate="marineindustryprojApp.poll.detail.title">Poll</span> {{poll.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.poll.moreRecommendation">More Recommendation</span></dt>
+                <dd>
+                    <span>{{poll.moreRecommendation}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.poll.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{poll.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.poll.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{poll.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.poll.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{poll.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.poll.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{poll.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.poll.archived">Archived</span></dt>
+                <dd>
+                    <span>{{poll.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.poll.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{poll.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.poll.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{poll.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.poll.status">Status</span></dt>
+                <dd>
+                    <span>{{poll.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.poll.finalNiazsanjiReport">Final Niazsanji Report</span></dt>
+                <dd>
+                    <div *ngIf="poll.finalNiazsanjiReportId">
+                        <a [routerLink]="['/final-niazsanji-report-marine-suffix', poll.finalNiazsanjiReportId, 'view']">{{poll.finalNiazsanjiReportDescription}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/poll-marine-suffix', poll.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

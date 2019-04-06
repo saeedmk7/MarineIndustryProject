@@ -1,0 +1,417 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-teacher-marine-suffix-heading" jhiTranslate="marineindustryprojApp.teacher.home.createOrEditLabel">Create or edit a Teacher</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!teacher.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="teacher.id" readonly />
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.code" for="field_code">Code</label>
+                    <input type="number" class="form-control" name="code" id="field_code"
+                           [(ngModel)]="teacher.code" required/>
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.phoneNumber" for="field_phoneNumber">Phone Number</label>
+                    <input type="number" class="form-control" name="phoneNumber" id="field_phoneNumber"
+                           [(ngModel)]="teacher.phoneNumber" maxlength="18" jhiMax="999999999999999" jhiMin="99" required/>
+                    <div [hidden]="!(editForm.controls.phoneNumber?.dirty && editForm.controls.phoneNumber?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.phoneNumber?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 18 }">
+                            This field cannot be longer than 18 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.phoneNumber?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.phoneNumber?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 999999999999999 }">
+                            This field cannot be more than 999999999999999.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.phoneNumber?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 99 }">
+                            This field cannot be less than 100000.
+                        </small>
+                    </div>
+                </div>
+                <div style="display: inline;" class="alert alert-warning">این فیلد باید برای هر فرد یکتا باشد در غیر اینصورت امکان ثبت اطلاعات فرد وجود ندارد.</div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات مدرس {{fullName}}</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="teacher.name" required maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.family" for="field_family">Family</label>
+                    <input type="text" class="form-control" name="family" id="field_family"
+                        [(ngModel)]="teacher.family" required maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.family?.dirty && editForm.controls.family?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.family?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.family?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.fatherName" for="field_fatherName">Father Name</label>
+                    <input type="text" class="form-control" name="fatherName" id="field_fatherName"
+                        [(ngModel)]="teacher.fatherName" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.fatherName?.dirty && editForm.controls.fatherName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fatherName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.scientificBasis" for="field_scientificBasis">Scientific Basis</label>
+                    <input type="number" class="form-control" name="scientificBasis" id="field_scientificBasis"
+                        [(ngModel)]="teacher.scientificBasis" min="1" jhiMin="1" max="30" jhiMax="30"/>
+                    <div [hidden]="!(editForm.controls.scientificBasis?.dirty && editForm.controls.scientificBasis?.invalid)">
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.scientificBasis?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.scientificBasis?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 30 }">
+                            This field cannot be more than 30.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.scientificBasis?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.inquiry" for="field_inquiry">Inquiry</label>
+                    <input type="checkbox" class="form-control" name="inquiry" id="field_inquiry"
+                        [(ngModel)]="teacher.inquiry" />
+                    <div [hidden]="!(editForm.controls.inquiry?.dirty && editForm.controls.inquiry?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.inquiry?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.schoolConfirmation" for="field_schoolConfirmation">School Confirmation</label>
+                    <input type="checkbox" class="form-control" name="schoolConfirmation" id="field_schoolConfirmation"
+                        [(ngModel)]="teacher.schoolConfirmation" />
+                    <div [hidden]="!(editForm.controls.schoolConfirmation?.dirty && editForm.controls.schoolConfirmation?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.schoolConfirmation?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.protectiveApproval" for="field_protectiveApproval">Protective Approval</label>
+                    <input type="checkbox" class="form-control" name="protectiveApproval" id="field_protectiveApproval"
+                        [(ngModel)]="teacher.protectiveApproval" />
+                    <div [hidden]="!(editForm.controls.protectiveApproval?.dirty && editForm.controls.protectiveApproval?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.protectiveApproval?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.teachingSubject" for="field_teachingSubject">Teaching Subject</label>
+                    <input type="text" class="form-control" name="teachingSubject" id="field_teachingSubject"
+                        [(ngModel)]="teacher.teachingSubject" maxlength="1024"/>
+                    <div [hidden]="!(editForm.controls.teachingSubject?.dirty && editForm.controls.teachingSubject?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.teachingSubject?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1024 }">
+                        This field cannot be longer than 1024 characters.
+                        </small>
+                    </div>
+                </div>
+                <div *ngIf="isfa">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.issueDate" for="field_issueDate">Issue Date</label>
+                        <div class="d-flex">
+                            <dp-date-picker
+                                dir="rtl"
+                                [(ngModel)]="issueDate"
+                                name="issueDate"
+                                id="field_issueDate"
+                                mode="day"
+                                placeholder="تاریخ صدور"
+                                class="form-control col-md-4"
+                                [disabled] = "!isfa"
+                                theme="dp-material">
+                            </dp-date-picker>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.expirationDate" for="field_expirationDate">Expiration Date</label>
+                        <div class="d-flex">
+                            <dp-date-picker
+                                dir="rtl"
+                                [(ngModel)]="expirationDate"
+                                name="expirationDate"
+                                id="field_expirationDate"
+                                mode="day"
+                                placeholder="تاریخ اتمام اعتبار"
+                                class="form-control col-md-4"
+                                [disabled] = "!isfa"
+                                theme="dp-material">
+                            </dp-date-picker>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.licenseRenewalDate" for="field_licenseRenewalDate">License Renewal Date</label>
+                        <div class="d-flex">
+                            <dp-date-picker
+                                dir="rtl"
+                                [(ngModel)]="licenseRenewalDate"
+                                name="licenseRenewalDate"
+                                id="field_licenseRenewalDate"
+                                mode="day"
+                                placeholder="تاریخ اتمام اعتبار"
+                                class="form-control col-md-4"
+                                [disabled] = "!isfa"
+                                theme="dp-material">
+                            </dp-date-picker>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!isfa">
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.issueDate" for="field_issueDate">Issue Date</label>
+                        <div class="d-flex">
+                            <input id="field_issueDate" type="datetime-local" class="form-control" name="issueDate" [(ngModel)]="issueDate"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.expirationDate" for="field_expirationDate">Expiration Date</label>
+                        <div class="d-flex">
+                            <input id="field_expirationDate" type="datetime-local" class="form-control" name="expirationDate" [(ngModel)]="expirationDate"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.licenseRenewalDate" for="field_licenseRenewalDate">License Renewal Date</label>
+                        <div class="d-flex">
+                            <input id="field_licenseRenewalDate" type="datetime-local" class="form-control" name="licenseRenewalDate" [(ngModel)]="licenseRenewalDate"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.licenseNumber" for="field_licenseNumber">License Number</label>
+                    <input type="number" class="form-control" name="licenseNumber" id="field_licenseNumber"
+                        [(ngModel)]="teacher.licenseNumber" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.sessionNumber" for="field_sessionNumber">Session Number</label>
+                    <input type="number" class="form-control" name="sessionNumber" id="field_sessionNumber"
+                        [(ngModel)]="teacher.sessionNumber" />
+                </div>
+
+
+
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.createUserLogin" for="field_createUserLogin">Create User Login</label>
+                    <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
+                        [(ngModel)]="teacher.createUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.createUserLogin?.dirty && editForm.controls.createUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.createDate" for="field_createDate">Create Date</label>
+                    <div class="d-flex">
+                        <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="createDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.modifyUserLogin" for="field_modifyUserLogin">Modify User Login</label>
+                    <input type="text" class="form-control" name="modifyUserLogin" id="field_modifyUserLogin"
+                        [(ngModel)]="teacher.modifyUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.modifyUserLogin?.dirty && editForm.controls.modifyUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.modifyUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.modifyDate" for="field_modifyDate">Modify Date</label>
+                    <div class="d-flex">
+                        <input id="field_modifyDate" type="datetime-local" class="form-control" name="modifyDate" [(ngModel)]="modifyDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.archived" for="field_archived">Archived</label>
+                    <input type="checkbox" class="form-control" name="archived" id="field_archived"
+                        [(ngModel)]="teacher.archived" />
+                    <div [hidden]="!(editForm.controls.archived?.dirty && editForm.controls.archived?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.archived?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.archivedUserLogin" for="field_archivedUserLogin">Archived User Login</label>
+                    <input type="text" class="form-control" name="archivedUserLogin" id="field_archivedUserLogin"
+                        [(ngModel)]="teacher.archivedUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.archivedUserLogin?.dirty && editForm.controls.archivedUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.archivedUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.archivedDate" for="field_archivedDate">Archived Date</label>
+                    <div class="d-flex">
+                        <input id="field_archivedDate" type="datetime-local" class="form-control" name="archivedDate" [(ngModel)]="archivedDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.status" for="field_status">Status</label>
+                    <input type="number" class="form-control" name="status" id="field_status"
+                        [(ngModel)]="teacher.status" required/>
+                    <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.status?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.status?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>-->
+
+                <!--<div class="form-group">
+                    <label jhiTranslate="marineindustryprojApp.teacher.document" for="field_document">Document</label>
+                    <select class="form-control" id="field_document" multiple name="document" [(ngModel)]="teacher.documents">
+                        <option [ngValue]="getSelected(teacher.documents, documentOption)" *ngFor="let documentOption of documents; trackBy: trackDocumentById">{{documentOption.title}}</option>
+                    </select>
+                </div>-->
+                <div class="form-group">
+                    <a (click)="change('qualification-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.lastQualification" for="field_lastQualification">Last Qualification</a>
+                    <!--<select class="form-control" id="field_lastQualification" name="lastQualification" [(ngModel)]="teacher.lastQualificationId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="qualificationOption.id" *ngFor="let qualificationOption of qualifications; trackBy: trackQualificationById">{{qualificationOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="qualifications"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="lastQualification"
+                        id="field_lastQualification"
+                        [(ngModel)]="teacher.lastQualificationId">
+                </div>
+                <div class="form-group">
+                    <a (click)="change('field-of-study-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.lastFieldOfStudy" for="field_lastFieldOfStudy">Last Field Of Study</a>
+                    <!--<select class="form-control" id="field_lastFieldOfStudy" name="lastFieldOfStudy" [(ngModel)]="teacher.lastFieldOfStudyId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="fieldOfStudyOption.id" *ngFor="let fieldOfStudyOption of fieldofstudies; trackBy: trackFieldOfStudyById">{{fieldOfStudyOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="fieldofstudies"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="lastFieldOfStudy"
+                        id="field_lastFieldOfStudy"
+                        [(ngModel)]="teacher.lastFieldOfStudyId">
+                </div>
+                <div class="form-group">
+                    <a (click)="change('service-unit-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.serviceUnit" for="field_serviceUnit">Service Unit</a>
+                    <!--<select class="form-control" id="field_serviceUnit" name="serviceUnit" [(ngModel)]="teacher.serviceUnitId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="serviceUnitOption.id" *ngFor="let serviceUnitOption of serviceunits; trackBy: trackServiceUnitById">{{serviceUnitOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="serviceunits"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="serviceUnit"
+                        id="field_serviceUnit"
+                        [(ngModel)]="teacher.serviceUnitId">
+                </div>
+                <div class="form-group">
+                    <a (click)="change('academic-rank-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.academicRank" for="field_academicRank">Academic Rank</a>
+                   <!-- <select class="form-control" id="field_academicRank" name="academicRank" [(ngModel)]="teacher.academicRankId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="academicRankOption.id" *ngFor="let academicRankOption of academicranks; trackBy: trackAcademicRankById">{{academicRankOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="academicranks"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="academicRank"
+                        id="field_academicRank"
+                        [(ngModel)]="teacher.academicRankId">
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

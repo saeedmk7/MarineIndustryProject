@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FinalNiazSanjiReport" columnDirection="RTL" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cec2ac11-ee5b-4eca-944a-9a4699dbfbb8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="4f712750-97fd-4398-9c10-a57423641631"/>
+	<subDataset name="New Dataset 1" uuid="80738c92-bd6e-4ceb-af67-cb6def0fbb33"/>
+	<field name="educationalModuleTitle" class="java.lang.String"/>
+	<field name="educationalModuleId" class="java.lang.String"/>
+	<field name="educationalModuleLevel" class="java.lang.Number"/>
+	<field name="educationalModuleHour" class="java.lang.Number"/>
+	<field name="personFullName" class="java.lang.String"/>
+	<field name="jobTitle" class="java.lang.String"/>
+	<field name="priceCost" class="java.lang.Number"/>
+	<field name="employmentTypeTitle" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="74" splitType="Stretch">
+			<textField>
+				<reportElement x="677" y="0" width="100" height="20" uuid="2777d549-683e-40ab-8e79-aa122bddd099"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[فرم شماره   5-1]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="30" width="802" height="20" uuid="e52ef346-b35e-48f7-9116-6eaa050ca87e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[فهرست دوره های آموزشی مورد نیاز]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="50" width="802" height="20" uuid="32079c2e-1336-4f92-8564-fd03f90496a0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[معاونت: ..........................]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="1" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="777" y="0" width="25" height="29" uuid="a5bd9fd3-0c10-4e48-abc0-4b304ef2550b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[ردیف]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="575" y="0" width="87" height="29" uuid="4d518f86-c1b9-4865-b809-0a8193cf10e2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[شناسه پودمان]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="662" y="0" width="115" height="29" uuid="e6a07923-3e17-4fac-a954-18943e412b25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[عنوان پودمان]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="538" y="0" width="37" height="29" uuid="e368a41f-42be-444d-9908-fd91fc7cf7a9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[سطح]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="482" y="0" width="56" height="29" uuid="0a8ee4e9-badd-4e89-9d40-5c5899fd798e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[مدت پودمان (ساعت)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="0" width="149" height="29" uuid="7fb87e24-9d6c-454e-96c5-78b8af103cc3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[نام و نام خانوادگی متقاضی]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="0" width="149" height="29" uuid="5bf913e0-43b4-4772-9c42-6b42952317e5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[شغل سازمانی متقاضی]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="0" width="93" height="29" uuid="4307c949-c4a9-4cea-8178-abad537195fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[هزینه دوره]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="91" height="29" uuid="a6b33a13-77d5-4f57-8791-dfcad8a85f38"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[نوع عضویت]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="777" y="0" width="25" height="29" uuid="02d53581-adfd-4e3c-927b-3aa422fd88b8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="0" width="149" height="29" uuid="40b776e6-ff55-4363-9f06-a50408829f7e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jobTitle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="0" width="149" height="29" uuid="99a2a909-79e4-4edb-ac73-c9d1ddaf647c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{personFullName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="538" y="0" width="37" height="29" uuid="2518e1b7-b9fa-4c71-bf2b-d9590ad5f2e0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{educationalModuleLevel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="575" y="0" width="87" height="29" uuid="e8ad85e7-2253-46cd-b0ab-4b32b3180f12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{educationalModuleId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="91" height="29" uuid="3a37b8de-deb0-4f43-8cb4-e79861ea75b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employmentTypeTitle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="482" y="0" width="56" height="29" uuid="54924494-6c71-4eb1-b4da-caa1b10b4f57"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{educationalModuleHour}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="0" width="93" height="29" uuid="33c22aa9-7a72-4a6f-83b5-bf0a92bcb82b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{priceCost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="662" y="0" width="115" height="29" uuid="1a28a6c2-7d61-4fdf-9fe2-c35eaa6f572d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true" pdfEncoding="Cp1256"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{educationalModuleTitle}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="538" y="0" width="264" height="29" uuid="43b3477a-8be4-46cb-a842-4566da9288c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[جمع کل (نفر ساعت) :]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="482" y="0" width="56" height="29" uuid="ba0641a1-def1-49c7-a72d-2f5bd1450c18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+			</textField>
+			<textField>
+				<reportElement x="184" y="0" width="298" height="29" uuid="cd5b436b-fbd9-4a4f-b597-965cc41a3684"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[جمع کل متقاضیان (موارد تکراری فقط یکبار شمارش شوند:]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="0" width="93" height="29" uuid="e2a7f2a4-da26-4e60-8fdd-be867ee65ec3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="91" height="29" uuid="775382f4-36d4-4781-9b85-c6d614729551"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14" isBold="true"/>
+				</textElement>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

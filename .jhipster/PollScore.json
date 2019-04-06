@@ -1,0 +1,73 @@
+{
+    "name": "PollScore",
+    "fields": [
+        {
+            "fieldName": "recommendation",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 1024
+        },
+        {
+            "fieldName": "createUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "createDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "modifyUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "modifyDate",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "pollItem",
+            "otherEntityName": "pollItem",
+            "otherEntityField": "title"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "scoreItem",
+            "otherEntityName": "scoreItem",
+            "otherEntityField": "title"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "poll",
+            "otherEntityName": "poll",
+            "otherEntityField": "moreRecommendation"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "person",
+            "otherEntityName": "person",
+            "otherEntityField": "family"
+        }
+    ],
+    "changelogDate": "20181006162120",
+    "entityTableName": "poll_score",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "marineSuffix"
+}

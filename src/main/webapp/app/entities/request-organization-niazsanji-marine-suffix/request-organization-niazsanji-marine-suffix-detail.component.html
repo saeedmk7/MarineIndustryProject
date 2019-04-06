@@ -1,0 +1,154 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="requestOrganizationNiazsanji" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.detail.title">Request Organization Niazsanji</span> {{requestOrganizationNiazsanji.id}}</h2>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <!--<dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.code">Code</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.code}}</span>
+                </dd>-->
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اولیه نیازسنجی</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.recommendedByOrgchart">Recommended By Orgchart</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.recommendedByOrgchart}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.educationalModule">Educational Module</span></dt>
+                <dd>
+                    <div *ngIf="requestOrganizationNiazsanji.educationalModuleId">
+                        <a [routerLink]="['/educational-module-marine-suffix', requestOrganizationNiazsanji.educationalModuleId, 'view']">{{requestOrganizationNiazsanji.educationalModuleTitle}}</a>
+                    </div>
+                </dd>
+                <dt>وضعیت درخواست</dt>
+                <dd>
+                    <strong>{{requestOrganizationNiazsanji.statusMeaning}}</strong>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.neededSoftwares">Needed Softwares</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.neededSoftwares}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.neededHardware">Needed Hardware</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.neededHardware}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.trainingGoals">Training Goals</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.trainingGoals}}</span>
+                </dd>
+
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات مدرس</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherName">Teacher Name</span></dt>
+                <dd *ngIf="requestOrganizationNiazsanji.teacherId">
+                    {{requestOrganizationNiazsanji.teacherFamily}}
+                </dd>
+                <dd *ngIf="!requestOrganizationNiazsanji.teacherId">
+                    معلم در لیست مدرسان یافت نشده است.
+                </dd>
+                <ng-container *ngIf="!requestOrganizationNiazsanji.teacherId">
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherName">Teacher Name</span> و <span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherMobile">Teacher Mobile</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.teacherName}} - {{requestOrganizationNiazsanji.teacherMobile}}</span>
+                </dd>
+                </ng-container>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات افراد شرکت کننده</div></div>
+                <div class="table-responsive">
+                    <table class="table table-striped  table-bordered table-hover table-sm">
+                        <thead>
+                        <tr >
+                            <th>کد ملی </th>
+                            <th>نام و نام خانوادگی</th>
+                            <th>شغل سازمانی</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let person of requestOrganizationNiazsanji.people">
+                            <td>{{person.nationalId}}</td>
+                            <td>{{person.name}} {{person.family}}</td>
+                            <td>{{person.jobTitle}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.requestStatus">Request Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + requestOrganizationNiazsanji.requestStatus}}">{{requestOrganizationNiazsanji.requestStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.changeStatusUserLogin">Change Status User Login</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.changeStatusUserLogin}}</span>
+                </dd>-->
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات تکمیلی نیازسنجی</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.studentsType">Students Type</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.studentsType}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.priceCost">Price Cost</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.priceCost | number}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.description">Description</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.description}}</span>
+                </dd>
+
+                <!--<dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.archived">Archived</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.archivedDate}}</span>
+                </dd>-->
+                <!--
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.status">Status</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.statusMeaning}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.person">Person</span></dt>
+                <dd>
+                    <span *ngFor="let person of requestOrganizationNiazsanji.people; let last = last">
+                        <a [routerLink]="['/person-marine-suffix', person?.id, 'view' ]">{{person.family}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>-->
+
+
+                <!--<dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teachApproach">Teach Approach</span></dt>
+                <dd>
+                    <div *ngIf="requestOrganizationNiazsanji.teachApproachId">
+                        <a [routerLink]="['/teach-approach-marine-suffix', requestOrganizationNiazsanji.teachApproachId, 'view']">{{requestOrganizationNiazsanji.teachApproachTitle}}</a>
+                    </div>
+                </dd>-->
+
+            </dl>
+            <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">گردش درخواست و نظرات</div></div>
+            <textarea [disabled]="true" [rows]="rows" class="form-control">{{requestOrganizationNiazsanji.conversation}}</textarea>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+        </div>
+        </div>
+    </div>
+</div>

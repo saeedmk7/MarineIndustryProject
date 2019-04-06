@@ -1,0 +1,40 @@
+
+{
+    "marineindustryprojApp": {
+        "finalNiazsanjiReport" : {
+            "home": {
+                "title": "لیست نیازسنجی های آماده برنامه ریزی و اجرا",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش گزارش پایانی نیازسنجی"
+            },
+            "created": "گزارش پایانی نیازسنجی با شناسه {{ param }} ایجاد شد.",
+            "updated": "گزارش پایانی نیازسنجی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "گزارش پایانی نیازسنجی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف گزارش پایانی نیازسنجی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات نیازسنجی"
+            },
+            "niazsanjiYear": "سال نیازسنجی",
+            "niazSanjiSource": "منبع نیازسنجی",
+            "priceCost": "هزینه دوره(ریال)",
+            "description": "توضیحات بیشتر",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "designAndPlanning": "Design And Planning",
+            "runPhase": "Run Phase",
+            "poll": "Poll",
+            "document": "مدارک",
+            "educationalModule": "پودمان آموزشی",
+            "educationalModuleId": "پودمان آموزشی",
+            "organizationChart": "Organization Chart"
+        }
+    }
+}

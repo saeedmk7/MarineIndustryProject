@@ -1,0 +1,32 @@
+
+{
+    "marineindustryprojApp": {
+        "usersRequest" : {
+            "home": {
+                "title": "Users Requests",
+                "createLabel": "Create a new Users Request",
+                "createOrEditLabel": "Create or edit a Users Request"
+            },
+            "created": "A new Users Request is created with identifier {{ param }}",
+            "updated": "A Users Request is updated with identifier {{ param }}",
+            "deleted": "A Users Request is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Users Request {{ id }}?"
+            },
+            "detail": {
+                "title": "Users Request"
+            },
+            "title": "Title",
+            "telephone": "Telephone",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "conversation": "Conversation",
+            "requestStatus": "Request Status",
+            "changeStatusUserLogin": "Change Status User Login",
+            "document": "Document"
+        }
+    }
+}

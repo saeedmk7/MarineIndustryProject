@@ -1,0 +1,47 @@
+
+{
+    "marineindustryprojApp": {
+        "finalOrganizationNiazsanji" : {
+            "home": {
+                "title": "Final Organization Niazsanjis",
+                "createLabel": "Create a new Final Organization Niazsanji",
+                "createOrEditLabel": "Create or edit a Final Organization Niazsanji"
+            },
+            "created": "A new Final Organization Niazsanji is created with identifier {{ param }}",
+            "updated": "A Final Organization Niazsanji is updated with identifier {{ param }}",
+            "deleted": "A Final Organization Niazsanji is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Final Organization Niazsanji {{ id }}?"
+            },
+            "detail": {
+                "title": "Final Organization Niazsanji"
+            },
+            "code": "Code",
+            "recommendedByOrgchart": "Recommended By Orgchart",
+            "neededSoftwares": "Needed Softwares",
+            "neededHardware": "Needed Hardware",
+            "studentsType": "Students Type",
+            "teacherName": "Teacher Name",
+            "teacherMobile": "Teacher Mobile",
+            "requestStatus": "Request Status",
+            "changeStatusUserLogin": "Change Status User Login",
+            "trainingGoals": "Training Goals",
+            "description": "Description",
+            "priceCost": "Price Cost",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "person": "Person",
+            "document": "Document",
+            "teacher": "Teacher",
+            "educationalModule": "Educational Module",
+            "teachApproach": "Teach Approach",
+            "requestOrganizationNiazsanji": "Request Organization Niazsanji"
+        }
+    }
+}

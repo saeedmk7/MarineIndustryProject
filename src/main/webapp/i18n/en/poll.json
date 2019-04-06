@@ -1,0 +1,32 @@
+
+{
+    "marineindustryprojApp": {
+        "poll" : {
+            "home": {
+                "title": "Polls",
+                "createLabel": "Create a new Poll",
+                "createOrEditLabel": "Create or edit a Poll"
+            },
+            "created": "A new Poll is created with identifier {{ param }}",
+            "updated": "A Poll is updated with identifier {{ param }}",
+            "deleted": "A Poll is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Poll {{ id }}?"
+            },
+            "detail": {
+                "title": "Poll"
+            },
+            "moreRecommendation": "More Recommendation",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "pollScore": "Poll Score",
+            "finalNiazsanjiReport": "Final Niazsanji Report"
+        }
+    }
+}

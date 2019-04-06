@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity DesignAndPlanning.
+    -->
+    <changeSet id="20181006162102-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="design_and_plannings_id"
+                                 baseTableName="design_and_planning_person"
+                                 constraintName="fk_design_and_planning_person_design_and_plannings_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="design_and_planning"/>
+        <addForeignKeyConstraint baseColumnNames="people_id"
+                                 baseTableName="design_and_planning_person"
+                                 constraintName="fk_design_and_planning_person_people_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+        
+        <addForeignKeyConstraint baseColumnNames="design_and_plannings_id"
+                                 baseTableName="design_and_planning_document"
+                                 constraintName="fk_design_and_planning_document_design_and_plannings_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="design_and_planning"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="design_and_planning_document"
+                                 constraintName="fk_design_and_planning_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="final_niazsanji_report_id"
+                                 baseTableName="design_and_planning"
+                                 constraintName="fk_design_and_planning_final_niazsanji_report_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="final_niazsanji_report"/>
+
+        <addForeignKeyConstraint baseColumnNames="mahiat_course_id"
+                                 baseTableName="design_and_planning"
+                                 constraintName="fk_design_and_planning_mahiat_course_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mahiat_course"/>
+
+        <addForeignKeyConstraint baseColumnNames="course_type_id"
+                                 baseTableName="design_and_planning"
+                                 constraintName="fk_design_and_planning_course_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="teach_type_id"
+                                 baseTableName="design_and_planning"
+                                 constraintName="fk_design_and_planning_teach_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teach_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="course_location_id"
+                                 baseTableName="design_and_planning"
+                                 constraintName="fk_design_and_planning_course_location_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course_location"/>
+
+        <addForeignKeyConstraint baseColumnNames="conditions_of_participant_id"
+                                 baseTableName="design_and_planning"
+                                 constraintName="fk_design_and_planning_conditions_of_participant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="conditions_of_participant"/>
+
+        <addForeignKeyConstraint baseColumnNames="effectiveness_level_id"
+                                 baseTableName="design_and_planning"
+                                 constraintName="fk_design_and_planning_effectiveness_level_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="effectiveness_level"/>
+
+        <addForeignKeyConstraint baseColumnNames="tools_and_facility_id"
+                                 baseTableName="design_and_planning"
+                                 constraintName="fk_design_and_planning_tools_and_facility_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tools_and_facility"/>
+
+        <addForeignKeyConstraint baseColumnNames="teaching_approach_id"
+                                 baseTableName="design_and_planning"
+                                 constraintName="fk_design_and_planning_teaching_approach_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teaching_approach"/>
+
+        <addForeignKeyConstraint baseColumnNames="teach_technique_id"
+                                 baseTableName="design_and_planning"
+                                 constraintName="fk_design_and_planning_teach_technique_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teach_technique"/>
+
+        <addForeignKeyConstraint baseColumnNames="effectiveness_index_id"
+                                 baseTableName="design_and_planning"
+                                 constraintName="fk_design_and_planning_effectiveness_index_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="effectiveness_index"/>
+
+    </changeSet>
+</databaseChangeLog>

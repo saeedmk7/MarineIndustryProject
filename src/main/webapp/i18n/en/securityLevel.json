@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "securityLevel" : {
+            "home": {
+                "title": "Security Levels",
+                "createLabel": "Create a new Security Level",
+                "createOrEditLabel": "Create or edit a Security Level"
+            },
+            "created": "A new Security Level is created with identifier {{ param }}",
+            "updated": "A Security Level is updated with identifier {{ param }}",
+            "deleted": "A Security Level is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Security Level {{ id }}?"
+            },
+            "detail": {
+                "title": "Security Level"
+            },
+            "title": "Title",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "educationalModule": "Educational Module",
+            "requestEducationalModule": "Request Educational Module"
+        }
+    }
+}

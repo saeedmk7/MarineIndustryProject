@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity DesignAndPlanning.
+    -->
+    <changeSet id="20181006162102-1" author="jhipster">
+        <createTable tableName="design_and_planning">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="direct_cost" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="direct_cost_description" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="undirect_cost" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="undirect_cost_description" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="step" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="finished" type="boolean">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="finished_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="finished_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="description" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="create_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="create_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modify_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modify_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="archived" type="boolean">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="archived_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="archived_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="status" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="final_niazsanji_report_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="mahiat_course_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="course_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="teach_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="course_location_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="conditions_of_participant_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="effectiveness_level_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tools_and_facility_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="teaching_approach_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="teach_technique_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="effectiveness_index_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="design_and_planning" columnName="finished_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="design_and_planning" columnName="create_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="design_and_planning" columnName="modify_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="design_and_planning" columnName="archived_date" columnDataType="datetime"/>
+        
+        <createTable tableName="design_and_planning_person">
+            <column name="people_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="design_and_plannings_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="design_and_plannings_id, people_id" tableName="design_and_planning_person"/>
+        
+        <createTable tableName="design_and_planning_document">
+            <column name="documents_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="design_and_plannings_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="design_and_plannings_id, documents_id" tableName="design_and_planning_document"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

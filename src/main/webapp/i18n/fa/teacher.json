@@ -1,0 +1,56 @@
+{
+    "marineindustryprojApp": {
+        "teacher" : {
+            "home": {
+                "title": "فهرست مدرسین داخلی ودجا",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش مدرس"
+            },
+            "created": "مدرس با شناسه {{ param }} ایجاد شد.",
+            "updated": "مدرس با شناسه {{ param }} ویرایش شد.",
+            "deleted": "مدرس با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف مدرس با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات مدرس"
+            },
+            "name": "نام",
+            "family": "نام خانوادگی",
+            "fatherName": "نام پدر",
+            "scientificBasis": "پایه علمی",
+            "inquiry": "استعلام",
+            "schoolConfirmation": "تاییدیه مکتبی",
+            "protectiveApproval": "تاییدیه حفاظتی",
+            "teachingSubject": "موضوع تدریس",
+            "issueDate": "تاریخ صدور",
+            "expirationDate": "تاریخ اتمام اعتبار",
+            "licenseNumber": "شماره گواهینامه",
+            "sessionNumber": "شماره جلسه",
+            "phoneNumber": "شماره موبایل",
+            "licenseRenewalDate": "تاریخ تمدید گواهینامه",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "requestOrganizationNiazsanji": "Request Organization Niazsanji",
+            "finalOrganizationNiazsanji": "Final Organization Niazsanji",
+            "document": "مدارک",
+            "lastQualification": "آخرین مدرک تحصیلی",
+            "lastQualificationTitle": "آخرین مدرک تحصیلی",
+            "lastFieldOfStudy": "آخرین رشته تحصیلی",
+            "lastFieldOfStudyTitle": "آخرین رشته تحصیلی",
+            "serviceUnit": "واحد خدمتی",
+            "serviceUnitTitle": "واحد خدمتی",
+            "academicRank": "مرتبه علمی",
+            "academicRankTitle": "مرتبه علمی",
+            "educationalModule": "Educational Module",
+            "expired": "تاریخ اتمام اعتبار"
+        }
+    }
+}

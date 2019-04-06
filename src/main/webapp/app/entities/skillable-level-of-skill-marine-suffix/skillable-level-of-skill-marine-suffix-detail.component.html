@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="skillableLevelOfSkill">
+            <h2><span jhiTranslate="marineindustryprojApp.skillableLevelOfSkill.detail.title">Skillable Level Of Skill</span> {{skillableLevelOfSkill.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.skillableLevelOfSkill.title">Title</span></dt>
+                <dd>
+                    <span>{{skillableLevelOfSkill.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.skillableLevelOfSkill.code">Code</span></dt>
+                <dd>
+                    <span>{{skillableLevelOfSkill.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.skillableLevelOfSkill.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{skillableLevelOfSkill.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.skillableLevelOfSkill.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{skillableLevelOfSkill.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.skillableLevelOfSkill.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{skillableLevelOfSkill.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.skillableLevelOfSkill.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{skillableLevelOfSkill.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/skillable-level-of-skill-marine-suffix', skillableLevelOfSkill.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

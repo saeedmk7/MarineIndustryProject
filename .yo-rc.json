@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.marineindustryproj",
+      "nativeLanguage": "fa"
+    },
+    "jhipsterVersion": "5.4.1",
+    "applicationType": "monolith",
+    "baseName": "marineindustryproj",
+    "packageName": "com.marineindustryproj",
+    "packageFolder": "com/marineindustryproj",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "YmI5ZjJiZGU1ZmY4YjYyYjhmOWVmMzFmZGM5MTkxODg1MmJiYzE3MTEzNjA0NzQxYWZlYzU0ZmFkOGUwZDc0ZTE0ZDI5MTg5MDMyOWYyMDQ0MzBlNzY3NDQyOGNmNDFhNTllNDZkODk2ZTJlZGI0ZDY4N2VmMDcxMTA3YTYyYWQ=",
+    "clientFramework": "angularX",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "jhiPrefix": "mi",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "fa",
+    "languages": [
+      "fa",
+      "ar-ly",
+      "en"
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+    <div class="dccContainer">
+        <div *ngIf="announcement">
+            <h2><span jhiTranslate="marineindustryprojApp.announcement.detail.title">Announcement</span> {{announcement.title}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class="col-lg-2 detHeader">توضیحات خبر:</span>
+                    <span class="detHeader">{{announcement.description}}</span>
+                </div>
+                <div class="col-lg-12">
+                    <span class="col-lg-2 detHeader">تاریخ خبر:</span>
+                    <span class="detHeader">{{announcement.createDate}}</span>
+                </div>
+            </div>
+            <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">متن خبر</div></div>
+            <!--<div class="row">
+                <ckeditor [(ngModel)]="announcement.compeleteText" [editor]="Editor" [disabled]="true" [config]="config" name="compeleteText" id="field_compeleteText"></ckeditor>
+            </div>-->
+            <div class="row">
+                <div [innerHTML]="announcement.compeleteText"></div>
+            </div>
+            <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">دریافت ضمائم</div></div>
+            <!--<dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.announcement.title">Title</span></dt>
+                <dd>
+                    <span>{{announcement.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.announcement.code">Code</span></dt>
+                <dd>
+                    <span>{{announcement.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.announcement.description">Description</span></dt>
+                <dd>
+                    <span>{{announcement.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.announcement.compeleteText">Compelete Text</span></dt>
+                <dd>
+                    <span>{{announcement.compeleteText}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.announcement.isActive">Is Active</span></dt>
+                <dd>
+                    <span>{{announcement.isActive}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.announcement.announcementLevel">Announcement Level</span></dt>
+                <dd>
+                    <span>{{announcement.announcementLevel}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.announcement.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{announcement.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.announcement.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{announcement.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.announcement.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{announcement.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.announcement.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{announcement.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.announcement.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of announcement.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>-->
+            <span *ngFor="let document of announcement.documents; let last = last">
+                <a *ngIf="document.fileDoc" [href]="document.fileDoc | safe" target="_blank"
+                        class="btn btn-default btn-sm">
+                    <fa-icon [icon]="'download'"></fa-icon>
+                    <span class="d-none d-md-inline">{{document.title}}</span>
+                </a>
+            </span>
+            <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">پایان</div></div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+        </div>
+    </div>
+</div>

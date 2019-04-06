@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="finalNiazsanjiReport" class="detail-page">
+            <mi-alert></mi-alert>
+            <h2><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.detail.title">Final Niazsanji Report</span> {{finalNiazsanjiReport.id}}</h2>
+
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.educationalModule">Educational Module</span></dt>
+                <dd>
+                    <div *ngIf="finalNiazsanjiReport.educationalModuleId">
+                        <a [routerLink]="['/educational-module-marine-suffix', finalNiazsanjiReport.educationalModuleId, 'view']">{{finalNiazsanjiReport.educationalModuleTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+            <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">لیست افراد در نیازسنجی</div></div>
+            <div class="table-responsive" *ngIf="finalNiazsanjiReportPeople">
+                <table class="table table-striped  table-bordered table-hover table-sm">
+                    <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th>فرد</th>
+                        <th>منبع نیازسنجی</th>
+                        <th>هزینه</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let finalNiazsanjiReportPerson of finalNiazsanjiReportPeople ;let i = index">
+                        <td>{{i+1}}</td>
+                        <td>
+                            <div *ngIf="finalNiazsanjiReportPerson.personId">
+                                <a [routerLink]="['../person-marine-suffix', finalNiazsanjiReportPerson.personId , 'view' ]" >{{finalNiazsanjiReportPerson.personFamily}}</a>
+                            </div>
+                        </td>
+                        <td jhiTranslate="{{'marineindustryprojApp.NiazSanjiSource.' + finalNiazsanjiReportPerson.niazSanjiSource}}">{{finalNiazsanjiReportPerson.niazSanjiSource}}</td>
+                        <td>{{finalNiazsanjiReportPerson.priceCost | number}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+           <!-- <button type="button"
+                    [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReport.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>-->
+        </div>
+        </div>
+    </div>
+</div>

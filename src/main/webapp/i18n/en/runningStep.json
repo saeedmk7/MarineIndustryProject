@@ -1,0 +1,34 @@
+
+{
+    "marineindustryprojApp": {
+        "runningStep" : {
+            "home": {
+                "title": "Running Steps",
+                "createLabel": "Create a new Running Step",
+                "createOrEditLabel": "Create or edit a Running Step"
+            },
+            "created": "A new Running Step is created with identifier {{ param }}",
+            "updated": "A Running Step is updated with identifier {{ param }}",
+            "deleted": "A Running Step is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Running Step {{ id }}?"
+            },
+            "detail": {
+                "title": "Running Step"
+            },
+            "title": "Title",
+            "description": "Description",
+            "stepNumber": "Step Number",
+            "stepRequired": "Step Required",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "runRunningStep": "Run Running Step"
+        }
+    }
+}

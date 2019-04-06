@@ -1,0 +1,79 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-users-request-marine-suffix-heading" jhiTranslate="marineindustryprojApp.usersRequest.home.createOrEditLabel">Create or edit a Users Request</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!usersRequest.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="usersRequest.id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.usersRequest.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title" [disabled]="usersRequest.id !== undefined"
+                        [(ngModel)]="usersRequest.title" required maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.usersRequest.telephone" for="field_telephone">Telephone</label>
+                    <input type="text" class="form-control" [disabled]="usersRequest.id !== undefined" name="telephone" id="field_telephone"
+                        [(ngModel)]="usersRequest.telephone" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.telephone?.dirty && editForm.controls.telephone?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.telephone?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group fullcover">
+                    <label class="form-control-label"  jhiTranslate="marineindustryprojApp.usersRequest.description" for="field_description">Description</label>
+                    <textarea class="form-control" [disabled]="usersRequest.id !== undefined" name="description" id="field_description"
+                        [(ngModel)]="usersRequest.description" ></textarea>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">صحبت ها</div></div>
+                <div class="form-group fullcover" *ngIf="usersRequest.id !== undefined">
+                    <label class="form-control-label"   jhiTranslate="marineindustryprojApp.usersRequest.conversation" for="field_conversation">conversation</label>
+                    <textarea class="form-control" [disabled]="true" name="conversation" id="field_conversation"
+                              [(ngModel)]="usersRequest.conversation" ></textarea>
+                </div>
+                <div class="form-group fullcover" *ngIf="usersRequest.id !== undefined">
+                    <label class="form-control-label"  jhiTranslate="marineindustryprojApp.usersRequest.answer" for="field_answer">answer</label>
+                    <textarea class="form-control" *ngIf="usersRequest.id !== undefined" name="answer" id="field_answer"
+                              [(ngModel)]="answer" ></textarea>
+                </div>
+                <div class="form-group" *ngIf="isAdmin">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.usersRequest.requestStatus" for="field_requestStatus">Request Status</label>
+                    <select class="form-control" name="requestStatus" [(ngModel)]="usersRequest.requestStatus" id="field_requestStatus" >
+                        <option value="NEW">{{'marineindustryprojApp.RequestStatus.NEW' | translate}}</option>
+                        <option value="READ">{{'marineindustryprojApp.RequestStatus.READ' | translate}}</option>
+                        <option value="RETURNED">{{'marineindustryprojApp.RequestStatus.RETURNED' | translate}}</option>
+                        <option value="IGNORE">{{'marineindustryprojApp.RequestStatus.IGNORE' | translate}}</option>
+                        <option value="ACCEPT">{{'marineindustryprojApp.RequestStatus.ACCEPT' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+
+                <span *ngIf="usersRequest.id === undefined" class="alert alert-info">لطفا در ثبت درخواست خود نهایت دقت را بفرمائید در صورتی که درخواست شما ثبت شود دیگر امکان تغییر آن توسط شما وجود ندارد.</span>
+            </div>
+        </form>
+    </div>
+</div>

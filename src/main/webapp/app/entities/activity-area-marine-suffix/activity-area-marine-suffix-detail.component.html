@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="activityArea" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.activityArea.detail.title">Activity Area</span> {{activityArea.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.activityArea.title">Title</span></dt>
+                <dd>
+                    <span>{{activityArea.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.activityArea.code">Code</span></dt>
+                <dd>
+                    <span>{{activityArea.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.activityArea.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{activityArea.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.activityArea.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{activityArea.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.activityArea.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{activityArea.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.activityArea.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{activityArea.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <!--<button type="button"
+                    [routerLink]="['/activity-area-marine-suffix', activityArea.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>-->
+        </div>
+    </div>
+</div>

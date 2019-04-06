@@ -1,0 +1,86 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.organizationChartAuthority.home.title">Organization Chart Authorities</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-organization-chart-authority-marine-suffix" [routerLink]="['/organization-chart-authority-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.organizationChartAuthority.home.createLabel">
+            Create new Organization Chart Authority
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="organizationChartAuthorities">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="authorityName"><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.authorityName">Authority Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hasEditPermission"><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.hasEditPermission">Has Edit Permission</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archived"><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.archived">Archived</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedUserLogin"><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.archivedUserLogin">Archived User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedDate"><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.archivedDate">Archived Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let organizationChartAuthority of organizationChartAuthorities ;trackBy: trackId">
+                <td><a [routerLink]="['/organization-chart-authority-marine-suffix', organizationChartAuthority.id, 'view' ]">{{organizationChartAuthority.id}}</a></td>
+                <td>{{organizationChartAuthority.authorityName}}</td>
+                <td>{{organizationChartAuthority.hasEditPermission}}</td>
+                <td>{{organizationChartAuthority.createUserLogin}}</td>
+                <td>{{organizationChartAuthority.createDate | date:'medium'}}</td>
+                <td>{{organizationChartAuthority.modifyUserLogin}}</td>
+                <td>{{organizationChartAuthority.modifyDate | date:'medium'}}</td>
+                <td>{{organizationChartAuthority.archived}}</td>
+                <td>{{organizationChartAuthority.archivedUserLogin}}</td>
+                <td>{{organizationChartAuthority.archivedDate | date:'medium'}}</td>
+                <td>{{organizationChartAuthority.status}}</td>
+                <td>
+                    <div *ngIf="organizationChartAuthority.organizationChartId">
+                        <a [routerLink]="['../organization-chart-marine-suffix', organizationChartAuthority.organizationChartId , 'view' ]" >{{organizationChartAuthority.organizationChartTitle}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/organization-chart-authority-marine-suffix', organizationChartAuthority.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/organization-chart-authority-marine-suffix', organizationChartAuthority.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'organization-chart-authority-marine-suffix/'+ organizationChartAuthority.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="organizationChartAuthorities && organizationChartAuthorities.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

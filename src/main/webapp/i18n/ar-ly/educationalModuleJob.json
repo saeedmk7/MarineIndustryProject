@@ -1,0 +1,27 @@
+
+{
+    "marineindustryprojApp": {
+        "educationalModuleJob" : {
+            "home": {
+                "title": "Educational Module Jobs",
+                "createLabel": "Create a new Educational Module Job",
+                "createOrEditLabel": "Create or edit a Educational Module Job"
+            },
+            "created": "A new Educational Module Job is created with identifier {{ param }}",
+            "updated": "A Educational Module Job is updated with identifier {{ param }}",
+            "deleted": "A Educational Module Job is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Educational Module Job {{ id }}?"
+            },
+            "detail": {
+                "title": "Educational Module Job"
+            },
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "educationalModule": "Educational Module",
+            "job": "Job"
+        }
+    }
+}

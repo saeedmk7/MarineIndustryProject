@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "educationalModuleJob" : {
+            "home": {
+                "title": "تخصیص پودمان به شغل بصورت گروهی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش"
+            },
+            "created": "با شناسه {{ param }} ایجاد شد.",
+            "updated": "با شناسه {{ param }} ویرایش شد.",
+            "deleted": "با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات"
+            },
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "educationalModule": "پودمان آموزشی",
+            "educationalModuleId": "پودمان آموزشی",
+            "job": "شغل",
+            "jobId": "شغل"
+        }
+    }
+}

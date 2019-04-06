@@ -1,0 +1,44 @@
+
+{
+    "marineindustryprojApp": {
+        "job" : {
+            "home": {
+                "title": "Jobs",
+                "createLabel": "Create a new Job",
+                "createOrEditLabel": "Create or edit a Job"
+            },
+            "created": "A new Job is created with identifier {{ param }}",
+            "updated": "A Job is updated with identifier {{ param }}",
+            "deleted": "A Job is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Job {{ id }}?"
+            },
+            "detail": {
+                "title": "Job"
+            },
+            "title": "Title",
+            "jobKey": "Job Key",
+            "jobCode": "Job Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "jobPerson": "Job Person",
+            "practicaljobPerson": "Practicaljob Person",
+            "job": "Job",
+            "educationalModuleJob": "Educational Module Job",
+            "document": "Document",
+            "raste": "Raste",
+            "radeh": "Radeh",
+            "jobType": "Job Type",
+            "scientificWorkGroup": "Scientific Work Group",
+            "parent": "Parent",
+            "mainTask": "Main Task",
+            "niazsanjiGroup": "Niazsanji Group"
+        }
+    }
+}

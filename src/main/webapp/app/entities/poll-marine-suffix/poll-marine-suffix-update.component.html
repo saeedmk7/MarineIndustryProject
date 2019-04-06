@@ -1,0 +1,122 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-poll-marine-suffix-heading" jhiTranslate="marineindustryprojApp.poll.home.createOrEditLabel">Create or edit a Poll</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!poll.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="poll.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.poll.moreRecommendation" for="field_moreRecommendation">More Recommendation</label>
+                    <input type="text" class="form-control" name="moreRecommendation" id="field_moreRecommendation"
+                        [(ngModel)]="poll.moreRecommendation" maxlength="1024"/>
+                    <div [hidden]="!(editForm.controls.moreRecommendation?.dirty && editForm.controls.moreRecommendation?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.moreRecommendation?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1024 }">
+                        This field cannot be longer than 1024 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.poll.createUserLogin" for="field_createUserLogin">Create User Login</label>
+                    <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
+                        [(ngModel)]="poll.createUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.createUserLogin?.dirty && editForm.controls.createUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.poll.createDate" for="field_createDate">Create Date</label>
+                    <div class="d-flex">
+                        <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="createDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.poll.modifyUserLogin" for="field_modifyUserLogin">Modify User Login</label>
+                    <input type="text" class="form-control" name="modifyUserLogin" id="field_modifyUserLogin"
+                        [(ngModel)]="poll.modifyUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.modifyUserLogin?.dirty && editForm.controls.modifyUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.modifyUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.poll.modifyDate" for="field_modifyDate">Modify Date</label>
+                    <div class="d-flex">
+                        <input id="field_modifyDate" type="datetime-local" class="form-control" name="modifyDate" [(ngModel)]="modifyDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.poll.archived" for="field_archived">Archived</label>
+                    <input type="checkbox" class="form-control" name="archived" id="field_archived"
+                        [(ngModel)]="poll.archived" />
+                    <div [hidden]="!(editForm.controls.archived?.dirty && editForm.controls.archived?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.archived?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.poll.archivedUserLogin" for="field_archivedUserLogin">Archived User Login</label>
+                    <input type="text" class="form-control" name="archivedUserLogin" id="field_archivedUserLogin"
+                        [(ngModel)]="poll.archivedUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.archivedUserLogin?.dirty && editForm.controls.archivedUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.archivedUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.poll.archivedDate" for="field_archivedDate">Archived Date</label>
+                    <div class="d-flex">
+                        <input id="field_archivedDate" type="datetime-local" class="form-control" name="archivedDate" [(ngModel)]="archivedDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.poll.status" for="field_status">Status</label>
+                    <input type="number" class="form-control" name="status" id="field_status"
+                        [(ngModel)]="poll.status" required/>
+                    <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.status?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.status?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.poll.finalNiazsanjiReport" for="field_finalNiazsanjiReport">Final Niazsanji Report</label>
+                    <select class="form-control" id="field_finalNiazsanjiReport" name="finalNiazsanjiReport" [(ngModel)]="poll.finalNiazsanjiReportId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="finalNiazsanjiReportOption.id" *ngFor="let finalNiazsanjiReportOption of finalniazsanjireports; trackBy: trackFinalNiazsanjiReportById">{{finalNiazsanjiReportOption.description}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="organizationChart" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.organizationChart.detail.title">Organization Chart</span> {{organizationChart.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChart.title">Title</span></dt>
+                <dd>
+                    <span>{{organizationChart.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChart.code">Code</span></dt>
+                <dd>
+                    <span>{{organizationChart.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChart.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{organizationChart.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChart.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{organizationChart.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChart.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{organizationChart.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChart.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{organizationChart.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChart.archived">Archived</span></dt>
+                <dd>
+                    <span>{{organizationChart.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChart.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{organizationChart.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChart.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{organizationChart.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChart.status">Status</span></dt>
+                <dd>
+                    <span>{{organizationChart.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChart.parent">Parent</span></dt>
+                <dd>
+                    <div *ngIf="organizationChart.parentId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', organizationChart.parentId, 'view']">{{organizationChart.parentTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/organization-chart-marine-suffix', organizationChart.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

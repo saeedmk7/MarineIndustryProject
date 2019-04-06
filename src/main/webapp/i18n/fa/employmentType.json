@@ -1,0 +1,27 @@
+{
+    "marineindustryprojApp": {
+        "employmentType" : {
+            "home": {
+                "title": "انواع استخدام",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش نوع استخدام"
+            },
+            "created": "نوع استخدام با شناسه {{ param }} ایجاد شد.",
+            "updated": "نوع استخدام با شناسه {{ param }} ویرایش شد.",
+            "deleted": "نوع استخدام با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف نوع استخدام با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات نوع استخدام"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "person": "Person"
+        }
+    }
+}

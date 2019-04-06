@@ -1,0 +1,66 @@
+
+{
+    "marineindustryprojApp": {
+        "educationalModule" : {
+            "home": {
+                "title": "فهرست پودمان ها",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش پودمان"
+            },
+            "created": "پودمان با شناسه {{ param }} ایجاد شد.",
+            "updated": "پودمان با شناسه {{ param }} ویرایش شد.",
+            "deleted": "پودمان با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف پودمان با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات پودمان"
+            },
+            "title": "عنوان پودمان",
+            "code": "شناسه پودمان",
+            "learningTimeTheorical": "مدت زمان نظری (ساعت)",
+            "learningTimePractical": "مدت زمان عملی (ساعت)",
+            "version": "نسخه ویرایش",
+            "innerCode": "کد درون سازمانی پودمان",
+            "centralizedCode": "کد متمرکز پودمان",
+            "moreDescription": "توضیحات بیشتر",
+            "recommendedBy": "واحد پیشنهاد دهنده",
+            "educationalModuleHeadlines": "سرفصل های پودمان",
+            "prerequisite": "پیش نیازها",
+            "drafters": "تدوین کنندگان",
+            "educationalModuleLevel": "سطح پودمان آموزشی",
+            "educationalModuleGroup": "گروه پودمان آموزشی",
+            "educationalModuleHour": "ساعت پودمان آموزشی",
+            "timePassed": "مدت زمان سپری شده",
+            "credit": "اعتبار",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "educationalModuleJob": "Educational Module Job",
+            "requestOrganizationNiazsanji": "Request Organization Niazsanji",
+            "finalOrganizationNiazsanji": "Final Organization Niazsanji",
+            "finalNiazsanjiReport": "Final Niazsanji Report",
+            "scientificWorkGroup": "گروه علمی شغلی مربوطه",
+            "scientificWorkGroupId": "گروه علمی شغلی مربوطه",
+            "document": "مدارک",
+            "educationalCenter": "مراکز آموزشی پیشنهادی",
+            "goal": "اهداف آموزشی",
+            "resource": "منابع آموزشی",
+            "teacher": "مدرسین دارای صلاحیت تدریس",
+            "securityLevel": "طبقه بندی امنیتی",
+            "skillableLevelOfSkill": "سطح مهارت قابل تامین پودمان",
+            "skillableLevelOfSkillId": "سطح مهارت قابل تامین پودمان",
+            "evaluationMethod": "شیوه ارزشیابی",
+            "organization": "واحد پیشنهاد دهنده",
+            "organizationTitle": "واحد پیشنهاد دهنده",
+            "organizationId": "واحد پیشنهاد دهنده",
+            "requestEducationalModule": "درخواست متناظر (در صورت موجود بودن)",
+            "niazsanjiGroup": "Niazsanji Group"
+        }
+    }
+}

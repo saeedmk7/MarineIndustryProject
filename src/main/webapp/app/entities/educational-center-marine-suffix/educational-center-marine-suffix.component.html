@@ -1,0 +1,131 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.educationalCenter.home.title">Educational Centers</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-educational-center-marine-suffix" [routerLink]="['/educational-center-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.educationalCenter.home.createLabel">
+            Create new Educational Center
+            </span>
+        </button>
+        <button class="btn btn-info float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <div class="row">
+        <search-panel class="col-md-12" [searchPanelModel]="searchbarModel"></search-panel>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="educationalCenters">
+        <table class="table table-striped  table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th>ردیف</th>
+            <th jhiSortBy="name"><span jhiTranslate="marineindustryprojApp.educationalCenter.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="ceo"><span jhiTranslate="marineindustryprojApp.educationalCenter.ceo">Ceo</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="connectionPerson"><span jhiTranslate="marineindustryprojApp.educationalCenter.connectionPerson">Connection Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telephone"><span jhiTranslate="marineindustryprojApp.educationalCenter.telephone">Telephone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fax"><span jhiTranslate="marineindustryprojApp.educationalCenter.fax">Fax</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="address"><span jhiTranslate="marineindustryprojApp.educationalCenter.address">Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="email"><span jhiTranslate="marineindustryprojApp.educationalCenter.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th><span jhiTranslate="marineindustryprojApp.educationalCenter.activityArea">activityArea</span></th>
+            <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.educationalCenter.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.educationalCenter.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.educationalCenter.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.educationalCenter.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archived"><span jhiTranslate="marineindustryprojApp.educationalCenter.archived">Archived</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedUserLogin"><span jhiTranslate="marineindustryprojApp.educationalCenter.archivedUserLogin">Archived User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedDate"><span jhiTranslate="marineindustryprojApp.educationalCenter.archivedDate">Archived Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.educationalCenter.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let educationalCenter of educationalCenters ;let i = index">
+                <!--<td><a [routerLink]="['/educational-center-marine-suffix', educationalCenter.id, 'view' ]">{{educationalCenter.id}}</a></td>-->
+                <td>{{i+1}}</td>
+                <td>{{educationalCenter.name}}</td>
+                <!--<td>{{educationalCenter.ceo}}</td>-->
+                <td>{{educationalCenter.connectionPerson}}</td>
+                <td>{{educationalCenter.telephone}}</td>
+                <td>{{educationalCenter.fax}}</td>
+                <td>{{educationalCenter.address}}</td>
+                <td>
+                    <div *ngIf="educationalCenter.activityAreas">
+                        <div *ngFor="let activityArea of educationalCenter.activityAreas">
+                            <a class="badge badge-info" [routerLink]="['../activity-areas-marine-suffix', activityArea  , 'view' ]" >{{activityArea.title}}</a>
+                        </div>
+                    </div>
+                </td>
+                <!--<td>{{educationalCenter.email}}</td>-->
+                <!--<td>{{educationalCenter.createUserLogin}}</td>
+                <td>{{educationalCenter.createDate | date:'medium'}}</td>
+                <td>{{educationalCenter.modifyUserLogin}}</td>
+                <td>{{educationalCenter.modifyDate | date:'medium'}}</td>
+                <td>{{educationalCenter.archived}}</td>
+                <td>{{educationalCenter.archivedUserLogin}}</td>
+                <td>{{educationalCenter.archivedDate | date:'medium'}}</td>
+                <td>{{educationalCenter.status}}</td>-->
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                     <button type="submit"
+                                [routerLink]="['../document-marine-suffix', 'educationalCenter',educationalCenter.id ]"
+                                class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.documents">Documents</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/educational-center-marine-suffix', educationalCenter.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/educational-center-marine-suffix', educationalCenter.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'educational-center-marine-suffix/'+ educationalCenter.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="10">
+                    <div *ngIf="educationalCenters && educationalCenters.length">
+
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+</div>

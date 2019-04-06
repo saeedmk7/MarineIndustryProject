@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="subTask" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.subTask.detail.title">Sub Task</span> {{subTask.id}}</h2>
+
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.subTask.title">Title</span></dt>
+                <dd>
+                    <span>{{subTask.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.subTask.description">Description</span></dt>
+                <dd>
+                    <span>{{subTask.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.subTask.code">Code</span></dt>
+                <dd>
+                    <span>{{subTask.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.subTask.solution">Solution</span></dt>
+                <dd>
+                    <span>{{subTask.solution}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.subTask.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{subTask.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.subTask.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{subTask.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.subTask.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{subTask.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.subTask.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{subTask.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.subTask.archived">Archived</span></dt>
+                <dd>
+                    <span>{{subTask.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.subTask.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{subTask.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.subTask.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{subTask.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.subTask.status">Status</span></dt>
+                <dd>
+                    <span>{{subTask.status}}</span>
+                </dd>
+            </dl>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/sub-task-marine-suffix', subTask.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+</div>   </div>
+    </div>
+</div>

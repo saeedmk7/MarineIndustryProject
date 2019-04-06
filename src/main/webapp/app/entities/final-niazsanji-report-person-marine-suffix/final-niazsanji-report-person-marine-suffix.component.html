@@ -1,0 +1,113 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.home.title">Final Niazsanji Report People</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-final-niazsanji-report-person-marine-suffix" [routerLink]="['/final-niazsanji-report-person-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.home.createLabel">
+            Create new Final Niazsanji Report Person
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="finalNiazsanjiReportPeople">
+        <table class="table table-striped  table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="niazSanjiSource"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.niazSanjiSource">Niaz Sanji Source</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archived"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.archived">Archived</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedUserLogin"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.archivedUserLogin">Archived User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedDate"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.archivedDate">Archived Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="finalNiazsanjiReportDescription"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.finalNiazsanjiReport">Final Niazsanji Report</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let finalNiazsanjiReportPerson of finalNiazsanjiReportPeople ;trackBy: trackId">
+                <td><a [routerLink]="['/final-niazsanji-report-person-marine-suffix', finalNiazsanjiReportPerson.id, 'view' ]">{{finalNiazsanjiReportPerson.id}}</a></td>
+                <td jhiTranslate="{{'marineindustryprojApp.NiazSanjiSource.' + finalNiazsanjiReportPerson.niazSanjiSource}}">{{finalNiazsanjiReportPerson.niazSanjiSource}}</td>
+                <td>{{finalNiazsanjiReportPerson.priceCost}}</td>
+                <td>{{finalNiazsanjiReportPerson.description}}</td>
+                <td>{{finalNiazsanjiReportPerson.createUserLogin}}</td>
+                <td>{{finalNiazsanjiReportPerson.createDate | date:'medium'}}</td>
+                <td>{{finalNiazsanjiReportPerson.modifyUserLogin}}</td>
+                <td>{{finalNiazsanjiReportPerson.modifyDate | date:'medium'}}</td>
+                <td>{{finalNiazsanjiReportPerson.archived}}</td>
+                <td>{{finalNiazsanjiReportPerson.archivedUserLogin}}</td>
+                <td>{{finalNiazsanjiReportPerson.archivedDate | date:'medium'}}</td>
+                <td>{{finalNiazsanjiReportPerson.status}}</td>
+                <td>
+                    <div *ngIf="finalNiazsanjiReportPerson.personId">
+                        <a [routerLink]="['../person-marine-suffix', finalNiazsanjiReportPerson.personId , 'view' ]" >{{finalNiazsanjiReportPerson.personFamily}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="finalNiazsanjiReportPerson.finalNiazsanjiReportId">
+                        <a [routerLink]="['../final-niazsanji-report-marine-suffix', finalNiazsanjiReportPerson.finalNiazsanjiReportId , 'view' ]" >{{finalNiazsanjiReportPerson.finalNiazsanjiReportDescription}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/final-niazsanji-report-person-marine-suffix', finalNiazsanjiReportPerson.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/final-niazsanji-report-person-marine-suffix', finalNiazsanjiReportPerson.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'final-niazsanji-report-person-marine-suffix/'+ finalNiazsanjiReportPerson.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="10">
+                    <div *ngIf="finalNiazsanjiReportPeople && finalNiazsanjiReportPeople.length">
+
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+</div>

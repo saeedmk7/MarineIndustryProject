@@ -1,0 +1,9 @@
+{
+    "import-data": {
+        "title": "بارگزاری داده از اکسل",
+        "entities": {
+            "entityType": "عنوان جدول",
+            "excelFile": "فایل اکسل"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+
+{
+    "marineindustryprojApp": {
+        "securityLevel" : {
+            "home": {
+                "title": "طبقه بندی های امنیتی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش طبقه بندی امنیتی"
+            },
+            "created": "طبقه بندی امنیتی با شناسه {{ param }} ایجاد شد.",
+            "updated": "طبقه بندی امنیتی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "طبقه بندی امنیتی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف طبقه بندی امنیتی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات طبقه بندی امنیتی"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "educationalModule": "Educational Module"
+        }
+    }
+}

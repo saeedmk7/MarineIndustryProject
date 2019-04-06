@@ -1,0 +1,149 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="person" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.person.detail.title">Person</span> {{person.id}}</h2>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.person.name">Name</span></dt>
+                <dd>
+                    <span>{{person.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.family">Family</span></dt>
+                <dd>
+                    <span>{{person.family}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.fatherName">Father Name</span></dt>
+                <dd>
+                    <span>{{person.fatherName}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.certificateNumber">Certificate Number</span></dt>
+                <dd>
+                    <span>{{person.certificateNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.nationalId">National Id</span></dt>
+                <dd>
+                    <span>{{person.nationalId}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.birthDate">Birth Date</span></dt>
+                <dd>
+                    <span>{{person.birthDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.personelCode">Personel Code</span></dt>
+                <dd>
+                    <span>{{person.personelCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.employmentDate">Employment Date</span></dt>
+                <dd>
+                    <span>{{person.employmentDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.yearOfService">Year Of Service</span></dt>
+                <dd>
+                    <span>{{person.yearOfService}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.code">Code</span></dt>
+                <dd>
+                    <span>{{person.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{person.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{person.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{person.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{person.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.archived">Archived</span></dt>
+                <dd>
+                    <span>{{person.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{person.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{person.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.status">Status</span></dt>
+                <dd>
+                    <span>{{person.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.scientificWorkGroup">Scientific Work Group</span></dt>
+                <dd>
+                    <span *ngFor="let scientificWorkGroup of person.scientificWorkGroups; let last = last">
+                        <a [routerLink]="['/scientific-work-group-marine-suffix', scientificWorkGroup?.id, 'view' ]">{{scientificWorkGroup.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.lastQualification">Last Qualification</span></dt>
+                <dd>
+                    <div *ngIf="person.lastQualificationId">
+                        <a [routerLink]="['/qualification-marine-suffix', person.lastQualificationId, 'view']">{{person.lastQualificationTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.lastFieldOfStudy">Last Field Of Study</span></dt>
+                <dd>
+                    <div *ngIf="person.lastFieldOfStudyId">
+                        <a [routerLink]="['/field-of-study-marine-suffix', person.lastFieldOfStudyId, 'view']">{{person.lastFieldOfStudyTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.employmentType">Employment Type</span></dt>
+                <dd>
+                    <div *ngIf="person.employmentTypeId">
+                        <a [routerLink]="['/employment-type-marine-suffix', person.employmentTypeId, 'view']">{{person.employmentTypeTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.workGroup">Work Group</span></dt>
+                <dd>
+                    <div *ngIf="person.workGroupId">
+                        <a [routerLink]="['/work-group-marine-suffix', person.workGroupId, 'view']">{{person.workGroupTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.workIndustry">Work Industry</span></dt>
+                <dd>
+                    <div *ngIf="person.workIndustryId">
+                        <a [routerLink]="['/work-industry-marine-suffix', person.workIndustryId, 'view']">{{person.workIndustryTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.job">Job</span></dt>
+                <dd>
+                    <div *ngIf="person.jobId">
+                        <a [routerLink]="['/job-marine-suffix', person.jobId, 'view']" class="enableLink">{{person.jobTitle}} - {{person.jobCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.practicaljob">Practicaljob</span></dt>
+                <dd>
+                    <div *ngIf="person.practicaljobId">
+                        <a [routerLink]="['/job-marine-suffix', person.practicaljobId, 'view']" class="enableLink">{{person.practicaljobTitle}} - {{person.practicaljobCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.person.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="person.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', person.organizationChartId, 'view']">{{person.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/person-marine-suffix', person.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+        </div>
+    </div>
+</div>

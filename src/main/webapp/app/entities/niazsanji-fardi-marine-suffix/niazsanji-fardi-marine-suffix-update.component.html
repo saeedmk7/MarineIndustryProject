@@ -1,0 +1,132 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-niazsanji-fardi-marine-suffix-heading" jhiTranslate="marineindustryprojApp.niazsanjiFardi.home.createOrEditLabel">Create or edit a Niazsanji Fardi</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!niazsanjiFardi.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="niazsanjiFardi.id" readonly />
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiFardi.code" for="field_code">Code</label>
+                    <input type="text" class="form-control" name="code" id="field_code"
+                        [(ngModel)]="niazsanjiFardi.code" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.code?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>-->
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اولیه نیازسنجی</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiFardi.organizationChart" for="field_organizationChart">Organization Chart</label>
+                    <!--<select class="form-control" id="field_organizationChart" name="organizationChart" [(ngModel)]="niazsanjiFardi.organizationChartId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="organizationChartOption.id" *ngFor="let organizationChartOption of organizationcharts; trackBy: trackOrganizationChartById">{{organizationChartOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="organizationcharts"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="fullTitle"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="organizationChartId"
+                        id="field_organizationChart"
+                        [(ngModel)]="niazsanjiFardi.organizationChartId">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiFardi.person" for="field_person">Person</label>
+                    <!--<select class="form-control" id="field_person" name="person" [(ngModel)]="niazsanjiFardi.personId"  required>
+                        <option *ngIf="!editForm.value.person" [ngValue]="null" selected></option>
+                        <option [ngValue]="personOption.id" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.family}}</option>
+                    </select>-->
+                    <ng-select
+                    [items]="people"
+                    [multiple]="false"
+                    [closeOnSelect]="true"
+                    [searchable]="true"
+                    [required]="true"
+                    bindLabel="fullName"
+                    bindValue="id"
+                    placeholder="انتخاب نمائید."
+                    name="personId"
+                    id="field_person"
+                    [(ngModel)]="niazsanjiFardi.personId">
+                </div>
+                <div [hidden]="!(editForm.controls.person?.dirty && editForm.controls.person?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.person?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات پودمان</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiFardi.educationalModule" for="field_educationalModule">Educational Module</label>
+                    <!--<select class="form-control" id="field_educationalModule" name="educationalModule" [(ngModel)]="niazsanjiFardi.educationalModuleId"  required>
+                        <option *ngIf="!editForm.value.educationalModule" [ngValue]="null" selected></option>
+                        <option [ngValue]="educationalModuleOption.id" *ngFor="let educationalModuleOption of educationalmodules; trackBy: trackEducationalModuleById">{{educationalModuleOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="educationalmodules"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="fullTitle"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="educationalModuleId"
+                        id="field_educationalModule"
+                        [(ngModel)]="niazsanjiFardi.educationalModuleId">
+                </div>
+                <div [hidden]="!(editForm.controls.educationalModule?.dirty && editForm.controls.educationalModule?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.educationalModule?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiFardi.educationalModuleType" for="field_educationalModuleType">Educational Module Type</label>
+                    <select class="form-control" name="educationalModuleType" [(ngModel)]="niazsanjiFardi.educationalModuleType" id="field_educationalModuleType"  required>
+                        <option value="APPROVED">{{'marineindustryprojApp.EducationalModuleType.APPROVED' | translate}}</option>
+                        <option value="ALL">{{'marineindustryprojApp.EducationalModuleType.ALL' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.educationalModuleType?.dirty && editForm.controls.educationalModuleType?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.educationalModuleType?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiFardi.priceCost" for="field_priceCost">Price Cost</label>
+                    <input type="number" class="form-control" name="priceCost" id="field_priceCost"
+                        [(ngModel)]="niazsanjiFardi.priceCost" />
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">توضیحات تکمیلی</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiFardi.description" for="field_description">Description</label>
+                    <textarea class="form-control" name="description" id="field_description"
+                        [(ngModel)]="niazsanjiFardi.description" ></textarea>
+                </div>
+
+
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

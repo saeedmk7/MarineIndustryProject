@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report4" printOrder="Horizontal" columnDirection="RTL" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c738fa83-1894-46d5-b7e2-516744f9f549">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.export.xls.one.page.per.sheet" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.ignore.graphics" value="false"/>
+	<property name="net.sf.jasperreports.page.break.no.pagination" value="apply"/>
+	<property name="net.sf.jasperreports.export.xls.sheet.names.all" value="Data/Footnotes"/>
+	<property name="net.sf.jasperreports.export.xls.freeze.row" value="3"/>
+	<property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+	<property name="net.sf.jasperreports.exports.xls.font.size.fix.enabled" value="false"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="educationalModuleTitle" class="java.lang.String"/>
+	<field name="educationalModuleId" class="java.lang.Long"/>
+	<field name="educationalModuleLevel" class="java.lang.Integer"/>
+	<field name="educationalModuleHour" class="java.lang.Integer"/>
+	<field name="personFullName" class="java.lang.String"/>
+	<field name="jobTitle" class="java.lang.String"/>
+	<field name="priceCost" class="java.lang.Integer"/>
+	<field name="employmentTypeTitle" class="java.lang.String"/>
+	<field name="niazSanjiSource" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30">
+			<staticText>
+				<reportElement mode="Opaque" x="361" y="0" width="142" height="27" forecolor="#006699" uuid="527fc128-fcce-4c54-bc2c-d1fc6efee218"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="B Nazanin" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[نام و نام خانوادگی متقاضی]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="503" y="0" width="52" height="27" forecolor="#006699" backcolor="#FFFFFF" uuid="75862687-8337-4102-abc4-4a273e662fe9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="B Nazanin" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[مدت پودمان (ساعت)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="555" y="0" width="37" height="27" forecolor="#006699" backcolor="#FFFFFF" uuid="885e160f-c363-4e19-9eef-290b9bc38580"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="B Nazanin" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[سطح]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="592" y="0" width="85" height="27" forecolor="#006699" backcolor="#FFFFFF" uuid="06ddc06a-edad-4276-a923-9657f9f7d70a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="B Nazanin" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[شناسه پودمان]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="677" y="0" width="93" height="27" forecolor="#006699" backcolor="#FFFFFF" uuid="46a8bf85-aa7a-42fb-89bd-71024c89ef73"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="B Nazanin" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[عنوان پودمان]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="770" y="0" width="32" height="27" forecolor="#006699" backcolor="#FFFFFF" uuid="4d78442b-4011-4ed7-8a84-be71b562cfc0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="B Nazanin" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[ردیف]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="245" y="0" width="116" height="27" forecolor="#006699" backcolor="#FFFFFF" uuid="50209518-2d30-4732-94d8-ba1ef339355d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="B Nazanin" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[شغل سازمانی متقاضی]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="176" y="0" width="69" height="27" forecolor="#006699" backcolor="#FFFFFF" uuid="c623888b-f00d-4e36-bb32-601c04e92382"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="B Nazanin" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[هزینه دوره]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="80" y="0" width="96" height="27" forecolor="#006699" backcolor="#FFFFFF" uuid="6415c3d7-89dd-4000-bac9-356741e9b424"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="B Nazanin" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[نوع عضویت]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="80" height="27" forecolor="#006699" backcolor="#FFFFFF" uuid="d6cdef77-a1b8-4477-869d-f6a01ed9932c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="B Nazanin" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[منبع نیازسنجی]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="770" y="0" width="32" height="26" uuid="a7330783-2302-4d45-9011-f05eaef041ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="677" y="0" width="93" height="26" uuid="fd229546-2fcf-47f2-b8e5-975153861fbb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{educationalModuleTitle}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="592" y="0" width="85" height="26" uuid="ea4bcc8e-b3c7-4121-81a5-3621085574e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{educationalModuleId}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="555" y="0" width="37" height="26" uuid="9b00179a-fe9f-4c86-abe1-b6ddf4868a5f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{educationalModuleLevel}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="503" y="0" width="52" height="26" uuid="ce0c007b-b1a3-4034-a3fa-fc8e98b1dd61"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{educationalModuleHour}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="361" y="0" width="142" height="26" uuid="c3c1ac26-ba1b-4323-afff-96d8f2e06de7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{personFullName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="245" y="0" width="116" height="26" uuid="f4f74158-60ed-4d7d-bc85-4057bcaa6865"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jobTitle}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="176" y="0" width="69" height="26" uuid="94e9f0bb-38d4-46dc-b2fc-cae0b2f0e341"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{priceCost}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="80" y="0" width="96" height="26" uuid="8703a91a-78d1-4055-82ff-a595b7a932ff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employmentTypeTitle}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="80" height="26" uuid="26a42835-605b-448f-9186-689b669d67ee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{niazSanjiSource}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17"/>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

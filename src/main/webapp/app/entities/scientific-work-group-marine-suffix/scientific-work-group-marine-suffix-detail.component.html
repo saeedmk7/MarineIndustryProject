@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="scientificWorkGroup" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.scientificWorkGroup.detail.title">Scientific Work Group</span> {{scientificWorkGroup.id}}</h2>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.scientificWorkGroup.title">Title</span></dt>
+                <dd>
+                    <span>{{scientificWorkGroup.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.scientificWorkGroup.code">Code</span></dt>
+                <dd>
+                    <span>{{scientificWorkGroup.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.scientificWorkGroup.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{scientificWorkGroup.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.scientificWorkGroup.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{scientificWorkGroup.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.scientificWorkGroup.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{scientificWorkGroup.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.scientificWorkGroup.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{scientificWorkGroup.modifyDate}}</span>
+                </dd>
+            </dl>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/scientific-work-group-marine-suffix', scientificWorkGroup.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="navBarItem">
+            <h2><span jhiTranslate="marineindustryprojApp.navBarItem.detail.title">Nav Bar Item</span> {{navBarItem.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItem.title">Title</span></dt>
+                <dd>
+                    <span>{{navBarItem.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItem.code">Code</span></dt>
+                <dd>
+                    <span>{{navBarItem.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItem.description">Description</span></dt>
+                <dd>
+                    <span>{{navBarItem.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItem.url">Url</span></dt>
+                <dd>
+                    <span>{{navBarItem.url}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItem.faicon">Faicon</span></dt>
+                <dd>
+                    <span>{{navBarItem.faicon}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItem.isActive">Is Active</span></dt>
+                <dd>
+                    <span>{{navBarItem.isActive}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItem.displayOrder">Display Order</span></dt>
+                <dd>
+                    <span>{{navBarItem.displayOrder}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItem.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{navBarItem.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItem.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{navBarItem.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItem.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{navBarItem.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItem.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{navBarItem.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.navBarItem.parent">Parent</span></dt>
+                <dd>
+                    <div *ngIf="navBarItem.parentId">
+                        <a [routerLink]="['/nav-bar-item-marine-suffix', navBarItem.parentId, 'view']">{{navBarItem.parentTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/nav-bar-item-marine-suffix', navBarItem.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

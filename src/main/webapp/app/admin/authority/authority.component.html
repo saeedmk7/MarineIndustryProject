@@ -1,0 +1,43 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.authority.home.title">Authority</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-authority" [routerLink]="['./new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.authority.home.createLabel">
+            Create new Criterion
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="authorities">
+        <table class="table table-striped">
+            <thead>
+            <th><span jhiTranslate="marineindustryprojApp.authority.name">Name</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let authority of authorities">
+                <td>{{authority.name}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/nav-bar-item-authority-marine-suffix', authority.name, 'new']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'key'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.setpermission">Edit</span>
+                        </button>
+                        <button type="button" (click)="deleteAuthority(authority)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
+</div>

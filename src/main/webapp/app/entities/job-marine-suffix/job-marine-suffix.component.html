@@ -1,0 +1,146 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.job.home.title">Jobs</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-job-marine-suffix" [routerLink]="['/job-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.job.home.createLabel">
+            Create new Job
+            </span>
+        </button>
+        <button class="btn btn-info float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <div class="row">
+        <search-panel class="col-md-12" [searchPanelModel]="searchbarModel"></search-panel>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="jobs">
+        <table class="table table-striped table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th>ردیف</th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.job.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="jobKey"><span jhiTranslate="marineindustryprojApp.job.jobKey">Job Key</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="jobCode"><span jhiTranslate="marineindustryprojApp.job.jobCode">Job Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.job.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.job.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.job.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.job.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archived"><span jhiTranslate="marineindustryprojApp.job.archived">Archived</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedUserLogin"><span jhiTranslate="marineindustryprojApp.job.archivedUserLogin">Archived User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedDate"><span jhiTranslate="marineindustryprojApp.job.archivedDate">Archived Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.job.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <!--<th jhiSortBy="rasteTitle"><span jhiTranslate="marineindustryprojApp.job.raste">Raste</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="radehTitle"><span jhiTranslate="marineindustryprojApp.job.radeh">Radeh</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="jobTypeTitle"><span jhiTranslate="marineindustryprojApp.job.jobType">Job Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="scientificWorkGroupTitle"><span jhiTranslate="marineindustryprojApp.job.scientificWorkGroup">Scientific Work Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <!--<th jhiSortBy="parentTitle"><span jhiTranslate="marineindustryprojApp.job.parent">Parent</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let job of jobs ;let i = index">
+                <!--<td><a [routerLink]="['/job-marine-suffix', job.id, 'view' ]">{{job.id}}</a></td>-->
+                <td>{{i+1}}</td>
+                <td>{{job.title}}</td>
+                <td>{{job.jobKey}}</td>
+                <td>{{job.jobCode}}</td>
+                <td>{{job.createUserLogin}}</td>
+                <td>{{job.createDate}}</td>
+                <!--<td>{{job.modifyUserLogin}}</td>
+                <td>{{job.modifyDate | date:'medium'}}</td>
+                <td>{{job.archived}}</td>
+                <td>{{job.archivedUserLogin}}</td>
+                <td>{{job.archivedDate | date:'medium'}}</td>
+                <td>{{job.status}}</td>-->
+                <!--<td>
+                    <div *ngIf="job.rasteId">
+                        <a [routerLink]="['../raste-marine-suffix', job.rasteId , 'view' ]" >{{job.rasteTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="job.radehId">
+                        <a [routerLink]="['../radeh-marine-suffix', job.radehId , 'view' ]" >{{job.radehTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="job.jobTypeId">
+                        <a [routerLink]="['../job-type-marine-suffix', job.jobTypeId , 'view' ]" >{{job.jobTypeTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="job.scientificWorkGroupId">
+                        <a [routerLink]="['../scientific-work-group-marine-suffix', job.scientificWorkGroupId , 'view' ]" >{{job.scientificWorkGroupTitle}}</a>
+                    </div>
+                </td>-->
+               <!-- <td>
+                    <div *ngIf="job.parentId">
+                        <a [routerLink]="['../job-marine-suffix', job.parentId , 'view' ]" >{{job.parentTitle}}</a>
+                    </div>
+                </td>-->
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../document-marine-suffix', 'job',job.id ]"
+                                class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.documents">Documents</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/job-marine-suffix', job.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/job-marine-suffix', job.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'job-marine-suffix/'+ job.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="7">
+
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+        <div *ngIf="jobs && jobs.length">
+
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+    </div>
+</div>

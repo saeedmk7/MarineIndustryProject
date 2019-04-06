@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="mahiatCourse" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.mahiatCourse.detail.title">Mahiat Course</span> {{mahiatCourse.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.mahiatCourse.title">Title</span></dt>
+                <dd>
+                    <span>{{mahiatCourse.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mahiatCourse.code">Code</span></dt>
+                <dd>
+                    <span>{{mahiatCourse.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mahiatCourse.description">Description</span></dt>
+                <dd>
+                    <span>{{mahiatCourse.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mahiatCourse.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{mahiatCourse.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mahiatCourse.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{mahiatCourse.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mahiatCourse.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{mahiatCourse.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mahiatCourse.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{mahiatCourse.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/mahiat-course-marine-suffix', mahiatCourse.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

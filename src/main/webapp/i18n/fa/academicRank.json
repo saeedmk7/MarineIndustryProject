@@ -1,0 +1,27 @@
+{
+    "marineindustryprojApp": {
+        "academicRank" : {
+            "home": {
+                "title": "مراتب علمی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش مرتبه علمی"
+            },
+            "created": "مرتبه علمی با شناسه {{ param }} ایجاد شد.",
+            "updated": "مرتبه علمی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "مرتبه علمی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف مرتبه علمی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات مرتبه علمی"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "teacher": "استاد"
+        }
+    }
+}

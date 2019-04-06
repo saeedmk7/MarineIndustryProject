@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="workGroup" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.workGroup.detail.title">Work Group</span> {{workGroup.id}}</h2>
+
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.workGroup.title">Title</span></dt>
+                <dd>
+                    <span>{{workGroup.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workGroup.code">Code</span></dt>
+                <dd>
+                    <span>{{workGroup.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workGroup.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{workGroup.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workGroup.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{workGroup.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workGroup.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{workGroup.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workGroup.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{workGroup.modifyDate}}</span>
+                </dd>
+            </dl>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/work-group-marine-suffix', workGroup.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+        </div>
+    </div>
+</div>

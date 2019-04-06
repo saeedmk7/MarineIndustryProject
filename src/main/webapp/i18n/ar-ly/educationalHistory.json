@@ -1,0 +1,41 @@
+{
+    "marineindustryprojApp": {
+        "educationalHistory": {
+            "home": {
+                "title": "Educational Histories",
+                "createLabel": "Create a new Educational History",
+                "createOrEditLabel": "Create or edit a Educational History"
+            },
+            "created": "A new Educational History is created with identifier {{ param }}",
+            "updated": "A Educational History is updated with identifier {{ param }}",
+            "deleted": "A Educational History is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Educational History {{ id }}?"
+            },
+            "detail": {
+                "title": "Educational History"
+            },
+            "educationalModuleTitle": "Educational Module Title",
+            "learningTimeTheorical": "Learning Time Theorical",
+            "learningTimePractical": "Learning Time Practical",
+            "totalTime": "Total Time",
+            "educationalCenter": "Educational Center",
+            "dateOfStart": "Date Of Start",
+            "fileDoc": "File Doc",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "conversation": "Conversation",
+            "requestStatus": "Request Status",
+            "changeStatusUserLogin": "Change Status User Login",
+            "person": "Person",
+            "organizationChart": "Organization Chart"
+        }
+    }
+}

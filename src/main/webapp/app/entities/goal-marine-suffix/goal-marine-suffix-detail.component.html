@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="goal" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.goal.detail.title">Goal</span> {{goal.id}}</h2>
+
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.goal.title">Title</span></dt>
+                <dd>
+                    <span>{{goal.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.goal.description">Description</span></dt>
+                <dd>
+                    <span>{{goal.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.goal.code">Code</span></dt>
+                <dd>
+                    <span>{{goal.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.goal.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{goal.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.goal.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{goal.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.goal.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{goal.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.goal.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{goal.modifyDate}}</span>
+                </dd>
+            </dl>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/goal-marine-suffix', goal.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+{
+    "marineindustryprojApp": {
+        "organizationChart" : {
+            "home": {
+                "title": "چارت سازمانی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش چارت سازمانی"
+            },
+            "created": "چارت سازمانی با شناسه {{ param }} ایجاد شد.",
+            "updated": "چارت سازمانی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "چارت سازمانی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف چارت سازمانی با شناسه {{ id }} مطمئنید؟",
+                "error": "گزینه ی مورد نظر شما یا دارای فرزندانیست و یا افرادی به آن تخصیص داده شده اند به همین دلیل امکان حذف این گزینه وجود ندارد."
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات چارت سازمانی"
+            },
+            "title": "عنوان چارت سازمانی",
+            "code": "کد",
+            "createUserLogin": "ایجادکننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "آخرین ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "person": "Person",
+            "organizationChart": "Organization Chart",
+            "requestOrganizationNiazsanji": "Request Organization Niazsanji",
+            "finalOrganizationNiazsanji": "Final Organization Niazsanji",
+            "finalNiazsanjiReport": "Final Niazsanji Report",
+            "niazsanjiFardi": "Niazsanji Fardi",
+            "requestNiazsanjiFardi": "Request Niazsanji Fardi",
+            "organizationChartAuthority": "Organization Chart Authority",
+            "parent": "والد"
+        }
+    }
+}

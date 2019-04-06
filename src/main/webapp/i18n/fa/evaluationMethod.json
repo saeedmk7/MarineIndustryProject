@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "evaluationMethod" : {
+            "home": {
+                "title": "شیوه های ارزشیابی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش شیوه ارزشیابی"
+            },
+            "created": "شیوه ارزشیابی با شناسه {{ param }} ایجاد شد.",
+            "updated": "شیوه ارزشیابی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "شیوه ارزشیابی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف شیوه ارزشیابی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات شیوه ارزشیابی"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "educationalModule": "Educational Module",
+            "requestEducationalModule": "Request Educational Module"
+        }
+    }
+}

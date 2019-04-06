@@ -1,0 +1,28 @@
+
+{
+    "marineindustryprojApp": {
+        "navBarItemAuthority" : {
+            "home": {
+                "title": "تخصیص دسترسی منوها به نقش",
+                "createLabel": "جدید",
+                "createOrEditLabel": "تخصیص دسترسی به نقش ها"
+            },
+            "created": "مدرک تحصیلی با شناسه {{ param }} ایجاد شد.",
+            "updated": "مدرک تحصیلی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "مدرک تحصیلی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف مدرک تحصیلی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات مدرک تحصیلی"
+            },
+            "authorityName": "نقش",
+            "hasEditPermission": "آیا مجوز ویرایش دارد؟",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "navBarItem": "Nav Bar Item"
+        }
+    }
+}

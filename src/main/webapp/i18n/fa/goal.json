@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "goal" : {
+            "home": {
+                "title": "اهداف",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش هدف"
+            },
+            "created": "هدف با شناسه {{ param }} ایجاد شد.",
+            "updated": "هدف با شناسه {{ param }} ویرایش شد.",
+            "deleted": "هدف با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف هدف با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات هدف"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "educationalModule": "Educational Module"
+        }
+    }
+}

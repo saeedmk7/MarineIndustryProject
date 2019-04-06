@@ -1,0 +1,123 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-job-marine-suffix-heading" jhiTranslate="marineindustryprojApp.job.home.createOrEditLabel">Create or edit a Job</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <!--<div class="form-group" [hidden]="!job.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+
+                </div>-->
+                <input type="hidden" class="form-control" id="id" name="id"
+                       [(ngModel)]="job.id" readonly />
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.job.jobKey" for="field_jobKey">Job Key</label>
+                    <input type="number" class="form-control" [disabled]="job.id !== undefined" name="jobKey" id="field_jobKey"
+                           [(ngModel)]="job.jobKey" required min="100000" jhiMin="100000" max="999999" jhiMax="999999" maxlength="6"/>
+                    <div [hidden]="!(editForm.controls.jobKey?.dirty && editForm.controls.jobKey?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.jobKey?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <!--  <small class="form-text text-danger"
+                          [hidden]="!editForm.controls.jobKey?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 6 }">
+                          This field is required to be at least 6 characters.
+                          </small>
+                          <small class="form-text text-danger"
+                          [hidden]="!editForm.controls.jobKey?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 6 }">
+                          This field cannot be longer than 6 characters.
+                          </small>-->
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.jobKey?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 999999 }">
+                            This field cannot be more than 999999.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.jobKey?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 100000 }">
+                            This field cannot be less than 100000.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.jobKey?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div style="display: inline;" class="alert alert-warning">این فیلد باید برای هر شغل یکتا باشد در غیر اینصورت امکان ثبت اطلاعات شغل وجود ندارد.</div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات شغل</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.job.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="job.title" required maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.job.jobCode" for="field_jobCode">Job Code</label>
+                    <input type="text" class="form-control" name="jobCode" id="field_jobCode"
+                        [(ngModel)]="job.jobCode" minlength="12" maxlength="12"/>
+                    <div [hidden]="!(editForm.controls.jobCode?.dirty && editForm.controls.jobCode?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.jobCode?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 12 }">
+                        This field is required to be at least 12 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.jobCode?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 12 }">
+                        This field cannot be longer than 12 characters.
+                        </small>
+                    </div>
+                </div>
+                <!--<div class="form-group">
+                    <a (click)="change('raste-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.job.raste" for="field_raste">Raste</a>
+                    <select class="form-control" id="field_raste" name="raste" [(ngModel)]="job.rasteId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="rasteOption.id" *ngFor="let rasteOption of rastes; trackBy: trackRasteById">{{rasteOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('radeh-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.job.radeh" for="field_radeh">Radeh</a>
+                    <select class="form-control" id="field_radeh" name="radeh" [(ngModel)]="job.radehId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="radehOption.id" *ngFor="let radehOption of radehs; trackBy: trackRadehById">{{radehOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('job-type-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.job.jobType" for="field_jobType">Job Type</a>
+                    <select class="form-control" id="field_jobType" name="jobType" [(ngModel)]="job.jobTypeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="jobTypeOption.id" *ngFor="let jobTypeOption of jobtypes; trackBy: trackJobTypeById">{{jobTypeOption.title}}</option>
+                    </select>
+                </div>-->
+                <div class="form-group">
+                    <a (click)="change('scientific-work-group-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.job.scientificWorkGroup" for="field_scientificWorkGroup">Scientific Work Group</a>
+                    <select class="form-control" id="field_scientificWorkGroup" name="scientificWorkGroup" [(ngModel)]="job.scientificWorkGroupId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="scientificWorkGroupOption.id" *ngFor="let scientificWorkGroupOption of scientificworkgroups; trackBy: trackScientificWorkGroupById">{{scientificWorkGroupOption.title}}</option>
+                    </select>
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.job.parent" for="field_parent">Parent</label>
+                    <select class="form-control" id="field_parent" name="parent" [(ngModel)]="job.parentId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="jobOption.id" *ngFor="let jobOption of jobs; trackBy: trackJobById">{{jobOption.title}}</option>
+                    </select>
+                </div>-->
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

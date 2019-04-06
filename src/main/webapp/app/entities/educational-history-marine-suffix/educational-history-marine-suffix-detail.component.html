@@ -1,0 +1,96 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="educationalHistory" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.educationalHistory.detail.title">Educational History</span> {{educationalHistory.id}}</h2>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات فرد</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.person">Person</span></dt>
+                <dd>
+                    {{educationalHistory.personFamily}}
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.organizationChart">organizationChart</span></dt>
+                <dd>
+                    {{educationalHistory.organizationChartTitle}}
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.job">job</span></dt>
+                <dd>
+                    {{educationalHistory["job"]}}
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.practicaljob">practicaljob</span></dt>
+                <dd>
+                    {{educationalHistory["practicaljob"]}}
+                </dd>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات پرونده/سوابق آموزشی</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalModuleTitle">Educational Module Title</span></dt>
+                <dd>
+                    <span>{{educationalHistory.educationalModuleTitle}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.learningTimeTheorical">Learning Time Theorical</span></dt>
+                <dd>
+                    <span>{{educationalHistory.learningTimeTheorical}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.learningTimePractical">Learning Time Practical</span></dt>
+                <dd>
+                    <span>{{educationalHistory.learningTimePractical}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.totalTime">Total Time</span></dt>
+                <dd>
+                    <span>{{educationalHistory.totalTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalCenter">Educational Center</span></dt>
+                <dd>
+                    <span>{{educationalHistory.educationalCenter}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.dateOfStart">Date Of Start</span></dt>
+                <dd>
+                    <span>{{educationalHistory.dateOfStart}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{educationalHistory.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.description">Description</span></dt>
+                <dd>
+                    <span>{{educationalHistory.description}}</span>
+                </dd>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">فایل گواهینامه</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.fileDoc">File Doc</span></dt>
+                <dd>
+                    <!--<span>{{educationalHistory.fileDoc}}</span>
+                    <a href="educationalHistory.fileDoc | safe" cl-->
+                    <a *ngIf="educationalHistory.fileDoc" [href]="educationalHistory.fileDoc | safe" target="_blank"
+                       class="btn btn-default btn-sm enableLink">
+                        <fa-icon [icon]="'download'"></fa-icon>
+                        <span class="d-none d-md-inline">دریافت گواهینامه</span>
+                    </a>
+                </dd>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">گردش درخواست و نظرات</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.status">Status</span></dt>
+                <dd>
+                    <strong>{{educationalHistory.statusMeaning}}</strong>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.conversation">Conversation</span></dt>
+                <textarea [disabled]="true" [rows]="rows" class="form-control">{{educationalHistory.conversation}}</textarea><!--
+                <dd>
+                    <span>{{educationalHistory.conversation}}</span>
+                </dd>-->
+                <!--<dt><span jhiTranslate="marineindustryprojApp.educationalHistory.requestStatus">Request Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + educationalHistory.requestStatus}}">{{educationalHistory.requestStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.changeStatusUserLogin">Change Status User Login</span></dt>
+                <dd>
+                    <span>{{educationalHistory.changeStatusUserLogin}}</span>
+                </dd>-->
+            </dl>
+            <div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+        </div>
+        </div>
+    </div>
+</div>

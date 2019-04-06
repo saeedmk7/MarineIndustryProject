@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity RequestEducationalModule.
+    -->
+    <changeSet id="20181223172317-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="request_educational_modules_id"
+                                 baseTableName="request_educational_module_scientific_work_group"
+                                 constraintName="fk_request_educational_module_scientific_work_group_request_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="scientific_work_groups_id"
+                                 baseTableName="request_educational_module_scientific_work_group"
+                                 constraintName="fk_request_educational_module_scientific_work_group_scientific_work_groups_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="scientific_work_group"/>
+        
+        <addForeignKeyConstraint baseColumnNames="request_educational_modules_id"
+                                 baseTableName="request_educational_module_document"
+                                 constraintName="fk_request_educational_module_document_request_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="request_educational_module_document"
+                                 constraintName="fk_request_educational_module_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="request_educational_modules_id"
+                                 baseTableName="request_educational_module_educational_center"
+                                 constraintName="fk_request_educational_module_educational_center_request_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="educational_centers_id"
+                                 baseTableName="request_educational_module_educational_center"
+                                 constraintName="fk_request_educational_module_educational_center_educational_centers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_center"/>
+        
+        <addForeignKeyConstraint baseColumnNames="request_educational_modules_id"
+                                 baseTableName="request_educational_module_goal"
+                                 constraintName="fk_request_educational_module_goal_request_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="goals_id"
+                                 baseTableName="request_educational_module_goal"
+                                 constraintName="fk_request_educational_module_goal_goals_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="goal"/>
+        
+        <addForeignKeyConstraint baseColumnNames="request_educational_modules_id"
+                                 baseTableName="request_educational_module_resource"
+                                 constraintName="fk_request_educational_module_resource_request_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="resources_id"
+                                 baseTableName="request_educational_module_resource"
+                                 constraintName="fk_request_educational_module_resource_resources_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="resource"/>
+        
+        <addForeignKeyConstraint baseColumnNames="request_educational_modules_id"
+                                 baseTableName="request_educational_module_teacher"
+                                 constraintName="fk_request_educational_module_teacher_request_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="teachers_id"
+                                 baseTableName="request_educational_module_teacher"
+                                 constraintName="fk_request_educational_module_teacher_teachers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teacher"/>
+        
+        <addForeignKeyConstraint baseColumnNames="security_level_id"
+                                 baseTableName="request_educational_module"
+                                 constraintName="fk_request_educational_module_security_level_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="security_level"/>
+
+        <addForeignKeyConstraint baseColumnNames="skillable_level_of_skill_id"
+                                 baseTableName="request_educational_module"
+                                 constraintName="fk_request_educational_module_skillable_level_of_skill_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="skillable_level_of_skill"/>
+
+        <addForeignKeyConstraint baseColumnNames="evaluation_method_id"
+                                 baseTableName="request_educational_module"
+                                 constraintName="fk_request_educational_module_evaluation_method_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="evaluation_method"/>
+
+        <addForeignKeyConstraint baseColumnNames="organization_id"
+                                 baseTableName="request_educational_module"
+                                 constraintName="fk_request_educational_module_organization_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization"/>
+
+    </changeSet>
+</databaseChangeLog>

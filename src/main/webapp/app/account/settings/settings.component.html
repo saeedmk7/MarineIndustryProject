@@ -1,0 +1,128 @@
+<div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 jhiTranslate="settings.title" translateValues="{username: '{{settingsAccount.login}}'}" *ngIf="settingsAccount">User settings for [<b>{{settingsAccount.login}}</b>]</h2>
+
+            <div class="alert alert-success" *ngIf="success" jhiTranslate="settings.messages.success">
+                <strong>Settings saved!</strong>
+            </div>
+            <div class="alert alert-danger" *ngIf="error">
+                <strong>{{error}}</strong>
+            </div>
+
+            <mi-alert-error></mi-alert-error>
+
+            <form name="form" role="form" (ngSubmit)="save()" #settingsForm="ngForm" *ngIf="settingsAccount" class="fontlg" novalidate>
+                <!--<div class="form-group" *ngIf="languages && languages.length > 0">
+                    <label for="langKey" jhiTranslate="settings.form.language">Language</label>
+                    <select class="form-control" id="langKey" name="langKey" [(ngModel)]="settingsAccount.langKey">
+                        <option *ngFor="let language of languages" [value]="language">{{language | findLanguageFromKey}}</option>
+                    </select>
+                </div>-->
+                <div class="row" style="justify-content: center;">
+                    <div class="profile-img">
+                        <img *ngIf="!isNewImage" [src]="oldPicUrl | safe" style="max-width: 200px;max-height: 300px" />
+                        <img *ngIf="isNewImage" [src]="picUrl | safe" style="max-width: 200px;max-height: 300px" />
+                        <div class="file btn btn-lg btn-primary">
+                            تغییر تصویر
+                            <input type="file" name="file" accept=".jpg,.png,.bmp" [(ngModel)]="file" (change)="show($event,picUrl)" />
+                        </div>
+                    </div>
+                    <!--<div class="form-group center">
+                        <img src="../../../content/images/home/man.png" class="profile-img" />
+                        <div class="file btn btn-lg btn-primary">
+                            تغییر تصویر
+                            <input type="file" name="file">
+                        </div>
+                    </div>-->
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="col-md-3">
+                            <label>نام:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <label>{{person.name}}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-md-6">
+                            <label>نام خانوادگی:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <label>{{person.family}}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-md-3">
+                            <label>کدپرسنلی:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <label>{{person.personelCode}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="col-md-3">
+                            <label>کدملی:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <label>{{person.nationalId}}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-md-3">
+                            <label>نام پدر:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <label>{{person.fatherName}}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-md-3">
+                            <label>شغل:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <label>{{jobTitle}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-info">
+                    لطفا قبل از انتخاب عکس به موارد زیر دقت نمائید.
+                    <ul>
+                        <li>
+                            نام فایل انتخابی شما نباید شامل تعداد زیادی نقطه(.) یا کاما (,) و امثالهم باشد.
+                        </li>
+                        <li>
+                            فایل شما حتما باید دارای پسوندهای مربوط به تصویر (JPG,JPEG,PNG) باشد.
+                        </li>
+                        <li>
+                            حجم تصویر انتخابی شما نباید بیش از 80 کیلوبایت باشد.
+                        </li>
+                        <li>
+                            بهترین سایز برای تصویر 400*300 پیکسل می باشد.
+                        </li>
+                        <li>
+                            اگر برای کم کردن سایز تصویر به راهنمایی نیاز دارید می توانید از ویدئو زیر استفاده نمائید.
+                        </li>
+                    </ul>
+                <a href="/content/TrainingMovie/Paint.wmv" target="_blank"
+                   class="btn btn-default btn-sm">
+                    <fa-icon [icon]="'download'"></fa-icon>
+                    <span class="d-none d-md-inline">دانلود</span>
+                </a>
+                </div>
+                <div class="row">
+                    <button type="submit" [disabled]="settingsForm.form.invalid" class="btn btn-primary center btn-margin" jhiTranslate="settings.form.button">Save</button>
+                    <a href="#/password" class="btn btn-info btn-margin">تغییر رمز عبور</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

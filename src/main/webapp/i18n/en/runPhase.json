@@ -1,0 +1,39 @@
+
+{
+    "marineindustryprojApp": {
+        "runPhase" : {
+            "home": {
+                "title": "Run Phases",
+                "createLabel": "Create a new Run Phase",
+                "createOrEditLabel": "Create or edit a Run Phase"
+            },
+            "created": "A new Run Phase is created with identifier {{ param }}",
+            "updated": "A Run Phase is updated with identifier {{ param }}",
+            "deleted": "A Run Phase is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Run Phase {{ id }}?"
+            },
+            "detail": {
+                "title": "Run Phase"
+            },
+            "description": "Description",
+            "finalizeCost": "Finalize Cost",
+            "stepNumber": "Step Number",
+            "done": "Done",
+            "doneUserLogin": "Done User Login",
+            "doneDate": "Done Date",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "runRunningStep": "Run Running Step",
+            "document": "Document",
+            "person": "Person",
+            "finalNiazsanjiReport": "Final Niazsanji Report"
+        }
+    }
+}

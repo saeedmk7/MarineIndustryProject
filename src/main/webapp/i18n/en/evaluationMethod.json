@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "evaluationMethod" : {
+            "home": {
+                "title": "Evaluation Methods",
+                "createLabel": "Create a new Evaluation Method",
+                "createOrEditLabel": "Create or edit a Evaluation Method"
+            },
+            "created": "A new Evaluation Method is created with identifier {{ param }}",
+            "updated": "A Evaluation Method is updated with identifier {{ param }}",
+            "deleted": "A Evaluation Method is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Evaluation Method {{ id }}?"
+            },
+            "detail": {
+                "title": "Evaluation Method"
+            },
+            "title": "Title",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "educationalModule": "Educational Module",
+            "requestEducationalModule": "Request Educational Module"
+        }
+    }
+}

@@ -1,0 +1,163 @@
+<nav *ngIf="isAuthenticated()">
+    <div class=" bgWhite lightShadow sidebarMenu">
+        <ul class="nav flex-column accordion" id="accordionExample">
+            <li class="nav-item">
+                <a class="nav-link" href="#" role="button">
+                    <img src="../../../content/images/navbar/LogoSanaie1.png" style="width: 100%;padding-top: 10%"/>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#" role="button">
+                    <i class="fa fa-home"></i>
+                    <span class="pr-2">صفحه اصلی</span>
+                </a>
+            </li>
+            <li class="nav-item" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                <a class="nav-link" data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="false" aria-controls="collapseOne">
+                    <fa-icon [icon]="'building'"></fa-icon>
+                    <span class="pr-2">سازمان</span>
+                    <i class="fa fa-angle-down menuArrow"></i>
+                </a>
+                <ul id="collapseOne" class="collapse show pt-2 pb-2" data-parent="#accordionExample">
+                    <li class="nchild">
+                        <a href="#/person-marine-suffix">
+                            <fa-icon [icon]="'users'"></fa-icon>
+                            <span>اطلاعات پرسنل</span>
+                        </a>
+                    </li>
+                    <li class="nchild"><a href="#/job-marine-suffix">
+                        <fa-icon [icon]="'paint-roller'"></fa-icon>
+                        <span>مشاغل</span>
+
+                    </a>
+                    </li>
+                    <li class="nchild">
+                        <a href="#/organization-chart-marine-suffix">
+
+                            <fa-icon [icon]="'sitemap'"></fa-icon>
+                            <span>چارت سازمانی</span>
+                        </a>
+                    </li>
+                    <li class="nchild">
+                        <a href="#/scientific-work-group-marine-suffix">
+                            <fa-icon [icon]="'stamp'"></fa-icon>
+                            <span>گروه های علمی شغلی</span>
+
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                <a class="nav-link" data-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="false" aria-controls="collapseTwo">
+                    <fa-icon [icon]="'database'"></fa-icon>
+                    <span class="pr-2">اطلاعات پایه</span>
+                    <i class="fa fa-angle-left menuArrow"></i>
+                </a>
+                <ul id="collapseTwo" class="collapse" data-parent="#accordionExample">
+                    <li class="nchild">
+                        <a href="#/educational-module-marine-suffix">
+                            <fa-icon [icon]="'book-open'"></fa-icon>
+                            <span>پودمان های آموزشی</span>
+                        </a>
+                    </li>
+                    <li class="nchild"><a href="#/teacher-marine-suffix">
+                        <fa-icon [icon]="'chalkboard-teacher'"></fa-icon>
+                        <span>اطلاعات مدرسان</span>
+
+                    </a>
+                    </li>
+                    <li class="nchild">
+                        <a href="#/main-task-marine-suffix">
+
+                            <fa-icon [icon]="'tag'"></fa-icon>
+                            <span>وظایف اصلی</span>
+                        </a>
+                    </li>
+                    <li class="nchild">
+                        <a href="#/sub-task-marine-suffix">
+                            <fa-icon [icon]="'tags'"></fa-icon>
+                            <span>وظایف فرعی</span>
+
+                        </a>
+                    </li>
+                    <li class="nchild">
+                        <a href="#/educational-center-marine-suffix">
+                            <fa-icon [icon]="'hotel'"></fa-icon>
+                            <span>مراکز آموزشی</span>
+
+                        </a>
+                    </li>
+                    <li class="nchild">
+                        <a href="#/resource-marine-suffix">
+                            <fa-icon [icon]="'file'"></fa-icon>
+                            <span>منابع آموزشی</span>
+
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_USER']">
+                <a class="nav-link" data-toggle="collapse" href="#collapseThree" role="button" aria-expanded="false" aria-controls="collapseThree">
+                    <fa-icon [icon]="'glasses'"></fa-icon>
+                    <span class="pr-2">نیازسنجی</span>
+                    <i class="fa fa-angle-left menuArrow"></i>
+                </a>
+                <ul id="collapseThree" class="collapse" data-parent="#accordionExample">
+                    <li class="nchild" *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_USER']">
+                        <a href="#/request-organization-niazsanji-marine-suffix">
+                            <fa-icon [icon]="'receipt'"></fa-icon>
+                            <span>درخواست نیازسنجی سازمانی</span>
+                        </a>
+                    </li>
+                    <li class="nchild" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <a href="#/final-organization-niazsanji-marine-suffix">
+                        <fa-icon [icon]="'list-alt'"></fa-icon>
+                        <span>لیست نیازسنجی های سازمانی</span>
+
+                    </a>
+                    </li>
+                    <li class="nchild" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <a href="#/final-niazsanji-report-marine-suffix">
+
+                            <fa-icon [icon]="'check-double'"></fa-icon>
+                            <span>تکمیل فرآیند نیازسنجی</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                <a class="nav-link" data-toggle="collapse" href="#collapseFour" role="button" aria-expanded="false" aria-controls="collapseFour">
+                    <fa-icon [icon]="'toolbox'"></fa-icon>
+                    <span class="pr-2">مدیریت</span>
+                    <i class="fa fa-angle-left menuArrow"></i>
+                </a>
+                <ul id="collapseFour" class="collapse" data-parent="#accordionExample">
+                    <li class="nchild">
+                        <a href="#/admin/user-management">
+                            <fa-icon [icon]="'user-edit'"></fa-icon>
+                            <span>مدیریت کاربران</span>
+                        </a>
+                    </li>
+                    <li class="nchild">
+                        <a href="#/announcement-marine-suffix">
+                            <fa-icon [icon]="'newspaper'"></fa-icon>
+                            <span>مدیریت اخبار</span>
+                        </a>
+                    </li>
+                    <li class="nchild">
+                        <a href="#/nav-bar-item-marine-suffix">
+                            <fa-icon [icon]="'newspaper'"></fa-icon>
+                            <span>مدیریت منوها</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div style="position: absolute;width:100%;bottom: 0;padding-left: 7%">
+            <a href="#" (click)="logout();" class="logout"> خروج از حساب<span class="badge badge-danger date-logout">{{todayDate}}</span></a>
+        </div>
+    </div><!-- Main Menu (Right) -->
+
+
+</nav>
+<nav></nav>

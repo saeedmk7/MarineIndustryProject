@@ -1,0 +1,158 @@
+<div>
+    <h2>
+        <span id="user-management-page-heading" jhiTranslate="userManagement.home.title">Users</span>
+        <button class="btn btn-primary float-right jh-create-entity" [routerLink]="['./new']">
+            <fa-icon [icon]="'plus'"></fa-icon> <span jhiTranslate="userManagement.home.createLabel">Create a new User</span>
+        </button>
+        <button class="btn btn-warning float-right jh-create-entity" [routerLink]="['../authority']">
+            <fa-icon [icon]="'address-card'"></fa-icon> <span jhiTranslate="userManagement.home.authority">authority</span>
+        </button>
+    </h2>
+    <mi-alert-error></mi-alert-error>
+    <div *ngIf="message" class="alert alert-success">
+        {{message}}
+    </div>
+    <div>
+        <div class="card border-success">
+            <a data-toggle="collapse" href="#collapseExample1" class="card-header center" style="background-color: aliceblue;">
+                <span class="panel-title">جستجو</span>
+                <span class="pull-right clickable"><i class="glyphicon glyphicon-ok"></i></span>
+            </a>
+            <div class="collapse" id="collapseExample1">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_login">نام کاربری</label>
+                       <input type="text" [(ngModel)]="login" class="form-control" id="field_login" name="login" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_person">افراد</label>
+                        <!--<input type="text" [(ngModel)]="personId" class="form-control" id="field_person" name="personId" />-->
+                        <ng-select
+                            [items]="people"
+                            [multiple]="false"
+                            [closeOnSelect]="true"
+                            [searchable]="true"
+                            bindLabel="fullName"
+                            bindValue="id"
+                            placeholder="نام"
+                            name="person"
+                            id="field_person"
+                            [(ngModel)]="personId" >
+                    </div>
+
+                </div>
+                <div class="card-footer text-muted success-color white-text">
+                    <input type="button" (click)="search()" class="btn-info" value="جستجو">
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="users">
+        <table class="table table-striped  table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <!--<th jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <!--<th></th>-->
+                <!--<th jhiSortBy="langKey"> <span jhiTranslate="userManagement.langKey">Lang Key</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th><span jhiTranslate="userManagement.profiles">Profiles</span></th>
+                <th>فعال؟</th>
+                <th jhiSortBy="createdDate"><span jhiTranslate="userManagement.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="lastModifiedBy"><span jhiTranslate="userManagement.lastModifiedBy">Last Modified By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="lastModifiedDate"><span jhiTranslate="userManagement.lastModifiedDate">Last Modified Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="person"><span jhiTranslate="userManagement.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody *ngIf ="users">
+            <tr *ngFor="let user of users; trackBy: trackIdentity">
+                <td><a [routerLink]="['./', user.login, 'view']">{{user.id}}</a></td>
+                <td>{{user.login}}</td>
+                <!--<td>{{user.email}}</td>-->
+               <!-- <td>
+                    <button class="btn btn-danger btn-sm" (click)="setActive(user, true)" *ngIf="!user.activated"
+                            jhiTranslate="userManagement.deactivated">Deactivated</button>
+                    <button class="btn btn-success btn-sm" (click)="setActive(user, false)" *ngIf="user.activated"
+                            [disabled]="currentAccount.login === user.login" jhiTranslate="userManagement.activated">Activated</button>
+                </td>-->
+                <!--<td>{{user.langKey}}</td>-->
+                <td>
+                    <div *ngFor="let authority of user.authorities">
+                        <span class="badge badge-info">{{ authority }}</span>
+                    </div>
+                </td>
+                <td>
+                    <!--<span class="fa" [ngClass]="{'fa-check': user.activated === true,'fa-eye': user.activated === false}"></span>-->
+
+                    <!--<span class="fa fa-crosshairs" [class.fa-check]="user.activated.valueOf() === 'بلی'" [class.fa-times]="user.activated.valueOf() === 'خیر'"></span>-->
+                    <span>{{user.activated}}</span>
+                </td>
+                <td>{{user.createdDate}}</td>
+                <td>{{user.lastModifiedBy}}</td>
+                <td>{{user.lastModifiedDate}}</td>
+                <td>
+                    <div *ngIf="user.personId">
+                        <a [routerLink]="['../../person-marine-suffix', user.personId , 'view' ]" >{{user.personFullName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['./', user.login, 'view']"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['./', user.login, 'edit']"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="button" (click)="deleteUser(user)"
+                                class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.login">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                        <button type="button" (click)="resetPassword(user)" title="ریست کردن رمز"
+                                class="btn btn-warning btn-sm" [disabled]="currentAccount.login === user.login">
+                            <fa-icon [icon]="'lock'"></fa-icon>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="10">
+
+                </td>
+
+            </tr>
+
+            </tfoot>
+        </table>
+        <div *ngIf="users && users.length">
+
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+    </div>
+</div>

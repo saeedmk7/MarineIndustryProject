@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="workIndustry" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.workIndustry.detail.title">Work Industry</span> {{workIndustry.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.workIndustry.title">Title</span></dt>
+                <dd>
+                    <span>{{workIndustry.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workIndustry.code">Code</span></dt>
+                <dd>
+                    <span>{{workIndustry.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workIndustry.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{workIndustry.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workIndustry.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{workIndustry.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workIndustry.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{workIndustry.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workIndustry.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{workIndustry.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/work-industry-marine-suffix', workIndustry.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

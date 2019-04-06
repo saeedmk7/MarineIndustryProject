@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "toolsAndFacility" : {
+            "home": {
+                "title": "Tools And Facilities",
+                "createLabel": "Create a new Tools And Facility",
+                "createOrEditLabel": "Create or edit a Tools And Facility"
+            },
+            "created": "A new Tools And Facility is created with identifier {{ param }}",
+            "updated": "A Tools And Facility is updated with identifier {{ param }}",
+            "deleted": "A Tools And Facility is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Tools And Facility {{ id }}?"
+            },
+            "detail": {
+                "title": "Tools And Facility"
+            },
+            "title": "Title",
+            "code": "Code",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "designAndPlanning": "Design And Planning"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+
+{
+    "marineindustryprojApp": {
+        "radeh" : {
+            "home": {
+                "title": "رده ها",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش رده"
+            },
+            "created": "رده با شناسه {{ param }} ایجاد شد.",
+            "updated": "رده با شناسه {{ param }} ویرایش شد.",
+            "deleted": "رده با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف رده با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات رده"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "job": "شغل"
+        }
+    }
+}

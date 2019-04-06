@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity FinalOrganizationNiazsanji.
+    -->
+    <changeSet id="20181006162100-1" author="jhipster">
+        <createTable tableName="final_organization_niazsanji">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="code" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="recommended_by_orgchart" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="needed_softwares" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="needed_hardware" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="students_type" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="teacher_name" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="teacher_mobile" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="request_status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="change_status_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="training_goals" type="varchar(1024)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="description" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="create_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="create_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modify_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modify_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="archived" type="boolean">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="archived_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="archived_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="status" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="educational_module_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="teach_approach_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="request_organization_niazsanji_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="final_organization_niazsanji" columnName="create_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="final_organization_niazsanji" columnName="modify_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="final_organization_niazsanji" columnName="archived_date" columnDataType="datetime"/>
+        
+        <createTable tableName="final_organization_niazsanji_person">
+            <column name="people_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="final_organization_niazsanjis_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="final_organization_niazsanjis_id, people_id" tableName="final_organization_niazsanji_person"/>
+        
+        <createTable tableName="final_organization_niazsanji_document">
+            <column name="documents_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="final_organization_niazsanjis_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="final_organization_niazsanjis_id, documents_id" tableName="final_organization_niazsanji_document"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

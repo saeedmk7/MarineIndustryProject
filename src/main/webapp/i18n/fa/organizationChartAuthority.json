@@ -1,0 +1,31 @@
+{
+    "marineindustryprojApp": {
+        "organizationChartAuthority" : {
+            "home": {
+                "title": "نقش چارت سازمانی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش نقش چارت سازمانی"
+            },
+            "created": "نقش چارت سازمانی با شناسه {{ param }} ایجاد شد.",
+            "updated": "نقش چارت سازمانی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "نقش چارت سازمانی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف نقش چارت سازمانی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات نقش چارت سازمانی"
+            },
+            "authorityName": "Authority Name",
+            "hasEditPermission": "آیا دسترسی به ویرایش چارت سازمانی دارد؟",
+            "createUserLogin": "ایجادکننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "آخرین ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "organizationChart": "Organization Chart"
+        }
+    }
+}

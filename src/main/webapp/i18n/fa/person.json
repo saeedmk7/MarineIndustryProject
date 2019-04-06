@@ -1,0 +1,63 @@
+{
+    "marineindustryprojApp": {
+        "person" : {
+            "home": {
+                "title": "افراد سازمان",
+                "createLabel": "جدید",
+                "createOrEditLabel": "مشخصات {{param}}"
+            },
+            "created": "فردی با شناسه {{ param }} ایجاد شد.",
+            "updated": "فردی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "فردی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف فردی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات"
+            },
+            "name": "نام",
+            "family": "نام خانوادگی",
+            "code": "کد کاربر",
+            "fatherName": "نام پدر",
+            "certificateNumber": "شماره شناسنامه",
+            "nationalId": "کدملی",
+            "birthDate": "تاریخ تولد",
+            "personelCode": "کدپرسنلی",
+            "employmentDate": "تاریخ استخدام",
+            "yearOfService": "سنوات خدمت",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو شدن",
+            "status": "وضعیت",
+            "pollScore": "Poll Score",
+            "document": "مدارک",
+            "scientificWorkGroup": "گروه علمی شغلی",
+            "lastQualification": "آخرین مدرک تحصیلی",
+            "lastQualificationTitle": "آخرین مدرک تحصیلی",
+            "lastFieldOfStudy": "آخرین رشته نحصیلی",
+            "lastFieldOfStudyTitle": "آخرین رشته نحصیلی",
+            "employmentType": "نوع استخدام",
+            "employmentTypeId": "نوع استخدام",
+            "employmentTypeTitle": "نوع استخدام",
+            "workGroup": "نام گروه محل خدمت",
+            "workGroupTitle": "نام گروه محل خدمت",
+            "workIndustry": "نام صنعت محل خدمت",
+            "workIndustryTitle": "نام صنعت محل خدمت",
+            "job": "شغل سازمانی",
+            "jobTitle": "شغل سازمانی",
+            "practicaljob": "شغل عملی",
+            "practicaljobTitle": "شغل عملی",
+            "organizationChart": "موقعیت در چارت سازمانی",
+            "organizationChartTitle": "موقعیت در چارت سازمانی",
+            "mainTask": "Main Task",
+            "requestOrganizationNiazsanji": "Request Organization Niazsanji",
+            "finalOrganizationNiazsanji": "Final Organization Niazsanji",
+            "designAndPlanning": "Design And Planning",
+            "runPhase": "Run Phase"
+        }
+    }
+}

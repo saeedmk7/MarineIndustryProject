@@ -1,0 +1,51 @@
+
+{
+    "marineindustryprojApp": {
+        "designAndPlanning" : {
+            "home": {
+                "title": "Design And Plannings",
+                "createLabel": "Create a new Design And Planning",
+                "createOrEditLabel": "Create or edit a Design And Planning"
+            },
+            "created": "A new Design And Planning is created with identifier {{ param }}",
+            "updated": "A Design And Planning is updated with identifier {{ param }}",
+            "deleted": "A Design And Planning is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Design And Planning {{ id }}?"
+            },
+            "detail": {
+                "title": "Design And Planning"
+            },
+            "directCost": "Direct Cost",
+            "directCostDescription": "Direct Cost Description",
+            "undirectCost": "Undirect Cost",
+            "undirectCostDescription": "Undirect Cost Description",
+            "step": "Step",
+            "finished": "Finished",
+            "finishedUserLogin": "Finished User Login",
+            "finishedDate": "Finished Date",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "person": "Person",
+            "document": "Document",
+            "finalNiazsanjiReport": "Final Niazsanji Report",
+            "mahiatCourse": "Mahiat Course",
+            "courseType": "Course Type",
+            "teachType": "Teach Type",
+            "courseLocation": "Course Location",
+            "conditionsOfParticipant": "Conditions Of Participant",
+            "effectivenessLevel": "Effectiveness Level",
+            "toolsAndFacility": "Tools And Facility",
+            "teachingApproach": "Teaching Approach",
+            "teachTechnique": "Teach Technique",
+            "effectivenessIndex": "Effectiveness Index"
+        }
+    }
+}

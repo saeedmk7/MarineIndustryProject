@@ -1,0 +1,34 @@
+
+{
+    "marineindustryprojApp": {
+        "subTask" : {
+            "home": {
+                "title": "وظایف فرعی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش وظیفه فرعی"
+            },
+            "created": "وظیفه فرعی با شناسه {{ param }} ایجاد شد.",
+            "updated": "وظیفه فرعی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "وظیفه فرعی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف وظیفه فرعی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات وظیفه فرعی"
+            },
+            "title": "عنوان",
+            "description": "توضیحات",
+            "code": "کد",
+            "solution": "راه حل",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "mainTask": "وظیفه اصلی"
+        }
+    }
+}

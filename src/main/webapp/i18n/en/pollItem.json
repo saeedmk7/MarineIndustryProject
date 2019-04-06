@@ -1,0 +1,31 @@
+
+{
+    "marineindustryprojApp": {
+        "pollItem" : {
+            "home": {
+                "title": "Poll Items",
+                "createLabel": "Create a new Poll Item",
+                "createOrEditLabel": "Create or edit a Poll Item"
+            },
+            "created": "A new Poll Item is created with identifier {{ param }}",
+            "updated": "A Poll Item is updated with identifier {{ param }}",
+            "deleted": "A Poll Item is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Poll Item {{ id }}?"
+            },
+            "detail": {
+                "title": "Poll Item"
+            },
+            "title": "Title",
+            "displayOrder": "Display Order",
+            "coefficient": "Coefficient",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "pollScore": "Poll Score",
+            "criterion": "Criterion"
+        }
+    }
+}

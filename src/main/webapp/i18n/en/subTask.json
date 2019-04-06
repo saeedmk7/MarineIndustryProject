@@ -1,0 +1,34 @@
+
+{
+    "marineindustryprojApp": {
+        "subTask" : {
+            "home": {
+                "title": "Sub Tasks",
+                "createLabel": "Create a new Sub Task",
+                "createOrEditLabel": "Create or edit a Sub Task"
+            },
+            "created": "A new Sub Task is created with identifier {{ param }}",
+            "updated": "A Sub Task is updated with identifier {{ param }}",
+            "deleted": "A Sub Task is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Sub Task {{ id }}?"
+            },
+            "detail": {
+                "title": "Sub Task"
+            },
+            "title": "Title",
+            "description": "Description",
+            "code": "Code",
+            "solution": "Solution",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "mainTask": "Main Task"
+        }
+    }
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity UsersRequest.
+    -->
+    <changeSet id="20181223172412-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="users_requests_id"
+                                 baseTableName="users_request_document"
+                                 constraintName="fk_users_request_document_users_requests_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users_request"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="users_request_document"
+                                 constraintName="fk_users_request_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+    </changeSet>
+</databaseChangeLog>

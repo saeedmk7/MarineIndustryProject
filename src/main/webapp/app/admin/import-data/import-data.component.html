@@ -1,0 +1,284 @@
+<mi-alert></mi-alert>
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-document-marine-suffix-heading" jhiTranslate="import-data.title">Title</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="import-data.entities.entityType" for="field_entityType">entityType</label>
+                    <select class="form-control" name="entityType" id="field_entityType"
+                           [(ngModel)]="importDataRequest.entityType" required>
+                        <option [selected]="true" value="job">شغل سازمانی</option>
+                        <option  value="educationalModule">پودمان آموزشی</option>
+                        <option  value="person">اطلاعات پرسنل</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.document.fileDoc" for="field_fileDoc">File Doc</label>
+                    <div>
+                        <input type="file" id="file_fileDoc" (change)="setFileData($event, importDataRequest, 'fileDoc', false)" jhiTranslate="entity.action.addblob"/>
+                        <span *ngIf="warning" class="alert alert-warning">{{warning}}</span>
+                    </div>
+                    <input type="hidden" class="form-control" name="fileDoc" id="field_fileDoc"
+                           [(ngModel)]="importDataRequest.fileDoc" required/>
+                    <div [hidden]="!(editForm.controls.fileDoc?.dirty && editForm.controls.fileDoc?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.fileDoc?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="alert alert-warning">
+                    نکته بسیار مهم: در صورتی که شناسه هر کدام از موجودیت ها تکراری باشد (یعنی در اطلاعات ذخیره شده ردیفی با این شناسه وجود داشته باشد) اطلاعات جدیدی که الان میخواهید وارد نمائید جایگزین قبلی می شود. <br/>
+                    نکته: حتما باید Sheet ی که اطلاعات در آن قرار دارد در اکسل نام آن <span style="color: red; font-size: 20px;font-family: Arial;">"Sheet1"</span> باشد.
+                    نکته: لطفا قبل از انتخاب اکسل مورد نظر آن را ببندید.
+                </div>
+                <div class="row" [ngSwitch]="importDataRequest.entityType">
+                    <table *ngSwitchCase="'job'" class="table table-sm table-striped table-bordered table-responsive" style="width: 100%">
+                        <tr>
+                            <td>
+                                1- JobKey *
+                            </td>
+                            <td>
+                                2- Title *
+                            </td>
+                            <td>
+                                3- JobCode *
+                            </td>
+                            <td>
+                                4- scientificWorkGroupId
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                شناسه شغل <br/>
+                                اجباریست<br/>
+                                حتما باید یکتا باشد.<br/>
+                                شش (6) رقمی است.<br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                عنوان شغل<br/>
+                                اجباریست<br/>
+                                حداکثر 100 کاراکتر<br/>
+                            </td>
+                            <td>
+                                کد شغل<br/>
+                                اجباریست<br/>
+                                دوازده (12) رقمی است.<br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                شناسه گروه علمی شغلی<br/>
+                                اختیاریست<br/>
+                                حتما باید در جدول گروه علمی شغلی ردیفی با این شناسه وجود داشته باشد.<br/>
+                                <a class="enableLink" href="#/scientific-work-group-marine-suffix">لینک جدول گروه های علمی شغلی</a><br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table *ngSwitchCase="'educationalModule'" class="table table-sm table-striped table-bordered table-responsive" style="width: 100%">
+                        <tr>
+                            <td>
+                                1- code *
+                            </td>
+                            <td>
+                                2- title *
+                            </td>
+                            <td>
+                                3- learning_time_theorical *
+                            </td>
+                            <td>
+                                4- learning_time_practical *
+                            </td>
+                            <td>
+                                5- skillable_level_of_skill_id *
+                            </td>
+                            <td>
+                                6- scientific_work_group_id *
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                شناسه پودمان <br/>
+                                اجباریست<br/>
+                                حتما باید یکتا باشد.<br/>
+                                حداکثر 18 رقمی<br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                عنوان پودمان<br/>
+                                اجباریست<br/>
+                                حداکثر 1000 کاراکتر<br/>
+                            </td>
+                            <td>
+                                مدت زمان نظری (ساعت)<br/>
+                                اجباریست<br/>
+                                حداکثر 8 رقمی<br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                مدت زمان عملی (ساعت)<br/>
+                                اجباریست<br/>
+                                حداکثر 8 رقمی<br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                سطح مهارت قابل تامین پودمان<br/>
+                                اجباریست<br/>
+                                حتما باید در جدول سطوح مهارت قابل تامین پودمان ردیفی با این شناسه وجود داشته باشد.<br/>
+                                <a class="enableLink" href="#/skillable-level-of-skill-marine-suffix">لینک جدول سطوح مهارت قابل تامین پودمان</a><br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                شناسه گروه علمی شغلی<br/>
+                                اختیاریست<br/>
+                                حتما باید در جدول گروه علمی شغلی ردیفی با این شناسه وجود داشته باشد.<br/>
+                                <a class="enableLink" href="#/scientific-work-group-marine-suffix">لینک جدول گروه های علمی شغلی</a><br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table *ngSwitchCase="'person'" class="table table-sm table-striped table-bordered table-responsive" style="width: 100%">
+                        <tr>
+                            <td>
+                                1- personel_code *
+                            </td>
+                            <td>
+                                2- name *
+                            </td>
+                            <td>
+                                3- family *
+                            </td>
+                            <td>
+                                4- father_name *
+                            </td>
+                            <td>
+                                5- certificate_number *
+                            </td>
+                            <td>
+                                6- national_id *
+                            </td>
+                            <td>
+                                7- birth_date *
+                            </td>
+                            <td>
+                                8- job_id *
+                            </td>
+                            <td>
+                                9- practicaljob_id *
+                            </td>
+                            <td>
+                                10- employment_date
+                            </td>
+                            <td>
+                                11- last_qualification_id
+                            </td>
+                            <td>
+                                12- last_field_of_study_id
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                کد پرسنلی<br/>
+                                اجباریست<br/>
+                                حتما باید یکتا باشد.<br/>
+                                حداکثر 18 رقمی<br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                نام<br/>
+                                اجباریست<br/>
+                                حداکثر 100 کاراکتر<br/>
+                            </td>
+                            <td>
+                            نام خانوادگی<br/>
+                            اجباریست<br/>
+                            حداکثر 100 کاراکتر<br/>
+                        </td>
+                            <td>
+                                نام پدر<br/>
+                                اجباریست<br/>
+                                حداکثر 100 کاراکتر<br/>
+                            </td>
+                            <td>
+                                شماره شناسنامه<br/>
+                                اجباریست<br/>
+                                حداکثر 12 کاراکتر<br/>
+                            </td>
+                            <td>
+                                کدملی<br/>
+                                اجباریست<br/>
+                                حداکثر 10 کاراکتر<br/>
+                                حتما باید یکتا باشد.<br/>
+                                با توجه به این کد ملی برای این پرسنل یک کاربر ایجاد می شود<br/>
+                                لطفا در موقع ثبت نهایت دقت را در تکراری نبودن کدملی لحاظ فرمائید.
+                            </td>
+                            <td>
+                                تاریخ تولد<br/>
+                                اجباریست<br/>
+                                لطفا به شمسی و فقط و فقط به شکل زیر وارد نمائید.<br/>
+                                1395-12-30<br/>
+                                روز-ماه-سال
+                            </td>
+                            <td>
+                                شناسه شغل سازمانی<br/>
+                                اجباریست<br/>
+                                حتما باید در جدول مشاغل ردیفی با این شناسه وجود داشته باشد.<br/>
+                                <a class="enableLink" href="#/job-marine-suffix">لینک جدول مشاغل</a><br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                شناسه شغل عملی<br/>
+                                اجباریست<br/>
+                                حتما باید در جدول مشاغل ردیفی با این شناسه وجود داشته باشد.<br/>
+                                <a class="enableLink" href="#/job-marine-suffix">لینک جدول مشاغل</a><br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                تاریخ استخدام<br/>
+                                اختیاریست<br/>
+                                لطفا به شمسی و فقط و فقط به شکل زیر وارد نمائید.<br/>
+                                1395-12-30<br/>
+                                روز-ماه-سال
+                            </td>
+                            <td>
+                                آخرین مدرک تحصیلی<br/>
+                                اختیاریست<br/>
+                                حتما باید در جدول مدارک تحصیلی ردیفی با این شناسه وجود داشته باشد.<br/>
+                                <a class="enableLink" href="#/qualification-marine-suffix">لینک جدول مدارک تحصیلی</a><br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                آخرین رشته نحصیلی<br/>
+                                اختیاریست<br/>
+                                حتما باید در جدول رشته های تحصیلی ردیفی با این شناسه وجود داشته باشد.<br/>
+                                <a class="enableLink" href="#/field-of-study-marine-suffix">لینک جدول رشته های تحصیلی</a><br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div *ngIf="file" class="progress">
+                    <div class="progress-bar progress-bar-info progress-bar-striped"
+                         role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                         aria-valuemin="0" aria-valuemax="100"
+                         [ngStyle]="{width:progress.percentage+'%'}">
+                        {{progress.percentage}}%</div>
+                </div>
+                <div class="alert alert-success" *ngIf="success">
+                    {{success}}
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

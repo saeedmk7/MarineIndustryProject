@@ -1,0 +1,153 @@
+[
+    {
+        "id": 1,
+        "title": "صفحه اصلی",
+        "url": "#",
+        "faicon": "home",
+        "is_active": true,
+        "parent_id":null
+    },
+    {
+        "id": 2,
+        "title": "سازمان",
+        "url": "collapseOne",
+        "faicon": "building",
+        "is_active": true,
+        "parent_id":null
+    },
+    {
+        "id": 3,
+                "title": "اطلاعات پرسنل",
+                "url": "#/person-marine-suffix",
+                "faicon": "users",
+                "is_active": true,
+        "parent_id":2
+            },
+            {
+                "id": 4,
+                "title": "مشاغل",
+                "url": "#/job-marine-suffix",
+                "faicon": "paint-roller",
+                "is_active": true,
+                "parent_id":2
+            },
+            {
+                "id": 5,
+                "title": "چارت سازمانی",
+                "url": "#/organization-chart-marine-suffix",
+                "faicon": "sitemap",
+                "is_active": true,
+                "parent_id":2
+            },
+    {
+        "id": 7,
+        "title": "اطلاعات پایه",
+        "url": "collapseTwo",
+        "faicon": "database",
+        "is_active": true,
+        "parent_id":null
+    },    {
+    "id": 8,
+                "title": "پودمان های آموزشی",
+                "url": "#/educational-module-marine-suffix",
+                "faicon": "book-open",
+                "is_active": true,
+    "parent_id":7
+            },
+            {
+                "id": 9,
+                "title": "مدرسان آموزشی",
+                "url": "#/teacher-marine-suffix",
+                "faicon": "chalkboard-teacher",
+                "is_active": true,
+                "parent_id":7
+            },
+            {
+                "id": 12,
+                "title": "مراکز آموزشی",
+                "url": "#/educational-center-marine-suffix",
+                "faicon": "hotel",
+                "is_active": true,
+                "parent_id":7
+            },
+            {
+                "id": 13,
+                "title": "منابع آموزشی",
+                "url": "#/resource-marine-suffix",
+                "faicon": "file",
+                "is_active": true,
+                "parent_id":7
+            },
+    {
+        "id": 14,
+        "title": "نیازسنجی",
+        "url": "collapseThree",
+        "faicon": "glasses",
+        "is_active": true,
+        "parent_id":null
+    },
+    {
+        "id": 15,
+        "title": "درخواست نیازسنجی فردی",
+        "url": "#/request-organization-niazsanji-marine-suffix",
+        "faicon": "receipt",
+        "is_active": true,
+        "parent_id":14
+    },
+    {
+        "id": 16,
+        "title": "درخواست نیازسنجی گروهی",
+        "url": "#/niazsanji-group-marine-suffix",
+        "faicon": "receipt",
+        "is_active": true,
+        "parent_id":14
+    },
+            {
+                "id": 17,
+                "title": "درخواست نیازسنجی سازمانی",
+                "url": "#/request-organization-niazsanji-marine-suffix",
+                "faicon": "receipt",
+                "is_active": true,
+                "parent_id":14
+            },
+            {
+                "id": 18,
+                "title": "لیست نیازسنجی های سازمانی",
+                "url": "#/final-organization-niazsanji-marine-suffix",
+                "faicon": "list-alt",
+                "is_active": true,
+                "parent_id":14
+            },
+            {
+                "id": 19,
+                "title": "تکمیل فرآیند نیازسنجی",
+                "url": "#/final-niazsanji-report-marine-suffix",
+                "faicon": "check-double",
+                "is_active": true,
+                "parent_id":14
+            }
+    ,
+    {
+        "id": 20,
+        "title": "مدیریت",
+        "url": "collapseFour",
+        "faicon": "tool-box",
+        "is_active": true,
+        "parent_id":null
+    },    {
+    "id": 21,
+                "title": "مدیریت کاربران",
+                "url": "#/admin/user-management",
+                "faicon": "user-edit",
+                "is_active": true,
+    "parent_id":20
+            }
+    ,
+    {
+        "id": 22,
+        "title": "مدیریت اخبار",
+        "url": "#/announcement-marine-suffix",
+        "faicon": "newspaper",
+        "is_active": true,
+        "parent_id":20
+    }]

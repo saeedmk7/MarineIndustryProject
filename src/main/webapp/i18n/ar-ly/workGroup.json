@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "workGroup" : {
+            "home": {
+                "title": "Work Groups",
+                "createLabel": "Create a new Work Group",
+                "createOrEditLabel": "Create or edit a Work Group"
+            },
+            "created": "A new Work Group is created with identifier {{ param }}",
+            "updated": "A Work Group is updated with identifier {{ param }}",
+            "deleted": "A Work Group is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Work Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Work Group"
+            },
+            "title": "Title",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "person": "Person",
+            "workUnit": "Work Unit"
+        }
+    }
+}

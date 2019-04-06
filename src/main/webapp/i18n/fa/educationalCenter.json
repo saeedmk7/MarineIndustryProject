@@ -1,0 +1,43 @@
+{
+    "marineindustryprojApp": {
+        "educationalCenter" : {
+            "home": {
+                "title": "مراکز آموزشی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش مرکز آموزشی"
+            },
+            "created": "مرکز آموزشی با شناسه {{ param }} ایجاد شد.",
+            "updated": "مرکز آموزشی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "مرکز آموزشی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف مرکز آموزشی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات مرکز آموزشی"
+            },
+            "name": "نام مرکز آموزشی",
+            "address": "آدرس",
+            "telephone": "تلفن مرکز",
+            "educationalCenterType": "نوع مرکز آموزشی",
+            "ceo": "مدیر عامل",
+            "connectionPerson": "فرد رابط",
+            "fax": "فکس",
+            "email": "ایمیل",
+            "activityArea": "حوزه فعالیت",
+            "activityAreaId": "حوزه فعالیت",
+            "activityAreaTitle": "حوزه فعالیت",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "activityArea": "حوزه فعالیت",
+            "document": "مدارک",
+            "educationalModule": "پودمان",
+            "requestEducationalModule": "Request Educational Module"
+        }
+    }
+}

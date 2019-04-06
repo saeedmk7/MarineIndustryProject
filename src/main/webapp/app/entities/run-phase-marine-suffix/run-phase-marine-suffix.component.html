@@ -1,0 +1,94 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.runPhase.home.title">Run Phases</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-run-phase-marine-suffix" [routerLink]="['/run-phase-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.runPhase.home.createLabel">
+            Create new Run Phase
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="runPhases">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.runPhase.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="finalizeCost"><span jhiTranslate="marineindustryprojApp.runPhase.finalizeCost">Finalize Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="stepNumber"><span jhiTranslate="marineindustryprojApp.runPhase.stepNumber">Step Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="done"><span jhiTranslate="marineindustryprojApp.runPhase.done">Done</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="doneUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.doneUserLogin">Done User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="doneDate"><span jhiTranslate="marineindustryprojApp.runPhase.doneDate">Done Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.runPhase.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.runPhase.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archived"><span jhiTranslate="marineindustryprojApp.runPhase.archived">Archived</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.archivedUserLogin">Archived User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedDate"><span jhiTranslate="marineindustryprojApp.runPhase.archivedDate">Archived Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.runPhase.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="finalNiazsanjiReportDescription"><span jhiTranslate="marineindustryprojApp.runPhase.finalNiazsanjiReport">Final Niazsanji Report</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let runPhase of runPhases ;trackBy: trackId">
+                <td><a [routerLink]="['/run-phase-marine-suffix', runPhase.id, 'view' ]">{{runPhase.id}}</a></td>
+                <td>{{runPhase.description}}</td>
+                <td>{{runPhase.finalizeCost}}</td>
+                <td>{{runPhase.stepNumber}}</td>
+                <td>{{runPhase.done}}</td>
+                <td>{{runPhase.doneUserLogin}}</td>
+                <td>{{runPhase.doneDate | date:'medium'}}</td>
+                <td>{{runPhase.createUserLogin}}</td>
+                <td>{{runPhase.createDate | date:'medium'}}</td>
+                <td>{{runPhase.modifyUserLogin}}</td>
+                <td>{{runPhase.modifyDate | date:'medium'}}</td>
+                <td>{{runPhase.archived}}</td>
+                <td>{{runPhase.archivedUserLogin}}</td>
+                <td>{{runPhase.archivedDate | date:'medium'}}</td>
+                <td>{{runPhase.status}}</td>
+                <td>
+                    <div *ngIf="runPhase.finalNiazsanjiReportId">
+                        <a [routerLink]="['../final-niazsanji-report-marine-suffix', runPhase.finalNiazsanjiReportId , 'view' ]" >{{runPhase.finalNiazsanjiReportDescription}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/run-phase-marine-suffix', runPhase.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/run-phase-marine-suffix', runPhase.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'run-phase-marine-suffix/'+ runPhase.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="runPhases && runPhases.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

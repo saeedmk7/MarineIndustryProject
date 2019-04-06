@@ -1,0 +1,48 @@
+
+{
+    "marineindustryprojApp": {
+        "requestOrganizationNiazsanji" : {
+            "home": {
+                "title": "Request Organization Niazsanjis",
+                "createLabel": "Create a new Request Organization Niazsanji",
+                "createOrEditLabel": "Create or edit a Request Organization Niazsanji"
+            },
+            "created": "A new Request Organization Niazsanji is created with identifier {{ param }}",
+            "updated": "A Request Organization Niazsanji is updated with identifier {{ param }}",
+            "deleted": "A Request Organization Niazsanji is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Request Organization Niazsanji {{ id }}?"
+            },
+            "detail": {
+                "title": "Request Organization Niazsanji"
+            },
+            "code": "Code",
+            "recommendedByOrgchart": "Recommended By Orgchart",
+            "neededSoftwares": "Needed Softwares",
+            "neededHardware": "Needed Hardware",
+            "studentsType": "Students Type",
+            "teacherNotFound": "Teacher Not Found",
+            "teacherName": "Teacher Name",
+            "teacherMobile": "Teacher Mobile",
+            "requestStatus": "Request Status",
+            "changeStatusUserLogin": "Change Status User Login",
+            "trainingGoals": "Training Goals",
+            "description": "Description",
+            "priceCost": "Price Cost",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "finalOrganizationNiazsanji": "Final Organization Niazsanji",
+            "person": "Person",
+            "document": "Document",
+            "teacher": "Teacher",
+            "educationalModule": "Educational Module",
+            "teachApproach": "Teach Approach"
+        }
+    }
+}

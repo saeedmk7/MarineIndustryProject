@@ -1,0 +1,12 @@
+{
+    "marineindustryprojApp": {
+        "RequestStatus" : {
+            "null": "",
+            "NEW": "جدید",
+            "READ": "در حال بررسی",
+            "IGNORE": "رد شده",
+            "ACCEPT": "تایید شده",
+            "RETURNED": "برگشت خورده"
+        }
+    }
+}

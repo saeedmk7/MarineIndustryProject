@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fieldOfStudy" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.fieldOfStudy.detail.title">Field Of Study</span> {{fieldOfStudy.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.fieldOfStudy.title">Title</span></dt>
+                <dd>
+                    <span>{{fieldOfStudy.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.fieldOfStudy.code">Code</span></dt>
+                <dd>
+                    <span>{{fieldOfStudy.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.fieldOfStudy.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{fieldOfStudy.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.fieldOfStudy.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{fieldOfStudy.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.fieldOfStudy.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{fieldOfStudy.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.fieldOfStudy.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{fieldOfStudy.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/field-of-study-marine-suffix', fieldOfStudy.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

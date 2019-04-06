@@ -1,0 +1,89 @@
+/* ========== Sidebar Menu ========== */
+.sidebarMenu {
+    height: calc(100vh - 50px);
+    z-index: 999;
+    /*background: linear-gradient(to top right, rgba(247, 27, 57, 0.81) , rgba(255, 106, 0, 0.8)),  url("../../../content/images/navbar/sidebar-1.jpg") top center;*/
+    background: linear-gradient(to top right, rgba(0, 0, 0, 0.85) , rgba(0, 0, 0, 0.6)),  url("../../../content/images/navbar/sidebar-1.jpg") top center;
+}
+.sidebarMenu .companyLogo {
+    width: 70%;
+    margin: 1.5rem 15%;
+}
+.sidebarMenu > ul {
+    margin-left: 0;
+    padding-right: 0;
+}
+.sidebarMenu .nav-item > a {
+    font: normal normal 14px IranYekan;
+    color: rgba(255, 255, 255, 0.75);
+}
+.sidebarMenu .nav-item ul li,
+.sidebarMenu .nav-item ul li > a {
+    color: rgba(255, 255, 255, 0.75);
+}
+.sidebarMenu > ul > li.active > a {
+    font-family: IranYekanBold;
+    background: rgba(255, 255, 255, .2);
+    color: rgba(255, 255, 255, 1);
+    border-right: 3px solid #fff;
+}
+.sidebarMenu > ul > li.active > ul {
+    overflow: hidden;
+    background: rgba(255, 255, 255, .15);
+}
+.sidebarMenu > ul > li > ul > li {
+    list-style: none;
+    margin-right: -1.5rem;
+}
+.sidebarMenu > ul > li > ul > li a {
+    width: 100%;
+    float: right;
+    overflow: hidden;
+    padding: 5px 1rem 5px 1rem;
+    border-right: 2px solid rgba(255, 255, 255, .25);
+    font: normal normal 13px IranSans;
+}
+.sidebarMenu > ul > li > ul > li a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+.sidebarMenu > ul > li > ul > li.active {
+}
+.sidebarMenu > ul > li > ul > li.active > a {
+    font-family: IranSansMed;
+    color: rgba(255, 255, 255, 1);
+    border-right: 2px solid rgba(255, 255, 255, .75);
+}
+
+.menuArrow {
+    float: left;
+    margin-top: 6px;
+}
+a.logout {
+    background-color: #dc3545;
+    display: block;
+    padding: 5% 1% 5%;
+    margin: 0;
+    font-size: 16px;
+    text-decoration: none;
+    color: #fff;
+}
+.date-logout {
+    float: left;
+    margin: 1% 0;
+    font-size: 15px;
+    display: inline-block;
+    padding: 5px 10px 2px;
+    background: red;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2) inset;
+}
+
+.Imams {
+    text-align: center;
+}
+.Imams img {
+    border-radius: 10%;
+    margin: 10px auto 0;
+    display: inline-block;
+}

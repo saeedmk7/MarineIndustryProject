@@ -1,0 +1,21 @@
+{
+    "marineindustryprojApp": {
+        "authority" : {
+            "home": {
+                "title": "نقش ها",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید"
+            },
+            "created": "نقش با شناسه {{ param }} ایجاد شد.",
+            "updated": "نقش با شناسه {{ param }} ویرایش شد.",
+            "deleted": "نقش با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف نقش با شناسه {{ name }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات نقش"
+            },
+            "name": "نقش"
+        }
+    }
+}

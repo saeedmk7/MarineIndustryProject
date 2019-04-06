@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "workIndustry" : {
+            "home": {
+                "title": "صنایع محل خدمت",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش صنعت محل خدمت"
+            },
+            "created": "صنعت محل خدمت با شناسه {{ param }} ایجاد شد.",
+            "updated": "صنعت محل خدمت با شناسه {{ param }} ویرایش شد.",
+            "deleted": "صنعت محل خدمت با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف صنعت محل خدمت با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات صنعت محل خدمت"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "person": "Person",
+            "workUnit": "Work Unit"
+        }
+    }
+}

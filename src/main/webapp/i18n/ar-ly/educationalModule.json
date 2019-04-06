@@ -1,0 +1,65 @@
+
+{
+    "marineindustryprojApp": {
+        "educationalModule" : {
+            "home": {
+                "title": "Educational Modules",
+                "createLabel": "Create a new Educational Module",
+                "createOrEditLabel": "Create or edit a Educational Module"
+            },
+            "created": "A new Educational Module is created with identifier {{ param }}",
+            "updated": "A Educational Module is updated with identifier {{ param }}",
+            "deleted": "A Educational Module is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Educational Module {{ id }}?"
+            },
+            "detail": {
+                "title": "Educational Module"
+            },
+            "code": "Code",
+            "title": "Title",
+            "learningTimeTheorical": "Learning Time Theorical",
+            "learningTimePractical": "Learning Time Practical",
+            "version": "Version",
+            "innerCode": "Inner Code",
+            "centralizedCode": "Centralized Code",
+            "moreDescription": "More Description",
+            "recommendedBy": "Recommended By",
+            "educationalModuleHeadlines": "Educational Module Headlines",
+            "prerequisite": "Prerequisite",
+            "drafters": "Drafters",
+            "educationalModuleLevel": "Educational Module Level",
+            "educationalModuleGroup": "Educational Module Group",
+            "educationalModuleHour": "Educational Module Hour",
+            "timePassed": "Time Passed",
+            "credit": "Credit",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "educationalModuleJob": "Educational Module Job",
+            "requestOrganizationNiazsanji": "Request Organization Niazsanji",
+            "finalOrganizationNiazsanji": "Final Organization Niazsanji",
+            "finalNiazsanjiReport": "Final Niazsanji Report",
+            "niazsanjiFardi": "Niazsanji Fardi",
+            "approvedRequestNiazsanjiFardi": "Approved Request Niazsanji Fardi",
+            "allRequestNiazsanjiFardi": "All Request Niazsanji Fardi",
+            "scientificWorkGroup": "Scientific Work Group",
+            "document": "Document",
+            "educationalCenter": "Educational Center",
+            "goal": "Goal",
+            "resource": "Resource",
+            "teacher": "Teacher",
+            "requestEducationalModule": "Request Educational Module",
+            "securityLevel": "Security Level",
+            "skillableLevelOfSkill": "Skillable Level Of Skill",
+            "evaluationMethod": "Evaluation Method",
+            "organization": "Organization",
+            "niazsanjiGroup": "Niazsanji Group"
+        }
+    }
+}

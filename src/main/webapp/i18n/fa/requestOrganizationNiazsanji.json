@@ -1,0 +1,58 @@
+
+{
+    "marineindustryprojApp": {
+        "requestOrganizationNiazsanji" : {
+            "home": {
+                "title": "تعریف دوره های متمرکز",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش دوره متمرکز"
+            },
+            "created": "دوره متمرکز با شناسه {{ param }} ایجاد شد.",
+            "updated": "دوره متمرکز با شناسه {{ param }} ویرایش شد.",
+            "deleted": "دوره متمرکز با شناسه {{ param }} حذف شد.",
+            "teacherNotFoundError":"مدرس مورد نظر یافت نشده لطفا مدرس را با توجه به اطلاعات وارد شده ایجاد و ثبت نمائید سپس اقدام به نهایی کردن درخواست نمائید.",
+            "completed": "دوره متمرکز مورد نظر با موفقیت نهایی شد.",
+            "rejected": "دوره متمرکز مورد نظر با موفقیت رد شد.",
+            "delete": {
+                "question": "آیا از حذف دوره متمرکز با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات دوره متمرکز"
+            },
+            "code": "کد",
+            "recommendedByOrgchart": "پیشنهاد دهنده",
+            "neededSoftwares": "تجهیزات آموزشی و کمک آموزشی نرم افزاری",
+            "neededHardware": "تجهیزات آموزشی و کمک آموزشی سخت افزاری",
+            "studentsType": "جامعه مخاطبین",
+            "teacherNotFound": "مدرس در لیست مدرسین یافت نشد.",
+            "teacherName": "نام مدرس",
+            "teacherMobile": "شماره تلفن مدرس",
+            "requestStatus": "وضعیت درخواست",
+            "changeStatusUserLogin": "فرد تغییر دهنده وضعیت درخواست",
+            "trainingGoals": "اهداف آموزش",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر درخواست کننده",
+            "createDate": "تاریخ درخواست",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "finalOrganizationNiazsanji": "Final Organization Niazsanji",
+            "person": "افراد",
+            "job": "شغل",
+            "document": "مدارک",
+            "teacher": "Teacher",
+            "educationalModule": "پودمان آموزشی",
+            "educationalModuleId": "پودمان آموزشی",
+            "yearId": "سال",
+            "teachApproach": "روش آموزش",
+            "priceCost": "هزینه(ریال)",
+            "selectionType": "انتخاب افراد به صورت گروهی؟",
+            "organizationChartId":"پیشنهاد دهنده",
+            "answer": "جواب"
+
+        }
+    }
+}

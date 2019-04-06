@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="toolsAndFacility" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.toolsAndFacility.detail.title">Tools And Facility</span> {{toolsAndFacility.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.toolsAndFacility.title">Title</span></dt>
+                <dd>
+                    <span>{{toolsAndFacility.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.toolsAndFacility.code">Code</span></dt>
+                <dd>
+                    <span>{{toolsAndFacility.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.toolsAndFacility.description">Description</span></dt>
+                <dd>
+                    <span>{{toolsAndFacility.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.toolsAndFacility.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{toolsAndFacility.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.toolsAndFacility.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{toolsAndFacility.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.toolsAndFacility.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{toolsAndFacility.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.toolsAndFacility.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{toolsAndFacility.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/tools-and-facility-marine-suffix', toolsAndFacility.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

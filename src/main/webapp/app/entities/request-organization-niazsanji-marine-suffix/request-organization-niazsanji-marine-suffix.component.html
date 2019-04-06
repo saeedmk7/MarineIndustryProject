@@ -1,0 +1,198 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.home.title">Request Organization Niazsanjis</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-request-organization-niazsanji-marine-suffix" [routerLink]="['/request-organization-niazsanji-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.home.createLabel">
+            Create new Request Organization Niazsanji
+            </span>
+        </button>
+        <button  class="btn btn-info float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <div class="row">
+        <search-panel class="col-md-12" [searchPanelModel]="searchbarModel"></search-panel>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="requestOrganizationNiazsanjis">
+        <table class="table table-striped  table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th>ردیف</th>
+            <!--<th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="recommendedByOrgchart"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.recommendedByOrgchart">Recommended By Orgchart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="studentsType"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.studentsType">Students Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th>افراد انتخابی</th>
+            <!--<th jhiSortBy="teacherNotFound"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherNotFound">Teacher Not Found</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="teacherName"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherName">Teacher Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <!--<th jhiSortBy="requestStatus"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.requestStatus">Request Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.status">Status</span></th>
+            <th width="300"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let requestOrganizationNiazsanji of requestOrganizationNiazsanjis ;let i = index" [ngClass]="{'new': requestOrganizationNiazsanji.requestStatus == 'NEW','accept': requestOrganizationNiazsanji.requestStatus === 'ACCEPT','ignore': requestOrganizationNiazsanji.requestStatus === 'IGNORE'}">
+                <!--<td><a [routerLink]="['/request-organization-niazsanji-marine-suffix', requestOrganizationNiazsanji.id, 'view' ]">{{requestOrganizationNiazsanji.id}}</a></td>-->
+                <td>{{i+1}}</td>
+                <!--<td>{{requestOrganizationNiazsanji.code}}</td>-->
+                <!--<td>{{requestOrganizationNiazsanji.recommendedByOrgchart}}</td>-->
+                <td>
+                    <div *ngIf="requestOrganizationNiazsanji.organizationChartId">
+                        <a [routerLink]="['../organization-chart-marine-suffix', requestOrganizationNiazsanji.organizationChartId , 'view' ]" >{{requestOrganizationNiazsanji.organizationChartTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="requestOrganizationNiazsanji.educationalModuleId">
+                        <a [routerLink]="['../educational-module-marine-suffix', requestOrganizationNiazsanji.educationalModuleId , 'view' ]" >{{requestOrganizationNiazsanji.educationalModuleTitle}}</a>
+                    </div>
+                </td>
+                <td>{{requestOrganizationNiazsanji.studentsType}}</td>
+                <td>
+                    <div *ngFor="let person of requestOrganizationNiazsanji.people">
+                        <span class="badge badge-info">{{ person.name }} {{person.family}}</span>
+                    </div>
+                </td>
+                <!--<td>{{requestOrganizationNiazsanji.teacherNotFound}}</td>-->
+                <!--<td>{{requestOrganizationNiazsanji.teacherNotFound ? requestOrganizationNiazsanji.teacherName : requestOrganizationNiazsanji.teacherFamily}}</td>-->
+                <!--<td>
+                    <div *ngIf="requestOrganizationNiazsanji.teacherId">
+                        <a [routerLink]="['../teacher-marine-suffix', requestOrganizationNiazsanji.teacherId , 'view' ]" >{{requestOrganizationNiazsanji.teacherFamily}}</a>
+                    </div>
+                    <div *ngIf="!requestOrganizationNiazsanji.teacherId">
+                        {{requestOrganizationNiazsanji.teacherName}} - {{requestOrganizationNiazsanji.teacherMobile}}
+                    </div>
+                </td>-->
+                <!--<td>{{requestOrganizationNiazsanji.teacherMobile}}</td>-->
+                <!--<td jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + requestOrganizationNiazsanji.requestStatus}}">{{requestOrganizationNiazsanji.requestStatus}}</td>-->
+                <!--<td>{{requestOrganizationNiazsanji.changeStatusUserLogin}}</td>
+                <td>{{requestOrganizationNiazsanji.trainingGoals}}</td>
+                <td>{{requestOrganizationNiazsanji.description}}</td>-->
+                <td>{{requestOrganizationNiazsanji.priceCost | number}}</td>
+                <!--<td>{{requestOrganizationNiazsanji.createUserLogin}}</td>-->
+                <td>{{requestOrganizationNiazsanji.createDate}}</td>
+                <td>
+                    {{requestOrganizationNiazsanji.statusMeaning}}
+                </td>
+                <!--<td>{{requestOrganizationNiazsanji.modifyUserLogin}}</td>
+                <td>{{requestOrganizationNiazsanji.modifyDate | date:'medium'}}</td>
+                <td>{{requestOrganizationNiazsanji.archived}}</td>
+                <td>{{requestOrganizationNiazsanji.archivedUserLogin}}</td>
+                <td>{{requestOrganizationNiazsanji.archivedDate | date:'medium'}}</td>
+                <td>{{requestOrganizationNiazsanji.status}}</td>-->
+
+                <!--<td>
+                    <div *ngIf="requestOrganizationNiazsanji.teachApproachId">
+                        <a [routerLink]="['../teach-approach-marine-suffix', requestOrganizationNiazsanji.teachApproachId , 'view' ]" >{{requestOrganizationNiazsanji.teachApproachTitle}}</a>
+                    </div>
+                </td>-->
+                <td class="text-right">
+                    <!--<button type="submit" title="مدارک"
+                            [routerLink]="['../document-marine-suffix', 'requestOrganizationNiazsanji',requestOrganizationNiazsanji.id]"
+                            class="btn btn-light btn-sm">
+                        <span class="fa fa-file"></span>
+                    </button>-->
+                    <button type="submit" title="جزئیات"
+                            [routerLink]="['/request-organization-niazsanji-marine-suffix', requestOrganizationNiazsanji.id, 'view' ]"
+                            class="btn btn-info btn-sm">
+                        <fa-icon [icon]="'eye'"></fa-icon>
+                        <span class="d-none d-md-inline" alt="مشاهده" jhiTranslate="entity.action.view">View</span>
+                    </button>
+                    <ng-container *ngIf="!(requestOrganizationNiazsanji.requestStatus == 'ACCEPT'  || requestOrganizationNiazsanji.requestStatus == 'IGNORE')">
+                        <ng-container *ngIf="requestOrganizationNiazsanji.status == currentPerson.organizationChartId">
+                            <button type="submit" title="ویرایش"
+                                    [routerLink]="['/request-organization-niazsanji-marine-suffix', requestOrganizationNiazsanji.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                            <button type="submit" title="ثبت نظر"
+                                    [routerLink]="['/', { outlets: { popup: 'request-organization-niazsanji-marine-suffix/'+ requestOrganizationNiazsanji.id + '/' + 'COMMENT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'comments'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.comment">comment</span>-->
+                            </button>
+                            <button type="submit" title="تایید کردن"
+                                    [routerLink]="['/', { outlets: { popup: 'request-organization-niazsanji-marine-suffix/'+ requestOrganizationNiazsanji.id + '/' + 'ACCEPT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-success btn-sm">
+                                <fa-icon [icon]="'check-double'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.accept">comment</span>-->
+                            </button>
+                            <button type="submit" title="رد کردن"
+                                    [routerLink]="['/', { outlets: { popup: 'request-organization-niazsanji-marine-suffix/'+ requestOrganizationNiazsanji.id + '/' + 'REJECT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'ban'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
+                            </button>
+                        </ng-container>
+                    </ng-container>
+                    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                            [routerLink]="['/', { outlets: { popup: 'request-organization-niazsanji-marine-suffix/'+ requestOrganizationNiazsanji.id + '/delete'} }]"
+                            replaceUrl="true"
+                            queryParamsHandling="merge"
+                            class="btn btn-danger btn-sm">
+                        <fa-icon [icon]="'times'"></fa-icon>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                    </button>
+                    <!--<div class="btn-group flex-btn-group-container">
+
+
+
+
+                        <button *ngIf="requestOrganizationNiazsanji.status == 0 && isAdmin" type="submit" (click)="complete(requestOrganizationNiazsanji)"
+                                class="btn btn-success btn-sm">
+                            <span class="fa fa-check" color="f00c"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.complete">complete</span>
+                        </button>
+                        <button *ngIf="requestOrganizationNiazsanji.status == 0 && isAdmin" type="submit" (click)="reject(requestOrganizationNiazsanji)"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-ban" color="f00c"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.reject">reject</span>
+                        </button>
+                    </div>-->
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="10">
+
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+    <div *ngIf="requestOrganizationNiazsanjis && requestOrganizationNiazsanjis.length">
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

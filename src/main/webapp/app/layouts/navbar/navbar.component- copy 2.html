@@ -1,0 +1,316 @@
+
+<nav *ngIf="isAuthenticated()">
+<div style="float: left;display: block;text-align: left;">
+    <img src="../../../content/images/header-bg.png" height="100" width="411"/>
+</div>
+    <div class="col-xs-2 bgWhite lightShadow sidebarMenu">
+        <ul class="nav flex-column accordion" id="accordionExample">
+            <li class="nav-item">
+                <a class="nav-link" href="#0" role="button">
+                    <img src="../../../content/images/home/LogoRajaee.png" height="222" width="650"/>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#0" role="button">
+                    <i class="fas fa-home"></i>
+                    <span class="pr-2">صفحه نخست</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="false" aria-controls="collapseOne">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="pr-2">امور قراردادها</span>
+                    <i class="fas fa-angle-down menuArrow"></i>
+                </a>
+                <ul id="collapseOne" class="collapse show pt-2 pb-2" data-parent="#accordionExample">
+                    <li class="active"><a href="#0">جزئیات قرارداد</a></li>
+                    <li><a href="#0">الحاقیه&zwnj;ها</a></li>
+                    <li><a href="#0">تائیده قیمت&zwnj;ها</a></li>
+                    <li><a href="#0">ضمانت نامه&zwnj;ها</a></li>
+                    <li><a href="#0">صورتجلسات تحویل</a></li>
+                    <li><a href="#0">صورتجلسات احجام</a></li>
+                    <li><a href="#0">دستورکارها</a></li>
+                    <li><a href="#0">صورت وضعیت&zwnj;ها</a></li>
+                    <li><a href="#0">نقشه&zwnj;های چون ساخت</a></li>
+                    <li><a href="#0">کسر خدمات</a></li>
+                    <li><a href="#0">اطلاعات پیمانکار</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#collapseTow" role="button" aria-expanded="false" aria-controls="collapseTow">
+                    <i class="fas fa-edit"></i>
+                    <span class="pr-2">واحد فنی</span>
+                    <i class="fas fa-angle-left menuArrow"></i>
+                </a>
+                <ul id="collapseTow" class="collapse" data-parent="#accordionExample">
+                    <li><a href="#0">گزارشات کلی</a></li>
+                    <li><a href="#0">دستور کارها</a></li>
+                    <li><a href="#0">صورتمجالس احجام</a></li>
+                    <li><a href="#0">نقشه&zwnj;ها</a></li>
+                    <li><a href="#0">صورتمجالس هماهنگی</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#collapseThree" role="button" aria-expanded="false" aria-controls="collapseThree">
+                    <i class="fas fa-id-card-alt"></i>
+                    <span class="pr-2">واحد پرسنلی</span>
+                    <i class="fas fa-angle-left menuArrow"></i>
+                </a>
+                <ul id="collapseThree" class="collapse" data-parent="#accordionExample">
+                    <li><a href="#0">ویرایش اطلاعات کاربری</a></li>
+                    <li><a href="#0">دسترسی کاربران</a></li>
+                    <li><a href="#0">دسترسی مدیریت</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </div><!-- Main Menu (Right) -->
+    <div id="MainMenu" style="    display: block;
+    padding-top: 3%;
+    text-align: center;
+    padding-right: 5%;" >
+
+    <ul id="css3menu" class="topmenu">
+
+        <li class="topmenu" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            <a class="excepted-menu" href="#/request-organization-niazsanji-marine-suffix">
+            <span class="bell-contain" style="padding: 6px">
+                <fa-icon [icon]="'bell'"></fa-icon>
+                <span *ngIf="counter != undefined" class="badge badge-success">{{counter}}</span>
+            </span>
+            </a>
+        </li>
+
+        <li class="topmenu">
+            <a href="#/" target="main" style="padding: 6px">
+                <img src="../../../content/images/navbar/Home.png">
+            </a>
+        </li>
+        <li class="toproot" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            <a>&nbsp;&nbsp;&nbsp;سازمان&nbsp;&nbsp;&nbsp;</a>
+            <div class="submenu" style="width: 300px;">
+                <div class="column" style="width: 49%">
+                    <ul>
+                        <li><a href="#/person-marine-suffix" target="main"><img src="../../../content/images/navbar/Personel.png" style="margin:5px;margin-right: 0">اطلاعات پرسنل</a></li>
+                        <li><a href="#/job-marine-suffix" target="main"><img src="../../../content/images/navbar/Job.png" style="margin:5px;margin-right: 0">مشاغل</a></li>
+                        <!--<li><a href="#" target="main">رابطها و سرپرستان</a></li>-->
+                        <li><a href="#/organization-chart-marine-suffix" target="main">چارت سازمانی</a></li>
+                    </ul>
+                </div>
+                <!--<div class="column" style="width: 33%">
+                    <ul>
+                        &lt;!&ndash;<li><a href="#" target="main">سطوح سازمانی</a></li>&ndash;&gt;
+                        <li><a href="#/radeh-marine-suffix" target="main">رده های سازمانی</a></li>
+                        <li><a href="#/raste-marine-suffix" target="main">رسته های سازمانی</a></li>
+                        &lt;!&ndash;<li><a href="#" target="main">رده
+                            و
+                            زیررده</a></li>&ndash;&gt;
+                        <li><a href="#/qualification-marine-suffix" target="main">مقاطع تحصیلی</a></li>
+                        <li><a href="#/field-of-study-marine-suffix" target="main">رشته های تحصیلی</a></li>
+                    </ul>
+                </div>-->
+                <div class="column" style="width: 49%">
+                    <ul>
+
+                      <!--  <li><a href="#/work-industry-marine-suffix" target="main">صنایع سازمان</a></li>
+                        <li><a href="#/work-group-marine-suffix" target="main">گروه های سازمان</a></li>-->
+                        <li><a href="#/scientific-work-group-marine-suffix" target="main">گروه های علمی شغلی</a></li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="toproot" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            <a>اطلاعات پایه </a>
+            <div class="submenu" style="width: 330px;">
+                <div class="column" style="width: 50%">
+                    <ul>
+                        <li><a href="#/educational-module-marine-suffix" target="main"><img src="../../../content/images/navbar/Course.png" style="margin:5px;margin-right: 0">
+                            دوره های آموزشی
+                        </a></li>
+                        <li><a href="#/teacher-marine-suffix" target="main"><img src="../../../content/images/navbar/Teacher.png" style="margin:2px 5px 2px 5px;margin-right: 0">
+                            اطلاعات مدرسان
+                        </a></li>
+                    </ul>
+                </div>
+                <div class="column" style="width: 50%">
+                    <ul>
+                        <li><a href="#/main-task-marine-suffix" target="main">
+                            وظایف اصلی
+                        </a></li>
+                        <li><a href="#/sub-task-marine-suffix" target="main">
+                            وظایف فرعی
+                        </a></li>
+                        <li><a href="#/educational-center-marine-suffix" target="main">
+                            مراکز آموزشی
+                        </a></li>
+                        <li><a href="#/resource-marine-suffix" target="main">
+                            منابع آموزشی
+                        </a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="toproot" *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_USER']">
+            <a>&nbsp;&nbsp;&nbsp;نیاز سنجی&nbsp;&nbsp;&nbsp;</a>
+            <div class="submenu" style="width: 350px;">
+                <div class="column" style="width: 60%">
+                    <ul>
+                        <li *jhiHasAnyAuthority="'ROLE_ADMIN'"><a href="#/niazsanji-group-marine-suffix" target="main"><img src="../../../content/images/navbar/light-bulb.png" style="margin:5px;margin-right: 0">
+                            نیازسنجی گروهی
+                        </a></li>
+
+                        <li *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_USER']">
+                            <a href="#/request-organization-niazsanji-marine-suffix" target="_parent"><img src="../../../content/images/navbar/request-niazsanji.png" style="margin:5px;margin-right: 0">درخواست نیازسنجی سازمانی</a>
+                        </a></li>
+                        <li *jhiHasAnyAuthority="'ROLE_ADMIN'"><a href="#/final-organization-niazsanji-marine-suffix" target="main">
+                            لیست نیازسنجی های سازمانی
+                        </a></li>
+                    </ul>
+                </div>
+                -<div class="column" style="width: 39%" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    <ul>
+                        <li *jhiHasAnyAuthority="['ROLE_ADMIN']"><a href="#/final-niazsanji-report-marine-suffix" target="main">
+                            تکمیل فرآیند نیازسنجی
+                        </a></li>
+                      <!--  &lt;!&ndash;<li><a href="#" target="main">
+                            تجدید نظر نمره
+                        </a></li>
+                        <li><a href="#" target="main">
+                            یـادآوری غیـبــت
+                        </a></li>
+                        <li><a href="#" target="main">
+                            گواهینامه نوع دوم
+                        </a></li>&ndash;&gt;-->
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <!--<li *jhiHasAnyAuthority="'ROLE_ADMIN'" class="toproot">
+            <a>&nbsp;&nbsp;&nbsp;فرایند آموزش &nbsp;&nbsp;&nbsp;</a>
+            <div class="submenu" style="width: 300px;">
+                <div class="column" style="width: 55%">
+                    <ul>
+
+                        <li><a href="#" target="main"><img src="../../../content/images/navbar/Class.png" style="margin:5px;margin-right: 0">
+                            کلاسهای آموزشی
+                        </a></li>
+                        <li><a href="#" target="_parent">
+                            ارزشیابی اثربخشی
+                        </a></li>
+                        <li><a href="#" target="main">
+                            فرایند آموزشی فردی
+                        </a></li>
+                    </ul>
+                </div>
+                <div class="column" style="width: 45%">
+                    <ul>
+                        <li><a href="#" target="main">
+                            صدور گواهینامه
+                        </a></li>
+                        <li><a href="#" target="main">
+                            تجدید نظر نمره
+                        </a></li>
+                        <li><a href="#" target="main">
+                            یـادآوری غیـبــت
+                        </a></li>
+                        <li><a href="#" target="main">
+                            گواهینامه نوع دوم
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </li >-->
+        <!--<li id="liPortal" class="toproot">
+            <a>&nbsp;&nbsp;پرتال &nbsp;&nbsp;</a>
+            <div class="submenu" style="width: 155px">
+                <div class="column" style="width: 100%">
+                    <ul>
+                        <li><a href="#/user-management" target="main">
+                            کاربران پرتال
+                        </a></li>
+                        <li><a href="#" target="main">
+                            کلاسهای پرتال
+                        </a></li>
+                        <li><a href="#" target="main">
+                            پرداختهای پرتال
+                        </a></li>
+                        <li><a href="#" target="main">
+                            اساتید متقاضی
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </li>-->
+        <!--<li class="toproot" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            <a>&nbsp;&nbsp;گزارشات &nbsp;&nbsp;</a>
+            <div class="submenu" style="width: 145px">
+                <div class="column" style="width: 100%">
+                    <ul>
+                        <li><a href="#" target="main"><img src="../../../content/images/navbar/Report.png" style="margin:5px;margin-right: 0">
+                            گزارشات و نمودارها
+                        </a></li>
+                        <li><a href="#" target="main"><img src="../../../content/images/navbar/Build.png" style="margin:5px;margin-right: 0">
+                            گزارشات اختصاصی
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </li>-->
+        <li class="toproot" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            <a>&nbsp;&nbsp;مدیریت &nbsp;&nbsp;</a>
+            <div class="submenu" style="width: 150px;margin-right: 0px;border-radius:11px 11px 11px 11px;-moz-border-radius:11px 11px 11px 11px;-webkit-border-radius:11px;">
+                <div class="column" style="width: 100%">
+                    <ul>
+                        <li><a href="#/admin/user-management" target="main"><img src="../../../content/images/navbar/Personel.png" style="margin:5px;margin-right: 0">
+                            مدیریت کاربران
+                        </a></li>
+                       <!-- <li><a href="#" target="main">
+                            سطوح دسترسی
+                        </a></li>
+                        <li><a href="#" target="main">
+                            رویدادنگاری </a></li>
+                        <li><a href="#" target="main">
+                            بودجه آموزشی </a></li>
+                        <li><a href="#" target="main">
+                            تنظیمات
+                        </a></li>-->
+                    </ul>
+                </div>
+                <!--<div class="column" style="width: 34%">
+                    <ul>
+                        <li><a href="#" target="main">
+                            کتابخانه </a></li>
+                        <li><a href="#" target="main">
+                            سوالات متداول </a></li>
+                        <li><a href="#" target="main">
+                            نظرسنجی
+                        </a></li><li><a href="#" target="main">
+                        معرفی پیوند </a></li>
+                    </ul>
+                </div>
+                <div class="column" style="width: 33%">
+                    <ul>
+                        <li><a href="#" target="main"><img src="../../../content/images/navbar/Message.png" style="margin:5px;margin-right: 0">
+                            پیامها</a></li>
+                        <li><a href="#" target="main">
+                            اخبار و اطلاعیه ها </a></li>
+                        <li><a href="#" target="main"> مدیریت داده ها </a></li>
+                    </ul>
+                </div>-->
+            </div>
+        </li>
+        <li class="topmenu">
+            <!--<a id="ucLogOut_lbtnSignOut" title="خروج" href="javascript:__doPostBack('ucLogOut$lbtnSignOut','')" style="padding: 4px">
+                <img src="../../../content/images/navbar/logout.png" style="border: 0">
+            </a>-->
+            <a (click)="logout()" style="padding: 4px">
+                <img src="../../../content/images/navbar/logout.png" style="border: 0">
+                <!--<i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>-->
+                <!--<span jhiTranslate="global.menu.account.logout">Sign out</span>-->
+            </a>
+        </li>
+    </ul>
+</div>
+</nav>
+<nav></nav>

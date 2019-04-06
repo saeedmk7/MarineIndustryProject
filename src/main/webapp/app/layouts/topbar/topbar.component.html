@@ -1,0 +1,141 @@
+<nav *ngIf="isAuthenticated()">
+    <div class="col-xs-12 bgWhite lightShadow topMenu">
+        <ul class="nav justify-content-end" style="padding-inline-start: 0px;">
+            <li class="nav-item" style="flex-grow: 1">
+                <!--<button (click)="changeTyping()" style="display: inline" class="btn btn-sm btn-info">تغییر حالت</button>-->
+                <div id="typingDiv" class="typingClass" [@enterAnimation] *ngIf="show">
+                    <!--<div id="typing"></div>-->
+                    {{currentSpeech}}
+                </div>
+
+            </li>
+            <li class="nav-item seperate-left seperate-right" title="درخواست های جدید نیازسنجی فردی">
+                <a class="nav-link excepted-menu" href="#/request-niazsanji-fardi-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'flag'"></fa-icon>
+                    <span *ngIf="niazSanjiFardiRequestCounter != undefined" class="badge badge-info">{{niazSanjiFardiRequestCounter}}</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item seperate-left seperate-right" title="سابقه آموزشی جدید">
+                <a class="nav-link excepted-menu" href="#/educational-history-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'id-card'"></fa-icon>
+                    <span *ngIf="educationalHistoryCounter != undefined" class="badge badge-info">{{educationalHistoryCounter}}</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item seperate-left seperate-right" *ngIf="isModirAmozesh" title="تعداد درخواست های نیازسنجی سازمانی">
+                <a class="nav-link excepted-menu" href="#/request-organization-niazsanji-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'bell'"></fa-icon>
+                    <span *ngIf="requestOrganizationNiazsanjiCounter != undefined" class="badge badge-warning ">{{requestOrganizationNiazsanjiCounter}}</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item seperate-left seperate-right" *ngIf="isAdmin" title="تعداد درخواست های کاربران از مدیریت سیستم">
+                <a class="nav-link excepted-menu" href="#/users-request-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'envelope'"></fa-icon>
+                    <span *ngIf="usersRequestCounter != undefined" class="badge badge-success ">{{usersRequestCounter}}</span>
+                    </span>
+                </a>
+            </li>
+            <ng-container *ngIf="isModirKolAmozesh || isKarshenasArshadAmozeshSazman" >
+                <li class="nav-item seperate-left seperate-right" title="تعداد درخواست های نیازسنجی فردی اجرا نشده">
+                    <a class="nav-link excepted-menu" href="#/niazsanji-fardi-marine-suffix">
+                        <span class="bell-contain" style="padding: 6px">
+                        <fa-icon [icon]="'flag'"></fa-icon>
+                        <span *ngIf="niazSanjiFardiCounter != undefined" class="badge badge-info">{{niazSanjiFardiCounter}}</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item seperate-left seperate-right" title="تعداد درخواست های نیازسنجی متمرکز اجرا نشده">
+                    <a class="nav-link excepted-menu" href="#/final-organization-niazsanji-marine-suffix">
+                        <span class="bell-contain" style="padding: 6px">
+                        <fa-icon [icon]="'bell'"></fa-icon>
+                        <span *ngIf="finalOrganizationNiazsanjiConter != undefined" class="badge badge-warning">{{finalOrganizationNiazsanjiConter}}</span>
+                        </span>
+                    </a>
+                </li>
+            </ng-container>
+            <!--<li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{currentUserFullName}}</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">پنل کاربری</a>
+                    <a class="dropdown-item" href="#">ویرایش اطلاعات</a>
+                    <a class="dropdown-item" href="#">درخواست دسترسی</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item red" href="#" (click)="logout();">
+                        <fa-icon [icon]="'sign-out-alt'"></fa-icon>
+                        <span>خروج از حساب</span>
+                    </a>
+                </div>
+            </li>-->
+            <span class="alert alert-danger text-center" *ngIf="badError">
+                {{badError}}
+            </span>
+            <li class="nav-item seperate-left seperate-right dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img [src]="imgUrl | safe" class="user-image" alt="User Image">
+                    <span class="hidden-xs" id="currenUserFullNameTopBar">{{currentUserFullName}}</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- User image -->
+                    <li class="user-header">
+                        <img [src]="imgUrl | safe" class="img-circle" alt="User Image">
+
+                        <p>
+                            {{currentUserFullName}}
+                            <!--<small>Member since Nov. 2012</small>-->
+                        </p>
+                        <p> {{jobTitle}}</p>
+                    </li>
+                    <!-- Menu Body -->
+                    <!-- <li class="user-body">
+                         <div class="row">
+                             <div class="col-xs-4 text-center">
+                                 <a href="#">Followers</a>
+                             </div>
+                             <div class="col-xs-4 text-center">
+                                 <a href="#">Sales</a>
+                             </div>
+                             <div class="col-xs-4 text-center">
+                                 <a href="#">Friends</a>
+                             </div>
+                         </div>
+                         &lt;!&ndash; /.row &ndash;&gt;
+                     </li>-->
+                    <!-- Menu Footer-->
+                    <li class="user-footer">
+                        <div class="pull-left">
+                            <a href="#/settings" class="btn btn-default btn-flat">پروفایل</a>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" (click)="logout()" class="btn btn-default btn-flat">
+                                <fa-icon [icon]="'sign-out-alt'"></fa-icon>
+                                <span>خروج از حساب</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item seperate-right">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+
+        </ul>
+        <!--<ul class="nav" style="float: right;display: inline-block">
+            <li>
+
+
+            &lt;!&ndash;<li *ngFor="let speech of speeches" class="typing">
+                {{speech}}
+            </li>&ndash;&gt;
+        </ul>-->
+    </div>
+</nav>
+<nav *ngIf="!isAuthenticated()" class="back-cover">
+</nav>

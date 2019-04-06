@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="runRunningStep">
+            <h2><span jhiTranslate="marineindustryprojApp.runRunningStep.detail.title">Run Running Step</span> {{runRunningStep.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.runRunningStep.description">Description</span></dt>
+                <dd>
+                    <span>{{runRunningStep.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runRunningStep.done">Done</span></dt>
+                <dd>
+                    <span>{{runRunningStep.done}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runRunningStep.doneUserLogin">Done User Login</span></dt>
+                <dd>
+                    <span>{{runRunningStep.doneUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runRunningStep.doneDate">Done Date</span></dt>
+                <dd>
+                    <span>{{runRunningStep.doneDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runRunningStep.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{runRunningStep.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runRunningStep.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{runRunningStep.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runRunningStep.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{runRunningStep.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runRunningStep.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{runRunningStep.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runRunningStep.runPhase">Run Phase</span></dt>
+                <dd>
+                    <div *ngIf="runRunningStep.runPhaseId">
+                        <a [routerLink]="['/run-phase-marine-suffix', runRunningStep.runPhaseId, 'view']">{{runRunningStep.runPhaseDescription}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runRunningStep.runningStep">Running Step</span></dt>
+                <dd>
+                    <div *ngIf="runRunningStep.runningStepId">
+                        <a [routerLink]="['/running-step-marine-suffix', runRunningStep.runningStepId, 'view']">{{runRunningStep.runningStepTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/run-running-step-marine-suffix', runRunningStep.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

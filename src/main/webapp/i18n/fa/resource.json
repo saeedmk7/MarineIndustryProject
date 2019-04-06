@@ -1,0 +1,30 @@
+
+{
+    "marineindustryprojApp": {
+        "resource" : {
+            "home": {
+                "title": "منابع آموزشی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش منبع آموزشی"
+            },
+            "created": "منبع آموزشی با شناسه {{ param }} ایجاد شد.",
+            "updated": "منبع آموزشی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "منبع آموزشی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف منبع آموزشی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات منبع آموزشی"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "document": "Document",
+            "educationalModule": "Educational Module"
+        }
+    }
+}

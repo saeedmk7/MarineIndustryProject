@@ -1,0 +1,144 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.educationalHistory.home.title">Educational Histories</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-educational-history-marine-suffix" [routerLink]="['/educational-history-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.educationalHistory.home.createLabel">
+            Create new Educational History
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <search-panel [searchPanelModel]="searchbarModel"></search-panel>
+    <br/>
+    <div class="table-responsive" *ngIf="educationalHistories">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th>ردیف</th>
+            <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.educationalHistory.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalModuleTitle">Educational Module Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="learningTimeTheorical"><span jhiTranslate="marineindustryprojApp.educationalHistory.learningTimeTheorical">Learning Time Theorical</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="learningTimePractical"><span jhiTranslate="marineindustryprojApp.educationalHistory.learningTimePractical">Learning Time Practical</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="totalTime"><span jhiTranslate="marineindustryprojApp.educationalHistory.totalTime">Total Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalCenter"><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalCenter">Educational Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dateOfStart"><span jhiTranslate="marineindustryprojApp.educationalHistory.dateOfStart">Date Of Start</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th  width="300"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let educationalHistory of educationalHistories ;let i = index" [ngClass]="{'new': educationalHistory.requestStatus == 'NEW','accept': educationalHistory.requestStatus === 'ACCEPT','ignore': educationalHistory.requestStatus === 'IGNORE'}">
+                <!--<td><a [routerLink]="['/educational-history-marine-suffix', educationalHistory.id, 'view' ]">{{educationalHistory.id}}</a></td>-->
+                <td>{{i+1}}</td>
+                <td>{{educationalHistory.personFullName}}</td>
+                <td>{{educationalHistory.educationalModuleTitle}}</td>
+                <td>{{educationalHistory.learningTimeTheorical}}</td>
+                <td>{{educationalHistory.learningTimePractical}}</td>
+                <td>{{educationalHistory.totalTime}}</td>
+                <td>{{educationalHistory.educationalCenter}}</td>
+                <td>{{educationalHistory.dateOfStart}}</td>
+                <td class="text-right">
+                    <a *ngIf="educationalHistory.fileDoc" title="دریافت گواهینامه" [href]="educationalHistory.fileDoc | safe" target="_blank"
+                       class="btn btn-default btn-sm enableLink">
+                        <fa-icon [icon]="'download'"></fa-icon>
+                    </a>
+                    <button type="submit" title="جزئیات"
+                            [routerLink]="['/educational-history-marine-suffix', educationalHistory.id, 'view' ]"
+                            class="btn btn-info btn-sm">
+                        <fa-icon [icon]="'eye'"></fa-icon>
+                        <span class="d-none d-md-inline" alt="مشاهده" jhiTranslate="entity.action.view">View</span>
+                    </button>
+                    <ng-container *ngIf="!(educationalHistory.requestStatus == 'ACCEPT'  || educationalHistory.requestStatus == 'IGNORE')">
+                        <ng-container *ngIf="educationalHistory.status == currentPerson.organizationChartId">
+                            <button type="submit" title="ویرایش"
+                                    [routerLink]="['/educational-history-marine-suffix', educationalHistory.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                            <button type="submit" title="ثبت نظر"
+                                    [routerLink]="['/', { outlets: { popup: 'educational-history-marine-suffix/'+ educationalHistory.id + '/' + 'COMMENT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'comments'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.comment">comment</span>-->
+                            </button>
+                            <button type="submit" title="تایید کردن"
+                                    [routerLink]="['/', { outlets: { popup: 'educational-history-marine-suffix/'+ educationalHistory.id + '/' + 'ACCEPT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-success btn-sm">
+                                <fa-icon [icon]="'check-double'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.accept">comment</span>-->
+                            </button>
+                            <button type="submit" title="رد کردن"
+                                    [routerLink]="['/', { outlets: { popup: 'educational-history-marine-suffix/'+ educationalHistory.id + '/' + 'REJECT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'ban'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
+                            </button>
+                        </ng-container>
+                    </ng-container>
+                    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                            [routerLink]="['/', { outlets: { popup: 'educational-history-marine-suffix/'+ educationalHistory.id + '/delete'} }]"
+                            replaceUrl="true"
+                            queryParamsHandling="merge"
+                            class="btn btn-danger btn-sm">
+                        <fa-icon [icon]="'times'"></fa-icon>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                    </button>
+
+                </td>
+            </tr>
+            <tr style="font-weight: bold; color: #18a39b">
+                <td colspan="3">
+                    مجموع
+                </td>
+                <td>
+                    {{sumTheorical}}
+                </td>
+                <td>
+                    {{sumPractical}}
+                </td>
+                <td>
+                    {{sumTotal}}
+                </td>
+                <td colspan="8"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="8">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="5">
+
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+    <div *ngIf="educationalHistories && educationalHistories.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

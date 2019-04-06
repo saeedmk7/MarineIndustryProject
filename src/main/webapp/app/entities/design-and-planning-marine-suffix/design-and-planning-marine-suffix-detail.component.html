@@ -1,0 +1,169 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="designAndPlanning" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.designAndPlanning.detail.title">Design And Planning</span> {{designAndPlanning.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.directCost">Direct Cost</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.directCost}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.directCostDescription">Direct Cost Description</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.directCostDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.undirectCost">Undirect Cost</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.undirectCost}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.undirectCostDescription">Undirect Cost Description</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.undirectCostDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.step">Step</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.step}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.finished">Finished</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.finished}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.finishedUserLogin">Finished User Login</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.finishedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.finishedDate">Finished Date</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.finishedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.description">Description</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.archived">Archived</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.status">Status</span></dt>
+                <dd>
+                    <span>{{designAndPlanning.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.person">Person</span></dt>
+                <dd>
+                    <span *ngFor="let person of designAndPlanning.people; let last = last">
+                        <a [routerLink]="['/person-marine-suffix', person?.id, 'view' ]">{{person.family}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of designAndPlanning.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.finalNiazsanjiReport">Final Niazsanji Report</span></dt>
+                <dd>
+                    <div *ngIf="designAndPlanning.finalNiazsanjiReportId">
+                        <a [routerLink]="['/final-niazsanji-report-marine-suffix', designAndPlanning.finalNiazsanjiReportId, 'view']">{{designAndPlanning.finalNiazsanjiReportDescription}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.mahiatCourse">Mahiat Course</span></dt>
+                <dd>
+                    <div *ngIf="designAndPlanning.mahiatCourseId">
+                        <a [routerLink]="['/mahiat-course-marine-suffix', designAndPlanning.mahiatCourseId, 'view']">{{designAndPlanning.mahiatCourseTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.courseType">Course Type</span></dt>
+                <dd>
+                    <div *ngIf="designAndPlanning.courseTypeId">
+                        <a [routerLink]="['/course-type-marine-suffix', designAndPlanning.courseTypeId, 'view']">{{designAndPlanning.courseTypeTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.teachType">Teach Type</span></dt>
+                <dd>
+                    <div *ngIf="designAndPlanning.teachTypeId">
+                        <a [routerLink]="['/teach-type-marine-suffix', designAndPlanning.teachTypeId, 'view']">{{designAndPlanning.teachTypeTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.courseLocation">Course Location</span></dt>
+                <dd>
+                    <div *ngIf="designAndPlanning.courseLocationId">
+                        <a [routerLink]="['/course-location-marine-suffix', designAndPlanning.courseLocationId, 'view']">{{designAndPlanning.courseLocationTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.conditionsOfParticipant">Conditions Of Participant</span></dt>
+                <dd>
+                    <div *ngIf="designAndPlanning.conditionsOfParticipantId">
+                        <a [routerLink]="['/conditions-of-participant-marine-suffix', designAndPlanning.conditionsOfParticipantId, 'view']">{{designAndPlanning.conditionsOfParticipantTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.effectivenessLevel">Effectiveness Level</span></dt>
+                <dd>
+                    <div *ngIf="designAndPlanning.effectivenessLevelId">
+                        <a [routerLink]="['/effectiveness-level-marine-suffix', designAndPlanning.effectivenessLevelId, 'view']">{{designAndPlanning.effectivenessLevelTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.toolsAndFacility">Tools And Facility</span></dt>
+                <dd>
+                    <div *ngIf="designAndPlanning.toolsAndFacilityId">
+                        <a [routerLink]="['/tools-and-facility-marine-suffix', designAndPlanning.toolsAndFacilityId, 'view']">{{designAndPlanning.toolsAndFacilityTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.teachingApproach">Teaching Approach</span></dt>
+                <dd>
+                    <div *ngIf="designAndPlanning.teachingApproachId">
+                        <a [routerLink]="['/teaching-approach-marine-suffix', designAndPlanning.teachingApproachId, 'view']">{{designAndPlanning.teachingApproachTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.teachTechnique">Teach Technique</span></dt>
+                <dd>
+                    <div *ngIf="designAndPlanning.teachTechniqueId">
+                        <a [routerLink]="['/teach-technique-marine-suffix', designAndPlanning.teachTechniqueId, 'view']">{{designAndPlanning.teachTechniqueTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.effectivenessIndex">Effectiveness Index</span></dt>
+                <dd>
+                    <div *ngIf="designAndPlanning.effectivenessIndexId">
+                        <a [routerLink]="['/effectiveness-index-marine-suffix', designAndPlanning.effectivenessIndexId, 'view']">{{designAndPlanning.effectivenessIndexTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/design-and-planning-marine-suffix', designAndPlanning.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+
+{
+    "marineindustryprojApp": {
+        "teacher" : {
+            "home": {
+                "title": "Teachers",
+                "createLabel": "Create a new Teacher",
+                "createOrEditLabel": "Create or edit a Teacher"
+            },
+            "created": "A new Teacher is created with identifier {{ param }}",
+            "updated": "A Teacher is updated with identifier {{ param }}",
+            "deleted": "A Teacher is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Teacher {{ id }}?"
+            },
+            "detail": {
+                "title": "Teacher"
+            },
+            "name": "Name",
+            "family": "Family",
+            "fatherName": "Father Name",
+            "scientificBasis": "Scientific Basis",
+            "inquiry": "Inquiry",
+            "schoolConfirmation": "School Confirmation",
+            "protectiveApproval": "Protective Approval",
+            "teachingSubject": "Teaching Subject",
+            "issueDate": "Issue Date",
+            "expirationDate": "Expiration Date",
+            "licenseNumber": "License Number",
+            "sessionNumber": "Session Number",
+            "phoneNumber": "Phone Number",
+            "licenseRenewalDate": "License Renewal Date",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "requestOrganizationNiazsanji": "Request Organization Niazsanji",
+            "finalOrganizationNiazsanji": "Final Organization Niazsanji",
+            "document": "Document",
+            "lastQualification": "Last Qualification",
+            "lastFieldOfStudy": "Last Field Of Study",
+            "serviceUnit": "Service Unit",
+            "academicRank": "Academic Rank",
+            "educationalModule": "Educational Module",
+            "requestEducationalModule": "Request Educational Module"
+        }
+    }
+}

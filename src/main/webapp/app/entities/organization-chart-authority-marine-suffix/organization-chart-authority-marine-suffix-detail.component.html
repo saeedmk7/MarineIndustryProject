@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="organizationChartAuthority" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.detail.title">Organization Chart Authority</span> {{organizationChartAuthority.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.authorityName">Authority Name</span></dt>
+                <dd>
+                    <span>{{organizationChartAuthority.authorityName}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.hasEditPermission">Has Edit Permission</span></dt>
+                <dd>
+                    <span>{{organizationChartAuthority.hasEditPermission}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{organizationChartAuthority.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{organizationChartAuthority.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{organizationChartAuthority.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{organizationChartAuthority.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.archived">Archived</span></dt>
+                <dd>
+                    <span>{{organizationChartAuthority.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{organizationChartAuthority.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{organizationChartAuthority.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.status">Status</span></dt>
+                <dd>
+                    <span>{{organizationChartAuthority.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.organizationChartAuthority.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="organizationChartAuthority.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', organizationChartAuthority.organizationChartId, 'view']">{{organizationChartAuthority.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/organization-chart-authority-marine-suffix', organizationChartAuthority.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

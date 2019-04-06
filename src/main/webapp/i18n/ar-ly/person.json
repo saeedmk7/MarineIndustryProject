@@ -1,0 +1,56 @@
+
+{
+    "marineindustryprojApp": {
+        "person" : {
+            "home": {
+                "title": "People",
+                "createLabel": "Create a new Person",
+                "createOrEditLabel": "Create or edit a Person"
+            },
+            "created": "A new Person is created with identifier {{ param }}",
+            "updated": "A Person is updated with identifier {{ param }}",
+            "deleted": "A Person is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Person {{ id }}?"
+            },
+            "detail": {
+                "title": "Person"
+            },
+            "name": "Name",
+            "family": "Family",
+            "fatherName": "Father Name",
+            "certificateNumber": "Certificate Number",
+            "nationalId": "National Id",
+            "birthDate": "Birth Date",
+            "personelCode": "Personel Code",
+            "employmentDate": "Employment Date",
+            "yearOfService": "Year Of Service",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "finalNiazsanjiReportPerson": "Final Niazsanji Report Person",
+            "pollScore": "Poll Score",
+            "document": "Document",
+            "scientificWorkGroup": "Scientific Work Group",
+            "lastQualification": "Last Qualification",
+            "lastFieldOfStudy": "Last Field Of Study",
+            "employmentType": "Employment Type",
+            "workGroup": "Work Group",
+            "workIndustry": "Work Industry",
+            "job": "Job",
+            "practicaljob": "Practicaljob",
+            "organizationChart": "Organization Chart",
+            "mainTask": "Main Task",
+            "requestOrganizationNiazsanji": "Request Organization Niazsanji",
+            "finalOrganizationNiazsanji": "Final Organization Niazsanji",
+            "designAndPlanning": "Design And Planning",
+            "runPhase": "Run Phase"
+        }
+    }
+}

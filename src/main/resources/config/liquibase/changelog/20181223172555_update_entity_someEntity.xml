@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the entity UsersRequest.
+    -->
+    <changeSet id="20181223172555" author="jhipster">
+        <addUniqueConstraint columnNames="national_id"
+                             constraintName="ux_person_national_id"
+                             schemaName="public"
+                             tableName="person"/>
+        <addUniqueConstraint columnNames="personel_code"
+                             constraintName="ux_person_personel_code"
+                             schemaName="public"
+                             tableName="person"/>
+
+
+        <modifyDataType columnName="code"
+                        newDataType="bigint"
+                        schemaName="public"
+                        tableName="teacher"/>
+        <addNotNullConstraint columnDataType="bigint"
+                              columnName="code"
+                              defaultNullValue="0"
+                              schemaName="public"
+                              tableName="teacher"/>
+        <addUniqueConstraint columnNames="code"
+                             constraintName="ux_teacher_code"
+                             schemaName="public"
+                             tableName="teacher"/>
+
+        <addUniqueConstraint columnNames="job_key"
+                             constraintName="ux_job_job_key"
+                             schemaName="public"
+                             tableName="job"/>
+        <addColumn schemaName="public"
+                   tableName="job">
+            <column name="first_3_job_code" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+
+        <addUniqueConstraint columnNames="code"
+                             constraintName="ux_educational_module_code"
+                             schemaName="public"
+                             tableName="educational_module"/>
+        <modifyDataType columnName="educational_module_headlines"
+                        newDataType="clob"
+                        schemaName="public"
+                        tableName="educational_module"/>
+
+
+        <dropNotNullConstraint columnDataType="varchar(50)"
+                               columnName="email"
+                               schemaName="public"
+                               tableName="educational_center"/>
+
+        <addColumn schemaName="public"
+                   tableName="request_organization_niazsanji">
+            <column name="conversation" type="clob">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="organization_chart_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+
+        <addForeignKeyConstraint baseColumnNames="organization_chart_id"
+                                 baseTableName="request_organization_niazsanji"
+                                 constraintName="fk_request_organization_niazsanji_organization_chart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+
+        <addColumn schemaName="public"
+                   tableName="final_organization_niazsanji">
+            <column name="organization_chart_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="organization_chart_id"
+                                 baseTableName="final_organization_niazsanji"
+                                 constraintName="fk_final_organization_niazsanji_organization_chart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+
+        <addColumn schemaName="public"
+                   tableName="final_niazsanji_report_person">
+            <column name="source_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

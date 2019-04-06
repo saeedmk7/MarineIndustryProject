@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-nav-bar-item-authority-marine-suffix-heading" jhiTranslate="marineindustryprojApp.navBarItemAuthority.home.createOrEditLabel">Create or edit a Nav Bar Item Authority</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <!--<div class="form-group" [hidden]="!navBarItemAuthority.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="navBarItemAuthority.id" readonly />
+                </div>-->
+                <input type="hidden" [(ngModel)]="navBarItemAuthority.navBarItemTitle" name="navBarItemTitle" id="field_navBarItemTitle" />
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.navBarItemAuthority.authorityName" for="field_authorityName">Authority Name</label>
+                    <input type="text" class="form-control disabled" disabled name="authorityName" id="field_authorityName"
+                        [(ngModel)]="navBarItemAuthority.authorityName" required/>
+                    <div [hidden]="!(editForm.controls.authorityName?.dirty && editForm.controls.authorityName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.authorityName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">منوها</div></div>
+
+
+                <input type="text" name="searchtxt" id="searchtxt" placeholder="جستجو" [ngModel]="searchtxt" (ngModelChange)="search($event)" /><!--<button (click)="search()">searchbtn</button>-->
+                <tree-root #tree [nodes]="nodes"  [options]="options"></tree-root>
+                <!--(select)="onSelect($event)" (deselect)="onDeselect($event)"-->
+                <!--<div formArrayName="navbaritems" *ngFor="let navbaritem of form.controls.navbaritems.controls; let i = index">
+                    <div *ngIf="!navbaritems[i].parentId" class="dropdown-divider pt-3 mt-4">
+                        <div class="divider-title">
+                            <input type="checkbox" [formControlName]="i">{{navbaritems[i].title}}<br>
+                            &lt;!&ndash;<input type="checkbox" [ngValue]="navBarItemOption.id" />&ndash;&gt;
+                        </div>
+                    </div>
+                    <div class="col-lg-3" *ngIf="navbaritems[i].parentId">
+                        <label>
+                            <input type="checkbox" [formControlName]="i">
+                            {{navbaritems[i].title}}
+                        </label>
+                    </div>
+                </div>-->
+
+
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.navBarItemAuthority.navBarItem" for="field_navBarItem">Nav Bar Item</label>
+                    <select class="form-control" id="field_navBarItem" name="navBarItem" [(ngModel)]="navBarItemAuthority.navBarItemId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="navBarItemOption.id" *ngFor="let navBarItemOption of navbaritems; trackBy: trackNavBarItemById">{{navBarItemOption.title}}</option>
+                    </select>
+                </div>-->
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"   (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" class="btn btn-primary" [disabled]="editForm.form.invalid || isSaving">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

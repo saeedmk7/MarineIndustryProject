@@ -1,0 +1,141 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="teacher" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.teacher.detail.title">Teacher</span> {{teacher.id}}</h2>
+
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.name">Name</span></dt>
+                <dd>
+                    <span>{{teacher.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.family">Family</span></dt>
+                <dd>
+                    <span>{{teacher.family}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.fatherName">Father Name</span></dt>
+                <dd>
+                    <span>{{teacher.fatherName}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.scientificBasis">Scientific Basis</span></dt>
+                <dd>
+                    <span>{{teacher.scientificBasis}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.inquiry">Inquiry</span></dt>
+                <dd>
+                    <span>{{teacher.inquiry}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.schoolConfirmation">School Confirmation</span></dt>
+                <dd>
+                    <span>{{teacher.schoolConfirmation}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.protectiveApproval">Protective Approval</span></dt>
+                <dd>
+                    <span>{{teacher.protectiveApproval}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.teachingSubject">Teaching Subject</span></dt>
+                <dd>
+                    <span>{{teacher.teachingSubject}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.issueDate">Issue Date</span></dt>
+                <dd>
+                    <span>{{teacher.issueDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.expirationDate">Expiration Date</span></dt>
+                <dd>
+                    <span>{{teacher.expirationDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.licenseNumber">License Number</span></dt>
+                <dd>
+                    <span>{{teacher.licenseNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.sessionNumber">Session Number</span></dt>
+                <dd>
+                    <span>{{teacher.sessionNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{teacher.phoneNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.licenseRenewalDate">License Renewal Date</span></dt>
+                <dd>
+                    <span>{{teacher.licenseRenewalDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.code">Code</span></dt>
+                <dd>
+                    <span>{{teacher.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{teacher.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{teacher.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{teacher.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{teacher.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.archived">Archived</span></dt>
+                <dd>
+                    <span>{{teacher.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{teacher.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{teacher.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.status">Status</span></dt>
+                <dd>
+                    <span>{{teacher.status}}</span>
+                </dd>
+
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.lastQualification">Last Qualification</span></dt>
+                <dd>
+                    <div *ngIf="teacher.lastQualificationId">
+                        <a [routerLink]="['/qualification-marine-suffix', teacher.lastQualificationId, 'view']">{{teacher.lastQualificationTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.lastFieldOfStudy">Last Field Of Study</span></dt>
+                <dd>
+                    <div *ngIf="teacher.lastFieldOfStudyId">
+                        <a [routerLink]="['/field-of-study-marine-suffix', teacher.lastFieldOfStudyId, 'view']">{{teacher.lastFieldOfStudyTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.serviceUnit">Service Unit</span></dt>
+                <dd>
+                    <div *ngIf="teacher.serviceUnitId">
+                        <a [routerLink]="['/service-unit-marine-suffix', teacher.serviceUnitId, 'view']">{{teacher.serviceUnitTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacher.academicRank">Academic Rank</span></dt>
+                <dd>
+                    <div *ngIf="teacher.academicRankId">
+                        <a [routerLink]="['/academic-rank-marine-suffix', teacher.academicRankId, 'view']">{{teacher.academicRankTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/teacher-marine-suffix', teacher.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+</div>
+        </div>
+    </div>
+</div>

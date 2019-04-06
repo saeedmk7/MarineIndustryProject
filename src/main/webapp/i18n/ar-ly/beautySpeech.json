@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "beautySpeech" : {
+            "home": {
+                "title": "Beauty Speeches",
+                "createLabel": "Create a new Beauty Speech",
+                "createOrEditLabel": "Create or edit a Beauty Speech"
+            },
+            "created": "A new Beauty Speech is created with identifier {{ param }}",
+            "updated": "A Beauty Speech is updated with identifier {{ param }}",
+            "deleted": "A Beauty Speech is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Beauty Speech {{ id }}?"
+            },
+            "detail": {
+                "title": "Beauty Speech"
+            },
+            "title": "Title",
+            "description": "Description",
+            "isActive": "Is Active",
+            "showDate": "Show Date",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "teachingApproach" : {
+            "home": {
+                "title": "روش های آموزش",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش روش آموزش"
+            },
+            "created": "روش آموزش با شناسه {{ param }} ایجاد شد.",
+            "updated": "روش آموزش با شناسه {{ param }} ویرایش شد.",
+            "deleted": "روش آموزش با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف روش آموزش با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات روش آموزش"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "designAndPlanning": "Design And Planning"
+        }
+    }
+}

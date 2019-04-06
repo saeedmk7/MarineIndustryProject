@@ -1,0 +1,17 @@
+{
+    "home": {
+        "title": "کاربر گرامی خوش آمدید",
+        "subtitle": "این صفحه اصلی شماست",
+        "logged": {
+            "message": "شما وارد شدید با کاربر \"{{username}}\"."
+        },
+        "question": "اگر سوالی دارید؟ در مورد :",
+        "link": {
+            "homepage": "صفحه اصلی",
+            "stackoverflow": " در Stack Overflow",
+            "bugtracker": " bug tracker",
+            "chat": " public chat room",
+            "follow": ""
+        }
+    }
+}

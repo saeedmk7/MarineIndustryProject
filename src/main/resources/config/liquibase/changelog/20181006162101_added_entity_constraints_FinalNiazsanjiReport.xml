@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity FinalNiazsanjiReport.
+    -->
+    <changeSet id="20181006162101-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="final_niazsanji_reports_id"
+                                 baseTableName="final_niazsanji_report_person"
+                                 constraintName="fk_final_niazsanji_report_person_final_niazsanji_reports_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="final_niazsanji_report"/>
+        <addForeignKeyConstraint baseColumnNames="people_id"
+                                 baseTableName="final_niazsanji_report_person"
+                                 constraintName="fk_final_niazsanji_report_person_people_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+        
+        <addForeignKeyConstraint baseColumnNames="final_niazsanji_reports_id"
+                                 baseTableName="final_niazsanji_report_document"
+                                 constraintName="fk_final_niazsanji_report_document_final_niazsanji_reports_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="final_niazsanji_report"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="final_niazsanji_report_document"
+                                 constraintName="fk_final_niazsanji_report_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="educational_module_id"
+                                 baseTableName="final_niazsanji_report"
+                                 constraintName="fk_final_niazsanji_report_educational_module_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+
+    </changeSet>
+</databaseChangeLog>

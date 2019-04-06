@@ -1,0 +1,135 @@
+{
+    "name": "Document",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 100
+        },
+        {
+            "fieldName": "fileDoc",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "createDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "modifyUserLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "modifyDate",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "person",
+            "otherEntityName": "person",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "document"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "teacher",
+            "otherEntityName": "teacher",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "document"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "job",
+            "otherEntityName": "job",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "document"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "educationalModule",
+            "otherEntityName": "educationalModule",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "document"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "educationalCenter",
+            "otherEntityName": "educationalCenter",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "document"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "resource",
+            "otherEntityName": "resource",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "document"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "requestOrganizationNiazsanji",
+            "otherEntityName": "requestOrganizationNiazsanji",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "document"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "finalOrganizationNiazsanji",
+            "otherEntityName": "finalOrganizationNiazsanji",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "document"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "finalNiazsanjiReport",
+            "otherEntityName": "finalNiazsanjiReport",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "document"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "designAndPlanning",
+            "otherEntityName": "designAndPlanning",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "document"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "runPhase",
+            "otherEntityName": "runPhase",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "document"
+        }
+    ],
+    "changelogDate": "20181006162054",
+    "entityTableName": "document",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "marineSuffix"
+}

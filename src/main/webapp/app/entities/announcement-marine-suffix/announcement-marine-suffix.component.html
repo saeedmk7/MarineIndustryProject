@@ -1,0 +1,100 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.announcement.home.title">Announcements</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-announcement-marine-suffix" [routerLink]="['/announcement-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.announcement.home.createLabel">
+            Create new Announcement
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="announcements">
+        <table class="table table-striped table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.announcement.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.announcement.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.announcement.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="compeleteText"><span jhiTranslate="marineindustryprojApp.announcement.compeleteText">Compelete Text</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="isActive"><span jhiTranslate="marineindustryprojApp.announcement.isActive">Is Active</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="announcementLevel"><span jhiTranslate="marineindustryprojApp.announcement.announcementLevel">Announcement Level</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.announcement.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.announcement.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let announcement of announcements ;trackBy: trackId">
+                <td><a [routerLink]="['/announcement-marine-suffix', announcement.id, 'view' ]">{{announcement.id}}</a></td>
+                <td>{{announcement.title}}</td>
+                <td>{{announcement.code}}</td>
+                <td>{{announcement.description}}</td>
+                <!--<td>{{announcement.compeleteText}}</td>-->
+                <td>{{announcement.isActive}}</td>
+                <!--<td>{{announcement.announcementLevel}}</td>-->
+                <td>{{announcement.createUserLogin}}</td>
+                <td>{{announcement.createDate}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button *jhiHasAnyAuthority="['ROLE_ADMIN']" type="submit"
+                                [routerLink]="['../document-marine-suffix', 'announcement',announcement.id ]"
+                                class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.documents">Documents</span>
+                        </button>
+                        <button  type="submit"
+                                [routerLink]="['/announcement-marine-suffix', announcement.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button *jhiHasAnyAuthority="['ROLE_ADMIN']" type="submit"
+                                [routerLink]="['/announcement-marine-suffix', announcement.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button *jhiHasAnyAuthority="['ROLE_ADMIN']" type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'announcement-marine-suffix/'+ announcement.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="7">
+                    <div *ngIf="announcements && announcements.length">
+
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,158 @@
+[
+    {
+        "title": "صفحه اصلی",
+        "url": "#",
+        "faicon": "faHome",
+        "isActive": false,
+        "acceptedRoles": "",
+        "children": null
+    },
+    {
+        "title": "سازمان",
+        "url": "collapseOne",
+        "faicon": "faBuilding",
+        "isActive": true,
+        "acceptedRoles": "'ROLE_ADMIN'",
+        "children": [
+            {
+                "title": "اطلاعات پرسنل",
+                "url": "#/person-marine-suffix",
+                "faicon": "faUsers",
+                "isActive": false,
+                "acceptedRoles": "'ROLE_ADMIN'",
+                "children": null
+            },
+            {
+                "title": "مشاغل",
+                "url": "#/job-marine-suffix",
+                "faicon": "faPaintRoller",
+                "isActive": false,
+                "acceptedRoles": "'ROLE_ADMIN'",
+                "children": null
+            },
+            {
+                "title": "چارت سازمانی",
+                "url": "#/organization-chart-marine-suffix",
+                "faicon": "faSitemap",
+                "isActive": false,
+                "acceptedRoles": "'ROLE_ADMIN'",
+                "children": null
+            },
+            {
+                "title": "گروه های علمی شغلی",
+                "url": "#/scientific-work-group-marine-suffix",
+                "faicon": "faStamp",
+                "isActive": false,
+                "acceptedRoles": "'ROLE_ADMIN'",
+                "children": null
+            }
+        ]
+    },
+    {
+        "title": "اطلاعات پایه",
+        "url": "collapseTwo",
+        "faicon": "faDatabase",
+        "isActive": true,
+        "acceptedRoles": "'ROLE_ADMIN'",
+        "children": [
+            {
+                "title": "پودمان های آموزشی",
+                "url": "#/educational-module-marine-suffix",
+                "faicon": "faBookOpen",
+                "isActive": false,
+                "acceptedRoles": "'ROLE_ADMIN'",
+                "children": null
+            },
+            {
+                "title": "اطلاعات مدرسان",
+                "url": "#/teacher-marine-suffix",
+                "faicon": "faChalkboardTeacher",
+                "isActive": false,
+                "acceptedRoles": "'ROLE_ADMIN'",
+                "children": null
+            },
+            {
+                "title": "وظایف اصلی",
+                "url": "#/main-task-marine-suffix",
+                "faicon": "faTag",
+                "isActive": false,
+                "acceptedRoles": "'ROLE_ADMIN'",
+                "children": null
+            },
+            {
+                "title": "وظایف فرعی",
+                "url": "#/sub-task-marine-suffix",
+                "faicon": "faTags",
+                "isActive": false,
+                "acceptedRoles": "'ROLE_ADMIN'",
+                "children": null
+            },
+            {
+                "title": "مراکز آموزشی",
+                "url": "#/educational-center-marine-suffix",
+                "faicon": "faHotel",
+                "isActive": false,
+                "acceptedRoles": "'ROLE_ADMIN'",
+                "children": null
+            },
+            {
+                "title": "منابع آموزشی",
+                "url": "#/resource-marine-suffix",
+                "faicon": "faFile",
+                "isActive": false,
+                "acceptedRoles": "'ROLE_ADMIN'",
+                "children": null
+            }
+        ]
+    },
+    {
+        "title": "نیازسنجی",
+        "url": "collapseThree",
+        "faicon": "faGlasses",
+        "isActive": true,
+        "acceptedRoles": "['ROLE_ADMIN','ROLE_USER']",
+        "children": [
+            {
+                "title": "درخواست نیازسنجی سازمانی",
+                "url": "#/request-organization-niazsanji-marine-suffix",
+                "faicon": "faReceipt",
+                "isActive": false,
+                "acceptedRoles": "['ROLE_ADMIN','ROLE_USER']",
+                "children": null
+            },
+            {
+                "title": "لیست نیازسنجی های سازمانی",
+                "url": "#/final-organization-niazsanji-marine-suffix",
+                "faicon": "faListAlt",
+                "isActive": false,
+                "acceptedRoles": "'ROLE_ADMIN'",
+                "children": null
+            },
+            {
+                "title": "تکمیل فرآیند نیازسنجی",
+                "url": "#/final-niazsanji-report-marine-suffix",
+                "faicon": "faCheckDouble",
+                "isActive": false,
+                "acceptedRoles": "'ROLE_ADMIN'",
+                "children": null
+            }
+        ]
+    },
+    {
+        "title": "مدیریت",
+        "url": "collapseFour",
+        "faicon": "faToolbox",
+        "isActive": true,
+        "acceptedRoles": "'ROLE_ADMIN'",
+        "children": [
+            {
+                "title": "مدیریت کاربران",
+                "url": "#/admin/user-management",
+                "faicon": "faUserEdit",
+                "isActive": false,
+                "acceptedRoles": "'ROLE_ADMIN'",
+                "children": null
+            }
+        ]
+    }
+]

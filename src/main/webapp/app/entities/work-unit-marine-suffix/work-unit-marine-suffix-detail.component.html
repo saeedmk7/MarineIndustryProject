@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="workUnit" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.workUnit.detail.title">Work Unit</span> {{workUnit.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.workUnit.code">Code</span></dt>
+                <dd>
+                    <span>{{workUnit.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workUnit.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{workUnit.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workUnit.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{workUnit.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workUnit.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{workUnit.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workUnit.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{workUnit.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workUnit.workIndustry">Work Industry</span></dt>
+                <dd>
+                    <div *ngIf="workUnit.workIndustryId">
+                        <a [routerLink]="['/work-industry-marine-suffix', workUnit.workIndustryId, 'view']">{{workUnit.workIndustryTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.workUnit.workGroup">Work Group</span></dt>
+                <dd>
+                    <div *ngIf="workUnit.workGroupId">
+                        <a [routerLink]="['/work-group-marine-suffix', workUnit.workGroupId, 'view']">{{workUnit.workGroupTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/work-unit-marine-suffix', workUnit.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

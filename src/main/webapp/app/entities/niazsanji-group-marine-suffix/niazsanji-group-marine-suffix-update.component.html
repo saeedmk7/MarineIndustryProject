@@ -1,0 +1,183 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-niazsanji-group-marine-suffix-heading" jhiTranslate="marineindustryprojApp.niazsanjiGroup.home.createOrEditLabel">Create or edit a Niazsanji Group</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!niazsanjiGroup.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="niazsanjiGroup.id" readonly />
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اولیه نیازسنجی</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiGroup.editorPerson" for="field_editorPerson">Editor Person</label>
+                    <input type="text" class="form-control" name="editorPerson" id="field_editorPerson"
+                        [(ngModel)]="niazsanjiGroup.editorPerson" required maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.editorPerson?.dirty && editForm.controls.editorPerson?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.editorPerson?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.editorPerson?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('scientific-work-group-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiGroup.scientificWorkGroup" for="field_scientificWorkGroup">Scientific Work Group</a>
+                   <!-- <select class="form-control" id="field_scientificWorkGroup" name="scientificWorkGroup" [(ngModel)]="niazsanjiGroup.scientificWorkGroupId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="scientificWorkGroupOption.id" *ngFor="let scientificWorkGroupOption of scientificworkgroups; trackBy: trackScientificWorkGroupById">{{scientificWorkGroupOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="scientificworkgroups"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="گروه علمی شغلی"
+                        name="scientificWorkGroupId"
+                        id="field_scientificWorkGroup"
+                        [(ngModel)]="niazsanjiGroup.scientificWorkGroupId">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiGroup.priceCost" for="field_priceCost">Price Cost</label>
+                    <input type="number" class="form-control" name="priceCost" id="field_priceCost"
+                           [(ngModel)]="niazsanjiGroup.priceCost" />
+                </div>
+                <div *ngIf="isfa">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiGroup.reviewDate" for="field_reviewDate">Review Date</label>
+                        <div class="d-flex">
+                            <dp-date-picker
+                                dir="rtl"
+                                [(ngModel)]="reviewDate"
+                                name="reviewDate"
+                                id="field_reviewDate"
+                                mode="day"
+                                class="form-control col-md-4"
+                                [disabled] = "!isfa"
+                                theme="dp-material">
+                            </dp-date-picker>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiGroup.scheduleDate" for="field_scheduleDate">Schedule Date</label>
+                        <div class="d-flex">
+                            <dp-date-picker
+                                dir="rtl"
+                                [(ngModel)]="scheduleDate"
+                                name="scheduleDate"
+                                id="field_scheduleDate"
+                                mode="day"
+                                class="form-control col-md-4"
+                                [disabled] = "!isfa"
+                                theme="dp-material">
+                            </dp-date-picker>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!isfa">
+                    <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiGroup.reviewDate" for="field_reviewDate">Review Date</label>
+                    <div class="d-flex">
+                        <input id="field_reviewDate" type="datetime-local" class="form-control" name="reviewDate" [(ngModel)]="reviewDate"
+                        />
+                    </div>
+                </div>
+                    <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiGroup.scheduleDate" for="field_scheduleDate">Schedule Date</label>
+                    <div class="d-flex">
+                        <input id="field_scheduleDate" type="datetime-local" class="form-control" name="scheduleDate" [(ngModel)]="scheduleDate"
+                        />
+                    </div>
+                </div>
+                </div>
+
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">مشخصات شغل سازمانی</div></div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiGroup.firstThreeJobCode" for="field_firstThreeJobCode">First Three Job Code</label>
+                    <input type="text" class="form-control" name="firstThreeJobCode" id="field_firstThreeJobCode"
+                           [(ngModel)]="niazsanjiGroup.firstThreeJobCode" required maxlength="3" (keyup)="showRelatedJobs(this)"/>
+                    <div [hidden]="!(editForm.controls.firstThreeJobCode?.dirty && editForm.controls.firstThreeJobCode?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.firstThreeJobCode?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 3 }">
+                            This field cannot be longer than 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.firstThreeJobCode?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 3 }">
+                            This field cannot be shorter than 3 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('job-marine-suffix')" jhiTranslate="marineindustryprojApp.niazsanjiGroup.job" for="field_job">Job</a>
+                    <!--<select class="form-control" id="field_job" multiple name="job" [(ngModel)]="niazsanjiGroup.jobs">
+                        <option [ngValue]="getSelected(niazsanjiGroup.jobs, jobOption)" *ngFor="let jobOption of jobs; trackBy: trackJobById">{{jobOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="jobs"
+                        [multiple]="true"
+                        [closeOnSelect]="false"
+                        [searchable]="true"
+                        [disabled]="disable"
+                        [required]="true"
+                        bindLabel="fullTitle"
+                        placeholder="مشاغل"
+                        name="jobs"
+                        id="field_job"
+                        [(ngModel)]="niazsanjiGroup.jobs">
+                    </ng-select>
+                </div>
+                <div class="form-group">
+                    <span class="alert-info">در این بخش ابتدا باید 3 رقم اول شناسه شغل را وارد نمائید تا مشاغل بارگزاری شوند.</span>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">پودمان های آموزشی پیشنهادی شغل</div></div>
+                <div class="form-group" style="width: 100%">
+                    <a (click)="change('educational-module-marine-suffix')" jhiTranslate="marineindustryprojApp.niazsanjiGroup.educationalModule" for="field_educationalModule">Educational Module</a>
+                    <!--<select class="form-control" id="field_educationalModule" multiple name="educationalModule" [(ngModel)]="niazsanjiGroup.educationalModules">
+                        <option [ngValue]="getSelected(niazsanjiGroup.educationalModules, educationalModuleOption)" *ngFor="let educationalModuleOption of educationalmodules; trackBy: trackEducationalModuleById">{{educationalModuleOption.title}} {{educationalModuleOption.code}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="educationalmodules"
+                        [multiple]="true"
+                        [closeOnSelect]="false"
+                        [searchable]="true"
+                        [disabled]="educationalModulesDisable"
+                        [required]="true"
+                        bindLabel="fullTitle"
+                        placeholder="پودمان های آموزشی منتخب"
+                        name="educationalModules"
+                        id="field_educationalModule"
+                        [(ngModel)]="niazsanjiGroup.educationalModules">
+                    </ng-select>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">توضیحات تکمیلی</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiGroup.description" for="field_description">Description</label>
+                    <textarea class="form-control" name="description" id="field_description"
+                              [(ngModel)]="niazsanjiGroup.description" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

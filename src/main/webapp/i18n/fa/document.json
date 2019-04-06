@@ -1,0 +1,42 @@
+{
+    "marineindustryprojApp": {
+        "document" : {
+            "home": {
+                "title": "ضمائم",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش مدرک"
+            },
+            "created": "مدرکی با شناسه {{ param }} ایجاد شد.",
+            "updated": "مدرکی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "مدرکی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف مدرک با این شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "مدرک"
+            },
+            "title": "عنوان مدرک",
+            "fileDoc": "مدرک",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "person": "Person",
+            "teacher": "Teacher",
+            "job": "Job",
+            "educationalModule": "Educational Module",
+            "requestEducationalModule": "Request Educational Module",
+            "educationalCenter": "Educational Center",
+            "resource": "Resource",
+            "requestOrganizationNiazsanji": "Request Organization Niazsanji",
+            "finalOrganizationNiazsanji": "Final Organization Niazsanji",
+            "finalNiazsanjiReport": "Final Niazsanji Report",
+            "designAndPlanning": "Design And Planning",
+            "runPhase": "Run Phase",
+            "announcement": "Announcement",
+            "usersRequest": "Users Request",
+            "niazsanjiFardi": "Niazsanji Fardi",
+            "requestNiazsanjiFardi": "Request Niazsanji Fardi"
+        }
+    }
+}

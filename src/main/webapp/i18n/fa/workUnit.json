@@ -1,0 +1,31 @@
+{
+    "marineindustryprojApp": {
+        "workUnit" : {
+            "home": {
+                "title": "یگان های محل خدمت",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش یگان محل خدمت"
+            },
+            "created": "یگان محل خدمت با شناسه {{ param }} ایجاد شد.",
+            "updated": "یگان محل خدمت با شناسه {{ param }} ویرایش شد.",
+            "deleted": "یگان محل خدمت با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف یگان محل خدمت با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات یگان محل خدمت"
+            },
+            "code": "کد یگان محل خدمت",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "workIndustry": "صنعت محل خدمت",
+            "workGroup": "گروه محل خدمت"
+        },
+        "userManagement": {
+            "activated": "فعال؟",
+            "login": "کدملی"
+        }
+    }
+}

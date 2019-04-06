@@ -1,0 +1,31 @@
+
+{
+    "marineindustryprojApp": {
+        "announcement" : {
+            "home": {
+                "title": "اخبار",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش خبر"
+            },
+            "created": "خبری با شناسه {{ param }} ایجاد شد.",
+            "updated": "خبری با شناسه {{ param }} ویرایش شد.",
+            "deleted": "خبری با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف خبر با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": ""
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات کوتاه",
+            "compeleteText": "متن خبر",
+            "isActive": "فعال باشد؟",
+            "announcementLevel": "سطح خبر",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده"
+        }
+    }
+}

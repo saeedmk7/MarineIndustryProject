@@ -1,0 +1,30 @@
+
+{
+    "marineindustryprojApp": {
+        "goal" : {
+            "home": {
+                "title": "Goals",
+                "createLabel": "Create a new Goal",
+                "createOrEditLabel": "Create or edit a Goal"
+            },
+            "created": "A new Goal is created with identifier {{ param }}",
+            "updated": "A Goal is updated with identifier {{ param }}",
+            "deleted": "A Goal is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Goal {{ id }}?"
+            },
+            "detail": {
+                "title": "Goal"
+            },
+            "title": "Title",
+            "description": "Description",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "educationalModule": "Educational Module",
+            "requestEducationalModule": "Request Educational Module"
+        }
+    }
+}

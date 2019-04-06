@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "effectivenessLevel" : {
+            "home": {
+                "title": "Effectiveness Levels",
+                "createLabel": "Create a new Effectiveness Level",
+                "createOrEditLabel": "Create or edit a Effectiveness Level"
+            },
+            "created": "A new Effectiveness Level is created with identifier {{ param }}",
+            "updated": "A Effectiveness Level is updated with identifier {{ param }}",
+            "deleted": "A Effectiveness Level is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Effectiveness Level {{ id }}?"
+            },
+            "detail": {
+                "title": "Effectiveness Level"
+            },
+            "title": "Title",
+            "code": "Code",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "designAndPlanning": "Design And Planning"
+        }
+    }
+}

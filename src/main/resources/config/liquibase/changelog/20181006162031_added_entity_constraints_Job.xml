@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Job.
+    -->
+    <changeSet id="20181006162031-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="jobs_id"
+                                 baseTableName="job_document"
+                                 constraintName="fk_job_document_jobs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="job"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="job_document"
+                                 constraintName="fk_job_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="raste_id"
+                                 baseTableName="job"
+                                 constraintName="fk_job_raste_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="raste"/>
+
+        <addForeignKeyConstraint baseColumnNames="radeh_id"
+                                 baseTableName="job"
+                                 constraintName="fk_job_radeh_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="radeh"/>
+
+        <addForeignKeyConstraint baseColumnNames="job_type_id"
+                                 baseTableName="job"
+                                 constraintName="fk_job_job_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="job_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="scientific_work_group_id"
+                                 baseTableName="job"
+                                 constraintName="fk_job_scientific_work_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="scientific_work_group"/>
+
+        <addForeignKeyConstraint baseColumnNames="parent_id"
+                                 baseTableName="job"
+                                 constraintName="fk_job_parent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="job"/>
+
+    </changeSet>
+</databaseChangeLog>

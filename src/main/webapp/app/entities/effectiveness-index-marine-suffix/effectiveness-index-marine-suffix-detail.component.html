@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="effectivenessIndex" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.effectivenessIndex.detail.title">Effectiveness Index</span> {{effectivenessIndex.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessIndex.title">Title</span></dt>
+                <dd>
+                    <span>{{effectivenessIndex.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessIndex.code">Code</span></dt>
+                <dd>
+                    <span>{{effectivenessIndex.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessIndex.description">Description</span></dt>
+                <dd>
+                    <span>{{effectivenessIndex.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessIndex.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{effectivenessIndex.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessIndex.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{effectivenessIndex.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessIndex.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{effectivenessIndex.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessIndex.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{effectivenessIndex.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/effectiveness-index-marine-suffix', effectivenessIndex.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

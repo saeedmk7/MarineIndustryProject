@@ -1,0 +1,133 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-organization-chart-authority-marine-suffix-heading" jhiTranslate="marineindustryprojApp.organizationChartAuthority.home.createOrEditLabel">Create or edit a Organization Chart Authority</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!organizationChartAuthority.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="organizationChartAuthority.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.organizationChartAuthority.authorityName" for="field_authorityName">Authority Name</label>
+                    <input type="text" class="form-control" name="authorityName" id="field_authorityName"
+                        [(ngModel)]="organizationChartAuthority.authorityName" required/>
+                    <div [hidden]="!(editForm.controls.authorityName?.dirty && editForm.controls.authorityName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.authorityName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.organizationChartAuthority.hasEditPermission" for="field_hasEditPermission">Has Edit Permission</label>
+                    <input type="checkbox" class="form-control" name="hasEditPermission" id="field_hasEditPermission"
+                        [(ngModel)]="organizationChartAuthority.hasEditPermission" />
+                    <div [hidden]="!(editForm.controls.hasEditPermission?.dirty && editForm.controls.hasEditPermission?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.hasEditPermission?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.organizationChartAuthority.createUserLogin" for="field_createUserLogin">Create User Login</label>
+                    <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
+                        [(ngModel)]="organizationChartAuthority.createUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.createUserLogin?.dirty && editForm.controls.createUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.organizationChartAuthority.createDate" for="field_createDate">Create Date</label>
+                    <div class="d-flex">
+                        <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="createDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.organizationChartAuthority.modifyUserLogin" for="field_modifyUserLogin">Modify User Login</label>
+                    <input type="text" class="form-control" name="modifyUserLogin" id="field_modifyUserLogin"
+                        [(ngModel)]="organizationChartAuthority.modifyUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.modifyUserLogin?.dirty && editForm.controls.modifyUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.modifyUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.organizationChartAuthority.modifyDate" for="field_modifyDate">Modify Date</label>
+                    <div class="d-flex">
+                        <input id="field_modifyDate" type="datetime-local" class="form-control" name="modifyDate" [(ngModel)]="modifyDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.organizationChartAuthority.archived" for="field_archived">Archived</label>
+                    <input type="checkbox" class="form-control" name="archived" id="field_archived"
+                        [(ngModel)]="organizationChartAuthority.archived" />
+                    <div [hidden]="!(editForm.controls.archived?.dirty && editForm.controls.archived?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.archived?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.organizationChartAuthority.archivedUserLogin" for="field_archivedUserLogin">Archived User Login</label>
+                    <input type="text" class="form-control" name="archivedUserLogin" id="field_archivedUserLogin"
+                        [(ngModel)]="organizationChartAuthority.archivedUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.archivedUserLogin?.dirty && editForm.controls.archivedUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.archivedUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.organizationChartAuthority.archivedDate" for="field_archivedDate">Archived Date</label>
+                    <div class="d-flex">
+                        <input id="field_archivedDate" type="datetime-local" class="form-control" name="archivedDate" [(ngModel)]="archivedDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.organizationChartAuthority.status" for="field_status">Status</label>
+                    <input type="number" class="form-control" name="status" id="field_status"
+                        [(ngModel)]="organizationChartAuthority.status" required/>
+                    <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.status?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.status?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.organizationChartAuthority.organizationChart" for="field_organizationChart">Organization Chart</label>
+                    <select class="form-control" id="field_organizationChart" name="organizationChart" [(ngModel)]="organizationChartAuthority.organizationChartId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="organizationChartOption.id" *ngFor="let organizationChartOption of organizationcharts; trackBy: trackOrganizationChartById">{{organizationChartOption.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

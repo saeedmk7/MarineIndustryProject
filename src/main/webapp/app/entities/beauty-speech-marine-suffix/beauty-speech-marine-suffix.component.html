@@ -1,0 +1,94 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.beautySpeech.home.title">Beauty Speeches</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-beauty-speech-marine-suffix" [routerLink]="['/beauty-speech-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.beautySpeech.home.createLabel">
+            Create new Beauty Speech
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="beautySpeeches">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.beautySpeech.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.beautySpeech.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="isActive"><span jhiTranslate="marineindustryprojApp.beautySpeech.isActive">Is Active</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="showDate"><span jhiTranslate="marineindustryprojApp.beautySpeech.showDate">Show Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.beautySpeech.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.beautySpeech.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.beautySpeech.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.beautySpeech.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let beautySpeech of beautySpeeches ;trackBy: trackId">
+                <td><a [routerLink]="['/beauty-speech-marine-suffix', beautySpeech.id, 'view' ]">{{beautySpeech.id}}</a></td>
+                <td>{{beautySpeech.title}}</td>
+                <td>{{beautySpeech.description}}</td>
+                <td>{{beautySpeech.isActive}}</td>
+                <td>{{beautySpeech.showDate}}</td>
+                <!--<td>{{beautySpeech.createUserLogin}}</td>
+                <td>{{beautySpeech.createDate | date:'medium'}}</td>
+                <td>{{beautySpeech.modifyUserLogin}}</td>
+                <td>{{beautySpeech.modifyDate | date:'medium'}}</td>-->
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/beauty-speech-marine-suffix', beautySpeech.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/beauty-speech-marine-suffix', beautySpeech.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'beauty-speech-marine-suffix/'+ beautySpeech.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="7">
+                    <div *ngIf="beautySpeeches && beautySpeeches.length">
+
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+</div>

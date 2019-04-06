@@ -1,0 +1,79 @@
+<nav *ngIf="isAuthenticated()">
+    <div class=" bgWhite lightShadow sidebarMenu">
+        <ul class="nav flex-column accordion" id="accordionExample">
+            <li class="nav-item">
+                <a class="nav-link" role="button" href="#">
+                    <img src="../../../content/images/navbar/LogoSanaie1.png" style="width: 100%;padding-top: 10%"/>
+                </a>
+            </li>
+            <div *ngIf="menuList">
+            <li class="nav-item"  *ngFor="let item of menuList">
+                <a class="nav-link" role="button" href="#{{item.url}}" aria-expanded="{{item.isActive}}" aria-controls="{{item.url}}">
+                    <i class="fa {{item.faicon}}"></i>
+                    <span class="pr-2">صفحه نخست</span>
+                    <i *ngIf="item.children" ngClass="'fa-angle-down': item.isActive,'fa-angle-down': !item.isActive" class="fa menuArrow"></i>
+                </a>
+                <ul id="{{item.url}}" *ngIf="item.children" *ngFor="let child of item.children" ngClass="'show pt-2 pb-2': item.isActive" class="collapse" data-parent="#accordionExample">
+                    <li ngClass="'active': item.isActive">
+                        <a href="{{item.url}}">
+                            <i class="fa {{item.faicon}}"></i>
+                            <span>{{child.title}}</span>
+                        </a>
+
+                    </li>
+                </ul>
+            </li>
+            </div>
+            <!--<li class="nav-item active">
+                <a class="nav-link" data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="false" aria-controls="collapseOne">
+                    <i class="fa fa-file-alt"></i>
+                    <span class="pr-2">امور قراردادها</span>
+                    <i class="fa fa-angle-down menuArrow"></i>
+                </a>
+                <ul id="collapseOne" class="collapse show pt-2 pb-2" data-parent="#accordionExample">
+                    <li class="active"><a href="#">جزئیات قرارداد</a></li>
+                    <li><a href="#">الحاقیه&zwnj;ها</a></li>
+                    <li><a href="#">تائیده قیمت&zwnj;ها</a></li>
+                    <li><a href="#">ضمانت نامه&zwnj;ها</a></li>
+                    <li><a href="#">صورتجلسات تحویل</a></li>
+                    <li><a href="#">صورتجلسات احجام</a></li>
+                    <li><a href="#">دستورکارها</a></li>
+                    <li><a href="#">صورت وضعیت&zwnj;ها</a></li>
+                    <li><a href="#">نقشه&zwnj;های چون ساخت</a></li>
+                    <li><a href="#">کسر خدمات</a></li>
+                    <li><a href="#">اطلاعات پیمانکار</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#collapseTow" role="button" aria-expanded="false" aria-controls="collapseTow">
+                    <i class="fa fa-edit"></i>
+                    <span class="pr-2">واحد فنی</span>
+                    <i class="fa fa-angle-left menuArrow"></i>
+                </a>
+                <ul id="collapseTow" class="collapse" data-parent="#accordionExample">
+                    <li><a href="#">گزارشات کلی</a></li>
+                    <li><a href="#">دستور کارها</a></li>
+                    <li><a href="#">صورتمجالس احجام</a></li>
+                    <li><a href="#">نقشه&zwnj;ها</a></li>
+                    <li><a href="#">صورتمجالس هماهنگی</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#collapseThree" role="button" aria-expanded="false" aria-controls="collapseThree">
+                    <i class="fa fa-id-card-alt"></i>
+                    <span class="pr-2">واحد پرسنلی</span>
+                    <i class="fa fa-angle-left menuArrow"></i>
+                </a>
+                <ul id="collapseThree" class="collapse" data-parent="#accordionExample">
+                    <li><a href="#">ویرایش اطلاعات کاربری</a></li>
+                    <li><a href="#">دسترسی کاربران</a></li>
+                    <li><a href="#">دسترسی مدیریت</a></li>
+                </ul>
+            </li>-->
+        </ul>
+        <div style="position: absolute;width:100%;bottom: 0;padding-left: 7%">
+            <a href="#" (click)="logout();" class="logout"> خروج از حساب<span class="badge badge-danger date-logout">{{todayDate}}</span></a>
+        </div>
+    </div><!-- Main Menu (Right) -->
+</nav>
+<nav></nav>

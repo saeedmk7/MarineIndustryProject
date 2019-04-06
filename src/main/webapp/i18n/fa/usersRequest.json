@@ -1,0 +1,33 @@
+
+{
+    "marineindustryprojApp": {
+        "usersRequest" : {
+            "home": {
+                "title": "فهرست درخواست های کاربران",
+                "createLabel": "جدید",
+                "createOrEditLabel": "درخواست جدید یا ویرایش"
+            },
+            "created": "درخواست با شناسه {{ param }} ایجاد شد.",
+            "updated": "درخواست با شناسه {{ param }} ویرایش شد.",
+            "deleted": "درخواست با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف درخواست با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات درخواست"
+            },
+            "title": "عنوان",
+            "telephone": "شماره داخلی",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "conversation": "مکالمات",
+            "requestStatus": "وضعیت درخواست",
+            "changeStatusUserLogin": "کاربر تغییر دهنده وضعیت درخواست",
+            "document": "مدارک",
+            "answer": "جواب"
+        }
+    }
+}

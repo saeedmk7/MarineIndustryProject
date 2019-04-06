@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "teachApproach" : {
+            "home": {
+                "title": "Teach Approaches",
+                "createLabel": "Create a new Teach Approach",
+                "createOrEditLabel": "Create or edit a Teach Approach"
+            },
+            "created": "A new Teach Approach is created with identifier {{ param }}",
+            "updated": "A Teach Approach is updated with identifier {{ param }}",
+            "deleted": "A Teach Approach is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Teach Approach {{ id }}?"
+            },
+            "detail": {
+                "title": "Teach Approach"
+            },
+            "title": "Title",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "requestOrganizationNiazsanji": "Request Organization Niazsanji",
+            "finalOrganizationNiazsanji": "Final Organization Niazsanji"
+        }
+    }
+}

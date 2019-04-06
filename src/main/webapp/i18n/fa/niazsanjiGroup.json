@@ -1,0 +1,38 @@
+
+{
+    "marineindustryprojApp": {
+        "niazsanjiGroup" : {
+            "home": {
+                "title": "لیست نیازسنجی های گروهی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش نیازسنجی گروهی"
+            },
+            "created": "نیازسنجی گروهی با شناسه {{ param }} ایجاد شد.",
+            "updated": "نیازسنجی گروهی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "نیازسنجی گروهی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف نیازسنجی گروهی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "کاربرگ نیازسنجی آموزشی مشاغل شماره "
+            },
+            "editorPerson": "تدوین کننده",
+            "reviewDate": "تاریخ بازنگری",
+            "scheduleDate": "تاریخ طرح در گروه علمی شغلی",
+            "firstThreeJobCode": "3 رقم اول شناسه شغل",
+            "priceCost": "هزینه(ریال)",
+            "description": "توضیحات",
+            "createUserLogin": "ایجادکننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "آخرین ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "job": "مشاغل",
+            "educationalModule": "پودمان های آموزشی منتخب",
+            "scientificWorkGroup": "گروه علمی شغلی"
+        }
+    }
+}

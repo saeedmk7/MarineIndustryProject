@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Teacher.
+    -->
+    <changeSet id="20181006162030-1" author="jhipster">
+        <createTable tableName="teacher">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="family" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="father_name" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="scientific_basis" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="inquiry" type="boolean">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="school_confirmation" type="boolean">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="protective_approval" type="boolean">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="teaching_subject" type="varchar(1024)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="issue_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="expiration_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="license_number" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="session_number" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phone_number" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="license_renewal_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="code" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="create_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="create_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modify_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modify_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="archived" type="boolean">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="archived_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="archived_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="status" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="last_qualification_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="last_field_of_study_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="service_unit_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="academic_rank_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="teacher" columnName="issue_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="teacher" columnName="expiration_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="teacher" columnName="license_renewal_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="teacher" columnName="create_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="teacher" columnName="modify_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="teacher" columnName="archived_date" columnDataType="datetime"/>
+        
+        <createTable tableName="teacher_document">
+            <column name="documents_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="teachers_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="teachers_id, documents_id" tableName="teacher_document"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

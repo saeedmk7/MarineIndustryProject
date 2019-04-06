@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity RequestOrganizationNiazsanji.
+    -->
+    <changeSet id="20181006162058-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="request_organization_niazsanjis_id"
+                                 baseTableName="request_organization_niazsanji_person"
+                                 constraintName="fk_request_organization_niazsanji_person_request_organization_niazsanjis_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_organization_niazsanji"/>
+        <addForeignKeyConstraint baseColumnNames="people_id"
+                                 baseTableName="request_organization_niazsanji_person"
+                                 constraintName="fk_request_organization_niazsanji_person_people_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+        
+        <addForeignKeyConstraint baseColumnNames="request_organization_niazsanjis_id"
+                                 baseTableName="request_organization_niazsanji_document"
+                                 constraintName="fk_request_organization_niazsanji_document_request_organization_niazsanjis_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_organization_niazsanji"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="request_organization_niazsanji_document"
+                                 constraintName="fk_request_organization_niazsanji_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="educational_module_id"
+                                 baseTableName="request_organization_niazsanji"
+                                 constraintName="fk_request_organization_niazsanji_educational_module_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+
+        <addForeignKeyConstraint baseColumnNames="teach_approach_id"
+                                 baseTableName="request_organization_niazsanji"
+                                 constraintName="fk_request_organization_niazsanji_teach_approach_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teach_approach"/>
+
+    </changeSet>
+</databaseChangeLog>

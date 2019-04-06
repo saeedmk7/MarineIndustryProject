@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity PollScore.
+    -->
+    <changeSet id="20181006162120-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="poll_item_id"
+                                 baseTableName="poll_score"
+                                 constraintName="fk_poll_score_poll_item_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="poll_item"/>
+
+        <addForeignKeyConstraint baseColumnNames="score_item_id"
+                                 baseTableName="poll_score"
+                                 constraintName="fk_poll_score_score_item_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="score_item"/>
+
+        <addForeignKeyConstraint baseColumnNames="poll_id"
+                                 baseTableName="poll_score"
+                                 constraintName="fk_poll_score_poll_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="poll"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="poll_score"
+                                 constraintName="fk_poll_score_person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+    </changeSet>
+</databaseChangeLog>

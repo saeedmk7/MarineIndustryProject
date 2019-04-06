@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "beautySpeech" : {
+            "home": {
+                "title": "سخنان زیبای روز",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش سخن روز"
+            },
+            "created": "سخن روز با شناسه {{ param }} ایجاد شد.",
+            "updated": "سخن روز با شناسه {{ param }} ویرایش شد.",
+            "deleted": "سخن روز با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف سخن روز با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات سخن روز"
+            },
+            "title": "عنوان",
+            "description": "سخن روز",
+            "isActive": "فعال است؟",
+            "showDate": "تاریخ نمایش",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده"
+        }
+    }
+}

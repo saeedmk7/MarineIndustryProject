@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "qualification" : {
+            "home": {
+                "title": "مدارک تحصیلی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش مدرک تحصیلی"
+            },
+            "created": "مدرک تحصیلی با شناسه {{ param }} ایجاد شد.",
+            "updated": "مدرک تحصیلی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "مدرک تحصیلی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف مدرک تحصیلی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات مدرک تحصیلی"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "person": "Person",
+            "teacher": "Teacher"
+        }
+    }
+}

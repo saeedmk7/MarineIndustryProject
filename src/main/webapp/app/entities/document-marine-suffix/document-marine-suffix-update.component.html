@@ -1,0 +1,138 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-document-marine-suffix-heading" jhiTranslate="marineindustryprojApp.document.home.createOrEditLabel">Create or edit a Document</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!document.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="document.id" readonly />
+                </div>
+                <div class="form-group" [hidden]="true">
+            <label for="entityName" jhiTranslate="global.field.entityName">entityName</label>
+            <input type="text" class="form-control" id="entityName" name="entityName"
+                   [(ngModel)]="document.entityName" readonly />
+        </div>
+        <div class="form-group" [hidden]="true">
+            <label for="entityId" jhiTranslate="global.field.entityId">entityId</label>
+            <input type="text" class="form-control" id="entityId" name="entityId"
+                   [(ngModel)]="document.entityId" readonly />
+        </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.document.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="document.title" required maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.document.fileDoc" for="field_fileDoc">File Doc</label>
+                    <div>
+                        <div *ngIf="document.fileDoc" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(document.fileDocContentType, document.fileDoc)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{document.fileDocContentType}}, {{byteSize(document.fileDoc)}}</span>
+                            <button type="button" (click)="document.fileDoc=null;document.fileDocContentType=null;"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_fileDoc" (change)="setFileData($event, document, 'fileDoc', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="fileDoc" id="field_fileDoc"
+                        [(ngModel)]="document.fileDoc" required/>
+                    <input type="hidden" class="form-control" name="fileDocContentType" id="field_fileDocContentType"
+                        [(ngModel)]="document.fileDocContentType" />
+                    <div [hidden]="!(editForm.controls.fileDoc?.dirty && editForm.controls.fileDoc?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fileDoc?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.document.createUserLogin" for="field_createUserLogin">Create User Login</label>
+                    <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
+                        [(ngModel)]="document.createUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.createUserLogin?.dirty && editForm.controls.createUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.document.createDate" for="field_createDate">Create Date</label>
+                    <div class="d-flex">
+                        <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="createDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.document.modifyUserLogin" for="field_modifyUserLogin">Modify User Login</label>
+                    <input type="text" class="form-control" name="modifyUserLogin" id="field_modifyUserLogin"
+                        [(ngModel)]="document.modifyUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.modifyUserLogin?.dirty && editForm.controls.modifyUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.modifyUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.document.modifyDate" for="field_modifyDate">Modify Date</label>
+                    <div class="d-flex">
+                        <input id="field_modifyDate" type="datetime-local" class="form-control" name="modifyDate" [(ngModel)]="modifyDate"
+                        />
+                    </div>
+                </div>-->
+                <div *ngIf="file" class="progress">
+                    <div class="progress-bar progress-bar-info progress-bar-striped"
+                         role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                         aria-valuemin="0" aria-valuemax="100"
+                         [ngStyle]="{width:progress.percentage+'%'}">
+                        {{progress.percentage}}%</div>
+                </div>
+            </div>
+            <div class="alert alert-info">
+                لطفا قبل از آپلود به موارد زیر دقت فرمائید.
+                <ol>
+                    <li>
+                        لطفا عنوان مدرک را متناسب با فایلی که میخواهید ذخیره کنید انتخاب نمائید.
+                    </li>
+                    <li>
+                        نام فایل انتخابی شما نباید شامل تعداد زیادی نقطه(.) یا کاما (,) و امثالهم باشد.
+                    </li>
+                    <li>
+                        فایل شما حتما باید دارای پسوند معتبر باشد.
+                    </li>
+                    <li>
+                        فایل انتخابی شما بیش از 500 مگابایت نمی تواند باشد در صورتی که نیاز به آپلود فایلی بیش از این حجم دارید آن را با ابزار winrar به چند فایل تقسیم کرده و هر کدام را به صورت جداگانه ذخیره نمائید. برای دریافت راهنمای می توانید ویدئو آموزشی زیر را مشاهده فرمائید.
+                    </li>
+                    <a href="/content/TrainingMovie/WinRar.wmv" target="_blank"
+                       class="btn btn-default btn-sm">
+                        <fa-icon [icon]="'download'"></fa-icon>
+                        <span class="d-none d-md-inline">دانلود</span>
+                    </a>
+
+                </ol>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

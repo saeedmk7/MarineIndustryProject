@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="employmentType" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.employmentType.detail.title">Employment Type</span> {{employmentType.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.employmentType.title">Title</span></dt>
+                <dd>
+                    <span>{{employmentType.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.employmentType.code">Code</span></dt>
+                <dd>
+                    <span>{{employmentType.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.employmentType.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{employmentType.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.employmentType.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{employmentType.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.employmentType.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{employmentType.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.employmentType.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{employmentType.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/employment-type-marine-suffix', employmentType.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

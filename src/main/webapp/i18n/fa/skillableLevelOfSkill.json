@@ -1,0 +1,28 @@
+
+{
+    "marineindustryprojApp": {
+        "skillableLevelOfSkill" : {
+            "home": {
+                "title": "سطوح مهارت قابل تامین پودمان",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش سطح مهارت قابل تامین پودمان"
+            },
+            "created": "سطح مهارت قابل تامین پودمان با شناسه {{ param }} ایجاد شد.",
+            "updated": "سطح مهارت قابل تامین پودمان با شناسه {{ param }} ویرایش شد.",
+            "deleted": "سطح مهارت قابل تامین پودمان با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف سطح مهارت قابل تامین پودمان با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات سطح مهارت قابل تامین پودمان"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "educationalModule": "Educational Module"
+        }
+    }
+}

@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="criterion" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.criterion.detail.title">Criterion</span> {{criterion.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.criterion.title">Title</span></dt>
+                <dd>
+                    <span>{{criterion.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.criterion.displayOrder">Display Order</span></dt>
+                <dd>
+                    <span>{{criterion.displayOrder}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.criterion.coefficient">Coefficient</span></dt>
+                <dd>
+                    <span>{{criterion.coefficient}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.criterion.description">Description</span></dt>
+                <dd>
+                    <span>{{criterion.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.criterion.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{criterion.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.criterion.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{criterion.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.criterion.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{criterion.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.criterion.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{criterion.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+           <!-- <button type="button"
+                    [routerLink]="['/criterion-marine-suffix', criterion.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>-->
+        </div>
+    </div>
+</div>

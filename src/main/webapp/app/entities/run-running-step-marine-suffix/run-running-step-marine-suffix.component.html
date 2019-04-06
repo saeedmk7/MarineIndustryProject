@@ -1,0 +1,88 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.runRunningStep.home.title">Run Running Steps</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-run-running-step-marine-suffix" [routerLink]="['/run-running-step-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.runRunningStep.home.createLabel">
+            Create new Run Running Step
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="runRunningSteps">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.runRunningStep.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="done"><span jhiTranslate="marineindustryprojApp.runRunningStep.done">Done</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="doneUserLogin"><span jhiTranslate="marineindustryprojApp.runRunningStep.doneUserLogin">Done User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="doneDate"><span jhiTranslate="marineindustryprojApp.runRunningStep.doneDate">Done Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.runRunningStep.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.runRunningStep.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.runRunningStep.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.runRunningStep.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="runPhaseDescription"><span jhiTranslate="marineindustryprojApp.runRunningStep.runPhase">Run Phase</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="runningStepTitle"><span jhiTranslate="marineindustryprojApp.runRunningStep.runningStep">Running Step</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let runRunningStep of runRunningSteps ;trackBy: trackId">
+                <td><a [routerLink]="['/run-running-step-marine-suffix', runRunningStep.id, 'view' ]">{{runRunningStep.id}}</a></td>
+                <td>{{runRunningStep.description}}</td>
+                <td>{{runRunningStep.done}}</td>
+                <td>{{runRunningStep.doneUserLogin}}</td>
+                <td>{{runRunningStep.doneDate | date:'medium'}}</td>
+                <td>{{runRunningStep.createUserLogin}}</td>
+                <td>{{runRunningStep.createDate | date:'medium'}}</td>
+                <td>{{runRunningStep.modifyUserLogin}}</td>
+                <td>{{runRunningStep.modifyDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="runRunningStep.runPhaseId">
+                        <a [routerLink]="['../run-phase-marine-suffix', runRunningStep.runPhaseId , 'view' ]" >{{runRunningStep.runPhaseDescription}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="runRunningStep.runningStepId">
+                        <a [routerLink]="['../running-step-marine-suffix', runRunningStep.runningStepId , 'view' ]" >{{runRunningStep.runningStepTitle}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/run-running-step-marine-suffix', runRunningStep.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/run-running-step-marine-suffix', runRunningStep.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'run-running-step-marine-suffix/'+ runRunningStep.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="runRunningSteps && runRunningSteps.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

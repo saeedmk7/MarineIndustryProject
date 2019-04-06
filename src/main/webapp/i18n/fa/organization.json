@@ -1,0 +1,28 @@
+
+{
+    "marineindustryprojApp": {
+        "organization" : {
+            "home": {
+                "title": "سازمان ها",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش سازمان"
+            },
+            "created": "سازمانی با شناسه {{ param }} ایجاد شد.",
+            "updated": "سازمانی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "سازمانی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف سازمان با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات سازمان"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "educationalModule": "Educational Module"
+        }
+    }
+}

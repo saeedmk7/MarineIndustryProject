@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity NiazsanjiGroup.
+    -->
+    <changeSet id="20181006162057-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="niazsanji_groups_id"
+                                 baseTableName="niazsanji_group_job"
+                                 constraintName="fk_niazsanji_group_job_niazsanji_groups_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="niazsanji_group"/>
+        <addForeignKeyConstraint baseColumnNames="jobs_id"
+                                 baseTableName="niazsanji_group_job"
+                                 constraintName="fk_niazsanji_group_job_jobs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="job"/>
+        
+        <addForeignKeyConstraint baseColumnNames="niazsanji_groups_id"
+                                 baseTableName="niazsanji_group_educational_module"
+                                 constraintName="fk_niazsanji_group_educational_module_niazsanji_groups_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="niazsanji_group"/>
+        <addForeignKeyConstraint baseColumnNames="educational_modules_id"
+                                 baseTableName="niazsanji_group_educational_module"
+                                 constraintName="fk_niazsanji_group_educational_module_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+        
+    </changeSet>
+</databaseChangeLog>

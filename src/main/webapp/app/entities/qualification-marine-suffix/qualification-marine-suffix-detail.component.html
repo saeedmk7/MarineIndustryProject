@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="qualification">
+            <h2><span jhiTranslate="marineindustryprojApp.qualification.detail.title">Qualification</span> {{qualification.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.qualification.title">Title</span></dt>
+                <dd>
+                    <span>{{qualification.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.qualification.code">Code</span></dt>
+                <dd>
+                    <span>{{qualification.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.qualification.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{qualification.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.qualification.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{qualification.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.qualification.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{qualification.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.qualification.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{qualification.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/qualification-marine-suffix', qualification.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

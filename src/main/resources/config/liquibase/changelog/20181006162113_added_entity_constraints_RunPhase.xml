@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity RunPhase.
+    -->
+    <changeSet id="20181006162113-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="run_phases_id"
+                                 baseTableName="run_phase_document"
+                                 constraintName="fk_run_phase_document_run_phases_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="run_phase"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="run_phase_document"
+                                 constraintName="fk_run_phase_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="run_phases_id"
+                                 baseTableName="run_phase_person"
+                                 constraintName="fk_run_phase_person_run_phases_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="run_phase"/>
+        <addForeignKeyConstraint baseColumnNames="people_id"
+                                 baseTableName="run_phase_person"
+                                 constraintName="fk_run_phase_person_people_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+        
+        <addForeignKeyConstraint baseColumnNames="final_niazsanji_report_id"
+                                 baseTableName="run_phase"
+                                 constraintName="fk_run_phase_final_niazsanji_report_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="final_niazsanji_report"/>
+
+    </changeSet>
+</databaseChangeLog>

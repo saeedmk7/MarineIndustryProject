@@ -1,0 +1,31 @@
+
+{
+    "marineindustryprojApp": {
+        "resource" : {
+            "home": {
+                "title": "Resources",
+                "createLabel": "Create a new Resource",
+                "createOrEditLabel": "Create or edit a Resource"
+            },
+            "created": "A new Resource is created with identifier {{ param }}",
+            "updated": "A Resource is updated with identifier {{ param }}",
+            "deleted": "A Resource is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Resource {{ id }}?"
+            },
+            "detail": {
+                "title": "Resource"
+            },
+            "title": "Title",
+            "description": "Description",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "document": "Document",
+            "educationalModule": "Educational Module",
+            "requestEducationalModule": "Request Educational Module"
+        }
+    }
+}

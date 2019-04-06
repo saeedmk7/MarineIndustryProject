@@ -1,0 +1,180 @@
+<!doctype html>
+<html class="no-js" lang="fa" dir="ltr">
+<head>
+    <base href="./" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>سازمان صنایع دریایی</title>
+    <meta name="description" content="">
+    <meta name="google" value="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="manifest" href="manifest.webapp" />
+
+<style>
+    .container {
+        height: 100vh;
+        width: 100vw;
+        font-family: Helvetica;
+
+    }
+
+    .loader {
+        height: 20px;
+        width: 200px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    .loader--dot {
+        animation-name: loader;
+        animation-timing-function: ease-in-out;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        height: 20px;
+        width: 20px;
+        border-radius: 100%;
+        background-color: black;
+        position: absolute;
+        border: 2px solid white;
+    }
+    .loader--dot:first-child {
+        background-color: #8cc759;
+        animation-delay: 0.5s;
+    }
+    .loader--dot:nth-child(2) {
+        background-color: #8c6daf;
+        animation-delay: 0.4s;
+    }
+    .loader--dot:nth-child(3) {
+        background-color: #ef5d74;
+        animation-delay: 0.3s;
+    }
+    .loader--dot:nth-child(4) {
+        background-color: #f9a74b;
+        animation-delay: 0.2s;
+    }
+    .loader--dot:nth-child(5) {
+        background-color: #60beeb;
+        animation-delay: 0.1s;
+    }
+    .loader--dot:nth-child(6) {
+        background-color: #fbef5a;
+        animation-delay: 0s;
+    }
+    .loader--text {
+        font-family: IranSans,SansSerif,IranYekan,"B Nazanin", "B Badr", Tahoma, "Times New Roman";
+        position: absolute;
+        top: 200%;
+        left: 0;
+        right: 0;
+        width: 15rem;
+        margin: auto;
+        direction: rtl;
+    }
+    .loader--text:after {
+        content: "درحال بارگزاری سامانه";
+        font-weight: bold;
+        animation-name: loading-text;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        direction: rtl;
+    }
+
+    @keyframes loader {
+        15% {
+            transform: translateX(0);
+        }
+        45% {
+            transform: translateX(230px);
+        }
+        65% {
+            transform: translateX(230px);
+        }
+        95% {
+            transform: translateX(0);
+        }
+    }
+    @keyframes loading-text {
+        0% {
+            content: "درحال بارگزاری سامانه";
+        }
+        10% {
+            content: "درحال بارگزاری سامانه.";
+        }
+        20% {
+            content: "درحال بارگزاری سامانه..";
+        }
+        30% {
+            content: "درحال بارگزاری سامانه...";
+        }
+        40% {
+            content: "درحال بارگزاری سامانه....";
+        }
+        50% {
+            content: "درحال بارگزاری سامانه.....";
+        }
+        60% {
+            content: "درحال بارگزاری سامانه......";
+        }
+        70% {
+            content: "درحال بارگزاری سامانه.......";
+        }
+        80% {
+            content: "درحال بارگزاری سامانه........";
+        }
+        90% {
+            content: "درحال بارگزاری سامانه.........";
+        }
+    }
+</style>
+
+    <!-- jhipster-needle-add-resources-to-root - JHipster will add new resources here -->
+</head>
+<body style="overflow-x: hidden">
+    <!--[if lt IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <mi-main>
+        <div class="container">
+            <div class="loader">
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--text"></div>
+            </div>
+        </div>
+    </mi-main>
+    <noscript>
+        <h1>You must enable javascript to view this page.</h1>
+    </noscript>
+    <!-- uncomment this for adding service worker
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/service-worker.js')
+                        .then(function () {
+                            console.log('Service Worker Registered');
+                        });
+                });
+            }
+        </script>
+    -->
+    <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
+    <script>
+        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+        ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>-->
+</body>
+</html>

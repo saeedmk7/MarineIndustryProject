@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity EducationalModuleJob.
+    -->
+    <changeSet id="20181113110531-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="educational_module_id"
+                                 baseTableName="educational_module_job"
+                                 constraintName="fk_educational_module_job_educational_module_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+
+        <addForeignKeyConstraint baseColumnNames="job_id"
+                                 baseTableName="educational_module_job"
+                                 constraintName="fk_educational_module_job_job_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="job"/>
+
+
+    </changeSet>
+</databaseChangeLog>

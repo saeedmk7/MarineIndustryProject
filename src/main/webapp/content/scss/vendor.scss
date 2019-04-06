@@ -1,0 +1,19 @@
+/* after changing this file run 'npm run webpack:build' */
+$fa-font-path: '~font-awesome/fonts';
+
+/***************************
+put Sass variables here:
+eg $input-color: red;
+****************************/
+// Override Boostrap variables
+@import 'bootstrap-variables';
+// Import Bootstrap source files from node_modules
+@import '~bootstrap/scss/bootstrap';
+@import './rtl.scss';
+@import '~font-awesome/scss/font-awesome';
+@import '~angular-tree-component/dist/angular-tree-component.css';
+@import './custom.scss';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~@progress/kendo-theme-default/dist/all.css";
+
+/* jhipster-needle-scss-add-vendor JHipster will add new css style */

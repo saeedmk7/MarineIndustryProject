@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="educationalModuleJob">
+            <h2><span jhiTranslate="marineindustryprojApp.educationalModuleJob.detail.title">Educational Module Job</span> {{educationalModuleJob.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.educationalModuleJob.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{educationalModuleJob.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalModuleJob.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{educationalModuleJob.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalModuleJob.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{educationalModuleJob.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalModuleJob.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{educationalModuleJob.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalModuleJob.educationalModule">Educational Module</span></dt>
+                <dd>
+                    <div *ngIf="educationalModuleJob.educationalModuleId">
+                        <!--<a [routerLink]="['/educational-module-marine-suffix', educationalModuleJob.educationalModuleId, 'view']">{{educationalModuleJob.educationalModuleTitle}}</a>-->
+                        <span>{{educationalModuleJob.educationalModuleTitle}}</span>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalModuleJob.job">Job</span></dt>
+                <dd>
+                    <div *ngIf="educationalModuleJob.jobId">
+                        <span>{{educationalModuleJob.jobTitle}}</span>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report4" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c738fa83-1894-46d5-b7e2-516744f9f549">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="family" class="java.lang.String"/>
+	<field name="fatherName" class="java.lang.String"/>
+	<field name="certificateNumber" class="java.lang.String"/>
+	<field name="nationalId" class="java.lang.String"/>
+	<field name="birthDate" class="java.lang.String"/>
+	<field name="personelCode" class="java.lang.String"/>
+	<field name="employmentDate" class="java.lang.String"/>
+	<field name="yearOfService" class="java.lang.Integer"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="7c826f7d-3143-436a-9e2d-50fbb86bf9ca"/>
+				<staticText>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="cbdb9e8c-c900-4647-b438-1f762cbaf3b0"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TITLE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="97fba265-f5e5-47b4-b0f0-29158700caa5"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Add a description here]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="b1f4be71-4c62-4cd3-99e5-9e3529634100"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="22e2e997-c899-472f-b4a0-a0ac9d023f72"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="55" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="32362f16-02ca-46df-a035-cd4b004a6bc5"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="110" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="be77ae94-5e17-4183-bfc4-d06a97cb3ae8"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[family]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="165" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="77616c9f-5d54-46c2-b44e-f6b5d17b5a0e"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[father_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="220" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="527fc128-fcce-4c54-bc2c-d1fc6efee218"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[certificate_number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="275" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="75862687-8337-4102-abc4-4a273e662fe9"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[national_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="330" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="885e160f-c363-4e19-9eef-290b9bc38580"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[birth_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="385" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="06ddc06a-edad-4276-a923-9657f9f7d70a"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[personel_code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="440" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="46a8bf85-aa7a-42fb-89bd-71024c89ef73"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[employment_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="495" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="4d78442b-4011-4ed7-8a84-be71b562cfc0"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[year_of_service]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="04d1c81b-0993-4c16-b9e3-ef892cef631a"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="55" height="20" uuid="dbf71f2b-84f4-48cf-907b-2b516fed1e22"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="55" y="0" width="55" height="20" uuid="1d03da20-756f-47b9-9125-c880e597966d"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="110" y="0" width="55" height="20" uuid="4cbc0eef-0576-4758-8a96-b567821a597a"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{family}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="165" y="0" width="55" height="20" uuid="e466a31e-70d2-4135-a3f1-b90fea2e2f91"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fatherName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="220" y="0" width="55" height="20" uuid="4c2a7725-5356-4001-8943-dd11804aa3cc"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{certificateNumber}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="275" y="0" width="55" height="20" uuid="bb181184-b40e-4216-a5b7-bf5265f54725"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nationalId}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="330" y="0" width="55" height="20" uuid="95fb99c2-692b-4ed1-9324-c2bd2c9daa84"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{birthDate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="385" y="0" width="55" height="20" uuid="30443f69-743b-4a1d-95b4-886d08fa47dc"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{personelCode}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="440" y="0" width="55" height="20" uuid="693338d0-96aa-4b44-b8e6-a384a23f14c2"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employmentDate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="495" y="0" width="55" height="20" uuid="a7330783-2302-4d45-9011-f05eaef041ea"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{yearOfService}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="88273894-7c83-4f02-be83-1ec99d3f7b50"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="5986270f-1238-40b2-ad30-2e51ee3e828c"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="afdd48d2-216e-4e00-bca5-425dde377f5c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

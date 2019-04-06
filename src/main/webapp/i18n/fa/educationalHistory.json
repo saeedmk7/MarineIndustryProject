@@ -1,0 +1,54 @@
+{
+    "marineindustryprojApp": {
+        "educationalHistory": {
+            "home": {
+                "title": "پرونده/سوابق آموزشی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش پرونده/سوابق آموزشی"
+            },
+            "created": "پرونده/سوابق آموزشی با شناسه {{ param }} ایجاد شد.",
+            "updated": "پرونده/سوابق آموزشی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "پرونده/سوابق آموزشی با شناسه {{ param }} حذف شد.",
+            "completed": "پرونده/سوابق آموزشی مورد نظر با موفقیت نهایی شد.",
+            "rejected": "پرونده/سوابق آموزشی مورد نظر با موفقیت رد شد.",
+            "delete": {
+                "question": "آیا از حذف پرونده/سوابق آموزشی با شناسه {{ id }} مطمئنید؟"
+            },
+            "comment": {
+                "accept": "لطفا نظر خود را درج نمائید.",
+                "reject": "لطفا علت عدم تایید را ثبت نمائید.",
+                "comment": "لطفا نظر خود را درج نمائید."
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات پرونده/سوابق آموزشی"
+            },
+            "index": "ردیف",
+            "educationalModuleTitle": "عنوان پودمان آموزشی",
+            "learningTimeTheorical": "مدت زمان نظری(ساعت)",
+            "learningTimePractical": "مدت زمان عملی(ساعت)",
+            "totalTime": "مجموع (ساعت)",
+            "educationalCenter": "مرکزآموزشی",
+            "dateOfStart": "تاریخ برگزاری دوره",
+            "fileDoc": "فایل گواهینامه",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر درخواست کننده",
+            "createDate": "تاریخ ثبت اطلاعات",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت درخواست",
+            "conversation": "مکالمات",
+            "requestStatus": "وضعیت درخواست",
+            "changeStatusUserLogin": "فرد تغییر دهنده وضعیت درخواست",
+            "person": "نام و نام خانوادگی",
+            "personName": "نام و نام خانوادگی",
+            "personFamily": "نام و نام خانوادگی",
+            "job": "شغل سازمانی",
+            "practicaljob": "شغل سازمانی",
+            "organizationChart": "موقعیت در سازمان",
+            "organizationChartId": "موقعیت در سازمان"
+        }
+    }
+}

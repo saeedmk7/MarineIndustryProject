@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "workIndustry" : {
+            "home": {
+                "title": "Work Industries",
+                "createLabel": "Create a new Work Industry",
+                "createOrEditLabel": "Create or edit a Work Industry"
+            },
+            "created": "A new Work Industry is created with identifier {{ param }}",
+            "updated": "A Work Industry is updated with identifier {{ param }}",
+            "deleted": "A Work Industry is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Work Industry {{ id }}?"
+            },
+            "detail": {
+                "title": "Work Industry"
+            },
+            "title": "Title",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "person": "Person",
+            "workUnit": "Work Unit"
+        }
+    }
+}

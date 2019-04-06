@@ -1,0 +1,29 @@
+
+{
+    "marineindustryprojApp": {
+        "skillableLevelOfSkill" : {
+            "home": {
+                "title": "Skillable Level Of Skills",
+                "createLabel": "Create a new Skillable Level Of Skill",
+                "createOrEditLabel": "Create or edit a Skillable Level Of Skill"
+            },
+            "created": "A new Skillable Level Of Skill is created with identifier {{ param }}",
+            "updated": "A Skillable Level Of Skill is updated with identifier {{ param }}",
+            "deleted": "A Skillable Level Of Skill is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Skillable Level Of Skill {{ id }}?"
+            },
+            "detail": {
+                "title": "Skillable Level Of Skill"
+            },
+            "title": "Title",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "educationalModule": "Educational Module",
+            "requestEducationalModule": "Request Educational Module"
+        }
+    }
+}

@@ -1,0 +1,62 @@
+
+{
+    "marineindustryprojApp": {
+        "requestEducationalModule" : {
+            "home": {
+                "title": "فهرست درخواست پودمان ها",
+                "createLabel": "جدید",
+                "createOrEditLabel": "درخواست پودمان"
+            },
+            "created": "درخواست پودمان با شناسه {{ param }} ایجاد شد.",
+            "updated": "درخواست پودمان با شناسه {{ param }} ویرایش شد.",
+            "deleted": "درخواست پودمان با شناسه {{ param }} حذف شد.",
+            "completed": "درخواست پودمان آموزشی مورد نظر با موفقیت نهایی شد.",
+            "rejected": "درخواست پودمان آموزشی مورد نظر با موفقیت رد شد.",
+            "delete": {
+                "question": "آیا برای حذف درخواست پودمان با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات درخواست پودمان"
+            },
+            "title": "عنوان پودمان",
+            "code": "شناسه پودمان",
+            "learningTimeTheorical": "مدت زمان نظری (ساعت)",
+            "learningTimePractical": "مدت زمان عملی (ساعت)",
+            "version": "نسخه ویرایش",
+            "innerCode": "کد درون سازمانی پودمان",
+            "centralizedCode": "کد متمرکز پودمان",
+            "moreDescription": "توضیحات بیشتر",
+            "recommendedBy": "واحد پیشنهاد دهنده",
+            "educationalModuleHeadlines": "سرفصل های پودمان",
+            "prerequisite": "پیش نیازها",
+            "drafters": "تدوین کنندگان",
+            "educationalModuleLevel": "سطح پودمان آموزشی",
+            "educationalModuleGroup": "گروه پودمان آموزشی",
+            "educationalModuleHour": "ساعت پودمان آموزشی",
+            "timePassed": "مدت زمان سپری شده",
+            "credit": "اعتبار",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "conversation": "مکالمه",
+            "requestStatus": "وضعیت درخواست",
+            "changeStatusUserLogin": "کاربر تغییر دهنده وضعیت درخواست",
+            "educationalModule": "پودمان آموزشی",
+            "scientificWorkGroup": "گروه علمی شغلی مربوطه",
+            "document": "مدارک",
+            "educationalCenter": "مراکز آموزشی پیشنهادی",
+            "goal": "اهداف آموزشی",
+            "resource": "منابع آموزشی",
+            "teacher": "مدرسین دارای صلاحیت تدریس",
+            "securityLevel": "طبقه بندی امنیتی",
+            "skillableLevelOfSkill": "سطح مهارت قابل تامین پودمان",
+            "evaluationMethod": "شیوه ارزشیابی",
+            "organization": "سازمان"
+        }
+    }
+}

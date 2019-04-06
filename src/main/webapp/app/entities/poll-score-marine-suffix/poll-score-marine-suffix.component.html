@@ -1,0 +1,94 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.pollScore.home.title">Poll Scores</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-poll-score-marine-suffix" [routerLink]="['/poll-score-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.pollScore.home.createLabel">
+            Create new Poll Score
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="pollScores">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="recommendation"><span jhiTranslate="marineindustryprojApp.pollScore.recommendation">Recommendation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.pollScore.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.pollScore.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.pollScore.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.pollScore.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pollItemTitle"><span jhiTranslate="marineindustryprojApp.pollScore.pollItem">Poll Item</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="scoreItemTitle"><span jhiTranslate="marineindustryprojApp.pollScore.scoreItem">Score Item</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pollMoreRecommendation"><span jhiTranslate="marineindustryprojApp.pollScore.poll">Poll</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.pollScore.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let pollScore of pollScores ;trackBy: trackId">
+                <td><a [routerLink]="['/poll-score-marine-suffix', pollScore.id, 'view' ]">{{pollScore.id}}</a></td>
+                <td>{{pollScore.recommendation}}</td>
+                <td>{{pollScore.createUserLogin}}</td>
+                <td>{{pollScore.createDate | date:'medium'}}</td>
+                <td>{{pollScore.modifyUserLogin}}</td>
+                <td>{{pollScore.modifyDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="pollScore.pollItemId">
+                        <a [routerLink]="['../poll-item-marine-suffix', pollScore.pollItemId , 'view' ]" >{{pollScore.pollItemTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="pollScore.scoreItemId">
+                        <a [routerLink]="['../score-item-marine-suffix', pollScore.scoreItemId , 'view' ]" >{{pollScore.scoreItemTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="pollScore.pollId">
+                        <a [routerLink]="['../poll-marine-suffix', pollScore.pollId , 'view' ]" >{{pollScore.pollMoreRecommendation}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="pollScore.personId">
+                        <a [routerLink]="['../person-marine-suffix', pollScore.personId , 'view' ]" >{{pollScore.personFamily}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/poll-score-marine-suffix', pollScore.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/poll-score-marine-suffix', pollScore.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'poll-score-marine-suffix/'+ pollScore.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="pollScores && pollScores.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

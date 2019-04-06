@@ -1,0 +1,11 @@
+{
+    "marineindustryprojApp": {
+        "RequestStatus" : {
+            "null": "",
+            "NEW": "NEW",
+            "READ": "READ",
+            "IGNORE": "IGNORE",
+            "ACCEPT": "ACCEPT"
+        }
+    }
+}

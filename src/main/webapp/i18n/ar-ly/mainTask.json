@@ -1,0 +1,36 @@
+
+{
+    "marineindustryprojApp": {
+        "mainTask" : {
+            "home": {
+                "title": "Main Tasks",
+                "createLabel": "Create a new Main Task",
+                "createOrEditLabel": "Create or edit a Main Task"
+            },
+            "created": "A new Main Task is created with identifier {{ param }}",
+            "updated": "A Main Task is updated with identifier {{ param }}",
+            "deleted": "A Main Task is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Main Task {{ id }}?"
+            },
+            "detail": {
+                "title": "Main Task"
+            },
+            "title": "Title",
+            "description": "Description",
+            "code": "Code",
+            "solution": "Solution",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "subTask": "Sub Task",
+            "job": "Job",
+            "person": "Person"
+        }
+    }
+}

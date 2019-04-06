@@ -1,0 +1,372 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-person-marine-suffix-heading" jhiTranslate="marineindustryprojApp.person.home.createOrEditLabel" translateValues="{param: '{{fullName}}'}">Create or edit a Person</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <!--<div class="form-group" [hidden]="!person.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="person.id" readonly />
+                </div>-->
+                <input type="hidden" class="form-control col-md-4" id="id" name="id"
+               [(ngModel)]="person.id" readonly />
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.personelCode" for="field_personelCode">Personel Code</label>
+                    <input type="number" class="form-control" [disabled]="person.id !== undefined" name="personelCode" id="field_personelCode"
+                           [(ngModel)]="person.personelCode" required maxlength="50" jhiMax="999999999999" jhiMin="99"/>
+                    <div [hidden]="!(editForm.controls.personelCode?.dirty && editForm.controls.personelCode?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.personelCode?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.personelCode?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.personelCode?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 999999999999 }">
+                            This field cannot be more than 999999.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.personelCode?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 99 }">
+                            This field cannot be less than 100000.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.personelCode?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div style="display: inline;" class="alert alert-warning">این فیلد باید برای هر فرد یکتا باشد در غیر اینصورت امکان ثبت اطلاعات فرد وجود ندارد.</div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات شناسنامه ای  {{fullName}}</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="person.name" required maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.family" for="field_family">Family</label>
+                    <input type="text" class="form-control" name="family" id="field_family"
+                        [(ngModel)]="person.family" required maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.family?.dirty && editForm.controls.family?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.family?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.family?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.fatherName" for="field_fatherName">Father Name</label>
+                    <input type="text" class="form-control" name="fatherName" id="field_fatherName"
+                        [(ngModel)]="person.fatherName" required maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.fatherName?.dirty && editForm.controls.fatherName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fatherName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fatherName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.certificateNumber" for="field_certificateNumber">Certificate Number</label>
+                    <input type="text" class="form-control" name="certificateNumber" id="field_certificateNumber"
+                        [(ngModel)]="person.certificateNumber" required maxlength="12"/>
+                    <div [hidden]="!(editForm.controls.certificateNumber?.dirty && editForm.controls.certificateNumber?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.certificateNumber?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.certificateNumber?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 12 }">
+                        This field cannot be longer than 12 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.nationalId" for="field_nationalId">National Id</label>
+                    <input type="text" class="form-control" name="nationalId" id="field_nationalId"
+                        [(ngModel)]="person.nationalId" required maxlength="10" pattern="[0-9]{10}"/>
+                    <div [hidden]="!(editForm.controls.nationalId?.dirty && editForm.controls.nationalId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nationalId?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nationalId?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 10 }">
+                        This field cannot be longer than 10 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.nationalId?.errors?.pattern" jhiTranslate="entity.validation.pattern" translateValues="{ pattern: 'National Id' }">
+                            This field should follow pattern for "National Id".
+                        </small>
+                    </div>
+                </div>
+                <div class="alert alert-warning" style="display: inline">فیلد کد ملی نیز باید برای هر فرد یکتا باشد.</div>
+                <div *ngIf="isfa">
+                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.birthDate" for="field_birthDate">Birth Date</label>
+                    <div class="d-flex">
+                          <dp-date-picker
+                        dir="rtl"
+                        [(ngModel)]="birthDate"
+                        name="birthDate"
+                        id="field_birthDate"
+                        mode="day"
+                        placeholder="تاریخ تولد"
+                        class="form-control col-md-4"
+                        [disabled] = "!isfa"
+                        [required]="isfa"
+                        (close)="birthDatechanged()"
+                        theme="dp-material">
+                    </dp-date-picker>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.employmentDate" for="field_employmentDate">Employment Date</label>
+                    <div class="d-flex">
+                        <dp-date-picker
+                        dir="rtl"
+                        [(ngModel)]="employmentDate"
+                        name="employmentDate"
+                        id="field_employmentDate"
+                        mode="day"
+                        placeholder="تاریخ استخدام"
+                        class="form-control col-md-4"
+                        (close)="employmentDateChanged()"
+                        [disabled] = "!isfa"
+                        theme="dp-material">
+                    </dp-date-picker>
+                    </div>
+                </div>
+                </div>
+                <div *ngIf="!isfa">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.birthDate" for="field_birthDate">Birth Date</label>
+                    <div class="d-flex">
+                        <input id="field_birthDate" type="datetime-local" class="form-control" name="birthDate" [(ngModel)]="birthDate"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.birthDate?.dirty && editForm.controls.birthDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.birthDate?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.birthDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.employmentDate" for="field_employmentDate">Employment Date</label>
+                    <div class="d-flex">
+                        <input id="field_employmentDate" type="datetime-local" class="form-control" name="employmentDate" [(ngModel)]="employmentDate"
+                        />
+                    </div>
+                </div>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات شغلی {{fullName}}</div></div>
+                <div class="form-group">
+                    <a (click)="change('organization-chart-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.person.organizationChart" for="field_organizationChart">organizationChart</a>
+                    <!--<select class="form-control" id="field_job" name="job" [(ngModel)]="person.jobId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="jobOption.id" *ngFor="let jobOption of jobs; trackBy: trackJobById">{{jobOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="organizationcharts"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="fullTitle"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="organizationChart"
+                        id="field_organizationChart"
+                        [(ngModel)]="person.organizationChartId">
+                </div>
+                <div class="form-group">
+                    <a (click)="change('job-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.person.job" for="field_job">Job</a>
+                    <!--<select class="form-control" id="field_job" name="job" [(ngModel)]="person.jobId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="jobOption.id" *ngFor="let jobOption of jobs; trackBy: trackJobById">{{jobOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="jobs"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="fullTitle"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="job"
+                        id="field_job"
+                        [(ngModel)]="person.jobId">
+                </div>
+                <div class="form-group">
+                    <a (click)="change('job-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.person.practicaljob" for="field_practicaljob">Practicaljob</a>
+                    <!--<select class="form-control" id="field_practicaljob" name="practicaljob" [(ngModel)]="person.practicaljobId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="jobOption.id" *ngFor="let jobOption of jobs; trackBy: trackJobById">{{jobOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="jobs"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="fullTitle"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="practicaljob"
+                        id="field_practicaljob"
+                        [(ngModel)]="person.practicaljobId">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.yearOfService" for="field_yearOfService">Year Of Service</label>
+                    <input type="number" class="form-control" name="yearOfService" id="field_yearOfService"
+                        [(ngModel)]="person.yearOfService" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.code" for="field_code">Code</label>
+                    <input type="text" class="form-control" name="code" id="field_code"
+                        [(ngModel)]="person.code" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.code?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <a (click)="change('employment-type-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.person.employmentType" for="field_employmentType">Employment Type</a>
+                    <!--<select class="form-control" id="field_employmentType" name="employmentType" [(ngModel)]="person.employmentTypeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="employmentTypeOption.id" *ngFor="let employmentTypeOption of employmenttypes; trackBy: trackEmploymentTypeById">{{employmentTypeOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="employmenttypes"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="employmentType"
+                        id="field_employmentType"
+                        [(ngModel)]="person.employmentTypeId">
+                </div>
+                <div class="form-group">
+                    <a (click)="change('work-group-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.person.workGroup" for="field_workGroup">Work Group</a>
+                    <!--<select class="form-control" id="field_workGroup" name="workGroup" [(ngModel)]="person.workGroupId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="workGroupOption.id" *ngFor="let workGroupOption of workgroups; trackBy: trackWorkGroupById">{{workGroupOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="workgroups"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="workGroup"
+                        id="field_workGroup"
+                        [(ngModel)]="person.workGroupId">
+                </div>
+                <div class="form-group">
+                    <a (click)="change('work-industry-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.person.workIndustry" for="field_workIndustry">Work Industry</a>
+                    <!--<select class="form-control" id="field_workIndustry" name="workIndustry" [(ngModel)]="person.workIndustryId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="workIndustryOption.id" *ngFor="let workIndustryOption of workindustries; trackBy: trackWorkIndustryById">{{workIndustryOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="workindustries"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="workIndustry"
+                        id="field_workIndustry"
+                        [(ngModel)]="person.workIndustryId">
+                </div>
+
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات تحصیلی {{fullName}}</div></div>
+                <div class="form-group">
+                    <a (click)="change('qualification-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.person.lastQualification" for="field_lastQualification">Last Qualification</a>
+                    <!--<select class="form-control" id="field_lastQualification" name="lastQualification" [(ngModel)]="person.lastQualificationId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="qualificationOption.id" *ngFor="let qualificationOption of qualifications; trackBy: trackQualificationById">{{qualificationOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="qualifications"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="lastQualification"
+                        id="field_lastQualification"
+                        [(ngModel)]="person.lastQualificationId">
+                </div>
+                <div class="form-group">
+                    <a (click)="change('field-of-study-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.person.lastFieldOfStudy" for="field_lastFieldOfStudy">Last Field Of Study</a>
+                   <!-- <select class="form-control" id="field_lastFieldOfStudy" name="lastFieldOfStudy" [(ngModel)]="person.lastFieldOfStudyId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="fieldOfStudyOption.id" *ngFor="let fieldOfStudyOption of fieldofstudies; trackBy: trackFieldOfStudyById">{{fieldOfStudyOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="fieldofstudies"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="lastFieldOfStudy"
+                        id="field_lastFieldOfStudy"
+                        [(ngModel)]="person.lastFieldOfStudyId">
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+
+                <span class="alert alert-danger" *ngIf="message">{{message}}</span>
+            </div>
+        </form>
+    </div>
+</div>

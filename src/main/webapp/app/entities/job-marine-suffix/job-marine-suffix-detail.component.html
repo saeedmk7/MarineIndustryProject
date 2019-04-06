@@ -1,0 +1,97 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="job" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.job.detail.title">Job</span> {{job.id}}</h2>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.job.title">Title</span></dt>
+                <dd>
+                    <span>{{job.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.jobKey">Job Key</span></dt>
+                <dd>
+                    <span>{{job.jobKey}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.jobCode">Job Code</span></dt>
+                <dd>
+                    <span>{{job.jobCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{job.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{job.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{job.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{job.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.archived">Archived</span></dt>
+                <dd>
+                    <span>{{job.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{job.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{job.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.status">Status</span></dt>
+                <dd>
+                    <span>{{job.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.raste">Raste</span></dt>
+                <dd>
+                    <div *ngIf="job.rasteId">
+                        <a [routerLink]="['/raste-marine-suffix', job.rasteId, 'view']">{{job.rasteTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.radeh">Radeh</span></dt>
+                <dd>
+                    <div *ngIf="job.radehId">
+                        <a [routerLink]="['/radeh-marine-suffix', job.radehId, 'view']">{{job.radehTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.jobType">Job Type</span></dt>
+                <dd>
+                    <div *ngIf="job.jobTypeId">
+                        <a [routerLink]="['/job-type-marine-suffix', job.jobTypeId, 'view']">{{job.jobTypeTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.scientificWorkGroup">Scientific Work Group</span></dt>
+                <dd>
+                    <div *ngIf="job.scientificWorkGroupId">
+                        <a [routerLink]="['/scientific-work-group-marine-suffix', job.scientificWorkGroupId, 'view']">{{job.scientificWorkGroupTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.job.parent">Parent</span></dt>
+                <dd>
+                    <div *ngIf="job.parentId">
+                        <a [routerLink]="['/job-marine-suffix', job.parentId, 'view']">{{job.parentTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+        <div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/job-marine-suffix', job.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+        </div>
+    </div>
+</div>

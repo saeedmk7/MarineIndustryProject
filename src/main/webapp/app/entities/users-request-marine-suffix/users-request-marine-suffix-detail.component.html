@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="usersRequest" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.usersRequest.detail.title">Users Request</span> {{usersRequest.id}}</h2>
+
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.usersRequest.title">Title</span></dt>
+                <dd>
+                    <span>{{usersRequest.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.usersRequest.telephone">Telephone</span></dt>
+                <dd>
+                    <span>{{usersRequest.telephone}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.usersRequest.description">Description</span></dt>
+                <dd>
+                    <span>{{usersRequest.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.usersRequest.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{usersRequest.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.usersRequest.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{usersRequest.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.usersRequest.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{usersRequest.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.usersRequest.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{usersRequest.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.usersRequest.conversation">Conversation</span></dt>
+                <dd>
+                    <span>{{usersRequest.conversation}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.usersRequest.requestStatus">Request Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + usersRequest.requestStatus}}">{{usersRequest.requestStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.usersRequest.changeStatusUserLogin">Change Status User Login</span></dt>
+                <dd>
+                    <span>{{usersRequest.changeStatusUserLogin}}</span>
+                </dd>
+
+            </dl>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <!--<button type="button"
+                    [routerLink]="['/users-request-marine-suffix', usersRequest.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>-->
+</div>   </div>
+    </div>
+</div>

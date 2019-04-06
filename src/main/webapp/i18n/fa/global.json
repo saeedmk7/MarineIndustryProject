@@ -1,0 +1,213 @@
+{
+    "global": {
+        "title": "Marineindustryproj",
+        "browsehappy": "شما از مرورگر <strong>قدیمی</strong> استفاده می‌کنید. لطفا <a href=\"http://browsehappy.com/?locale=en\">مرورگر خود را به روز کنید</a>",
+        "menu": {
+            "home": "خانه",
+            "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+            "entities": {
+                "main": "اطلاعات پایه",
+                "personMarineSuffix": "فهرست کارکنان",
+                "teacherMarineSuffix": "فهرست مدرسین داخلی ودجا",
+                "jobMarineSuffix": "مشاغل سازمانی",
+                "organizationChartMarineSuffix": "چارت سازمانی",
+                "educationalModuleMarineSuffix": "پودمان ها",
+                "educationalCenterMarineSuffix": "مراکز آموزشی",
+                "resourceMarineSuffix": "Resource",
+                "goalMarineSuffix": "Goal",
+                "evaluationMethodMarineSuffix": "Evaluation Method",
+                "skillableLevelOfSkillMarineSuffix": "Skillable Level Of Skill",
+                "securityLevelMarineSuffix": "Security Level",
+                "rasteMarineSuffix": "Raste",
+                "radehMarineSuffix": "Radeh",
+                "jobTypeMarineSuffix": "Job Type",
+                "qualificationMarineSuffix": "مدارک تحصیلی",
+                "fieldOfStudyMarineSuffix": "Field Of Study",
+                "employmentTypeMarineSuffix": "Employment Type",
+                "workGroupMarineSuffix": "Work Group",
+                "workIndustryMarineSuffix": "Work Industry",
+                "workUnitMarineSuffix": "Work Unit",
+                "scientificWorkGroupMarineSuffix": "Scientific Work Group",
+                "organizationMarineSuffix": "Organization",
+                "activityAreaMarineSuffix": "Activity Area",
+                "serviceUnitMarineSuffix": "Service Unit",
+                "academicRankMarineSuffix": "Academic Rank",
+                "documentMarineSuffix": "Document",
+                "mainTaskMarineSuffix": "Main Task",
+                "subTaskMarineSuffix": "Sub Task",
+                "niazsanjiGroupMarineSuffix": "Niazsanji Group",
+                "requestOrganizationNiazsanjiMarineSuffix": "Request Organization Niazsanji",
+                "teachApproachMarineSuffix": "Teach Approach",
+                "finalOrganizationNiazsanjiMarineSuffix": "Final Organization Niazsanji",
+                "finalNiazsanjiReportMarineSuffix": "Final Niazsanji Report",
+                "finalNiazsanjiReportPersonMarineSuffix": "Final Niazsanji Report Person",
+                "designAndPlanningMarineSuffix": "Design And Planning",
+                "mahiatCourseMarineSuffix": "Mahiat Course",
+                "courseTypeMarineSuffix": "Course Type",
+                "teachTypeMarineSuffix": "Teach Type",
+                "courseLocationMarineSuffix": "Course Location",
+                "conditionsOfParticipantMarineSuffix": "Conditions Of Participant",
+                "effectivenessLevelMarineSuffix": "Effectiveness Level",
+                "toolsAndFacilityMarineSuffix": "Tools And Facility",
+                "teachingApproachMarineSuffix": "Teaching Approach",
+                "teachTechniqueMarineSuffix": "Teach Technique",
+                "effectivenessIndexMarineSuffix": "Effectiveness Index",
+                "runPhaseMarineSuffix": "Run Phase",
+                "runningStepMarineSuffix": "Running Step",
+                "runRunningStepMarineSuffix": "Run Running Step",
+                "criterionMarineSuffix": "Criterion",
+                "pollItemMarineSuffix": "Poll Item",
+                "pollMarineSuffix": "Poll",
+                "scoreItemMarineSuffix": "Score Item",
+                "pollScoreMarineSuffix": "Poll Score",
+                "organizationChartAuthorityMarineSuffix": "Organization Chart Authority",
+                "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+            },
+            "account": {
+                "main": "حساب",
+                "settings": "تنضیمات",
+                "password": "رمزعبور",
+                "sessions": "نشست ها",
+                "login": "ورود",
+                "logout": "خروج",
+                "register": "ثبت نام"
+            },
+            "admin": {
+                "import-data": "ورود دیتا",
+                "main": "مدیریت برتر",
+                "userManagement": "مدیریت کاربر",
+                "tracker": "ردیاب کاربر",
+                "metrics": "معیارها",
+                "health": "سلامتی",
+                "configuration": "پیکربندی",
+                "logs": "وقایع ثبت شده",
+                "audits": "وقایع بازرسی",
+                "apidocs": "ای‌پی‌آی",
+                "database": "پایگاه داده",
+                "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
+            },
+            "language": "زبان"
+        },
+        "form": {
+            "username": "کدملی",
+            "username.placeholder": "کدملی شما",
+            "currentpassword": "رمزعبور کنونی",
+            "currentpassword.placeholder": "رمزعبور کنونی",
+            "newpassword": "رمزعبور جدید",
+            "newpassword.placeholder": "رمزعبور جدید",
+            "confirmpassword": "تصدیق رمزعبور جدید",
+            "confirmpassword.placeholder": "تصدیق رمزعبور جدید",
+            "email": "رایانامه",
+            "email.placeholder": "آدرس رایانامه شما"
+        },
+        "messages": {
+            "info": {
+                "authenticated": {
+                    "prefix": "اگر شما می‌خواهید",
+                    "link": "ورود",
+                    "suffix": ", می‌توانید از حساب پایه:<br/>- مدیریت برتر (login=\"admin\" and password=\"admin\") <br/>- کاربر (login=\"user\" and password=\"user\")."
+                },
+                "register": {
+                    "noaccount": "آیا هنوز حساب کاربری ندارید؟",
+                    "link": "ثبت نام حساب کاربری جدید"
+                }
+            },
+            "error": {
+                "dontmatch": "رمزعبور و تصدیق رمزعبور یکی نیستند!"
+            },
+            "validate": {
+                "newpassword": {
+                    "required": "رمزعبور شما ضروری است",
+                    "minlength": "رمزعبور شما باید حداقل ۴ کرکتر باشد",
+                    "maxlength": "رمز عبور شما نمی‌تواند بیش از ۵۰ کرکتر باشد.",
+                    "strength": "قدرتمندی رمزعبور:"
+                },
+                "confirmpassword": {
+                    "required": "تصدیق رمزعبور شما ضروری است",
+                    "minlength": "تصدیق رمزعبور شما باید حداقل ۴ کرکتر باشد",
+                    "maxlength": "تصدیق رمز عبور شما نمی‌تواند بیش از ۵۰ کرکتر باشد."
+                },
+                "email": {
+                    "required": "آدرس ایمیل شما ضروری است",
+                    "invalid": "آدرس ایمیل شما نامعتبر است",
+                    "minlength": "آدرس ایمیل شما حداقل باید ۵ کرکتر باشد",
+                    "maxlength": "آدرس ایمیل شما نمی‌تواند بیش از ۵۰ کرکتر باشد."
+                }
+            }
+        },
+        "field": {
+            "id": "شناسه"
+        },
+        "ribbon": {
+            "dev":"در حال توسعه"
+        },
+        "item-count": "نمایش {{first}} - {{second}} از {{total}} مورد."
+    },
+    "entity": {
+        "action": {
+            "addblob": "اضافه کردن فایل",
+            "addimage": "اضافه کردن تصویر",
+            "back": "برگشت",
+            "cancel": "انصراف",
+            "delete": "",
+            "edit": "",
+            "open": "نمایش مدرک",
+            "save": "ذخیره",
+            "view": "",
+            "upexcel": "آپلود و ذخیره در دیتابیس",
+            "documents": "مدارک",
+            "getexcel": "خروجی اکسل",
+            "complete": "نهایی کردن",
+            "reject": "رد کردن",
+            "report": "گزارش گرفتن",
+            "openreport": "نمایش گزارش",
+            "setpermission": "تخصیص دسترسی",
+            "completeAndRunning": "اجرا کردن",
+            "comment":{
+                "accept": "تایید کردن",
+                "reject": "رد کردن",
+                "comment": "ثبت نظر"
+            }
+        },
+        "detail": {
+            "field": "فیلد",
+            "value": "مقدار"
+        },
+        "delete": {
+            "title": "تصدیق عملیات حذف"
+        },
+        "comment":{
+            "accept": "عملیات تایید درخواست",
+            "reject": "عملیات رد کردن درخواست",
+            "comment": "عملیات اعلام نظر روی درخواست"
+        },
+        "validation": {
+            "required": "وارد کردن این فیلد ضروری است",
+            "minlength": "این فیلد باید حداقل {{ min }} کاراکتر باشد.",
+            "maxlength": "این فیلد نمی‌تواند بیشتر از {{ max }} کاراکتر باشد",
+            "min": "این فیلد باید بیشتر از {{ min }} باشد.",
+            "max": "این فیلد نمی‌تواند بیش از {{ max }} باشد.",
+            "minbytes": "این فیلد باید بیش از {{ min }} بایت باشد.",
+            "maxbytes": "این فیلد نمی‌تواند بیش از {{ max }} بایت باشد.",
+            "pattern": "این فیلد باید مطابق {{ pattern }} باشد.",
+            "number": "این فیلد باید عدد باشد.",
+            "datetimelocal": "این فیلد باید زمان باشد.",
+            "patternLogin":"لطفا فقط از حروف انگلیسی و یا اعداد استفاده نمائید."
+        }
+    },
+    "error": {
+        "internalServerError": "خطای داخلی در سرور",
+        "server.not.reachable": "سرور در دسترس نیست",
+        "url.not.found": "پیدا نشد",
+        "NotNull": "فیلد {{ fieldName }} نمی‌تواند خالی باشد!",
+        "Size": "فیلد{{ fieldName }} نیازمندی‌های حداقل/حداکثر را ندارد!",
+        "userexists": "این نام کاربر در سیستم وجود دارد!",
+        "emailexists": "این آدرس ایمیل در سیستم وجود دارد!",
+        "idexists": "موجودیت جدید {{ entityName }} نمی‌تواند شناسه داشته‌باشد.",
+        "idnull": "Invalid ID",
+        "isexcelvalid": "فقط فایل اکسل مورد تایید است.",
+        "successfileupload": "اطلاعات شما با موفقیت آپلود و در دیتابیس ذخیره شد.",
+        "failedfileupload": "اطلاعات بنا به دلایلی برای ثبت با مشکل روبرو شده است. {{ message }}"
+    },
+    "footer": "این پاورقی است"
+}

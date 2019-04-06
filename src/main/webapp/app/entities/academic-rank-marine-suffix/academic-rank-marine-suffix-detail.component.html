@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="academicRank" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.academicRank.detail.title">Academic Rank</span> {{academicRank.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.academicRank.title">Title</span></dt>
+                <dd>
+                    <span>{{academicRank.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.academicRank.code">Code</span></dt>
+                <dd>
+                    <span>{{academicRank.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.academicRank.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{academicRank.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.academicRank.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{academicRank.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.academicRank.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{academicRank.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.academicRank.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{academicRank.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+<!--            <button type="button"
+                    [routerLink]="['/academic-rank-marine-suffix', academicRank.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>-->
+        </div>
+    </div>
+</div>

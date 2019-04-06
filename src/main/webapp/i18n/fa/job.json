@@ -1,0 +1,45 @@
+
+{
+    "marineindustryprojApp": {
+        "job" : {
+            "home": {
+                "title": "مشاغل",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش شغل"
+            },
+            "created": "شغلی با شناسه {{ param }} ایجاد شد.",
+            "updated": "شغلی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "شغلی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف شغل با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات شغل"
+            },
+           "title": "عنوان شغل سازمانی",
+            "jobKey": "کلید شغل فعلی",
+            "jobCode": "شناسه شغلی",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "jobPerson": "شغل اصلی",
+            "practicaljobPerson": "شغل عملی",
+            "job": "شغل",
+            "educationalModuleJob": "Educational Module Job",
+            "document": "مدارک",
+            "raste": "رسته",
+            "radeh": "رده",
+            "jobType": "نوع شغل",
+            "scientificWorkGroup": "گروه علمی شغلی",
+            "parent": "والد",
+            "mainTask": "وظیفه اصلی",
+            "niazsanjiGroup": "نیازسنجی گروهی",
+            "first3JobCode": "سه رقم اول شناسه شغل"
+        }
+    }
+}

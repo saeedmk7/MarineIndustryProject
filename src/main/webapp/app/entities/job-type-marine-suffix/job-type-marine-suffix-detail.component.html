@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="jobType" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.jobType.detail.title">Job Type</span> {{jobType.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.jobType.title">Title</span></dt>
+                <dd>
+                    <span>{{jobType.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobType.code">Code</span></dt>
+                <dd>
+                    <span>{{jobType.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobType.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{jobType.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobType.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{jobType.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobType.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{jobType.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobType.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{jobType.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/job-type-marine-suffix', jobType.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

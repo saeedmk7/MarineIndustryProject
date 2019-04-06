@@ -1,0 +1,49 @@
+
+{
+    "marineindustryprojApp": {
+        "finalOrganizationNiazsanji" : {
+            "home": {
+                "title": "فهرست دوره های متمرکز",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش دوره متمرکز"
+            },
+            "created": "دوره متمرکز با شناسه {{ param }} ایجاد شد.",
+            "updated": "دوره متمرکز با شناسه {{ param }} ویرایش شد.",
+            "deleted": "دوره متمرکز با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف دوره متمرکز با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات دوره متمرکز"
+            },
+            "niazsanjiYear": "سال نیازسنجی",
+            "code": "کد",
+            "recommendedByOrgchart": "پیشنهاد دهنده",
+            "neededSoftwares": "تجهیزات آموزشی و کمک آموزشی نرم افزاری",
+            "neededHardware": "تجهیزات آموزشی و کمک آموزشی سخت افزاری",
+            "studentsType": "جامعه مخاطبین",
+            "teacherName": "نام مدرس",
+            "teacherMobile": "شماره تلفن مدرس",
+            "requestStatus": "وضعیت درخواست",
+            "changeStatusUserLogin": "فرد تغییر دهنده وضعیت درخواست",
+            "trainingGoals": "اهداف آموزش",
+            "description": "توضیحات",
+            "conversation": "Conversation",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "person": "افراد",
+            "document": "مدارک",
+            "educationalModule": "پودمان آموزشی",
+            "teachApproach": "روش آموزش",
+            "requestOrganizationNiazsanji": "کد درخواست نهایی شده",
+            "priceCost": "هزینه(ریال)",
+            "teacher": "مدرس"
+        }
+    }
+}

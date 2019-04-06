@@ -1,0 +1,448 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <!--<h2 id="mi-educational-module-marine-suffix-heading" jhiTranslate="marineindustryprojApp.educationalModule.home.createOrEditLabel">Create or edit a Educational Module</h2>-->
+            <h2 class="mi-educational-module-marine-suffix-heading">اطلاعات پودمان {{educationalModule.title}}</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!educationalModule.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="educationalModule.id" readonly />
+                </div>
+
+
+                <!--<div class="form-group">
+                    <a (click)="change('request-educational-module-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.requestEducationalModule" for="field_requestEducationalModule">requestEducationalModuleId</a>
+                    &lt;!&ndash; <select class="form-control" id="field_requestOrganizationNiazsanji" name="requestOrganizationNiazsanji" [(ngModel)]="finalOrganizationNiazsanji.requestOrganizationNiazsanjiId" >
+                         <option [ngValue]="requestOrganizationNiazsanjiOption.id" *ngFor="let requestOrganizationNiazsanjiOption of requestorganizationniazsanjis; trackBy: trackRequestOrganizationNiazsanjiById">
+                             {{requestOrganizationNiazsanjiOption.id}}-{{requestOrganizationNiazsanjiOption.code}}-{{requestOrganizationNiazsanjiOption.recommendedByOrgchart}}
+                         </option>
+                     </select>&ndash;&gt;
+                    <ng-select
+                        [items]="requestEducationalModules"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="fullTitle"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="requestEducationalModule"
+                        id="field_requestEducationalModule"
+                        [(ngModel)]="educationalModule.requestEducationalModuleId">
+                </div>-->
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اولیه و ضروری پودمان {{educationalModule.title}}</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.code" for="field_code">Code</label>
+                    <input type="number" class="form-control" name="code" id="field_code"
+                           [(ngModel)]="educationalModule.code" maxlength="18" jhiMax="9999999999999999" jhiMin="99" required/>
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.phoneNumber?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 18 }">
+                            This field cannot be longer than 18 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 9999999999999999 }">
+                            This field cannot be more than 9999999999999999.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 99 }">
+                            This field cannot be less than 100000.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group half">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                           [(ngModel)]="educationalModule.title" required maxlength="1000"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1000 }">
+                            This field cannot be longer than 1000 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.learningTimeTheorical" for="field_learningTimeTheorical">Learning Time Theorical</label>
+                    <input type="number" class="form-control" name="learningTimeTheorical" id="field_learningTimeTheorical"
+                           [(ngModel)]="educationalModule.learningTimeTheorical" required/>
+                    <div [hidden]="!(editForm.controls.learningTimeTheorical?.dirty && editForm.controls.learningTimeTheorical?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.learningTimeTheorical?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.learningTimeTheorical?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.learningTimePractical" for="field_learningTimePractical">Learning Time Practical</label>
+                    <input type="number" class="form-control" name="learningTimePractical" id="field_learningTimePractical"
+                           [(ngModel)]="educationalModule.learningTimePractical" required/>
+                    <div [hidden]="!(editForm.controls.learningTimePractical?.dirty && editForm.controls.learningTimePractical?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.learningTimePractical?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.learningTimePractical?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">مجموع</label>
+                    <input type="number" class="form-control" [disabled]="true" [value]="(educationalModule.learningTimePractical ? educationalModule.learningTimePractical : 0) + (educationalModule.learningTimeTheorical ? educationalModule.learningTimeTheorical : 0)"/>
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.recommendedBy" for="field_recommendedBy">Recommended By</label>
+                    <input type="text" class="form-control" name="recommendedBy" id="field_recommendedBy"
+                           [(ngModel)]="educationalModule.recommendedBy" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.recommendedBy?.dirty && editForm.controls.recommendedBy?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.recommendedBy?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                            This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <a (click)="change('skillable-level-of-skill-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.skillableLevelOfSkill" for="field_skillableLevelOfSkill">Skillable Level Of Skill</a>
+                    <!--<select class="form-control" id="field_skillableLevelOfSkill" name="skillableLevelOfSkill" [(ngModel)]="educationalModule.skillableLevelOfSkillId" required >
+                        <option [ngValue]="skillableLevelOfSkillOption.id" *ngFor="let skillableLevelOfSkillOption of skillablelevelofskills; trackBy: trackSkillableLevelOfSkillById">{{skillableLevelOfSkillOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="skillablelevelofskills"
+                        [multiple]="false"
+                        [closeOnSelect]="false"
+                        [searchable]="true"
+                        [required]="true"
+                        bindValue="id"
+                        bindLabel="title"
+                        placeholder="انتخاب تمائید."
+                        name="skillableLevelOfSkill"
+                        id="field_skillableLevelOfSkill"
+                        [(ngModel)]="educationalModule.skillableLevelOfSkillId">
+                </div>
+                <div class="form-group">
+                    <a (click)="change('scientific-work-group-marine-suffix')" jhiTranslate="marineindustryprojApp.educationalModule.scientificWorkGroup" for="field_scientificWorkGroup">Scientific Work Group</a>
+                    <!--<select class="form-control" id="field_scientificWorkGroup" multiple name="scientificWorkGroup" [(ngModel)]="educationalModule.scientificWorkGroups">
+                        <option [ngValue]="getSelected(educationalModule.scientificWorkGroups, scientificWorkGroupOption)" *ngFor="let scientificWorkGroupOption of scientificworkgroups; trackBy: trackScientificWorkGroupById">{{scientificWorkGroupOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="scientificworkgroups"
+                        [multiple]="true"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="title"
+                        placeholder="'گروه های علمی شغلی"
+                        name="scientificWorkGroup"
+                        id="field_scientificworkgroup"
+                        [(ngModel)]="educationalModule.scientificWorkGroups">
+                </div>
+
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات تکمیلی پودمان {{educationalModule.title}}</div></div>
+                <div class="form-group half">
+                    <a (click)="change('goal-marine-suffix')" jhiTranslate="marineindustryprojApp.educationalModule.goal" for="field_goal">Goal</a>
+                   <!-- <select class="form-control" id="field_goal" multiple name="goal" [(ngModel)]="educationalModule.goals">
+                        <option [ngValue]="getSelected(educationalModule.goals, goalOption)" *ngFor="let goalOption of goals; trackBy: trackGoalById">{{goalOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="goals"
+                        [multiple]="true"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        placeholder="اهداف"
+                        name="goal"
+                        id="field_goal"
+                        [(ngModel)]="educationalModule.goals">
+                </div>
+                <div class="form-group half">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.educationalModuleHeadlines" for="field_educationalModuleHeadlines">Educational Module Headlines</label>
+                    <textarea type="text" class="form-control" name="educationalModuleHeadlines" id="field_educationalModuleHeadlines"
+                              [(ngModel)]="educationalModule.educationalModuleHeadlines" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.educationalModuleHeadlines?.dirty && editForm.controls.educationalModuleHeadlines?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.educationalModuleHeadlines?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group half">
+                    <a (click)="change('educational-center-marine-suffix')" jhiTranslate="marineindustryprojApp.educationalModule.educationalCenter" for="field_educationalCenter">Educational Center</a>
+                    <!--<select class="form-control" id="field_educationalCenter" multiple name="educationalCenter" [(ngModel)]="educationalModule.educationalCenters">
+                        <option [ngValue]="getSelected(educationalModule.educationalCenters, educationalCenterOption)" *ngFor="let educationalCenterOption of educationalcenters; trackBy: trackEducationalCenterById">{{educationalCenterOption.name}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="educationalcenters"
+                        [multiple]="true"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="name"
+                        placeholder="مراکز آموزشی"
+                        name="educationalcenter"
+                        id="field_educationalCenter"
+                        [(ngModel)]="educationalModule.educationalCenters">
+                </div>
+                <div class="form-group half">
+                    <a (click)="change('teacher-marine-suffix')" jhiTranslate="marineindustryprojApp.educationalModule.teacher" for="field_teacher">Teacher</a>
+                    <!--<select class="form-control" id="field_teacher" multiple name="teacher" [(ngModel)]="educationalModule.teachers">
+                        <option [ngValue]="getSelected(educationalModule.teachers, teacherOption)" *ngFor="let teacherOption of teachers; trackBy: trackTeacherById">{{teacherOption.name}} {{teacherOption.family}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="teachers"
+                        [multiple]="true"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="fullName"
+                        placeholder="مدرسین"
+                        name="teacher"
+                        id="field_teacher"
+                        [(ngModel)]="educationalModule.teachers">
+                </div>
+                <div class="form-group half">
+                    <a (click)="change('resource-marine-suffix')" jhiTranslate="marineindustryprojApp.educationalModule.resource" for="field_resource">Resource</a>
+                    <!--<select class="form-control" id="field_resource" multiple name="resource" [(ngModel)]="educationalModule.resources">
+                        <option [ngValue]="getSelected(educationalModule.resources, resourceOption)" *ngFor="let resourceOption of resources; trackBy: trackResourceById">{{resourceOption.title}}</option>
+                    </select>-->
+
+                    <ng-select
+                        [items]="resources"
+                        [multiple]="true"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        placeholder="منابع آموزشی"
+                        name="resource"
+                        id="field_resource"
+                        [(ngModel)]="educationalModule.resources">
+                </div>
+
+                <div class="form-group half">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.prerequisite" for="field_prerequisite">Prerequisite</label>
+                    <textarea type="text" class="form-control" name="prerequisite" id="field_prerequisite"
+                              [(ngModel)]="educationalModule.prerequisite" maxlength="4096" ></textarea>
+                    <div [hidden]="!(editForm.controls.prerequisite?.dirty && editForm.controls.prerequisite?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.prerequisite?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('security-level-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.securityLevel" for="field_securityLevel">Security Level</a>
+                    <select class="form-control" id="field_securityLevel" name="securityLevel" [(ngModel)]="educationalModule.securityLevelId" >
+                        <option [ngValue]="securityLevelOption.id" *ngFor="let securityLevelOption of securitylevels; trackBy: trackSecurityLevelById">{{securityLevelOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('evaluation-method-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.evaluationMethod" for="field_evaluationMethod">Evaluation Method</a>
+                    <select class="form-control" id="field_evaluationMethod" name="evaluationMethod" [(ngModel)]="educationalModule.evaluationMethodId" >
+                        <option [ngValue]="evaluationMethodOption.id" *ngFor="let evaluationMethodOption of evaluationmethods; trackBy: trackEvaluationMethodById">{{evaluationMethodOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.drafters" for="field_drafters">Drafters</label>
+                    <input type="text" class="form-control" name="drafters" id="field_drafters"
+                        [(ngModel)]="educationalModule.drafters" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.drafters?.dirty && editForm.controls.drafters?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.drafters?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('organization-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.organization" for="field_organization">Organization</a>
+                    <!--<select class="form-control" id="field_organization" name="organization" [(ngModel)]="educationalModule.organizationId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="organizationOption.id" *ngFor="let organizationOption of organizations; trackBy: trackOrganizationById">{{organizationOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="organizations"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="organization"
+                        id="field_organization"
+                        [(ngModel)]="educationalModule.organizationId">
+                </div>
+                <div class="form-group bighalf">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.centralizedCode" for="field_centralizedCode">Centralized Code</label>
+                    <input type="text" class="form-control" name="centralizedCode" id="field_centralizedCode"
+                           [(ngModel)]="educationalModule.centralizedCode" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.centralizedCode?.dirty && editForm.controls.centralizedCode?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.centralizedCode?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.version" for="field_version">Version</label>
+                    <input type="text" class="form-control" name="version" id="field_version"
+                           [(ngModel)]="educationalModule.version" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.version?.dirty && editForm.controls.version?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.version?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group bighalf">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.innerCode" for="field_innerCode">Inner Code</label>
+                    <input type="text" class="form-control" name="innerCode" id="field_innerCode"
+                           [(ngModel)]="educationalModule.innerCode" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.innerCode?.dirty && editForm.controls.innerCode?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.innerCode?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <!--<div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اضافی پودمان (در صورت تمایل پاک می شوند).</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.educationalModuleGroup" for="field_educationalModuleGroup">Educational Module Group</label>
+                    <input type="number" class="form-control" name="educationalModuleGroup" id="field_educationalModuleGroup"
+                        [(ngModel)]="educationalModule.educationalModuleGroup" max="99" jhiMax="99"/>
+                    <div [hidden]="!(editForm.controls.educationalModuleGroup?.dirty && editForm.controls.educationalModuleGroup?.invalid)">
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.educationalModuleGroup?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 99 }">
+                            This field cannot be more than 99.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.educationalModuleGroup?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.educationalModuleHour" for="field_educationalModuleHour">Educational Module Hour</label>
+                    <input type="number" class="form-control" name="educationalModuleHour" id="field_educationalModuleHour"
+                        [(ngModel)]="educationalModule.educationalModuleHour" max="99" jhiMax="99"/>
+                    <div [hidden]="!(editForm.controls.educationalModuleHour?.dirty && editForm.controls.educationalModuleHour?.invalid)">
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.educationalModuleHour?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 99 }">
+                            This field cannot be more than 99.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.educationalModuleHour?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.educationalModuleLevel" for="field_educationalModuleLevel">Educational Module Level</label>
+                    <input type="number" class="form-control" name="educationalModuleLevel" id="field_educationalModuleLevel"
+                           [(ngModel)]="educationalModule.educationalModuleLevel" max="9" jhiMax="9"/>
+                    <span *ngIf="educationalModule.educationalModuleLevel" class="alert-info">تا سطح {{educationalModule.educationalModuleLevel}}</span>
+                    <div [hidden]="!(editForm.controls.educationalModuleLevel?.dirty && editForm.controls.educationalModuleLevel?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.educationalModuleLevel?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 9 }">
+                            This field cannot be more than 9.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.educationalModuleLevel?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+
+
+                <div *ngIf="isfa">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.timePassed" for="field_timePassed">Time Passed</label>
+                        <div class="d-flex">
+                            <dp-date-picker
+                                dir="rtl"
+                                [(ngModel)]="timePassed"
+                                name="timePassed"
+                                id="field_timePassed"
+                                mode="day"
+                                class="form-control col-md-4"
+                                [disabled] = "!isfa"
+                                theme="dp-material">
+                            </dp-date-picker>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.credit" for="field_credit">Credit</label>
+                        <div class="d-flex">
+                            <dp-date-picker
+                                dir="rtl"
+                                [(ngModel)]="credit"
+                                name="credit"
+                                id="field_credit"
+                                mode="day"
+                                class="form-control col-md-4"
+                                [disabled] = "!isfa"
+                                theme="dp-material">
+                            </dp-date-picker>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!isfa">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.timePassed" for="field_timePassed">Time Passed</label>
+                    <div class="d-flex">
+                        <input id="field_timePassed" type="datetime-local" class="form-control" name="timePassed" [(ngModel)]="timePassed"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.credit" for="field_credit">Credit</label>
+                    <div class="d-flex">
+                        <input id="field_credit" type="datetime-local" class="form-control" name="credit" [(ngModel)]="credit"
+                        />
+                    </div>
+                </div>
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.moreDescription" for="field_moreDescription">More Description</label>
+                    <textarea class="form-control" name="moreDescription" id="field_moreDescription"
+                              [(ngModel)]="educationalModule.moreDescription" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.moreDescription?.dirty && editForm.controls.moreDescription?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.moreDescription?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

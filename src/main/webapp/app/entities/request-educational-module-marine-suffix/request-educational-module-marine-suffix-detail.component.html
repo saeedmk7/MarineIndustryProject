@@ -1,0 +1,187 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="requestEducationalModule" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.requestEducationalModule.detail.title">Request Educational Module</span> {{requestEducationalModule.id}}</h2>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.code">Code</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.title">Title</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.learningTimeTheorical">Learning Time Theorical</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.learningTimeTheorical}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.learningTimePractical">Learning Time Practical</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.learningTimePractical}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.version">Version</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.version}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.innerCode">Inner Code</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.innerCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.centralizedCode">Centralized Code</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.centralizedCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.moreDescription">More Description</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.moreDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.recommendedBy">Recommended By</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.recommendedBy}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalModuleHeadlines">Educational Module Headlines</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.educationalModuleHeadlines}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.prerequisite">Prerequisite</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.prerequisite}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.drafters">Drafters</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.drafters}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalModuleLevel">Educational Module Level</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.educationalModuleLevel}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalModuleGroup">Educational Module Group</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.educationalModuleGroup}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalModuleHour">Educational Module Hour</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.educationalModuleHour}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.timePassed">Time Passed</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.timePassed}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.credit">Credit</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.credit}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.archived">Archived</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.status">Status</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.conversation">Conversation</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.conversation}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.requestStatus">Request Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + requestEducationalModule.requestStatus}}">{{requestEducationalModule.requestStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.changeStatusUserLogin">Change Status User Login</span></dt>
+                <dd>
+                    <span>{{requestEducationalModule.changeStatusUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.scientificWorkGroup">Scientific Work Group</span></dt>
+                <dd>
+                    <span *ngFor="let scientificWorkGroup of requestEducationalModule.scientificWorkGroups; let last = last">
+                        <a [routerLink]="['/scientific-work-group-marine-suffix', scientificWorkGroup?.id, 'view' ]">{{scientificWorkGroup.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalCenter">Educational Center</span></dt>
+                <dd>
+                    <span *ngFor="let educationalCenter of requestEducationalModule.educationalCenters; let last = last">
+                        <a [routerLink]="['/educational-center-marine-suffix', educationalCenter?.id, 'view' ]">{{educationalCenter.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.goal">Goal</span></dt>
+                <dd>
+                    <span *ngFor="let goal of requestEducationalModule.goals; let last = last">
+                        <a [routerLink]="['/goal-marine-suffix', goal?.id, 'view' ]">{{goal.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.resource">Resource</span></dt>
+                <dd>
+                    <span *ngFor="let resource of requestEducationalModule.resources; let last = last">
+                        <a [routerLink]="['/resource-marine-suffix', resource?.id, 'view' ]">{{resource.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.teacher">Teacher</span></dt>
+                <dd>
+                    <span *ngFor="let teacher of requestEducationalModule.teachers; let last = last">
+                        <a [routerLink]="['/teacher-marine-suffix', teacher?.id, 'view' ]">{{teacher.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.securityLevel">Security Level</span></dt>
+                <dd>
+                    <div *ngIf="requestEducationalModule.securityLevelId">
+                        <a [routerLink]="['/security-level-marine-suffix', requestEducationalModule.securityLevelId, 'view']">{{requestEducationalModule.securityLevelTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.skillableLevelOfSkill">Skillable Level Of Skill</span></dt>
+                <dd>
+                    <div *ngIf="requestEducationalModule.skillableLevelOfSkillId">
+                        <a [routerLink]="['/skillable-level-of-skill-marine-suffix', requestEducationalModule.skillableLevelOfSkillId, 'view']">{{requestEducationalModule.skillableLevelOfSkillTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.evaluationMethod">Evaluation Method</span></dt>
+                <dd>
+                    <div *ngIf="requestEducationalModule.evaluationMethodId">
+                        <a [routerLink]="['/evaluation-method-marine-suffix', requestEducationalModule.evaluationMethodId, 'view']">{{requestEducationalModule.evaluationMethodTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.organization">Organization</span></dt>
+                <dd>
+                    <div *ngIf="requestEducationalModule.organizationId">
+                        <a [routerLink]="['/organization-marine-suffix', requestEducationalModule.organizationId, 'view']">{{requestEducationalModule.organizationTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+           <!-- <button type="button"
+                    [routerLink]="['/request-educational-module-marine-suffix', requestEducationalModule.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>-->
+        </div>
+    </div>
+</div>

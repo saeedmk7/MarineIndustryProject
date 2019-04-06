@@ -1,0 +1,41 @@
+{
+    "marineindustryprojApp": {
+        "requestNiazsanjiFardi": {
+            "home": {
+                "title": "Request Niazsanji Fardis",
+                "createLabel": "Create a new Request Niazsanji Fardi",
+                "createOrEditLabel": "Create or edit a Request Niazsanji Fardi"
+            },
+            "created": "A new Request Niazsanji Fardi is created with identifier {{ param }}",
+            "updated": "A Request Niazsanji Fardi is updated with identifier {{ param }}",
+            "deleted": "A Request Niazsanji Fardi is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Request Niazsanji Fardi {{ id }}?"
+            },
+            "detail": {
+                "title": "Request Niazsanji Fardi"
+            },
+            "code": "Code",
+            "costApprovedEducationalModule": "Cost Approved Educational Module",
+            "costAllEducationalModule": "Cost All Educational Module",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "conversation": "Conversation",
+            "requestStatus": "Request Status",
+            "changeStatusUserLogin": "Change Status User Login",
+            "niazsanjiFardi": "Niazsanji Fardi",
+            "document": "Document",
+            "approvedEducationalModule": "Approved Educational Module",
+            "allEducationalModule": "All Educational Module",
+            "person": "Person",
+            "organizationChart": "Organization Chart"
+        }
+    }
+}

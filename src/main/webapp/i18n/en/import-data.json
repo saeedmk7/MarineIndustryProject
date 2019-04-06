@@ -1,0 +1,10 @@
+{
+    "import-data": {
+        "title": "Import Data",
+        "filter": "Filter (by prefix)",
+        "table": {
+            "prefix": "Prefix",
+            "properties": "Properties"
+        }
+    }
+}

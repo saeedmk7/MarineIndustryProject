@@ -1,0 +1,40 @@
+
+{
+    "marineindustryprojApp": {
+        "educationalCenter" : {
+            "home": {
+                "title": "Educational Centers",
+                "createLabel": "Create a new Educational Center",
+                "createOrEditLabel": "Create or edit a Educational Center"
+            },
+            "created": "A new Educational Center is created with identifier {{ param }}",
+            "updated": "A Educational Center is updated with identifier {{ param }}",
+            "deleted": "A Educational Center is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Educational Center {{ id }}?"
+            },
+            "detail": {
+                "title": "Educational Center"
+            },
+            "name": "Name",
+            "ceo": "Ceo",
+            "connectionPerson": "Connection Person",
+            "telephone": "Telephone",
+            "fax": "Fax",
+            "address": "Address",
+            "email": "Email",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "activityArea": "Activity Area",
+            "document": "Document",
+            "educationalModule": "Educational Module",
+            "requestEducationalModule": "Request Educational Module"
+        }
+    }
+}

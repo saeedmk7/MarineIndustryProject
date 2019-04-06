@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="serviceUnit">
+            <h2><span jhiTranslate="marineindustryprojApp.serviceUnit.detail.title">Service Unit</span> {{serviceUnit.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.serviceUnit.title">Title</span></dt>
+                <dd>
+                    <span>{{serviceUnit.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.serviceUnit.code">Code</span></dt>
+                <dd>
+                    <span>{{serviceUnit.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.serviceUnit.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{serviceUnit.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.serviceUnit.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{serviceUnit.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.serviceUnit.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{serviceUnit.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.serviceUnit.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{serviceUnit.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/service-unit-marine-suffix', serviceUnit.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

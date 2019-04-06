@@ -1,0 +1,77 @@
+<div class="form" style="margin: 0px;z-index: 1000">
+<div class="modal-body" style="font-family: IranSans,IranYekan,SansSerif">
+    <div>
+        <div style="width: 100%;">
+            <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication">
+                <strong>Failed to sign in!</strong> Please check your credentials and try again.
+            </div>
+        </div>
+
+            <!-- Form-->
+                <!--<div class="form-toggle"></div>-->
+                <div class="form-panel one">
+                    <div class="form-header">
+                        <h1 class="modal-title" jhiTranslate="login.title">Sign in</h1>
+                    </div>
+                    <div class="form-content">
+                        <form (ngSubmit)="login()">
+                            <div class="form-group" style="width: 100%">
+                                <label for="username" jhiTranslate="global.form.username">Login</label>
+                                <input type="text" class="form-control" name="username" id="username" placeholder="{{'global.form.username.placeholder' | translate}}"
+                                       [(ngModel)]="username">
+                            </div>
+                            <div class="form-group" style="width: 100%">
+                                <label for="password" jhiTranslate="login.form.password">Password</label>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
+                                       [(ngModel)]="password">
+                            </div>
+                            <div class="form-group" style="width: 100%">
+                                <label class="form-remember" for="rememberMe">
+                                    <input type="checkbox" name="rememberMe" id="rememberMe" [(ngModel)]="rememberMe" checked>
+                                    <span jhiTranslate="login.form.rememberme">Remember me</span>
+                                </label>
+                            </div>
+                            <div class="form-group" style="width: 100%">
+                                <button type="submit" jhiTranslate="login.form.button">Sign in</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--<div class="form-panel two">
+                    <div class="form-header">
+                        <h1 style="padding-right: 25%;">ثبت نام</h1>
+                        &lt;!&ndash;<div *ngIf="!success && !hasError">
+                        </div>&ndash;&gt;
+                        <div *ngIf="success">
+                            <h6 class="alert alert-success">ثبت نام شما با موفقیت به پایان رسید با مدیریت سامانه جهت بررسی و فعالسازی اکانت خود تماس حاصل فرمائید.</h6>
+                        </div>
+                        <div *ngIf="hasError">
+                            <p class="alert alert-danger">{{errorMessage}}</p>
+                        </div>
+                    </div>
+                    <div class="form-content">
+                        <form>
+                            <div class="form-group" style="width: 100%">
+                                <label for="username">نام کاربری</label>
+                                <input type="text" id="registerUserName" class="form-control" name="registerUserName" [(ngModel)]="registerUserName" required="required"/>
+                                <p class="info">بهتر است نام کاربری برابر کدملی شما باشد.</p>
+                            </div>
+                            <div class="form-group" style="width: 100%">
+                                <label for="registerPassword">پسورد</label>
+                                <input type="password" id="registerPassword" class="form-control" name="registerPassword" [(ngModel)]="registerPassword" required="required"/>
+                            </div>
+                            <div class="form-group" style="width: 100%">
+                                <label for="confirmPassword">تایید پسورد</label>
+                                <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" [(ngModel)]="confirmPassword" required="required"/>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" (click)="register()">ثبت نام</button>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>-->
+            </div>
+    </div>
+</div>

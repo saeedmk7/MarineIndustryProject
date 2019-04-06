@@ -1,0 +1,63 @@
+{
+    "marineindustryprojApp": {
+        "requestNiazsanjiFardi": {
+            "home": {
+                "title": "درخواست نیازسنجی فردی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش درخواست نیازسنجی فردی"
+            },
+            "created": "درخواست نیازسنجی فردی با شناسه {{ param }} ایجاد شد.",
+            "updated": "درخواست نیازسنجی فردی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "درخواست نیازسنجی فردی با شناسه {{ param }} حذف شد.",
+            "completed": "درخواست نیازسنجی فردی مورد نظر با موفقیت نهایی شد.",
+            "rejected": "درخواست نیازسنجی فردی مورد نظر با موفقیت رد شد.",
+            "delete": {
+                "question": "آیا از حذف درخواست نیازسنجی فردی با شناسه {{ id }} مطمئنید؟"
+            },
+            "comment": {
+                "accept": "لطفا نظر خود را درج نمائید.",
+                "reject": "لطفا علت عدم تایید را ثبت نمائید.",
+                "comment": "لطفا نظر خود را درج نمائید."
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات درخواست نیازسنجی فردی"
+            },
+            "index": "ردیف",
+            "code": "کد",
+            "costApprovedEducationalModule": "هزینه پودمان تصویب شده(ریال)",
+            "timeApprovedEducationalModule": "مدت زمان پودمان تصویب شده",
+            "timeEducationalModule": "مدت زمان پودمان",
+            "levelApprovedEducationalModule": "سطح پودمان تصویب شده",
+            "levelEducationalModule": "سطح پودمان",
+            "costEducationalModule": "هزینه پودمان(ریال)",
+            "costAllEducationalModule": "هزینه پودمان کلی(ریال)",
+            "timeAllEducationalModule": "مدت زمان پودمان کلی",
+            "levelAllEducationalModule": "سطح پودمان کلی",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر درخواست کننده",
+            "createDate": "تاریخ درخواست",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت درخواست",
+            "conversation": "مکالمات",
+            "requestStatus": "وضعیت درخواست",
+            "changeStatusUserLogin": "فرد تغییر دهنده وضعیت درخواست",
+            "niazsanjiFardi": "نیازسنجی فردی",
+            "document": "مدرک",
+            "educationalModule": "عنوان پودمان آموزشی",
+            "approvedEducationalModule": "پودمان های مصوب شده",
+            "approvedEducationalModuleId": "پودمان های مصوب شده",
+            "allEducationalModule": "کلیه پودمان ها",
+            "allEducationalModuleId": "کلیه پودمان ها",
+            "person": "فرد موردنظر",
+            "personName": "نام و نام خانوادگی",
+            "jobTitle": "شغل سازمانی",
+            "organizationChart": "پیشنهاد دهنده",
+            "organizationChartId": "پیشنهاد دهنده",
+            "answer": "جواب"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+
+{
+    "marineindustryprojApp": {
+        "raste" : {
+            "home": {
+                "title": "رسته ها",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش رسته"
+            },
+            "created": "رسته با شناسه {{ param }} ایجاد شد.",
+            "updated": "رسته با شناسه {{ param }} ویرایش شد.",
+            "deleted": "رسته با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف رسته با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات رسته"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "job": "شغل"
+        }
+    }
+}

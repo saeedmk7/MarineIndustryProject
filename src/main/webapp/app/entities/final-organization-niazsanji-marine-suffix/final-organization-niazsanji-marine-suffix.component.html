@@ -1,0 +1,237 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.home.title">Final Organization Niazsanjis</span>
+        <!--<button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-final-organization-niazsanji-marine-suffix" [routerLink]="['/final-organization-niazsanji-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.home.createLabel">
+            Create new Final Organization Niazsanji
+            </span>
+        </button>-->
+        <button id="jh-create-entity" class="btn btn-warning float-right jh-create-entity create-niazsanji-fardi-marine-suffix" [disabled]="!selectedNiazSanji" (click)="selectYear()">
+            <fa-icon [icon]="'calendar-alt'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.niazsanjiFardi.home.setYear">
+            SetYear
+            </span>
+        </button>
+        <select [(ngModel)] = "selectedYear" style="font-family: IranSansLight" id="selectedYear" class="small float-right jh-create-entity" name="selectedYear" *ngIf="selectedNiazSanji">
+            <option [ngValue]="year"  *ngFor="let year of years">{{year}}</option>
+        </select>
+        <button class="btn btn-info float-left"  jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <div class="row">
+        <search-panel class="col-md-12" [searchPanelModel]="searchbarModel"></search-panel>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="finalOrganizationNiazsanjis">
+        <table class="table table-striped  table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th><input type="checkbox" title="انتخاب همه" id="selectAll" (change)="selectAll($event.target.checked)"></th>
+                <th>ردیف</th>
+            <th jhiSortBy="recommendedByOrgchart"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.recommendedByOrgchart">Recommended By Orgchart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="studentsType"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.studentsType">Students Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th>افراد انتخابی</th>
+                <!--<th jhiSortBy="teacherFamily"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.teacher">Teacher</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="niazsanjiYear"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.niazsanjiYear">niazsanjiYear</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="requestOrganizationNiazsanjiRecommendedByOrgchart"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.requestOrganizationNiazsanji">Request Organization Niazsanji</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th>تاریخچه</th>
+            <th width="250"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let finalOrganizationNiazsanji of finalOrganizationNiazsanjis ; let i = index;"
+                [ngClass]="{'new': (finalOrganizationNiazsanji.status == 0 || finalOrganizationNiazsanji.status == 10),'accept': finalOrganizationNiazsanji.status == 20,'ignore': (finalOrganizationNiazsanji.status == 11 || finalOrganizationNiazsanji.status == 1)}">
+                <!--<td><a [routerLink]="['/final-organization-niazsanji-marine-suffix', finalOrganizationNiazsanji.id, 'view' ]">{{finalOrganizationNiazsanji.id}}</a></td>-->
+                <td><input *ngIf="(finalOrganizationNiazsanji.status == 0 || finalOrganizationNiazsanji.status == 10)" class="mycheckbox" (change)="onChange(finalOrganizationNiazsanji.id, $event.target.checked)" name="{{finalOrganizationNiazsanji.id}}" type="checkbox" id="{{finalOrganizationNiazsanji.id}}"></td>
+                <td>{{i+1}}</td>
+                <!--<td>{{finalOrganizationNiazsanji.recommendedByOrgchart}}</td>-->
+                <td>
+                    <div *ngIf="finalOrganizationNiazsanji.organizationChartId">
+                        <a [routerLink]="['../organization-chart-marine-suffix', finalOrganizationNiazsanji.organizationChartId , 'view' ]" >{{finalOrganizationNiazsanji.organizationChartTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="finalOrganizationNiazsanji.educationalModuleId">
+                        <a [routerLink]="['../educational-module-marine-suffix', finalOrganizationNiazsanji.educationalModuleId , 'view' ]" >{{finalOrganizationNiazsanji.educationalModuleTitle}}</a>
+                    </div>
+                </td>
+                <td>{{finalOrganizationNiazsanji.studentsType}}</td>
+                <td>
+                    <div *ngFor="let person of finalOrganizationNiazsanji.people">
+                        <span class="badge badge-info">{{ person.name }} {{person.family}}</span>
+                    </div>
+                </td>
+                <!--<td>{{finalOrganizationNiazsanji.teacherName}}</td>
+                <td>{{finalOrganizationNiazsanji.teacherMobile}}</td>
+                <td jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + finalOrganizationNiazsanji.requestStatus}}">{{finalOrganizationNiazsanji.requestStatus}}</td>
+                <td>{{finalOrganizationNiazsanji.changeStatusUserLogin}}</td>
+                <td>{{finalOrganizationNiazsanji.trainingGoals}}</td>
+                <td>{{finalOrganizationNiazsanji.description}}</td>-->
+                <!--<td>
+                    <div *ngIf="finalOrganizationNiazsanji.teacherId">
+                        <a [routerLink]="['../teacher-marine-suffix', finalOrganizationNiazsanji.teacherId , 'view' ]" >{{finalOrganizationNiazsanji.teacherFamily}}</a>
+                    </div>
+                </td>-->
+                <td>{{finalOrganizationNiazsanji.priceCost | number}}</td>
+                <td>{{finalOrganizationNiazsanji.createDate}}</td>
+                <td>{{finalOrganizationNiazsanji.niazsanjiYear}}</td>
+                <td>
+                    <div *ngIf="finalOrganizationNiazsanji.requestOrganizationNiazsanjiId">
+                        <!--<a [routerLink]="['../request-organization-niazsanji-marine-suffix', finalOrganizationNiazsanji.requestOrganizationNiazsanjiId , 'view' ]" >{{finalOrganizationNiazsanji.requestOrganizationNiazsanjiId}}</a>-->
+                        <button type="submit" title="مشاهده"
+                                [routerLink]="['../request-organization-niazsanji-marine-suffix', finalOrganizationNiazsanji.requestOrganizationNiazsanjiId , 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                    </div>
+                </td>
+                <td class="text-right" width="250">
+                    <div class="btn-group flex-btn-group-container">
+
+                        <ng-container *ngIf="(isAdmin || isModirKolAmozesh) && finalOrganizationNiazsanji.status == 10">
+                            <button type="submit" title="مدارک"
+                                    [routerLink]="['../document-marine-suffix', 'finalorganizationniazsanji', finalOrganizationNiazsanji.id ]"
+                                    class="btn btn-light btn-sm">
+                                <span class="fa fa-file"></span>
+                            </button>
+                            <button type="submit" title="ویرایش"
+                                    [routerLink]="['/final-organization-niazsanji-marine-suffix', finalOrganizationNiazsanji.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" title="ثبت نظر"
+                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'COMMENT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'comments'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.comment">comment</span>-->
+                            </button>
+                            <!--<button  type="submit" title="اجراکردن" (click)="complete(finalOrganizationNiazsanji)"
+                                     class="btn btn-success btn-sm">
+                                <span class="fa fa-check" color="f00c"></span>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.completeAndRunning">complete</span>
+                            </button>-->
+                            <!--<button type="submit" title="اجراکردن"
+                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'ACCEPT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'ban'"></fa-icon>
+                                &lt;!&ndash;<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>&ndash;&gt;
+                            </button>-->
+                            <button type="submit" title="اجراکردن"
+                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'ACCEPT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-success btn-sm">
+                                <fa-icon [icon]="'check-double'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.completeAndRunning">complete</span>
+                            </button>
+                            <button type="submit" title="رد کردن"
+                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'REJECT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'ban'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="(isAdmin || isKarshenasArshadAmozesh) && finalOrganizationNiazsanji.status == 0">
+                            <button type="submit" title="مدارک"
+                                    [routerLink]="['../document-marine-suffix', 'finalorganizationniazsanji', finalOrganizationNiazsanji.id ]"
+                                    class="btn btn-light btn-sm">
+                                <span class="fa fa-file"></span>
+                            </button>
+                            <button type="submit" title="ویرایش"
+                                    [routerLink]="['/final-organization-niazsanji-marine-suffix', finalOrganizationNiazsanji.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" title="ثبت نظر"
+                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'COMMENT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'comments'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.comment">comment</span>-->
+                            </button>
+                            <button type="submit" title="تایید کردن"
+                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'ACCEPT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-success btn-sm">
+                                <fa-icon [icon]="'check-double'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.accept">comment</span>-->
+                            </button>
+                            <button type="submit" title="رد کردن"
+                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'REJECT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'ban'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
+                            </button>
+                        </ng-container>
+                        <!--<button  type="submit" title="ردکردن" (click)="reject(finalOrganizationNiazsanji)"
+                                 class="btn btn-danger btn-sm">
+                            <span class="fa fa-ban" color="f00c"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.reject">reject</span>
+                        </button>-->
+
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="10">
+
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+    <div *ngIf="finalOrganizationNiazsanjis && finalOrganizationNiazsanjis.length">
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

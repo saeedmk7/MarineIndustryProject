@@ -1,0 +1,179 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.requestEducationalModule.home.title">Request Educational Modules</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-request-educational-module-marine-suffix" [routerLink]="['/request-educational-module-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.requestEducationalModule.home.createLabel">
+            Create new Request Educational Module
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="requestEducationalModules">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="learningTimeTheorical"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.learningTimeTheorical">Learning Time Theorical</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="learningTimePractical"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.learningTimePractical">Learning Time Practical</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="version"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.version">Version</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="innerCode"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.innerCode">Inner Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="centralizedCode"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.centralizedCode">Centralized Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="moreDescription"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.moreDescription">More Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="recommendedBy"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.recommendedBy">Recommended By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="educationalModuleHeadlines"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalModuleHeadlines">Educational Module Headlines</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="prerequisite"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.prerequisite">Prerequisite</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="drafters"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.drafters">Drafters</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleLevel"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalModuleLevel">Educational Module Level</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleGroup"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalModuleGroup">Educational Module Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleHour"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalModuleHour">Educational Module Hour</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="timePassed"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.timePassed">Time Passed</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="credit"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.credit">Credit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archived"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.archived">Archived</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedUserLogin"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.archivedUserLogin">Archived User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedDate"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.archivedDate">Archived Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="conversation"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.conversation">Conversation</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="requestStatus"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.requestStatus">Request Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="changeStatusUserLogin"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.changeStatusUserLogin">Change Status User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="securityLevelTitle"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.securityLevel">Security Level</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="skillableLevelOfSkillTitle"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.skillableLevelOfSkill">Skillable Level Of Skill</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="evaluationMethodTitle"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.evaluationMethod">Evaluation Method</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="organizationTitle"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.organization">Organization</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let requestEducationalModule of requestEducationalModules ;trackBy: trackId" [ngClass]="{'bg-success': requestEducationalModule.requestStatus == 'NEW','accept': requestEducationalModule.requestStatus === 'ACCEPT','ignore': requestEducationalModule.requestStatus === 'IGNORE'}">
+                <td><a [routerLink]="['/request-educational-module-marine-suffix', requestEducationalModule.id, 'view' ]">{{requestEducationalModule.id}}</a></td>
+                <!--<td>{{requestEducationalModule.code}}</td>-->
+                <td>{{requestEducationalModule.title}}</td>
+                <!--<td>{{requestEducationalModule.learningTimeTheorical}}</td>
+                <td>{{requestEducationalModule.learningTimePractical}}</td>
+                <td>{{requestEducationalModule.version}}</td>-->
+                <td>{{requestEducationalModule.innerCode}}</td>
+                <td>{{requestEducationalModule.centralizedCode}}</td>
+                <!--<td>{{requestEducationalModule.moreDescription}}</td>-->
+                <td>{{requestEducationalModule.recommendedBy}}</td>
+                <!--<td>{{requestEducationalModule.educationalModuleHeadlines}}</td>
+                <td>{{requestEducationalModule.prerequisite}}</td>
+                <td>{{requestEducationalModule.drafters}}</td>
+                <td>{{requestEducationalModule.educationalModuleLevel}}</td>
+                <td>{{requestEducationalModule.educationalModuleGroup}}</td>
+                <td>{{requestEducationalModule.educationalModuleHour}}</td>
+                <td>{{requestEducationalModule.timePassed | date:'medium'}}</td>
+                <td>{{requestEducationalModule.credit | date:'medium'}}</td>-->
+                <td>{{requestEducationalModule.createUserLogin}}</td>
+                <td>{{requestEducationalModule.createDate}}</td>
+                <!--<td>{{requestEducationalModule.modifyUserLogin}}</td>
+                <td>{{requestEducationalModule.modifyDate | date:'medium'}}</td>
+                <td>{{requestEducationalModule.archived}}</td>
+                <td>{{requestEducationalModule.archivedUserLogin}}</td>
+                <td>{{requestEducationalModule.archivedDate | date:'medium'}}</td>
+                <td>{{requestEducationalModule.status}}</td>
+                <td>{{requestEducationalModule.conversation}}</td>-->
+                <td jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + requestEducationalModule.requestStatus}}">{{requestEducationalModule.requestStatus}}</td>
+                <td>{{requestEducationalModule.changeStatusUserLogin}}</td>
+                <!--<td>
+                    <div *ngIf="requestEducationalModule.securityLevelId">
+                        <a [routerLink]="['../security-level-marine-suffix', requestEducationalModule.securityLevelId , 'view' ]" >{{requestEducationalModule.securityLevelTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="requestEducationalModule.skillableLevelOfSkillId">
+                        <a [routerLink]="['../skillable-level-of-skill-marine-suffix', requestEducationalModule.skillableLevelOfSkillId , 'view' ]" >{{requestEducationalModule.skillableLevelOfSkillTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="requestEducationalModule.evaluationMethodId">
+                        <a [routerLink]="['../evaluation-method-marine-suffix', requestEducationalModule.evaluationMethodId , 'view' ]" >{{requestEducationalModule.evaluationMethodTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="requestEducationalModule.organizationId">
+                        <a [routerLink]="['../organization-marine-suffix', requestEducationalModule.organizationId , 'view' ]" >{{requestEducationalModule.organizationTitle}}</a>
+                    </div>
+                </td>-->
+                <td class="text-right">
+                    <ng-container *ngIf="!(requestEducationalModule.requestStatus === 'ACCEPT' || requestEducationalModule.requestStatus === 'IGNORE')">
+                    <ng-container *ngIf="requestEducationalModule.requestStatus === 'NEW' || requestEducationalModule.requestStatus === 'READ' || isAdmin">
+                    <div class="btn-group flex-btn-group-container">
+                        <button *ngIf="requestEducationalModule.status == 0"  type="submit"
+                                [routerLink]="['../document-marine-suffix', 'requesteducationalmodule',requestEducationalModule.id ]"
+                                class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.documents">Documents</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/request-educational-module-marine-suffix', requestEducationalModule.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit" *ngIf="requestEducationalModule.status == 0"
+                                [routerLink]="['/request-educational-module-marine-suffix', requestEducationalModule.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" *ngIf="requestEducationalModule.status == 0"
+                                [routerLink]="['/', { outlets: { popup: 'request-educational-module-marine-suffix/'+ requestEducationalModule.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                        <button *ngIf="isAdmin" type="submit" (click)="complete(requestEducationalModule)"
+                                class="btn btn-success btn-sm">
+                            <span class="fa fa-check" color="f00c"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.complete">complete</span>
+                        </button>
+                        <button *ngIf="isAdmin" type="submit" (click)="reject(requestEducationalModule)"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-ban" color="f00c"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.reject">reject</span>
+                        </button>
+                    </div>
+                    </ng-container>
+                    </ng-container>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="8">
+                    <div *ngIf="requestEducationalModules && requestEducationalModules.length">
+
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "workGroup" : {
+            "home": {
+                "title": "گروه های محل خدمت",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش گروه محل خدمت"
+            },
+            "created": "گروه محل خدمت با شناسه {{ param }} ایجاد شد.",
+            "updated": "گروه محل خدمت با شناسه {{ param }} ویرایش شد.",
+            "deleted": "گروه محل خدمت با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف گروه محل خدمت با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات گروه محل خدمت"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "person": "Person",
+            "workUnit": "Work Unit"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+
+{
+    "marineindustryprojApp": {
+        "jobType" : {
+            "home": {
+                "title": "نوع شغل ها",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش نوع شغل"
+            },
+            "created": "نوع شغل با شناسه {{ param }} ایجاد شد.",
+            "updated": "نوع شغل با شناسه {{ param }} ویرایش شد.",
+            "deleted": "نوع شغل با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف نوع شغل با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات نوع شغل"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "job": "شغل"
+        }
+    }
+}

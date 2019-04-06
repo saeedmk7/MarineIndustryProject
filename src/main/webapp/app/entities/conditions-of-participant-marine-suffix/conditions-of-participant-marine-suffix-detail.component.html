@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="conditionsOfParticipant" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.conditionsOfParticipant.detail.title">Conditions Of Participant</span> {{conditionsOfParticipant.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.conditionsOfParticipant.title">Title</span></dt>
+                <dd>
+                    <span>{{conditionsOfParticipant.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.conditionsOfParticipant.code">Code</span></dt>
+                <dd>
+                    <span>{{conditionsOfParticipant.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.conditionsOfParticipant.description">Description</span></dt>
+                <dd>
+                    <span>{{conditionsOfParticipant.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.conditionsOfParticipant.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{conditionsOfParticipant.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.conditionsOfParticipant.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{conditionsOfParticipant.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.conditionsOfParticipant.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{conditionsOfParticipant.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.conditionsOfParticipant.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{conditionsOfParticipant.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+           <!-- <button type="button"
+                    [routerLink]="['/conditions-of-participant-marine-suffix', conditionsOfParticipant.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>-->
+        </div>
+    </div>
+</div>

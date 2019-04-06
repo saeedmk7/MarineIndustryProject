@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-educational-module-job-marine-suffix-heading" jhiTranslate="marineindustryprojApp.educationalModuleJob.home.createOrEditLabel">Create or edit a Educational Module Job</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!educationalModuleJob.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="educationalModuleJob.id" readonly />
+                </div>
+                <form (keydown)="isEnter($event)">
+                <div class="row">
+                    <div class="form-group">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="first3jobCode_field">3 رقم اول کد شغلی</label>
+                        <input type="number" class="form-control" required name="first3jobCode" autofocus maxlength="3" id="first3jobCode_field"  [disabled]="!disable" [(ngModel)]="first3jobCode" /><!--maxlength="3"-->
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-success btn-sm col-lg-3 bottom" (click)="filterJobs()">بارگزاری اطلاعات</button>
+                    </div>
+                </div>
+                </form>
+                <div class="row">
+                <div class="form-group half">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModuleJob.job">Job</label>
+                    <ng-select
+                        [items]="tempJobs"
+                        [multiple]="true"
+                        [closeOnSelect]="false"
+                        [searchable]="true"
+                        [disabled]="disable"
+                        [required]="true"
+                        bindLabel="fullTitle"
+                        placeholder="مشاغل"
+                        name="selectedJobs"
+                        [(ngModel)]="selectedJobs">
+                    </ng-select>
+                </div>
+
+                <div class="form-group half">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModuleJob.educationalModule">Educational Module</label>
+                    <ng-select
+                        [items]="educationalmodules"
+                        [multiple]="true"
+                        [closeOnSelect]="false"
+                        [searchable]="true"
+                        bindLabel="fullTitle"
+                        [disabled]="disable"
+                        [required]="true"
+                        placeholder="پودمان های آموزشی"
+                        name="selectedEducationalModules"
+                        [(ngModel)]="selectedEducationalModules">
+                    </ng-select>
+                </div>
+                </div>
+                <div class="row">
+                    <h5 class="alert alert-warning">در صورت تایید این موارد پودمانهای آموزشی که مشاغل انتخابی تا به الان داشته اند حفظ و پودمان های جدیدی که اکنون انتخاب کرده اید به مشاغل انتخابی تخصیص داده می شوند.</h5>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+                <button type="button" id="clear" class="btn btn-secondary"  (click)="cleanPage()">
+                    پاکسازی صفحه
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

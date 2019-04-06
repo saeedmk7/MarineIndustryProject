@@ -1,0 +1,207 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-request-niazsanji-fardi-marine-suffix-heading" jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.home.createOrEditLabel">Create or edit a Request Niazsanji Fardi</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!requestNiazsanjiFardi.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="requestNiazsanjiFardi.id" readonly />
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.code" for="field_code">Code</label>
+                    <input type="text" class="form-control" name="code" id="field_code"
+                        [(ngModel)]="requestNiazsanjiFardi.code" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.code?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>-->
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اولیه نیازسنجی</div></div>
+                <div class="form-group bighalf">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.organizationChart" for="field_organizationChart">Organization Chart</label>
+                    <!--<select class="form-control" id="field_organizationChart" name="organizationChart" [(ngModel)]="requestNiazsanjiFardi.organizationChartId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="organizationChartOption.id" *ngFor="let organizationChartOption of organizationcharts; trackBy: trackOrganizationChartById">{{organizationChartOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="recommenedOrgCharts"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        [disabled]="orgChartDisabled"
+                        (change)="onOrganizationChartChange($event)"
+                        bindLabel="fullTitle"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="organizationChart"
+                        id="field_organizationChart"
+                        [(ngModel)]="requestNiazsanjiFardi.organizationChartId">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.person" for="field_person">Person</label>
+                    <!--<select class="form-control" id="field_person" name="person" [(ngModel)]="requestNiazsanjiFardi.personId"  required>
+                        <option *ngIf="!editForm.value.person" [ngValue]="null" selected></option>
+                        <option [ngValue]="personOption.id" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.family}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="people"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        [disabled]="orgChartDisabled"
+                        (change)="onPersonChange($event)"
+                        bindLabel="fullName"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="person"
+                        id="field_person"
+                        [(ngModel)]="requestNiazsanjiFardi.personId" >
+                </div>
+                <div [hidden]="!(editForm.controls.person?.dirty && editForm.controls.person?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.person?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات دوره های شرکت کرده</div></div>
+                <div class="table-responsive">
+                    <table class="table table-striped  table-bordered table-hover table-sm">
+                        <thead>
+                        <tr >
+                            <th><span jhiTranslate="global.field.id">ID</span> </th>
+                            <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazSanjiSource">Niaz Sanji Source</span> </th>
+                            <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.priceCost">Price Cost</span></th>
+                            <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.educationalModule">Educational Module</span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let finalNiazsanjiReport of finalNiazsanjiReports">
+                            <td><a [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReport.id, 'view' ]">{{finalNiazsanjiReport.id}}</a></td>
+                            <td jhiTranslate="{{'marineindustryprojApp.NiazSanjiSource.' + finalNiazsanjiReport.niazSanjiSource}}">{{finalNiazsanjiReport.niazSanjiSource}}</td>
+                            <td>{{finalNiazsanjiReport.priceCost | number}}</td>
+                            <td>
+                                {{finalNiazsanjiReport.educationalModuleTitle}}
+                                <!--<div *ngIf="finalNiazsanjiReport.educationalModuleId">
+                                    <a [routerLink]="['../educational-module-marine-suffix', finalNiazsanjiReport.educationalModuleId , 'view' ]" >{{finalNiazsanjiReport.educationalModuleTitle}}</a>
+                                </div>-->
+                            </td>
+                        </tr>
+                        <tr *ngIf="hasNoRow" >
+                            <td colspan="5" class="alert-danger">
+                                این فرد تاکنون در دوره ای شرکت نکرده است.
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات پودمان های درخواستی</div></div>
+                <div>
+                    <table class="table table-striped  table-bordered table-hover table-sm">
+                        <thead>
+                        <tr >
+                            <th></th>
+                            <th width="600">پودمان ها</th>
+                            <th>ساعت پودمان</th>
+                            <th>سطح پودمان</th>
+                            <th>هزینه (ریال)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngIf="(requestNiazsanjiFardi.id === undefined) || (requestNiazsanjiFardi.id !== undefined && requestNiazsanjiFardi.approvedEducationalModuleId)">
+                            <td>
+                                از پودمان های مصوب
+                            </td>
+                            <td>
+                                    <ng-select
+                                        [items]="approvedEducationalmodules"
+                                        [multiple]="false"
+                                        [closeOnSelect]="true"
+                                        [searchable]="true"
+                                        [required]="false"
+                                        bindLabel="fullTitle"
+                                        bindValue="id"
+                                        (change)="onApprovedChange($event)"
+                                        placeholder="انتخاب نمائید."
+                                        name="approvedEducationalModule"
+                                        id="field_approvedEducationalModule"
+                                        [(ngModel)]="requestNiazsanjiFardi.approvedEducationalModuleId" >
+                            </td>
+                            <td>{{approvedHour | number}}</td>
+                            <td>{{approvedLevel}}</td>
+                            <td>
+                                    <input type="text" class="form-control" name="costApprovedEducationalModule" id="field_costApprovedEducationalModule"
+                                           [(ngModel)]="requestNiazsanjiFardi.costApprovedEducationalModule" />
+                            </td>
+                        </tr>
+                        <tr *ngIf="(requestNiazsanjiFardi.id === undefined) || (requestNiazsanjiFardi.id !== undefined && requestNiazsanjiFardi.allEducationalModuleId)">
+                            <td>
+                                از کلیه پودمان ها
+                            </td>
+                            <td>
+                                    <ng-select
+                                        [items]="educationalmodules"
+                                        [multiple]="false"
+                                        [closeOnSelect]="true"
+                                        [searchable]="true"
+                                        [required]="false"
+                                        (change)="onAllChange($event)"
+                                        bindLabel="fullTitle"
+                                        bindValue="id"
+                                        placeholder="انتخاب نمائید."
+                                        name="allEducationalModule"
+                                        id="field_allEducationalModule"
+                                        [(ngModel)]="requestNiazsanjiFardi.allEducationalModuleId" >
+                            </td>
+                            <td>{{allHour | number}}</td>
+                            <td>{{allLevel}}</td>
+                            <td>
+                                <input type="text" class="form-control" name="costAllEducationalModule" id="field_costAllEducationalModule"
+                                       [(ngModel)]="requestNiazsanjiFardi.costAllEducationalModule" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>{{approvedHour + allHour | number}}</td>
+                            <td></td>
+                            <td>{{+requestNiazsanjiFardi.costAllEducationalModule +  +requestNiazsanjiFardi.costApprovedEducationalModule | number}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">توضیحات تکمیلی</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.description" for="field_description">Description</label>
+                    <textarea class="form-control" name="description" id="field_description"
+                        [(ngModel)]="requestNiazsanjiFardi.description" ></textarea>
+                </div>
+                <div class="form-group" *ngIf="requestNiazsanjiFardi.id === undefined">
+                    <span *ngIf="targetPeople">درخواست شما برای افراد زیر ارسال می شود.</span>
+                    <ul>
+                        <li *ngFor="let item of targetPeople">
+                            {{item.fullName}}
+                        </li>
+                    </ul>
+                </div>
+                <div>
+
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+                <span class="alert alert-warning" *ngIf="requestNiazsanjiFardi.id === undefined">بعد از ذخیره اطلاعات امکان ویرایش برای شما وجود ندارد، لطفا در زمان ثبت اطلاعات نهایت دقت را بفرمائید.</span>
+                <span class="alert alert-danger" *ngIf="message">{{message}}</span>
+            </div>
+        </form>
+    </div>
+</div>

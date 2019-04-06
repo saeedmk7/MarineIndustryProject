@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="runningStep">
+            <h2><span jhiTranslate="marineindustryprojApp.runningStep.detail.title">Running Step</span> {{runningStep.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.runningStep.title">Title</span></dt>
+                <dd>
+                    <span>{{runningStep.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runningStep.description">Description</span></dt>
+                <dd>
+                    <span>{{runningStep.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runningStep.stepNumber">Step Number</span></dt>
+                <dd>
+                    <span>{{runningStep.stepNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runningStep.stepRequired">Step Required</span></dt>
+                <dd>
+                    <span>{{runningStep.stepRequired}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runningStep.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{runningStep.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runningStep.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{runningStep.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runningStep.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{runningStep.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runningStep.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{runningStep.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runningStep.archived">Archived</span></dt>
+                <dd>
+                    <span>{{runningStep.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runningStep.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{runningStep.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runningStep.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{runningStep.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.runningStep.status">Status</span></dt>
+                <dd>
+                    <span>{{runningStep.status}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/running-step-marine-suffix', runningStep.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

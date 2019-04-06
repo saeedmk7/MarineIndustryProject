@@ -1,0 +1,91 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="educationalCenter" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.educationalCenter.detail.title">Educational Center</span> {{educationalCenter.id}}</h2>
+
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.name">Name</span></dt>
+                <dd>
+                    <span>{{educationalCenter.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.ceo">Ceo</span></dt>
+                <dd>
+                    <span>{{educationalCenter.ceo}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.connectionPerson">Connection Person</span></dt>
+                <dd>
+                    <span>{{educationalCenter.connectionPerson}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.telephone">Telephone</span></dt>
+                <dd>
+                    <span>{{educationalCenter.telephone}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.fax">Fax</span></dt>
+                <dd>
+                    <span>{{educationalCenter.fax}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.address">Address</span></dt>
+                <dd>
+                    <span>{{educationalCenter.address}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.email">Email</span></dt>
+                <dd>
+                    <span>{{educationalCenter.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{educationalCenter.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{educationalCenter.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{educationalCenter.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{educationalCenter.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.archived">Archived</span></dt>
+                <dd>
+                    <span>{{educationalCenter.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{educationalCenter.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{educationalCenter.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.status">Status</span></dt>
+                <dd>
+                    <span>{{educationalCenter.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenter.activityArea">Activity Area</span></dt>
+                <dd>
+                    <span *ngFor="let activityArea of educationalCenter.activityAreas; let last = last">
+                        <!--<a [routerLink]="['/activity-area-marine-suffix', activityArea?.id, 'view' ]">{{activityArea.title}}</a>{{last ? '' : ', '}}-->
+                        <span>{{activityArea.title}}</span>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/educational-center-marine-suffix', educationalCenter.id, 'edit']"
+                    class="btn btn-primary edit-hide">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+        </div>
+    </div>
+</div>
