@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.document.fileDoc" for="field_fileDoc">File Doc</label>
                     <div>
-                        <input type="file" id="file_fileDoc" (change)="setFileData($event, importDataRequest, 'fileDoc', false)" jhiTranslate="entity.action.addblob"/>
+                        <input type="file" id="file_fileDoc" (change)="setFileData($event)" jhiTranslate="entity.action.addblob"/>
                         <span *ngIf="warning" class="alert alert-warning">{{warning}}</span>
                     </div>
                     <input type="hidden" class="form-control" name="fileDoc" id="field_fileDoc"

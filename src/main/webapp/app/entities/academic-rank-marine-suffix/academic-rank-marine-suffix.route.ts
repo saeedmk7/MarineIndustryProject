@@ -24,6 +24,7 @@ export class AcademicRankMarineSuffixResolve implements Resolve<IAcademicRankMar
         }
         return of(new AcademicRankMarineSuffix());
     }
+
 }
 
 export const academicRankRoute: Routes = [

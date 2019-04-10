@@ -4,6 +4,8 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 import { Principal } from '../';
 import { LoginModalService } from '../login/login-modal.service';
 import { StateStorageService } from './state-storage.service';
+import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
+import {CURRENT_ALLOWED_URL_KEY} from "app/shared/constants/storage-keys.constants";
 
 @Injectable({ providedIn: 'root' })
 export class UserRouteAccessService implements CanActivate {
@@ -11,17 +13,34 @@ export class UserRouteAccessService implements CanActivate {
         private router: Router,
         private loginModalService: LoginModalService,
         private principal: Principal,
-        private stateStorageService: StateStorageService
+        private stateStorageService: StateStorageService,
+        private sessionStorageService: SessionStorageService
     ) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Promise<boolean> {
         const authorities = route.data['authorities'];
+
+
+
         // We need to call the checkLogin / and so the principal.identity() function, to ensure,
         // that the client has a principal too, if they already logged in by the server.
         // This could happen on a page refresh.
-        return this.checkLogin(authorities, state.url);
+        return this.checkLogin(authorities, state.url) && this.canSeePage(state.url);
     }
-
+    canSeePage(url: string): Promise<boolean> {
+        debugger;
+        const principal = this.principal;
+        return Promise.resolve(
+            principal.identity().then(account => {
+                if (account) {
+                    let urls: string[] = this.sessionStorageService.retrieve(CURRENT_ALLOWED_URL_KEY);
+                    if(urls.filter(a => a.includes(url)).length > 0){
+                        return true;
+                    }
+                    return false;
+                }
+                }));
+    }
     checkLogin(authorities: string[], url: string): Promise<boolean> {
         const principal = this.principal;
         return Promise.resolve(
@@ -31,6 +50,7 @@ export class UserRouteAccessService implements CanActivate {
                 }
 
                 if (account) {
+
                     return principal.hasAnyAuthority(authorities).then(response => {
                         if (response) {
                             return true;
