@@ -24,11 +24,9 @@ import {EducationalModuleMarineSuffixService} from "app/entities/educational-mod
 import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
 import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
-import {STATUS_MEANING} from "app/shared/constants/status.constants";
 import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
-import {IRequestNiazsanjiFardiMarineSuffix} from "app/shared/model/request-niazsanji-fardi-marine-suffix.model";
 
 @Component({
     selector: 'mi-request-organization-niazsanji-marine-suffix',

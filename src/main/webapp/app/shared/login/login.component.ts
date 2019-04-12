@@ -43,7 +43,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         setTimeout(() => this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#username'), 'focus', []), 0);
-        $(document).ready(function() {
+        /*$(document).ready(function() {
             var panelOne = $('.form-panel.two').height(),
                 panelTwo = $('.form-panel.two')[0].scrollHeight;
 
@@ -67,7 +67,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
                     'height': panelOne
                 }, 200);
             });
-        });
+        });*/
     }
 
     cancel() {
