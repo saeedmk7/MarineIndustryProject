@@ -6,6 +6,7 @@ import com.marineindustryproj.service.POJO.FileStorageProperties;
 import com.marineindustryproj.service.parseExcel.EducationalModuleExcel;
 import com.marineindustryproj.service.parseExcel.JobExcel;
 import com.marineindustryproj.service.parseExcel.PersonExcel;
+import com.marineindustryproj.service.parseExcel.TeacherExcel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,9 @@ public class StorageService {
                     break;
                 case "person":
                     sb = new PersonExcel().parsePerson(fileName);
+                    break;
+                case "teacher":
+                    sb = new TeacherExcel().parseTeacher(fileName);
                     break;
                 default:
                     break;

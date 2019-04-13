@@ -99,6 +99,9 @@
                             <td>
                                 6- scientific_work_group_id *
                             </td>
+                            <td>
+                                7- organization_id *
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -137,6 +140,13 @@
                                 اختیاریست<br/>
                                 حتما باید در جدول گروه علمی شغلی ردیفی با این شناسه وجود داشته باشد.<br/>
                                 <a class="enableLink" href="#/scientific-work-group-marine-suffix">لینک جدول گروه های علمی شغلی</a><br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                واحد پیشنهاد دهنده<br/>
+                                اختیاریست<br/>
+                                حتما باید در جدول سازمان ها ردیفی با این شناسه وجود داشته باشد.<br/>
+                                <a class="enableLink" href="#/organization-marine-suffix">لینک جدول سازمان ها</a><br/>
                                 حتما فقط باید عدد باشد.<br/>
                             </td>
                         </tr>
@@ -178,6 +188,12 @@
                             </td>
                             <td>
                                 12- last_field_of_study_id
+                            </td>
+                            <td>
+                                13- employment_type_id
+                            </td>
+                            <td>
+                                14- work_group_id
                             </td>
                         </tr>
                         <tr>
@@ -258,6 +274,20 @@
                                 <a class="enableLink" href="#/field-of-study-marine-suffix">لینک جدول رشته های تحصیلی</a><br/>
                                 حتما فقط باید عدد باشد.<br/>
                             </td>
+                            <td>
+                                نوع استخدام<br/>
+                                اختیاریست<br/>
+                                حتما باید در جدول انواع استخدام ردیفی با این شناسه وجود داشته باشد.<br/>
+                                <a class="enableLink" href="#/employment-type-marine-suffix">لینک جدول انواع استخدام</a><br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                گروه محل خدمت<br/>
+                                اختیاریست<br/>
+                                حتما باید در جدول گروه های محل خدمت ردیفی با این شناسه وجود داشته باشد.<br/>
+                                <a class="enableLink" href="#/work-group-marine-suffix">لینک جدول گروه های محل خدمت</a><br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
                         </tr>
                     </table>
                     <table *ngSwitchCase="'teacher'" class="table table-sm table-striped table-bordered table-responsive" style="width: 100%">
@@ -290,13 +320,31 @@
                                 9- teaching_subject *
                             </td>
                             <td>
-                                10- expiration_date
+                                10- issue_date
                             </td>
                             <td>
-                                11- last_qualification_id
+                                11- expiration_date
                             </td>
                             <td>
-                                12- last_field_of_study_id
+                                12- license_number
+                            </td>
+                            <td>
+                                13- session_number
+                            </td>
+                            <td>
+                                14- status
+                            </td>
+                            <td>
+                                15- last_qualification_id
+                            </td>
+                            <td>
+                                16- service_unit_id
+                            </td>
+                            <td>
+                                17- academic_rank_id
+                            </td>
+                            <td>
+                                18- last_field_of_study_id
                             </td>
                         </tr>
                         <tr>
@@ -352,6 +400,13 @@
                                 حداکثر 1024 کاراکتر<br/>
                             </td>
                             <td>
+                                تاریخ صدور<br/>
+                                اجباریست<br/>
+                                لطفا به شمسی و فقط و فقط به شکل زیر وارد نمائید.<br/>
+                                1395-12-30<br/>
+                                روز-ماه-سال
+                            </td>
+                            <td>
                                 تاریخ اتمام اعتبار<br/>
                                 اجباریست<br/>
                                 لطفا به شمسی و فقط و فقط به شکل زیر وارد نمائید.<br/>
@@ -359,10 +414,42 @@
                                 روز-ماه-سال
                             </td>
                             <td>
+                                شماره گواهینامه<br/>
+                                اختیاریست<br/>
+                                حداکثر 9 رقمی<br/>
+                                فقط عدد میتواند باشد.<br/>
+                            </td>
+                            <td>
+                                شماره جلسه<br/>
+                                اختیاریست<br/>
+                                حداکثر 9 رقمی<br/>
+                                فقط عدد میتواند باشد.<br/>
+                            </td>
+                            <td>
+                                تعداد بار تمدید گواهینامه<br/>
+                                اختیاریست<br/>
+                                حداکثر 9 رقمی<br/>
+                                فقط عدد میتواند باشد.<br/>
+                            </td>
+                            <td>
                                 آخرین مدرک تحصیلی<br/>
                                 اختیاریست<br/>
                                 حتما باید در جدول مدارک تحصیلی ردیفی با این شناسه وجود داشته باشد.<br/>
                                 <a class="enableLink" href="#/qualification-marine-suffix">لینک جدول مدارک تحصیلی</a><br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                واحد خدمتی<br/>
+                                اختیاریست<br/>
+                                حتما باید در جدول واحدهای خدمتی ردیفی با این شناسه وجود داشته باشد.<br/>
+                                <a class="enableLink" href="#/service-unit-marine-suffix">لینک جدول واحدهای خدمتی</a><br/>
+                                حتما فقط باید عدد باشد.<br/>
+                            </td>
+                            <td>
+                                مرتبه علمی<br/>
+                                اختیاریست<br/>
+                                حتما باید در جدول مراتب علمی ردیفی با این شناسه وجود داشته باشد.<br/>
+                                <a class="enableLink" href="#/academic-rank-marine-suffix">لینک جدول مراتب علمی</a><br/>
                                 حتما فقط باید عدد باشد.<br/>
                             </td>
                             <td>

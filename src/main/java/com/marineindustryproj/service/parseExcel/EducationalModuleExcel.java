@@ -16,9 +16,11 @@ import java.util.Set;
 
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.EducationalModuleService;
+import com.marineindustryproj.service.OrganizationService;
 import com.marineindustryproj.service.ScientificWorkGroupService;
 import com.marineindustryproj.service.SkillableLevelOfSkillService;
 import com.marineindustryproj.service.dto.EducationalModuleDTO;
+import com.marineindustryproj.service.dto.OrganizationDTO;
 import com.marineindustryproj.service.dto.ScientificWorkGroupDTO;
 import com.marineindustryproj.service.dto.SkillableLevelOfSkillDTO;
 import org.apache.poi.ss.usermodel.Cell;
@@ -38,6 +40,7 @@ public class EducationalModuleExcel {
     private static EducationalModuleService educationalModuleService = null;
     private static SkillableLevelOfSkillService skillableLevelOfSkillService = null;
     private static ScientificWorkGroupService scientificWorkGroupService = null;
+    private static OrganizationService organizationService = null;
     private static ImportUtilities importUtilities = null;
 
     private final Path rootLocation = Paths.get("upload-dir");
@@ -46,7 +49,9 @@ public class EducationalModuleExcel {
     public EducationalModuleExcel(EducationalModuleService educationalModuleService,
                                   SkillableLevelOfSkillService skillableLevelOfSkillService,
                                   ScientificWorkGroupService scientificWorkGroupService,
+                                  OrganizationService organizationService,
                                   ImportUtilities importUtilities) {
+        this.organizationService = organizationService;
         this.educationalModuleService = educationalModuleService;
         this.importUtilities = importUtilities;
         this.skillableLevelOfSkillService = skillableLevelOfSkillService;
@@ -223,6 +228,39 @@ public class EducationalModuleExcel {
                                     }
                                     else
                                         importUtilities.addError(rowNum,columnNum,"scientificWorkGroupId",4, sb);
+                                }
+                                break;
+                            case 6: //organizationId
+                                Double organizationId = Double.valueOf(0);
+                                if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                    organizationId = currentCell.getNumericCellValue();
+                                else
+                                    organizationId = Double.valueOf(currentCell.getStringCellValue());
+                                if (organizationId != 0) {
+                                    Optional<OrganizationDTO> organizationDTO =
+                                        organizationService.findOne(organizationId.longValue());
+                                    if(organizationDTO.isPresent()) {
+                                        educationalModuleDTO.setOrganizationId(organizationId.longValue());
+                                        educationalModuleDTO.setRecommendedBy(organizationDTO.get().getTitle());
+                                    }
+                                    else {
+                                        importUtilities.addError(rowNum,
+                                            columnNum,
+                                            "organizationId",
+                                            4,
+                                            sb);
+                                        /*hasError = true;
+                                        continue;*/
+                                    }
+                                }
+                                else{
+                                    importUtilities.addError(rowNum,
+                                        columnNum,
+                                        "organizationId",
+                                        1,
+                                        sb);
+                                    /*hasError = true;
+                                    continue;*/
                                 }
                                 break;
                         }

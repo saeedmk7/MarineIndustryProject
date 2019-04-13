@@ -1,6 +1,5 @@
 package com.marineindustryproj.service.parseExcel;
 
-import com.marineindustryproj.domain.Qualification;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.*;
 import com.marineindustryproj.service.dto.*;
@@ -9,9 +8,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +17,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.*;
-
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -342,6 +340,32 @@ public class PersonExcel {
                                         fieldOfStudyService.findOne(lastFieldOfStudyId.longValue());
                                     if(fieldOfStudyDTO.isPresent())
                                         personDTO.setLastFieldOfStudyId(lastFieldOfStudyId.longValue());
+                                }
+                                break;
+                            case 12: // employmentTypeId
+                                Double employmentTypeId = Double.valueOf(0);
+                                if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                    employmentTypeId = currentCell.getNumericCellValue();
+                                else
+                                    employmentTypeId = Double.valueOf(currentCell.getStringCellValue());
+                                if (employmentTypeId != 0) {
+                                    Optional<EmploymentTypeDTO> employmentTypeDTO =
+                                        employmentTypeService.findOne(employmentTypeId.longValue());
+                                    if(employmentTypeDTO.isPresent())
+                                        personDTO.setEmploymentTypeId(employmentTypeId.longValue());
+                                }
+                                break;
+                            case 13: // workGroupId
+                                Double workGroupId = Double.valueOf(0);
+                                if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                    workGroupId = currentCell.getNumericCellValue();
+                                else
+                                    workGroupId = Double.valueOf(currentCell.getStringCellValue());
+                                if (workGroupId != 0) {
+                                    Optional<WorkGroupDTO> workGroupDTO =
+                                        workGroupService.findOne(workGroupId.longValue());
+                                    if(workGroupDTO.isPresent())
+                                        personDTO.setWorkGroupId(workGroupId.longValue());
                                 }
                                 break;
                         }
