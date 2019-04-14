@@ -50,7 +50,7 @@ export class UsersRequestMarineSuffixComponent implements OnInit, OnDestroy {
         this.routeData = this.activatedRoute.data.subscribe(data => {
             this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
-            this.reverse = data.pagingParams.ascending;
+            this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
         });
     }

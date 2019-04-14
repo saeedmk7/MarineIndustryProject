@@ -102,7 +102,7 @@ export class NavbarComponent implements OnInit,AfterViewInit {
                                     return v.url;
                                 });
                                 debugger;
-                                let additionalUrlsThatNeeds: string[] = ["#/settings"];
+                                let additionalUrlsThatNeeds: string[] = ["#/settings","#/password","#/document-marine-suffix"];
                                 additionalUrlsThatNeeds.forEach(a => {
                                     navBarItemAddresses.push(a);
                                 });

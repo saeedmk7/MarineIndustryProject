@@ -1,5 +1,7 @@
 package com.marineindustryproj.service.parseExcel;
 
+import com.ghasemkiani.util.icu.PersianCalendar;
+import com.ibm.icu.util.Calendar;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.*;
 import com.marineindustryproj.service.dto.*;
@@ -20,6 +22,7 @@ import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Optional;
@@ -215,23 +218,58 @@ public class PersonExcel {
                                 personDTO.setNationalId(StringUtils.leftPad(nationalIdStr,10, '0'));
                                 break;
                             case 6: // birthDate
+                                ZonedDateTime a;
                                 String birthDate = "";
                                 birthDate = currentCell.getStringCellValue();
                                 if (birthDate.isEmpty()) {
                                     importUtilities.addError(rowNum,
-                                        columnNum,
-                                        "birthDate",
-                                        1,
-                                        sb);
+                                                             columnNum,
+                                                             "birthDate",
+                                                             1,
+                                                             sb);
                                     hasError = true;
                                     continue;
                                 }
                                 String[] seperated = birthDate.split("-");
-                                ConvertDateUtil.YearMonthDate yearMonthDate = new ConvertDateUtil.YearMonthDate(Integer.valueOf(seperated[0]),Integer.valueOf(seperated[1]),Integer.valueOf(seperated[2]));
+                                try {
+                                    PersianCalendar persianCalendar = new PersianCalendar(Integer.valueOf(seperated[0]),
+                                                                                          Integer.valueOf(seperated[1]),
+                                                                                          Integer.valueOf(seperated[2]));
+                                    GregorianCalendar gregorianCalendar = new GregorianCalendar();
+                                    gregorianCalendar.setTime(persianCalendar.getTime());
+
+                                    a = ZonedDateTime.of(gregorianCalendar.get(Calendar.YEAR),
+                                                                       gregorianCalendar.get(Calendar.MONTH) == 0 ? 1 : gregorianCalendar.get(Calendar.MONTH),
+                                                                       gregorianCalendar.get(Calendar.DAY_OF_MONTH),
+                                                                       0,
+                                                                       0,
+                                                                       0,
+                                                                       0,
+                                                                       ZoneId.systemDefault());
+
+                                /*ConvertDateUtil.YearMonthDate yearMonthDate = new ConvertDateUtil.YearMonthDate(Integer.valueOf(seperated[0]),Integer.valueOf(seperated[1]),Integer.valueOf(seperated[2]));
                                 ConvertDateUtil.YearMonthDate gregorianYearMonthDateBirthDate =  ConvertDateUtil.jalaliToGregorian(yearMonthDate);
 
                                 //DateTimeFormatter parserEmploymentDate = DateTimeFormatter.ofPattern("YYYY/MM/DD");
-                                ZonedDateTime a = ZonedDateTime.of(gregorianYearMonthDateBirthDate.getYear(),gregorianYearMonthDateBirthDate.getMonth(),gregorianYearMonthDateBirthDate.getDate(),0,0,0,0, ZoneId.systemDefault()); //) ZonedDateTime. (LocalDate.parse(jalaliYearMonthDateEmploymentDate.toString(), parserEmploymentDate));
+                                ZonedDateTime a = ZonedDateTime.of(gregorianYearMonthDateBirthDate.getYear(),gregorianYearMonthDateBirthDate.getMonth(),gregorianYearMonthDateBirthDate.getDate(),0,0,0,0, ZoneId.systemDefault()); //) ZonedDateTime. (LocalDate.parse(jalaliYearMonthDateEmploymentDate.toString(), parserEmploymentDate));*/
+
+                                }
+                                catch (Exception ex){
+                                    PersianCalendar persianCalendar = new PersianCalendar(Integer.valueOf(seperated[0]),
+                                                                                          Integer.valueOf(1),
+                                                                                          Integer.valueOf(1));
+                                    GregorianCalendar gregorianCalendar = new GregorianCalendar();
+                                    gregorianCalendar.setTime(persianCalendar.getTime());
+
+                                    a = ZonedDateTime.of(gregorianCalendar.get(Calendar.YEAR),
+                                                         gregorianCalendar.get(Calendar.MONTH) == 0 ? 1 : gregorianCalendar.get(Calendar.MONTH),
+                                                         gregorianCalendar.get(Calendar.DAY_OF_MONTH),
+                                                         0,
+                                                         0,
+                                                         0,
+                                                         0,
+                                                         ZoneId.systemDefault());
+                                }
                                 personDTO.setBirthDate(a);
                                 break;
                             case 7: // jobId

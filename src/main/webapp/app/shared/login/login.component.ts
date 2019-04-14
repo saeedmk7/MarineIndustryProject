@@ -18,7 +18,7 @@ import {EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE} from "app/shared";
 export class JhiLoginModalComponent implements AfterViewInit {
     authenticationError: boolean;
     password: string;
-    rememberMe: boolean;
+    rememberMe: boolean = true;
     username: string;
     credentials: any;
 

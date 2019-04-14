@@ -30,6 +30,7 @@ export class UserRouteAccessService implements CanActivate {
         return Promise.resolve(
             principal.identity().then(account => {
                 if (account) {
+                    debugger;
                     if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined) {
                         return true;
                     }
@@ -39,8 +40,11 @@ export class UserRouteAccessService implements CanActivate {
                         let searchWord = "";
                         if(splitUrl[1].includes('('))
                             searchWord = splitUrl[1].substring(0, splitUrl[1].indexOf("("));
+                        else if(splitUrl[1].includes('?'))
+                            searchWord = splitUrl[1].substring(0, splitUrl[1].indexOf("?"));
                         else
                             searchWord = splitUrl[1];
+
                         if (urls.filter(a => a.includes(searchWord)).length > 0) {
                             return true;
                         }

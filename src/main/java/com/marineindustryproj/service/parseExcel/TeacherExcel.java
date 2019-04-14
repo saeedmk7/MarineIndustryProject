@@ -1,5 +1,8 @@
 package com.marineindustryproj.service.parseExcel;
 
+import com.ghasemkiani.util.icu.PersianCalendar;
+import com.ibm.icu.util.Calendar;
+import com.ibm.icu.util.ULocale;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.*;
 import com.marineindustryproj.service.dto.*;
@@ -20,10 +23,13 @@ import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TimeZone;
 
 @Service
 @Transactional
@@ -82,7 +88,8 @@ public class TeacherExcel {
     public StringBuilder parseTeacher(String fileName) throws Exception {
         StringBuilder sb = new StringBuilder();
         try {
-            ConvertDateUtil convertDateUtil = new ConvertDateUtil();
+            //PersianCalendar
+              //com.ibm.icu.impl.CalendarUtil.
             FileInputStream excelFile = new FileInputStream(new File(this.rootLocation.resolve(fileName).toAbsolutePath().toString()));
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheet("Sheet1");
@@ -242,44 +249,87 @@ public class TeacherExcel {
                                 teacherDTO.setTeachingSubject(teachingSubject);
                                 break;
                             case 9: // issueDate
-                                String issueDate = "";
-                                issueDate = currentCell.getStringCellValue();
-                                if (issueDate.isEmpty()) {
-                                    importUtilities.addError(rowNum,
-                                        columnNum,
-                                        "issueDate",
-                                        1,
-                                        sb);
+                                try {
+                                    String issueDate = "";
+                                    issueDate = currentCell.getStringCellValue();
+                                    if (issueDate.isEmpty()) {
+                                        importUtilities.addError(rowNum,
+                                                                 columnNum,
+                                                                 "issueDate",
+                                                                 1,
+                                                                 sb);
                                   /*  hasError = true;
                                     continue;*/
-                                }
-                                String[] seperated = issueDate.split("-");
-                                ConvertDateUtil.YearMonthDate yearMonthDate = new ConvertDateUtil.YearMonthDate(Integer.valueOf(seperated[0]),Integer.valueOf(seperated[1]),Integer.valueOf(seperated[2]));
+                                    }
+                                    String[] seperated = issueDate.split("-");
+                                    PersianCalendar persianCalendar = new PersianCalendar(Integer.valueOf(seperated[0]),
+                                                                                          Integer.valueOf(seperated[1]),
+                                                                                          Integer.valueOf(seperated[2]));
+                                    GregorianCalendar gregorianCalendar = new GregorianCalendar();
+                                    gregorianCalendar.setTime(persianCalendar.getTime());
+
+                                    ZonedDateTime a = ZonedDateTime.of(gregorianCalendar.get(Calendar.YEAR),
+                                                                       gregorianCalendar.get(Calendar.MONTH) == 0 ? 1 : gregorianCalendar.get(Calendar.MONTH),
+                                                                       gregorianCalendar.get(Calendar.DAY_OF_MONTH),
+                                                                       0,
+                                                                       0,
+                                                                       0,
+                                                                       0,
+                                                                       ZoneId.systemDefault());
+
+                                /*ConvertDateUtil.YearMonthDate yearMonthDate = new ConvertDateUtil.YearMonthDate(Integer.valueOf(seperated[0]),Integer.valueOf(seperated[1]),Integer.valueOf(seperated[2]));
                                 ConvertDateUtil.YearMonthDate gregorianYearMonthDateBirthDate =  ConvertDateUtil.jalaliToGregorian(yearMonthDate);
 
                                 //DateTimeFormatter parserEmploymentDate = DateTimeFormatter.ofPattern("YYYY/MM/DD");
-                                ZonedDateTime a = ZonedDateTime.of(gregorianYearMonthDateBirthDate.getYear(),gregorianYearMonthDateBirthDate.getMonth(),gregorianYearMonthDateBirthDate.getDate(),0,0,0,0, ZoneId.systemDefault()); //) ZonedDateTime. (LocalDate.parse(jalaliYearMonthDateEmploymentDate.toString(), parserEmploymentDate));
-                                teacherDTO.setIssueDate(a);
+                                ZonedDateTime a = ZonedDateTime.of(gregorianYearMonthDateBirthDate.getYear(),gregorianYearMonthDateBirthDate.getMonth(),gregorianYearMonthDateBirthDate.getDate(),0,0,0,0, ZoneId.systemDefault()); //) ZonedDateTime. (LocalDate.parse(jalaliYearMonthDateEmploymentDate.toString(), parserEmploymentDate));*/
+                                    teacherDTO.setIssueDate(a);
+                                }
+                                catch (Exception ex)
+                                {
+                                    // ignore
+                                }
                                 break;
                             case 10: // expirationDate
-                                String expirationDate = "";
-                                expirationDate = currentCell.getStringCellValue();
-                                if (expirationDate.isEmpty()) {
-                                    importUtilities.addError(rowNum,
-                                        columnNum,
-                                        "expirationDate",
-                                        1,
-                                        sb);
+                                try {
+                                    String expirationDate = "";
+                                    expirationDate = currentCell.getStringCellValue();
+                                    if (expirationDate.isEmpty()) {
+                                        importUtilities.addError(rowNum,
+                                                                 columnNum,
+                                                                 "expirationDate",
+                                                                 1,
+                                                                 sb);
                                   /*  hasError = true;
                                     continue;*/
-                                }
-                                String[] expirationDateSeperated = expirationDate.split("-");
-                                ConvertDateUtil.YearMonthDate expirationDateYearMonthDate = new ConvertDateUtil.YearMonthDate(Integer.valueOf(expirationDateSeperated[0]),Integer.valueOf(expirationDateSeperated[1]),Integer.valueOf(expirationDateSeperated[2]));
+                                    }
+                                    String[] expirationDateSeperated = expirationDate.split("-");
+
+                                    PersianCalendar persianCalendar1 = new PersianCalendar(Integer.valueOf(expirationDateSeperated[0]),
+                                                                                           Integer.valueOf(expirationDateSeperated[1]),
+                                                                                           Integer.valueOf(expirationDateSeperated[2]));
+                                    GregorianCalendar gregorianCalendar1 = new GregorianCalendar();
+                                    gregorianCalendar1.setTime(persianCalendar1.getTime());
+
+                                    ZonedDateTime b = ZonedDateTime.of(gregorianCalendar1.get(Calendar.YEAR),
+                                                                       (gregorianCalendar1.get(Calendar.MONTH) == 0 ? 1 : gregorianCalendar1.get(Calendar.MONTH)),
+                                                                       gregorianCalendar1.get(Calendar.DAY_OF_MONTH),
+                                                                       0,
+                                                                       0,
+                                                                       0,
+                                                                       0,
+                                                                       ZoneId.systemDefault());
+
+                                /*ConvertDateUtil.YearMonthDate expirationDateYearMonthDate = new ConvertDateUtil.YearMonthDate(Integer.valueOf(expirationDateSeperated[0]),Integer.valueOf(expirationDateSeperated[1]),Integer.valueOf(expirationDateSeperated[2]));
                                 ConvertDateUtil.YearMonthDate gregorianYearMonthDateExpirationDate =  ConvertDateUtil.jalaliToGregorian(expirationDateYearMonthDate);
 
                                 //DateTimeFormatter parserEmploymentDate = DateTimeFormatter.ofPattern("YYYY/MM/DD");
-                                ZonedDateTime b = ZonedDateTime.of(gregorianYearMonthDateExpirationDate.getYear(),gregorianYearMonthDateExpirationDate.getMonth(),gregorianYearMonthDateExpirationDate.getDate(),0,0,0,0, ZoneId.systemDefault()); //) ZonedDateTime. (LocalDate.parse(jalaliYearMonthDateEmploymentDate.toString(), parserEmploymentDate));
-                                teacherDTO.setExpirationDate(b);
+                                ZonedDateTime b = ZonedDateTime.of(gregorianYearMonthDateExpirationDate.getYear(),gregorianYearMonthDateExpirationDate.getMonth(),gregorianYearMonthDateExpirationDate.getDate(),0,0,0,0, ZoneId.systemDefault()); //) ZonedDateTime. (LocalDate.parse(jalaliYearMonthDateEmploymentDate.toString(), parserEmploymentDate));*/
+                                    teacherDTO.setExpirationDate(b);
+                                }
+                                catch (Exception ex)
+                                {
+                                    // ignore
+                                }
                                 break;
                             case 11: //licenseNumber
                                 Double licenseNumber = Double.valueOf(0);

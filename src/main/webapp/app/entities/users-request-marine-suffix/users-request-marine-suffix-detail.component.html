@@ -13,10 +13,7 @@
                 <dd>
                     <span>{{usersRequest.telephone}}</span>
                 </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.usersRequest.description">Description</span></dt>
-                <dd>
-                    <span>{{usersRequest.description}}</span>
-                </dd>
+
                 <dt><span jhiTranslate="marineindustryprojApp.usersRequest.createUserLogin">Create User Login</span></dt>
                 <dd>
                     <span>{{usersRequest.createUserLogin}}</span>
@@ -24,18 +21,6 @@
                 <dt><span jhiTranslate="marineindustryprojApp.usersRequest.createDate">Create Date</span></dt>
                 <dd>
                     <span>{{usersRequest.createDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.usersRequest.modifyUserLogin">Modify User Login</span></dt>
-                <dd>
-                    <span>{{usersRequest.modifyUserLogin}}</span>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.usersRequest.modifyDate">Modify Date</span></dt>
-                <dd>
-                    <span>{{usersRequest.modifyDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.usersRequest.conversation">Conversation</span></dt>
-                <dd>
-                    <span>{{usersRequest.conversation}}</span>
                 </dd>
                 <dt><span jhiTranslate="marineindustryprojApp.usersRequest.requestStatus">Request Status</span></dt>
                 <dd>
@@ -47,6 +32,16 @@
                 </dd>
 
             </dl>
+            <div class="form-group fullcover">
+                <label class="form-control-label"  jhiTranslate="marineindustryprojApp.usersRequest.description" for="field_description">Description</label>
+                <textarea class="form-control" [disabled]="true" name="description" id="field_description"
+                          [(ngModel)]="usersRequest.description" ></textarea>
+            </div>
+            <div class="form-group fullcover">
+                <label class="form-control-label"   jhiTranslate="marineindustryprojApp.usersRequest.conversation" for="field_conversation">conversation</label>
+                <textarea class="form-control" [disabled]="true" name="conversation" id="field_conversation"
+                          [(ngModel)]="usersRequest.conversation" ></textarea>
+            </div>
 <div>
             <button type="submit"
                     (click)="previousState()"

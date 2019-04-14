@@ -230,17 +230,21 @@ export class HomeComponent implements OnInit, OnDestroy {
 
         this.priceCostSeries = [{
             name: "اجرا شده",
-            data: this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0).map(a => a.priceCostFinished)
+            data: this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0).map(a => a.priceCostFinished),
+            color: "lightgreen"
         },{
             name: "اجرا نشده",
-            data: this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0).map(a => a.priceCostNew)
+            data: this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0).map(a => a.priceCostNew),
+            color: "red"
         }];
         this.personHourSeries = [{
             name: "اجرا شده",
-            data: this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0).map(a => a.educationalModuleTotalHourFinished)
+            data: this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0).map(a => a.educationalModuleTotalHourFinished),
+            color: "lightgreen"
         },{
             name: "اجرا نشده",
-            data: this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0).map(a => a.educationalModuleTotalHourNew)
+            data: this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0).map(a => a.educationalModuleTotalHourNew),
+            color: "red"
         }];
         this.loadChart();
     }
