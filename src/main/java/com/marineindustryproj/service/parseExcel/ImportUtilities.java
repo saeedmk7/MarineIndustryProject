@@ -27,12 +27,15 @@ public class ImportUtilities {
                 sb.append(MessageFormat.format("در ردیف {0} مقدار ستون {2} در جدول متناظرش وجود ندارد.",rowNum, fieldName));
         }
     }
-    public static boolean isNumeric(String str) {
+    public boolean isNumeric(String str) {
         try {
             Long.parseLong(str);
             return true;
         } catch(NumberFormatException e){
             return false;
         }
+    }
+    public String correctString(String str){
+        return str.trim().replace('ي', 'ی').replace('ك','ک').replace('ة','ه');
     }
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.ZonedDateTime;
@@ -13,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.EducationalModuleService;
@@ -67,6 +69,9 @@ public class EducationalModuleExcel {
             FileInputStream excelFile = new FileInputStream(new File(this.rootLocation.resolve(fileName).toAbsolutePath().toString()));
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheet("Sheet1");
+
+            List<Long> ids = educationalModuleService.findAllFromCache().stream().map(a -> a.getId()).collect(Collectors.toList());
+
             Iterator<Row> iterator = datatypeSheet.iterator();
             while (iterator.hasNext()) {
                 Row currentRow = iterator.next();
@@ -100,6 +105,10 @@ public class EducationalModuleExcel {
                                     hasError = true;
                                     continue;
                                 }
+                                if(ids.contains(code.longValue())){
+                                    hasError = true;
+                                    continue;
+                                }
                                 /*if (!isNumeric(jobKey)) {
                                     addError(rowNum,
                                              columnNum,
@@ -127,7 +136,7 @@ public class EducationalModuleExcel {
                                     hasError = true;
                                     continue;
                                 }
-                                educationalModuleDTO.setTitle(title);
+                                educationalModuleDTO.setTitle(importUtilities.correctString(title));
                                 break;
                             case 2: //learningTimeTheorical
                                 Double learningTimeTheorical = Double.valueOf(0);
@@ -265,6 +274,8 @@ public class EducationalModuleExcel {
                                 break;
                         }
                     }
+                    if(hasError)
+                        continue;
                     educationalModuleDTO.setCreateDate(ZonedDateTime.now());
                     educationalModuleDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
                     educationalModuleDTO.setArchived(false);

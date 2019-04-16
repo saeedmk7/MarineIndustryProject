@@ -25,8 +25,10 @@ import java.time.ZonedDateTime;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -77,6 +79,7 @@ public class PersonExcel {
             FileInputStream excelFile = new FileInputStream(new File(this.rootLocation.resolve(fileName).toAbsolutePath().toString()));
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheet("Sheet1");
+            List<Long> ids = personService.findAllFromCache().stream().map(a -> a.getId()).collect(Collectors.toList());
             Iterator<Row> iterator = datatypeSheet.iterator();
             while (iterator.hasNext()) {
                 Row currentRow = iterator.next();
@@ -110,6 +113,10 @@ public class PersonExcel {
                                     hasError = true;
                                     continue;
                                 }
+                                if(ids.contains(personelCode.longValue())){
+                                    hasError = true;
+                                    continue;
+                                }
                                 /*if (!isNumeric(jobKey)) {
                                     addError(rowNum,
                                              columnNum,
@@ -137,7 +144,7 @@ public class PersonExcel {
                                     hasError = true;
                                     continue;
                                 }
-                                personDTO.setName(name);
+                                personDTO.setName(importUtilities.correctString(name));
                                 break;
                             case 2: //family
                                 String family = "";
@@ -154,7 +161,7 @@ public class PersonExcel {
                                     hasError = true;
                                     continue;
                                 }
-                                personDTO.setFamily(family);
+                                personDTO.setFamily(importUtilities.correctString(family));
                                 break;
                             case 3: //fatherName
                                 String fatherName = "";
@@ -171,7 +178,7 @@ public class PersonExcel {
                                     hasError = true;
                                     continue;
                                 }
-                                personDTO.setFatherName(fatherName);
+                                personDTO.setFatherName(importUtilities.correctString(fatherName));
                                 break;
                             case 4: //certificateNumber
                                 Double certificateNumber = Double.valueOf(0);
@@ -218,10 +225,12 @@ public class PersonExcel {
                                 personDTO.setNationalId(StringUtils.leftPad(nationalIdStr,10, '0'));
                                 break;
                             case 6: // birthDate
-                                ZonedDateTime a;
-                                String birthDate = "";
-                                birthDate = currentCell.getStringCellValue();
-                                if (birthDate.isEmpty()) {
+                                Double birthDate = Double.valueOf(0);
+                                if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                    birthDate = currentCell.getNumericCellValue();
+                                else
+                                    birthDate = Double.valueOf(currentCell.getStringCellValue());
+                                if (birthDate == 0) {
                                     importUtilities.addError(rowNum,
                                                              columnNum,
                                                              "birthDate",
@@ -230,46 +239,13 @@ public class PersonExcel {
                                     hasError = true;
                                     continue;
                                 }
-                                String[] seperated = birthDate.split("-");
-                                try {
-                                    PersianCalendar persianCalendar = new PersianCalendar(Integer.valueOf(seperated[0]),
-                                                                                          Integer.valueOf(seperated[1]),
-                                                                                          Integer.valueOf(seperated[2]));
-                                    GregorianCalendar gregorianCalendar = new GregorianCalendar();
-                                    gregorianCalendar.setTime(persianCalendar.getTime());
-
-                                    a = ZonedDateTime.of(gregorianCalendar.get(Calendar.YEAR),
-                                                                       gregorianCalendar.get(Calendar.MONTH) == 0 ? 1 : gregorianCalendar.get(Calendar.MONTH),
-                                                                       gregorianCalendar.get(Calendar.DAY_OF_MONTH),
-                                                                       0,
-                                                                       0,
-                                                                       0,
-                                                                       0,
-                                                                       ZoneId.systemDefault());
-
-                                /*ConvertDateUtil.YearMonthDate yearMonthDate = new ConvertDateUtil.YearMonthDate(Integer.valueOf(seperated[0]),Integer.valueOf(seperated[1]),Integer.valueOf(seperated[2]));
-                                ConvertDateUtil.YearMonthDate gregorianYearMonthDateBirthDate =  ConvertDateUtil.jalaliToGregorian(yearMonthDate);
-
-                                //DateTimeFormatter parserEmploymentDate = DateTimeFormatter.ofPattern("YYYY/MM/DD");
-                                ZonedDateTime a = ZonedDateTime.of(gregorianYearMonthDateBirthDate.getYear(),gregorianYearMonthDateBirthDate.getMonth(),gregorianYearMonthDateBirthDate.getDate(),0,0,0,0, ZoneId.systemDefault()); //) ZonedDateTime. (LocalDate.parse(jalaliYearMonthDateEmploymentDate.toString(), parserEmploymentDate));*/
-
-                                }
-                                catch (Exception ex){
-                                    PersianCalendar persianCalendar = new PersianCalendar(Integer.valueOf(seperated[0]),
-                                                                                          Integer.valueOf(1),
-                                                                                          Integer.valueOf(1));
-                                    GregorianCalendar gregorianCalendar = new GregorianCalendar();
-                                    gregorianCalendar.setTime(persianCalendar.getTime());
-
-                                    a = ZonedDateTime.of(gregorianCalendar.get(Calendar.YEAR),
-                                                         gregorianCalendar.get(Calendar.MONTH) == 0 ? 1 : gregorianCalendar.get(Calendar.MONTH),
-                                                         gregorianCalendar.get(Calendar.DAY_OF_MONTH),
-                                                         0,
-                                                         0,
-                                                         0,
-                                                         0,
-                                                         ZoneId.systemDefault());
-                                }
+                                String birthDateStr = String.valueOf(birthDate.longValue());
+                                int year = Integer.valueOf(birthDateStr.substring(0,4));
+                                int month = Integer.valueOf(birthDateStr.substring(4,6));
+                                int day = Integer.valueOf(birthDateStr.substring(6,8));
+                                ZonedDateTime a = getZonedDateTime(year,
+                                                                   month,
+                                                                   day);
                                 personDTO.setBirthDate(a);
                                 break;
                             case 7: // jobId
@@ -335,23 +311,27 @@ public class PersonExcel {
                                 }
                                 break;
                             case 9: // employmentDate
-                                String employmentDate = "";
-                                employmentDate = currentCell.getStringCellValue();
-                                if (employmentDate.isEmpty()) {
+                                Double employmentDate = Double.valueOf(0);
+                                if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                    employmentDate = currentCell.getNumericCellValue();
+                                else
+                                    employmentDate = Double.valueOf(currentCell.getStringCellValue());
+                                if (employmentDate == 0) {
                                     importUtilities.addError(rowNum,
-                                        columnNum,
-                                        "employmentDate",
-                                        1,
-                                        sb);
+                                                             columnNum,
+                                                             "employmentDate",
+                                                             1,
+                                                             sb);
                                     hasError = true;
                                     continue;
                                 }
-                                String[] seperatedEmploymentDate = employmentDate.split("-");
-                                ConvertDateUtil.YearMonthDate yearMonthDateEmploymentDate = new ConvertDateUtil.YearMonthDate(Integer.valueOf(seperatedEmploymentDate[0]),Integer.valueOf(seperatedEmploymentDate[1]),Integer.valueOf(seperatedEmploymentDate[2]));
-                                ConvertDateUtil.YearMonthDate gregorianYearMonthDateEmploymentDate =  ConvertDateUtil.jalaliToGregorian(yearMonthDateEmploymentDate);
-
-                                //DateTimeFormatter parserEmploymentDate = DateTimeFormatter.ofPattern("YYYY/MM/DD");
-                                ZonedDateTime b = ZonedDateTime.of(gregorianYearMonthDateEmploymentDate.getYear(),gregorianYearMonthDateEmploymentDate.getMonth(),gregorianYearMonthDateEmploymentDate.getDate(),0,0,0,0, ZoneId.systemDefault()); //) ZonedDateTime. (LocalDate.parse(jalaliYearMonthDateEmploymentDate.toString(), parserEmploymentDate));
+                                String employmentDateStr = String.valueOf(employmentDate.longValue());
+                                int employmentDateYear = Integer.valueOf(employmentDateStr.substring(0,4));
+                                int employmentDateMonth = Integer.valueOf(employmentDateStr.substring(4,6));
+                                int employmentDateDay = Integer.valueOf(employmentDateStr.substring(6,8));
+                                ZonedDateTime b = getZonedDateTime(employmentDateYear,
+                                                     employmentDateMonth,
+                                                     employmentDateDay);
                                 personDTO.setEmploymentDate(b);
                                 break;
                             case 10: // lastQualificationId
@@ -408,6 +388,8 @@ public class PersonExcel {
                                 break;
                         }
                     }
+                    if(hasError)
+                        continue;
                     personDTO.setCreateDate(ZonedDateTime.now());
                     personDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
                     personDTO.setArchived(false);
@@ -445,5 +427,43 @@ public class PersonExcel {
         return sb;
     }
 
+    private ZonedDateTime getZonedDateTime(int year,
+                                           int month,
+                                           int day) {
+        ZonedDateTime b;
+        try {
+            PersianCalendar persianCalendar = new PersianCalendar(year,
+                                                                  month,
+                                                                  day);
+            GregorianCalendar gregorianCalendar = new GregorianCalendar();
+            gregorianCalendar.setTime(persianCalendar.getTime());
+
+            b = ZonedDateTime.of(gregorianCalendar.get(Calendar.YEAR),
+                                 gregorianCalendar.get(Calendar.MONTH) == 0 ? 1 : gregorianCalendar.get(Calendar.MONTH),
+                                 gregorianCalendar.get(Calendar.DAY_OF_MONTH),
+                                 0,
+                                 0,
+                                 0,
+                                 0,
+                                 ZoneId.systemDefault());
+}
+        catch (Exception ex){
+            PersianCalendar persianCalendar = new PersianCalendar(year,
+                                                                  1,
+                                                                  1);
+            GregorianCalendar gregorianCalendar = new GregorianCalendar();
+            gregorianCalendar.setTime(persianCalendar.getTime());
+
+            b = ZonedDateTime.of(gregorianCalendar.get(Calendar.YEAR),
+                                 gregorianCalendar.get(Calendar.MONTH) == 0 ? 1 : gregorianCalendar.get(Calendar.MONTH),
+                                 gregorianCalendar.get(Calendar.DAY_OF_MONTH),
+                                 0,
+                                 0,
+                                 0,
+                                 0,
+                                 ZoneId.systemDefault());
+        }
+        return b;
+    }
 }
 

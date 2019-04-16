@@ -27,9 +27,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TimeZone;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -93,6 +95,7 @@ public class TeacherExcel {
             FileInputStream excelFile = new FileInputStream(new File(this.rootLocation.resolve(fileName).toAbsolutePath().toString()));
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheet("Sheet1");
+            List<Long> ids = teacherService.findAllFromCache().stream().map(a -> a.getId()).collect(Collectors.toList());
             Iterator<Row> iterator = datatypeSheet.iterator();
             while (iterator.hasNext()) {
                 Row currentRow = iterator.next();
@@ -126,6 +129,10 @@ public class TeacherExcel {
                                     hasError = true;
                                     continue;
                                 }
+                                if(ids.contains(phoneNumber.longValue())){
+                                    hasError = true;
+                                    continue;
+                                }
                                 teacherDTO.setPhoneNumber(String.valueOf(phoneNumber.longValue()));
                                 teacherDTO.setId(phoneNumber.longValue());
                                 teacherDTO.setCode(phoneNumber.longValue());
@@ -145,7 +152,7 @@ public class TeacherExcel {
                                     hasError = true;
                                     continue;
                                 }
-                                teacherDTO.setName(name);
+                                teacherDTO.setName(importUtilities.correctString(name));
                                 break;
                             case 2: //family
                                 String family = "";
@@ -162,7 +169,7 @@ public class TeacherExcel {
                                     hasError = true;
                                     continue;
                                 }
-                                teacherDTO.setFamily(family);
+                                teacherDTO.setFamily(importUtilities.correctString(family));
                                 break;
                             case 3: //fatherName
                                 String fatherName = "";
@@ -179,7 +186,7 @@ public class TeacherExcel {
                                     hasError = true;
                                     continue;
                                 }
-                                teacherDTO.setFatherName(fatherName);
+                                teacherDTO.setFatherName(importUtilities.correctString(fatherName));
                                 break;
                             case 4: //scientificBasis
                                 Double scientificBasis = Double.valueOf(0);
@@ -246,7 +253,7 @@ public class TeacherExcel {
                                     /*hasError = true;
                                     continue;*/
                                 }
-                                teacherDTO.setTeachingSubject(teachingSubject);
+                                teacherDTO.setTeachingSubject(importUtilities.correctString(teachingSubject));
                                 break;
                             case 9: // issueDate
                                 try {
@@ -436,6 +443,8 @@ public class TeacherExcel {
                                 break;
                         }
                     }
+                    if(hasError)
+                        continue;
                     teacherDTO.setCreateDate(ZonedDateTime.now());
                     teacherDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
                     teacherDTO.setArchived(false);

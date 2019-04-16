@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.EmploymentTypeService;
@@ -75,6 +76,7 @@ public class JobExcel {
             FileInputStream excelFile = new FileInputStream(new File(this.rootLocation.resolve(fileName).toAbsolutePath().toString()));
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheet("Sheet1");
+            List<Long> ids = jobService.findAllFromCache().stream().map(a -> a.getId()).collect(Collectors.toList());
             Iterator<Row> iterator = datatypeSheet.iterator();
             while (iterator.hasNext()) {
                 Row currentRow = iterator.next();
@@ -108,6 +110,10 @@ public class JobExcel {
                                     hasError = true;
                                     continue;
                                 }
+                                if(ids.contains(jobKey.longValue())){
+                                    hasError = true;
+                                    continue;
+                                }
                                 /*if (!isNumeric(jobKey)) {
                                     addError(rowNum,
                                              columnNum,
@@ -135,7 +141,7 @@ public class JobExcel {
                                     hasError = true;
                                     continue;
                                 }
-                                jobDTO.setTitle(title);
+                                jobDTO.setTitle(importUtilities.correctString(title));
                                 break;
                             case 2: //JobCode
                                 Double jobCode = Double.valueOf(0);
@@ -181,6 +187,8 @@ public class JobExcel {
                                 }
                         }
                     }
+                    if(hasError)
+                        continue;
                     jobDTO.setCreateDate(ZonedDateTime.now());
                     jobDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
                     jobDTO.setArchived(false);
