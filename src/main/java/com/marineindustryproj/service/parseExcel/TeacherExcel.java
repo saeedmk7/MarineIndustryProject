@@ -125,6 +125,7 @@ public class TeacherExcel {
                                         columnNum,
                                         "phoneNumber",
                                         1,
+                                        "",
                                         sb);
                                     hasError = true;
                                     continue;
@@ -148,6 +149,7 @@ public class TeacherExcel {
                                         columnNum,
                                         "name",
                                         1,
+                                        "",
                                         sb);
                                     hasError = true;
                                     continue;
@@ -165,6 +167,7 @@ public class TeacherExcel {
                                         columnNum,
                                         "family",
                                         1,
+                                        "",
                                         sb);
                                     hasError = true;
                                     continue;
@@ -182,6 +185,7 @@ public class TeacherExcel {
                                         columnNum,
                                         "fatherName",
                                         1,
+                                        "",
                                         sb);
                                     hasError = true;
                                     continue;
@@ -199,6 +203,7 @@ public class TeacherExcel {
                                              columnNum,
                                              "scientificBasis",
                                              1,
+                                             "",
                                              sb);
                                     /*hasError = true;
                                     continue;*/
@@ -249,6 +254,7 @@ public class TeacherExcel {
                                         columnNum,
                                         "teachingSubject",
                                         1,
+                                        "",
                                         sb);
                                     /*hasError = true;
                                     continue;*/
@@ -256,86 +262,57 @@ public class TeacherExcel {
                                 teacherDTO.setTeachingSubject(importUtilities.correctString(teachingSubject));
                                 break;
                             case 9: // issueDate
+                                Double issueDate = Double.valueOf(0);
                                 try {
-                                    String issueDate = "";
-                                    issueDate = currentCell.getStringCellValue();
-                                    if (issueDate.isEmpty()) {
-                                        importUtilities.addError(rowNum,
-                                                                 columnNum,
-                                                                 "issueDate",
-                                                                 1,
-                                                                 sb);
-                                  /*  hasError = true;
-                                    continue;*/
-                                    }
-                                    String[] seperated = issueDate.split("-");
-                                    PersianCalendar persianCalendar = new PersianCalendar(Integer.valueOf(seperated[0]),
-                                                                                          Integer.valueOf(seperated[1]),
-                                                                                          Integer.valueOf(seperated[2]));
-                                    GregorianCalendar gregorianCalendar = new GregorianCalendar();
-                                    gregorianCalendar.setTime(persianCalendar.getTime());
-
-                                    ZonedDateTime a = ZonedDateTime.of(gregorianCalendar.get(Calendar.YEAR),
-                                                                       gregorianCalendar.get(Calendar.MONTH) == 0 ? 1 : gregorianCalendar.get(Calendar.MONTH),
-                                                                       gregorianCalendar.get(Calendar.DAY_OF_MONTH),
-                                                                       0,
-                                                                       0,
-                                                                       0,
-                                                                       0,
-                                                                       ZoneId.systemDefault());
-
-                                /*ConvertDateUtil.YearMonthDate yearMonthDate = new ConvertDateUtil.YearMonthDate(Integer.valueOf(seperated[0]),Integer.valueOf(seperated[1]),Integer.valueOf(seperated[2]));
-                                ConvertDateUtil.YearMonthDate gregorianYearMonthDateBirthDate =  ConvertDateUtil.jalaliToGregorian(yearMonthDate);
-
-                                //DateTimeFormatter parserEmploymentDate = DateTimeFormatter.ofPattern("YYYY/MM/DD");
-                                ZonedDateTime a = ZonedDateTime.of(gregorianYearMonthDateBirthDate.getYear(),gregorianYearMonthDateBirthDate.getMonth(),gregorianYearMonthDateBirthDate.getDate(),0,0,0,0, ZoneId.systemDefault()); //) ZonedDateTime. (LocalDate.parse(jalaliYearMonthDateEmploymentDate.toString(), parserEmploymentDate));*/
+                                    if (currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                        issueDate = currentCell.getNumericCellValue();
+                                    else
+                                        issueDate = Double.valueOf(currentCell.getStringCellValue());
+                                    if(issueDate == 0)
+                                        break;
+                                    String issueDateStr = String.valueOf(issueDate.longValue());
+                                    int year = Integer.valueOf(issueDateStr.substring(0,
+                                                                                      4));
+                                    int month = Integer.valueOf(issueDateStr.substring(4,
+                                                                                       6));
+                                    int day = Integer.valueOf(issueDateStr.substring(6,
+                                                                                     8));
+                                    ZonedDateTime a = importUtilities.getZonedDateTime(year,
+                                                                       month,
+                                                                       day);
                                     teacherDTO.setIssueDate(a);
                                 }
-                                catch (Exception ex)
-                                {
-                                    // ignore
+                                catch (Exception ex){
+                                    importUtilities.addError(rowNum, columnNum, "issueDate", 5, ex.getMessage(), sb);
+                                    teacherDTO.setIssueDate(ZonedDateTime.now());
                                 }
                                 break;
                             case 10: // expirationDate
+                                Double expirationDate = Double.valueOf(0);
                                 try {
-                                    String expirationDate = "";
-                                    expirationDate = currentCell.getStringCellValue();
-                                    if (expirationDate.isEmpty()) {
-                                        importUtilities.addError(rowNum,
-                                                                 columnNum,
-                                                                 "expirationDate",
-                                                                 1,
-                                                                 sb);
-                                  /*  hasError = true;
-                                    continue;*/
-                                    }
-                                    String[] expirationDateSeperated = expirationDate.split("-");
+                                    if (currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                        expirationDate = currentCell.getNumericCellValue();
+                                    else
+                                        expirationDate = Double.valueOf(currentCell.getStringCellValue());
 
-                                    PersianCalendar persianCalendar1 = new PersianCalendar(Integer.valueOf(expirationDateSeperated[0]),
-                                                                                           Integer.valueOf(expirationDateSeperated[1]),
-                                                                                           Integer.valueOf(expirationDateSeperated[2]));
-                                    GregorianCalendar gregorianCalendar1 = new GregorianCalendar();
-                                    gregorianCalendar1.setTime(persianCalendar1.getTime());
+                                    if(expirationDate == 0)
+                                        break;
 
-                                    ZonedDateTime b = ZonedDateTime.of(gregorianCalendar1.get(Calendar.YEAR),
-                                                                       (gregorianCalendar1.get(Calendar.MONTH) == 0 ? 1 : gregorianCalendar1.get(Calendar.MONTH)),
-                                                                       gregorianCalendar1.get(Calendar.DAY_OF_MONTH),
-                                                                       0,
-                                                                       0,
-                                                                       0,
-                                                                       0,
-                                                                       ZoneId.systemDefault());
-
-                                /*ConvertDateUtil.YearMonthDate expirationDateYearMonthDate = new ConvertDateUtil.YearMonthDate(Integer.valueOf(expirationDateSeperated[0]),Integer.valueOf(expirationDateSeperated[1]),Integer.valueOf(expirationDateSeperated[2]));
-                                ConvertDateUtil.YearMonthDate gregorianYearMonthDateExpirationDate =  ConvertDateUtil.jalaliToGregorian(expirationDateYearMonthDate);
-
-                                //DateTimeFormatter parserEmploymentDate = DateTimeFormatter.ofPattern("YYYY/MM/DD");
-                                ZonedDateTime b = ZonedDateTime.of(gregorianYearMonthDateExpirationDate.getYear(),gregorianYearMonthDateExpirationDate.getMonth(),gregorianYearMonthDateExpirationDate.getDate(),0,0,0,0, ZoneId.systemDefault()); //) ZonedDateTime. (LocalDate.parse(jalaliYearMonthDateEmploymentDate.toString(), parserEmploymentDate));*/
+                                    String expirationDateStr = String.valueOf(expirationDate.longValue());
+                                    int expirationDateYear = Integer.valueOf(expirationDateStr.substring(0,
+                                                                                                         4));
+                                    int expirationDateMonth = Integer.valueOf(expirationDateStr.substring(4,
+                                                                                                          6));
+                                    int expirationDateDay = Integer.valueOf(expirationDateStr.substring(6,
+                                                                                                        8));
+                                    ZonedDateTime b = importUtilities.getZonedDateTime(expirationDateYear,
+                                                                                       expirationDateMonth,
+                                                                                       expirationDateDay);
                                     teacherDTO.setExpirationDate(b);
                                 }
-                                catch (Exception ex)
-                                {
-                                    // ignore
+                                catch (Exception ex){
+                                    importUtilities.addError(rowNum, columnNum, "expirationDate", 5, ex.getMessage(), sb);
+                                    teacherDTO.setExpirationDate(ZonedDateTime.now());
                                 }
                                 break;
                             case 11: //licenseNumber
@@ -349,6 +326,7 @@ public class TeacherExcel {
                                         columnNum,
                                         "licenseNumber",
                                         1,
+                                        "",
                                         sb);
                                     /*hasError = true;
                                     continue;*/
@@ -366,6 +344,7 @@ public class TeacherExcel {
                                         columnNum,
                                         "sessionNumber",
                                         1,
+                                        "",
                                         sb);
                                     /*hasError = true;
                                     continue;*/
@@ -383,6 +362,7 @@ public class TeacherExcel {
                                         columnNum,
                                         "status",
                                         1,
+                                        "",
                                         sb);
                                     /*hasError = true;
                                     continue;*/
@@ -453,7 +433,7 @@ public class TeacherExcel {
 
                 }
                 catch (Exception ex){
-                    importUtilities.addError(rowNum, 0, "", 3, sb);
+                    importUtilities.addError(rowNum, 0, "", 3, ex.getMessage(),sb);
                 }
             }
             return sb;

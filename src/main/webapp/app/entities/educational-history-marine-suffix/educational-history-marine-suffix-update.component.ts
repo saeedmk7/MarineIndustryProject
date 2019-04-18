@@ -181,7 +181,7 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
     }
 
     save() {
-        debugger;
+
         this.isSaving = true;
         this.currentUserFullName = this.currentPerson.fullName;
         this.message = "";

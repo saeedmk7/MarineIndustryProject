@@ -9,7 +9,7 @@ import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { EducationalHistoryMarineSuffixService } from './educational-history-marine-suffix.service';
-import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
+import {IPersonMarineSuffix, PersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix/person-marine-suffix.service";
 import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix/organization-chart-marine-suffix.service";
@@ -26,6 +26,8 @@ import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 })
 export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestroy {
     organizationcharts: IOrganizationChartMarineSuffix[];
+    recommenedOrgCharts: IOrganizationChartMarineSuffix[];
+    people: IPersonMarineSuffix[];
     currentPerson: IPersonMarineSuffix;
 
     currentAccount: any;
@@ -58,6 +60,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
     sumPractical: number;
     sumTheorical: number;
     sumTotal: number;
+
     constructor(
         protected educationalHistoryService: EducationalHistoryMarineSuffixService,
         private organizationChartService: OrganizationChartMarineSuffixService,
@@ -308,9 +311,9 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
                 //this.prepareDate();
                 this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'educationalModuleTitle', 'text', 'contains'));
                 this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'educationalCenter', 'text', 'contains'));
-
+                this.prepareSearchOrgChart();
                 if(this.isSuperUsers){
-                    this.prepareSearchOrgChart();
+
                     let status = [{id: 'ACCEPT', title: 'تایید شده'},{id: 'IGNORE', title: 'رد شده'},{id:'NEW',title: 'جدید'}];
                     this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'requestStatus', 'select', 'equals', status));
 
@@ -322,7 +325,23 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         if (!this.done) {
             this.makeCriteria();
         }
-        //this.registerChangeInEducationalHistories();
+    }
+    prepareSearchPerson(orgs: IOrganizationChartMarineSuffix[]) {
+
+        const ids = orgs.map(a => a.id);
+        let criteria = [{
+            key: 'organizationChartId.in',
+            value: ids
+        }];
+        this.personService.query({
+            page: 0,
+            size: 20000,
+            criteria,
+            sort: ["id", "asc"]
+        }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
+                this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'personId', 'select', 'equals', resp.body, 'fullName', ''));
+            },
+            (error) => this.onError("فردی یافت نشد."));
     }
     setRoles(account: any){
         if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
@@ -342,27 +361,32 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         this.searchbarModel.push(new SearchPanelModel('requestOrganizationNiazsanji', 'yearId', 'select', 'equals', dates));
 
     }
+
     prepareSearchOrgChart(){
         if(this.organizationChartService.organizationchartsAll)
         {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
-            this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select', 'equals', this.handleOrgChartView(), 'fullTitle', 'half'));
+            const orgs = this.handleOrgChartView();
+            this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'organizationChartId', 'select', 'equals', orgs, 'fullTitle', 'half'));
+            this.prepareSearchPerson(orgs);
         }
         else {
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
 
                     this.organizationcharts = res.body;
-                    this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select', 'equals', this.handleOrgChartView(), 'fullTitle', 'half'));
+                    const orgs = this.handleOrgChartView();
+                    this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'organizationChartId', 'select', 'equals', orgs, 'fullTitle', 'half'));
+                    this.prepareSearchPerson(orgs);
                 },
                 (res: HttpErrorResponse) => this.onError(res.message));
         }
 
     }
     handleOrgChartView(): IOrganizationChartMarineSuffix[]{
-        //if(this.isAdmin)
-        return this.organizationcharts;
-        /*if(this.treeUtilities.hasChild(this.organizationcharts, this.currentPerson.organizationChartId))
+        if(this.isAdmin)
+            return this.organizationcharts;
+        if(this.treeUtilities.hasChild(this.organizationcharts, this.currentPerson.organizationChartId))
         {
             let orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
             this.recommenedOrgCharts = this.organizationcharts.filter(a => orgIds.includes(a.id));
@@ -371,7 +395,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
             this.recommenedOrgCharts = [];
             this.recommenedOrgCharts.push(this.organizationcharts.find(a => a.id == this.currentPerson.organizationChartId));
         }
-        return this.recommenedOrgCharts;*/
+        return this.recommenedOrgCharts;
     }
     ngOnDestroy() {
         this.eventManager.destroy(this.criteriaSubscriber);

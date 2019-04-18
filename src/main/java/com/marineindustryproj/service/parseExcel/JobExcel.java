@@ -106,6 +106,7 @@ public class JobExcel {
                                              columnNum,
                                              "JobKey",
                                              1,
+                                             "",
                                              sb);
                                     hasError = true;
                                     continue;
@@ -137,6 +138,7 @@ public class JobExcel {
                                              columnNum,
                                              "title",
                                              1,
+                                             "",
                                              sb);
                                     hasError = true;
                                     continue;
@@ -154,6 +156,7 @@ public class JobExcel {
                                              columnNum,
                                              "jobCode",
                                              1,
+                                             "",
                                              sb);
                                     hasError = true;
                                     continue;
@@ -183,7 +186,7 @@ public class JobExcel {
                                     if(scientificWorkGroupDTO.isPresent())
                                         jobDTO.setScientificWorkGroupId(scientificWorkGroupId.longValue());
                                     else
-                                        importUtilities.addError(rowNum,columnNum,"scientificWorkGroupId",4, sb);
+                                        importUtilities.addError(rowNum,columnNum,"scientificWorkGroupId",4, "",sb);
                                 }
                         }
                     }
@@ -196,7 +199,7 @@ public class JobExcel {
                     jobService.save(jobDTO);
                 }
                 catch (Exception ex){
-                    importUtilities.addError(rowNum, 0, "", 3, sb);
+                    importUtilities.addError(rowNum, 0, "", 3, ex.getMessage(), sb);
                     break;
                 }
             }

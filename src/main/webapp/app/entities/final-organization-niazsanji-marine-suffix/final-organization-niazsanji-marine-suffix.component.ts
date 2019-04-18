@@ -336,7 +336,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         }
     }
     prepareSearchDate(){
-        debugger;
+
         let dates = this.convertObjectDatesService.getYearsArray();
         this.searchbarModel.push(new SearchPanelModel('requestOrganizationNiazsanji', 'yearId', 'select', 'equals', dates));
     }

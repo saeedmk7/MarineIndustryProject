@@ -101,7 +101,7 @@ export class NavbarComponent implements OnInit,AfterViewInit {
                                 let navBarItemAddresses: string[] = this.navBarItemMarineSuffix.map(function (v) {
                                     return v.url;
                                 });
-                                debugger;
+
                                 let additionalUrlsThatNeeds: string[] = ["#/settings","#/password","#/document-marine-suffix"];
                                 additionalUrlsThatNeeds.forEach(a => {
                                     navBarItemAddresses.push(a);

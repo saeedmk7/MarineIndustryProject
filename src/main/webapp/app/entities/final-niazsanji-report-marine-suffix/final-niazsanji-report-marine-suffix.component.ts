@@ -28,6 +28,7 @@ import {IFinalNiazsanjiReportOrganizationMarineSuffix} from "app/entities/final-
 import {GridComponent, GridDataResult} from "@progress/kendo-angular-grid";
 import {Workbook} from '@progress/kendo-angular-excel-export';
 import { saveAs } from '@progress/kendo-file-saver';
+import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 
 @Component({
     selector: 'mi-final-niazsanji-report-marine-suffix',
@@ -38,6 +39,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     finalNiazsanjiReport: IFinalNiazsanjiReportMarineSuffix = {};
     finalNiazsanjiReports: IFinalNiazsanjiReportMarineSuffix[];
 
+
     finalNiazsanjiReportsFardis: IFinalNiazsanjiReportFardiMarineSuffix[] = [];
     finalNiazsanjiReportsOrganizations: IFinalNiazsanjiReportOrganizationMarineSuffix[] = [];
     educationalModules: IEducationalModuleMarineSuffix[];
@@ -45,7 +47,10 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     @ViewChild(GridComponent) grid: GridComponent;
 
     people: IPersonMarineSuffix[];
+    currentPerson: IPersonMarineSuffix;
     organizationcharts: IOrganizationChartMarineSuffix[];
+    recommenedOrgCharts: IOrganizationChartMarineSuffix[];
+    orgsRoot: IOrganizationChartMarineSuffix[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -58,7 +63,11 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     predicate: any;
     previousPage: any;
     reverse: any;
-    isAdmin: any;
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
     dates: any[];
     public groups: GroupDescriptor[] = [{field: 'organizationChartTitle'}];
     public groupsOrg: GroupDescriptor[] = [{field: 'organizationChartTitle'}];
@@ -110,7 +119,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         this.yearsCollections = GREGORIAN_START_END_DATE;
     }
     finalize(dataItem){
-        debugger;
+
         this.finalNiazsanjiReportService.find(dataItem.id).subscribe((resp: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) =>{
             resp.body.status = 10;
             this.finalNiazsanjiReportService.update(resp.body).subscribe((resp: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => resp);
@@ -329,20 +338,35 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     ngOnInit() {
         this.principal.identity().then(account => {
             this.currentAccount = account;
-            if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined) {
+            this.setRoles(account);
+            /*if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined) {
                 this.isAdmin = true;
-            }
+            }*/
 
+            this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
+                this.currentPerson = resp.body;
 
-            this.prepareSearchOrgChart();
-            this.prepareSearchEducationalModule();
-            this.prepareSearchPerson();
-            this.prepareSearchDate();
-
+                this.prepareSearchOrgChart();
+                this.prepareSearchEducationalModule();
+                this.prepareSearchPerson();
+                this.prepareSearchDate();
+            });
         });
         this.registerChangeInFinalNiazsanjiReports();
     }
+    setRoles(account: any){
+        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+            this.isAdmin = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+            this.isModirAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+            this.isModirKolAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+            this.isKarshenasArshadAmozeshSazman = true;
 
+        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isSuperUsers = true;
+    }
     prepareSearchEducationalModule() {
         if (this.educationalModuleService.educationalModules) {
             this.educationalModules = this.educationalModuleService.educationalModules
@@ -373,7 +397,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         this.dates = this.convertObjectDatesService.getYearsArray();
     }
 
-    prepareSearchOrgChart() {
+    /*prepareSearchOrgChart() {
         if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
         }
@@ -386,8 +410,47 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 (res: HttpErrorResponse) => this.onError(res.message));
         }
 
+    }*/
+    prepareSearchOrgChart(){
+        if(this.organizationChartService.organizationchartsAll)
+        {
+            this.organizationcharts = this.organizationChartService.organizationchartsAll;
+            const orgs = this.handleOrgChartView();
+            this.prepareRootsSearch(orgs);
+        }
+        else {
+            this.organizationChartService.query().subscribe(
+                (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
+
+                    this.organizationcharts = res.body;
+                    const orgs = this.handleOrgChartView();
+                    this.prepareRootsSearch(orgs);
+                },
+                (res: HttpErrorResponse) => this.onError(res.message));
+        }
+
+    }
+    handleOrgChartView(): IOrganizationChartMarineSuffix[]{
+        if(this.isSuperUsers) {
+            this.recommenedOrgCharts = this.organizationcharts;
+            return this.recommenedOrgCharts;
+        }
+        if(this.treeUtilities.hasChild(this.organizationcharts, this.currentPerson.organizationChartId))
+        {
+            let orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
+            this.recommenedOrgCharts = this.organizationcharts.filter(a => orgIds.includes(a.id));
+        }
+        else{
+            this.recommenedOrgCharts = [];
+            this.recommenedOrgCharts.push(this.organizationcharts.find(a => a.id == this.currentPerson.organizationChartId));
+        }
+        return this.recommenedOrgCharts;
     }
 
+    prepareRootsSearch(orgs: IOrganizationChartMarineSuffix[]){
+
+        this.orgsRoot = orgs.filter(a => a.parentId == null);
+    }
     byteSize(field) {
         return this.dataUtils.byteSize(field);
     }

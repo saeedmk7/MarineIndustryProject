@@ -27,7 +27,7 @@ export class ImportDataComponent implements OnInit {
         const a = 0;
     }
     setFileData(event) {
-        debugger;
+
         this.isSaving = false;
         this.warning = "";
         if (event && event.target.files && event.target.files[0]) {
@@ -64,7 +64,7 @@ export class ImportDataComponent implements OnInit {
         /*this.subscribeToSaveResponse();*/
     }
     private onSaveSuccess(event) {
-        debugger;
+
         this.isSaving = false;
 
         this.success = event.body;

@@ -158,7 +158,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         }
     }
     handlePeopleList(){
-        debugger;
+
         const rootId = this.treeUtilities.getRootId(this.organizationCharts ,this.currentPerson.organizationChartId);
         const orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationCharts ,rootId).filter(this.treeUtilities.onlyUnique);
 
@@ -174,7 +174,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
             sort: ["id", "asc"]
         }).subscribe(
             (res: HttpResponse<IPersonMarineSuffix[]>) => {
-                debugger;
+
                 this.people = res.body;
                 this.fullPeople = res.body;
             },

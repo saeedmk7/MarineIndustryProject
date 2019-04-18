@@ -201,7 +201,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     makeChartResult(){
-        debugger;
+
         const groups = this.organizationcharts.filter(a => a.parentId == null);
         this.categories = groups.sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0).map(a => a.title);
         this.finalNiazsanjiReportService.getChartResult(this.selectedNiazsanjiYear).subscribe((resp: HttpResponse<IChartResult[]>) => {

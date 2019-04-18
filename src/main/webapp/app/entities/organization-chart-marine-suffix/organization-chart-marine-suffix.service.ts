@@ -58,6 +58,7 @@ export class OrganizationChartMarineSuffixService {
         }
 
     }
+
     /*getAvailable(): Observable<EntityArrayResponseType> {
         return this.http
             .get<IOrganizationChartMarineSuffix[]>('',{observe: 'response'})

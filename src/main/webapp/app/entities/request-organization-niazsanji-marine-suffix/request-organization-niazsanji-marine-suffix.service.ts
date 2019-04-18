@@ -42,7 +42,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixService {
     }
 
     find(id: number): Observable<EntityResponseType> {
-        debugger;
+
         return this.http
             .get<IRequestOrganizationNiazsanjiMarineSuffix>(`${this.resourceUrl}/${id}`, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));

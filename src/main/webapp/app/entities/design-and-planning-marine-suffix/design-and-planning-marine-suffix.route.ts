@@ -12,17 +12,35 @@ import { DesignAndPlanningMarineSuffixDetailComponent } from './design-and-plann
 import { DesignAndPlanningMarineSuffixUpdateComponent } from './design-and-planning-marine-suffix-update.component';
 import { DesignAndPlanningMarineSuffixDeletePopupComponent } from './design-and-planning-marine-suffix-delete-dialog.component';
 import { IDesignAndPlanningMarineSuffix } from 'app/shared/model/design-and-planning-marine-suffix.model';
+import {IPersonMarineSuffix, PersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 
 @Injectable({ providedIn: 'root' })
 export class DesignAndPlanningMarineSuffixResolve implements Resolve<IDesignAndPlanningMarineSuffix> {
     constructor(private service: DesignAndPlanningMarineSuffixService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        debugger;
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service
-                .find(id)
-                .pipe(map((designAndPlanning: HttpResponse<DesignAndPlanningMarineSuffix>) => designAndPlanning.body));
+            let criteria = [{
+                key: 'finalNiazsanjiReportId.equals',
+                value: id
+            }];
+            this.service
+                .query({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: ["id", "asc"]
+                }).subscribe((resp: HttpResponse<IDesignAndPlanningMarineSuffix[]>) => {
+                        if(resp.body.length > 0)   {
+                            return resp.body[0];
+                        }
+                        else{
+                            return of(new DesignAndPlanningMarineSuffix());
+                        }
+                    },
+                    (error) => of(new DesignAndPlanningMarineSuffix()));
         }
         return of(new DesignAndPlanningMarineSuffix());
     }

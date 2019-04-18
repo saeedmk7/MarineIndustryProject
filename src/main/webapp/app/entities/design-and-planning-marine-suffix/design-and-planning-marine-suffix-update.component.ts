@@ -95,6 +95,7 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ designAndPlanning }) => {
+            debugger;
             this.designAndPlanning = designAndPlanning;
         });
         this.personService.query().subscribe(
@@ -103,18 +104,18 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.documentService.query().subscribe(
+        /*this.documentService.query().subscribe(
             (res: HttpResponse<IDocumentMarineSuffix[]>) => {
                 this.documents = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.finalNiazsanjiReportService.query().subscribe(
+        );*/
+        /*this.finalNiazsanjiReportService.query().subscribe(
             (res: HttpResponse<IFinalNiazsanjiReportMarineSuffix[]>) => {
                 this.finalniazsanjireports = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        );*/
         this.mahiatCourseService.query().subscribe(
             (res: HttpResponse<IMahiatCourseMarineSuffix[]>) => {
                 this.mahiatcourses = res.body;

@@ -101,6 +101,7 @@ public class EducationalModuleExcel {
                                              columnNum,
                                              "code",
                                              1,
+                                             "",
                                              sb);
                                     hasError = true;
                                     continue;
@@ -132,6 +133,7 @@ public class EducationalModuleExcel {
                                              columnNum,
                                              "title",
                                              1,
+                                             "",
                                              sb);
                                     hasError = true;
                                     continue;
@@ -164,13 +166,13 @@ public class EducationalModuleExcel {
                                 }*/
                                 educationalModuleDTO.setLearningTimeTheorical(learningTimeTheorical.intValue());
                                 break;
-                            case 3: //learningTimePractical
+                            /*case 3: //learningTimePractical
                                 Double learningTimePractical = Double.valueOf(0);
                                 if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
                                     learningTimePractical = currentCell.getNumericCellValue();
                                 else
                                     learningTimePractical = Double.valueOf(currentCell.getStringCellValue());
-                                /*if (learningTimePractical == 0) {
+                                *//*if (learningTimePractical == 0) {
                                     importUtilities.addError(rowNum,
                                              columnNum,
                                              "learningTimePractical",
@@ -178,8 +180,8 @@ public class EducationalModuleExcel {
                                              sb);
                                     hasError = true;
                                     continue;
-                                }*/
-                                /*if (!isNumeric(jobCode)) {
+                                }*//*
+                                *//*if (!isNumeric(jobCode)) {
                                     addError(rowNum,
                                              columnNum,
                                              "jobCode",
@@ -187,10 +189,10 @@ public class EducationalModuleExcel {
                                              sb);
                                     hasError = true;
                                     continue;
-                                }*/
+                                }*//*
                                 educationalModuleDTO.setLearningTimePractical(learningTimePractical.intValue());
-                                break;
-                            case 4: //skillableLevelOfSkillId
+                                break;*/
+                            case 3: //skillableLevelOfSkillId
                                 Double skillableLevelOfSkillId = Double.valueOf(0);
                                 if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
                                     skillableLevelOfSkillId = currentCell.getNumericCellValue();
@@ -206,6 +208,7 @@ public class EducationalModuleExcel {
                                                                  columnNum,
                                                                  "skillableLevelOfSkillId",
                                                                  4,
+                                                                 "",
                                                                  sb);
                                         hasError = true;
                                         continue;
@@ -216,12 +219,13 @@ public class EducationalModuleExcel {
                                                              columnNum,
                                                              "skillableLevelOfSkillId",
                                                              1,
+                                                             "",
                                                              sb);
                                     hasError = true;
                                     continue;
                                 }
                                 break;
-                            case 5: //scientificWorkGroupId
+                            case 4: //scientificWorkGroupId
                                 Double scientificWorkGroupId = Double.valueOf(0);
                                 if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
                                     scientificWorkGroupId = currentCell.getNumericCellValue();
@@ -236,10 +240,10 @@ public class EducationalModuleExcel {
                                         educationalModuleDTO.setScientificWorkGroups(scientificWorkGroupDTOList);
                                     }
                                     else
-                                        importUtilities.addError(rowNum,columnNum,"scientificWorkGroupId",4, sb);
+                                        importUtilities.addError(rowNum,columnNum,"scientificWorkGroupId",4, "", sb);
                                 }
                                 break;
-                            case 6: //organizationId
+                            case 5: //organizationId
                                 Double organizationId = Double.valueOf(0);
                                 if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
                                     organizationId = currentCell.getNumericCellValue();
@@ -257,6 +261,7 @@ public class EducationalModuleExcel {
                                             columnNum,
                                             "organizationId",
                                             4,
+                                            "",
                                             sb);
                                         /*hasError = true;
                                         continue;*/
@@ -267,6 +272,7 @@ public class EducationalModuleExcel {
                                         columnNum,
                                         "organizationId",
                                         1,
+                                        "",
                                         sb);
                                     /*hasError = true;
                                     continue;*/
@@ -283,7 +289,7 @@ public class EducationalModuleExcel {
                     educationalModuleService.save(educationalModuleDTO);
                 }
                 catch (Exception ex){
-                    importUtilities.addError(rowNum, 0, "", 3, sb);
+                    importUtilities.addError(rowNum, 0, "", 3, ex.getMessage(),sb);
                 }
             }
             return sb;

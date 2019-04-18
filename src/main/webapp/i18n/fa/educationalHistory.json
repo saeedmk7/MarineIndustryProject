@@ -43,6 +43,7 @@
             "requestStatus": "وضعیت درخواست",
             "changeStatusUserLogin": "فرد تغییر دهنده وضعیت درخواست",
             "person": "نام و نام خانوادگی",
+            "personId": "نام و نام خانوادگی",
             "personName": "نام و نام خانوادگی",
             "personFamily": "نام و نام خانوادگی",
             "job": "شغل سازمانی",

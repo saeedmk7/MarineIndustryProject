@@ -25,12 +25,12 @@ export class UserRouteAccessService implements CanActivate {
         return this.checkLogin(authorities, state.url) && this.canSeePage(state.url);
     }
     canSeePage(url: string): Promise<boolean> {
-        debugger;
+
         const principal = this.principal;
         return Promise.resolve(
             principal.identity().then(account => {
                 if (account) {
-                    debugger;
+
                     if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined) {
                         return true;
                     }

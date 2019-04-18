@@ -109,6 +109,7 @@ public class PersonExcel {
                                         columnNum,
                                         "personelCode",
                                         1,
+                                        "",
                                         sb);
                                     hasError = true;
                                     continue;
@@ -140,6 +141,7 @@ public class PersonExcel {
                                         columnNum,
                                         "name",
                                         1,
+                                        "",
                                         sb);
                                     hasError = true;
                                     continue;
@@ -157,6 +159,7 @@ public class PersonExcel {
                                         columnNum,
                                         "family",
                                         1,
+                                        "",
                                         sb);
                                     hasError = true;
                                     continue;
@@ -174,6 +177,7 @@ public class PersonExcel {
                                         columnNum,
                                         "fatherName",
                                         1,
+                                        "",
                                         sb);
                                     hasError = true;
                                     continue;
@@ -191,6 +195,7 @@ public class PersonExcel {
                                              columnNum,
                                              "certificateNumber",
                                              1,
+                                             "",
                                              sb);
                                     hasError = true;
                                     continue;
@@ -208,6 +213,7 @@ public class PersonExcel {
                                              columnNum,
                                              "nationalId",
                                              1,
+                                             "",
                                              sb);
                                     hasError = true;
                                     continue;
@@ -226,27 +232,37 @@ public class PersonExcel {
                                 break;
                             case 6: // birthDate
                                 Double birthDate = Double.valueOf(0);
-                                if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
-                                    birthDate = currentCell.getNumericCellValue();
-                                else
-                                    birthDate = Double.valueOf(currentCell.getStringCellValue());
-                                if (birthDate == 0) {
-                                    importUtilities.addError(rowNum,
-                                                             columnNum,
-                                                             "birthDate",
-                                                             1,
-                                                             sb);
-                                    hasError = true;
-                                    continue;
+                                try {
+                                    if (currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                        birthDate = currentCell.getNumericCellValue();
+                                    else
+                                        birthDate = Double.valueOf(currentCell.getStringCellValue());
+                                    if (birthDate == 0) {
+                                        importUtilities.addError(rowNum,
+                                                                 columnNum,
+                                                                 "birthDate",
+                                                                 1,
+                                                                 "",
+                                                                 sb);
+                                        hasError = true;
+                                        continue;
+                                    }
+                                    String birthDateStr = String.valueOf(birthDate.longValue());
+                                    int year = Integer.valueOf(birthDateStr.substring(0,
+                                                                                      4));
+                                    int month = Integer.valueOf(birthDateStr.substring(4,
+                                                                                       6));
+                                    int day = Integer.valueOf(birthDateStr.substring(6,
+                                                                                     8));
+                                    ZonedDateTime a = importUtilities.getZonedDateTime(year,
+                                                                       month,
+                                                                       day);
+                                    personDTO.setBirthDate(a);
                                 }
-                                String birthDateStr = String.valueOf(birthDate.longValue());
-                                int year = Integer.valueOf(birthDateStr.substring(0,4));
-                                int month = Integer.valueOf(birthDateStr.substring(4,6));
-                                int day = Integer.valueOf(birthDateStr.substring(6,8));
-                                ZonedDateTime a = getZonedDateTime(year,
-                                                                   month,
-                                                                   day);
-                                personDTO.setBirthDate(a);
+                                catch (Exception ex){
+                                    importUtilities.addError(rowNum, columnNum, "birthDate", 5, ex.getMessage(), sb);
+                                    personDTO.setBirthDate(ZonedDateTime.now());
+                                }
                                 break;
                             case 7: // jobId
                                 Double jobId = Double.valueOf(0);
@@ -264,6 +280,7 @@ public class PersonExcel {
                                             columnNum,
                                             "jobId",
                                             4,
+                                            "",
                                             sb);
                                         hasError = true;
                                         continue;
@@ -274,6 +291,7 @@ public class PersonExcel {
                                         columnNum,
                                         "jobId",
                                         1,
+                                        "",
                                         sb);
                                     hasError = true;
                                     continue;
@@ -295,6 +313,7 @@ public class PersonExcel {
                                             columnNum,
                                             "practicalJobId",
                                             4,
+                                            "",
                                             sb);
                                         hasError = true;
                                         continue;
@@ -305,6 +324,7 @@ public class PersonExcel {
                                         columnNum,
                                         "practicalJobId",
                                         1,
+                                        "",
                                         sb);
                                     hasError = true;
                                     continue;
@@ -312,27 +332,29 @@ public class PersonExcel {
                                 break;
                             case 9: // employmentDate
                                 Double employmentDate = Double.valueOf(0);
-                                if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
-                                    employmentDate = currentCell.getNumericCellValue();
-                                else
-                                    employmentDate = Double.valueOf(currentCell.getStringCellValue());
-                                if (employmentDate == 0) {
-                                    importUtilities.addError(rowNum,
-                                                             columnNum,
-                                                             "employmentDate",
-                                                             1,
-                                                             sb);
-                                    hasError = true;
-                                    continue;
+                                try {
+                                    if (currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                        employmentDate = currentCell.getNumericCellValue();
+                                    else
+                                        employmentDate = Double.valueOf(currentCell.getStringCellValue());
+                                    if(employmentDate == 0)
+                                        break;
+                                    String employmentDateStr = String.valueOf(employmentDate.longValue());
+                                    int employmentDateYear = Integer.valueOf(employmentDateStr.substring(0,
+                                                                                                         4));
+                                    int employmentDateMonth = Integer.valueOf(employmentDateStr.substring(4,
+                                                                                                          6));
+                                    int employmentDateDay = Integer.valueOf(employmentDateStr.substring(6,
+                                                                                                        8));
+                                    ZonedDateTime b = importUtilities.getZonedDateTime(employmentDateYear,
+                                                                       employmentDateMonth,
+                                                                       employmentDateDay);
+                                    personDTO.setEmploymentDate(b);
                                 }
-                                String employmentDateStr = String.valueOf(employmentDate.longValue());
-                                int employmentDateYear = Integer.valueOf(employmentDateStr.substring(0,4));
-                                int employmentDateMonth = Integer.valueOf(employmentDateStr.substring(4,6));
-                                int employmentDateDay = Integer.valueOf(employmentDateStr.substring(6,8));
-                                ZonedDateTime b = getZonedDateTime(employmentDateYear,
-                                                     employmentDateMonth,
-                                                     employmentDateDay);
-                                personDTO.setEmploymentDate(b);
+                                catch (Exception ex){
+                                    importUtilities.addError(rowNum, columnNum, "employmentDate", 5, ex.getMessage(), sb);
+                                    personDTO.setEmploymentDate(ZonedDateTime.now());
+                                }
                                 break;
                             case 10: // lastQualificationId
                                 Double lastQualificationId = Double.valueOf(0);
@@ -415,7 +437,7 @@ public class PersonExcel {
 
                 }
                 catch (Exception ex){
-                    importUtilities.addError(rowNum, 0, "", 3, sb);
+                    importUtilities.addError(rowNum, 0, "", 3, ex.getMessage(), sb);
                 }
             }
             return sb;
@@ -427,43 +449,6 @@ public class PersonExcel {
         return sb;
     }
 
-    private ZonedDateTime getZonedDateTime(int year,
-                                           int month,
-                                           int day) {
-        ZonedDateTime b;
-        try {
-            PersianCalendar persianCalendar = new PersianCalendar(year,
-                                                                  month,
-                                                                  day);
-            GregorianCalendar gregorianCalendar = new GregorianCalendar();
-            gregorianCalendar.setTime(persianCalendar.getTime());
 
-            b = ZonedDateTime.of(gregorianCalendar.get(Calendar.YEAR),
-                                 gregorianCalendar.get(Calendar.MONTH) == 0 ? 1 : gregorianCalendar.get(Calendar.MONTH),
-                                 gregorianCalendar.get(Calendar.DAY_OF_MONTH),
-                                 0,
-                                 0,
-                                 0,
-                                 0,
-                                 ZoneId.systemDefault());
-}
-        catch (Exception ex){
-            PersianCalendar persianCalendar = new PersianCalendar(year,
-                                                                  1,
-                                                                  1);
-            GregorianCalendar gregorianCalendar = new GregorianCalendar();
-            gregorianCalendar.setTime(persianCalendar.getTime());
-
-            b = ZonedDateTime.of(gregorianCalendar.get(Calendar.YEAR),
-                                 gregorianCalendar.get(Calendar.MONTH) == 0 ? 1 : gregorianCalendar.get(Calendar.MONTH),
-                                 gregorianCalendar.get(Calendar.DAY_OF_MONTH),
-                                 0,
-                                 0,
-                                 0,
-                                 0,
-                                 ZoneId.systemDefault());
-        }
-        return b;
-    }
 }
 

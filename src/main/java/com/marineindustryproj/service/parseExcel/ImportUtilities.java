@@ -1,7 +1,12 @@
 package com.marineindustryproj.service.parseExcel;
 
 import java.text.MessageFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.GregorianCalendar;
 
+import com.ghasemkiani.util.icu.PersianCalendar;
+import com.ibm.icu.util.Calendar;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,7 +15,9 @@ public class ImportUtilities {
                          int columnNum,
                          String fieldName,
                          int errorType,
-                         StringBuilder sb){
+                         String errorMessage,
+                         StringBuilder sb
+                         ){
         switch (errorType)
         {
             case 1: //isEmpty
@@ -21,10 +28,14 @@ public class ImportUtilities {
                 sb.append(MessageFormat.format("در ردیف {0} در ستون {1} مقدار {2} باید عدد باشد.", rowNum, columnNum, fieldName));
                 break;
             case 3: //row has error
-                sb.append(MessageFormat.format("اطلاعات ردیف {0} مشکل دارد. لطفا آن را دقیقا بررسی نمائید.", rowNum, columnNum, fieldName));
+                sb.append(MessageFormat.format("اطلاعات ردیف {0} مشکل دارد. لطفا آن را دقیقا بررسی نمائید. ارور: {1}", rowNum, errorMessage));
                 break;
             case 4: //entity is not present
-                sb.append(MessageFormat.format("در ردیف {0} مقدار ستون {2} در جدول متناظرش وجود ندارد.",rowNum, fieldName));
+                sb.append(MessageFormat.format("در ردیف {0} مقدار ستون {1} در جدول متناظرش وجود ندارد.", rowNum, fieldName));
+                break;
+            case 5:
+                sb.append(MessageFormat.format("در ردیف {0} مقدار ستون {1} با ارور {2} مواجه شد.", rowNum, fieldName, errorMessage));
+                break;
         }
     }
     public boolean isNumeric(String str) {
@@ -37,5 +48,43 @@ public class ImportUtilities {
     }
     public String correctString(String str){
         return str.trim().replace('ي', 'ی').replace('ك','ک').replace('ة','ه');
+    }
+    public ZonedDateTime getZonedDateTime(int year,
+                                           int month,
+                                           int day) {
+        ZonedDateTime b;
+        try {
+            PersianCalendar persianCalendar = new PersianCalendar(year,
+                                                                  month,
+                                                                  day);
+            GregorianCalendar gregorianCalendar = new GregorianCalendar();
+            gregorianCalendar.setTime(persianCalendar.getTime());
+
+            b = ZonedDateTime.of(gregorianCalendar.get(Calendar.YEAR),
+                                 gregorianCalendar.get(Calendar.MONTH) == 0 ? 1 : gregorianCalendar.get(Calendar.MONTH),
+                                 gregorianCalendar.get(Calendar.DAY_OF_MONTH),
+                                 0,
+                                 0,
+                                 0,
+                                 0,
+                                 ZoneId.systemDefault());
+        }
+        catch (Exception ex){
+            PersianCalendar persianCalendar = new PersianCalendar(year,
+                                                                  1,
+                                                                  1);
+            GregorianCalendar gregorianCalendar = new GregorianCalendar();
+            gregorianCalendar.setTime(persianCalendar.getTime());
+
+            b = ZonedDateTime.of(gregorianCalendar.get(Calendar.YEAR),
+                                 gregorianCalendar.get(Calendar.MONTH) == 0 ? 1 : gregorianCalendar.get(Calendar.MONTH),
+                                 gregorianCalendar.get(Calendar.DAY_OF_MONTH),
+                                 0,
+                                 0,
+                                 0,
+                                 0,
+                                 ZoneId.systemDefault());
+        }
+        return b;
     }
 }
