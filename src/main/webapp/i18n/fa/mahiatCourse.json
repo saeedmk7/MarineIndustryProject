@@ -3,27 +3,27 @@
     "marineindustryprojApp": {
         "mahiatCourse" : {
             "home": {
-                "title": "Mahiat Courses",
-                "createLabel": "Create a new Mahiat Course",
-                "createOrEditLabel": "Create or edit a Mahiat Course"
+                "title": "ماهیت های دوره",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش ماهیت دوره"
             },
-            "created": "A new Mahiat Course is created with identifier {{ param }}",
-            "updated": "A Mahiat Course is updated with identifier {{ param }}",
-            "deleted": "A Mahiat Course is deleted with identifier {{ param }}",
+            "created": "ماهیت دوره با شناسه {{ param }} ایجاد شد.",
+            "updated": "ماهیت دوره با شناسه {{ param }} ویرایش شد.",
+            "deleted": "ماهیت دوره با شناسه {{ param }} حذف شد.",
             "delete": {
-                "question": "Are you sure you want to delete Mahiat Course {{ id }}?"
+                "question": "آیا برای حذف ماهیت دوره با شناسه {{ id }} مطمئنید؟"
             },
             "detail": {
-                "title": "Mahiat Course"
+                "title": "جزئیات اطلاعات ماهیت دوره"
             },
-            "title": "Title",
-            "code": "Code",
-            "description": "Description",
-            "createUserLogin": "Create User Login",
-            "createDate": "Create Date",
-            "modifyUserLogin": "Modify User Login",
-            "modifyDate": "Modify Date",
-            "designAndPlanning": "Design And Planning"
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "designAndPlanning": "طراحی و برنامه ریزی"
         }
     }
 }

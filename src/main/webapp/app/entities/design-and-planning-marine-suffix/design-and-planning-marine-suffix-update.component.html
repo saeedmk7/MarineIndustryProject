@@ -9,6 +9,110 @@
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="designAndPlanning.id" readonly />
                 </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات دوره</div></div>
+                <div class="form-group">
+                    <label class="form-control-label">عنوان دوره</label>
+                    <label class="form-control">{{educationalModule.title}}</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">کد دوره</label>
+                    <label class="form-control">{{educationalModule.code}}</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">پیش نیاز دوره</label>
+                    <label class="form-control">{{educationalModule.prerequisite}}</label>
+                </div>
+                <div class="table-responsive" *ngIf="finalniazsanjireportPeople">
+                    <table class="table table-striped  table-bordered table-hover table-sm">
+                        <thead>
+                        <tr>
+                            <th>ردیف</th>
+                            <th>فرد</th>
+                            <th>منبع نیازسنجی</th>
+                            <th>هزینه</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let finalNiazsanjiReportPerson of finalniazsanjireportPeople ;let i = index">
+                            <td>{{i+1}}</td>
+                            <td>
+                                <div *ngIf="finalNiazsanjiReportPerson.personId">
+                                    <a [routerLink]="['../person-marine-suffix', finalNiazsanjiReportPerson.personId , 'view' ]" >{{finalNiazsanjiReportPerson.personFullName}}</a>
+                                </div>
+                            </td>
+                            <td jhiTranslate="{{'marineindustryprojApp.NiazSanjiSource.' + finalNiazsanjiReportPerson.niazSanjiSource}}">{{finalNiazsanjiReportPerson.niazSanjiSource}}</td>
+                            <td>{{finalNiazsanjiReportPerson.priceCost | number}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">برنامه ریزی دوره</div></div>
+                <div class="form-group">
+                    <a (click)="change('mahiat-course-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.mahiatCourse" for="field_mahiatCourse">Mahiat Course</a>
+                    <select class="form-control" id="field_mahiatCourse" name="mahiatCourse" [(ngModel)]="designAndPlanning.mahiatCourseId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="mahiatCourseOption.id" *ngFor="let mahiatCourseOption of mahiatcourses; trackBy: trackMahiatCourseById">{{mahiatCourseOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('course-type-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.courseType" for="field_courseType">Course Type</a>
+                    <select class="form-control" id="field_courseType" name="courseType" [(ngModel)]="designAndPlanning.courseTypeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="courseTypeOption.id" *ngFor="let courseTypeOption of coursetypes; trackBy: trackCourseTypeById">{{courseTypeOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('teach-type-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.teachType" for="field_teachType">Teach Type</a>
+                    <select class="form-control" id="field_teachType" name="teachType" [(ngModel)]="designAndPlanning.teachTypeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="teachTypeOption.id" *ngFor="let teachTypeOption of teachtypes; trackBy: trackTeachTypeById">{{teachTypeOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('course-location-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.courseLocation" for="field_courseLocation">Course Location</a>
+                    <select class="form-control" id="field_courseLocation" name="courseLocation" [(ngModel)]="designAndPlanning.courseLocationId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="courseLocationOption.id" *ngFor="let courseLocationOption of courselocations; trackBy: trackCourseLocationById">{{courseLocationOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('teaching-approach-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.teachingApproach" for="field_teachingApproach">Teaching Approach</a>
+                    <select class="form-control" id="field_teachingApproach" name="teachingApproach" [(ngModel)]="designAndPlanning.teachingApproachId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="teachingApproachOption.id" *ngFor="let teachingApproachOption of teachingapproaches; trackBy: trackTeachingApproachById">{{teachingApproachOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('teach-technique-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.teachTechnique" for="field_teachTechnique">Teach Technique</a>
+                    <select class="form-control" id="field_teachTechnique" name="teachTechnique" [(ngModel)]="designAndPlanning.teachTechniqueId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="teachTechniqueOption.id" *ngFor="let teachTechniqueOption of teachtechniques; trackBy: trackTeachTechniqueById">{{teachTechniqueOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('tools-and-facility-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.toolsAndFacility" for="field_toolsAndFacility">Tools And Facility</a>
+                    <select class="form-control" id="field_toolsAndFacility" name="toolsAndFacility" [(ngModel)]="designAndPlanning.toolsAndFacilityId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="toolsAndFacilityOption.id" *ngFor="let toolsAndFacilityOption of toolsandfacilities; trackBy: trackToolsAndFacilityById">{{toolsAndFacilityOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('effectiveness-level-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.effectivenessLevel" for="field_effectivenessLevel">Effectiveness Level</a>
+                    <select class="form-control" id="field_effectivenessLevel" name="effectivenessLevel" [(ngModel)]="designAndPlanning.effectivenessLevelId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="effectivenessLevelOption.id" *ngFor="let effectivenessLevelOption of effectivenesslevels; trackBy: trackEffectivenessLevelById">{{effectivenessLevelOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('effectiveness-index-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.effectivenessIndex" for="field_effectivenessIndex">Effectiveness Index</a>
+                    <select class="form-control" id="field_effectivenessIndex" name="effectivenessIndex" [(ngModel)]="designAndPlanning.effectivenessIndexId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="effectivenessIndexOption.id" *ngFor="let effectivenessIndexOption of effectivenessindices; trackBy: trackEffectivenessIndexById">{{effectivenessIndexOption.title}}</option>
+                    </select>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">تعیین هزینه های آموزش</div></div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.directCost" for="field_directCost">Direct Cost</label>
                     <input type="number" class="form-control" name="directCost" id="field_directCost"
@@ -24,10 +128,10 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group bighalf">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.directCostDescription" for="field_directCostDescription">Direct Cost Description</label>
-                    <input type="text" class="form-control" name="directCostDescription" id="field_directCostDescription"
-                        [(ngModel)]="designAndPlanning.directCostDescription" maxlength="4096"/>
+                    <textarea type="text" class="form-control" name="directCostDescription" id="field_directCostDescription"
+                              [(ngModel)]="designAndPlanning.directCostDescription" maxlength="4096"></textarea>
                     <div [hidden]="!(editForm.controls.directCostDescription?.dirty && editForm.controls.directCostDescription?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.directCostDescription?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
@@ -50,10 +154,10 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group bighalf">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.undirectCostDescription" for="field_undirectCostDescription">Undirect Cost Description</label>
-                    <input type="text" class="form-control" name="undirectCostDescription" id="field_undirectCostDescription"
-                        [(ngModel)]="designAndPlanning.undirectCostDescription" maxlength="4096"/>
+                    <textarea type="text" class="form-control" name="undirectCostDescription" id="field_undirectCostDescription"
+                              [(ngModel)]="designAndPlanning.undirectCostDescription" maxlength="4096"></textarea>
                     <div [hidden]="!(editForm.controls.undirectCostDescription?.dirty && editForm.controls.undirectCostDescription?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.undirectCostDescription?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
@@ -61,32 +165,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.step" for="field_step">Step</label>
-                    <input type="number" class="form-control" name="step" id="field_step"
-                        [(ngModel)]="designAndPlanning.step" required/>
-                    <div [hidden]="!(editForm.controls.step?.dirty && editForm.controls.step?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.step?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.step?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.finished" for="field_finished">Finished</label>
-                    <input type="checkbox" class="form-control" name="finished" id="field_finished"
-                        [(ngModel)]="designAndPlanning.finished" />
-                    <div [hidden]="!(editForm.controls.finished?.dirty && editForm.controls.finished?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.finished?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.description" for="field_description">Description</label>
                     <input type="text" class="form-control" name="description" id="field_description"
@@ -98,96 +177,31 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label jhiTranslate="marineindustryprojApp.designAndPlanning.person" for="field_person">Person</label>
-                    <select class="form-control" id="field_person" multiple name="person" [(ngModel)]="designAndPlanning.people">
-                        <option [ngValue]="getSelected(designAndPlanning.people, personOption)" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.family}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.finalNiazsanjiReport" for="field_finalNiazsanjiReport">Final Niazsanji Report</label>
-                    <select class="form-control" id="field_finalNiazsanjiReport" name="finalNiazsanjiReport" [(ngModel)]="designAndPlanning.finalNiazsanjiReportId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="finalNiazsanjiReportOption.id" *ngFor="let finalNiazsanjiReportOption of finalniazsanjireports; trackBy: trackFinalNiazsanjiReportById">{{finalNiazsanjiReportOption.description}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.mahiatCourse" for="field_mahiatCourse">Mahiat Course</label>
-                    <select class="form-control" id="field_mahiatCourse" name="mahiatCourse" [(ngModel)]="designAndPlanning.mahiatCourseId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="mahiatCourseOption.id" *ngFor="let mahiatCourseOption of mahiatcourses; trackBy: trackMahiatCourseById">{{mahiatCourseOption.title}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.courseType" for="field_courseType">Course Type</label>
-                    <select class="form-control" id="field_courseType" name="courseType" [(ngModel)]="designAndPlanning.courseTypeId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="courseTypeOption.id" *ngFor="let courseTypeOption of coursetypes; trackBy: trackCourseTypeById">{{courseTypeOption.title}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.teachType" for="field_teachType">Teach Type</label>
-                    <select class="form-control" id="field_teachType" name="teachType" [(ngModel)]="designAndPlanning.teachTypeId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="teachTypeOption.id" *ngFor="let teachTypeOption of teachtypes; trackBy: trackTeachTypeById">{{teachTypeOption.title}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.courseLocation" for="field_courseLocation">Course Location</label>
-                    <select class="form-control" id="field_courseLocation" name="courseLocation" [(ngModel)]="designAndPlanning.courseLocationId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="courseLocationOption.id" *ngFor="let courseLocationOption of courselocations; trackBy: trackCourseLocationById">{{courseLocationOption.title}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
+
+
+
+               <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.conditionsOfParticipant" for="field_conditionsOfParticipant">Conditions Of Participant</label>
                     <select class="form-control" id="field_conditionsOfParticipant" name="conditionsOfParticipant" [(ngModel)]="designAndPlanning.conditionsOfParticipantId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="conditionsOfParticipantOption.id" *ngFor="let conditionsOfParticipantOption of conditionsofparticipants; trackBy: trackConditionsOfParticipantById">{{conditionsOfParticipantOption.title}}</option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.effectivenessLevel" for="field_effectivenessLevel">Effectiveness Level</label>
-                    <select class="form-control" id="field_effectivenessLevel" name="effectivenessLevel" [(ngModel)]="designAndPlanning.effectivenessLevelId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="effectivenessLevelOption.id" *ngFor="let effectivenessLevelOption of effectivenesslevels; trackBy: trackEffectivenessLevelById">{{effectivenessLevelOption.title}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.toolsAndFacility" for="field_toolsAndFacility">Tools And Facility</label>
-                    <select class="form-control" id="field_toolsAndFacility" name="toolsAndFacility" [(ngModel)]="designAndPlanning.toolsAndFacilityId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="toolsAndFacilityOption.id" *ngFor="let toolsAndFacilityOption of toolsandfacilities; trackBy: trackToolsAndFacilityById">{{toolsAndFacilityOption.title}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.teachingApproach" for="field_teachingApproach">Teaching Approach</label>
-                    <select class="form-control" id="field_teachingApproach" name="teachingApproach" [(ngModel)]="designAndPlanning.teachingApproachId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="teachingApproachOption.id" *ngFor="let teachingApproachOption of teachingapproaches; trackBy: trackTeachingApproachById">{{teachingApproachOption.title}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.teachTechnique" for="field_teachTechnique">Teach Technique</label>
-                    <select class="form-control" id="field_teachTechnique" name="teachTechnique" [(ngModel)]="designAndPlanning.teachTechniqueId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="teachTechniqueOption.id" *ngFor="let teachTechniqueOption of teachtechniques; trackBy: trackTeachTechniqueById">{{teachTechniqueOption.title}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.effectivenessIndex" for="field_effectivenessIndex">Effectiveness Index</label>
-                    <select class="form-control" id="field_effectivenessIndex" name="effectivenessIndex" [(ngModel)]="designAndPlanning.effectivenessIndexId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="effectivenessIndexOption.id" *ngFor="let effectivenessIndexOption of effectivenessindices; trackBy: trackEffectivenessIndexById">{{effectivenessIndexOption.title}}</option>
-                    </select>
-                </div>
+                </div>-->
+
+
+
+
+
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" value="false" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+                <button type="submit" value="true" id="finalize-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;تایید نهایی</span>
                 </button>
             </div>
         </form>

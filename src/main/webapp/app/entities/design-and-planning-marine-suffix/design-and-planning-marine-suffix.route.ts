@@ -37,12 +37,21 @@ export class DesignAndPlanningMarineSuffixResolve implements Resolve<IDesignAndP
                             return resp.body[0];
                         }
                         else{
-                            return of(new DesignAndPlanningMarineSuffix());
+                            let design: IDesignAndPlanningMarineSuffix = new DesignAndPlanningMarineSuffix();
+                            design.finalNiazsanjiReportId = id;
+                            return design;
                         }
                     },
-                    (error) => of(new DesignAndPlanningMarineSuffix()));
+                    (error) => {
+                        let design: IDesignAndPlanningMarineSuffix = new DesignAndPlanningMarineSuffix();
+                        design.finalNiazsanjiReportId = id;
+                        return design;
+                    });
         }
-        return of(new DesignAndPlanningMarineSuffix());
+        let design: IDesignAndPlanningMarineSuffix = new DesignAndPlanningMarineSuffix();
+        design.finalNiazsanjiReportId = id;
+        return design;
+        //return of(new DesignAndPlanningMarineSuffix());
     }
 }
 

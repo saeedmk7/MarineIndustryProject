@@ -3,27 +3,27 @@
     "marineindustryprojApp": {
         "courseType" : {
             "home": {
-                "title": "Course Types",
-                "createLabel": "Create a new Course Type",
-                "createOrEditLabel": "Create or edit a Course Type"
+                "title": "نوع های دوره",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش نوع دوره"
             },
-            "created": "A new Course Type is created with identifier {{ param }}",
-            "updated": "A Course Type is updated with identifier {{ param }}",
-            "deleted": "A Course Type is deleted with identifier {{ param }}",
+            "created": "نوع دوره با شناسه {{ param }} ایجاد شد.",
+            "updated": "نوع دوره با شناسه {{ param }} ویرایش شد.",
+            "deleted": "نوع دوره با شناسه {{ param }} حذف شد.",
             "delete": {
-                "question": "Are you sure you want to delete Course Type {{ id }}?"
+                "question": "آیا برای حذف نوع دوره با شناسه {{ id }} مطمئنید؟"
             },
             "detail": {
-                "title": "Course Type"
+                "title": "جزئیات اطلاعات نوع دوره"
             },
-            "title": "Title",
-            "code": "Code",
-            "description": "Description",
-            "createUserLogin": "Create User Login",
-            "createDate": "Create Date",
-            "modifyUserLogin": "Modify User Login",
-            "modifyDate": "Modify Date",
-            "designAndPlanning": "Design And Planning"
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "designAndPlanning": "طراحی و برنامه ریزی"
         }
     }
 }

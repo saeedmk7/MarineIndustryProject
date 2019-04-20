@@ -3,27 +3,27 @@
     "marineindustryprojApp": {
         "conditionsOfParticipant" : {
             "home": {
-                "title": "Conditions Of Participants",
-                "createLabel": "Create a new Conditions Of Participant",
-                "createOrEditLabel": "Create or edit a Conditions Of Participant"
+                "title": "شرایط شرکت کنندگان",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش شرایط شرکت کنندگان"
             },
-            "created": "A new Conditions Of Participant is created with identifier {{ param }}",
-            "updated": "A Conditions Of Participant is updated with identifier {{ param }}",
-            "deleted": "A Conditions Of Participant is deleted with identifier {{ param }}",
+            "created": "شرایط شرکت کنندگان با شناسه {{ param }} ایجاد شد.",
+            "updated": "شرایط شرکت کنندگان با شناسه {{ param }} ویرایش شد.",
+            "deleted": "شرایط شرکت کنندگان با شناسه {{ param }} حذف شد.",
             "delete": {
-                "question": "Are you sure you want to delete Conditions Of Participant {{ id }}?"
+                "question": "آیا برای حذف شرایط شرکت کنندگان با شناسه {{ id }} مطمئنید؟"
             },
             "detail": {
-                "title": "Conditions Of Participant"
+                "title": "جزئیات اطلاعات شرایط شرکت کنندگان"
             },
-            "title": "Title",
-            "code": "Code",
-            "description": "Description",
-            "createUserLogin": "Create User Login",
-            "createDate": "Create Date",
-            "modifyUserLogin": "Modify User Login",
-            "modifyDate": "Modify Date",
-            "designAndPlanning": "Design And Planning"
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "designAndPlanning": "طراحی و برنامه ریزی"
         }
     }
 }

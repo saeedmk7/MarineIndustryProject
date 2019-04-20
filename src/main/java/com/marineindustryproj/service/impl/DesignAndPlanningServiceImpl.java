@@ -1,5 +1,8 @@
 package com.marineindustryproj.service.impl;
 
+import com.marineindustryproj.domain.FinalNiazsanjiReport;
+import com.marineindustryproj.repository.FinalNiazsanjiReportRepository;
+import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.DesignAndPlanningService;
 import com.marineindustryproj.domain.DesignAndPlanning;
 import com.marineindustryproj.repository.DesignAndPlanningRepository;
@@ -13,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
@@ -26,10 +30,13 @@ public class DesignAndPlanningServiceImpl implements DesignAndPlanningService {
 
     private final DesignAndPlanningRepository designAndPlanningRepository;
 
+    private final FinalNiazsanjiReportRepository finalNiazsanjiReportRepository;
+
     private final DesignAndPlanningMapper designAndPlanningMapper;
 
-    public DesignAndPlanningServiceImpl(DesignAndPlanningRepository designAndPlanningRepository, DesignAndPlanningMapper designAndPlanningMapper) {
+    public DesignAndPlanningServiceImpl(DesignAndPlanningRepository designAndPlanningRepository, FinalNiazsanjiReportRepository finalNiazsanjiReportRepository, DesignAndPlanningMapper designAndPlanningMapper) {
         this.designAndPlanningRepository = designAndPlanningRepository;
+        this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
         this.designAndPlanningMapper = designAndPlanningMapper;
     }
 
@@ -42,6 +49,20 @@ public class DesignAndPlanningServiceImpl implements DesignAndPlanningService {
     @Override
     public DesignAndPlanningDTO save(DesignAndPlanningDTO designAndPlanningDTO) {
         log.debug("Request to save DesignAndPlanning : {}", designAndPlanningDTO);
+
+        FinalNiazsanjiReport finalNiazsanjiReport = finalNiazsanjiReportRepository.getOne(designAndPlanningDTO.getFinalNiazsanjiReportId());
+        //finalNiazsanjiReport.setRunMonth(designAndPlanningDTO.getRun);
+
+        if(designAndPlanningDTO.isFinished() && designAndPlanningDTO.getStatus() < 5)
+        {
+            designAndPlanningDTO.setFinishedDate(ZonedDateTime.now());
+            designAndPlanningDTO.setFinishedUserLogin(SecurityUtils.getCurrentUserLogin().get());
+
+            designAndPlanningDTO.setStatus(5);
+
+
+            finalNiazsanjiReport.setStatus(10);
+        }
 
         DesignAndPlanning designAndPlanning = designAndPlanningMapper.toEntity(designAndPlanningDTO);
         designAndPlanning = designAndPlanningRepository.save(designAndPlanning);

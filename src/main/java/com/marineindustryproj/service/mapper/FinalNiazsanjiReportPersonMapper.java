@@ -13,6 +13,7 @@ public interface FinalNiazsanjiReportPersonMapper extends EntityMapper<FinalNiaz
 
     @Mapping(source = "person.id", target = "personId")
     @Mapping(source = "person.family", target = "personFamily")
+    @Mapping(source = "person.name", target = "personName")
     @Mapping(source = "finalNiazsanjiReport.id", target = "finalNiazsanjiReportId")
     @Mapping(source = "finalNiazsanjiReport.description", target = "finalNiazsanjiReportDescription")
     FinalNiazsanjiReportPersonDTO toDto(FinalNiazsanjiReportPerson finalNiazsanjiReportPerson);

@@ -125,6 +125,9 @@ public class FinalNiazsanjiReportQueryService extends QueryService<FinalNiazsanj
             if (criteria.getStatus() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getStatus(), FinalNiazsanjiReport_.status));
             }
+            if (criteria.getRunMonth() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getRunMonth(), FinalNiazsanjiReport_.runMonth));
+            }
             if (criteria.getFinalNiazsanjiReportPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportPersonId(),
                     root -> root.join(FinalNiazsanjiReport_.finalNiazsanjiReportPeople, JoinType.LEFT).get(FinalNiazsanjiReportPerson_.id)));

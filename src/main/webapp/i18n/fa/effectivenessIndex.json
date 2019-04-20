@@ -3,27 +3,27 @@
     "marineindustryprojApp": {
         "effectivenessIndex" : {
             "home": {
-                "title": "Effectiveness Indices",
-                "createLabel": "Create a new Effectiveness Index",
-                "createOrEditLabel": "Create or edit a Effectiveness Index"
+                "title": "شاخص های اثربخشی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش شاخص اثربخشی"
             },
-            "created": "A new Effectiveness Index is created with identifier {{ param }}",
-            "updated": "A Effectiveness Index is updated with identifier {{ param }}",
-            "deleted": "A Effectiveness Index is deleted with identifier {{ param }}",
+            "created": "شاخص اثربخشی با شناسه {{ param }} ایجاد شد.",
+            "updated": "شاخص اثربخشی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "شاخص اثربخشی با شناسه {{ param }} حذف شد.",
             "delete": {
-                "question": "Are you sure you want to delete Effectiveness Index {{ id }}?"
+                "question": "آیا برای حذف شاخص اثربخشی با شناسه {{ id }} مطمئنید؟"
             },
             "detail": {
-                "title": "Effectiveness Index"
+                "title": "جزئیات اطلاعات شاخص اثربخشی"
             },
-            "title": "Title",
-            "code": "Code",
-            "description": "Description",
-            "createUserLogin": "Create User Login",
-            "createDate": "Create Date",
-            "modifyUserLogin": "Modify User Login",
-            "modifyDate": "Modify Date",
-            "designAndPlanning": "Design And Planning"
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "designAndPlanning": "طراحی و برنامه ریزی"
         }
     }
 }

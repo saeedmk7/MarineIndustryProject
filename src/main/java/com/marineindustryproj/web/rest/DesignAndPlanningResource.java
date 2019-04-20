@@ -1,6 +1,7 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.DesignAndPlanningService;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +61,12 @@ public class DesignAndPlanningResource {
         if (designAndPlanningDTO.getId() != null) {
             throw new BadRequestAlertException("A new designAndPlanning cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        designAndPlanningDTO.setStep(0);
+        designAndPlanningDTO.setArchived(false);
+        designAndPlanningDTO.setCreateDate(ZonedDateTime.now());
+        designAndPlanningDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+
         DesignAndPlanningDTO result = designAndPlanningService.save(designAndPlanningDTO);
         return ResponseEntity.created(new URI("/api/design-and-plannings/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

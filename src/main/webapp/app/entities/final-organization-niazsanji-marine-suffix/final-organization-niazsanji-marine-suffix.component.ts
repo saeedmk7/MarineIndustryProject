@@ -48,7 +48,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
     predicate: any;
     previousPage: any;
     reverse: any;
-    isAdmin:any;
+    isAdmin:boolean = false;
     isModirKolAmozesh: boolean;
     isKarshenasArshadAmozesh: boolean;
 

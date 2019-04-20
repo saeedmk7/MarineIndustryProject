@@ -3,27 +3,27 @@
     "marineindustryprojApp": {
         "courseLocation" : {
             "home": {
-                "title": "Course Locations",
-                "createLabel": "Create a new Course Location",
-                "createOrEditLabel": "Create or edit a Course Location"
+                "title": "محل های برگزاری دوره",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش محل برگزاری دوره"
             },
-            "created": "A new Course Location is created with identifier {{ param }}",
-            "updated": "A Course Location is updated with identifier {{ param }}",
-            "deleted": "A Course Location is deleted with identifier {{ param }}",
+            "created": "محل برگزاری دوره با شناسه {{ param }} ایجاد شد.",
+            "updated": "محل برگزاری دوره با شناسه {{ param }} ویرایش شد.",
+            "deleted": "محل برگزاری دوره با شناسه {{ param }} حذف شد.",
             "delete": {
-                "question": "Are you sure you want to delete Course Location {{ id }}?"
+                "question": "آیا برای حذف محل برگزاری دوره با شناسه {{ id }} مطمئنید؟"
             },
             "detail": {
-                "title": "Course Location"
+                "title": "جزئیات اطلاعات محل برگزاری دوره"
             },
-            "title": "Title",
-            "code": "Code",
-            "description": "Description",
-            "createUserLogin": "Create User Login",
-            "createDate": "Create Date",
-            "modifyUserLogin": "Modify User Login",
-            "modifyDate": "Modify Date",
-            "designAndPlanning": "Design And Planning"
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "designAndPlanning": "طراحی و برنامه ریزی"
         }
     }
 }

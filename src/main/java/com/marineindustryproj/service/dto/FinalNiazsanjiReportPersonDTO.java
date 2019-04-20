@@ -47,6 +47,8 @@ public class FinalNiazsanjiReportPersonDTO implements Serializable {
 
     private Long personId;
 
+    private String personName;
+
     private String personFamily;
 
     private Long finalNiazsanjiReportId;
@@ -173,6 +175,14 @@ public class FinalNiazsanjiReportPersonDTO implements Serializable {
         this.personFamily = personFamily;
     }
 
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
     public Long getFinalNiazsanjiReportId() {
         return finalNiazsanjiReportId;
     }
@@ -227,7 +237,8 @@ public class FinalNiazsanjiReportPersonDTO implements Serializable {
             ", status=" + getStatus() +
             ", sourceId=" + getSourceId() +
             ", person=" + getPersonId() +
-            ", person='" + getPersonFamily() + "'" +
+            ", personFamily='" + getPersonFamily() + "'" +
+            ", personName='" + getPersonFamily() + "'" +
             ", finalNiazsanjiReport=" + getFinalNiazsanjiReportId() +
             ", finalNiazsanjiReport='" + getFinalNiazsanjiReportDescription() + "'" +
             "}";

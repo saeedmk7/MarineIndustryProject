@@ -16,6 +16,8 @@ export interface IFinalNiazsanjiReportPersonMarineSuffix {
     status?: number;
     sourceId?: number;
     personFamily?: string;
+    personName?: string;
+    personFullName?: string;
     personId?: number;
     finalNiazsanjiReportDescription?: string;
     finalNiazsanjiReportId?: number;
@@ -37,6 +39,8 @@ export class FinalNiazsanjiReportPersonMarineSuffix implements IFinalNiazsanjiRe
         public status?: number,
         public sourceId?: number,
         public personFamily?: string,
+        public personName?: string,
+        public personFullName?: string,
         public personId?: number,
         public finalNiazsanjiReportDescription?: string,
         public finalNiazsanjiReportId?: number

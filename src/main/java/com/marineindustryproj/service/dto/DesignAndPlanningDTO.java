@@ -61,6 +61,8 @@ public class DesignAndPlanningDTO implements Serializable {
     @NotNull
     private Integer status;
 
+    private Integer runMonth;
+
     private Set<PersonDTO> people = new HashSet<>();
 
     private Set<DocumentDTO> documents = new HashSet<>();
@@ -251,6 +253,14 @@ public class DesignAndPlanningDTO implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getRunMonth() {
+        return runMonth;
+    }
+
+    public void setRunMonth(Integer runMonth) {
+        this.runMonth = runMonth;
     }
 
     public Set<PersonDTO> getPeople() {
@@ -487,6 +497,7 @@ public class DesignAndPlanningDTO implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", runMonth=" + getRunMonth() +
             ", finalNiazsanjiReport=" + getFinalNiazsanjiReportId() +
             ", finalNiazsanjiReport='" + getFinalNiazsanjiReportDescription() + "'" +
             ", mahiatCourse=" + getMahiatCourseId() +

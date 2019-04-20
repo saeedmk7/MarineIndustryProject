@@ -74,6 +74,9 @@ public class FinalNiazsanjiReport implements Serializable {
     @Column(name = "status", nullable = false)
     private Integer status;
 
+    @Column(name = "run_month")
+    private Integer runMonth;
+
     @OneToMany(mappedBy = "finalNiazsanjiReport")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = new HashSet<>();
@@ -267,6 +270,19 @@ public class FinalNiazsanjiReport implements Serializable {
         this.status = status;
     }
 
+    public Integer getRunMonth() {
+        return runMonth;
+    }
+
+    public FinalNiazsanjiReport runMonth(Integer runMonth) {
+        this.runMonth = runMonth;
+        return this;
+    }
+
+    public void setRunMonth(Integer runMonth) {
+        this.runMonth = runMonth;
+    }
+
     public Set<FinalNiazsanjiReportPerson> getFinalNiazsanjiReportPeople() {
         return finalNiazsanjiReportPeople;
     }
@@ -455,6 +471,7 @@ public class FinalNiazsanjiReport implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", runMonth=" + getRunMonth() +
             "}";
     }
 }

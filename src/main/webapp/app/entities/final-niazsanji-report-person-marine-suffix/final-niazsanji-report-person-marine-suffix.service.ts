@@ -73,6 +73,7 @@ export class FinalNiazsanjiReportPersonMarineSuffixService {
         res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
         res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
         res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
+        res.body.personFullName = (res.body.personName ? res.body.personName : '') + ' ' + (res.body.personFamily ? res.body.personFamily : '');
         return res;
     }
 
@@ -84,6 +85,8 @@ export class FinalNiazsanjiReportPersonMarineSuffixService {
                 finalNiazsanjiReportPerson.modifyDate != null ? moment(finalNiazsanjiReportPerson.modifyDate) : null;
             finalNiazsanjiReportPerson.archivedDate =
                 finalNiazsanjiReportPerson.archivedDate != null ? moment(finalNiazsanjiReportPerson.archivedDate) : null;
+            finalNiazsanjiReportPerson.personFullName = (finalNiazsanjiReportPerson.personName ? finalNiazsanjiReportPerson.personName : '')
+                + ' ' + (finalNiazsanjiReportPerson.personFamily ? finalNiazsanjiReportPerson.personFamily : '');
         });
         return res;
     }

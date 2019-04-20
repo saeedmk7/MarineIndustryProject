@@ -3,27 +3,27 @@
     "marineindustryprojApp": {
         "teachType" : {
             "home": {
-                "title": "Teach Types",
-                "createLabel": "Create a new Teach Type",
-                "createOrEditLabel": "Create or edit a Teach Type"
+                "title": "نوع های آموزش",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش نوع آموزش"
             },
-            "created": "A new Teach Type is created with identifier {{ param }}",
-            "updated": "A Teach Type is updated with identifier {{ param }}",
-            "deleted": "A Teach Type is deleted with identifier {{ param }}",
+            "created": "نوع آموزش با شناسه {{ param }} ایجاد شد.",
+            "updated": "نوع آموزش با شناسه {{ param }} ویرایش شد.",
+            "deleted": "نوع آموزش با شناسه {{ param }} حذف شد.",
             "delete": {
-                "question": "Are you sure you want to delete Teach Type {{ id }}?"
+                "question": "آیا از حذف نوع آموزش با شناسه {{ id }} مطمئنید؟"
             },
             "detail": {
-                "title": "Teach Type"
+                "title": "جزئیات اطلاعات نوع آموزش"
             },
-            "title": "Title",
-            "code": "Code",
-            "description": "Description",
-            "createUserLogin": "Create User Login",
-            "createDate": "Create Date",
-            "modifyUserLogin": "Modify User Login",
-            "modifyDate": "Modify Date",
-            "designAndPlanning": "Design And Planning"
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "designAndPlanning": "طراحی و برنامه ریزی"
         }
     }
 }
