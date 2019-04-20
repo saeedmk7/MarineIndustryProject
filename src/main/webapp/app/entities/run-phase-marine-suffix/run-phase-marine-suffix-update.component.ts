@@ -14,6 +14,12 @@ import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model
 import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
 import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
 import { FinalNiazsanjiReportMarineSuffixService } from 'app/entities/final-niazsanji-report-marine-suffix';
+import {IDesignAndPlanningMarineSuffix} from "app/shared/model/design-and-planning-marine-suffix.model";
+import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
+import {IFinalNiazsanjiReportPersonMarineSuffix} from "app/shared/model/final-niazsanji-report-person-marine-suffix.model";
+import {EducationalModuleMarineSuffixService} from "app/entities/educational-module-marine-suffix";
+import {FinalNiazsanjiReportPersonMarineSuffixService} from "app/entities/final-niazsanji-report-person-marine-suffix";
+import {Principal} from "app/core";
 
 @Component({
     selector: 'mi-run-phase-marine-suffix-update',
@@ -22,49 +28,122 @@ import { FinalNiazsanjiReportMarineSuffixService } from 'app/entities/final-niaz
 export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     private _runPhase: IRunPhaseMarineSuffix;
     isSaving: boolean;
-
-    documents: IDocumentMarineSuffix[];
-
+    educationalModule: IEducationalModuleMarineSuffix = {};
     people: IPersonMarineSuffix[];
-
+    finalniazsanjireport: IFinalNiazsanjiReportMarineSuffix;
+    finalniazsanjireportPeople: IFinalNiazsanjiReportPersonMarineSuffix[];
     finalniazsanjireports: IFinalNiazsanjiReportMarineSuffix[];
-    doneDate: string;
-    createDate: string;
-    modifyDate: string;
-    archivedDate: string;
+
+    isAdmin: boolean = false;
+    isModirKolAmozesh: boolean;
+    isKarshenasArshadAmozesh: boolean;
+    currentAccount: any;
+
+    documentUrl: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private runPhaseService: RunPhaseMarineSuffixService,
-        private documentService: DocumentMarineSuffixService,
         private personService: PersonMarineSuffixService,
         private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService,
-        private activatedRoute: ActivatedRoute
+        private educationalModuleService: EducationalModuleMarineSuffixService,
+        private finalNiazsanjiReportPersonService: FinalNiazsanjiReportPersonMarineSuffixService,
+        private activatedRoute: ActivatedRoute,
+        private principal: Principal
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ runPhase }) => {
             this.runPhase = runPhase;
+            const criteriaRun = [{
+                key: 'finalNiazsanjiReportId.equals',
+                value: this.runPhase.finalNiazsanjiReportId
+            }];
+            this.runPhaseService
+                .query({
+                    page: 0,
+                    size: 20000,
+                    criteriaRun,
+                    sort: ["id", "asc"]
+                }).subscribe((resp: HttpResponse<IRunPhaseMarineSuffix[]>) => {
+
+                if (resp.body.length > 0) {
+                    this.runPhase =  resp.body[0];
+                    debugger;
+                    this.documentUrl = 'document-marine-suffix/runphase/' + this.runPhase.id;
+                }
+            });
+            this.finalNiazsanjiReportService.find(this.runPhase.finalNiazsanjiReportId).subscribe(
+                (res: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => {
+
+                    this.finalniazsanjireport = res.body;
+
+                    this.educationalModuleService.find(this.finalniazsanjireport.educationalModuleId).subscribe(
+                        (res: HttpResponse<IEducationalModuleMarineSuffix>) => {
+
+                            this.educationalModule = res.body;
+                        },
+                        (res: HttpErrorResponse) => this.onError(res.message));
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+
+            const criteria = [{
+                key: 'finalNiazsanjiReportId.equals',
+                value: this.runPhase.finalNiazsanjiReportId
+            }];
+            this.finalNiazsanjiReportPersonService.query({
+                page: 0,
+                size: 20000,
+                criteria: criteria,
+                sort: ["id", "asc"]
+            }).subscribe((resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>) => {
+                    this.finalniazsanjireportPeople = resp.body;
+                    /*if (resp.body.length > 0) {
+                        const personIds = resp.body.map(a => a.personId);
+                        const criteria1 = [{
+                            key: 'id.in',
+                            value: personIds
+                        }];
+                        this.personService.query({
+                            page: 0,
+                            size: 20000,
+                            criteria: criteria1,
+                            sort: ["id", "asc"]
+                        }).subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
+                                this.people = res.body;
+                            },
+                            (res: HttpErrorResponse) => this.onError(res.message));
+                    }*/
+                },
+                (res: HttpErrorResponse) => this.onError(res.message))
+
         });
-        this.documentService.query().subscribe(
-            (res: HttpResponse<IDocumentMarineSuffix[]>) => {
-                this.documents = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.personService.query().subscribe(
+
+        this.principal.identity().then(account => {
+            this.currentAccount = account;
+            if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+                this.isAdmin = true;
+            if (account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined) {
+                this.isModirKolAmozesh = true;
+            }
+            if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined) {
+                this.isKarshenasArshadAmozesh = true;
+            }
+        });
+        /*this.personService.query().subscribe(
             (res: HttpResponse<IPersonMarineSuffix[]>) => {
                 this.people = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.finalNiazsanjiReportService.query().subscribe(
+        );*/
+        /*this.finalNiazsanjiReportService.query().subscribe(
             (res: HttpResponse<IFinalNiazsanjiReportMarineSuffix[]>) => {
                 this.finalniazsanjireports = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        );*/
     }
 
     previousState() {
@@ -73,10 +152,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.runPhase.doneDate = moment(this.doneDate, DATE_TIME_FORMAT);
-        this.runPhase.createDate = moment(this.createDate, DATE_TIME_FORMAT);
-        this.runPhase.modifyDate = moment(this.modifyDate, DATE_TIME_FORMAT);
-        this.runPhase.archivedDate = moment(this.archivedDate, DATE_TIME_FORMAT);
+
         if (this.runPhase.id !== undefined) {
             this.subscribeToSaveResponse(this.runPhaseService.update(this.runPhase));
         } else {
@@ -132,9 +208,5 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
 
     set runPhase(runPhase: IRunPhaseMarineSuffix) {
         this._runPhase = runPhase;
-        this.doneDate = moment(runPhase.doneDate).format(DATE_TIME_FORMAT);
-        this.createDate = moment(runPhase.createDate).format(DATE_TIME_FORMAT);
-        this.modifyDate = moment(runPhase.modifyDate).format(DATE_TIME_FORMAT);
-        this.archivedDate = moment(runPhase.archivedDate).format(DATE_TIME_FORMAT);
     }
 }

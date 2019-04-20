@@ -20,7 +20,7 @@ export class DesignAndPlanningMarineSuffixResolve implements Resolve<IDesignAndP
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        debugger;
+
         const id = route.params['id'] ? route.params['id'] : null;
         /*if (id) {
             let criteria = [{
@@ -34,7 +34,7 @@ export class DesignAndPlanningMarineSuffixResolve implements Resolve<IDesignAndP
                     criteria,
                     sort: ["id", "asc"]
                 }).subscribe((resp: HttpResponse<IDesignAndPlanningMarineSuffix[]>) => {
-                    debugger;
+
                     if (resp.body.length > 0) {
                         return resp.body[0];
                     }
@@ -45,14 +45,14 @@ export class DesignAndPlanningMarineSuffixResolve implements Resolve<IDesignAndP
                     }
                 },
                 (error) => {
-                    debugger;
+
                     let design: IDesignAndPlanningMarineSuffix = new DesignAndPlanningMarineSuffix();
                     design.finalNiazsanjiReportId = id;
                     return design;
                 });
         }
         else {*/
-            debugger;
+
             let design: IDesignAndPlanningMarineSuffix = new DesignAndPlanningMarineSuffix();
             design.finalNiazsanjiReportId = id;
             return design;

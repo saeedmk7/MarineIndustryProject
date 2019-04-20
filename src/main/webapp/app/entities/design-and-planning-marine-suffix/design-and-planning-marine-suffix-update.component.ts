@@ -36,6 +36,7 @@ import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 import {FinalNiazsanjiReportPersonMarineSuffixService} from "app/entities/final-niazsanji-report-person-marine-suffix";
 import {IFinalNiazsanjiReportPersonMarineSuffix} from "app/shared/model/final-niazsanji-report-person-marine-suffix.model";
 import {MONTHS} from "app/shared/constants/months.constants";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'mi-design-and-planning-marine-suffix-update',
@@ -104,7 +105,7 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({designAndPlanning}) => {
-            debugger;
+
             this.designAndPlanning = designAndPlanning;
             const criteriaDesign = [{
                 key: 'finalNiazsanjiReportId.equals',
@@ -117,10 +118,11 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
                     criteriaDesign,
                     sort: ["id", "asc"]
                 }).subscribe((resp: HttpResponse<IDesignAndPlanningMarineSuffix[]>) => {
-                    debugger;
+
                     if (resp.body.length > 0) {
                         this.designAndPlanning =  resp.body[0];
-                        this.documentUrl = 'document-marine-suffix/' + designAndPlanning.id +'/designandplanning';
+                        debugger;
+                        this.documentUrl = 'document-marine-suffix/designandplanning/' + this.designAndPlanning.id;
                     }
                 });
             this.finalNiazsanjiReportService.find(this.designAndPlanning.finalNiazsanjiReportId).subscribe(
@@ -249,11 +251,12 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
     }
 
     change(i) {
-
+        debugger;
         this.router.navigateByUrl(i);
     }
 
     save() {
+        debugger;
 
         this.isSaving = true;
 
@@ -267,10 +270,9 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
         }
     }
     finalize(){
-
+        debugger;
         this.designAndPlanning.finished = true;
-        let element: HTMLElement = document.querySelector('input[type="submit"]') as HTMLElement;
-        element.click();
+        $('#save-entity').trigger('click');
     }
     trackMahiatCourseById(index: number, item: IMahiatCourseMarineSuffix) {
         return item.id;

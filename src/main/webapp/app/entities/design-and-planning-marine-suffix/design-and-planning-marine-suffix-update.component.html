@@ -4,9 +4,9 @@
             <h2 id="mi-design-and-planning-marine-suffix-heading" jhiTranslate="marineindustryprojApp.designAndPlanning.home.createOrEditLabel">Create or edit a Design And Planning</h2>
             <div>
                 <mi-alert-error></mi-alert-error>
-                <div class="form-group" [hidden]="!designAndPlanning.id">
+                <div class="form-group" [hidden]="true">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
+                    <input type="hidden" class="form-control" id="id" name="id"
                         [(ngModel)]="designAndPlanning.id" readonly />
                 </div>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات دوره</div></div>
@@ -204,17 +204,18 @@
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" #submitButton id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
                 <button type="button" (click)="finalize()" id="finalize-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;تایید نهایی</span>
+                    <span><fa-icon [icon]="'save'"></fa-icon>تایید نهایی</span>
                 </button>
 
-                <a (click)=change(documentUrl) [disabled]="documentUrl == undefined" class="btn btn-warning">
+                <button type="button" (click)=change(documentUrl) [disabled]="documentUrl == undefined" class="btn btn-warning pull-left">
                     <span class="fa fa-file"></span>
                     <span class="d-none d-md-inline">ثبت مدارک</span>
-                </a>
+                </button>
+                <span class="alert alert-info pull-left">برای ثبت مدارک لطفا ابتدا اطلاعات اولیه طراحی را ذخیره نمائید سپس دکمه ثبت مدارک فعال خواهد شد.</span>
             </div>
         </form>
     </div>

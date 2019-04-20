@@ -4,11 +4,12 @@
             <h2 id="mi-run-phase-marine-suffix-heading" jhiTranslate="marineindustryprojApp.runPhase.home.createOrEditLabel">Create or edit a Run Phase</h2>
             <div>
                 <mi-alert-error></mi-alert-error>
-                <div class="form-group" [hidden]="!runPhase.id">
+                <div class="form-group" [hidden]="true">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
+                    <input type="hidden" class="form-control" id="id" name="id"
                         [(ngModel)]="runPhase.id" readonly />
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.description" for="field_description">Description</label>
                     <input type="text" class="form-control" name="description" id="field_description"
@@ -35,7 +36,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.stepNumber" for="field_stepNumber">Step Number</label>
                     <input type="number" class="form-control" name="stepNumber" id="field_stepNumber"
                         [(ngModel)]="runPhase.stepNumber" required/>
@@ -60,8 +61,8 @@
                         This field is required.
                         </small>
                     </div>
-                </div>
-                <div class="form-group">
+                </div>-->
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.doneUserLogin" for="field_doneUserLogin">Done User Login</label>
                     <input type="text" class="form-control" name="doneUserLogin" id="field_doneUserLogin"
                         [(ngModel)]="runPhase.doneUserLogin" maxlength="50"/>
@@ -178,7 +179,7 @@
                         <option [ngValue]="null"></option>
                         <option [ngValue]="finalNiazsanjiReportOption.id" *ngFor="let finalNiazsanjiReportOption of finalniazsanjireports; trackBy: trackFinalNiazsanjiReportById">{{finalNiazsanjiReportOption.description}}</option>
                     </select>
-                </div>
+                </div>-->
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

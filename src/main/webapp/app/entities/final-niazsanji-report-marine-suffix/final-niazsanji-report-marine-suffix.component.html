@@ -127,18 +127,19 @@
                         <fa-icon [icon]="'sticky-note'"></fa-icon>
                         <span class="d-none d-md-inline">برنامه ریزی</span>
                     </kendo-buttongroup>-->
-                    <kendo-buttongroup type="submit" class="btn btn-success btn-sm"
-                                       [routerLink]="['/design-and-planning-marine-suffix', dataItem.id, 'edit']"
-                    >
-                        <span class="fa fa-file"></span>
-                        <span class="d-none d-md-inline">برنامه ریزی</span>
-                    </kendo-buttongroup>
-
-                    <kendo-buttongroup type="submit" class="btn btn-success btn-sm"
-                                       [routerLink]="['../document-marine-suffix', 'runphase', dataItem.id ]"
-                    >
-                        <span class="fa fa-file"></span>
-                        <span class="d-none d-md-inline">مدارک اجرا</span>
+                    <kendo-buttongroup>
+                        <button kendoButton type="submit" class="btn btn-warning btn-sm"
+                                           [routerLink]="['/design-and-planning-marine-suffix', dataItem.id, 'edit']"
+                        >
+                            <span class="fa fa-file"></span>
+                            <span class="d-none d-md-inline">برنامه ریزی</span>
+                        </button>
+                        <button kendoButton type="submit" class="btn btn-success btn-sm"  [disabled]="false"
+                                [routerLink]="['/run-phase-marine-suffix', dataItem.id, 'edit']"
+                        >
+                            <span class="fa fa-file"></span>
+                            <span class="d-none d-md-inline">اجرا</span>
+                        </button>
                     </kendo-buttongroup>
                     <kendo-buttongroup type="submit" *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                        [routerLink]="['/', { outlets: { popup: 'final-niazsanji-report-marine-suffix/'+ dataItem.id + '/delete'} }]"
