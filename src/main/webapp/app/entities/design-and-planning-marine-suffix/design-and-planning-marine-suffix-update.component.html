@@ -116,7 +116,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.directCost" for="field_directCost">Direct Cost</label>
                     <input type="number" class="form-control" name="directCost" id="field_directCost"
-                        [(ngModel)]="designAndPlanning.directCost" required/>
+                        [(ngModel)]="designAndPlanning.directCost" [max]="2147483647" [min]="0" required/>
                     <div [hidden]="!(editForm.controls.directCost?.dirty && editForm.controls.directCost?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.directCost?.errors?.required" jhiTranslate="entity.validation.required">
@@ -142,7 +142,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.undirectCost" for="field_undirectCost">Undirect Cost</label>
                     <input type="number" class="form-control" name="undirectCost" id="field_undirectCost"
-                        [(ngModel)]="designAndPlanning.undirectCost" required/>
+                        [(ngModel)]="designAndPlanning.undirectCost" [max]="2147483647" [min]="0" required/>
                     <div [hidden]="!(editForm.controls.undirectCost?.dirty && editForm.controls.undirectCost?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.undirectCost?.errors?.required" jhiTranslate="entity.validation.required">
@@ -165,7 +165,13 @@
                         </small>
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.runMonth" for="field_runMonth">run month</label>
+                    <select class="form-control" id="field_runMonth" name="runMonth" [(ngModel)]="designAndPlanning.runMonth" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="runMonth.id" *ngFor="let runMonth of runMonths; trackBy: trackEffectivenessLevelById">{{runMonth.persianMonth}}</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.description" for="field_description">Description</label>
                     <input type="text" class="form-control" name="description" id="field_description"
@@ -178,7 +184,8 @@
                     </div>
                 </div>
 
-
+                <input type="hidden" [value]="designAndPlanning.finished">
+                <input type="hidden" [value]="designAndPlanning.step">
 
                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.conditionsOfParticipant" for="field_conditionsOfParticipant">Conditions Of Participant</label>
@@ -197,12 +204,17 @@
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" value="false" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" #submitButton id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
-                <button type="submit" value="true" id="finalize-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="button" (click)="finalize()" id="finalize-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;تایید نهایی</span>
                 </button>
+
+                <a (click)=change(documentUrl) [disabled]="documentUrl == undefined" class="btn btn-warning">
+                    <span class="fa fa-file"></span>
+                    <span class="d-none d-md-inline">ثبت مدارک</span>
+                </a>
             </div>
         </form>
     </div>

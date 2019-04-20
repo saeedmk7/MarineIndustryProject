@@ -59,6 +59,8 @@ public class DesignAndPlanningCriteria implements Serializable {
 
     private IntegerFilter status;
 
+    private IntegerFilter runMonth;
+
     private LongFilter personId;
 
     private LongFilter documentId;
@@ -232,6 +234,14 @@ public class DesignAndPlanningCriteria implements Serializable {
         this.status = status;
     }
 
+    public IntegerFilter getRunMonth() {
+        return runMonth;
+    }
+
+    public void setRunMonth(IntegerFilter runMonth) {
+        this.runMonth = runMonth;
+    }
+
     public LongFilter getPersonId() {
         return personId;
     }
@@ -365,6 +375,7 @@ public class DesignAndPlanningCriteria implements Serializable {
             Objects.equals(archivedUserLogin, that.archivedUserLogin) &&
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
+            Objects.equals(runMonth, that.runMonth) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
@@ -401,6 +412,7 @@ public class DesignAndPlanningCriteria implements Serializable {
         archivedUserLogin,
         archivedDate,
         status,
+        runMonth,
         personId,
         documentId,
         finalNiazsanjiReportId,
@@ -438,6 +450,7 @@ public class DesignAndPlanningCriteria implements Serializable {
                 (archivedUserLogin != null ? "archivedUserLogin=" + archivedUserLogin + ", " : "") +
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
+                (runMonth != null ? "runMonth=" + runMonth + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +

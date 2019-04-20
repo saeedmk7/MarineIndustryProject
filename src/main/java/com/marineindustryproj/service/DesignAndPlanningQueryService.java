@@ -140,6 +140,9 @@ public class DesignAndPlanningQueryService extends QueryService<DesignAndPlannin
             if (criteria.getStatus() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getStatus(), DesignAndPlanning_.status));
             }
+            if (criteria.getRunMonth() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getRunMonth(), DesignAndPlanning_.runMonth));
+            }
             if (criteria.getPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPersonId(),
                     root -> root.join(DesignAndPlanning_.people, JoinType.LEFT).get(Person_.id)));

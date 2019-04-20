@@ -35,6 +35,7 @@ import {Principal} from "app/core";
 import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 import {FinalNiazsanjiReportPersonMarineSuffixService} from "app/entities/final-niazsanji-report-person-marine-suffix";
 import {IFinalNiazsanjiReportPersonMarineSuffix} from "app/shared/model/final-niazsanji-report-person-marine-suffix.model";
+import {MONTHS} from "app/shared/constants/months.constants";
 
 @Component({
     selector: 'mi-design-and-planning-marine-suffix-update',
@@ -44,6 +45,7 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
     isSaving: boolean;
     educationalModule: IEducationalModuleMarineSuffix = {};
 
+    runMonths: any = MONTHS;
     people: IPersonMarineSuffix[];
     finalniazsanjireport: IFinalNiazsanjiReportMarineSuffix;
     finalniazsanjireportPeople: IFinalNiazsanjiReportPersonMarineSuffix[];
@@ -53,6 +55,7 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
     courselocations: ICourseLocationMarineSuffix[];
     conditionsofparticipants: IConditionsOfParticipantMarineSuffix[];
     effectivenesslevels: IEffectivenessLevelMarineSuffix[];
+
     toolsandfacilities: IToolsAndFacilityMarineSuffix[];
     teachingapproaches: ITeachingApproachMarineSuffix[];
     teachtechniques: ITeachTechniqueMarineSuffix[];
@@ -62,6 +65,8 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
     isModirKolAmozesh: boolean;
     isKarshenasArshadAmozesh: boolean;
     currentAccount: any;
+
+    documentUrl: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -101,15 +106,31 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({designAndPlanning}) => {
             debugger;
             this.designAndPlanning = designAndPlanning;
-
+            const criteriaDesign = [{
+                key: 'finalNiazsanjiReportId.equals',
+                value: this.designAndPlanning.finalNiazsanjiReportId
+            }];
+            this.designAndPlanningService
+                .query({
+                    page: 0,
+                    size: 20000,
+                    criteriaDesign,
+                    sort: ["id", "asc"]
+                }).subscribe((resp: HttpResponse<IDesignAndPlanningMarineSuffix[]>) => {
+                    debugger;
+                    if (resp.body.length > 0) {
+                        this.designAndPlanning =  resp.body[0];
+                        this.documentUrl = 'document-marine-suffix/' + designAndPlanning.id +'/designandplanning';
+                    }
+                });
             this.finalNiazsanjiReportService.find(this.designAndPlanning.finalNiazsanjiReportId).subscribe(
                 (res: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => {
-                    debugger;
+
                     this.finalniazsanjireport = res.body;
 
                     this.educationalModuleService.find(this.finalniazsanjireport.educationalModuleId).subscribe(
                         (res: HttpResponse<IEducationalModuleMarineSuffix>) => {
-                            debugger;
+
                             this.educationalModule = res.body;
                         },
                         (res: HttpErrorResponse) => this.onError(res.message));
@@ -228,26 +249,29 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
     }
 
     change(i) {
-        debugger;
+
         this.router.navigateByUrl(i);
     }
 
-    save(finalize: boolean) {
+    save() {
+
         this.isSaving = true;
 
-        this.designAndPlanning.status = 0;
+        this.designAndPlanning.status = this.designAndPlanning.status == undefined ? 0 : this.designAndPlanning.status;
+        this.designAndPlanning.step = this.designAndPlanning.step == undefined ? 0 : this.designAndPlanning.step;
 
-        if(finalize)
-        {
-            this.designAndPlanning.finished = true;
-        }
         if (this.designAndPlanning.id !== undefined) {
             this.subscribeToSaveResponse(this.designAndPlanningService.update(this.designAndPlanning));
         } else {
             this.subscribeToSaveResponse(this.designAndPlanningService.create(this.designAndPlanning));
         }
     }
+    finalize(){
 
+        this.designAndPlanning.finished = true;
+        let element: HTMLElement = document.querySelector('input[type="submit"]') as HTMLElement;
+        element.click();
+    }
     trackMahiatCourseById(index: number, item: IMahiatCourseMarineSuffix) {
         return item.id;
     }

@@ -92,6 +92,9 @@ public class DesignAndPlanning implements Serializable {
     @Column(name = "status", nullable = false)
     private Integer status;
 
+    @Column(name = "run_month")
+    private Integer runMonth;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "design_and_planning_person",
@@ -378,6 +381,19 @@ public class DesignAndPlanning implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getRunMonth() {
+        return runMonth;
+    }
+
+    public DesignAndPlanning runMonth(Integer runMonth) {
+        this.runMonth = runMonth;
+        return this;
+    }
+
+    public void setRunMonth(Integer runMonth) {
+        this.runMonth = runMonth;
     }
 
     public Set<Person> getPeople() {

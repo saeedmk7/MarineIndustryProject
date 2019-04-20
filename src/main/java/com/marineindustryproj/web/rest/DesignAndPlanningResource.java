@@ -89,6 +89,15 @@ public class DesignAndPlanningResource {
         if (designAndPlanningDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        DesignAndPlanningDTO designAndPlanning = designAndPlanningService.findOne(designAndPlanningDTO.getId()).get();
+
+        designAndPlanningDTO.setCreateUserLogin(designAndPlanning.getCreateUserLogin());
+        designAndPlanningDTO.setCreateDate(designAndPlanning.getCreateDate());
+        designAndPlanningDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        designAndPlanningDTO.setModifyDate(ZonedDateTime.now());
+        designAndPlanningDTO.setStep(0);
+        designAndPlanningDTO.setArchived(false);
+
         DesignAndPlanningDTO result = designAndPlanningService.save(designAndPlanningDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, designAndPlanningDTO.getId().toString()))

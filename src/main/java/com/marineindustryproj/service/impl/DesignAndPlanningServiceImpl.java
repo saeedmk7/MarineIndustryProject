@@ -51,19 +51,20 @@ public class DesignAndPlanningServiceImpl implements DesignAndPlanningService {
         log.debug("Request to save DesignAndPlanning : {}", designAndPlanningDTO);
 
         FinalNiazsanjiReport finalNiazsanjiReport = finalNiazsanjiReportRepository.getOne(designAndPlanningDTO.getFinalNiazsanjiReportId());
-        //finalNiazsanjiReport.setRunMonth(designAndPlanningDTO.getRun);
+        finalNiazsanjiReport.setRunMonth(designAndPlanningDTO.getRunMonth());
 
-        if(designAndPlanningDTO.isFinished() && designAndPlanningDTO.getStatus() < 5)
+        if(designAndPlanningDTO.isFinished() && designAndPlanningDTO.getStatus() < 10)
         {
             designAndPlanningDTO.setFinishedDate(ZonedDateTime.now());
             designAndPlanningDTO.setFinishedUserLogin(SecurityUtils.getCurrentUserLogin().get());
 
-            designAndPlanningDTO.setStatus(5);
+            designAndPlanningDTO.setStatus(10);
 
 
             finalNiazsanjiReport.setStatus(10);
         }
 
+        finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
         DesignAndPlanning designAndPlanning = designAndPlanningMapper.toEntity(designAndPlanningDTO);
         designAndPlanning = designAndPlanningRepository.save(designAndPlanning);
         return designAndPlanningMapper.toDto(designAndPlanning);
