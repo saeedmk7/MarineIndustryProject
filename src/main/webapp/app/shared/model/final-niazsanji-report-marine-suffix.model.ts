@@ -21,6 +21,7 @@ export interface IFinalNiazsanjiReportMarineSuffix {
     archivedUserLogin?: string;
     archivedDate?: Moment;
     status?: number;
+    runMonth?: number;
     finalNiazsanjiReportPeople?: IFinalNiazsanjiReportPersonMarineSuffix[];
     designAndPlannings?: IDesignAndPlanningMarineSuffix[];
     runPhases?: IRunPhaseMarineSuffix[];
@@ -47,6 +48,7 @@ export class FinalNiazsanjiReportMarineSuffix implements IFinalNiazsanjiReportMa
         public archivedUserLogin?: string,
         public archivedDate?: Moment,
         public status?: number,
+        public runMonth?: number,
         public finalNiazsanjiReportPeople?: IFinalNiazsanjiReportPersonMarineSuffix[],
         public designAndPlannings?: IDesignAndPlanningMarineSuffix[],
         public runPhases?: IRunPhaseMarineSuffix[],

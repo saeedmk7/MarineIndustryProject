@@ -92,7 +92,7 @@ export class RunningStepMarineSuffixComponent implements OnInit, OnDestroy {
         this.loadAll();
     }
     change(i) {
-        debugger;
+
         this.router.navigateByUrl(i);
     }
     ngOnInit() {

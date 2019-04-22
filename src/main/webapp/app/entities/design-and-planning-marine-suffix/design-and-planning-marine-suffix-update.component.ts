@@ -105,7 +105,7 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({designAndPlanning}) => {
-            debugger;
+
             this.designAndPlanning = designAndPlanning;
             const criteriaDesign = [{
                 key: 'finalNiazsanjiReportId.equals',
@@ -118,10 +118,10 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
                     criteria: criteriaDesign,
                     sort: ["id", "asc"]
                 }).subscribe((resp: HttpResponse<IDesignAndPlanningMarineSuffix[]>) => {
-                debugger;
+
                     if (resp.body.length > 0) {
                         this.designAndPlanning =  resp.body[0];
-                        debugger;
+
                         this.documentUrl = 'document-marine-suffix/designandplanning/' + this.designAndPlanning.id;
                     }
                 });
@@ -251,12 +251,12 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
     }
 
     change(i) {
-        debugger;
+
         this.router.navigateByUrl(i);
     }
 
     save() {
-        debugger;
+
 
         this.isSaving = true;
 
@@ -270,7 +270,7 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
         }
     }
     finalize(){
-        debugger;
+
         this.designAndPlanning.finished = true;
         $('#save-entity').trigger('click');
     }

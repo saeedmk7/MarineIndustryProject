@@ -96,6 +96,7 @@ export class NavbarComponent implements OnInit,AfterViewInit {
                         ];*/
                         this.navBarItemMarineSuffixService.query()
                             .subscribe((res: HttpResponse<INavBarItemMarineSuffix[]>) => {
+                                debugger;
                                 this.navBarItemMarineSuffix = res.body;
                                 this.navBarItemMarineSuffix = this.navBarItemMarineSuffix.filter((a) => navBarItemIds.includes(a.id));
                                 let navBarItemAddresses: string[] = this.navBarItemMarineSuffix.map(function (v) {
@@ -107,7 +108,7 @@ export class NavbarComponent implements OnInit,AfterViewInit {
                                     navBarItemAddresses.push(a);
                                 });
                                 this.sessionStorage.store(CURRENT_ALLOWED_URL_KEY, navBarItemAddresses);
-                                this.list_to_tree(this.navBarItemMarineSuffix);
+                                this.list_to_tree(this.navBarItemMarineSuffix.filter(a => a.isActive == true));
                             })
                     },
                     (res: HttpErrorResponse) => this.onError(res.message))
@@ -117,7 +118,7 @@ export class NavbarComponent implements OnInit,AfterViewInit {
     }
 
     private list_to_tree(list) {
-        var map = {}, node, roots = [], i;
+        let map = {}, node, roots = [], i;
         for (i = 0; i < list.length; i += 1) {
             map[list[i].id] = i; // initialize the map
             list[i].children = []; // initialize the children
@@ -135,7 +136,6 @@ export class NavbarComponent implements OnInit,AfterViewInit {
         this.treeNode = roots;
     }
     onError(str){
-
         this.jhiAlertService.error(str);
     }
     changeLanguage(languageKey: string) {

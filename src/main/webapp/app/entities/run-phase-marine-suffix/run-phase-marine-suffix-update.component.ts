@@ -94,7 +94,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
 
                 if (resp.body.length > 0) {
                     this.runPhase =  resp.body[0];
-                    debugger;
+
                     this.documentUrl = 'document-marine-suffix/runphase/' + this.runPhase.id;
                 }
 
@@ -102,10 +102,10 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                 this.runningStepService.query().subscribe(
                     (resp: HttpResponse<IRunningStepMarineSuffix[]>) => {
                         this.runningSteps = resp.body;
-                        debugger;
+
                         let stepNumbers = resp.body.map(a => a.stepNumber).filter(this.treeUtilities.onlyUnique);
                         stepNumbers.forEach(a => {
-                            debugger;
+
                             let tab: RunPhaseTabModel = new RunPhaseTabModel();
                             tab.id = "tab" + a;
                             tab.title = "گام" + a;
@@ -115,7 +115,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
 
                             let runningsForThisStep = this.runningSteps.filter(w => w.stepNumber == a);
                             runningsForThisStep.forEach(e => {
-                                debugger;
+
                                 let runPhaseItem: RunPhaseItemModel = new RunPhaseItemModel();
                                 runPhaseItem.id = e.id;
                                 runPhaseItem.title = e.title + (e.stepRequired ? "(اجباریست)" : "");
@@ -232,7 +232,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
         );*/
     }
     change(i) {
-        debugger;
+
         this.router.navigateByUrl(i);
     }
 
@@ -241,7 +241,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     }
     errorMessage: string;
     finalize(){
-        debugger;
+
         let isValid: boolean = true;
         this.errorMessage = "";
         this.runningSteps.forEach(a => {
@@ -263,7 +263,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        debugger;
+
         let runPhaseSaveData: IRunPhaseSaveDataModel = new RunPhaseSaveDataModel();
         runPhaseSaveData.runPhaseId = this.runPhase.id;
         runPhaseSaveData.finalNiazsanjiReportId = this.runPhase.finalNiazsanjiReportId;

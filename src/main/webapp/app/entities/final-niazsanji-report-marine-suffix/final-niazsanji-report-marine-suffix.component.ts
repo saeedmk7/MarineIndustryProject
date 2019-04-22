@@ -29,6 +29,8 @@ import {GridComponent, GridDataResult} from "@progress/kendo-angular-grid";
 import {Workbook} from '@progress/kendo-angular-excel-export';
 import { saveAs } from '@progress/kendo-file-saver';
 import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
+import {MONTHS} from "app/shared/constants/months.constants";
+import {FINALNIAZSANJISTATUSMEANING} from "app/shared/constants/final-niazsanji-report-status-meaning.constants";
 
 @Component({
     selector: 'mi-final-niazsanji-report-marine-suffix',
@@ -69,6 +71,8 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     isModirAmozesh: boolean = false;
     isSuperUsers: boolean = false;
     dates: any[];
+    months: any[] = MONTHS;
+    statusMeaning: any[] = FINALNIAZSANJISTATUSMEANING;
     public groups: GroupDescriptor[] = [{field: 'organizationChartTitle'}];
     public groupsOrg: GroupDescriptor[] = [{field: 'organizationChartTitle'}];
 
@@ -132,6 +136,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     onSubmit(f: any) {
+        debugger;
         this.message = "";
         this.finalNiazsanjiReportsFardis = [];
         this.finalNiazsanjiReportsOrganizations = [];
@@ -165,7 +170,29 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     createCriteria(criteria, f): any {
-
+        debugger;
+        if (f.value['status']) {
+            let val = f.value['status'];
+            if (val) {
+                /*let yearDetail = this.yearsCollections.find(a => a.year == val);
+                let beginDate = new Date(yearDetail.beginDate).toISOString();
+                let endDate = new Date(yearDetail.endDate).toISOString();*/
+                criteria.push({
+                    key: 'status.equals', value: val
+                });
+            }
+        }
+        if (f.value['runMonth']) {
+            let val = f.value['runMonth'];
+            if (val) {
+                /*let yearDetail = this.yearsCollections.find(a => a.year == val);
+                let beginDate = new Date(yearDetail.beginDate).toISOString();
+                let endDate = new Date(yearDetail.endDate).toISOString();*/
+                criteria.push({
+                    key: 'runMonth.equals', value: val
+                });
+            }
+        }
         if (f.value['niazsanjiYear']) {
             let val = f.value['niazsanjiYear'];
             if (val) {

@@ -8,7 +8,7 @@
                 </a>
             </li>
             <ng-container *ngIf="treeNode">
-            <li  *ngFor="let node of treeNode" [ngClass]="{'active': node.isActive}" class="nav-item">
+            <li  *ngFor="let node of treeNode" class="nav-item">
                 <a class="nav-link" [attr.data-toggle]="node.children.length > 0 ? 'collapse' : null" attr.href="#{{node.url}}" role="button" aria-expanded="false" attr.aria-controls="{{node.url}}">
                     <fa-icon [icon]="node.faicon"></fa-icon>
                     <span class="pr-2">{{node.title}}</span>
