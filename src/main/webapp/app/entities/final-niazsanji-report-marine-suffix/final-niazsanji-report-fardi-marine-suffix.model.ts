@@ -9,6 +9,7 @@ export interface IFinalNiazsanjiReportFardiMarineSuffix {
     personJobTitle?: string;
     priceCost?: number;
     niazsanjiYear?: number;
+    status?: number;
 }
 
 export class FinalNiazsanjiReportFardiMarineSuffix implements IFinalNiazsanjiReportFardiMarineSuffix  {
@@ -22,7 +23,8 @@ export class FinalNiazsanjiReportFardiMarineSuffix implements IFinalNiazsanjiRep
         public organizationChartTitle?: string,
         public personFullName?: string,
         public personJobTitle?: string,
-        public priceCost?: number) {
+        public priceCost?: number,
+        public status?: number) {
 
     }
 }

@@ -118,14 +118,14 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         });*/
         this.yearsCollections = GREGORIAN_START_END_DATE;
     }
-    finalize(dataItem){
+    /*finalize(dataItem){
 
         this.finalNiazsanjiReportService.find(dataItem.id).subscribe((resp: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) =>{
             resp.body.status = 10;
             this.finalNiazsanjiReportService.update(resp.body).subscribe((resp: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => resp);
         });
 
-    }
+    }*/
     public ngAfterViewInit(): void {
         // Expand the first row initially
         //this.grid.expandRow(0);
@@ -227,6 +227,8 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         data.forEach((a: IFinalNiazsanjiReportMarineSuffix) => {
             let finalNiazsanjiReportsFardi: IFinalNiazsanjiReportFardiMarineSuffix = {};
             finalNiazsanjiReportsFardi.id = a.id;
+            finalNiazsanjiReportsFardi.status = a.status;
+
 
             finalNiazsanjiReportsFardi.educationalModuleId = a.educationalModuleId;
 
@@ -264,6 +266,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
 
             let finalNiazsanjiReportsOrganization: IFinalNiazsanjiReportOrganizationMarineSuffix = {};
             finalNiazsanjiReportsOrganization.id = a.id;
+            finalNiazsanjiReportsOrganization.status = a.status;
 
             finalNiazsanjiReportsOrganization.educationalModuleId = a.educationalModuleId;
 

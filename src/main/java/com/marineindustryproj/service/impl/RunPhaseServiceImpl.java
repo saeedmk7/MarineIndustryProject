@@ -1,9 +1,18 @@
 package com.marineindustryproj.service.impl;
 
+import com.marineindustryproj.domain.FinalNiazsanjiReport;
+import com.marineindustryproj.domain.RunRunningStep;
+import com.marineindustryproj.domain.RunningStep;
+import com.marineindustryproj.repository.FinalNiazsanjiReportRepository;
+import com.marineindustryproj.repository.RunRunningStepRepository;
+import com.marineindustryproj.repository.RunningStepRepository;
+import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.RunPhaseService;
 import com.marineindustryproj.domain.RunPhase;
 import com.marineindustryproj.repository.RunPhaseRepository;
 import com.marineindustryproj.service.dto.RunPhaseDTO;
+import com.marineindustryproj.service.dto.customs.RunPhaseSaveDataItemModel;
+import com.marineindustryproj.service.dto.customs.RunPhaseSaveDataModel;
 import com.marineindustryproj.service.mapper.RunPhaseMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +22,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing RunPhase.
@@ -28,9 +40,18 @@ public class RunPhaseServiceImpl implements RunPhaseService {
 
     private final RunPhaseMapper runPhaseMapper;
 
-    public RunPhaseServiceImpl(RunPhaseRepository runPhaseRepository, RunPhaseMapper runPhaseMapper) {
+    private final FinalNiazsanjiReportRepository finalNiazsanjiReportRepository;
+
+    private final RunningStepRepository runningStepRepository;
+
+    private final RunRunningStepRepository runRunningStepRepository;
+
+    public RunPhaseServiceImpl(RunPhaseRepository runPhaseRepository, RunPhaseMapper runPhaseMapper, FinalNiazsanjiReportRepository finalNiazsanjiReportRepository, RunningStepRepository runningStepRepository, RunRunningStepRepository runRunningStepRepository) {
         this.runPhaseRepository = runPhaseRepository;
         this.runPhaseMapper = runPhaseMapper;
+        this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
+        this.runningStepRepository = runningStepRepository;
+        this.runRunningStepRepository = runRunningStepRepository;
     }
 
     /**
@@ -45,6 +66,78 @@ public class RunPhaseServiceImpl implements RunPhaseService {
 
         RunPhase runPhase = runPhaseMapper.toEntity(runPhaseDTO);
         runPhase = runPhaseRepository.save(runPhase);
+        return runPhaseMapper.toDto(runPhase);
+    }
+
+    @Override
+    public RunPhaseDTO saveDataModel(RunPhaseSaveDataModel runPhaseSaveDataModel) {
+        log.debug("Request to save RunPhase : {}", runPhaseSaveDataModel);
+        FinalNiazsanjiReport finalNiazsanjiReport = finalNiazsanjiReportRepository.getOne(runPhaseSaveDataModel.getFinalNiazsanjiReportId());
+        RunPhase runPhase = new RunPhase();
+        if(runPhaseSaveDataModel.getRunPhaseId() != null)
+        {
+            runPhase = runPhaseRepository.getOne(runPhaseSaveDataModel.getRunPhaseId());
+        }
+        else{
+            runPhase.setFinalNiazsanjiReport(finalNiazsanjiReport);
+            runPhase.setArchived(false);
+            runPhase.setCreateDate(ZonedDateTime.now());
+            runPhase.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            runPhase.setDescription(runPhaseSaveDataModel.getDescription());
+            runPhase.setFinalizeCost(runPhaseSaveDataModel.getFinalizeCost());
+            runPhase.setStatus(runPhaseSaveDataModel.getStatus());
+            runPhase.setDone(false);
+        }
+        runPhase.setStepNumber(runPhaseSaveDataModel.getStepNumber());
+        if(runPhaseSaveDataModel.getDone() && runPhase.getStatus() < 10)
+        {
+            runPhase.setDone(runPhaseSaveDataModel.getDone());
+            runPhase.setDoneDate(ZonedDateTime.now());
+            runPhase.setDoneUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            runPhase.setStatus(10);
+
+            finalNiazsanjiReport.setStatus(20);
+            finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
+        }
+        //RunPhase runPhase = runPhaseMapper.toEntity(runPhaseDTO);
+        runPhase = runPhaseRepository.save(runPhase);
+
+
+        Set<RunRunningStep> runRunningSteps = runPhase.getRunRunningSteps();
+        for (RunPhaseSaveDataItemModel item: runPhaseSaveDataModel.getRunPhaseSaveDataItemModels()) {
+            RunRunningStep runRunningStep = new RunRunningStep();
+            if(runRunningSteps.stream().anyMatch(a -> a.getRunningStep().getId() == item.getRunningStepId()))
+            {
+                 runRunningStep = runRunningSteps.stream().filter(a -> a.getRunningStep().getId() == item.getRunningStepId()).collect(Collectors.toList()).get(0);
+                 if(runRunningStep.isDone() != true && item.getDone()) {
+                     runRunningStep.setDoneDate(ZonedDateTime.now());
+                     runRunningStep.setDoneUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                     runRunningStep.setDone(true);
+                 }
+                 else{
+                     runRunningStep.setDone(false);
+                 }
+                 runRunningStep.setDescription(item.getDescription());
+            }
+            else{
+                if(item.getDone()) {
+                    runRunningStep.setDoneDate(ZonedDateTime.now());
+                    runRunningStep.setDoneUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                    runRunningStep.setDone(true);
+                }
+                else
+                    runRunningStep.setDone(false);
+
+                runRunningStep.setDescription(item.getDescription());
+                runRunningStep.setCreateDate(ZonedDateTime.now());
+                runRunningStep.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                RunningStep runningStep = runningStepRepository.getOne(item.getRunningStepId());
+                runRunningStep.setRunningStep(runningStep);
+                runRunningStep.setRunPhase(runPhase);
+            }
+            runRunningStepRepository.save(runRunningStep);
+        }
+
         return runPhaseMapper.toDto(runPhase);
     }
 

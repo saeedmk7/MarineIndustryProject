@@ -34,6 +34,7 @@ export class RunningStepMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.runningStep.status = 0;
         this.runningStep.createDate = moment(this.createDate, DATE_TIME_FORMAT);
         this.runningStep.modifyDate = moment(this.modifyDate, DATE_TIME_FORMAT);
         this.runningStep.archivedDate = moment(this.archivedDate, DATE_TIME_FORMAT);

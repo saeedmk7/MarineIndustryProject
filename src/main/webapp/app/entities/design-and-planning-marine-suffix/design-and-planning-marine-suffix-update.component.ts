@@ -105,7 +105,7 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({designAndPlanning}) => {
-
+            debugger;
             this.designAndPlanning = designAndPlanning;
             const criteriaDesign = [{
                 key: 'finalNiazsanjiReportId.equals',
@@ -114,11 +114,11 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
             this.designAndPlanningService
                 .query({
                     page: 0,
-                    size: 20000,
-                    criteriaDesign,
+                    size: 200,
+                    criteria: criteriaDesign,
                     sort: ["id", "asc"]
                 }).subscribe((resp: HttpResponse<IDesignAndPlanningMarineSuffix[]>) => {
-
+                debugger;
                     if (resp.body.length > 0) {
                         this.designAndPlanning =  resp.body[0];
                         debugger;

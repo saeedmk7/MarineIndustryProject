@@ -9,7 +9,8 @@ export interface IFinalNiazsanjiReportOrganizationMarineSuffix {
     educationalModuleTotalLearningTime?: number;
     priceCost?: number;
     niazsanjiYear?: number;
-    people?: IPersonMarineSuffix[]
+    people?: IPersonMarineSuffix[],
+    status?: number
 }
 
 export class FinalNiazsanjiReportOrganizationMarineSuffix implements IFinalNiazsanjiReportOrganizationMarineSuffix  {
@@ -22,7 +23,8 @@ export class FinalNiazsanjiReportOrganizationMarineSuffix implements IFinalNiazs
         public niazsanjiYear?: number,
         public organizationChartTitle?: string,
         public people?: IPersonMarineSuffix[],
-        public priceCost?: number) {
+        public priceCost?: number,
+        public status?: number) {
 
     }
 }

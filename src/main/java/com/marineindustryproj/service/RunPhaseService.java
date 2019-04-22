@@ -2,6 +2,7 @@ package com.marineindustryproj.service;
 
 import com.marineindustryproj.service.dto.RunPhaseDTO;
 
+import com.marineindustryproj.service.dto.customs.RunPhaseSaveDataModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -19,6 +20,8 @@ public interface RunPhaseService {
      * @return the persisted entity
      */
     RunPhaseDTO save(RunPhaseDTO runPhaseDTO);
+
+    RunPhaseDTO saveDataModel(RunPhaseSaveDataModel runPhaseSaveDataModel);
 
     /**
      * Get all the runPhases.

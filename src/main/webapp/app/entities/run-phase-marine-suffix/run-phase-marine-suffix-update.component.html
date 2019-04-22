@@ -2,6 +2,50 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <h2 id="mi-run-phase-marine-suffix-heading" jhiTranslate="marineindustryprojApp.runPhase.home.createOrEditLabel">Create or edit a Run Phase</h2>
+            <!--<section id="tabs" class="project-tab">
+                <div class="container">-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <nav>
+                                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                    <a *ngFor="let item of runPhaseTabModel" class="nav-item nav-link" [ngClass]="{'active': item.active}" [id]="'nav-' + item.id" data-toggle="tab" [href]="item.href"  role="tab" >{{item.title}}</a>
+                                    <!--<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Project Tab 1</a>
+                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Project Tab 2</a>
+                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Project Tab 3</a>-->
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div *ngFor="let tab of runPhaseTabModel" class="tab-pane fade" [ngClass]="{'active show': tab.active}" [id]="tab.id" role="tabpanel">
+                                    <table class="table" cellspacing="0" border="0">
+                                        <thead>
+                                        <tr>
+                                            <th>ردیف</th>
+                                            <th>عنوان</th>
+                                            <th>انجام شده؟</th>
+                                            <th>توضیحات انجام کار</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let item of tab.runPhaseItems; let i = index">
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <td>
+                                                <label>{{item.title}}</label>
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" [id]="'chk-' + item.id" [name]="'chk-' + item.id" [checked]="item.checked" [alt]="item.description" [title]="item.description" />
+                                            </td>
+                                            <td>
+                                                <textarea class="form-control" [id]="'txt-' + item.id" [name]="'txt-' + item.id">{{item.descMessage}}</textarea>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             <div>
                 <mi-alert-error></mi-alert-error>
                 <div class="form-group" [hidden]="true">
@@ -12,8 +56,8 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.description" for="field_description">Description</label>
-                    <input type="text" class="form-control" name="description" id="field_description"
-                        [(ngModel)]="runPhase.description" maxlength="4096"/>
+                    <textarea type="text" class="form-control" name="description" id="field_description"
+                              [(ngModel)]="runPhase.description" maxlength="4096"></textarea>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
@@ -36,150 +80,14 @@
                         </small>
                     </div>
                 </div>
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.stepNumber" for="field_stepNumber">Step Number</label>
-                    <input type="number" class="form-control" name="stepNumber" id="field_stepNumber"
-                        [(ngModel)]="runPhase.stepNumber" required/>
-                    <div [hidden]="!(editForm.controls.stepNumber?.dirty && editForm.controls.stepNumber?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.stepNumber?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.stepNumber?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.done" for="field_done">Done</label>
-                    <input type="checkbox" class="form-control" name="done" id="field_done"
-                        [(ngModel)]="runPhase.done" />
-                    <div [hidden]="!(editForm.controls.done?.dirty && editForm.controls.done?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.done?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>-->
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.doneUserLogin" for="field_doneUserLogin">Done User Login</label>
-                    <input type="text" class="form-control" name="doneUserLogin" id="field_doneUserLogin"
-                        [(ngModel)]="runPhase.doneUserLogin" maxlength="50"/>
-                    <div [hidden]="!(editForm.controls.doneUserLogin?.dirty && editForm.controls.doneUserLogin?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.doneUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                        This field cannot be longer than 50 characters.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.doneDate" for="field_doneDate">Done Date</label>
-                    <div class="d-flex">
-                        <input id="field_doneDate" type="datetime-local" class="form-control" name="doneDate" [(ngModel)]="doneDate"
-                        />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.createUserLogin" for="field_createUserLogin">Create User Login</label>
-                    <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
-                        [(ngModel)]="runPhase.createUserLogin" maxlength="50"/>
-                    <div [hidden]="!(editForm.controls.createUserLogin?.dirty && editForm.controls.createUserLogin?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.createUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                        This field cannot be longer than 50 characters.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.createDate" for="field_createDate">Create Date</label>
-                    <div class="d-flex">
-                        <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="createDate"
-                        />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.modifyUserLogin" for="field_modifyUserLogin">Modify User Login</label>
-                    <input type="text" class="form-control" name="modifyUserLogin" id="field_modifyUserLogin"
-                        [(ngModel)]="runPhase.modifyUserLogin" maxlength="50"/>
-                    <div [hidden]="!(editForm.controls.modifyUserLogin?.dirty && editForm.controls.modifyUserLogin?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.modifyUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                        This field cannot be longer than 50 characters.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.modifyDate" for="field_modifyDate">Modify Date</label>
-                    <div class="d-flex">
-                        <input id="field_modifyDate" type="datetime-local" class="form-control" name="modifyDate" [(ngModel)]="modifyDate"
-                        />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.archived" for="field_archived">Archived</label>
-                    <input type="checkbox" class="form-control" name="archived" id="field_archived"
-                        [(ngModel)]="runPhase.archived" />
-                    <div [hidden]="!(editForm.controls.archived?.dirty && editForm.controls.archived?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.archived?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.archivedUserLogin" for="field_archivedUserLogin">Archived User Login</label>
-                    <input type="text" class="form-control" name="archivedUserLogin" id="field_archivedUserLogin"
-                        [(ngModel)]="runPhase.archivedUserLogin" maxlength="50"/>
-                    <div [hidden]="!(editForm.controls.archivedUserLogin?.dirty && editForm.controls.archivedUserLogin?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.archivedUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                        This field cannot be longer than 50 characters.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.archivedDate" for="field_archivedDate">Archived Date</label>
-                    <div class="d-flex">
-                        <input id="field_archivedDate" type="datetime-local" class="form-control" name="archivedDate" [(ngModel)]="archivedDate"
-                        />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.status" for="field_status">Status</label>
-                    <input type="number" class="form-control" name="status" id="field_status"
-                        [(ngModel)]="runPhase.status" required/>
-                    <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.status?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.status?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label jhiTranslate="marineindustryprojApp.runPhase.document" for="field_document">Document</label>
-                    <select class="form-control" id="field_document" multiple name="document" [(ngModel)]="runPhase.documents">
-                        <option [ngValue]="getSelected(runPhase.documents, documentOption)" *ngFor="let documentOption of documents; trackBy: trackDocumentById">{{documentOption.title}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label jhiTranslate="marineindustryprojApp.runPhase.person" for="field_person">Person</label>
-                    <select class="form-control" id="field_person" multiple name="person" [(ngModel)]="runPhase.people">
-                        <option [ngValue]="getSelected(runPhase.people, personOption)" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.family}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.finalNiazsanjiReport" for="field_finalNiazsanjiReport">Final Niazsanji Report</label>
-                    <select class="form-control" id="field_finalNiazsanjiReport" name="finalNiazsanjiReport" [(ngModel)]="runPhase.finalNiazsanjiReportId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="finalNiazsanjiReportOption.id" *ngFor="let finalNiazsanjiReportOption of finalniazsanjireports; trackBy: trackFinalNiazsanjiReportById">{{finalNiazsanjiReportOption.description}}</option>
-                    </select>
-                </div>-->
+                <!--<textarea class="row alert alert-danger" cols="150" *ngIf="errorMessage">{{errorMessage}}</textarea>-->
+                <div class="row alert alert-danger" *ngIf="errorMessage" [innerHTML]="errorMessage"></div>
+            </div>
+            <div *ngIf="isAdmin">
+                <a href="#/running-step-marine-suffix" [ngClass]="{'enableLink': isAdmin}" class="btn btn-warning">
+                    <span class="fa fa-file"></span>
+                    <span class="d-none d-md-inline">ثبت مراحل فاز اجرا</span>
+                </a>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
@@ -188,7 +96,16 @@
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
+                <button type="button" (click)="finalize()" id="finalize-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
+                    <span><fa-icon [icon]="'save'"></fa-icon>تایید نهایی</span>
+                </button>
+                <button type="button" (click)=change(documentUrl) [disabled]="documentUrl == undefined" class="btn btn-warning pull-left">
+                    <span class="fa fa-file"></span>
+                    <span class="d-none d-md-inline">ثبت مدارک</span>
+                </button>
+                <span class="alert alert-info pull-left">برای ثبت مدارک لطفا ابتدا اطلاعات اولیه فاز اجرا را ذخیره نمائید سپس دکمه ثبت مدارک فعال خواهد شد.</span>
             </div>
+
         </form>
     </div>
 </div>

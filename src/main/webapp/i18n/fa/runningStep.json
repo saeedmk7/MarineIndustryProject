@@ -3,27 +3,27 @@
     "marineindustryprojApp": {
         "runningStep" : {
             "home": {
-                "title": "Running Steps",
-                "createLabel": "Create a new Running Step",
-                "createOrEditLabel": "Create or edit a Running Step"
+                "title": "گام های فاز اجرا",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش گام فاز اجرا"
             },
-            "created": "A new Running Step is created with identifier {{ param }}",
-            "updated": "A Running Step is updated with identifier {{ param }}",
-            "deleted": "A Running Step is deleted with identifier {{ param }}",
+            "created": "گام فاز اجرا با شناسه {{ param }} ایجاد شد.",
+            "updated": "گام فاز اجرا با شناسه {{ param }} ویرایش شد.",
+            "deleted": "گام فاز اجرا با شناسه {{ param }} حذف شد.",
             "delete": {
-                "question": "Are you sure you want to delete Running Step {{ id }}?"
+                "question": "آیا از حذف گام فاز اجرا با شناسه {{ id }} مطمئنید؟"
             },
             "detail": {
-                "title": "Running Step"
+                "title": "جزئیات اطلاعات گام فاز اجرا"
             },
-            "title": "Title",
-            "description": "Description",
-            "stepNumber": "Step Number",
-            "stepRequired": "Step Required",
-            "createUserLogin": "Create User Login",
-            "createDate": "Create Date",
-            "modifyUserLogin": "Modify User Login",
-            "modifyDate": "Modify Date",
+            "title": "عنوان",
+            "description": "توضیحات",
+            "stepNumber": "شماره گام",
+            "stepRequired": "گام اجباریست؟",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
             "archived": "آرشیو شده؟",
             "archivedUserLogin": "آرشیو شده توسط",
             "archivedDate": "تاریخ آرشیو",

@@ -353,7 +353,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             Long priceCostNew = finalNiazsanjiReportCustomDTOS.stream().filter(a -> a.getStatus() == 0).mapToLong(o -> o.getPriceCost()).sum();
             chartResult.setPriceCostNew(priceCostNew);
 
-            Long priceCostFinished = finalNiazsanjiReportCustomDTOS.stream().filter(a -> a.getStatus() == 10).mapToLong(o -> o.getPriceCost()).sum();
+            Long priceCostFinished = finalNiazsanjiReportCustomDTOS.stream().filter(a -> a.getStatus() == 20).mapToLong(o -> o.getPriceCost()).sum();
             chartResult.setPriceCostFinished(priceCostFinished);
 
 
@@ -365,7 +365,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                                                               educationalModuleTotalHourNew);
             chartResult.setEducationalModuleTotalHourNew(educationalModuleTotalHourNew);
 
-            List<Long> idsFinished = finalNiazsanjiReportCustomDTOS.stream().filter(a -> a.getStatus() == 10).map(o -> o.getId()).collect(Collectors.toList());
+            List<Long> idsFinished = finalNiazsanjiReportCustomDTOS.stream().filter(a -> a.getStatus() == 20).map(o -> o.getId()).collect(Collectors.toList());
             Long educationalModuleTotalHourFinished = Long.valueOf(0);
             educationalModuleTotalHourFinished = getEducationHours(finalNiazsanjiReportCustomDTOS,
                                                               idsFinished,

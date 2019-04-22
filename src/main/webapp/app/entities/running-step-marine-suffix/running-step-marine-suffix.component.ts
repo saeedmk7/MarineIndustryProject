@@ -30,6 +30,7 @@ export class RunningStepMarineSuffixComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
 
+
     constructor(
         private runningStepService: RunningStepMarineSuffixService,
         private parseLinks: JhiParseLinks,
@@ -90,7 +91,10 @@ export class RunningStepMarineSuffixComponent implements OnInit, OnDestroy {
         ]);
         this.loadAll();
     }
-
+    change(i) {
+        debugger;
+        this.router.navigateByUrl(i);
+    }
     ngOnInit() {
         this.loadAll();
         this.principal.identity().then(account => {

@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IRunPhaseMarineSuffix } from 'app/shared/model/run-phase-marine-suffix.model';
+import {IRunPhaseSaveDataModel} from "app/entities/run-phase-marine-suffix/run-phase-marine-suffix-save-data.model";
 
 type EntityResponseType = HttpResponse<IRunPhaseMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<IRunPhaseMarineSuffix[]>;
@@ -45,6 +46,12 @@ export class RunPhaseMarineSuffixService {
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
+    saveRunPhaseModel(runPhaseSaveModel?: IRunPhaseSaveDataModel): Observable<EntityResponseType> {
+        const url = this.resourceUrl + '/save-data-model';
+        return this.http
+            .post<IRunPhaseMarineSuffix>(url, runPhaseSaveModel, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }

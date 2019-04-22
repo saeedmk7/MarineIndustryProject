@@ -2,6 +2,7 @@ package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.marineindustryproj.service.RunPhaseService;
+import com.marineindustryproj.service.dto.customs.RunPhaseSaveDataModel;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -61,6 +62,19 @@ public class RunPhaseResource {
         }
         RunPhaseDTO result = runPhaseService.save(runPhaseDTO);
         return ResponseEntity.created(new URI("/api/run-phases/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    @PostMapping("/run-phases/save-data-model")
+    @Timed
+    public ResponseEntity<RunPhaseDTO> SaveRunPhaseDataModel(@Valid @RequestBody RunPhaseSaveDataModel runPhaseSaveDataModel) throws URISyntaxException {
+        log.debug("REST request to save RunPhase : {}", runPhaseSaveDataModel);
+        /*if (runPhaseDTO.getId() != null) {
+            throw new BadRequestAlertException("A new runPhase cannot already have an ID", ENTITY_NAME, "idexists");
+        }*/
+        RunPhaseDTO result = runPhaseService.saveDataModel(runPhaseSaveDataModel);
+        return ResponseEntity.created(new URI("/api/run-phases/save-data-model" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
