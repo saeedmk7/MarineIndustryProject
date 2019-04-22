@@ -204,12 +204,22 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 });
             }
         }
+        debugger;
         if (f.value['organizationChartId']) {
             let val = +f.value['organizationChartId'];
             let childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, val).filter(this.treeUtilities.onlyUnique);
             criteria.push({
                 key: 'organizationChartId.in', value: childIds
             });
+        }
+        else{
+            if(this.isModirAmozesh){
+                let org = this.recommenedOrgCharts.find(a => a.parentId == null);
+                let childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, org.id).filter(this.treeUtilities.onlyUnique);
+                criteria.push({
+                    key: 'organizationChartId.in', value: childIds
+                });
+            }
         }
         if (f.value['educationalModuleId']) {
             let val = +f.value['educationalModuleId'];
@@ -405,7 +415,6 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             this.educationalModuleService.query().subscribe(
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                     this.educationalModules = res.body;
-
                 },
                 (res: HttpErrorResponse) => this.onError(res.message))
         }
