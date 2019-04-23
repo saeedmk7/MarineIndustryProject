@@ -152,6 +152,7 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
         this.searchbarModel = new Array<SearchPanelModel>();
         this.searchbarModel.push(new SearchPanelModel('teacher','name','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('teacher','family','text', 'contains'));
+        this.searchbarModel.push(new SearchPanelModel('teacher','phoneNumber','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('teacher','teachingSubject','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('teacher','expired','select','equals', expiredOptions))
 

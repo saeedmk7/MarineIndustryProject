@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, AfterViewInit, ViewEncapsulation} from '@angular/core';
 import {HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
@@ -25,7 +25,7 @@ import {FinalNiazsanjiReportPersonMarineSuffixService} from "app/entities/final-
 import {IFinalNiazsanjiReportPersonMarineSuffix} from "app/shared/model/final-niazsanji-report-person-marine-suffix.model";
 import * as $ from 'jquery';
 import {IFinalNiazsanjiReportOrganizationMarineSuffix} from "app/entities/final-niazsanji-report-marine-suffix/final-niazsanji-report-organization-marine-suffix.model";
-import {GridComponent, GridDataResult} from "@progress/kendo-angular-grid";
+import {GridComponent, GridDataResult, RowClassArgs} from "@progress/kendo-angular-grid";
 import {Workbook} from '@progress/kendo-angular-excel-export';
 import { saveAs } from '@progress/kendo-file-saver';
 import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
@@ -34,6 +34,14 @@ import {FINALNIAZSANJISTATUSMEANING} from "app/shared/constants/final-niazsanji-
 
 @Component({
     selector: 'mi-final-niazsanji-report-marine-suffix',
+    encapsulation: ViewEncapsulation.None,
+    styles:[`
+        .k-grid tr.info { background-color: #d9edf7; color: #31708f; }
+        .k-grid tr.success { background-color: #dff0d8; color: #3c763d; }
+        .k-grid tr.warning { background-color: #fcf8e3; color: #8a6d3b; }
+        .k-grid tr.danger { background-color: #f2dede; color: #a94442; }
+        
+    `],
     templateUrl: './final-niazsanji-report-marine-suffix.component.html'
 })
 export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -136,7 +144,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     onSubmit(f: any) {
-        debugger;
+
         this.message = "";
         this.finalNiazsanjiReportsFardis = [];
         this.finalNiazsanjiReportsOrganizations = [];
@@ -170,7 +178,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     createCriteria(criteria, f): any {
-        debugger;
+
         if (f.value['status']) {
             let val = f.value['status'];
             if (val) {
@@ -204,7 +212,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 });
             }
         }
-        debugger;
+
         if (f.value['organizationChartId']) {
             let val = +f.value['organizationChartId'];
             let childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, val).filter(this.treeUtilities.onlyUnique);
@@ -521,6 +529,14 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             result.push('id');
         }
         return result;
+    }
+
+    public rowCallback(context: RowClassArgs) {
+        return {
+            success: context.dataItem.status == 20,
+            warning: context.dataItem.status == 10,
+            danger: context.dataItem.status == 0
+        };
     }
 
     /*private paginateFinalNiazsanjiReports(data: IFinalNiazsanjiReportMarineSuffix[], headers: HttpHeaders) {

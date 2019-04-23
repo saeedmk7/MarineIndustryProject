@@ -257,7 +257,7 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
 
     save() {
 
-
+        debugger;
         this.isSaving = true;
 
         this.designAndPlanning.status = this.designAndPlanning.status == undefined ? 0 : this.designAndPlanning.status;

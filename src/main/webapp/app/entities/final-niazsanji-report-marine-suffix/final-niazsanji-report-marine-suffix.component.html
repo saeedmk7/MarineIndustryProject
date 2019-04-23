@@ -144,6 +144,7 @@
             [height]="700"
             [group]="groups"
             [groupable]="{ showFooter: true }"
+            [rowClass]="rowCallback"
             (groupChange)="groupChangeFardis($event)">
             <ng-template kendoGridToolbarTemplate>
                 <button type="button" kendoGridExcelCommand icon="file-excel" style="float: left" class="info">خروجی اکسل</button>

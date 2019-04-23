@@ -418,22 +418,24 @@ public class PersonExcel {
                     personDTO.setStatus(0);
                     personDTO = personService.save(personDTO);
 
-                    UserDTO userDTO = new UserDTO();
-                    userDTO.setActivated(true);
-                    userDTO.setCreatedBy(SecurityUtils.getCurrentUserLogin().get());
-                    userDTO.setLastModifiedBy(SecurityUtils.getCurrentUserLogin().get());
-                    userDTO.setCreatedDate(Instant.now());
-                    userDTO.setLastModifiedDate(Instant.now());
-                    userDTO.setEmail(personDTO.getNationalId() + "@amoozesh.com");
-                    userDTO.setLangKey("fa");
-                    userDTO.setLogin(personDTO.getNationalId());
-                    userDTO.setPassword("123456");
-                    userDTO.setPersonId(personDTO.getId());
-                    Set<String> authorities = new HashSet<String>();
-                    authorities.add("ROLE_USER");
-                    userDTO.setAuthorities(authorities);
+                    if(!userService.getUserWithAuthoritiesByLogin(personDTO.getNationalId()).isPresent()) {
+                        UserDTO userDTO = new UserDTO();
+                        userDTO.setActivated(true);
+                        userDTO.setCreatedBy(SecurityUtils.getCurrentUserLogin().get());
+                        userDTO.setLastModifiedBy(SecurityUtils.getCurrentUserLogin().get());
+                        userDTO.setCreatedDate(Instant.now());
+                        userDTO.setLastModifiedDate(Instant.now());
+                        userDTO.setEmail(personDTO.getNationalId() + "@amoozesh.com");
+                        userDTO.setLangKey("fa");
+                        userDTO.setLogin(personDTO.getNationalId());
+                        userDTO.setPassword("123456");
+                        userDTO.setPersonId(personDTO.getId());
+                        Set<String> authorities = new HashSet<String>();
+                        authorities.add("ROLE_USER");
+                        userDTO.setAuthorities(authorities);
 
-                    userService.createUser(userDTO);
+                        userService.createUser(userDTO);
+                    }
 
                 }
                 catch (Exception ex){

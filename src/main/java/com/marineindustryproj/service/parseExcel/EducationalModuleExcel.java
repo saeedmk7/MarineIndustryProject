@@ -286,6 +286,7 @@ public class EducationalModuleExcel {
                     educationalModuleDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
                     educationalModuleDTO.setArchived(false);
                     educationalModuleDTO.setStatus(0);
+                    educationalModuleDTO.setLearningTimePractical(0);
                     educationalModuleService.save(educationalModuleDTO);
                 }
                 catch (Exception ex){
