@@ -39,9 +39,6 @@ public class ServiceUnitCriteria implements Serializable {
 
     private LongFilter teacherId;
 
-    public ServiceUnitCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

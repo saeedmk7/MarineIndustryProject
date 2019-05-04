@@ -41,9 +41,6 @@ public class SecurityLevelCriteria implements Serializable {
 
     private LongFilter requestEducationalModuleId;
 
-    public SecurityLevelCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

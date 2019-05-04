@@ -61,9 +61,6 @@ public class RunPhaseCriteria implements Serializable {
 
     private LongFilter finalNiazsanjiReportId;
 
-    public RunPhaseCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

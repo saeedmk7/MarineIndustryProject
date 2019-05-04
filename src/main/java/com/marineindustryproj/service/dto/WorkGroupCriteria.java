@@ -41,9 +41,6 @@ public class WorkGroupCriteria implements Serializable {
 
     private LongFilter workUnitId;
 
-    public WorkGroupCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

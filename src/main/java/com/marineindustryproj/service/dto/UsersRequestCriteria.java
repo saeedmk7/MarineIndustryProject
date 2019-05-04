@@ -49,9 +49,6 @@ public class UsersRequestCriteria implements Serializable {
 
     private LongFilter documentId;
 
-    public UsersRequestCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

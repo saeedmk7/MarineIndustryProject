@@ -24,6 +24,7 @@
             "neededSoftwares": "تجهیزات آموزشی و کمک آموزشی نرم افزاری",
             "neededHardware": "تجهیزات آموزشی و کمک آموزشی سخت افزاری",
             "studentsType": "جامعه مخاطبین",
+            "courseType": "نوع دوره",
             "teacherNotFound": "مدرس در لیست مدرسین یافت نشد.",
             "teacherName": "نام مدرس",
             "teacherMobile": "شماره تلفن مدرس",

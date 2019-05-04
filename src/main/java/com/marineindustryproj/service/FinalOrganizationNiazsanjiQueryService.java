@@ -160,6 +160,10 @@ public class FinalOrganizationNiazsanjiQueryService extends QueryService<FinalOr
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(FinalOrganizationNiazsanji_.documents, JoinType.LEFT).get(Document_.id)));
             }
+            if (criteria.getCourseTypeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getCourseTypeId(),
+                    root -> root.join(FinalOrganizationNiazsanji_.courseType, JoinType.LEFT).get(CourseType_.id)));
+            }
             if (criteria.getOrganizationChartId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOrganizationChartId(),
                     root -> root.join(FinalOrganizationNiazsanji_.organizationChart, JoinType.LEFT).get(OrganizationChart_.id)));

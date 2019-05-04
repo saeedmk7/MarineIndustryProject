@@ -39,9 +39,6 @@ public class NavBarItemAuthorityCriteria implements Serializable {
 
     private LongFilter navBarItemId;
 
-    public NavBarItemAuthorityCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

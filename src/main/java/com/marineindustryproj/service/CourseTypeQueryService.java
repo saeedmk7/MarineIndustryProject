@@ -110,9 +110,29 @@ public class CourseTypeQueryService extends QueryService<CourseType> {
             if (criteria.getModifyDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getModifyDate(), CourseType_.modifyDate));
             }
+            if (criteria.getRequestOrganizationNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRequestOrganizationNiazsanjiId(),
+                    root -> root.join(CourseType_.requestOrganizationNiazsanjis, JoinType.LEFT).get(RequestOrganizationNiazsanji_.id)));
+            }
+            if (criteria.getFinalOrganizationNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getFinalOrganizationNiazsanjiId(),
+                    root -> root.join(CourseType_.finalOrganizationNiazsanjis, JoinType.LEFT).get(FinalOrganizationNiazsanji_.id)));
+            }
+            if (criteria.getFinalNiazsanjiReportId() != null) {
+                specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportId(),
+                    root -> root.join(CourseType_.finalNiazsanjiReports, JoinType.LEFT).get(FinalNiazsanjiReport_.id)));
+            }
             if (criteria.getDesignAndPlanningId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDesignAndPlanningId(),
                     root -> root.join(CourseType_.designAndPlannings, JoinType.LEFT).get(DesignAndPlanning_.id)));
+            }
+            if (criteria.getNiazsanjiFardiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getNiazsanjiFardiId(),
+                    root -> root.join(CourseType_.niazsanjiFardis, JoinType.LEFT).get(NiazsanjiFardi_.id)));
+            }
+            if (criteria.getRequestNiazsanjiFardiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRequestNiazsanjiFardiId(),
+                    root -> root.join(CourseType_.requestNiazsanjiFardis, JoinType.LEFT).get(RequestNiazsanjiFardi_.id)));
             }
         }
         return specification;

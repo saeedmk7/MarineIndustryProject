@@ -95,6 +95,10 @@ public class NiazsanjiFardi implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("niazsanjiFardis")
+    private CourseType courseType;
+
+    @ManyToOne
+    @JsonIgnoreProperties("niazsanjiFardis")
     private RequestNiazsanjiFardi requestNiazsanjiFardi;
 
     @ManyToOne(optional = false)
@@ -338,6 +342,19 @@ public class NiazsanjiFardi implements Serializable {
 
     public void setDocuments(Set<Document> documents) {
         this.documents = documents;
+    }
+
+    public CourseType getCourseType() {
+        return courseType;
+    }
+
+    public NiazsanjiFardi courseType(CourseType courseType) {
+        this.courseType = courseType;
+        return this;
+    }
+
+    public void setCourseType(CourseType courseType) {
+        this.courseType = courseType;
     }
 
     public RequestNiazsanjiFardi getRequestNiazsanjiFardi() {

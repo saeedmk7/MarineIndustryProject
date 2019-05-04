@@ -39,9 +39,6 @@ public class AcademicRankCriteria implements Serializable {
 
     private LongFilter teacherId;
 
-    public AcademicRankCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

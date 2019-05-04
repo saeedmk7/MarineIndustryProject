@@ -55,9 +55,6 @@ public class MainTaskCriteria implements Serializable {
 
     private LongFilter personId;
 
-    public MainTaskCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

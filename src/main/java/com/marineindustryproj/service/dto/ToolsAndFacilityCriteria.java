@@ -41,9 +41,6 @@ public class ToolsAndFacilityCriteria implements Serializable {
 
     private LongFilter designAndPlanningId;
 
-    public ToolsAndFacilityCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

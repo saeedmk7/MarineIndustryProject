@@ -41,9 +41,6 @@ public class ScoreItemCriteria implements Serializable {
 
     private LongFilter pollScoreId;
 
-    public ScoreItemCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

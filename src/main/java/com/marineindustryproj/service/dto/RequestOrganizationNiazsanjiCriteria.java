@@ -79,6 +79,8 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
 
     private LongFilter documentId;
 
+    private LongFilter courseTypeId;
+
     private LongFilter organizationChartId;
 
     private LongFilter teacherId;
@@ -287,6 +289,14 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
         this.documentId = documentId;
     }
 
+    public LongFilter getCourseTypeId() {
+        return courseTypeId;
+    }
+
+    public void setCourseTypeId(LongFilter courseTypeId) {
+        this.courseTypeId = courseTypeId;
+    }
+
     public LongFilter getOrganizationChartId() {
         return organizationChartId;
     }
@@ -355,6 +365,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(documentId, that.documentId) &&
+            Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(organizationChartId, that.organizationChartId) &&
             Objects.equals(teacherId, that.teacherId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
@@ -389,6 +400,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
         finalOrganizationNiazsanjiId,
         personId,
         documentId,
+        courseTypeId,
         organizationChartId,
         teacherId,
         educationalModuleId,
@@ -424,6 +436,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
+                (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +

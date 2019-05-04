@@ -116,9 +116,6 @@ public class EducationalModuleQueryService extends QueryService<EducationalModul
             if (criteria.getRecommendedBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getRecommendedBy(), EducationalModule_.recommendedBy));
             }
-            if (criteria.getEducationalModuleHeadlines() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getEducationalModuleHeadlines(), EducationalModule_.educationalModuleHeadlines));
-            }
             if (criteria.getPrerequisite() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getPrerequisite(), EducationalModule_.prerequisite));
             }

@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import {IDocumentMarineSuffix} from "app/shared/model/document-marine-suffix.model";
+import {IDocumentMarineSuffix} from 'app/shared/model/document-marine-suffix.model';
 
 export interface IAnnouncementMarineSuffix {
     id?: number;

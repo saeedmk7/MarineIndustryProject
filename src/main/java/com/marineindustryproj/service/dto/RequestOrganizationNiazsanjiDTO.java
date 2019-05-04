@@ -81,6 +81,10 @@ public class RequestOrganizationNiazsanjiDTO implements Serializable {
 
     private Set<DocumentDTO> documents = new HashSet<>();
 
+    private Long courseTypeId;
+
+    private String courseTypeTitle;
+
     private Long organizationChartId;
 
     private String organizationChartTitle;
@@ -297,6 +301,22 @@ public class RequestOrganizationNiazsanjiDTO implements Serializable {
         this.documents = documents;
     }
 
+    public Long getCourseTypeId() {
+        return courseTypeId;
+    }
+
+    public void setCourseTypeId(Long courseTypeId) {
+        this.courseTypeId = courseTypeId;
+    }
+
+    public String getCourseTypeTitle() {
+        return courseTypeTitle;
+    }
+
+    public void setCourseTypeTitle(String courseTypeTitle) {
+        this.courseTypeTitle = courseTypeTitle;
+    }
+
     public Long getOrganizationChartId() {
         return organizationChartId;
     }
@@ -408,6 +428,8 @@ public class RequestOrganizationNiazsanjiDTO implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", conversation='" + getConversation() + "'" +
+            ", courseType=" + getCourseTypeId() +
+            ", courseType='" + getCourseTypeTitle() + "'" +
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             ", teacher=" + getTeacherId() +

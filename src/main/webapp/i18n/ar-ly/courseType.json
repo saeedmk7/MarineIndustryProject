@@ -23,7 +23,12 @@
             "createDate": "Create Date",
             "modifyUserLogin": "Modify User Login",
             "modifyDate": "Modify Date",
-            "designAndPlanning": "Design And Planning"
+            "requestOrganizationNiazsanji": "Request Organization Niazsanji",
+            "finalOrganizationNiazsanji": "Final Organization Niazsanji",
+            "finalNiazsanjiReport": "Final Niazsanji Report",
+            "designAndPlanning": "Design And Planning",
+            "niazsanjiFardi": "Niazsanji Fardi",
+            "requestNiazsanjiFardi": "Request Niazsanji Fardi"
         }
     }
 }

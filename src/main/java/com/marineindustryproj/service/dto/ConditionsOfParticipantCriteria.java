@@ -41,9 +41,6 @@ public class ConditionsOfParticipantCriteria implements Serializable {
 
     private LongFilter designAndPlanningId;
 
-    public ConditionsOfParticipantCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

@@ -42,6 +42,7 @@
             <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="archived"><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.archived">Archived</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -80,6 +81,11 @@
                 <td>{{niazsanjiFardi.description}}</td>
                 <td>{{niazsanjiFardi.createUserLogin}}</td>
                 <td>{{niazsanjiFardi.createDate}}</td>
+                <td>
+                    <div *ngIf="niazsanjiFardi.courseTypeId">
+                        <a [routerLink]="['../course-type-marine-suffix', niazsanjiFardi.courseTypeId , 'view' ]" >{{niazsanjiFardi.courseTypeTitle}}</a>
+                    </div>
+                </td>
                 <td>{{niazsanjiFardi.niazsanjiYear}}</td>
                 <!--<td>{{niazsanjiFardi.modifyUserLogin}}</td>
                 <td>{{niazsanjiFardi.modifyDate | date:'medium'}}</td>

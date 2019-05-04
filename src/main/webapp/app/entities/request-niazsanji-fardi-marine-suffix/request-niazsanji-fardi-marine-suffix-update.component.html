@@ -109,6 +109,7 @@
                             <th width="600">پودمان ها</th>
                             <th>ساعت پودمان</th>
                             <th>سطح پودمان</th>
+                            <th>نوع دوره</th>
                             <th>هزینه (ریال)</th>
                         </tr>
                         </thead>
@@ -134,6 +135,20 @@
                             </td>
                             <td>{{approvedHour | number}}</td>
                             <td>{{approvedLevel}}</td>
+                            <td>
+                                <ng-select
+                                    [items]="coursetypes"
+                                    [multiple]="false"
+                                    [closeOnSelect]="true"
+                                    [searchable]="true"
+                                    [required]="false"
+                                    bindLabel="title"
+                                    bindValue="id"
+                                    placeholder="انتخاب نمائید."
+                                    name="approvedCourseType"
+                                    id="field_approvedCourseType"
+                                    [(ngModel)]="requestNiazsanjiFardi.approvedCourseTypeId" >
+                            </td>
                             <td>
                                     <input type="text" class="form-control" name="costApprovedEducationalModule" id="field_costApprovedEducationalModule"
                                            [(ngModel)]="requestNiazsanjiFardi.costApprovedEducationalModule" />
@@ -161,6 +176,20 @@
                             <td>{{allHour | number}}</td>
                             <td>{{allLevel}}</td>
                             <td>
+                                <ng-select
+                                    [items]="coursetypes"
+                                    [multiple]="false"
+                                    [closeOnSelect]="true"
+                                    [searchable]="true"
+                                    [required]="false"
+                                    bindLabel="title"
+                                    bindValue="id"
+                                    placeholder="انتخاب نمائید."
+                                    name="allCourseType"
+                                    id="field_allCourseType"
+                                    [(ngModel)]="requestNiazsanjiFardi.allCourseTypeId" >
+                            </td>
+                            <td>
                                 <input type="text" class="form-control" name="costAllEducationalModule" id="field_costAllEducationalModule"
                                        [(ngModel)]="requestNiazsanjiFardi.costAllEducationalModule" />
                             </td>
@@ -168,9 +197,10 @@
                         <tr>
                             <td colspan="2"></td>
                             <td>{{approvedHour + allHour | number}}</td>
-                            <td></td>
+                            <td colspan="2"></td>
                             <td>{{+requestNiazsanjiFardi.costAllEducationalModule +  +requestNiazsanjiFardi.costApprovedEducationalModule | number}}</td>
                         </tr>
+
                         </tbody>
                     </table>
                 </div>

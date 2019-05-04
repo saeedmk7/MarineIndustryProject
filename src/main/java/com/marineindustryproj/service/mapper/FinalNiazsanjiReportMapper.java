@@ -8,9 +8,11 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity FinalNiazsanjiReport and its DTO FinalNiazsanjiReportDTO.
  */
-@Mapper(componentModel = "spring", uses = {DocumentMapper.class, OrganizationChartMapper.class, EducationalModuleMapper.class})
+@Mapper(componentModel = "spring", uses = {DocumentMapper.class, CourseTypeMapper.class, OrganizationChartMapper.class, EducationalModuleMapper.class})
 public interface FinalNiazsanjiReportMapper extends EntityMapper<FinalNiazsanjiReportDTO, FinalNiazsanjiReport> {
 
+    @Mapping(source = "courseType.id", target = "courseTypeId")
+    @Mapping(source = "courseType.title", target = "courseTypeTitle")
     @Mapping(source = "organizationChart.id", target = "organizationChartId")
     @Mapping(source = "organizationChart.title", target = "organizationChartTitle")
     @Mapping(source = "educationalModule.id", target = "educationalModuleId")
@@ -21,6 +23,7 @@ public interface FinalNiazsanjiReportMapper extends EntityMapper<FinalNiazsanjiR
     @Mapping(target = "designAndPlannings", ignore = true)
     @Mapping(target = "runPhases", ignore = true)
     @Mapping(target = "polls", ignore = true)
+    @Mapping(source = "courseTypeId", target = "courseType")
     @Mapping(source = "organizationChartId", target = "organizationChart")
     @Mapping(source = "educationalModuleId", target = "educationalModule")
     FinalNiazsanjiReport toEntity(FinalNiazsanjiReportDTO finalNiazsanjiReportDTO);

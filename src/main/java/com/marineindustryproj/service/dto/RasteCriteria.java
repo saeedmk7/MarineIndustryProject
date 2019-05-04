@@ -39,9 +39,6 @@ public class RasteCriteria implements Serializable {
 
     private LongFilter jobId;
 
-    public RasteCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

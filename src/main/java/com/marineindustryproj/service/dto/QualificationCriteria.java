@@ -41,9 +41,6 @@ public class QualificationCriteria implements Serializable {
 
     private LongFilter teacherId;
 
-    public QualificationCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

@@ -92,6 +92,13 @@
                     </small>
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiFardi.courseType" for="field_courseType">Course Type</label>
+                    <select class="form-control" id="field_courseType" name="courseType" [(ngModel)]="niazsanjiFardi.courseTypeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="courseTypeOption.id" *ngFor="let courseTypeOption of coursetypes; trackBy: trackCourseTypeById">{{courseTypeOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiFardi.educationalModuleType" for="field_educationalModuleType">Educational Module Type</label>
                     <select class="form-control" name="educationalModuleType" [(ngModel)]="niazsanjiFardi.educationalModuleType" id="field_educationalModuleType"  required>
                         <option value="APPROVED">{{'marineindustryprojApp.EducationalModuleType.APPROVED' | translate}}</option>

@@ -61,6 +61,8 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
 
     private LongFilter documentId;
 
+    private LongFilter courseTypeId;
+
     private LongFilter approvedEducationalModuleId;
 
     private LongFilter allEducationalModuleId;
@@ -197,6 +199,14 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
         this.documentId = documentId;
     }
 
+    public LongFilter getCourseTypeId() {
+        return courseTypeId;
+    }
+
+    public void setCourseTypeId(LongFilter courseTypeId) {
+        this.courseTypeId = courseTypeId;
+    }
+
     public LongFilter getApprovedEducationalModuleId() {
         return approvedEducationalModuleId;
     }
@@ -256,6 +266,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
             Objects.equals(documentId, that.documentId) &&
+            Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(approvedEducationalModuleId, that.approvedEducationalModuleId) &&
             Objects.equals(allEducationalModuleId, that.allEducationalModuleId) &&
             Objects.equals(personId, that.personId) &&
@@ -281,6 +292,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
         changeStatusUserLogin,
         niazsanjiFardiId,
         documentId,
+        courseTypeId,
         approvedEducationalModuleId,
         allEducationalModuleId,
         personId,
@@ -307,6 +319,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
+                (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (approvedEducationalModuleId != null ? "approvedEducationalModuleId=" + approvedEducationalModuleId + ", " : "") +
                 (allEducationalModuleId != null ? "allEducationalModuleId=" + allEducationalModuleId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +

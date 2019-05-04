@@ -43,9 +43,6 @@ public class CriterionCriteria implements Serializable {
 
     private LongFilter pollItemId;
 
-    public CriterionCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

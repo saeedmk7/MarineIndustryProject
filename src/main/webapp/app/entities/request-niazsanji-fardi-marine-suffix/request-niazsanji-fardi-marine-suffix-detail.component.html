@@ -46,6 +46,12 @@
                 <dd>
                     <span>{{requestNiazsanjiFardi.description}}</span>
                 </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.courseType">Course Type</span></dt>
+                <dd>
+                    <div *ngIf="requestNiazsanjiFardi.courseTypeId">
+                        <a [routerLink]="['/course-type-marine-suffix', requestNiazsanjiFardi.courseTypeId, 'view']">{{requestNiazsanjiFardi.courseTypeTitle}}</a>
+                    </div>
+                </dd>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات دوره های شرکت کرده {{requestNiazsanjiFardi.personFamily}}</div></div>
                 <div class="table-responsive">
                     <table class="table table-striped  table-bordered table-hover table-sm">
@@ -131,6 +137,7 @@
                         </tbody>
                     </table>
                 </div>
+
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">گردش درخواست و نظرات</div></div>
                 <textarea [disabled]="true" [rows]="rows" class="form-control">{{requestNiazsanjiFardi.conversation}}</textarea>
                <!-- <dt><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.requestStatus">Request Status</span></dt>

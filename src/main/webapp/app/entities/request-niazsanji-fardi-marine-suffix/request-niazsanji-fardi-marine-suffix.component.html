@@ -28,6 +28,7 @@
                 <th>پودمان انتخابی</th>
                 <th>هزینه پودمان انتخابی(ریال)</th>
                 <th>نوع انتخاب</th>
+                <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="costApprovedEducationalModule"><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.costApprovedEducationalModule">Cost Approved Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <!--<th jhiSortBy="allEducationalModuleTitle"><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.allEducationalModule">All Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <!--<th jhiSortBy="costAllEducationalModule"><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.costAllEducationalModule">Cost All Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
@@ -80,6 +81,11 @@
                 </td>
                 <td *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
                     از پودمان های مصوب
+                </td>
+                <td>
+                    <div *ngIf="requestNiazsanjiFardi.courseTypeId">
+                        <a [routerLink]="['../course-type-marine-suffix', requestNiazsanjiFardi.courseTypeId , 'view' ]" >{{requestNiazsanjiFardi.courseTypeTitle}}</a>
+                    </div>
                 </td>
                 <!--<td>{{requestNiazsanjiFardi.description}}</td>-->
                 <!--<td>{{requestNiazsanjiFardi.createUserLogin}}</td>-->

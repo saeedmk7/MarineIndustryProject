@@ -51,9 +51,6 @@ public class SubTaskCriteria implements Serializable {
 
     private LongFilter mainTaskId;
 
-    public SubTaskCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

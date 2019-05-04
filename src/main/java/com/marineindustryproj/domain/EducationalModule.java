@@ -270,6 +270,7 @@ public class EducationalModule implements Serializable {
         this.learningTimePractical = learningTimePractical;
         return this;
     }
+
     public void setLearningTimePractical(Integer learningTimePractical) {
         this.learningTimePractical = learningTimePractical;
     }

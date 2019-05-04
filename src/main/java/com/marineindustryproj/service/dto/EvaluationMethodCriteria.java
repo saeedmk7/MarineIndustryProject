@@ -41,9 +41,6 @@ public class EvaluationMethodCriteria implements Serializable {
 
     private LongFilter requestEducationalModuleId;
 
-    public EvaluationMethodCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

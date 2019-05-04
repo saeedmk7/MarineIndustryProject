@@ -97,6 +97,10 @@ public class RequestNiazsanjiFardi implements Serializable {
     private Set<Document> documents = new HashSet<>();
 
     @ManyToOne
+    @JsonIgnoreProperties("requestNiazsanjiFardis")
+    private CourseType courseType;
+
+    @ManyToOne
     @JsonIgnoreProperties("approvedRequestNiazsanjiFardis")
     private EducationalModule approvedEducationalModule;
 
@@ -365,6 +369,19 @@ public class RequestNiazsanjiFardi implements Serializable {
 
     public void setDocuments(Set<Document> documents) {
         this.documents = documents;
+    }
+
+    public CourseType getCourseType() {
+        return courseType;
+    }
+
+    public RequestNiazsanjiFardi courseType(CourseType courseType) {
+        this.courseType = courseType;
+        return this;
+    }
+
+    public void setCourseType(CourseType courseType) {
+        this.courseType = courseType;
     }
 
     public EducationalModule getApprovedEducationalModule() {

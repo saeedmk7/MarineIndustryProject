@@ -41,9 +41,6 @@ public class WorkIndustryCriteria implements Serializable {
 
     private LongFilter workUnitId;
 
-    public WorkIndustryCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

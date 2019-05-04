@@ -167,15 +167,15 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.runMonth" for="field_runMonth">run month</label>
-                    <select class="form-control" id="field_runMonth" name="runMonth" [(ngModel)]="designAndPlanning.runMonth" >
+                    <select class="form-control" id="field_runMonth" name="runMonth" [required]="true" [(ngModel)]="designAndPlanning.runMonth" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="runMonth.id" *ngFor="let runMonth of runMonths; trackBy: trackEffectivenessLevelById">{{runMonth.persianMonth}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.description" for="field_description">Description</label>
-                    <input type="text" class="form-control" name="description" id="field_description"
-                        [(ngModel)]="designAndPlanning.description" maxlength="4096"/>
+                    <textarea class="form-control" name="description" id="field_description"
+                              [(ngModel)]="designAndPlanning.description" maxlength="4096"></textarea>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">

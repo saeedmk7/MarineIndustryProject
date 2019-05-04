@@ -87,9 +87,6 @@ public class DesignAndPlanningCriteria implements Serializable {
 
     private LongFilter effectivenessIndexId;
 
-    public DesignAndPlanningCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

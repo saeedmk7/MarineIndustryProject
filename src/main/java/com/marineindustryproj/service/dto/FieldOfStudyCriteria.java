@@ -41,9 +41,6 @@ public class FieldOfStudyCriteria implements Serializable {
 
     private LongFilter teacherId;
 
-    public FieldOfStudyCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

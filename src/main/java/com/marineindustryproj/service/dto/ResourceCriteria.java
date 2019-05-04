@@ -45,9 +45,6 @@ public class ResourceCriteria implements Serializable {
 
     private LongFilter requestEducationalModuleId;
 
-    public ResourceCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

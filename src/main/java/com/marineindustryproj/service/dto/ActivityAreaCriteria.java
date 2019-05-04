@@ -39,9 +39,6 @@ public class ActivityAreaCriteria implements Serializable {
 
     private LongFilter educationalCenterId;
 
-    public ActivityAreaCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

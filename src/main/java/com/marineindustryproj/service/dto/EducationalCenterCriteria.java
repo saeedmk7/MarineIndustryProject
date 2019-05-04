@@ -63,9 +63,6 @@ public class EducationalCenterCriteria implements Serializable {
 
     private LongFilter requestEducationalModuleId;
 
-    public EducationalCenterCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

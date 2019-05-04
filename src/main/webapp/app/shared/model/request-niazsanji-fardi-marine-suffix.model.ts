@@ -1,7 +1,7 @@
 import { Moment } from 'moment';
 import { INiazsanjiFardiMarineSuffix } from 'app/shared/model//niazsanji-fardi-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
-import {RequestStatus} from "app/shared/model/enums/RequestStatus";
+import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
 
 export interface IRequestNiazsanjiFardiMarineSuffix {
     id?: number;
@@ -23,6 +23,10 @@ export interface IRequestNiazsanjiFardiMarineSuffix {
     changeStatusUserLogin?: string;
     niazsanjiFardis?: INiazsanjiFardiMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
+    courseTypeTitle?: string;
+    courseTypeId?: number;
+    allCourseTypeId?: number;
+    approvedCourseTypeId?: number;
     approvedEducationalModuleTitle?: string;
     approvedEducationalModuleId?: number;
     allEducationalModuleTitle?: string;
@@ -56,6 +60,8 @@ export class RequestNiazsanjiFardiMarineSuffix implements IRequestNiazsanjiFardi
         public changeStatusUserLogin?: string,
         public niazsanjiFardis?: INiazsanjiFardiMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
+        public courseTypeTitle?: string,
+        public courseTypeId?: number,
         public approvedEducationalModuleTitle?: string,
         public approvedEducationalModuleId?: number,
         public allEducationalModuleTitle?: string,

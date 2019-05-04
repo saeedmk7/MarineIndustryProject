@@ -2,7 +2,7 @@ import { Moment } from 'moment';
 import { IFinalOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//final-organization-niazsanji-marine-suffix.model';
 import { IPersonMarineSuffix } from 'app/shared/model//person-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
-import {RequestStatus} from "app/shared/model/enums/RequestStatus";
+import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
 
 export interface IRequestOrganizationNiazsanjiMarineSuffix {
     id?: number;
@@ -33,6 +33,8 @@ export interface IRequestOrganizationNiazsanjiMarineSuffix {
     finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[];
     people?: IPersonMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
+    courseTypeTitle?: string;
+    courseTypeId?: number;
     organizationChartTitle?: string;
     organizationChartId?: number;
     teacherFamily?: string;
@@ -72,6 +74,8 @@ export class RequestOrganizationNiazsanjiMarineSuffix implements IRequestOrganiz
         public finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[],
         public people?: IPersonMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
+        public courseTypeTitle?: string,
+        public courseTypeId?: number,
         public organizationChartTitle?: string,
         public organizationChartId?: number,
         public teacherFamily?: string,

@@ -39,10 +39,17 @@ public class CourseTypeCriteria implements Serializable {
 
     private ZonedDateTimeFilter modifyDate;
 
+    private LongFilter requestOrganizationNiazsanjiId;
+
+    private LongFilter finalOrganizationNiazsanjiId;
+
+    private LongFilter finalNiazsanjiReportId;
+
     private LongFilter designAndPlanningId;
 
-    public CourseTypeCriteria() {
-    }
+    private LongFilter niazsanjiFardiId;
+
+    private LongFilter requestNiazsanjiFardiId;
 
     public LongFilter getId() {
         return id;
@@ -108,12 +115,52 @@ public class CourseTypeCriteria implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public LongFilter getRequestOrganizationNiazsanjiId() {
+        return requestOrganizationNiazsanjiId;
+    }
+
+    public void setRequestOrganizationNiazsanjiId(LongFilter requestOrganizationNiazsanjiId) {
+        this.requestOrganizationNiazsanjiId = requestOrganizationNiazsanjiId;
+    }
+
+    public LongFilter getFinalOrganizationNiazsanjiId() {
+        return finalOrganizationNiazsanjiId;
+    }
+
+    public void setFinalOrganizationNiazsanjiId(LongFilter finalOrganizationNiazsanjiId) {
+        this.finalOrganizationNiazsanjiId = finalOrganizationNiazsanjiId;
+    }
+
+    public LongFilter getFinalNiazsanjiReportId() {
+        return finalNiazsanjiReportId;
+    }
+
+    public void setFinalNiazsanjiReportId(LongFilter finalNiazsanjiReportId) {
+        this.finalNiazsanjiReportId = finalNiazsanjiReportId;
+    }
+
     public LongFilter getDesignAndPlanningId() {
         return designAndPlanningId;
     }
 
     public void setDesignAndPlanningId(LongFilter designAndPlanningId) {
         this.designAndPlanningId = designAndPlanningId;
+    }
+
+    public LongFilter getNiazsanjiFardiId() {
+        return niazsanjiFardiId;
+    }
+
+    public void setNiazsanjiFardiId(LongFilter niazsanjiFardiId) {
+        this.niazsanjiFardiId = niazsanjiFardiId;
+    }
+
+    public LongFilter getRequestNiazsanjiFardiId() {
+        return requestNiazsanjiFardiId;
+    }
+
+    public void setRequestNiazsanjiFardiId(LongFilter requestNiazsanjiFardiId) {
+        this.requestNiazsanjiFardiId = requestNiazsanjiFardiId;
     }
 
 
@@ -135,7 +182,12 @@ public class CourseTypeCriteria implements Serializable {
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
-            Objects.equals(designAndPlanningId, that.designAndPlanningId);
+            Objects.equals(requestOrganizationNiazsanjiId, that.requestOrganizationNiazsanjiId) &&
+            Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
+            Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
+            Objects.equals(designAndPlanningId, that.designAndPlanningId) &&
+            Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
+            Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId);
     }
 
     @Override
@@ -149,7 +201,12 @@ public class CourseTypeCriteria implements Serializable {
         createDate,
         modifyUserLogin,
         modifyDate,
-        designAndPlanningId
+        requestOrganizationNiazsanjiId,
+        finalOrganizationNiazsanjiId,
+        finalNiazsanjiReportId,
+        designAndPlanningId,
+        niazsanjiFardiId,
+        requestNiazsanjiFardiId
         );
     }
 
@@ -164,7 +221,12 @@ public class CourseTypeCriteria implements Serializable {
                 (createDate != null ? "createDate=" + createDate + ", " : "") +
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
+                (requestOrganizationNiazsanjiId != null ? "requestOrganizationNiazsanjiId=" + requestOrganizationNiazsanjiId + ", " : "") +
+                (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
+                (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
                 (designAndPlanningId != null ? "designAndPlanningId=" + designAndPlanningId + ", " : "") +
+                (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
+                (requestNiazsanjiFardiId != null ? "requestNiazsanjiFardiId=" + requestNiazsanjiFardiId + ", " : "") +
             "}";
     }
 

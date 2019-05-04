@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import {RequestStatus} from "app/shared/model/enums/RequestStatus";
+import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
 
 
 export interface IEducationalHistoryMarineSuffix {

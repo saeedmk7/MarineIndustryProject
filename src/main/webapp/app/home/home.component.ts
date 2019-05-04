@@ -280,7 +280,11 @@ export class HomeComponent implements OnInit, OnDestroy {
                     '<td style="padding:0"><b>{point.y}</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
-                useHTML: true
+                useHTML: true,
+                /*formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        this.point.y + ' ' + this.point.name.toLowerCase();
+                }*/
             },
             plotOptions: {
                 column: {

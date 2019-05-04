@@ -47,9 +47,6 @@ public class OrganizationChartAuthorityCriteria implements Serializable {
 
     private LongFilter organizationChartId;
 
-    public OrganizationChartAuthorityCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

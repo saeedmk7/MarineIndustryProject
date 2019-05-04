@@ -8,9 +8,11 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity FinalOrganizationNiazsanji and its DTO FinalOrganizationNiazsanjiDTO.
  */
-@Mapper(componentModel = "spring", uses = {PersonMapper.class, DocumentMapper.class, OrganizationChartMapper.class, TeacherMapper.class, EducationalModuleMapper.class, TeachApproachMapper.class, RequestOrganizationNiazsanjiMapper.class})
+@Mapper(componentModel = "spring", uses = {PersonMapper.class, DocumentMapper.class, CourseTypeMapper.class, OrganizationChartMapper.class, TeacherMapper.class, EducationalModuleMapper.class, TeachApproachMapper.class, RequestOrganizationNiazsanjiMapper.class})
 public interface FinalOrganizationNiazsanjiMapper extends EntityMapper<FinalOrganizationNiazsanjiDTO, FinalOrganizationNiazsanji> {
 
+    @Mapping(source = "courseType.id", target = "courseTypeId")
+    @Mapping(source = "courseType.title", target = "courseTypeTitle")
     @Mapping(source = "organizationChart.id", target = "organizationChartId")
     @Mapping(source = "organizationChart.title", target = "organizationChartTitle")
     @Mapping(source = "teacher.id", target = "teacherId")
@@ -23,6 +25,7 @@ public interface FinalOrganizationNiazsanjiMapper extends EntityMapper<FinalOrga
     @Mapping(source = "requestOrganizationNiazsanji.recommendedByOrgchart", target = "requestOrganizationNiazsanjiRecommendedByOrgchart")
     FinalOrganizationNiazsanjiDTO toDto(FinalOrganizationNiazsanji finalOrganizationNiazsanji);
 
+    @Mapping(source = "courseTypeId", target = "courseType")
     @Mapping(source = "organizationChartId", target = "organizationChart")
     @Mapping(source = "teacherId", target = "teacher")
     @Mapping(source = "educationalModuleId", target = "educationalModule")

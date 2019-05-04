@@ -59,9 +59,6 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
 
     private LongFilter finalNiazsanjiReportId;
 
-    public FinalNiazsanjiReportPersonCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

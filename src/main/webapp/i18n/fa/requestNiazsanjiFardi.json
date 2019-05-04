@@ -25,6 +25,7 @@
             "index": "ردیف",
             "code": "کد",
             "costApprovedEducationalModule": "هزینه پودمان تصویب شده(ریال)",
+            "courseType": "نوع دوره",
             "timeApprovedEducationalModule": "مدت زمان پودمان تصویب شده",
             "timeEducationalModule": "مدت زمان پودمان",
             "levelApprovedEducationalModule": "سطح پودمان تصویب شده",

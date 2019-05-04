@@ -6,7 +6,7 @@ import { IEducationalCenterMarineSuffix } from 'app/shared/model//educational-ce
 import { IGoalMarineSuffix } from 'app/shared/model//goal-marine-suffix.model';
 import { IResourceMarineSuffix } from 'app/shared/model//resource-marine-suffix.model';
 import { ITeacherMarineSuffix } from 'app/shared/model//teacher-marine-suffix.model';
-import {RequestStatus} from "app/shared/model/enums/RequestStatus";
+import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
 
 export interface IRequestEducationalModuleMarineSuffix {
     id?: number;
@@ -105,6 +105,6 @@ export class RequestEducationalModuleMarineSuffix implements IRequestEducational
         public organizationId?: number
     ) {
         this.archived = this.archived || false;
-        this.fullTitle =  this.code + " - " + this.title;
+        this.fullTitle =  this.code + ' - ' + this.title;
     }
 }

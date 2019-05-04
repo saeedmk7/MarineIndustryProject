@@ -41,9 +41,6 @@ public class MahiatCourseCriteria implements Serializable {
 
     private LongFilter designAndPlanningId;
 
-    public MahiatCourseCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

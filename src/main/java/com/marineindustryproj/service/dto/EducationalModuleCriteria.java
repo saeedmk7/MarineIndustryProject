@@ -43,8 +43,6 @@ public class EducationalModuleCriteria implements Serializable {
 
     private StringFilter recommendedBy;
 
-    private StringFilter educationalModuleHeadlines;
-
     private StringFilter prerequisite;
 
     private StringFilter drafters;
@@ -191,14 +189,6 @@ public class EducationalModuleCriteria implements Serializable {
 
     public void setRecommendedBy(StringFilter recommendedBy) {
         this.recommendedBy = recommendedBy;
-    }
-
-    public StringFilter getEducationalModuleHeadlines() {
-        return educationalModuleHeadlines;
-    }
-
-    public void setEducationalModuleHeadlines(StringFilter educationalModuleHeadlines) {
-        this.educationalModuleHeadlines = educationalModuleHeadlines;
     }
 
     public StringFilter getPrerequisite() {
@@ -494,7 +484,6 @@ public class EducationalModuleCriteria implements Serializable {
             Objects.equals(centralizedCode, that.centralizedCode) &&
             Objects.equals(moreDescription, that.moreDescription) &&
             Objects.equals(recommendedBy, that.recommendedBy) &&
-            Objects.equals(educationalModuleHeadlines, that.educationalModuleHeadlines) &&
             Objects.equals(prerequisite, that.prerequisite) &&
             Objects.equals(drafters, that.drafters) &&
             Objects.equals(educationalModuleLevel, that.educationalModuleLevel) &&
@@ -544,7 +533,6 @@ public class EducationalModuleCriteria implements Serializable {
         centralizedCode,
         moreDescription,
         recommendedBy,
-        educationalModuleHeadlines,
         prerequisite,
         drafters,
         educationalModuleLevel,
@@ -595,7 +583,6 @@ public class EducationalModuleCriteria implements Serializable {
                 (centralizedCode != null ? "centralizedCode=" + centralizedCode + ", " : "") +
                 (moreDescription != null ? "moreDescription=" + moreDescription + ", " : "") +
                 (recommendedBy != null ? "recommendedBy=" + recommendedBy + ", " : "") +
-                (educationalModuleHeadlines != null ? "educationalModuleHeadlines=" + educationalModuleHeadlines + ", " : "") +
                 (prerequisite != null ? "prerequisite=" + prerequisite + ", " : "") +
                 (drafters != null ? "drafters=" + drafters + ", " : "") +
                 (educationalModuleLevel != null ? "educationalModuleLevel=" + educationalModuleLevel + ", " : "") +

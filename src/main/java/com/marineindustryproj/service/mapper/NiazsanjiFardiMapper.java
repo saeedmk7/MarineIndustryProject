@@ -8,9 +8,11 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity NiazsanjiFardi and its DTO NiazsanjiFardiDTO.
  */
-@Mapper(componentModel = "spring", uses = {DocumentMapper.class, RequestNiazsanjiFardiMapper.class, EducationalModuleMapper.class, PersonMapper.class, OrganizationChartMapper.class})
+@Mapper(componentModel = "spring", uses = {DocumentMapper.class, CourseTypeMapper.class, RequestNiazsanjiFardiMapper.class, EducationalModuleMapper.class, PersonMapper.class, OrganizationChartMapper.class})
 public interface NiazsanjiFardiMapper extends EntityMapper<NiazsanjiFardiDTO, NiazsanjiFardi> {
 
+    @Mapping(source = "courseType.id", target = "courseTypeId")
+    @Mapping(source = "courseType.title", target = "courseTypeTitle")
     @Mapping(source = "requestNiazsanjiFardi.id", target = "requestNiazsanjiFardiId")
     @Mapping(source = "requestNiazsanjiFardi.code", target = "requestNiazsanjiFardiCode")
     @Mapping(source = "educationalModule.id", target = "educationalModuleId")
@@ -22,6 +24,7 @@ public interface NiazsanjiFardiMapper extends EntityMapper<NiazsanjiFardiDTO, Ni
     @Mapping(source = "organizationChart.title", target = "organizationChartTitle")
     NiazsanjiFardiDTO toDto(NiazsanjiFardi niazsanjiFardi);
 
+    @Mapping(source = "courseTypeId", target = "courseType")
     @Mapping(source = "requestNiazsanjiFardiId", target = "requestNiazsanjiFardi")
     @Mapping(source = "educationalModuleId", target = "educationalModule")
     @Mapping(source = "personId", target = "person")

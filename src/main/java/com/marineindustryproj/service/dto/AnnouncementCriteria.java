@@ -45,9 +45,6 @@ public class AnnouncementCriteria implements Serializable {
 
     private LongFilter documentId;
 
-    public AnnouncementCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

@@ -46,8 +46,14 @@ public class FinalNiazsanjiReportDTO implements Serializable {
     private Integer status;
 
     private Integer runMonth;
+    
+    private Integer finalizeCost;
 
     private Set<DocumentDTO> documents = new HashSet<>();
+
+    private Long courseTypeId;
+
+    private String courseTypeTitle;
 
     private Long organizationChartId;
 
@@ -168,6 +174,14 @@ public class FinalNiazsanjiReportDTO implements Serializable {
     public void setRunMonth(Integer runMonth) {
         this.runMonth = runMonth;
     }
+    
+    public Integer getFinalizeCost() {
+        return finalizeCost;
+    }
+
+    public void setFinalizeCost(Integer finalizeCost) {
+        this.finalizeCost = finalizeCost;
+    }
 
     public Set<DocumentDTO> getDocuments() {
         return documents;
@@ -175,6 +189,22 @@ public class FinalNiazsanjiReportDTO implements Serializable {
 
     public void setDocuments(Set<DocumentDTO> documents) {
         this.documents = documents;
+    }
+
+    public Long getCourseTypeId() {
+        return courseTypeId;
+    }
+
+    public void setCourseTypeId(Long courseTypeId) {
+        this.courseTypeId = courseTypeId;
+    }
+
+    public String getCourseTypeTitle() {
+        return courseTypeTitle;
+    }
+
+    public void setCourseTypeTitle(String courseTypeTitle) {
+        this.courseTypeTitle = courseTypeTitle;
     }
 
     public Long getOrganizationChartId() {
@@ -247,6 +277,9 @@ public class FinalNiazsanjiReportDTO implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", runMonth=" + getRunMonth() +
+            ", finalizeCost=" + getFinalizeCost() +
+            ", courseType=" + getCourseTypeId() +
+            ", courseType='" + getCourseTypeTitle() + "'" +
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             ", educationalModule=" + getEducationalModuleId() +

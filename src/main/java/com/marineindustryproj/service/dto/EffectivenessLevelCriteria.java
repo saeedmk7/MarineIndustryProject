@@ -41,9 +41,6 @@ public class EffectivenessLevelCriteria implements Serializable {
 
     private LongFilter designAndPlanningId;
 
-    public EffectivenessLevelCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

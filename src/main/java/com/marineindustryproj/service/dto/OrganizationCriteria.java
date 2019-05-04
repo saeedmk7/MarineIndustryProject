@@ -41,9 +41,6 @@ public class OrganizationCriteria implements Serializable {
 
     private LongFilter requestEducationalModuleId;
 
-    public OrganizationCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

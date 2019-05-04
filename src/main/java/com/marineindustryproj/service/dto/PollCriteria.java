@@ -47,9 +47,6 @@ public class PollCriteria implements Serializable {
 
     private LongFilter finalNiazsanjiReportId;
 
-    public PollCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

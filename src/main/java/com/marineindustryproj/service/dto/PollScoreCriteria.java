@@ -43,9 +43,6 @@ public class PollScoreCriteria implements Serializable {
 
     private LongFilter personId;
 
-    public PollScoreCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

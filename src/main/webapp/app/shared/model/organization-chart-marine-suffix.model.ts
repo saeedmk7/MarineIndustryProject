@@ -7,6 +7,7 @@ import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model//final-niazs
 import { IOrganizationChartAuthorityMarineSuffix } from 'app/shared/model//organization-chart-authority-marine-suffix.model';
 import { INiazsanjiFardiMarineSuffix } from 'app/shared/model//niazsanji-fardi-marine-suffix.model';
 import { IRequestNiazsanjiFardiMarineSuffix } from 'app/shared/model//request-niazsanji-fardi-marine-suffix.model';
+import { IEducationalHistoryMarineSuffix } from 'app/shared/model//educational-history-marine-suffix.model';
 
 export interface IOrganizationChartMarineSuffix {
     id?: number;
@@ -29,6 +30,7 @@ export interface IOrganizationChartMarineSuffix {
     organizationChartAuthorities?: IOrganizationChartAuthorityMarineSuffix[];
     niazsanjiFardis?: INiazsanjiFardiMarineSuffix[];
     requestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[];
+    educationalHistories?: IEducationalHistoryMarineSuffix[];
     parentTitle?: string;
     parentId?: number;
 }
@@ -55,6 +57,7 @@ export class OrganizationChartMarineSuffix implements IOrganizationChartMarineSu
         public organizationChartAuthorities?: IOrganizationChartAuthorityMarineSuffix[],
         public niazsanjiFardis?: INiazsanjiFardiMarineSuffix[],
         public requestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[],
+        public educationalHistories?: IEducationalHistoryMarineSuffix[],
         public parentTitle?: string,
         public parentId?: number
     ) {

@@ -41,9 +41,6 @@ public class SkillableLevelOfSkillCriteria implements Serializable {
 
     private LongFilter requestEducationalModuleId;
 
-    public SkillableLevelOfSkillCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

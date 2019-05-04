@@ -31,6 +31,8 @@ import {IUser, Principal, UserService} from "app/core";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 import {IFinalOrganizationNiazsanjiMarineSuffix} from "app/shared/model/final-organization-niazsanji-marine-suffix.model";
+import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
+import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 
 @Component({
     selector: 'mi-request-niazsanji-fardi-marine-suffix-update',
@@ -42,7 +44,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
     recommenedOrgCharts: IOrganizationChartMarineSuffix[];
     orgChartDisabled: boolean;
     isSaving: boolean;
-
+    coursetypes: ICourseTypeMarineSuffix[];
     documents: IDocumentMarineSuffix[];
 
     educationalmodules: IEducationalModuleMarineSuffix[];
@@ -76,6 +78,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
     currentUserFullName: string = "";
     constructor(
         protected dataUtils: JhiDataUtils,
+        private courseTypeService: CourseTypeMarineSuffixService,
         protected jhiAlertService: JhiAlertService,
         protected educationalModuleJobService: EducationalModuleJobMarineSuffixService,
         protected requestNiazsanjiFardiService: RequestNiazsanjiFardiMarineSuffixService,
@@ -94,6 +97,12 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
     ngOnInit() {
 
         this.isSaving = false;
+        this.courseTypeService.query().subscribe(
+            (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                this.coursetypes = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         this.activatedRoute.data.subscribe(({ requestNiazsanjiFardi }) => {
             this.requestNiazsanjiFardi = requestNiazsanjiFardi;
 
@@ -432,10 +441,12 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
 
                     approvedEducationalModule.allEducationalModuleId = null;
                     approvedEducationalModule.costAllEducationalModule = 0;
+                    approvedEducationalModule.courseTypeId = this.requestNiazsanjiFardi.approvedCourseTypeId;
                     this.subscribeToSaveResponse(this.requestNiazsanjiFardiService.create(approvedEducationalModule));
 
                     allEducationalModule.approvedEducationalModuleId = null;
                     allEducationalModule.costApprovedEducationalModule = 0;
+                    allEducationalModule.courseTypeId = this.requestNiazsanjiFardi.allCourseTypeId;
                     this.subscribeToSaveResponse(this.requestNiazsanjiFardiService.create(allEducationalModule));
                 }
                 else {

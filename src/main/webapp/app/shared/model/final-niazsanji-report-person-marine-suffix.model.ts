@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import {NiazSanjiSource} from "app/shared/model/enums/NiazSanjiSource";
+import {NiazSanjiSource} from 'app/shared/model/enums/NiazSanjiSource';
 
 export interface IFinalNiazsanjiReportPersonMarineSuffix {
     id?: number;

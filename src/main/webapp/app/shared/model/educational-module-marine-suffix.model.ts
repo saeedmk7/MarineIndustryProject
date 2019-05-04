@@ -124,6 +124,6 @@ export class EducationalModuleMarineSuffix implements IEducationalModuleMarineSu
         public niazsanjiGroups?: INiazsanjiGroupMarineSuffix[]
     ) {
         this.archived = this.archived || false;
-        this.fullTitle =  this.code + " - " + this.title;
+        this.fullTitle =  this.code + ' - ' + this.title;
     }
 }

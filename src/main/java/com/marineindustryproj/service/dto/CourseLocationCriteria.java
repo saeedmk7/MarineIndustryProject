@@ -41,9 +41,6 @@ public class CourseLocationCriteria implements Serializable {
 
     private LongFilter designAndPlanningId;
 
-    public CourseLocationCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

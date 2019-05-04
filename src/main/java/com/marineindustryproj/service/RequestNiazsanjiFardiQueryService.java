@@ -136,6 +136,10 @@ public class RequestNiazsanjiFardiQueryService extends QueryService<RequestNiazs
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(RequestNiazsanjiFardi_.documents, JoinType.LEFT).get(Document_.id)));
             }
+            if (criteria.getCourseTypeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getCourseTypeId(),
+                    root -> root.join(RequestNiazsanjiFardi_.courseType, JoinType.LEFT).get(CourseType_.id)));
+            }
             if (criteria.getApprovedEducationalModuleId() != null) {
                 specification = specification.and(buildSpecification(criteria.getApprovedEducationalModuleId(),
                     root -> root.join(RequestNiazsanjiFardi_.approvedEducationalModule, JoinType.LEFT).get(EducationalModule_.id)));

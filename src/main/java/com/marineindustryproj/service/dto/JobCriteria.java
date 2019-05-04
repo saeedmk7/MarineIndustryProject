@@ -73,9 +73,6 @@ public class JobCriteria implements Serializable {
 
     private LongFilter niazsanjiGroupId;
 
-    public JobCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

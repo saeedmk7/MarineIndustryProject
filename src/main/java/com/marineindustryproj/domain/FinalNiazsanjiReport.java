@@ -77,6 +77,9 @@ public class FinalNiazsanjiReport implements Serializable {
     @Column(name = "run_month")
     private Integer runMonth;
 
+    @Column(name = "finalize_cost")
+    private Integer finalizeCost;
+
     @OneToMany(mappedBy = "finalNiazsanjiReport")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = new HashSet<>();
@@ -95,6 +98,10 @@ public class FinalNiazsanjiReport implements Serializable {
                joinColumns = @JoinColumn(name = "final_niazsanji_reports_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "documents_id", referencedColumnName = "id"))
     private Set<Document> documents = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties("finalNiazsanjiReports")
+    private CourseType courseType;
 
     @ManyToOne
     @JsonIgnoreProperties("finalNiazsanjiReports")
@@ -282,6 +289,19 @@ public class FinalNiazsanjiReport implements Serializable {
     public void setRunMonth(Integer runMonth) {
         this.runMonth = runMonth;
     }
+    
+    public Integer getFinalizeCost() {
+        return finalizeCost;
+    }
+
+    public FinalNiazsanjiReport finalizeCost(Integer finalizeCost) {
+        this.finalizeCost = finalizeCost;
+        return this;
+    }
+
+    public void setFinalizeCost(Integer finalizeCost) {
+        this.finalizeCost = finalizeCost;
+    }
 
     public Set<FinalNiazsanjiReportPerson> getFinalNiazsanjiReportPeople() {
         return finalNiazsanjiReportPeople;
@@ -408,6 +428,19 @@ public class FinalNiazsanjiReport implements Serializable {
         this.documents = documents;
     }
 
+    public CourseType getCourseType() {
+        return courseType;
+    }
+
+    public FinalNiazsanjiReport courseType(CourseType courseType) {
+        this.courseType = courseType;
+        return this;
+    }
+
+    public void setCourseType(CourseType courseType) {
+        this.courseType = courseType;
+    }
+
     public OrganizationChart getOrganizationChart() {
         return organizationChart;
     }
@@ -472,6 +505,7 @@ public class FinalNiazsanjiReport implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", runMonth=" + getRunMonth() +
+            ", finalizeCost=" + getFinalizeCost() +
             "}";
     }
 }

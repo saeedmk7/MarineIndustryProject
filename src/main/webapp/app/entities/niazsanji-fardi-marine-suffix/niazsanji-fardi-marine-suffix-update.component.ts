@@ -15,6 +15,8 @@ import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model
 import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
 import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
 import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
+import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
+import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 
 @Component({
     selector: 'mi-niazsanji-fardi-marine-suffix-update',
@@ -25,7 +27,7 @@ export class NiazsanjiFardiMarineSuffixUpdateComponent implements OnInit {
     isSaving: boolean;
 
     documents: IDocumentMarineSuffix[];
-
+    coursetypes: ICourseTypeMarineSuffix[];
     requestniazsanjifardis: IRequestNiazsanjiFardiMarineSuffix[];
 
     educationalmodules: IEducationalModuleMarineSuffix[];
@@ -40,6 +42,7 @@ export class NiazsanjiFardiMarineSuffixUpdateComponent implements OnInit {
     constructor(
         protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
+        private courseTypeService: CourseTypeMarineSuffixService,
         protected niazsanjiFardiService: NiazsanjiFardiMarineSuffixService,
         protected documentService: DocumentMarineSuffixService,
         protected educationalModuleService: EducationalModuleMarineSuffixService,
@@ -86,6 +89,12 @@ export class NiazsanjiFardiMarineSuffixUpdateComponent implements OnInit {
         else{
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
         }
+        this.courseTypeService.query().subscribe(
+            (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                this.coursetypes = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     previousState() {

@@ -32,6 +32,7 @@
             <th jhiSortBy="teacherName"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherName">Teacher Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <!--<th jhiSortBy="requestStatus"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.requestStatus">Request Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.status">Status</span></th>
@@ -76,6 +77,11 @@
                 <td>{{requestOrganizationNiazsanji.trainingGoals}}</td>
                 <td>{{requestOrganizationNiazsanji.description}}</td>-->
                 <td>{{requestOrganizationNiazsanji.priceCost | number}}</td>
+                <td>
+                    <div *ngIf="requestOrganizationNiazsanji.courseTypeId">
+                        <a [routerLink]="['../course-type-marine-suffix', requestOrganizationNiazsanji.courseTypeId , 'view' ]" >{{requestOrganizationNiazsanji.courseTypeTitle}}</a>
+                    </div>
+                </td>
                 <!--<td>{{requestOrganizationNiazsanji.createUserLogin}}</td>-->
                 <td>{{requestOrganizationNiazsanji.createDate}}</td>
                 <td>

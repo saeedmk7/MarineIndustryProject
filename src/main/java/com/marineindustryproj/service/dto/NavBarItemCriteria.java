@@ -53,9 +53,6 @@ public class NavBarItemCriteria implements Serializable {
 
     private LongFilter parentId;
 
-    public NavBarItemCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

@@ -12,7 +12,12 @@ import org.mapstruct.*;
 public interface CourseTypeMapper extends EntityMapper<CourseTypeDTO, CourseType> {
 
 
+    @Mapping(target = "requestOrganizationNiazsanjis", ignore = true)
+    @Mapping(target = "finalOrganizationNiazsanjis", ignore = true)
+    @Mapping(target = "finalNiazsanjiReports", ignore = true)
     @Mapping(target = "designAndPlannings", ignore = true)
+    @Mapping(target = "niazsanjiFardis", ignore = true)
+    @Mapping(target = "requestNiazsanjiFardis", ignore = true)
     CourseType toEntity(CourseTypeDTO courseTypeDTO);
 
     default CourseType fromId(Long id) {

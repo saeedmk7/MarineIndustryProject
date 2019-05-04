@@ -44,6 +44,12 @@
                         <a [routerLink]="['/request-niazsanji-fardi-marine-suffix', niazsanjiFardi.requestNiazsanjiFardiId, 'view']" class="enableLink">{{niazsanjiFardi.requestNiazsanjiFardiId}}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.courseType">Course Type</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiFardi.courseTypeId">
+                        <a [routerLink]="['/course-type-marine-suffix', niazsanjiFardi.courseTypeId, 'view']">{{niazsanjiFardi.courseTypeTitle}}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.educationalModule">Educational Module</span></dt>
                 <dd>
                     <div *ngIf="niazsanjiFardi.educationalModuleId">

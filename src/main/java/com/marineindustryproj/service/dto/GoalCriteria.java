@@ -43,9 +43,6 @@ public class GoalCriteria implements Serializable {
 
     private LongFilter requestEducationalModuleId;
 
-    public GoalCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

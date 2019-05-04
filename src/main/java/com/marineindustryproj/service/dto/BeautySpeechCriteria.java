@@ -41,9 +41,6 @@ public class BeautySpeechCriteria implements Serializable {
 
     private ZonedDateTimeFilter modifyDate;
 
-    public BeautySpeechCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

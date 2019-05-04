@@ -25,6 +25,8 @@ import {OrganizationChartMarineSuffixService} from "app/entities/organization-ch
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import * as $ from 'jquery';
+import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
+import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 
 @Component({
     selector: 'mi-request-organization-niazsanji-marine-suffix-update',
@@ -36,7 +38,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
     message: string;
 
     currentPerson: IPersonMarineSuffix;
-
+    coursetypes: ICourseTypeMarineSuffix[];
     people: IPersonMarineSuffix[];
     fullPeople: IPersonMarineSuffix[];
     jobs: IJobMarineSuffix[];
@@ -60,6 +62,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         private jhiAlertService: JhiAlertService,
         private requestOrganizationNiazsanjiService: RequestOrganizationNiazsanjiMarineSuffixService,
         private organizationChartService: OrganizationChartMarineSuffixService,
+        private courseTypeService: CourseTypeMarineSuffixService,
         private personService: PersonMarineSuffixService,
         private jobService: JobMarineSuffixService,
         private educationalModuleService: EducationalModuleMarineSuffixService,
@@ -122,6 +125,12 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
         }
+        this.courseTypeService.query().subscribe(
+            (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                this.coursetypes = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
 
     }
     loadOrgCharts(){

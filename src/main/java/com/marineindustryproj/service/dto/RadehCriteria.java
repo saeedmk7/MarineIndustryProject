@@ -39,9 +39,6 @@ public class RadehCriteria implements Serializable {
 
     private LongFilter jobId;
 
-    public RadehCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

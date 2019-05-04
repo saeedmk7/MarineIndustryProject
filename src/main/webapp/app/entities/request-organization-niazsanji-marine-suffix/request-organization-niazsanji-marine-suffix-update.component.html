@@ -301,6 +301,13 @@
                         </small>
                     </div>
                 </div>
+                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.courseType" for="field_courseType">Course Type</label>
+                    <select class="form-control" id="field_courseType" name="courseType" [(ngModel)]="requestOrganizationNiazsanji.courseTypeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="courseTypeOption.id" *ngFor="let courseTypeOption of coursetypes; trackBy: trackCourseTypeById">{{courseTypeOption.title}}</option>
+                    </select>
+                </div>
                 <div class="form-group" *ngIf="requestOrganizationNiazsanji.id === undefined">
                     <span *ngIf="targetPeople">درخواست شما برای افراد زیر ارسال می شود.</span>
                     <ul>

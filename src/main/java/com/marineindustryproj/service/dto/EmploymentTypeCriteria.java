@@ -39,9 +39,6 @@ public class EmploymentTypeCriteria implements Serializable {
 
     private LongFilter personId;
 
-    public EmploymentTypeCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

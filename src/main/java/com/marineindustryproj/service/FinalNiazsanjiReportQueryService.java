@@ -128,6 +128,9 @@ public class FinalNiazsanjiReportQueryService extends QueryService<FinalNiazsanj
             if (criteria.getRunMonth() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getRunMonth(), FinalNiazsanjiReport_.runMonth));
             }
+            if (criteria.getFinalizeCost() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getFinalizeCost(), FinalNiazsanjiReport_.finalizeCost));
+            }
             if (criteria.getFinalNiazsanjiReportPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportPersonId(),
                     root -> root.join(FinalNiazsanjiReport_.finalNiazsanjiReportPeople, JoinType.LEFT).get(FinalNiazsanjiReportPerson_.id)));
@@ -147,6 +150,10 @@ public class FinalNiazsanjiReportQueryService extends QueryService<FinalNiazsanj
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(FinalNiazsanjiReport_.documents, JoinType.LEFT).get(Document_.id)));
+            }
+            if (criteria.getCourseTypeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getCourseTypeId(),
+                    root -> root.join(FinalNiazsanjiReport_.courseType, JoinType.LEFT).get(CourseType_.id)));
             }
             if (criteria.getOrganizationChartId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOrganizationChartId(),

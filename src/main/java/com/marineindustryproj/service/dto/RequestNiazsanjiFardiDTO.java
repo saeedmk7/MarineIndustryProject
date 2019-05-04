@@ -57,6 +57,10 @@ public class RequestNiazsanjiFardiDTO implements Serializable {
 
     private Set<DocumentDTO> documents = new HashSet<>();
 
+    private Long courseTypeId;
+
+    private String courseTypeTitle;
+
     private Long approvedEducationalModuleId;
 
     private String approvedEducationalModuleTitle;
@@ -211,6 +215,22 @@ public class RequestNiazsanjiFardiDTO implements Serializable {
         this.documents = documents;
     }
 
+    public Long getCourseTypeId() {
+        return courseTypeId;
+    }
+
+    public void setCourseTypeId(Long courseTypeId) {
+        this.courseTypeId = courseTypeId;
+    }
+
+    public String getCourseTypeTitle() {
+        return courseTypeTitle;
+    }
+
+    public void setCourseTypeTitle(String courseTypeTitle) {
+        this.courseTypeTitle = courseTypeTitle;
+    }
+
     public Long getApprovedEducationalModuleId() {
         return approvedEducationalModuleId;
     }
@@ -323,6 +343,8 @@ public class RequestNiazsanjiFardiDTO implements Serializable {
             ", conversation='" + getConversation() + "'" +
             ", requestStatus='" + getRequestStatus() + "'" +
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
+            ", courseType=" + getCourseTypeId() +
+            ", courseType='" + getCourseTypeTitle() + "'" +
             ", approvedEducationalModule=" + getApprovedEducationalModuleId() +
             ", approvedEducationalModule='" + getApprovedEducationalModuleTitle() + "'" +
             ", allEducationalModule=" + getAllEducationalModuleId() +

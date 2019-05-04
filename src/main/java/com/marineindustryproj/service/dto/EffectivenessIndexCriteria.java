@@ -41,9 +41,6 @@ public class EffectivenessIndexCriteria implements Serializable {
 
     private LongFilter designAndPlanningId;
 
-    public EffectivenessIndexCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

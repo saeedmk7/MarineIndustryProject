@@ -90,6 +90,12 @@
                 <dd>
                     <span>{{requestOrganizationNiazsanji.description}}</span>
                 </dd>
+                 <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.courseType">Course Type</span></dt>
+                <dd>
+                    <div *ngIf="requestOrganizationNiazsanji.courseTypeId">
+                        <a [routerLink]="['/course-type-marine-suffix', requestOrganizationNiazsanji.courseTypeId, 'view']">{{requestOrganizationNiazsanji.courseTypeTitle}}</a>
+                    </div>
+                </dd>
 
                 <!--<dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.createUserLogin">Create User Login</span></dt>
                 <dd>

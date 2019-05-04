@@ -19,6 +19,7 @@
             "niazsanjiYear": "سال نیازسنجی",
             "niazSanjiSource": "منبع نیازسنجی",
             "priceCost": "هزینه دوره(ریال)",
+            "courseType": "نوع دوره",
             "description": "توضیحات بیشتر",
             "createUserLogin": "کاربر ایجاد کننده",
             "createDate": "تاریخ ایجاد",

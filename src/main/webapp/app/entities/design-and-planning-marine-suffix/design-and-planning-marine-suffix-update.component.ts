@@ -270,9 +270,13 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
         }
     }
     finalize(){
-
-        this.designAndPlanning.finished = true;
-        $('#save-entity').trigger('click');
+        /*if(this.designAndPlanning.runMonth) {*/
+            this.designAndPlanning.finished = true;
+            $('#save-entity').trigger('click');
+        /*}
+        else{
+            this.onError("برای تایید نهایی ماه اجرا را باید وارد نمائید.")
+        }*/
     }
     trackMahiatCourseById(index: number, item: IMahiatCourseMarineSuffix) {
         return item.id;

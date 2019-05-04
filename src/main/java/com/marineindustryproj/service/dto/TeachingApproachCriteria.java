@@ -41,9 +41,6 @@ public class TeachingApproachCriteria implements Serializable {
 
     private LongFilter designAndPlanningId;
 
-    public TeachingApproachCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

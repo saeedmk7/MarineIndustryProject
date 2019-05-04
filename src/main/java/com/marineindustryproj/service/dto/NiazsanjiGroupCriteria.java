@@ -59,9 +59,6 @@ public class NiazsanjiGroupCriteria implements Serializable {
 
     private LongFilter scientificWorkGroupId;
 
-    public NiazsanjiGroupCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

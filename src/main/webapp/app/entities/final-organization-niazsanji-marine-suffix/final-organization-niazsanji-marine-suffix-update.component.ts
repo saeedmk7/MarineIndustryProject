@@ -21,6 +21,8 @@ import {RequestOrganizationNiazsanjiMarineSuffixService} from 'app/entities/requ
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
 import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
+import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
+import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 
 @Component({
     selector: 'mi-final-organization-niazsanji-marine-suffix-update',
@@ -33,7 +35,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixUpdateComponent implements On
     people: IPersonMarineSuffix[];
 
     teachers: ITeacherMarineSuffix[];
-
+    coursetypes: ICourseTypeMarineSuffix[];
     educationalmodules: IEducationalModuleMarineSuffix[];
 
     organizationCharts: IOrganizationChartMarineSuffix[];
@@ -46,6 +48,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixUpdateComponent implements On
         private jhiAlertService: JhiAlertService,
         private finalOrganizationNiazsanjiService: FinalOrganizationNiazsanjiMarineSuffixService,
         private personService: PersonMarineSuffixService,
+        private courseTypeService: CourseTypeMarineSuffixService,
         private organizationChartService: OrganizationChartMarineSuffixService,
         private teacherService: TeacherMarineSuffixService,
         private educationalModuleService: EducationalModuleMarineSuffixService,
@@ -106,6 +109,12 @@ export class FinalOrganizationNiazsanjiMarineSuffixUpdateComponent implements On
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
         }
+        this.courseTypeService.query().subscribe(
+            (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                this.coursetypes = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
     change(i){
         this.router.navigateByUrl(i);

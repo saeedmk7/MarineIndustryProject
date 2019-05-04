@@ -134,6 +134,10 @@ public class RequestOrganizationNiazsanji implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("requestOrganizationNiazsanjis")
+    private CourseType courseType;
+
+    @ManyToOne
+    @JsonIgnoreProperties("requestOrganizationNiazsanjis")
     private OrganizationChart organizationChart;
 
     @ManyToOne
@@ -516,6 +520,19 @@ public class RequestOrganizationNiazsanji implements Serializable {
 
     public void setDocuments(Set<Document> documents) {
         this.documents = documents;
+    }
+
+    public CourseType getCourseType() {
+        return courseType;
+    }
+
+    public RequestOrganizationNiazsanji courseType(CourseType courseType) {
+        this.courseType = courseType;
+        return this;
+    }
+
+    public void setCourseType(CourseType courseType) {
+        this.courseType = courseType;
     }
 
     public OrganizationChart getOrganizationChart() {

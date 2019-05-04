@@ -41,9 +41,6 @@ public class TeachApproachCriteria implements Serializable {
 
     private LongFilter finalOrganizationNiazsanjiId;
 
-    public TeachApproachCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }

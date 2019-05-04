@@ -5,8 +5,8 @@ export class SearchPanelModel {
         public type?: string,
         public searchType?: string,
         public values?: any,
-        public bindLabel: string = "title",
-        public className: string = "",
+        public bindLabel: string = 'title',
+        public className: string = '',
         public selectedValue?: string){
     }
 }

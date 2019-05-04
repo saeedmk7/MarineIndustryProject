@@ -51,9 +51,6 @@ public class RunningStepCriteria implements Serializable {
 
     private LongFilter runRunningStepId;
 
-    public RunningStepCriteria() {
-    }
-
     public LongFilter getId() {
         return id;
     }
