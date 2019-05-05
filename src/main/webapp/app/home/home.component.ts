@@ -139,6 +139,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                     if(!resp.body.organizationChartId){
                         this.badError = "موقعیت در چارت سازمانی برای شما تنظیم نشده است، لطفا مراتب را با مدیریت سامانه در میان بگذارید.";
                     }
+                    //this.prepareNiazsanjiChart(resp.body.id);
                 })
             }
             if(this.isSuperUsers)
@@ -199,7 +200,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
 
     }
-
+    prepareNiazsanjiChart(personId: number){
+        //this.finalNiazsanjiReportService.niazsanjiChartResult(personId).subscribe()
+    }
     makeChartResult(){
 
         const groups = this.organizationcharts.filter(a => a.parentId == null);

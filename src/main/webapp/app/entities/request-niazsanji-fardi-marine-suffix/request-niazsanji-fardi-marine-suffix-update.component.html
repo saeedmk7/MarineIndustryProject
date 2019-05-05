@@ -78,6 +78,7 @@
                             <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazSanjiSource">Niaz Sanji Source</span> </th>
                             <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.priceCost">Price Cost</span></th>
                             <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.educationalModule">Educational Module</span></th>
+                            <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.courseType">Course Type</span></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -90,6 +91,9 @@
                                 <!--<div *ngIf="finalNiazsanjiReport.educationalModuleId">
                                     <a [routerLink]="['../educational-module-marine-suffix', finalNiazsanjiReport.educationalModuleId , 'view' ]" >{{finalNiazsanjiReport.educationalModuleTitle}}</a>
                                 </div>-->
+                            </td>
+                            <td>
+                                {{finalNiazsanjiReport.courseTypeTitle}}
                             </td>
                         </tr>
                         <tr *ngIf="hasNoRow" >

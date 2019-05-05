@@ -62,6 +62,12 @@ export class FinalNiazsanjiReportMarineSuffixService {
             .get<IChartResult[]>(url, { observe: 'response' })
             .pipe(map((res: HttpResponse<IChartResult[]>) => res));
     }
+    niazsanjiChartResult(personId: number): Observable<HttpResponse<IChartResult[]>> {
+        let url = this.resourceUrl + '/getChartData/' + personId;
+        return this.http
+            .get<IChartResult[]>(url, { observe: 'response' })
+            .pipe(map((res: HttpResponse<IChartResult[]>) => res));
+    }
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http

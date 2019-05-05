@@ -61,6 +61,7 @@
                             <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazSanjiSource">Niaz Sanji Source</span> </th>
                             <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.priceCost">Price Cost</span></th>
                             <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.educationalModule">Educational Module</span></th>
+                            <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.courseType">Course Type</span></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -73,6 +74,9 @@
                                 <!--<div *ngIf="finalNiazsanjiReport.educationalModuleId">
                                     <a [routerLink]="['../educational-module-marine-suffix', finalNiazsanjiReport.educationalModuleId , 'view' ]" >{{finalNiazsanjiReport.educationalModuleTitle}}</a>
                                 </div>-->
+                            </td>
+                            <td>
+                                {{finalNiazsanjiReport.courseTypeTitle}}
                             </td>
                         </tr>
                         <tr *ngIf="hasNoRow" >
@@ -92,6 +96,7 @@
                             <th>پودمان ها</th>
                             <th>ساعت پودمان</th>
                             <th>سطح پودمان</th>
+                            <th>نوع دوره</th>
                             <th>هزینه</th>
                         </tr>
                         </thead>
@@ -107,6 +112,7 @@
                             </td>
                             <td>{{approvedHour | number}}</td>
                             <td>{{approvedLevel}}</td>
+                            <td>{{requestNiazsanjiFardi.courseTypeTitle}}</td>
                             <td>
                                 <!--<input type="number" class="form-control" name="costApprovedEducationalModule" id="field_costApprovedEducationalModule"
                                        [(ngModel)]="requestNiazsanjiFardi.costApprovedEducationalModule" />-->
@@ -124,6 +130,7 @@
                             </td>
                             <td>{{allHour | number}}</td>
                             <td>{{allLevel}}</td>
+                            <td>{{requestNiazsanjiFardi.courseTypeTitle}}</td>
                             <td>
                                 <span>{{requestNiazsanjiFardi.costAllEducationalModule}}</span>
                             </td>
