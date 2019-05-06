@@ -187,6 +187,8 @@
             <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-grid-column>
+            <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="200"></kendo-grid-column>
+            <kendo-grid-column field="finalizeCost" title="هزینه پایانی" [width]="200"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100">
                 <ng-template
                     kendoGridFooterTemplate
@@ -210,6 +212,7 @@
                 <kendo-excelexport-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="priceCost" title="هزینه" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
             </kendo-grid-excel>
         </kendo-grid>
@@ -266,7 +269,10 @@
             <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-grid-column>
+            <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="200"></kendo-grid-column>
+            <kendo-grid-column field="finalizeCost" title="هزینه پایانی" [width]="200"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100">
+
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل (نفر ساعت): {{total | number}}</ng-template>
@@ -290,6 +296,7 @@
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="priceCost" title="هزینه" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
                <!-- <div *kendoGridDetailTemplate="let dataItem">
                     <mi-final-niazsanji-report-marine-suffix-detail-people [people]="dataItem.people"></mi-final-niazsanji-report-marine-suffix-detail-people>

@@ -7,10 +7,13 @@ export interface IFinalNiazsanjiReportOrganizationMarineSuffix {
     educationalModuleId?: number;
     educationalModuleLevel?: string;
     educationalModuleTotalLearningTime?: number;
+    courseTypeId?: number;
+    courseTypeTitle?: string;
     priceCost?: number;
     niazsanjiYear?: number;
-    people?: IPersonMarineSuffix[],
-    status?: number
+    finalizeCost?: number;
+    people?: IPersonMarineSuffix[];
+    status?: number;
 }
 
 export class FinalNiazsanjiReportOrganizationMarineSuffix implements IFinalNiazsanjiReportOrganizationMarineSuffix  {
@@ -19,9 +22,12 @@ export class FinalNiazsanjiReportOrganizationMarineSuffix implements IFinalNiazs
         public educationalModuleLevel?: string,
         public educationalModuleTitle?: string,
         public educationalModuleTotalLearningTime?: number,
+        public courseTypeId?: number,
+        public courseTypeTitle?: string,
         public id?: number,
         public niazsanjiYear?: number,
         public organizationChartTitle?: string,
+        public finalizeCost?: number,
         public people?: IPersonMarineSuffix[],
         public priceCost?: number,
         public status?: number) {

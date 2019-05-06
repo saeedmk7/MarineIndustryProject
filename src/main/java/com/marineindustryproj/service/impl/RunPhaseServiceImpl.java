@@ -104,6 +104,7 @@ public class RunPhaseServiceImpl implements RunPhaseService {
         runPhase.setDescription(runPhaseSaveDataModel.getDescription());
         runPhase.setFinalizeCost(runPhaseSaveDataModel.getFinalizeCost());
         runPhase.setStepNumber(runPhaseSaveDataModel.getStepNumber());
+        finalNiazsanjiReport.setFinalizeCost(runPhase.getFinalizeCost());
         if(runPhaseSaveDataModel.getDone() && runPhase.getStatus() < 10)
         {
             runPhase.setDone(runPhaseSaveDataModel.getDone());

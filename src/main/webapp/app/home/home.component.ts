@@ -25,6 +25,7 @@ import {FinalNiazsanjiReportMarineSuffix} from "app/shared/model/final-niazsanji
 import {FinalNiazsanjiReportMarineSuffixService} from "app/entities/final-niazsanji-report-marine-suffix";
 import {IChartResult} from "app/shared/model/custom/chart-result";
 import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
+import {IHomePageNiazsanjiReport} from "app/shared/model/custom/niazsanji-chart-result";
 
 
 @Component({
@@ -37,6 +38,7 @@ import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 })
 export class HomeComponent implements OnInit, OnDestroy {
     organizationcharts: IOrganizationChartMarineSuffix[];
+    homePageNiazsanjiReport: IHomePageNiazsanjiReport;
     account: Account;
     modalRef: NgbModalRef;
    /* welcomeState = 'out';
@@ -139,7 +141,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                     if(!resp.body.organizationChartId){
                         this.badError = "موقعیت در چارت سازمانی برای شما تنظیم نشده است، لطفا مراتب را با مدیریت سامانه در میان بگذارید.";
                     }
-                    //this.prepareNiazsanjiChart(resp.body.id);
+                    this.prepareHomePageNiazsanjiReport(resp.body.id);
                 })
             }
             if(this.isSuperUsers)
@@ -200,8 +202,11 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
 
     }
-    prepareNiazsanjiChart(personId: number){
-        //this.finalNiazsanjiReportService.niazsanjiChartResult(personId).subscribe()
+    prepareHomePageNiazsanjiReport(personId: number){
+        this.finalNiazsanjiReportService.getHomePageNiazsanjiReport(personId).subscribe((resp: HttpResponse<IHomePageNiazsanjiReport>) => {
+           this.homePageNiazsanjiReport = resp.body;
+        },
+            (res: HttpErrorResponse) => this.onError(res.message));
     }
     makeChartResult(){
 

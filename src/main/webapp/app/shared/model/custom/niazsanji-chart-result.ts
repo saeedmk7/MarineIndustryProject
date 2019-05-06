@@ -1,13 +1,21 @@
 
-export interface INiazsanjiChartResult {
-    requestNiazsanjiFardiCount?: number;
-    requestOrganizationNiazsanjiCount?: number;
+export interface IHomePageNiazsanjiReport {
+    niazsanjiFardiCount?: number;
+    niazsanjiFardiSucceedCount?: number;
+    organizationNiazsanjiCount?: number;
+    organizationNiazsanjiSucceedCount?: number;
+    designAndPlanningStepCount?: number;
+    runningStepCount?: number;
 }
 
-export class NiazsanjiChartResult implements INiazsanjiChartResult {
+export class HomePageNiazsanjiReport implements IHomePageNiazsanjiReport {
     constructor(
-        public requestNiazsanjiFardiCount?: number,
-        public requestOrganizationNiazsanjiCount?: number
+        public niazsanjiFardiCount?: number,
+        public niazsanjiFardiSucceedCount?: number,
+        public organizationNiazsanjiCount?: number,
+        public organizationNiazsanjiSucceedCount?: number,
+        public designAndPlanningStepCount?: number,
+        public runningStepCount?: number
     ) {
     }
 }

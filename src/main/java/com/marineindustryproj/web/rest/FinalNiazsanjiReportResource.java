@@ -27,6 +27,7 @@ import com.marineindustryproj.service.dto.PersonCriteria;
 import com.marineindustryproj.service.dto.PersonDTO;
 import com.marineindustryproj.service.dto.ReportDTO;
 import com.marineindustryproj.service.dto.customs.ChartResult;
+import com.marineindustryproj.service.dto.customs.HomePageNiazsanjiReport;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -590,6 +591,21 @@ public class FinalNiazsanjiReportResource {
 
         List<ChartResult> chartResults = finalNiazsanjiReportService.getChartResult(niazsanjiYear);
         return ResponseEntity.ok().body(chartResults);
+    }
+
+    /**
+     * GET  /final-niazsanji-reports/:id : get the "id" finalNiazsanjiReport.
+     *
+     * @param personId the id of the finalNiazsanjiReportDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the finalNiazsanjiReportDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/final-niazsanji-reports/getHomePageNiazsanjiReport/{personId}")
+    @Timed
+    public ResponseEntity<HomePageNiazsanjiReport> getHomePageNiazsanjiReport(@PathVariable Long personId) {
+        log.debug("REST request to get HomePageNiazsanjiReport : {}", personId);
+
+        HomePageNiazsanjiReport homePageNiazsanjiReports = finalNiazsanjiReportService.getHomePageNiazsanjiReport(personId);
+        return ResponseEntity.ok().body(homePageNiazsanjiReports);
     }
 
     /**

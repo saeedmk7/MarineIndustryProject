@@ -2,7 +2,9 @@ package com.marineindustryproj.service.impl;
 
 import com.marineindustryproj.domain.FinalNiazsanjiReportPerson;
 import com.marineindustryproj.domain.OrganizationChart;
+import com.marineindustryproj.domain.Person;
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
+import com.marineindustryproj.domain.enumeration.RequestStatus;
 import com.marineindustryproj.repository.OrganizationChartRepository;
 import com.marineindustryproj.repository.PersonRepository;
 import com.marineindustryproj.security.SecurityUtils;
@@ -21,7 +23,8 @@ import com.marineindustryproj.service.NiazsanjiGroupService;
 import com.marineindustryproj.service.OrganizationChartQueryService;
 import com.marineindustryproj.service.PersonQueryService;
 import com.marineindustryproj.service.PersonService;
-import com.marineindustryproj.service.dto.FinalNiazsanjiReportCriteria;
+import com.marineindustryproj.service.RequestNiazsanjiFardiQueryService;
+import com.marineindustryproj.service.RequestOrganizationNiazsanjiQueryService;
 import com.marineindustryproj.service.dto.FinalNiazsanjiReportDTO;
 import com.marineindustryproj.service.dto.FinalNiazsanjiReportPersonCriteria;
 import com.marineindustryproj.service.dto.FinalNiazsanjiReportPersonDTO;
@@ -32,8 +35,11 @@ import com.marineindustryproj.service.dto.NiazsanjiGroupCriteria;
 import com.marineindustryproj.service.dto.NiazsanjiGroupDTO;
 import com.marineindustryproj.service.dto.PersonCriteria;
 import com.marineindustryproj.service.dto.PersonDTO;
+import com.marineindustryproj.service.dto.RequestNiazsanjiFardiCriteria;
+import com.marineindustryproj.service.dto.RequestOrganizationNiazsanjiCriteria;
 import com.marineindustryproj.service.dto.customs.ChartResult;
 import com.marineindustryproj.service.dto.customs.FinalNiazsanjiReportCustomDTO;
+import com.marineindustryproj.service.dto.customs.HomePageNiazsanjiReport;
 import com.marineindustryproj.service.mapper.FinalNiazsanjiReportMapper;
 import com.marineindustryproj.service.mapper.OrganizationChartMapper;
 import io.github.jhipster.service.filter.BooleanFilter;
@@ -100,6 +106,10 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
     private final OrganizationChartMapper organizationChartMapper;
 
+    private final RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService;
+
+    private final RequestOrganizationNiazsanjiQueryService requestOrganizationNiazsanjiQueryService;
+
     private final CacheManager cacheManager;
 
     public FinalNiazsanjiReportServiceImpl(FinalNiazsanjiReportRepository finalNiazsanjiReportRepository,
@@ -119,6 +129,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                                            FinalNiazsanjiReportPersonQueryService finalNiazsanjiReportPersonQueryService,
                                            OrganizationChartRepository organizationChartRepository,
                                            OrganizationChartMapper organizationChartMapper,
+                                           RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService,
+                                           RequestOrganizationNiazsanjiQueryService requestOrganizationNiazsanjiQueryService,
                                            CacheManager cacheManager) {
         this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
         this.finalNiazsanjiReportMapper = finalNiazsanjiReportMapper;
@@ -136,6 +148,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         this.finalNiazsanjiReportPersonQueryService = finalNiazsanjiReportPersonQueryService;
         this.organizationChartRepository = organizationChartRepository;
         this.organizationChartMapper = organizationChartMapper;
+        this.requestNiazsanjiFardiQueryService = requestNiazsanjiFardiQueryService;
+        this.requestOrganizationNiazsanjiQueryService = requestOrganizationNiazsanjiQueryService;
         this.cacheManager = cacheManager;
     }
     /**
@@ -374,6 +388,60 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             chartResults.add(chartResult);
         }
         return chartResults;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public HomePageNiazsanjiReport getHomePageNiazsanjiReport(Long personId) {
+        log.debug("Request to get HomePageNiazsanjiReport by personId : {}", personId);
+        Optional<Person> person = personRepository.findById(personId);
+        HomePageNiazsanjiReport report = new HomePageNiazsanjiReport();
+        if(person.isPresent()){
+            LongFilter personIdFilter = new LongFilter();
+            personIdFilter.setEquals(personId);
+
+
+            RequestNiazsanjiFardiCriteria requestNiazsanjiFardiCriteria = new RequestNiazsanjiFardiCriteria();
+            requestNiazsanjiFardiCriteria.setPersonId(personIdFilter);
+
+            report.setNiazsanjiFardiCount(requestNiazsanjiFardiQueryService.countByCriteria(requestNiazsanjiFardiCriteria));
+
+            RequestNiazsanjiFardiCriteria.RequestStatusFilter requestStatusFilter = new RequestNiazsanjiFardiCriteria.RequestStatusFilter();
+            requestStatusFilter.setEquals(RequestStatus.ACCEPT);
+            requestNiazsanjiFardiCriteria.setRequestStatus(requestStatusFilter);
+
+            report.setNiazsanjiFardiSucceedCount(requestNiazsanjiFardiQueryService.countByCriteria(requestNiazsanjiFardiCriteria));
+
+
+            RequestOrganizationNiazsanjiCriteria requestOrganizationNiazsanjiCriteria = new RequestOrganizationNiazsanjiCriteria();
+            requestOrganizationNiazsanjiCriteria.setPersonId(personIdFilter);
+
+            report.setOrganizationNiazsanjiCount(requestOrganizationNiazsanjiQueryService.countByCriteria(requestOrganizationNiazsanjiCriteria));
+
+            RequestOrganizationNiazsanjiCriteria.RequestStatusFilter organizationRequestStatusFilter = new RequestOrganizationNiazsanjiCriteria.RequestStatusFilter();
+            requestStatusFilter.setEquals(RequestStatus.ACCEPT);
+            requestOrganizationNiazsanjiCriteria.setRequestStatus(organizationRequestStatusFilter);
+
+            report.setOrganizationNiazsanjiSucceedCount(requestOrganizationNiazsanjiQueryService.countByCriteria(requestOrganizationNiazsanjiCriteria));
+
+            FinalNiazsanjiReportPersonCriteria finalNiazsanjiReportPersonCriteria = new FinalNiazsanjiReportPersonCriteria();
+            finalNiazsanjiReportPersonCriteria.setPersonId(personIdFilter);
+            List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPersonDTOS = finalNiazsanjiReportPersonQueryService.findByCriteria(finalNiazsanjiReportPersonCriteria);
+
+            long designAndPlanningStepCount = 0;
+            long runningStepCount = 0;
+
+            for (FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPersonDTO: finalNiazsanjiReportPersonDTOS) {
+                if(finalNiazsanjiReportPersonDTO.getStatus() == 10)
+                    designAndPlanningStepCount++;
+                if(finalNiazsanjiReportPersonDTO.getStatus() == 20)
+                    runningStepCount++;
+            }
+            report.setDesignAndPlanningStepCount(designAndPlanningStepCount);
+            report.setRunningStepCount(runningStepCount);
+        }
+
+        return report;
     }
 
     private Long getEducationHours(List<FinalNiazsanjiReportCustomDTO> finalNiazsanjiReportCustomDTOS,

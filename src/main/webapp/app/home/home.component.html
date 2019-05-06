@@ -20,6 +20,31 @@
                     <div [chart]="priceCostChart"></div>
                 </ng-container>
 
+                <ng-container>
+                    <table class="table table-striped  table-bordered table-hover table-sm">
+                        <thead>
+                        <tr >
+                            <th><span>درخواست های نیازسنجی فردی</span> </th>
+                            <th><span>درخواست های نیازسنجی فردی نهایی شده</span></th>
+                            <th><span>درخواست های نیازسنجی سازمانی</span> </th>
+                            <th><span>درخواست های نیازسنجی سازمانی نهایی شده</span></th>
+                            <th><span>درخواست های نیازسنجی در حال برنامه ریزی</span></th>
+                            <th><span>درخواست های نیازسنجی در حال اجرا</span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{homePageNiazsanjiReport.niazsanjiFardiCount}}</td>
+                            <td>{{homePageNiazsanjiReport.niazsanjiFardiSucceedCount}}</td>
+                            <td>{{homePageNiazsanjiReport.organizationNiazsanjiCount}}</td>
+                            <td>{{homePageNiazsanjiReport.organizationNiazsanjiSucceedCount}}</td>
+                            <td>{{homePageNiazsanjiReport.designAndPlanningStepCount}}</td>
+                            <td>{{homePageNiazsanjiReport.runningStepCount}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </ng-container>
+
                 <ng-container *ngIf="isAdmin" [ngSwitch]="pageName">
                     <div class="div-pic-home" *ngSwitchCase="'home'"  [@enterAnimation]>
                         <img class="img-home" src="../../content/images/home/ShotTerm-Learning.png"/>

@@ -124,7 +124,7 @@
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.courseType" for="field_courseType">Course Type</label>
                     <select class="form-control" id="field_courseType" name="courseType" [(ngModel)]="finalOrganizationNiazsanji.courseTypeId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="courseTypeOption.id" *ngFor="let courseTypeOption of coursetypes; trackBy: trackCourseTypeById">{{courseTypeOption.title}}</option>
+                        <option [ngValue]="courseTypeOption.id" *ngFor="let courseTypeOption of coursetypes">{{courseTypeOption.title}}</option>
                     </select>
                 </div>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات مدرس</div></div>
