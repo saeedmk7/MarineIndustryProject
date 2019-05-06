@@ -46,6 +46,7 @@ export class NavBarItemMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        debugger;
         this.navBarItem.createDate = moment(this.createDate, DATE_TIME_FORMAT);
         this.navBarItem.modifyDate = moment(this.modifyDate, DATE_TIME_FORMAT);
         if (this.navBarItem.id !== undefined) {

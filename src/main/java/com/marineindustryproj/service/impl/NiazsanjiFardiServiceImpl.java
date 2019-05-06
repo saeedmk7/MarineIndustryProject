@@ -99,6 +99,7 @@ public class NiazsanjiFardiServiceImpl implements NiazsanjiFardiService {
         finalNiazsanjiReport.setDocuments(niazsanjiFardi.getDocuments());
         finalNiazsanjiReport.setNiazSanjiSource(NiazSanjiSource.FARDI);
         finalNiazsanjiReport.setPriceCost(niazsanjiFardi.getPriceCost().intValue());
+        finalNiazsanjiReport.setCourseType(niazsanjiFardi.getCourseType());
         finalNiazsanjiReport.setStatus(0);
         finalNiazsanjiReport = finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
 
