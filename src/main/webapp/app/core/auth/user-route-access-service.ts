@@ -5,7 +5,7 @@ import { Principal } from '../';
 import { LoginModalService } from '../login/login-modal.service';
 import { StateStorageService } from './state-storage.service';
 import {CURRENT_ALLOWED_URL_KEY} from "app/shared/constants/storage-keys.constants";
-import {SessionStorageService} from 'ngx-webstorage';
+import {LocalStorageService} from 'ngx-webstorage';
 
 @Injectable({ providedIn: 'root' })
 export class UserRouteAccessService implements CanActivate {
@@ -14,7 +14,7 @@ export class UserRouteAccessService implements CanActivate {
         private loginModalService: LoginModalService,
         private principal: Principal,
         private stateStorageService: StateStorageService,
-        private sessionStorageService: SessionStorageService
+        private $localStorage: LocalStorageService
     ) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Promise<boolean> {
@@ -29,12 +29,13 @@ export class UserRouteAccessService implements CanActivate {
         const principal = this.principal;
         return Promise.resolve(
             principal.identity().then(account => {
+                debugger;
                 if (account) {
 
                     if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined) {
                         return true;
                     }
-                    let urls: string[] = this.sessionStorageService.retrieve(CURRENT_ALLOWED_URL_KEY);
+                    let urls: string[] = this.$localStorage.retrieve(CURRENT_ALLOWED_URL_KEY);
                     let splitUrl = url.split("/");
                     if(splitUrl.length > 0) {
                         let searchWord = "";

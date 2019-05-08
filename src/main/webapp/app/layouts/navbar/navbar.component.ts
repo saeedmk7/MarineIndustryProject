@@ -10,7 +10,7 @@ import {NavBarItemAuthorityMarineSuffixService} from "app/entities/nav-bar-item-
 import {NavBarItemMarineSuffixService} from "app/entities/nav-bar-item-marine-suffix";
 import {INavBarItemMarineSuffix} from "app/shared/model/nav-bar-item-marine-suffix.model";
 import {INavBarItemAuthorityMarineSuffix} from "app/shared/model/nav-bar-item-authority-marine-suffix.model";
-import {SessionStorageService} from 'ngx-webstorage';
+import {LocalStorageService} from 'ngx-webstorage';
 import {CURRENT_ALLOWED_URL_KEY} from "app/shared/constants/storage-keys.constants";
 
 /*import * as menus from './menu.json';*/
@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit,AfterViewInit {
         private jhiAlertService: JhiAlertService,
         private navBarItemAuthorityMarineSuffixService: NavBarItemAuthorityMarineSuffixService,
         private navBarItemMarineSuffixService: NavBarItemMarineSuffixService,
-        private sessionStorage: SessionStorageService
+        private $localStorage: LocalStorageService
     ) {
     }
     ngOnInit() {
@@ -108,7 +108,7 @@ export class NavbarComponent implements OnInit,AfterViewInit {
                                 additionalUrlsThatNeeds.forEach(a => {
                                     navBarItemAddresses.push(a);
                                 });
-                                this.sessionStorage.store(CURRENT_ALLOWED_URL_KEY, navBarItemAddresses);
+                                this.$localStorage.store(CURRENT_ALLOWED_URL_KEY, navBarItemAddresses);
                                 this.list_to_tree(this.navBarItemMarineSuffix.filter(a => a.isActive == true));
                             })
                     },
