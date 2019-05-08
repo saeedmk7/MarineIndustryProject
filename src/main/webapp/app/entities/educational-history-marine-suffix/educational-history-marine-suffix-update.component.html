@@ -20,13 +20,29 @@
                             [required]="true"
                             bindValue="id"
                             bindLabel="fullName"
-                            placeholder="نام"
+                            placeholder="نام و نام خانوادگی"
                             name="person"
                             id="field_person"
                             [(ngModel)]="educationalHistory.personId" >
                     </div>
                 </div>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات دوره گذرانده شده</div></div>
+                <div class="form-group half">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.educationalModule" for="field_educationalModule">Educational Module</label>
+                    <ng-select
+                        [items]="educationalmodules"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        (change)="onEducationalModuleChange($event)"
+                        bindLabel="fullTitle"
+                        bindValue="id"
+                        placeholder="پودمان آموزشی"
+                        name="educationalModule"
+                        id="field_educationalModule"
+                        [(ngModel)]="educationalHistory.educationalModuleId">
+                </div>
                 <div class="form-group half">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.educationalModuleTitle" for="field_educationalModuleTitle">Educational Module Title</label>
                     <input type="text" class="form-control" name="educationalModuleTitle" id="field_educationalModuleTitle"
@@ -179,13 +195,7 @@
                     <textarea class="form-control" name="description" id="field_description"
                         [(ngModel)]="educationalHistory.description" ></textarea>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.educationalModule" for="field_educationalModule">Educational Module</label>
-                    <select class="form-control" id="field_educationalModule" name="educationalModule" [(ngModel)]="educationalHistory.educationalModuleId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="educationalModuleOption.id" *ngFor="let educationalModuleOption of educationalmodules; trackBy: trackEducationalModuleById">{{educationalModuleOption.title}}</option>
-                    </select>
-                </div>
+
                 <div class="form-group" *ngIf="educationalHistory.id === undefined">
                     <span *ngIf="targetPeople">درخواست شما برای افراد زیر ارسال می شود.</span>
                     <ul>

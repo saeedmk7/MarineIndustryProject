@@ -107,13 +107,13 @@ export class RunRunningStepMarineSuffixComponent implements OnInit, OnDestroy {
         return item.id;
     }
 
-    byteSize(field) {
+    /*byteSize(field) {
         return this.dataUtils.byteSize(field);
     }
 
     openFile(contentType, field) {
         return this.dataUtils.openFile(contentType, field);
-    }
+    }*/
 
     registerChangeInRunRunningSteps() {
         this.eventSubscriber = this.eventManager.subscribe('runRunningStepListModification', response => this.loadAll());

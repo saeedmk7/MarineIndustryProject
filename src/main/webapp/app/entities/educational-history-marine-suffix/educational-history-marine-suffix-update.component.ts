@@ -15,6 +15,8 @@ import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dat
 import {Principal} from "app/core/auth/principal.service";
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import * as persianMoment from 'jalali-moment';
+import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
+import {EducationalModuleMarineSuffixService} from "app/entities/educational-module-marine-suffix";
 
 @Component({
     selector: 'mi-educational-history-marine-suffix-update',
@@ -24,7 +26,7 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
     educationalHistory: IEducationalHistoryMarineSuffix;
     organizationCharts: IOrganizationChartMarineSuffix[];
     isSaving: boolean;
-
+    educationalmodules: IEducationalModuleMarineSuffix[];
     people: IPersonMarineSuffix[];
     targetPeople: IPersonMarineSuffix[];
     currentUserFullName: string;
@@ -49,7 +51,8 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
         protected activatedRoute: ActivatedRoute,
         private principal : Principal,
         private convertObjectDatesService: ConvertObjectDatesService,
-        private treeUtilities: TreeUtilities
+        private treeUtilities: TreeUtilities,
+        private educationalModuleService: EducationalModuleMarineSuffixService
     ) {}
 
     ngOnInit() {
@@ -72,6 +75,17 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
 
 
         });
+        if(this.educationalModuleService.educationalModules){
+            this.educationalmodules = this.educationalModuleService.educationalModules;
+        }
+        else {
+            this.educationalModuleService.query().subscribe(
+                (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
+                    this.educationalmodules = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
 
     }
     loadOrgCharts(){
@@ -113,6 +127,12 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+    }
+    onEducationalModuleChange($event: IEducationalModuleMarineSuffix){
+        debugger;
+        this.educationalHistory.learningTimeTheorical = $event.learningTimeTheorical;
+        this.educationalHistory.learningTimePractical = $event.learningTimePractical;
+        this.educationalHistory.educationalModuleName = $event.title;
     }
     previousState() {
         window.history.back();
