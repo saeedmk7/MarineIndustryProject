@@ -115,13 +115,13 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"
+                        <button type="submit"  *jhiHasAnyAuthority="['ROLE_ADMIN']"
                                 [routerLink]="['/teacher-marine-suffix', teacher.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button type="submit"  *jhiHasAnyAuthority="['ROLE_ADMIN']"
                                 [routerLink]="['/', { outlets: { popup: 'teacher-marine-suffix/'+ teacher.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
