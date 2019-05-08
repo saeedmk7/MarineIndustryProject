@@ -21,6 +21,7 @@
             <th jhiSortBy="done"><span jhiTranslate="marineindustryprojApp.runPhase.done">Done</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="doneUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.doneUserLogin">Done User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="doneDate"><span jhiTranslate="marineindustryprojApp.runPhase.doneDate">Done Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="runMonth"><span jhiTranslate="marineindustryprojApp.runPhase.runMonth">Run Month</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.runPhase.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -42,6 +43,7 @@
                 <td>{{runPhase.done}}</td>
                 <td>{{runPhase.doneUserLogin}}</td>
                 <td>{{runPhase.doneDate | date:'medium'}}</td>
+                <td>{{runPhase.runMonth}}</td>
                 <td>{{runPhase.createUserLogin}}</td>
                 <td>{{runPhase.createDate | date:'medium'}}</td>
                 <td>{{runPhase.modifyUserLogin}}</td>

@@ -56,7 +56,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
     private IntegerFilter status;
 
     private IntegerFilter runMonth;
-    
+
     private IntegerFilter finalizeCost;
 
     private LongFilter finalNiazsanjiReportPersonId;
@@ -186,7 +186,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
     public void setRunMonth(IntegerFilter runMonth) {
         this.runMonth = runMonth;
     }
-    
+
     public IntegerFilter getFinalizeCost() {
         return finalizeCost;
     }

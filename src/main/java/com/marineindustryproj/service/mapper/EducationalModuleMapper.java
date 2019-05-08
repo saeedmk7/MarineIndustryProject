@@ -30,6 +30,7 @@ public interface EducationalModuleMapper extends EntityMapper<EducationalModuleD
     @Mapping(target = "niazsanjiFardis", ignore = true)
     @Mapping(target = "approvedRequestNiazsanjiFardis", ignore = true)
     @Mapping(target = "allRequestNiazsanjiFardis", ignore = true)
+    @Mapping(target = "educationalHistories", ignore = true)
     @Mapping(source = "requestEducationalModuleId", target = "requestEducationalModule")
     @Mapping(source = "securityLevelId", target = "securityLevel")
     @Mapping(source = "skillableLevelOfSkillId", target = "skillableLevelOfSkill")

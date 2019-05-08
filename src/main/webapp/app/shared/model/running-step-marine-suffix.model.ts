@@ -7,6 +7,9 @@ export interface IRunningStepMarineSuffix {
     description?: string;
     stepNumber?: number;
     stepRequired?: boolean;
+    fileDocRequired?: boolean;
+    colorText?: string;
+    isHeader?: boolean;
     createUserLogin?: string;
     createDate?: Moment;
     modifyUserLogin?: string;
@@ -25,6 +28,9 @@ export class RunningStepMarineSuffix implements IRunningStepMarineSuffix {
         public description?: string,
         public stepNumber?: number,
         public stepRequired?: boolean,
+        public fileDocRequired?: boolean,
+        public colorText?: string,
+        public isHeader?: boolean,
         public createUserLogin?: string,
         public createDate?: Moment,
         public modifyUserLogin?: string,
@@ -36,6 +42,8 @@ export class RunningStepMarineSuffix implements IRunningStepMarineSuffix {
         public runRunningSteps?: IRunRunningStepMarineSuffix[]
     ) {
         this.stepRequired = this.stepRequired || false;
+        this.fileDocRequired = this.fileDocRequired || false;
+        this.isHeader = this.isHeader || false;
         this.archived = this.archived || false;
     }
 }

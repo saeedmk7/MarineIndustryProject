@@ -117,6 +117,8 @@
     <include file="config/liquibase/changelog/20190320175937_update_entity_courseType.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190321175937_update_entity_designAndPlanning.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190421175937_update_entity_addSomeField.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190425175937_update_entity_addSomeNewField.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190426175937_update_entity_educationalHistory.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

@@ -631,6 +631,7 @@ public class DesignAndPlanning implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", runMonth=" + getRunMonth() +
             "}";
     }
 }

@@ -87,6 +87,8 @@ public class EducationalModuleCriteria implements Serializable {
 
     private LongFilter allRequestNiazsanjiFardiId;
 
+    private LongFilter educationalHistoryId;
+
     private LongFilter scientificWorkGroupId;
 
     private LongFilter documentId;
@@ -367,6 +369,14 @@ public class EducationalModuleCriteria implements Serializable {
         this.allRequestNiazsanjiFardiId = allRequestNiazsanjiFardiId;
     }
 
+    public LongFilter getEducationalHistoryId() {
+        return educationalHistoryId;
+    }
+
+    public void setEducationalHistoryId(LongFilter educationalHistoryId) {
+        this.educationalHistoryId = educationalHistoryId;
+    }
+
     public LongFilter getScientificWorkGroupId() {
         return scientificWorkGroupId;
     }
@@ -506,6 +516,7 @@ public class EducationalModuleCriteria implements Serializable {
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
             Objects.equals(approvedRequestNiazsanjiFardiId, that.approvedRequestNiazsanjiFardiId) &&
             Objects.equals(allRequestNiazsanjiFardiId, that.allRequestNiazsanjiFardiId) &&
+            Objects.equals(educationalHistoryId, that.educationalHistoryId) &&
             Objects.equals(scientificWorkGroupId, that.scientificWorkGroupId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(educationalCenterId, that.educationalCenterId) &&
@@ -555,6 +566,7 @@ public class EducationalModuleCriteria implements Serializable {
         niazsanjiFardiId,
         approvedRequestNiazsanjiFardiId,
         allRequestNiazsanjiFardiId,
+        educationalHistoryId,
         scientificWorkGroupId,
         documentId,
         educationalCenterId,
@@ -605,6 +617,7 @@ public class EducationalModuleCriteria implements Serializable {
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
                 (approvedRequestNiazsanjiFardiId != null ? "approvedRequestNiazsanjiFardiId=" + approvedRequestNiazsanjiFardiId + ", " : "") +
                 (allRequestNiazsanjiFardiId != null ? "allRequestNiazsanjiFardiId=" + allRequestNiazsanjiFardiId + ", " : "") +
+                (educationalHistoryId != null ? "educationalHistoryId=" + educationalHistoryId + ", " : "") +
                 (scientificWorkGroupId != null ? "scientificWorkGroupId=" + scientificWorkGroupId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (educationalCenterId != null ? "educationalCenterId=" + educationalCenterId + ", " : "") +

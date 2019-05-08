@@ -11,6 +11,7 @@ export interface IRunPhaseMarineSuffix {
     done?: boolean;
     doneUserLogin?: string;
     doneDate?: Moment;
+    runMonth?: number;
     createUserLogin?: string;
     createDate?: Moment;
     modifyUserLogin?: string;
@@ -35,6 +36,7 @@ export class RunPhaseMarineSuffix implements IRunPhaseMarineSuffix {
         public done?: boolean,
         public doneUserLogin?: string,
         public doneDate?: Moment,
+        public runMonth?: number,
         public createUserLogin?: string,
         public createDate?: Moment,
         public modifyUserLogin?: string,

@@ -31,6 +31,8 @@ public class RunPhaseDTO implements Serializable {
 
     private ZonedDateTime doneDate;
 
+    private Integer runMonth;
+
     @Size(max = 50)
     private String createUserLogin;
 
@@ -114,6 +116,14 @@ public class RunPhaseDTO implements Serializable {
 
     public void setDoneDate(ZonedDateTime doneDate) {
         this.doneDate = doneDate;
+    }
+
+    public Integer getRunMonth() {
+        return runMonth;
+    }
+
+    public void setRunMonth(Integer runMonth) {
+        this.runMonth = runMonth;
     }
 
     public String getCreateUserLogin() {
@@ -243,6 +253,7 @@ public class RunPhaseDTO implements Serializable {
             ", done='" + isDone() + "'" +
             ", doneUserLogin='" + getDoneUserLogin() + "'" +
             ", doneDate='" + getDoneDate() + "'" +
+            ", runMonth=" + getRunMonth() +
             ", createUserLogin='" + getCreateUserLogin() + "'" +
             ", createDate='" + getCreateDate() + "'" +
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +

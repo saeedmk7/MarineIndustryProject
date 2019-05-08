@@ -28,6 +28,9 @@
             "archivedUserLogin": "آرشیو شده توسط",
             "archivedDate": "تاریخ آرشیو",
             "status": "وضعیت",
+            "fileDocRequired": "File Doc Required",
+            "colorText": "Color Text",
+            "isHeader": "Is Header",
             "runRunningStep": "Run Running Step"
         }
     }

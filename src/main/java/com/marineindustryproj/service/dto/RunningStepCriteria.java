@@ -33,6 +33,12 @@ public class RunningStepCriteria implements Serializable {
 
     private BooleanFilter stepRequired;
 
+    private BooleanFilter fileDocRequired;
+
+    private StringFilter colorText;
+
+    private BooleanFilter isHeader;
+
     private StringFilter createUserLogin;
 
     private ZonedDateTimeFilter createDate;
@@ -89,6 +95,30 @@ public class RunningStepCriteria implements Serializable {
 
     public void setStepRequired(BooleanFilter stepRequired) {
         this.stepRequired = stepRequired;
+    }
+
+    public BooleanFilter getFileDocRequired() {
+        return fileDocRequired;
+    }
+
+    public void setFileDocRequired(BooleanFilter fileDocRequired) {
+        this.fileDocRequired = fileDocRequired;
+    }
+
+    public StringFilter getColorText() {
+        return colorText;
+    }
+
+    public void setColorText(StringFilter colorText) {
+        this.colorText = colorText;
+    }
+
+    public BooleanFilter getIsHeader() {
+        return isHeader;
+    }
+
+    public void setIsHeader(BooleanFilter isHeader) {
+        this.isHeader = isHeader;
     }
 
     public StringFilter getCreateUserLogin() {
@@ -179,6 +209,9 @@ public class RunningStepCriteria implements Serializable {
             Objects.equals(description, that.description) &&
             Objects.equals(stepNumber, that.stepNumber) &&
             Objects.equals(stepRequired, that.stepRequired) &&
+            Objects.equals(fileDocRequired, that.fileDocRequired) &&
+            Objects.equals(colorText, that.colorText) &&
+            Objects.equals(isHeader, that.isHeader) &&
             Objects.equals(createUserLogin, that.createUserLogin) &&
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
@@ -198,6 +231,9 @@ public class RunningStepCriteria implements Serializable {
         description,
         stepNumber,
         stepRequired,
+        fileDocRequired,
+        colorText,
+        isHeader,
         createUserLogin,
         createDate,
         modifyUserLogin,
@@ -218,6 +254,9 @@ public class RunningStepCriteria implements Serializable {
                 (description != null ? "description=" + description + ", " : "") +
                 (stepNumber != null ? "stepNumber=" + stepNumber + ", " : "") +
                 (stepRequired != null ? "stepRequired=" + stepRequired + ", " : "") +
+                (fileDocRequired != null ? "fileDocRequired=" + fileDocRequired + ", " : "") +
+                (colorText != null ? "colorText=" + colorText + ", " : "") +
+                (isHeader != null ? "isHeader=" + isHeader + ", " : "") +
                 (createUserLogin != null ? "createUserLogin=" + createUserLogin + ", " : "") +
                 (createDate != null ? "createDate=" + createDate + ", " : "") +
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +

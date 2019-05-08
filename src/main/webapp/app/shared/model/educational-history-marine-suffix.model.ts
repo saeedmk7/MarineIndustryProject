@@ -4,7 +4,7 @@ import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
 
 export interface IEducationalHistoryMarineSuffix {
     id?: number;
-    educationalModuleTitle?: string;
+    educationalModuleName?: string;
     learningTimeTheorical?: number;
     learningTimePractical?: number;
     totalTime?: number;
@@ -28,6 +28,8 @@ export interface IEducationalHistoryMarineSuffix {
     personName?: string;
     personFamily?: string;
     personId?: number;
+    educationalModuleTitle?: string;
+    educationalModuleId?: number;
     organizationChartTitle?: string;
     organizationChartId?: number;
 }
@@ -35,7 +37,7 @@ export interface IEducationalHistoryMarineSuffix {
 export class EducationalHistoryMarineSuffix implements IEducationalHistoryMarineSuffix {
     constructor(
         public id?: number,
-        public educationalModuleTitle?: string,
+        public educationalModuleName?: string,
         public learningTimeTheorical?: number,
         public learningTimePractical?: number,
         public totalTime?: number,
@@ -59,6 +61,8 @@ export class EducationalHistoryMarineSuffix implements IEducationalHistoryMarine
         public personName?: string,
         public personFamily?: string,
         public personId?: number,
+        public educationalModuleTitle?: string,
+        public educationalModuleId?: number,
         public organizationChartTitle?: string,
         public organizationChartId?: number
     ) {

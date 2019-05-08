@@ -24,6 +24,14 @@ public class RunningStepDTO implements Serializable {
     @NotNull
     private Boolean stepRequired;
 
+    @NotNull
+    private Boolean fileDocRequired;
+
+    private String colorText;
+
+    @NotNull
+    private Boolean isHeader;
+
     @Size(max = 50)
     private String createUserLogin;
 
@@ -83,6 +91,30 @@ public class RunningStepDTO implements Serializable {
 
     public void setStepRequired(Boolean stepRequired) {
         this.stepRequired = stepRequired;
+    }
+
+    public Boolean isFileDocRequired() {
+        return fileDocRequired;
+    }
+
+    public void setFileDocRequired(Boolean fileDocRequired) {
+        this.fileDocRequired = fileDocRequired;
+    }
+
+    public String getColorText() {
+        return colorText;
+    }
+
+    public void setColorText(String colorText) {
+        this.colorText = colorText;
+    }
+
+    public Boolean isIsHeader() {
+        return isHeader;
+    }
+
+    public void setIsHeader(Boolean isHeader) {
+        this.isHeader = isHeader;
     }
 
     public String getCreateUserLogin() {
@@ -178,6 +210,9 @@ public class RunningStepDTO implements Serializable {
             ", description='" + getDescription() + "'" +
             ", stepNumber=" + getStepNumber() +
             ", stepRequired='" + isStepRequired() + "'" +
+            ", fileDocRequired='" + isFileDocRequired() + "'" +
+            ", colorText='" + getColorText() + "'" +
+            ", isHeader='" + isIsHeader() + "'" +
             ", createUserLogin='" + getCreateUserLogin() + "'" +
             ", createDate='" + getCreateDate() + "'" +
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +

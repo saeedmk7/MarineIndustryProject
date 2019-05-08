@@ -18,13 +18,15 @@
             <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th>ردیف</th>
             <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.educationalHistory.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalModuleTitle">Educational Module Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleName"><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalModuleName">Educational Module Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="learningTimeTheorical"><span jhiTranslate="marineindustryprojApp.educationalHistory.learningTimeTheorical">Learning Time Theorical</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="learningTimePractical"><span jhiTranslate="marineindustryprojApp.educationalHistory.learningTimePractical">Learning Time Practical</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="totalTime"><span jhiTranslate="marineindustryprojApp.educationalHistory.totalTime">Total Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="educationalCenter"><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalCenter">Educational Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dateOfStart"><span jhiTranslate="marineindustryprojApp.educationalHistory.dateOfStart">Date Of Start</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th><span jhiTranslate="marineindustryprojApp.educationalHistory.status">Status</span></th>
+
             <th  width="300"></th>
             </tr>
             </thead>
@@ -33,12 +35,17 @@
                 <!--<td><a [routerLink]="['/educational-history-marine-suffix', educationalHistory.id, 'view' ]">{{educationalHistory.id}}</a></td>-->
                 <td>{{i+1}}</td>
                 <td>{{educationalHistory.personFullName}}</td>
-                <td>{{educationalHistory.educationalModuleTitle}}</td>
+                <td>{{educationalHistory.educationalModuleName}}</td>
                 <td>{{educationalHistory.learningTimeTheorical}}</td>
                 <td>{{educationalHistory.learningTimePractical}}</td>
                 <td>{{educationalHistory.totalTime}}</td>
                 <td>{{educationalHistory.educationalCenter}}</td>
                 <td>{{educationalHistory.dateOfStart}}</td>
+                <td>
+                    <div *ngIf="educationalHistory.educationalModuleId">
+                        <a [routerLink]="['../educational-module-marine-suffix', educationalHistory.educationalModuleId , 'view' ]" >{{educationalHistory.educationalModuleTitle}}</a>
+                    </div>
+                </td>
                 <td>{{educationalHistory.statusMeaning}}</td>
                 <td class="text-right">
                     <a *ngIf="educationalHistory.fileDoc" title="دریافت گواهینامه" [href]="educationalHistory.fileDoc | safe" target="_blank"

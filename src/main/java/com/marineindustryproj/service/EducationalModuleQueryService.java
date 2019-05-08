@@ -189,6 +189,10 @@ public class EducationalModuleQueryService extends QueryService<EducationalModul
                 specification = specification.and(buildSpecification(criteria.getAllRequestNiazsanjiFardiId(),
                     root -> root.join(EducationalModule_.allRequestNiazsanjiFardis, JoinType.LEFT).get(RequestNiazsanjiFardi_.id)));
             }
+            if (criteria.getEducationalHistoryId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalHistoryId(),
+                    root -> root.join(EducationalModule_.educationalHistories, JoinType.LEFT).get(EducationalHistory_.id)));
+            }
             if (criteria.getScientificWorkGroupId() != null) {
                 specification = specification.and(buildSpecification(criteria.getScientificWorkGroupId(),
                     root -> root.join(EducationalModule_.scientificWorkGroups, JoinType.LEFT).get(ScientificWorkGroup_.id)));

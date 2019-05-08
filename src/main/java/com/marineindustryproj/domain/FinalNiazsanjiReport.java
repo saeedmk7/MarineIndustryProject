@@ -289,7 +289,7 @@ public class FinalNiazsanjiReport implements Serializable {
     public void setRunMonth(Integer runMonth) {
         this.runMonth = runMonth;
     }
-    
+
     public Integer getFinalizeCost() {
         return finalizeCost;
     }

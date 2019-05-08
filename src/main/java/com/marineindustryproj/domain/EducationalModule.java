@@ -147,6 +147,9 @@ public class EducationalModule implements Serializable {
     @OneToMany(mappedBy = "allEducationalModule")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<RequestNiazsanjiFardi> allRequestNiazsanjiFardis = new HashSet<>();
+    @OneToMany(mappedBy = "educationalModule")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<EducationalHistory> educationalHistories = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_module_scientific_work_group",
@@ -721,6 +724,31 @@ public class EducationalModule implements Serializable {
 
     public void setAllRequestNiazsanjiFardis(Set<RequestNiazsanjiFardi> requestNiazsanjiFardis) {
         this.allRequestNiazsanjiFardis = requestNiazsanjiFardis;
+    }
+
+    public Set<EducationalHistory> getEducationalHistories() {
+        return educationalHistories;
+    }
+
+    public EducationalModule educationalHistories(Set<EducationalHistory> educationalHistories) {
+        this.educationalHistories = educationalHistories;
+        return this;
+    }
+
+    public EducationalModule addEducationalHistory(EducationalHistory educationalHistory) {
+        this.educationalHistories.add(educationalHistory);
+        educationalHistory.setEducationalModule(this);
+        return this;
+    }
+
+    public EducationalModule removeEducationalHistory(EducationalHistory educationalHistory) {
+        this.educationalHistories.remove(educationalHistory);
+        educationalHistory.setEducationalModule(null);
+        return this;
+    }
+
+    public void setEducationalHistories(Set<EducationalHistory> educationalHistories) {
+        this.educationalHistories = educationalHistories;
     }
 
     public Set<ScientificWorkGroup> getScientificWorkGroups() {

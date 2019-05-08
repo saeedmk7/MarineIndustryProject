@@ -15,6 +15,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fileDoc"><span jhiTranslate="marineindustryprojApp.runRunningStep.fileDoc">File Doc</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.runRunningStep.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="done"><span jhiTranslate="marineindustryprojApp.runRunningStep.done">Done</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="doneUserLogin"><span jhiTranslate="marineindustryprojApp.runRunningStep.doneUserLogin">Done User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -31,6 +32,7 @@
             <tbody>
             <tr *ngFor="let runRunningStep of runRunningSteps ;trackBy: trackId">
                 <td><a [routerLink]="['/run-running-step-marine-suffix', runRunningStep.id, 'view' ]">{{runRunningStep.id}}</a></td>
+                <td>{{runRunningStep.fileDoc}}</td>
                 <td>{{runRunningStep.description}}</td>
                 <td>{{runRunningStep.done}}</td>
                 <td>{{runRunningStep.doneUserLogin}}</td>

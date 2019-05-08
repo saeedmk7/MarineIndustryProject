@@ -23,7 +23,7 @@
                 "title": "جزئیات اطلاعات پرونده/سوابق آموزشی"
             },
             "index": "ردیف",
-            "educationalModuleTitle": "عنوان پودمان آموزشی",
+            "educationalModuleName": "عنوان پودمان آموزشی",
             "learningTimeTheorical": "مدت زمان نظری(ساعت)",
             "learningTimePractical": "مدت زمان عملی(ساعت)",
             "totalTime": "مجموع (ساعت)",
@@ -49,7 +49,8 @@
             "job": "شغل سازمانی",
             "practicaljob": "شغل سازمانی",
             "organizationChart": "موقعیت در سازمان",
-            "organizationChartId": "موقعیت در سازمان"
+            "organizationChartId": "موقعیت در سازمان",
+            "educationalModule": "Educational Module"
         }
     }
 }

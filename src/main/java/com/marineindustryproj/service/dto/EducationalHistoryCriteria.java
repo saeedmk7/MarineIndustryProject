@@ -31,7 +31,7 @@ public class EducationalHistoryCriteria implements Serializable {
 
     private LongFilter id;
 
-    private StringFilter educationalModuleTitle;
+    private StringFilter educationalModuleName;
 
     private IntegerFilter learningTimeTheorical;
 
@@ -65,6 +65,8 @@ public class EducationalHistoryCriteria implements Serializable {
 
     private LongFilter personId;
 
+    private LongFilter educationalModuleId;
+
     private LongFilter organizationChartId;
 
     public LongFilter getId() {
@@ -75,12 +77,12 @@ public class EducationalHistoryCriteria implements Serializable {
         this.id = id;
     }
 
-    public StringFilter getEducationalModuleTitle() {
-        return educationalModuleTitle;
+    public StringFilter getEducationalModuleName() {
+        return educationalModuleName;
     }
 
-    public void setEducationalModuleTitle(StringFilter educationalModuleTitle) {
-        this.educationalModuleTitle = educationalModuleTitle;
+    public void setEducationalModuleName(StringFilter educationalModuleName) {
+        this.educationalModuleName = educationalModuleName;
     }
 
     public IntegerFilter getLearningTimeTheorical() {
@@ -211,6 +213,14 @@ public class EducationalHistoryCriteria implements Serializable {
         this.personId = personId;
     }
 
+    public LongFilter getEducationalModuleId() {
+        return educationalModuleId;
+    }
+
+    public void setEducationalModuleId(LongFilter educationalModuleId) {
+        this.educationalModuleId = educationalModuleId;
+    }
+
     public LongFilter getOrganizationChartId() {
         return organizationChartId;
     }
@@ -231,7 +241,7 @@ public class EducationalHistoryCriteria implements Serializable {
         final EducationalHistoryCriteria that = (EducationalHistoryCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
+            Objects.equals(educationalModuleName, that.educationalModuleName) &&
             Objects.equals(learningTimeTheorical, that.learningTimeTheorical) &&
             Objects.equals(learningTimePractical, that.learningTimePractical) &&
             Objects.equals(totalTime, that.totalTime) &&
@@ -248,6 +258,7 @@ public class EducationalHistoryCriteria implements Serializable {
             Objects.equals(requestStatus, that.requestStatus) &&
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
             Objects.equals(personId, that.personId) &&
+            Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(organizationChartId, that.organizationChartId);
     }
 
@@ -255,7 +266,7 @@ public class EducationalHistoryCriteria implements Serializable {
     public int hashCode() {
         return Objects.hash(
         id,
-        educationalModuleTitle,
+        educationalModuleName,
         learningTimeTheorical,
         learningTimePractical,
         totalTime,
@@ -272,6 +283,7 @@ public class EducationalHistoryCriteria implements Serializable {
         requestStatus,
         changeStatusUserLogin,
         personId,
+        educationalModuleId,
         organizationChartId
         );
     }
@@ -280,7 +292,7 @@ public class EducationalHistoryCriteria implements Serializable {
     public String toString() {
         return "EducationalHistoryCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
+                (educationalModuleName != null ? "educationalModuleName=" + educationalModuleName + ", " : "") +
                 (learningTimeTheorical != null ? "learningTimeTheorical=" + learningTimeTheorical + ", " : "") +
                 (learningTimePractical != null ? "learningTimePractical=" + learningTimePractical + ", " : "") +
                 (totalTime != null ? "totalTime=" + totalTime + ", " : "") +
@@ -297,6 +309,7 @@ public class EducationalHistoryCriteria implements Serializable {
                 (requestStatus != null ? "requestStatus=" + requestStatus + ", " : "") +
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
+                (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
             "}";
     }

@@ -58,6 +58,33 @@
                         </small>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runningStep.fileDocRequired" for="field_fileDocRequired">File Doc Required</label>
+                    <input type="checkbox" class="form-control" name="fileDocRequired" id="field_fileDocRequired"
+                        [(ngModel)]="runningStep.fileDocRequired" />
+                    <div [hidden]="!(editForm.controls.fileDocRequired?.dirty && editForm.controls.fileDocRequired?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fileDocRequired?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runningStep.colorText" for="field_colorText">Color Text</label>
+                    <input type="text" class="form-control" name="colorText" id="field_colorText"
+                        [(ngModel)]="runningStep.colorText" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runningStep.isHeader" for="field_isHeader">Is Header</label>
+                    <input type="checkbox" class="form-control" name="isHeader" id="field_isHeader"
+                        [(ngModel)]="runningStep.isHeader" />
+                    <div [hidden]="!(editForm.controls.isHeader?.dirty && editForm.controls.isHeader?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.isHeader?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
 <!--                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.runningStep.createUserLogin" for="field_createUserLogin">Create User Login</label>
                     <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"

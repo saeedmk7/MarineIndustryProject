@@ -107,6 +107,9 @@ public class RunPhaseQueryService extends QueryService<RunPhase> {
             if (criteria.getDoneDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDoneDate(), RunPhase_.doneDate));
             }
+            if (criteria.getRunMonth() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getRunMonth(), RunPhase_.runMonth));
+            }
             if (criteria.getCreateUserLogin() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCreateUserLogin(), RunPhase_.createUserLogin));
             }

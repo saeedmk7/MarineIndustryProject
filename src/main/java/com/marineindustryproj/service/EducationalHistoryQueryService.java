@@ -89,8 +89,8 @@ public class EducationalHistoryQueryService extends QueryService<EducationalHist
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), EducationalHistory_.id));
             }
-            if (criteria.getEducationalModuleTitle() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getEducationalModuleTitle(), EducationalHistory_.educationalModuleTitle));
+            if (criteria.getEducationalModuleName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getEducationalModuleName(), EducationalHistory_.educationalModuleName));
             }
             if (criteria.getLearningTimeTheorical() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLearningTimeTheorical(), EducationalHistory_.learningTimeTheorical));
@@ -140,6 +140,10 @@ public class EducationalHistoryQueryService extends QueryService<EducationalHist
             if (criteria.getPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPersonId(),
                     root -> root.join(EducationalHistory_.person, JoinType.LEFT).get(Person_.id)));
+            }
+            if (criteria.getEducationalModuleId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
+                    root -> root.join(EducationalHistory_.educationalModule, JoinType.LEFT).get(EducationalModule_.id)));
             }
             if (criteria.getOrganizationChartId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOrganizationChartId(),

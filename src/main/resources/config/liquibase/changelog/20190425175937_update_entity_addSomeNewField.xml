@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the entity UsersRequest.
+    -->
+    <changeSet id="20190425175937" author="jhipster">
+        <addColumn schemaName="public"
+                   tableName="educational_history">
+            <column name="educational_module_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="educational_module_id"
+                                 baseTableName="educational_history"
+                                 constraintName="fk_educational_history_educational_module_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+
+        <addColumn schemaName="public"
+                   tableName="run_running_step">
+            <column name="file_doc" type="clob">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+
+        <addColumn schemaName="public"
+                   tableName="running_step">
+            <column name="file_doc_required" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"  />
+            </column>
+
+            <column name="color_text" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="is_header" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+
+        <addColumn schemaName="public"
+                   tableName="run_phase">
+            <column name="run_month" type="integer">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

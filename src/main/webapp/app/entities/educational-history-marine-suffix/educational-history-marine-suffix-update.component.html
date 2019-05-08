@@ -179,6 +179,13 @@
                     <textarea class="form-control" name="description" id="field_description"
                         [(ngModel)]="educationalHistory.description" ></textarea>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.educationalModule" for="field_educationalModule">Educational Module</label>
+                    <select class="form-control" id="field_educationalModule" name="educationalModule" [(ngModel)]="educationalHistory.educationalModuleId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="educationalModuleOption.id" *ngFor="let educationalModuleOption of educationalmodules; trackBy: trackEducationalModuleById">{{educationalModuleOption.title}}</option>
+                    </select>
+                </div>
                 <div class="form-group" *ngIf="educationalHistory.id === undefined">
                     <span *ngIf="targetPeople">درخواست شما برای افراد زیر ارسال می شود.</span>
                     <ul>

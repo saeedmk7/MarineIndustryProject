@@ -44,6 +44,17 @@ public class RunningStep implements Serializable {
     @Column(name = "step_required", nullable = false)
     private Boolean stepRequired;
 
+    @NotNull
+    @Column(name = "file_doc_required", nullable = false)
+    private Boolean fileDocRequired;
+
+    @Column(name = "color_text")
+    private String colorText;
+
+    @NotNull
+    @Column(name = "is_header", nullable = false)
+    private Boolean isHeader;
+
     @Size(max = 50)
     @Column(name = "create_user_login", length = 50)
     private String createUserLogin;
@@ -135,6 +146,45 @@ public class RunningStep implements Serializable {
 
     public void setStepRequired(Boolean stepRequired) {
         this.stepRequired = stepRequired;
+    }
+
+    public Boolean isFileDocRequired() {
+        return fileDocRequired;
+    }
+
+    public RunningStep fileDocRequired(Boolean fileDocRequired) {
+        this.fileDocRequired = fileDocRequired;
+        return this;
+    }
+
+    public void setFileDocRequired(Boolean fileDocRequired) {
+        this.fileDocRequired = fileDocRequired;
+    }
+
+    public String getColorText() {
+        return colorText;
+    }
+
+    public RunningStep colorText(String colorText) {
+        this.colorText = colorText;
+        return this;
+    }
+
+    public void setColorText(String colorText) {
+        this.colorText = colorText;
+    }
+
+    public Boolean isIsHeader() {
+        return isHeader;
+    }
+
+    public RunningStep isHeader(Boolean isHeader) {
+        this.isHeader = isHeader;
+        return this;
+    }
+
+    public void setIsHeader(Boolean isHeader) {
+        this.isHeader = isHeader;
     }
 
     public String getCreateUserLogin() {
@@ -295,6 +345,9 @@ public class RunningStep implements Serializable {
             ", description='" + getDescription() + "'" +
             ", stepNumber=" + getStepNumber() +
             ", stepRequired='" + isStepRequired() + "'" +
+            ", fileDocRequired='" + isFileDocRequired() + "'" +
+            ", colorText='" + getColorText() + "'" +
+            ", isHeader='" + isIsHeader() + "'" +
             ", createUserLogin='" + getCreateUserLogin() + "'" +
             ", createDate='" + getCreateDate() + "'" +
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +

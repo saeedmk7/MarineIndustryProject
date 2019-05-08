@@ -30,8 +30,8 @@ public class EducationalHistory implements Serializable {
 
     @NotNull
     @Size(max = 4096)
-    @Column(name = "educational_module_title", length = 4096, nullable = false)
-    private String educationalModuleTitle;
+    @Column(name = "educational_module_name", length = 4096, nullable = false)
+    private String educationalModuleName;
 
     @Column(name = "learning_time_theorical")
     private Integer learningTimeTheorical;
@@ -107,6 +107,10 @@ public class EducationalHistory implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("educationalHistories")
+    private EducationalModule educationalModule;
+
+    @ManyToOne
+    @JsonIgnoreProperties("educationalHistories")
     private OrganizationChart organizationChart;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -118,17 +122,17 @@ public class EducationalHistory implements Serializable {
         this.id = id;
     }
 
-    public String getEducationalModuleTitle() {
-        return educationalModuleTitle;
+    public String getEducationalModuleName() {
+        return educationalModuleName;
     }
 
-    public EducationalHistory educationalModuleTitle(String educationalModuleTitle) {
-        this.educationalModuleTitle = educationalModuleTitle;
+    public EducationalHistory educationalModuleName(String educationalModuleName) {
+        this.educationalModuleName = educationalModuleName;
         return this;
     }
 
-    public void setEducationalModuleTitle(String educationalModuleTitle) {
-        this.educationalModuleTitle = educationalModuleTitle;
+    public void setEducationalModuleName(String educationalModuleName) {
+        this.educationalModuleName = educationalModuleName;
     }
 
     public Integer getLearningTimeTheorical() {
@@ -378,6 +382,19 @@ public class EducationalHistory implements Serializable {
         this.person = person;
     }
 
+    public EducationalModule getEducationalModule() {
+        return educationalModule;
+    }
+
+    public EducationalHistory educationalModule(EducationalModule educationalModule) {
+        this.educationalModule = educationalModule;
+        return this;
+    }
+
+    public void setEducationalModule(EducationalModule educationalModule) {
+        this.educationalModule = educationalModule;
+    }
+
     public OrganizationChart getOrganizationChart() {
         return organizationChart;
     }
@@ -416,7 +433,7 @@ public class EducationalHistory implements Serializable {
     public String toString() {
         return "EducationalHistory{" +
             "id=" + getId() +
-            ", educationalModuleTitle='" + getEducationalModuleTitle() + "'" +
+            ", educationalModuleName='" + getEducationalModuleName() + "'" +
             ", learningTimeTheorical=" + getLearningTimeTheorical() +
             ", learningTimePractical=" + getLearningTimePractical() +
             ", totalTime=" + getTotalTime() +

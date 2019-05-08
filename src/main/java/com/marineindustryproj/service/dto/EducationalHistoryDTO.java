@@ -16,7 +16,7 @@ public class EducationalHistoryDTO implements Serializable {
 
     @NotNull
     @Size(max = 4096)
-    private String educationalModuleTitle;
+    private String educationalModuleName;
 
     private Integer learningTimeTheorical;
 
@@ -72,6 +72,10 @@ public class EducationalHistoryDTO implements Serializable {
 
     private String personFamily;
 
+    private Long educationalModuleId;
+
+    private String educationalModuleTitle;
+
     private Long organizationChartId;
 
     private String organizationChartTitle;
@@ -84,12 +88,12 @@ public class EducationalHistoryDTO implements Serializable {
         this.id = id;
     }
 
-    public String getEducationalModuleTitle() {
-        return educationalModuleTitle;
+    public String getEducationalModuleName() {
+        return educationalModuleName;
     }
 
-    public void setEducationalModuleTitle(String educationalModuleTitle) {
-        this.educationalModuleTitle = educationalModuleTitle;
+    public void setEducationalModuleName(String educationalModuleName) {
+        this.educationalModuleName = educationalModuleName;
     }
 
     public Integer getLearningTimeTheorical() {
@@ -260,6 +264,22 @@ public class EducationalHistoryDTO implements Serializable {
         this.personFamily = personFamily;
     }
 
+    public Long getEducationalModuleId() {
+        return educationalModuleId;
+    }
+
+    public void setEducationalModuleId(Long educationalModuleId) {
+        this.educationalModuleId = educationalModuleId;
+    }
+
+    public String getEducationalModuleTitle() {
+        return educationalModuleTitle;
+    }
+
+    public void setEducationalModuleTitle(String educationalModuleTitle) {
+        this.educationalModuleTitle = educationalModuleTitle;
+    }
+
     public Long getOrganizationChartId() {
         return organizationChartId;
     }
@@ -301,7 +321,7 @@ public class EducationalHistoryDTO implements Serializable {
     public String toString() {
         return "EducationalHistoryDTO{" +
             "id=" + getId() +
-            ", educationalModuleTitle='" + getEducationalModuleTitle() + "'" +
+            ", educationalModuleName='" + getEducationalModuleName() + "'" +
             ", learningTimeTheorical=" + getLearningTimeTheorical() +
             ", learningTimePractical=" + getLearningTimePractical() +
             ", totalTime=" + getTotalTime() +
@@ -323,6 +343,8 @@ public class EducationalHistoryDTO implements Serializable {
             ", person=" + getPersonId() +
             ", person='" + getPersonName() + "'" +
             ", person='" + getPersonFamily() + "'" +
+            ", educationalModule=" + getEducationalModuleId() +
+            ", educationalModule='" + getEducationalModuleTitle() + "'" +
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             "}";

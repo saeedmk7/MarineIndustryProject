@@ -2,6 +2,7 @@ import { Moment } from 'moment';
 
 export interface IRunRunningStepMarineSuffix {
     id?: number;
+    fileDoc?: any;
     description?: string;
     done?: boolean;
     doneUserLogin?: string;
@@ -19,6 +20,7 @@ export interface IRunRunningStepMarineSuffix {
 export class RunRunningStepMarineSuffix implements IRunRunningStepMarineSuffix {
     constructor(
         public id?: number,
+        public fileDoc?: any,
         public description?: string,
         public done?: boolean,
         public doneUserLogin?: string,

@@ -46,7 +46,7 @@ public class FinalNiazsanjiReportDTO implements Serializable {
     private Integer status;
 
     private Integer runMonth;
-    
+
     private Integer finalizeCost;
 
     private Set<DocumentDTO> documents = new HashSet<>();
@@ -174,7 +174,7 @@ public class FinalNiazsanjiReportDTO implements Serializable {
     public void setRunMonth(Integer runMonth) {
         this.runMonth = runMonth;
     }
-    
+
     public Integer getFinalizeCost() {
         return finalizeCost;
     }

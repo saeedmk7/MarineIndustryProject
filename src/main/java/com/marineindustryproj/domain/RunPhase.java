@@ -52,6 +52,9 @@ public class RunPhase implements Serializable {
     @Column(name = "done_date")
     private ZonedDateTime doneDate;
 
+    @Column(name = "run_month")
+    private Integer runMonth;
+
     @Size(max = 50)
     @Column(name = "create_user_login", length = 50)
     private String createUserLogin;
@@ -187,6 +190,19 @@ public class RunPhase implements Serializable {
 
     public void setDoneDate(ZonedDateTime doneDate) {
         this.doneDate = doneDate;
+    }
+
+    public Integer getRunMonth() {
+        return runMonth;
+    }
+
+    public RunPhase runMonth(Integer runMonth) {
+        this.runMonth = runMonth;
+        return this;
+    }
+
+    public void setRunMonth(Integer runMonth) {
+        this.runMonth = runMonth;
     }
 
     public String getCreateUserLogin() {
@@ -412,6 +428,7 @@ public class RunPhase implements Serializable {
             ", done='" + isDone() + "'" +
             ", doneUserLogin='" + getDoneUserLogin() + "'" +
             ", doneDate='" + getDoneDate() + "'" +
+            ", runMonth=" + getRunMonth() +
             ", createUserLogin='" + getCreateUserLogin() + "'" +
             ", createDate='" + getCreateDate() + "'" +
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +

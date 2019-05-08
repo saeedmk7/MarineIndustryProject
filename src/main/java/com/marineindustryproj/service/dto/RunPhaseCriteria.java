@@ -37,6 +37,8 @@ public class RunPhaseCriteria implements Serializable {
 
     private ZonedDateTimeFilter doneDate;
 
+    private IntegerFilter runMonth;
+
     private StringFilter createUserLogin;
 
     private ZonedDateTimeFilter createDate;
@@ -115,6 +117,14 @@ public class RunPhaseCriteria implements Serializable {
 
     public void setDoneDate(ZonedDateTimeFilter doneDate) {
         this.doneDate = doneDate;
+    }
+
+    public IntegerFilter getRunMonth() {
+        return runMonth;
+    }
+
+    public void setRunMonth(IntegerFilter runMonth) {
+        this.runMonth = runMonth;
     }
 
     public StringFilter getCreateUserLogin() {
@@ -231,6 +241,7 @@ public class RunPhaseCriteria implements Serializable {
             Objects.equals(done, that.done) &&
             Objects.equals(doneUserLogin, that.doneUserLogin) &&
             Objects.equals(doneDate, that.doneDate) &&
+            Objects.equals(runMonth, that.runMonth) &&
             Objects.equals(createUserLogin, that.createUserLogin) &&
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
@@ -255,6 +266,7 @@ public class RunPhaseCriteria implements Serializable {
         done,
         doneUserLogin,
         doneDate,
+        runMonth,
         createUserLogin,
         createDate,
         modifyUserLogin,
@@ -280,6 +292,7 @@ public class RunPhaseCriteria implements Serializable {
                 (done != null ? "done=" + done + ", " : "") +
                 (doneUserLogin != null ? "doneUserLogin=" + doneUserLogin + ", " : "") +
                 (doneDate != null ? "doneDate=" + doneDate + ", " : "") +
+                (runMonth != null ? "runMonth=" + runMonth + ", " : "") +
                 (createUserLogin != null ? "createUserLogin=" + createUserLogin + ", " : "") +
                 (createDate != null ? "createDate=" + createDate + ", " : "") +
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +

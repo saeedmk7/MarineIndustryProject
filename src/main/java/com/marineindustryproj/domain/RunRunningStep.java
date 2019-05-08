@@ -26,6 +26,10 @@ public class RunRunningStep implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @Lob
+    @Column(name = "file_doc")
+    private String fileDoc;
+
     @Size(max = 4096)
     @Column(name = "description", length = 4096)
     private String description;
@@ -70,6 +74,19 @@ public class RunRunningStep implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getFileDoc() {
+        return fileDoc;
+    }
+
+    public RunRunningStep fileDoc(String fileDoc) {
+        this.fileDoc = fileDoc;
+        return this;
+    }
+
+    public void setFileDoc(String fileDoc) {
+        this.fileDoc = fileDoc;
     }
 
     public String getDescription() {
@@ -227,6 +244,7 @@ public class RunRunningStep implements Serializable {
     public String toString() {
         return "RunRunningStep{" +
             "id=" + getId() +
+            ", fileDoc='" + getFileDoc() + "'" +
             ", description='" + getDescription() + "'" +
             ", done='" + isDone() + "'" +
             ", doneUserLogin='" + getDoneUserLogin() + "'" +

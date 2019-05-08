@@ -80,6 +80,11 @@
                         </small>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.runMonth" for="field_runMonth">Run Month</label>
+                    <input type="number" class="form-control" name="runMonth" id="field_runMonth"
+                        [(ngModel)]="runPhase.runMonth" />
+                </div>
                 <!--<textarea class="row alert alert-danger" cols="150" *ngIf="errorMessage">{{errorMessage}}</textarea>-->
                 <div class="row alert alert-danger" *ngIf="errorMessage" [innerHTML]="errorMessage"></div>
             </div>

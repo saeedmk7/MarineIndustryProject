@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Lob;
 
 /**
  * A DTO for the RunRunningStep entity.
@@ -11,6 +12,9 @@ import java.util.Objects;
 public class RunRunningStepDTO implements Serializable {
 
     private Long id;
+
+    @Lob
+    private String fileDoc;
 
     @Size(max = 4096)
     private String description;
@@ -47,6 +51,14 @@ public class RunRunningStepDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getFileDoc() {
+        return fileDoc;
+    }
+
+    public void setFileDoc(String fileDoc) {
+        this.fileDoc = fileDoc;
     }
 
     public String getDescription() {
@@ -170,6 +182,7 @@ public class RunRunningStepDTO implements Serializable {
     public String toString() {
         return "RunRunningStepDTO{" +
             "id=" + getId() +
+            ", fileDoc='" + getFileDoc() + "'" +
             ", description='" + getDescription() + "'" +
             ", done='" + isDone() + "'" +
             ", doneUserLogin='" + getDoneUserLogin() + "'" +

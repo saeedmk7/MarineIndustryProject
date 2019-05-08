@@ -101,6 +101,15 @@ public class RunningStepQueryService extends QueryService<RunningStep> {
             if (criteria.getStepRequired() != null) {
                 specification = specification.and(buildSpecification(criteria.getStepRequired(), RunningStep_.stepRequired));
             }
+            if (criteria.getFileDocRequired() != null) {
+                specification = specification.and(buildSpecification(criteria.getFileDocRequired(), RunningStep_.fileDocRequired));
+            }
+            if (criteria.getColorText() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getColorText(), RunningStep_.colorText));
+            }
+            if (criteria.getIsHeader() != null) {
+                specification = specification.and(buildSpecification(criteria.getIsHeader(), RunningStep_.isHeader));
+            }
             if (criteria.getCreateUserLogin() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCreateUserLogin(), RunningStep_.createUserLogin));
             }
