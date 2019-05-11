@@ -3,6 +3,7 @@ import {IRunPhaseSaveDataItemModel} from "app/entities/run-phase-marine-suffix/r
 export interface IRunPhaseSaveDataModel {
     finalNiazsanjiReportId?: number;
     runPhaseId?: number;
+    runMonth?: number;
     description?: string;
     stepNumber?: number;
     done?: boolean;
@@ -15,6 +16,7 @@ export class RunPhaseSaveDataModel implements IRunPhaseSaveDataModel {
     constructor(
         public finalNiazsanjiReportId?: number,
         public runPhaseId?: number,
+        public runMonth?: number,
         public description?: string,
         public stepNumber?: number,
         public done?: boolean,

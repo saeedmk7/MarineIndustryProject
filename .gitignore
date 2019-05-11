@@ -8,6 +8,7 @@ historyUploads/*
 imageuploads/*
 upload-dir/*
 uploads/*
+runPhaseUploads/*
 
 ######################
 # Node

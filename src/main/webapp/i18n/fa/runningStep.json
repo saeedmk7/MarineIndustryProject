@@ -28,9 +28,9 @@
             "archivedUserLogin": "آرشیو شده توسط",
             "archivedDate": "تاریخ آرشیو",
             "status": "وضعیت",
-            "fileDocRequired": "File Doc Required",
-            "colorText": "Color Text",
-            "isHeader": "Is Header",
+            "fileDocRequired": "بارگزاری فایل اجباریست؟",
+            "colorText": "رنگ متن",
+            "isHeader": "سرتیتره؟",
             "runRunningStep": "Run Running Step"
         }
     }

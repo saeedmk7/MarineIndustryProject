@@ -5,7 +5,7 @@
             "home": {
                 "title": "فاز اجرا",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش فاز اجرا"
+                "createOrEditLabel": "گام های مربوط به اجرای دوره آموزشی"
             },
             "created": "فاز اجرا با شناسه {{ param }} ایجاد شد.",
             "updated": "فاز اجرا با شناسه {{ param }} ویرایش شد.",
@@ -16,8 +16,8 @@
             "detail": {
                 "title": "جزئیات اطلاعات فاز اجرا"
             },
-            "description": "توضیحات",
-            "finalizeCost": "قیمت نهایی شده",
+            "description": "توضیحات تکمیلی",
+            "finalizeCost": "هزینه صرف شده(ریال)",
             "stepNumber": "شماره گام",
             "done": "نهایی شده؟",
             "doneUserLogin": "کاربر نهایی کننده",
@@ -30,7 +30,7 @@
             "archivedUserLogin": "آرشیو شده توسط",
             "archivedDate": "تاریخ آرشیو",
             "status": "وضعیت",
-            "runMonth": "Run Month",
+            "runMonth": "ماه اجرا",
             "runRunningStep": "Run Running Step",
             "document": "Document",
             "person": "Person",

@@ -27,7 +27,7 @@
             "learningTimeTheorical": "مدت زمان نظری(ساعت)",
             "learningTimePractical": "مدت زمان عملی(ساعت)",
             "totalTime": "مجموع (ساعت)",
-            "educationalCenter": "مرکزآموزشی",
+            "educationalCenter": "مرکز آموزشی",
             "dateOfStart": "تاریخ برگزاری دوره",
             "fileDoc": "فایل گواهینامه",
             "description": "توضیحات",
@@ -47,10 +47,10 @@
             "personName": "نام و نام خانوادگی",
             "personFamily": "نام و نام خانوادگی",
             "job": "شغل سازمانی",
-            "practicaljob": "شغل سازمانی",
+            "practicaljob": "شغل عملی",
             "organizationChart": "موقعیت در سازمان",
             "organizationChartId": "موقعیت در سازمان",
-            "educationalModule": "Educational Module"
+            "educationalModule": "پودمان آموزشی"
         }
     }
 }

@@ -9,6 +9,7 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { RunningStepMarineSuffixService } from './running-step-marine-suffix.service';
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 
 @Component({
     selector: 'mi-running-step-marine-suffix',
@@ -38,7 +39,8 @@ export class RunningStepMarineSuffixComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private convertObjectDatesService: ConvertObjectDatesService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -127,7 +129,7 @@ export class RunningStepMarineSuffixComponent implements OnInit, OnDestroy {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
-        this.runningSteps = data;
+        this.runningSteps = this.convertObjectDatesService.changeArrayDate(data);
     }
 
     private onError(errorMessage: string) {

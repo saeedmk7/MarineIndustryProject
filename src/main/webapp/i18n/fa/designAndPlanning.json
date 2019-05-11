@@ -3,7 +3,7 @@
     "marineindustryprojApp": {
         "designAndPlanning" : {
             "home": {
-                "title": "فهرست طراحی و برنامه ریزی",
+                "title": "فهرست طراحی و برنامه ریزی های انجام شده برای شما",
                 "createLabel": "جدید",
                 "createOrEditLabel": "تکمیل فرآیند طراحی و برنامه ریزی آموزشی"
             },
@@ -21,7 +21,7 @@
             "undirectCost": "هزینه های غیرمستقیم",
             "undirectCostDescription": "تشریح هزینه های غیرمستقیم",
             "step": "مرحله",
-            "finished": "تایید نهایی",
+            "finished": "تایید نهایی شده؟",
             "finishedUserLogin": "کاربر نهایی کننده",
             "finishedDate": "تاریخ نهایی شدن",
             "description": "توضیحات تکمیلی",
@@ -34,15 +34,17 @@
             "archivedDate": "تاریخ آرشیو",
             "status": "وضعیت",
             "runMonth": "ماه اجرا",
-            "person": "افراد",
+            "person": "افراد دوره",
             "document": "مدارک",
             "finalNiazsanjiReport": "نیازسنجی مربوطه",
             "mahiatCourse": "ماهیت دوره",
             "courseType": "نوع دوره",
+            "courseTypeId": "نوع دوره",
             "teachType": "نوع آموزش",
             "courseLocation": "محل برگزاری دوره",
             "conditionsOfParticipant": "تعیین شرایط شرکت کنندگان",
             "effectivenessLevel": "سطح اثربخشی دوره",
+            "effectivenessLevelId": "سطح اثربخشی دوره",
             "toolsAndFacility": "ابزار و امکانات مورد نیاز دوره",
             "teachingApproach": "روش آموزش",
             "teachTechnique": "تکنیک آموزش",

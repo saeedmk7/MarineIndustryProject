@@ -4,40 +4,74 @@
             <h2 id="mi-run-phase-marine-suffix-heading" jhiTranslate="marineindustryprojApp.runPhase.home.createOrEditLabel">Create or edit a Run Phase</h2>
             <!--<section id="tabs" class="project-tab">
                 <div class="container">-->
+            <div *ngIf="isAdmin">
+                <a href="#/running-step-marine-suffix" [ngClass]="{'enableLink': isAdmin}" class="btn btn-warning">
+                    <span class="fa fa-file"></span>
+                    <span class="d-none d-md-inline">ثبت مراحل فاز اجرا</span>
+                </a>
+            </div>
                     <div class="row">
                         <div class="col-md-12">
                             <nav>
                                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                    <a *ngFor="let item of runPhaseTabModel" class="nav-item nav-link" [ngClass]="{'active': item.active}" [id]="'nav-' + item.id" data-toggle="tab" [href]="item.href"  role="tab" >{{item.title}}</a>
+                                    <a *ngFor="let item of runPhaseTabModel" class="nav-item nav-link" style="color: white" [ngClass]="{'active': item.active}" [ngStyle]="{'background-color': item.colorText}" [id]="'nav-' + item.id" data-toggle="tab" [href]="item.href"  role="tab" >{{item.title}}</a>
                                     <!--<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Project Tab 1</a>
                                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Project Tab 2</a>
                                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Project Tab 3</a>-->
                                 </div>
                             </nav>
                             <div class="tab-content" id="nav-tabContent">
-                                <div *ngFor="let tab of runPhaseTabModel" class="tab-pane fade" [ngClass]="{'active show': tab.active}" [id]="tab.id" role="tabpanel">
+                                <div *ngFor="let tab of runPhaseTabModel" class="tab-pane fade" [ngClass]="{'active show': tab.active}"  [id]="tab.id" role="tabpanel">
                                     <table class="table" cellspacing="0" border="0">
                                         <thead>
                                         <tr>
                                             <th>ردیف</th>
-                                            <th>عنوان</th>
+                                            <th style="width:30%">عنوان</th>
                                             <th>انجام شده؟</th>
+                                            <th>بارگزاری فایل</th>
                                             <th>توضیحات انجام کار</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr *ngFor="let item of tab.runPhaseItems; let i = index">
+                                        <tr *ngFor="let item of tab.runPhaseItems; let i = index" [ngClass]="{'success': item.checked && item.fileDoc, 'warning': item.checked && !item.fileDoc, 'danger': !item.checked}">
                                             <td>
                                                 {{i+1}}
                                             </td>
-                                            <td>
+                                            <td style="font-size: 15px;">
                                                 <label>{{item.title}}</label>
+                                                <span class="badge badge-danger" *ngIf="item.required"> انجام اجباری</span>
+                                                <span class="badge badge-danger" *ngIf="item.fileDocRequired"> بارگزاری فایل اجباری</span>
                                             </td>
                                             <td>
-                                                <input type="checkbox" [id]="'chk-' + item.id" [name]="'chk-' + item.id" [checked]="item.checked" [alt]="item.description" [title]="item.description" />
+                                                <input type="checkbox" [id]="'chk-' + item.id" [name]="'chk-' + item.id" [checked]="item.checked" [alt]="item.description" [title]="item.description" [(ngModel)]="item.checked" />
+                                                <!--<input class="form-check-input" type="radio" [id]="'rd1-' + item.id" [name]="'chk-' + item.id" [value]="true" [(ngModel)]="item.checked">
+                                                <label [for]="'rd1-' + item.id">
+                                                    بلی
+                                                </label>
+                                                <input class="form-check-input" type="radio" [id]="'rd2-' + item.id" [name]="'chk-' + item.id" [alt]="item.description" [value]="false" [(ngModel)]="item.checked">
+                                                <label [for]="'rd2-' + item.id">
+                                                خیر
+                                                </label>-->
                                             </td>
                                             <td>
-                                                <textarea class="form-control" [id]="'txt-' + item.id" [name]="'txt-' + item.id">{{item.descMessage}}</textarea>
+                                                <input *ngIf="!item.fileDoc" type="file" [disabled]="!item.checked" [id]="'file-' + item.id" (change)="validateFile($event, item.id)" jhiTranslate="entity.action.addblob"/>
+                                                <button type="button" *ngIf="!item.fileDoc" disabled="disabled" [id]="'uploadBtn-' + item.id" (click)="uploadFile(item.id)" class="btn btn-info btn-sm">
+                                                    <span>بارگذاری فایل</span>
+                                                    <fa-icon [icon]="'cloud-upload-alt'"></fa-icon>
+                                                </button>
+                                                <div *ngIf="!item.fileDoc" style="display: none" [id]="'message-' + item.id"></div>
+                                                <a *ngIf="item.fileDoc" title="دریافت فایل" [href]="item.fileDoc | safe" target="_blank"
+                                                   class="btn btn-default btn-sm enableLink">
+                                                    <fa-icon [icon]="'download'"></fa-icon>
+                                                </a>
+                                                <button type="button" *ngIf="item.fileDoc" (click)="deleteFile(item.fileDoc, item.id)" class="btn btn-danger btn-sm">
+                                                    <fa-icon [icon]="'times'"></fa-icon>
+                                                </button>
+                                                <input type="hidden" [id]="'fileDoc-' + item.id" [name]="'fileDoc-' + item.id" [(ngModel)]="item.fileDoc">
+                                            </td>
+
+                                            <td>
+                                                <textarea class="form-control" rows="1" [id]="'txt-' + item.id" [name]="'txt-' + item.id">{{item.descMessage}}</textarea>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -46,8 +80,9 @@
                             </div>
                         </div>
                     </div>
-            <div>
+            <div style="background-color: aliceblue;">
                 <mi-alert-error></mi-alert-error>
+            <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات تکمیلی</div></div>
                 <div class="form-group" [hidden]="true">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="hidden" class="form-control" id="id" name="id"
@@ -55,20 +90,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.description" for="field_description">Description</label>
-                    <textarea type="text" class="form-control" name="description" id="field_description"
-                              [(ngModel)]="runPhase.description" maxlength="4096"></textarea>
-                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
-                        This field cannot be longer than 4096 characters.
-                        </small>
-                    </div>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.runMonth" for="field_runMonth">Run Month</label>
+                   <!-- <input type="number" class="form-control" name="runMonth" id="field_runMonth"
+                           [(ngModel)]="runPhase.runMonth" />-->
+                    <select class="form-control" id="field_runMonth" name="runMonth" [required]="true" [(ngModel)]="runPhase.runMonth" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="runMonth.id" *ngFor="let runMonth of runMonths; trackBy: trackEffectivenessLevelById">{{runMonth.persianMonth}}</option>
+                    </select>
                 </div>
+                <!--<textarea class="row alert alert-danger" cols="150" *ngIf="errorMessage">{{errorMessage}}</textarea>-->
+                <!--<div class="row alert alert-danger" *ngIf="errorMessage" [innerHTML]="errorMessage"></div>-->
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.finalizeCost" for="field_finalizeCost">Finalize Cost</label>
                     <input type="number" class="form-control" name="finalizeCost" id="field_finalizeCost"
                         [(ngModel)]="runPhase.finalizeCost" required/>
+
                     <div [hidden]="!(editForm.controls.finalizeCost?.dirty && editForm.controls.finalizeCost?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.finalizeCost?.errors?.required" jhiTranslate="entity.validation.required">
@@ -80,35 +117,38 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.runMonth" for="field_runMonth">Run Month</label>
-                    <input type="number" class="form-control" name="runMonth" id="field_runMonth"
-                        [(ngModel)]="runPhase.runMonth" />
-                </div>
-                <!--<textarea class="row alert alert-danger" cols="150" *ngIf="errorMessage">{{errorMessage}}</textarea>-->
-                <div class="row alert alert-danger" *ngIf="errorMessage" [innerHTML]="errorMessage"></div>
+            <div class="form-group">
+                <label class="form-control-label"></label>
+                <label class="form-control alert-info">{{runPhase.finalizeCost | number}} ریال</label>
             </div>
-            <div *ngIf="isAdmin">
-                <a href="#/running-step-marine-suffix" [ngClass]="{'enableLink': isAdmin}" class="btn btn-warning">
-                    <span class="fa fa-file"></span>
-                    <span class="d-none d-md-inline">ثبت مراحل فاز اجرا</span>
-                </a>
+            <div class="form-group fullcover">
+                <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.description" for="field_description">Description</label>
+                <textarea type="text" class="form-control " name="description" id="field_description"
+                          [(ngModel)]="runPhase.description" maxlength="4096"></textarea>
+                <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                    </small>
+                </div>
+            </div>
+                <div class="row alert alert-danger" *ngIf="errorMessage" [innerHTML]="errorMessage"></div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" title="برای ثبت هر تغییری نیاز به ذخیره می باشد." id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
                 <button type="button" (click)="finalize()" id="finalize-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
                     <span><fa-icon [icon]="'save'"></fa-icon>تایید نهایی</span>
                 </button>
+                <span class="alert alert-info pull-left">برای ثبت مدارک لطفا ابتدا اطلاعات اولیه فاز اجرا را ذخیره نمائید سپس دکمه ثبت مدارک فعال خواهد شد.</span>
                 <button type="button" (click)=change(documentUrl) [disabled]="documentUrl == undefined" class="btn btn-warning pull-left">
                     <span class="fa fa-file"></span>
                     <span class="d-none d-md-inline">ثبت مدارک</span>
                 </button>
-                <span class="alert alert-info pull-left">برای ثبت مدارک لطفا ابتدا اطلاعات اولیه فاز اجرا را ذخیره نمائید سپس دکمه ثبت مدارک فعال خواهد شد.</span>
             </div>
 
         </form>

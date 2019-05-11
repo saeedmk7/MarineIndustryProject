@@ -73,7 +73,8 @@ import {
     faLightbulb,
     faLock,
     faAddressCard,
-    faIdCard
+    faIdCard,
+    faCloudUploadAlt
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -146,5 +147,6 @@ library.add(faLightbulb);
 library.add(faLock);
 library.add(faAddressCard);
 library.add(faIdCard);
+library.add(faCloudUploadAlt);
 
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

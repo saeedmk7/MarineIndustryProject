@@ -29,7 +29,7 @@ export class UserRouteAccessService implements CanActivate {
         const principal = this.principal;
         return Promise.resolve(
             principal.identity().then(account => {
-                debugger;
+
                 if (account) {
 
                     if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined) {

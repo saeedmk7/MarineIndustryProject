@@ -1,23 +1,32 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="marineindustryprojApp.designAndPlanning.home.title">Design And Plannings</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-design-and-planning-marine-suffix" [routerLink]="['/design-and-planning-marine-suffix/new']">
+        <!--<button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-design-and-planning-marine-suffix" [routerLink]="['/design-and-planning-marine-suffix/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="marineindustryprojApp.designAndPlanning.home.createLabel">
             Create new Design And Planning
             </span>
-        </button>
+        </button>-->
     </h2>
     <mi-alert></mi-alert>
+    <div class="row">
+        <search-panel class="col-md-12" [searchPanelModel]="searchbarModel"></search-panel>
+    </div>
     <br/>
     <div class="table-responsive" *ngIf="designAndPlannings">
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered table-hover table-sm">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th>ردیف</th>
+            <th>عنوان دوره</th>
+            <th>شناسه دوره</th>
+            <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="effectivenessLevelTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.effectivenessLevel">Effectiveness Level</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="runMonth"><span jhiTranslate="marineindustryprojApp.designAndPlanning.runMonth">runMonth</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="directCost"><span jhiTranslate="marineindustryprojApp.designAndPlanning.directCost">Direct Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="directCostDescription"><span jhiTranslate="marineindustryprojApp.designAndPlanning.directCostDescription">Direct Cost Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="undirectCost"><span jhiTranslate="marineindustryprojApp.designAndPlanning.undirectCost">Undirect Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="directCostDescription"><span jhiTranslate="marineindustryprojApp.designAndPlanning.directCostDescription">Direct Cost Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="undirectCostDescription"><span jhiTranslate="marineindustryprojApp.designAndPlanning.undirectCostDescription">Undirect Cost Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="step"><span jhiTranslate="marineindustryprojApp.designAndPlanning.step">Step</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="finished"><span jhiTranslate="marineindustryprojApp.designAndPlanning.finished">Finished</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -34,24 +43,38 @@
             <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.designAndPlanning.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="finalNiazsanjiReportDescription"><span jhiTranslate="marineindustryprojApp.designAndPlanning.finalNiazsanjiReport">Final Niazsanji Report</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="mahiatCourseTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.mahiatCourse">Mahiat Course</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
             <th jhiSortBy="teachTypeTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.teachType">Teach Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="courseLocationTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.courseLocation">Course Location</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="conditionsOfParticipantTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.conditionsOfParticipant">Conditions Of Participant</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="effectivenessLevelTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.effectivenessLevel">Effectiveness Level</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
             <th jhiSortBy="toolsAndFacilityTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.toolsAndFacility">Tools And Facility</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="teachingApproachTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.teachingApproach">Teaching Approach</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="teachTechniqueTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.teachTechnique">Teach Technique</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="effectivenessIndexTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.effectivenessIndex">Effectiveness Index</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="effectivenessIndexTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.effectivenessIndex">Effectiveness Index</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let designAndPlanning of designAndPlannings ;trackBy: trackId">
-                <td><a [routerLink]="['/design-and-planning-marine-suffix', designAndPlanning.id, 'view' ]">{{designAndPlanning.id}}</a></td>
-                <td>{{designAndPlanning.directCost}}</td>
-                <td>{{designAndPlanning.directCostDescription}}</td>
-                <td>{{designAndPlanning.undirectCost}}</td>
+            <tr *ngFor="let designAndPlanning of designAndPlannings ;let i = index">
+                <!--<td><a [routerLink]="['/design-and-planning-marine-suffix', designAndPlanning.id, 'view' ]">{{designAndPlanning.id}}</a></td>-->
+                <td>{{i+1}}</td>
+                <td></td>
+                <td></td>
+                <td>
+                    <div *ngIf="designAndPlanning.courseTypeId">
+                        <a [routerLink]="['../course-type-marine-suffix', designAndPlanning.courseTypeId , 'view' ]" >{{designAndPlanning.courseTypeTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="designAndPlanning.effectivenessLevelId">
+                        <a [routerLink]="['../effectiveness-level-marine-suffix', designAndPlanning.effectivenessLevelId , 'view' ]" >{{designAndPlanning.effectivenessLevelTitle}}</a>
+                    </div>
+                </td>
+                <td>{{designAndPlanning.runMonthName}}</td>
+                <td>{{designAndPlanning.directCost | number}}</td>
+                <td>{{designAndPlanning.undirectCost | number}}</td>
+                <!--<td>{{designAndPlanning.directCostDescription}}</td>
                 <td>{{designAndPlanning.undirectCostDescription}}</td>
                 <td>{{designAndPlanning.step}}</td>
                 <td>{{designAndPlanning.finished}}</td>
@@ -76,11 +99,7 @@
                         <a [routerLink]="['../mahiat-course-marine-suffix', designAndPlanning.mahiatCourseId , 'view' ]" >{{designAndPlanning.mahiatCourseTitle}}</a>
                     </div>
                 </td>
-                <td>
-                    <div *ngIf="designAndPlanning.courseTypeId">
-                        <a [routerLink]="['../course-type-marine-suffix', designAndPlanning.courseTypeId , 'view' ]" >{{designAndPlanning.courseTypeTitle}}</a>
-                    </div>
-                </td>
+
                 <td>
                     <div *ngIf="designAndPlanning.teachTypeId">
                         <a [routerLink]="['../teach-type-marine-suffix', designAndPlanning.teachTypeId , 'view' ]" >{{designAndPlanning.teachTypeTitle}}</a>
@@ -96,11 +115,7 @@
                         <a [routerLink]="['../conditions-of-participant-marine-suffix', designAndPlanning.conditionsOfParticipantId , 'view' ]" >{{designAndPlanning.conditionsOfParticipantTitle}}</a>
                     </div>
                 </td>
-                <td>
-                    <div *ngIf="designAndPlanning.effectivenessLevelId">
-                        <a [routerLink]="['../effectiveness-level-marine-suffix', designAndPlanning.effectivenessLevelId , 'view' ]" >{{designAndPlanning.effectivenessLevelTitle}}</a>
-                    </div>
-                </td>
+
                 <td>
                     <div *ngIf="designAndPlanning.toolsAndFacilityId">
                         <a [routerLink]="['../tools-and-facility-marine-suffix', designAndPlanning.toolsAndFacilityId , 'view' ]" >{{designAndPlanning.toolsAndFacilityTitle}}</a>
@@ -120,41 +135,59 @@
                     <div *ngIf="designAndPlanning.effectivenessIndexId">
                         <a [routerLink]="['../effectiveness-index-marine-suffix', designAndPlanning.effectivenessIndexId , 'view' ]" >{{designAndPlanning.effectivenessIndexTitle}}</a>
                     </div>
-                </td>
+                </td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['/design-and-planning-marine-suffix', designAndPlanning.id, 'view' ]"
+                                [routerLink]="['/design-and-planning-marine-suffix', designAndPlanning.finalNiazsanjiReportId, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"
+                        <!--<button type="submit"
                                 [routerLink]="['/design-and-planning-marine-suffix', designAndPlanning.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
+                        </button>-->
+                        <!--<button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
                                 [routerLink]="['/', { outlets: { popup: 'design-and-planning-marine-suffix/'+ designAndPlanning.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+                        </button>-->
                     </div>
                 </td>
             </tr>
             </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="3">
+
+                </td>
+            </tr>
+
+            </tfoot>
         </table>
-    </div>
     <div *ngIf="designAndPlannings && designAndPlannings.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
         <div class="row justify-content-center">
             <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
+    </div>
     </div>
 </div>

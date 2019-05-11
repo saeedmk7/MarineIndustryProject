@@ -309,7 +309,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
                 this.currentPerson = resp.body;
                 //this.prepareSearchOrgChart();
                 //this.prepareDate();
-                this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'educationalModuleTitle', 'text', 'contains'));
+                this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'educationalModuleName', 'text', 'contains'));
                 this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'educationalCenter', 'text', 'contains'));
                 this.prepareSearchOrgChart();
                 if(this.isSuperUsers){
@@ -427,6 +427,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
     }
 
     protected paginateEducationalHistories(data: IEducationalHistoryMarineSuffix[], headers: HttpHeaders) {
+
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
@@ -435,9 +436,14 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         this.educationalHistories.forEach((a: IEducationalHistoryMarineSuffix) => {
             a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
         });
-        this.sumPractical = this.educationalHistories.map(a => a.learningTimePractical).reduce((partial_sum, a) => partial_sum + a);
-        this.sumTheorical = this.educationalHistories.map(a => a.learningTimeTheorical).reduce((partial_sum, a) => partial_sum + a);
-        this.sumTotal = this.educationalHistories.map(a => a.totalTime).reduce((partial_sum, a) => partial_sum + a);
+        if(this.educationalHistories.length) {
+            this.sumPractical = this.educationalHistories.map(a => a.learningTimePractical).reduce((partial_sum, a) => partial_sum + a);
+            this.sumTheorical = this.educationalHistories.map(a => a.learningTimeTheorical).reduce((partial_sum, a) => partial_sum + a);
+            this.sumTotal = this.educationalHistories.map(a => a.totalTime).reduce((partial_sum, a) => partial_sum + a);
+        }
+        else{
+            this.sumPractical = this.sumTheorical = this.sumTotal = 0;
+        }
 
     }
 

@@ -3,6 +3,7 @@ import * as moment from 'jalali-moment';
 import {JhiLanguageService} from "ng-jhipster";
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
+import {MONTHS} from "app/shared/constants/months.constants";
 
 @Injectable({ providedIn: 'root' })
 export class ConvertObjectDatesService {
@@ -68,6 +69,11 @@ export class ConvertObjectDatesService {
             case 'ACCEPT':
                 return RequestStatus.ACCEPT;
         }
+    }
+    convertMonthsNumber2MonthName(month: number) : string {
+        if(month <= 0 || month > 12)
+            return "نامشخص";
+        return MONTHS.find(a => a.id == month).persianMonth;
     }
     convertStatus2EqualString(status: number): string {
         switch (status) {

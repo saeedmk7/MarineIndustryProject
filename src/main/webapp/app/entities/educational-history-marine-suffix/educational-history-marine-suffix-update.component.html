@@ -34,7 +34,7 @@
                         [multiple]="false"
                         [closeOnSelect]="true"
                         [searchable]="true"
-                        [required]="true"
+                        [required]="false"
                         (change)="onEducationalModuleChange($event)"
                         bindLabel="fullTitle"
                         bindValue="id"
@@ -44,36 +44,21 @@
                         [(ngModel)]="educationalHistory.educationalModuleId">
                 </div>
                 <div class="form-group half">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.educationalModuleTitle" for="field_educationalModuleTitle">Educational Module Title</label>
-                    <input type="text" class="form-control" name="educationalModuleTitle" id="field_educationalModuleTitle"
-                        [(ngModel)]="educationalHistory.educationalModuleTitle" required maxlength="4096"/>
-                    <div [hidden]="!(editForm.controls.educationalModuleTitle?.dirty && editForm.controls.educationalModuleTitle?.invalid)">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.educationalModuleName" for="field_educationalModuleName">Educational Module Name</label>
+                    <input type="text" class="form-control" name="educationalModuleName" id="field_educationalModuleName"
+                        [(ngModel)]="educationalHistory.educationalModuleName" required maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.educationalModuleName?.dirty && editForm.controls.educationalModuleName?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.educationalModuleTitle?.errors?.required" jhiTranslate="entity.validation.required">
+                        [hidden]="!editForm.controls.educationalModuleName?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.educationalModuleTitle?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        [hidden]="!editForm.controls.educationalModuleName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
                         This field cannot be longer than 4096 characters.
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.dateOfStart" for="field_dateOfStart">Date Of Start</label>
-                    <kendo-maskedtextbox
-                        [includeLiterals]="true"
-                        required="true"
-                        [(ngModel)]="educationalHistory.dateOfStart"
-                        name="dateOfStart"
-                        class="form-control"
-                        id="field_dateOfStart"
-                        (blur)="checkDateValidation($event)"
-                        mask="0000/00/00">
-                    </kendo-maskedtextbox>
-                    <span *ngIf="dateValid == 1" class="alert-success">تاریخ معتبر است</span>
-                    <span *ngIf="dateValid == 2" class="alert-danger">تاریخ نامعتبر است</span>
-                </div>
-                <br/>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.learningTimeTheorical" for="field_learningTimeTheorical">Learning Time Theorical</label>
                     <!--<input type="number" (keypress)="validateKeyStrokes($event)" value="0" jhiMax="2000000000" max="2000000000" min="0" jhiMin="0" class="form-control" name="learningTimeTheorical" id="field_learningTimeTheorical"
@@ -133,6 +118,21 @@
                         [(ngModel)]="educationalHistory.totalTime" [min]="0" [max]="2000000000"
                         name="totalTime" id="field_totalTime" [format]="'n0'" class="form-control">
                     </kendo-numerictextbox>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.dateOfStart" for="field_dateOfStart">Date Of Start</label>
+                    <kendo-maskedtextbox
+                        [includeLiterals]="true"
+                        required="true"
+                        [(ngModel)]="educationalHistory.dateOfStart"
+                        name="dateOfStart"
+                        class="form-control"
+                        id="field_dateOfStart"
+                        (blur)="checkDateValidation($event)"
+                        mask="0000/00/00">
+                    </kendo-maskedtextbox>
+                    <span *ngIf="dateValid == 1" class="alert-success">تاریخ معتبر است</span>
+                    <span *ngIf="dateValid == 2" class="alert-danger">تاریخ نامعتبر است</span>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.educationalCenter" for="field_educationalCenter">Educational Center</label>

@@ -33,4 +33,14 @@ public class FileStorageProperties {
     public void setHistoryUploadDir(String historyUploadDir) {
         this.historyUploadDir = historyUploadDir;
     }
+
+    private String runPhaseUploadDir;
+
+    public String getRunPhaseUploadDir() {
+        return runPhaseUploadDir;
+    }
+
+    public void setRunPhaseUploadDir(String runPhaseUploadDir) {
+        this.runPhaseUploadDir = runPhaseUploadDir;
+    }
 }

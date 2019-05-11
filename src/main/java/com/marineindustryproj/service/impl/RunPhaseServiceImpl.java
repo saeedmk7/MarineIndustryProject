@@ -1,6 +1,7 @@
 package com.marineindustryproj.service.impl;
 
 import com.marineindustryproj.domain.FinalNiazsanjiReport;
+import com.marineindustryproj.domain.Person;
 import com.marineindustryproj.repository.FinalNiazsanjiReportRepository;
 import com.marineindustryproj.repository.RunRunningStepRepository;
 import com.marineindustryproj.repository.RunningStepRepository;
@@ -26,8 +27,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -104,7 +107,9 @@ public class RunPhaseServiceImpl implements RunPhaseService {
         runPhase.setDescription(runPhaseSaveDataModel.getDescription());
         runPhase.setFinalizeCost(runPhaseSaveDataModel.getFinalizeCost());
         runPhase.setStepNumber(runPhaseSaveDataModel.getStepNumber());
+        runPhase.setRunMonth(runPhaseSaveDataModel.getRunMonth());
         finalNiazsanjiReport.setFinalizeCost(runPhase.getFinalizeCost());
+        finalNiazsanjiReport.setRunMonth(runPhase.getRunMonth());
         if(runPhaseSaveDataModel.getDone() && runPhase.getStatus() < 10)
         {
             runPhase.setDone(runPhaseSaveDataModel.getDone());
@@ -142,6 +147,7 @@ public class RunPhaseServiceImpl implements RunPhaseService {
                      runRunningStep.setDone(item.getDone());
                  }
                  runRunningStep.setDescription(item.getDescription());
+                 runRunningStep.setFileDoc(item.getFileDoc());
             }
             else{
                 if(item.getDone()) {
@@ -153,6 +159,7 @@ public class RunPhaseServiceImpl implements RunPhaseService {
                     runRunningStep.setDone(false);
 
                 runRunningStep.setDescription(item.getDescription());
+                runRunningStep.setFileDoc(item.getFileDoc());
                 runRunningStep.setCreateDate(ZonedDateTime.now());
                 runRunningStep.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
                 //RunningStep runningStep = runningStepRepository.getOne(item.getRunningStepId());
@@ -162,6 +169,16 @@ public class RunPhaseServiceImpl implements RunPhaseService {
             runRunningStepService.save(runRunningStep);
         }
 
+        if(runPhase.getPeople().isEmpty()) {
+            long[] personIds = finalNiazsanjiReport.getFinalNiazsanjiReportPeople().stream().mapToLong(a ->a.getPerson().getId()).toArray();
+            Set<Person> people = new HashSet<>();
+            for (long personId : personIds) {
+                Person person = new Person();
+                person.setId(personId);
+                people.add(person);
+            }
+            runPhase.setPeople(people);
+        }
         return runPhaseMapper.toDto(runPhase);
     }
 

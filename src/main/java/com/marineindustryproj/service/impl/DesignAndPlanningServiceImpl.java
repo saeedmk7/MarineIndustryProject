@@ -1,6 +1,7 @@
 package com.marineindustryproj.service.impl;
 
 import com.marineindustryproj.domain.FinalNiazsanjiReport;
+import com.marineindustryproj.domain.Person;
 import com.marineindustryproj.repository.FinalNiazsanjiReportRepository;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.DesignAndPlanningService;
@@ -16,8 +17,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Array;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * Service Implementation for managing DesignAndPlanning.
@@ -51,8 +56,7 @@ public class DesignAndPlanningServiceImpl implements DesignAndPlanningService {
         log.debug("Request to save DesignAndPlanning : {}", designAndPlanningDTO);
 
         FinalNiazsanjiReport finalNiazsanjiReport = finalNiazsanjiReportRepository.getOne(designAndPlanningDTO.getFinalNiazsanjiReportId());
-        finalNiazsanjiReport.setRunMonth(designAndPlanningDTO.getRunMonth());
-
+        //finalNiazsanjiReport.setRunMonth(designAndPlanningDTO.getRunMonth());
         if(designAndPlanningDTO.isFinished() && designAndPlanningDTO.getStatus() < 10)
         {
             designAndPlanningDTO.setFinishedDate(ZonedDateTime.now());
@@ -66,6 +70,16 @@ public class DesignAndPlanningServiceImpl implements DesignAndPlanningService {
 
         finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
         DesignAndPlanning designAndPlanning = designAndPlanningMapper.toEntity(designAndPlanningDTO);
+        if(designAndPlanning.getPeople().isEmpty()) {
+            long[] personIds = finalNiazsanjiReport.getFinalNiazsanjiReportPeople().stream().mapToLong(a ->a.getPerson().getId()).toArray();
+            Set<Person> people = new HashSet<>();
+            for (long personId : personIds) {
+                Person person = new Person();
+                person.setId(personId);
+                people.add(person);
+            }
+            designAndPlanning.setPeople(people);
+        }
         designAndPlanning = designAndPlanningRepository.save(designAndPlanning);
         return designAndPlanningMapper.toDto(designAndPlanning);
     }

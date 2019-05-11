@@ -24,7 +24,7 @@
             <th jhiSortBy="totalTime"><span jhiTranslate="marineindustryprojApp.educationalHistory.totalTime">Total Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="educationalCenter"><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalCenter">Educational Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dateOfStart"><span jhiTranslate="marineindustryprojApp.educationalHistory.dateOfStart">Date Of Start</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th><span jhiTranslate="marineindustryprojApp.educationalHistory.status">Status</span></th>
 
             <th  width="300"></th>
@@ -41,11 +41,11 @@
                 <td>{{educationalHistory.totalTime}}</td>
                 <td>{{educationalHistory.educationalCenter}}</td>
                 <td>{{educationalHistory.dateOfStart}}</td>
-                <td>
+                <!--<td>
                     <div *ngIf="educationalHistory.educationalModuleId">
                         <a [routerLink]="['../educational-module-marine-suffix', educationalHistory.educationalModuleId , 'view' ]" >{{educationalHistory.educationalModuleTitle}}</a>
                     </div>
-                </td>
+                </td>-->
                 <td>{{educationalHistory.statusMeaning}}</td>
                 <td class="text-right">
                     <a *ngIf="educationalHistory.fileDoc" title="دریافت گواهینامه" [href]="educationalHistory.fileDoc | safe" target="_blank"

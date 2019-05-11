@@ -28,7 +28,24 @@
 <div class="row grid">
 
     <div class="col-5">
-        <input type="text" name="searchtxt" id="searchtxt" placeholder="جستجو" [ngModel]="searchtxt" (ngModelChange)="search($event)" /><!--<button (click)="search()">searchbtn</button>-->
+        <div class="form-group">
+            <label class="form-control-label">جستجو چارت</label>
+            <input type="text" name="searchtxt" class="form-control" id="searchtxt" placeholder="جستجو چارت" [ngModel]="searchtxt" (ngModelChange)="search($event)" /><!--<button (click)="search()">searchbtn</button>-->
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">جستجو پرسنل </label>
+            <ng-select
+                [items]="people"
+                [multiple]="false"
+                [closeOnSelect]="true"
+                [searchable]="true"
+                (change)="searchOrg($event)"
+                bindLabel="fullName"
+                placeholder="جستجو پرسنل"
+                name="searchPeople"
+                [(ngModel)]="searchPerson">
+            </ng-select>
+        </div>
         <tree-root #tree [nodes]="nodes" [options]="options" (activate)="nodeActive($event)"></tree-root>
     </div>
     <div class="col-5">

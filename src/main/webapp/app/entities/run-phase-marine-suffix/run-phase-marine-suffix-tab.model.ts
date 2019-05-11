@@ -5,6 +5,7 @@ export interface IRunPhaseTabModel {
     title?: string;
     href?: string;
     active?: boolean;
+    colorText?: string;
     runPhaseItems?: IRunPhaseItemModel[]
 }
 
@@ -14,6 +15,7 @@ export class RunPhaseTabModel implements IRunPhaseTabModel {
         public title?: string,
         public href?: string,
         public active?: boolean,
+        public colorText?: string,
         public runPhaseItems?: IRunPhaseItemModel[]
     ) {}
 }

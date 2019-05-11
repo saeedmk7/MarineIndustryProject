@@ -257,9 +257,12 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
 
     save() {
 
-        debugger;
-        this.isSaving = true;
 
+        this.isSaving = true;
+        if(!this.designAndPlanning.finished){
+            this.designAndPlanning.directCost = this.designAndPlanning.directCost == undefined ? 0 : this.designAndPlanning.directCost;
+            this.designAndPlanning.undirectCost = this.designAndPlanning.undirectCost == undefined ? 0 : this.designAndPlanning.undirectCost;
+        }
         this.designAndPlanning.status = this.designAndPlanning.status == undefined ? 0 : this.designAndPlanning.status;
         this.designAndPlanning.step = this.designAndPlanning.step == undefined ? 0 : this.designAndPlanning.step;
 
@@ -331,14 +334,19 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<IDesignAndPlanningMarineSuffix>>) {
         result.subscribe(
-            (res: HttpResponse<IDesignAndPlanningMarineSuffix>) => this.onSaveSuccess(),
+            (res: HttpResponse<IDesignAndPlanningMarineSuffix>) => this.onSaveSuccess(res.body),
             (res: HttpErrorResponse) => this.onSaveError()
         );
     }
 
-    private onSaveSuccess() {
+    private onSaveSuccess(res: IDesignAndPlanningMarineSuffix) {
         this.isSaving = false;
-        this.previousState();
+        if(res.finished)
+            this.previousState();
+        else {
+            this.designAndPlanning = res;
+            this.documentUrl = 'document-marine-suffix/designandplanning/' + this.designAndPlanning.id;
+        }
     }
 
     private onSaveError() {

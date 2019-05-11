@@ -9,6 +9,13 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { DesignAndPlanningMarineSuffixService } from './design-and-planning-marine-suffix.service';
+import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+import {MONTHS} from "app/shared/constants/months.constants";
+import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
+import {EffectivenessLevelMarineSuffixService} from "app/entities/effectiveness-level-marine-suffix";
+import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
+import {IEffectivenessLevelMarineSuffix} from "app/shared/model/effectiveness-level-marine-suffix.model";
 
 @Component({
     selector: 'mi-design-and-planning-marine-suffix',
@@ -20,6 +27,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
     error: any;
     success: any;
     eventSubscriber: Subscription;
+    criteriaSubscriber: Subscription;
     routeData: any;
     links: any;
     totalItems: any;
@@ -29,6 +37,9 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
     predicate: any;
     previousPage: any;
     reverse: any;
+    searchbarModel: SearchPanelModel[];
+    done:boolean = false;
+    criteria: any;
 
     constructor(
         private designAndPlanningService: DesignAndPlanningMarineSuffixService,
@@ -37,7 +48,10 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private courseTypeService: CourseTypeMarineSuffixService,
+        private effectivenessLevelService: EffectivenessLevelMarineSuffixService,
+        private convertObjectDatesService : ConvertObjectDatesService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -46,19 +60,35 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
         });
+        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
+            this.done = true;
+            this.criteria = criteria.content;
+            this.loadAll(criteria.content);
+        });
     }
 
-    loadAll() {
-        this.designAndPlanningService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<IDesignAndPlanningMarineSuffix[]>) => this.paginateDesignAndPlannings(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+    loadAll(criteria?) {
+        this.principal.identity().then(account => {
+            this.currentAccount = account;
+            if(!criteria){
+                criteria = [];
+            }
+            criteria.push({
+                key: 'personId.equals',
+                value: this.currentAccount.personId
+            });
+            this.designAndPlanningService
+                .query({
+                    page: this.page - 1,
+                    size: this.itemsPerPage,
+                    criteria,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<IDesignAndPlanningMarineSuffix[]>) => this.paginateDesignAndPlannings(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        });
     }
 
     loadPage(page: number) {
@@ -92,15 +122,34 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
     }
 
     ngOnInit() {
-        this.loadAll();
-        this.principal.identity().then(account => {
+        this.searchbarModel = new Array<SearchPanelModel>();
+        this.searchbarModel.push(new SearchPanelModel('designAndPlanning','runMonth','select', 'equals', MONTHS, 'persianMonth'));
+        this.courseTypeService.query().subscribe(
+            (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                this.searchbarModel.push(new SearchPanelModel('designAndPlanning','courseTypeId','select', 'equals', res.body));
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.effectivenessLevelService.query().subscribe(
+            (res: HttpResponse<IEffectivenessLevelMarineSuffix[]>) => {
+                this.searchbarModel.push(new SearchPanelModel('designAndPlanning','effectivenessLevelId','select', 'equals', res.body));
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+
+        /*this.principal.identity().then(account => {
             this.currentAccount = account;
-        });
-        this.registerChangeInDesignAndPlannings();
+        });*/
+        if(!this.done)
+        {
+            this.loadAll();
+        }
+        //this.registerChangeInDesignAndPlannings();
     }
 
     ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
+        //this.eventManager.destroy(this.eventSubscriber);
+        this.eventManager.destroy(this.criteriaSubscriber);
     }
 
     trackId(index: number, item: IDesignAndPlanningMarineSuffix) {
@@ -123,6 +172,9 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
+        data.forEach(a => {
+            a.runMonthName = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
+        })
         this.designAndPlannings = data;
     }
 

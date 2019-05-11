@@ -18,6 +18,8 @@ public class RunPhaseSaveDataModel implements Serializable {
 
     private Integer status;
 
+    private Integer runMonth;
+
     private Long finalNiazsanjiReportId;
 
     private Set<RunPhaseSaveDataItemModel> runPhaseSaveDataItemModels = new HashSet<>();
@@ -84,5 +86,13 @@ public class RunPhaseSaveDataModel implements Serializable {
 
     public void setRunPhaseSaveDataItemModels(Set<RunPhaseSaveDataItemModel> runPhaseSaveDataItemModels) {
         this.runPhaseSaveDataItemModels = runPhaseSaveDataItemModels;
+    }
+
+    public Integer getRunMonth() {
+        return runMonth;
+    }
+
+    public void setRunMonth(Integer runMonth) {
+        this.runMonth = runMonth;
     }
 }

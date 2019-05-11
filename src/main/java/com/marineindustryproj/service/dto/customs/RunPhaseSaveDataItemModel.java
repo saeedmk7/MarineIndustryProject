@@ -17,6 +17,8 @@ public class RunPhaseSaveDataItemModel implements Serializable {
 
     private String description;
 
+    private String fileDoc;
+
     public Long getRunningStepId() {
         return runningStepId;
     }
@@ -39,5 +41,13 @@ public class RunPhaseSaveDataItemModel implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getFileDoc() {
+        return fileDoc;
+    }
+
+    public void setFileDoc(String fileDoc) {
+        this.fileDoc = fileDoc;
     }
 }

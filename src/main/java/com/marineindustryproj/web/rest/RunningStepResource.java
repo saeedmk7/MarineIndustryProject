@@ -1,6 +1,7 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.RunningStepService;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +61,10 @@ public class RunningStepResource {
         if (runningStepDTO.getId() != null) {
             throw new BadRequestAlertException("A new runningStep cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        runningStepDTO.setCreateDate(ZonedDateTime.now());
+        runningStepDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+
         RunningStepDTO result = runningStepService.save(runningStepDTO);
         return ResponseEntity.created(new URI("/api/running-steps/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -81,6 +87,18 @@ public class RunningStepResource {
         if (runningStepDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+        RunningStepDTO runningStep = runningStepService.findOne(runningStepDTO.getId()).get();
+
+        if(runningStep.getCreateUserLogin() == null)
+            runningStepDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        else
+            runningStepDTO.setCreateUserLogin(runningStep.getCreateUserLogin());
+        runningStepDTO.setCreateDate(runningStep.getCreateDate());
+        runningStepDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        runningStepDTO.setModifyDate(ZonedDateTime.now());
+
+
         RunningStepDTO result = runningStepService.save(runningStepDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, runningStepDTO.getId().toString()))

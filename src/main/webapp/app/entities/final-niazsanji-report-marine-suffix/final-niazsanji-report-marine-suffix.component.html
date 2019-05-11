@@ -55,19 +55,22 @@
                             id="field_niazsanjiYear"
                             [(ngModel)]="finalNiazsanjiReport.niazsanjiYear">
                     </div>
-                    <div class="form-group half">
-                        <label class="form-control-label" for="field_organizationChart">پیشنهاد دهنده</label>
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_runMonth">ماه اجرا</label>
                         <ng-select
-                            [items]="recommenedOrgCharts"
+                            [items]="months"
                             [multiple]="false"
                             [closeOnSelect]="true"
                             [searchable]="true"
-                            bindLabel="fullTitle"
+                            [required]="false"
+                            bindLabel="persianMonth"
                             bindValue="id"
                             placeholder="انتخاب نمائید."
-                            name="organizationChartId"
-                            id="field_organizationChart"
-                            [(ngModel)]="finalNiazsanjiReport.organizationChartId">
+                            name="runMonth"
+                            id="field_runMonth"
+                            [(ngModel)]="finalNiazsanjiReport.runMonth">
+                    </div>
+                    <div class="form-group">
                     </div>
                     <div class="form-group" *ngIf="isSuperUsers">
                         <label class="form-control-label" for="field_organizationChart">گروه</label>
@@ -84,6 +87,21 @@
                             [(ngModel)]="finalNiazsanjiReport.organizationChartId">
                     </div>
                     <div class="form-group half">
+                        <label class="form-control-label" for="field_organizationChart">پیشنهاد دهنده</label>
+                        <ng-select
+                            [items]="recommenedOrgCharts"
+                            [multiple]="false"
+                            [closeOnSelect]="true"
+                            [searchable]="true"
+                            bindLabel="fullTitle"
+                            bindValue="id"
+                            placeholder="انتخاب نمائید."
+                            name="organizationChartId"
+                            id="field_organizationChart"
+                            [(ngModel)]="finalNiazsanjiReport.organizationChartId">
+                    </div>
+
+                    <div class="form-group half">
                         <label class="form-control-label" for="field_educationalModule">پودمان آموزشی</label>
                         <ng-select
                             [items]="educationalModules"
@@ -97,21 +115,7 @@
                             id="field_educationalModule"
                             [(ngModel)]="finalNiazsanjiReport.educationalModuleId">
                     </div>
-                    <div class="form-group">
-                        <label class="form-control-label" for="field_runMonth">ماه اجرا</label>
-                        <ng-select
-                            [items]="months"
-                            [multiple]="false"
-                            [closeOnSelect]="true"
-                            [searchable]="true"
-                            [required]="false"
-                            bindLabel="persianMonth"
-                            bindValue="id"
-                            placeholder="انتخاب نمائید."
-                            name="runMonth"
-                            id="field_runMonth"
-                            [(ngModel)]="finalNiazsanjiReport.runMonth">
-                    </div>
+
                     <div class="form-group">
                         <label class="form-control-label" for="field_status">وضعیت نیازسنجی</label>
                         <ng-select

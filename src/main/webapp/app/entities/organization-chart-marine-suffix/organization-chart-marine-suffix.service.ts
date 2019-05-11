@@ -43,7 +43,6 @@ export class OrganizationChartMarineSuffixService {
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {
-
         if(req) {
             const options = createRequestOption(req);
             return this.http
@@ -96,6 +95,7 @@ export class OrganizationChartMarineSuffixService {
         return res;
     }
     appendParent(org: IOrganizationChartMarineSuffix): string{
+
         let fullTitle = org.title;
         if(org.parentId){
             let father = this.organizationcharts.find(a => a.id == org.parentId);
@@ -106,6 +106,7 @@ export class OrganizationChartMarineSuffixService {
 
     private convertDateArrayFromServer(res: EntityArrayResponseType, isAll: boolean = false): EntityArrayResponseType {
         this.organizationcharts = res.body;
+
         res.body.forEach((organizationChart: IOrganizationChartMarineSuffix) => {
             organizationChart.createDate = organizationChart.createDate != null ? moment(organizationChart.createDate) : null;
             organizationChart.modifyDate = organizationChart.modifyDate != null ? moment(organizationChart.modifyDate) : null;

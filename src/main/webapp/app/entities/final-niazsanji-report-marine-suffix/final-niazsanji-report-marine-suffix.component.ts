@@ -37,8 +37,8 @@ import {FINALNIAZSANJISTATUSMEANING} from "app/shared/constants/final-niazsanji-
     encapsulation: ViewEncapsulation.None,
     styles:[`
         .k-grid tr.info { background-color: #d9edf7; color: #31708f; }
-        .k-grid tr.success { background-color: #dff0d8; color: #3c763d; }
-        .k-grid tr.warning { background-color: #fcf8e3; color: #8a6d3b; }
+        .k-grid tr.success { background-color: #28a745; color: #fff; }
+        .k-grid tr.warning { background-color: #ffc107; color: #fff; }
         .k-grid tr.danger { background-color: #f2dede; color: #a94442; }
         
     `],

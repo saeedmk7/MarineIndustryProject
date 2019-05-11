@@ -19,6 +19,7 @@ export class OrganizationChartMarineSuffixComponent implements OnInit, OnDestroy
     organizationCharts: IOrganizationChartMarineSuffix[];
     people: IPersonMarineSuffix[];
     selectedPeople: IPersonMarineSuffix[];
+    searchPerson: IPersonMarineSuffix;
     tempSelectedPeople: IPersonMarineSuffix[];
     showPeople: boolean = false;
     disable: boolean = false;
@@ -46,6 +47,36 @@ export class OrganizationChartMarineSuffixComponent implements OnInit, OnDestroy
         private treeUtilities: TreeUtilities
     ) {
 
+    }
+    searchOrg($event: IPersonMarineSuffix){
+
+
+        this.personService.find($event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
+
+            this.searchtxt = resp.body.organizationChartTitle;
+            this.search(this.searchtxt);
+        },
+            (res: HttpErrorResponse) => this.onError(res.message));
+
+        /*let criteria = [{
+            key:'id.equals',
+            value: $event.id
+        }];
+        this.organizationChartService.query({
+            page: 0,
+            size: 2000,
+            criteria,
+            sort: ['id,asc']
+        }).subscribe(
+            (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
+
+                if(res.body.length) {
+                    const a = res.body[0];
+                    this.searchtxt = a.title;
+                }
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );*/
     }
     callAdd(){
         if(this.myId)

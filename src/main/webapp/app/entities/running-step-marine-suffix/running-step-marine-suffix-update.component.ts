@@ -15,9 +15,9 @@ import { RunningStepMarineSuffixService } from './running-step-marine-suffix.ser
 export class RunningStepMarineSuffixUpdateComponent implements OnInit {
     private _runningStep: IRunningStepMarineSuffix;
     isSaving: boolean;
-    createDate: string;
+    /*createDate: string;
     modifyDate: string;
-    archivedDate: string;
+    archivedDate: string;*/
 
     constructor(private runningStepService: RunningStepMarineSuffixService, private activatedRoute: ActivatedRoute) {}
 
@@ -34,10 +34,13 @@ export class RunningStepMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+
         this.runningStep.status = 0;
-        this.runningStep.createDate = moment(this.createDate, DATE_TIME_FORMAT);
-        this.runningStep.modifyDate = moment(this.modifyDate, DATE_TIME_FORMAT);
-        this.runningStep.archivedDate = moment(this.archivedDate, DATE_TIME_FORMAT);
+        this.runningStep.isHeader = this.runningStep.isHeader == null ? false : this.runningStep.isHeader;
+        this.runningStep.fileDocRequired = this.runningStep.fileDocRequired == null ? false : this.runningStep.fileDocRequired;
+        this.runningStep.stepRequired = this.runningStep.stepRequired == null ? false : this.runningStep.stepRequired;
+        if(!this.runningStep.stepRequired)
+            this.runningStep.fileDocRequired = false;
         if (this.runningStep.id !== undefined) {
             this.subscribeToSaveResponse(this.runningStepService.update(this.runningStep));
         } else {
@@ -66,8 +69,8 @@ export class RunningStepMarineSuffixUpdateComponent implements OnInit {
 
     set runningStep(runningStep: IRunningStepMarineSuffix) {
         this._runningStep = runningStep;
-        this.createDate = moment(runningStep.createDate).format(DATE_TIME_FORMAT);
+        /*this.createDate = moment(runningStep.createDate).format(DATE_TIME_FORMAT);
         this.modifyDate = moment(runningStep.modifyDate).format(DATE_TIME_FORMAT);
-        this.archivedDate = moment(runningStep.archivedDate).format(DATE_TIME_FORMAT);
+        this.archivedDate = moment(runningStep.archivedDate).format(DATE_TIME_FORMAT);*/
     }
 }

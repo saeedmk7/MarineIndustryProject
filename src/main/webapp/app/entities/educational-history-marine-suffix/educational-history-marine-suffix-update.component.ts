@@ -129,10 +129,12 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
         );
     }
     onEducationalModuleChange($event: IEducationalModuleMarineSuffix){
-        debugger;
+
         this.educationalHistory.learningTimeTheorical = $event.learningTimeTheorical;
         this.educationalHistory.learningTimePractical = $event.learningTimePractical;
+        this.educationalHistory.totalTime = (this.educationalHistory.learningTimeTheorical ? +this.educationalHistory.learningTimeTheorical : 0) + (this.educationalHistory.learningTimePractical ? +this.educationalHistory.learningTimePractical : 0);
         this.educationalHistory.educationalModuleName = $event.title;
+
     }
     previousState() {
         window.history.back();

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpRequest, HttpResponse} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
@@ -9,6 +9,7 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IRunPhaseMarineSuffix } from 'app/shared/model/run-phase-marine-suffix.model';
 import {IRunPhaseSaveDataModel} from "app/entities/run-phase-marine-suffix/run-phase-marine-suffix-save-data.model";
+import {add} from "@progress/kendo-angular-inputs/dist/es2015/common/math";
 
 type EntityResponseType = HttpResponse<IRunPhaseMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<IRunPhaseMarineSuffix[]>;
@@ -19,6 +20,23 @@ export class RunPhaseMarineSuffixService {
 
     constructor(private http: HttpClient) {}
 
+    uploadFile(formdata: FormData): Observable<HttpEvent<{}>> {
+
+        /*return this.http
+            .post<any>(this.resourceUrl, formdata, { observe: 'response', reportProgress:true });*/
+        const url = this.resourceUrl + "/upload-file";
+        const req = new HttpRequest('POST', url, formdata, {
+            reportProgress: true,
+            responseType: 'text'
+        });
+
+        return this.http.request(req);
+    }
+    deleteFile(address: string): Observable<HttpResponse<any>> {
+        debugger
+        let fileName = address.split('/')[address.split('/').length-1];
+        return this.http.delete<any>(`${this.resourceUrl}/delete/${fileName}`, { observe: 'response' });
+    }
     create(runPhase: IRunPhaseMarineSuffix): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(runPhase);
         return this.http
