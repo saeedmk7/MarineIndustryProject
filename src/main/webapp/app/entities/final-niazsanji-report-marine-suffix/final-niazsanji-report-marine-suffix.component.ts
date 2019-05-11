@@ -96,6 +96,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     public aggregatesCost: any[] = [{field: 'priceCost', aggregate: 'sum'}];*/
     public total: any;
     public totalCost: any;
+    public totalFinalizeCost: any;
     public message: string;
 
     constructor(
@@ -283,10 +284,12 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 finalNiazsanjiReportsFardi.educationalModuleLevel = education.skillableLevelOfSkillTitle;
                 finalNiazsanjiReportsFardi.educationalModuleTotalLearningTime = education.totalLearningTime;
             }
-
             finalNiazsanjiReportsFardi.niazsanjiYear = a.niazsanjiYear;
             finalNiazsanjiReportsFardi.organizationChartTitle = a.organizationChartTitle;
             finalNiazsanjiReportsFardi.priceCost = a.priceCost;
+            finalNiazsanjiReportsFardi.finalizeCost = a.finalizeCost;
+            finalNiazsanjiReportsFardi.courseTypeTitle = a.courseTypeTitle;
+            finalNiazsanjiReportsFardi.runMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
 
 
             let personRep = res.find(w => w.finalNiazsanjiReportId == a.id);
@@ -325,6 +328,9 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             finalNiazsanjiReportsOrganization.niazsanjiYear = a.niazsanjiYear;
             finalNiazsanjiReportsOrganization.organizationChartTitle = a.organizationChartTitle;
             finalNiazsanjiReportsOrganization.priceCost = a.priceCost;
+            finalNiazsanjiReportsOrganization.finalizeCost = a.finalizeCost;
+            finalNiazsanjiReportsOrganization.runMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
+            finalNiazsanjiReportsOrganization.courseTypeTitle = a.courseTypeTitle;
 
 
             let personReps = res.filter(w => w.finalNiazsanjiReportId == a.id);
@@ -360,6 +366,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         this.totalCost = aggregateBy(this.finalNiazsanjiReportsFardis, this.aggregatesCost);*/
         this.total = this.finalNiazsanjiReportsFardis.map(a => a.educationalModuleTotalLearningTime).reduce((a, b) => a + b, 0);
         this.totalCost = this.finalNiazsanjiReportsFardis.map(a => a.priceCost).reduce((a, b) => a + b, 0);
+        this.totalFinalizeCost = this.finalNiazsanjiReportsFardis.map(a => a.finalizeCost).reduce((a, b) => a + b, 0);
     }
 
     public groupChangeOrgs(groups: GroupDescriptor[]): void {
@@ -374,9 +381,11 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         this.totalCost = aggregateBy(this.finalNiazsanjiReportsOrganizations, this.aggregatesCost);*/
         this.total = 0; //this.finalNiazsanjiReportsOrganizations.map(a => a.educationalModuleTotalLearningTime).reduce((a, b) => a + b, 0);
         this.totalCost = 0;
+        this.totalFinalizeCost = 0;
         this.finalNiazsanjiReportsOrganizations.forEach(a => {
             this.total += a.educationalModuleTotalLearningTime * a.people.length;
             this.totalCost += a.priceCost * a.people.length;
+            this.totalFinalizeCost += a.finalizeCost * a.people.length;
         });
         //this.total = this.finalNiazsanjiReportsOrganizations.map(a => a.people.length);
         //this.totalCost = 0;//this.finalNiazsanjiReportsOrganizations.map(a => a.priceCost).reduce((a, b) => a + b, 0);

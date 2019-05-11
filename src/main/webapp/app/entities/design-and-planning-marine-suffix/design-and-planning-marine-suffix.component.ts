@@ -16,6 +16,10 @@ import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suf
 import {EffectivenessLevelMarineSuffixService} from "app/entities/effectiveness-level-marine-suffix";
 import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
 import {IEffectivenessLevelMarineSuffix} from "app/shared/model/effectiveness-level-marine-suffix.model";
+import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
+import {EducationalModuleMarineSuffixService} from "app/entities/educational-module-marine-suffix";
+import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
+import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 
 @Component({
     selector: 'mi-design-and-planning-marine-suffix',
@@ -24,6 +28,8 @@ import {IEffectivenessLevelMarineSuffix} from "app/shared/model/effectiveness-le
 export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy {
     currentAccount: any;
     designAndPlannings: IDesignAndPlanningMarineSuffix[];
+    educationalModules: IEducationalModuleMarineSuffix[];
+    people: IPersonMarineSuffix[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -37,9 +43,15 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
     predicate: any;
     previousPage: any;
     reverse: any;
-    searchbarModel: SearchPanelModel[];
+    searchbarModel: SearchPanelModel[] = [];
     done:boolean = false;
     criteria: any;
+
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
 
     constructor(
         private designAndPlanningService: DesignAndPlanningMarineSuffixService,
@@ -50,6 +62,8 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         private router: Router,
         private eventManager: JhiEventManager,
         private courseTypeService: CourseTypeMarineSuffixService,
+        private educationalModuleService: EducationalModuleMarineSuffixService,
+        private personService: PersonMarineSuffixService,
         private effectivenessLevelService: EffectivenessLevelMarineSuffixService,
         private convertObjectDatesService : ConvertObjectDatesService
     ) {
@@ -68,27 +82,27 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
     }
 
     loadAll(criteria?) {
-        this.principal.identity().then(account => {
-            this.currentAccount = account;
-            if(!criteria){
-                criteria = [];
-            }
+
+        if(!criteria){
+            criteria = [];
+        }
+        if(!this.isSuperUsers) {
             criteria.push({
                 key: 'personId.equals',
                 value: this.currentAccount.personId
             });
-            this.designAndPlanningService
-                .query({
-                    page: this.page - 1,
-                    size: this.itemsPerPage,
-                    criteria,
-                    sort: this.sort()
-                })
-                .subscribe(
-                    (res: HttpResponse<IDesignAndPlanningMarineSuffix[]>) => this.paginateDesignAndPlannings(res.body, res.headers),
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
-        });
+        }
+        this.designAndPlanningService
+            .query({
+                page: this.page - 1,
+                size: this.itemsPerPage,
+                criteria,
+                sort: this.sort()
+            })
+            .subscribe(
+                (res: HttpResponse<IDesignAndPlanningMarineSuffix[]>) => this.paginateDesignAndPlannings(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 
     loadPage(page: number) {
@@ -120,19 +134,24 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         ]);
         this.loadAll();
     }
-
     ngOnInit() {
-        this.searchbarModel = new Array<SearchPanelModel>();
-        this.searchbarModel.push(new SearchPanelModel('designAndPlanning','runMonth','select', 'equals', MONTHS, 'persianMonth'));
+    this.principal.identity().then(account => {
+        this.currentAccount = account;
+        this.setRoles(account);
+
+        this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'runMonth', 'select', 'equals', MONTHS, 'persianMonth'));
+        this.prepareSearchEducationalModule();
+        if(this.isSuperUsers)
+            this.prepareSearchPerson();
         this.courseTypeService.query().subscribe(
             (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
-                this.searchbarModel.push(new SearchPanelModel('designAndPlanning','courseTypeId','select', 'equals', res.body));
+                this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'courseTypeId', 'select', 'equals', res.body));
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
         this.effectivenessLevelService.query().subscribe(
             (res: HttpResponse<IEffectivenessLevelMarineSuffix[]>) => {
-                this.searchbarModel.push(new SearchPanelModel('designAndPlanning','effectivenessLevelId','select', 'equals', res.body));
+                this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'effectivenessLevelId', 'select', 'equals', res.body));
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -140,13 +159,52 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         /*this.principal.identity().then(account => {
             this.currentAccount = account;
         });*/
-        if(!this.done)
-        {
+        if (!this.done) {
             this.loadAll();
         }
+    });
         //this.registerChangeInDesignAndPlannings();
     }
+    prepareSearchPerson() {
+        if (this.personService.people) {
+            this.people = this.personService.people;
+            this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'personId', 'select', 'equals', this.people, "fullName"));
+        }
+        else {
+            this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
+                    this.people = res.body;
+                    this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'personId', 'select', 'equals', this.people, "fullName"));
+                },
+                (res: HttpErrorResponse) => this.onError(res.message));
+        }
+    }
+    prepareSearchEducationalModule() {
+        if (this.educationalModuleService.educationalModules) {
+            this.educationalModules = this.educationalModuleService.educationalModules
+            this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle'));
+        }
+        else {
+            this.educationalModuleService.query().subscribe(
+                (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
+                    this.educationalModules = res.body;
+                    this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle'));
+                },
+                (res: HttpErrorResponse) => this.onError(res.message))
+        }
+    }
+    setRoles(account: any){
+        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+            this.isAdmin = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+            this.isModirAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+            this.isModirKolAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+            this.isKarshenasArshadAmozeshSazman = true;
 
+        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isSuperUsers = true;
+    }
     ngOnDestroy() {
         //this.eventManager.destroy(this.eventSubscriber);
         this.eventManager.destroy(this.criteriaSubscriber);

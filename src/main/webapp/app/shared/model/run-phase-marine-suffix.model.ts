@@ -23,6 +23,8 @@ export interface IRunPhaseMarineSuffix {
     runRunningSteps?: IRunRunningStepMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     people?: IPersonMarineSuffix[];
+    educationalModuleTitle?: string;
+    educationalModuleId?: number;
     finalNiazsanjiReportDescription?: string;
     finalNiazsanjiReportId?: number;
 }
@@ -48,6 +50,8 @@ export class RunPhaseMarineSuffix implements IRunPhaseMarineSuffix {
         public runRunningSteps?: IRunRunningStepMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public people?: IPersonMarineSuffix[],
+        public educationalModuleTitle?: string,
+        public educationalModuleId?: number,
         public finalNiazsanjiReportDescription?: string,
         public finalNiazsanjiReportId?: number
     ) {

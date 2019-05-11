@@ -21,7 +21,7 @@ public class EducationalCenterDTO implements Serializable {
     @Size(max = 50)
     private String ceo;
 
-    @Size(max = 50)
+    @Size(max = 4096)
     private String connectionPerson;
 
     @Size(max = 100)

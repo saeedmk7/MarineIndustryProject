@@ -140,6 +140,12 @@ public class EducationalModule implements Serializable {
     private Set<FinalNiazsanjiReport> finalNiazsanjiReports = new HashSet<>();
     @OneToMany(mappedBy = "educationalModule")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<DesignAndPlanning> designAndPlannings = new HashSet<>();
+    @OneToMany(mappedBy = "educationalModule")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<RunPhase> runPhases = new HashSet<>();
+    @OneToMany(mappedBy = "educationalModule")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<NiazsanjiFardi> niazsanjiFardis = new HashSet<>();
     @OneToMany(mappedBy = "approvedEducationalModule")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -649,6 +655,56 @@ public class EducationalModule implements Serializable {
 
     public void setFinalNiazsanjiReports(Set<FinalNiazsanjiReport> finalNiazsanjiReports) {
         this.finalNiazsanjiReports = finalNiazsanjiReports;
+    }
+
+    public Set<DesignAndPlanning> getDesignAndPlannings() {
+        return designAndPlannings;
+    }
+
+    public EducationalModule designAndPlannings(Set<DesignAndPlanning> designAndPlannings) {
+        this.designAndPlannings = designAndPlannings;
+        return this;
+    }
+
+    public EducationalModule addDesignAndPlanning(DesignAndPlanning designAndPlanning) {
+        this.designAndPlannings.add(designAndPlanning);
+        designAndPlanning.setEducationalModule(this);
+        return this;
+    }
+
+    public EducationalModule removeDesignAndPlanning(DesignAndPlanning designAndPlanning) {
+        this.designAndPlannings.remove(designAndPlanning);
+        designAndPlanning.setEducationalModule(null);
+        return this;
+    }
+
+    public void setDesignAndPlannings(Set<DesignAndPlanning> designAndPlannings) {
+        this.designAndPlannings = designAndPlannings;
+    }
+
+    public Set<RunPhase> getRunPhases() {
+        return runPhases;
+    }
+
+    public EducationalModule runPhases(Set<RunPhase> runPhases) {
+        this.runPhases = runPhases;
+        return this;
+    }
+
+    public EducationalModule addRunPhase(RunPhase runPhase) {
+        this.runPhases.add(runPhase);
+        runPhase.setEducationalModule(this);
+        return this;
+    }
+
+    public EducationalModule removeRunPhase(RunPhase runPhase) {
+        this.runPhases.remove(runPhase);
+        runPhase.setEducationalModule(null);
+        return this;
+    }
+
+    public void setRunPhases(Set<RunPhase> runPhases) {
+        this.runPhases = runPhases;
     }
 
     public Set<NiazsanjiFardi> getNiazsanjiFardis() {

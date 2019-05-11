@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the entity UsersRequest.
+    -->
+    <changeSet id="20190427175937" author="jhipster">
+        <addColumn schemaName="public"
+                   tableName="run_phase">
+            <column name="educational_module_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="educational_module_id"
+                                 baseTableName="run_phase"
+                                 constraintName="fk_run_phase_educational_module_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+
+        <addColumn schemaName="public"
+                   tableName="design_and_planning">
+            <column name="educational_module_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="educational_module_id"
+                                 baseTableName="design_and_planning"
+                                 constraintName="fk_design_and_planning_educational_module_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

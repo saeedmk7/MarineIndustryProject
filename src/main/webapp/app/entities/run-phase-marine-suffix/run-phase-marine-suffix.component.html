@@ -30,6 +30,7 @@
             <th jhiSortBy="archivedUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.archivedUserLogin">Archived User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="archivedDate"><span jhiTranslate="marineindustryprojApp.runPhase.archivedDate">Archived Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.runPhase.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.runPhase.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="finalNiazsanjiReportDescription"><span jhiTranslate="marineindustryprojApp.runPhase.finalNiazsanjiReport">Final Niazsanji Report</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -52,6 +53,11 @@
                 <td>{{runPhase.archivedUserLogin}}</td>
                 <td>{{runPhase.archivedDate | date:'medium'}}</td>
                 <td>{{runPhase.status}}</td>
+                <td>
+                    <div *ngIf="runPhase.educationalModuleId">
+                        <a [routerLink]="['../educational-module-marine-suffix', runPhase.educationalModuleId , 'view' ]" >{{runPhase.educationalModuleTitle}}</a>
+                    </div>
+                </td>
                 <td>
                     <div *ngIf="runPhase.finalNiazsanjiReportId">
                         <a [routerLink]="['../final-niazsanji-report-marine-suffix', runPhase.finalNiazsanjiReportId , 'view' ]" >{{runPhase.finalNiazsanjiReportDescription}}</a>

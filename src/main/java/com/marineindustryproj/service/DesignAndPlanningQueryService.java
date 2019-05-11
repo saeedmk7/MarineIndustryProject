@@ -151,6 +151,10 @@ public class DesignAndPlanningQueryService extends QueryService<DesignAndPlannin
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(DesignAndPlanning_.documents, JoinType.LEFT).get(Document_.id)));
             }
+            if (criteria.getEducationalModuleId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
+                    root -> root.join(DesignAndPlanning_.educationalModule, JoinType.LEFT).get(EducationalModule_.id)));
+            }
             if (criteria.getFinalNiazsanjiReportId() != null) {
                 specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportId(),
                     root -> root.join(DesignAndPlanning_.finalNiazsanjiReport, JoinType.LEFT).get(FinalNiazsanjiReport_.id)));

@@ -61,6 +61,8 @@ public class RunPhaseCriteria implements Serializable {
 
     private LongFilter personId;
 
+    private LongFilter educationalModuleId;
+
     private LongFilter finalNiazsanjiReportId;
 
     public LongFilter getId() {
@@ -215,6 +217,14 @@ public class RunPhaseCriteria implements Serializable {
         this.personId = personId;
     }
 
+    public LongFilter getEducationalModuleId() {
+        return educationalModuleId;
+    }
+
+    public void setEducationalModuleId(LongFilter educationalModuleId) {
+        this.educationalModuleId = educationalModuleId;
+    }
+
     public LongFilter getFinalNiazsanjiReportId() {
         return finalNiazsanjiReportId;
     }
@@ -253,6 +263,7 @@ public class RunPhaseCriteria implements Serializable {
             Objects.equals(runRunningStepId, that.runRunningStepId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(personId, that.personId) &&
+            Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId);
     }
 
@@ -278,6 +289,7 @@ public class RunPhaseCriteria implements Serializable {
         runRunningStepId,
         documentId,
         personId,
+        educationalModuleId,
         finalNiazsanjiReportId
         );
     }
@@ -304,6 +316,7 @@ public class RunPhaseCriteria implements Serializable {
                 (runRunningStepId != null ? "runRunningStepId=" + runRunningStepId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
+                (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
             "}";
     }

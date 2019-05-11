@@ -81,6 +81,10 @@ public class EducationalModuleCriteria implements Serializable {
 
     private LongFilter finalNiazsanjiReportId;
 
+    private LongFilter designAndPlanningId;
+
+    private LongFilter runPhaseId;
+
     private LongFilter niazsanjiFardiId;
 
     private LongFilter approvedRequestNiazsanjiFardiId;
@@ -345,6 +349,22 @@ public class EducationalModuleCriteria implements Serializable {
         this.finalNiazsanjiReportId = finalNiazsanjiReportId;
     }
 
+    public LongFilter getDesignAndPlanningId() {
+        return designAndPlanningId;
+    }
+
+    public void setDesignAndPlanningId(LongFilter designAndPlanningId) {
+        this.designAndPlanningId = designAndPlanningId;
+    }
+
+    public LongFilter getRunPhaseId() {
+        return runPhaseId;
+    }
+
+    public void setRunPhaseId(LongFilter runPhaseId) {
+        this.runPhaseId = runPhaseId;
+    }
+
     public LongFilter getNiazsanjiFardiId() {
         return niazsanjiFardiId;
     }
@@ -513,6 +533,8 @@ public class EducationalModuleCriteria implements Serializable {
             Objects.equals(requestOrganizationNiazsanjiId, that.requestOrganizationNiazsanjiId) &&
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
+            Objects.equals(designAndPlanningId, that.designAndPlanningId) &&
+            Objects.equals(runPhaseId, that.runPhaseId) &&
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
             Objects.equals(approvedRequestNiazsanjiFardiId, that.approvedRequestNiazsanjiFardiId) &&
             Objects.equals(allRequestNiazsanjiFardiId, that.allRequestNiazsanjiFardiId) &&
@@ -563,6 +585,8 @@ public class EducationalModuleCriteria implements Serializable {
         requestOrganizationNiazsanjiId,
         finalOrganizationNiazsanjiId,
         finalNiazsanjiReportId,
+        designAndPlanningId,
+        runPhaseId,
         niazsanjiFardiId,
         approvedRequestNiazsanjiFardiId,
         allRequestNiazsanjiFardiId,
@@ -614,6 +638,8 @@ public class EducationalModuleCriteria implements Serializable {
                 (requestOrganizationNiazsanjiId != null ? "requestOrganizationNiazsanjiId=" + requestOrganizationNiazsanjiId + ", " : "") +
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
+                (designAndPlanningId != null ? "designAndPlanningId=" + designAndPlanningId + ", " : "") +
+                (runPhaseId != null ? "runPhaseId=" + runPhaseId + ", " : "") +
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
                 (approvedRequestNiazsanjiFardiId != null ? "approvedRequestNiazsanjiFardiId=" + approvedRequestNiazsanjiFardiId + ", " : "") +
                 (allRequestNiazsanjiFardiId != null ? "allRequestNiazsanjiFardiId=" + allRequestNiazsanjiFardiId + ", " : "") +

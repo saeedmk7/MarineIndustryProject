@@ -48,7 +48,12 @@
             "toolsAndFacility": "ابزار و امکانات مورد نیاز دوره",
             "teachingApproach": "روش آموزش",
             "teachTechnique": "تکنیک آموزش",
-            "effectivenessIndex": "شاخص اثربخشی"
+            "effectivenessIndex": "شاخص اثربخشی",
+            "educationalModule": "پودمان آموزشی",
+            "educationalModuleTitle": "عنوان پودمان آموزشی",
+            "educationalModuleId": "پودمان آموزشی",
+            "educationalModuleCode": "پودمان آموزشی",
+            "personId": "فرد موردنظر"
         }
     }
 }

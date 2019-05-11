@@ -6,47 +6,18 @@
             <mi-alert-error></mi-alert-error>
             <dl class="row-md jh-entity-details">
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات دوره</div></div>
-               <!-- <div class="form-group">
-                    <label class="form-control-label">عنوان دوره</label>
-                    <label class="form-control">{{educationalModule.title}}</label>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label">کد دوره</label>
-                    <label class="form-control">{{educationalModule.code}}</label>
-                </div>
-                &lt;!&ndash;<div class="form-group">
+                <dt>عنوان دوره</dt>
+                <dd>{{designAndPlanning.educationalModuleTitle}}</dd>
+                <dt>شناسه دوره</dt>
+                <dd>{{designAndPlanning.educationalModuleId}}</dd>
+                <!--<div class="form-group">
                     <label class="form-control-label">پیش نیاز دوره</label>
                     <label class="form-control">{{educationalModule.prerequisite}}</label>
-                </div>&ndash;&gt;
-                <div class="table-responsive" *ngIf="finalniazsanjireportPeople">
-                    <table class="table table-striped  table-bordered table-hover table-sm">
-                        <thead>
-                        <tr>
-                            <th>ردیف</th>
-                            <th>فرد</th>
-                            <th>منبع نیازسنجی</th>
-                            <th>هزینه</th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let finalNiazsanjiReportPerson of finalniazsanjireportPeople ;let i = index">
-                            <td>{{i+1}}</td>
-                            <td>
-                                <div *ngIf="finalNiazsanjiReportPerson.personId">
-                                    <a [routerLink]="['../person-marine-suffix', finalNiazsanjiReportPerson.personId , 'view' ]" >{{finalNiazsanjiReportPerson.personFullName}}</a>
-                                </div>
-                            </td>
-                            <td jhiTranslate="{{'marineindustryprojApp.NiazSanjiSource.' + finalNiazsanjiReportPerson.niazSanjiSource}}">{{finalNiazsanjiReportPerson.niazSanjiSource}}</td>
-                            <td>{{finalNiazsanjiReportPerson.priceCost | number}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>-->
                 <dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.person">Person</span></dt>
                 <dd>
                     <span class="badge badge-info" *ngFor="let person of designAndPlanning.people; let last = last">
-                        <a [routerLink]="['/person-marine-suffix', person?.id, 'view' ]">{{person.family}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/person-marine-suffix', person?.id, 'view' ]">{{person.name}} {{person.family}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">برنامه ریزی دوره</div></div>

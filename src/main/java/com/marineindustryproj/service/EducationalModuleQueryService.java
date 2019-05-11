@@ -177,6 +177,14 @@ public class EducationalModuleQueryService extends QueryService<EducationalModul
                 specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportId(),
                     root -> root.join(EducationalModule_.finalNiazsanjiReports, JoinType.LEFT).get(FinalNiazsanjiReport_.id)));
             }
+            if (criteria.getDesignAndPlanningId() != null) {
+                specification = specification.and(buildSpecification(criteria.getDesignAndPlanningId(),
+                    root -> root.join(EducationalModule_.designAndPlannings, JoinType.LEFT).get(DesignAndPlanning_.id)));
+            }
+            if (criteria.getRunPhaseId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRunPhaseId(),
+                    root -> root.join(EducationalModule_.runPhases, JoinType.LEFT).get(RunPhase_.id)));
+            }
             if (criteria.getNiazsanjiFardiId() != null) {
                 specification = specification.and(buildSpecification(criteria.getNiazsanjiFardiId(),
                     root -> root.join(EducationalModule_.niazsanjiFardis, JoinType.LEFT).get(NiazsanjiFardi_.id)));

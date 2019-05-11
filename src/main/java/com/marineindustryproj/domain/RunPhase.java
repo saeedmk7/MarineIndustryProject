@@ -103,6 +103,10 @@ public class RunPhase implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("runPhases")
+    private EducationalModule educationalModule;
+
+    @ManyToOne
+    @JsonIgnoreProperties("runPhases")
     private FinalNiazsanjiReport finalNiazsanjiReport;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -382,6 +386,19 @@ public class RunPhase implements Serializable {
 
     public void setPeople(Set<Person> people) {
         this.people = people;
+    }
+
+    public EducationalModule getEducationalModule() {
+        return educationalModule;
+    }
+
+    public RunPhase educationalModule(EducationalModule educationalModule) {
+        this.educationalModule = educationalModule;
+        return this;
+    }
+
+    public void setEducationalModule(EducationalModule educationalModule) {
+        this.educationalModule = educationalModule;
     }
 
     public FinalNiazsanjiReport getFinalNiazsanjiReport() {

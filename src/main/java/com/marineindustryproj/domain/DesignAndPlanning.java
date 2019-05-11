@@ -111,6 +111,10 @@ public class DesignAndPlanning implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("designAndPlannings")
+    private EducationalModule educationalModule;
+
+    @ManyToOne
+    @JsonIgnoreProperties("designAndPlannings")
     private FinalNiazsanjiReport finalNiazsanjiReport;
 
     @ManyToOne
@@ -444,6 +448,19 @@ public class DesignAndPlanning implements Serializable {
 
     public void setDocuments(Set<Document> documents) {
         this.documents = documents;
+    }
+
+    public EducationalModule getEducationalModule() {
+        return educationalModule;
+    }
+
+    public DesignAndPlanning educationalModule(EducationalModule educationalModule) {
+        this.educationalModule = educationalModule;
+        return this;
+    }
+
+    public void setEducationalModule(EducationalModule educationalModule) {
+        this.educationalModule = educationalModule;
     }
 
     public FinalNiazsanjiReport getFinalNiazsanjiReport() {

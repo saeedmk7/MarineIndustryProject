@@ -19,8 +19,8 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th>ردیف</th>
-            <th>عنوان دوره</th>
-            <th>شناسه دوره</th>
+            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.educationalModuleTitle">Educational Module Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleId"><span jhiTranslate="marineindustryprojApp.designAndPlanning.educationalModuleCode">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="effectivenessLevelTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.effectivenessLevel">Effectiveness Level</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="runMonth"><span jhiTranslate="marineindustryprojApp.designAndPlanning.runMonth">runMonth</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -59,8 +59,12 @@
             <tr *ngFor="let designAndPlanning of designAndPlannings ;let i = index">
                 <!--<td><a [routerLink]="['/design-and-planning-marine-suffix', designAndPlanning.id, 'view' ]">{{designAndPlanning.id}}</a></td>-->
                 <td>{{i+1}}</td>
-                <td></td>
-                <td></td>
+                <td>
+                    <div *ngIf="designAndPlanning.educationalModuleId">
+                        <a [routerLink]="['../educational-module-marine-suffix', designAndPlanning.educationalModuleId , 'view' ]" >{{designAndPlanning.educationalModuleTitle}}</a>
+                    </div>
+                </td>
+                <td>{{designAndPlanning.educationalModuleId}}</td>
                 <td>
                     <div *ngIf="designAndPlanning.courseTypeId">
                         <a [routerLink]="['../course-type-marine-suffix', designAndPlanning.courseTypeId , 'view' ]" >{{designAndPlanning.courseTypeTitle}}</a>

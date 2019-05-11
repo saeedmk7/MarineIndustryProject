@@ -37,8 +37,8 @@ public class EducationalCenter implements Serializable {
     @Column(name = "ceo", length = 50)
     private String ceo;
 
-    @Size(max = 50)
-    @Column(name = "connection_person", length = 50)
+    @Size(max = 4096)
+    @Column(name = "connection_person", length = 4096)
     private String connectionPerson;
 
     @Size(max = 100)

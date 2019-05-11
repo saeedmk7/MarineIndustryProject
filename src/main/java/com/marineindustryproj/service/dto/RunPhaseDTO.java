@@ -58,6 +58,10 @@ public class RunPhaseDTO implements Serializable {
 
     private Set<PersonDTO> people = new HashSet<>();
 
+    private Long educationalModuleId;
+
+    private String educationalModuleTitle;
+
     private Long finalNiazsanjiReportId;
 
     private String finalNiazsanjiReportDescription;
@@ -206,6 +210,22 @@ public class RunPhaseDTO implements Serializable {
         this.people = people;
     }
 
+    public Long getEducationalModuleId() {
+        return educationalModuleId;
+    }
+
+    public void setEducationalModuleId(Long educationalModuleId) {
+        this.educationalModuleId = educationalModuleId;
+    }
+
+    public String getEducationalModuleTitle() {
+        return educationalModuleTitle;
+    }
+
+    public void setEducationalModuleTitle(String educationalModuleTitle) {
+        this.educationalModuleTitle = educationalModuleTitle;
+    }
+
     public Long getFinalNiazsanjiReportId() {
         return finalNiazsanjiReportId;
     }
@@ -262,6 +282,8 @@ public class RunPhaseDTO implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", educationalModule=" + getEducationalModuleId() +
+            ", educationalModule='" + getEducationalModuleTitle() + "'" +
             ", finalNiazsanjiReport=" + getFinalNiazsanjiReportId() +
             ", finalNiazsanjiReport='" + getFinalNiazsanjiReportDescription() + "'" +
             "}";

@@ -70,6 +70,7 @@ public class DesignAndPlanningServiceImpl implements DesignAndPlanningService {
 
         finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
         DesignAndPlanning designAndPlanning = designAndPlanningMapper.toEntity(designAndPlanningDTO);
+        designAndPlanning.setEducationalModule(finalNiazsanjiReport.getEducationalModule());
         if(designAndPlanning.getPeople().isEmpty()) {
             long[] personIds = finalNiazsanjiReport.getFinalNiazsanjiReportPeople().stream().mapToLong(a ->a.getPerson().getId()).toArray();
             Set<Person> people = new HashSet<>();

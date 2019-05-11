@@ -25,6 +25,8 @@ export interface IDesignAndPlanningMarineSuffix {
     runMonthName?: string;
     people?: IPersonMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
+    educationalModuleTitle?: string;
+    educationalModuleId?: number;
     finalNiazsanjiReportDescription?: string;
     finalNiazsanjiReportId?: number;
     mahiatCourseTitle?: string;
@@ -73,6 +75,8 @@ export class DesignAndPlanningMarineSuffix implements IDesignAndPlanningMarineSu
         public runMonthName?: string,
         public people?: IPersonMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
+        public educationalModuleTitle?: string,
+        public educationalModuleId?: number,
         public finalNiazsanjiReportDescription?: string,
         public finalNiazsanjiReportId?: number,
         public mahiatCourseTitle?: string,

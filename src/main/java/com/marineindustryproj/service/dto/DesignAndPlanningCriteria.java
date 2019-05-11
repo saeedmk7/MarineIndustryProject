@@ -65,6 +65,8 @@ public class DesignAndPlanningCriteria implements Serializable {
 
     private LongFilter documentId;
 
+    private LongFilter educationalModuleId;
+
     private LongFilter finalNiazsanjiReportId;
 
     private LongFilter mahiatCourseId;
@@ -255,6 +257,14 @@ public class DesignAndPlanningCriteria implements Serializable {
         this.documentId = documentId;
     }
 
+    public LongFilter getEducationalModuleId() {
+        return educationalModuleId;
+    }
+
+    public void setEducationalModuleId(LongFilter educationalModuleId) {
+        this.educationalModuleId = educationalModuleId;
+    }
+
     public LongFilter getFinalNiazsanjiReportId() {
         return finalNiazsanjiReportId;
     }
@@ -375,6 +385,7 @@ public class DesignAndPlanningCriteria implements Serializable {
             Objects.equals(runMonth, that.runMonth) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(documentId, that.documentId) &&
+            Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
             Objects.equals(mahiatCourseId, that.mahiatCourseId) &&
             Objects.equals(courseTypeId, that.courseTypeId) &&
@@ -412,6 +423,7 @@ public class DesignAndPlanningCriteria implements Serializable {
         runMonth,
         personId,
         documentId,
+        educationalModuleId,
         finalNiazsanjiReportId,
         mahiatCourseId,
         courseTypeId,
@@ -450,6 +462,7 @@ public class DesignAndPlanningCriteria implements Serializable {
                 (runMonth != null ? "runMonth=" + runMonth + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
+                (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
                 (mahiatCourseId != null ? "mahiatCourseId=" + mahiatCourseId + ", " : "") +
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +

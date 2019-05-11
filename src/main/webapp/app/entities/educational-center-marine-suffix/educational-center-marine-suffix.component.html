@@ -25,7 +25,7 @@
                 <th>ردیف</th>
             <th jhiSortBy="name"><span jhiTranslate="marineindustryprojApp.educationalCenter.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="ceo"><span jhiTranslate="marineindustryprojApp.educationalCenter.ceo">Ceo</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="connectionPerson"><span jhiTranslate="marineindustryprojApp.educationalCenter.connectionPerson">Connection Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="connectionPerson"><span jhiTranslate="marineindustryprojApp.educationalCenter.connectionPerson">Connection Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="telephone"><span jhiTranslate="marineindustryprojApp.educationalCenter.telephone">Telephone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="fax"><span jhiTranslate="marineindustryprojApp.educationalCenter.fax">Fax</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="address"><span jhiTranslate="marineindustryprojApp.educationalCenter.address">Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -48,7 +48,7 @@
                 <td>{{i+1}}</td>
                 <td>{{educationalCenter.name}}</td>
                 <!--<td>{{educationalCenter.ceo}}</td>-->
-                <td>{{educationalCenter.connectionPerson}}</td>
+                <!--<td>{{educationalCenter.connectionPerson}}</td>-->
                 <td>{{educationalCenter.telephone}}</td>
                 <td>{{educationalCenter.fax}}</td>
                 <td>{{educationalCenter.address}}</td>
@@ -116,16 +116,17 @@
                 </td>
 
                 <td colspan="10">
-                    <div *ngIf="educationalCenters && educationalCenters.length">
 
-                        <div class="row justify-content-center">
-                            <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
-                        </div>
-                    </div>
                 </td>
             </tr>
 
             </tfoot>
         </table>
+        <div *ngIf="educationalCenters && educationalCenters.length">
+
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
     </div>
 </div>

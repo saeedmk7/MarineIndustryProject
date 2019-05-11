@@ -34,6 +34,7 @@
             "runRunningStep": "Run Running Step",
             "document": "Document",
             "person": "Person",
+            "educationalModule": "Educational Module",
             "finalNiazsanjiReport": "Final Niazsanji Report"
         }
     }
