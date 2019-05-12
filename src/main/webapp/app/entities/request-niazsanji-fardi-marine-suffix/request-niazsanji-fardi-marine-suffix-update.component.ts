@@ -33,6 +33,7 @@ import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dat
 import {IFinalOrganizationNiazsanjiMarineSuffix} from "app/shared/model/final-organization-niazsanji-marine-suffix.model";
 import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
+import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 
 @Component({
     selector: 'mi-request-niazsanji-fardi-marine-suffix-update',
@@ -51,10 +52,15 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
     approvedEducationalmodules: IEducationalModuleMarineSuffix[];
     finalNiazsanjiReports: IFinalNiazsanjiReportMarineSuffix[];
     people: IPersonMarineSuffix[];
+    allPeople: IPersonMarineSuffix[];
     currentPerson: IPersonMarineSuffix;
 
     currentAccount: any;
-    isAdmin: boolean = false;
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
 
     predicate: any;
     reverse: any;
@@ -143,8 +149,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         this.principal.identity().then(account => {
 
             this.currentAccount = account;
-            if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-                this.isAdmin = true;
+            this.setRoles(account);
 
             this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
 
@@ -177,7 +182,48 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
 
         });
     }
+    preparePeople() {
+        if(this.isSuperUsers) {
+            if (this.personService.people) {
+                this.allPeople = this.personService.people;
+            }
+            else {
+                this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
+                        this.allPeople = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message));
+            }
+        }
+        if(this.isModirAmozesh){
+            let criteria = [{
+                key:'organizationChartId.in',
+                value: this.recommenedOrgCharts.map(a => a.id)
+            }];
+            this.personService.query({
+                page: 0,
+                size: 20000,
+                criteria,
+                sort: ["id","asc"]
+            }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
+                this.allPeople = resp.body;
+            },
+                (res: HttpErrorResponse) => this.onError(res.message));
+        }
+    }
+    setRoles(account: any){
+        debugger;
+        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+            this.isAdmin = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+            this.isModirAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+            this.isModirKolAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+            this.isKarshenasArshadAmozeshSazman = true;
 
+        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isSuperUsers = true;
+    }
     onPersonChange(event){
 
         if(event.id){
@@ -204,6 +250,23 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
                 criteria,
                 sort: ["id","asc"]
             }).subscribe((resp: HttpResponse<IEducationalModuleJobMarineSuffix[]>) => this.showEducationalModules(resp.body),
+                (error) => this.onError("موردی یافت نشد"));
+        }
+    }
+    onAllPersonChange(event: IPersonMarineSuffix){
+        if(event.id){
+            this.personService.find(event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
+                this.people = [];
+                this.people.push(resp.body);
+                this.requestNiazsanjiFardi.personId = event.id;
+                debugger;
+                if(this.recommenedOrgCharts.find(a => a.id == resp.body.organizationChartId) == null) {
+                    this.recommenedOrgCharts = [];
+                    this.recommenedOrgCharts.push(this.organizationcharts.find(a => a.id == resp.body.organizationChartId));
+                }
+                this.requestNiazsanjiFardi.organizationChartId = resp.body.organizationChartId;
+                this.onPersonChange(resp.body);
+            },
                 (error) => this.onError("موردی یافت نشد"));
         }
     }
@@ -260,6 +323,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
             this.recommenedOrgCharts.push(this.organizationcharts.find(a => a.id == this.currentPerson.organizationChartId));
             this.orgChartDisabled = true;
         }
+        this.preparePeople();
     }
     onOrganizationChartChange(event){
 

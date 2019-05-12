@@ -133,8 +133,8 @@
                     </div>
                 </div>
                 <div class="card-footer text-muted success-color white-text">
-                    <input type="submit" class="btn-primary" id="searchButton" value="جستجو">
-
+                    <input type="submit" class="btn btn-primary btn-lg" id="searchButton" value="جستجو">
+                    <div style="display: inline" class="alert alert-info">برای دیدن کلیه نیازسنجی های فردی و نیازسنجی های متمرکز پس از انتخاب سال نیازسنجی دکمه جستجو را کلیک کنید.</div>
                     <div style="display: inline" class="alert alert-danger" *ngIf="message">{{message}}</div>
                 </div>
             </div>
@@ -193,7 +193,7 @@
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="90"></kendo-grid-column>
             <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>
             <!--<kendo-grid-column field="finalizeCost" title="هزینه پایانی" [width]="100"></kendo-grid-column>-->
-            <kendo-grid-column field="finalizeCost" title="هزینه پایانی" [width]="100">
+            <kendo-grid-column field="finalizeCost" title="هزینه صرف شده" [width]="100">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalFinalizeCost | number}}</ng-template>
@@ -205,7 +205,7 @@
             </kendo-grid-column>
             <kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="200"></kendo-grid-column>
             <kendo-grid-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="200"></kendo-grid-column>
-            <kendo-grid-column field="priceCost" type="number" title="هزینه" [width]="100">
+            <kendo-grid-column field="priceCost" type="number" title="هزینه اولیه" [width]="100">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalCost | number}}</ng-template>
@@ -282,7 +282,7 @@
             <kendo-grid-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>
-            <kendo-grid-column field="finalizeCost" title="هزینه پایانی" [width]="100">
+            <kendo-grid-column field="finalizeCost" title="هزینه صرف شده" [width]="100">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalFinalizeCost | number}}</ng-template>
@@ -295,7 +295,7 @@
             </kendo-grid-column>
             <!--<kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="300"></kendo-grid-column>
             <kendo-grid-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="300"></kendo-grid-column>-->
-            <kendo-grid-column field="priceCost" title="هزینه" [width]="100">
+            <kendo-grid-column field="priceCost" title="هزینه اولیه" [width]="100">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalCost | number}}</ng-template>

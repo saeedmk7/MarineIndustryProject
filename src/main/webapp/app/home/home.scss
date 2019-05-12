@@ -26,6 +26,13 @@ Main page styles
     bottom: 0;
     left: 0;
 }
+.newsbox {
+    position: fixed !important;
+    bottom: 5%;
+    margin: 1%;
+    /* right: 20px; */
+    width: 80% !important;
+}
 .hipster {
     display: inline-block;
     width: 347px;

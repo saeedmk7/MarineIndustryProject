@@ -1,9 +1,10 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.marineindustryproj.domain.enumeration.RequestStatus;
 import com.marineindustryproj.security.SecurityUtils;
+import com.marineindustryproj.service.PersonService;
 import com.marineindustryproj.service.RequestNiazsanjiFardiService;
+import com.marineindustryproj.service.dto.PersonDTO;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -16,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,9 +43,14 @@ public class RequestNiazsanjiFardiResource {
 
     private final RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService;
 
-    public RequestNiazsanjiFardiResource(RequestNiazsanjiFardiService requestNiazsanjiFardiService, RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService) {
+    private final PersonService personService;
+
+    public RequestNiazsanjiFardiResource(RequestNiazsanjiFardiService requestNiazsanjiFardiService,
+                                         RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService,
+                                         PersonService personService) {
         this.requestNiazsanjiFardiService = requestNiazsanjiFardiService;
         this.requestNiazsanjiFardiQueryService = requestNiazsanjiFardiQueryService;
+        this.personService = personService;
     }
 
     /**
@@ -63,8 +68,9 @@ public class RequestNiazsanjiFardiResource {
             throw new BadRequestAlertException("A new requestNiazsanjiFardi cannot already have an ID", ENTITY_NAME, "idexists");
         }
 
+        PersonDTO personDTO = personService.findOne(requestNiazsanjiFardiDTO.getPersonId()).get();
         requestNiazsanjiFardiDTO.setCreateDate(ZonedDateTime.now());
-        requestNiazsanjiFardiDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        requestNiazsanjiFardiDTO.setCreateUserLogin(personDTO.getNationalId());
         //requestNiazsanjiFardiDTO.setChangeStatusUserLogin(SecurityUtils.getCurrentUserLogin().get());
 
         RequestNiazsanjiFardiDTO result = requestNiazsanjiFardiService.save(requestNiazsanjiFardiDTO);

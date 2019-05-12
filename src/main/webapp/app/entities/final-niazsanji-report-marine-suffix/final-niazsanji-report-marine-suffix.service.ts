@@ -11,6 +11,7 @@ import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsa
 import {IReportMarineSuffix} from "app/shared/model/report-marine-suffix.model";
 import {ChartResult, IChartResult} from "app/shared/model/custom/chart-result";
 import {HomePageNiazsanjiReport, IHomePageNiazsanjiReport} from "app/shared/model/custom/niazsanji-chart-result";
+import {IHomePagePersonHourChart} from "app/shared/model/custom/home-page-person-hour-chart-result";
 
 type EntityResponseType = HttpResponse<IFinalNiazsanjiReportMarineSuffix>;
 type EntityResponseTypeReport = HttpResponse<IReportMarineSuffix>;
@@ -68,6 +69,12 @@ export class FinalNiazsanjiReportMarineSuffixService {
         return this.http
             .get<IHomePageNiazsanjiReport>(url, { observe: 'response' })
             .pipe(map((res: HttpResponse<IHomePageNiazsanjiReport>) => res));
+    }
+    getHomePagePersonHourChart(personId: number): Observable<HttpResponse<IHomePagePersonHourChart>> {
+        let url = this.resourceUrl + '/getHomePagePersonHourChart/' + personId;
+        return this.http
+            .get<IHomePagePersonHourChart>(url, { observe: 'response' })
+            .pipe(map((res: HttpResponse<IHomePagePersonHourChart>) => res));
     }
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);

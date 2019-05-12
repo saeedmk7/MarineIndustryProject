@@ -20,6 +20,24 @@
                         </small>
                     </div>
                 </div>-->
+                <div class="form-group" *ngIf="isSuperUsers || isModirAmozesh">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.person" for="field_person">Person</label>
+                    <!--<select class="form-control" id="field_person" name="person" [(ngModel)]="requestNiazsanjiFardi.personId"  required>
+                        <option *ngIf="!editForm.value.person" [ngValue]="null" selected></option>
+                        <option [ngValue]="personOption.id" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.family}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="allPeople"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        (change)="onAllPersonChange($event)"
+                        bindLabel="fullName"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="allPerson"
+                        id="field_allPerson">
+                </div>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اولیه نیازسنجی</div></div>
                 <div class="form-group bighalf">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.organizationChart" for="field_organizationChart">Organization Chart</label>

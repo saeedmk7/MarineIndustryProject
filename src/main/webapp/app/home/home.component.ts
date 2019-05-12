@@ -38,7 +38,7 @@ import {IHomePageNiazsanjiReport} from "app/shared/model/custom/niazsanji-chart-
 })
 export class HomeComponent implements OnInit, OnDestroy {
     organizationcharts: IOrganizationChartMarineSuffix[];
-    homePageNiazsanjiReport: IHomePageNiazsanjiReport;
+    homePageNiazsanjiReport: IHomePageNiazsanjiReport = {};
     account: Account;
     modalRef: NgbModalRef;
    /* welcomeState = 'out';
@@ -141,7 +141,8 @@ export class HomeComponent implements OnInit, OnDestroy {
                     if(!resp.body.organizationChartId){
                         this.badError = "موقعیت در چارت سازمانی برای شما تنظیم نشده است، لطفا مراتب را با مدیریت سامانه در میان بگذارید.";
                     }
-                    this.prepareHomePageNiazsanjiReport(resp.body.id);
+
+                    //this.prepareHomePageNiazsanjiReport(resp.body.id);
                 })
             }
             if(this.isSuperUsers)
