@@ -1,6 +1,11 @@
 /* ==========================================================================
 Main page styles
 ========================================================================== */
+tr.success { background-color: #dff0d8; color: #3c763d; }
+tr.danger { background-color: #f2dede; color: #a94442; }
+tr.info { background-color: #d9edf7; color: #31708f; }
+tr.warning { background-color: #fcf8e3; color: #8a6d3b; }
+
 .chartFont{
     font-family: IranSans, SansSerif, IranYekan, 'B Nazanin', 'B Badr', Tahoma, 'Times New Roman' !important;
 }
@@ -27,11 +32,9 @@ Main page styles
     left: 0;
 }
 .newsbox {
-    position: fixed !important;
-    bottom: 5%;
-    margin: 1%;
+    margin: 2%;
     /* right: 20px; */
-    width: 80% !important;
+    width: 95% !important;
 }
 .hipster {
     display: inline-block;

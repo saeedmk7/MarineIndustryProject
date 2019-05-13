@@ -261,8 +261,8 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
         this.isSaving = true;
         if(!this.designAndPlanning.finished){
             this.designAndPlanning.directCost = this.designAndPlanning.directCost == undefined ? 0 : this.designAndPlanning.directCost;
-            this.designAndPlanning.undirectCost = this.designAndPlanning.undirectCost == undefined ? 0 : this.designAndPlanning.undirectCost;
         }
+        this.designAndPlanning.undirectCost = this.designAndPlanning.undirectCost == undefined ? 0 : this.designAndPlanning.undirectCost;
         this.designAndPlanning.status = this.designAndPlanning.status == undefined ? 0 : this.designAndPlanning.status;
         this.designAndPlanning.step = this.designAndPlanning.step == undefined ? 0 : this.designAndPlanning.step;
 

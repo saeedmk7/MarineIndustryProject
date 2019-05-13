@@ -28,6 +28,7 @@ import com.marineindustryproj.service.dto.PersonDTO;
 import com.marineindustryproj.service.dto.ReportDTO;
 import com.marineindustryproj.service.dto.customs.ChartResult;
 import com.marineindustryproj.service.dto.customs.HomePageNiazsanjiReport;
+import com.marineindustryproj.service.dto.customs.HomePagePersonEducationalModule;
 import com.marineindustryproj.service.dto.customs.HomePagePersonHourChart;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
@@ -617,7 +618,14 @@ public class FinalNiazsanjiReportResource {
         HomePagePersonHourChart homePagePersonHourChart = finalNiazsanjiReportService.getHomePagePersonHourChart(personId);
         return ResponseEntity.ok().body(homePagePersonHourChart);
     }
+    @GetMapping("/final-niazsanji-reports/getHomePagePersonEducationalModule/{personId}")
+    @Timed
+    public ResponseEntity<List<HomePagePersonEducationalModule>> getHomePagePersonEducationalModule(@PathVariable Long personId) {
+        log.debug("REST request to get HPersonHourChart : {}", personId);
 
+        List<HomePagePersonEducationalModule> homePagePersonEducationalModules = finalNiazsanjiReportService.getHomePagePersonEducationalModules(personId);
+        return ResponseEntity.ok().body(homePagePersonEducationalModules);
+    }
     /**
      * DELETE  /final-niazsanji-reports/:id : delete the "id" finalNiazsanjiReport.
      *

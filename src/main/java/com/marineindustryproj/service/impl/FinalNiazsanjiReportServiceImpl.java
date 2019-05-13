@@ -82,6 +82,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
     private final DesignAndPlanningQueryService designAndPlanningQueryService;
 
+    private final RunPhaseQueryService runPhaseQueryService;
+
     private final CacheManager cacheManager;
 
     public FinalNiazsanjiReportServiceImpl(FinalNiazsanjiReportRepository finalNiazsanjiReportRepository,
@@ -103,7 +105,11 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                                            OrganizationChartMapper organizationChartMapper,
                                            RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService,
                                            RequestOrganizationNiazsanjiQueryService requestOrganizationNiazsanjiQueryService,
-                                           EducationalHistoryQueryService educationalHistoryQueryService, EducationalModuleJobQueryService educationalModuleJobQueryService, DesignAndPlanningQueryService designAndPlanningQueryService, CacheManager cacheManager) {
+                                           EducationalHistoryQueryService educationalHistoryQueryService,
+                                           EducationalModuleJobQueryService educationalModuleJobQueryService,
+                                           DesignAndPlanningQueryService designAndPlanningQueryService,
+                                           RunPhaseQueryService runPhaseQueryService,
+                                           CacheManager cacheManager) {
         this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
         this.finalNiazsanjiReportMapper = finalNiazsanjiReportMapper;
         this.niazsanjiGroupService = niazsanjiGroupService;
@@ -125,6 +131,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         this.educationalHistoryQueryService = educationalHistoryQueryService;
         this.educationalModuleJobQueryService = educationalModuleJobQueryService;
         this.designAndPlanningQueryService = designAndPlanningQueryService;
+        this.runPhaseQueryService = runPhaseQueryService;
         this.cacheManager = cacheManager;
     }
     /**
@@ -442,6 +449,11 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
             DesignAndPlanningCriteria designAndPlanningCriteria = new DesignAndPlanningCriteria();
             designAndPlanningCriteria.setPersonId(personIdFilter);
+
+            BooleanFilter finishedFilter = new BooleanFilter();
+            finishedFilter.setEquals(false);
+            designAndPlanningCriteria.setFinished(finishedFilter);
+
             List<DesignAndPlanningDTO> designAndPlanningDTOS = designAndPlanningQueryService.findByCriteria(designAndPlanningCriteria);
             long[] designEducationalIds = designAndPlanningDTOS.stream().mapToLong(a -> a.getEducationalModuleId()).toArray();
             List<EducationalModuleMinDTO> designEducationalModules = educationalModuleService.findAllFromCache().stream().filter(a -> Arrays.stream(designEducationalIds).anyMatch(w -> w == a.getId())).collect(Collectors.toList());
@@ -456,13 +468,14 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             educationalHistoryCriteria.setRequestStatus(requestStatusFilter);
 
             List<EducationalHistoryDTO> educationalHistoryDTOS = educationalHistoryQueryService.findByCriteria(educationalHistoryCriteria);
-            long[] educationalHistoryEducationalIds = educationalHistoryDTOS.stream().mapToLong(a -> a.getEducationalModuleId()).toArray();
+            //List<EducationalHistoryDTO> educationalHistoryDTOS1 = educationalHistoryDTOS.stream().filter(a -> a.getEducationalModuleId() != null).collect(Collectors.toList());
+            long[] educationalHistoryEducationalIds = educationalHistoryDTOS.stream().filter(a -> a.getEducationalModuleId() != null).mapToLong(a -> a.getEducationalModuleId()).toArray();
             List<EducationalModuleMinDTO> educationalHistoryEducationalModules = educationalModuleService.findAllFromCache().stream().filter(a -> Arrays.stream(educationalHistoryEducationalIds).anyMatch(w -> w == a.getId())).collect(Collectors.toList());
             long[] educationalHistoryTimes = educationalHistoryEducationalModules.stream().mapToLong(a -> a.getLearningTimePractical() + a.getLearningTimeTheorical()).toArray();
             Long educationalHistoryTime = Arrays.stream(educationalHistoryTimes).sum();
 
-            float designPercent = (designTotalTime / totalTime) * 100;
-            float educationalHistoryPercent = (educationalHistoryTime / totalTime) * 100;
+            float designPercent = ((float) designTotalTime / totalTime) * 100;
+            float educationalHistoryPercent = ((float) educationalHistoryTime / totalTime) * 100;
 
             float remaining = 100 - designPercent - educationalHistoryPercent;
 
@@ -474,6 +487,69 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         return report;
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<HomePagePersonEducationalModule> getHomePagePersonEducationalModules(Long personId) {
+        log.debug("Request to get HomePagePersonEducationalModules by personId : {}", personId);
+        Optional<Person> person = personRepository.findById(personId);
+        List<HomePagePersonEducationalModule> report = new ArrayList<>();
+        if(person.isPresent()){
+            LongFilter personIdFilter = new LongFilter();
+            personIdFilter.setEquals(personId);
+
+            LongFilter jobIdFilter = new LongFilter();
+            jobIdFilter.setEquals(person.get().getJob().getId());
+
+            EducationalModuleJobCriteria educationalModuleJobCriteria = new EducationalModuleJobCriteria();
+            educationalModuleJobCriteria.setJobId(jobIdFilter);
+            List<EducationalModuleJobDTO> educationalModuleJobDTOS = educationalModuleJobQueryService.findByCriteria(educationalModuleJobCriteria);
+            long[] educationalIds = educationalModuleJobDTOS.stream().mapToLong(a -> a.getEducationalModuleId()).toArray();
+            List<EducationalModuleMinDTO> educationalModules = educationalModuleService.findAllFromCache().stream().filter(a -> Arrays.stream(educationalIds).anyMatch(w -> w == a.getId())).collect(Collectors.toList());
+
+            for (EducationalModuleMinDTO educationalModule : educationalModules) {
+                Integer status = getEducationalModuleStatus(educationalModule, personIdFilter);
+
+                HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(educationalModule, status);
+                report.add(homePagePersonEducationalModule);
+            }
+        }
+        return report;
+    }
+
+    private Integer getEducationalModuleStatus(EducationalModuleMinDTO educationalModule, LongFilter personIdFilter){
+
+        LongFilter educationalModuleIdFilter = new LongFilter();
+        educationalModuleIdFilter.setEquals(educationalModule.getId());
+
+        EducationalHistoryCriteria educationalHistoryCriteria = new EducationalHistoryCriteria();
+        educationalHistoryCriteria.setPersonId(personIdFilter);
+        educationalHistoryCriteria.setEducationalModuleId(educationalModuleIdFilter);
+        EducationalHistoryCriteria.RequestStatusFilter requestStatusFilter = new EducationalHistoryCriteria.RequestStatusFilter();
+        requestStatusFilter.setEquals(RequestStatus.ACCEPT);
+        educationalHistoryCriteria.setRequestStatus(requestStatusFilter);
+
+        List<EducationalHistoryDTO> educationalHistoryDTOS = educationalHistoryQueryService.findByCriteria(educationalHistoryCriteria);
+        if(!educationalHistoryDTOS.isEmpty())
+            return 100;
+
+        RunPhaseCriteria runPhaseCriteria = new RunPhaseCriteria();
+        runPhaseCriteria.setPersonId(personIdFilter);
+        runPhaseCriteria.setEducationalModuleId(educationalModuleIdFilter);
+
+        List<RunPhaseDTO> runPhaseDTOS = runPhaseQueryService.findByCriteria(runPhaseCriteria);
+        if(!runPhaseDTOS.isEmpty())
+            return 90;
+
+        DesignAndPlanningCriteria designAndPlanningCriteria = new DesignAndPlanningCriteria();
+        designAndPlanningCriteria.setPersonId(personIdFilter);
+        designAndPlanningCriteria.setEducationalModuleId(educationalModuleIdFilter);
+
+        List<DesignAndPlanningDTO> designAndPlanningDTOS = designAndPlanningQueryService.findByCriteria(designAndPlanningCriteria);
+        if(!designAndPlanningDTOS.isEmpty())
+            return 80;
+
+        return 0;
+    }
     private Long getEducationHours(List<FinalNiazsanjiReportCustomDTO> finalNiazsanjiReportCustomDTOS,
                                    List<Long> ids,
                                    Long educationalModuleTotalHour) {

@@ -95,7 +95,7 @@
                            [(ngModel)]="runPhase.runMonth" />-->
                     <select class="form-control" id="field_runMonth" name="runMonth" [required]="true" [(ngModel)]="runPhase.runMonth" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="runMonth.id" *ngFor="let runMonth of runMonths; trackBy: trackEffectivenessLevelById">{{runMonth.persianMonth}}</option>
+                        <option [ngValue]="runMonth.id" *ngFor="let runMonth of runMonths">{{runMonth.persianMonth}}</option>
                     </select>
                 </div>
                 <!--<textarea class="row alert alert-danger" cols="150" *ngIf="errorMessage">{{errorMessage}}</textarea>-->
@@ -152,5 +152,6 @@
             </div>
 
         </form>
+        <mi-alert></mi-alert>
     </div>
 </div>

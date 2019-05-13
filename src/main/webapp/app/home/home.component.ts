@@ -27,6 +27,7 @@ import {IChartResult} from "app/shared/model/custom/chart-result";
 import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 import {IHomePageNiazsanjiReport} from "app/shared/model/custom/niazsanji-chart-result";
 import {IHomePagePersonHourChart} from "app/shared/model/custom/home-page-person-hour-chart";
+import {IHomePagePersonEducationalModule} from "app/shared/model/custom/home-page-person-educational-module";
 
 
 @Component({
@@ -41,6 +42,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     organizationcharts: IOrganizationChartMarineSuffix[];
     homePageNiazsanjiReport: IHomePageNiazsanjiReport = {};
     homePagePersonHourChart: IHomePagePersonHourChart = {};
+    homePagePersonEducationalModules: IHomePagePersonEducationalModule[] = [];
+
     account: Account;
     modalRef: NgbModalRef;
    /* welcomeState = 'out';
@@ -99,7 +102,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     deleteElement(i)
     {
-
         $('#' + i).remove();
     }
     toggleColappse(i)
@@ -145,6 +147,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                         this.badError = "موقعیت در چارت سازمانی برای شما تنظیم نشده است، لطفا مراتب را با مدیریت سامانه در میان بگذارید.";
                     }
                     this.prepareHomePagePersonHourChart(resp.body.id);
+                    this.prepareHomePagePersonEducationalModule(resp.body.id);
                     //this.prepareHomePageNiazsanjiReport(resp.body.id);
                 })
             }
@@ -208,17 +211,45 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     prepareHomePageNiazsanjiReport(personId: number){
         this.finalNiazsanjiReportService.getHomePageNiazsanjiReport(personId).subscribe((resp: HttpResponse<IHomePageNiazsanjiReport>) => {
+
            this.homePageNiazsanjiReport = resp.body;
         },
             (res: HttpErrorResponse) => this.onError(res.message));
     }
     prepareHomePagePersonHourChart(personId: number){
         this.finalNiazsanjiReportService.getHomePagePersonHourChart(personId).subscribe((resp: HttpResponse<IHomePagePersonHourChart>) => {
+                debugger;
                 this.homePagePersonHourChart = resp.body;
                 this.makePersonHourPieChart(resp.body);
             },
             (res: HttpErrorResponse) => this.onError(res.message));
     }
+    prepareHomePagePersonEducationalModule(personId: number){
+        this.finalNiazsanjiReportService.getHomePagePersonEducationalModule(personId).subscribe((resp: HttpResponse<IHomePagePersonEducationalModule[]>) => {
+                debugger;
+                this.homePagePersonEducationalModules = resp.body;
+                this.homePagePersonEducationalModules.forEach(a => {
+                    a.totalLearningTime = a.learningTimePractical == undefined ? 0 : a.learningTimePractical + a.learningTimeTheorical == undefined ? 0 : a.learningTimeTheorical;
+                   switch (a.status) {
+                       case 100:
+                           a.statusMeaning = "بارگزاری مدارک اتمام دوره";
+                           break;
+                       case 90:
+                           a.statusMeaning = "در حال اجرا دوره";
+                           break;
+                       case 80:
+                           a.statusMeaning = "در حال طراحی و برنامه ریزی دوره";
+                           break;
+                       case 0:
+                           a.statusMeaning = "باقیمانده";
+                           break;
+                   }
+                });
+                //this.makePersonHourPieChart(resp.body);
+            },
+            (res: HttpErrorResponse) => this.onError(res.message));
+    }
+
     makeChartResult(){
         const groups = this.organizationcharts.filter(a => a.parentId == null);
         this.categories = groups.sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0).map(a => a.title);
@@ -251,44 +282,50 @@ export class HomeComponent implements OnInit, OnDestroy {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                type: 'pie'
+                type: 'pie',
+                style: {
+                    fontFamily: 'IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman'
+                }
             },
             title: {
-                text: 'نمودار نفر/ساعت'
+                text: 'نمودار نفر/ساعت به درصد'
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                pointFormat: '<b>درصد {point.percentage:.0f}</b>',
             },
             plotOptions: {
                 pie: {
                     allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                        style: {
-                            color: 'black'
-                        }
-                    }
+                    cursor: 'pointer'
                 }
             },
             series: [{
-                name: 'Brands',
+                name: '',
                 //colorByPoint: true,
                 data: [{
-                    name: 'نفر/ساعت گذرانده شده شما تاکنون',
+                    name: ' گذرانده شده شما تاکنون',
                     y: res.passed,
-                    sliced: true,
-                    selected: true
+                    color: '#71f056'
                 }, {
-                    name: 'دوره درحال اجرا',
-                    y: res.designAndPlanning
+                    name: 'در حال طراحی و برنامه ریزی',
+                    y: res.designAndPlanning,
+                    color: '#fcea63'
                 }, {
                     name: 'باقیمانده',
-                    y: res.remaining
+                    y: res.remaining,
+                    sliced: true,
+                    selected: true,
+                    color: '#f23537'
                 }]
-            }]
+            }],
+            credits: {
+                enabled: false
+            }
         });
+    }
+    redirect(): boolean {
+        return false;
+       //this.router.navigateByUrl(i);
     }
     makeSeries(){
 
