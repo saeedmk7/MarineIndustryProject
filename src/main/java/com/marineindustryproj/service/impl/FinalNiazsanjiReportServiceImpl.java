@@ -1,45 +1,15 @@
 package com.marineindustryproj.service.impl;
 
-import com.marineindustryproj.domain.FinalNiazsanjiReportPerson;
-import com.marineindustryproj.domain.OrganizationChart;
-import com.marineindustryproj.domain.Person;
+import com.marineindustryproj.domain.*;
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
 import com.marineindustryproj.domain.enumeration.RequestStatus;
 import com.marineindustryproj.repository.OrganizationChartRepository;
 import com.marineindustryproj.repository.PersonRepository;
 import com.marineindustryproj.security.SecurityUtils;
-import com.marineindustryproj.service.EducationalModuleService;
-import com.marineindustryproj.service.EmploymentTypeService;
-import com.marineindustryproj.service.FinalNiazsanjiReportPersonQueryService;
-import com.marineindustryproj.service.FinalNiazsanjiReportPersonService;
-import com.marineindustryproj.service.FinalNiazsanjiReportService;
-import com.marineindustryproj.domain.FinalNiazsanjiReport;
+import com.marineindustryproj.service.*;
 import com.marineindustryproj.repository.FinalNiazsanjiReportRepository;
-import com.marineindustryproj.service.FinalOrganizationNiazsanjiQueryService;
-import com.marineindustryproj.service.FinalOrganizationNiazsanjiService;
-import com.marineindustryproj.service.JobService;
-import com.marineindustryproj.service.NiazsanjiGroupQueryService;
-import com.marineindustryproj.service.NiazsanjiGroupService;
-import com.marineindustryproj.service.OrganizationChartQueryService;
-import com.marineindustryproj.service.PersonQueryService;
-import com.marineindustryproj.service.PersonService;
-import com.marineindustryproj.service.RequestNiazsanjiFardiQueryService;
-import com.marineindustryproj.service.RequestOrganizationNiazsanjiQueryService;
-import com.marineindustryproj.service.dto.FinalNiazsanjiReportDTO;
-import com.marineindustryproj.service.dto.FinalNiazsanjiReportPersonCriteria;
-import com.marineindustryproj.service.dto.FinalNiazsanjiReportPersonDTO;
-import com.marineindustryproj.service.dto.FinalOrganizationNiazsanjiCriteria;
-import com.marineindustryproj.service.dto.FinalOrganizationNiazsanjiDTO;
-import com.marineindustryproj.service.dto.JobDTO;
-import com.marineindustryproj.service.dto.NiazsanjiGroupCriteria;
-import com.marineindustryproj.service.dto.NiazsanjiGroupDTO;
-import com.marineindustryproj.service.dto.PersonCriteria;
-import com.marineindustryproj.service.dto.PersonDTO;
-import com.marineindustryproj.service.dto.RequestNiazsanjiFardiCriteria;
-import com.marineindustryproj.service.dto.RequestOrganizationNiazsanjiCriteria;
-import com.marineindustryproj.service.dto.customs.ChartResult;
-import com.marineindustryproj.service.dto.customs.FinalNiazsanjiReportCustomDTO;
-import com.marineindustryproj.service.dto.customs.HomePageNiazsanjiReport;
+import com.marineindustryproj.service.dto.*;
+import com.marineindustryproj.service.dto.customs.*;
 import com.marineindustryproj.service.mapper.FinalNiazsanjiReportMapper;
 import com.marineindustryproj.service.mapper.OrganizationChartMapper;
 import io.github.jhipster.service.filter.BooleanFilter;
@@ -55,11 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -110,6 +76,12 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
     private final RequestOrganizationNiazsanjiQueryService requestOrganizationNiazsanjiQueryService;
 
+    private final EducationalHistoryQueryService educationalHistoryQueryService;
+
+    private final EducationalModuleJobQueryService educationalModuleJobQueryService;
+
+    private final DesignAndPlanningQueryService designAndPlanningQueryService;
+
     private final CacheManager cacheManager;
 
     public FinalNiazsanjiReportServiceImpl(FinalNiazsanjiReportRepository finalNiazsanjiReportRepository,
@@ -131,7 +103,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                                            OrganizationChartMapper organizationChartMapper,
                                            RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService,
                                            RequestOrganizationNiazsanjiQueryService requestOrganizationNiazsanjiQueryService,
-                                           CacheManager cacheManager) {
+                                           EducationalHistoryQueryService educationalHistoryQueryService, EducationalModuleJobQueryService educationalModuleJobQueryService, DesignAndPlanningQueryService designAndPlanningQueryService, CacheManager cacheManager) {
         this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
         this.finalNiazsanjiReportMapper = finalNiazsanjiReportMapper;
         this.niazsanjiGroupService = niazsanjiGroupService;
@@ -150,6 +122,9 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         this.organizationChartMapper = organizationChartMapper;
         this.requestNiazsanjiFardiQueryService = requestNiazsanjiFardiQueryService;
         this.requestOrganizationNiazsanjiQueryService = requestOrganizationNiazsanjiQueryService;
+        this.educationalHistoryQueryService = educationalHistoryQueryService;
+        this.educationalModuleJobQueryService = educationalModuleJobQueryService;
+        this.designAndPlanningQueryService = designAndPlanningQueryService;
         this.cacheManager = cacheManager;
     }
     /**
@@ -439,6 +414,61 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             }
             report.setDesignAndPlanningStepCount(designAndPlanningStepCount);
             report.setRunningStepCount(runningStepCount);
+        }
+
+        return report;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public HomePagePersonHourChart getHomePagePersonHourChart(Long personId) {
+        log.debug("Request to get HomePagePersonHourChart by personId : {}", personId);
+        Optional<Person> person = personRepository.findById(personId);
+        HomePagePersonHourChart report = new HomePagePersonHourChart();
+        if(person.isPresent()){
+            LongFilter personIdFilter = new LongFilter();
+            personIdFilter.setEquals(personId);
+
+            LongFilter jobIdFilter = new LongFilter();
+            jobIdFilter.setEquals(person.get().getJob().getId());
+
+            EducationalModuleJobCriteria educationalModuleJobCriteria = new EducationalModuleJobCriteria();
+            educationalModuleJobCriteria.setJobId(jobIdFilter);
+            List<EducationalModuleJobDTO> educationalModuleJobDTOS = educationalModuleJobQueryService.findByCriteria(educationalModuleJobCriteria);
+            long[] educationalIds = educationalModuleJobDTOS.stream().mapToLong(a -> a.getEducationalModuleId()).toArray();
+            List<EducationalModuleMinDTO> educationalModules = educationalModuleService.findAllFromCache().stream().filter(a -> Arrays.stream(educationalIds).anyMatch(w -> w == a.getId())).collect(Collectors.toList());
+            long[] totalLearningTimes = educationalModules.stream().mapToLong(a -> a.getLearningTimePractical() + a.getLearningTimeTheorical()).toArray();
+            Long totalTime = Arrays.stream(totalLearningTimes).sum();
+
+            DesignAndPlanningCriteria designAndPlanningCriteria = new DesignAndPlanningCriteria();
+            designAndPlanningCriteria.setPersonId(personIdFilter);
+            List<DesignAndPlanningDTO> designAndPlanningDTOS = designAndPlanningQueryService.findByCriteria(designAndPlanningCriteria);
+            long[] designEducationalIds = designAndPlanningDTOS.stream().mapToLong(a -> a.getEducationalModuleId()).toArray();
+            List<EducationalModuleMinDTO> designEducationalModules = educationalModuleService.findAllFromCache().stream().filter(a -> Arrays.stream(designEducationalIds).anyMatch(w -> w == a.getId())).collect(Collectors.toList());
+            long[] designTimes = designEducationalModules.stream().mapToLong(a -> a.getLearningTimePractical() + a.getLearningTimeTheorical()).toArray();
+            Long designTotalTime = Arrays.stream(designTimes).sum();
+
+            EducationalHistoryCriteria educationalHistoryCriteria = new EducationalHistoryCriteria();
+            educationalHistoryCriteria.setPersonId(personIdFilter);
+
+            EducationalHistoryCriteria.RequestStatusFilter requestStatusFilter = new EducationalHistoryCriteria.RequestStatusFilter();
+            requestStatusFilter.setEquals(RequestStatus.ACCEPT);
+            educationalHistoryCriteria.setRequestStatus(requestStatusFilter);
+
+            List<EducationalHistoryDTO> educationalHistoryDTOS = educationalHistoryQueryService.findByCriteria(educationalHistoryCriteria);
+            long[] educationalHistoryEducationalIds = educationalHistoryDTOS.stream().mapToLong(a -> a.getEducationalModuleId()).toArray();
+            List<EducationalModuleMinDTO> educationalHistoryEducationalModules = educationalModuleService.findAllFromCache().stream().filter(a -> Arrays.stream(educationalHistoryEducationalIds).anyMatch(w -> w == a.getId())).collect(Collectors.toList());
+            long[] educationalHistoryTimes = educationalHistoryEducationalModules.stream().mapToLong(a -> a.getLearningTimePractical() + a.getLearningTimeTheorical()).toArray();
+            Long educationalHistoryTime = Arrays.stream(educationalHistoryTimes).sum();
+
+            float designPercent = (designTotalTime / totalTime) * 100;
+            float educationalHistoryPercent = (educationalHistoryTime / totalTime) * 100;
+
+            float remaining = 100 - designPercent - educationalHistoryPercent;
+
+            report.setDesignAndPlanning(designPercent);
+            report.setPassed(educationalHistoryPercent);
+            report.setRemaining(remaining);
         }
 
         return report;

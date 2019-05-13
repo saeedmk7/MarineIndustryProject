@@ -28,6 +28,7 @@ import com.marineindustryproj.service.dto.PersonDTO;
 import com.marineindustryproj.service.dto.ReportDTO;
 import com.marineindustryproj.service.dto.customs.ChartResult;
 import com.marineindustryproj.service.dto.customs.HomePageNiazsanjiReport;
+import com.marineindustryproj.service.dto.customs.HomePagePersonHourChart;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -606,6 +607,15 @@ public class FinalNiazsanjiReportResource {
 
         HomePageNiazsanjiReport homePageNiazsanjiReports = finalNiazsanjiReportService.getHomePageNiazsanjiReport(personId);
         return ResponseEntity.ok().body(homePageNiazsanjiReports);
+    }
+
+    @GetMapping("/final-niazsanji-reports/getHomePagePersonHourChart/{personId}")
+    @Timed
+    public ResponseEntity<HomePagePersonHourChart> getHomePagePersonHourChart(@PathVariable Long personId) {
+        log.debug("REST request to get HPersonHourChart : {}", personId);
+
+        HomePagePersonHourChart homePagePersonHourChart = finalNiazsanjiReportService.getHomePagePersonHourChart(personId);
+        return ResponseEntity.ok().body(homePagePersonHourChart);
     }
 
     /**

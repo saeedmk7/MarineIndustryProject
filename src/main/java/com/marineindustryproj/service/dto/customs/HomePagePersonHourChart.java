@@ -7,41 +7,44 @@ import java.io.Serializable;
  */
 public class HomePagePersonHourChart implements Serializable {
 
-    private Long designAndPlanning;
+    private Float designAndPlanning;
 
-    private Long passed;
+    private Float passed;
 
-    private Long remaining;
+    private Float remaining;
 
-    public HomePagePersonHourChart(Long designAndPlanning,
-                                   Long passed,
-                                   Long remaining) {
+    public HomePagePersonHourChart(Float designAndPlanning, Float passed, Float remaining) {
         this.designAndPlanning = designAndPlanning;
         this.passed = passed;
         this.remaining = remaining;
     }
 
-    public Long getDesignAndPlanning() {
+    public HomePagePersonHourChart() {
+
+    }
+
+
+    public Float getDesignAndPlanning() {
         return designAndPlanning;
     }
 
-    public void setDesignAndPlanning(Long designAndPlanning) {
+    public void setDesignAndPlanning(Float designAndPlanning) {
         this.designAndPlanning = designAndPlanning;
     }
 
-    public Long getPassed() {
+    public Float getPassed() {
         return passed;
     }
 
-    public void setPassed(Long passed) {
+    public void setPassed(Float passed) {
         this.passed = passed;
     }
 
-    public Long getRemaining() {
+    public Float getRemaining() {
         return remaining;
     }
 
-    public void setRemaining(Long remaining) {
+    public void setRemaining(Float remaining) {
         this.remaining = remaining;
     }
 }

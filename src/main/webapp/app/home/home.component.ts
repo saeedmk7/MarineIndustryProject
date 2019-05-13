@@ -26,6 +26,7 @@ import {FinalNiazsanjiReportMarineSuffixService} from "app/entities/final-niazsa
 import {IChartResult} from "app/shared/model/custom/chart-result";
 import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 import {IHomePageNiazsanjiReport} from "app/shared/model/custom/niazsanji-chart-result";
+import {IHomePagePersonHourChart} from "app/shared/model/custom/home-page-person-hour-chart";
 
 
 @Component({
@@ -39,6 +40,7 @@ import {IHomePageNiazsanjiReport} from "app/shared/model/custom/niazsanji-chart-
 export class HomeComponent implements OnInit, OnDestroy {
     organizationcharts: IOrganizationChartMarineSuffix[];
     homePageNiazsanjiReport: IHomePageNiazsanjiReport = {};
+    homePagePersonHourChart: IHomePagePersonHourChart = {};
     account: Account;
     modalRef: NgbModalRef;
    /* welcomeState = 'out';
@@ -57,6 +59,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     isModirAmozesh: boolean = false;
     isSuperUsers: boolean = false;
     badError: string;
+    homePagePersonHourPieChart: Chart;
     personHourChart: Chart;
     priceCostChart: Chart;
     chart: Chart;
@@ -141,7 +144,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                     if(!resp.body.organizationChartId){
                         this.badError = "موقعیت در چارت سازمانی برای شما تنظیم نشده است، لطفا مراتب را با مدیریت سامانه در میان بگذارید.";
                     }
-
+                    this.prepareHomePagePersonHourChart(resp.body.id);
                     //this.prepareHomePageNiazsanjiReport(resp.body.id);
                 })
             }
@@ -209,8 +212,14 @@ export class HomeComponent implements OnInit, OnDestroy {
         },
             (res: HttpErrorResponse) => this.onError(res.message));
     }
+    prepareHomePagePersonHourChart(personId: number){
+        this.finalNiazsanjiReportService.getHomePagePersonHourChart(personId).subscribe((resp: HttpResponse<IHomePagePersonHourChart>) => {
+                this.homePagePersonHourChart = resp.body;
+                this.makePersonHourPieChart(resp.body);
+            },
+            (res: HttpErrorResponse) => this.onError(res.message));
+    }
     makeChartResult(){
-
         const groups = this.organizationcharts.filter(a => a.parentId == null);
         this.categories = groups.sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0).map(a => a.title);
         this.finalNiazsanjiReportService.getChartResult(this.selectedNiazsanjiYear).subscribe((resp: HttpResponse<IChartResult[]>) => {
@@ -235,6 +244,52 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     }
 
+    makePersonHourPieChart(res: IHomePagePersonHourChart)
+    {
+        this.homePagePersonHourPieChart = new Chart({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'نمودار نفر/ساعت'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Brands',
+                //colorByPoint: true,
+                data: [{
+                    name: 'نفر/ساعت گذرانده شده شما تاکنون',
+                    y: res.passed,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'دوره درحال اجرا',
+                    y: res.designAndPlanning
+                }, {
+                    name: 'باقیمانده',
+                    y: res.remaining
+                }]
+            }]
+        });
+    }
     makeSeries(){
 
         this.priceCostSeries = [{
