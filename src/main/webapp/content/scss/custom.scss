@@ -291,6 +291,7 @@ ul#css3menu.topmenu > :first-child a:hover{background-color:#29c76a}
 .table tr{
     text-align: center;
     vertical-align: middle !important;
+    font-size: 15px;
 }
 .table-striped tbody tr:nth-of-type(odd){
     background-color: #EFF9FF !important;
@@ -353,11 +354,14 @@ dd {
     display: inline-block;
     width: 30%;
     margin: 0 0 15px 0;
+    font-size: 15px;
+    font-weight: normal !important;
 }
 dt {
     display: inline-block;
     width: 18%;
     margin: 0 0 15px 0;
+    font-size: 15px;
 }
 .form-group {
     margin-bottom: 1rem;
@@ -407,6 +411,7 @@ form[name="editForm"]:before {
     cursor: not-allowed;
     text-decoration: none;
     pointer-events: none;
+    font-weight: normal;
 }
 form[name="editForm"], .detail-page {
     border: 1px solid #28a745;
@@ -580,6 +585,7 @@ nav.back-cover {
     cursor: not-allowed;
     text-decoration: none;
     pointer-events: none;
+    font-weight: normal;
 }
 
 /*

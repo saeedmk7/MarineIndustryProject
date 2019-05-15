@@ -6,11 +6,13 @@ import com.marineindustryproj.repository.FinalNiazsanjiReportRepository;
 import com.marineindustryproj.repository.RunRunningStepRepository;
 import com.marineindustryproj.repository.RunningStepRepository;
 import com.marineindustryproj.security.SecurityUtils;
+import com.marineindustryproj.service.RunPhaseQueryService;
 import com.marineindustryproj.service.RunPhaseService;
 import com.marineindustryproj.domain.RunPhase;
 import com.marineindustryproj.repository.RunPhaseRepository;
 import com.marineindustryproj.service.RunRunningStepQueryService;
 import com.marineindustryproj.service.RunRunningStepService;
+import com.marineindustryproj.service.dto.RunPhaseCriteria;
 import com.marineindustryproj.service.dto.RunPhaseDTO;
 import com.marineindustryproj.service.dto.RunRunningStepCriteria;
 import com.marineindustryproj.service.dto.RunRunningStepDTO;
@@ -56,13 +58,16 @@ public class RunPhaseServiceImpl implements RunPhaseService {
 
     private final RunRunningStepQueryService runRunningStepQueryService;
 
+    private final RunPhaseQueryService runPhaseQueryService;
+
     public RunPhaseServiceImpl(RunPhaseRepository runPhaseRepository,
                                RunPhaseMapper runPhaseMapper,
                                FinalNiazsanjiReportRepository finalNiazsanjiReportRepository,
                                RunningStepRepository runningStepRepository,
                                RunRunningStepRepository runRunningStepRepository,
                                RunRunningStepService runRunningStepService,
-                               RunRunningStepQueryService runRunningStepQueryService) {
+                               RunRunningStepQueryService runRunningStepQueryService,
+                               RunPhaseQueryService runPhaseQueryService) {
         this.runPhaseRepository = runPhaseRepository;
         this.runPhaseMapper = runPhaseMapper;
         this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
@@ -70,6 +75,7 @@ public class RunPhaseServiceImpl implements RunPhaseService {
         this.runRunningStepRepository = runRunningStepRepository;
         this.runRunningStepService = runRunningStepService;
         this.runRunningStepQueryService = runRunningStepQueryService;
+        this.runPhaseQueryService = runPhaseQueryService;
     }
 
     /**
@@ -230,5 +236,21 @@ public class RunPhaseServiceImpl implements RunPhaseService {
     public void delete(Long id) {
         log.debug("Request to delete RunPhase : {}", id);
         runPhaseRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteByFinalNiazsanjiReportId(Long finalNiazsanjiReportId) {
+        log.debug("Request to delete FinalNiazsanjiReportPerson by finalNiazsanjiReportId: {}", finalNiazsanjiReportId);
+        LongFilter filter = new LongFilter();
+        filter.setEquals(finalNiazsanjiReportId);
+
+        RunPhaseCriteria runPhaseCriteria = new RunPhaseCriteria();
+        runPhaseCriteria.setFinalNiazsanjiReportId(filter);
+        List<RunPhaseDTO> runPhaseDTOS =  runPhaseQueryService.findByCriteria(runPhaseCriteria);
+        if(!runPhaseDTOS.isEmpty()){
+            for (RunPhaseDTO runPhase : runPhaseDTOS) {
+                delete(runPhase.getId());
+            }
+        }
     }
 }

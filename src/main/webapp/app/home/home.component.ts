@@ -232,7 +232,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                     a.totalLearningTime = a.learningTimePractical == undefined ? 0 : a.learningTimePractical + a.learningTimeTheorical == undefined ? 0 : a.learningTimeTheorical;
                    switch (a.status) {
                        case 100:
-                           a.statusMeaning = "بارگزاری مدارک اتمام دوره";
+                           a.statusMeaning = "بارگذاری مدارک اتمام دوره";
                            break;
                        case 90:
                            a.statusMeaning = "در حال اجرا دوره";

@@ -82,7 +82,11 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
     private final DesignAndPlanningQueryService designAndPlanningQueryService;
 
+    private final DesignAndPlanningService designAndPlanningService;
+
     private final RunPhaseQueryService runPhaseQueryService;
+
+    private final RunPhaseService runPhaseService;
 
     private final CacheManager cacheManager;
 
@@ -108,7 +112,9 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                                            EducationalHistoryQueryService educationalHistoryQueryService,
                                            EducationalModuleJobQueryService educationalModuleJobQueryService,
                                            DesignAndPlanningQueryService designAndPlanningQueryService,
+                                           DesignAndPlanningService designAndPlanningService,
                                            RunPhaseQueryService runPhaseQueryService,
+                                           RunPhaseService runPhaseService,
                                            CacheManager cacheManager) {
         this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
         this.finalNiazsanjiReportMapper = finalNiazsanjiReportMapper;
@@ -131,7 +137,9 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         this.educationalHistoryQueryService = educationalHistoryQueryService;
         this.educationalModuleJobQueryService = educationalModuleJobQueryService;
         this.designAndPlanningQueryService = designAndPlanningQueryService;
+        this.designAndPlanningService = designAndPlanningService;
         this.runPhaseQueryService = runPhaseQueryService;
+        this.runPhaseService = runPhaseService;
         this.cacheManager = cacheManager;
     }
     /**
@@ -577,6 +585,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
     public void delete(Long id) {
         log.debug("Request to delete FinalNiazsanjiReport : {}", id);
 
+        runPhaseService.deleteByFinalNiazsanjiReportId(id);
+        designAndPlanningService.deleteByFinalNiazsanjiReportId(id);
         finalNiazsanjiReportPersonService.deleteByFinalNiazsanjiReportId(id);
         finalNiazsanjiReportRepository.deleteById(id);
         clearFinalNiazsanjiReportCaches();

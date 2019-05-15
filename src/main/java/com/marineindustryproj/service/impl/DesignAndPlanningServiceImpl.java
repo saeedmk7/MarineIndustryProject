@@ -4,11 +4,14 @@ import com.marineindustryproj.domain.FinalNiazsanjiReport;
 import com.marineindustryproj.domain.Person;
 import com.marineindustryproj.repository.FinalNiazsanjiReportRepository;
 import com.marineindustryproj.security.SecurityUtils;
+import com.marineindustryproj.service.DesignAndPlanningQueryService;
 import com.marineindustryproj.service.DesignAndPlanningService;
 import com.marineindustryproj.domain.DesignAndPlanning;
 import com.marineindustryproj.repository.DesignAndPlanningRepository;
+import com.marineindustryproj.service.dto.DesignAndPlanningCriteria;
 import com.marineindustryproj.service.dto.DesignAndPlanningDTO;
 import com.marineindustryproj.service.mapper.DesignAndPlanningMapper;
+import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,12 +20,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Array;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Stream;
 
 /**
  * Service Implementation for managing DesignAndPlanning.
@@ -39,10 +41,16 @@ public class DesignAndPlanningServiceImpl implements DesignAndPlanningService {
 
     private final DesignAndPlanningMapper designAndPlanningMapper;
 
-    public DesignAndPlanningServiceImpl(DesignAndPlanningRepository designAndPlanningRepository, FinalNiazsanjiReportRepository finalNiazsanjiReportRepository, DesignAndPlanningMapper designAndPlanningMapper) {
+    private final DesignAndPlanningQueryService designAndPlanningQueryService;
+
+    public DesignAndPlanningServiceImpl(DesignAndPlanningRepository designAndPlanningRepository,
+                                        FinalNiazsanjiReportRepository finalNiazsanjiReportRepository,
+                                        DesignAndPlanningMapper designAndPlanningMapper,
+                                        DesignAndPlanningQueryService designAndPlanningQueryService) {
         this.designAndPlanningRepository = designAndPlanningRepository;
         this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
         this.designAndPlanningMapper = designAndPlanningMapper;
+        this.designAndPlanningQueryService = designAndPlanningQueryService;
     }
 
     /**
@@ -132,5 +140,20 @@ public class DesignAndPlanningServiceImpl implements DesignAndPlanningService {
     public void delete(Long id) {
         log.debug("Request to delete DesignAndPlanning : {}", id);
         designAndPlanningRepository.deleteById(id);
+    }
+    @Override
+    public void deleteByFinalNiazsanjiReportId(Long finalNiazsanjiReportId) {
+        log.debug("Request to delete DesignAndPlanning by finalNiazsanjiReportId: {}", finalNiazsanjiReportId);
+        LongFilter filter = new LongFilter();
+        filter.setEquals(finalNiazsanjiReportId);
+
+        DesignAndPlanningCriteria designAndPlanningCriteria = new DesignAndPlanningCriteria();
+        designAndPlanningCriteria.setFinalNiazsanjiReportId(filter);
+        List<DesignAndPlanningDTO> designAndPlanningDTOs =  designAndPlanningQueryService.findByCriteria(designAndPlanningCriteria);
+        if(!designAndPlanningDTOs.isEmpty()){
+            for (DesignAndPlanningDTO designAndPlanning : designAndPlanningDTOs) {
+                delete(designAndPlanning.getId());
+            }
+        }
     }
 }

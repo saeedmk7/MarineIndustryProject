@@ -28,7 +28,7 @@
                                             <th>ردیف</th>
                                             <th style="width:30%">عنوان</th>
                                             <th>انجام شده؟</th>
-                                            <th>بارگزاری فایل</th>
+                                            <th>بارگذاری فایل</th>
                                             <th>توضیحات انجام کار</th>
                                         </tr>
                                         </thead>
@@ -40,7 +40,7 @@
                                             <td style="font-size: 15px;">
                                                 <label>{{item.title}}</label>
                                                 <span class="badge badge-danger" *ngIf="item.required"> انجام اجباری</span>
-                                                <span class="badge badge-danger" *ngIf="item.fileDocRequired"> بارگزاری فایل اجباری</span>
+                                                <span class="badge badge-danger" *ngIf="item.fileDocRequired"> بارگذاری فایل اجباری</span>
                                             </td>
                                             <td>
                                                 <input type="checkbox" [id]="'chk-' + item.id" [name]="'chk-' + item.id" [checked]="item.checked" [alt]="item.description" [title]="item.description" [(ngModel)]="item.checked" />

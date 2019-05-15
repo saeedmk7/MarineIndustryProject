@@ -127,7 +127,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                                 let runPhaseItem: RunPhaseItemModel = new RunPhaseItemModel();
                                 runPhaseItem.id = e.id;
                                 runPhaseItem.title = e.title; //+ (e.stepRequired ? "(اجباریست)" : "");
-                                runPhaseItem.description = e.description;
+                                runPhaseItem.description = e.description == null ? "" : e.description;
                                 runPhaseItem.required = e.stepRequired;
                                 runPhaseItem.fileDocRequired = e.fileDocRequired;
                                 runPhaseItem.stepNumber = a.stepNumber;
@@ -153,7 +153,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                                     this.runPhaseTabModel.forEach(w => {
                                        w.runPhaseItems.forEach(r => {
                                            if(r.id == x.runningStepId){
-                                               r.descMessage = x.description;
+                                               r.descMessage = x.description == null ? "" : x.description;
                                                r.fileDoc = x.fileDoc;
                                                r.checked = x.done;
                                            }
