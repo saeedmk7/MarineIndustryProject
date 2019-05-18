@@ -161,6 +161,12 @@ public class EducationalModuleQueryService extends QueryService<EducationalModul
             if (criteria.getStatus() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getStatus(), EducationalModule_.status));
             }
+            if (criteria.getGoalsText() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getGoalsText(), EducationalModule_.goalsText));
+            }
+            if (criteria.getTeachersText() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getTeachersText(), EducationalModule_.teachersText));
+            }
             if (criteria.getEducationalModuleJobId() != null) {
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleJobId(),
                     root -> root.join(EducationalModule_.educationalModuleJobs, JoinType.LEFT).get(EducationalModuleJob_.id)));

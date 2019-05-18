@@ -34,7 +34,8 @@
             "runRunningStep": "Run Running Step",
             "document": "Document",
             "person": "Person",
-            "educationalModule": "Educational Module",
+            "organizationChart": "پیشنهاد دهنده",
+            "educationalModule": "پودمان آموزشی",
             "finalNiazsanjiReport": "Final Niazsanji Report"
         }
     }

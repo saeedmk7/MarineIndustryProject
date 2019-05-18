@@ -11,12 +11,10 @@
         <br/>
         <div *ngIf="isKarshenasArshadAmozesh && commentType == 'ACCEPT'">
             <span>بعد از تایید این درخواست برای مدیر کل آموزش ارسال می شود.</span>
-        <!--    <ul>
-                <li *ngFor="let item of targetPeople">
-                    {{item.fullName}}
-                </li>
-            </ul>-->
         </div>
+        <!--<div *ngIf="isModirKolAmozesh && commentType == 'ACCEPT'">
+            <span>بعد از تایید این درخواست برای مدیر کل آموزش ارسال می شود.</span>
+        </div>-->
     </div>
     <div class="modal-footer">
         <div *ngIf="message">

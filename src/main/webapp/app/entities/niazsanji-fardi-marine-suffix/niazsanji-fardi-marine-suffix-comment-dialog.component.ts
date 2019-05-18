@@ -111,6 +111,8 @@ export class NiazsanjiFardiMarineSuffixCommentDialogComponent implements OnInit 
                             this.niazsanjiFardi.status = 1;
                         if(this.isModirKolAmozesh)
                             this.niazsanjiFardi.status = 11;
+                        if(this.niazsanjiFardi.status == 20)
+                            this.niazsanjiFardi.status = 21;
                         this.niazsanjiFardi.changeStatusUserLogin = this.currentAccount.login;
                         this.requestNiazsanjiFardiService.update(requestNiazsanjiFardi).subscribe(
                             (res: HttpResponse<IRequestNiazsanjiFardiMarineSuffix>) => this.onSaveSuccess(),
@@ -205,6 +207,7 @@ export class NiazsanjiFardiMarineSuffixCommentDialogComponent implements OnInit 
                 this.commentType = 'COMMENT';
                 break;
         }
+        this.knowAboutStatusForContinue();
         if(this.organizationChartService.organizationchartsAll)
         {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;

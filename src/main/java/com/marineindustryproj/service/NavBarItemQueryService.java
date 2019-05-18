@@ -37,8 +37,7 @@ public class NavBarItemQueryService extends QueryService<NavBarItem> {
 
     private final NavBarItemMapper navBarItemMapper;
 
-    public NavBarItemQueryService(NavBarItemRepository navBarItemRepository,
-                                  NavBarItemMapper navBarItemMapper) {
+    public NavBarItemQueryService(NavBarItemRepository navBarItemRepository, NavBarItemMapper navBarItemMapper) {
         this.navBarItemRepository = navBarItemRepository;
         this.navBarItemMapper = navBarItemMapper;
     }
@@ -50,8 +49,7 @@ public class NavBarItemQueryService extends QueryService<NavBarItem> {
      */
     @Transactional(readOnly = true)
     public List<NavBarItemDTO> findByCriteria(NavBarItemCriteria criteria) {
-        log.debug("find by criteria : {}",
-                  criteria);
+        log.debug("find by criteria : {}", criteria);
         final Specification<NavBarItem> specification = createSpecification(criteria);
         return navBarItemMapper.toDto(navBarItemRepository.findAll(specification));
     }
@@ -108,6 +106,9 @@ public class NavBarItemQueryService extends QueryService<NavBarItem> {
             }
             if (criteria.getIsActive() != null) {
                 specification = specification.and(buildSpecification(criteria.getIsActive(), NavBarItem_.isActive));
+            }
+            if (criteria.getDisplayOrder() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDisplayOrder(), NavBarItem_.displayOrder));
             }
             if (criteria.getCreateUserLogin() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCreateUserLogin(), NavBarItem_.createUserLogin));

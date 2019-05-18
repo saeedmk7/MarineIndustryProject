@@ -77,6 +77,9 @@ public class FinalNiazsanjiReport implements Serializable {
     @Column(name = "run_month")
     private Integer runMonth;
 
+    @Column(name = "planning_run_month")
+    private Integer planningRunMonth;
+
     @Column(name = "finalize_cost")
     private Integer finalizeCost;
 
@@ -288,6 +291,19 @@ public class FinalNiazsanjiReport implements Serializable {
 
     public void setRunMonth(Integer runMonth) {
         this.runMonth = runMonth;
+    }
+
+    public Integer getPlanningRunMonth() {
+        return planningRunMonth;
+    }
+
+    public FinalNiazsanjiReport planningRunMonth(Integer planningRunMonth) {
+        this.planningRunMonth = planningRunMonth;
+        return this;
+    }
+
+    public void setPlanningRunMonth(Integer planningRunMonth) {
+        this.planningRunMonth = planningRunMonth;
     }
 
     public Integer getFinalizeCost() {
@@ -505,6 +521,7 @@ public class FinalNiazsanjiReport implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", runMonth=" + getRunMonth() +
+            ", planningRunMonth=" + getPlanningRunMonth() +
             ", finalizeCost=" + getFinalizeCost() +
             "}";
     }

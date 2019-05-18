@@ -128,6 +128,9 @@ public class FinalNiazsanjiReportQueryService extends QueryService<FinalNiazsanj
             if (criteria.getRunMonth() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getRunMonth(), FinalNiazsanjiReport_.runMonth));
             }
+            if (criteria.getPlanningRunMonth() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getPlanningRunMonth(), FinalNiazsanjiReport_.planningRunMonth));
+            }
             if (criteria.getFinalizeCost() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getFinalizeCost(), FinalNiazsanjiReport_.finalizeCost));
             }

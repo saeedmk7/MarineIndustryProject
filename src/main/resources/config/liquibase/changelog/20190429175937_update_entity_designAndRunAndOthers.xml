@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the entity UsersRequest.
+    -->
+    <changeSet id="20190429175937" author="jhipster">
+        <addColumn schemaName="public"
+                   tableName="run_phase">
+            <column name="organization_chart_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="organization_chart_id"
+                                 baseTableName="run_phase"
+                                 constraintName="fk_run_phase_organization_chart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+
+        <addColumn schemaName="public"
+                   tableName="design_and_planning">
+            <column name="organization_chart_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="organization_chart_id"
+                                 baseTableName="design_and_planning"
+                                 constraintName="fk_design_and_planning_organization_chart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+
+        <addColumn schemaName="public"
+                   tableName="final_niazsanji_report">
+            <column name="planning_run_month" type="integer">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addColumn schemaName="public"
+                   tableName="educational_module">
+            <column name="goals_text" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="teachers_text" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addColumn schemaName="public"
+                   tableName="request_educational_module">
+            <column name="goals_text" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="teachers_text" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <dropNotNullConstraint columnDataType="integer"
+                               columnName="code"
+                               schemaName="public"
+                               tableName="request_educational_module"/>
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

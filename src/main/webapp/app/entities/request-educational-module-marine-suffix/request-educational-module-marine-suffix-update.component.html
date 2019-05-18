@@ -141,7 +141,17 @@
                         id="field_goal"
                         [(ngModel)]="requestEducationalModule.goals">
                 </div>
-
+<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestEducationalModule.goalsText" for="field_goalsText">Goals Text</label>
+                    <input type="text" class="form-control" name="goalsText" id="field_goalsText"
+                        [(ngModel)]="requestEducationalModule.goalsText" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.goalsText?.dirty && editForm.controls.goalsText?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.goalsText?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
                 <div class="form-group half">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalModuleHeadlines" for="field_educationalModuleHeadlines">Educational Module Headlines</label>
                     <textarea type="text" class="form-control" name="educationalModuleHeadlines" id="field_educationalModuleHeadlines"
@@ -186,6 +196,17 @@
                         name="teacher"
                         id="field_teacher"
                         [(ngModel)]="requestEducationalModule.teachers">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestEducationalModule.teachersText" for="field_teachersText">Teachers Text</label>
+                    <input type="text" class="form-control" name="teachersText" id="field_teachersText"
+                        [(ngModel)]="requestEducationalModule.teachersText" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.teachersText?.dirty && editForm.controls.teachersText?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.teachersText?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group half">
                     <label jhiTranslate="marineindustryprojApp.requestEducationalModule.resource" for="field_resource">Resource</label>

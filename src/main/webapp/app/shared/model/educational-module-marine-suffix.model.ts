@@ -3,6 +3,8 @@ import { IEducationalModuleJobMarineSuffix } from 'app/shared/model//educational
 import { IRequestOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//request-organization-niazsanji-marine-suffix.model';
 import { IFinalOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//final-organization-niazsanji-marine-suffix.model';
 import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model//final-niazsanji-report-marine-suffix.model';
+import { IDesignAndPlanningMarineSuffix } from 'app/shared/model//design-and-planning-marine-suffix.model';
+import { IRunPhaseMarineSuffix } from 'app/shared/model//run-phase-marine-suffix.model';
 import { INiazsanjiFardiMarineSuffix } from 'app/shared/model//niazsanji-fardi-marine-suffix.model';
 import { IRequestNiazsanjiFardiMarineSuffix } from 'app/shared/model//request-niazsanji-fardi-marine-suffix.model';
 import { IEducationalHistoryMarineSuffix } from 'app/shared/model//educational-history-marine-suffix.model';
@@ -43,10 +45,14 @@ export interface IEducationalModuleMarineSuffix {
     archivedUserLogin?: string;
     archivedDate?: Moment;
     status?: number;
+    goalsText?: string;
+    teachersText?: string;
     educationalModuleJobs?: IEducationalModuleJobMarineSuffix[];
     requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[];
     finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[];
     finalNiazsanjiReports?: IFinalNiazsanjiReportMarineSuffix[];
+    designAndPlannings?: IDesignAndPlanningMarineSuffix[];
+    runPhases?: IRunPhaseMarineSuffix[];
     niazsanjiFardis?: INiazsanjiFardiMarineSuffix[];
     approvedRequestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[];
     allRequestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[];
@@ -100,10 +106,14 @@ export class EducationalModuleMarineSuffix implements IEducationalModuleMarineSu
         public archivedUserLogin?: string,
         public archivedDate?: Moment,
         public status?: number,
+        public goalsText?: string,
+        public teachersText?: string,
         public educationalModuleJobs?: IEducationalModuleJobMarineSuffix[],
         public requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[],
         public finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[],
         public finalNiazsanjiReports?: IFinalNiazsanjiReportMarineSuffix[],
+        public designAndPlannings?: IDesignAndPlanningMarineSuffix[],
+        public runPhases?: IRunPhaseMarineSuffix[],
         public niazsanjiFardis?: INiazsanjiFardiMarineSuffix[],
         public approvedRequestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[],
         public allRequestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[],

@@ -103,6 +103,10 @@ public class RunPhase implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("runPhases")
+    private OrganizationChart organizationChart;
+
+    @ManyToOne
+    @JsonIgnoreProperties("runPhases")
     private EducationalModule educationalModule;
 
     @ManyToOne
@@ -386,6 +390,19 @@ public class RunPhase implements Serializable {
 
     public void setPeople(Set<Person> people) {
         this.people = people;
+    }
+
+    public OrganizationChart getOrganizationChart() {
+        return organizationChart;
+    }
+
+    public RunPhase organizationChart(OrganizationChart organizationChart) {
+        this.organizationChart = organizationChart;
+        return this;
+    }
+
+    public void setOrganizationChart(OrganizationChart organizationChart) {
+        this.organizationChart = organizationChart;
     }
 
     public EducationalModule getEducationalModule() {

@@ -86,6 +86,12 @@ public class EducationalModuleDTO implements Serializable {
     @NotNull
     private Integer status;
 
+    @Size(max = 4096)
+    private String goalsText;
+
+    @Size(max = 4096)
+    private String teachersText;
+
     private Set<ScientificWorkGroupDTO> scientificWorkGroups = new HashSet<>();
 
     private Set<DocumentDTO> documents = new HashSet<>();
@@ -326,6 +332,22 @@ public class EducationalModuleDTO implements Serializable {
         this.status = status;
     }
 
+    public String getGoalsText() {
+        return goalsText;
+    }
+
+    public void setGoalsText(String goalsText) {
+        this.goalsText = goalsText;
+    }
+
+    public String getTeachersText() {
+        return teachersText;
+    }
+
+    public void setTeachersText(String teachersText) {
+        this.teachersText = teachersText;
+    }
+
     public Set<ScientificWorkGroupDTO> getScientificWorkGroups() {
         return scientificWorkGroups;
     }
@@ -504,6 +526,8 @@ public class EducationalModuleDTO implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", goalsText='" + getGoalsText() + "'" +
+            ", teachersText='" + getTeachersText() + "'" +
             ", requestEducationalModule=" + getRequestEducationalModuleId() +
             ", requestEducationalModule='" + getRequestEducationalModuleTitle() + "'" +
             ", securityLevel=" + getSecurityLevelId() +

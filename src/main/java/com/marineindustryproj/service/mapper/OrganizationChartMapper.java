@@ -20,6 +20,8 @@ public interface OrganizationChartMapper extends EntityMapper<OrganizationChartD
     @Mapping(target = "requestOrganizationNiazsanjis", ignore = true)
     @Mapping(target = "finalOrganizationNiazsanjis", ignore = true)
     @Mapping(target = "finalNiazsanjiReports", ignore = true)
+    @Mapping(target = "designAndPlannings", ignore = true)
+    @Mapping(target = "runPhases", ignore = true)
     @Mapping(target = "organizationChartAuthorities", ignore = true)
     @Mapping(target = "niazsanjiFardis", ignore = true)
     @Mapping(target = "requestNiazsanjiFardis", ignore = true)

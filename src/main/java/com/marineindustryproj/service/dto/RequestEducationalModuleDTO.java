@@ -16,7 +16,6 @@ public class RequestEducationalModuleDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
     private Integer code;
 
     @NotNull
@@ -94,6 +93,12 @@ public class RequestEducationalModuleDTO implements Serializable {
 
     @Size(max = 50)
     private String changeStatusUserLogin;
+
+    @Size(max = 4096)
+    private String goalsText;
+
+    @Size(max = 4096)
+    private String teachersText;
 
     private Set<ScientificWorkGroupDTO> scientificWorkGroups = new HashSet<>();
 
@@ -355,6 +360,22 @@ public class RequestEducationalModuleDTO implements Serializable {
         this.changeStatusUserLogin = changeStatusUserLogin;
     }
 
+    public String getGoalsText() {
+        return goalsText;
+    }
+
+    public void setGoalsText(String goalsText) {
+        this.goalsText = goalsText;
+    }
+
+    public String getTeachersText() {
+        return teachersText;
+    }
+
+    public void setTeachersText(String teachersText) {
+        this.teachersText = teachersText;
+    }
+
     public Set<ScientificWorkGroupDTO> getScientificWorkGroups() {
         return scientificWorkGroups;
     }
@@ -520,6 +541,8 @@ public class RequestEducationalModuleDTO implements Serializable {
             ", conversation='" + getConversation() + "'" +
             ", requestStatus='" + getRequestStatus() + "'" +
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
+            ", goalsText='" + getGoalsText() + "'" +
+            ", teachersText='" + getTeachersText() + "'" +
             ", securityLevel=" + getSecurityLevelId() +
             ", securityLevel='" + getSecurityLevelTitle() + "'" +
             ", skillableLevelOfSkill=" + getSkillableLevelOfSkillId() +

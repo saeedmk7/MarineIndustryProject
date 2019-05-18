@@ -26,7 +26,9 @@
             <th jhiSortBy="runMonth"><span jhiTranslate="marineindustryprojApp.designAndPlanning.runMonth">runMonth</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="directCost"><span jhiTranslate="marineindustryprojApp.designAndPlanning.directCost">Direct Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="undirectCost"><span jhiTranslate="marineindustryprojApp.designAndPlanning.undirectCost">Undirect Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="directCostDescription"><span jhiTranslate="marineindustryprojApp.designAndPlanning.directCostDescription">Direct Cost Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--
+            <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="directCostDescription"><span jhiTranslate="marineindustryprojApp.designAndPlanning.directCostDescription">Direct Cost Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="undirectCostDescription"><span jhiTranslate="marineindustryprojApp.designAndPlanning.undirectCostDescription">Undirect Cost Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="step"><span jhiTranslate="marineindustryprojApp.designAndPlanning.step">Step</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="finished"><span jhiTranslate="marineindustryprojApp.designAndPlanning.finished">Finished</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -78,7 +80,13 @@
                 <td>{{designAndPlanning.runMonthName}}</td>
                 <td>{{designAndPlanning.directCost | number}}</td>
                 <td>{{designAndPlanning.undirectCost | number}}</td>
-                <!--<td>{{designAndPlanning.directCostDescription}}</td>
+                <!--
+                <td>
+                    <div *ngIf="designAndPlanning.organizationChartId">
+                        <a [routerLink]="['../organization-chart-marine-suffix', designAndPlanning.organizationChartId , 'view' ]" >{{designAndPlanning.organizationChartTitle}}</a>
+                    </div>
+                </td>
+                <td>{{designAndPlanning.directCostDescription}}</td>
                 <td>{{designAndPlanning.undirectCostDescription}}</td>
                 <td>{{designAndPlanning.step}}</td>
                 <td>{{designAndPlanning.finished}}</td>

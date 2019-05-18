@@ -67,6 +67,10 @@ public class DesignAndPlanningDTO implements Serializable {
 
     private Set<DocumentDTO> documents = new HashSet<>();
 
+    private Long organizationChartId;
+
+    private String organizationChartTitle;
+
     private Long educationalModuleId;
 
     private String educationalModuleTitle;
@@ -281,6 +285,22 @@ public class DesignAndPlanningDTO implements Serializable {
 
     public void setDocuments(Set<DocumentDTO> documents) {
         this.documents = documents;
+    }
+
+    public Long getOrganizationChartId() {
+        return organizationChartId;
+    }
+
+    public void setOrganizationChartId(Long organizationChartId) {
+        this.organizationChartId = organizationChartId;
+    }
+
+    public String getOrganizationChartTitle() {
+        return organizationChartTitle;
+    }
+
+    public void setOrganizationChartTitle(String organizationChartTitle) {
+        this.organizationChartTitle = organizationChartTitle;
     }
 
     public Long getEducationalModuleId() {
@@ -518,6 +538,8 @@ public class DesignAndPlanningDTO implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", runMonth=" + getRunMonth() +
+            ", organizationChart=" + getOrganizationChartId() +
+            ", organizationChart='" + getOrganizationChartTitle() + "'" +
             ", educationalModule=" + getEducationalModuleId() +
             ", educationalModule='" + getEducationalModuleTitle() + "'" +
             ", finalNiazsanjiReport=" + getFinalNiazsanjiReportId() +

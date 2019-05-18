@@ -31,8 +31,7 @@ public class RequestEducationalModule implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
-    @Column(name = "code", nullable = false)
+    @Column(name = "code")
     private Integer code;
 
     @NotNull
@@ -138,6 +137,14 @@ public class RequestEducationalModule implements Serializable {
     @Size(max = 50)
     @Column(name = "change_status_user_login", length = 50)
     private String changeStatusUserLogin;
+
+    @Size(max = 4096)
+    @Column(name = "goals_text", length = 4096)
+    private String goalsText;
+
+    @Size(max = 4096)
+    @Column(name = "teachers_text", length = 4096)
+    private String teachersText;
 
     @OneToMany(mappedBy = "requestEducationalModule")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -573,6 +580,32 @@ public class RequestEducationalModule implements Serializable {
         this.changeStatusUserLogin = changeStatusUserLogin;
     }
 
+    public String getGoalsText() {
+        return goalsText;
+    }
+
+    public RequestEducationalModule goalsText(String goalsText) {
+        this.goalsText = goalsText;
+        return this;
+    }
+
+    public void setGoalsText(String goalsText) {
+        this.goalsText = goalsText;
+    }
+
+    public String getTeachersText() {
+        return teachersText;
+    }
+
+    public RequestEducationalModule teachersText(String teachersText) {
+        this.teachersText = teachersText;
+        return this;
+    }
+
+    public void setTeachersText(String teachersText) {
+        this.teachersText = teachersText;
+    }
+
     public Set<EducationalModule> getEducationalModules() {
         return educationalModules;
     }
@@ -853,6 +886,8 @@ public class RequestEducationalModule implements Serializable {
             ", conversation='" + getConversation() + "'" +
             ", requestStatus='" + getRequestStatus() + "'" +
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
+            ", goalsText='" + getGoalsText() + "'" +
+            ", teachersText='" + getTeachersText() + "'" +
             "}";
     }
 }

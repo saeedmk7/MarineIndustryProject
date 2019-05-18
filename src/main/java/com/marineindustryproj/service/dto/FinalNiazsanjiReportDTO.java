@@ -47,6 +47,8 @@ public class FinalNiazsanjiReportDTO implements Serializable {
 
     private Integer runMonth;
 
+    private Integer planningRunMonth;
+
     private Integer finalizeCost;
 
     private Set<DocumentDTO> documents = new HashSet<>();
@@ -175,6 +177,14 @@ public class FinalNiazsanjiReportDTO implements Serializable {
         this.runMonth = runMonth;
     }
 
+    public Integer getPlanningRunMonth() {
+        return planningRunMonth;
+    }
+
+    public void setPlanningRunMonth(Integer planningRunMonth) {
+        this.planningRunMonth = planningRunMonth;
+    }
+
     public Integer getFinalizeCost() {
         return finalizeCost;
     }
@@ -277,6 +287,7 @@ public class FinalNiazsanjiReportDTO implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", runMonth=" + getRunMonth() +
+            ", planningRunMonth=" + getPlanningRunMonth() +
             ", finalizeCost=" + getFinalizeCost() +
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +

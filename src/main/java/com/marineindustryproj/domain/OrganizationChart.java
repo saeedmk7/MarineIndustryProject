@@ -84,6 +84,12 @@ public class OrganizationChart implements Serializable {
     private Set<FinalNiazsanjiReport> finalNiazsanjiReports = new HashSet<>();
     @OneToMany(mappedBy = "organizationChart")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<DesignAndPlanning> designAndPlannings = new HashSet<>();
+    @OneToMany(mappedBy = "organizationChart")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<RunPhase> runPhases = new HashSet<>();
+    @OneToMany(mappedBy = "organizationChart")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<OrganizationChartAuthority> organizationChartAuthorities = new HashSet<>();
     @OneToMany(mappedBy = "organizationChart")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -360,6 +366,56 @@ public class OrganizationChart implements Serializable {
 
     public void setFinalNiazsanjiReports(Set<FinalNiazsanjiReport> finalNiazsanjiReports) {
         this.finalNiazsanjiReports = finalNiazsanjiReports;
+    }
+
+    public Set<DesignAndPlanning> getDesignAndPlannings() {
+        return designAndPlannings;
+    }
+
+    public OrganizationChart designAndPlannings(Set<DesignAndPlanning> designAndPlannings) {
+        this.designAndPlannings = designAndPlannings;
+        return this;
+    }
+
+    public OrganizationChart addDesignAndPlanning(DesignAndPlanning designAndPlanning) {
+        this.designAndPlannings.add(designAndPlanning);
+        designAndPlanning.setOrganizationChart(this);
+        return this;
+    }
+
+    public OrganizationChart removeDesignAndPlanning(DesignAndPlanning designAndPlanning) {
+        this.designAndPlannings.remove(designAndPlanning);
+        designAndPlanning.setOrganizationChart(null);
+        return this;
+    }
+
+    public void setDesignAndPlannings(Set<DesignAndPlanning> designAndPlannings) {
+        this.designAndPlannings = designAndPlannings;
+    }
+
+    public Set<RunPhase> getRunPhases() {
+        return runPhases;
+    }
+
+    public OrganizationChart runPhases(Set<RunPhase> runPhases) {
+        this.runPhases = runPhases;
+        return this;
+    }
+
+    public OrganizationChart addRunPhase(RunPhase runPhase) {
+        this.runPhases.add(runPhase);
+        runPhase.setOrganizationChart(this);
+        return this;
+    }
+
+    public OrganizationChart removeRunPhase(RunPhase runPhase) {
+        this.runPhases.remove(runPhase);
+        runPhase.setOrganizationChart(null);
+        return this;
+    }
+
+    public void setRunPhases(Set<RunPhase> runPhases) {
+        this.runPhases = runPhases;
     }
 
     public Set<OrganizationChartAuthority> getOrganizationChartAuthorities() {

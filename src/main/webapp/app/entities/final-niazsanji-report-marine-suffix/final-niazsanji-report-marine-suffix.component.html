@@ -28,7 +28,7 @@
             </a>
             <div id="collapseExample">
                 <div class="card-body">
-                    <div class="form-group bighalf">
+                    <div class="form-group half">
                         <label class="form-control-label">منبع نیازسنجی</label>
                         <div class="form-control">
                             <label class="form-check-label">
@@ -70,8 +70,8 @@
                             id="field_runMonth"
                             [(ngModel)]="finalNiazsanjiReport.runMonth">
                     </div>
-                    <div class="form-group">
-                    </div>
+                  <!--  <div class="form-group">
+                    </div>-->
                     <div class="form-group" *ngIf="isSuperUsers">
                         <label class="form-control-label" for="field_organizationChart">گروه</label>
                         <ng-select
@@ -169,12 +169,6 @@
                             <span class="fa fa-file"></span>
                             <span class="d-none d-md-inline">برنامه ریزی</span>
                         </button>
-                        <button kendoButton type="submit" class="btn btn-success btn-sm"  [disabled]="dataItem.status < 10"
-                                [routerLink]="['/run-phase-marine-suffix', dataItem.id, 'edit']"
-                        >
-                            <span class="fa fa-file"></span>
-                            <span class="d-none d-md-inline">اجرا</span>
-                        </button>
                     </kendo-buttongroup>
                     <kendo-buttongroup type="submit" *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                        [routerLink]="['/', { outlets: { popup: 'final-niazsanji-report-marine-suffix/'+ dataItem.id + '/delete'} }]"
@@ -259,12 +253,12 @@
                             <span class="fa fa-file"></span>
                             <span class="d-none d-md-inline">برنامه ریزی</span>
                         </button>
-                        <button kendoButton type="submit" class="btn btn-success btn-sm"  [disabled]="dataItem.status < 10"
+                        <!--<button kendoButton type="submit" class="btn btn-success btn-sm"  [disabled]="dataItem.status < 10"
                                 [routerLink]="['/run-phase-marine-suffix', dataItem.id, 'edit']"
                         >
                             <span class="fa fa-file"></span>
                             <span class="d-none d-md-inline">اجرا</span>
-                        </button>
+                        </button>-->
                     </kendo-buttongroup>
                     <kendo-buttongroup type="submit" *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                        [routerLink]="['/', { outlets: { popup: 'final-niazsanji-report-marine-suffix/'+ dataItem.id + '/delete'} }]"

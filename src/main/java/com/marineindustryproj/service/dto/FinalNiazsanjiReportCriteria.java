@@ -57,6 +57,8 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
 
     private IntegerFilter runMonth;
 
+    private IntegerFilter planningRunMonth;
+
     private IntegerFilter finalizeCost;
 
     private LongFilter finalNiazsanjiReportPersonId;
@@ -187,6 +189,14 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         this.runMonth = runMonth;
     }
 
+    public IntegerFilter getPlanningRunMonth() {
+        return planningRunMonth;
+    }
+
+    public void setPlanningRunMonth(IntegerFilter planningRunMonth) {
+        this.planningRunMonth = planningRunMonth;
+    }
+
     public IntegerFilter getFinalizeCost() {
         return finalizeCost;
     }
@@ -284,6 +294,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
             Objects.equals(runMonth, that.runMonth) &&
+            Objects.equals(planningRunMonth, that.planningRunMonth) &&
             Objects.equals(finalizeCost, that.finalizeCost) &&
             Objects.equals(finalNiazsanjiReportPersonId, that.finalNiazsanjiReportPersonId) &&
             Objects.equals(designAndPlanningId, that.designAndPlanningId) &&
@@ -312,6 +323,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         archivedDate,
         status,
         runMonth,
+        planningRunMonth,
         finalizeCost,
         finalNiazsanjiReportPersonId,
         designAndPlanningId,
@@ -341,6 +353,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
                 (runMonth != null ? "runMonth=" + runMonth + ", " : "") +
+                (planningRunMonth != null ? "planningRunMonth=" + planningRunMonth + ", " : "") +
                 (finalizeCost != null ? "finalizeCost=" + finalizeCost + ", " : "") +
                 (finalNiazsanjiReportPersonId != null ? "finalNiazsanjiReportPersonId=" + finalNiazsanjiReportPersonId + ", " : "") +
                 (designAndPlanningId != null ? "designAndPlanningId=" + designAndPlanningId + ", " : "") +

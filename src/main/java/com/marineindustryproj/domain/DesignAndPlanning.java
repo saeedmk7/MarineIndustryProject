@@ -111,6 +111,10 @@ public class DesignAndPlanning implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("designAndPlannings")
+    private OrganizationChart organizationChart;
+
+    @ManyToOne
+    @JsonIgnoreProperties("designAndPlannings")
     private EducationalModule educationalModule;
 
     @ManyToOne
@@ -448,6 +452,19 @@ public class DesignAndPlanning implements Serializable {
 
     public void setDocuments(Set<Document> documents) {
         this.documents = documents;
+    }
+
+    public OrganizationChart getOrganizationChart() {
+        return organizationChart;
+    }
+
+    public DesignAndPlanning organizationChart(OrganizationChart organizationChart) {
+        this.organizationChart = organizationChart;
+        return this;
+    }
+
+    public void setOrganizationChart(OrganizationChart organizationChart) {
+        this.organizationChart = organizationChart;
     }
 
     public EducationalModule getEducationalModule() {

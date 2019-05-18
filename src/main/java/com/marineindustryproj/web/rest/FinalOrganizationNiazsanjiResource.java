@@ -91,7 +91,7 @@ public class FinalOrganizationNiazsanjiResource {
         finalOrganizationNiazsanjiDTO.setCreateDate(finalOrganizationNiazsanji.getCreateDate());
         finalOrganizationNiazsanjiDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
         finalOrganizationNiazsanjiDTO.setModifyDate(ZonedDateTime.now());
-        finalOrganizationNiazsanjiDTO.setStatus(20);
+        finalOrganizationNiazsanjiDTO.setStatus(30);
         finalOrganizationNiazsanjiDTO.setChangeStatusUserLogin(SecurityUtils.getCurrentUserLogin().get());
         finalOrganizationNiazsanjiDTO.setRequestStatus(RequestStatus.ACCEPT);
 

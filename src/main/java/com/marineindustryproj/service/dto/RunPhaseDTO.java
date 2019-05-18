@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
+
 /**
  * A DTO for the RunPhase entity.
  */
@@ -58,6 +60,10 @@ public class RunPhaseDTO implements Serializable {
 
     private Set<PersonDTO> people = new HashSet<>();
 
+    private Long organizationChartId;
+
+    private String organizationChartTitle;
+
     private Long educationalModuleId;
 
     private String educationalModuleTitle;
@@ -65,6 +71,10 @@ public class RunPhaseDTO implements Serializable {
     private Long finalNiazsanjiReportId;
 
     private String finalNiazsanjiReportDescription;
+
+    private Integer niazsanjiYear;
+
+    private NiazSanjiSource niazSanjiSource;
 
     public Long getId() {
         return id;
@@ -210,6 +220,22 @@ public class RunPhaseDTO implements Serializable {
         this.people = people;
     }
 
+    public Long getOrganizationChartId() {
+        return organizationChartId;
+    }
+
+    public void setOrganizationChartId(Long organizationChartId) {
+        this.organizationChartId = organizationChartId;
+    }
+
+    public String getOrganizationChartTitle() {
+        return organizationChartTitle;
+    }
+
+    public void setOrganizationChartTitle(String organizationChartTitle) {
+        this.organizationChartTitle = organizationChartTitle;
+    }
+
     public Long getEducationalModuleId() {
         return educationalModuleId;
     }
@@ -240,6 +266,22 @@ public class RunPhaseDTO implements Serializable {
 
     public void setFinalNiazsanjiReportDescription(String finalNiazsanjiReportDescription) {
         this.finalNiazsanjiReportDescription = finalNiazsanjiReportDescription;
+    }
+
+    public Integer getNiazsanjiYear() {
+        return niazsanjiYear;
+    }
+
+    public void setNiazsanjiYear(Integer niazsanjiYear) {
+        this.niazsanjiYear = niazsanjiYear;
+    }
+
+    public NiazSanjiSource getNiazSanjiSource() {
+        return niazSanjiSource;
+    }
+
+    public void setNiazSanjiSource(NiazSanjiSource niazSanjiSource) {
+        this.niazSanjiSource = niazSanjiSource;
     }
 
     @Override
@@ -282,10 +324,16 @@ public class RunPhaseDTO implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", organizationChart=" + getOrganizationChartId() +
+            ", organizationChart='" + getOrganizationChartTitle() + "'" +
             ", educationalModule=" + getEducationalModuleId() +
             ", educationalModule='" + getEducationalModuleTitle() + "'" +
             ", finalNiazsanjiReport=" + getFinalNiazsanjiReportId() +
             ", finalNiazsanjiReport='" + getFinalNiazsanjiReportDescription() + "'" +
+            ", niazsanjiYear=" + getNiazsanjiYear() +
+            ", niazSanjiSource='" + getNiazSanjiSource() + "'" +
             "}";
     }
+
+
 }

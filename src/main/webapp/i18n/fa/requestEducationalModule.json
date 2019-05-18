@@ -52,11 +52,13 @@
             "educationalCenter": "مراکز آموزشی پیشنهادی",
             "goal": "اهداف آموزشی",
             "resource": "منابع آموزشی",
-            "teacher": "مدرسین دارای صلاحیت تدریس",
+            "teacher": "مدرسین ودجا دارای صلاحیت تدریس",
             "securityLevel": "طبقه بندی امنیتی",
             "skillableLevelOfSkill": "سطح مهارت قابل تامین پودمان",
             "evaluationMethod": "شیوه ارزشیابی",
-            "organization": "سازمان"
+            "organization": "سازمان",
+            "goalsText": "اهداف",
+            "teachersText": "مدرسین خارج از ودجا"
         }
     }
 }

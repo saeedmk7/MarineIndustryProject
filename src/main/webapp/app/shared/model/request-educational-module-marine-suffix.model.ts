@@ -39,6 +39,8 @@ export interface IRequestEducationalModuleMarineSuffix {
     conversation?: any;
     requestStatus?: RequestStatus;
     changeStatusUserLogin?: string;
+    goalsText?: string;
+    teachersText?: string;
     educationalModules?: IEducationalModuleMarineSuffix[];
     scientificWorkGroups?: IScientificWorkGroupMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
@@ -88,6 +90,8 @@ export class RequestEducationalModuleMarineSuffix implements IRequestEducational
         public conversation?: any,
         public requestStatus?: RequestStatus,
         public changeStatusUserLogin?: string,
+        public goalsText?: string,
+        public teachersText?: string,
         public educationalModules?: IEducationalModuleMarineSuffix[],
         public scientificWorkGroups?: IScientificWorkGroupMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],

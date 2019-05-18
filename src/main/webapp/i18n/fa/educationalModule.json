@@ -52,7 +52,7 @@
             "educationalHistory": "Educational History",
             "goal": "اهداف آموزشی",
             "resource": "منابع آموزشی",
-            "teacher": "مدرسین دارای صلاحیت تدریس",
+            "teacher": "مدرسین ودجا دارای صلاحیت تدریس",
             "securityLevel": "طبقه بندی امنیتی",
             "skillableLevelOfSkill": "سطح مهارت قابل تامین پودمان",
             "skillableLevelOfSkillId": "سطح مهارت قابل تامین پودمان",
@@ -61,7 +61,9 @@
             "organizationTitle": "واحد پیشنهاد دهنده",
             "organizationId": "واحد پیشنهاد دهنده",
             "requestEducationalModule": "درخواست متناظر (در صورت موجود بودن)",
-            "niazsanjiGroup": "Niazsanji Group"
+            "niazsanjiGroup": "Niazsanji Group",
+            "goalsText": "اهداف",
+            "teachersText": "مدرسین خارج از ودجا"
         }
     }
 }

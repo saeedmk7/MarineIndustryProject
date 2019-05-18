@@ -126,6 +126,14 @@ public class EducationalModule implements Serializable {
     @Column(name = "status", nullable = false)
     private Integer status;
 
+    @Size(max = 4096)
+    @Column(name = "goals_text", length = 4096)
+    private String goalsText;
+
+    @Size(max = 4096)
+    @Column(name = "teachers_text", length = 4096)
+    private String teachersText;
+
     @OneToMany(mappedBy = "educationalModule")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EducationalModuleJob> educationalModuleJobs = new HashSet<>();
@@ -555,6 +563,32 @@ public class EducationalModule implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getGoalsText() {
+        return goalsText;
+    }
+
+    public EducationalModule goalsText(String goalsText) {
+        this.goalsText = goalsText;
+        return this;
+    }
+
+    public void setGoalsText(String goalsText) {
+        this.goalsText = goalsText;
+    }
+
+    public String getTeachersText() {
+        return teachersText;
+    }
+
+    public EducationalModule teachersText(String teachersText) {
+        this.teachersText = teachersText;
+        return this;
+    }
+
+    public void setTeachersText(String teachersText) {
+        this.teachersText = teachersText;
     }
 
     public Set<EducationalModuleJob> getEducationalModuleJobs() {
@@ -1097,6 +1131,8 @@ public class EducationalModule implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", goalsText='" + getGoalsText() + "'" +
+            ", teachersText='" + getTeachersText() + "'" +
             "}";
     }
 }

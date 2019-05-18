@@ -8,9 +8,11 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity DesignAndPlanning and its DTO DesignAndPlanningDTO.
  */
-@Mapper(componentModel = "spring", uses = {PersonMapper.class, DocumentMapper.class, EducationalModuleMapper.class, FinalNiazsanjiReportMapper.class, MahiatCourseMapper.class, CourseTypeMapper.class, TeachTypeMapper.class, CourseLocationMapper.class, ConditionsOfParticipantMapper.class, EffectivenessLevelMapper.class, ToolsAndFacilityMapper.class, TeachingApproachMapper.class, TeachTechniqueMapper.class, EffectivenessIndexMapper.class})
+@Mapper(componentModel = "spring", uses = {PersonMapper.class, DocumentMapper.class, OrganizationChartMapper.class, EducationalModuleMapper.class, FinalNiazsanjiReportMapper.class, MahiatCourseMapper.class, CourseTypeMapper.class, TeachTypeMapper.class, CourseLocationMapper.class, ConditionsOfParticipantMapper.class, EffectivenessLevelMapper.class, ToolsAndFacilityMapper.class, TeachingApproachMapper.class, TeachTechniqueMapper.class, EffectivenessIndexMapper.class})
 public interface DesignAndPlanningMapper extends EntityMapper<DesignAndPlanningDTO, DesignAndPlanning> {
 
+    @Mapping(source = "organizationChart.id", target = "organizationChartId")
+    @Mapping(source = "organizationChart.title", target = "organizationChartTitle")
     @Mapping(source = "educationalModule.id", target = "educationalModuleId")
     @Mapping(source = "educationalModule.title", target = "educationalModuleTitle")
     @Mapping(source = "finalNiazsanjiReport.id", target = "finalNiazsanjiReportId")
@@ -37,6 +39,7 @@ public interface DesignAndPlanningMapper extends EntityMapper<DesignAndPlanningD
     @Mapping(source = "effectivenessIndex.title", target = "effectivenessIndexTitle")
     DesignAndPlanningDTO toDto(DesignAndPlanning designAndPlanning);
 
+    @Mapping(source = "organizationChartId", target = "organizationChart")
     @Mapping(source = "educationalModuleId", target = "educationalModule")
     @Mapping(source = "finalNiazsanjiReportId", target = "finalNiazsanjiReport")
     @Mapping(source = "mahiatCourseId", target = "mahiatCourse")

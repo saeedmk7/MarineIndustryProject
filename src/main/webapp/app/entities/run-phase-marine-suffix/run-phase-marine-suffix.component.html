@@ -9,116 +9,289 @@
         </button>
     </h2>
     <mi-alert></mi-alert>
-    <br/>
-    <div class="table-responsive" *ngIf="runPhases">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.runPhase.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="educationalModuleId"><span jhiTranslate="marineindustryprojApp.runPhase.educationalModuleId">Educational Module Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th><span jhiTranslate="marineindustryprojApp.runPhase.people">People</span></th>
-            <!--<th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.runPhase.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="finalizeCost"><span jhiTranslate="marineindustryprojApp.runPhase.finalizeCost">Finalize Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="stepNumber"><span jhiTranslate="marineindustryprojApp.runPhase.stepNumber">Step Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="done"><span jhiTranslate="marineindustryprojApp.runPhase.done">Done</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="doneUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.doneUserLogin">Done User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="doneDate"><span jhiTranslate="marineindustryprojApp.runPhase.doneDate">Done Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="runMonth"><span jhiTranslate="marineindustryprojApp.runPhase.runMonth">Run Month</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.runPhase.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.runPhase.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="archived"><span jhiTranslate="marineindustryprojApp.runPhase.archived">Archived</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="archivedUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.archivedUserLogin">Archived User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="archivedDate"><span jhiTranslate="marineindustryprojApp.runPhase.archivedDate">Archived Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.runPhase.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="finalNiazsanjiReportDescription"><span jhiTranslate="marineindustryprojApp.runPhase.finalNiazsanjiReport">Final Niazsanji Report</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let runPhase of runPhases ;trackBy: trackId">
-                <td><a [routerLink]="['/run-phase-marine-suffix', runPhase.id, 'view' ]">{{runPhase.id}}</a></td>
-                <td>
-                    {{runPhase.educationalModuleTitle}}
-                </td>
-                <td>
-                    {{runPhase.educationalModuleId}}
-                </td>
-                <!--<td>{{runPhase.description}}</td>-->
-                <td>{{runPhase.finalizeCost}}</td>
-                <!--<td>{{runPhase.stepNumber}}</td>-->
-                <td>{{runPhase.done}}</td>
-                <!--<td>{{runPhase.doneUserLogin}}</td>
-                <td>{{runPhase.doneDate | date:'medium'}}</td>-->
-                <td>{{runPhase.runMonthPersian}}</td>
-                <!--<td>{{runPhase.createUserLogin}}</td>
-                <td>{{runPhase.createDate | date:'medium'}}</td>
-                <td>{{runPhase.modifyUserLogin}}</td>
-                <td>{{runPhase.modifyDate | date:'medium'}}</td>
-                <td>{{runPhase.archived}}</td>
-                <td>{{runPhase.archivedUserLogin}}</td>
-                <td>{{runPhase.archivedDate | date:'medium'}}</td>-->
-                <!--<td>{{runPhase.status}}</td>-->
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <div class="card border-success ">
+            <a data-toggle="collapse" href="#collapseExample" class="card-header center" style="background-color: aliceblue;">
+                <span class="panel-title">پنل جستجو</span>
+                <span class="pull-right clickable"><i class="glyphicon glyphicon-ok"></i></span>
+            </a>
+            <div id="collapseExample">
+                <div class="card-body">
+                    <div class="form-group half">
+                        <label class="form-control-label">منبع نیازسنجی</label>
+                        <div class="form-control">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="true" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی
+                            </label>
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="false" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان سازمانی (متمرکز و گروهی)
+                            </label>
+                        </div>
 
-                <!--<td>
-                    <div *ngIf="runPhase.finalNiazsanjiReportId">
-                        <a [routerLink]="['../final-niazsanji-report-marine-suffix', runPhase.finalNiazsanjiReportId , 'view' ]" >{{runPhase.finalNiazsanjiReportDescription}}</a>
                     </div>
-                </td>-->
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/run-phase-marine-suffix', runPhase.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/run-phase-marine-suffix', runPhase.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'run-phase-marine-suffix/'+ runPhase.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_niazsanjiYear">سال نیازسنجی</label>
+                        <ng-select
+                            [items]="dates"
+                            [multiple]="false"
+                            [closeOnSelect]="true"
+                            [searchable]="true"
+                            [required]="true"
+                            bindLabel="title"
+                            bindValue="id"
+                            placeholder="انتخاب نمائید."
+                            name="niazsanjiYear"
+                            id="field_niazsanjiYear"
+                            [(ngModel)]="runPhase.niazsanjiYear">
                     </div>
-                </td>
-            </tr>
-            </tbody>
-            <tfoot>
-            <tr>
-                <td colspan="6">
-                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
-                        <option value="10">۱۰</option>
-                        <option selected="selected" value="20">۲۰</option>
-                        <option value="50">۵۰</option>
-                        <option value="100">۱۰۰</option>
-                        <option value="500">۵۰۰</option>
-                    </select>
-                    <div class="row justify-content-center">
-                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_runMonth">ماه اجرا</label>
+                        <ng-select
+                            [items]="months"
+                            [multiple]="false"
+                            [closeOnSelect]="true"
+                            [searchable]="true"
+                            [required]="false"
+                            bindLabel="persianMonth"
+                            bindValue="id"
+                            placeholder="انتخاب نمائید."
+                            name="runMonth"
+                            id="field_runMonth"
+                            [(ngModel)]="runPhase.runMonth">
                     </div>
-                </td>
+                    <!--<div class="form-group">
+                    </div>-->
+                    <div class="form-group" *ngIf="isSuperUsers">
+                        <label class="form-control-label" for="field_organizationChart">گروه</label>
+                        <ng-select
+                            [items]="orgsRoot"
+                            [multiple]="false"
+                            [closeOnSelect]="true"
+                            [searchable]="true"
+                            bindLabel="fullTitle"
+                            bindValue="id"
+                            placeholder="انتخاب نمائید."
+                            name="organizationChartId"
+                            id="field_organizationChartsRoot"
+                            [(ngModel)]="runPhase.organizationChartId">
+                    </div>
+                    <div class="form-group half">
+                        <label class="form-control-label" for="field_organizationChart">پیشنهاد دهنده</label>
+                        <ng-select
+                            [items]="recommenedOrgCharts"
+                            [multiple]="false"
+                            [closeOnSelect]="true"
+                            [searchable]="true"
+                            bindLabel="fullTitle"
+                            bindValue="id"
+                            placeholder="انتخاب نمائید."
+                            name="organizationChartId"
+                            id="field_organizationChart"
+                            [(ngModel)]="runPhase.organizationChartId">
+                    </div>
 
-                <td colspan="3">
+                    <div class="form-group half">
+                        <label class="form-control-label" for="field_educationalModule">پودمان آموزشی</label>
+                        <ng-select
+                            [items]="educationalModules"
+                            [multiple]="false"
+                            [closeOnSelect]="true"
+                            [searchable]="true"
+                            bindLabel="fullTitle"
+                            bindValue="id"
+                            placeholder="انتخاب نمائید."
+                            name="educationalModuleId"
+                            id="field_educationalModule"
+                            [(ngModel)]="runPhase.educationalModuleId">
+                    </div>
 
-                </td>
-            </tr>
-
-            </tfoot>
-        </table>
-    </div>
-    <div *ngIf="runPhases && runPhases.length">
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_status">وضعیت نیازسنجی</label>
+                        <ng-select
+                            [items]="statusMeaning"
+                            [multiple]="false"
+                            [closeOnSelect]="true"
+                            [searchable]="true"
+                            [required]="false"
+                            bindLabel="mean"
+                            bindValue="id"
+                            placeholder="انتخاب نمائید."
+                            name="status"
+                            id="field_status"
+                            [(ngModel)]="runPhase.status">
+                    </div>
+                </div>
+                <div class="card-footer text-muted success-color white-text">
+                    <input type="submit" class="btn btn-primary btn-lg" id="searchButton" value="جستجو">
+                    <div style="display: inline" class="alert alert-info">برای دیدن کلیه نیازسنجی های فردی و نیازسنجی های متمرکز پس از انتخاب سال نیازسنجی دکمه جستجو را کلیک کنید.</div>
+                    <div style="display: inline" class="alert alert-danger" *ngIf="message">{{message}}</div>
+                </div>
+            </div>
         </div>
+    </form>
+    <br/>
+    <div class="table-responsive" *ngIf="runPhaseFardis.length > 0">
+        <kendo-grid
+            [groupable]="true"
+            [data]="gridView"
+            [height]="700"
+            [group]="groups"
+            [groupable]="{ showFooter: true }"
+            [rowClass]="rowCallback"
+            (groupChange)="groupChangeFardis($event)">
+            <ng-template kendoGridToolbarTemplate>
+                <button type="button" kendoGridExcelCommand icon="file-excel" style="float: left" class="info">خروجی اکسل</button>
+            </ng-template>
+            <!--<kendo-grid-column field="id" title="شناسه" [width]="100"></kendo-grid-column>-->
+            <!--<kendo-grid-column field="jobTitle" title="عنوان شغل" [width]="300"></kendo-grid-column>-->
+            <kendo-grid-column field="id" title=" " [width]="200">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <!--<kendo-buttongroup type="button" class="btn btn-warning btn-sm"
+                    >
+                        <fa-icon [icon]="'sticky-note'"></fa-icon>
+                        <span class="d-none d-md-inline">برنامه ریزی</span>
+                    </kendo-buttongroup>-->
+                    <kendo-buttongroup>
+                        <button kendoButton type="submit" class="btn btn-success btn-sm"
+                                [routerLink]="['/run-phase-marine-suffix', dataItem.id, 'edit']"
+                        >
+                            <span class="fa fa-file"></span>
+                            <span class="d-none d-md-inline">اجرا</span>
+                        </button>
+                    </kendo-buttongroup>
+                    <!--<kendo-buttongroup type="submit" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                                       [routerLink]="['/', { outlets: { popup: 'final-niazsanji-report-marine-suffix/'+ dataItem.id + '/delete'} }]"
+                                       replaceUrl="true"
+                                       queryParamsHandling="merge" style="background-color: #aa0000;color: white"
+                                       class="btn btn-danger btn-sm"
+                    >
+                        <fa-icon [icon]="'times'"></fa-icon>
+                        <span class="d-none d-md-inline">حذف</span>
+                    </kendo-buttongroup>-->
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="250"></kendo-grid-column>
+            <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-grid-column>
+            <kendo-grid-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="90"></kendo-grid-column>
+            <!--<kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>-->
+            <!--<kendo-grid-column field="finalizeCost" title="هزینه پایانی" [width]="100"></kendo-grid-column>-->
+            <kendo-grid-column field="finalizeCost" title="هزینه صرف شده" [width]="100">
+                <ng-template
+                    kendoGridFooterTemplate
+                    let-column="column">جمع کل: {{totalFinalizeCost | number}}</ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100">
+                <ng-template
+                    kendoGridFooterTemplate
+                    let-column="column">جمع کل (نفر ساعت): {{total | number}}</ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="200"></kendo-grid-column>
+            <kendo-grid-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="500"></kendo-grid-column>
+            <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
+                <kendo-excelexport-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="300"></kendo-excelexport-column>
+                <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
+                <kendo-excelexport-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
+                <!--<kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="200"></kendo-excelexport-column>-->
+                <kendo-excelexport-column field="finalizeCost" title="هزینه پایانی" [width]="200"></kendo-excelexport-column>
+                <kendo-excelexport-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="200"></kendo-excelexport-column>
+                <kendo-excelexport-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="200"></kendo-excelexport-column>
+                <!--<kendo-excelexport-column field="priceCost" title="هزینه" [width]="100"></kendo-excelexport-column>-->
+                <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
+            </kendo-grid-excel>
+        </kendo-grid>
+    </div>
+    <div class="table-responsive" *ngIf="runPhaseOrganizations.length > 0">
+        <kendo-grid
+            [groupable]="true"
+            [data]="gridViewOrg"
+            [height]="700"
+            [group]="groupsOrg"
+            [groupable]="{ showFooter: true }"
+            [navigable]="true"
+            (groupChange)="groupChangeOrgs($event)"
+            [rowClass]="rowCallback"
+            (excelExport)="onExcelExport($event)">
+            <ng-template kendoGridToolbarTemplate>
+                <button type="button" kendoGridExcelCommand icon="file-excel" style="float: left" class="info">خروجی اکسل</button>
+            </ng-template>
+            <!--<kendo-grid-column field="id" title="شناسه" [width]="100"></kendo-grid-column>-->
+            <!--<kendo-grid-column field="jobTitle" title="عنوان شغل" [width]="300"></kendo-grid-column>-->
+            <kendo-grid-column field="id" title=" " [width]="200">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <!--<kendo-buttongroup type="button" class="btn btn-warning btn-sm"
+                    >
+                        <fa-icon [icon]="'sticky-note'"></fa-icon>
+                        <span class="d-none d-md-inline">برنامه ریزی</span>
+                    </kendo-buttongroup>-->
+                    <kendo-buttongroup>
+                        <button kendoButton type="submit" class="btn btn-success btn-sm"
+                                [routerLink]="['/run-phase-marine-suffix', dataItem.id, 'edit']"
+                        >
+                            <span class="fa fa-file"></span>
+                            <span class="d-none d-md-inline">اجرا</span>
+                        </button>
+                    </kendo-buttongroup>
+                    <!--<kendo-buttongroup type="submit" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                                       [routerLink]="['/', { outlets: { popup: 'final-niazsanji-report-marine-suffix/'+ dataItem.id + '/delete'} }]"
+                                       replaceUrl="true"
+                                       queryParamsHandling="merge" style="background-color: #aa0000;color: white"
+                                       class="btn btn-danger btn-sm"
+                    >
+                        <fa-icon [icon]="'times'"></fa-icon>
+                        <span class="d-none d-md-inline">حذف</span>
+                    </kendo-buttongroup>-->
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="200"></kendo-grid-column>
+            <kendo-grid-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="finalizeCost" title="هزینه صرف شده" [width]="100">
+                <ng-template
+                    kendoGridFooterTemplate
+                    let-column="column">جمع کل: {{totalFinalizeCost | number}}</ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100">
+
+                <ng-template
+                    kendoGridFooterTemplate
+                    let-column="column">جمع کل (نفر ساعت): {{total | number}}</ng-template>
+            </kendo-grid-column>
+            <!--<kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="300"></kendo-grid-column>
+            <kendo-grid-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="300"></kendo-grid-column>-->
+            <!--<kendo-grid-column field="priceCost" title="هزینه اولیه" [width]="100">-->
+                <ng-template
+                    kendoGridFooterTemplate
+                    let-column="column">جمع کل: {{totalCost | number}}</ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
+            <div *kendoGridDetailTemplate="let dataItem">
+                <mi-final-niazsanji-report-marine-suffix-detail-people [people]="dataItem.people"></mi-final-niazsanji-report-marine-suffix-detail-people>
+            </div>
+            <kendo-grid-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="500"></kendo-grid-column>
+            <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
+                <kendo-excelexport-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="300"></kendo-excelexport-column>
+                <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
+                <kendo-excelexport-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
+                <!--<kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-excelexport-column>-->
+                <kendo-excelexport-column field="finalizeCost" title="هزینه پایانی" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100"></kendo-excelexport-column>
+                <!--<kendo-excelexport-column field="priceCost" title="هزینه" [width]="100"></kendo-excelexport-column>-->
+                <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
+                <!-- <div *kendoGridDetailTemplate="let dataItem">
+                     <mi-final-niazsanji-report-marine-suffix-detail-people [people]="dataItem.people"></mi-final-niazsanji-report-marine-suffix-detail-people>
+                 </div>-->
+            </kendo-grid-excel>
+        </kendo-grid>
     </div>
 </div>

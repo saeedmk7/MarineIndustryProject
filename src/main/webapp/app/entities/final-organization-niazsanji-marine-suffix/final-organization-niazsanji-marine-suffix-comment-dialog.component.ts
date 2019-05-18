@@ -112,6 +112,8 @@ export class FinalOrganizationNiazsanjiMarineSuffixCommentDialogComponent implem
                             this.finalOrganizationNiazsanji.status = 1;
                         if(this.isModirKolAmozesh)
                             this.finalOrganizationNiazsanji.status = 11;
+                        if(this.finalOrganizationNiazsanji.status == 20)
+                            this.finalOrganizationNiazsanji.status = 21;
                         this.finalOrganizationNiazsanji.changeStatusUserLogin = this.currentAccount.login;
                         this.requestOrganizationNiazsanjiService.update(requestOrganizationNiazsanji).subscribe(
                             (res: HttpResponse<IRequestOrganizationNiazsanjiMarineSuffix>) => this.onSaveSuccess(),
@@ -119,13 +121,12 @@ export class FinalOrganizationNiazsanjiMarineSuffixCommentDialogComponent implem
                         );
                         break;
                     case 'ACCEPT':
-
-                        requestOrganizationNiazsanji.conversation += " تایید درخواست توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
-                        if (this.comment) {
-                            requestOrganizationNiazsanji.conversation += "\n";
-                            requestOrganizationNiazsanji.conversation += currentUserFullName + ": " + this.comment;
-                        }
-                        if (this.isKarshenasArshadAmozesh) {
+                        if (this.isKarshenasArshadAmozesh && this.finalOrganizationNiazsanji.status == 0) {
+                            requestOrganizationNiazsanji.conversation += " تایید درخواست توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
+                            if (this.comment) {
+                                requestOrganizationNiazsanji.conversation += "\n";
+                                requestOrganizationNiazsanji.conversation += currentUserFullName + ": " + this.comment;
+                            }
                             this.finalOrganizationNiazsanji.status = 10;
                             this.finalOrganizationNiazsanji.changeStatusUserLogin = this.currentAccount.login;
                             this.requestOrganizationNiazsanjiService.update(requestOrganizationNiazsanji).subscribe(
@@ -133,8 +134,26 @@ export class FinalOrganizationNiazsanjiMarineSuffixCommentDialogComponent implem
                                 (res: HttpErrorResponse) => this.onSaveError(res)
                             );
                         }
+                        else if(this.isModirKolAmozesh && this.finalOrganizationNiazsanji.status == 10) {
+                            requestOrganizationNiazsanji.conversation += " تایید درخواست توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
+                            if (this.comment) {
+                                requestOrganizationNiazsanji.conversation += "\n";
+                                requestOrganizationNiazsanji.conversation += currentUserFullName + ": " + this.comment;
+                            }
+                            this.finalOrganizationNiazsanji.status = 20;
+                            this.finalOrganizationNiazsanji.changeStatusUserLogin = this.currentAccount.login;
+                            this.requestOrganizationNiazsanjiService.update(requestOrganizationNiazsanji).subscribe(
+                                (res: HttpResponse<IRequestNiazsanjiFardiMarineSuffix>) => this.onSaveSuccess(),
+                                (res: HttpErrorResponse) => this.onSaveError(res)
+                            );
+                        }
                         else {
-                            if(this.finalOrganizationNiazsanji.niazsanjiYear) {
+                             if(this.finalOrganizationNiazsanji.niazsanjiYear) {
+                                 requestOrganizationNiazsanji.conversation += " تایید نهایی و تصویب شوراء تربیت و آموزش سازمان توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
+                                if (this.comment) {
+                                    requestOrganizationNiazsanji.conversation += "\n";
+                                    requestOrganizationNiazsanji.conversation += currentUserFullName + ": " + this.comment;
+                                }
                                 requestOrganizationNiazsanji.requestStatus = RequestStatus.ACCEPT;
                                 this.requestOrganizationNiazsanjiService.update(requestOrganizationNiazsanji).subscribe(
                                     (res: HttpResponse<IRequestNiazsanjiFardiMarineSuffix>) => this.onSaveSuccess(),

@@ -2,6 +2,8 @@ package com.marineindustryproj.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+
+import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -61,9 +63,15 @@ public class RunPhaseCriteria implements Serializable {
 
     private LongFilter personId;
 
+    private LongFilter organizationChartId;
+
     private LongFilter educationalModuleId;
 
     private LongFilter finalNiazsanjiReportId;
+
+    private IntegerFilter niazsanjiYear;
+
+    private FinalNiazsanjiReportCriteria.NiazSanjiSourceFilter niazSanjiSource;
 
     public LongFilter getId() {
         return id;
@@ -217,6 +225,14 @@ public class RunPhaseCriteria implements Serializable {
         this.personId = personId;
     }
 
+    public LongFilter getOrganizationChartId() {
+        return organizationChartId;
+    }
+
+    public void setOrganizationChartId(LongFilter organizationChartId) {
+        this.organizationChartId = organizationChartId;
+    }
+
     public LongFilter getEducationalModuleId() {
         return educationalModuleId;
     }
@@ -233,6 +249,20 @@ public class RunPhaseCriteria implements Serializable {
         this.finalNiazsanjiReportId = finalNiazsanjiReportId;
     }
 
+    public IntegerFilter getNiazsanjiYear() {
+        return niazsanjiYear;
+    }
+
+    public void setNiazsanjiYear(IntegerFilter niazsanjiYear) {
+        this.niazsanjiYear = niazsanjiYear;
+    }
+    public FinalNiazsanjiReportCriteria.NiazSanjiSourceFilter getNiazSanjiSource() {
+        return niazSanjiSource;
+    }
+
+    public void setNiazSanjiSource(FinalNiazsanjiReportCriteria.NiazSanjiSourceFilter niazSanjiSource) {
+        this.niazSanjiSource = niazSanjiSource;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -263,8 +293,11 @@ public class RunPhaseCriteria implements Serializable {
             Objects.equals(runRunningStepId, that.runRunningStepId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(personId, that.personId) &&
+            Objects.equals(organizationChartId, that.organizationChartId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
-            Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId);
+            Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
+            Objects.equals(niazsanjiYear, that.niazsanjiYear) &&
+            Objects.equals(niazSanjiSource, that.niazSanjiSource);
     }
 
     @Override
@@ -289,8 +322,11 @@ public class RunPhaseCriteria implements Serializable {
         runRunningStepId,
         documentId,
         personId,
+        organizationChartId,
         educationalModuleId,
-        finalNiazsanjiReportId
+        finalNiazsanjiReportId,
+        niazsanjiYear,
+        niazSanjiSource
         );
     }
 
@@ -316,9 +352,13 @@ public class RunPhaseCriteria implements Serializable {
                 (runRunningStepId != null ? "runRunningStepId=" + runRunningStepId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
+                (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
+                (niazsanjiYear != null ? "niazsanjiYear=" + niazsanjiYear + ", " : "") +
+                (niazSanjiSource != null ? "niazSanjiSource=" + niazSanjiSource + ", " : "") +
             "}";
     }
+
 
 }

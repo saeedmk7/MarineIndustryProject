@@ -55,6 +55,10 @@ public class OrganizationChartCriteria implements Serializable {
 
     private LongFilter finalNiazsanjiReportId;
 
+    private LongFilter designAndPlanningId;
+
+    private LongFilter runPhaseId;
+
     private LongFilter organizationChartAuthorityId;
 
     private LongFilter niazsanjiFardiId;
@@ -193,6 +197,22 @@ public class OrganizationChartCriteria implements Serializable {
         this.finalNiazsanjiReportId = finalNiazsanjiReportId;
     }
 
+    public LongFilter getDesignAndPlanningId() {
+        return designAndPlanningId;
+    }
+
+    public void setDesignAndPlanningId(LongFilter designAndPlanningId) {
+        this.designAndPlanningId = designAndPlanningId;
+    }
+
+    public LongFilter getRunPhaseId() {
+        return runPhaseId;
+    }
+
+    public void setRunPhaseId(LongFilter runPhaseId) {
+        this.runPhaseId = runPhaseId;
+    }
+
     public LongFilter getOrganizationChartAuthorityId() {
         return organizationChartAuthorityId;
     }
@@ -260,6 +280,8 @@ public class OrganizationChartCriteria implements Serializable {
             Objects.equals(requestOrganizationNiazsanjiId, that.requestOrganizationNiazsanjiId) &&
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
+            Objects.equals(designAndPlanningId, that.designAndPlanningId) &&
+            Objects.equals(runPhaseId, that.runPhaseId) &&
             Objects.equals(organizationChartAuthorityId, that.organizationChartAuthorityId) &&
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
             Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId) &&
@@ -286,6 +308,8 @@ public class OrganizationChartCriteria implements Serializable {
         requestOrganizationNiazsanjiId,
         finalOrganizationNiazsanjiId,
         finalNiazsanjiReportId,
+        designAndPlanningId,
+        runPhaseId,
         organizationChartAuthorityId,
         niazsanjiFardiId,
         requestNiazsanjiFardiId,
@@ -313,6 +337,8 @@ public class OrganizationChartCriteria implements Serializable {
                 (requestOrganizationNiazsanjiId != null ? "requestOrganizationNiazsanjiId=" + requestOrganizationNiazsanjiId + ", " : "") +
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
+                (designAndPlanningId != null ? "designAndPlanningId=" + designAndPlanningId + ", " : "") +
+                (runPhaseId != null ? "runPhaseId=" + runPhaseId + ", " : "") +
                 (organizationChartAuthorityId != null ? "organizationChartAuthorityId=" + organizationChartAuthorityId + ", " : "") +
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
                 (requestNiazsanjiFardiId != null ? "requestNiazsanjiFardiId=" + requestNiazsanjiFardiId + ", " : "") +

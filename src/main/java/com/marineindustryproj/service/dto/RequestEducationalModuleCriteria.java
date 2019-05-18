@@ -85,6 +85,10 @@ public class RequestEducationalModuleCriteria implements Serializable {
 
     private StringFilter changeStatusUserLogin;
 
+    private StringFilter goalsText;
+
+    private StringFilter teachersText;
+
     private LongFilter educationalModuleId;
 
     private LongFilter scientificWorkGroupId;
@@ -331,6 +335,22 @@ public class RequestEducationalModuleCriteria implements Serializable {
         this.changeStatusUserLogin = changeStatusUserLogin;
     }
 
+    public StringFilter getGoalsText() {
+        return goalsText;
+    }
+
+    public void setGoalsText(StringFilter goalsText) {
+        this.goalsText = goalsText;
+    }
+
+    public StringFilter getTeachersText() {
+        return teachersText;
+    }
+
+    public void setTeachersText(StringFilter teachersText) {
+        this.teachersText = teachersText;
+    }
+
     public LongFilter getEducationalModuleId() {
         return educationalModuleId;
     }
@@ -458,6 +478,8 @@ public class RequestEducationalModuleCriteria implements Serializable {
             Objects.equals(status, that.status) &&
             Objects.equals(requestStatus, that.requestStatus) &&
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
+            Objects.equals(goalsText, that.goalsText) &&
+            Objects.equals(teachersText, that.teachersText) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(scientificWorkGroupId, that.scientificWorkGroupId) &&
             Objects.equals(documentId, that.documentId) &&
@@ -502,6 +524,8 @@ public class RequestEducationalModuleCriteria implements Serializable {
         status,
         requestStatus,
         changeStatusUserLogin,
+        goalsText,
+        teachersText,
         educationalModuleId,
         scientificWorkGroupId,
         documentId,
@@ -547,6 +571,8 @@ public class RequestEducationalModuleCriteria implements Serializable {
                 (status != null ? "status=" + status + ", " : "") +
                 (requestStatus != null ? "requestStatus=" + requestStatus + ", " : "") +
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
+                (goalsText != null ? "goalsText=" + goalsText + ", " : "") +
+                (teachersText != null ? "teachersText=" + teachersText + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (scientificWorkGroupId != null ? "scientificWorkGroupId=" + scientificWorkGroupId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +

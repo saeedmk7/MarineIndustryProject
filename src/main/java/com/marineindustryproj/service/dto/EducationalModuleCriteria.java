@@ -73,6 +73,10 @@ public class EducationalModuleCriteria implements Serializable {
 
     private IntegerFilter status;
 
+    private StringFilter goalsText;
+
+    private StringFilter teachersText;
+
     private LongFilter educationalModuleJobId;
 
     private LongFilter requestOrganizationNiazsanjiId;
@@ -317,6 +321,22 @@ public class EducationalModuleCriteria implements Serializable {
         this.status = status;
     }
 
+    public StringFilter getGoalsText() {
+        return goalsText;
+    }
+
+    public void setGoalsText(StringFilter goalsText) {
+        this.goalsText = goalsText;
+    }
+
+    public StringFilter getTeachersText() {
+        return teachersText;
+    }
+
+    public void setTeachersText(StringFilter teachersText) {
+        this.teachersText = teachersText;
+    }
+
     public LongFilter getEducationalModuleJobId() {
         return educationalModuleJobId;
     }
@@ -529,6 +549,8 @@ public class EducationalModuleCriteria implements Serializable {
             Objects.equals(archivedUserLogin, that.archivedUserLogin) &&
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
+            Objects.equals(goalsText, that.goalsText) &&
+            Objects.equals(teachersText, that.teachersText) &&
             Objects.equals(educationalModuleJobId, that.educationalModuleJobId) &&
             Objects.equals(requestOrganizationNiazsanjiId, that.requestOrganizationNiazsanjiId) &&
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
@@ -581,6 +603,8 @@ public class EducationalModuleCriteria implements Serializable {
         archivedUserLogin,
         archivedDate,
         status,
+        goalsText,
+        teachersText,
         educationalModuleJobId,
         requestOrganizationNiazsanjiId,
         finalOrganizationNiazsanjiId,
@@ -634,6 +658,8 @@ public class EducationalModuleCriteria implements Serializable {
                 (archivedUserLogin != null ? "archivedUserLogin=" + archivedUserLogin + ", " : "") +
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
+                (goalsText != null ? "goalsText=" + goalsText + ", " : "") +
+                (teachersText != null ? "teachersText=" + teachersText + ", " : "") +
                 (educationalModuleJobId != null ? "educationalModuleJobId=" + educationalModuleJobId + ", " : "") +
                 (requestOrganizationNiazsanjiId != null ? "requestOrganizationNiazsanjiId=" + requestOrganizationNiazsanjiId + ", " : "") +
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
