@@ -144,11 +144,11 @@ export class TreeUtilities {
         }
         else {
             if(status == 0 && requestStatus == RequestStatus.NEW)
-                return "منتظر تایید مدیریت آموزش سازمان";
+                return "منتظر تصویب شوراء تربیت و آموزش سازمان";
             if(status == 0 && requestStatus == RequestStatus.IGNORE)
-                return "رد شده توسط مدیریت آموزش سازمان";
+                return "رد شده توسط شوراء تربیت و آموزش سازمان";
             if(status == 0 && requestStatus == RequestStatus.ACCEPT)
-                return "تایید نهایی";
+                return "تایید شوراء تربیت و آموزش سازمان (تایید نهایی)";
         }
     }
     onlyUnique(value, index, self) {

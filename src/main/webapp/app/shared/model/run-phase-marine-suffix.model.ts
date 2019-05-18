@@ -12,6 +12,7 @@ export interface IRunPhaseMarineSuffix {
     doneUserLogin?: string;
     doneDate?: Moment;
     runMonth?: number;
+    runMonthPersian?: string;
     createUserLogin?: string;
     createDate?: Moment;
     modifyUserLogin?: string;
@@ -39,6 +40,7 @@ export class RunPhaseMarineSuffix implements IRunPhaseMarineSuffix {
         public doneUserLogin?: string,
         public doneDate?: Moment,
         public runMonth?: number,
+        public runMonthPersian?: string,
         public createUserLogin?: string,
         public createDate?: Moment,
         public modifyUserLogin?: string,

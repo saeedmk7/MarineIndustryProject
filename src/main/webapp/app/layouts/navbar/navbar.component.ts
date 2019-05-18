@@ -109,7 +109,11 @@ export class NavbarComponent implements OnInit,AfterViewInit {
                                     navBarItemAddresses.push(a);
                                 });
                                 this.$localStorage.store(CURRENT_ALLOWED_URL_KEY, navBarItemAddresses);
-                                this.list_to_tree(this.navBarItemMarineSuffix.filter(a => a.isActive == true));
+
+                                this.list_to_tree(this.navBarItemMarineSuffix.filter(a => a.isActive == true).sort(function(a,b)
+                                {
+                                    return (a.displayOrder > b.displayOrder) ? 1 : ((b.displayOrder > a.displayOrder) ? -1 : 0);
+                                }));
                             })
                     },
                     (res: HttpErrorResponse) => this.onError(res.message))
@@ -126,6 +130,7 @@ export class NavbarComponent implements OnInit,AfterViewInit {
         }
         for (i = 0; i < list.length; i += 1) {
             node = list[i];
+            //node.displayOrder = node.displayOrder;
             node.parentId = node.parentId == null ? 0 : node.parentId;
             if (node.parentId !== 0) {
                 // if you have dangling branches check that map[node.parentId] exists

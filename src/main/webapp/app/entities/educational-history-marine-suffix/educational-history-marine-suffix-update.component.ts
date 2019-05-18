@@ -29,6 +29,7 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
     educationalmodules: IEducationalModuleMarineSuffix[];
     people: IPersonMarineSuffix[];
     targetPeople: IPersonMarineSuffix[];
+    mustSendOrgChartId: number;
     currentUserFullName: string;
     currentAccount: any;
     currentPerson: IPersonMarineSuffix;
@@ -142,11 +143,13 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
     findTargetPeople(){
         let organization = this.organizationCharts.find(a => a.id == this.currentPerson.organizationChartId);
         if(organization.parentId > 0) {
-            let neededOrgId: number = organization.parentId;
 
+            this.mustSendOrgChartId = this.treeUtilities.getRootId(this.organizationCharts ,this.currentPerson.organizationChartId); //organization.parentId;
+
+            //this.mustSendChartId = neededOrgId;
             let criteria = [{
                 key: 'organizationChartId.equals',
-                value: neededOrgId
+                value: this.mustSendOrgChartId
             }];
             this.personService.query({
                 page: 0,
@@ -166,6 +169,7 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
                 (error) => this.onError("فردی یافت نشد."));
         }
         else{
+            this.mustSendOrgChartId = 0;
             this.targetPeople = [];
             this.targetPeople.push(new PersonMarineSuffix(0, 'ثبت نهایی', 'ثبت نهایی', 'پرونده/سابقه آموزشی شما شما پس از ثبت برای کارشناس ارشد آموزش سازمان برای بازبینی ارسال می شود.'));
         }
@@ -220,11 +224,12 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
             if(!this.educationalHistory.personId)
                 this.educationalHistory.personId = this.currentPerson.id;
             this.educationalHistory.organizationChartId = this.currentPerson.organizationChartId;
-            let org = this.organizationCharts.find(a => a.id == this.currentPerson.organizationChartId);
+            /*let org = this.organizationCharts.find(a => a.id == this.currentPerson.organizationChartId);
             if(org.parentId > 0)
                 this.educationalHistory.status = org.parentId;
             else
-                this.educationalHistory.status = 0;
+                this.educationalHistory.status = 0;*/
+            this.educationalHistory.status = this.mustSendOrgChartId;
             this.educationalHistory.requestStatus = RequestStatus.NEW;
             this.educationalHistory.changeStatusUserLogin = this.currentAccount.login;
             this.educationalHistory.conversation = " درخواست توسط " + this.currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " ثبت شد. "

@@ -3,7 +3,7 @@
     "marineindustryprojApp": {
         "finalNiazsanjiReport" : {
             "home": {
-                "title": "لیست نیازسنجی های آماده برنامه ریزی و اجرا",
+                "title": "فهرست برنامه ریزی برای اجرا",
                 "createLabel": "جدید",
                 "createOrEditLabel": "جدید یا ویرایش گزارش پایانی نیازسنجی"
             },

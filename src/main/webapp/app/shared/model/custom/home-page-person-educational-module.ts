@@ -9,6 +9,7 @@ export interface IHomePagePersonEducationalModule {
     totalLearningTime?: number;
     status?: number;
     statusMeaning?: string;
+    educationalModuleType?: string;
     organizationTitle?: string;
     organizationId?: number;
     skillableLevelOfSkillTitle?: string;
@@ -26,6 +27,7 @@ export class HomePagePersonEducationalModule implements IHomePagePersonEducation
         public totalLearningTime?: number,
         public status?: number,
         public statusMeaning?: string,
+        public educationalModuleType?: string,
         public skillableLevelOfSkillTitle?: string,
         public skillableLevelOfSkillId?: number,
         public organizationTitle?: string,

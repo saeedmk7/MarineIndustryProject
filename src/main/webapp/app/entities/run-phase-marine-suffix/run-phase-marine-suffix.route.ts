@@ -19,15 +19,15 @@ export class RunPhaseMarineSuffixResolve implements Resolve<IRunPhaseMarineSuffi
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const id = route.params['id'] ? route.params['id'] : null;
-        /*if (id) {
+        if (id) {
             return this.service.find(id).pipe(map((runPhase: HttpResponse<RunPhaseMarineSuffix>) => runPhase.body));
         }
-        return of(new RunPhaseMarineSuffix());*/
+        return of(new RunPhaseMarineSuffix());
 
-        let runPhase: RunPhaseMarineSuffix = new RunPhaseMarineSuffix();
+        /*let runPhase: RunPhaseMarineSuffix = new RunPhaseMarineSuffix();
         runPhase.finalNiazsanjiReportId = id;
 
-        return runPhase;
+        return runPhase;*/
     }
 }
 

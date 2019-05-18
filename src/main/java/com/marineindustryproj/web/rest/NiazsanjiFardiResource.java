@@ -98,7 +98,7 @@ public class NiazsanjiFardiResource {
         niazsanjiFardiDTO.setCreateDate(niazsanjiFardi.getCreateDate());
         niazsanjiFardiDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
         niazsanjiFardiDTO.setModifyDate(ZonedDateTime.now());
-        niazsanjiFardiDTO.setStatus(20);
+        niazsanjiFardiDTO.setStatus(30);
         niazsanjiFardiDTO.setChangeStatusUserLogin(SecurityUtils.getCurrentUserLogin().get());
 
         NiazsanjiFardiDTO result = niazsanjiFardiService.finalize(niazsanjiFardiDTO);

@@ -275,10 +275,10 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         this.finalOrganizationNiazsanjiService.find(mymodel.id).subscribe((resp) => {
             let model = resp.body;
 
-            if (confirm("آیا از اجرا کردن دوره متمرکز مورد نظر مطمئنید.")) {
+            if (confirm("آیا از اجرا کردن نیازسنجی پودمان سازمانی (متمرکز و گروهی) مورد نظر مطمئنید.")) {
 
                 this.finalOrganizationNiazsanjiService.finalize(model).subscribe(
-                    (res: HttpResponse<IFinalOrganizationNiazsanjiMarineSuffix>) => this.onSuccess("دوره متمرکز مورد نظر شما به مرحله اجرا وارد شد."),
+                    (res: HttpResponse<IFinalOrganizationNiazsanjiMarineSuffix>) => this.onSuccess("نیازسنجی پودمان سازمانی (متمرکز و گروهی) مورد نظر شما به مرحله اجرا وارد شد."),
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
             }

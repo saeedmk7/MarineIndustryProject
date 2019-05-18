@@ -36,6 +36,7 @@ export class RequestNiazsanjiFardiMarineSuffixDetailComponent implements OnInit 
     allLevel: string;
     rows: number = 0;
     organizationcharts: IOrganizationChartMarineSuffix[];
+    hasNoRow:boolean = false;
 
     constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute,
         private convertObjectDatesService : ConvertObjectDatesService,
@@ -125,7 +126,7 @@ export class RequestNiazsanjiFardiMarineSuffixDetailComponent implements OnInit 
                 (error) => this.onError("موردی یافت نشد"));
         }
     }
-    hasNoRow:boolean = false;
+
     showEducations(resp: IFinalNiazsanjiReportPersonMarineSuffix[]){
 
         if(resp.length) {
@@ -145,7 +146,7 @@ export class RequestNiazsanjiFardiMarineSuffixDetailComponent implements OnInit 
                 sort: ["id", "asc"]
             }).subscribe((resp: HttpResponse<IFinalNiazsanjiReportMarineSuffix[]>) => {
 
-                    this.finalNiazsanjiReports = resp.body
+                    this.finalNiazsanjiReports = resp.body;
                 },
                 (error) => this.onError("موردی یافت نشد"));
         }

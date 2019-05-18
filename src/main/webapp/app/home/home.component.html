@@ -40,28 +40,32 @@
                                 <th>ردیف</th>
                                 <th><span jhiTranslate="marineindustryprojApp.educationalModule.code">Code</span></th>
                                 <th><span jhiTranslate="marineindustryprojApp.educationalModule.title">Title</span></th>
-                                <th><span>مدت کل پودمان</span></fa-icon></th>
-                                <th><span jhiTranslate="marineindustryprojApp.educationalModule.organization">Organization</span> </th>
+                                <th><span>مدت کل پودمان</span></th>
+                                <!--<th><span jhiTranslate="marineindustryprojApp.educationalModule.organization">Organization</span> </th>-->
                                 <th><span jhiTranslate="marineindustryprojApp.educationalModule.skillableLevelOfSkill">Skillable Level Of Skill</span></th>
+                                <th><span>نوع پودمان</span></th>
                                 <th>وضعیت</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr *ngFor="let educationalModule of homePagePersonEducationalModules; let i = index;"
-                                [ngClass]="{'success': educationalModule.status == 100, 'info': educationalModule.status == 90, 'warning': educationalModule.status == 80, 'danger': educationalModule.status == 0}">
+                                [ngClass]="{'success': educationalModule.status == 100, 'info': educationalModule.status == 90, 'warning': educationalModule.status == 80, 'light': educationalModule.status == 70, 'danger': educationalModule.status == 0}">
                                 <td>{{i+1}}</td>
                                 <td>{{educationalModule.code}}</td>
                                 <td>{{educationalModule.title}}</td>
                                 <td>{{educationalModule.totalLearningTime | number}}</td>
-                                <td>
+                                <!--<td>
                                     <div *ngIf="educationalModule.organizationId">
                                         <a [routerLink]="['../organization-marine-suffix', educationalModule.organizationId , 'view' ]" >{{educationalModule.organizationTitle}}</a>
                                     </div>
-                                </td>
+                                </td>-->
                                 <td>
                                     <div *ngIf="educationalModule.skillableLevelOfSkillId">
                                         <a [routerLink]="['../skillable-level-of-skill-marine-suffix', educationalModule.skillableLevelOfSkillId , 'view' ]" >{{educationalModule.skillableLevelOfSkillTitle}}</a>
                                     </div>
+                                </td>
+                                <td>
+                                    {{educationalModule.educationalModuleType}}
                                 </td>
                                 <td>
                                     {{educationalModule.statusMeaning}}
@@ -85,8 +89,8 @@
                     <table class="table table-striped  table-bordered table-hover table-sm">
                         <thead>
                         <tr >
-                            <th><span>درخواست های نیازسنجی فردی</span> </th>
-                            <th><span>درخواست های نیازسنجی فردی نهایی شده</span></th>
+                            <th><span>درخواست های نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی</span> </th>
+                            <th><span>درخواست های نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی نهایی شده</span></th>
                             <th><span>درخواست های نیازسنجی سازمانی</span> </th>
                             <th><span>درخواست های نیازسنجی سازمانی نهایی شده</span></th>
                             <th><span>درخواست های نیازسنجی در حال برنامه ریزی</span></th>
@@ -122,13 +126,13 @@
                                     <td>
                                         <a class="HomeBox" href="#/request-niazsanji-fardi-marine-suffix" style="opacity: 1;background-color: orangered;">
                                             <img src="../../content/images/home/man.png">
-                                            <div class="HomeBoxTitle">درخواست نیازسنجی فردی</div>
+                                            <div class="HomeBoxTitle">درخواست نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی</div>
                                         </a>
                                     </td>
                                     <td>
                                         <a class="HomeBox" href="#/niazsanji-fardi-marine-suffix" style="opacity: 1;background-color: darkseagreen;">
                                             <img src="../../content/images/home/archives.png">
-                                            <div class="HomeBoxTitle">فهرست نهایی شده نیازسنجی فردی</div>
+                                            <div class="HomeBoxTitle">فهرست نهایی شده نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی</div>
                                         </a>
                                     </td>
 
@@ -137,13 +141,13 @@
                                     <td>
                                         <a class="HomeBox" href="#/request-organization-niazsanji-marine-suffix" style="opacity: 1;    background-color: darkslateblue;">
                                             <img src="../../content/images/home/teamwork.png">
-                                            <div class="HomeBoxTitle">تعریف دوره های متمرکز</div>
+                                            <div class="HomeBoxTitle">تعریف نیازسنجی های پودمان سازمانی (متمرکز و گروهی)</div>
                                         </a>
                                     </td>
                                     <td>
                                         <a class="HomeBox" href="#/final-organization-niazsanji-marine-suffix" style="opacity: 1;background-color: mediumseagreen;">
                                             <img src="../../content/images/home/archives.png">
-                                            <div class="HomeBoxTitle">فهرست نهایی شده دوره های متمرکز</div>
+                                            <div class="HomeBoxTitle">فهرست نهایی شده نیازسنجی های پودمان سازمانی (متمرکز و گروهی)</div>
                                         </a>
                                     </td>
                                 </tr>

@@ -42,6 +42,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
     private final FinalNiazsanjiReportRepository finalNiazsanjiReportRepository;
 
+    private final FinalNiazsanjiReportQueryService finalNiazsanjiReportQueryService;
+
     private final FinalNiazsanjiReportMapper finalNiazsanjiReportMapper;
 
     private final NiazsanjiGroupService niazsanjiGroupService;
@@ -104,7 +106,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                                            EmploymentTypeService employmentTypeService,
                                            FinalNiazsanjiReportPersonService finalNiazsanjiReportPersonService,
                                            OrganizationChartQueryService organizationChartQueryService,
-                                           FinalNiazsanjiReportPersonQueryService finalNiazsanjiReportPersonQueryService,
+                                           FinalNiazsanjiReportQueryService finalNiazsanjiReportQueryService, FinalNiazsanjiReportPersonQueryService finalNiazsanjiReportPersonQueryService,
                                            OrganizationChartRepository organizationChartRepository,
                                            OrganizationChartMapper organizationChartMapper,
                                            RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService,
@@ -129,6 +131,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         this.educationalModuleService = educationalModuleService;
         this.employmentTypeService = employmentTypeService;
         this.finalNiazsanjiReportPersonService = finalNiazsanjiReportPersonService;
+        this.finalNiazsanjiReportQueryService = finalNiazsanjiReportQueryService;
         this.finalNiazsanjiReportPersonQueryService = finalNiazsanjiReportPersonQueryService;
         this.organizationChartRepository = organizationChartRepository;
         this.organizationChartMapper = organizationChartMapper;
@@ -508,17 +511,69 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             LongFilter jobIdFilter = new LongFilter();
             jobIdFilter.setEquals(person.get().getJob().getId());
 
+
+            EducationalHistoryCriteria educationalHistoryCriteria = new EducationalHistoryCriteria();
+            educationalHistoryCriteria.setPersonId(personIdFilter);
+
+            EducationalHistoryCriteria.RequestStatusFilter requestStatusFilter = new EducationalHistoryCriteria.RequestStatusFilter();
+            requestStatusFilter.setEquals(RequestStatus.ACCEPT);
+            educationalHistoryCriteria.setRequestStatus(requestStatusFilter);
+
+            List<EducationalHistoryDTO> educationalHistoryDTOS = educationalHistoryQueryService.findByCriteria(educationalHistoryCriteria);
+
+            for (EducationalHistoryDTO educationalHistoryDTO : educationalHistoryDTOS) {
+                Integer status = 100; //getEducationalModuleStatus(educationalModule, personIdFilter);
+
+                HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(educationalHistoryDTO, status);
+                report.add(homePagePersonEducationalModule);
+            }
+
+            FinalNiazsanjiReportPersonCriteria finalNiazsanjiReportPersonCriteria = new FinalNiazsanjiReportPersonCriteria();
+            finalNiazsanjiReportPersonCriteria.setPersonId(personIdFilter);
+
+            List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPersonDTOS = finalNiazsanjiReportPersonQueryService.findByCriteria(finalNiazsanjiReportPersonCriteria);
+            long[] finalIds = finalNiazsanjiReportPersonDTOS.stream().mapToLong(a -> a.getFinalNiazsanjiReportId()).toArray();
+
+            FinalNiazsanjiReportCriteria finalNiazsanjiReportCriteria = new FinalNiazsanjiReportCriteria();
+            LongFilter finalIdFilter = new LongFilter();
+            List<Long> listFinalIds = new ArrayList<>();
+
+            for(long finalId: finalIds){
+                listFinalIds.add(finalId);
+            }
+            finalIdFilter.setIn(listFinalIds);
+            finalNiazsanjiReportCriteria.setFinalNiazsanjiReportPersonId(finalIdFilter);
+
+            List<FinalNiazsanjiReportDTO> finalNiazsanjiReportDTOS = finalNiazsanjiReportQueryService.findByCriteria(finalNiazsanjiReportCriteria);
+
+            for (FinalNiazsanjiReportDTO finalNiazsanjiReportDTO : finalNiazsanjiReportDTOS) {
+                //Integer status = getEducationalModuleStatus(finalNiazsanjiReportDTO, personIdFilter);
+                if(report.stream().filter(a -> a.getTitle().equals(finalNiazsanjiReportDTO.getEducationalModuleTitle())).count() == 0){
+                    HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(finalNiazsanjiReportDTO);
+                    report.add(homePagePersonEducationalModule);
+                }
+            }
+
             EducationalModuleJobCriteria educationalModuleJobCriteria = new EducationalModuleJobCriteria();
             educationalModuleJobCriteria.setJobId(jobIdFilter);
+
             List<EducationalModuleJobDTO> educationalModuleJobDTOS = educationalModuleJobQueryService.findByCriteria(educationalModuleJobCriteria);
             long[] educationalIds = educationalModuleJobDTOS.stream().mapToLong(a -> a.getEducationalModuleId()).toArray();
             List<EducationalModuleMinDTO> educationalModules = educationalModuleService.findAllFromCache().stream().filter(a -> Arrays.stream(educationalIds).anyMatch(w -> w == a.getId())).collect(Collectors.toList());
 
             for (EducationalModuleMinDTO educationalModule : educationalModules) {
-                Integer status = getEducationalModuleStatus(educationalModule, personIdFilter);
+                if(report.stream().filter(a -> a.getTitle().equals(educationalModule.getTitle())).count() == 0) {
+                    Integer status = 0; //getEducationalModuleStatus(educationalModule, personIdFilter);
 
-                HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(educationalModule, status);
-                report.add(homePagePersonEducationalModule);
+                    HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(educationalModule, status);
+                    report.add(homePagePersonEducationalModule);
+                }
+                else{
+                    HomePagePersonEducationalModule homePagePersonEducationalModule = report.stream().filter(a -> a.getTitle().equals(educationalModule.getTitle())).findFirst().get();
+                    report.remove(homePagePersonEducationalModule);
+                    homePagePersonEducationalModule.setEducationalModuleType("از شناسنامه شغلی");
+                    report.add(homePagePersonEducationalModule);
+                }
             }
         }
         return report;

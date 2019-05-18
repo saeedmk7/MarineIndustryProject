@@ -15,14 +15,17 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.runPhase.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.runPhase.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleId"><span jhiTranslate="marineindustryprojApp.runPhase.educationalModuleId">Educational Module Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th><span jhiTranslate="marineindustryprojApp.runPhase.people">People</span></th>
+            <!--<th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.runPhase.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="finalizeCost"><span jhiTranslate="marineindustryprojApp.runPhase.finalizeCost">Finalize Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="stepNumber"><span jhiTranslate="marineindustryprojApp.runPhase.stepNumber">Step Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="stepNumber"><span jhiTranslate="marineindustryprojApp.runPhase.stepNumber">Step Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="done"><span jhiTranslate="marineindustryprojApp.runPhase.done">Done</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="doneUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.doneUserLogin">Done User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="doneDate"><span jhiTranslate="marineindustryprojApp.runPhase.doneDate">Done Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="doneUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.doneUserLogin">Done User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="doneDate"><span jhiTranslate="marineindustryprojApp.runPhase.doneDate">Done Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="runMonth"><span jhiTranslate="marineindustryprojApp.runPhase.runMonth">Run Month</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.runPhase.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.runPhase.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -30,39 +33,40 @@
             <th jhiSortBy="archivedUserLogin"><span jhiTranslate="marineindustryprojApp.runPhase.archivedUserLogin">Archived User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="archivedDate"><span jhiTranslate="marineindustryprojApp.runPhase.archivedDate">Archived Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.runPhase.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.runPhase.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="finalNiazsanjiReportDescription"><span jhiTranslate="marineindustryprojApp.runPhase.finalNiazsanjiReport">Final Niazsanji Report</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="finalNiazsanjiReportDescription"><span jhiTranslate="marineindustryprojApp.runPhase.finalNiazsanjiReport">Final Niazsanji Report</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let runPhase of runPhases ;trackBy: trackId">
                 <td><a [routerLink]="['/run-phase-marine-suffix', runPhase.id, 'view' ]">{{runPhase.id}}</a></td>
-                <td>{{runPhase.description}}</td>
+                <td>
+                    {{runPhase.educationalModuleTitle}}
+                </td>
+                <td>
+                    {{runPhase.educationalModuleId}}
+                </td>
+                <!--<td>{{runPhase.description}}</td>-->
                 <td>{{runPhase.finalizeCost}}</td>
-                <td>{{runPhase.stepNumber}}</td>
+                <!--<td>{{runPhase.stepNumber}}</td>-->
                 <td>{{runPhase.done}}</td>
-                <td>{{runPhase.doneUserLogin}}</td>
-                <td>{{runPhase.doneDate | date:'medium'}}</td>
-                <td>{{runPhase.runMonth}}</td>
-                <td>{{runPhase.createUserLogin}}</td>
+                <!--<td>{{runPhase.doneUserLogin}}</td>
+                <td>{{runPhase.doneDate | date:'medium'}}</td>-->
+                <td>{{runPhase.runMonthPersian}}</td>
+                <!--<td>{{runPhase.createUserLogin}}</td>
                 <td>{{runPhase.createDate | date:'medium'}}</td>
                 <td>{{runPhase.modifyUserLogin}}</td>
                 <td>{{runPhase.modifyDate | date:'medium'}}</td>
                 <td>{{runPhase.archived}}</td>
                 <td>{{runPhase.archivedUserLogin}}</td>
-                <td>{{runPhase.archivedDate | date:'medium'}}</td>
-                <td>{{runPhase.status}}</td>
-                <td>
-                    <div *ngIf="runPhase.educationalModuleId">
-                        <a [routerLink]="['../educational-module-marine-suffix', runPhase.educationalModuleId , 'view' ]" >{{runPhase.educationalModuleTitle}}</a>
-                    </div>
-                </td>
-                <td>
+                <td>{{runPhase.archivedDate | date:'medium'}}</td>-->
+                <!--<td>{{runPhase.status}}</td>-->
+
+                <!--<td>
                     <div *ngIf="runPhase.finalNiazsanjiReportId">
                         <a [routerLink]="['../final-niazsanji-report-marine-suffix', runPhase.finalNiazsanjiReportId , 'view' ]" >{{runPhase.finalNiazsanjiReportDescription}}</a>
                     </div>
-                </td>
+                </td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
@@ -89,12 +93,30 @@
                 </td>
             </tr>
             </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="3">
+
+                </td>
+            </tr>
+
+            </tfoot>
         </table>
     </div>
     <div *ngIf="runPhases && runPhases.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
         <div class="row justify-content-center">
             <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>

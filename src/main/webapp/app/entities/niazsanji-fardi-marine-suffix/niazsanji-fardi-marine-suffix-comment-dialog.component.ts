@@ -119,13 +119,27 @@ export class NiazsanjiFardiMarineSuffixCommentDialogComponent implements OnInit 
                         break;
                     case 'ACCEPT':
 
-                        requestNiazsanjiFardi.conversation += " تایید درخواست توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
-                        if (this.comment) {
-                            requestNiazsanjiFardi.conversation += "\n";
-                            requestNiazsanjiFardi.conversation += currentUserFullName + ": " + this.comment;
-                        }
-                        if (this.isKarshenasArshadAmozesh) {
+
+                        if (this.isKarshenasArshadAmozesh && this.niazsanjiFardi.status == 0) {
+                            requestNiazsanjiFardi.conversation += " تایید درخواست توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
+                            if (this.comment) {
+                                requestNiazsanjiFardi.conversation += "\n";
+                                requestNiazsanjiFardi.conversation += currentUserFullName + ": " + this.comment;
+                            }
                             this.niazsanjiFardi.status = 10;
+                            this.niazsanjiFardi.changeStatusUserLogin = this.currentAccount.login;
+                            this.requestNiazsanjiFardiService.update(requestNiazsanjiFardi).subscribe(
+                                (res: HttpResponse<IRequestNiazsanjiFardiMarineSuffix>) => this.onSaveSuccess(),
+                                (res: HttpErrorResponse) => this.onSaveError(res)
+                            );
+                        }
+                        else if(this.isModirKolAmozesh && this.niazsanjiFardi.status == 10) {
+                            requestNiazsanjiFardi.conversation += " تایید درخواست توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
+                            if (this.comment) {
+                                requestNiazsanjiFardi.conversation += "\n";
+                                requestNiazsanjiFardi.conversation += currentUserFullName + ": " + this.comment;
+                            }
+                            this.niazsanjiFardi.status = 20;
                             this.niazsanjiFardi.changeStatusUserLogin = this.currentAccount.login;
                             this.requestNiazsanjiFardiService.update(requestNiazsanjiFardi).subscribe(
                                 (res: HttpResponse<IRequestNiazsanjiFardiMarineSuffix>) => this.onSaveSuccess(),
@@ -134,6 +148,11 @@ export class NiazsanjiFardiMarineSuffixCommentDialogComponent implements OnInit 
                         }
                         else {
                             if(this.niazsanjiFardi.niazsanjiYear) {
+                                requestNiazsanjiFardi.conversation += " تایید نهایی و تصویب شوراء تربیت و آموزش سازمان توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
+                                if (this.comment) {
+                                    requestNiazsanjiFardi.conversation += "\n";
+                                    requestNiazsanjiFardi.conversation += currentUserFullName + ": " + this.comment;
+                                }
                                 requestNiazsanjiFardi.requestStatus = RequestStatus.ACCEPT;
                                 this.requestNiazsanjiFardiService.update(requestNiazsanjiFardi).subscribe(
                                     (res: HttpResponse<IRequestNiazsanjiFardiMarineSuffix>) => this.onSaveSuccess(),

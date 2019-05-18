@@ -6,6 +6,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { INavBarItemMarineSuffix } from 'app/shared/model/nav-bar-item-marine-suffix.model';
 import { Principal } from 'app/core';
 import { NavBarItemMarineSuffixService } from './nav-bar-item-marine-suffix.service';
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 
 @Component({
     selector: 'mi-nav-bar-item-marine-suffix',
@@ -20,13 +21,18 @@ export class NavBarItemMarineSuffixComponent implements OnInit, OnDestroy {
         private navBarItemService: NavBarItemMarineSuffixService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private convertObjectDatesService: ConvertObjectDatesService
     ) {}
 
     loadAll() {
         this.navBarItemService.query().subscribe(
             (res: HttpResponse<INavBarItemMarineSuffix[]>) => {
-                this.navBarItems = res.body;
+                this.navBarItems = this.convertObjectDatesService.changeArrayDate(res.body);
+                this.navBarItems.sort(function(a,b)
+                {
+                    return (a.displayOrder > b.displayOrder) ? 1 : ((b.displayOrder > a.displayOrder) ? -1 : 0);
+                });
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

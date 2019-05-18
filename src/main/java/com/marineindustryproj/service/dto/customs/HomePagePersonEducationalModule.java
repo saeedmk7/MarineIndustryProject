@@ -1,8 +1,53 @@
 package com.marineindustryproj.service.dto.customs;
 
+import com.marineindustryproj.domain.EducationalHistory;
+import com.marineindustryproj.domain.EducationalModule;
+import com.marineindustryproj.domain.FinalNiazsanjiReport;
+import com.marineindustryproj.service.EducationalModuleService;
+import com.marineindustryproj.service.dto.EducationalHistoryDTO;
 import com.marineindustryproj.service.dto.EducationalModuleDTO;
+import com.marineindustryproj.service.dto.FinalNiazsanjiReportDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Optional;
 
 public class HomePagePersonEducationalModule {
+
+    @Autowired
+    private EducationalModuleService educationalModuleService;
+
+    public HomePagePersonEducationalModule(FinalNiazsanjiReportDTO finalNiazsanjiReportDTO) {
+        if(finalNiazsanjiReportDTO.getEducationalModuleId() != null)
+        {
+            Optional<EducationalModuleDTO> educationalModuleDTOOptional = educationalModuleService.findOne(finalNiazsanjiReportDTO.getEducationalModuleId());
+            if(educationalModuleDTOOptional.isPresent()) {
+                EducationalModuleDTO educationalModuleDTO = educationalModuleDTOOptional.get();
+                this.id = educationalModuleDTO.getId();
+                this.title = educationalModuleDTO.getTitle();
+                this.code = educationalModuleDTO.getCode();
+                this.learningTimePractical = educationalModuleDTO.getLearningTimePractical();
+                this.learningTimeTheorical = educationalModuleDTO.getLearningTimeTheorical();
+                this.organizationId = educationalModuleDTO.getOrganizationId();
+                this.organizationTitle = educationalModuleDTO.getOrganizationTitle();
+                this.skillableLevelOfSkillId = educationalModuleDTO.getSkillableLevelOfSkillId();
+                this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
+                this.educationalModuleType = "از کلیه پودمان ها";
+            }
+        }
+        switch (finalNiazsanjiReportDTO.getStatus())
+        {
+            case 0:
+                this.status = 70;
+                break;
+            case 10:
+                this.status = 80;
+                break;
+            case 20:
+                this.status = 90;
+                break;
+        }
+        this.status = status;
+    }
 
     public HomePagePersonEducationalModule(EducationalModuleMinDTO educationalModuleMinDTO, Integer status) {
         this.id = educationalModuleMinDTO.getId();
@@ -14,6 +59,7 @@ public class HomePagePersonEducationalModule {
         this.organizationTitle = educationalModuleMinDTO.getOrganizationTitle();
         this.skillableLevelOfSkillId = educationalModuleMinDTO.getSkillableLevelOfSkillId();
         this.skillableLevelOfSkillTitle = educationalModuleMinDTO.getSkillableLevelOfSkillTitle();
+        this.educationalModuleType = "از شناسنامه شغلی";
         this.status = status;
     }
     public HomePagePersonEducationalModule(EducationalModuleDTO educationalModuleDTO, Integer status) {
@@ -26,6 +72,27 @@ public class HomePagePersonEducationalModule {
         this.organizationTitle = educationalModuleDTO.getOrganizationTitle();
         this.skillableLevelOfSkillId = educationalModuleDTO.getSkillableLevelOfSkillId();
         this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
+        this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
+        this.educationalModuleType = "از شناسنامه شغلی";
+        this.status = status;
+    }
+    public HomePagePersonEducationalModule(EducationalHistoryDTO educationalHistoryDTO, Integer status) {
+        this.id = educationalHistoryDTO.getId();
+        this.title = educationalHistoryDTO.getEducationalModuleName();
+        this.learningTimePractical = educationalHistoryDTO.getLearningTimePractical();
+        this.learningTimeTheorical = educationalHistoryDTO.getLearningTimeTheorical();
+
+        if(educationalHistoryDTO.getEducationalModuleId() != null) {
+            this.code = educationalHistoryDTO.getEducationalModuleId().toString();
+            Optional<EducationalModuleDTO> educationalModuleDTO = educationalModuleService.findOne(educationalHistoryDTO.getEducationalModuleId());
+            if(educationalModuleDTO.isPresent()){
+                this.skillableLevelOfSkillId = educationalModuleDTO.get().getSkillableLevelOfSkillId();
+                this.skillableLevelOfSkillTitle = educationalModuleDTO.get().getSkillableLevelOfSkillTitle();
+                this.organizationId = educationalModuleDTO.get().getOrganizationId();
+                this.organizationTitle = educationalModuleDTO.get().getOrganizationTitle();
+                this.educationalModuleType = "از کلیه پودمان ها";
+            }
+        }
         this.status = status;
     }
     private Long id;
@@ -45,6 +112,8 @@ public class HomePagePersonEducationalModule {
     private Long organizationId;
 
     private String organizationTitle;
+
+    private String educationalModuleType;
 
     private Integer status;
 
@@ -134,5 +203,13 @@ public class HomePagePersonEducationalModule {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getEducationalModuleType() {
+        return educationalModuleType;
+    }
+
+    public void setEducationalModuleType(String educationalModuleType) {
+        this.educationalModuleType = educationalModuleType;
     }
 }

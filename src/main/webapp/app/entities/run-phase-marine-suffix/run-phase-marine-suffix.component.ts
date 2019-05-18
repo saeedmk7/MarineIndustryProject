@@ -9,6 +9,8 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { RunPhaseMarineSuffixService } from './run-phase-marine-suffix.service';
+import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
+import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 
 @Component({
     selector: 'mi-run-phase-marine-suffix',
@@ -17,6 +19,8 @@ import { RunPhaseMarineSuffixService } from './run-phase-marine-suffix.service';
 export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy {
     currentAccount: any;
     runPhases: IRunPhaseMarineSuffix[];
+    educationalModules: IEducationalModuleMarineSuffix[];
+    people: IPersonMarineSuffix[];
     error: any;
     success: any;
     eventSubscriber: Subscription;

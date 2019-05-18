@@ -238,7 +238,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                            a.statusMeaning = "در حال اجرا دوره";
                            break;
                        case 80:
-                           a.statusMeaning = "در حال طراحی و برنامه ریزی دوره";
+                           a.statusMeaning = "در حال برنامه ریزی برای اجرا دوره";
                            break;
                        case 0:
                            a.statusMeaning = "باقیمانده";
@@ -307,7 +307,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                     y: res.passed,
                     color: '#71f056'
                 }, {
-                    name: 'در حال طراحی و برنامه ریزی',
+                    name: 'در حال برنامه ریزی برای اجرا',
                     y: res.designAndPlanning,
                     color: '#fcea63'
                 }, {

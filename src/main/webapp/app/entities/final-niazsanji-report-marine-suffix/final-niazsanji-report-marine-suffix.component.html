@@ -28,14 +28,14 @@
             </a>
             <div id="collapseExample">
                 <div class="card-body">
-                    <div class="form-group">
+                    <div class="form-group bighalf">
                         <label class="form-control-label">منبع نیازسنجی</label>
                         <div class="form-control">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="true" [(ngModel)]="niazSanjiSource">نیازسنجی فردی
+                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="true" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی
                             </label>
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="false" [(ngModel)]="niazSanjiSource">نیازسنجی متمرکز
+                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="false" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان سازمانی (متمرکز و گروهی)
                             </label>
                         </div>
 
@@ -187,8 +187,8 @@
                     </kendo-buttongroup>
                 </ng-template>
             </kendo-grid-column>
-            <kendo-grid-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="200"></kendo-grid-column>
-            <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="200"></kendo-grid-column>
+            <kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="250"></kendo-grid-column>
+            <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="90"></kendo-grid-column>
             <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>
@@ -203,7 +203,7 @@
                     kendoGridFooterTemplate
                     let-column="column">جمع کل (نفر ساعت): {{total | number}}</ng-template>
             </kendo-grid-column>
-            <kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="200"></kendo-grid-column>
+
             <kendo-grid-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="200"></kendo-grid-column>
             <kendo-grid-column field="priceCost" type="number" title="هزینه اولیه" [width]="100">
                 <ng-template
@@ -212,7 +212,7 @@
             </kendo-grid-column>
             <kendo-grid-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
-
+            <kendo-grid-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="500"></kendo-grid-column>
             <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
                 <kendo-excelexport-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
@@ -277,7 +277,6 @@
                     </kendo-buttongroup>
                 </ng-template>
             </kendo-grid-column>
-            <kendo-grid-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="200"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="200"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="100"></kendo-grid-column>
@@ -305,7 +304,7 @@
             <div *kendoGridDetailTemplate="let dataItem">
                 <mi-final-niazsanji-report-marine-suffix-detail-people [people]="dataItem.people"></mi-final-niazsanji-report-marine-suffix-detail-people>
             </div>
-
+            <kendo-grid-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="500"></kendo-grid-column>
             <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
                 <kendo-excelexport-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>

@@ -2,7 +2,7 @@
     "marineindustryprojApp": {
         "NiazSanjiSource" : {
             "null": "",
-            "FARDI": "نیازسنجی فردی",
+            "FARDI": "نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی",
             "GROUP": "نیازسنجی گروهی",
             "ORGANIZATION": "نیازسنجی سازمانی"
         }

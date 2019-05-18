@@ -3,32 +3,33 @@
     "marineindustryprojApp": {
         "navBarItem" : {
             "home": {
-                "title": "Nav Bar Items",
-                "createLabel": "Create a new Nav Bar Item",
-                "createOrEditLabel": "Create or edit a Nav Bar Item"
+                "title": "مدیریت منوها",
+                "createLabel": "جدید",
+                "createOrEditLabel": "ایجاد یا ویرایش منو"
             },
-            "created": "A new Nav Bar Item is created with identifier {{ param }}",
-            "updated": "A Nav Bar Item is updated with identifier {{ param }}",
-            "deleted": "A Nav Bar Item is deleted with identifier {{ param }}",
+            "created": "منو با شناسه {{ param }} ایجاد شد.",
+            "updated": "منو با شناسه {{ param }} ویرایش شد.",
+            "deleted": "منو با شناسه {{ param }} حذف شد.",
             "delete": {
-                "question": "Are you sure you want to delete Nav Bar Item {{ id }}?"
+                "question": "آیا از حذف منو با شناسه {{ id }} مطمئنید؟"
             },
             "detail": {
-                "title": "Nav Bar Item"
+                "title": "جزئیات اطلاعات منو"
             },
-            "title": "Title",
-            "code": "Code",
-            "description": "Description",
-            "url": "Url",
-            "faicon": "Faicon",
-            "isActive": "Is Active",
-            "createUserLogin": "Create User Login",
-            "createDate": "Create Date",
-            "modifyUserLogin": "Modify User Login",
-            "modifyDate": "Modify Date",
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "url": "آدرس",
+            "displayOrder": "ترتیب نمایش",
+            "faicon": "شکلک",
+            "isActive": "فعال؟",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
             "navBarItem": "Nav Bar Item",
             "navBarItemAuthority": "Nav Bar Item Authority",
-            "parent": "Parent"
+            "parent": "منو پدر"
         }
     }
 }

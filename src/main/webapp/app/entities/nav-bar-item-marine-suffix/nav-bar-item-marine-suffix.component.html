@@ -39,7 +39,7 @@
                 <td>{{navBarItem.isActive}}</td>
                 <td>{{navBarItem.displayOrder}}</td>
                 <td>{{navBarItem.createUserLogin}}</td>
-                <td>{{navBarItem.createDate | date:'medium'}}</td>
+                <td>{{navBarItem.createDate}}</td>
                 <td>
                     <div *ngIf="navBarItem.parentId">
                         <a [routerLink]="['../nav-bar-item-marine-suffix', navBarItem.parentId , 'view' ]" >{{navBarItem.parentTitle}}</a>

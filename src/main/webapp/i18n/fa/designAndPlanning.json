@@ -3,9 +3,9 @@
     "marineindustryprojApp": {
         "designAndPlanning" : {
             "home": {
-                "title": "فهرست طراحی و برنامه ریزی های انجام شده برای شما",
+                "title": "فهرست برنامه ریزی برای اجرا های انجام شده برای شما",
                 "createLabel": "جدید",
-                "createOrEditLabel": "تکمیل فرآیند طراحی و برنامه ریزی آموزشی"
+                "createOrEditLabel": "تکمیل فرآیند برنامه ریزی برای اجرا آموزشی"
             },
             "created": "برنامه ریزی با شناسه {{ param }} ایجاد شد.",
             "updated": "برنامه ریزی با شناسه {{ param }} ویرایش شد.",

@@ -4,8 +4,57 @@
             <h2><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.detail.title">Request Niazsanji Fardi</span> {{requestNiazsanjiFardi.id}}</h2>
             <mi-alert-error></mi-alert-error>
             <dl class="row-md jh-entity-details">
-
-                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اولیه نیازسنجی</div></div>
+                <div class="dropdown-divider pt-3 mt-4">
+                    <div class="divider-title" *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">اطلاعات پودمان درخواستی <strong> از شناسنامه شغلی</strong></div>
+                    <div class="divider-title" *ngIf="requestNiazsanjiFardi.allEducationalModuleId">اطلاعات پودمان درخواستی <strong> از کلیه پودمان ها</strong></div>
+                </div>
+                <dt><span>نوع پودمان</span></dt>
+                <dd *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
+                    از شناسنامه شغلی
+                </dd>
+                <dd *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
+                    از کلیه پودمان ها
+                </dd>
+                <dt><span>عنوان پودمان</span></dt>
+                <dd *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
+                    {{requestNiazsanjiFardi.approvedEducationalModuleTitle}}
+                </dd>
+                <dd *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
+                    {{requestNiazsanjiFardi.allEducationalModuleTitle}}
+                </dd>
+                <dt><span>شناسه پودمان</span></dt>
+                <dd *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
+                    {{requestNiazsanjiFardi.approvedEducationalModuleId}}
+                </dd>
+                <dd *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
+                    {{requestNiazsanjiFardi.allEducationalModuleId}}
+                </dd>
+                <dt><span>ساعت پودمان</span></dt>
+                <dd *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
+                    {{approvedHour | number}}
+                </dd>
+                <dd *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
+                    {{allHour | number}}
+                </dd>
+                <dt><span>سطح پودمان</span></dt>
+                <dd *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
+                    {{approvedLevel}}
+                </dd>
+                <dd *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
+                    {{allLevel}}
+                </dd>
+                <dt><span>نوع دوره</span></dt>
+                <dd>
+                    {{requestNiazsanjiFardi.courseTypeTitle}}
+                </dd>
+                <dt><span>هزینه</span></dt>
+                <dd *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
+                    {{requestNiazsanjiFardi.costApprovedEducationalModule | number}} ریال
+                </dd>
+                <dd *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
+                    {{requestNiazsanjiFardi.costAllEducationalModule | number}} ريال
+                </dd>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات نیازسنجی</div></div>
                 <dt><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.organizationChart">Organization Chart</span></dt>
                 <dd>
                     <div *ngIf="requestNiazsanjiFardi.organizationChartId">
@@ -46,12 +95,12 @@
                 <dd>
                     <span>{{requestNiazsanjiFardi.description}}</span>
                 </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.courseType">Course Type</span></dt>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.courseType">Course Type</span></dt>
                 <dd>
                     <div *ngIf="requestNiazsanjiFardi.courseTypeId">
                         <a [routerLink]="['/course-type-marine-suffix', requestNiazsanjiFardi.courseTypeId, 'view']">{{requestNiazsanjiFardi.courseTypeTitle}}</a>
                     </div>
-                </dd>
+                </dd>-->
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات دوره های شرکت کرده {{requestNiazsanjiFardi.personFamily}}</div></div>
                 <div class="table-responsive">
                     <table class="table table-striped  table-bordered table-hover table-sm">
@@ -87,7 +136,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات پودمان های درخواستی</div></div>
+                <!--<div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات پودمان های درخواستی</div></div>
                 <div>
                     <table class="table table-striped  table-bordered table-hover table-sm">
                         <thead>
@@ -103,7 +152,7 @@
                         <tbody>
                         <tr *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
                             <td>
-                                از پودمان های مصوب
+                                از شناسنامه شغلی
                             </td>
                             <td>
                                 <div *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
@@ -114,8 +163,8 @@
                             <td>{{approvedLevel}}</td>
                             <td>{{requestNiazsanjiFardi.courseTypeTitle}}</td>
                             <td>
-                                <!--<input type="number" class="form-control" name="costApprovedEducationalModule" id="field_costApprovedEducationalModule"
-                                       [(ngModel)]="requestNiazsanjiFardi.costApprovedEducationalModule" />-->
+                                &lt;!&ndash;<input type="number" class="form-control" name="costApprovedEducationalModule" id="field_costApprovedEducationalModule"
+                                       [(ngModel)]="requestNiazsanjiFardi.costApprovedEducationalModule" />&ndash;&gt;
                                 <span>{{requestNiazsanjiFardi.costApprovedEducationalModule}}</span>
                             </td>
                         </tr>
@@ -143,7 +192,7 @@
                         </tr>
                         </tbody>
                     </table>
-                </div>
+                </div>-->
 
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">گردش درخواست و نظرات</div></div>
                 <textarea [disabled]="true" [rows]="rows" class="form-control">{{requestNiazsanjiFardi.conversation}}</textarea>

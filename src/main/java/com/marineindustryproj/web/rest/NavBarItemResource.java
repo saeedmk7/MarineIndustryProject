@@ -1,6 +1,7 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.NavBarItemService;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,6 +56,8 @@ public class NavBarItemResource {
         if (navBarItemDTO.getId() != null) {
             throw new BadRequestAlertException("A new navBarItem cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        navBarItemDTO.setCreateDate(ZonedDateTime.now());
+        navBarItemDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
         NavBarItemDTO result = navBarItemService.save(navBarItemDTO);
         return ResponseEntity.created(new URI("/api/nav-bar-items/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -76,6 +80,13 @@ public class NavBarItemResource {
         if (navBarItemDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        NavBarItemDTO navBarItem = navBarItemService.findOne(navBarItemDTO.getId()).get();
+
+        navBarItemDTO.setCreateUserLogin(navBarItem.getCreateUserLogin());
+        navBarItemDTO.setCreateDate(navBarItem.getCreateDate());
+        navBarItemDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        navBarItemDTO.setModifyDate(ZonedDateTime.now());
+
         NavBarItemDTO result = navBarItemService.save(navBarItemDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, navBarItemDTO.getId().toString()))

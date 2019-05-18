@@ -254,12 +254,14 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 sort: this.sort()
             }).subscribe(
                 (res: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>) => {
+
                     if (this.niazSanjiSource) {
                         this.prepareForFardiFinal(res.body, data);
                     }
                     else {
                         this.prepareForOrganizationFinal(res.body, data);
                     }
+                    $('#collapseExample').addClass('collapse');
                 }, (res: HttpErrorResponse) => this.onError(res.message)
             );
         }
@@ -285,7 +287,9 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 finalNiazsanjiReportsFardi.educationalModuleTotalLearningTime = education.totalLearningTime;
             }
             finalNiazsanjiReportsFardi.niazsanjiYear = a.niazsanjiYear;
-            finalNiazsanjiReportsFardi.organizationChartTitle = a.organizationChartTitle;
+            let org = this.organizationcharts.find(w => w.id == a.organizationChartId);
+            if(org)
+                finalNiazsanjiReportsFardi.organizationChartTitle = org.fullTitle; //a.organizationChartTitle;
             finalNiazsanjiReportsFardi.priceCost = a.priceCost;
             finalNiazsanjiReportsFardi.finalizeCost = a.finalizeCost;
             finalNiazsanjiReportsFardi.courseTypeTitle = a.courseTypeTitle;
@@ -326,7 +330,10 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             }
 
             finalNiazsanjiReportsOrganization.niazsanjiYear = a.niazsanjiYear;
-            finalNiazsanjiReportsOrganization.organizationChartTitle = a.organizationChartTitle;
+            let org = this.organizationcharts.find(w => w.id == a.organizationChartId);
+            if(org)
+                finalNiazsanjiReportsOrganization.organizationChartTitle = org.fullTitle; //a.organizationChartTitle;
+            //finalNiazsanjiReportsOrganization.organizationChartTitle = a.organizationChartTitle;
             finalNiazsanjiReportsOrganization.priceCost = a.priceCost;
             finalNiazsanjiReportsOrganization.finalizeCost = a.finalizeCost;
             finalNiazsanjiReportsOrganization.runMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
