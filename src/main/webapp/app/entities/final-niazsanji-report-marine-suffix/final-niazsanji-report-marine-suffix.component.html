@@ -56,7 +56,7 @@
                             [(ngModel)]="finalNiazsanjiReport.niazsanjiYear">
                     </div>
                     <div class="form-group">
-                        <label class="form-control-label" for="field_runMonth">ماه اجرا</label>
+                        <label class="form-control-label" for="field_planningRunMonth">ماه برنامه ریزی</label>
                         <ng-select
                             [items]="months"
                             [multiple]="false"
@@ -66,9 +66,9 @@
                             bindLabel="persianMonth"
                             bindValue="id"
                             placeholder="انتخاب نمائید."
-                            name="runMonth"
-                            id="field_runMonth"
-                            [(ngModel)]="finalNiazsanjiReport.runMonth">
+                            name="planningRunMonth"
+                            id="field_planningRunMonth"
+                            [(ngModel)]="finalNiazsanjiReport.planningRunMonth">
                     </div>
                   <!--  <div class="form-group">
                     </div>-->
@@ -117,7 +117,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-control-label" for="field_status">وضعیت نیازسنجی</label>
+                        <label class="form-control-label" for="field_status">وضعیت برنامه ریزی</label>
                         <ng-select
                             [items]="statusMeaning"
                             [multiple]="false"
@@ -205,6 +205,7 @@
                     let-column="column">جمع کل: {{totalCost | number}}</ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="planningRunMonthPersian" title="ماه برنامه ریزی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="500"></kendo-grid-column>
             <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
@@ -294,6 +295,7 @@
                     let-column="column">جمع کل: {{totalCost | number}}</ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="planningRunMonthPersian" title="ماه برنامه ریزی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
             <div *kendoGridDetailTemplate="let dataItem">
                 <mi-final-niazsanji-report-marine-suffix-detail-people [people]="dataItem.people"></mi-final-niazsanji-report-marine-suffix-detail-people>

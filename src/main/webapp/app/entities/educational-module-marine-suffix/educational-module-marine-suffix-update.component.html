@@ -157,11 +157,11 @@
                 </div>
 
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات تکمیلی پودمان {{educationalModule.title}}</div></div>
-                <div class="form-group half">
+                <!--<div class="form-group half">
                     <a (click)="change('goal-marine-suffix')" jhiTranslate="marineindustryprojApp.educationalModule.goal" for="field_goal">Goal</a>
-                   <!-- <select class="form-control" id="field_goal" multiple name="goal" [(ngModel)]="educationalModule.goals">
+                   &lt;!&ndash; <select class="form-control" id="field_goal" multiple name="goal" [(ngModel)]="educationalModule.goals">
                         <option [ngValue]="getSelected(educationalModule.goals, goalOption)" *ngFor="let goalOption of goals; trackBy: trackGoalById">{{goalOption.title}}</option>
-                    </select>-->
+                    </select>&ndash;&gt;
                     <ng-select
                         [items]="goals"
                         [multiple]="true"
@@ -173,6 +173,17 @@
                         name="goal"
                         id="field_goal"
                         [(ngModel)]="educationalModule.goals">
+                </div>-->
+                <div class="form-group half">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.goalsText" for="field_goalsText">Goals Text</label>
+                    <textarea type="text" class="form-control" name="goalsText" id="field_goalsText"
+                              [(ngModel)]="educationalModule.goalsText" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.goalsText?.dirty && editForm.controls.goalsText?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.goalsText?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group half">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.educationalModuleHeadlines" for="field_educationalModuleHeadlines">Educational Module Headlines</label>
@@ -203,6 +214,24 @@
                         [(ngModel)]="educationalModule.educationalCenters">
                 </div>
                 <div class="form-group half">
+                    <a (click)="change('resource-marine-suffix')" jhiTranslate="marineindustryprojApp.educationalModule.resource" for="field_resource">Resource</a>
+                    <!--<select class="form-control" id="field_resource" multiple name="resource" [(ngModel)]="educationalModule.resources">
+                        <option [ngValue]="getSelected(educationalModule.resources, resourceOption)" *ngFor="let resourceOption of resources; trackBy: trackResourceById">{{resourceOption.title}}</option>
+                    </select>-->
+
+                    <ng-select
+                        [items]="resources"
+                        [multiple]="true"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        planpm startceholder="منابع آموزشی"
+                        name="resource"
+                        id="field_resource"
+                        [(ngModel)]="educationalModule.resources">
+                </div>
+                <div class="form-group half">
                     <a (click)="change('teacher-marine-suffix')" jhiTranslate="marineindustryprojApp.educationalModule.teacher" for="field_teacher">Teacher</a>
                     <!--<select class="form-control" id="field_teacher" multiple name="teacher" [(ngModel)]="educationalModule.teachers">
                         <option [ngValue]="getSelected(educationalModule.teachers, teacherOption)" *ngFor="let teacherOption of teachers; trackBy: trackTeacherById">{{teacherOption.name}} {{teacherOption.family}}</option>
@@ -219,10 +248,10 @@
                         id="field_teacher"
                         [(ngModel)]="educationalModule.teachers">
                 </div>
-                 <div class="form-group">
+                 <div class="form-group half">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.teachersText" for="field_teachersText">Teachers Text</label>
-                    <input type="text" class="form-control" name="teachersText" id="field_teachersText"
-                        [(ngModel)]="educationalModule.teachersText" maxlength="4096"/>
+                    <textarea class="form-control" name="teachersText" id="field_teachersText"
+                              [(ngModel)]="educationalModule.teachersText" maxlength="4096"></textarea>
                     <div [hidden]="!(editForm.controls.teachersText?.dirty && editForm.controls.teachersText?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.teachersText?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
@@ -230,35 +259,8 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group half">
-                    <a (click)="change('resource-marine-suffix')" jhiTranslate="marineindustryprojApp.educationalModule.resource" for="field_resource">Resource</a>
-                    <!--<select class="form-control" id="field_resource" multiple name="resource" [(ngModel)]="educationalModule.resources">
-                        <option [ngValue]="getSelected(educationalModule.resources, resourceOption)" *ngFor="let resourceOption of resources; trackBy: trackResourceById">{{resourceOption.title}}</option>
-                    </select>-->
 
-                    <ng-select
-                        [items]="resources"
-                        [multiple]="true"
-                        [closeOnSelect]="true"
-                        [searchable]="true"
-                        [required]="false"
-                        bindLabel="title"
-                        placeholder="منابع آموزشی"
-                        name="resource"
-                        id="field_resource"
-                        [(ngModel)]="educationalModule.resources">
-                </div>
-<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.goalsText" for="field_goalsText">Goals Text</label>
-                    <input type="text" class="form-control" name="goalsText" id="field_goalsText"
-                        [(ngModel)]="educationalModule.goalsText" maxlength="4096"/>
-                    <div [hidden]="!(editForm.controls.goalsText?.dirty && editForm.controls.goalsText?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.goalsText?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
-                        This field cannot be longer than 4096 characters.
-                        </small>
-                    </div>
-                </div>
+
                 <div class="form-group half">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.prerequisite" for="field_prerequisite">Prerequisite</label>
                     <textarea type="text" class="form-control" name="prerequisite" id="field_prerequisite"

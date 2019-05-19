@@ -14,6 +14,7 @@ export interface IFinalNiazsanjiReportFardiMarineSuffix {
     status?: number;
     finalizeCost?: number;
     runMonthPersian?: string;
+    planningRunMonthPersian?: string;
 }
 
 export class FinalNiazsanjiReportFardiMarineSuffix implements IFinalNiazsanjiReportFardiMarineSuffix  {
@@ -32,6 +33,7 @@ export class FinalNiazsanjiReportFardiMarineSuffix implements IFinalNiazsanjiRep
         public priceCost?: number,
         public status?: number,
         public finalizeCost?: number,
+        public planningRunMonthPersian?: string,
         public runMonthPersian?: string) {
 
     }

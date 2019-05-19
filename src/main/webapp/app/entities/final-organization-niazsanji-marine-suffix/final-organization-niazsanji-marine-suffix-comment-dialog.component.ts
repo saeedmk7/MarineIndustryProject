@@ -219,7 +219,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixCommentDialogComponent implem
     }
     knowAboutStatusForContinue(){
 
-        if(this.finalOrganizationNiazsanji.status == 11 || this.finalOrganizationNiazsanji.status == 1 || this.finalOrganizationNiazsanji.status == 20){
+        if(this.finalOrganizationNiazsanji.status == 21 || this.finalOrganizationNiazsanji.status == 11 || this.finalOrganizationNiazsanji.status == 1 || this.finalOrganizationNiazsanji.status == 30){
             this.clear();
         }
     }

@@ -11,6 +11,7 @@
     <mi-alert></mi-alert>
     <div class="row">
         <search-panel class="col-md-12" [searchPanelModel]="searchbarModel"></search-panel>
+        <div class="alert alert-warning" *ngIf="message">{{message}}</div>
     </div>
     <div>
             <div class="card border-success">

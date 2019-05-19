@@ -49,9 +49,10 @@
             </thead>
             <tbody>
             <tr *ngFor="let finalOrganizationNiazsanji of finalOrganizationNiazsanjis ; let i = index;"
-                [ngClass]="{'new': (finalOrganizationNiazsanji.status == 0 || finalOrganizationNiazsanji.status == 10),'accept': finalOrganizationNiazsanji.status == 20,'ignore': (finalOrganizationNiazsanji.status == 11 || finalOrganizationNiazsanji.status == 1)}">
+                [ngClass]="{'new': (finalOrganizationNiazsanji.status == 0 || finalOrganizationNiazsanji.status == 10 || finalOrganizationNiazsanji.status == 20),
+                'accept': finalOrganizationNiazsanji.status == 30,'ignore': (finalOrganizationNiazsanji.status == 21 || finalOrganizationNiazsanji.status == 11 || finalOrganizationNiazsanji.status == 1)}">
                 <!--<td><a [routerLink]="['/final-organization-niazsanji-marine-suffix', finalOrganizationNiazsanji.id, 'view' ]">{{finalOrganizationNiazsanji.id}}</a></td>-->
-                <td><input *ngIf="(finalOrganizationNiazsanji.status == 0 || finalOrganizationNiazsanji.status == 10)" class="mycheckbox" (change)="onChange(finalOrganizationNiazsanji.id, $event.target.checked)" name="{{finalOrganizationNiazsanji.id}}" type="checkbox" id="{{finalOrganizationNiazsanji.id}}"></td>
+                <td><input *ngIf="(finalOrganizationNiazsanji.status == 0 || finalOrganizationNiazsanji.status == 10 || finalOrganizationNiazsanji.status == 20)" class="mycheckbox" (change)="onChange(finalOrganizationNiazsanji.id, $event.target.checked)" name="{{finalOrganizationNiazsanji.id}}" type="checkbox" id="{{finalOrganizationNiazsanji.id}}"></td>
                 <td>{{i+1}}</td>
                 <!--<td>{{finalOrganizationNiazsanji.recommendedByOrgchart}}</td>-->
                 <td>
@@ -102,71 +103,18 @@
                 </td>
                 <td class="text-right" width="250">
                     <div class="btn-group flex-btn-group-container">
-
-                        <ng-container *ngIf="(isAdmin || isModirKolAmozesh) && finalOrganizationNiazsanji.status == 10">
-                            <button type="submit" title="مدارک"
-                                    [routerLink]="['../document-marine-suffix', 'finalorganizationniazsanji', finalOrganizationNiazsanji.id ]"
-                                    class="btn btn-light btn-sm">
-                                <span class="fa fa-file"></span>
-                            </button>
-                            <button type="submit" title="ویرایش"
-                                    [routerLink]="['/final-organization-niazsanji-marine-suffix', finalOrganizationNiazsanji.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
-
-                            <button type="submit" title="ثبت نظر"
-                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'COMMENT' + '/comment'} }]"
-                                    replaceUrl="true"
-                                    queryParamsHandling="merge"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon [icon]="'comments'"></fa-icon>
-                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.comment">comment</span>-->
-                            </button>
-                            <!--<button  type="submit" title="اجراکردن" (click)="complete(finalOrganizationNiazsanji)"
-                                     class="btn btn-success btn-sm">
-                                <span class="fa fa-check" color="f00c"></span>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.completeAndRunning">complete</span>
-                            </button>-->
-                            <!--<button type="submit" title="اجراکردن"
-                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'ACCEPT' + '/comment'} }]"
-                                    replaceUrl="true"
-                                    queryParamsHandling="merge"
-                                    class="btn btn-danger btn-sm">
-                                <fa-icon [icon]="'ban'"></fa-icon>
-                                &lt;!&ndash;<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>&ndash;&gt;
-                            </button>-->
-                            <button type="submit" title="اجراکردن"
-                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'ACCEPT' + '/comment'} }]"
-                                    replaceUrl="true"
-                                    queryParamsHandling="merge"
-                                    class="btn btn-success btn-sm">
-                                <fa-icon [icon]="'check-double'"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.completeAndRunning">complete</span>
-                            </button>
-                            <button type="submit" title="رد کردن"
-                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'REJECT' + '/comment'} }]"
-                                    replaceUrl="true"
-                                    queryParamsHandling="merge"
-                                    class="btn btn-danger btn-sm">
-                                <fa-icon [icon]="'ban'"></fa-icon>
-                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
-                            </button>
-                        </ng-container>
-                        <ng-container *ngIf="(isAdmin || isKarshenasArshadAmozesh) && finalOrganizationNiazsanji.status == 0">
-                            <button type="submit" title="مدارک"
-                                    [routerLink]="['../document-marine-suffix', 'finalorganizationniazsanji', finalOrganizationNiazsanji.id ]"
-                                    class="btn btn-light btn-sm">
-                                <span class="fa fa-file"></span>
-                            </button>
-                            <button type="submit" title="ویرایش"
-                                    [routerLink]="['/final-organization-niazsanji-marine-suffix', finalOrganizationNiazsanji.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
-
+                        <button type="submit" title="مدارک" *ngIf="(isAdmin || isKarshenasArshadAmozesh || isModirKolAmozesh) && (finalOrganizationNiazsanji.status < 30 && finalOrganizationNiazsanji.status != 1 && finalOrganizationNiazsanji.status != 11 && finalOrganizationNiazsanji.status != 21)"
+                                [routerLink]="['../document-marine-suffix', 'finalorganizationniazsanji', finalOrganizationNiazsanji.id ]"
+                                class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                        </button>
+                        <button type="submit" title="ویرایش" *ngIf="(isAdmin || isKarshenasArshadAmozesh || isModirKolAmozesh) && (finalOrganizationNiazsanji.status < 30 && finalOrganizationNiazsanji.status != 1 && finalOrganizationNiazsanji.status != 11 && finalOrganizationNiazsanji.status != 21)"
+                                [routerLink]="['/final-organization-niazsanji-marine-suffix', finalOrganizationNiazsanji.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <ng-container *ngIf="isModirKolAmozesh && finalOrganizationNiazsanji.status == 10">
                             <button type="submit" title="ثبت نظر"
                                     [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'COMMENT' + '/comment'} }]"
                                     replaceUrl="true"
@@ -181,6 +129,59 @@
                                     queryParamsHandling="merge"
                                     class="btn btn-success btn-sm">
                                 <fa-icon [icon]="'check-double'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.completeAndRunning">complete</span>-->
+                            </button>
+                            <button type="submit" title="رد کردن"
+                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'REJECT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'ban'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="isKarshenasArshadAmozesh && finalOrganizationNiazsanji.status == 0">
+                            <button type="submit" title="ثبت نظر"
+                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'COMMENT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'comments'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.comment">comment</span>-->
+                            </button>
+                            <button type="submit" title="تایید کردن"
+                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'ACCEPT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-success btn-sm">
+                                <fa-icon [icon]="'check-double'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.accept">comment</span>-->
+                            </button>
+                            <button type="submit" title="رد کردن"
+                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'REJECT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'ban'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="finalOrganizationNiazsanji.status == 20">
+                            <button type="submit" title="ثبت نظر"
+                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'COMMENT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'comments'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.comment">comment</span>-->
+                            </button>
+                            <button type="submit" title="تصویب شوراء"
+                                    [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/' + 'ACCEPT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-success btn-sm">
+                                <fa-icon [icon]="'check-double'"></fa-icon>
+                                <span class="d-none d-md-inline" >تصویب شوراء</span>
                                 <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.accept">comment</span>-->
                             </button>
                             <button type="submit" title="رد کردن"

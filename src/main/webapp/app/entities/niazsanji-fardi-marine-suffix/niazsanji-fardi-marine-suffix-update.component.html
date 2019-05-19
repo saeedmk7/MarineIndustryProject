@@ -94,7 +94,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiFardi.courseType" for="field_courseType">Course Type</label>
-                    <select class="form-control" id="field_courseType" name="courseType" [(ngModel)]="niazsanjiFardi.courseTypeId" >
+                    <select class="form-control" id="field_courseType" name="courseType" [(ngModel)]="niazsanjiFardi.courseTypeId" required>
                         <option [ngValue]="null"></option>
                         <option [ngValue]="courseTypeOption.id" *ngFor="let courseTypeOption of coursetypes">{{courseTypeOption.title}}</option>
                     </select>

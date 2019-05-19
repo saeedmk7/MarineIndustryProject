@@ -70,6 +70,7 @@ public class DesignAndPlanningServiceImpl implements DesignAndPlanningService {
 
         FinalNiazsanjiReport finalNiazsanjiReport = finalNiazsanjiReportRepository.getOne(designAndPlanningDTO.getFinalNiazsanjiReportId());
         //finalNiazsanjiReport.setRunMonth(designAndPlanningDTO.getRunMonth());
+        finalNiazsanjiReport.setPlanningRunMonth(designAndPlanningDTO.getRunMonth());
         if(designAndPlanningDTO.isFinished() && designAndPlanningDTO.getStatus() < 10)
         {
             designAndPlanningDTO.setFinishedDate(ZonedDateTime.now());
@@ -80,6 +81,7 @@ public class DesignAndPlanningServiceImpl implements DesignAndPlanningService {
             RunPhase runPhase = new RunPhase();
             runPhase.setFinalNiazsanjiReport(finalNiazsanjiReport);
             runPhase.setArchived(false);
+            runPhase.setStepNumber(0);
             runPhase.setCreateDate(ZonedDateTime.now());
             runPhase.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
             runPhase.setStatus(0);

@@ -208,7 +208,7 @@
                 </div>
                 <div class="form-group bighalf">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.selectionType" for="field_selectionType">selectionType</label>
-                    <input type="checkbox" class="form-control" name="selectionType" id="field_selectionType"
+                    <input type="checkbox" class="form-control" name="selectionType" id="field_selectionType" (change)="cleanUp()"
                            [(ngModel)]="selectionType" />
                 </div>
                 <ng-container *ngIf="selectionType">

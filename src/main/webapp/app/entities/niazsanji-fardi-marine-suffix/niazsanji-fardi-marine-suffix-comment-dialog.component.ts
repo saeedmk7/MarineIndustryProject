@@ -190,7 +190,7 @@ export class NiazsanjiFardiMarineSuffixCommentDialogComponent implements OnInit 
     }
     knowAboutStatusForContinue(){
 
-        if(this.niazsanjiFardi.status == 11 || this.niazsanjiFardi.status == 1 || this.niazsanjiFardi.status == 20){
+        if(this.niazsanjiFardi.status == 21 || this.niazsanjiFardi.status == 11 || this.niazsanjiFardi.status == 1 || this.niazsanjiFardi.status == 30){
             this.clear();
         }
     }

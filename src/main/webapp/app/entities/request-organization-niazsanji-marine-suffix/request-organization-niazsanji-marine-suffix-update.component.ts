@@ -74,7 +74,14 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         private convertObjectDatesService: ConvertObjectDatesService,
         private treeUtilities: TreeUtilities
     ) {}
-
+    cleanUp(){
+        debugger;
+        if(!this.selectionType){
+            this.firstThreeJobCode = "";
+            this.selectedJob = {};
+            this.onChange(undefined);
+        }
+    }
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ requestOrganizationNiazsanji }) => {

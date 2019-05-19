@@ -191,14 +191,14 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 });
             }
         }
-        if (f.value['runMonth']) {
-            let val = f.value['runMonth'];
+        if (f.value['planningRunMonth']) {
+            let val = f.value['planningRunMonth'];
             if (val) {
                 /*let yearDetail = this.yearsCollections.find(a => a.year == val);
                 let beginDate = new Date(yearDetail.beginDate).toISOString();
                 let endDate = new Date(yearDetail.endDate).toISOString();*/
                 criteria.push({
-                    key: 'runMonth.equals', value: val
+                    key: 'planningRunMonth.equals', value: val
                 });
             }
         }
@@ -294,6 +294,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             finalNiazsanjiReportsFardi.finalizeCost = a.finalizeCost;
             finalNiazsanjiReportsFardi.courseTypeTitle = a.courseTypeTitle;
             finalNiazsanjiReportsFardi.runMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
+            finalNiazsanjiReportsFardi.planningRunMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.planningRunMonth);
 
 
             let personRep = res.find(w => w.finalNiazsanjiReportId == a.id);
@@ -337,6 +338,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             finalNiazsanjiReportsOrganization.priceCost = a.priceCost;
             finalNiazsanjiReportsOrganization.finalizeCost = a.finalizeCost;
             finalNiazsanjiReportsOrganization.runMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
+            finalNiazsanjiReportsOrganization.planningRunMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.planningRunMonth);
             finalNiazsanjiReportsOrganization.courseTypeTitle = a.courseTypeTitle;
 
 

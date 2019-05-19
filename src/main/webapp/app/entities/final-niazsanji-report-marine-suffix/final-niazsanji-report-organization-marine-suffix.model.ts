@@ -15,6 +15,7 @@ export interface IFinalNiazsanjiReportOrganizationMarineSuffix {
     people?: IPersonMarineSuffix[];
     status?: number;
     runMonthPersian?: string;
+    planningRunMonthPersian?: string;
 }
 
 export class FinalNiazsanjiReportOrganizationMarineSuffix implements IFinalNiazsanjiReportOrganizationMarineSuffix  {
@@ -32,6 +33,7 @@ export class FinalNiazsanjiReportOrganizationMarineSuffix implements IFinalNiazs
         public people?: IPersonMarineSuffix[],
         public priceCost?: number,
         public runMonthPersian?: string,
+        public planningRunMonthPersian?: string,
         public status?: number) {
 
     }

@@ -106,7 +106,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                                            EmploymentTypeService employmentTypeService,
                                            FinalNiazsanjiReportPersonService finalNiazsanjiReportPersonService,
                                            OrganizationChartQueryService organizationChartQueryService,
-                                           FinalNiazsanjiReportQueryService finalNiazsanjiReportQueryService, FinalNiazsanjiReportPersonQueryService finalNiazsanjiReportPersonQueryService,
+                                           FinalNiazsanjiReportQueryService finalNiazsanjiReportQueryService,
+                                           FinalNiazsanjiReportPersonQueryService finalNiazsanjiReportPersonQueryService,
                                            OrganizationChartRepository organizationChartRepository,
                                            OrganizationChartMapper organizationChartMapper,
                                            RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService,
@@ -524,8 +525,13 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             for (EducationalHistoryDTO educationalHistoryDTO : educationalHistoryDTOS) {
                 Integer status = 100; //getEducationalModuleStatus(educationalModule, personIdFilter);
 
-                HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(educationalHistoryDTO, status);
-                report.add(homePagePersonEducationalModule);
+                Optional<EducationalModuleDTO> educationalModuleDTO = educationalModuleService.findOne(educationalHistoryDTO.getEducationalModuleId());
+                if(educationalModuleDTO.isPresent()) {
+                    HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(educationalHistoryDTO,
+                                                                                                                          educationalModuleDTO.get(),
+                                                                                                                          status);
+                    report.add(homePagePersonEducationalModule);
+                }
             }
 
             FinalNiazsanjiReportPersonCriteria finalNiazsanjiReportPersonCriteria = new FinalNiazsanjiReportPersonCriteria();
@@ -534,26 +540,28 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPersonDTOS = finalNiazsanjiReportPersonQueryService.findByCriteria(finalNiazsanjiReportPersonCriteria);
             long[] finalIds = finalNiazsanjiReportPersonDTOS.stream().mapToLong(a -> a.getFinalNiazsanjiReportId()).toArray();
 
-            FinalNiazsanjiReportCriteria finalNiazsanjiReportCriteria = new FinalNiazsanjiReportCriteria();
-            LongFilter finalIdFilter = new LongFilter();
-            List<Long> listFinalIds = new ArrayList<>();
+            if(finalIds.length > 0) {
+                FinalNiazsanjiReportCriteria finalNiazsanjiReportCriteria = new FinalNiazsanjiReportCriteria();
+                LongFilter finalIdFilter = new LongFilter();
+                List<Long> listFinalIds = new ArrayList<>();
 
-            for(long finalId: finalIds){
-                listFinalIds.add(finalId);
-            }
-            finalIdFilter.setIn(listFinalIds);
-            finalNiazsanjiReportCriteria.setFinalNiazsanjiReportPersonId(finalIdFilter);
-
-            List<FinalNiazsanjiReportDTO> finalNiazsanjiReportDTOS = finalNiazsanjiReportQueryService.findByCriteria(finalNiazsanjiReportCriteria);
-
-            for (FinalNiazsanjiReportDTO finalNiazsanjiReportDTO : finalNiazsanjiReportDTOS) {
-                //Integer status = getEducationalModuleStatus(finalNiazsanjiReportDTO, personIdFilter);
-                if(report.stream().filter(a -> a.getTitle().equals(finalNiazsanjiReportDTO.getEducationalModuleTitle())).count() == 0){
-                    HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(finalNiazsanjiReportDTO);
-                    report.add(homePagePersonEducationalModule);
+                for(long finalId: finalIds){
+                    listFinalIds.add(finalId);
+                }
+                finalIdFilter.setIn(listFinalIds);
+                finalNiazsanjiReportCriteria.setId(finalIdFilter);
+                List<FinalNiazsanjiReportDTO> finalNiazsanjiReportDTOS = finalNiazsanjiReportQueryService.findByCriteria(finalNiazsanjiReportCriteria);
+                for (FinalNiazsanjiReportDTO finalNiazsanjiReportDTO : finalNiazsanjiReportDTOS) {
+                    //Integer status = getEducationalModuleStatus(finalNiazsanjiReportDTO, personIdFilter);
+                    if(report.stream().filter(a -> a.getTitle().equals(finalNiazsanjiReportDTO.getEducationalModuleTitle())).count() == 0){
+                        Optional<EducationalModuleDTO> educationalModuleDTO = educationalModuleService.findOne(finalNiazsanjiReportDTO.getEducationalModuleId());
+                        if(educationalModuleDTO.isPresent()) {
+                            HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(finalNiazsanjiReportDTO, educationalModuleDTO.get());
+                            report.add(homePagePersonEducationalModule);
+                        }
+                    }
                 }
             }
-
             EducationalModuleJobCriteria educationalModuleJobCriteria = new EducationalModuleJobCriteria();
             educationalModuleJobCriteria.setJobId(jobIdFilter);
 
@@ -564,7 +572,6 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             for (EducationalModuleMinDTO educationalModule : educationalModules) {
                 if(report.stream().filter(a -> a.getTitle().equals(educationalModule.getTitle())).count() == 0) {
                     Integer status = 0; //getEducationalModuleStatus(educationalModule, personIdFilter);
-
                     HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(educationalModule, status);
                     report.add(homePagePersonEducationalModule);
                 }

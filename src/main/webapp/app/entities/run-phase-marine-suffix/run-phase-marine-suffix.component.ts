@@ -249,6 +249,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     }
 
     prepareForFardiFinal(data: IRunPhaseMarineSuffix[]) {
+        debugger;
         data.forEach((a: IRunPhaseMarineSuffix) => {
             let runPhaseFardi: IRunPhaseFardiMarineSuffix = {};
             runPhaseFardi.id = a.id;
@@ -270,7 +271,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             runPhaseFardi.finalizeCost = a.finalizeCost;
             //runPhaseFardi.courseTypeTitle = a.courseTypeTitle;
             runPhaseFardi.runMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
-            if (a.people) {
+            if (a.people.length > 0) {
                 let person = this.people.find(q => q.id == a.people[0].id);
                 if (person) {
                     runPhaseFardi.personFullName = person.fullName;
@@ -284,7 +285,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     }
 
     prepareForOrganizationFinal(data: IRunPhaseMarineSuffix[]) {
-
+        debugger;
         data.forEach((a: IRunPhaseMarineSuffix) => {
 
             let runPhaseOrganization: IRunPhaseOrganizationMarineSuffix = {};
@@ -310,7 +311,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             runPhaseOrganization.finalizeCost = a.finalizeCost;
             runPhaseOrganization.runMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
             //runPhaseOrganization.courseTypeTitle = a.courseTypeTitle;
-
+            debugger;
             if (a.people) {
                 let peopleIds = a.people.map(a => a.id);
                 let persons = this.people.filter(w => peopleIds.includes(w.id));
@@ -327,7 +328,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     }
 
     private loadFardis(): void {
-
+        debugger;
         this.gridView = process(this.runPhaseFardis, {group: this.groups});
         /*this.total = aggregateBy(this.runPhaseFardis, this.aggregates);
         this.totalCost = aggregateBy(this.runPhaseFardis, this.aggregatesCost);*/
@@ -342,7 +343,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     }
 
     private loadOrgs(): void {
-
+        debugger;
         this.gridViewOrg = process(this.runPhaseOrganizations, {group: this.groupsOrg});
         /*this.total = aggregateBy(this.runPhaseOrganizations, this.aggregates);
         this.totalCost = aggregateBy(this.runPhaseOrganizations, this.aggregatesCost);*/
@@ -453,9 +454,8 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
 
     public rowCallback(context: RowClassArgs) {
         return {
-            success: context.dataItem.status == 20,
-            warning: context.dataItem.status == 10,
-            danger: context.dataItem.status == 0
+            success: context.dataItem.status == 10,
+            warning: context.dataItem.status == 0
         };
     }
 

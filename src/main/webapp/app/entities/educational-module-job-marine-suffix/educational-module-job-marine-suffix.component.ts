@@ -57,6 +57,7 @@ export class EducationalModuleJobMarineSuffixComponent implements OnInit, OnDest
     selectedEducationalModule: number;
     counter: number = 0;
     allRows: number = 0;
+    message: string;
     constructor(
         private educationalModuleJobService: EducationalModuleJobMarineSuffixService,
         private educationalModuleService: EducationalModuleMarineSuffixService,
@@ -96,17 +97,23 @@ export class EducationalModuleJobMarineSuffixComponent implements OnInit, OnDest
         this.loadEducationalModuleJobs();
     }*/
     loadAll(criteria?) {
-        this.educationalModuleJobService
-            .query({
-                page: 0,
-                size: 20000,
-                criteria,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<IEducationalModuleJobMarineSuffix[]>) => this.paginateEducationalModuleJobs(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        debugger;
+        if(criteria.find(a => a.value != "")) {
+            this.educationalModuleJobService
+                .query({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<IEducationalModuleJobMarineSuffix[]>) => this.paginateEducationalModuleJobs(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+        else{
+            this.message = "لطفا حداقل یک مورد را انتخاب نمائید.";
+        }
     }
 
     ngOnInit() {

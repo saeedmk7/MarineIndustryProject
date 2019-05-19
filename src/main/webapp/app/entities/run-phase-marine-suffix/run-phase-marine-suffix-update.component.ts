@@ -83,91 +83,72 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ runPhase }) => {
-            this.runPhase = runPhase;
-            const criteriaRun = [{
-                key: 'finalNiazsanjiReportId.equals',
-                value: this.runPhase.finalNiazsanjiReportId
-            }];
-            this.runPhaseService
-                .query({
-                    page: 0,
-                    size: 20000,
-                    criteria: criteriaRun,
-                    sort: ["id", "asc"]
-                }).subscribe((resp: HttpResponse<IRunPhaseMarineSuffix[]>) => {
+        this.runPhase = runPhase;
+        this.documentUrl = 'document-marine-suffix/runphase/' + this.runPhase.id;
+        this.runningStepService.query().subscribe(
+                (resp: HttpResponse<IRunningStepMarineSuffix[]>) => {
+                    this.runningSteps = resp.body;
 
-                if (resp.body.length > 0) {
-                    this.runPhase =  resp.body[0];
+                    let stepNumbers = resp.body.filter(a => a.isHeader).sort(function(a,b)
+                    {
+                        return (a.stepNumber > b.stepNumber) ? 1 : ((b.stepNumber > a.stepNumber) ? -1 : 0);
+                    });
+                    stepNumbers.forEach(a => {
 
-                    this.documentUrl = 'document-marine-suffix/runphase/' + this.runPhase.id;
-                }
+                        let tab: RunPhaseTabModel = new RunPhaseTabModel();
+                        tab.id = "tab" + a.stepNumber;
+                        tab.title = a.title;
+                        tab.href = "#" + tab.id;
+                        tab.active = a.stepNumber == 1;
+                        tab.colorText = a.colorText;
+                        tab.runPhaseItems = [];
 
+                        let runningsForThisStep = this.runningSteps.filter(w => w.stepNumber == a.stepNumber && w.isHeader == false);
+                        runningsForThisStep.forEach(e => {
 
-                this.runningStepService.query().subscribe(
-                    (resp: HttpResponse<IRunningStepMarineSuffix[]>) => {
-                        this.runningSteps = resp.body;
-
-                        let stepNumbers = resp.body.filter(a => a.isHeader).sort(function(a,b)
-                        {
-                            return (a.stepNumber > b.stepNumber) ? 1 : ((b.stepNumber > a.stepNumber) ? -1 : 0);
+                            let runPhaseItem: RunPhaseItemModel = new RunPhaseItemModel();
+                            runPhaseItem.id = e.id;
+                            runPhaseItem.title = e.title; //+ (e.stepRequired ? "(اجباریست)" : "");
+                            runPhaseItem.description = e.description == null ? "" : e.description;
+                            runPhaseItem.required = e.stepRequired;
+                            runPhaseItem.fileDocRequired = e.fileDocRequired;
+                            runPhaseItem.stepNumber = a.stepNumber;
+                            tab.runPhaseItems.push(runPhaseItem);
                         });
-                        stepNumbers.forEach(a => {
 
-                            let tab: RunPhaseTabModel = new RunPhaseTabModel();
-                            tab.id = "tab" + a.stepNumber;
-                            tab.title = a.title;
-                            tab.href = "#" + tab.id;
-                            tab.active = a.stepNumber == 1;
-                            tab.colorText = a.colorText;
-                            tab.runPhaseItems = [];
+                        this.runPhaseTabModel.push(tab);
+                    });
 
-                            let runningsForThisStep = this.runningSteps.filter(w => w.stepNumber == a.stepNumber && w.isHeader == false);
-                            runningsForThisStep.forEach(e => {
-
-                                let runPhaseItem: RunPhaseItemModel = new RunPhaseItemModel();
-                                runPhaseItem.id = e.id;
-                                runPhaseItem.title = e.title; //+ (e.stepRequired ? "(اجباریست)" : "");
-                                runPhaseItem.description = e.description == null ? "" : e.description;
-                                runPhaseItem.required = e.stepRequired;
-                                runPhaseItem.fileDocRequired = e.fileDocRequired;
-                                runPhaseItem.stepNumber = a.stepNumber;
-                                tab.runPhaseItems.push(runPhaseItem);
-                            });
-
-                            this.runPhaseTabModel.push(tab);
-                        })
-
-                        if(this.runPhase.id != undefined) {
-                            const criteria1 = [{
-                                key: 'runPhaseId.equals',
-                                value: this.runPhase.id
-                            }];
-                            this.runRunningStepMarineSuffixService.query({
-                                page: 0,
-                                size: 20000,
-                                criteria: criteria1,
-                                sort: ["id", "asc"]
-                            }).subscribe(
-                                (response: HttpResponse<IRunRunningStepMarineSuffix[]>) => {
-                                response.body.forEach(x => {
-                                    this.runPhaseTabModel.forEach(w => {
-                                       w.runPhaseItems.forEach(r => {
-                                           if(r.id == x.runningStepId){
-                                               r.descMessage = x.description == null ? "" : x.description;
-                                               r.fileDoc = x.fileDoc;
-                                               r.checked = x.done;
-                                           }
-                                       })
-                                    });
-                                })
-                            },
-                                (res: HttpErrorResponse) => this.onError(res.message));
-                            }
-                        //this.runPhaseTabModel = resp.body.map(a => new RunPhaseTabModel(a.id))
-                    },
-                    (res: HttpErrorResponse) => this.onError(res.message));
-            });
-            this.finalNiazsanjiReportService.find(this.runPhase.finalNiazsanjiReportId).subscribe(
+                    if(this.runPhase.id != undefined) {
+                        const criteria1 = [{
+                            key: 'runPhaseId.equals',
+                            value: this.runPhase.id
+                        }];
+                        this.runRunningStepMarineSuffixService.query({
+                            page: 0,
+                            size: 20000,
+                            criteria: criteria1,
+                            sort: ["id", "asc"]
+                        }).subscribe(
+                            (response: HttpResponse<IRunRunningStepMarineSuffix[]>) => {
+                            response.body.forEach(x => {
+                                this.runPhaseTabModel.forEach(w => {
+                                   w.runPhaseItems.forEach(r => {
+                                       if(r.id == x.runningStepId){
+                                           r.descMessage = x.description == null ? "" : x.description;
+                                           r.fileDoc = x.fileDoc;
+                                           r.checked = x.done;
+                                       }
+                                   })
+                                });
+                            })
+                        },
+                            (res: HttpErrorResponse) => this.onError(res.message));
+                        }
+                    //this.runPhaseTabModel = resp.body.map(a => new RunPhaseTabModel(a.id))
+                },
+                (res: HttpErrorResponse) => this.onError(res.message));
+            /*this.finalNiazsanjiReportService.find(this.runPhase.finalNiazsanjiReportId).subscribe(
                 (res: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => {
 
                     this.finalniazsanjireport = res.body;
@@ -180,9 +161,9 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                         (res: HttpErrorResponse) => this.onError(res.message));
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
-            );
+            );*/
 
-            const criteria = [{
+            /*const criteria = [{
                 key: 'finalNiazsanjiReportId.equals',
                 value: this.runPhase.finalNiazsanjiReportId
             }];
@@ -193,7 +174,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                 sort: ["id", "asc"]
             }).subscribe((resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>) => {
                     this.finalniazsanjireportPeople = resp.body;
-                    /*if (resp.body.length > 0) {
+                    /!*if (resp.body.length > 0) {
                         const personIds = resp.body.map(a => a.personId);
                         const criteria1 = [{
                             key: 'id.in',
@@ -208,9 +189,9 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                                 this.people = res.body;
                             },
                             (res: HttpErrorResponse) => this.onError(res.message));
-                    }*/
+                    }*!/
                 },
-                (res: HttpErrorResponse) => this.onError(res.message))
+                (res: HttpErrorResponse) => this.onError(res.message))*/
 
         });
 

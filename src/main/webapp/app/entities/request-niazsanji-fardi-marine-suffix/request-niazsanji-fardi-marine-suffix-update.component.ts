@@ -389,7 +389,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         }
         else{
             this.approvedEducationalmodules = [];
-            this.approvedEducationalmodules.push(new EducationalModuleMarineSuffix(0,'0',"","پودمانی برای این شغل مصوب نشده است."));
+            this.approvedEducationalmodules.push(new EducationalModuleMarineSuffix(0,'0',"","پودمانی در شناسنامه شغلی شما یافت نشد."));
         }
     }
     showEducations(resp: IFinalNiazsanjiReportPersonMarineSuffix[]){
@@ -457,6 +457,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
 
 
 
+
         if(this.requestNiazsanjiFardi.allEducationalModuleId == undefined)
             this.requestNiazsanjiFardi.costAllEducationalModule = 0;
         else {
@@ -472,7 +473,27 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         else {
             if(isNaN(this.requestNiazsanjiFardi.costApprovedEducationalModule))
             {
-                this.message = "لطفا در باکس هزینه پودمان مصوب فقط عدد وارد نمائید.";
+                this.message = "لطفا در باکس هزینه از شناسنامه شغلی فقط عدد وارد نمائید.";
+                this.isSaving = false;
+                return;
+            }
+        }
+
+        if(this.requestNiazsanjiFardi.approvedEducationalModuleId)
+        {
+            if(!this.requestNiazsanjiFardi.approvedCourseTypeId)
+            {
+                this.message = "لطفا نوع دوره از شناسنامه شغلی را انتخاب نمائید.";
+                this.isSaving = false;
+                return;
+            }
+        }
+
+        if(this.requestNiazsanjiFardi.allEducationalModuleId)
+        {
+            if(!this.requestNiazsanjiFardi.allCourseTypeId)
+            {
+                this.message = "لطفا نوع دوره از کلیه پودمان ها را انتخاب نمائید.";
                 this.isSaving = false;
                 return;
             }

@@ -146,7 +146,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                     if(!resp.body.organizationChartId){
                         this.badError = "موقعیت در چارت سازمانی برای شما تنظیم نشده است، لطفا مراتب را با مدیریت سامانه در میان بگذارید.";
                     }
-                    this.prepareHomePagePersonHourChart(resp.body.id);
+                    //this.prepareHomePagePersonHourChart(resp.body.id);
                     this.prepareHomePagePersonEducationalModule(resp.body.id);
                     //this.prepareHomePageNiazsanjiReport(resp.body.id);
                 })
@@ -232,16 +232,19 @@ export class HomeComponent implements OnInit, OnDestroy {
                     a.totalLearningTime = a.learningTimePractical == undefined ? 0 : a.learningTimePractical + a.learningTimeTheorical == undefined ? 0 : a.learningTimeTheorical;
                    switch (a.status) {
                        case 100:
-                           a.statusMeaning = "بارگذاری مدارک اتمام دوره";
+                           a.statusMeaning = "خاتمه دوره";
                            break;
                        case 90:
-                           a.statusMeaning = "در حال اجرا دوره";
+                           a.statusMeaning = "اجرا شده";
                            break;
                        case 80:
-                           a.statusMeaning = "در حال برنامه ریزی برای اجرا دوره";
+                           a.statusMeaning = "برنامه ریزی شده";
+                           break;
+                       case 70:
+                           a.statusMeaning = "تصویب شوراء";
                            break;
                        case 0:
-                           a.statusMeaning = "باقیمانده";
+                           a.statusMeaning = "شناسنامه شغلی";
                            break;
                    }
                 });

@@ -9,7 +9,7 @@ import {
     RunPhaseMarineSuffixDeletePopupComponent,
     RunPhaseMarineSuffixDeleteDialogComponent,
     runPhaseRoute,
-    runPhasePopupRoute
+    runPhasePopupRoute, RunPhaseMarineSuffixDetailPeopleComponent
 } from './';
 import {NgSelectModule} from "@ng-select/ng-select";
 import {FormsModule} from "@angular/forms";
@@ -23,6 +23,7 @@ const ENTITY_STATES = [...runPhaseRoute, ...runPhasePopupRoute];
     imports: [MarineindustryprojSharedModule, NgSelectModule, FormsModule, BrowserAnimationsModule, GridModule , ExcelModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         RunPhaseMarineSuffixComponent,
+        RunPhaseMarineSuffixDetailPeopleComponent,
         RunPhaseMarineSuffixDetailComponent,
         RunPhaseMarineSuffixUpdateComponent,
         RunPhaseMarineSuffixDeleteDialogComponent,

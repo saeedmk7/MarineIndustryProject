@@ -40,7 +40,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let requestOrganizationNiazsanji of requestOrganizationNiazsanjis ;let i = index" [ngClass]="{'new': requestOrganizationNiazsanji.requestStatus == 'NEW','accept': requestOrganizationNiazsanji.requestStatus === 'ACCEPT','ignore': requestOrganizationNiazsanji.requestStatus === 'IGNORE'}">
+            <tr *ngFor="let requestOrganizationNiazsanji of requestOrganizationNiazsanjis ;let i = index"
+                [ngClass]="{'new': requestOrganizationNiazsanji.requestStatus == 'NEW','accept': requestOrganizationNiazsanji.requestStatus === 'ACCEPT','ignore': requestOrganizationNiazsanji.requestStatus === 'IGNORE'}">
                 <!--<td><a [routerLink]="['/request-organization-niazsanji-marine-suffix', requestOrganizationNiazsanji.id, 'view' ]">{{requestOrganizationNiazsanji.id}}</a></td>-->
                 <td>{{i+1}}</td>
                 <!--<td>{{requestOrganizationNiazsanji.code}}</td>-->

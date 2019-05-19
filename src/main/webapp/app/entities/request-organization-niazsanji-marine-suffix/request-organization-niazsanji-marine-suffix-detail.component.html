@@ -19,6 +19,14 @@
                         <a [routerLink]="['/educational-module-marine-suffix', requestOrganizationNiazsanji.educationalModuleId, 'view']">{{requestOrganizationNiazsanji.educationalModuleTitle}}</a>
                     </div>
                 </dd>
+                <dt><span >ساعت پودمان</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.totalLearningTime | number}}</span>
+                </dd>
+                <dt><span >سطح پودمان</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.skillLevelOfSkillTitle}}</span>
+                </dd>
                 <dt>وضعیت درخواست</dt>
                 <dd>
                     <strong>{{requestOrganizationNiazsanji.statusMeaning}}</strong>
@@ -35,21 +43,13 @@
                 <dd>
                     <span>{{requestOrganizationNiazsanji.trainingGoals}}</span>
                 </dd>
-
-                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات مدرس</div></div>
-                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherName">Teacher Name</span></dt>
-                <dd *ngIf="requestOrganizationNiazsanji.teacherId">
-                    {{requestOrganizationNiazsanji.teacherFamily}}
-                </dd>
-                <dd *ngIf="!requestOrganizationNiazsanji.teacherId">
-                    معلم در لیست مدرسان یافت نشده است.
-                </dd>
-                <ng-container *ngIf="!requestOrganizationNiazsanji.teacherId">
-                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherName">Teacher Name</span> و <span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherMobile">Teacher Mobile</span></dt>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.courseType">Course Type</span></dt>
                 <dd>
-                    <span>{{requestOrganizationNiazsanji.teacherName}} - {{requestOrganizationNiazsanji.teacherMobile}}</span>
+                    <div *ngIf="requestOrganizationNiazsanji.courseTypeId">
+                        <a [routerLink]="['/course-type-marine-suffix', requestOrganizationNiazsanji.courseTypeId, 'view']">{{requestOrganizationNiazsanji.courseTypeTitle}}</a>
+                    </div>
                 </dd>
-                </ng-container>
+
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات افراد شرکت کننده</div></div>
                 <div class="table-responsive">
                     <table class="table table-striped  table-bordered table-hover table-sm">
@@ -69,6 +69,20 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات مدرس</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherName">Teacher Name</span></dt>
+                <dd *ngIf="requestOrganizationNiazsanji.teacherId">
+                    {{requestOrganizationNiazsanji.teacherFamily}}
+                </dd>
+                <dd *ngIf="!requestOrganizationNiazsanji.teacherId">
+                    معلم در لیست مدرسان یافت نشده است.
+                </dd>
+                <ng-container *ngIf="!requestOrganizationNiazsanji.teacherId">
+                    <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherName">Teacher Name</span> و <span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherMobile">Teacher Mobile</span></dt>
+                    <dd>
+                        <span>{{requestOrganizationNiazsanji.teacherName}} - {{requestOrganizationNiazsanji.teacherMobile}}</span>
+                    </dd>
+                </ng-container>
                 <!--<dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.requestStatus">Request Status</span></dt>
                 <dd>
                     <span jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + requestOrganizationNiazsanji.requestStatus}}">{{requestOrganizationNiazsanji.requestStatus}}</span>
@@ -90,12 +104,7 @@
                 <dd>
                     <span>{{requestOrganizationNiazsanji.description}}</span>
                 </dd>
-                 <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.courseType">Course Type</span></dt>
-                <dd>
-                    <div *ngIf="requestOrganizationNiazsanji.courseTypeId">
-                        <a [routerLink]="['/course-type-marine-suffix', requestOrganizationNiazsanji.courseTypeId, 'view']">{{requestOrganizationNiazsanji.courseTypeTitle}}</a>
-                    </div>
-                </dd>
+
 
                 <!--<dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.createUserLogin">Create User Login</span></dt>
                 <dd>

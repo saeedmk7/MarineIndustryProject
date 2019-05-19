@@ -274,7 +274,7 @@
             <kendo-grid-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
             <div *kendoGridDetailTemplate="let dataItem">
-                <mi-final-niazsanji-report-marine-suffix-detail-people [people]="dataItem.people"></mi-final-niazsanji-report-marine-suffix-detail-people>
+                <mi-run-phase-marine-suffix-detail-people [people]="dataItem.people"></mi-run-phase-marine-suffix-detail-people>
             </div>
             <kendo-grid-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="500"></kendo-grid-column>
             <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
