@@ -129,7 +129,10 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
                 (res: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => {
 
                     this.finalniazsanjireport = res.body;
-
+                    this.designAndPlanning.directCost = this.finalniazsanjireport.priceCost;
+                    this.designAndPlanning.courseTypeId = this.finalniazsanjireport.courseTypeId;
+                    this.designAndPlanning.educationalModuleId = this.finalniazsanjireport.educationalModuleId;
+                    this.designAndPlanning.organizationChartId = this.finalniazsanjireport.organizationChartId;
                     this.educationalModuleService.find(this.finalniazsanjireport.educationalModuleId).subscribe(
                         (res: HttpResponse<IEducationalModuleMarineSuffix>) => {
 

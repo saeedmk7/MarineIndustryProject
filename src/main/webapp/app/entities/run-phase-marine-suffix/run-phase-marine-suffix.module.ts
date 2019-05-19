@@ -11,11 +11,16 @@ import {
     runPhaseRoute,
     runPhasePopupRoute
 } from './';
+import {NgSelectModule} from "@ng-select/ng-select";
+import {FormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ExcelModule, GridModule} from "@progress/kendo-angular-grid";
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 
 const ENTITY_STATES = [...runPhaseRoute, ...runPhasePopupRoute];
 
 @NgModule({
-    imports: [MarineindustryprojSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [MarineindustryprojSharedModule, NgSelectModule, FormsModule, BrowserAnimationsModule, GridModule , ExcelModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         RunPhaseMarineSuffixComponent,
         RunPhaseMarineSuffixDetailComponent,
@@ -23,6 +28,7 @@ const ENTITY_STATES = [...runPhaseRoute, ...runPhasePopupRoute];
         RunPhaseMarineSuffixDeleteDialogComponent,
         RunPhaseMarineSuffixDeletePopupComponent
     ],
+    providers: [ ConvertObjectDatesService ],
     entryComponents: [
         RunPhaseMarineSuffixComponent,
         RunPhaseMarineSuffixUpdateComponent,

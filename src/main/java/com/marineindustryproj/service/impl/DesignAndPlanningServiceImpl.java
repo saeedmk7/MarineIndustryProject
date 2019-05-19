@@ -2,7 +2,9 @@ package com.marineindustryproj.service.impl;
 
 import com.marineindustryproj.domain.FinalNiazsanjiReport;
 import com.marineindustryproj.domain.Person;
+import com.marineindustryproj.domain.RunPhase;
 import com.marineindustryproj.repository.FinalNiazsanjiReportRepository;
+import com.marineindustryproj.repository.RunPhaseRepository;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.DesignAndPlanningQueryService;
 import com.marineindustryproj.service.DesignAndPlanningService;
@@ -39,16 +41,19 @@ public class DesignAndPlanningServiceImpl implements DesignAndPlanningService {
 
     private final FinalNiazsanjiReportRepository finalNiazsanjiReportRepository;
 
+    private final RunPhaseRepository runPhaseRepository;
+
     private final DesignAndPlanningMapper designAndPlanningMapper;
 
     private final DesignAndPlanningQueryService designAndPlanningQueryService;
 
     public DesignAndPlanningServiceImpl(DesignAndPlanningRepository designAndPlanningRepository,
                                         FinalNiazsanjiReportRepository finalNiazsanjiReportRepository,
-                                        DesignAndPlanningMapper designAndPlanningMapper,
+                                        RunPhaseRepository runPhaseRepository, DesignAndPlanningMapper designAndPlanningMapper,
                                         DesignAndPlanningQueryService designAndPlanningQueryService) {
         this.designAndPlanningRepository = designAndPlanningRepository;
         this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
+        this.runPhaseRepository = runPhaseRepository;
         this.designAndPlanningMapper = designAndPlanningMapper;
         this.designAndPlanningQueryService = designAndPlanningQueryService;
     }
@@ -69,11 +74,29 @@ public class DesignAndPlanningServiceImpl implements DesignAndPlanningService {
         {
             designAndPlanningDTO.setFinishedDate(ZonedDateTime.now());
             designAndPlanningDTO.setFinishedUserLogin(SecurityUtils.getCurrentUserLogin().get());
-
             designAndPlanningDTO.setStatus(10);
-
-
             finalNiazsanjiReport.setStatus(10);
+
+            RunPhase runPhase = new RunPhase();
+            runPhase.setFinalNiazsanjiReport(finalNiazsanjiReport);
+            runPhase.setArchived(false);
+            runPhase.setCreateDate(ZonedDateTime.now());
+            runPhase.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            runPhase.setStatus(0);
+            runPhase.setDone(false);
+            runPhase.setFinalizeCost(designAndPlanningDTO.getDirectCost());
+            runPhase.setEducationalModule(finalNiazsanjiReport.getEducationalModule());
+            runPhase.setOrganizationChart(finalNiazsanjiReport.getOrganizationChart());
+            runPhase.runMonth(designAndPlanningDTO.getRunMonth());
+            long[] personIds = finalNiazsanjiReport.getFinalNiazsanjiReportPeople().stream().mapToLong(a ->a.getPerson().getId()).toArray();
+            Set<Person> people = new HashSet<>();
+            for (long personId : personIds) {
+                Person person = new Person();
+                person.setId(personId);
+                people.add(person);
+            }
+            runPhase.setPeople(people);
+            runPhaseRepository.save(runPhase);
         }
 
         finalNiazsanjiReportRepository.save(finalNiazsanjiReport);

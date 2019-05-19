@@ -1,10 +1,10 @@
-import {Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild, AfterViewInit} from '@angular/core';
 import {HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {JhiEventManager, JhiParseLinks, JhiAlertService} from 'ng-jhipster';
 
-import {IRunPhaseMarineSuffix} from 'app/shared/model/run-phase-marine-suffix.model';
+import {IRunPhaseMarineSuffix, RunPhaseMarineSuffix} from 'app/shared/model/run-phase-marine-suffix.model';
 import {Principal} from 'app/core';
 
 import {ITEMS_PER_PAGE} from 'app/shared';
@@ -28,6 +28,7 @@ import {IRunPhaseFardiMarineSuffix} from "app/entities/run-phase-marine-suffix/r
 import {IRunPhaseOrganizationMarineSuffix} from "app/entities/run-phase-marine-suffix/run-phase-organization-marine-suffix.model";
 import {Workbook} from '@progress/kendo-angular-excel-export';
 import { saveAs } from '@progress/kendo-file-saver';
+import {IFinalNiazsanjiReportMarineSuffix} from "app/shared/model/final-niazsanji-report-marine-suffix.model";
 
 @Component({
     selector: 'mi-run-phase-marine-suffix',
@@ -56,10 +57,10 @@ import { saveAs } from '@progress/kendo-file-saver';
     `],
     templateUrl: './run-phase-marine-suffix.component.html'
 })
-export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy {
+export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterViewInit{
     currentAccount: any;
-    runPhases: IRunPhaseMarineSuffix[];
-    runPhase: IRunPhaseMarineSuffix = {};
+    runPhases: IRunPhaseMarineSuffix[] = [];
+    public runPhase: IRunPhaseMarineSuffix = {};
     educationalModules: IEducationalModuleMarineSuffix[];
     people: IPersonMarineSuffix[];
     runPhaseFardis: IRunPhaseFardiMarineSuffix[] = [];
@@ -231,6 +232,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     private prepareForFinal(data: IRunPhaseMarineSuffix[]) {
+        debugger;
         if (data.length > 0) {
             $('#collapseExample').addClass('collapse');
             if (this.niazSanjiSource) {
@@ -518,7 +520,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy {
 
             this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
                 this.currentPerson = resp.body;
-
+                debugger
                 this.prepareSearchOrgChart();
                 this.prepareSearchEducationalModule();
                 this.prepareSearchPerson();
@@ -550,5 +552,8 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    ngAfterViewInit(): void {
     }
 }
