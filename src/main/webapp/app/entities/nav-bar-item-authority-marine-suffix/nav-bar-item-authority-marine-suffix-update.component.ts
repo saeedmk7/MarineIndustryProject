@@ -70,7 +70,7 @@ export class NavBarItemAuthorityMarineSuffixUpdateComponent implements OnInit {
             (resultAuthorities: HttpResponse<INavBarItemAuthorityMarineSuffix[]>) => {
                 this.navBarItemService.query().subscribe(
                     (res: HttpResponse<INavBarItemMarineSuffix[]>) => {
-                        this.navbaritems = res.body;
+                        this.navbaritems = res.body.sort((a,b) => (a.displayOrder > b.displayOrder) ? 1 : (a.displayOrder < b.displayOrder) ? -1 : 0);
                         this.resultAuthorityBody = resultAuthorities.body;
                         const wq = this.resultAuthorityBody;
 
@@ -156,6 +156,7 @@ export class NavBarItemAuthorityMarineSuffixUpdateComponent implements OnInit {
     }
 
     save() {
+        debugger;
         this.isSaving = true;
         const authorityName = this.navBarItemAuthority.authorityName;
         const selectedLeafNodeIdsKeys = Object.keys(this.tree.treeModel.selectedLeafNodeIds);

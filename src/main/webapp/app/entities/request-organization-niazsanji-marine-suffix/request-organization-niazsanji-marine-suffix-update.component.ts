@@ -218,7 +218,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
                     }
                     else {
                         this.targetPeople = [];
-                        this.targetPeople = [new PersonMarineSuffix(0, 'خطا', 'خطا', 'خطا: نفر دریافت کننده ای در چارت سامانی برای شما تعریف نشده است. لطفا با مدیریت سامانه تماس بگیرید. ')]
+                        this.targetPeople = [new PersonMarineSuffix(0, 'خطا', 'خطا', 'خطا: نفر دریافت کننده ای در چارت سازمانی برای شما تعریف نشده است. لطفا با مدیریت سامانه تماس بگیرید. ')]
                     }
                 },
                 (error) => this.onError("فردی یافت نشد."));

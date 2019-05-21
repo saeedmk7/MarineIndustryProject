@@ -40,6 +40,10 @@ import {FINALNIAZSANJISTATUSMEANING} from "app/shared/constants/final-niazsanji-
         .k-grid tr.success { background-color: #28a745; color: #fff; }
         .k-grid tr.warning { background-color: #ffc107; color: #fff; }
         .k-grid tr.danger { background-color: #f2dede; color: #a94442; }
+        .k-grid tr.info:hover { background-color: #d9edf7; color: #31708f; }
+        .k-grid tr.success:hover { background-color: #28a745; color: #fff; }
+        .k-grid tr.warning:hover { background-color: #ffc107; color: #fff; }
+        .k-grid tr.danger:hover { background-color: #f2dede; color: #a94442; }
         
     `],
     templateUrl: './final-niazsanji-report-marine-suffix.component.html'

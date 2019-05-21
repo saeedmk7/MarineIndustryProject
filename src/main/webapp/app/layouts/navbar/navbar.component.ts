@@ -12,6 +12,7 @@ import {INavBarItemMarineSuffix} from "app/shared/model/nav-bar-item-marine-suff
 import {INavBarItemAuthorityMarineSuffix} from "app/shared/model/nav-bar-item-authority-marine-suffix.model";
 import {LocalStorageService} from 'ngx-webstorage';
 import {CURRENT_ALLOWED_URL_KEY} from "app/shared/constants/storage-keys.constants";
+import {forEach} from "@angular/router/src/utils/collection";
 
 /*import * as menus from './menu.json';*/
 
@@ -96,10 +97,19 @@ export class NavbarComponent implements OnInit,AfterViewInit {
                         ];*/
                         this.navBarItemMarineSuffixService.query()
                             .subscribe((res: HttpResponse<INavBarItemMarineSuffix[]>) => {
-
-
+                                debugger;
                                 this.navBarItemMarineSuffix = res.body;
+                                let finalNavBarItemMarineSuffix = res.body;
                                 this.navBarItemMarineSuffix = this.navBarItemMarineSuffix.filter((a) => navBarItemIds.includes(a.id));
+                                for (let i = 0; i < this.navBarItemMarineSuffix.length; i++) {
+                                    const id = this.navBarItemMarineSuffix[i].id;
+                                    const childs = finalNavBarItemMarineSuffix.filter(a => a.parentId == id);
+                                    const selectedChilds = this.navBarItemMarineSuffix.filter(a => a.parentId == id);
+                                    if(childs.length != 0 && selectedChilds.length == 0)
+                                    {
+                                        this.navBarItemMarineSuffix = this.navBarItemMarineSuffix.filter(a => a.id != id);
+                                    }
+                                }
                                 let navBarItemAddresses: string[] = this.navBarItemMarineSuffix.map(function (v) {
                                     return v.url;
                                 });

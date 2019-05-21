@@ -116,7 +116,15 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
                 this.requestNiazsanjiFardi.costApprovedEducationalModule = 0;
                 this.requestNiazsanjiFardi.costAllEducationalModule = 0;
             }
-
+            else{
+                if(this.requestNiazsanjiFardi.allEducationalModuleId)
+                {
+                    this.requestNiazsanjiFardi.allCourseTypeId = this.requestNiazsanjiFardi.courseTypeId;
+                }
+                if(this.requestNiazsanjiFardi.approvedEducationalModuleId) {
+                }
+                    this.requestNiazsanjiFardi.approvedCourseTypeId = this.requestNiazsanjiFardi.courseTypeId;
+            }
         });
 
         if(this.organizationChartService.organizationchartsAll){
@@ -300,7 +308,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
                     }
                     else {
                         this.targetPeople = [];
-                        this.targetPeople = [new PersonMarineSuffix(0, 'خطا', 'خطا', 'خطا: نفر دریافت کننده ای در چارت سامانی برای شما تعریف نشده است. لطفا با مدیریت سامانه تماس بگیرید. ')]
+                        this.targetPeople = [new PersonMarineSuffix(0, 'خطا', 'خطا', 'خطا: نفر دریافت کننده ای در چارت سازمانی برای شما تعریف نشده است. لطفا با مدیریت سامانه تماس بگیرید. ')]
                     }
                 },
                 (error) => this.onError("فردی یافت نشد."));
@@ -502,6 +510,10 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         this.currentUserFullName = this.currentPerson.fullName;
 
         if (this.requestNiazsanjiFardi.id !== undefined) {
+            if(this.requestNiazsanjiFardi.approvedCourseTypeId)
+                this.requestNiazsanjiFardi.courseTypeId = this.requestNiazsanjiFardi.approvedCourseTypeId;
+            if(this.requestNiazsanjiFardi.allCourseTypeId)
+                this.requestNiazsanjiFardi.courseTypeId = this.requestNiazsanjiFardi.allCourseTypeId;
             this.subscribeToSaveResponse(this.requestNiazsanjiFardiService.update(this.requestNiazsanjiFardi),true);
         } else {
             if(this.currentPerson.organizationChartId) {

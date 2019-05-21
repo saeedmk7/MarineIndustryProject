@@ -44,7 +44,7 @@ export const authorityPopupRoute: Routes = [
             authority: AuthorityResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'marineindustryprojApp.authority.home.title'
         },
         canActivate: [UserRouteAccessService],
