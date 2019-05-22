@@ -33,46 +33,7 @@ import {IFinalNiazsanjiReportMarineSuffix} from "app/shared/model/final-niazsanj
 @Component({
     selector: 'mi-run-phase-marine-suffix',
     encapsulation: ViewEncapsulation.None,
-    styles: [`
-        .k-grid tr.info {
-            background-color: #d9edf7;
-            color: #31708f;
-        }
-
-        .k-grid tr.success {
-            background-color: #28a745;
-            color: #fff;
-        }
-
-        .k-grid tr.warning {
-            background-color: #ffc107;
-            color: #fff;
-        }
-
-        .k-grid tr.danger {
-            background-color: #f2dede;
-            color: #a94442;
-        }
-        .k-grid tr.info:hover {
-            background-color: #d9edf7;
-            color: #31708f;
-        }
-
-        .k-grid tr.success:hover{
-            background-color: #28a745;
-            color: #fff;
-        }
-
-        .k-grid tr.warning:hover {
-            background-color: #ffc107;
-            color: #fff;
-        }
-
-        .k-grid tr.danger:hover {
-            background-color: #f2dede;
-            color: #a94442;
-        }
-    `],
+    styleUrls: ['./run-phase-marine-suffix.component.scss'],
     templateUrl: './run-phase-marine-suffix.component.html'
 })
 export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterViewInit{
@@ -81,6 +42,8 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     public runPhase: IRunPhaseMarineSuffix = {};
     educationalModules: IEducationalModuleMarineSuffix[];
     people: IPersonMarineSuffix[];
+    recommendedPeople: IPersonMarineSuffix[];
+    personId: number;
     runPhaseFardis: IRunPhaseFardiMarineSuffix[] = [];
     runPhaseOrganizations: IRunPhaseOrganizationMarineSuffix[] = [];
 
@@ -240,6 +203,13 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                 });
             }
         }
+        debugger;
+        if (f.value['personId']) {
+            let val = +f.value['personId'];
+            criteria.push({
+                key: 'personId.in', value: val
+            });
+        }
         if (f.value['educationalModuleId']) {
             let val = +f.value['educationalModuleId'];
             criteria.push({
@@ -287,7 +257,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             } //a.organizationChartTitle;
             //runPhaseFardi.priceCost = a.finalizeCost;
             runPhaseFardi.finalizeCost = a.finalizeCost;
-            //runPhaseFardi.courseTypeTitle = a.courseTypeTitle;
+            runPhaseFardi.courseTypeTitle = a.courseTypeTitle;
             runPhaseFardi.runMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
             if (a.people.length > 0) {
                 let person = this.people.find(q => q.id == a.people[0].id);
@@ -328,7 +298,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             //runPhaseOrganization.priceCost = a.priceCost;
             runPhaseOrganization.finalizeCost = a.finalizeCost;
             runPhaseOrganization.runMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
-            //runPhaseOrganization.courseTypeTitle = a.courseTypeTitle;
+            runPhaseOrganization.courseTypeTitle = a.courseTypeTitle;
             debugger;
             if (a.people) {
                 let peopleIds = a.people.map(a => a.id);
@@ -410,12 +380,52 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         }
     }
 
-    prepareSearchPerson() {
+    prepareSearchPerson(orgs: IOrganizationChartMarineSuffix[]) {
+        debugger;
+        if(this.isSuperUsers)
+        {
+            if(!this.people) {
+                if (this.personService.people) {
+                    this.people = this.personService.people;
+                    this.recommendedPeople = this.convertObjectDatesService.goClone(this.people);
+                }
+                else {
+                    this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
+                            debugger;
+                            this.people = res.body;
+                            this.recommendedPeople = this.convertObjectDatesService.goClone(this.people);
+                        },
+                        (res: HttpErrorResponse) => this.onError(res.message));
+                }
+            }
+            else{
+                this.recommendedPeople = this.convertObjectDatesService.goClone(this.people);
+            }
+            return;
+        }
+        const orgIds = orgs.map(a => a.id);
+        let criteria = [{
+            key:'organizationChartId.in',
+            value: orgIds
+        }];
+        this.personService.query({
+            page: 0,
+            size: 20000,
+            criteria,
+            sort: ["id","asc"]
+        }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
+                this.recommendedPeople = resp.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message));
+    }
+    preparePeople() {
+        debugger;
         if (this.personService.people) {
             this.people = this.personService.people;
         }
         else {
             this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
+                    debugger;
                     this.people = res.body;
                 },
                 (res: HttpErrorResponse) => this.onError(res.message));
@@ -430,6 +440,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
             const orgs = this.handleOrgChartView();
+            this.prepareSearchPerson(orgs);
             this.prepareRootsSearch(orgs);
         }
         else {
@@ -438,6 +449,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
 
                     this.organizationcharts = res.body;
                     const orgs = this.handleOrgChartView();
+                    this.prepareSearchPerson(orgs);
                     this.prepareRootsSearch(orgs);
                 },
                 (res: HttpErrorResponse) => this.onError(res.message));
@@ -458,6 +470,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             this.recommenedOrgCharts = [];
             this.recommenedOrgCharts.push(this.organizationcharts.find(a => a.id == this.currentPerson.organizationChartId));
         }
+
         return this.recommenedOrgCharts;
     }
 
@@ -538,10 +551,10 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
 
             this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
                 this.currentPerson = resp.body;
-                debugger
+
                 this.prepareSearchOrgChart();
                 this.prepareSearchEducationalModule();
-                this.prepareSearchPerson();
+                this.preparePeople();
                 this.prepareSearchDate();
             });
         });

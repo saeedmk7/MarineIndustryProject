@@ -63,6 +63,8 @@ public class DocumentCriteria implements Serializable {
 
     private LongFilter requestNiazsanjiFardiId;
 
+    private LongFilter instructionId;
+
     public LongFilter getId() {
         return id;
     }
@@ -223,6 +225,14 @@ public class DocumentCriteria implements Serializable {
         this.requestNiazsanjiFardiId = requestNiazsanjiFardiId;
     }
 
+    public LongFilter getInstructionId() {
+        return instructionId;
+    }
+
+    public void setInstructionId(LongFilter instructionId) {
+        this.instructionId = instructionId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -253,7 +263,8 @@ public class DocumentCriteria implements Serializable {
             Objects.equals(announcementId, that.announcementId) &&
             Objects.equals(usersRequestId, that.usersRequestId) &&
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
-            Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId);
+            Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId) &&
+            Objects.equals(instructionId, that.instructionId);
     }
 
     @Override
@@ -278,7 +289,8 @@ public class DocumentCriteria implements Serializable {
         announcementId,
         usersRequestId,
         niazsanjiFardiId,
-        requestNiazsanjiFardiId
+        requestNiazsanjiFardiId,
+        instructionId
         );
     }
 
@@ -305,6 +317,7 @@ public class DocumentCriteria implements Serializable {
                 (usersRequestId != null ? "usersRequestId=" + usersRequestId + ", " : "") +
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
                 (requestNiazsanjiFardiId != null ? "requestNiazsanjiFardiId=" + requestNiazsanjiFardiId + ", " : "") +
+                (instructionId != null ? "instructionId=" + instructionId + ", " : "") +
             "}";
     }
 

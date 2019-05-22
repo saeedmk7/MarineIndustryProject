@@ -128,6 +128,11 @@ public class Document implements Serializable {
     @JsonIgnore
     private Set<RequestNiazsanjiFardi> requestNiazsanjiFardis = new HashSet<>();
 
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<Instruction> instructions = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -600,6 +605,31 @@ public class Document implements Serializable {
 
     public void setRequestNiazsanjiFardis(Set<RequestNiazsanjiFardi> requestNiazsanjiFardis) {
         this.requestNiazsanjiFardis = requestNiazsanjiFardis;
+    }
+
+    public Set<Instruction> getInstructions() {
+        return instructions;
+    }
+
+    public Document instructions(Set<Instruction> instructions) {
+        this.instructions = instructions;
+        return this;
+    }
+
+    public Document addInstruction(Instruction instruction) {
+        this.instructions.add(instruction);
+        instruction.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeInstruction(Instruction instruction) {
+        this.instructions.remove(instruction);
+        instruction.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setInstructions(Set<Instruction> instructions) {
+        this.instructions = instructions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

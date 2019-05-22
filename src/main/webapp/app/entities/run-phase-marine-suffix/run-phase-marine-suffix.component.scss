@@ -1,3 +1,46 @@
+/*list*/
+.k-grid tr.info {
+    background-color: #d9edf7;
+    color: #31708f;
+}
+
+.k-grid tr.success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.k-grid tr.warning {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.k-grid tr.danger {
+    background-color: #f2dede;
+    color: #a94442;
+}
+.k-grid tr.info:hover {
+    background-color: #d9edf7;
+    color: #31708f;
+}
+
+.k-grid tr.success:hover{
+    background-color: #28a745;
+    color: #fff;
+}
+
+.k-grid tr.warning:hover {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.k-grid tr.danger:hover {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+/*update*/
+
+
 tr.success { background-color: #dff0d8; color: #3c763d; }
 tr.danger { background-color: #f2dede; color: #a94442; }
 tr.info { background-color: #d9edf7; color: #31708f; }

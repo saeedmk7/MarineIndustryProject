@@ -15,6 +15,7 @@ import { IAnnouncementMarineSuffix } from 'app/shared/model//announcement-marine
 import { IUsersRequestMarineSuffix } from 'app/shared/model//users-request-marine-suffix.model';
 import { INiazsanjiFardiMarineSuffix } from 'app/shared/model//niazsanji-fardi-marine-suffix.model';
 import { IRequestNiazsanjiFardiMarineSuffix } from 'app/shared/model//request-niazsanji-fardi-marine-suffix.model';
+import { IInstructionMarineSuffix } from 'app/shared/model//instruction-marine-suffix.model';
 
 export interface IDocumentMarineSuffix {
     id?: number;
@@ -43,6 +44,7 @@ export interface IDocumentMarineSuffix {
     usersRequests?: IUsersRequestMarineSuffix[];
     niazsanjiFardis?: INiazsanjiFardiMarineSuffix[];
     requestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[];
+    instructions?: IInstructionMarineSuffix[];
 }
 
 export class DocumentMarineSuffix implements IDocumentMarineSuffix {
@@ -72,6 +74,7 @@ export class DocumentMarineSuffix implements IDocumentMarineSuffix {
         public announcements?: IAnnouncementMarineSuffix[],
         public usersRequests?: IUsersRequestMarineSuffix[],
         public niazsanjiFardis?: INiazsanjiFardiMarineSuffix[],
-        public requestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[]
+        public requestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[],
+        public instructions?: IInstructionMarineSuffix[]
     ) {}
 }

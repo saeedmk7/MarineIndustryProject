@@ -162,6 +162,12 @@ public class RunPhaseQueryService extends QueryService<RunPhase> {
                 specification = specification.and(buildSpecification(criteria.getNiazsanjiYear(),
                     root -> root.join(RunPhase_.finalNiazsanjiReport, JoinType.LEFT).get(FinalNiazsanjiReport_.niazsanjiYear)));
             }
+            if (criteria.getCourseTypeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getCourseTypeId(),
+                                                                     root -> root.join(RunPhase_.finalNiazsanjiReport, JoinType.LEFT)
+                                                                         .join(FinalNiazsanjiReport_.courseType, JoinType.LEFT)
+                                                                         .get(CourseType_.id)));
+            }
         }
         return specification;
     }

@@ -39,7 +39,7 @@ export class PersonMarineSuffixService {
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {
-
+        debugger;
         if(req) {
             const options = createRequestOption(req);
             return this.http

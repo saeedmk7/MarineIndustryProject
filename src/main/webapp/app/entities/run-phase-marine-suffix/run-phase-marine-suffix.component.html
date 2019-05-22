@@ -89,7 +89,20 @@
                             id="field_organizationChart"
                             [(ngModel)]="runPhase.organizationChartId">
                     </div>
-
+                    <div class="form-group half">
+                        <label class="form-control-label" for="field_educationalModule">افراد</label>
+                        <ng-select
+                            [items]="recommendedPeople"
+                            [multiple]="false"
+                            [closeOnSelect]="true"
+                            [searchable]="true"
+                            bindLabel="fullName"
+                            bindValue="id"
+                            placeholder="انتخاب نمائید."
+                            name="personId"
+                            id="field_personId"
+                            [(ngModel)]="personId">
+                    </div>
                     <div class="form-group half">
                         <label class="form-control-label" for="field_educationalModule">پودمان آموزشی</label>
                         <ng-select
@@ -174,7 +187,7 @@
             <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="90"></kendo-grid-column>
-            <!--<kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>-->
+            <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>
             <!--<kendo-grid-column field="finalizeCost" title="هزینه پایانی" [width]="100"></kendo-grid-column>-->
             <kendo-grid-column field="finalizeCost" title="هزینه صرف شده" [width]="100">
                 <ng-template
@@ -196,7 +209,7 @@
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
-                <!--<kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="200"></kendo-excelexport-column>-->
+                <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="finalizeCost" title="هزینه پایانی" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="200"></kendo-excelexport-column>
@@ -282,7 +295,7 @@
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
-                <!--<kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-excelexport-column>-->
+                <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="finalizeCost" title="هزینه پایانی" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100"></kendo-excelexport-column>
                 <!--<kendo-excelexport-column field="priceCost" title="هزینه" [width]="100"></kendo-excelexport-column>-->

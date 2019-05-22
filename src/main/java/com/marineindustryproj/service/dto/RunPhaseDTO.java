@@ -76,6 +76,10 @@ public class RunPhaseDTO implements Serializable {
 
     private NiazSanjiSource niazSanjiSource;
 
+    private Long courseTypeId;
+
+    private String courseTypeTitle;
+
     public Long getId() {
         return id;
     }
@@ -284,6 +288,22 @@ public class RunPhaseDTO implements Serializable {
         this.niazSanjiSource = niazSanjiSource;
     }
 
+    public Long getCourseTypeId() {
+        return courseTypeId;
+    }
+
+    public void setCourseTypeId(Long courseTypeId) {
+        this.courseTypeId = courseTypeId;
+    }
+
+    public String getCourseTypeTitle() {
+        return courseTypeTitle;
+    }
+
+    public void setCourseTypeTitle(String courseTypeTitle) {
+        this.courseTypeTitle = courseTypeTitle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -324,6 +344,8 @@ public class RunPhaseDTO implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", courseType=" + getCourseTypeId() +
+            ", courseType='" + getCourseTypeTitle() + "'" +
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             ", educationalModule=" + getEducationalModuleId() +

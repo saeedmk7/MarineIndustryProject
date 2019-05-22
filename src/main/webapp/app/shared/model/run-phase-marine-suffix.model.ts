@@ -33,6 +33,8 @@ export interface IRunPhaseMarineSuffix {
     finalNiazsanjiReportId?: number;
     niazsanjiYear?: number;
     niazSanjiSource?: NiazSanjiSource;
+    courseTypeId?: number;
+    courseTypeTitle?: string;
 }
 
 export class RunPhaseMarineSuffix implements IRunPhaseMarineSuffix {
@@ -64,7 +66,9 @@ export class RunPhaseMarineSuffix implements IRunPhaseMarineSuffix {
         public finalNiazsanjiReportDescription?: string,
         public finalNiazsanjiReportId?: number,
         public niazsanjiYear?: number,
-        public niazSanjiSource?: NiazSanjiSource
+        public niazSanjiSource?: NiazSanjiSource,
+        public courseTypeId?: number,
+        public courseTypeTitle?: string
     ) {
         this.done = this.done || false;
         this.archived = this.archived || false;

@@ -27,7 +27,7 @@
             <th jhiSortBy="recommendedByOrgchart"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.recommendedByOrgchart">Recommended By Orgchart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="studentsType"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.studentsType">Students Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th>افراد انتخابی</th>
+            <!--<th>افراد انتخابی</th>-->
             <!--<th jhiSortBy="teacherNotFound"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherNotFound">Teacher Not Found</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="teacherName"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherName">Teacher Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <!--<th jhiSortBy="requestStatus"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.requestStatus">Request Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
@@ -57,11 +57,11 @@
                     </div>
                 </td>
                 <td>{{requestOrganizationNiazsanji.studentsType}}</td>
-                <td>
+               <!-- <td>
                     <div *ngFor="let person of requestOrganizationNiazsanji.people">
                         <span class="badge badge-info">{{ person.name }} {{person.family}}</span>
                     </div>
-                </td>
+                </td>-->
                 <!--<td>{{requestOrganizationNiazsanji.teacherNotFound}}</td>-->
                 <!--<td>{{requestOrganizationNiazsanji.teacherNotFound ? requestOrganizationNiazsanji.teacherName : requestOrganizationNiazsanji.teacherFamily}}</td>-->
                 <!--<td>

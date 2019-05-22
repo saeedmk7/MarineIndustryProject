@@ -19,6 +19,8 @@ public interface RunPhaseMapper extends EntityMapper<RunPhaseDTO, RunPhase> {
     @Mapping(source = "finalNiazsanjiReport.description", target = "finalNiazsanjiReportDescription")
     @Mapping(source = "finalNiazsanjiReport.niazSanjiSource", target = "niazSanjiSource")
     @Mapping(source = "finalNiazsanjiReport.niazsanjiYear", target = "niazsanjiYear")
+    @Mapping(source = "finalNiazsanjiReport.courseType.id", target = "courseTypeId")
+    @Mapping(source = "finalNiazsanjiReport.courseType.title", target = "courseTypeTitle")
     RunPhaseDTO toDto(RunPhase runPhase);
 
     @Mapping(target = "runRunningSteps", ignore = true)

@@ -37,7 +37,7 @@
             <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="studentsType"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.studentsType">Students Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th>افراد انتخابی</th>
+                <!--<th>افراد انتخابی</th>-->
                 <!--<th jhiSortBy="teacherFamily"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.teacher">Teacher</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -71,11 +71,11 @@
                         <a [routerLink]="['../course-type-marine-suffix', finalOrganizationNiazsanji.courseTypeId , 'view' ]" >{{finalOrganizationNiazsanji.courseTypeTitle}}</a>
                     </div>
                 </td>
-                <td>
+                <!--<td>
                     <div *ngFor="let person of finalOrganizationNiazsanji.people">
                         <span class="badge badge-info">{{ person.name }} {{person.family}}</span>
                     </div>
-                </td>
+                </td>-->
                 <!--<td>{{finalOrganizationNiazsanji.teacherName}}</td>
                 <td>{{finalOrganizationNiazsanji.teacherMobile}}</td>
                 <td jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + finalOrganizationNiazsanji.requestStatus}}">{{finalOrganizationNiazsanji.requestStatus}}</td>

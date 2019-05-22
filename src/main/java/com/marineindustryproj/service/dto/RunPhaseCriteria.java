@@ -73,6 +73,8 @@ public class RunPhaseCriteria implements Serializable {
 
     private FinalNiazsanjiReportCriteria.NiazSanjiSourceFilter niazSanjiSource;
 
+    private LongFilter courseTypeId;
+
     public LongFilter getId() {
         return id;
     }
@@ -263,7 +265,13 @@ public class RunPhaseCriteria implements Serializable {
     public void setNiazSanjiSource(FinalNiazsanjiReportCriteria.NiazSanjiSourceFilter niazSanjiSource) {
         this.niazSanjiSource = niazSanjiSource;
     }
+    public LongFilter getCourseTypeId() {
+        return courseTypeId;
+    }
 
+    public void setCourseTypeId(LongFilter courseTypeId) {
+        this.courseTypeId = courseTypeId;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -296,6 +304,7 @@ public class RunPhaseCriteria implements Serializable {
             Objects.equals(organizationChartId, that.organizationChartId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
+            Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(niazsanjiYear, that.niazsanjiYear) &&
             Objects.equals(niazSanjiSource, that.niazSanjiSource);
     }
@@ -322,6 +331,7 @@ public class RunPhaseCriteria implements Serializable {
         runRunningStepId,
         documentId,
         personId,
+        courseTypeId,
         organizationChartId,
         educationalModuleId,
         finalNiazsanjiReportId,
@@ -355,6 +365,7 @@ public class RunPhaseCriteria implements Serializable {
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
+                (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (niazsanjiYear != null ? "niazsanjiYear=" + niazsanjiYear + ", " : "") +
                 (niazSanjiSource != null ? "niazSanjiSource=" + niazSanjiSource + ", " : "") +
             "}";
