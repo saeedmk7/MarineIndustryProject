@@ -56,6 +56,11 @@ export class ConvertObjectDatesService {
     public miladi2Shamsi(date: Date): string {
         return date.getHours() + ":" + date.getMinutes() + "  " + moment(date).format('jYYYY/jMM/jDD');
     }
+    public getNowShamsiYear(): number {
+        debugger;
+        let date = new Date();
+        return +moment(date).format('jYYYY');
+    }
     convertString2RequestStatus(newStatus: string): RequestStatus {
         switch (newStatus) {
             case 'NEW':

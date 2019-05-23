@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "instruction": {
+            "home": {
+                "title": "Instructions",
+                "createLabel": "Create a new Instruction",
+                "createOrEditLabel": "Create or edit a Instruction"
+            },
+            "created": "A new Instruction is created with identifier {{ param }}",
+            "updated": "A Instruction is updated with identifier {{ param }}",
+            "deleted": "A Instruction is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Instruction {{ id }}?"
+            },
+            "detail": {
+                "title": "Instruction"
+            },
+            "title": "Title",
+            "description": "Description",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "document": "Document"
+        }
+    }
+}

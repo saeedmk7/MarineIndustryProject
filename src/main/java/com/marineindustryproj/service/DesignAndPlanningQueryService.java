@@ -163,6 +163,10 @@ public class DesignAndPlanningQueryService extends QueryService<DesignAndPlannin
                 specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportId(),
                     root -> root.join(DesignAndPlanning_.finalNiazsanjiReport, JoinType.LEFT).get(FinalNiazsanjiReport_.id)));
             }
+            if (criteria.getNiazsanjiYear() != null) {
+                specification = specification.and(buildSpecification(criteria.getNiazsanjiYear(),
+                    root -> root.join(DesignAndPlanning_.finalNiazsanjiReport, JoinType.LEFT).get(FinalNiazsanjiReport_.niazsanjiYear)));
+            }
             if (criteria.getMahiatCourseId() != null) {
                 specification = specification.and(buildSpecification(criteria.getMahiatCourseId(),
                     root -> root.join(DesignAndPlanning_.mahiatCourse, JoinType.LEFT).get(MahiatCourse_.id)));
@@ -203,6 +207,7 @@ public class DesignAndPlanningQueryService extends QueryService<DesignAndPlannin
                 specification = specification.and(buildSpecification(criteria.getEffectivenessIndexId(),
                     root -> root.join(DesignAndPlanning_.effectivenessIndex, JoinType.LEFT).get(EffectivenessIndex_.id)));
             }
+
         }
         return specification;
     }

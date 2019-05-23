@@ -16,8 +16,14 @@
                             <option [ngValue]="year" [selected]="year == selectedNiazsanjiYear" *ngFor="let year of years">{{year}}</option>
                         </select>
                     </p>
-                    <div [chart]="personHourChart"></div>
-                    <div [chart]="priceCostChart"></div>
+                    <ng-container ngIf="isHomePageCharts">
+                        <div [chart]="personHourChart"></div>
+                        <div [chart]="priceCostChart"></div>
+                    </ng-container>
+                    <ng-container ngIf="!isHomePageCharts">
+                        <div [chart]="groupByMonthPersonHourChart"></div>
+                        <div [chart]="groupByMonthPriceCostChart"></div>
+                    </ng-container>
                 </ng-container>
                 <!--<ng-container>
                     <div [chart]="homePagePersonHourPieChart"></div>

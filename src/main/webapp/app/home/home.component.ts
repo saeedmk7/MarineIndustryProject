@@ -28,6 +28,7 @@ import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 import {IHomePageNiazsanjiReport} from "app/shared/model/custom/niazsanji-chart-result";
 import {IHomePagePersonHourChart} from "app/shared/model/custom/home-page-person-hour-chart";
 import {IHomePagePersonEducationalModule} from "app/shared/model/custom/home-page-person-educational-module";
+import {IPlanningAndRunMonthReport} from "app/shared/model/custom/planning-month-report";
 
 
 @Component({
@@ -43,8 +44,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     homePageNiazsanjiReport: IHomePageNiazsanjiReport = {};
     homePagePersonHourChart: IHomePagePersonHourChart = {};
     homePagePersonEducationalModules: IHomePagePersonEducationalModule[] = [];
-
+    planningAndRunMonthReports: IPlanningAndRunMonthReport[] = [];
+    isHomePageCharts: true;
     account: Account;
+    currentPerson: IPersonMarineSuffix;
     modalRef: NgbModalRef;
    /* welcomeState = 'out';
     centerLinksState = 'out';
@@ -65,6 +68,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     homePagePersonHourPieChart: Chart;
     personHourChart: Chart;
     priceCostChart: Chart;
+    groupByMonthPersonHourChart: Chart;
+    groupByMonthPriceCostChart: Chart;
     chart: Chart;
     chartResults: IChartResult[] = [];
     priceCostSeries: any;
@@ -100,6 +105,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                     this.pageName = 'home';
         });
     }
+
     deleteElement(i)
     {
         $('#' + i).remove();
@@ -143,6 +149,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             }
             else{
                 this.personService.find(this.account.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
+                    this.currentPerson = resp.body;
                     if(!resp.body.organizationChartId){
                         this.badError = "موقعیت در چارت سازمانی برای شما تنظیم نشده است، لطفا مراتب را با مدیریت سامانه در میان بگذارید.";
                     }
@@ -218,7 +225,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     prepareHomePagePersonHourChart(personId: number){
         this.finalNiazsanjiReportService.getHomePagePersonHourChart(personId).subscribe((resp: HttpResponse<IHomePagePersonHourChart>) => {
-                debugger;
+
                 this.homePagePersonHourChart = resp.body;
                 this.makePersonHourPieChart(resp.body);
             },
@@ -226,7 +233,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     prepareHomePagePersonEducationalModule(personId: number){
         this.finalNiazsanjiReportService.getHomePagePersonEducationalModule(personId).subscribe((resp: HttpResponse<IHomePagePersonEducationalModule[]>) => {
-                debugger;
+
                 this.homePagePersonEducationalModules = resp.body;
                 this.homePagePersonEducationalModules.forEach(a => {
                     a.totalLearningTime = a.learningTimePractical == undefined ? 0 : a.learningTimePractical + a.learningTimeTheorical == undefined ? 0 : a.learningTimeTheorical;
@@ -344,7 +351,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.personHourSeries = [{
             name: "اجرا شده",
             data: this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0).map(a => a.educationalModuleTotalHourFinished),
-            color: "lightgreen"
+            color: "lightgreen",
         },{
             name: "اجرا نشده",
             data: this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0).map(a => a.educationalModuleTotalHourNew),
@@ -354,6 +361,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     loadChart(){
 
+        // @ts-ignore
         this.personHourChart = new Chart({
             chart: {
                 type: 'column',
@@ -394,6 +402,17 @@ export class HomeComponent implements OnInit, OnDestroy {
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0
+                },
+                series:{
+                    cursor: 'pointer',
+                    allowPointSelect: true,
+                    point: {
+                        events : {
+                            click: event1 => {
+                                this.showDetail(event1);
+                            }
+                        }
+                    }
                 }
             },
             series: this.personHourSeries,
@@ -445,6 +464,30 @@ export class HomeComponent implements OnInit, OnDestroy {
             }
         });
 
+    }
+    showPlanningReport(org: IOrganizationChartMarineSuffix){
+        debugger;
+        let niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
+        let orgRootId = org.id; //this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
+        this.finalNiazsanjiReportService.getPlanningAndRunMonthReport(niazsanjiYear,2, orgRootId)
+            .subscribe(
+                (res: HttpResponse<IPlanningAndRunMonthReport[]>) => {
+                    debugger;
+                    this.planningAndRunMonthReports = res.body;
+                    this.planningAndRunMonthReports.forEach(a => {
+                        a.persianMonth = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.month);
+                    });
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+    showDetail(event){
+        debugger;
+        let org = this.organizationcharts.find(a => a.title == event.point.category);
+        if(org)
+        {
+            this.showPlanningReport(org);
+        }
     }
     changeChartProps(){
 

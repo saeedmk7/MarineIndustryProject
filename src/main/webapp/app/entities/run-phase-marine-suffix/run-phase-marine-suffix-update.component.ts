@@ -222,7 +222,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
         );*/
     }
     uploadFile(id: number){
-        debugger;
+
 
 
         let fileToUpload = $('#file-'+ id).prop('files')[0];
@@ -233,7 +233,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
         this.runPhaseService.uploadFile(formdata).subscribe(event =>{
                 if(event instanceof HttpResponse){
                     if(event.body){
-                        debugger;
+
                         //$('#fileDoc-'+ id).val(event.body);
                         this.runPhaseTabModel.filter(a => a.runPhaseItems.forEach(w => {
                             if(w.id == id)
@@ -256,7 +256,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
         });*/
     }
     validateFile(event, id){
-        debugger;
+
         //file.name.split('.')[file.name.split('.').length-1] == 'rar'
         if (event && event.target.files && event.target.files[0]) {
             let file = event.target.files[0];
@@ -301,7 +301,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     }
     errorMessage: string;
     finalize(){
-        debugger;
+
         let isValid: boolean = true;
         this.errorMessage = "";
         this.runningSteps.forEach(a => {
@@ -334,7 +334,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        debugger;
+
         let runPhaseSaveData: IRunPhaseSaveDataModel = new RunPhaseSaveDataModel();
         runPhaseSaveData.runPhaseId = this.runPhase.id;
         runPhaseSaveData.runMonth = this.runPhase.runMonth;

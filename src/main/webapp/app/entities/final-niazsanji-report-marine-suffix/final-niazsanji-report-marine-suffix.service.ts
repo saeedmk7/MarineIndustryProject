@@ -13,6 +13,7 @@ import {ChartResult, IChartResult} from "app/shared/model/custom/chart-result";
 import {HomePageNiazsanjiReport, IHomePageNiazsanjiReport} from "app/shared/model/custom/niazsanji-chart-result";
 import {IHomePagePersonHourChart} from "app/shared/model/custom/home-page-person-hour-chart";
 import {IHomePagePersonEducationalModule} from "app/shared/model/custom/home-page-person-educational-module";
+import {IPlanningAndRunMonthReport} from "app/shared/model/custom/planning-month-report";
 
 type EntityResponseType = HttpResponse<IFinalNiazsanjiReportMarineSuffix>;
 type EntityResponseTypeReport = HttpResponse<IReportMarineSuffix>;
@@ -82,6 +83,13 @@ export class FinalNiazsanjiReportMarineSuffixService {
         return this.http
             .get<IHomePagePersonEducationalModule[]>(url, { observe: 'response' })
             .pipe(map((res: HttpResponse<IHomePagePersonEducationalModule[]>) => res));
+    }
+    getPlanningAndRunMonthReport(niazsanjiYear: number, reportType: number ,orgRootId: number): Observable<HttpResponse<IPlanningAndRunMonthReport[]>> {
+        debugger;
+        let url = this.resourceUrl + '/getPlanningAndRunMonthReport/' + niazsanjiYear + '/' + reportType + '/'  + orgRootId;
+        return this.http
+            .get<IPlanningAndRunMonthReport[]>(url, { observe: 'response' })
+            .pipe(map((res: HttpResponse<IPlanningAndRunMonthReport[]>) => res));
     }
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);

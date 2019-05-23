@@ -97,7 +97,7 @@ export class EducationalModuleJobMarineSuffixComponent implements OnInit, OnDest
         this.loadEducationalModuleJobs();
     }*/
     loadAll(criteria?) {
-        debugger;
+
         if(criteria.find(a => a.value != "")) {
             this.educationalModuleJobService
                 .query({

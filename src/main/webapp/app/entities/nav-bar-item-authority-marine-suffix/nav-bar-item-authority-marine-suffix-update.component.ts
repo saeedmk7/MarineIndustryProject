@@ -156,7 +156,7 @@ export class NavBarItemAuthorityMarineSuffixUpdateComponent implements OnInit {
     }
 
     save() {
-        debugger;
+
         this.isSaving = true;
         const authorityName = this.navBarItemAuthority.authorityName;
         const selectedLeafNodeIdsKeys = Object.keys(this.tree.treeModel.selectedLeafNodeIds);

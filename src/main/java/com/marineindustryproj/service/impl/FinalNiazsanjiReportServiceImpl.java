@@ -437,6 +437,112 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
         return report;
     }
+    @Override
+    @Transactional(readOnly = true)
+    public List<PlanningAndRunMonthReport> getPlanningAndRunMonthReport(Integer niazsanjiYear, Integer reportType, Long rootOrgId) {
+        log.debug("Request to get HomePageNiazsanjiReport by personId : {}", niazsanjiYear);
+
+        List<PlanningAndRunMonthReport> planningAndRunMonthReports = new ArrayList<>();
+
+        IntegerFilter niazsanjiYearFilter = new IntegerFilter();
+        niazsanjiYearFilter.setEquals(niazsanjiYear);
+        LongFilter orgIdsFilter = new LongFilter();
+        List<OrganizationChart> organizationCharts = organizationChartRepository.findAll();
+        List<Long> orgIds = this.getAllOfChilderenIdsOfThisId(organizationCharts ,rootOrgId, true);
+        orgIdsFilter.setIn(orgIds);
+        BooleanFilter booleanFilter = new BooleanFilter();
+        booleanFilter.setEquals(true);
+
+        List<EducationalModuleMinDTO> educationalModuleMinDTOS = educationalModuleService.findAllFromCache();
+        //if want just planning
+        if(reportType == 1) {
+            planningAndRunMonthReports.addAll(getDesignAndPlanningMonthResult(niazsanjiYearFilter,
+                                            orgIdsFilter,
+                                            booleanFilter,
+                                            educationalModuleMinDTOS));
+        }
+        //if want just run
+        else if(reportType == 2){
+            planningAndRunMonthReports.addAll(getRunPhaseMonthResult(niazsanjiYearFilter,
+                                                                              orgIdsFilter,
+                                                                              booleanFilter,
+                                                                              educationalModuleMinDTOS));
+        }
+        //if want them both
+        else if(reportType == 3){
+            planningAndRunMonthReports.addAll(getDesignAndPlanningMonthResult(niazsanjiYearFilter,
+                                                                              orgIdsFilter,
+                                                                              booleanFilter,
+                                                                              educationalModuleMinDTOS));
+            planningAndRunMonthReports.addAll(getRunPhaseMonthResult(niazsanjiYearFilter,
+                                                                     orgIdsFilter,
+                                                                     booleanFilter,
+                                                                     educationalModuleMinDTOS));
+        }
+        return planningAndRunMonthReports;
+    }
+
+    private List<PlanningAndRunMonthReport> getRunPhaseMonthResult(IntegerFilter niazsanjiYearFilter,
+                                                                                   LongFilter orgIdsFilter,
+                                                                                   BooleanFilter booleanFilter,
+                                                                                   List<EducationalModuleMinDTO> educationalModuleMinDTOS) {
+        List<PlanningAndRunMonthReport> planningAndRunMonthReports = new ArrayList<>();
+        RunPhaseCriteria runPhaseCriteria = new RunPhaseCriteria();
+        runPhaseCriteria.setNiazsanjiYear(niazsanjiYearFilter);
+        runPhaseCriteria.setOrganizationChartId(orgIdsFilter);
+        runPhaseCriteria.setDone(booleanFilter);
+        List<RunPhaseDTO> runPhaseDTOS = runPhaseQueryService.findByCriteria(runPhaseCriteria);
+        for (int i = 1; i <= 12; i++) {
+            Integer month = i;
+            List<RunPhaseDTO> runPhaseMonth = runPhaseDTOS.stream().filter(a -> a.getRunMonth() != null && a.getRunMonth().equals(month)).collect(Collectors.toList());
+            Long personHour = Long.valueOf(0);
+            Long personCost = Long.valueOf(0);
+            for (RunPhaseDTO runPhaseDTO: runPhaseMonth) {
+                Integer peopleCount = runPhaseDTO.getPeople().size();
+                personCost += (runPhaseDTO.getFinalizeCost() * peopleCount);
+                List<EducationalModuleMinDTO> selectedEducts = educationalModuleMinDTOS.stream().filter(a -> a.getId().equals(runPhaseDTO.getEducationalModuleId())).collect(Collectors.toList());
+                if(selectedEducts.size() > 0)
+                {
+                    EducationalModuleMinDTO educationalModuleMinDTO = selectedEducts.get(0);
+                    personHour += ((educationalModuleMinDTO.getLearningTimePractical() + educationalModuleMinDTO.getLearningTimeTheorical()) * peopleCount);
+                }
+            }
+            planningAndRunMonthReports.add(new PlanningAndRunMonthReport(month, personHour, personCost,
+                                                                         2));
+        }
+        return planningAndRunMonthReports;
+    }
+
+    private List<PlanningAndRunMonthReport> getDesignAndPlanningMonthResult(IntegerFilter niazsanjiYearFilter,
+                                                 LongFilter orgIdsFilter,
+                                                 BooleanFilter booleanFilter,
+                                                 List<EducationalModuleMinDTO> educationalModuleMinDTOS) {
+        List<PlanningAndRunMonthReport> planningAndRunMonthReports = new ArrayList<>();
+        DesignAndPlanningCriteria designAndPlanningCriteria = new DesignAndPlanningCriteria();
+        designAndPlanningCriteria.setNiazsanjiYear(niazsanjiYearFilter);
+        designAndPlanningCriteria.setOrganizationChartId(orgIdsFilter);
+        designAndPlanningCriteria.setFinished(booleanFilter);
+        List<DesignAndPlanningDTO> designAndPlanningDTOS = designAndPlanningQueryService.findByCriteria(designAndPlanningCriteria);
+        for (int i = 1; i <= 12; i++) {
+            Integer month = i;
+            List<DesignAndPlanningDTO> designAndPlanningMonth = designAndPlanningDTOS.stream().filter(a -> a.getRunMonth() != null && a.getRunMonth().equals(month)).collect(Collectors.toList());
+            Long personHour = Long.valueOf(0);
+            Long personCost = Long.valueOf(0);
+            for (DesignAndPlanningDTO designAndPlanningDTO: designAndPlanningMonth) {
+                Integer peopleCount = designAndPlanningDTO.getPeople().size();
+                personCost += ((designAndPlanningDTO.getDirectCost() + designAndPlanningDTO.getUndirectCost()) * peopleCount);
+                List<EducationalModuleMinDTO> selectedEducts = educationalModuleMinDTOS.stream().filter(a -> a.getId().equals(designAndPlanningDTO.getEducationalModuleId())).collect(Collectors.toList());
+                if(selectedEducts.size() > 0)
+                {
+                    EducationalModuleMinDTO educationalModuleMinDTO = selectedEducts.get(0);
+                    personHour += ((educationalModuleMinDTO.getLearningTimePractical() + educationalModuleMinDTO.getLearningTimeTheorical()) * peopleCount);
+                }
+            }
+            planningAndRunMonthReports.add(new PlanningAndRunMonthReport(month, personHour, personCost,
+                                                                         1));
+        }
+        return planningAndRunMonthReports;
+    }
 
     @Override
     @Transactional(readOnly = true)

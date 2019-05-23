@@ -6,6 +6,7 @@ import com.marineindustryproj.service.dto.customs.ChartResult;
 import com.marineindustryproj.service.dto.customs.HomePageNiazsanjiReport;
 import com.marineindustryproj.service.dto.customs.HomePagePersonEducationalModule;
 import com.marineindustryproj.service.dto.customs.HomePagePersonHourChart;
+import com.marineindustryproj.service.dto.customs.PlanningAndRunMonthReport;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -57,6 +58,8 @@ public interface FinalNiazsanjiReportService {
     List<ChartResult> getChartResult(Integer niazsanjiYear);
 
     HomePageNiazsanjiReport getHomePageNiazsanjiReport(Long personId);
+
+    List<PlanningAndRunMonthReport> getPlanningAndRunMonthReport(Integer niazsanjiYear, Integer reportType, Long rootOrgId);
 
     HomePagePersonHourChart getHomePagePersonHourChart(Long personId);
 

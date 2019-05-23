@@ -119,6 +119,8 @@ public class DesignAndPlanningDTO implements Serializable {
 
     private String effectivenessIndexTitle;
 
+    private Integer niazsanjiYear;
+
     public Long getId() {
         return id;
     }
@@ -495,6 +497,14 @@ public class DesignAndPlanningDTO implements Serializable {
         this.effectivenessIndexTitle = effectivenessIndexTitle;
     }
 
+    public Integer getNiazsanjiYear() {
+        return niazsanjiYear;
+    }
+
+    public void setNiazsanjiYear(Integer niazsanjiYear) {
+        this.niazsanjiYear = niazsanjiYear;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -563,6 +573,7 @@ public class DesignAndPlanningDTO implements Serializable {
             ", teachTechnique=" + getTeachTechniqueId() +
             ", teachTechnique='" + getTeachTechniqueTitle() + "'" +
             ", effectivenessIndex=" + getEffectivenessIndexId() +
+            ", niazsanjiYear=" + getNiazsanjiYear() +
             ", effectivenessIndex='" + getEffectivenessIndexTitle() + "'" +
             "}";
     }

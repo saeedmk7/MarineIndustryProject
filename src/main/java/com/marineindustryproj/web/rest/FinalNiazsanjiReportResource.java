@@ -30,6 +30,7 @@ import com.marineindustryproj.service.dto.customs.ChartResult;
 import com.marineindustryproj.service.dto.customs.HomePageNiazsanjiReport;
 import com.marineindustryproj.service.dto.customs.HomePagePersonEducationalModule;
 import com.marineindustryproj.service.dto.customs.HomePagePersonHourChart;
+import com.marineindustryproj.service.dto.customs.PlanningAndRunMonthReport;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -626,6 +627,16 @@ public class FinalNiazsanjiReportResource {
         List<HomePagePersonEducationalModule> homePagePersonEducationalModules = finalNiazsanjiReportService.getHomePagePersonEducationalModules(personId);
         return ResponseEntity.ok().body(homePagePersonEducationalModules);
     }
+
+    @GetMapping("/final-niazsanji-reports/getPlanningAndRunMonthReport/{niazsanjiYear}/{reportType}/{rootOrgId}")
+    @Timed
+    public ResponseEntity<List<PlanningAndRunMonthReport>> getPlanningAndRunMonthReport(@PathVariable Integer niazsanjiYear, @PathVariable Integer reportType, @PathVariable Long rootOrgId) {
+        log.debug("REST request to get PlanningAndRunMonthReport : {}", niazsanjiYear);
+
+        List<PlanningAndRunMonthReport> planningAndRunMonthReports = finalNiazsanjiReportService.getPlanningAndRunMonthReport(niazsanjiYear, reportType, rootOrgId);
+        return ResponseEntity.ok().body(planningAndRunMonthReports);
+    }
+
     /**
      * DELETE  /final-niazsanji-reports/:id : delete the "id" finalNiazsanjiReport.
      *

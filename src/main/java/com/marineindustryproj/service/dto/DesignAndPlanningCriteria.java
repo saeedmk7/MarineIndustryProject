@@ -91,6 +91,8 @@ public class DesignAndPlanningCriteria implements Serializable {
 
     private LongFilter effectivenessIndexId;
 
+    private IntegerFilter niazsanjiYear;
+
     public LongFilter getId() {
         return id;
     }
@@ -362,7 +364,13 @@ public class DesignAndPlanningCriteria implements Serializable {
     public void setEffectivenessIndexId(LongFilter effectivenessIndexId) {
         this.effectivenessIndexId = effectivenessIndexId;
     }
+    public IntegerFilter getNiazsanjiYear() {
+        return niazsanjiYear;
+    }
 
+    public void setNiazsanjiYear(IntegerFilter niazsanjiYear) {
+        this.niazsanjiYear = niazsanjiYear;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -407,6 +415,7 @@ public class DesignAndPlanningCriteria implements Serializable {
             Objects.equals(toolsAndFacilityId, that.toolsAndFacilityId) &&
             Objects.equals(teachingApproachId, that.teachingApproachId) &&
             Objects.equals(teachTechniqueId, that.teachTechniqueId) &&
+            Objects.equals(niazsanjiYear, that.niazsanjiYear) &&
             Objects.equals(effectivenessIndexId, that.effectivenessIndexId);
     }
 
@@ -446,6 +455,7 @@ public class DesignAndPlanningCriteria implements Serializable {
         toolsAndFacilityId,
         teachingApproachId,
         teachTechniqueId,
+        niazsanjiYear,
         effectivenessIndexId
         );
     }
@@ -486,6 +496,7 @@ public class DesignAndPlanningCriteria implements Serializable {
                 (toolsAndFacilityId != null ? "toolsAndFacilityId=" + toolsAndFacilityId + ", " : "") +
                 (teachingApproachId != null ? "teachingApproachId=" + teachingApproachId + ", " : "") +
                 (teachTechniqueId != null ? "teachTechniqueId=" + teachTechniqueId + ", " : "") +
+                (niazsanjiYear != null ? "niazsanjiYear=" + niazsanjiYear + ", " : "") +
                 (effectivenessIndexId != null ? "effectivenessIndexId=" + effectivenessIndexId + ", " : "") +
             "}";
     }

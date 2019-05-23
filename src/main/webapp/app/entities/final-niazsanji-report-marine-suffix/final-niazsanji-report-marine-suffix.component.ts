@@ -31,6 +31,7 @@ import { saveAs } from '@progress/kendo-file-saver';
 import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 import {MONTHS} from "app/shared/constants/months.constants";
 import {FINALNIAZSANJISTATUSMEANING} from "app/shared/constants/final-niazsanji-report-status-meaning.constants";
+import {IPlanningAndRunMonthReport} from "app/shared/model/custom/planning-month-report";
 
 @Component({
     selector: 'mi-final-niazsanji-report-marine-suffix',
@@ -57,6 +58,8 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     finalNiazsanjiReportsFardis: IFinalNiazsanjiReportFardiMarineSuffix[] = [];
     finalNiazsanjiReportsOrganizations: IFinalNiazsanjiReportOrganizationMarineSuffix[] = [];
     educationalModules: IEducationalModuleMarineSuffix[];
+
+    planningAndRunMonthReports: IPlanningAndRunMonthReport[] = [];
 
     @ViewChild(GridComponent) grid: GridComponent;
 
@@ -143,6 +146,23 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         });
 
     }*/
+
+    showPlanningReport(){
+        debugger;
+        let niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
+        let orgRootId = this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
+        this.finalNiazsanjiReportService.getPlanningAndRunMonthReport(niazsanjiYear,1, orgRootId)
+            .subscribe(
+                (res: HttpResponse<IPlanningAndRunMonthReport[]>) => {
+                    debugger;
+                    this.planningAndRunMonthReports = res.body;
+                    this.planningAndRunMonthReports.forEach(a => {
+                        a.persianMonth = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.month);
+                    });
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
     public ngAfterViewInit(): void {
         // Expand the first row initially
         //this.grid.expandRow(0);
@@ -484,6 +504,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         if(this.organizationChartService.organizationchartsAll)
         {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
+            this.showPlanningReport();
             const orgs = this.handleOrgChartView();
             this.prepareRootsSearch(orgs);
         }
@@ -492,6 +513,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
 
                     this.organizationcharts = res.body;
+                    this.showPlanningReport();
                     const orgs = this.handleOrgChartView();
                     this.prepareRootsSearch(orgs);
                 },

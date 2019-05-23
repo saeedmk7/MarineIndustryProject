@@ -75,7 +75,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         private treeUtilities: TreeUtilities
     ) {}
     cleanUp(){
-        debugger;
+
         if(!this.selectionType){
             this.firstThreeJobCode = "";
             this.selectedJob = {};

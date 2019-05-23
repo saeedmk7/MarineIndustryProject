@@ -219,7 +219,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         }
     }
     setRoles(account: any){
-        debugger;
+
         if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
             this.isAdmin = true;
         if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
@@ -267,7 +267,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
                 this.people = [];
                 this.people.push(resp.body);
                 this.requestNiazsanjiFardi.personId = event.id;
-                debugger;
+
                 if(this.recommenedOrgCharts.find(a => a.id == resp.body.organizationChartId) == null) {
                     this.recommenedOrgCharts = [];
                     this.recommenedOrgCharts.push(this.organizationcharts.find(a => a.id == resp.body.organizationChartId));

@@ -97,7 +97,7 @@ export class NavbarComponent implements OnInit,AfterViewInit {
                         ];*/
                         this.navBarItemMarineSuffixService.query()
                             .subscribe((res: HttpResponse<INavBarItemMarineSuffix[]>) => {
-                                debugger;
+
                                 this.navBarItemMarineSuffix = res.body;
                                 let finalNavBarItemMarineSuffix = res.body;
                                 this.navBarItemMarineSuffix = this.navBarItemMarineSuffix.filter((a) => navBarItemIds.includes(a.id));
