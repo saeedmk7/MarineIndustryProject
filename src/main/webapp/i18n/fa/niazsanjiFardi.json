@@ -42,11 +42,11 @@
             "levelEducationalModule": "سطح پودمان آموزشی",
             "costEducationalModule": "هزینه پودمان آموزشی",
             "educationalModuleId": "پودمان آموزشی",
-            "person": "فرد موردنظر",
+            "person": "نام و نام خانوادگی",
             "personName": "نام و نام خانوادگی",
             "job": "شغل سازمانی",
             "jobTitle": "شغل سازمانی",
-            "personId": "فرد موردنظر",
+            "personId": "نام و نام خانوادگی",
             "organizationChart": "پیشنهاد دهنده"
         }
     }

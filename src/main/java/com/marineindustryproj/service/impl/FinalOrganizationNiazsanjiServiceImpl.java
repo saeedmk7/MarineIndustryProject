@@ -5,13 +5,11 @@ import com.marineindustryproj.domain.FinalNiazsanjiReport;
 import com.marineindustryproj.domain.FinalNiazsanjiReportPerson;
 import com.marineindustryproj.domain.Person;
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
-import com.marineindustryproj.repository.EducationalModuleRepository;
-import com.marineindustryproj.repository.FinalNiazsanjiReportPersonRepository;
-import com.marineindustryproj.repository.FinalNiazsanjiReportRepository;
+import com.marineindustryproj.repository.*;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.FinalOrganizationNiazsanjiService;
 import com.marineindustryproj.domain.FinalOrganizationNiazsanji;
-import com.marineindustryproj.repository.FinalOrganizationNiazsanjiRepository;
+import com.marineindustryproj.service.RequestOrganizationNiazsanjiService;
 import com.marineindustryproj.service.dto.FinalOrganizationNiazsanjiDTO;
 import com.marineindustryproj.service.mapper.FinalOrganizationNiazsanjiMapper;
 import org.slf4j.Logger;
@@ -35,6 +33,8 @@ public class FinalOrganizationNiazsanjiServiceImpl implements FinalOrganizationN
     private final Logger log = LoggerFactory.getLogger(FinalOrganizationNiazsanjiServiceImpl.class);
 
     private final FinalOrganizationNiazsanjiRepository finalOrganizationNiazsanjiRepository;
+    private final RequestOrganizationNiazsanjiService requestOrganizationNiazsanjiService;
+
     private final EducationalModuleRepository educationalModuleRepository;
     private final FinalNiazsanjiReportRepository finalNiazsanjiReportRepository;
     private final FinalNiazsanjiReportPersonRepository finalNiazsanjiReportPersonRepository;
@@ -42,11 +42,12 @@ public class FinalOrganizationNiazsanjiServiceImpl implements FinalOrganizationN
     private final FinalOrganizationNiazsanjiMapper finalOrganizationNiazsanjiMapper;
 
     public FinalOrganizationNiazsanjiServiceImpl(FinalOrganizationNiazsanjiRepository finalOrganizationNiazsanjiRepository,
-                                                 EducationalModuleRepository educationalModuleRepository,
+                                                 RequestOrganizationNiazsanjiService requestOrganizationNiazsanjiService, EducationalModuleRepository educationalModuleRepository,
                                                  FinalNiazsanjiReportRepository finalNiazsanjiReportRepository,
                                                  FinalNiazsanjiReportPersonRepository finalNiazsanjiReportPersonRepository,
                                                  FinalOrganizationNiazsanjiMapper finalOrganizationNiazsanjiMapper) {
         this.finalOrganizationNiazsanjiRepository = finalOrganizationNiazsanjiRepository;
+        this.requestOrganizationNiazsanjiService = requestOrganizationNiazsanjiService;
         this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
         this.finalNiazsanjiReportPersonRepository = finalNiazsanjiReportPersonRepository;
         this.finalOrganizationNiazsanjiMapper = finalOrganizationNiazsanjiMapper;
@@ -160,6 +161,7 @@ public class FinalOrganizationNiazsanjiServiceImpl implements FinalOrganizationN
     @Override
     public void delete(Long id) {
         log.debug("Request to delete FinalOrganizationNiazsanji : {}", id);
+        requestOrganizationNiazsanjiService.deleteByFinalOrganizationNiazsanji(id);
         finalOrganizationNiazsanjiRepository.deleteById(id);
     }
 }

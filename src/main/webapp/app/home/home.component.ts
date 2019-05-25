@@ -29,6 +29,7 @@ import {IHomePageNiazsanjiReport} from "app/shared/model/custom/niazsanji-chart-
 import {IHomePagePersonHourChart} from "app/shared/model/custom/home-page-person-hour-chart";
 import {IHomePagePersonEducationalModule} from "app/shared/model/custom/home-page-person-educational-module";
 import {IPlanningAndRunMonthReport} from "app/shared/model/custom/planning-month-report";
+import {MONTHS} from "app/shared/constants/months.constants";
 
 
 @Component({
@@ -45,7 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     homePagePersonHourChart: IHomePagePersonHourChart = {};
     homePagePersonEducationalModules: IHomePagePersonEducationalModule[] = [];
     planningAndRunMonthReports: IPlanningAndRunMonthReport[] = [];
-    isHomePageCharts: true;
+    isHomePageCharts: boolean = true;
     account: Account;
     currentPerson: IPersonMarineSuffix;
     modalRef: NgbModalRef;
@@ -68,16 +69,25 @@ export class HomeComponent implements OnInit, OnDestroy {
     homePagePersonHourPieChart: Chart;
     personHourChart: Chart;
     priceCostChart: Chart;
-    groupByMonthPersonHourChart: Chart;
-    groupByMonthPriceCostChart: Chart;
+
     chart: Chart;
     chartResults: IChartResult[] = [];
     priceCostSeries: any;
     personHourSeries: any;
+
     categories: any[];
     niazsanjiYear: number;
     years: any[];
     selectedNiazsanjiYear: number;
+
+    detailMonthPriceCostSeries: any;
+    detailMonthPersonHourSeries: any;
+    detailMonthPersonHourChart: Chart;
+    detailMonthPriceCostChart: Chart;
+    piePlanningPersonHourChart: Chart;
+    pieRunnningPersonHourChart: Chart;
+    piePlanningPriceCostChart: Chart;
+    pieRunnningPriceCostChart: Chart;
     constructor(
         private principal: Principal,
         private organizationChartService: OrganizationChartMarineSuffixService,
@@ -465,30 +475,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
 
     }
-    showPlanningReport(org: IOrganizationChartMarineSuffix){
-        debugger;
-        let niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
-        let orgRootId = org.id; //this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
-        this.finalNiazsanjiReportService.getPlanningAndRunMonthReport(niazsanjiYear,2, orgRootId)
-            .subscribe(
-                (res: HttpResponse<IPlanningAndRunMonthReport[]>) => {
-                    debugger;
-                    this.planningAndRunMonthReports = res.body;
-                    this.planningAndRunMonthReports.forEach(a => {
-                        a.persianMonth = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.month);
-                    });
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-    }
-    showDetail(event){
-        debugger;
-        let org = this.organizationcharts.find(a => a.title == event.point.category);
-        if(org)
-        {
-            this.showPlanningReport(org);
-        }
-    }
+
     changeChartProps(){
 
         $('.highcharts-credits').textContent = '';
@@ -552,5 +539,245 @@ export class HomeComponent implements OnInit, OnDestroy {
             if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh)
                 this.isSuperUsers = true;
         }
+    }
+
+    selectedGroup: string = "";
+    //home page chart detail
+    showDetail(event){
+        debugger;
+        this.selectedGroup = event.point.category;
+        let org = this.organizationcharts.find(a => a.title == this.selectedGroup);
+
+        if(org)
+        {
+            //this.pageName = 'detail';
+            this.changePage('detail');
+            this.showPlanningReport(org);
+        }
+    }
+    showPlanningReport(org: IOrganizationChartMarineSuffix){
+        debugger;
+        let niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
+        let orgRootId = org.id; //this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
+        this.finalNiazsanjiReportService.getPlanningAndRunMonthReport(niazsanjiYear,3, orgRootId)
+            .subscribe(
+                (res: HttpResponse<IPlanningAndRunMonthReport[]>) => {
+                    debugger;
+                    this.planningAndRunMonthReports = res.body;
+                    this.planningAndRunMonthReports.forEach(a => {
+                        a.persianMonth = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.month);
+                    });
+                    this.makeDetailSeries();
+                    this.makePiesSeries();
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+    makeDetailSeries(){
+
+        this.detailMonthPriceCostSeries = [{
+            name: "برنامه ریزی",
+            data: this.planningAndRunMonthReports.filter(a => a.reportType == 1)
+                .sort((a,b) => (a.month > b.month) ? 1 : (a.month < b.month) ? -1 : 0)
+                .map(a => a.personCost),
+            color: "lightgreen"
+        },{
+            name: "اجرا",
+            data: this.planningAndRunMonthReports.filter(a => a.reportType == 2)
+                .sort((a,b) => (a.month > b.month) ? 1 : (a.month < b.month) ? -1 : 0)
+                .map(a => a.personCost),
+            color: "red"
+        }];
+        this.detailMonthPersonHourSeries = [{
+            name: "برنامه ریزی",
+            data: this.planningAndRunMonthReports.filter(a => a.reportType == 1)
+                .sort((a,b) => (a.month > b.month) ? 1 : (a.month < b.month) ? -1 : 0)
+                .map(a => a.personHour),
+            color: "lightgreen"
+        },{
+            name: "اجرا",
+            data: this.planningAndRunMonthReports.filter(a => a.reportType == 2)
+                .sort((a,b) => (a.month > b.month) ? 1 : (a.month < b.month) ? -1 : 0)
+                .map(a => a.personHour),
+            color: "red"
+        }];
+        this.loadDetailMonthColumnChart();
+    }
+    loadDetailMonthColumnChart(){
+        // @ts-ignore
+        this.detailMonthPersonHourChart = new Chart({
+            chart: {
+                type: 'column',
+                style: {
+                    fontFamily: 'IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman'
+                }
+            },
+            lang: {
+                decimalPoint: ',',
+                thousandsSep: '.'
+            },
+            title: {
+                text: 'نمودار نفر/ساعت به تفکیک ماه گروه ' + this.selectedGroup
+            },
+            xAxis: {
+                categories: MONTHS.sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0).map(a => a.persianMonth),
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'نفر ساعت'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true,
+                /*formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        this.point.y + ' ' + this.point.name.toLowerCase();
+                }*/
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                },
+                series:{
+                    cursor: 'pointer',
+                    allowPointSelect: true
+                }
+            },
+            series: this.detailMonthPersonHourSeries,
+            credits: {
+                enabled: false
+            }
+        });
+        this.detailMonthPriceCostChart = new Chart({
+            chart: {
+                type: 'column',
+                style: {
+                    fontFamily: 'IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman'
+                }
+            },
+            lang: {
+                decimalPoint: ',',
+                thousandsSep: '.'
+            },
+            title: {
+                text: 'نمودار هزینه به تفکیک ماه گروه ' + this.selectedGroup
+            },
+            xAxis: {
+                categories: MONTHS.sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0).map(a => a.persianMonth),
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'میزان هزینه'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: this.detailMonthPriceCostSeries,
+            credits: {
+                enabled: false
+            }
+        });
+    }
+    makePiesSeries()
+    {
+        let piePlanningPersonHourSeries: any = this.makePiePersonHourSeries(1);
+        this.piePlanningPersonHourChart = this.showPieChart('نمودار درصد نفر/ساعت برنامه ریزی شده گروه ' + this.selectedGroup +' به تفکیک ماه', piePlanningPersonHourSeries);
+        let pieRunnningPersonHourSeries: any = this.makePiePersonHourSeries(2);
+        this.pieRunnningPersonHourChart = this.showPieChart('نمودار درصد نفر/ساعت اجرا شده گروه ' + this.selectedGroup +' به تفکیک ماه', pieRunnningPersonHourSeries);
+
+        let piePlanningCostSeries: any = this.makePieCostSeries(1);
+        this.piePlanningPriceCostChart = this.showPieChart('نمودار درصد هزینه برنامه ریزی شده گروه ' + this.selectedGroup +' به تفکیک ماه', piePlanningCostSeries);
+        let pieRunnningCostSeries: any = this.makePieCostSeries(2);
+        this.pieRunnningPriceCostChart = this.showPieChart('نمودار درصد هزینه اجرا شده گروه ' + this.selectedGroup +' به تفکیک ماه', pieRunnningCostSeries);
+    }
+    makePiePersonHourSeries(reportType: number){
+        const filtered = this.planningAndRunMonthReports.filter(a => a.reportType == reportType);
+        const allHour = filtered.map(a => a.personHour).reduce((sum, current) => sum + current);
+        let array: any = [];
+        MONTHS.forEach(a => {
+           const monthFilter = filtered.filter(e => e.month == a.id);
+           const sumMonth = monthFilter.map(a => a.personHour).reduce((sum, current) => sum + current);
+           const sumMonthPercent = (sumMonth / allHour) * 100;
+           array.push({
+               name: a.persianMonth,
+               y: sumMonthPercent,
+               color: a.color
+           });
+        });
+        return array;
+    }
+    makePieCostSeries(reportType: number){
+        const filtered = this.planningAndRunMonthReports.filter(a => a.reportType == reportType);
+        const allHour = filtered.map(a => a.personCost).reduce((sum, current) => sum + current);
+        let array: any = [];
+        MONTHS.forEach(a => {
+            const monthFilter = filtered.filter(e => e.month == a.id);
+            const sumMonth = monthFilter.map(a => a.personCost).reduce((sum, current) => sum + current);
+            const sumMonthPercent = (sumMonth / allHour) * 100;
+            array.push({
+                name: a.persianMonth,
+                y: sumMonthPercent,
+                color: a.color
+            });
+        });
+        return array;
+    }
+    showPieChart(headerText: string, data: any): Chart{
+        return new Chart({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                style: {
+                    fontFamily: 'IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman'
+                }
+            },
+            title: {
+                text: headerText,
+                style: {
+                    fontSize: '12px'
+                }
+            },
+            tooltip: {
+                pointFormat: '<b>درصد {point.percentage:.0f}</b>',
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer'
+                }
+            },
+            series: [{
+                name: '',
+                //colorByPoint: true,
+                data: data
+            }],
+            credits: {
+                enabled: false
+            }
+        });
     }
 }

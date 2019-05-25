@@ -57,4 +57,6 @@ public interface RequestOrganizationNiazsanjiService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    void deleteByFinalOrganizationNiazsanji(Long finalOrganizationNiazsanjiId);
 }

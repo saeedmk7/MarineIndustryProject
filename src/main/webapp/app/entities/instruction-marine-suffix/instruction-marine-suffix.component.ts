@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { IInstructionMarineSuffix } from 'app/shared/model/instruction-marine-suffix.model';
-import { AccountService } from 'app/core';
+import { Principal} from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { InstructionMarineSuffixService } from './instruction-marine-suffix.service';
@@ -34,7 +34,7 @@ export class InstructionMarineSuffixComponent implements OnInit, OnDestroy {
         protected instructionService: InstructionMarineSuffixService,
         protected parseLinks: JhiParseLinks,
         protected jhiAlertService: JhiAlertService,
-        protected accountService: AccountService,
+        protected principal: Principal,
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
         protected eventManager: JhiEventManager
@@ -93,7 +93,7 @@ export class InstructionMarineSuffixComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.loadAll();
-        this.accountService.identity().then(account => {
+        this.principal.identity().then(account => {
             this.currentAccount = account;
         });
         this.registerChangeInInstructions();

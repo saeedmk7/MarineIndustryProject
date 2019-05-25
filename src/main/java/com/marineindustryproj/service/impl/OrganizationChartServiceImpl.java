@@ -3,8 +3,13 @@ package com.marineindustryproj.service.impl;
 import com.marineindustryproj.service.OrganizationChartService;
 import com.marineindustryproj.domain.OrganizationChart;
 import com.marineindustryproj.repository.OrganizationChartRepository;
+import com.marineindustryproj.service.PersonQueryService;
+import com.marineindustryproj.service.PersonService;
 import com.marineindustryproj.service.dto.OrganizationChartDTO;
+import com.marineindustryproj.service.dto.PersonCriteria;
+import com.marineindustryproj.service.dto.PersonDTO;
 import com.marineindustryproj.service.mapper.OrganizationChartMapper;
+import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,13 +36,19 @@ public class OrganizationChartServiceImpl implements OrganizationChartService {
 
     private final OrganizationChartMapper organizationChartMapper;
 
+    private final PersonQueryService personQueryService;
+
+    private final PersonService personService;
+
     private final CacheManager cacheManager;
 
     public OrganizationChartServiceImpl(OrganizationChartRepository organizationChartRepository,
                                         OrganizationChartMapper organizationChartMapper,
-                                        CacheManager cacheManager) {
+                                        PersonQueryService personQueryService, PersonService personService, CacheManager cacheManager) {
         this.organizationChartRepository = organizationChartRepository;
         this.organizationChartMapper = organizationChartMapper;
+        this.personQueryService = personQueryService;
+        this.personService = personService;
         this.cacheManager = cacheManager;
     }
 
@@ -93,6 +104,18 @@ public class OrganizationChartServiceImpl implements OrganizationChartService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete OrganizationChart : {}", id);
+        PersonCriteria personCriteria = new PersonCriteria();
+        LongFilter orgFilter = new LongFilter();
+        orgFilter.setEquals(id);
+        personCriteria.setOrganizationChartId(orgFilter);
+        List<PersonDTO> personDTOS = personQueryService.findByCriteria(personCriteria);
+        if(!personDTOS.isEmpty())
+        {
+            for (PersonDTO person: personDTOS) {
+                person.setOrganizationChartId(null);
+                personService.save(person);
+            }
+        }
         organizationChartRepository.deleteById(id);
         clearOrganizationChartCaches();
     }

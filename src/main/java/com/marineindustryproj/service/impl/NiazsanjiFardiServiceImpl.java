@@ -4,7 +4,6 @@ import com.marineindustryproj.domain.EducationalModule;
 import com.marineindustryproj.domain.FinalNiazsanjiReport;
 import com.marineindustryproj.domain.FinalNiazsanjiReportPerson;
 import com.marineindustryproj.domain.Person;
-import com.marineindustryproj.domain.RequestNiazsanjiFardi;
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
 import com.marineindustryproj.repository.EducationalModuleRepository;
 import com.marineindustryproj.repository.FinalNiazsanjiReportPersonRepository;
@@ -14,6 +13,7 @@ import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.NiazsanjiFardiService;
 import com.marineindustryproj.domain.NiazsanjiFardi;
 import com.marineindustryproj.repository.NiazsanjiFardiRepository;
+import com.marineindustryproj.service.RequestNiazsanjiFardiService;
 import com.marineindustryproj.service.dto.NiazsanjiFardiDTO;
 import com.marineindustryproj.service.mapper.NiazsanjiFardiMapper;
 import org.slf4j.Logger;
@@ -38,6 +38,7 @@ public class NiazsanjiFardiServiceImpl implements NiazsanjiFardiService {
 
     private final NiazsanjiFardiRepository niazsanjiFardiRepository;
     private final RequestNiazsanjiFardiRepository requestNiazsanjiFardiRepository;
+    private final RequestNiazsanjiFardiService requestNiazsanjiFardiService;
 
     private final NiazsanjiFardiMapper niazsanjiFardiMapper;
 
@@ -47,12 +48,13 @@ public class NiazsanjiFardiServiceImpl implements NiazsanjiFardiService {
 
     public NiazsanjiFardiServiceImpl(NiazsanjiFardiRepository niazsanjiFardiRepository,
                                      RequestNiazsanjiFardiRepository requestNiazsanjiFardiRepository,
-                                     NiazsanjiFardiMapper niazsanjiFardiMapper,
+                                     RequestNiazsanjiFardiService requestNiazsanjiFardiService, NiazsanjiFardiMapper niazsanjiFardiMapper,
                                      EducationalModuleRepository educationalModuleRepository,
                                      FinalNiazsanjiReportRepository finalNiazsanjiReportRepository,
                                      FinalNiazsanjiReportPersonRepository finalNiazsanjiReportPersonRepository) {
         this.niazsanjiFardiRepository = niazsanjiFardiRepository;
         this.requestNiazsanjiFardiRepository = requestNiazsanjiFardiRepository;
+        this.requestNiazsanjiFardiService = requestNiazsanjiFardiService;
         this.niazsanjiFardiMapper = niazsanjiFardiMapper;
         this.educationalModuleRepository = educationalModuleRepository;
         this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
@@ -167,6 +169,7 @@ public class NiazsanjiFardiServiceImpl implements NiazsanjiFardiService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete NiazsanjiFardi : {}", id);
+        requestNiazsanjiFardiService.deleteByFinalNiazsanjiFardi(id);
         niazsanjiFardiRepository.deleteById(id);
     }
 }

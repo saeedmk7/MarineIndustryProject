@@ -9,7 +9,10 @@ tr.light{ color:#818182;background-color:#fefefe;}
 .chartFont{
     font-family: IranSans, SansSerif, IranYekan, 'B Nazanin', 'B Badr', Tahoma, 'Times New Roman' !important;
 }
-
+.adjustPosition{
+    position: relative;
+    display: inline-block;
+}
 .niazsanjiPage {
     width: 100%;
 }
@@ -32,6 +35,8 @@ tr.light{ color:#818182;background-color:#fefefe;}
     left: 0;
 }
 .newsbox {
+    position: relative !important;
+    display: inline-block;
     margin: 2%;
     /* right: 20px; */
     width: 95% !important;
@@ -61,6 +66,7 @@ tr.light{ color:#818182;background-color:#fefefe;}
 }
 
 .table-home{
+    position: relative;
     display: inline-block;
     width: 70%;
     padding: 2%;
@@ -73,6 +79,7 @@ tr.light{ color:#818182;background-color:#fefefe;}
 }
 .div-pic-home{
     display: inline-block;
+    position: relative;
     width: 49%;
     margin-top: 0px;
     padding-right: 2%;
@@ -336,7 +343,7 @@ tr.light{ color:#818182;background-color:#fefefe;}
 .box-header > .ion,
 .box-header .box-title {
     display: inline-block;
-    font-size: 18px;
+    font-size: 22px;
     margin: 0;
     line-height: 1;
 }

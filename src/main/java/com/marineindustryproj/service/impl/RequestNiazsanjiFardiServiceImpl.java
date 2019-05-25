@@ -175,4 +175,20 @@ public class RequestNiazsanjiFardiServiceImpl implements RequestNiazsanjiFardiSe
         log.debug("Request to delete RequestNiazsanjiFardi : {}", id);
         requestNiazsanjiFardiRepository.deleteById(id);
     }
+    /**
+     * Delete the requestNiazsanjiFardi by niazsanjiFardiId.
+     *
+     * @param niazsanjiFardiId the id of the entity
+     */
+    @Override
+    public void deleteByFinalNiazsanjiFardi(Long niazsanjiFardiId) {
+        log.debug("Request to delete RequestNiazsanjiFardi by niazsanjiFardiId : {}", niazsanjiFardiId);
+        Optional<NiazsanjiFardi> niazsanjiFardi = niazsanjiFardiRepository.findOneWithEagerRelationships(niazsanjiFardiId);
+        if(niazsanjiFardi.isPresent()) {
+            Optional<RequestNiazsanjiFardiDTO> requestNiazsanjiFardi = this.findOne(niazsanjiFardi.get().getId());
+            if (requestNiazsanjiFardi.isPresent()) {
+                requestNiazsanjiFardiRepository.deleteById(requestNiazsanjiFardi.get().getId());
+            }
+        }
+    }
 }

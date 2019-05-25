@@ -58,8 +58,7 @@ export class ConvertObjectDatesService {
     }
     public getNowShamsiYear(): number {
         debugger;
-        let date = new Date();
-        return +moment(date).format('jYYYY');
+        return +moment().format('jYYYY');
     }
     convertString2RequestStatus(newStatus: string): RequestStatus {
         switch (newStatus) {

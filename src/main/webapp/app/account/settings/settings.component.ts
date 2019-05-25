@@ -5,8 +5,10 @@ import { Principal, AccountService, JhiLanguageHelper } from 'app/core';
 import {JhiAlertService} from "ng-jhipster/src/service/alert.service";
 import {SettingsService} from "./settings.service";
 import {IPersonMarineSuffix, PersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
-import {HttpResponse} from "@angular/common/http";
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
+import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
+import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
 
 @Component({
     selector: 'jhi-settings',
@@ -28,6 +30,7 @@ export class SettingsComponent implements OnInit {
     picUrl: string = "";
     oldPicUrl: string = "";
     isNewImage: boolean = false;
+    organizationTitle: string = "";
     person: IPersonMarineSuffix = new PersonMarineSuffix();
     constructor(
         private dataUtils: JhiDataUtils,
@@ -37,6 +40,7 @@ export class SettingsComponent implements OnInit {
         private languageHelper: JhiLanguageHelper,
         private jhiAlertService : JhiAlertService,
         private settingService: SettingsService,
+        private organizationChartService: OrganizationChartMarineSuffixService,
         private personMarineSuffixService: PersonMarineSuffixService
     ) {}
 
@@ -71,13 +75,31 @@ export class SettingsComponent implements OnInit {
         this.person = body;
         if (this.person) {
             this.currentUserFullName = this.person.name + " " + this.person.family;
-            this.jobTitle = this.person.jobTitle
+            this.jobTitle = this.person.jobTitle;
+            this.prepareOrgChart(this.person.organizationChartId);
         }
         else {
             this.currentUserFullName = this.settingsAccount.login;
         }
     }
+    prepareOrgChart(orgId: number){
+        if(this.organizationChartService.organizationchartsAll)
+        {
+            this.organizationTitle = this.organizationChartService.organizationchartsAll.find(a => a.id == orgId).fullTitle;
+        }
+        else {
+            this.organizationChartService.query().subscribe(
+                (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
 
+                    this.organizationTitle = res.body.find(a => a.id == orgId).fullTitle;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message));
+        }
+
+    }
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
     onPersonError(body) {
 
         this.jhiAlertService.error(body);

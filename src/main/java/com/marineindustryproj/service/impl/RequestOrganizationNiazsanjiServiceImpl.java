@@ -129,7 +129,22 @@ public class RequestOrganizationNiazsanjiServiceImpl implements RequestOrganizat
         return requestOrganizationNiazsanjiRepository.findOneWithEagerRelationships(id)
             .map(requestOrganizationNiazsanjiMapper::toDto);
     }
-
+    /**
+     * Delete the requestOrganizationNiazsanji by finalOrganizationNiazsanjiId.
+     *
+     * @param finalOrganizationNiazsanjiId the id of the entity
+     */
+    @Override
+    public void deleteByFinalOrganizationNiazsanji(Long finalOrganizationNiazsanjiId) {
+        log.debug("Request to delete RequestOrganizationNiazsanji by finalId : {}", finalOrganizationNiazsanjiId);
+        Optional<FinalOrganizationNiazsanji> finalOrganizationNiazsanji = finalOrganizationNiazsanjiRepository.findOneWithEagerRelationships(finalOrganizationNiazsanjiId);
+        if(finalOrganizationNiazsanji.isPresent()) {
+            Optional<RequestOrganizationNiazsanjiDTO> requestOrganizationNiazsanji = this.findOne(finalOrganizationNiazsanji.get().getId());
+            if (requestOrganizationNiazsanji.isPresent()) {
+                requestOrganizationNiazsanjiRepository.deleteById(requestOrganizationNiazsanji.get().getId());
+            }
+        }
+    }
     /**
      * Delete the requestOrganizationNiazsanji by id.
      *

@@ -4,11 +4,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils} from 'ng-jhipster';
 
-import {IFinalNiazsanjiReportMarineSuffix} from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
 import {Principal} from 'app/core';
 
 import {ITEMS_PER_PAGE} from 'app/shared';
-import {FinalNiazsanjiReportMarineSuffixService} from './final-niazsanji-report-marine-suffix.service';
 import {TranslateService} from '@ngx-translate/core';
 import {EducationalModuleMarineSuffixService} from "app/entities/educational-module-marine-suffix";
 import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
@@ -18,28 +16,32 @@ import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
-import {IFinalNiazsanjiReportFardiMarineSuffix} from "app/entities/final-niazsanji-report-marine-suffix/final-niazsanji-report-fardi-marine-suffix.model";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import {DataResult, GroupDescriptor, process} from "@progress/kendo-data-query";
-import {FinalNiazsanjiReportPersonMarineSuffixService} from "app/entities/final-niazsanji-report-person-marine-suffix";
-import {IFinalNiazsanjiReportPersonMarineSuffix} from "app/shared/model/final-niazsanji-report-person-marine-suffix.model";
 import * as $ from 'jquery';
-import {IFinalNiazsanjiReportOrganizationMarineSuffix} from "app/entities/final-niazsanji-report-marine-suffix/final-niazsanji-report-organization-marine-suffix.model";
 import {GridComponent, GridDataResult, RowClassArgs} from "@progress/kendo-angular-grid";
 import {Workbook} from '@progress/kendo-angular-excel-export';
 import { saveAs } from '@progress/kendo-file-saver';
-import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 import {MONTHS} from "app/shared/constants/months.constants";
-import {FINALNIAZSANJISTATUSMEANING} from "app/shared/constants/final-niazsanji-report-status-meaning.constants";
 import {IPlanningAndRunMonthReport} from "app/shared/model/custom/planning-month-report";
+import {IFinalNiazsanjiReportOrganizationMarineSuffix} from "app/entities/final-niazsanji-report-marine-suffix/final-niazsanji-report-organization-marine-suffix.model";
+import {FINALNIAZSANJISTATUSMEANING} from "app/shared/constants/final-niazsanji-report-status-meaning.constants";
+import {FinalNiazsanjiReportPersonMarineSuffixService} from "app/entities/final-niazsanji-report-person-marine-suffix";
+import {IFinalNiazsanjiReportPersonMarineSuffix} from "app/shared/model/final-niazsanji-report-person-marine-suffix.model";
+import {
+    FinalNiazsanjiReportMarineSuffix,
+    IFinalNiazsanjiReportMarineSuffix
+} from "app/shared/model/final-niazsanji-report-marine-suffix.model";
+import {IFinalNiazsanjiReportFardiMarineSuffix} from "app/entities/final-niazsanji-report-marine-suffix/final-niazsanji-report-fardi-marine-suffix.model";
+import {FinalNiazsanjiReportMarineSuffixService} from "app/entities/final-niazsanji-report-marine-suffix";
 
 @Component({
-    selector: 'mi-final-niazsanji-report-marine-suffix',
+    selector: 'mi-planning-marine-suffix',
     encapsulation: ViewEncapsulation.None,
-    styleUrls:['./final-niazsanji-report-marine-suffix.scss'],
-    templateUrl: './final-niazsanji-report-marine-suffix.component.html'
+    styleUrls: ['../final-niazsanji-report-marine-suffix/final-niazsanji-report-marine-suffix.scss'],
+    templateUrl: './planning-marine-suffix.component.html'
 })
-export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterViewInit {
     currentAccount: any;
     finalNiazsanjiReport: IFinalNiazsanjiReportMarineSuffix = {};
     finalNiazsanjiReports: IFinalNiazsanjiReportMarineSuffix[];
@@ -633,7 +635,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         // https://www.telerik.com/kendo-angular-ui/components/excelexport/api/Workbook/
         new Workbook(workbook).toDataURL().then((dataUrl: string) => {
             // https://www.telerik.com/kendo-angular-ui/components/filesaver/
-            saveAs(dataUrl, 'final-niazsanji-report.xlsx');
+            saveAs(dataUrl, 'planning.xlsx');
             //saveAs(dataUrl, 'Categories.xlsx');
             //this.loading =  false;
         });
