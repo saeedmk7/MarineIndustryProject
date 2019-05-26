@@ -308,7 +308,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 }
             },
             title: {
-                text: 'نمودار نفر/ساعت به درصد'
+                text: 'نمودار نفر ساعت به درصد'
             },
             tooltip: {
                 pointFormat: '<b>درصد {point.percentage:.0f}</b>',
@@ -384,7 +384,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 thousandsSep: '.'
             },
             title: {
-                text: 'نمودار نفر/ساعت گروه های سازمان'
+                text: 'نمودار نفر ساعت گروه های سازمان'
             },
             xAxis: {
                 categories: this.categories,
@@ -394,14 +394,18 @@ export class HomeComponent implements OnInit, OnDestroy {
                 min: 0,
                 title: {
                     text: 'نفر ساعت'
-                }
+                },
+                opposite: true
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                    '<td style="direction: ltr; padding:0"><b>{point.y}</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
+                style:{
+                    direction: 'rtl'
+                },
                 useHTML: true,
                 /*formatter: function () {
                     return '<b>' + this.series.name + '</b><br/>' +
@@ -430,6 +434,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 enabled: false
             }
         });
+        // @ts-ignore
         this.priceCostChart = new Chart({
             chart: {
                 type: 'column',
@@ -452,20 +457,35 @@ export class HomeComponent implements OnInit, OnDestroy {
                 min: 0,
                 title: {
                     text: 'میزان هزینه'
-                }
+                },
+                opposite: true
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                    '<td style="direction: ltr; padding:0"><b>{point.y}</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
+                style:{
+                    direction: 'rtl'
+                },
                 useHTML: true
             },
             plotOptions: {
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0
+                },
+                series:{
+                    cursor: 'pointer',
+                    allowPointSelect: true,
+                    point: {
+                        events : {
+                            click: event1 => {
+                                this.showDetail(event1);
+                            }
+                        }
+                    }
                 }
             },
             series: this.priceCostSeries,
@@ -576,136 +596,47 @@ export class HomeComponent implements OnInit, OnDestroy {
     makeDetailSeries(){
 
         this.detailMonthPriceCostSeries = [{
-            name: "برنامه ریزی",
+                name: "هزینه اجرا شده",
+                data: this.planningAndRunMonthReports.filter(a => a.reportType == 2)
+                    .sort((a,b) => (a.month > b.month) ? -1 : (a.month < b.month) ? 1 : 0)
+                    .map(a => a.personCost),
+                color: "#28a745"
+            },{
+            name: "هزینه برنامه ریزی شده",
             data: this.planningAndRunMonthReports.filter(a => a.reportType == 1)
-                .sort((a,b) => (a.month > b.month) ? 1 : (a.month < b.month) ? -1 : 0)
+                .sort((a,b) => (a.month > b.month) ? -1 : (a.month < b.month) ? 1 : 0)
                 .map(a => a.personCost),
-            color: "lightgreen"
-        },{
-            name: "اجرا",
-            data: this.planningAndRunMonthReports.filter(a => a.reportType == 2)
-                .sort((a,b) => (a.month > b.month) ? 1 : (a.month < b.month) ? -1 : 0)
-                .map(a => a.personCost),
-            color: "red"
+            color: "#ffc107"
         }];
         this.detailMonthPersonHourSeries = [{
-            name: "برنامه ریزی",
-            data: this.planningAndRunMonthReports.filter(a => a.reportType == 1)
-                .sort((a,b) => (a.month > b.month) ? 1 : (a.month < b.month) ? -1 : 0)
-                .map(a => a.personHour),
-            color: "lightgreen"
-        },{
-            name: "اجرا",
+            name: "نفر ساعت اجرا شده",
             data: this.planningAndRunMonthReports.filter(a => a.reportType == 2)
-                .sort((a,b) => (a.month > b.month) ? 1 : (a.month < b.month) ? -1 : 0)
+                .sort((a,b) => (a.month > b.month) ? -1 : (a.month < b.month) ? 1 : 0)
                 .map(a => a.personHour),
-            color: "red"
+            color: "#28a745"
+        },{
+            name: "نفر ساعت برنامه ریزی شده",
+            data: this.planningAndRunMonthReports.filter(a => a.reportType == 1)
+                .sort((a,b) => (a.month > b.month) ? -1 : (a.month < b.month) ? 1 : 0)
+                .map(a => a.personHour),
+            color: "#ffc107"
         }];
         this.loadDetailMonthColumnChart();
     }
     loadDetailMonthColumnChart(){
+        const cats: any = MONTHS.sort((a,b) => (a.id > b.id) ? -1 : (a.id < b.id) ? 1 : 0).map(a => a.persianMonth);
         // @ts-ignore
-        this.detailMonthPersonHourChart = new Chart({
-            chart: {
-                type: 'column',
-                style: {
-                    fontFamily: 'IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman'
-                }
-            },
-            lang: {
-                decimalPoint: ',',
-                thousandsSep: '.'
-            },
-            title: {
-                text: 'نمودار نفر/ساعت به تفکیک ماه گروه ' + this.selectedGroup
-            },
-            xAxis: {
-                categories: MONTHS.sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0).map(a => a.persianMonth),
-                crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'نفر ساعت'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true,
-                /*formatter: function () {
-                    return '<b>' + this.series.name + '</b><br/>' +
-                        this.point.y + ' ' + this.point.name.toLowerCase();
-                }*/
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                },
-                series:{
-                    cursor: 'pointer',
-                    allowPointSelect: true
-                }
-            },
-            series: this.detailMonthPersonHourSeries,
-            credits: {
-                enabled: false
-            }
-        });
-        this.detailMonthPriceCostChart = new Chart({
-            chart: {
-                type: 'column',
-                style: {
-                    fontFamily: 'IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman'
-                }
-            },
-            lang: {
-                decimalPoint: ',',
-                thousandsSep: '.'
-            },
-            title: {
-                text: 'نمودار هزینه به تفکیک ماه گروه ' + this.selectedGroup
-            },
-            xAxis: {
-                categories: MONTHS.sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0).map(a => a.persianMonth),
-                crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'میزان هزینه'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-            series: this.detailMonthPriceCostSeries,
-            credits: {
-                enabled: false
-            }
-        });
+        this.detailMonthPersonHourChart = this.showColumnChart('نمودار نفر ساعت به تفکیک ماه گروه ' + this.selectedGroup, this.detailMonthPersonHourSeries,
+            'میزان نفر ساعت', cats);
+        this.detailMonthPriceCostChart = this.showColumnChart('نمودار هزینه به تفکیک ماه گروه ' + this.selectedGroup, this.detailMonthPriceCostSeries,
+            'میزان هزینه', cats);
     }
     makePiesSeries()
     {
         let piePlanningPersonHourSeries: any = this.makePiePersonHourSeries(1);
-        this.piePlanningPersonHourChart = this.showPieChart('نمودار درصد نفر/ساعت برنامه ریزی شده گروه ' + this.selectedGroup +' به تفکیک ماه', piePlanningPersonHourSeries);
+        this.piePlanningPersonHourChart = this.showPieChart('نمودار درصد نفر ساعت برنامه ریزی شده گروه ' + this.selectedGroup +' به تفکیک ماه', piePlanningPersonHourSeries);
         let pieRunnningPersonHourSeries: any = this.makePiePersonHourSeries(2);
-        this.pieRunnningPersonHourChart = this.showPieChart('نمودار درصد نفر/ساعت اجرا شده گروه ' + this.selectedGroup +' به تفکیک ماه', pieRunnningPersonHourSeries);
+        this.pieRunnningPersonHourChart = this.showPieChart('نمودار درصد نفر ساعت اجرا شده گروه ' + this.selectedGroup +' به تفکیک ماه', pieRunnningPersonHourSeries);
 
         let piePlanningCostSeries: any = this.makePieCostSeries(1);
         this.piePlanningPriceCostChart = this.showPieChart('نمودار درصد هزینه برنامه ریزی شده گروه ' + this.selectedGroup +' به تفکیک ماه', piePlanningCostSeries);
@@ -762,7 +693,11 @@ export class HomeComponent implements OnInit, OnDestroy {
                 }
             },
             tooltip: {
-                pointFormat: '<b>درصد {point.percentage:.0f}</b>',
+                pointFormat: '<b>%</b><b style="direction: ltr">{point.percentage:.0f}</b>',
+                useHTML:true,
+                style:{
+                    direction: 'rtl'
+                },
             },
             plotOptions: {
                 pie: {
@@ -775,6 +710,55 @@ export class HomeComponent implements OnInit, OnDestroy {
                 //colorByPoint: true,
                 data: data
             }],
+            credits: {
+                enabled: false
+            }
+        });
+    }
+    showColumnChart(headerText: string, series: any, title: string, categories: any): Chart{
+        return new Chart({
+            chart: {
+                type: 'column',
+                style: {
+                    fontFamily: 'IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman'
+                }
+            },
+            title: {
+                text: headerText
+            },
+            lang: {
+                decimalPoint: ',',
+                thousandsSep: '.'
+            },
+            xAxis: {
+                categories: categories,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: title
+                },
+                opposite: true
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="direction: ltr ;padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                style:{
+                  direction: 'rtl'
+                },
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: series,
             credits: {
                 enabled: false
             }

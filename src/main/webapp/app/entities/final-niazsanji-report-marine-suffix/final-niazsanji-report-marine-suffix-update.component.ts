@@ -14,6 +14,8 @@ import { EducationalModuleMarineSuffixService } from 'app/entities/educational-m
 import Bytes = jest.Bytes;
 import {IReportMarineSuffix} from "app/shared/model/report-marine-suffix.model";
 import {trigger} from "@angular/animations";
+import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
+import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
 
 @Component({
     selector: 'mi-final-niazsanji-report-marine-suffix-update',
@@ -25,12 +27,16 @@ export class FinalNiazsanjiReportMarineSuffixUpdateComponent implements OnInit {
     isSaving: boolean;
 
     educationalmodules: IEducationalModuleMarineSuffix[];
+    organizationCharts: IOrganizationChartMarineSuffix[];
+    people: IPersonMarineSuffix[];
+    selectedPeople: IPersonMarineSuffix[];
 
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService,
         private personService: PersonMarineSuffixService,
+        private organizationChartService: OrganizationChartMarineSuffixService,
         private documentService: DocumentMarineSuffixService,
         private educationalModuleService: EducationalModuleMarineSuffixService,
         private activatedRoute: ActivatedRoute,
@@ -44,10 +50,6 @@ export class FinalNiazsanjiReportMarineSuffixUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ finalNiazsanjiReport }) => {
             this.finalNiazsanjiReport = finalNiazsanjiReport;
         });
-        this._report = new class implements IReportMarineSuffix {
-            fileDoc: any;
-            fileDocContentType: string;
-        };
         if(this.educationalModuleService.educationalModules) {
             this.educationalmodules = this.educationalModuleService.educationalModules;
         }
@@ -55,6 +57,28 @@ export class FinalNiazsanjiReportMarineSuffixUpdateComponent implements OnInit {
             this.educationalModuleService.query().subscribe(
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                     this.educationalmodules = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
+        if(this.organizationChartService.organizationchartsAll) {
+            this.organizationCharts = this.organizationChartService.organizationchartsAll;
+        }
+        else{
+            this.organizationChartService.query().subscribe(
+                (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
+                    this.organizationCharts = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
+        if(this.personService.people) {
+            this.people = this.personService.people;
+        }
+        else{
+            this.personService.query().subscribe(
+                (res: HttpResponse<IPersonMarineSuffix[]>) => {
+                    this.people = res.body;
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
@@ -75,18 +99,6 @@ export class FinalNiazsanjiReportMarineSuffixUpdateComponent implements OnInit {
         } else {
             this.subscribeToSaveResponse(this.finalNiazsanjiReportService.create(this.finalNiazsanjiReport));
         }
-    }
-    makeReport(i){
-        let id = i.finalNiazsanjiReport.educationalModuleId;
-        this.finalNiazsanjiReportService.report(id).subscribe((res: HttpResponse<IReportMarineSuffix>)=>{
-            this._report = res.body;
-        })
-    }
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
     }
     private subscribeToSaveResponse(result: Observable<HttpResponse<IFinalNiazsanjiReportMarineSuffix>>) {
         result.subscribe(

@@ -3,22 +3,22 @@
         <ul class="nav flex-column accordion" id="accordionExample">
             <li class="nav-item">
                 <a class="nav-link Imams" href="#" role="button">
-                    <img src="../../../content/images/topbar/Sanaye200.jpg" style="width: 31%" />
-                    <img src="../../../content/images/navbar/LogoSanaie.png" style="width: 80%;padding-top: 3%"/>
+                    <img src="../../../content/images/topbar/Sanaye200.png" style="width: 31%" />
+                    <img src="../../../content/images/navbar/LogoSanaie.png" style="width: 70%;padding-top: 3%"/>
                 </a>
             </li>
             <ng-container *ngIf="treeNode">
             <li  *ngFor="let node of treeNode" class="nav-item">
                 <a class="nav-link" [attr.data-toggle]="node.children.length > 0 ? 'collapse' : null" attr.href="#{{node.url}}" role="button" aria-expanded="false" attr.aria-controls="{{node.url}}">
                     <fa-icon [icon]="node.faicon"></fa-icon>
-                    <span class="pr-2">{{node.title}}</span>
+                    <span class="pr-2 aLittleShadow">{{node.title}}</span>
                     <i [ngClass]="{'fa fa-angle-left menuArrow':node.children.length>0}"></i>
                 </a>
                 <ul *ngIf="node.children.length>0" id="{{node.url}}" class="collapse" data-parent="#accordionExample">
                     <li class="nchild" *ngFor="let child of node.children">
                         <a href="{{child.url}}" class="nchild">
                             <fa-icon [icon]="child.faicon"></fa-icon>
-                            <span>{{child.title}}</span>
+                            <span class="aLittleShadow">{{child.title}}</span>
                         </a>
                     </li>
                 </ul>

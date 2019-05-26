@@ -39,7 +39,10 @@
             "document": "مدارک",
             "educationalModule": "پودمان آموزشی",
             "educationalModuleId": "پودمان آموزشی",
-            "organizationChart": "Organization Chart"
+            "organizationChart": "پیشنهاد دهنده",
+            "organizationChartId": "پیشنهاد دهنده",
+            "person": "نام و نام خانوادگی",
+            "personId": "نام و نام خانوادگی"
         }
     }
 }

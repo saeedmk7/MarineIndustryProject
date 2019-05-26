@@ -571,7 +571,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         return {
             success: context.dataItem.status == 20,
             warning: context.dataItem.status == 10,
-            danger: context.dataItem.status == 0
+            danger: context.dataItem.status < 10
         };
     }
 

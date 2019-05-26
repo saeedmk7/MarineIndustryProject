@@ -137,7 +137,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
 
     }*/
 
-    showPlanningReport(){
+    /*showPlanningReport(){
         debugger;
         let niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
         let orgRootId = this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
@@ -152,7 +152,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
-    }
+    }*/
     public ngAfterViewInit(): void {
         // Expand the first row initially
         //this.grid.expandRow(0);
@@ -494,7 +494,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         if(this.organizationChartService.organizationchartsAll)
         {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
-            this.showPlanningReport();
+            //this.showPlanningReport();
             const orgs = this.handleOrgChartView();
             this.prepareRootsSearch(orgs);
         }
@@ -503,7 +503,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
 
                     this.organizationcharts = res.body;
-                    this.showPlanningReport();
+                    //this.showPlanningReport();
                     const orgs = this.handleOrgChartView();
                     this.prepareRootsSearch(orgs);
                 },
@@ -567,9 +567,8 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
 
     public rowCallback(context: RowClassArgs) {
         return {
-            success: context.dataItem.status == 20,
-            warning: context.dataItem.status == 10,
-            danger: context.dataItem.status == 0
+            info: context.dataItem.status == 5,
+            light: context.dataItem.status == 0
         };
     }
 

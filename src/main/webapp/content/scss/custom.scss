@@ -320,12 +320,15 @@ tfoot{
 .HomeBoxTitle{padding:3px;color:#ffffff;margin-top:5px;font-size:16px}
 /*.HomeBox{background:#1a75ba;float:right;width:31%;cursor:pointer;padding:15px 0px 15px 0px;margin:2px;border-radius:4px;-webkit-transition: all 0.3s ease;transition: all 0.3s ease;}*/
 .HomeBox{/*background:linear-gradient(to right top, #00aeef, rgba(34, 209, 119, 0.8));*/
-    background-color: #0093E9;
-    background-image: linear-gradient(45deg, #0093E9 0%, #80D0C7 100%);
+    background-color: chocolate;
+    /*background-image: linear-gradient(45deg, #0093E9 0%, #80D0C7 100%);*/
     /*background:white;border: 1px dashed #cccccc;*/
     float:right;width:31%;cursor:pointer;padding:15px 0px 15px 0px;margin:2px;border-radius:4px;-webkit-transition: all 0.3s ease;transition: all 0.3s ease;}
 /*.HomeBox:hover{background:#1a75ba;    box-shadow: 0 2px 8px #334;*/
-.HomeBox:hover{background:linear-gradient(to right top,rgba(34, 209, 119, 0.8) ,#00aeef); box-shadow: 0 2px 8px #334;
+.HomeBox:hover{
+    background-color: coral;
+    /*background:linear-gradient(to right top,rgba(34, 209, 119, 0.8) ,#00aeef);*/
+    box-shadow: 0 2px 8px #334;
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
     opacity: 1;
