@@ -37,6 +37,8 @@ export interface IRequestNiazsanjiFardiMarineSuffix {
     personId?: number;
     organizationChartTitle?: string;
     organizationChartId?: number;
+    totalLearningTime?: number;
+    skillLevelOfSkillTitle?: string;
 }
 
 export class RequestNiazsanjiFardiMarineSuffix implements IRequestNiazsanjiFardiMarineSuffix {
@@ -71,7 +73,9 @@ export class RequestNiazsanjiFardiMarineSuffix implements IRequestNiazsanjiFardi
         public personFamily?: string,
         public personId?: number,
         public organizationChartTitle?: string,
-        public organizationChartId?: number
+        public organizationChartId?: number,
+        public totalLearningTime?: number,
+        public skillLevelOfSkillTitle?: string
     ) {
         this.archived = this.archived || false;
     }

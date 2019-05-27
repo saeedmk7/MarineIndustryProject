@@ -181,24 +181,25 @@
                     </kendo-buttongroup>
                 </ng-template>
             </kendo-grid-column>
-            <kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="250"></kendo-grid-column>
+
             <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="90"></kendo-grid-column>
-            <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>
-            <!--<kendo-grid-column field="finalizeCost" title="هزینه پایانی" [width]="100"></kendo-grid-column>-->
-            <kendo-grid-column field="finalizeCost" title="هزینه صرف شده" [width]="100">
-                <ng-template
-                    kendoGridFooterTemplate
-                    let-column="column">جمع کل: {{totalFinalizeCost | number}}</ng-template>
-            </kendo-grid-column>
             <kendo-grid-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل (نفر ساعت): {{total | number}}</ng-template>
             </kendo-grid-column>
+            <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>
 
+            <!--<kendo-grid-column field="finalizeCost" title="هزینه پایانی" [width]="100"></kendo-grid-column>-->
+            <kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="250"></kendo-grid-column>
             <kendo-grid-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="200"></kendo-grid-column>
+            <kendo-grid-column field="finalizeCost" title="هزینه صرف شده" [width]="100">
+                <ng-template
+                    kendoGridFooterTemplate
+                    let-column="column">جمع کل: {{totalFinalizeCost | number}}</ng-template>
+            </kendo-grid-column>
             <kendo-grid-column field="priceCost" type="number" title="هزینه اولیه" [width]="100">
                 <ng-template
                     kendoGridFooterTemplate
@@ -207,6 +208,8 @@
             <kendo-grid-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="planningRunMonthPersian" title="ماه برنامه ریزی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="modifyPerson" title="ویرایش کننده" [width]="200"></kendo-grid-column>
+            <kendo-grid-column field="modifyDate" title="تاریخ ویرایش" [width]="150"></kendo-grid-column>
             <kendo-grid-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="500"></kendo-grid-column>
             <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
                 <kendo-excelexport-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="300"></kendo-excelexport-column>
@@ -221,6 +224,8 @@
                 <kendo-excelexport-column field="priceCost" title="هزینه" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="modifyPerson" title="ویرایش کننده" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="modifyDate" title="تاریخ ویرایش" [width]="100"></kendo-excelexport-column>
             </kendo-grid-excel>
         </kendo-grid>
     </div>
@@ -248,11 +253,11 @@
                         <span class="d-none d-md-inline">برنامه ریزی</span>
                     </kendo-buttongroup>-->
                     <kendo-buttongroup>
-                        <button kendoButton type="submit" class="btn btn-warning btn-sm"
-                                [routerLink]="['/design-and-planning-marine-suffix', dataItem.id, 'edit']"
-                        >
-                            <span class="fa fa-file"></span>
-                            <span class="d-none d-md-inline">برنامه ریزی</span>
+                        <button kendoButton type="submit"
+                                [routerLink]="['/final-niazsanji-report-marine-suffix', dataItem.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <!--<button kendoButton type="submit" class="btn btn-success btn-sm"  [disabled]="dataItem.status < 10"
                                 [routerLink]="['/run-phase-marine-suffix', dataItem.id, 'edit']"
@@ -275,18 +280,19 @@
             <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="200"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="100"></kendo-grid-column>
-            <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>
-            <kendo-grid-column field="finalizeCost" title="هزینه صرف شده" [width]="100">
-                <ng-template
-                    kendoGridFooterTemplate
-                    let-column="column">جمع کل: {{totalFinalizeCost | number}}</ng-template>
-            </kendo-grid-column>
             <kendo-grid-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100">
 
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل (نفر ساعت): {{total | number}}</ng-template>
             </kendo-grid-column>
+            <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="finalizeCost" title="هزینه صرف شده" [width]="100">
+                <ng-template
+                    kendoGridFooterTemplate
+                    let-column="column">جمع کل: {{totalFinalizeCost | number}}</ng-template>
+            </kendo-grid-column>
+
             <!--<kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="300"></kendo-grid-column>
             <kendo-grid-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="300"></kendo-grid-column>-->
             <kendo-grid-column field="priceCost" title="هزینه اولیه" [width]="100">
@@ -297,6 +303,8 @@
             <kendo-grid-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="planningRunMonthPersian" title="ماه برنامه ریزی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="modifyPerson" title="ویرایش کننده" [width]="200"></kendo-grid-column>
+            <kendo-grid-column field="modifyDate" title="تاریخ ویرایش" [width]="150"></kendo-grid-column>
             <div *kendoGridDetailTemplate="let dataItem">
                 <mi-final-niazsanji-report-marine-suffix-detail-people [people]="dataItem.people"></mi-final-niazsanji-report-marine-suffix-detail-people>
             </div>
@@ -312,6 +320,8 @@
                 <kendo-excelexport-column field="priceCost" title="هزینه" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="modifyPerson" title="ویرایش کننده" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="modifyDate" title="تاریخ ویرایش" [width]="100"></kendo-excelexport-column>
                <!-- <div *kendoGridDetailTemplate="let dataItem">
                     <mi-final-niazsanji-report-marine-suffix-detail-people [people]="dataItem.people"></mi-final-niazsanji-report-marine-suffix-detail-people>
                 </div>-->

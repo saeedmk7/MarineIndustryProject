@@ -181,4 +181,17 @@ public class DesignAndPlanningServiceImpl implements DesignAndPlanningService {
             }
         }
     }
+
+    @Override
+    public Optional<DesignAndPlanningDTO> findByFinalNiazsanjiReportId(Long finalNiazsanjiReportId) {
+        LongFilter filter = new LongFilter();
+        filter.setEquals(finalNiazsanjiReportId);
+
+        DesignAndPlanningCriteria designAndPlanningCriteria = new DesignAndPlanningCriteria();
+        designAndPlanningCriteria.setFinalNiazsanjiReportId(filter);
+        List<DesignAndPlanningDTO> designAndPlanningDTOs =  designAndPlanningQueryService.findByCriteria(designAndPlanningCriteria);
+        if(designAndPlanningDTOs.size() > 0)
+            return Optional.of(designAndPlanningDTOs.get(0));
+        return Optional.empty();
+    }
 }

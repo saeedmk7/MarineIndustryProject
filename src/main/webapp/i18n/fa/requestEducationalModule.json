@@ -3,7 +3,7 @@
     "marineindustryprojApp": {
         "requestEducationalModule" : {
             "home": {
-                "title": "فهرست درخواست پودمان ها",
+                "title": "درخواست های پودمان آموزشی",
                 "createLabel": "جدید",
                 "createOrEditLabel": "درخواست پودمان"
             },

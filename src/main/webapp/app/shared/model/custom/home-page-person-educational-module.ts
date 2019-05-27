@@ -14,6 +14,7 @@ export interface IHomePagePersonEducationalModule {
     organizationId?: number;
     skillableLevelOfSkillTitle?: string;
     skillableLevelOfSkillId?: number;
+    runDate?: string;
 }
 
 export class HomePagePersonEducationalModule implements IHomePagePersonEducationalModule {
@@ -31,7 +32,8 @@ export class HomePagePersonEducationalModule implements IHomePagePersonEducation
         public skillableLevelOfSkillTitle?: string,
         public skillableLevelOfSkillId?: number,
         public organizationTitle?: string,
-        public organizationId?: number
+        public organizationId?: number,
+        public runDate?: string
     ) {
     }
 }

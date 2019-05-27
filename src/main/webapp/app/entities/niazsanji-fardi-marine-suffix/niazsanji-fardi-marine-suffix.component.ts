@@ -288,9 +288,7 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
             this.prepareSearchPerson();
             this.prepareSearchEducationalModule();
             this.prepareSearchDate();
-            if (!this.done) {
-                this.loadAll();
-            }
+
         });
         //this.registerChangeInNiazsanjiFardis();
     }
@@ -299,13 +297,18 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
         if(this.educationalModuleService.educationalModules){
             this.educationalModules = this.educationalModuleService.educationalModules
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, "fullTitle",'half'));
+            if (!this.done) {
+                this.loadAll();
+            }
         }
         else {
             this.educationalModuleService.query().subscribe(
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                     this.educationalModules = res.body;
                     this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', res.body, "fullTitle",'half'));
-
+                    if (!this.done) {
+                        this.loadAll();
+                    }
                 },
                 (res: HttpErrorResponse) => this.onError(res.message))
         }
@@ -452,6 +455,13 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.niazsanjiFardis = this.convertObjectDatesService.changeArrayDate(data, true);
+        this.niazsanjiFardis.forEach(a => {
+            let education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            if(education){
+                a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
+                a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)
+            }
+        })
     }
 
     private onSuccess(successMessage: string) {

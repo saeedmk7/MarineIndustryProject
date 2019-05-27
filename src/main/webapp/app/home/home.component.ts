@@ -564,7 +564,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     selectedGroup: string = "";
     //home page chart detail
     showDetail(event){
-        debugger;
+
         this.selectedGroup = event.point.category;
         let org = this.organizationcharts.find(a => a.title == this.selectedGroup);
 
@@ -576,13 +576,13 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
     }
     showPlanningReport(org: IOrganizationChartMarineSuffix){
-        debugger;
+
         let niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
         let orgRootId = org.id; //this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
         this.finalNiazsanjiReportService.getPlanningAndRunMonthReport(niazsanjiYear,3, orgRootId)
             .subscribe(
                 (res: HttpResponse<IPlanningAndRunMonthReport[]>) => {
-                    debugger;
+
                     this.planningAndRunMonthReports = res.body;
                     this.planningAndRunMonthReports.forEach(a => {
                         a.persianMonth = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.month);

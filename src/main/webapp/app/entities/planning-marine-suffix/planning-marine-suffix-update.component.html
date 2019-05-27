@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="mi-planning-marine-suffix-heading" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.home.createOrEditLabel">Create or edit a Final Niazsanji Report</h2>
+            <h2 id="mi-planning-marine-suffix-heading" jhiTranslate="marineindustryprojApp.planning.home.createOrEditLabel">Create or edit a Final Niazsanji Report</h2>
             <div>
                 <mi-alert-error></mi-alert-error>
                 <div class="form-group" [hidden]="!finalNiazsanjiReport.id">
@@ -10,7 +10,7 @@
                         [(ngModel)]="finalNiazsanjiReport.id" readonly />
                 </div>
                <!-- <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazSanjiSource" for="field_niazSanjiSource">Niaz Sanji Source</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.planning.niazSanjiSource" for="field_niazSanjiSource">Niaz Sanji Source</label>
                     <select class="form-control" name="niazSanjiSource" [(ngModel)]="finalNiazsanjiReport.niazSanjiSource" id="field_niazSanjiSource"  required>
                         <option value="FARDI">{{'marineindustryprojApp.NiazSanjiSource.FARDI' | translate}}</option>
                         <option value="GROUP">{{'marineindustryprojApp.NiazSanjiSource.GROUP' | translate}}</option>
@@ -24,13 +24,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.priceCost" for="field_priceCost">Price Cost</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.planning.priceCost" for="field_priceCost">Price Cost</label>
                     <input type="number" class="form-control" name="priceCost" id="field_priceCost"
                         [(ngModel)]="finalNiazsanjiReport.priceCost" />
                 </div>-->
 
                <!-- <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.createUserLogin" for="field_createUserLogin">Create User Login</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.planning.createUserLogin" for="field_createUserLogin">Create User Login</label>
                     <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
                         [(ngModel)]="finalNiazsanjiReport.createUserLogin" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.createUserLogin?.dirty && editForm.controls.createUserLogin?.invalid)">
@@ -41,14 +41,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.createDate" for="field_createDate">Create Date</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.planning.createDate" for="field_createDate">Create Date</label>
                     <div class="d-flex">
                         <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="createDate"
                         />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.modifyUserLogin" for="field_modifyUserLogin">Modify User Login</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.planning.modifyUserLogin" for="field_modifyUserLogin">Modify User Login</label>
                     <input type="text" class="form-control" name="modifyUserLogin" id="field_modifyUserLogin"
                         [(ngModel)]="finalNiazsanjiReport.modifyUserLogin" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.modifyUserLogin?.dirty && editForm.controls.modifyUserLogin?.invalid)">
@@ -59,14 +59,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.modifyDate" for="field_modifyDate">Modify Date</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.planning.modifyDate" for="field_modifyDate">Modify Date</label>
                     <div class="d-flex">
                         <input id="field_modifyDate" type="datetime-local" class="form-control" name="modifyDate" [(ngModel)]="modifyDate"
                         />
                     </div>
                 </div>-->
                <!-- <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.archived" for="field_archived">Archived</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.planning.archived" for="field_archived">Archived</label>
                     <input type="checkbox" class="form-control" name="archived" id="field_archived"
                         [(ngModel)]="finalNiazsanjiReport.archived" />
                     <div [hidden]="!(editForm.controls.archived?.dirty && editForm.controls.archived?.invalid)">
@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.archivedUserLogin" for="field_archivedUserLogin">Archived User Login</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.planning.archivedUserLogin" for="field_archivedUserLogin">Archived User Login</label>
                     <input type="text" class="form-control" name="archivedUserLogin" id="field_archivedUserLogin"
                         [(ngModel)]="finalNiazsanjiReport.archivedUserLogin" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.archivedUserLogin?.dirty && editForm.controls.archivedUserLogin?.invalid)">
@@ -88,14 +88,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.archivedDate" for="field_archivedDate">Archived Date</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.planning.archivedDate" for="field_archivedDate">Archived Date</label>
                     <div class="d-flex">
                         <input id="field_archivedDate" type="datetime-local" class="form-control" name="archivedDate" [(ngModel)]="archivedDate"
                         />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.status" for="field_status">Status</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.planning.status" for="field_status">Status</label>
                     <input type="number" class="form-control" name="status" id="field_status"
                         [(ngModel)]="finalNiazsanjiReport.status" required/>
                     <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
@@ -111,13 +111,13 @@
                 </div>-->
 
                 <!--<div class="form-group">
-                    <label jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.person" for="field_person">Person</label>
+                    <label jhiTranslate="marineindustryprojApp.planning.person" for="field_person">Person</label>
                     <select class="form-control" id="field_person" multiple name="person" [(ngModel)]="finalNiazsanjiReport.people">
                         <option [ngValue]="getSelected(finalNiazsanjiReport.people, personOption)" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.family}}</option>
                     </select>
                 </div>-->
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.educationalModule" for="field_educationalModule">Educational Module</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.planning.educationalModule" for="field_educationalModule">Educational Module</label>
                     <select class="form-control" id="field_educationalModule" name="educationalModule" [(ngModel)]="finalNiazsanjiReport.educationalModuleId" required>
                         <option *ngIf="!editForm.value.educationalModule" [ngValue]="null" selected></option>
                         <option [ngValue]="educationalModuleOption.id" *ngFor="let educationalModuleOption of educationalmodules; trackBy: trackEducationalModuleById">{{educationalModuleOption.title}}</option>
@@ -130,7 +130,7 @@
                     </small>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.description" for="field_description">Description</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.planning.description" for="field_description">Description</label>
                     <textarea class="form-control" name="description" id="field_description"
                               [(ngModel)]="finalNiazsanjiReport.description" maxlength="4096" ></textarea>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">

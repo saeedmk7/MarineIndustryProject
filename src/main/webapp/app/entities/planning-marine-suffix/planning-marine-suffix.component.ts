@@ -140,13 +140,13 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     }*/
 
     showPlanningReport(){
-        debugger;
+
         let niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
         let orgRootId = this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
         this.finalNiazsanjiReportService.getPlanningAndRunMonthReport(niazsanjiYear,1, orgRootId)
             .subscribe(
                 (res: HttpResponse<IPlanningAndRunMonthReport[]>) => {
-                    debugger;
+
                     this.planningAndRunMonthReports = res.body;
                     this.planningAndRunMonthReports.forEach(a => {
                         a.persianMonth = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.month);
@@ -278,6 +278,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                         this.prepareForOrganizationFinal(res.body, data);
                     }
                     $('#collapseExample').addClass('collapse');
+                    $('#collapseExample').removeClass('show');
                 }, (res: HttpErrorResponse) => this.onError(res.message)
             );
         }

@@ -3,7 +3,7 @@
     "marineindustryprojApp": {
         "usersRequest" : {
             "home": {
-                "title": "فهرست درخواست های کاربران",
+                "title": "پنل پیشنهاد و انتقاد",
                 "createLabel": "جدید",
                 "createOrEditLabel": "درخواست جدید یا ویرایش"
             },

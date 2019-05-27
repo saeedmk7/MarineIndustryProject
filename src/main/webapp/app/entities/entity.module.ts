@@ -68,6 +68,7 @@ import { MarineindustryprojNiazsanjiFardiMarineSuffixModule } from './niazsanji-
 import { MarineindustryprojRequestNiazsanjiFardiMarineSuffixModule } from './request-niazsanji-fardi-marine-suffix/request-niazsanji-fardi-marine-suffix.module';
 import {MarineindustryprojEducationalHistoryMarineSuffixModule} from "app/entities/educational-history-marine-suffix/educational-history-marine-suffix.module";
 import {MarineindustryprojPlanningMarineSuffixModule} from "app/entities/planning-marine-suffix/planning-marine-suffix.module";
+import {MarineindustryprojInstructionMarineSuffixModule} from "app/entities/instruction-marine-suffix/instruction-marine-suffix.module";
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -137,7 +138,8 @@ import {MarineindustryprojPlanningMarineSuffixModule} from "app/entities/plannin
         MarineindustryprojNiazsanjiFardiMarineSuffixModule,
         MarineindustryprojRequestNiazsanjiFardiMarineSuffixModule,
         MarineindustryprojEducationalHistoryMarineSuffixModule,
-        MarineindustryprojPlanningMarineSuffixModule
+        MarineindustryprojPlanningMarineSuffixModule,
+        MarineindustryprojInstructionMarineSuffixModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

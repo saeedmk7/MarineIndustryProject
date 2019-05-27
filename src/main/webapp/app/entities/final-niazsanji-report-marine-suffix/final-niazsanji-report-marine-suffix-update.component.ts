@@ -16,6 +16,14 @@ import {IReportMarineSuffix} from "app/shared/model/report-marine-suffix.model";
 import {trigger} from "@angular/animations";
 import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
 import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
+import {FinalNiazsanjiReportPersonMarineSuffixService} from "app/entities/final-niazsanji-report-person-marine-suffix";
+import {IJobMarineSuffix} from "app/shared/model/job-marine-suffix.model";
+import {
+    FinalNiazsanjiReportPersonMarineSuffix,
+    IFinalNiazsanjiReportPersonMarineSuffix
+} from "app/shared/model/final-niazsanji-report-person-marine-suffix.model";
+import {CourseTypeMarineSuffix, ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
+import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 
 @Component({
     selector: 'mi-final-niazsanji-report-marine-suffix-update',
@@ -28,9 +36,11 @@ export class FinalNiazsanjiReportMarineSuffixUpdateComponent implements OnInit {
 
     educationalmodules: IEducationalModuleMarineSuffix[];
     organizationCharts: IOrganizationChartMarineSuffix[];
+    finalNiazsanjiReportPeople: IFinalNiazsanjiReportPersonMarineSuffix[];
     people: IPersonMarineSuffix[];
     selectedPeople: IPersonMarineSuffix[];
-
+    selectedPersonIds: number[];
+    coursetypes: ICourseTypeMarineSuffix[];
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -41,7 +51,9 @@ export class FinalNiazsanjiReportMarineSuffixUpdateComponent implements OnInit {
         private educationalModuleService: EducationalModuleMarineSuffixService,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private dataUtils: JhiDataUtils
+        private dataUtils: JhiDataUtils,
+        private finalNiazsanjiReportPersonService: FinalNiazsanjiReportPersonMarineSuffixService,
+        private courseTypeService: CourseTypeMarineSuffixService
     ) { }
 
     ngOnInit() {
@@ -49,6 +61,43 @@ export class FinalNiazsanjiReportMarineSuffixUpdateComponent implements OnInit {
 
         this.activatedRoute.data.subscribe(({ finalNiazsanjiReport }) => {
             this.finalNiazsanjiReport = finalNiazsanjiReport;
+
+            let criteria = [{
+                key: 'finalNiazsanjiReportId.equals',
+                value: this.finalNiazsanjiReport.id
+            }];
+
+            this.finalNiazsanjiReportPersonService.query({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: ["id", "asc"]
+            })
+            .subscribe(
+                (res: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>) => {
+
+                    this.finalNiazsanjiReportPeople = res.body;
+                    this.selectedPersonIds = this.finalNiazsanjiReportPeople.map(a => a.personId);
+
+                    if(this.personService.people) {
+                        this.people = this.personService.people;
+                        this.selectedPeople = this.people.filter(a => this.selectedPersonIds.includes(a.id));
+                    }
+                    else{
+                        this.personService.query().subscribe(
+                            (res: HttpResponse<IPersonMarineSuffix[]>) => {
+
+                                this.people = res.body;
+                                this.selectedPeople = this.people.filter(a => this.selectedPersonIds.includes(a.id));
+                            },
+                            (res: HttpErrorResponse) => this.onError(res.message)
+                        );
+                    }
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+
+
         });
         if(this.educationalModuleService.educationalModules) {
             this.educationalmodules = this.educationalModuleService.educationalModules;
@@ -72,19 +121,13 @@ export class FinalNiazsanjiReportMarineSuffixUpdateComponent implements OnInit {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
         }
-        if(this.personService.people) {
-            this.people = this.personService.people;
-        }
-        else{
-            this.personService.query().subscribe(
-                (res: HttpResponse<IPersonMarineSuffix[]>) => {
-                    this.people = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-        }
+        this.courseTypeService.query().subscribe((resp: HttpResponse<ICourseTypeMarineSuffix[]>) =>{
+            this.coursetypes = resp.body;
+        },
+            (res: HttpErrorResponse) => this.onError(res.message));
     }
     change(i){
+
         this.router.navigateByUrl(i);
     }
     previousState() {
@@ -93,7 +136,35 @@ export class FinalNiazsanjiReportMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.finalNiazsanjiReport.status = 0;
+
+
+        const finalSelectedIds = this.selectedPeople.map(a => a.id);
+        if(finalSelectedIds.length <= 0) {
+            this.onError('حداقل یک نفر را باید انتخاب نمائید.');
+            return;
+        }
+        const  finalPersonIds = this.finalNiazsanjiReportPeople.map(a => a.personId);
+        const  mustDeletedPersonIds = finalPersonIds.filter(a => !finalSelectedIds.includes(a));
+        const  nustDelete = this.finalNiazsanjiReportPeople.filter(a => mustDeletedPersonIds.includes(a.personId));
+        nustDelete.forEach(a => {
+            this.finalNiazsanjiReportPersonService.delete(a.id).subscribe(response => {});
+        });
+        const  mustInsertPersonIds = finalSelectedIds.filter(a => !finalPersonIds.includes(a));
+        const  mustInsert = this.people.filter(a => mustInsertPersonIds.includes(a.id));
+        mustInsert.forEach(a => {
+            let final: IFinalNiazsanjiReportPersonMarineSuffix = new FinalNiazsanjiReportPersonMarineSuffix();
+            final.personId = a.id;
+            final.finalNiazsanjiReportId = this.finalNiazsanjiReport.id;
+            final.archived = false;
+            final.niazSanjiSource = this.finalNiazsanjiReport.niazSanjiSource;
+            final.priceCost = this.finalNiazsanjiReport.priceCost;
+            final.sourceId = this.finalNiazsanjiReportPeople[0].sourceId;
+            final.status = 0;
+            this.finalNiazsanjiReportPersonService.create(final).subscribe((resp: IFinalNiazsanjiReportPersonMarineSuffix) => {
+
+            });
+        });
+
         if (this.finalNiazsanjiReport.id !== undefined) {
             this.subscribeToSaveResponse(this.finalNiazsanjiReportService.update(this.finalNiazsanjiReport));
         } else {

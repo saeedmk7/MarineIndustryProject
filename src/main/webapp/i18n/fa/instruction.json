@@ -2,26 +2,26 @@
     "marineindustryprojApp": {
         "instruction": {
             "home": {
-                "title": "Instructions",
-                "createLabel": "Create a new Instruction",
-                "createOrEditLabel": "Create or edit a Instruction"
+                "title": "قوانین و دستورالعمل ها",
+                "createLabel": "جدید",
+                "createOrEditLabel": "جدید یا ویرایش دستورالعمل"
             },
-            "created": "A new Instruction is created with identifier {{ param }}",
-            "updated": "A Instruction is updated with identifier {{ param }}",
-            "deleted": "A Instruction is deleted with identifier {{ param }}",
+            "created": "دستورالعمل با شناسه {{ param }} ایجاد شد.",
+            "updated": "دستورالعمل با شناسه {{ param }} ویرایش شد.",
+            "deleted": "دستورالعمل با شناسه {{ param }} حذف شد.",
             "delete": {
-                "question": "Are you sure you want to delete Instruction {{ id }}?"
+                "question": "آیا از حذف دستورالعمل با شناسه {{ id }} مطمئنید؟"
             },
             "detail": {
-                "title": "Instruction"
+                "title": "جزئیات اطلاعات دستورالعمل"
             },
-            "title": "Title",
-            "description": "Description",
-            "code": "Code",
-            "createUserLogin": "Create User Login",
-            "createDate": "Create Date",
-            "modifyUserLogin": "Modify User Login",
-            "modifyDate": "Modify Date",
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
             "document": "Document"
         }
     }

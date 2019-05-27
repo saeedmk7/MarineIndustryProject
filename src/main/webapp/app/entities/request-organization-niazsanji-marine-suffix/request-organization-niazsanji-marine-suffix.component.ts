@@ -266,7 +266,9 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
                 this.exportRequestsFinal(res);
             }
             else{
+
                 this.educationalModuleService.query().subscribe((resp: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
+
                         this.educationalModules = resp.body;
                         this.exportRequestsFinal(res);
                     },
@@ -282,6 +284,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
                     }
                     else{
                         this.educationalModuleService.query().subscribe((resp: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
+
                                 this.educationalModules = resp.body;
                                 this.exportRequestsFinal(res);
                             },
@@ -430,20 +433,29 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
             this.prepareSearchDate();
             this.prepareSearchEducationalModule();
             this.prepareSearchOrgChart();
+
+        });
+    }
+    prepareSearchEducationalModule(){
+        if(this.educationalModuleService.educationalModules) {
+            this.educationalModules = this.educationalModuleService.educationalModules;
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle', 'half'));
             if(!this.done){
                 this.makeCriteria();
             }
-        });
-        //this.registerChangeInRequestOrganizationNiazsanjis();
-    }
-    prepareSearchEducationalModule(){
-        this.educationalModuleService.query().subscribe(
-            (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
-                this.educationalModules = res.body;
-                this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', res.body));
+        }
+        else {
+            this.educationalModuleService.query().subscribe(
+                (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
 
-            },
-            (res: HttpErrorResponse) => this.onError(res.message))
+                    this.educationalModules = res.body;
+                    this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', res.body, 'fullTitle', 'half'));
+                    if(!this.done){
+                        this.makeCriteria();
+                    }
+                },
+                (res: HttpErrorResponse) => this.onError(res.message))
+        }
     }
     prepareSearchDate(){
         let dates = this.convertObjectDatesService.getYearsArray();
@@ -453,13 +465,14 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
         if(this.organizationChartService.organizationchartsAll)
         {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
+            this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select','equals', this.organizationcharts, 'fullTitle', 'half'));
         }
         else {
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
 
                     this.organizationcharts = res.body;
-                    this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select', 'equals', this.organizationcharts));
+                    this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select', 'equals', this.organizationcharts, 'fullTitle','half'));
                 },
                 (res: HttpErrorResponse) => this.onError(res.message));
         }
@@ -495,6 +508,11 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
         this.requestOrganizationNiazsanjis = this.convertObjectDatesService.changeArrayDate(data);
         this.requestOrganizationNiazsanjis.forEach((a: IRequestOrganizationNiazsanjiMarineSuffix) => {
             a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
+            let education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            if(education){
+                a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
+                a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)
+            }
         });
     }
 

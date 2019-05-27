@@ -50,7 +50,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.instruction.createUserLogin" for="field_createUserLogin">Create User Login</label>
                     <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
                         [(ngModel)]="instruction.createUserLogin" maxlength="50"/>
@@ -92,7 +92,7 @@
                     <select class="form-control" id="field_document" multiple name="document" [(ngModel)]="instruction.documents">
                         <option [ngValue]="getSelected(instruction.documents, documentOption)" *ngFor="let documentOption of documents; trackBy: trackDocumentById">{{documentOption.title}}</option>
                     </select>
-                </div>
+                </div>-->
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

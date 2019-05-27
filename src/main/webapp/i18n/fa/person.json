@@ -2,7 +2,7 @@
     "marineindustryprojApp": {
         "person" : {
             "home": {
-                "title": "افراد سازمان",
+                "title": "اطلاعات کارکنان سازمان",
                 "createLabel": "جدید",
                 "createOrEditLabel": "مشخصات {{param}}"
             },

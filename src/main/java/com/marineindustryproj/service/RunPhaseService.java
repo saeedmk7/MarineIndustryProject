@@ -1,5 +1,6 @@
 package com.marineindustryproj.service;
 
+import com.marineindustryproj.domain.RunPhase;
 import com.marineindustryproj.service.dto.RunPhaseDTO;
 
 import com.marineindustryproj.service.dto.customs.RunPhaseSaveDataModel;
@@ -54,4 +55,6 @@ public interface RunPhaseService {
     void delete(Long id);
 
     void deleteByFinalNiazsanjiReportId(Long finalNiazsanjiReportId);
+
+    Optional<RunPhaseDTO> findByFinalNiazsanjiReportId(Long finalNiazsanjiReportId);
 }

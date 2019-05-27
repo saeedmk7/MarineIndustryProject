@@ -43,6 +43,8 @@ export interface IFinalOrganizationNiazsanjiMarineSuffix {
     teachApproachId?: number;
     requestOrganizationNiazsanjiRecommendedByOrgchart?: string;
     requestOrganizationNiazsanjiId?: number;
+    totalLearningTime?: number;
+    skillLevelOfSkillTitle?: string;
 }
 
 export class FinalOrganizationNiazsanjiMarineSuffix implements IFinalOrganizationNiazsanjiMarineSuffix {
@@ -83,7 +85,9 @@ export class FinalOrganizationNiazsanjiMarineSuffix implements IFinalOrganizatio
         public teachApproachTitle?: string,
         public teachApproachId?: number,
         public requestOrganizationNiazsanjiRecommendedByOrgchart?: string,
-        public requestOrganizationNiazsanjiId?: number
+        public requestOrganizationNiazsanjiId?: number,
+        public totalLearningTime?: number,
+        public skillLevelOfSkillTitle?: string
     ) {
         this.archived = this.archived || false;
     }

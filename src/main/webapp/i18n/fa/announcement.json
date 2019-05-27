@@ -3,7 +3,7 @@
     "marineindustryprojApp": {
         "announcement" : {
             "home": {
-                "title": "اخبار",
+                "title": "پنل مدیریت اخبار",
                 "createLabel": "جدید",
                 "createOrEditLabel": "جدید یا ویرایش خبر"
             },

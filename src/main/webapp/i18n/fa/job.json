@@ -3,7 +3,7 @@
     "marineindustryprojApp": {
         "job" : {
             "home": {
-                "title": "مشاغل",
+                "title": "کلیه مشاغل سازمان",
                 "createLabel": "جدید",
                 "createOrEditLabel": "جدید یا ویرایش شغل"
             },

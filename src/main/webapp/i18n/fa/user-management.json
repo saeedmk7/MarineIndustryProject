@@ -1,7 +1,7 @@
 {
     "userManagement": {
         "home": {
-            "title": "کاربران",
+            "title": "پنل مدیریت و دسترسی کاربران",
             "authority": "نقش ها",
             "createLabel": "ایجاد یک کاربر جدید",
             "createOrEditLabel": "ایجاد و یا ویرایش یک کاربر"

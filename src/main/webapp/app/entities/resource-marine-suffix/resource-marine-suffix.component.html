@@ -58,7 +58,7 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"  *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                        <button type="submit"
                                 [routerLink]="['/resource-marine-suffix', resource.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>

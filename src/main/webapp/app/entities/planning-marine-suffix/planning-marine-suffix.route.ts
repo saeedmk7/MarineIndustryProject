@@ -41,7 +41,7 @@ export const planningRoute: Routes = [
         data: {
             authorities: ['ROLE_USER'],
             defaultSort: 'id,asc',
-            pageTitle: 'marineindustryprojApp.finalNiazsanjiReport.home.title'
+            pageTitle: 'marineindustryprojApp.planning.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -53,7 +53,7 @@ export const planningRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'marineindustryprojApp.finalNiazsanjiReport.home.title'
+            pageTitle: 'marineindustryprojApp.planning.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -65,7 +65,7 @@ export const planningRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'marineindustryprojApp.finalNiazsanjiReport.home.title'
+            pageTitle: 'marineindustryprojApp.planning.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -77,7 +77,7 @@ export const planningRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'marineindustryprojApp.finalNiazsanjiReport.home.title'
+            pageTitle: 'marineindustryprojApp.planning.home.title'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -92,7 +92,7 @@ export const planningPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'marineindustryprojApp.finalNiazsanjiReport.home.title'
+            pageTitle: 'marineindustryprojApp.planning.home.title'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

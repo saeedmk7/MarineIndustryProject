@@ -26,12 +26,16 @@
             <!--<th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="recommendedByOrgchart"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.recommendedByOrgchart">Recommended By Orgchart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="studentsType"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.studentsType">Students Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th>کدپودمان</th>
+            <th>سطح</th>
+            <th>ساعت</th>
+            <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="studentsType"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.studentsType">Students Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <!--<th>افراد انتخابی</th>-->
             <!--<th jhiSortBy="teacherNotFound"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherNotFound">Teacher Not Found</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="teacherName"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherName">Teacher Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <!--<th jhiSortBy="requestStatus"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.requestStatus">Request Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
             <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -56,7 +60,10 @@
                         <a [routerLink]="['../educational-module-marine-suffix', requestOrganizationNiazsanji.educationalModuleId , 'view' ]" >{{requestOrganizationNiazsanji.educationalModuleTitle}}</a>
                     </div>
                 </td>
-                <td>{{requestOrganizationNiazsanji.studentsType}}</td>
+                <td>{{requestOrganizationNiazsanji.educationalModuleId}}</td>
+                <td>{{requestOrganizationNiazsanji.skillLevelOfSkillTitle}}</td>
+                <td>{{requestOrganizationNiazsanji.totalLearningTime | number}}</td>
+                <!--<td>{{requestOrganizationNiazsanji.studentsType}}</td>-->
                <!-- <td>
                     <div *ngFor="let person of requestOrganizationNiazsanji.people">
                         <span class="badge badge-info">{{ person.name }} {{person.family}}</span>

@@ -300,24 +300,28 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             this.prepareSearchPerson();
             this.prepareSearchEducationalModule();
             this.prepareSearchDate();
-            if(!this.done){
-                this.loadAll();
-            }
+
 
         });
         //this.registerChangeInFinalOrganizationNiazsanjis();
     }
     prepareSearchEducationalModule(){
+
         if(this.educationalModuleService.educationalModules){
-            this.educationalModules = this.educationalModuleService.educationalModules
+            this.educationalModules = this.educationalModuleService.educationalModules;
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, "fullTitle",'half'));
+            if(!this.done){
+                this.loadAll();
+            }
         }
         else {
             this.educationalModuleService.query().subscribe(
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                     this.educationalModules = res.body;
                     this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', res.body, "fullTitle",'half'));
-
+                    if(!this.done){
+                        this.loadAll();
+                    }
                 },
                 (res: HttpErrorResponse) => this.onError(res.message))
         }
@@ -385,6 +389,13 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.finalOrganizationNiazsanjis = this.convertObjectDatesService.changeArrayDate(data,true);
+        this.finalOrganizationNiazsanjis.forEach(a => {
+            let education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            if(education){
+                a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
+                a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)
+            }
+        });
     }
     private onSuccess(errorMessage: string) {
         this.jhiAlertService.success(errorMessage, null, null);

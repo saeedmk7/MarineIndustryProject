@@ -58,6 +58,7 @@
                                 <!--<th><span jhiTranslate="marineindustryprojApp.educationalModule.organization">Organization</span> </th>-->
                                 <th><span jhiTranslate="marineindustryprojApp.educationalModule.skillableLevelOfSkill">Skillable Level Of Skill</span></th>
                                 <th><span>نوع پودمان</span></th>
+                                <th><span>تاریخ برگزاری</span></th>
                                 <th>وضعیت</th>
                             </tr>
                             </thead>
@@ -80,6 +81,9 @@
                                 </td>
                                 <td>
                                     {{educationalModule.educationalModuleType}}
+                                </td>
+                                <td>
+                                    {{educationalModule.runDate}}
                                 </td>
                                 <td>
                                     {{educationalModule.statusMeaning}}
@@ -198,48 +202,57 @@
                     </div>
                 </ng-container>-->
                 <div  class="table-home" [ngClass]="{'other-user-news': !isSuperUsers}">
-                    <table *ngIf="isAdmin" cellspacing="2" cellpadding="0" style="border:0px;">
+                    <table *ngIf="isSuperUsers" cellspacing="2" cellpadding="0" style="border:0px;">
                         <tbody><tr>
                             <td style="width:37%;text-align:center;padding-right:15px">
-                                <a class="HomeBox" href="#" style="opacity: 1;">
-                                    <img src="../../content/images/home/Process.png">
-                                    <div class="HomeBoxTitle">  </div>
-                                </a>
-                                <a class="HomeBox" href="#" style="opacity: 1;">
-                                    <img src="../../content/images/home/Class.png">
-                                    <div class="HomeBoxTitle">  </div>
-                                </a>
-                                <a class="HomeBox" href="#" style="opacity: 1;">
-                                    <img src="../../content/images/home/Evaluation.png">
-                                    <div class="HomeBoxTitle">  </div>
-                                </a>
-                                <a routerLink="person-marine-suffix">
-                                <a class="HomeBox" href="#/person-marine-suffix" style="opacity: 1;">
-                                    <img src="../../content/images/home/Personel.png">
-                                    <div class="HomeBoxTitle">پرسنل</div>
-                                </a>
+                                <a class="HomeBox" href="#/request-educational-module-marine-suffix" style="opacity: 1;">
+                                    <img src="../../content/images/home/Course.png">
+                                    <div class="HomeBoxTitle">درخواست پودمان <br/>آموزشی</div>
                                 </a>
                                 <a class="HomeBox" href="#/educational-module-marine-suffix" style="opacity: 1;">
                                     <img src="../../content/images/home/Course.png">
-                                    <div class="HomeBoxTitle">پودمان ها</div>
+                                    <div class="HomeBoxTitle">فهرست پودمان <br/>آموزشی</div>
                                 </a>
-                                <a class="HomeBox" href="#" style="opacity: 1;">
-                                    <img src="../../content/images/home/Report.png">
-                                    <div class="HomeBoxTitle">گزارشات</div>
+                                <a class="HomeBox" href="#/request-niazsanji-fardi-marine-suffix" style="opacity: 1;">
+                                    <img src="../../content/images/home/Process.png">
+                                    <div class="HomeBoxTitle"> درخواست نیازسنجی پودمانی شغلی و فردی</div>
                                 </a>
-
-                                <a class="HomeBox" href="#" style="opacity: 1;">
-                                    <img src="../../content/images/home/Help.png">
-                                    <div class="HomeBoxTitle">راهنما</div>
+                                <a class="HomeBox" href="#/niazsanji-fardi-marine-suffix" style="opacity: 1;">
+                                    <img src="../../content/images/home/Process.png">
+                                    <div class="HomeBoxTitle"> فهرست نیازسنجی پودمانی شغلی و فردی</div>
+                                </a>
+                                <a class="HomeBox" href="#/request-organization-niazsanji-marine-suffix" style="opacity: 1;">
+                                    <img src="../../content/images/home/Evaluation.png">
+                                    <div class="HomeBoxTitle"> درخواست نیازسنجی پودمانی سازمانی (متمرکز)</div>
+                                </a>
+                                <a class="HomeBox" href="#/final-organization-niazsanji-marine-suffix" style="opacity: 1;">
+                                    <img src="../../content/images/home/Evaluation.png">
+                                    <div class="HomeBoxTitle"> فهرست نیازسنجی پودمانی سازمانی (متمرکز)</div>
+                                </a>
+                                <a class="HomeBox" href="#/teacher-marine-suffix" style="opacity: 1;">
+                                    <img src="../../content/images/home/Class.png">
+                                    <div class="HomeBoxTitle"> مدرسان آموزشی ودجا</div>
+                                </a>
+                                <a class="HomeBox" href="#/person-marine-suffix" style="opacity: 1;">
+                                    <img src="../../content/images/home/Personel.png">
+                                    <div class="HomeBoxTitle">اطلاعات پرسنلی</div>
                                 </a>
                                 <a class="HomeBox" href="#/resource-marine-suffix" style="opacity: 1;">
                                     <img src="../../content/images/home/Library.png">
                                     <div class="HomeBoxTitle">منابع آموزشی</div>
                                 </a>
-                                <a class="HomeBox" href="#/admin/user-management" style="opacity: 1;">
+                                <a class="HomeBox" href="#/instruction-marine-suffix" style="opacity: 1;">
+                                    <img src="../../content/images/home/Help.png">
+                                    <div class="HomeBoxTitle">قوانین و دستورالعمل ها</div>
+                                </a>
+                                <a class="HomeBox" href="#" style="opacity: 1;">
+                                    <img src="../../content/images/home/Report.png">
+                                    <div class="HomeBoxTitle">گزارشات</div>
+                                </a>
+                                <!--<a class="HomeBox" href="#/admin/user-management" style="opacity: 1;">
                                 <img src="../../content/images/home/Password.png">
                                 <div class="HomeBoxTitle">مدیریت کاربران</div>
-                </a>
+                                </a>-->
                       <!--          <a routerLink="password">
                                     <div class="HomeBox" style="opacity: 1;">
                                         <img src="../../content/images/home/Password.png">

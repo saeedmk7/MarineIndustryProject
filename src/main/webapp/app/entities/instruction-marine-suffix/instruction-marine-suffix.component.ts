@@ -9,6 +9,10 @@ import { Principal} from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { InstructionMarineSuffixService } from './instruction-marine-suffix.service';
+import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+import {ExcelService} from "app/plugin/export-excel/excel-service";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'mi-instruction-marine-suffix',
@@ -29,6 +33,10 @@ export class InstructionMarineSuffixComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    criteriaSubscriber: Subscription;
+    searchbarModel: SearchPanelModel[];
+    done:boolean = false;
+    criteria: any;
 
     constructor(
         protected instructionService: InstructionMarineSuffixService,
@@ -37,7 +45,9 @@ export class InstructionMarineSuffixComponent implements OnInit, OnDestroy {
         protected principal: Principal,
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
-        protected eventManager: JhiEventManager
+        protected eventManager: JhiEventManager,
+        private jhiTranslate: TranslateService,
+        private convertObjectDatesService : ConvertObjectDatesService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -46,13 +56,22 @@ export class InstructionMarineSuffixComponent implements OnInit, OnDestroy {
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
         });
+        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
+            this.done = true;
+            this.criteria = criteria.content;
+            this.loadAll(criteria.content);
+        });
     }
-
-    loadAll() {
+    export() {
+        let a = new ExcelService(this.jhiTranslate);
+        a.exportAsExcelFile(this.instructions, 'instructions', 'marineindustryprojApp.instruction');
+    }
+    loadAll(criteria?) {
         this.instructionService
             .query({
                 page: this.page - 1,
                 size: this.itemsPerPage,
+                criteria,
                 sort: this.sort()
             })
             .subscribe(
@@ -69,14 +88,14 @@ export class InstructionMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/instruction-marine-suffix'], {
+       /* this.router.navigate(['/instruction-marine-suffix'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
-        });
-        this.loadAll();
+        });*/
+        this.loadAll(this.criteria);
     }
 
     clear() {
@@ -92,15 +111,22 @@ export class InstructionMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.loadAll();
+        this.searchbarModel = new Array<SearchPanelModel>();
+        this.searchbarModel.push(new SearchPanelModel('instruction','title','text', 'contains'));
+        this.searchbarModel.push(new SearchPanelModel('instruction','code','text','contains'));
+        if(!this.done)
+        {
+            this.loadAll();
+        }
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
-        this.registerChangeInInstructions();
+        //this.registerChangeInInstructions();
     }
 
     ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
+        //this.eventManager.destroy(this.eventSubscriber);
+        this.eventManager.destroy(this.criteriaSubscriber);
     }
 
     trackId(index: number, item: IInstructionMarineSuffix) {
@@ -123,7 +149,7 @@ export class InstructionMarineSuffixComponent implements OnInit, OnDestroy {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
-        this.instructions = data;
+        this.instructions = this.convertObjectDatesService.changeArrayDate(data);
     }
 
     protected onError(errorMessage: string) {

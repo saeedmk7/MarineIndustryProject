@@ -23,11 +23,15 @@
                 <th>ردیف</th>
             <!--<th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th>پودمان آموزشی</th>
+                <th>کدپودمان</th>
+                <th>نوع پودمان</th>
+                <th>سطح</th>
+                <th>ساعت</th>
                 <th><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.person">Person</span></th>
                 <!--<th jhiSortBy="approvedEducationalModuleTitle"><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.approvedEducationalModule">Approved Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-                <th>پودمان انتخابی</th>
-                <th>هزینه پودمان انتخابی(ریال)</th>
-                <th>نوع انتخاب</th>
+                <th>هزینه (ریال)</th>
+
                 <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="costApprovedEducationalModule"><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.costApprovedEducationalModule">Cost Approved Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <!--<th jhiSortBy="allEducationalModuleTitle"><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.allEducationalModule">All Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
@@ -59,29 +63,41 @@
                         <a [routerLink]="['../organization-chart-marine-suffix', requestNiazsanjiFardi.organizationChartId , 'view' ]" >{{requestNiazsanjiFardi.organizationChartTitle}}</a>
                     </div>
                 </td>
-                <td>
-                    <div *ngIf="requestNiazsanjiFardi.personId">
-                        <a [routerLink]="['../person-marine-suffix', requestNiazsanjiFardi.personId , 'view' ]" >{{requestNiazsanjiFardi.personFullName}}</a>
-                    </div>
-                </td>
                 <td *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
                     <div *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
                         <a [routerLink]="['../educational-module-marine-suffix', requestNiazsanjiFardi.approvedEducationalModuleId , 'view' ]" >{{requestNiazsanjiFardi.approvedEducationalModuleTitle}}</a>
                     </div>
                 </td>
-                <td *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">{{requestNiazsanjiFardi.costApprovedEducationalModule | number}}</td>
+                <td *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
+                    {{requestNiazsanjiFardi.approvedEducationalModuleId}}
+                </td>
                 <td *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
                     <div *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
                         <a [routerLink]="['../educational-module-marine-suffix', requestNiazsanjiFardi.allEducationalModuleId , 'view' ]" >{{requestNiazsanjiFardi.allEducationalModuleTitle}}</a>
                     </div>
                 </td>
-                <td *ngIf="requestNiazsanjiFardi.allEducationalModuleId">{{requestNiazsanjiFardi.costAllEducationalModule | number}}</td>
+                <td *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
+                    {{requestNiazsanjiFardi.allEducationalModuleId}}
+                </td>
                 <td *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
                     از کلیه پودمان ها
                 </td>
                 <td *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
                     از شناسنامه شغلی
                 </td>
+                <td>
+                    {{requestNiazsanjiFardi.skillLevelOfSkillTitle}}
+                </td>
+                <td>
+                    {{requestNiazsanjiFardi.totalLearningTime | number}}
+                </td>
+                <td>
+                    <div *ngIf="requestNiazsanjiFardi.personId">
+                        <a [routerLink]="['../person-marine-suffix', requestNiazsanjiFardi.personId , 'view' ]" >{{requestNiazsanjiFardi.personFullName}}</a>
+                    </div>
+                </td>
+                <td *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">{{requestNiazsanjiFardi.costApprovedEducationalModule | number}}</td>
+                <td *ngIf="requestNiazsanjiFardi.allEducationalModuleId">{{requestNiazsanjiFardi.costAllEducationalModule | number}}</td>
                 <td>
                     <div *ngIf="requestNiazsanjiFardi.courseTypeId">
                         <a [routerLink]="['../course-type-marine-suffix', requestNiazsanjiFardi.courseTypeId , 'view' ]" >{{requestNiazsanjiFardi.courseTypeTitle}}</a>

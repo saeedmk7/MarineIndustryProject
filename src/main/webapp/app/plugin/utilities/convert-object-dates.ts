@@ -57,7 +57,7 @@ export class ConvertObjectDatesService {
         return date.getHours() + ":" + date.getMinutes() + "  " + moment(date).format('jYYYY/jMM/jDD');
     }
     public getNowShamsiYear(): number {
-        debugger;
+
         return +moment().format('jYYYY');
     }
     convertString2RequestStatus(newStatus: string): RequestStatus {

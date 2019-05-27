@@ -2,7 +2,7 @@
     "marineindustryprojApp": {
         "teacher" : {
             "home": {
-                "title": "فهرست مدرسین داخلی ودجا",
+                "title": "مدرسان آموزشی ودجا",
                 "createLabel": "جدید",
                 "createOrEditLabel": "جدید یا ویرایش مدرس"
             },

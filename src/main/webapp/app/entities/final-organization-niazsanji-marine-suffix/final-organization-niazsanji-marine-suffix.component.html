@@ -35,7 +35,10 @@
                 <th>ردیف</th>
             <th jhiSortBy="recommendedByOrgchart"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.recommendedByOrgchart">Recommended By Orgchart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="studentsType"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.studentsType">Students Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th>کدپودمان</th>
+            <th>سطح</th>
+            <th>ساعت</th>
+            <!--<th jhiSortBy="studentsType"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.studentsType">Students Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <!--<th>افراد انتخابی</th>-->
                 <!--<th jhiSortBy="teacherFamily"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.teacher">Teacher</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
@@ -65,7 +68,11 @@
                         <a [routerLink]="['../educational-module-marine-suffix', finalOrganizationNiazsanji.educationalModuleId , 'view' ]" >{{finalOrganizationNiazsanji.educationalModuleTitle}}</a>
                     </div>
                 </td>
-                <td>{{finalOrganizationNiazsanji.studentsType}}</td>
+
+                <td>{{finalOrganizationNiazsanji.educationalModuleId}}</td>
+                <td>{{finalOrganizationNiazsanji.skillLevelOfSkillTitle}}</td>
+                <td>{{finalOrganizationNiazsanji.totalLearningTime | number}}</td>
+                <!--<td>{{finalOrganizationNiazsanji.studentsType}}</td>-->
                 <td>
                     <div *ngIf="finalOrganizationNiazsanji.courseTypeId">
                         <a [routerLink]="['../course-type-marine-suffix', finalOrganizationNiazsanji.courseTypeId , 'view' ]" >{{finalOrganizationNiazsanji.courseTypeTitle}}</a>

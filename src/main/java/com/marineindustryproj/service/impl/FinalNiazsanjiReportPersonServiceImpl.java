@@ -1,11 +1,18 @@
 package com.marineindustryproj.service.impl;
 
+import com.marineindustryproj.service.DesignAndPlanningService;
 import com.marineindustryproj.service.FinalNiazsanjiReportPersonQueryService;
 import com.marineindustryproj.service.FinalNiazsanjiReportPersonService;
 import com.marineindustryproj.domain.FinalNiazsanjiReportPerson;
 import com.marineindustryproj.repository.FinalNiazsanjiReportPersonRepository;
+import com.marineindustryproj.service.FinalNiazsanjiReportService;
+import com.marineindustryproj.service.PersonService;
+import com.marineindustryproj.service.RunPhaseService;
+import com.marineindustryproj.service.dto.DesignAndPlanningDTO;
 import com.marineindustryproj.service.dto.FinalNiazsanjiReportPersonCriteria;
 import com.marineindustryproj.service.dto.FinalNiazsanjiReportPersonDTO;
+import com.marineindustryproj.service.dto.PersonDTO;
+import com.marineindustryproj.service.dto.RunPhaseDTO;
 import com.marineindustryproj.service.mapper.FinalNiazsanjiReportPersonMapper;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
@@ -18,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Implementation for managing FinalNiazsanjiReportPerson.
@@ -34,12 +42,24 @@ public class FinalNiazsanjiReportPersonServiceImpl implements FinalNiazsanjiRepo
 
     private final FinalNiazsanjiReportPersonQueryService finalNiazsanjiReportPersonQueryService;
 
+    private final RunPhaseService runPhaseService;
+
+    private final DesignAndPlanningService designAndPlanningService;
+
+    private final PersonService personService;
+
     public FinalNiazsanjiReportPersonServiceImpl(FinalNiazsanjiReportPersonRepository finalNiazsanjiReportPersonRepository,
                                                  FinalNiazsanjiReportPersonMapper finalNiazsanjiReportPersonMapper,
-                                                 FinalNiazsanjiReportPersonQueryService finalNiazsanjiReportPersonQueryService) {
+                                                 FinalNiazsanjiReportPersonQueryService finalNiazsanjiReportPersonQueryService,
+                                                 RunPhaseService runPhaseService,
+                                                 DesignAndPlanningService designAndPlanningService,
+                                                 PersonService personService) {
         this.finalNiazsanjiReportPersonRepository = finalNiazsanjiReportPersonRepository;
         this.finalNiazsanjiReportPersonMapper = finalNiazsanjiReportPersonMapper;
         this.finalNiazsanjiReportPersonQueryService = finalNiazsanjiReportPersonQueryService;
+        this.runPhaseService = runPhaseService;
+        this.designAndPlanningService = designAndPlanningService;
+        this.personService = personService;
     }
 
     /**
@@ -51,8 +71,30 @@ public class FinalNiazsanjiReportPersonServiceImpl implements FinalNiazsanjiRepo
     @Override
     public FinalNiazsanjiReportPersonDTO save(FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPersonDTO) {
         log.debug("Request to save FinalNiazsanjiReportPerson : {}", finalNiazsanjiReportPersonDTO);
-
         FinalNiazsanjiReportPerson finalNiazsanjiReportPerson = finalNiazsanjiReportPersonMapper.toEntity(finalNiazsanjiReportPersonDTO);
+        Optional<RunPhaseDTO> runPhaseDTO = runPhaseService.findByFinalNiazsanjiReportId(finalNiazsanjiReportPerson.getFinalNiazsanjiReport().getId());
+        if(runPhaseDTO.isPresent()){
+            RunPhaseDTO runPhase = runPhaseDTO.get();
+            Set<PersonDTO> runPhasePeople = runPhase.getPeople();
+            Optional<PersonDTO> runPhasePersonDTO = personService.findOne(finalNiazsanjiReportPerson.getPerson().getId());
+            if(runPhasePersonDTO.isPresent()) {
+                runPhasePeople.add(runPhasePersonDTO.get());
+            }
+            runPhase.setPeople(runPhasePeople);
+            runPhase = runPhaseService.save(runPhase);
+        }
+        Optional<DesignAndPlanningDTO> designAndPlanningDTO = designAndPlanningService.findByFinalNiazsanjiReportId(finalNiazsanjiReportPerson.getFinalNiazsanjiReport().getId());
+        if(designAndPlanningDTO.isPresent()){
+            DesignAndPlanningDTO designAndPlanning = designAndPlanningDTO.get();
+            Set<PersonDTO> people = designAndPlanning.getPeople();
+            Optional<PersonDTO> personDTO = personService.findOne(finalNiazsanjiReportPerson.getPerson().getId());
+            if(personDTO.isPresent()) {
+                people.add(personDTO.get());
+            }
+            designAndPlanning.setPeople(people);
+            designAndPlanningService.save(designAndPlanning);
+        }
+
         finalNiazsanjiReportPerson = finalNiazsanjiReportPersonRepository.save(finalNiazsanjiReportPerson);
         return finalNiazsanjiReportPersonMapper.toDto(finalNiazsanjiReportPerson);
     }
@@ -94,6 +136,32 @@ public class FinalNiazsanjiReportPersonServiceImpl implements FinalNiazsanjiRepo
     @Override
     public void delete(Long id) {
         log.debug("Request to delete FinalNiazsanjiReportPerson : {}", id);
+        Optional<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPersonDTO1 = findOne(id);
+        if(finalNiazsanjiReportPersonDTO1.isPresent()) {
+            FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPersonDTO = finalNiazsanjiReportPersonDTO1.get();
+            Optional<RunPhaseDTO> runPhaseDTO = runPhaseService.findByFinalNiazsanjiReportId(finalNiazsanjiReportPersonDTO.getFinalNiazsanjiReportId());
+            if (runPhaseDTO.isPresent()) {
+                RunPhaseDTO runPhase = runPhaseDTO.get();
+                Set<PersonDTO> runPhasePeople = runPhase.getPeople();
+                Optional<PersonDTO> runPhasePersonDTO = personService.findOne(finalNiazsanjiReportPersonDTO.getPersonId());
+                if (runPhasePersonDTO.isPresent()) {
+                    runPhasePeople.remove(runPhasePersonDTO.get());
+                }
+                runPhase.setPeople(runPhasePeople);
+                runPhaseService.save(runPhase);
+            }
+            Optional<DesignAndPlanningDTO> designAndPlanningDTO = designAndPlanningService.findByFinalNiazsanjiReportId(finalNiazsanjiReportPersonDTO.getFinalNiazsanjiReportId());
+            if (designAndPlanningDTO.isPresent()) {
+                DesignAndPlanningDTO designAndPlanning = designAndPlanningDTO.get();
+                Set<PersonDTO> people = designAndPlanning.getPeople();
+                Optional<PersonDTO> personDTO = personService.findOne(finalNiazsanjiReportPersonDTO.getPersonId());
+                if (personDTO.isPresent()) {
+                    people.remove(personDTO.get());
+                }
+                designAndPlanning.setPeople(people);
+                designAndPlanningService.save(designAndPlanning);
+            }
+        }
         finalNiazsanjiReportPersonRepository.deleteById(id);
     }
 

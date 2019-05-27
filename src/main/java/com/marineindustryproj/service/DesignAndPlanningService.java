@@ -51,4 +51,6 @@ public interface DesignAndPlanningService {
     void delete(Long id);
 
     void deleteByFinalNiazsanjiReportId(Long finalNiazsanjiReportId);
+
+    Optional<DesignAndPlanningDTO> findByFinalNiazsanjiReportId(Long finalNiazsanjiReportId);
 }

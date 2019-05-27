@@ -3,7 +3,7 @@
     "marineindustryprojApp": {
         "beautySpeech" : {
             "home": {
-                "title": "سخنان زیبای روز",
+                "title": "پنل تعریف سخنان روز",
                 "createLabel": "جدید",
                 "createOrEditLabel": "جدید یا ویرایش سخن روز"
             },

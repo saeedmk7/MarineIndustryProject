@@ -157,6 +157,25 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         log.debug("Request to save FinalNiazsanjiReport : {}",
                   finalNiazsanjiReportDTO);
         FinalNiazsanjiReport finalNiazsanjiReport = finalNiazsanjiReportMapper.toEntity(finalNiazsanjiReportDTO);
+        Optional<RunPhaseDTO> runPhaseDTO = runPhaseService.findByFinalNiazsanjiReportId(finalNiazsanjiReportDTO.getId());
+        if(runPhaseDTO.isPresent())
+        {
+            RunPhaseDTO runPhase = runPhaseDTO.get();
+            runPhase.setEducationalModuleId(finalNiazsanjiReport.getEducationalModule().getId());
+            runPhase.setCourseTypeId(finalNiazsanjiReport.getCourseType().getId());
+            runPhase.setOrganizationChartId(finalNiazsanjiReport.getOrganizationChart().getId());
+            runPhaseService.save(runPhase);
+        }
+        Optional<DesignAndPlanningDTO> designAndPlanningDTO = designAndPlanningService.findByFinalNiazsanjiReportId(finalNiazsanjiReportDTO.getId());
+        if(designAndPlanningDTO.isPresent())
+        {
+            DesignAndPlanningDTO designAndPlanning = designAndPlanningDTO.get();
+            designAndPlanning.setEducationalModuleId(finalNiazsanjiReport.getEducationalModule().getId());
+            designAndPlanning.setCourseTypeId(finalNiazsanjiReport.getCourseType().getId());
+            designAndPlanning.setOrganizationChartId(finalNiazsanjiReport.getOrganizationChart().getId());
+            designAndPlanningService.save(designAndPlanning);
+        }
+
         finalNiazsanjiReport = finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
         clearFinalNiazsanjiReportCaches();
         return finalNiazsanjiReportMapper.toDto(finalNiazsanjiReport);

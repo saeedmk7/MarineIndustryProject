@@ -254,4 +254,17 @@ public class RunPhaseServiceImpl implements RunPhaseService {
             }
         }
     }
+
+    @Override
+    public Optional<RunPhaseDTO> findByFinalNiazsanjiReportId(Long finalNiazsanjiReportId) {
+        LongFilter filter = new LongFilter();
+        filter.setEquals(finalNiazsanjiReportId);
+
+        RunPhaseCriteria runPhaseCriteria = new RunPhaseCriteria();
+        runPhaseCriteria.setFinalNiazsanjiReportId(filter);
+        List<RunPhaseDTO> runPhaseDTOS =  runPhaseQueryService.findByCriteria(runPhaseCriteria);
+        if(runPhaseDTOS.size() > 0)
+            return Optional.of(runPhaseDTOS.get(0));
+        return Optional.empty();
+    }
 }

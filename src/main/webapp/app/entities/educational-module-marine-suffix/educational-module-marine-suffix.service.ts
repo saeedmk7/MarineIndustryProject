@@ -49,7 +49,7 @@ export class EducationalModuleMarineSuffixService {
             let url = this.resourceUrl + "/all";
             return this.http
                 .get<IEducationalModuleMarineSuffix[]>(url, {observe: 'response'})
-                .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+                .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res, true)));
         }
     }
 
@@ -102,6 +102,7 @@ export class EducationalModuleMarineSuffixService {
             educationalModule.totalLearningTime = (educationalModule.learningTimePractical ? educationalModule.learningTimePractical : 0)
                 + (educationalModule.learningTimeTheorical ? educationalModule.learningTimeTheorical : 0);
         });
+
         if(isAll)
             this.educationalModules = res.body;
         return res;

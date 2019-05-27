@@ -20,8 +20,8 @@ export class InstructionMarineSuffixUpdateComponent implements OnInit {
     isSaving: boolean;
 
     documents: IDocumentMarineSuffix[];
-    createDate: string;
-    modifyDate: string;
+    /*createDate: string;
+    modifyDate: string;*/
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -34,15 +34,13 @@ export class InstructionMarineSuffixUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ instruction }) => {
             this.instruction = instruction;
-            this.createDate = this.instruction.createDate != null ? this.instruction.createDate.format(DATE_TIME_FORMAT) : null;
-            this.modifyDate = this.instruction.modifyDate != null ? this.instruction.modifyDate.format(DATE_TIME_FORMAT) : null;
         });
-        this.documentService.query().subscribe(
+        /*this.documentService.query().subscribe(
             (res: HttpResponse<IDocumentMarineSuffix[]>) => {
                 this.documents = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        );*/
     }
 
     previousState() {
@@ -51,8 +49,8 @@ export class InstructionMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.instruction.createDate = this.createDate != null ? moment(this.createDate, DATE_TIME_FORMAT) : null;
-        this.instruction.modifyDate = this.modifyDate != null ? moment(this.modifyDate, DATE_TIME_FORMAT) : null;
+        /*this.instruction.createDate = this.createDate != null ? moment(this.createDate, DATE_TIME_FORMAT) : null;
+        this.instruction.modifyDate = this.modifyDate != null ? moment(this.modifyDate, DATE_TIME_FORMAT) : null;*/
         if (this.instruction.id !== undefined) {
             this.subscribeToSaveResponse(this.instructionService.update(this.instruction));
         } else {

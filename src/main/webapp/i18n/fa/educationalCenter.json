@@ -2,7 +2,7 @@
     "marineindustryprojApp": {
         "educationalCenter" : {
             "home": {
-                "title": "مراکز آموزشی",
+                "title": "مراکز و موسسات آموزشی",
                 "createLabel": "جدید",
                 "createOrEditLabel": "جدید یا ویرایش مرکز آموزشی"
             },

@@ -85,7 +85,7 @@ export class FinalNiazsanjiReportMarineSuffixService {
             .pipe(map((res: HttpResponse<IHomePagePersonEducationalModule[]>) => res));
     }
     getPlanningAndRunMonthReport(niazsanjiYear: number, reportType: number ,orgRootId: number): Observable<HttpResponse<IPlanningAndRunMonthReport[]>> {
-        debugger;
+
         let url = this.resourceUrl + '/getPlanningAndRunMonthReport/' + niazsanjiYear + '/' + reportType + '/'  + orgRootId;
         return this.http
             .get<IPlanningAndRunMonthReport[]>(url, { observe: 'response' })

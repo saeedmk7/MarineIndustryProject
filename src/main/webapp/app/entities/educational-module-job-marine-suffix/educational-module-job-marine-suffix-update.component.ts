@@ -14,6 +14,7 @@ import { IJobMarineSuffix } from 'app/shared/model/job-marine-suffix.model';
 import { JobMarineSuffixService } from 'app/entities/job-marine-suffix';
 import {NgSelectConfig} from '@ng-select/ng-select';
 import {create} from "domain";
+import {ifElse} from "@progress/kendo-data-query/dist/npm/funcs";
 
 @Component({
     selector: 'mi-educational-module-job-marine-suffix-update',
@@ -29,6 +30,7 @@ export class EducationalModuleJobMarineSuffixUpdateComponent implements OnInit {
     tempJobs: IJobMarineSuffix[];
 
     first3jobCode: string;
+    jobCode: string;
     selectedJobs: any;
     selectedEducationalModules:any;
 
@@ -46,6 +48,7 @@ export class EducationalModuleJobMarineSuffixUpdateComponent implements OnInit {
     }
     cleanPage(){
         this.first3jobCode = "";
+        this.jobCode = "";
         this.selectedJobs = [];
         this.selectedEducationalModules = [];
         this.disable = true;
@@ -59,7 +62,10 @@ export class EducationalModuleJobMarineSuffixUpdateComponent implements OnInit {
     filterJobs(){
         console.log(this.first3jobCode);
         console.log(this.jobs);
-        this.tempJobs = this.jobs.filter((a:IJobMarineSuffix) => a.jobCode.startsWith(this.first3jobCode));
+        if(this.jobCode)
+            this.tempJobs = this.jobs.filter((a:IJobMarineSuffix) => a.jobCode == this.jobCode);
+        else if(this.first3jobCode)
+            this.tempJobs = this.jobs.filter((a:IJobMarineSuffix) => a.jobCode.startsWith(this.first3jobCode));
         console.log(this.tempJobs);
         this.selectedJobs = this.tempJobs;
         this.disable = false;

@@ -9,6 +9,9 @@
         </button>
     </h2>
     <mi-alert></mi-alert>
+    <div class="row">
+        <search-panel class="col-md-12" [searchPanelModel]="searchbarModel"></search-panel>
+    </div>
     <br/>
     <div class="table-responsive" *ngIf="instructions">
         <table class="table table-striped">
@@ -18,10 +21,10 @@
             <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.instruction.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.instruction.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.instruction.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.instruction.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.instruction.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.instruction.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.instruction.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.instruction.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.instruction.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.instruction.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th></th>
             </tr>
             </thead>
@@ -31,12 +34,18 @@
                 <td>{{instruction.title}}</td>
                 <td>{{instruction.description}}</td>
                 <td>{{instruction.code}}</td>
-                <td>{{instruction.createUserLogin}}</td>
-                <td>{{instruction.createDate | date:'medium'}}</td>
-                <td>{{instruction.modifyUserLogin}}</td>
-                <td>{{instruction.modifyDate | date:'medium'}}</td>
+                <!--<td>{{instruction.createUserLogin}}</td>-->
+                <td>{{instruction.createDate}}</td>
+                <!--<td>{{instruction.modifyUserLogin}}</td>
+                <td>{{instruction.modifyDate | date:'medium'}}</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../document-marine-suffix', 'instruction',instruction.id ]"
+                                class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.documents">Documents</span>
+                        </button>
                         <button type="submit"
                                 [routerLink]="['/instruction-marine-suffix', instruction.id, 'view' ]"
                                 class="btn btn-info btn-sm">
@@ -49,7 +58,7 @@
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
                                 [routerLink]="['/', { outlets: { popup: 'instruction-marine-suffix/'+ instruction.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
@@ -61,12 +70,30 @@
                 </td>
             </tr>
             </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="5">
+
+                </td>
+            </tr>
+
+            </tfoot>
         </table>
     </div>
     <div *ngIf="instructions && instructions.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
         <div class="row justify-content-center">
             <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>

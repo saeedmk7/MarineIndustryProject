@@ -17,6 +17,7 @@ public class HomePagePersonEducationalModule {
         this.skillableLevelOfSkillId = educationalModuleDTO.getSkillableLevelOfSkillId();
         this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
         this.educationalModuleType = "از کلیه پودمان ها";
+        this.runDate = finalNiazsanjiReportDTO.getNiazsanjiYear().toString();
         switch (finalNiazsanjiReportDTO.getStatus())
         {
             case 0:
@@ -71,6 +72,7 @@ public class HomePagePersonEducationalModule {
         this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
         this.organizationId = educationalModuleDTO.getOrganizationId();
         this.organizationTitle = educationalModuleDTO.getOrganizationTitle();
+        this.runDate = educationalHistoryDTO.getDateOfStart();
         this.educationalModuleType = "از کلیه پودمان ها";
         this.status = status;
     }
@@ -95,6 +97,8 @@ public class HomePagePersonEducationalModule {
     private String educationalModuleType;
 
     private Integer status;
+
+    private String runDate;
 
     public Long getId() {
         return id;
@@ -190,5 +194,13 @@ public class HomePagePersonEducationalModule {
 
     public void setEducationalModuleType(String educationalModuleType) {
         this.educationalModuleType = educationalModuleType;
+    }
+
+    public String getRunDate() {
+        return runDate;
+    }
+
+    public void setRunDate(String runDate) {
+        this.runDate = runDate;
     }
 }

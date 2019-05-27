@@ -121,13 +121,13 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         this.yearsCollections = GREGORIAN_START_END_DATE;
     }
     showPlanningReport(){
-        debugger;
+
         let niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
         let orgRootId = this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
         this.finalNiazsanjiReportService.getPlanningAndRunMonthReport(niazsanjiYear,2, orgRootId)
             .subscribe(
                 (res: HttpResponse<IPlanningAndRunMonthReport[]>) => {
-                    debugger;
+
                     this.planningAndRunMonthReports = res.body;
                     this.planningAndRunMonthReports.forEach(a => {
                         a.persianMonth = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.month);
@@ -241,13 +241,14 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     private prepareForFinal(data: IRunPhaseMarineSuffix[]) {
 
         if (data.length > 0) {
-            $('#collapseExample').addClass('collapse');
             if (this.niazSanjiSource) {
                 this.prepareForFardiFinal(data);
             }
             else {
                 this.prepareForOrganizationFinal(data);
             }
+            $('#collapseExample').addClass('collapse');
+            $('#collapseExample').removeClass('show');
         }
         else {
             this.message = "موردی یافت نشد.";

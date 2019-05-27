@@ -20,8 +20,8 @@ export class ResourceMarineSuffixUpdateComponent implements OnInit {
     isSaving: boolean;
 
     educationalmodules: IEducationalModuleMarineSuffix[];
-    createDate: string;
-    modifyDate: string;
+    /*createDate: string;
+    modifyDate: string;*/
 
     constructor(
         private jhiAlertService: JhiAlertService,

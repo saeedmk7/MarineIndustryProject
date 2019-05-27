@@ -188,7 +188,7 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.getFinalorganizationNiazsanji();
                 this.getEducationalHistories();
                 //this.checkCurrentFullName();
-            }, 10000);
+            }, 20000);
            /* if(this.isAdmin || this.isModirKolAmozesh) {
                 this.getNewRequestOrganization();
                 this.getNewUsersRequest();

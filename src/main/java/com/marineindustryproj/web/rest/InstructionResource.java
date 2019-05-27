@@ -1,6 +1,7 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.InstructionService;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +61,9 @@ public class InstructionResource {
         if (instructionDTO.getId() != null) {
             throw new BadRequestAlertException("A new instruction cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        instructionDTO.setCreateDate(ZonedDateTime.now());
+        instructionDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+
         InstructionDTO result = instructionService.save(instructionDTO);
         return ResponseEntity.created(new URI("/api/instructions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -81,6 +86,12 @@ public class InstructionResource {
         if (instructionDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        InstructionDTO instruction = instructionService.findOne(instructionDTO.getId()).get();
+
+        instructionDTO.setCreateUserLogin(instruction.getCreateUserLogin());
+        instructionDTO.setCreateDate(instruction.getCreateDate());
+        instructionDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        instructionDTO.setModifyDate(ZonedDateTime.now());
         InstructionDTO result = instructionService.save(instructionDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, instructionDTO.getId().toString()))

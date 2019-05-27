@@ -3,7 +3,7 @@
     "marineindustryprojApp": {
         "educationalModuleJob" : {
             "home": {
-                "title": "تخصیص پودمان به شغل بصورت گروهی",
+                "title": "تخصیص گروهی پودمان به شغل",
                 "createLabel": "جدید",
                 "createOrEditLabel": "جدید یا ویرایش"
             },

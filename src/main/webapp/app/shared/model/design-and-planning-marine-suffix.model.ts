@@ -51,6 +51,8 @@ export interface IDesignAndPlanningMarineSuffix {
     teachTechniqueId?: number;
     effectivenessIndexTitle?: string;
     effectivenessIndexId?: number;
+    totalLearningTime?: number;
+    skillLevelOfSkillTitle?: string;
 }
 
 export class DesignAndPlanningMarineSuffix implements IDesignAndPlanningMarineSuffix {
@@ -102,7 +104,9 @@ export class DesignAndPlanningMarineSuffix implements IDesignAndPlanningMarineSu
         public teachTechniqueTitle?: string,
         public teachTechniqueId?: number,
         public effectivenessIndexTitle?: string,
-        public effectivenessIndexId?: number
+        public effectivenessIndexId?: number,
+        public totalLearningTime?: number,
+        public skillLevelOfSkillTitle?: string
     ) {
         this.finished = this.finished || false;
         this.archived = this.archived || false;

@@ -159,9 +159,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         /*this.principal.identity().then(account => {
             this.currentAccount = account;
         });*/
-        if (!this.done) {
-            this.loadAll();
-        }
+
     });
         //this.registerChangeInDesignAndPlannings();
     }
@@ -182,12 +180,18 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         if (this.educationalModuleService.educationalModules) {
             this.educationalModules = this.educationalModuleService.educationalModules
             this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle'));
+            if (!this.done) {
+                this.loadAll();
+            }
         }
         else {
             this.educationalModuleService.query().subscribe(
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                     this.educationalModules = res.body;
                     this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle'));
+                    if (!this.done) {
+                        this.loadAll();
+                    }
                 },
                 (res: HttpErrorResponse) => this.onError(res.message))
         }
@@ -232,6 +236,11 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         this.queryCount = this.totalItems;
         data.forEach(a => {
             a.runMonthName = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
+            let education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            if(education){
+                a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
+                a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)
+            }
         })
         this.designAndPlannings = data;
     }

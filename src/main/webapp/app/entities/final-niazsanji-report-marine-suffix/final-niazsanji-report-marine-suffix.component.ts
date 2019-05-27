@@ -138,13 +138,13 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }*/
 
     /*showPlanningReport(){
-        debugger;
+
         let niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
         let orgRootId = this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
         this.finalNiazsanjiReportService.getPlanningAndRunMonthReport(niazsanjiYear,1, orgRootId)
             .subscribe(
                 (res: HttpResponse<IPlanningAndRunMonthReport[]>) => {
-                    debugger;
+
                     this.planningAndRunMonthReports = res.body;
                     this.planningAndRunMonthReports.forEach(a => {
                         a.persianMonth = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.month);
@@ -275,7 +275,9 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                     else {
                         this.prepareForOrganizationFinal(res.body, data);
                     }
+                    debugger;
                     $('#collapseExample').addClass('collapse');
+                    $('#collapseExample').removeClass('show');
                 }, (res: HttpErrorResponse) => this.onError(res.message)
             );
         }
@@ -320,6 +322,11 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                     finalNiazsanjiReportsFardi.personJobTitle = person.jobTitle;
                 }
             }
+            const modifyPerson: IPersonMarineSuffix = this.people.find(w => w.nationalId == a.modifyUserLogin);
+            if(modifyPerson)
+                finalNiazsanjiReportsFardi.modifyPerson = modifyPerson.fullName;
+            if(a.modifyDate)
+                finalNiazsanjiReportsFardi.modifyDate = this.convertObjectDatesService.miladi2Shamsi(a.modifyDate.toDate());
 
             this.finalNiazsanjiReportsFardis.push(finalNiazsanjiReportsFardi);
         });
@@ -355,6 +362,11 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             finalNiazsanjiReportsOrganization.planningRunMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.planningRunMonth);
             finalNiazsanjiReportsOrganization.courseTypeTitle = a.courseTypeTitle;
 
+            const modifyPerson: IPersonMarineSuffix = this.people.find(w => w.nationalId == a.modifyUserLogin);
+            if(modifyPerson)
+                finalNiazsanjiReportsOrganization.modifyPerson = modifyPerson.fullName;
+            if(a.modifyDate)
+                finalNiazsanjiReportsOrganization.modifyDate = this.convertObjectDatesService.miladi2Shamsi(a.modifyDate.toDate());
 
             let personReps = res.filter(w => w.finalNiazsanjiReportId == a.id);
             if (personReps) {
@@ -372,6 +384,8 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                     this.finalNiazsanjiReportsFardis.push(finalNiazsanjiReportsFardi);
                 });*/
             }
+
+
         });
 
         this.loadOrgs();
@@ -567,8 +581,8 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
 
     public rowCallback(context: RowClassArgs) {
         return {
-            info: context.dataItem.status == 5,
-            light: context.dataItem.status == 0
+            info: context.dataItem.modifyPerson != null,
+            light: context.dataItem.modifyPerson == null
         };
     }
 

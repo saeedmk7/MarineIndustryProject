@@ -1,7 +1,9 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.FinalNiazsanjiReportPersonService;
+import com.marineindustryproj.service.dto.FieldOfStudyDTO;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -22,6 +24,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +62,10 @@ public class FinalNiazsanjiReportPersonResource {
         if (finalNiazsanjiReportPersonDTO.getId() != null) {
             throw new BadRequestAlertException("A new finalNiazsanjiReportPerson cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        finalNiazsanjiReportPersonDTO.setCreateDate(ZonedDateTime.now());
+        finalNiazsanjiReportPersonDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+
         FinalNiazsanjiReportPersonDTO result = finalNiazsanjiReportPersonService.save(finalNiazsanjiReportPersonDTO);
         return ResponseEntity.created(new URI("/api/final-niazsanji-report-people/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -81,6 +88,14 @@ public class FinalNiazsanjiReportPersonResource {
         if (finalNiazsanjiReportPersonDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+        FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPerson = finalNiazsanjiReportPersonService.findOne(finalNiazsanjiReportPersonDTO.getId()).get();
+
+        finalNiazsanjiReportPersonDTO.setCreateUserLogin(finalNiazsanjiReportPerson.getCreateUserLogin());
+        finalNiazsanjiReportPersonDTO.setCreateDate(finalNiazsanjiReportPerson.getCreateDate());
+        finalNiazsanjiReportPersonDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        finalNiazsanjiReportPersonDTO.setModifyDate(ZonedDateTime.now());
+
         FinalNiazsanjiReportPersonDTO result = finalNiazsanjiReportPersonService.save(finalNiazsanjiReportPersonDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, finalNiazsanjiReportPersonDTO.getId().toString()))

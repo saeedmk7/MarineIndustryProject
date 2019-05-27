@@ -122,6 +122,9 @@ public class DocumentQueryService extends QueryService<Document> {
         else if(entityName.equals("resource")) {
             criteria.setResourceId(longFilter);
         }
+        else if(entityName.equals("instruction")) {
+            criteria.setInstructionId(longFilter);
+        }
         else if(entityName.equals("runphase")) {
             criteria.setRunPhaseId(longFilter);
         }

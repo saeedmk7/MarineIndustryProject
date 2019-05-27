@@ -1,7 +1,6 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.marineindustryproj.domain.RequestNiazsanjiFardi;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.AnnouncementQueryService;
 import com.marineindustryproj.service.AnnouncementService;
@@ -16,6 +15,8 @@ import com.marineindustryproj.service.FinalNiazsanjiReportQueryService;
 import com.marineindustryproj.service.FinalNiazsanjiReportService;
 import com.marineindustryproj.service.FinalOrganizationNiazsanjiQueryService;
 import com.marineindustryproj.service.FinalOrganizationNiazsanjiService;
+import com.marineindustryproj.service.InstructionQueryService;
+import com.marineindustryproj.service.InstructionService;
 import com.marineindustryproj.service.JobQueryService;
 import com.marineindustryproj.service.JobService;
 import com.marineindustryproj.service.NiazsanjiFardiQueryService;
@@ -49,6 +50,8 @@ import com.marineindustryproj.service.dto.FinalNiazsanjiReportCriteria;
 import com.marineindustryproj.service.dto.FinalNiazsanjiReportDTO;
 import com.marineindustryproj.service.dto.FinalOrganizationNiazsanjiCriteria;
 import com.marineindustryproj.service.dto.FinalOrganizationNiazsanjiDTO;
+import com.marineindustryproj.service.dto.InstructionCriteria;
+import com.marineindustryproj.service.dto.InstructionDTO;
 import com.marineindustryproj.service.dto.JobCriteria;
 import com.marineindustryproj.service.dto.JobDTO;
 import com.marineindustryproj.service.dto.NiazsanjiFardiCriteria;
@@ -145,7 +148,11 @@ public class DocumentResource {
 
     private final ResourceService resourceService;
 
+    private final InstructionService instructionService;
+
     private final ResourceQueryService resourceQueryService;
+
+    private final InstructionQueryService instructionQueryService;
 
     private final RequestOrganizationNiazsanjiService requestOrganizationNiazsanjiService;
 
@@ -196,7 +203,9 @@ public class DocumentResource {
                             RunPhaseService runPhaseService,
                             RunPhaseQueryService runPhaseQueryService,
                             ResourceService resourceService,
+                            InstructionService instructionService,
                             ResourceQueryService resourceQueryService,
+                            InstructionQueryService instructionQueryService,
                             RequestOrganizationNiazsanjiService requestOrganizationNiazsanjiService,
                             RequestOrganizationNiazsanjiQueryService requestOrganizationNiazsanjiQueryService,
                             FinalOrganizationNiazsanjiService finalOrganizationNiazsanjiService,
@@ -231,7 +240,9 @@ public class DocumentResource {
         this.runPhaseService = runPhaseService;
         this.runPhaseQueryService = runPhaseQueryService;
         this.resourceService = resourceService;
+        this.instructionService = instructionService;
         this.resourceQueryService = resourceQueryService;
+        this.instructionQueryService = instructionQueryService;
         this.requestOrganizationNiazsanjiService = requestOrganizationNiazsanjiService;
         this.requestOrganizationNiazsanjiQueryService = requestOrganizationNiazsanjiQueryService;
         this.finalOrganizationNiazsanjiService = finalOrganizationNiazsanjiService;
@@ -345,6 +356,13 @@ public class DocumentResource {
                 documents.add(result);
                 resource.setDocuments(documents);
                 resourceService.save(resource);
+            }
+            if (documentDTO.getEntityName().toLowerCase().equals("instruction")) {
+                InstructionDTO instruction = instructionService.findOne(documentDTO.getEntityId()).get();
+                Set<DocumentDTO> documents = instruction.getDocuments();
+                documents.add(result);
+                instruction.setDocuments(documents);
+                instructionService.save(instruction);
             }
             if (documentDTO.getEntityName().toLowerCase().equals("requestorganizationniazsanji")) {
                 RequestOrganizationNiazsanjiDTO requestOrganizationNiazsanji = requestOrganizationNiazsanjiService.findOne(documentDTO.getEntityId()).get();
@@ -604,6 +622,18 @@ public class DocumentResource {
             documents.remove(documentService.findOne(id).get());
             resourceDTO.setDocuments(documents);
             resourceService.save(resourceDTO);
+        }
+        if (entityName.toLowerCase().equals("instruction")) {
+            InstructionCriteria criteria = new InstructionCriteria();
+            LongFilter filter = new LongFilter();
+            filter.setEquals(id);
+            criteria.setDocumentId(filter);
+            InstructionDTO instructionDTO = instructionQueryService.findByCriteria(criteria).get(0);
+
+            Set<DocumentDTO> documents = instructionDTO.getDocuments();
+            documents.remove(documentService.findOne(id).get());
+            instructionDTO.setDocuments(documents);
+            instructionService.save(instructionDTO);
         }
         if (entityName.toLowerCase().equals("requestorganizationniazsanji")) {
             RequestOrganizationNiazsanjiCriteria criteria = new RequestOrganizationNiazsanjiCriteria();

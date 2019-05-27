@@ -21,6 +21,8 @@
             <th>ردیف</th>
             <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.educationalModuleTitle">Educational Module Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="educationalModuleId"><span jhiTranslate="marineindustryprojApp.designAndPlanning.educationalModuleCode">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th>سطح</th>
+                <th>ساعت</th>
             <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="effectivenessLevelTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.effectivenessLevel">Effectiveness Level</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="runMonth"><span jhiTranslate="marineindustryprojApp.designAndPlanning.runMonth">runMonth</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -67,6 +69,8 @@
                     </div>
                 </td>
                 <td>{{designAndPlanning.educationalModuleId}}</td>
+                <td>{{designAndPlanning.skillLevelOfSkillTitle}}</td>
+                <td>{{designAndPlanning.totalLearningTime | number}}</td>
                 <td>
                     <div *ngIf="designAndPlanning.courseTypeId">
                         <a [routerLink]="['../course-type-marine-suffix', designAndPlanning.courseTypeId , 'view' ]" >{{designAndPlanning.courseTypeTitle}}</a>
@@ -176,7 +180,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <td colspan="6">
+                <td colspan="9">
                     <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
                         <option value="10">۱۰</option>
                         <option selected="selected" value="20">۲۰</option>
