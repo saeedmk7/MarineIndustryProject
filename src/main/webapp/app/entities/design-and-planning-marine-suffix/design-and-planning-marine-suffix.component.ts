@@ -82,7 +82,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
     }
 
     loadAll(criteria?) {
-
+        debugger;
         if(!criteria){
             criteria = [];
         }
@@ -177,9 +177,10 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         }
     }
     prepareSearchEducationalModule() {
+        this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'educationalModuleTitle', 'text', 'contains'));
         if (this.educationalModuleService.educationalModules) {
-            this.educationalModules = this.educationalModuleService.educationalModules
-            this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle'));
+            this.educationalModules = this.educationalModuleService.educationalModules;
+            //this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle'));
             if (!this.done) {
                 this.loadAll();
             }
@@ -188,7 +189,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
             this.educationalModuleService.query().subscribe(
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                     this.educationalModules = res.body;
-                    this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle'));
+                    //this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle'));
                     if (!this.done) {
                         this.loadAll();
                     }

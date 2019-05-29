@@ -111,6 +111,13 @@
                         <option [ngValue]="effectivenessIndexOption.id" *ngFor="let effectivenessIndexOption of effectivenessindices; trackBy: trackEffectivenessIndexById">{{effectivenessIndexOption.title}}</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <a (click)="change('effectiveness-index-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.conditionsOfParticipant" for="field_conditionsOfParticipant">Conditions Of Participant</a>
+                    <select class="form-control" id="field_conditionsOfParticipant" name="conditionsOfParticipant" [(ngModel)]="designAndPlanning.conditionsOfParticipantId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="conditionsOfParticipantOption.id" *ngFor="let conditionsOfParticipantOption of conditionsofparticipants; trackBy: trackConditionsOfParticipantById">{{conditionsOfParticipantOption.title}}</option>
+                    </select>
+                </div>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">تعیین هزینه های آموزش</div></div>
 
                 <div class="form-group">
@@ -189,13 +196,7 @@
                 <input type="hidden" [value]="designAndPlanning.educationalModuleId">
                 <input type="hidden" [value]="designAndPlanning.organizationChartId">
 
-               <!-- <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.conditionsOfParticipant" for="field_conditionsOfParticipant">Conditions Of Participant</label>
-                    <select class="form-control" id="field_conditionsOfParticipant" name="conditionsOfParticipant" [(ngModel)]="designAndPlanning.conditionsOfParticipantId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="conditionsOfParticipantOption.id" *ngFor="let conditionsOfParticipantOption of conditionsofparticipants; trackBy: trackConditionsOfParticipantById">{{conditionsOfParticipantOption.title}}</option>
-                    </select>
-                </div>-->
+
 
 
 

@@ -36,6 +36,7 @@ export class DesignAndPlanningMarineSuffixDetailComponent implements OnInit {
                 if (resp.body.length > 0) {
                     this.designAndPlanning =  resp.body[0];
                     this.designAndPlanning = this.convertObjectDatesService.changeDate(this.designAndPlanning);
+                    this.designAndPlanning.runMonthName = this.convertObjectDatesService.convertMonthsNumber2MonthName(this.designAndPlanning.runMonth);
                     this.documentUrl = 'document-marine-suffix/designandplanning/' + this.designAndPlanning.id;
                 }
             });

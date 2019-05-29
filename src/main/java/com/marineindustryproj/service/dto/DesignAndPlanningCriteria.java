@@ -69,6 +69,8 @@ public class DesignAndPlanningCriteria implements Serializable {
 
     private LongFilter educationalModuleId;
 
+    private StringFilter educationalModuleTitle;
+
     private LongFilter finalNiazsanjiReportId;
 
     private LongFilter mahiatCourseId;
@@ -501,4 +503,11 @@ public class DesignAndPlanningCriteria implements Serializable {
             "}";
     }
 
+    public StringFilter getEducationalModuleTitle() {
+        return educationalModuleTitle;
+    }
+
+    public void setEducationalModuleTitle(StringFilter educationalModuleTitle) {
+        this.educationalModuleTitle = educationalModuleTitle;
+    }
 }

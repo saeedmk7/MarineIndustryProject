@@ -1,4 +1,14 @@
 /* ========== Sidebar Menu ========== */
+.navbarmenu a {
+    -webkit-transition: all 0.3s ease  !important;
+    -moz-transition: all 0.3s ease  !important;
+    transition: all 0.3s ease  !important;
+    color: rgba(0, 0, 0, 1)  !important;
+}
+.navbarmenu a:hover, .navbarmenu a:focus {
+    background-color: rgba(255,255,255,0.5)  !important;
+    font-size: 13px !important;
+}
 .sidebarMenu {
     height: calc(100vh - 50px);
     z-index: 999;
