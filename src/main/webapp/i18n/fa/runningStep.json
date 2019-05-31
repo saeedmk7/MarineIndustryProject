@@ -5,7 +5,7 @@
             "home": {
                 "title": "گام های فاز اجرا",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش گام فاز اجرا"
+                "createOrEditLabel": " گام فاز اجرا"
             },
             "created": "گام فاز اجرا با شناسه {{ param }} ایجاد شد.",
             "updated": "گام فاز اجرا با شناسه {{ param }} ویرایش شد.",

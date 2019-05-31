@@ -27,6 +27,7 @@ import {
 } from "app/shared/model/request-niazsanji-fardi-marine-suffix.model";
 import {RequestNiazsanjiFardiMarineSuffixService} from "app/entities/request-niazsanji-fardi-marine-suffix/request-niazsanji-fardi-marine-suffix.service";
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
+import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 
 @Component({
     selector: 'mi-niazsanji-fardi-marine-suffix',
@@ -77,6 +78,7 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
         protected router: Router,
         protected eventManager: JhiEventManager,
         private convertObjectDatesService: ConvertObjectDatesService,
+        private treeUtilities: TreeUtilities,
         private jhiTranslate: TranslateService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -142,6 +144,14 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
                 });
                 criteria.push({
                     key: 'createDate.greaterOrEqualThan', value: beginDate
+                });
+            }
+            const orgId = +criteria.find(a => a.key == 'organizationChartId.equals').value;
+            criteria = criteria.filter(a => a.key != 'organizationChartId.equals');
+            if(orgId){
+                const childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, orgId);
+                criteria.push({
+                    key:'organizationChartId.in', value: childIds
                 });
             }
         }
@@ -294,9 +304,10 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     prepareSearchEducationalModule(){
+        this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
         if(this.educationalModuleService.educationalModules){
             this.educationalModules = this.educationalModuleService.educationalModules
-            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, "fullTitle",'half'));
+            /*this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, "fullTitle",'half'));*/
             if (!this.done) {
                 this.loadAll();
             }
@@ -305,7 +316,7 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
             this.educationalModuleService.query().subscribe(
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                     this.educationalModules = res.body;
-                    this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', res.body, "fullTitle",'half'));
+              /*      this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', res.body, "fullTitle",'half'));*/
                     if (!this.done) {
                         this.loadAll();
                     }
@@ -328,12 +339,15 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
     }
     prepareSearchDate(){
         let dates = this.convertObjectDatesService.getYearsArray();
-        this.searchbarModel.push(new SearchPanelModel('requestOrganizationNiazsanji', 'yearId', 'select', 'equals', dates));
+        const thisYear = this.convertObjectDatesService.getNowShamsiYear();
+        this.searchbarModel.push(new SearchPanelModel('requestOrganizationNiazsanji', 'yearId', 'select', 'equals', dates, 'title','',thisYear+''));
     }
     prepareSearchOrgChart(){
         if(this.organizationChartService.organizationchartsAll)
         {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
+            const groups = this.organizationcharts.filter(a => a.parentId == null);
+            this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select', 'equals', groups, 'title'));
             this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select', 'equals', this.organizationcharts, 'fullTitle', 'half'));
         }
         else {
@@ -341,6 +355,8 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
 
                     this.organizationcharts = res.body;
+                    const groups = this.organizationcharts.filter(a => a.parentId == null);
+                    this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select', 'equals', groups, 'title'));
                     //this.organizationcharts = this.tree
                     this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select', 'equals', this.organizationcharts, 'fullTitle', 'half'));
                 },
@@ -456,7 +472,10 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
         this.queryCount = this.totalItems;
         this.niazsanjiFardis = this.convertObjectDatesService.changeArrayDate(data, true);
         this.niazsanjiFardis.forEach(a => {
-            let education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
+            if(org)
+                a.organizationChartRootTitle = org.fullTitle.split('>')[0];
+            const education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
             if(education){
                 a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
                 a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)

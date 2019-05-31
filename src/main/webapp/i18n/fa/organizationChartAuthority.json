@@ -4,7 +4,7 @@
             "home": {
                 "title": "نقش چارت سازمانی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش نقش چارت سازمانی"
+                "createOrEditLabel": " نقش چارت سازمانی"
             },
             "created": "نقش چارت سازمانی با شناسه {{ param }} ایجاد شد.",
             "updated": "نقش چارت سازمانی با شناسه {{ param }} ویرایش شد.",

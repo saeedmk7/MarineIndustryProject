@@ -150,7 +150,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teacherMobile"  for="field_teacherMobile">Teacher Mobile</label>
-                    <input type="text" class="form-control" name="teacherMobile" [required]="requestOrganizationNiazsanji.teacherNotFound" [disabled]="!requestOrganizationNiazsanji.teacherNotFound" id="field_teacherMobile"
+                    <input type="text" class="form-control" name="teacherMobile" [disabled]="!requestOrganizationNiazsanji.teacherNotFound" id="field_teacherMobile"
                         [(ngModel)]="requestOrganizationNiazsanji.teacherMobile" maxlength="100"/>
                     <div [hidden]="!(editForm.controls.teacherMobile?.dirty && editForm.controls.teacherMobile?.invalid)">
                         <small class="form-text text-danger"
@@ -274,7 +274,7 @@
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات تکمیلی نیازسنجی</div></div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.priceCost" for="field_priceCost">Price Cost</label>
-                    <input type="number" maxlength="50" jhiMax="2000000000" max="2000000000" min="0" jhiMin="0" class="form-control" name="priceCost" id="field_priceCost"
+                    <input type="number" maxlength="50" required jhiMax="2000000000" max="2000000000" min="0" jhiMin="0" class="form-control" name="priceCost" id="field_priceCost"
                            [(ngModel)]="requestOrganizationNiazsanji.priceCost" />
                     <div [hidden]="!(editForm.controls.priceCost?.dirty && editForm.controls.priceCost?.invalid)">
                         <small class="form-text text-danger"
@@ -303,7 +303,7 @@
                 </div>
                  <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.courseType" for="field_courseType">Course Type</label>
-                    <select class="form-control" id="field_courseType" name="courseType" [(ngModel)]="requestOrganizationNiazsanji.courseTypeId" >
+                    <select class="form-control" id="field_courseType" required name="courseType" [(ngModel)]="requestOrganizationNiazsanji.courseTypeId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="courseTypeOption.id" *ngFor="let courseTypeOption of coursetypes">{{courseTypeOption.title}}</option>
                     </select>

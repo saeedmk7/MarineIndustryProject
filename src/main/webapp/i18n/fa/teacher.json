@@ -4,7 +4,7 @@
             "home": {
                 "title": "مدرسان آموزشی ودجا",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش مدرس"
+                "createOrEditLabel": " مدرس"
             },
             "created": "مدرس با شناسه {{ param }} ایجاد شد.",
             "updated": "مدرس با شناسه {{ param }} ویرایش شد.",

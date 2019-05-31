@@ -5,7 +5,7 @@
             "home": {
                 "title": "نوع های دوره",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش نوع دوره"
+                "createOrEditLabel": " نوع دوره"
             },
             "created": "نوع دوره با شناسه {{ param }} ایجاد شد.",
             "updated": "نوع دوره با شناسه {{ param }} ویرایش شد.",

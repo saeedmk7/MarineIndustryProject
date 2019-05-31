@@ -5,7 +5,7 @@
             "home": {
                 "title": "روش های آموزش",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش روش آموزش"
+                "createOrEditLabel": " روش آموزش"
             },
             "created": "روش آموزش با شناسه {{ param }} ایجاد شد.",
             "updated": "روش آموزش با شناسه {{ param }} ویرایش شد.",

@@ -67,6 +67,8 @@ public class RunPhaseCriteria implements Serializable {
 
     private LongFilter educationalModuleId;
 
+    private StringFilter educationalModuleTitle;
+
     private LongFilter finalNiazsanjiReportId;
 
     private IntegerFilter niazsanjiYear;
@@ -272,6 +274,14 @@ public class RunPhaseCriteria implements Serializable {
     public void setCourseTypeId(LongFilter courseTypeId) {
         this.courseTypeId = courseTypeId;
     }
+    public StringFilter getEducationalModuleTitle() {
+        return educationalModuleTitle;
+    }
+
+    public void setEducationalModuleTitle(StringFilter educationalModuleTitle) {
+        this.educationalModuleTitle = educationalModuleTitle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -303,6 +313,7 @@ public class RunPhaseCriteria implements Serializable {
             Objects.equals(personId, that.personId) &&
             Objects.equals(organizationChartId, that.organizationChartId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
+            Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
             Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(niazsanjiYear, that.niazsanjiYear) &&
@@ -334,6 +345,7 @@ public class RunPhaseCriteria implements Serializable {
         courseTypeId,
         organizationChartId,
         educationalModuleId,
+        educationalModuleTitle,
         finalNiazsanjiReportId,
         niazsanjiYear,
         niazSanjiSource
@@ -364,12 +376,14 @@ public class RunPhaseCriteria implements Serializable {
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (niazsanjiYear != null ? "niazsanjiYear=" + niazsanjiYear + ", " : "") +
                 (niazSanjiSource != null ? "niazSanjiSource=" + niazSanjiSource + ", " : "") +
             "}";
     }
+
 
 
 }

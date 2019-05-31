@@ -31,6 +31,7 @@ export class EducationalModuleJobMarineSuffixUpdateComponent implements OnInit {
 
     first3jobCode: string;
     jobCode: string;
+    jobTitle: string;
     selectedJobs: any;
     selectedEducationalModules:any;
 
@@ -49,6 +50,7 @@ export class EducationalModuleJobMarineSuffixUpdateComponent implements OnInit {
     cleanPage(){
         this.first3jobCode = "";
         this.jobCode = "";
+        this.jobTitle = "";
         this.selectedJobs = [];
         this.selectedEducationalModules = [];
         this.disable = true;
@@ -64,6 +66,8 @@ export class EducationalModuleJobMarineSuffixUpdateComponent implements OnInit {
         console.log(this.jobs);
         if(this.jobCode)
             this.tempJobs = this.jobs.filter((a:IJobMarineSuffix) => a.jobCode == this.jobCode);
+        else if(this.jobTitle)
+            this.tempJobs = this.jobs.filter((a:IJobMarineSuffix) => a.title.includes(this.jobTitle));
         else if(this.first3jobCode)
             this.tempJobs = this.jobs.filter((a:IJobMarineSuffix) => a.jobCode.startsWith(this.first3jobCode));
         console.log(this.tempJobs);

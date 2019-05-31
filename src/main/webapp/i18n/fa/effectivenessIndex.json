@@ -5,7 +5,7 @@
             "home": {
                 "title": "شاخص های اثربخشی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش شاخص اثربخشی"
+                "createOrEditLabel": " شاخص اثربخشی"
             },
             "created": "شاخص اثربخشی با شناسه {{ param }} ایجاد شد.",
             "updated": "شاخص اثربخشی با شناسه {{ param }} ویرایش شد.",

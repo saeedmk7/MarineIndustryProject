@@ -176,6 +176,10 @@ public class FinalOrganizationNiazsanjiQueryService extends QueryService<FinalOr
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
                     root -> root.join(FinalOrganizationNiazsanji_.educationalModule, JoinType.LEFT).get(EducationalModule_.id)));
             }
+            if (criteria.getEducationalModuleTitle() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleTitle(),
+                    root -> root.join(FinalOrganizationNiazsanji_.educationalModule, JoinType.LEFT).get(EducationalModule_.title)));
+            }
             if (criteria.getTeachApproachId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTeachApproachId(),
                     root -> root.join(FinalOrganizationNiazsanji_.teachApproach, JoinType.LEFT).get(TeachApproach_.id)));

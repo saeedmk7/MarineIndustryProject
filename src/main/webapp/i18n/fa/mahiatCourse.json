@@ -5,7 +5,7 @@
             "home": {
                 "title": "ماهیت های دوره",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش ماهیت دوره"
+                "createOrEditLabel": " ماهیت دوره"
             },
             "created": "ماهیت دوره با شناسه {{ param }} ایجاد شد.",
             "updated": "ماهیت دوره با شناسه {{ param }} ویرایش شد.",

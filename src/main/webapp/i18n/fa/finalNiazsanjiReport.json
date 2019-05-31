@@ -5,7 +5,7 @@
             "home": {
                 "title": "فهرست نیازسنجی های مصوب شوراء",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش نیازسنجی مصوب شوراء"
+                "createOrEditLabel": " نیازسنجی مصوب شوراء"
             },
             "created": "نیازسنجی مصوب شوراء با شناسه {{ param }} ایجاد شد.",
             "updated": "نیازسنجی مصوب شوراء با شناسه {{ param }} ویرایش شد.",
@@ -38,6 +38,7 @@
             "poll": "Poll",
             "document": "مدارک",
             "educationalModule": "پودمان آموزشی",
+            "educationalModuleTitle": "عنوان پودمان آموزشی",
             "educationalModuleId": "پودمان آموزشی",
             "organizationChart": "پیشنهاد دهنده",
             "organizationChartId": "پیشنهاد دهنده",

@@ -5,12 +5,12 @@
             <mi-alert-error></mi-alert-error>
             <dl class="row-md jh-entity-details">
                 <div class="dropdown-divider pt-3 mt-4">
-                    <div class="divider-title" *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">اطلاعات پودمان درخواستی <strong> از شناسنامه شغلی</strong></div>
+                    <div class="divider-title" *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">اطلاعات پودمان درخواستی <strong> از شناسنامه آموزشی</strong></div>
                     <div class="divider-title" *ngIf="requestNiazsanjiFardi.allEducationalModuleId">اطلاعات پودمان درخواستی <strong> از کلیه پودمان ها</strong></div>
                 </div>
                 <dt><span>نوع پودمان</span></dt>
                 <dd *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
-                    از شناسنامه شغلی
+                    از شناسنامه آموزشی
                 </dd>
                 <dd *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
                     از کلیه پودمان ها
@@ -152,7 +152,7 @@
                         <tbody>
                         <tr *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
                             <td>
-                                از شناسنامه شغلی
+                                از شناسنامه آموزشی
                             </td>
                             <td>
                                 <div *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">

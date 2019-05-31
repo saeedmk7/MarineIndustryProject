@@ -21,6 +21,8 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  * fix type specific filters.
  */
 public class RequestNiazsanjiFardiCriteria implements Serializable {
+
+
     /**
      * Class for filtering RequestStatus
      */
@@ -66,6 +68,8 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
     private LongFilter approvedEducationalModuleId;
 
     private LongFilter allEducationalModuleId;
+
+    private StringFilter educationalModuleTitle;
 
     private LongFilter personId;
 
@@ -238,7 +242,13 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
     public void setOrganizationChartId(LongFilter organizationChartId) {
         this.organizationChartId = organizationChartId;
     }
+    public StringFilter getEducationalModuleTitle() {
+        return educationalModuleTitle;
+    }
 
+    public void setEducationalModuleTitle(StringFilter educationalModuleTitle) {
+        this.educationalModuleTitle = educationalModuleTitle;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -269,6 +279,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
             Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(approvedEducationalModuleId, that.approvedEducationalModuleId) &&
             Objects.equals(allEducationalModuleId, that.allEducationalModuleId) &&
+            Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(organizationChartId, that.organizationChartId);
     }
@@ -295,6 +306,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
         courseTypeId,
         approvedEducationalModuleId,
         allEducationalModuleId,
+        educationalModuleTitle,
         personId,
         organizationChartId
         );
@@ -322,6 +334,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (approvedEducationalModuleId != null ? "approvedEducationalModuleId=" + approvedEducationalModuleId + ", " : "") +
                 (allEducationalModuleId != null ? "allEducationalModuleId=" + allEducationalModuleId + ", " : "") +
+                (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
             "}";

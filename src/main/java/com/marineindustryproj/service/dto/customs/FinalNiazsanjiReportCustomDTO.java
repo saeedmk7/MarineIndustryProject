@@ -14,10 +14,12 @@ public class FinalNiazsanjiReportCustomDTO implements Serializable {
 
     public FinalNiazsanjiReportCustomDTO(Long id,
                                          Integer priceCost,
+                                         Integer finalizeCost,
                                          EducationalModule educationalModule,
                                          Integer status) {
         this.id = id;
         this.priceCost = priceCost.longValue();
+        this.finalizeCost = priceCost.longValue();
         this.status = status;
         this.totalLearningTime = (educationalModule.getLearningTimePractical() > 0 ? educationalModule.getLearningTimePractical().longValue() : 0) + (educationalModule.getLearningTimeTheorical() > 0 ? educationalModule.getLearningTimeTheorical().longValue() : 0);
     }
@@ -25,6 +27,8 @@ public class FinalNiazsanjiReportCustomDTO implements Serializable {
     private Long id;
 
     private Long priceCost;
+
+    private Long finalizeCost;
 
     private Integer status;
 
@@ -62,6 +66,14 @@ public class FinalNiazsanjiReportCustomDTO implements Serializable {
         this.id = id;
     }
 
+    public Long getFinalizeCost() {
+        return finalizeCost;
+    }
+
+    public void setFinalizeCost(Long finalizeCost) {
+        this.finalizeCost = finalizeCost;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -88,8 +100,11 @@ public class FinalNiazsanjiReportCustomDTO implements Serializable {
         return "FinalNiazsanjiReportDTO{" +
             "id=" + getId() +
             ", priceCost=" + getPriceCost() +
+            ", finalizeCost=" + getFinalizeCost() +
             ", status=" + getStatus() +
             ", totalLearningTime=" + getTotalLearningTime() +
             "}";
     }
+
+
 }

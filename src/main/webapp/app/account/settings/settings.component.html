@@ -40,7 +40,16 @@
                 <br />
                 <br />
                 <br />
-                <div class="row">
+                <div class="alert alert-warning">
+                    همکار گرامی: چنانچه مغایرتی در اطلاعات وارد شده در ذیل و اطلاعات اصلی خود مشاهده می نمائید، در اسرع وقت درخواست ویرایش اطلاعات خود را از طریق
+                    <a href="#/users-request-marine-suffix" title="پنل پیشنهاد و انتقاد">پنل پیشنهاد و انتقاد</a>
+                    و با درج صحیح اطلاعات دقیق خود، مستقیم به کارشناس امر اطلاع دهید.
+                </div>
+                <div class="card border-success ">
+                    <a class="card-header center" style="background-color: aliceblue;">
+                        <span class="panel-title">پنل اطلاعات کاربر</span>
+                    </a>
+                <div class="card-body">
                     <div class="col-md-4">
                         <div class="col-md-3">
                             <label>نام:</label>
@@ -65,8 +74,6 @@
                             <label>{{person.personelCode}}</label>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-4">
                         <div class="col-md-3">
                             <label>کدملی:</label>
@@ -84,15 +91,39 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="col-md-3">
-                            <label>شغل:</label>
+                        <div class="col-md-6">
+                            <label><span jhiTranslate="marineindustryprojApp.person.employmentType">Employment Type</span>:</label>
                         </div>
-                        <div class="col-md-9">
-                            <label>{{jobTitle}}</label>
+                        <div class="col-md-6">
+                            <label>{{person.employmentTypeTitle}}</label>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                    <div class="col-md-6">
+                        <label>شناسه شغل:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{person.jobId}}</label>
+                    </div>
+                </div>
+                    <div class="col-md-4">
+                    <div class="col-md-6">
+                        <label><span jhiTranslate="marineindustryprojApp.person.job">Job</span>:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{person.jobTitle}}</label>
+                    </div>
+                </div>
+                    <div class="col-md-4">
+                    <div class="col-md-6">
+                        <label><span jhiTranslate="marineindustryprojApp.person.practicaljob">Practicaljob</span>:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{person.practicaljobTitle}}</label>
+                    </div>
+                </div>
                     <div class="col-md-12">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <label>جایگاه در سازمان:</label>
                         </div>
                         <div class="col-md-9">
@@ -100,6 +131,8 @@
                         </div>
                     </div>
                 </div>
+                </div>
+            <br/>
                 <div class="alert alert-info">
                     لطفا قبل از انتخاب عکس به موارد زیر دقت نمائید.
                     <ul>

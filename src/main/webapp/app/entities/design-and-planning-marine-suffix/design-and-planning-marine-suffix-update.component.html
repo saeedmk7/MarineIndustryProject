@@ -112,7 +112,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <a (click)="change('effectiveness-index-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.conditionsOfParticipant" for="field_conditionsOfParticipant">Conditions Of Participant</a>
+                    <a (click)="change('conditions-of-participant-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.conditionsOfParticipant" for="field_conditionsOfParticipant">Conditions Of Participant</a>
                     <select class="form-control" id="field_conditionsOfParticipant" name="conditionsOfParticipant" [(ngModel)]="designAndPlanning.conditionsOfParticipantId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="conditionsOfParticipantOption.id" *ngFor="let conditionsOfParticipantOption of conditionsofparticipants; trackBy: trackConditionsOfParticipantById">{{conditionsOfParticipantOption.title}}</option>

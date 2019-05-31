@@ -5,7 +5,7 @@
             "home": {
                 "title": "وظایف فرعی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش وظیفه فرعی"
+                "createOrEditLabel": " وظیفه فرعی"
             },
             "created": "وظیفه فرعی با شناسه {{ param }} ایجاد شد.",
             "updated": "وظیفه فرعی با شناسه {{ param }} ویرایش شد.",

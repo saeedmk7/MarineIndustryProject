@@ -36,6 +36,7 @@
             "person": "Person",
             "organizationChart": "پیشنهاد دهنده",
             "educationalModule": "پودمان آموزشی",
+            "educationalModuleTitle": "عنوان پودمان آموزشی",
             "finalNiazsanjiReport": "Final Niazsanji Report"
         }
     }

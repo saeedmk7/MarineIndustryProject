@@ -4,7 +4,7 @@
             "home": {
                 "title": "مدارک تحصیلی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش مدرک تحصیلی"
+                "createOrEditLabel": " مدرک تحصیلی"
             },
             "created": "مدرک تحصیلی با شناسه {{ param }} ایجاد شد.",
             "updated": "مدرک تحصیلی با شناسه {{ param }} ویرایش شد.",

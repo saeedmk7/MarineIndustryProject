@@ -21,6 +21,8 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  * fix type specific filters.
  */
 public class FinalNiazsanjiReportCriteria implements Serializable {
+
+
     /**
      * Class for filtering NiazSanjiSource
      */
@@ -76,6 +78,8 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
     private LongFilter organizationChartId;
 
     private LongFilter educationalModuleId;
+
+    private StringFilter educationalModuleTitle;
 
     public LongFilter getId() {
         return id;
@@ -268,7 +272,13 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
     public void setEducationalModuleId(LongFilter educationalModuleId) {
         this.educationalModuleId = educationalModuleId;
     }
+    public StringFilter getEducationalModuleTitle() {
+        return educationalModuleTitle;
+    }
 
+    public void setEducationalModuleTitle(StringFilter educationalModuleTitle) {
+        this.educationalModuleTitle = educationalModuleTitle;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -303,7 +313,8 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(organizationChartId, that.organizationChartId) &&
-            Objects.equals(educationalModuleId, that.educationalModuleId);
+            Objects.equals(educationalModuleId, that.educationalModuleId) &&
+            Objects.equals(educationalModuleTitle, that.educationalModuleTitle);
     }
 
     @Override
@@ -332,7 +343,8 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         documentId,
         courseTypeId,
         organizationChartId,
-        educationalModuleId
+        educationalModuleId,
+        educationalModuleTitle
         );
     }
 
@@ -363,6 +375,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
             "}";
     }
 

@@ -5,7 +5,7 @@
             "home": {
                 "title": "پنل تعریف سخنان روز",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش سخن روز"
+                "createOrEditLabel": " سخن روز"
             },
             "created": "سخن روز با شناسه {{ param }} ایجاد شد.",
             "updated": "سخن روز با شناسه {{ param }} ویرایش شد.",

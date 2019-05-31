@@ -5,7 +5,7 @@
             "home": {
                 "title": "کلیه مشاغل سازمان",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش شغل"
+                "createOrEditLabel": " شغل"
             },
             "created": "شغلی با شناسه {{ param }} ایجاد شد.",
             "updated": "شغلی با شناسه {{ param }} ویرایش شد.",

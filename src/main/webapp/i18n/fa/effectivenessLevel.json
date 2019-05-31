@@ -5,7 +5,7 @@
             "home": {
                 "title": "سطوح اثربخشی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش سطح اثربخشی"
+                "createOrEditLabel": " سطح اثربخشی"
             },
             "created": "سطح اثربخشی با شناسه {{ param }} ایجاد شد.",
             "updated": "سطح اثربخشی با شناسه {{ param }} ویرایش شد.",

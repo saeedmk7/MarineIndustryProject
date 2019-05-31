@@ -5,7 +5,7 @@
             "home": {
                 "title": "رسته ها",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش رسته"
+                "createOrEditLabel": " رسته"
             },
             "created": "رسته با شناسه {{ param }} ایجاد شد.",
             "updated": "رسته با شناسه {{ param }} ویرایش شد.",

@@ -5,7 +5,7 @@
                 "title": "فهرست نهایی نیازسنجی شغلی و فردی",
                 "createLabel": "جدید",
                 "setYear": "مشخص کردن سال نیازسنجی",
-                "createOrEditLabel": "جدید یا ویرایش نیازسنجی شغلی و فردی"
+                "createOrEditLabel": " نیازسنجی شغلی و فردی"
             },
             "created": "نیازسنجی شغلی و فردی با شناسه {{ param }} ایجاد شد.",
             "updated": "نیازسنجی شغلی و فردی با شناسه {{ param }} ویرایش شد.",
@@ -42,6 +42,7 @@
             "levelEducationalModule": "سطح پودمان آموزشی",
             "costEducationalModule": "هزینه پودمان آموزشی",
             "educationalModuleId": "پودمان آموزشی",
+            "educationalModuleTitle": "عنوان پودمان آموزشی",
             "person": "نام و نام خانوادگی",
             "personName": "نام و نام خانوادگی",
             "job": "شغل سازمانی",

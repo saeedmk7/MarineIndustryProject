@@ -5,7 +5,7 @@
             "home": {
                 "title": "نوع شغل ها",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش نوع شغل"
+                "createOrEditLabel": " نوع شغل"
             },
             "created": "نوع شغل با شناسه {{ param }} ایجاد شد.",
             "updated": "نوع شغل با شناسه {{ param }} ویرایش شد.",

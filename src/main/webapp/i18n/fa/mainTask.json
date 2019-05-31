@@ -5,7 +5,7 @@
             "home": {
                 "title": "وظایف اصلی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش وظیفه اصلی"
+                "createOrEditLabel": " وظیفه اصلی"
             },
             "created": "وظیفه اصلی با شناسه {{ param }} ایجاد شد.",
             "updated": "وظیفه اصلی با شناسه {{ param }} ویرایش شد.",

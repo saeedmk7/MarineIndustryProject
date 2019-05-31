@@ -31,6 +31,7 @@ export interface INiazsanjiFardiMarineSuffix {
     personFamily?: string;
     personId?: number;
     organizationChartTitle?: string;
+    organizationChartRootTitle?: string;
     organizationChartId?: number;
     totalLearningTime?: number;
     skillLevelOfSkillTitle?: string;

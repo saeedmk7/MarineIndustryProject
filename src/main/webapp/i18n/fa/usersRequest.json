@@ -5,7 +5,7 @@
             "home": {
                 "title": "پنل پیشنهاد و انتقاد",
                 "createLabel": "جدید",
-                "createOrEditLabel": "درخواست جدید یا ویرایش"
+                "createOrEditLabel": "درخواست "
             },
             "created": "درخواست با شناسه {{ param }} ایجاد شد.",
             "updated": "درخواست با شناسه {{ param }} ویرایش شد.",

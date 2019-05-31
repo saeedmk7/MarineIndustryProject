@@ -5,7 +5,7 @@
             "home": {
                 "title": "شیوه های ارزشیابی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش شیوه ارزشیابی"
+                "createOrEditLabel": " شیوه ارزشیابی"
             },
             "created": "شیوه ارزشیابی با شناسه {{ param }} ایجاد شد.",
             "updated": "شیوه ارزشیابی با شناسه {{ param }} ویرایش شد.",

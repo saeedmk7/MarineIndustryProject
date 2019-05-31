@@ -34,7 +34,7 @@
             <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th>ردیف</th>
             <!--<th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.organizationChart">Organization Chart</span></th>
 
             <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.niazsanjiFardi.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th>کدپودمان</th>
@@ -68,7 +68,7 @@
                 <!--<td>{{niazsanjiFardi.code}}</td>-->
                 <td>
                     <div *ngIf="niazsanjiFardi.organizationChartId">
-                        <a [routerLink]="['../organization-chart-marine-suffix', niazsanjiFardi.organizationChartId , 'view' ]" >{{niazsanjiFardi.organizationChartTitle}}</a>
+                        <a [routerLink]="['../organization-chart-marine-suffix', niazsanjiFardi.organizationChartId , 'view' ]" >{{niazsanjiFardi.organizationChartRootTitle}}</a>
                     </div>
                 </td>
 
@@ -227,7 +227,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <td colspan="8">
+                <td colspan="10">
                     <select [(ngModel)] = "itemsPerPage" (change)="loadAll()">
                         <option value="10">۱۰</option>
                         <option selected="selected" value="20">۲۰</option>

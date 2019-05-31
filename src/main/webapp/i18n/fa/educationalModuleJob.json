@@ -5,7 +5,7 @@
             "home": {
                 "title": "تخصیص گروهی پودمان به شغل",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش"
+                "createOrEditLabel": ""
             },
             "created": "با شناسه {{ param }} ایجاد شد.",
             "updated": "با شناسه {{ param }} ویرایش شد.",

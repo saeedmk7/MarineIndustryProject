@@ -211,12 +211,12 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        /*this.conditionsOfParticipantService.query().subscribe(
+        this.conditionsOfParticipantService.query().subscribe(
             (res: HttpResponse<IConditionsOfParticipantMarineSuffix[]>) => {
                 this.conditionsofparticipants = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
-        );*/
+        );
         this.effectivenessLevelService.query().subscribe(
             (res: HttpResponse<IEffectivenessLevelMarineSuffix[]>) => {
                 this.effectivenesslevels = res.body;

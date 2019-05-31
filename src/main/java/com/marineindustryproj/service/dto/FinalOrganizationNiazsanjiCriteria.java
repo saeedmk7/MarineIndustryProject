@@ -21,6 +21,7 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  * fix type specific filters.
  */
 public class FinalOrganizationNiazsanjiCriteria implements Serializable {
+
     /**
      * Class for filtering RequestStatus
      */
@@ -84,6 +85,8 @@ public class FinalOrganizationNiazsanjiCriteria implements Serializable {
     private LongFilter teacherId;
 
     private LongFilter educationalModuleId;
+
+    private StringFilter educationalModuleTitle;
 
     private LongFilter teachApproachId;
 
@@ -312,6 +315,13 @@ public class FinalOrganizationNiazsanjiCriteria implements Serializable {
     public void setEducationalModuleId(LongFilter educationalModuleId) {
         this.educationalModuleId = educationalModuleId;
     }
+    public StringFilter getEducationalModuleTitle() {
+        return educationalModuleTitle;
+    }
+
+    public void setEducationalModuleTitle(StringFilter educationalModuleTitle) {
+        this.educationalModuleTitle = educationalModuleTitle;
+    }
 
     public LongFilter getTeachApproachId() {
         return teachApproachId;
@@ -368,6 +378,7 @@ public class FinalOrganizationNiazsanjiCriteria implements Serializable {
             Objects.equals(organizationChartId, that.organizationChartId) &&
             Objects.equals(teacherId, that.teacherId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
+            Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
             Objects.equals(teachApproachId, that.teachApproachId) &&
             Objects.equals(requestOrganizationNiazsanjiId, that.requestOrganizationNiazsanjiId);
     }
@@ -403,6 +414,7 @@ public class FinalOrganizationNiazsanjiCriteria implements Serializable {
         organizationChartId,
         teacherId,
         educationalModuleId,
+        educationalModuleTitle,
         teachApproachId,
         requestOrganizationNiazsanjiId
         );
@@ -439,6 +451,7 @@ public class FinalOrganizationNiazsanjiCriteria implements Serializable {
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
                 (teachApproachId != null ? "teachApproachId=" + teachApproachId + ", " : "") +
                 (requestOrganizationNiazsanjiId != null ? "requestOrganizationNiazsanjiId=" + requestOrganizationNiazsanjiId + ", " : "") +
             "}";

@@ -4,7 +4,7 @@
             "home": {
                 "title": "چارت سازمانی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش چارت سازمانی"
+                "createOrEditLabel": " چارت سازمانی"
             },
             "created": "چارت سازمانی با شناسه {{ param }} ایجاد شد.",
             "updated": "چارت سازمانی با شناسه {{ param }} ویرایش شد.",

@@ -21,6 +21,8 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  * fix type specific filters.
  */
 public class RequestOrganizationNiazsanjiCriteria implements Serializable {
+
+
     /**
      * Class for filtering RequestStatus
      */
@@ -86,6 +88,8 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
     private LongFilter teacherId;
 
     private LongFilter educationalModuleId;
+
+    private StringFilter educationalModuleTitle;
 
     private LongFilter teachApproachId;
 
@@ -328,7 +332,13 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
     public void setTeachApproachId(LongFilter teachApproachId) {
         this.teachApproachId = teachApproachId;
     }
+    public StringFilter getEducationalModuleTitle() {
+        return educationalModuleTitle;
+    }
 
+    public void setEducationalModuleTitle(StringFilter educationalModuleTitle) {
+        this.educationalModuleTitle = educationalModuleTitle;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -369,6 +379,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
             Objects.equals(organizationChartId, that.organizationChartId) &&
             Objects.equals(teacherId, that.teacherId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
+            Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
             Objects.equals(teachApproachId, that.teachApproachId);
     }
 
@@ -404,6 +415,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
         organizationChartId,
         teacherId,
         educationalModuleId,
+        educationalModuleTitle,
         teachApproachId
         );
     }
@@ -440,6 +452,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
                 (teachApproachId != null ? "teachApproachId=" + teachApproachId + ", " : "") +
             "}";
     }

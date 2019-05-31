@@ -25,6 +25,7 @@ import {PersonMarineSuffixService} from "app/entities/person-marine-suffix/perso
 import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
 import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 import * as $ from 'jquery';
+import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 
 @Component({
     selector: 'mi-final-organization-niazsanji-marine-suffix',
@@ -74,6 +75,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         private router: Router,
         private eventManager: JhiEventManager,
         private jhiTranslate: TranslateService,
+        private treeUtilities: TreeUtilities,
         private convertObjectDatesService : ConvertObjectDatesService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -130,18 +132,26 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
 
         if(criteria)
         {
-            let val = +criteria.find(a => a.key == 'yearId.equals').value;
+            const val = +criteria.find(a => a.key == 'yearId.equals').value;
             criteria = criteria.filter(a => a.key != 'yearId.equals');
             if(val){
-                let yearDetail = this.yearsCollections.find(a => a.year == val);
-                let beginDate = new Date(yearDetail.beginDate).toISOString();
-                let endDate = new Date(yearDetail.endDate).toISOString();
+                const yearDetail = this.yearsCollections.find(a => a.year == val);
+                const beginDate = new Date(yearDetail.beginDate).toISOString();
+                const endDate = new Date(yearDetail.endDate).toISOString();
 
                 criteria.push({
                     key:'createDate.lessOrEqualThan', value: endDate
                 });
                 criteria.push({
                     key:'createDate.greaterOrEqualThan', value: beginDate
+                });
+            }
+            const orgId = +criteria.find(a => a.key == 'organizationChartId.equals').value;
+            criteria = criteria.filter(a => a.key != 'organizationChartId.equals');
+            if(orgId){
+                const childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, orgId);
+                criteria.push({
+                    key:'organizationChartId.in', value: childIds
                 });
             }
         }
@@ -306,10 +316,10 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         //this.registerChangeInFinalOrganizationNiazsanjis();
     }
     prepareSearchEducationalModule(){
-
+        this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
         if(this.educationalModuleService.educationalModules){
             this.educationalModules = this.educationalModuleService.educationalModules;
-            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, "fullTitle",'half'));
+            /*this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, "fullTitle",'half'));*/
             if(!this.done){
                 this.loadAll();
             }
@@ -318,7 +328,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             this.educationalModuleService.query().subscribe(
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                     this.educationalModules = res.body;
-                    this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', res.body, "fullTitle",'half'));
+                    /*this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', res.body, "fullTitle",'half'));*/
                     if(!this.done){
                         this.loadAll();
                     }
@@ -341,22 +351,29 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
     }
     prepareSearchDate(){
 
-        let dates = this.convertObjectDatesService.getYearsArray();
-        this.searchbarModel.push(new SearchPanelModel('requestOrganizationNiazsanji', 'yearId', 'select', 'equals', dates));
+        const dates = this.convertObjectDatesService.getYearsArray();
+        const thisYear = this.convertObjectDatesService.getNowShamsiYear();
+        this.searchbarModel.push(new SearchPanelModel('requestOrganizationNiazsanji', 'yearId', 'select', 'equals', dates, 'title','',thisYear+''));
     }
     prepareSearchOrgChart(){
         if(this.organizationChartService.organizationchartsAll)
         {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
+            const groups = this.organizationcharts.filter(a => a.parentId == null);
+            this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select', 'equals', groups, 'title'));
             this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select', 'equals', this.organizationcharts, 'fullTitle', 'half'));
+
         }
         else {
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
 
                     this.organizationcharts = res.body;
+                    const groups = this.organizationcharts.filter(a => a.parentId == null);
+                    this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select', 'equals', groups, 'title'));
                     //this.organizationcharts = this.tree
                     this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select', 'equals', this.organizationcharts, 'fullTitle', 'half'));
+
                 },
                 (res: HttpErrorResponse) => this.onError(res.message));
         }
@@ -390,7 +407,10 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         this.queryCount = this.totalItems;
         this.finalOrganizationNiazsanjis = this.convertObjectDatesService.changeArrayDate(data,true);
         this.finalOrganizationNiazsanjis.forEach(a => {
-            let education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
+            if(org)
+                a.organizationChartRootTitle = org.fullTitle.split('>')[0];
+            const education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
             if(education){
                 a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
                 a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)

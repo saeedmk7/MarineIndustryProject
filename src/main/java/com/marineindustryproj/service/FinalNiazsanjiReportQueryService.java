@@ -166,6 +166,10 @@ public class FinalNiazsanjiReportQueryService extends QueryService<FinalNiazsanj
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
                     root -> root.join(FinalNiazsanjiReport_.educationalModule, JoinType.LEFT).get(EducationalModule_.id)));
             }
+            if (criteria.getEducationalModuleTitle() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleTitle(),
+                    root -> root.join(FinalNiazsanjiReport_.educationalModule, JoinType.LEFT).get(EducationalModule_.title)));
+            }
         }
         return specification;
     }

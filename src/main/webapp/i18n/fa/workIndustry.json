@@ -4,7 +4,7 @@
             "home": {
                 "title": "صنایع محل خدمت",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش صنعت محل خدمت"
+                "createOrEditLabel": " صنعت محل خدمت"
             },
             "created": "صنعت محل خدمت با شناسه {{ param }} ایجاد شد.",
             "updated": "صنعت محل خدمت با شناسه {{ param }} ویرایش شد.",

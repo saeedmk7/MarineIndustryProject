@@ -5,7 +5,7 @@
             "home": {
                 "title": "فهرست پودمان های آموزشی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش پودمان"
+                "createOrEditLabel": " پودمان"
             },
             "created": "پودمان با شناسه {{ param }} ایجاد شد.",
             "updated": "پودمان با شناسه {{ param }} ویرایش شد.",

@@ -163,7 +163,9 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         this.message = "";
         this.finalNiazsanjiReportsFardis = [];
         this.finalNiazsanjiReportsOrganizations = [];
-        let niazSanjiSource = f.value['niazSanjiSource'];
+        if(f.value['niazsanjiYear'] == null)
+            return;
+        const niazSanjiSource = f.value['niazSanjiSource'];
         let criteria = [];
         criteria = this.createCriteria(criteria, f);
 
@@ -244,12 +246,18 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 });
             }
         }
-        if (f.value['educationalModuleId']) {
+        if (f.value['educationalModuleTitle']) {
+            let val = +f.value['educationalModuleTitle'];
+            criteria.push({
+                key: 'educationalModuleTitle.contains', value: val
+            });
+        }
+        /*if (f.value['educationalModuleId']) {
             let val = +f.value['educationalModuleId'];
             criteria.push({
                 key: 'educationalModuleId.equals', value: val
             });
-        }
+        }*/
         return criteria;
     }
 
@@ -487,6 +495,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     prepareSearchDate() {
+        this.finalNiazsanjiReport.niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
         this.dates = this.convertObjectDatesService.getYearsArray();
     }
 

@@ -5,7 +5,7 @@
             "home": {
                 "title": "نوع های آموزش",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش نوع آموزش"
+                "createOrEditLabel": " نوع آموزش"
             },
             "created": "نوع آموزش با شناسه {{ param }} ایجاد شد.",
             "updated": "نوع آموزش با شناسه {{ param }} ویرایش شد.",

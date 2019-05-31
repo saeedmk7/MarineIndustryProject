@@ -4,7 +4,7 @@
             "home": {
                 "title": "قوانین و دستورالعمل ها",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش دستورالعمل"
+                "createOrEditLabel": " دستورالعمل"
             },
             "created": "دستورالعمل با شناسه {{ param }} ایجاد شد.",
             "updated": "دستورالعمل با شناسه {{ param }} ویرایش شد.",

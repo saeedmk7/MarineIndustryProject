@@ -4,7 +4,7 @@
             "home": {
                 "title": "انواع استخدام",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش نوع استخدام"
+                "createOrEditLabel": " نوع استخدام"
             },
             "created": "نوع استخدام با شناسه {{ param }} ایجاد شد.",
             "updated": "نوع استخدام با شناسه {{ param }} ویرایش شد.",

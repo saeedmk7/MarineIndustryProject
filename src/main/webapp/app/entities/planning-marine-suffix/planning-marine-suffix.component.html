@@ -103,6 +103,11 @@
 
                     <div class="form-group half">
                         <label class="form-control-label" for="field_educationalModule">پودمان آموزشی</label>
+                        <input type="text" name="educationalModuleTitle" id="field_educationalModule" class="form-control"
+                               [(ngModel)]="finalNiazsanjiReport.educationalModuleTitle">
+                    </div>
+                    <!--<div class="form-group half">
+                        <label class="form-control-label" for="field_educationalModule">پودمان آموزشی</label>
                         <ng-select
                             [items]="educationalModules"
                             [multiple]="false"
@@ -114,7 +119,7 @@
                             name="educationalModuleId"
                             id="field_educationalModule"
                             [(ngModel)]="finalNiazsanjiReport.educationalModuleId">
-                    </div>
+                    </div>-->
 
                     <div class="form-group">
                         <label class="form-control-label" for="field_status">وضعیت برنامه ریزی</label>
@@ -153,7 +158,7 @@
             </thead>
             <tbody>
             <tr>
-                <td>نفر/ساعت</td>
+                <td>نفر ساعت</td>
                 <td *ngFor="let planningAndRunMonthReport of planningAndRunMonthReports">
                     {{planningAndRunMonthReport.personHour | number}}
                 </td>

@@ -4,7 +4,7 @@
             "home": {
                 "title": "ضمائم",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش مدرک"
+                "createOrEditLabel": " مدرک"
             },
             "created": "مدرکی با شناسه {{ param }} ایجاد شد.",
             "updated": "مدرکی با شناسه {{ param }} ویرایش شد.",

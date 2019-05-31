@@ -5,7 +5,7 @@
             "home": {
                 "title": "گروه های علمی شغلی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش گروه علمی شغلی"
+                "createOrEditLabel": " گروه علمی شغلی"
             },
             "created": "گروه علمی شغلی با شناسه {{ param }} ایجاد شد.",
             "updated": "گروه علمی شغلی با شناسه {{ param }} ویرایش شد.",

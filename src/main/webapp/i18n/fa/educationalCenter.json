@@ -4,7 +4,7 @@
             "home": {
                 "title": "مراکز و موسسات آموزشی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش مرکز آموزشی"
+                "createOrEditLabel": " مرکز آموزشی"
             },
             "created": "مرکز آموزشی با شناسه {{ param }} ایجاد شد.",
             "updated": "مرکز آموزشی با شناسه {{ param }} ویرایش شد.",

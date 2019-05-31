@@ -5,7 +5,7 @@
             "home": {
                 "title": "ابزارها و امکانات",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش ابزار و امکانات"
+                "createOrEditLabel": " ابزار و امکانات"
             },
             "created": "ابزار و امکانات با شناسه {{ param }} ایجاد شد.",
             "updated": "ابزار و امکانات با شناسه {{ param }} ویرایش شد.",

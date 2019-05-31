@@ -4,7 +4,7 @@
             "home": {
                 "title": "گروه های محل خدمت",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش گروه محل خدمت"
+                "createOrEditLabel": " گروه محل خدمت"
             },
             "created": "گروه محل خدمت با شناسه {{ param }} ایجاد شد.",
             "updated": "گروه محل خدمت با شناسه {{ param }} ویرایش شد.",

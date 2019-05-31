@@ -33,7 +33,7 @@
             <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th><input type="checkbox" title="انتخاب همه" id="selectAll" (change)="selectAll($event.target.checked)"></th>
                 <th>ردیف</th>
-            <th jhiSortBy="recommendedByOrgchart"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.recommendedByOrgchart">Recommended By Orgchart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.recommendedByOrgchart">Recommended By Orgchart</span></th>
             <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th>کدپودمان</th>
             <th>سطح</th>
@@ -60,7 +60,7 @@
                 <!--<td>{{finalOrganizationNiazsanji.recommendedByOrgchart}}</td>-->
                 <td>
                     <div *ngIf="finalOrganizationNiazsanji.organizationChartId">
-                        <a [routerLink]="['../organization-chart-marine-suffix', finalOrganizationNiazsanji.organizationChartId , 'view' ]" >{{finalOrganizationNiazsanji.organizationChartTitle}}</a>
+                        <a [routerLink]="['../organization-chart-marine-suffix', finalOrganizationNiazsanji.organizationChartId , 'view' ]" >{{finalOrganizationNiazsanji.organizationChartRootTitle}}</a>
                     </div>
                 </td>
                 <td>

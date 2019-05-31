@@ -5,7 +5,7 @@
             "home": {
                 "title": "رده ها",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش رده"
+                "createOrEditLabel": " رده"
             },
             "created": "رده با شناسه {{ param }} ایجاد شد.",
             "updated": "رده با شناسه {{ param }} ویرایش شد.",

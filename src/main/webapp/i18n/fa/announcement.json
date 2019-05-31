@@ -5,7 +5,7 @@
             "home": {
                 "title": "پنل مدیریت اخبار",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش خبر"
+                "createOrEditLabel": " خبر"
             },
             "created": "خبری با شناسه {{ param }} ایجاد شد.",
             "updated": "خبری با شناسه {{ param }} ویرایش شد.",

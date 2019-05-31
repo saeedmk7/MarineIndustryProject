@@ -4,7 +4,7 @@
             "home": {
                 "title": "پرنده و سوابق آموزشی کارکنان",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش پرونده"
+                "createOrEditLabel": " پرونده"
             },
             "created": "پرونده با شناسه {{ param }} ایجاد شد.",
             "updated": "پرونده با شناسه {{ param }} ویرایش شد.",

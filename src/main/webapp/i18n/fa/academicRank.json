@@ -4,7 +4,7 @@
             "home": {
                 "title": "مراتب علمی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش مرتبه علمی"
+                "createOrEditLabel": " مرتبه علمی"
             },
             "created": "مرتبه علمی با شناسه {{ param }} ایجاد شد.",
             "updated": "مرتبه علمی با شناسه {{ param }} ویرایش شد.",

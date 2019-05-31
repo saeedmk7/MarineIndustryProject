@@ -4,7 +4,7 @@
             "home": {
                 "title": "نیازسنجی پودمانی شغلی و فردی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش نیازسنجی پودمانی شغلی و فردی"
+                "createOrEditLabel": " نیازسنجی پودمانی شغلی و فردی"
             },
             "created": "نیازسنجی پودمانی شغلی و فردی با شناسه {{ param }} ایجاد شد.",
             "updated": "نیازسنجی پودمانی شغلی و فردی با شناسه {{ param }} ویرایش شد.",
@@ -49,9 +49,10 @@
             "niazsanjiFardi": "نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی",
             "document": "مدرک",
             "educationalModule": "عنوان پودمان آموزشی",
-            "approvedEducationalModule": "پودمان های از شناسنامه شغلی",
-            "approvedEducationalModuleId": "پودمان های از شناسنامه شغلی",
+            "approvedEducationalModule": "پودمان های از شناسنامه آموزشی",
+            "approvedEducationalModuleId": "پودمان های از شناسنامه آموزشی",
             "educationalModuleId": "پودمان ها",
+            "educationalModuleTitle": "عنوان پودمان آموزشی",
             "allEducationalModule": "کلیه پودمان ها",
             "allEducationalModuleId": "کلیه پودمان ها",
             "person": "نام و نام خانوادگی",

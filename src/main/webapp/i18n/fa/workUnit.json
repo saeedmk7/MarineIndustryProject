@@ -4,7 +4,7 @@
             "home": {
                 "title": "یگان های محل خدمت",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش یگان محل خدمت"
+                "createOrEditLabel": " یگان محل خدمت"
             },
             "created": "یگان محل خدمت با شناسه {{ param }} ایجاد شد.",
             "updated": "یگان محل خدمت با شناسه {{ param }} ویرایش شد.",

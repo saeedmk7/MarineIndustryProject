@@ -80,6 +80,7 @@ public class FinalOrganizationNiazsanjiServiceImpl implements FinalOrganizationN
         finalNiazsanjiReport.setNiazSanjiSource(NiazSanjiSource.ORGANIZATION);
         finalNiazsanjiReport.setPriceCost(finalOrganizationNiazsanjiDTO.getPriceCost());
         finalNiazsanjiReport.setStatus(0);
+        finalNiazsanjiReport.setFinalizeCost(0);
         finalNiazsanjiReport.setCourseType(finalOrganizationNiazsanji.getCourseType());
         finalNiazsanjiReport = finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
 

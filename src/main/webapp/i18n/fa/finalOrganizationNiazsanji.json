@@ -5,7 +5,7 @@
             "home": {
                 "title": "فهرست نیازسنجی پودمانی سازمانی (متمرکز)",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش نیازسنجی پودمانی سازمانی (متمرکز)"
+                "createOrEditLabel": " نیازسنجی پودمانی سازمانی (متمرکز)"
             },
             "created": "نیازسنجی پودمانی سازمانی (متمرکز) با شناسه {{ param }} ایجاد شد.",
             "updated": "نیازسنجی پودمانی سازمانی (متمرکز) با شناسه {{ param }} ویرایش شد.",
@@ -41,6 +41,7 @@
             "person": "افراد",
             "document": "مدارک",
             "educationalModule": "پودمان آموزشی",
+            "educationalModuleTitle": "عنوان پودمان آموزشی",
             "teachApproach": "روش آموزش",
             "requestOrganizationNiazsanji": "کد درخواست نهایی شده",
             "priceCost": "هزینه(ریال)",

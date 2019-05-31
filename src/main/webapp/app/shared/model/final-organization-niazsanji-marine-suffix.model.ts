@@ -34,6 +34,7 @@ export interface IFinalOrganizationNiazsanjiMarineSuffix {
     courseTypeTitle?: string;
     courseTypeId?: number;
     organizationChartTitle?: string;
+    organizationChartRootTitle?: string;
     organizationChartId?: number;
     teacherFamily?: string;
     teacherId?: number;

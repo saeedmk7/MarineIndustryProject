@@ -5,7 +5,7 @@
             "home": {
                 "title": "سازمان ها",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش سازمان"
+                "createOrEditLabel": " سازمان"
             },
             "created": "سازمانی با شناسه {{ param }} ایجاد شد.",
             "updated": "سازمانی با شناسه {{ param }} ویرایش شد.",

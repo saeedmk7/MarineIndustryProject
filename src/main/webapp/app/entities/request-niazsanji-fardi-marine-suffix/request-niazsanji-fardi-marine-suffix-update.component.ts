@@ -481,7 +481,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         else {
             if(isNaN(this.requestNiazsanjiFardi.costApprovedEducationalModule))
             {
-                this.message = "لطفا در باکس هزینه از شناسنامه شغلی فقط عدد وارد نمائید.";
+                this.message = "لطفا در باکس هزینه از شناسنامه آموزشی فقط عدد وارد نمائید.";
                 this.isSaving = false;
                 return;
             }
@@ -491,7 +491,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         {
             if(!this.requestNiazsanjiFardi.approvedCourseTypeId)
             {
-                this.message = "لطفا نوع دوره از شناسنامه شغلی را انتخاب نمائید.";
+                this.message = "لطفا نوع دوره از شناسنامه آموزشی را انتخاب نمائید.";
                 this.isSaving = false;
                 return;
             }

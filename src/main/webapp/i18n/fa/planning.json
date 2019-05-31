@@ -5,7 +5,7 @@
             "home": {
                 "title": "تکمیل فرآیند برنامه ریزی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش فرآیند برنامه ریزی"
+                "createOrEditLabel": " فرآیند برنامه ریزی"
             },
             "created": "فرآیند برنامه ریزی با شناسه {{ param }} ایجاد شد.",
             "updated": "فرآیند برنامه ریزی با شناسه {{ param }} ویرایش شد.",
@@ -39,6 +39,7 @@
             "document": "مدارک",
             "educationalModule": "پودمان آموزشی",
             "educationalModuleId": "پودمان آموزشی",
+            "educationalModuleTitle": "عنوان پودمان آموزشی",
             "organizationChart": "پیشنهاد دهنده",
             "organizationChartId": "پیشنهاد دهنده",
             "person": "نام و نام خانوادگی",

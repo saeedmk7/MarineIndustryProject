@@ -5,7 +5,7 @@
             "home": {
                 "title": "منابع آموزشی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش منبع آموزشی"
+                "createOrEditLabel": " منبع آموزشی"
             },
             "created": "منبع آموزشی با شناسه {{ param }} ایجاد شد.",
             "updated": "منبع آموزشی با شناسه {{ param }} ویرایش شد.",

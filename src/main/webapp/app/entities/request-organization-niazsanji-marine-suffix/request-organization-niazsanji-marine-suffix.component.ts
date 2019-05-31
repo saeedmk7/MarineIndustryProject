@@ -437,9 +437,10 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
         });
     }
     prepareSearchEducationalModule(){
+        this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
         if(this.educationalModuleService.educationalModules) {
             this.educationalModules = this.educationalModuleService.educationalModules;
-            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle', 'half'));
+            /*this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle', 'half'));*/
             if(!this.done){
                 this.makeCriteria();
             }
@@ -449,7 +450,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
 
                     this.educationalModules = res.body;
-                    this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', res.body, 'fullTitle', 'half'));
+                    /*this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', res.body, 'fullTitle', 'half'));*/
                     if(!this.done){
                         this.makeCriteria();
                     }
@@ -458,8 +459,9 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
         }
     }
     prepareSearchDate(){
-        let dates = this.convertObjectDatesService.getYearsArray();
-        this.searchbarModel.push(new SearchPanelModel('requestOrganizationNiazsanji', 'yearId', 'select', 'equals', dates));
+        const dates = this.convertObjectDatesService.getYearsArray();
+        const thisYear = this.convertObjectDatesService.getNowShamsiYear();
+        this.searchbarModel.push(new SearchPanelModel('requestOrganizationNiazsanji', 'yearId', 'select', 'equals', dates,'title','',thisYear+''));
     }
     prepareSearchOrgChart(){
         if(this.organizationChartService.organizationchartsAll)

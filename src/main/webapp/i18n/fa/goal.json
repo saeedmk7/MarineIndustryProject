@@ -5,7 +5,7 @@
             "home": {
                 "title": "اهداف",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش هدف"
+                "createOrEditLabel": " هدف"
             },
             "created": "هدف با شناسه {{ param }} ایجاد شد.",
             "updated": "هدف با شناسه {{ param }} ویرایش شد.",

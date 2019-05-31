@@ -65,6 +65,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     isKarshenasArshadAmozeshSazman: boolean = false;
     isModirAmozesh: boolean = false;
     isSuperUsers: boolean = false;
+    isTopUsers: boolean = false;
     badError: string;
     homePagePersonHourPieChart: Chart;
     personHourChart: Chart;
@@ -74,8 +75,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     chartResults: IChartResult[] = [];
     priceCostSeries: any;
     personHourSeries: any;
+    priceCostNewPercentSeries: any[] = [];
+    priceCostFinishedPercentSeries: any[] = [];
+    personHourNewPercentSeries: any[] = [];
+    personHourFinishedPercentSeries: any[] = [];
 
     categories: any[];
+    groups: any[];
     niazsanjiYear: number;
     years: any[];
     selectedNiazsanjiYear: number;
@@ -168,7 +174,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                     //this.prepareHomePageNiazsanjiReport(resp.body.id);
                 })
             }
-            if(this.isSuperUsers)
+            if(this.isTopUsers)
                 this.prepareOrgChart();
         });
         this.registerAuthenticationSuccess();
@@ -271,8 +277,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     makeChartResult(){
-        const groups = this.organizationcharts.filter(a => a.parentId == null);
-        this.categories = groups.sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0).map(a => a.title);
+        this.groups = this.organizationcharts.filter(a => a.parentId == null).sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0);
+        this.categories = this.groups.map(a => a.title);
         this.finalNiazsanjiReportService.getChartResult(this.selectedNiazsanjiYear).subscribe((resp: HttpResponse<IChartResult[]>) => {
             this.chartResults = resp.body;
             this.makeSeries();
@@ -349,23 +355,41 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     makeSeries(){
 
+        const sortedChartResults = this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0);
         this.priceCostSeries = [{
             name: "اجرا شده",
-            data: this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0).map(a => a.priceCostFinished),
+            data: sortedChartResults.map(a => a.priceCostFinished),
             color: "lightgreen"
         },{
             name: "اجرا نشده",
-            data: this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0).map(a => a.priceCostNew),
+            data: sortedChartResults.map(a => a.priceCostNew),
             color: "red"
+        },{
+            name: "کل هزینه",
+            data: sortedChartResults.map(a => a.totalPriceCost),
+            color: "blue"
         }];
+        this.groups.forEach(a => {
+           sortedChartResults.filter(e => e.groupId == a.id).forEach(w => {
+               debugger;
+               this.personHourNewPercentSeries.push((w.educationalModuleTotalHourNew / w.totalPersonHour) * 100);
+               this.personHourFinishedPercentSeries.push((w.educationalModuleTotalHourFinished / w.totalPersonHour) * 100);
+               this.priceCostNewPercentSeries.push((w.priceCostNew / w.totalPriceCost) * 100);
+               this.priceCostFinishedPercentSeries.push((w.priceCostFinished / w.totalPriceCost) * 100);
+           });
+        });
         this.personHourSeries = [{
             name: "اجرا شده",
-            data: this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0).map(a => a.educationalModuleTotalHourFinished),
+            data: sortedChartResults.map(a => a.educationalModuleTotalHourFinished),
             color: "lightgreen",
         },{
             name: "اجرا نشده",
-            data: this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0).map(a => a.educationalModuleTotalHourNew),
+            data: sortedChartResults.map(a => a.educationalModuleTotalHourNew),
             color: "red"
+        },{
+            name: "کل نفرساعت",
+            data: sortedChartResults.map(a => a.totalPersonHour),
+            color: "blue",
         }];
         this.loadChart();
     }
@@ -419,7 +443,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 },
                 series:{
                     cursor: 'pointer',
-                    allowPointSelect: true,
+                    /*allowPointSelect: true,*/
                     point: {
                         events : {
                             click: event1 => {
@@ -447,7 +471,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 thousandsSep: '.'
             },
             title: {
-                text: 'نمودار هزینه گروه های سازمان'
+                text: 'نمودار هزینه (ریال) گروه های سازمان'
             },
             xAxis: {
                 categories: this.categories,
@@ -478,7 +502,6 @@ export class HomeComponent implements OnInit, OnDestroy {
                 },
                 series:{
                     cursor: 'pointer',
-                    allowPointSelect: true,
                     point: {
                         events : {
                             click: event1 => {
@@ -556,8 +579,10 @@ export class HomeComponent implements OnInit, OnDestroy {
             if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
                 this.isKarshenasArshadAmozeshSazman = true;
 
-            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh)
+            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
                 this.isSuperUsers = true;
+            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh)
+                this.isTopUsers = true;
         }
     }
 
@@ -566,13 +591,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     showDetail(event){
 
         this.selectedGroup = event.point.category;
-        let org = this.organizationcharts.find(a => a.title == this.selectedGroup);
+        const org = this.organizationcharts.find(a => a.title == this.selectedGroup);
 
         if(org)
         {
-            //this.pageName = 'detail';
-            this.changePage('detail');
-            this.showPlanningReport(org);
+            debugger;
+            const rootId = this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
+            if(this.isSuperUsers || org.id == rootId) {
+                this.changePage('detail');
+                this.showPlanningReport(org);
+            }
         }
     }
     showPlanningReport(org: IOrganizationChartMarineSuffix){
@@ -626,9 +654,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     loadDetailMonthColumnChart(){
         const cats: any = MONTHS.sort((a,b) => (a.id > b.id) ? -1 : (a.id < b.id) ? 1 : 0).map(a => a.persianMonth);
         // @ts-ignore
-        this.detailMonthPersonHourChart = this.showColumnChart('نمودار نفر ساعت به تفکیک ماه گروه ' + this.selectedGroup, this.detailMonthPersonHourSeries,
+        this.detailMonthPersonHourChart = this.showColumnChart(' نمودار نفر ساعت به تفکیک ماه برنامه ریزی و اجرا - ' + this.selectedGroup, this.detailMonthPersonHourSeries,
             'میزان نفر ساعت', cats);
-        this.detailMonthPriceCostChart = this.showColumnChart('نمودار هزینه به تفکیک ماه گروه ' + this.selectedGroup, this.detailMonthPriceCostSeries,
+        this.detailMonthPriceCostChart = this.showColumnChart(' نمودار هزینه (ریال) به تفکیک ماه برنامه ریزی و اجرا - ' + this.selectedGroup, this.detailMonthPriceCostSeries,
             'میزان هزینه', cats);
     }
     makePiesSeries()

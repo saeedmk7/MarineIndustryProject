@@ -4,7 +4,7 @@
             "home": {
                 "title": "واحدهای خدمتی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش واحد خدمتی"
+                "createOrEditLabel": " واحد خدمتی"
             },
             "created": "واحد خدمتی با شناسه {{ param }} ایجاد شد.",
             "updated": "واحد خدمتی با شناسه {{ param }} ویرایش شد.",

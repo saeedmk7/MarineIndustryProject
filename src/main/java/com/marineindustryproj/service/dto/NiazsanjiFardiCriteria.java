@@ -21,6 +21,8 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  * fix type specific filters.
  */
 public class NiazsanjiFardiCriteria implements Serializable {
+
+
     /**
      * Class for filtering EducationalModuleType
      */
@@ -64,6 +66,8 @@ public class NiazsanjiFardiCriteria implements Serializable {
     private LongFilter requestNiazsanjiFardiId;
 
     private LongFilter educationalModuleId;
+
+    private StringFilter educationalModuleTitle;
 
     private LongFilter personId;
 
@@ -212,6 +216,13 @@ public class NiazsanjiFardiCriteria implements Serializable {
     public void setEducationalModuleId(LongFilter educationalModuleId) {
         this.educationalModuleId = educationalModuleId;
     }
+    public StringFilter getEducationalModuleTitle() {
+        return educationalModuleTitle;
+    }
+
+    public void setEducationalModuleTitle(StringFilter educationalModuleTitle) {
+        this.educationalModuleTitle = educationalModuleTitle;
+    }
 
     public LongFilter getPersonId() {
         return personId;
@@ -258,6 +269,7 @@ public class NiazsanjiFardiCriteria implements Serializable {
             Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
+            Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(organizationChartId, that.organizationChartId);
     }
@@ -283,6 +295,7 @@ public class NiazsanjiFardiCriteria implements Serializable {
         courseTypeId,
         requestNiazsanjiFardiId,
         educationalModuleId,
+        educationalModuleTitle,
         personId,
         organizationChartId
         );
@@ -309,6 +322,7 @@ public class NiazsanjiFardiCriteria implements Serializable {
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (requestNiazsanjiFardiId != null ? "requestNiazsanjiFardiId=" + requestNiazsanjiFardiId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
             "}";

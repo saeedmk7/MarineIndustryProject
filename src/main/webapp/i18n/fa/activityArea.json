@@ -4,7 +4,7 @@
             "home": {
                 "title": "حوزه های فعالیت",
                 "createLabel": "جدید",
-                "createOrEditLabel": "جدید یا ویرایش حوزه فعالیت"
+                "createOrEditLabel": " حوزه فعالیت"
             },
             "created": "حوزه فعالیت با شناسه {{ param }} ایجاد شد.",
             "updated": "حوزه فعالیت با شناسه {{ param }} ویرایش شد.",

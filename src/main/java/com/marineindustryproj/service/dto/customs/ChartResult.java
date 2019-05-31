@@ -14,6 +14,10 @@ public class ChartResult implements Serializable {
 
     private Long groupId;
 
+    private Long totalPersonHour;
+
+    private Long totalPriceCost;
+
     private Long priceCostNew;
 
     private Long educationalModuleTotalHourNew;
@@ -27,6 +31,8 @@ public class ChartResult implements Serializable {
         return "ChartResult{" +
             "priceCostNew=" + getPriceCostNew() +
             ", groupId=" + getGroupId() +
+            ", totalPersonHour=" + getTotalPersonHour() +
+            ", totalPriceCost=" + getTotalPriceCost() +
             ", educationalModuleTotalHourNew=" + getEducationalModuleTotalHourNew() +
             ", priceCostFinished=" + getPriceCostFinished() +
             ", educationalModuleTotalHourFinished=" + getEducationalModuleTotalHourFinished() +
@@ -71,5 +77,21 @@ public class ChartResult implements Serializable {
 
     public void setEducationalModuleTotalHourFinished(Long educationalModuleTotalHourFinished) {
         this.educationalModuleTotalHourFinished = educationalModuleTotalHourFinished;
+    }
+
+    public Long getTotalPersonHour() {
+        return totalPersonHour;
+    }
+
+    public void setTotalPersonHour(Long totalPersonHour) {
+        this.totalPersonHour = totalPersonHour;
+    }
+
+    public Long getTotalPriceCost() {
+        return totalPriceCost;
+    }
+
+    public void setTotalPriceCost(Long totalPriceCost) {
+        this.totalPriceCost = totalPriceCost;
     }
 }
