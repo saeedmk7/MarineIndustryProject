@@ -160,13 +160,13 @@
             <tr>
                 <td>نفر ساعت</td>
                 <td *ngFor="let planningAndRunMonthReport of planningAndRunMonthReports">
-                    {{planningAndRunMonthReport.personHour | number}}
+                    {{((planningAndRunMonthReport.personHour / planningAndRunMonthReport.totalHour) * 100) | number:'1.0-0'}} %
                 </td>
             </tr>
             <tr>
                 <td>هزینه</td>
                 <td *ngFor="let planningAndRunMonthReport of planningAndRunMonthReports">
-                    {{planningAndRunMonthReport.personCost | number}}
+                    {{((planningAndRunMonthReport.personCost / planningAndRunMonthReport.totalPriceCost) * 100) | number:'1.0-0'}} %
                 </td>
             </tr>
             </tbody>

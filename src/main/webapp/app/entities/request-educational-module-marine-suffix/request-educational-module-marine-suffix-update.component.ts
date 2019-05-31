@@ -30,6 +30,12 @@ import {IOrganizationMarineSuffix} from 'app/shared/model/organization-marine-su
 import {OrganizationMarineSuffixService} from 'app/entities/organization-marine-suffix';
 import {Principal} from "app/core";
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
+import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
+import {IPersonMarineSuffix, PersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
+import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
+import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
 
 @Component({
     selector: 'mi-request-educational-module-marine-suffix-update',
@@ -38,6 +44,19 @@ import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnInit {
     private _requestEducationalModule: IRequestEducationalModuleMarineSuffix;
     isSaving: boolean;
+    organizationCharts: IOrganizationChartMarineSuffix[];
+    people: IPersonMarineSuffix[];
+    targetPeople: IPersonMarineSuffix[];
+    mustSendOrgChartId: number;
+    currentAccount: any;
+    currentUserFullName: string;
+    currentPerson: IPersonMarineSuffix;
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
+    isTopUsers: boolean = false;
 
     scientificworkgroups: IScientificWorkGroupMarineSuffix[];
 
@@ -58,16 +77,8 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
     evaluationmethods: IEvaluationMethodMarineSuffix[];
 
     organizations: IOrganizationMarineSuffix[];
-    timePassed: string;
-    credit: string;
-    createDate: string;
-    modifyDate: string;
-    archivedDate: string;
-    answer: string;
-    currentAccount: any;
-    currentUserFullName: string;
-    isAdmin:boolean;
-    currentRequestStatus: RequestStatus;
+
+    message: string;
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
@@ -83,17 +94,41 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
         private evaluationMethodService: EvaluationMethodMarineSuffixService,
         private organizationService: OrganizationMarineSuffixService,
         private activatedRoute: ActivatedRoute,
-        private principal : Principal
+        private principal : Principal,
+        private convertObjectDatesService: ConvertObjectDatesService,
+        private treeUtilities: TreeUtilities,
+        protected personService: PersonMarineSuffixService,
+        protected organizationChartService: OrganizationChartMarineSuffixService
     ) {}
+    private setRoles(account: any){
+        if(account) {
+            if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+                this.isAdmin = true;
+            if (account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+                this.isModirAmozesh = true;
+            if (account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+                this.isModirKolAmozesh = true;
+            if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+                this.isKarshenasArshadAmozeshSazman = true;
 
+            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+                this.isSuperUsers = true;
+            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh)
+                this.isTopUsers = true;
+        }
+    }
     ngOnInit() {
         this.isSaving = false;
         this.principal.identity().then(account => {
 
             this.currentAccount = account;
-            if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-                this.isAdmin = true;
-            this.currentUserFullName = document.getElementById('currenUserFullNameTopBar').textContent;
+            this.setRoles(this.currentAccount);
+            this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
+                    this.currentPerson = resp.body;
+                    this.currentUserFullName = this.currentPerson.fullName;
+                    this.loadOrgCharts();
+                },
+                (res: HttpErrorResponse) => this.onError(res.message));
         });
         this.activatedRoute.data.subscribe(({ requestEducationalModule }) => {
             this.requestEducationalModule = requestEducationalModule;
@@ -155,52 +190,86 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
+    loadOrgCharts(){
+        if(this.organizationChartService.organizationchartsAll)
+        {
+            this.organizationCharts = this.organizationChartService.organizationchartsAll;
+            this.findTargetPeople();
+        }
+        else {
+            this.organizationChartService.query().subscribe(
+                (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
+                    this.organizationCharts = res.body;
+                    this.findTargetPeople();
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
     }
+    findTargetPeople(){
+        let organization = this.organizationCharts.find(a => a.id == this.currentPerson.organizationChartId);
+        if(organization.parentId > 0) {
 
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
+            this.mustSendOrgChartId = this.treeUtilities.getRootId(this.organizationCharts ,this.currentPerson.organizationChartId); //organization.parentId;
+
+            //this.mustSendChartId = neededOrgId;
+            let criteria = [{
+                key: 'organizationChartId.equals',
+                value: this.mustSendOrgChartId
+            }];
+            this.personService.query({
+                page: 0,
+                size: 20000,
+                criteria,
+                sort: ["id", "asc"]
+            }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
+                    let orgPeople = resp.body;
+                    if (orgPeople.length > 0) {
+                        this.targetPeople = orgPeople;
+                    }
+                    else {
+                        this.targetPeople = [];
+                        this.targetPeople = [new PersonMarineSuffix(0, 'خطا', 'خطا', 'خطا: نفر دریافت کننده ای در چارت سازمانی برای شما تعریف نشده است. لطفا با مدیریت سامانه تماس بگیرید. ')]
+                    }
+                },
+                (error) => this.onError("فردی یافت نشد."));
+        }
+        else{
+            this.mustSendOrgChartId = 0;
+            this.targetPeople = [];
+            this.targetPeople.push(new PersonMarineSuffix(0, 'ثبت نهایی', 'ثبت نهایی', 'پرونده/سابقه آموزشی شما شما پس از ثبت برای کارشناس ارشد آموزش سازمان برای بازبینی ارسال می شود.'));
+        }
     }
-
-    setFileData(event, entity, field, isImage) {
-        this.dataUtils.setFileData(event, entity, field, isImage);
-    }
-
     previousState() {
         window.history.back();
     }
 
     save() {
-
         this.isSaving = true;
-        this.requestEducationalModule.status = 0;
-        this.requestEducationalModule.code = 0;
-        this.requestEducationalModule.timePassed = moment("", DATE_TIME_FORMAT);
-        this.requestEducationalModule.credit = moment("", DATE_TIME_FORMAT);
-
-        if(!this.currentUserFullName)
-            this.currentUserFullName = document.getElementById('currenUserFullNameTopBar').textContent;
-
+        debugger;
+        this.currentUserFullName = this.currentPerson.fullName;
+        this.requestEducationalModule.code = this.requestEducationalModule.code ? this.requestEducationalModule.code : 0;
+        this.requestEducationalModule.title = this.requestEducationalModule.title ? this.requestEducationalModule.title : "";
+        this.requestEducationalModule.learningTimePractical = this.requestEducationalModule.learningTimePractical ? this.requestEducationalModule.learningTimePractical : 0;
+        this.requestEducationalModule.learningTimeTheorical = this.requestEducationalModule.learningTimeTheorical ? this.requestEducationalModule.learningTimeTheorical : 0;
+        this.message = "";
+        debugger;
+        if(!this.currentPerson.organizationChartId) {
+            this.message = "موقعیت در چارت سازمانی برای شما تنظیم نشده است، لطفا مراتب را با مدیریت سامانه در میان بگذارید."
+            this.isSaving = false;
+            return;
+        }
         if (this.requestEducationalModule.id !== undefined) {
-            if(this.requestEducationalModule.requestStatus != this.currentRequestStatus)
-                this.requestEducationalModule.changeStatusUserLogin = this.currentAccount.login;
-
-
-            if(this.requestEducationalModule.conversation)
-                this.requestEducationalModule.conversation += "\r\n";
-            else
-                this.requestEducationalModule.conversation = " ";
-
-            if(this.answer)
-                this.requestEducationalModule.conversation += this.currentUserFullName + ": " + this.answer;
-            //this.requestEducationalModule.conversation += "\r\n" + this.currentUserFullName + ": " + this.answer;
             this.subscribeToSaveResponse(this.requestEducationalModuleService.update(this.requestEducationalModule));
         } else {
+            this.requestEducationalModule.status = this.mustSendOrgChartId;
             this.requestEducationalModule.requestStatus = RequestStatus.NEW;
             this.requestEducationalModule.changeStatusUserLogin = this.currentAccount.login;
-            //this.requestEducationalModule.conversation = this.currentUserFullName + ": " + this.requestEducationalModule.description;
+            this.requestEducationalModule.conversation = " درخواست توسط " + this.currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " ثبت شد. "
+            /*if (this.requestEducationalModule.description) {
+                this.requestEducationalModule.conversation += "\n";
+                this.requestEducationalModule.conversation += this.currentUserFullName + ": " + this.requestEducationalModule.description;
+            }*/
             this.subscribeToSaveResponse(this.requestEducationalModuleService.create(this.requestEducationalModule));
         }
     }

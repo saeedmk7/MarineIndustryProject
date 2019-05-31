@@ -471,11 +471,23 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
         List<PlanningAndRunMonthReport> planningAndRunMonthReports = new ArrayList<>();
 
+        List<OrganizationChart> organizationCharts = organizationChartRepository.findAll();
+        List<Long> orgIds = this.getAllOfChilderenIdsOfThisId(organizationCharts ,rootOrgId, true);
+        List<FinalNiazsanjiReportCustomDTO> finalNiazsanjiReportCustomDTOS = finalNiazsanjiReportRepository.findAllFromCache(orgIds, niazsanjiYear);
+
+        Long totalCost = finalNiazsanjiReportCustomDTOS.stream().mapToLong(o -> o.getPriceCost()).sum();
+
+        List<Long> idsTotal = finalNiazsanjiReportCustomDTOS.stream().map(o -> o.getId()).collect(Collectors.toList());
+        Long totalHour = Long.valueOf(0);
+        totalHour = getEducationHours(finalNiazsanjiReportCustomDTOS,
+                                      idsTotal,
+                                      totalHour);
+
         IntegerFilter niazsanjiYearFilter = new IntegerFilter();
         niazsanjiYearFilter.setEquals(niazsanjiYear);
         LongFilter orgIdsFilter = new LongFilter();
-        List<OrganizationChart> organizationCharts = organizationChartRepository.findAll();
-        List<Long> orgIds = this.getAllOfChilderenIdsOfThisId(organizationCharts ,rootOrgId, true);
+
+
         orgIdsFilter.setIn(orgIds);
         BooleanFilter booleanFilter = new BooleanFilter();
         booleanFilter.setEquals(true);
@@ -486,6 +498,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             planningAndRunMonthReports.addAll(getDesignAndPlanningMonthResult(niazsanjiYearFilter,
                                             orgIdsFilter,
                                             booleanFilter,
+                                              totalCost,
+                                              totalHour,
                                             educationalModuleMinDTOS));
         }
         //if want just run
@@ -493,6 +507,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             planningAndRunMonthReports.addAll(getRunPhaseMonthResult(niazsanjiYearFilter,
                                                                               orgIdsFilter,
                                                                               booleanFilter,
+                                                                             totalCost,
+                                                                             totalHour,
                                                                               educationalModuleMinDTOS));
         }
         //if want them both
@@ -500,10 +516,14 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             planningAndRunMonthReports.addAll(getDesignAndPlanningMonthResult(niazsanjiYearFilter,
                                                                               orgIdsFilter,
                                                                               booleanFilter,
+                                                                              totalCost,
+                                                                              totalHour,
                                                                               educationalModuleMinDTOS));
             planningAndRunMonthReports.addAll(getRunPhaseMonthResult(niazsanjiYearFilter,
                                                                      orgIdsFilter,
                                                                      booleanFilter,
+                                                                     totalCost,
+                                                                     totalHour,
                                                                      educationalModuleMinDTOS));
         }
         return planningAndRunMonthReports;
@@ -512,6 +532,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
     private List<PlanningAndRunMonthReport> getRunPhaseMonthResult(IntegerFilter niazsanjiYearFilter,
                                                                                    LongFilter orgIdsFilter,
                                                                                    BooleanFilter booleanFilter,
+                                                                                   Long totalCost,
+                                                                                   Long totalHour,
                                                                                    List<EducationalModuleMinDTO> educationalModuleMinDTOS) {
         List<PlanningAndRunMonthReport> planningAndRunMonthReports = new ArrayList<>();
         RunPhaseCriteria runPhaseCriteria = new RunPhaseCriteria();
@@ -534,7 +556,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                     personHour += ((educationalModuleMinDTO.getLearningTimePractical() + educationalModuleMinDTO.getLearningTimeTheorical()) * peopleCount);
                 }
             }
-            planningAndRunMonthReports.add(new PlanningAndRunMonthReport(month, personHour, personCost,
+            planningAndRunMonthReports.add(new PlanningAndRunMonthReport(month, totalHour, totalCost, personHour, personCost,
                                                                          2));
         }
         return planningAndRunMonthReports;
@@ -543,6 +565,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
     private List<PlanningAndRunMonthReport> getDesignAndPlanningMonthResult(IntegerFilter niazsanjiYearFilter,
                                                  LongFilter orgIdsFilter,
                                                  BooleanFilter booleanFilter,
+                                                 Long totalCost,
+                                                 Long totalHour,
                                                  List<EducationalModuleMinDTO> educationalModuleMinDTOS) {
         List<PlanningAndRunMonthReport> planningAndRunMonthReports = new ArrayList<>();
         DesignAndPlanningCriteria designAndPlanningCriteria = new DesignAndPlanningCriteria();
@@ -565,7 +589,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                     personHour += ((educationalModuleMinDTO.getLearningTimePractical() + educationalModuleMinDTO.getLearningTimeTheorical()) * peopleCount);
                 }
             }
-            planningAndRunMonthReports.add(new PlanningAndRunMonthReport(month, personHour, personCost,
+            planningAndRunMonthReports.add(new PlanningAndRunMonthReport(month, totalHour, totalCost, personHour, personCost,
                                                                          1));
         }
         return planningAndRunMonthReports;
@@ -644,7 +668,6 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
             LongFilter jobIdFilter = new LongFilter();
             jobIdFilter.setEquals(person.get().getJob().getId());
-
 
             EducationalHistoryCriteria educationalHistoryCriteria = new EducationalHistoryCriteria();
             educationalHistoryCriteria.setPersonId(personIdFilter);
@@ -780,9 +803,9 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
     public void delete(Long id) {
         log.debug("Request to delete FinalNiazsanjiReport : {}", id);
 
-        runPhaseService.deleteByFinalNiazsanjiReportId(id);
+        /*runPhaseService.deleteByFinalNiazsanjiReportId(id);
         designAndPlanningService.deleteByFinalNiazsanjiReportId(id);
-        finalNiazsanjiReportPersonService.deleteByFinalNiazsanjiReportId(id);
+        finalNiazsanjiReportPersonService.deleteByFinalNiazsanjiReportId(id);*/
         finalNiazsanjiReportRepository.deleteById(id);
         clearFinalNiazsanjiReportCaches();
     }

@@ -176,7 +176,7 @@ public class FinalNiazsanjiReportPersonServiceImpl implements FinalNiazsanjiRepo
         List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPeople =  finalNiazsanjiReportPersonQueryService.findByCriteria(finalNiazsanjiReportPersonCriteria);
         if(!finalNiazsanjiReportPeople.isEmpty()){
             for (FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPerson : finalNiazsanjiReportPeople) {
-                delete(finalNiazsanjiReportPerson.getId());
+                finalNiazsanjiReportPersonRepository.deleteById(finalNiazsanjiReportPerson.getId());
             }
         }
     }

@@ -135,12 +135,14 @@
                                     {{educationalModule.runDate}}
                                 </td>
                                 <td>
-                                    {{educationalModule.statusMeaning}}
+                                    <a class="enableLink" [href]="'#/educational-history-marine-suffix/' + educationalModule.educationalHistoryId + '/view'"
+                                       *ngIf="educationalModule.status == 100">{{educationalModule.statusMeaning}}</a>
+                                    <span *ngIf="educationalModule.status != 100">{{educationalModule.statusMeaning}}</span>
                                 </td>
                             </tr>
                             <tr *ngIf="!homePagePersonEducationalModules">
                                 <td colspan="5" class="alert-danger">
-                                    دوره ای برای این فرد تعریف نشده.
+                                    دوره ای برای شما تعریف نشده.
                                 </td>
                             </tr>
                             </tbody>

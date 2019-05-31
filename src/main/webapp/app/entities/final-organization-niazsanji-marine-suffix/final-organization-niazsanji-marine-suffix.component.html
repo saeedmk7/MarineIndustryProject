@@ -13,7 +13,7 @@
             SetYear
             </span>
         </button>
-        <select [(ngModel)] = "selectedYear" style="font-family: IranSansLight" id="selectedYear" class="small float-right jh-create-entity" name="selectedYear" *ngIf="selectedNiazSanji">
+        <select [(ngModel)] = "selectedYear" style="font-family: IranSansLight; font-size: 65%;" id="selectedYear" class="float-right jh-create-entity" name="selectedYear" *ngIf="selectedNiazSanji">
             <option [ngValue]="year"  *ngFor="let year of years">{{year}}</option>
         </select>
         <button class="btn btn-info float-left"  jhiTranslate="entity.action.getexcel" (click)="export()">
@@ -187,7 +187,7 @@
                                     replaceUrl="true"
                                     queryParamsHandling="merge"
                                     class="btn btn-success btn-sm">
-                                <fa-icon [icon]="'check-double'"></fa-icon>
+                                <fa-icon [icon]="'stamp'"></fa-icon>
                                 <span class="d-none d-md-inline" >تصویب شوراء</span>
                                 <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.accept">comment</span>-->
                             </button>

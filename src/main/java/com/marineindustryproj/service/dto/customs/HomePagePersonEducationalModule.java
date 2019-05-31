@@ -75,6 +75,7 @@ public class HomePagePersonEducationalModule {
         this.runDate = educationalHistoryDTO.getDateOfStart();
         this.educationalModuleType = "از کلیه پودمان ها";
         this.status = status;
+        this.educationalHistoryId = educationalHistoryDTO.getId();
     }
     private Long id;
 
@@ -99,6 +100,8 @@ public class HomePagePersonEducationalModule {
     private Integer status;
 
     private String runDate;
+
+    private Long educationalHistoryId;
 
     public Long getId() {
         return id;
@@ -202,5 +205,13 @@ public class HomePagePersonEducationalModule {
 
     public void setRunDate(String runDate) {
         this.runDate = runDate;
+    }
+
+    public Long getEducationalHistoryId() {
+        return educationalHistoryId;
+    }
+
+    public void setEducationalHistoryId(Long educationalHistoryId) {
+        this.educationalHistoryId = educationalHistoryId;
     }
 }

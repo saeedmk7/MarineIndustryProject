@@ -14,7 +14,7 @@
             Edit
             </span>
     </button>
-    <button id="jh-remove-entity" class="btn btn-danger float-right jh-create-entity create-organization-chart-marine-suffix" (click)="callDel()">
+    <button *jhiHasAnyAuthority="['ROLE_ADMIN']" id="jh-remove-entity" class="btn btn-danger float-right jh-create-entity create-organization-chart-marine-suffix" (click)="callDel()">
         <fa-icon [icon]="'trash-alt'"></fa-icon>
         <span  jhiTranslate="entity.action.delete">
             Delete

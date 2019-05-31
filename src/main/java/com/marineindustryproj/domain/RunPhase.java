@@ -84,7 +84,7 @@ public class RunPhase implements Serializable {
     @Column(name = "status", nullable = false)
     private Integer status;
 
-    @OneToMany(mappedBy = "runPhase")
+    @OneToMany(mappedBy = "runPhase", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<RunRunningStep> runRunningSteps = new HashSet<>();
     @ManyToMany

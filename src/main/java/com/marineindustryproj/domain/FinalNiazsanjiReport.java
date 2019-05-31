@@ -83,16 +83,16 @@ public class FinalNiazsanjiReport implements Serializable {
     @Column(name = "finalize_cost")
     private Integer finalizeCost;
 
-    @OneToMany(mappedBy = "finalNiazsanjiReport")
+    @OneToMany(mappedBy = "finalNiazsanjiReport", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = new HashSet<>();
-    @OneToMany(mappedBy = "finalNiazsanjiReport")
+    @OneToMany(mappedBy = "finalNiazsanjiReport", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<DesignAndPlanning> designAndPlannings = new HashSet<>();
-    @OneToMany(mappedBy = "finalNiazsanjiReport")
+    @OneToMany(mappedBy = "finalNiazsanjiReport", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<RunPhase> runPhases = new HashSet<>();
-    @OneToMany(mappedBy = "finalNiazsanjiReport")
+    @OneToMany(mappedBy = "finalNiazsanjiReport", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Poll> polls = new HashSet<>();
     @ManyToMany

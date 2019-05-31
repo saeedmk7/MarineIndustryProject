@@ -62,7 +62,7 @@ public class Poll implements Serializable {
     @Column(name = "status", nullable = false)
     private Integer status;
 
-    @OneToMany(mappedBy = "poll")
+    @OneToMany(mappedBy = "poll", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PollScore> pollScores = new HashSet<>();
     @ManyToOne

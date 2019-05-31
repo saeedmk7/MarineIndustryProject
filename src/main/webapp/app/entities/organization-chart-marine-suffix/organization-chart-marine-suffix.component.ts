@@ -26,6 +26,7 @@ export class OrganizationChartMarineSuffixComponent implements OnInit, OnDestroy
     isSaving:boolean = false;
     myId:number=0;
     currentAccount: any;
+    currentPerson: IPersonMarineSuffix;
     eventSubscriber: Subscription;
     nodes : any;
     options = {
@@ -37,7 +38,12 @@ export class OrganizationChartMarineSuffixComponent implements OnInit, OnDestroy
     searchtxt:string;
     error: string;
     success: string;
-
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
+    isTopUsers: boolean = false;
     constructor(
         private organizationChartService: OrganizationChartMarineSuffixService,
         private jhiAlertService: JhiAlertService,
@@ -96,7 +102,14 @@ export class OrganizationChartMarineSuffixComponent implements OnInit, OnDestroy
 
                 this.organizationCharts = res.body;
 
-                this.nodes = this.treeUtilities.convertOrgChart2Tree(this.organizationCharts);
+                if(this.isSuperUsers)
+                    this.nodes = this.treeUtilities.convertOrgChart2Tree(this.organizationCharts);
+                else
+                {
+                    const orgIds = this.treeUtilities.getAllOfThisTreeIds(this.organizationCharts, this.currentPerson.organizationChartId);
+                    const selectedOrgs = this.organizationCharts.filter(a => orgIds.includes(a.id));
+                    this.nodes = this.treeUtilities.convertOrgChart2Tree(selectedOrgs);
+                }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -111,16 +124,35 @@ export class OrganizationChartMarineSuffixComponent implements OnInit, OnDestroy
     }
 
     ngOnInit() {
-
-        this.loadAll();
-        this.loadPeople();
         this.principal.identity().then(account => {
             this.currentAccount = account;
+            this.setRoles(this.currentAccount);
+            this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
+                this.currentPerson = resp.body;
+                this.loadAll();
+            }, (res: HttpErrorResponse) => this.onError(res.message));
         });
+        this.loadPeople();
         this.registerChangeInOrganizationCharts();
 
     }
+    private setRoles(account: any){
+        if(account) {
+            if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+                this.isAdmin = true;
+            if (account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+                this.isModirAmozesh = true;
+            if (account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+                this.isModirKolAmozesh = true;
+            if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+                this.isKarshenasArshadAmozeshSazman = true;
 
+            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+                this.isSuperUsers = true;
+            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh)
+                this.isTopUsers = true;
+        }
+    }
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }

@@ -267,7 +267,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                            a.statusMeaning = "تصویب شوراء";
                            break;
                        case 0:
-                           a.statusMeaning = "شناسنامه شغلی";
+                           a.statusMeaning = "شناسنامه آموزشی";
                            break;
                    }
                 });
@@ -672,8 +672,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.pieRunnningPriceCostChart = this.showPieChart('نمودار درصد هزینه اجرا شده گروه ' + this.selectedGroup +' به تفکیک ماه', pieRunnningCostSeries);
     }
     makePiePersonHourSeries(reportType: number){
+        debugger;
         const filtered = this.planningAndRunMonthReports.filter(a => a.reportType == reportType);
-        const allHour = filtered.map(a => a.personHour).reduce((sum, current) => sum + current);
+        const allHour = filtered[0].totalHour;
         let array: any = [];
         MONTHS.forEach(a => {
            const monthFilter = filtered.filter(e => e.month == a.id);
@@ -688,8 +689,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         return array;
     }
     makePieCostSeries(reportType: number){
+        debugger;
         const filtered = this.planningAndRunMonthReports.filter(a => a.reportType == reportType);
-        const allHour = filtered.map(a => a.personCost).reduce((sum, current) => sum + current);
+        const allHour = filtered[0].totalPriceCost; //filtered.map(a => a.personCost).reduce((sum, current) => sum + current);
         let array: any = [];
         MONTHS.forEach(a => {
             const monthFilter = filtered.filter(e => e.month == a.id);

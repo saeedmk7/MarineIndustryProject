@@ -92,6 +92,7 @@
                     <table class="table table-striped  table-bordered table-hover table-sm">
                         <thead>
                         <tr >
+                            <th>ردیف</th>
                             <th><span jhiTranslate="global.field.id">ID</span> </th>
                             <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazSanjiSource">Niaz Sanji Source</span> </th>
                             <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.priceCost">Price Cost</span></th>
@@ -100,7 +101,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr *ngFor="let finalNiazsanjiReport of finalNiazsanjiReports">
+                        <tr *ngFor="let finalNiazsanjiReport of finalNiazsanjiReports; let i = index">
+                            <td>{{i+1}}</td>
                             <td><a [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReport.id, 'view' ]">{{finalNiazsanjiReport.id}}</a></td>
                             <td jhiTranslate="{{'marineindustryprojApp.NiazSanjiSource.' + finalNiazsanjiReport.niazSanjiSource}}">{{finalNiazsanjiReport.niazSanjiSource}}</td>
                             <td>{{finalNiazsanjiReport.priceCost | number}}</td>
@@ -115,7 +117,7 @@
                             </td>
                         </tr>
                         <tr *ngIf="hasNoRow" >
-                            <td colspan="5" class="alert-danger">
+                            <td colspan="6" class="alert-danger">
                                 این فرد تاکنون در دوره ای شرکت نکرده است.
                             </td>
                         </tr>

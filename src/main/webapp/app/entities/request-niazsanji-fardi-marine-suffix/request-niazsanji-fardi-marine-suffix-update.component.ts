@@ -397,7 +397,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         }
         else{
             this.approvedEducationalmodules = [];
-            this.approvedEducationalmodules.push(new EducationalModuleMarineSuffix(0,'0',"","پودمانی در شناسنامه شغلی شما یافت نشد."));
+            this.approvedEducationalmodules.push(new EducationalModuleMarineSuffix(0,'0',"","پودمانی در شناسنامه آموزشی شما یافت نشد."));
         }
     }
     showEducations(resp: IFinalNiazsanjiReportPersonMarineSuffix[]){
@@ -510,9 +510,9 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         this.currentUserFullName = this.currentPerson.fullName;
 
         if (this.requestNiazsanjiFardi.id !== undefined) {
-            if(this.requestNiazsanjiFardi.approvedCourseTypeId)
+            if(this.requestNiazsanjiFardi.approvedEducationalModuleId)
                 this.requestNiazsanjiFardi.courseTypeId = this.requestNiazsanjiFardi.approvedCourseTypeId;
-            if(this.requestNiazsanjiFardi.allCourseTypeId)
+            if(this.requestNiazsanjiFardi.allEducationalModuleId)
                 this.requestNiazsanjiFardi.courseTypeId = this.requestNiazsanjiFardi.allCourseTypeId;
             this.subscribeToSaveResponse(this.requestNiazsanjiFardiService.update(this.requestNiazsanjiFardi),true);
         } else {
@@ -547,6 +547,10 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
                     this.subscribeToSaveResponse(this.requestNiazsanjiFardiService.create(allEducationalModule));
                 }
                 else {
+                    if(this.requestNiazsanjiFardi.approvedEducationalModuleId)
+                        this.requestNiazsanjiFardi.courseTypeId = this.requestNiazsanjiFardi.approvedCourseTypeId;
+                    if(this.requestNiazsanjiFardi.allEducationalModuleId)
+                        this.requestNiazsanjiFardi.courseTypeId = this.requestNiazsanjiFardi.allCourseTypeId;
                     this.subscribeToSaveResponse(this.requestNiazsanjiFardiService.create(this.requestNiazsanjiFardi));
                 }
             }

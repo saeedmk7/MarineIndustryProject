@@ -10,7 +10,11 @@ export class PlanningMarineSuffixDetailPeopleComponent implements OnInit {
     public view: any[];
 
     ngOnInit(): void {
-
+        let count = 0;
+        this.people.forEach(a => {
+            count++;
+            a.id = count;
+        });
         this.view = this.people;
     }
 

@@ -12,6 +12,7 @@ import { RequestEducationalModuleMarineSuffixDetailComponent } from './request-e
 import { RequestEducationalModuleMarineSuffixUpdateComponent } from './request-educational-module-marine-suffix-update.component';
 import { RequestEducationalModuleMarineSuffixDeletePopupComponent } from './request-educational-module-marine-suffix-delete-dialog.component';
 import { IRequestEducationalModuleMarineSuffix } from 'app/shared/model/request-educational-module-marine-suffix.model';
+import {RequestEducationalModuleMarineSuffixCommentPopupComponent} from "app/entities/request-educational-module-marine-suffix/request-educational-module-marine-suffix-comment-dialog.component";
 
 @Injectable({ providedIn: 'root' })
 export class RequestEducationalModuleMarineSuffixResolve implements Resolve<IRequestEducationalModuleMarineSuffix> {
@@ -84,6 +85,19 @@ export const requestEducationalModulePopupRoute: Routes = [
     {
         path: 'request-educational-module-marine-suffix/:id/delete',
         component: RequestEducationalModuleMarineSuffixDeletePopupComponent,
+        resolve: {
+            requestEducationalModule: RequestEducationalModuleMarineSuffixResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'marineindustryprojApp.requestEducationalModule.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'request-educational-module-marine-suffix/:id/:CommentType/comment',
+        component: RequestEducationalModuleMarineSuffixCommentPopupComponent,
         resolve: {
             requestEducationalModule: RequestEducationalModuleMarineSuffixResolve
         },

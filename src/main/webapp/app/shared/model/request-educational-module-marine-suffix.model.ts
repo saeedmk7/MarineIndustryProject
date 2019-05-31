@@ -15,6 +15,7 @@ export interface IRequestEducationalModuleMarineSuffix {
     fullTitle?: string;
     learningTimeTheorical?: number;
     learningTimePractical?: number;
+    totalLearningTime?: number;
     version?: string;
     innerCode?: string;
     centralizedCode?: string;
@@ -36,6 +37,7 @@ export interface IRequestEducationalModuleMarineSuffix {
     archivedUserLogin?: string;
     archivedDate?: Moment;
     status?: number;
+    statusMeaning?: string;
     conversation?: any;
     requestStatus?: RequestStatus;
     changeStatusUserLogin?: string;
@@ -66,6 +68,7 @@ export class RequestEducationalModuleMarineSuffix implements IRequestEducational
         public fullTitle?: string,
         public learningTimeTheorical?: number,
         public learningTimePractical?: number,
+        public totalLearningTime?: number,
         public version?: string,
         public innerCode?: string,
         public centralizedCode?: string,
@@ -87,6 +90,7 @@ export class RequestEducationalModuleMarineSuffix implements IRequestEducational
         public archivedUserLogin?: string,
         public archivedDate?: Moment,
         public status?: number,
+        public statusMeaning?: string,
         public conversation?: any,
         public requestStatus?: RequestStatus,
         public changeStatusUserLogin?: string,

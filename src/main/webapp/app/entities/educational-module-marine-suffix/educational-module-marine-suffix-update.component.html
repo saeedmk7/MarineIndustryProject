@@ -10,28 +10,6 @@
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="educationalModule.id" readonly />
                 </div>
-
-
-                <!--<div class="form-group">
-                    <a (click)="change('request-educational-module-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.requestEducationalModule" for="field_requestEducationalModule">requestEducationalModuleId</a>
-                    &lt;!&ndash; <select class="form-control" id="field_requestOrganizationNiazsanji" name="requestOrganizationNiazsanji" [(ngModel)]="finalOrganizationNiazsanji.requestOrganizationNiazsanjiId" >
-                         <option [ngValue]="requestOrganizationNiazsanjiOption.id" *ngFor="let requestOrganizationNiazsanjiOption of requestorganizationniazsanjis; trackBy: trackRequestOrganizationNiazsanjiById">
-                             {{requestOrganizationNiazsanjiOption.id}}-{{requestOrganizationNiazsanjiOption.code}}-{{requestOrganizationNiazsanjiOption.recommendedByOrgchart}}
-                         </option>
-                     </select>&ndash;&gt;
-                    <ng-select
-                        [items]="requestEducationalModules"
-                        [multiple]="false"
-                        [closeOnSelect]="true"
-                        [searchable]="true"
-                        [required]="false"
-                        bindLabel="fullTitle"
-                        bindValue="id"
-                        placeholder="انتخاب نمائید"
-                        name="requestEducationalModule"
-                        id="field_requestEducationalModule"
-                        [(ngModel)]="educationalModule.requestEducationalModuleId">
-                </div>-->
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اولیه و ضروری پودمان {{educationalModule.title}}</div></div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.code" for="field_code">Code</label>
@@ -347,104 +325,6 @@
                         </small>
                     </div>
                 </div>
-                <!--<div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اضافی پودمان (در صورت تمایل پاک می شوند).</div></div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.educationalModuleGroup" for="field_educationalModuleGroup">Educational Module Group</label>
-                    <input type="number" class="form-control" name="educationalModuleGroup" id="field_educationalModuleGroup"
-                        [(ngModel)]="educationalModule.educationalModuleGroup" max="99" jhiMax="99"/>
-                    <div [hidden]="!(editForm.controls.educationalModuleGroup?.dirty && editForm.controls.educationalModuleGroup?.invalid)">
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.educationalModuleGroup?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 99 }">
-                            This field cannot be more than 99.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.educationalModuleGroup?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.educationalModuleHour" for="field_educationalModuleHour">Educational Module Hour</label>
-                    <input type="number" class="form-control" name="educationalModuleHour" id="field_educationalModuleHour"
-                        [(ngModel)]="educationalModule.educationalModuleHour" max="99" jhiMax="99"/>
-                    <div [hidden]="!(editForm.controls.educationalModuleHour?.dirty && editForm.controls.educationalModuleHour?.invalid)">
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.educationalModuleHour?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 99 }">
-                            This field cannot be more than 99.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.educationalModuleHour?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.educationalModuleLevel" for="field_educationalModuleLevel">Educational Module Level</label>
-                    <input type="number" class="form-control" name="educationalModuleLevel" id="field_educationalModuleLevel"
-                           [(ngModel)]="educationalModule.educationalModuleLevel" max="9" jhiMax="9"/>
-                    <span *ngIf="educationalModule.educationalModuleLevel" class="alert-info">تا سطح {{educationalModule.educationalModuleLevel}}</span>
-                    <div [hidden]="!(editForm.controls.educationalModuleLevel?.dirty && editForm.controls.educationalModuleLevel?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.educationalModuleLevel?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 9 }">
-                            This field cannot be more than 9.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.educationalModuleLevel?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-
-
-
-                <div *ngIf="isfa">
-                    <div class="form-group">
-                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.timePassed" for="field_timePassed">Time Passed</label>
-                        <div class="d-flex">
-                            <dp-date-picker
-                                dir="rtl"
-                                [(ngModel)]="timePassed"
-                                name="timePassed"
-                                id="field_timePassed"
-                                mode="day"
-                                class="form-control col-md-4"
-                                [disabled] = "!isfa"
-                                theme="dp-material">
-                            </dp-date-picker>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.credit" for="field_credit">Credit</label>
-                        <div class="d-flex">
-                            <dp-date-picker
-                                dir="rtl"
-                                [(ngModel)]="credit"
-                                name="credit"
-                                id="field_credit"
-                                mode="day"
-                                class="form-control col-md-4"
-                                [disabled] = "!isfa"
-                                theme="dp-material">
-                            </dp-date-picker>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="!isfa">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.timePassed" for="field_timePassed">Time Passed</label>
-                    <div class="d-flex">
-                        <input id="field_timePassed" type="datetime-local" class="form-control" name="timePassed" [(ngModel)]="timePassed"
-                        />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.credit" for="field_credit">Credit</label>
-                    <div class="d-flex">
-                        <input id="field_credit" type="datetime-local" class="form-control" name="credit" [(ngModel)]="credit"
-                        />
-                    </div>
-                </div>
-                </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.moreDescription" for="field_moreDescription">More Description</label>
                     <textarea class="form-control" name="moreDescription" id="field_moreDescription"

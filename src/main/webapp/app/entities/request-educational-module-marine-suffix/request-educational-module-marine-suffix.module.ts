@@ -9,7 +9,9 @@ import {
     RequestEducationalModuleMarineSuffixDeletePopupComponent,
     RequestEducationalModuleMarineSuffixDeleteDialogComponent,
     requestEducationalModuleRoute,
-    requestEducationalModulePopupRoute
+    requestEducationalModulePopupRoute,
+    RequestEducationalModuleMarineSuffixCommentDialogComponent,
+    RequestEducationalModuleMarineSuffixCommentPopupComponent
 } from './';
 import {NgSelectModule} from "@ng-select/ng-select";
 import {FormsModule} from "@angular/forms";
@@ -25,14 +27,18 @@ const ENTITY_STATES = [...requestEducationalModuleRoute, ...requestEducationalMo
         RequestEducationalModuleMarineSuffixDetailComponent,
         RequestEducationalModuleMarineSuffixUpdateComponent,
         RequestEducationalModuleMarineSuffixDeleteDialogComponent,
-        RequestEducationalModuleMarineSuffixDeletePopupComponent
+        RequestEducationalModuleMarineSuffixDeletePopupComponent,
+        RequestEducationalModuleMarineSuffixCommentDialogComponent,
+        RequestEducationalModuleMarineSuffixCommentPopupComponent
     ],
     providers: [ ConvertObjectDatesService ],
     entryComponents: [
         RequestEducationalModuleMarineSuffixComponent,
         RequestEducationalModuleMarineSuffixUpdateComponent,
         RequestEducationalModuleMarineSuffixDeleteDialogComponent,
-        RequestEducationalModuleMarineSuffixDeletePopupComponent
+        RequestEducationalModuleMarineSuffixDeletePopupComponent,
+        RequestEducationalModuleMarineSuffixCommentDialogComponent,
+        RequestEducationalModuleMarineSuffixCommentPopupComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -14,15 +14,15 @@ import {OrganizationChartMarineSuffixService} from "app/entities/organization-ch
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import {IFinalOrganizationNiazsanjiMarineSuffix} from "app/shared/model/final-organization-niazsanji-marine-suffix.model";
-import {IEducationalHistoryMarineSuffix} from "app/shared/model/educational-history-marine-suffix.model";
-import {EducationalHistoryMarineSuffixService} from "app/entities/educational-history-marine-suffix/educational-history-marine-suffix.service";
+import {IRequestEducationalModuleMarineSuffix} from "../../shared/model/request-educational-module-marine-suffix.model";
+import {RequestEducationalModuleMarineSuffixService} from "./request-educational-module-marine-suffix.service";
 
 @Component({
-    selector: 'mi-educational-history-marine-suffix-comment-dialog',
-    templateUrl: './educational-history-marine-suffix-comment-dialog.component.html'
+    selector: 'mi-request-educational-module-marine-suffix-comment-dialog',
+    templateUrl: './request-educational-module-marine-suffix-comment-dialog.component.html'
 })
-export class EducationalHistoryMarineSuffixCommentDialogComponent implements OnInit {
-    educationalHistory: IEducationalHistoryMarineSuffix;
+export class RequestEducationalModuleMarineSuffixCommentDialogComponent implements OnInit {
+    requestEducationalModule: IRequestEducationalModuleMarineSuffix;
     commentType: string;
     organizationcharts: IOrganizationChartMarineSuffix[];
     targetPeople: IPersonMarineSuffix[];
@@ -35,7 +35,7 @@ export class EducationalHistoryMarineSuffixCommentDialogComponent implements OnI
     message: string;
     commentRequired: boolean = false;
     constructor(
-        protected educationalHistoryService: EducationalHistoryMarineSuffixService,
+        protected requestEducationalModuleService: RequestEducationalModuleMarineSuffixService,
         public activeModal: NgbActiveModal,
         protected eventManager: JhiEventManager,
         private activatedRoute: ActivatedRoute,
@@ -55,22 +55,21 @@ export class EducationalHistoryMarineSuffixCommentDialogComponent implements OnI
     }
 
     confirmDelete(id: number) {
-        /*this.educationalHistoryService.delete(id).subscribe(response => {
+        /*this.requestEducationalModuleService.delete(id).subscribe(response => {
             this.eventManager.broadcast({
-                name: 'educationalHistoryListModification',
-                content: 'Commented an educationalHistory'
+                name: 'requestEducationalModuleListModification',
+                content: 'Commented an requestEducationalModule'
             });
             this.activeModal.dismiss(true);
         });*/
     }
     isSaving: boolean = false;
     save(){
-
-
+        debugger;
         this.isSaving = true;
         this.message = "";
         let currentUserFullName = this.currentPerson.fullName;
-        this.educationalHistory.conversation += "\n ------------------------------------- \n";
+        this.requestEducationalModule.conversation += "\n ------------------------------------- \n";
         switch (this.commentType) {
             case 'COMMENT':
                 if(!this.comment)
@@ -79,9 +78,9 @@ export class EducationalHistoryMarineSuffixCommentDialogComponent implements OnI
                     this.isSaving = false;
                     return;
                 }
-                this.educationalHistory.conversation += " ثبت نظر توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " ثبت شد. ";
-                this.educationalHistory.conversation += "\n";
-                this.educationalHistory.conversation += currentUserFullName + ": " + this.comment;
+                this.requestEducationalModule.conversation += " ثبت نظر توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " ثبت شد. ";
+                this.requestEducationalModule.conversation += "\n";
+                this.requestEducationalModule.conversation += currentUserFullName + ": " + this.comment;
                 break;
             case 'REJECT':
                 if(!this.comment)
@@ -90,37 +89,37 @@ export class EducationalHistoryMarineSuffixCommentDialogComponent implements OnI
                     this.isSaving = false;
                     return;
                 }
-                this.educationalHistory.conversation += " رد درخواست توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
-                this.educationalHistory.conversation += "\n";
-                this.educationalHistory.conversation += currentUserFullName + ": " + this.comment;
+                this.requestEducationalModule.conversation += " رد درخواست توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
+                this.requestEducationalModule.conversation += "\n";
+                this.requestEducationalModule.conversation += currentUserFullName + ": " + this.comment;
 
-                this.educationalHistory.requestStatus = RequestStatus.IGNORE;
-                this.educationalHistory.changeStatusUserLogin = this.currentAccount.login;
+                this.requestEducationalModule.requestStatus = RequestStatus.IGNORE;
+                this.requestEducationalModule.changeStatusUserLogin = this.currentAccount.login;
                 break;
             case 'ACCEPT':
-                this.educationalHistory.conversation += " تایید درخواست توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
+                this.requestEducationalModule.conversation += " تایید درخواست توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
                 if(this.comment) {
-                    this.educationalHistory.conversation += "\n";
-                    this.educationalHistory.conversation += currentUserFullName + ": " + this.comment;
+                    this.requestEducationalModule.conversation += "\n";
+                    this.requestEducationalModule.conversation += currentUserFullName + ": " + this.comment;
                 }
                 let organization = this.organizationcharts.find(a => a.id == this.currentPerson.organizationChartId);
                 if(organization.parentId > 0) {
-                    this.educationalHistory.status = organization.parentId;
-                    this.educationalHistory.changeStatusUserLogin = this.currentAccount.login;
+                    this.requestEducationalModule.status = organization.parentId;
+                    this.requestEducationalModule.changeStatusUserLogin = this.currentAccount.login;
                 }
                 else {
-                    this.educationalHistory.status = 0;
-                    this.educationalHistory.changeStatusUserLogin = this.currentAccount.login;
-                    this.educationalHistoryService.finalize(this.educationalHistory).subscribe(
+                    this.requestEducationalModule.status = 0;
+                    this.requestEducationalModule.changeStatusUserLogin = this.currentAccount.login;
+                    /*this.requestEducationalModuleService.finalize(this.requestEducationalModule).subscribe(
                         (res: HttpResponse<IFinalOrganizationNiazsanjiMarineSuffix>) => this.onSaveSuccess(),
                         (res: HttpErrorResponse) => this.onSaveError(res)
-                    );
+                    );*/
                     return;
                 }
                 break;
         }
-        this.educationalHistoryService.update(this.educationalHistory).subscribe(
-            (res: HttpResponse<IEducationalHistoryMarineSuffix>) => this.onSaveSuccess(),
+        this.requestEducationalModuleService.update(this.requestEducationalModule).subscribe(
+            (res: HttpResponse<IRequestEducationalModuleMarineSuffix>) => this.onSaveSuccess(),
             (res: HttpErrorResponse) => this.onSaveError(res)
         );
     }
@@ -165,10 +164,10 @@ export class EducationalHistoryMarineSuffixCommentDialogComponent implements OnI
     }
     knowAboutStatusForContinue(){
 
-        if(this.educationalHistory.requestStatus == RequestStatus.ACCEPT || this.educationalHistory.requestStatus == RequestStatus.IGNORE){
+        if(this.requestEducationalModule.requestStatus == RequestStatus.ACCEPT || this.requestEducationalModule.requestStatus == RequestStatus.IGNORE){
             this.clear();
         }
-        if(this.educationalHistory.status != this.currentPerson.organizationChartId){
+        if(this.requestEducationalModule.status != this.currentPerson.organizationChartId){
             this.clear();
         }
     }
@@ -228,16 +227,16 @@ export class EducationalHistoryMarineSuffixCommentDialogComponent implements OnI
 }
 
 @Component({
-    selector: 'mi-educational-history-marine-suffix-comment-popup',
+    selector: 'mi-request-educational-module-marine-suffix-comment-popup',
     template: ''
 })
-export class EducationalHistoryMarineSuffixCommentPopupComponent implements OnInit, OnDestroy {
+export class RequestEducationalModuleMarineSuffixCommentPopupComponent implements OnInit, OnDestroy {
     protected ngbModalRef: NgbModalRef;
 
     constructor(protected activatedRoute: ActivatedRoute, protected router: Router, protected modalService: NgbModal) {}
 
     ngOnInit() {
-        this.activatedRoute.data.subscribe(({ educationalHistory }) => {
+        this.activatedRoute.data.subscribe(({ requestEducationalModule }) => {
             this.activatedRoute.params.subscribe((params) => {
 
                 let commentType = params['CommentType'] ? params['CommentType'] : "";
@@ -252,11 +251,11 @@ export class EducationalHistoryMarineSuffixCommentPopupComponent implements OnIn
                 }
                 setTimeout(() => {
 
-                    this.ngbModalRef = this.modalService.open(EducationalHistoryMarineSuffixCommentDialogComponent as Component, {
+                    this.ngbModalRef = this.modalService.open(RequestEducationalModuleMarineSuffixCommentDialogComponent as Component, {
                         size: 'lg',
                         backdrop: 'static'
                     });
-                    this.ngbModalRef.componentInstance.educationalHistory = educationalHistory;
+                    this.ngbModalRef.componentInstance.requestEducationalModule = requestEducationalModule;
                     this.ngbModalRef.componentInstance.commentType = commentType;
                         this.ngbModalRef.result.then(
                             result => {
