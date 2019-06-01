@@ -1,0 +1,30 @@
+{
+    "marineindustryprojApp": {
+        "jamHelp": {
+            "home": {
+                "title": "Jam Helps",
+                "createLabel": "Create a new Jam Help",
+                "createOrEditLabel": "Create or edit a Jam Help"
+            },
+            "created": "A new Jam Help is created with identifier {{ param }}",
+            "updated": "A Jam Help is updated with identifier {{ param }}",
+            "deleted": "A Jam Help is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Jam Help {{ id }}?"
+            },
+            "detail": {
+                "title": "Jam Help"
+            },
+            "title": "Title",
+            "description": "Description",
+            "code": "Code",
+            "fileDoc": "File Doc",
+            "pageUrl": "Page Url",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "jamHelpAuthority": "Jam Help Authority"
+        }
+    }
+}

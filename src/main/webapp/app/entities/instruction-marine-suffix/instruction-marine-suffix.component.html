@@ -14,7 +14,7 @@
     </div>
     <br/>
     <div class="table-responsive" *ngIf="instructions">
-        <table class="table table-striped">
+        <table class="table  table-striped table-bordered table-hover table-sm">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -29,8 +29,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let instruction of instructions ;trackBy: trackId">
-                <td><a [routerLink]="['/instruction-marine-suffix', instruction.id, 'view' ]">{{instruction.id}}</a></td>
+            <tr *ngFor="let instruction of instructions ;let i = index">
+                <!--<td><a [routerLink]="['/instruction-marine-suffix', instruction.id, 'view' ]">{{instruction.id}}</a></td>-->
+                <td>{{i+1}}</td>
                 <td>{{instruction.title}}</td>
                 <td>{{instruction.description}}</td>
                 <td>{{instruction.code}}</td>

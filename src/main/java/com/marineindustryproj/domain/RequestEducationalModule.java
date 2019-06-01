@@ -32,7 +32,7 @@ public class RequestEducationalModule implements Serializable {
     private Long id;
 
     @Column(name = "code")
-    private Integer code;
+    private String code;
 
     @NotNull
     @Size(max = 100)
@@ -216,16 +216,16 @@ public class RequestEducationalModule implements Serializable {
         this.id = id;
     }
 
-    public Integer getCode() {
+    public String getCode() {
         return code;
     }
 
-    public RequestEducationalModule code(Integer code) {
+    public RequestEducationalModule code(String code) {
         this.code = code;
         return this;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
@@ -858,7 +858,7 @@ public class RequestEducationalModule implements Serializable {
     public String toString() {
         return "RequestEducationalModule{" +
             "id=" + getId() +
-            ", code=" + getCode() +
+            ", code='" + getCode() + "'" +
             ", title='" + getTitle() + "'" +
             ", learningTimeTheorical=" + getLearningTimeTheorical() +
             ", learningTimePractical=" + getLearningTimePractical() +

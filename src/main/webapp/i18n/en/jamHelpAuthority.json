@@ -1,0 +1,27 @@
+{
+    "marineindustryprojApp": {
+        "jamHelpAuthority": {
+            "home": {
+                "title": "Jam Help Authorities",
+                "createLabel": "Create a new Jam Help Authority",
+                "createOrEditLabel": "Create or edit a Jam Help Authority"
+            },
+            "created": "A new Jam Help Authority is created with identifier {{ param }}",
+            "updated": "A Jam Help Authority is updated with identifier {{ param }}",
+            "deleted": "A Jam Help Authority is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Jam Help Authority {{ id }}?"
+            },
+            "detail": {
+                "title": "Jam Help Authority"
+            },
+            "authorityName": "Authority Name",
+            "hasEditPermission": "Has Edit Permission",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "jamHelp": "Jam Help"
+        }
+    }
+}

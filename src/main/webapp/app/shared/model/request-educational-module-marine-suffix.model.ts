@@ -10,7 +10,7 @@ import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
 
 export interface IRequestEducationalModuleMarineSuffix {
     id?: number;
-    code?: number;
+    code?: string;
     title?: string;
     fullTitle?: string;
     learningTimeTheorical?: number;
@@ -30,6 +30,7 @@ export interface IRequestEducationalModuleMarineSuffix {
     timePassed?: Moment;
     credit?: Moment;
     createUserLogin?: string;
+    createUserLoginName?: string;
     createDate?: Moment;
     modifyUserLogin?: string;
     modifyDate?: Moment;
@@ -63,7 +64,7 @@ export interface IRequestEducationalModuleMarineSuffix {
 export class RequestEducationalModuleMarineSuffix implements IRequestEducationalModuleMarineSuffix {
     constructor(
         public id?: number,
-        public code?: number,
+        public code?: string,
         public title?: string,
         public fullTitle?: string,
         public learningTimeTheorical?: number,
@@ -83,6 +84,7 @@ export class RequestEducationalModuleMarineSuffix implements IRequestEducational
         public timePassed?: Moment,
         public credit?: Moment,
         public createUserLogin?: string,
+        public createUserLoginName?: string,
         public createDate?: Moment,
         public modifyUserLogin?: string,
         public modifyDate?: Moment,

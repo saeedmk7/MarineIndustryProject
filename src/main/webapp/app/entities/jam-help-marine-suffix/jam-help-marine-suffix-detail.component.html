@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="jamHelp">
+            <h2><span jhiTranslate="marineindustryprojApp.jamHelp.detail.title">Jam Help</span> {{jamHelp.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.jamHelp.title">Title</span></dt>
+                <dd>
+                    <span>{{jamHelp.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jamHelp.description">Description</span></dt>
+                <dd>
+                    <span>{{jamHelp.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jamHelp.code">Code</span></dt>
+                <dd>
+                    <span>{{jamHelp.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jamHelp.fileDoc">File Doc</span></dt>
+                <dd>
+                    <span>{{jamHelp.fileDoc}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jamHelp.pageUrl">Page Url</span></dt>
+                <dd>
+                    <span>{{jamHelp.pageUrl}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jamHelp.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{jamHelp.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jamHelp.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{jamHelp.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jamHelp.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{jamHelp.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jamHelp.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{jamHelp.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/jam-help-marine-suffix', jamHelp.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

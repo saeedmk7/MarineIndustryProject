@@ -20,15 +20,17 @@ import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
 import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
+import {IHomePagePersonEducationalModule} from "app/shared/model/custom/home-page-person-educational-module";
 
 @Component({
     selector: 'mi-request-niazsanji-fardi-marine-suffix-detail',
-    templateUrl: './request-niazsanji-fardi-marine-suffix-detail.component.html'
+    templateUrl: './request-niazsanji-fardi-marine-suffix-detail.component.html',
+    styleUrls:['./request-niazsanji-fardi-marine-suffix.scss']
 })
 export class RequestNiazsanjiFardiMarineSuffixDetailComponent implements OnInit {
     requestNiazsanjiFardi: IRequestNiazsanjiFardiMarineSuffix;
     finalNiazsanjiReports: IFinalNiazsanjiReportMarineSuffix[];
-
+    homePagePersonEducationalModules: IHomePagePersonEducationalModule[] = [];
     approvedHour: number = 0;
     approvedLevel: string;
 
@@ -113,7 +115,7 @@ export class RequestNiazsanjiFardiMarineSuffixDetailComponent implements OnInit 
     onPersonChange(event){
 
         if(event.id){
-            let criteria = [{
+            /*let criteria = [{
                 key:'personId.equals',
                 value: event.id
             }];
@@ -123,7 +125,34 @@ export class RequestNiazsanjiFardiMarineSuffixDetailComponent implements OnInit 
                 criteria,
                 sort: ["id","asc"]
             }).subscribe((resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>) => this.showEducations(resp.body),
-                (error) => this.onError("موردی یافت نشد"));
+                (error) => this.onError("موردی یافت نشد"));*/
+
+            this.finalNiazsanjiReportMarineSuffixService.getHomePagePersonEducationalModule(event.id).subscribe((resp: HttpResponse<IHomePagePersonEducationalModule[]>) => {
+
+                    this.homePagePersonEducationalModules = resp.body.filter(a => a.status > 0);
+                    this.homePagePersonEducationalModules.forEach(a => {
+                        a.totalLearningTime = a.learningTimePractical == undefined ? 0 : a.learningTimePractical + a.learningTimeTheorical == undefined ? 0 : a.learningTimeTheorical;
+                        switch (a.status) {
+                            case 100:
+                                a.statusMeaning = "خاتمه دوره";
+                                break;
+                            case 90:
+                                a.statusMeaning = "اجرا شده";
+                                break;
+                            case 80:
+                                a.statusMeaning = "برنامه ریزی شده";
+                                break;
+                            case 70:
+                                a.statusMeaning = "تصویب شوراء";
+                                break;
+                            case 0:
+                                a.statusMeaning = "شناسنامه آموزشی";
+                                break;
+                        }
+                    });
+                    //this.makePersonHourPieChart(resp.body);
+                },
+                (res: HttpErrorResponse) => this.onError(res.message));
         }
     }
 

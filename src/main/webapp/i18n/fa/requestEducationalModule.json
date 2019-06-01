@@ -48,6 +48,7 @@
             "changeStatusUserLogin": "کاربر تغییر دهنده وضعیت درخواست",
             "educationalModule": "پودمان آموزشی",
             "scientificWorkGroup": "گروه علمی شغلی مربوطه",
+            "scientificWorkGroupId": "گروه علمی شغلی مربوطه",
             "document": "مدارک",
             "educationalCenter": "مراکز آموزشی پیشنهادی",
             "goal": "اهداف آموزشی",
@@ -55,8 +56,10 @@
             "teacher": "مدرسین ودجا دارای صلاحیت تدریس",
             "securityLevel": "طبقه بندی امنیتی",
             "skillableLevelOfSkill": "سطح مهارت قابل تامین پودمان",
+            "skillableLevelOfSkillId": "سطح مهارت قابل تامین پودمان",
             "evaluationMethod": "شیوه ارزشیابی",
             "organization": "سازمان",
+            "organizationId": "سازمان",
             "goalsText": "اهداف",
             "teachersText": "مدرسین خارج از ودجا"
         }

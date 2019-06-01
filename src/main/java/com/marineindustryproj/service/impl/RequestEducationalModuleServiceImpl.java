@@ -1,10 +1,16 @@
 package com.marineindustryproj.service.impl;
 
+import com.marineindustryproj.security.SecurityUtils;
+import com.marineindustryproj.service.EducationalModuleQueryService;
+import com.marineindustryproj.service.EducationalModuleService;
 import com.marineindustryproj.service.RequestEducationalModuleService;
 import com.marineindustryproj.domain.RequestEducationalModule;
 import com.marineindustryproj.repository.RequestEducationalModuleRepository;
+import com.marineindustryproj.service.dto.EducationalModuleCriteria;
+import com.marineindustryproj.service.dto.EducationalModuleDTO;
 import com.marineindustryproj.service.dto.RequestEducationalModuleDTO;
 import com.marineindustryproj.service.mapper.RequestEducationalModuleMapper;
+import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +19,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -28,9 +36,18 @@ public class RequestEducationalModuleServiceImpl implements RequestEducationalMo
 
     private final RequestEducationalModuleMapper requestEducationalModuleMapper;
 
-    public RequestEducationalModuleServiceImpl(RequestEducationalModuleRepository requestEducationalModuleRepository, RequestEducationalModuleMapper requestEducationalModuleMapper) {
+    private final EducationalModuleService educationalModuleService;
+
+    private final EducationalModuleQueryService educationalModuleQueryService;
+
+    public RequestEducationalModuleServiceImpl(RequestEducationalModuleRepository requestEducationalModuleRepository,
+                                               RequestEducationalModuleMapper requestEducationalModuleMapper,
+                                               EducationalModuleService educationalModuleService,
+                                               EducationalModuleQueryService educationalModuleQueryService) {
         this.requestEducationalModuleRepository = requestEducationalModuleRepository;
         this.requestEducationalModuleMapper = requestEducationalModuleMapper;
+        this.educationalModuleService = educationalModuleService;
+        this.educationalModuleQueryService = educationalModuleQueryService;
     }
 
     /**
@@ -47,7 +64,66 @@ public class RequestEducationalModuleServiceImpl implements RequestEducationalMo
         requestEducationalModule = requestEducationalModuleRepository.save(requestEducationalModule);
         return requestEducationalModuleMapper.toDto(requestEducationalModule);
     }
+    /**
+     * Finalize a requestEducationalModule.
+     *
+     * @param requestEducationalModuleDTO the entity to finalize
+     * @return the persisted entity
+     */
+    @Override
+    public RequestEducationalModuleDTO finalize(RequestEducationalModuleDTO requestEducationalModuleDTO) {
+        log.debug("Request to save RequestEducationalModule : {}", requestEducationalModuleDTO);
 
+        EducationalModuleCriteria criteria = new EducationalModuleCriteria();
+        LongFilter filter = new LongFilter();
+        filter.setEquals(requestEducationalModuleDTO.getId());
+        criteria.setRequestEducationalModuleId(filter);
+        List<EducationalModuleDTO> educationalModules = educationalModuleQueryService.findByCriteria(criteria);
+
+        if(educationalModules.isEmpty()) {
+            EducationalModuleDTO educationalModuleDTO = new EducationalModuleDTO();
+            educationalModuleDTO.setLearningTimePractical(requestEducationalModuleDTO.getLearningTimePractical());
+            educationalModuleDTO.setLearningTimeTheorical(requestEducationalModuleDTO.getLearningTimeTheorical());
+            educationalModuleDTO.setSkillableLevelOfSkillId(requestEducationalModuleDTO.getSkillableLevelOfSkillId());
+            educationalModuleDTO.setCode(requestEducationalModuleDTO.getCode());
+            educationalModuleDTO.setRecommendedBy(requestEducationalModuleDTO.getRecommendedBy());
+            educationalModuleDTO.setId(Long.parseLong(requestEducationalModuleDTO.getCode()));
+            educationalModuleDTO.setDocuments(requestEducationalModuleDTO.getDocuments());
+            educationalModuleDTO.setArchived(false);
+            educationalModuleDTO.setOrganizationId(requestEducationalModuleDTO.getOrganizationId());
+            educationalModuleDTO.setScientificWorkGroups(requestEducationalModuleDTO.getScientificWorkGroups());
+            educationalModuleDTO.setStatus(0);
+            educationalModuleDTO.setTitle(requestEducationalModuleDTO.getTitle());
+            educationalModuleDTO.setCredit(requestEducationalModuleDTO.getCredit());
+            educationalModuleDTO.setCentralizedCode(requestEducationalModuleDTO.getCentralizedCode());
+            educationalModuleDTO.setDrafters(requestEducationalModuleDTO.getDrafters());
+            educationalModuleDTO.setEducationalCenters(requestEducationalModuleDTO.getEducationalCenters());
+            educationalModuleDTO.setEducationalModuleGroup(requestEducationalModuleDTO.getEducationalModuleGroup());
+            educationalModuleDTO.setEducationalModuleHeadlines(requestEducationalModuleDTO.getEducationalModuleHeadlines());
+            educationalModuleDTO.setEducationalModuleHour(requestEducationalModuleDTO.getEducationalModuleHour());
+            educationalModuleDTO.setEducationalModuleLevel(requestEducationalModuleDTO.getEducationalModuleLevel());
+            educationalModuleDTO.setEvaluationMethodId(requestEducationalModuleDTO.getEvaluationMethodId());
+            educationalModuleDTO.setGoals(requestEducationalModuleDTO.getGoals());
+            educationalModuleDTO.setGoalsText(requestEducationalModuleDTO.getGoalsText());
+            educationalModuleDTO.setInnerCode(requestEducationalModuleDTO.getInnerCode());
+            educationalModuleDTO.setMoreDescription(requestEducationalModuleDTO.getMoreDescription());
+            educationalModuleDTO.setPrerequisite(requestEducationalModuleDTO.getPrerequisite());
+            educationalModuleDTO.setRequestEducationalModuleId(requestEducationalModuleDTO.getId());
+            educationalModuleDTO.setResources(requestEducationalModuleDTO.getResources());
+            educationalModuleDTO.setSecurityLevelId(requestEducationalModuleDTO.getSecurityLevelId());
+            educationalModuleDTO.setTeachers(requestEducationalModuleDTO.getTeachers());
+            educationalModuleDTO.setTeachersText(requestEducationalModuleDTO.getTeachersText());
+            educationalModuleDTO.setTimePassed(requestEducationalModuleDTO.getTimePassed());
+            educationalModuleDTO.setVersion(requestEducationalModuleDTO.getVersion());
+            educationalModuleDTO.setCreateDate(ZonedDateTime.now());
+            educationalModuleDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+
+            educationalModuleService.save(educationalModuleDTO);
+        }
+        RequestEducationalModule requestEducationalModule = requestEducationalModuleMapper.toEntity(requestEducationalModuleDTO);
+        requestEducationalModule = requestEducationalModuleRepository.save(requestEducationalModule);
+        return requestEducationalModuleMapper.toDto(requestEducationalModule);
+    }
     /**
      * Get all the requestEducationalModules.
      *

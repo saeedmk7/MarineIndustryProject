@@ -248,7 +248,7 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
         this.isSaving = true;
         debugger;
         this.currentUserFullName = this.currentPerson.fullName;
-        this.requestEducationalModule.code = this.requestEducationalModule.code ? this.requestEducationalModule.code : 0;
+        this.requestEducationalModule.code = this.requestEducationalModule.code ? this.requestEducationalModule.code : "";
         this.requestEducationalModule.title = this.requestEducationalModule.title ? this.requestEducationalModule.title : "";
         this.requestEducationalModule.learningTimePractical = this.requestEducationalModule.learningTimePractical ? this.requestEducationalModule.learningTimePractical : 0;
         this.requestEducationalModule.learningTimeTheorical = this.requestEducationalModule.learningTimeTheorical ? this.requestEducationalModule.learningTimeTheorical : 0;

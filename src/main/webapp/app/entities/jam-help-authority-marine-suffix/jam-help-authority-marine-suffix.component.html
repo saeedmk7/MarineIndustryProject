@@ -1,0 +1,78 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.jamHelpAuthority.home.title">Jam Help Authorities</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-jam-help-authority-marine-suffix" [routerLink]="['/jam-help-authority-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.jamHelpAuthority.home.createLabel">
+            Create new Jam Help Authority
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="jamHelpAuthorities">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="authorityName"><span jhiTranslate="marineindustryprojApp.jamHelpAuthority.authorityName">Authority Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hasEditPermission"><span jhiTranslate="marineindustryprojApp.jamHelpAuthority.hasEditPermission">Has Edit Permission</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.jamHelpAuthority.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.jamHelpAuthority.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.jamHelpAuthority.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.jamHelpAuthority.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="jamHelpTitle"><span jhiTranslate="marineindustryprojApp.jamHelpAuthority.jamHelp">Jam Help</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let jamHelpAuthority of jamHelpAuthorities ;trackBy: trackId">
+                <td><a [routerLink]="['/jam-help-authority-marine-suffix', jamHelpAuthority.id, 'view' ]">{{jamHelpAuthority.id}}</a></td>
+                <td>{{jamHelpAuthority.authorityName}}</td>
+                <td>{{jamHelpAuthority.hasEditPermission}}</td>
+                <td>{{jamHelpAuthority.createUserLogin}}</td>
+                <td>{{jamHelpAuthority.createDate | date:'medium'}}</td>
+                <td>{{jamHelpAuthority.modifyUserLogin}}</td>
+                <td>{{jamHelpAuthority.modifyDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="jamHelpAuthority.jamHelpId">
+                        <a [routerLink]="['../jam-help-marine-suffix', jamHelpAuthority.jamHelpId , 'view' ]" >{{jamHelpAuthority.jamHelpTitle}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/jam-help-authority-marine-suffix', jamHelpAuthority.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/jam-help-authority-marine-suffix', jamHelpAuthority.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'jam-help-authority-marine-suffix/'+ jamHelpAuthority.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="jamHelpAuthorities && jamHelpAuthorities.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

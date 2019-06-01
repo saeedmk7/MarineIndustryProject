@@ -734,7 +734,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                 else{
                     HomePagePersonEducationalModule homePagePersonEducationalModule = report.stream().filter(a -> a.getTitle().equals(educationalModule.getTitle())).findFirst().get();
                     report.remove(homePagePersonEducationalModule);
-                    homePagePersonEducationalModule.setEducationalModuleType("از شناسنامه شغلی");
+                    homePagePersonEducationalModule.setEducationalModuleType("از شناسنامه آموزشی");
                     report.add(homePagePersonEducationalModule);
                 }
             }

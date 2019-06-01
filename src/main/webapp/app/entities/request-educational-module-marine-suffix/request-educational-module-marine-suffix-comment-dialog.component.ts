@@ -32,6 +32,10 @@ export class RequestEducationalModuleMarineSuffixCommentDialogComponent implemen
     currentAccount: any;
     currentPerson: IPersonMarineSuffix;
     isAdmin: boolean = false;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
     message: string;
     commentRequired: boolean = false;
     constructor(
@@ -103,18 +107,25 @@ export class RequestEducationalModuleMarineSuffixCommentDialogComponent implemen
                     this.requestEducationalModule.conversation += currentUserFullName + ": " + this.comment;
                 }
                 let organization = this.organizationcharts.find(a => a.id == this.currentPerson.organizationChartId);
-                if(organization.parentId > 0) {
+                if(organization && organization.parentId && organization.parentId > 0 && this.requestEducationalModule.status != 0) {
                     this.requestEducationalModule.status = organization.parentId;
                     this.requestEducationalModule.changeStatusUserLogin = this.currentAccount.login;
                 }
                 else {
                     this.requestEducationalModule.status = 0;
                     this.requestEducationalModule.changeStatusUserLogin = this.currentAccount.login;
-                    /*this.requestEducationalModuleService.finalize(this.requestEducationalModule).subscribe(
-                        (res: HttpResponse<IFinalOrganizationNiazsanjiMarineSuffix>) => this.onSaveSuccess(),
-                        (res: HttpErrorResponse) => this.onSaveError(res)
-                    );*/
-                    return;
+                    if(this.isSuperUsers)
+                    {
+                        if(!this.requestEducationalModule.code) {
+                            this.message = "شناسه پودمان اجباریست لطفا قبل از تایید نهایی آن را تکمیل نمائید.";
+                            return;
+                        }
+                        this.requestEducationalModuleService.finalize(this.requestEducationalModule).subscribe(
+                            (res: HttpResponse<IRequestEducationalModuleMarineSuffix>) => this.onSaveSuccess(),
+                            (res: HttpErrorResponse) => this.onSaveError(res)
+                        );
+                        return;
+                    }
                 }
                 break;
         }
@@ -167,7 +178,7 @@ export class RequestEducationalModuleMarineSuffixCommentDialogComponent implemen
         if(this.requestEducationalModule.requestStatus == RequestStatus.ACCEPT || this.requestEducationalModule.requestStatus == RequestStatus.IGNORE){
             this.clear();
         }
-        if(this.requestEducationalModule.status != this.currentPerson.organizationChartId){
+        if(this.requestEducationalModule.status != 0 && this.requestEducationalModule.status != this.currentPerson.organizationChartId){
             this.clear();
         }
     }
@@ -177,6 +188,15 @@ export class RequestEducationalModuleMarineSuffixCommentDialogComponent implemen
             this.currentAccount = account;
             if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
                 this.isAdmin = true;
+            if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+                this.isModirAmozesh = true;
+            if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+                this.isModirKolAmozesh = true;
+            if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+                this.isKarshenasArshadAmozeshSazman = true;
+
+            if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+                this.isSuperUsers = true;
 
             this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
                 this.currentPerson = resp.body;

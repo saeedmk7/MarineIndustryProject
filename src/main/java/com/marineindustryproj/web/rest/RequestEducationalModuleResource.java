@@ -1,6 +1,7 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.domain.enumeration.RequestStatus;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.RequestEducationalModuleService;
 import com.marineindustryproj.service.dto.EducationalModuleDTO;
@@ -100,6 +101,27 @@ public class RequestEducationalModuleResource {
         RequestEducationalModuleDTO result = requestEducationalModuleService.save(requestEducationalModuleDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, requestEducationalModuleDTO.getId().toString()))
+            .body(result);
+    }
+    @PostMapping("/finalize-request-educational-module")
+    @Timed
+    public ResponseEntity<RequestEducationalModuleDTO> finalizeRequestEducationalModule(@Valid @RequestBody RequestEducationalModuleDTO requestEducationalModuleDTO) throws URISyntaxException {
+        log.debug("REST request to save RequestEducationalModule : {}", requestEducationalModuleDTO);
+        if (requestEducationalModuleDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        RequestEducationalModuleDTO requestEducationalModule = requestEducationalModuleService.findOne(requestEducationalModuleDTO.getId()).get();
+
+        requestEducationalModuleDTO.setCreateUserLogin(requestEducationalModule.getCreateUserLogin());
+        requestEducationalModuleDTO.setCreateDate(requestEducationalModule.getCreateDate());
+        requestEducationalModuleDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        requestEducationalModuleDTO.setModifyDate(ZonedDateTime.now());
+        requestEducationalModuleDTO.setChangeStatusUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        requestEducationalModuleDTO.setRequestStatus(RequestStatus.ACCEPT);
+
+        RequestEducationalModuleDTO result = requestEducationalModuleService.finalize(requestEducationalModuleDTO);
+        return ResponseEntity.created(new URI("/api/finalize-request-educational-module/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 

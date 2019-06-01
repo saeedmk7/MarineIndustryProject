@@ -31,7 +31,7 @@ public class RequestEducationalModuleCriteria implements Serializable {
 
     private LongFilter id;
 
-    private IntegerFilter code;
+    private StringFilter code;
 
     private StringFilter title;
 
@@ -119,11 +119,11 @@ public class RequestEducationalModuleCriteria implements Serializable {
         this.id = id;
     }
 
-    public IntegerFilter getCode() {
+    public StringFilter getCode() {
         return code;
     }
 
-    public void setCode(IntegerFilter code) {
+    public void setCode(StringFilter code) {
         this.code = code;
     }
 

@@ -1,7 +1,6 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.marineindustryproj.domain.EducationalModule;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.EducationalModuleService;
 import com.marineindustryproj.service.OrganizationService;
@@ -84,6 +83,7 @@ public class EducationalModuleResource {
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
 
     /**
      * PUT  /educational-modules : Updates an existing educationalModule.

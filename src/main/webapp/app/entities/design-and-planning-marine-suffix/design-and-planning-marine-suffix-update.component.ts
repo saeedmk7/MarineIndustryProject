@@ -187,12 +187,12 @@ export class DesignAndPlanningMarineSuffixUpdateComponent implements OnInit {
             }
         });
 
-        this.mahiatCourseService.query().subscribe(
+        /*this.mahiatCourseService.query().subscribe(
             (res: HttpResponse<IMahiatCourseMarineSuffix[]>) => {
                 this.mahiatcourses = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        );*/
         this.courseTypeService.query().subscribe(
             (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
                 this.coursetypes = res.body;

@@ -10,14 +10,38 @@
             <ng-container *ngIf="treeNode">
             <li  *ngFor="let node of treeNode" class="nav-item navbarmenu">
                 <a class="nav-link" [attr.data-toggle]="node.children.length > 0 ? 'collapse' : null" attr.href="#{{node.url}}" role="button" aria-expanded="false" attr.aria-controls="{{node.url}}">
-                    <fa-icon [icon]="node.faicon"></fa-icon>
+                    <ng-container [ngSwitch]="node.faicon">
+                        <img *ngSwitchCase="'one'" src="../../../content/images/navbar/one.png" />
+                        <img *ngSwitchCase="'two'" src="../../../content/images/navbar/one.png" />
+                        <img *ngSwitchCase="'three'" src="../../../content/images/navbar/one.png" />
+                        <img *ngSwitchCase="'four'" src="../../../content/images/navbar/one.png" />
+                        <img *ngSwitchCase="'five'" src="../../../content/images/navbar/one.png" />
+                        <img *ngSwitchCase="'six'" src="../../../content/images/navbar/one.png" />
+                        <img *ngSwitchCase="'seven'" src="../../../content/images/navbar/one.png" />
+                        <img *ngSwitchCase="'eight'" src="../../../content/images/navbar/one.png" />
+                        <img *ngSwitchCase="'nine'" src="../../../content/images/navbar/one.png" />
+                        <img *ngSwitchCase="'ten'" src="../../../content/images/navbar/one.png" />
+                        <fa-icon *ngSwitchDefault [icon]="node.faicon"></fa-icon>
+                    </ng-container>
                     <span class="pr-2 aLittleShadow">{{node.title}}</span>
                     <i [ngClass]="{'fa fa-angle-left menuArrow':node.children.length>0}"></i>
                 </a>
                 <ul *ngIf="node.children.length>0" id="{{node.url}}" class="collapse" data-parent="#accordionExample">
                     <li class="nchild" *ngFor="let child of node.children">
                         <a href="{{child.url}}" class="nchild">
-                            <fa-icon [icon]="child.faicon"></fa-icon>
+                            <ng-container [ngSwitch]="child.faicon">
+                                <img *ngSwitchCase="'one'" src="../../../content/images/navbar/one.png" />
+                                <img *ngSwitchCase="'two'" src="../../../content/images/navbar/one.png" />
+                                <img *ngSwitchCase="'three'" src="../../../content/images/navbar/one.png" />
+                                <img *ngSwitchCase="'four'" src="../../../content/images/navbar/one.png" />
+                                <img *ngSwitchCase="'five'" src="../../../content/images/navbar/one.png" />
+                                <img *ngSwitchCase="'six'" src="../../../content/images/navbar/one.png" />
+                                <img *ngSwitchCase="'seven'" src="../../../content/images/navbar/one.png" />
+                                <img *ngSwitchCase="'eight'" src="../../../content/images/navbar/one.png" />
+                                <img *ngSwitchCase="'nine'" src="../../../content/images/navbar/one.png" />
+                                <img *ngSwitchCase="'ten'" src="../../../content/images/navbar/one.png" />
+                                <fa-icon *ngSwitchDefault [icon]="child.faicon"></fa-icon>
+                            </ng-container>
                             <span class="aLittleShadow">{{child.title}}</span>
                         </a>
                     </li>
@@ -26,7 +50,7 @@
             </ng-container>
         </ul>
         <div style="position: absolute;width:100%;bottom: 0;padding-left: 7%">
-            <a href="#" (click)="logout();" class="logout"> خروج از حساب<span class="badge badge-danger date-logout">{{todayDate}}</span></a>
+            <a href="#" (click)="logout();" class="logout"> خروج از سامانه<span class="badge badge-danger date-logout">{{todayDate}}</span></a>
         </div>
     </div><!-- Main Menu (Right) -->
 

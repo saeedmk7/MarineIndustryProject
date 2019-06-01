@@ -28,6 +28,12 @@ import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 import {el} from "@angular/platform-browser/testing/src/browser_util";
 import {IEducationalHistoryMarineSuffix} from "app/shared/model/educational-history-marine-suffix.model";
+import {IScientificWorkGroupMarineSuffix} from "app/shared/model/scientific-work-group-marine-suffix.model";
+import {ISkillableLevelOfSkillMarineSuffix} from "app/shared/model/skillable-level-of-skill-marine-suffix.model";
+import {ScientificWorkGroupMarineSuffixService} from "app/entities/scientific-work-group-marine-suffix";
+import {SkillableLevelOfSkillMarineSuffixService} from "app/entities/skillable-level-of-skill-marine-suffix";
+import {OrganizationMarineSuffixService} from "app/entities/organization-marine-suffix";
+import {IOrganizationMarineSuffix} from "app/shared/model/organization-marine-suffix.model";
 
 @Component({
     selector: 'mi-request-educational-module-marine-suffix',
@@ -67,6 +73,12 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
 
     yearsCollections: any[];
 
+    searchScientificWorkGroupIds: number[];
+    scientificWorkGroups: IScientificWorkGroupMarineSuffix[];
+    searchSkillableLevelOfSkillIds: number[];
+    skillableLevelOfSkills: ISkillableLevelOfSkillMarineSuffix[];
+    organizations: IOrganizationMarineSuffix[];
+
     constructor(
         private requestEducationalModuleService: RequestEducationalModuleMarineSuffixService,
         private organizationChartService: OrganizationChartMarineSuffixService,
@@ -80,7 +92,10 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
         private eventManager: JhiEventManager,
         protected treeUtilities: TreeUtilities,
         private convertObjectDatesService : ConvertObjectDatesService,
-        private educationalModuleMarineSuffixService: EducationalModuleMarineSuffixService
+        private educationalModuleMarineSuffixService: EducationalModuleMarineSuffixService,
+        private scientificWorkGroupService: ScientificWorkGroupMarineSuffixService,
+        private skillableLevelOfSkillService: SkillableLevelOfSkillMarineSuffixService,
+        private organizationService: OrganizationMarineSuffixService,
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -101,7 +116,7 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
         this.yearsCollections = GREGORIAN_START_END_DATE;
     }
     makeCriteria(criteria?,excelExport: boolean = false){
-
+        debugger;
         if (criteria) {
             /*let val = +criteria.find(a => a.key == 'yearId.equals').value;
             //criteria.pop('yearId');
@@ -165,6 +180,7 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
 
     }
     handleAfterChart(wantOrgIds: number[],criteria,excelExport: boolean = false){
+        debugger;
         if(this.isSuperUsers) {
 
             if(criteria.find(a => a.key == 'organizationChartId.equals')){
@@ -179,6 +195,7 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
                     });
                 }
             }
+
             this.loadAll(criteria, excelExport);
             return;
         }
@@ -222,6 +239,7 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
         }
     }
     loadAll(criteria?,excelExport: boolean = false) {
+        debugger;
         if(!this.isSuperUsers)
         {
             let orgs = this.treeUtilities.getParentIds(this.organizationcharts,this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
@@ -239,6 +257,12 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
                     value: orgs
                 });
             }
+        }
+        else{
+            criteria.push({
+                key: 'status.equals',
+                value: '0'
+            });
         }
         if(excelExport) {
             this.requestEducationalModuleService
@@ -259,6 +283,7 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
                 .query({
                     page: this.page - 1,
                     size: this.itemsPerPage,
+                    criteria,
                     sort: this.sort()
                 })
                 .subscribe(
@@ -314,31 +339,52 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
 
             this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
                 this.currentPerson = resp.body;
+
+
                 //this.prepareSearchOrgChart();
                 //this.prepareDate();
-                this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'educationalModuleName', 'text', 'contains'));
-                this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'educationalCenter', 'text', 'contains'));
+                this.searchbarModel.push(new SearchPanelModel('requestEducationalModule', 'title', 'text', 'contains'));
+                this.searchbarModel.push(new SearchPanelModel('requestEducationalModule', 'code', 'text', 'contains'));
+                this.scientificWorkGroupService.query().subscribe(
+                    (res: HttpResponse<IScientificWorkGroupMarineSuffix[]>) => {
+                        this.scientificWorkGroups = res.body;
+                        this.skillableLevelOfSkillService.query().subscribe(
+                            (res: HttpResponse<ISkillableLevelOfSkillMarineSuffix[]>) => {
+                                this.skillableLevelOfSkills = res.body;
+                                this.organizationService.query().subscribe((res) => {
+                                    this.organizations = res.body;
+                                    this.searchbarModel.push(new SearchPanelModel('requestEducationalModule','scientificWorkGroupId','select','equals', this.scientificWorkGroups));
+                                    this.searchbarModel.push(new SearchPanelModel('requestEducationalModule','skillableLevelOfSkillId','select','equals', this.skillableLevelOfSkills));
+                                    this.searchbarModel.push(new SearchPanelModel('requestEducationalModule','organizationId','select','equals', this.organizations));
+                                    /*this.searchbarModel.push(new SearchPanelModel('educationalModule','recommendedBy','text','contains'));*/
+                                }),
+                                    (res: HttpErrorResponse) => this.onError(res.message);
+                            }),
+                            (res: HttpErrorResponse) => this.onError(res.message);
+                    }),
+                    (res: HttpErrorResponse) => this.onError(res.message);
+
+                //this.searchbarModel.push(new SearchPanelModel('requestEducationalModule', 'educationalCenter', 'text', 'contains'));
                 this.prepareSearchOrgChart();
+                this.prepareSearchPerson();
                 if(this.isSuperUsers){
 
                     let status = [{id: 'ACCEPT', title: 'تایید شده'},{id: 'IGNORE', title: 'رد شده'},{id:'NEW',title: 'جدید'}];
-                    this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'requestStatus', 'select', 'equals', status));
+                    this.searchbarModel.push(new SearchPanelModel('requestEducationalModule', 'requestStatus', 'select', 'equals', status));
 
                 }
 
             })
         });
 
-        if (!this.done) {
-            this.makeCriteria();
-        }
+
     }
 
     ngOnDestroy() {
         //this.eventManager.destroy(this.eventSubscriber);
         this.eventManager.destroy(this.criteriaSubscriber);
     }
-    prepareSearchPerson(orgs: IOrganizationChartMarineSuffix[]) {
+    /*prepareSearchPerson(orgs: IOrganizationChartMarineSuffix[]) {
 
         const ids = orgs.map(a => a.id);
         let criteria = [{
@@ -351,9 +397,28 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
             criteria,
             sort: ["id", "asc"]
         }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
-                this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'personId', 'select', 'equals', resp.body, 'fullName', ''));
+                this.searchbarModel.push(new SearchPanelModel('requestEducationalModule', 'personId', 'select', 'equals', resp.body, 'fullName', ''));
             },
             (error) => this.onError("فردی یافت نشد."));
+    }*/
+    prepareSearchPerson(){
+        if(this.personService.people){
+            this.people = this.personService.people;
+            if (!this.done) {
+                this.makeCriteria();
+            }
+        }
+        else {
+            this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
+                    this.people = res.body;
+                    if (!this.done) {
+                        this.makeCriteria();
+                    }
+                    //this.people.forEach(a => a["title"] = a.fullName);
+                    //this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'personId', 'select', 'equals', this.people, "fullName"));
+                },
+                (res: HttpErrorResponse) => this.onError(res.message));
+        }
     }
     setRoles(account: any){
         if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
@@ -379,8 +444,8 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
         {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
             const orgs = this.handleOrgChartView();
-            this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'organizationChartId', 'select', 'equals', orgs, 'fullTitle', 'half'));
-            this.prepareSearchPerson(orgs);
+            //this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'organizationChartId', 'select', 'equals', orgs, 'fullTitle', 'half'));
+            //this.prepareSearchPerson(orgs);
         }
         else {
             this.organizationChartService.query().subscribe(
@@ -388,8 +453,8 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
 
                     this.organizationcharts = res.body;
                     const orgs = this.handleOrgChartView();
-                    this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'organizationChartId', 'select', 'equals', orgs, 'fullTitle', 'half'));
-                    this.prepareSearchPerson(orgs);
+                    //this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'organizationChartId', 'select', 'equals', orgs, 'fullTitle', 'half'));
+                    //this.prepareSearchPerson(orgs);
                 },
                 (res: HttpErrorResponse) => this.onError(res.message));
         }
@@ -440,6 +505,9 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
         this.requestEducationalModules = this.convertObjectDatesService.changeArrayDate(data);
         this.requestEducationalModules.forEach(a => {
             a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
+            const person = this.people.find(w => w.nationalId == a.createUserLogin);
+            if(person)
+                a.createUserLoginName = person.fullName;
         });
     }
 

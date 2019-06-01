@@ -1,0 +1,31 @@
+{
+    "marineindustryprojApp": {
+        "jamHelp": {
+            "home": {
+                "title": "راهنمای سامانه",
+                "createLabel": "جدید",
+                "createOrEditLabel": " راهنما"
+            },
+            "created": "راهنما با شناسه {{ param }} ایجاد شد.",
+            "updated": "راهنما با شناسه {{ param }} ویرایش شد.",
+            "deleted": "راهنما با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف راهنما با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات راهنما"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "fileDoc": "فایل راهنما",
+            "pageUrl": "لینک صفحه تحت آموزش",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "authorityNames": "نقش ها",
+            "jamHelpAuthority": "Jam Help Authority"
+        }
+    }
+}

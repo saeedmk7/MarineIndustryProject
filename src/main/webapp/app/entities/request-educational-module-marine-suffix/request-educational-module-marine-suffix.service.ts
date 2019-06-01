@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IRequestEducationalModuleMarineSuffix } from 'app/shared/model/request-educational-module-marine-suffix.model';
+import {IRequestOrganizationNiazsanjiMarineSuffix} from "app/shared/model/request-organization-niazsanji-marine-suffix.model";
 
 type EntityResponseType = HttpResponse<IRequestEducationalModuleMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<IRequestEducationalModuleMarineSuffix[]>;
@@ -31,7 +32,13 @@ export class RequestEducationalModuleMarineSuffixService {
             .put<IRequestEducationalModuleMarineSuffix>(this.resourceUrl, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
-
+    finalize(requestEducationalModule: IRequestEducationalModuleMarineSuffix): Observable<EntityResponseType> {
+        const copy = this.convertDateFromClient(requestEducationalModule);
+        let url = SERVER_API_URL + 'api/finalize-request-educational-module';
+        return this.http
+            .post<IRequestEducationalModuleMarineSuffix>(url, copy, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
     find(id: number): Observable<EntityResponseType> {
         return this.http
             .get<IRequestEducationalModuleMarineSuffix>(`${this.resourceUrl}/${id}`, { observe: 'response' })
@@ -87,6 +94,7 @@ export class RequestEducationalModuleMarineSuffixService {
         res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
         res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
         res.body.fullTitle = (res.body.id ? res.body.id : "") + " - " + (res.body.title ? res.body.title : "");
+        res.body.totalLearningTime = (res.body.learningTimeTheorical ? res.body.learningTimeTheorical : 0) + (res.body.learningTimePractical ? res.body.learningTimePractical : 0);
         return res;
     }
 
@@ -103,6 +111,8 @@ export class RequestEducationalModuleMarineSuffixService {
                 requestEducationalModule.archivedDate != null ? moment(requestEducationalModule.archivedDate) : null;
             requestEducationalModule.fullTitle =
                 requestEducationalModule.id + " - " + requestEducationalModule.title ? requestEducationalModule.title : "";
+            requestEducationalModule.totalLearningTime = (requestEducationalModule.learningTimePractical ? requestEducationalModule.learningTimePractical : 0)
+                + (requestEducationalModule.learningTimeTheorical ? requestEducationalModule.learningTimeTheorical : 0);
         });
         return res;
     }

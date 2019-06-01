@@ -43,7 +43,7 @@ public class HomePagePersonEducationalModule {
         this.organizationTitle = educationalModuleMinDTO.getOrganizationTitle();
         this.skillableLevelOfSkillId = educationalModuleMinDTO.getSkillableLevelOfSkillId();
         this.skillableLevelOfSkillTitle = educationalModuleMinDTO.getSkillableLevelOfSkillTitle();
-        this.educationalModuleType = "از شناسنامه شغلی";
+        this.educationalModuleType = "از شناسنامه آموزشی";
         this.status = status;
 
     }
@@ -58,7 +58,7 @@ public class HomePagePersonEducationalModule {
         this.skillableLevelOfSkillId = educationalModuleDTO.getSkillableLevelOfSkillId();
         this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
         this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
-        this.educationalModuleType = "از شناسنامه شغلی";
+        this.educationalModuleType = "از شناسنامه آموزشی";
         this.status = status;
     }
     public HomePagePersonEducationalModule(EducationalHistoryDTO educationalHistoryDTO, EducationalModuleDTO educationalModuleDTO, Integer status) {

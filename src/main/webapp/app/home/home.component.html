@@ -252,19 +252,19 @@
                         </div>
                     </div>
                 </ng-container>-->
-                <div class="table-home" [ngClass]="{'other-user-news': !isSuperUsers}">
-                    <table *ngIf="isSuperUsers" cellspacing="2" cellpadding="0" style="border:0px;">
+                <div class="table-home" *ngIf="isSuperUsers">
+                    <table  cellspacing="2" cellpadding="0" style="border:0px;">
                         <tbody>
                         <tr>
                             <td style="width:37%;text-align:center;padding-right:15px">
                                 <a class="HomeBox" href="#/request-educational-module-marine-suffix"
                                    style="opacity: 1;">
                                     <img src="../../content/images/home/Course.png">
-                                    <div class="HomeBoxTitle">درخواست پودمان <br/>آموزشی</div>
+                                    <div class="HomeBoxTitle">درخواست پودمان آموزشی</div>
                                 </a>
                                 <a class="HomeBox" href="#/educational-module-marine-suffix" style="opacity: 1;">
                                     <img src="../../content/images/home/Course.png">
-                                    <div class="HomeBoxTitle">فهرست پودمان <br/>آموزشی</div>
+                                    <div class="HomeBoxTitle">فهرست پودمان آموزشی</div>
                                 </a>
                                 <a class="HomeBox" href="#/request-niazsanji-fardi-marine-suffix" style="opacity: 1;">
                                     <img src="../../content/images/home/Process.png">
@@ -297,12 +297,16 @@
                                     <div class="HomeBoxTitle">منابع آموزشی</div>
                                 </a>
                                 <a class="HomeBox" href="#/instruction-marine-suffix" style="opacity: 1;">
-                                    <img src="../../content/images/home/Help.png">
+                                    <img src="../../content/images/home/Ico-Request-Manage.png">
                                     <div class="HomeBoxTitle">قوانین و دستورالعمل ها</div>
                                 </a>
                                 <a class="HomeBox" href="#" style="opacity: 1;">
                                     <img src="../../content/images/home/Report.png">
                                     <div class="HomeBoxTitle">گزارشات</div>
+                                </a>
+                                <a class="HomeBox" href="#/jam-help-marine-suffix" style="opacity: 1;">
+                                    <img src="../../content/images/home/Help.png">
+                                    <div class="HomeBoxTitle">راهنما</div>
                                 </a>
                                 <!--<a class="HomeBox" href="#/admin/user-management" style="opacity: 1;">
                                 <img src="../../content/images/home/Password.png">

@@ -95,7 +95,6 @@ export class ConvertObjectDatesService {
                 return "رد شده توسط مدیر کل آموزش";
             case 30:
                 return "تایید نهایی درخواست توسط مدیر کل آموزش";
-
         }
         /*<span *ngSwitchCase="5">
             منتظر تایید مدیر قسمت

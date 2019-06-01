@@ -90,7 +90,7 @@ public class RequestEducationalModuleQueryService extends QueryService<RequestEd
                 specification = specification.and(buildSpecification(criteria.getId(), RequestEducationalModule_.id));
             }
             if (criteria.getCode() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCode(), RequestEducationalModule_.code));
+                specification = specification.and(buildStringSpecification(criteria.getCode(), RequestEducationalModule_.code));
             }
             if (criteria.getTitle() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getTitle(), RequestEducationalModule_.title));

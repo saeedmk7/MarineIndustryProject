@@ -48,13 +48,13 @@
                     </table>
                 </div>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">برنامه ریزی دوره</div></div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <a (click)="change('mahiat-course-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.mahiatCourse" for="field_mahiatCourse">Mahiat Course</a>
                     <select class="form-control" id="field_mahiatCourse" name="mahiatCourse" [(ngModel)]="designAndPlanning.mahiatCourseId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="mahiatCourseOption.id" *ngFor="let mahiatCourseOption of mahiatcourses; trackBy: trackMahiatCourseById">{{mahiatCourseOption.title}}</option>
                     </select>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <a (click)="change('course-type-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.designAndPlanning.courseType" for="field_courseType">Course Type</a>
                     <select class="form-control" id="field_courseType" name="courseType" [required]="true" [(ngModel)]="designAndPlanning.courseTypeId" >

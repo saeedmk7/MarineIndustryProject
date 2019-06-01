@@ -9,6 +9,7 @@
         </button>
     </h2>
     <mi-alert></mi-alert>
+    <search-panel [searchPanelModel]="searchbarModel"></search-panel>
     <br/>
     <div class="table-responsive" *ngIf="requestEducationalModules">
         <table class="table table-striped table-bordered table-hover table-sm">
@@ -52,7 +53,7 @@
                         </div>
                     </div>
                 </td>
-                <td>{{requestEducationalModule.createUserLogin}}</td>
+                <td>{{requestEducationalModule.createUserLoginName}}</td>
                 <td>{{requestEducationalModule.createDate}}</td>
                 <td>{{requestEducationalModule.statusMeaning}}</td>
                 <td class="text-right">
@@ -95,8 +96,40 @@
                                 <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
                             </button>
                         </ng-container>
+                        <ng-container *ngIf="requestEducationalModule.status == 0 && isSuperUsers">
+                            <button type="submit" title="ویرایش"
+                                    [routerLink]="['/request-educational-module-marine-suffix', requestEducationalModule.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                            <button type="submit" title="ثبت نظر"
+                                    [routerLink]="['/', { outlets: { popup: 'request-educational-module-marine-suffix/'+ requestEducationalModule.id + '/' + 'COMMENT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'comments'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.comment">comment</span>-->
+                            </button>
+                            <button type="submit" title="تایید کردن"
+                                    [routerLink]="['/', { outlets: { popup: 'request-educational-module-marine-suffix/'+ requestEducationalModule.id + '/' + 'ACCEPT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-success btn-sm">
+                                <fa-icon [icon]="'check-double'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.accept">comment</span>-->
+                            </button>
+                            <button type="submit" title="رد کردن"
+                                    [routerLink]="['/', { outlets: { popup: 'request-educational-module-marine-suffix/'+ requestEducationalModule.id + '/' + 'REJECT' + '/comment'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'ban'"></fa-icon>
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
+                            </button>
+                        </ng-container>
                     </ng-container>
-                    <button type="submit" title="ویرایش" *ngIf="requestEducationalModule.requestStatus != 'IGNORE' && isSuperUsers"
+                    <button type="submit" title="ویرایش" *ngIf="requestEducationalModule.requestStatus != 'IGNORE' && requestEducationalModule.requestStatus != 'ACCEPT' && isSuperUsers"
                             [routerLink]="['/request-educational-module-marine-suffix', requestEducationalModule.id, 'edit']"
                             class="btn btn-primary btn-sm">
                         <fa-icon [icon]="'pencil-alt'"></fa-icon>

@@ -21,6 +21,14 @@ public interface RequestEducationalModuleService {
     RequestEducationalModuleDTO save(RequestEducationalModuleDTO requestEducationalModuleDTO);
 
     /**
+     * Finalize a requestEducationalModule.
+     *
+     * @param requestEducationalModuleDTO the entity to save
+     * @return the persisted entity
+     */
+    RequestEducationalModuleDTO finalize(RequestEducationalModuleDTO requestEducationalModuleDTO);
+
+    /**
      * Get all the requestEducationalModules.
      *
      * @param pageable the pagination information
