@@ -112,6 +112,7 @@ file:
     history-upload-dir: ./historyUploads
     image-upload-dir: ./imageuploads
     run-phase-upload-dir: ./runPhaseUploads
+    jam-help-upload-dir: ./jamHelpUploads
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

@@ -49,7 +49,8 @@ export class JamHelpMarineSuffixDeletePopupComponent implements OnInit, OnDestro
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(JamHelpMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false,
+                    keyboard: false
                 });
                 this.ngbModalRef.componentInstance.jamHelp = jamHelp;
                 this.ngbModalRef.result.then(

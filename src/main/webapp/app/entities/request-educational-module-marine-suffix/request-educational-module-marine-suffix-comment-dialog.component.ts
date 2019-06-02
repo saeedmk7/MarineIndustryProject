@@ -273,7 +273,7 @@ export class RequestEducationalModuleMarineSuffixCommentPopupComponent implement
 
                     this.ngbModalRef = this.modalService.open(RequestEducationalModuleMarineSuffixCommentDialogComponent as Component, {
                         size: 'lg',
-                        backdrop: 'static'
+                        backdrop: false
                     });
                     this.ngbModalRef.componentInstance.requestEducationalModule = requestEducationalModule;
                     this.ngbModalRef.componentInstance.commentType = commentType;

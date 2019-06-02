@@ -254,7 +254,7 @@ export class EducationalHistoryMarineSuffixCommentPopupComponent implements OnIn
 
                     this.ngbModalRef = this.modalService.open(EducationalHistoryMarineSuffixCommentDialogComponent as Component, {
                         size: 'lg',
-                        backdrop: 'static'
+                        backdrop: false
                     });
                     this.ngbModalRef.componentInstance.educationalHistory = educationalHistory;
                     this.ngbModalRef.componentInstance.commentType = commentType;

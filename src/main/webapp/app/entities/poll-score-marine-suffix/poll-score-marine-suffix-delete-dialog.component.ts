@@ -49,7 +49,7 @@ export class PollScoreMarineSuffixDeletePopupComponent implements OnInit, OnDest
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(PollScoreMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.pollScore = pollScore;
                 this.ngbModalRef.result.then(

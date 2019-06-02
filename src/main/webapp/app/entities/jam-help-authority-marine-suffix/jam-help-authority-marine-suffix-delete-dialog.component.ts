@@ -49,7 +49,7 @@ export class JamHelpAuthorityMarineSuffixDeletePopupComponent implements OnInit,
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(JamHelpAuthorityMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.jamHelpAuthority = jamHelpAuthority;
                 this.ngbModalRef.result.then(

@@ -13,7 +13,7 @@ import {EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE} from "app/shared";
 @Component({
     selector: 'mi-login-modal',
     templateUrl: './login.component.html',
-    styleUrls:['../../../content/scss/login.scss']
+    styleUrls:['../../../content/scss/login.scss','./login.component.scss']
 })
 export class JhiLoginModalComponent implements AfterViewInit {
     authenticationError: boolean;

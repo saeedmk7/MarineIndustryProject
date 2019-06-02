@@ -11,6 +11,8 @@ import { ITEMS_PER_PAGE } from 'app/shared';
 import { JamHelpMarineSuffixService } from './jam-help-marine-suffix.service';
 import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+import {ExcelService} from "app/plugin/export-excel/excel-service";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'mi-jam-help-marine-suffix',
@@ -32,7 +34,7 @@ export class JamHelpMarineSuffixComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     criteriaSubscriber: Subscription;
-    searchbarModel: SearchPanelModel[];
+    searchbarModel: SearchPanelModel[] = [];
     done:boolean = false;
     criteria: any;
 
@@ -45,6 +47,7 @@ export class JamHelpMarineSuffixComponent implements OnInit, OnDestroy {
         protected dataUtils: JhiDataUtils,
         protected router: Router,
         protected eventManager: JhiEventManager,
+        private jhiTranslate: TranslateService,
         private convertObjectDatesService : ConvertObjectDatesService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -54,13 +57,22 @@ export class JamHelpMarineSuffixComponent implements OnInit, OnDestroy {
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
         });
+        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
+            this.done = true;
+            this.criteria = criteria.content;
+            this.loadAll(criteria.content);
+        });
     }
-
-    loadAll() {
+    export() {
+        let a = new ExcelService(this.jhiTranslate);
+        a.exportAsExcelFile(this.jamHelps, 'jamHelps', 'marineindustryprojApp.jamHelp');
+    }
+    loadAll(criteria?) {
         this.jamHelpService
             .query({
                 page: this.page - 1,
                 size: this.itemsPerPage,
+                criteria,
                 sort: this.sort()
             })
             .subscribe(
@@ -77,13 +89,13 @@ export class JamHelpMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/jam-help-marine-suffix'], {
+        /*this.router.navigate(['/jam-help-marine-suffix'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
-        });
+        });*/
         this.loadAll();
     }
 
@@ -101,14 +113,20 @@ export class JamHelpMarineSuffixComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.loadAll();
+        this.searchbarModel.push(new SearchPanelModel('jamHelp', 'title', 'text', 'contains'));
         this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
-        this.registerChangeInJamHelps();
+        if(!this.done)
+        {
+            this.loadAll();
+        }
+        //this.registerChangeInJamHelps();
     }
 
     ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
+        //this.eventManager.destroy(this.eventSubscriber);
+        this.eventManager.destroy(this.criteriaSubscriber);
     }
 
     trackId(index: number, item: IJamHelpMarineSuffix) {

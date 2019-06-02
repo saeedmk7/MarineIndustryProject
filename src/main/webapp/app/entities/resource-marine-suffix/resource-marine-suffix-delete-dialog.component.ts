@@ -50,7 +50,7 @@ export class ResourceMarineSuffixDeletePopupComponent implements OnInit, OnDestr
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(ResourceMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.resource = resource;
                 this.ngbModalRef.result.then(

@@ -45,7 +45,7 @@ export class GoalMarineSuffixDeletePopupComponent implements OnInit, OnDestroy {
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(GoalMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.goal = goal;
                 this.ngbModalRef.result.then(

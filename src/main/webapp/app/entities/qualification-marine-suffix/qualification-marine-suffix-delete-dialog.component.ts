@@ -49,7 +49,7 @@ export class QualificationMarineSuffixDeletePopupComponent implements OnInit, On
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(QualificationMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.qualification = qualification;
                 this.ngbModalRef.result.then(

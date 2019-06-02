@@ -49,7 +49,7 @@ export class MahiatCourseMarineSuffixDeletePopupComponent implements OnInit, OnD
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(MahiatCourseMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.mahiatCourse = mahiatCourse;
                 this.ngbModalRef.result.then(

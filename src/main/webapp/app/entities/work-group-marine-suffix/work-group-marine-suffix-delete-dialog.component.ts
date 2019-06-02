@@ -49,7 +49,7 @@ export class WorkGroupMarineSuffixDeletePopupComponent implements OnInit, OnDest
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(WorkGroupMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.workGroup = workGroup;
                 this.ngbModalRef.result.then(

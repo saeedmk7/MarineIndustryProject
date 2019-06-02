@@ -22,6 +22,13 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  */
 public class FinalNiazsanjiReportCriteria implements Serializable {
 
+    public LongFilter getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(LongFilter personId) {
+        this.personId = personId;
+    }
 
     /**
      * Class for filtering NiazSanjiSource
@@ -64,6 +71,8 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
     private IntegerFilter finalizeCost;
 
     private LongFilter finalNiazsanjiReportPersonId;
+
+    private LongFilter personId;
 
     private LongFilter designAndPlanningId;
 
@@ -314,6 +323,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
             Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(organizationChartId, that.organizationChartId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
+            Objects.equals(personId, that.personId) &&
             Objects.equals(educationalModuleTitle, that.educationalModuleTitle);
     }
 
@@ -344,6 +354,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         courseTypeId,
         organizationChartId,
         educationalModuleId,
+        personId,
         educationalModuleTitle
         );
     }
@@ -375,6 +386,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (personId != null ? "personId=" + personId + ", " : "") +
                 (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
             "}";
     }

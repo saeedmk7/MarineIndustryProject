@@ -164,12 +164,12 @@
                     </div>
                 </div>
                 <div class="form-group half">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalModuleHeadlines" for="field_requestEducationalModuleHeadlines">Educational Module Headlines</label>
-                    <textarea type="text" class="form-control" name="requestEducationalModuleHeadlines" id="field_requestEducationalModuleHeadlines"
-                              [(ngModel)]="requestEducationalModule.requestEducationalModuleHeadlines" maxlength="4096"></textarea>
-                    <div [hidden]="!(editForm.controls.requestEducationalModuleHeadlines?.dirty && editForm.controls.requestEducationalModuleHeadlines?.invalid)">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalModuleHeadlines" for="field_educationalModuleHeadlines">Educational Module Headlines</label>
+                    <textarea type="text" class="form-control" name="educationalModuleHeadlines" id="field_educationalModuleHeadlines"
+                              [(ngModel)]="requestEducationalModule.educationalModuleHeadlines" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.educationalModuleHeadlines?.dirty && editForm.controls.educationalModuleHeadlines?.invalid)">
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.requestEducationalModuleHeadlines?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                               [hidden]="!editForm.controls.educationalModuleHeadlines?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
                             This field cannot be longer than 4096 characters.
                         </small>
                     </div>

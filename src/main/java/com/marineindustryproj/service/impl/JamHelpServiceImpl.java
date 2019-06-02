@@ -1,6 +1,7 @@
 package com.marineindustryproj.service.impl;
 
 import com.marineindustryproj.domain.JamHelpAuthority;
+import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.JamHelpAuthorityService;
 import com.marineindustryproj.service.JamHelpService;
 import com.marineindustryproj.domain.JamHelp;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
@@ -50,18 +52,32 @@ public class JamHelpServiceImpl implements JamHelpService {
     @Override
     public JamHelpDTO save(JamHelpDTO jamHelpDTO) {
         log.debug("Request to save JamHelp : {}", jamHelpDTO);
-
-        /*if(!jamHelpDTO.getAuthorityNames().isEmpty())
-        {
-            String[] splitedValues = jamHelpDTO.getAuthorityNames().split(",");
-            if(splitedValues.length > 0){
-                //jamHelpRepository
-                JamHelpAuthorityDTO jamHelpAuthority = new JamHelpAuthorityDTO();
-            }
-        }*/
-
+        boolean isEdit = false;
+        if(jamHelpDTO.getId() != null)
+            isEdit = true;
         JamHelp jamHelp = jamHelpMapper.toEntity(jamHelpDTO);
         jamHelp = jamHelpRepository.save(jamHelp);
+
+        if(!jamHelpDTO.getAuthorityNames().isEmpty())
+        {
+
+            String[] splitedValues = jamHelpDTO.getAuthorityNames().split(",");
+            if(splitedValues.length > 0){
+                if(isEdit)
+                    jamHelpAuthorityService.deleteByJamHelpId(jamHelp.getId());
+                //jamHelpRepository
+                for (String authority: splitedValues) {
+                    JamHelpAuthorityDTO jamHelpAuthority = new JamHelpAuthorityDTO();
+                    jamHelpAuthority.setAuthorityName(authority);
+                    jamHelpAuthority.setCreateDate(ZonedDateTime.now());
+                    jamHelpAuthority.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                    jamHelpAuthority.setHasEditPermission(true);
+                    jamHelpAuthority.setJamHelpId(jamHelp.getId());
+                    jamHelpAuthorityService.save(jamHelpAuthority);
+                }
+            }
+        }
+
         return jamHelpMapper.toDto(jamHelp);
     }
 

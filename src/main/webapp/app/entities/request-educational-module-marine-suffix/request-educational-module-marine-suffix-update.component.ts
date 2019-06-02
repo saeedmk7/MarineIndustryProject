@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import * as moment from 'moment';
@@ -98,7 +98,8 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
         private convertObjectDatesService: ConvertObjectDatesService,
         private treeUtilities: TreeUtilities,
         protected personService: PersonMarineSuffixService,
-        protected organizationChartService: OrganizationChartMarineSuffixService
+        protected organizationChartService: OrganizationChartMarineSuffixService,
+        private router: Router
     ) {}
     private setRoles(account: any){
         if(account) {
@@ -116,6 +117,9 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
             if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh)
                 this.isTopUsers = true;
         }
+    }
+    change(i){
+        this.router.navigateByUrl(i);
     }
     ngOnInit() {
         this.isSaving = false;

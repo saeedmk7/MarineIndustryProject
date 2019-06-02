@@ -49,7 +49,7 @@ export class RunningStepMarineSuffixDeletePopupComponent implements OnInit, OnDe
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(RunningStepMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.runningStep = runningStep;
                 this.ngbModalRef.result.then(

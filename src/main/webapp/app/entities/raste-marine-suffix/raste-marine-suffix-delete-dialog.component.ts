@@ -49,7 +49,7 @@ export class RasteMarineSuffixDeletePopupComponent implements OnInit, OnDestroy 
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(RasteMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.raste = raste;
                 this.ngbModalRef.result.then(

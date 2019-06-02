@@ -43,4 +43,14 @@ public class FileStorageProperties {
     public void setRunPhaseUploadDir(String runPhaseUploadDir) {
         this.runPhaseUploadDir = runPhaseUploadDir;
     }
+    
+    private String jamHelpUploadDir;
+
+    public String getJamHelpUploadDir() {
+        return jamHelpUploadDir;
+    }
+
+    public void setJamHelpUploadDir(String jamHelpUploadDir) {
+        this.jamHelpUploadDir = jamHelpUploadDir;
+    }
 }

@@ -49,7 +49,7 @@ export class JobTypeMarineSuffixDeletePopupComponent implements OnInit, OnDestro
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(JobTypeMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.jobType = jobType;
                 this.ngbModalRef.result.then(

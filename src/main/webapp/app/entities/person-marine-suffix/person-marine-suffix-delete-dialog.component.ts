@@ -49,7 +49,7 @@ export class PersonMarineSuffixDeletePopupComponent implements OnInit, OnDestroy
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(PersonMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.person = person;
                 this.ngbModalRef.result.then(

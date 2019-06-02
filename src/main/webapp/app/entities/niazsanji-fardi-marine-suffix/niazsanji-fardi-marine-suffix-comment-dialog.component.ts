@@ -277,7 +277,7 @@ export class NiazsanjiFardiMarineSuffixCommentPopupComponent implements OnInit, 
 
                     this.ngbModalRef = this.modalService.open(NiazsanjiFardiMarineSuffixCommentDialogComponent as Component, {
                         size: 'lg',
-                        backdrop: 'static'
+                        backdrop: false
                     });
                     this.ngbModalRef.componentInstance.niazsanjiFardi = niazsanjiFardi;
                     this.ngbModalRef.componentInstance.commentType = commentType;

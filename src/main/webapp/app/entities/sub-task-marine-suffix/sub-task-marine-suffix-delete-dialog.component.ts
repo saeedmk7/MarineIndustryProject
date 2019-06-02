@@ -49,7 +49,7 @@ export class SubTaskMarineSuffixDeletePopupComponent implements OnInit, OnDestro
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(SubTaskMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.subTask = subTask;
                 this.ngbModalRef.result.then(

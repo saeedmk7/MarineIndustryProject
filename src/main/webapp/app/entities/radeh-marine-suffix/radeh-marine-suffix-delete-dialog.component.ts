@@ -49,7 +49,7 @@ export class RadehMarineSuffixDeletePopupComponent implements OnInit, OnDestroy 
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(RadehMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.radeh = radeh;
                 this.ngbModalRef.result.then(

@@ -49,7 +49,7 @@ export class AuthorityDeletePopupComponent implements OnInit, OnDestroy {
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(AuthorityDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.authority = authority;
                 this.ngbModalRef.result.then(

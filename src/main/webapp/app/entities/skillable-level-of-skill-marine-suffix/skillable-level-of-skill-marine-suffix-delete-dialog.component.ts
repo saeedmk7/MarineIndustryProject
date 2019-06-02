@@ -49,7 +49,7 @@ export class SkillableLevelOfSkillMarineSuffixDeletePopupComponent implements On
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(SkillableLevelOfSkillMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.skillableLevelOfSkill = skillableLevelOfSkill;
                 this.ngbModalRef.result.then(

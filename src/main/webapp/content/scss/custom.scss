@@ -351,6 +351,7 @@ tfoot{
 .modal-body {
     padding: 25px !important;
 }
+
 button.close {
     text-shadow: none !important;
     color: white;
@@ -490,14 +491,16 @@ nav.back-cover {
     height: 100vh;
 }
 .back-cover:before {
-    background: url(/content/images/login.jpg) no-repeat center center;
-    content: "";
+    /*background: url(/content/images/login.jpg) no-repeat center center;*/
+    white-space: pre-wrap;
+    content: "سیستم جامع آموزش منابع انسانی \A           سازمان صنایع دریایی";
+    color: blue;
+    font-family: BTitrBold;
+    font-size: 45px;
     display: block;
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    top: 3%;
+    right: 35%;
     /*height: 900px;*/
     max-width: 900px;
     margin: auto;
@@ -511,6 +514,7 @@ nav.back-cover {
     margin: 20vh auto 0px !important;
 }
 .modal.show .modal-dialog {
+
     position: absolute;
     top: 0;
     right: 0;
@@ -519,6 +523,7 @@ nav.back-cover {
     bottom: 0;
     margin: auto;
 }
+
 .back-cover .modal-content {
     background: transparent !important;
     width: 75% !important;
@@ -627,4 +632,16 @@ tr.ignore td {
 }
 tr.new td {
     color: blue;
+}
+
+
+.modal-backdrop.show{
+    opacity: 1 !important;
+}
+.modal-backdrop{
+    background: url("/content/images/loginBack.jpg") no-repeat center center !important;
+    background-size: cover !important;
+}
+.modal.show .modal-dialog {
+    left: 25% !important;
 }

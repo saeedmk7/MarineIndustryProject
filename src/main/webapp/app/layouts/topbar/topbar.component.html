@@ -25,6 +25,14 @@
                     </span>
                 </a>
             </li>
+            <li class="nav-item seperate-left seperate-right" *ngIf="isTopUsers" title="درخواست پودمان جدید">
+                <a class="nav-link excepted-menu" href="#/request-educational-module-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'book'"></fa-icon>
+                    <span *ngIf="educationalModuleRequestCounter != undefined" class="badge badge-info">{{educationalModuleRequestCounter}}</span>
+                    </span>
+                </a>
+            </li>
             <li class="nav-item seperate-left seperate-right" *ngIf="isModirAmozesh" title="تعداد درخواست های نیازسنجی سازمانی">
                 <a class="nav-link excepted-menu" href="#/request-organization-niazsanji-marine-suffix">
                     <span class="bell-contain" style="padding: 6px">
@@ -41,6 +49,7 @@
                     </span>
                 </a>
             </li>
+
             <ng-container *ngIf="isModirKolAmozesh || isKarshenasArshadAmozeshSazman" >
                 <li class="nav-item seperate-left seperate-right" title="تعداد درخواست های نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی اجرا نشده">
                     <a class="nav-link excepted-menu" href="#/niazsanji-fardi-marine-suffix">
@@ -58,6 +67,7 @@
                         </span>
                     </a>
                 </li>
+
             </ng-container>
             <!--<li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{currentUserFullName}}</a>

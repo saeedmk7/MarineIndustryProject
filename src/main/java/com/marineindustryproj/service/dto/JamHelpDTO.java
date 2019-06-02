@@ -45,7 +45,7 @@ public class JamHelpDTO implements Serializable {
 
     private ZonedDateTime modifyDate;
 
-    private Set<JamHelpAuthorityDTO> jamHelpAuthorityDTOS = new HashSet<>();
+    private String authorityNames;
 
     public Long getId() {
         return id;
@@ -127,12 +127,12 @@ public class JamHelpDTO implements Serializable {
         this.modifyDate = modifyDate;
     }
 
-    public Set<JamHelpAuthorityDTO> getJamHelpAuthorityDTOS() {
-        return jamHelpAuthorityDTOS;
+    public String getAuthorityNames() {
+        return authorityNames;
     }
 
-    public void setJamHelpAuthorityDTOS(Set<JamHelpAuthorityDTO> jamHelpAuthorityDTOS) {
-        this.jamHelpAuthorityDTOS = jamHelpAuthorityDTOS;
+    public void setAuthorityNames(String authorityNames) {
+        this.authorityNames = authorityNames;
     }
 
     @Override
@@ -164,6 +164,7 @@ public class JamHelpDTO implements Serializable {
             ", description='" + getDescription() + "'" +
             ", code='" + getCode() + "'" +
             ", fileDoc='" + getFileDoc() + "'" +
+            ", authorityNames='" + getAuthorityNames() + "'" +
             ", pageUrl='" + getPageUrl() + "'" +
             ", createUserLogin='" + getCreateUserLogin() + "'" +
             ", createDate='" + getCreateDate() + "'" +

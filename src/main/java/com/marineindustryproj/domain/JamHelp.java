@@ -65,7 +65,7 @@ public class JamHelp implements Serializable {
     @Column(name = "modify_date")
     private ZonedDateTime modifyDate;
 
-    @OneToMany(mappedBy = "jamHelp")
+    @OneToMany(mappedBy = "jamHelp", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<JamHelpAuthority> jamHelpAuthorities = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

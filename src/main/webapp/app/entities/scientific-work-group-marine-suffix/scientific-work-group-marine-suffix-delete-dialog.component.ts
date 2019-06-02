@@ -49,7 +49,7 @@ export class ScientificWorkGroupMarineSuffixDeletePopupComponent implements OnIn
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(ScientificWorkGroupMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.scientificWorkGroup = scientificWorkGroup;
                 this.ngbModalRef.result.then(

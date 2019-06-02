@@ -54,7 +54,7 @@ export class OrganizationChartMarineSuffixDeletePopupComponent implements OnInit
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(OrganizationChartMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.organizationChart = organizationChart;
                 this.ngbModalRef.result.then(

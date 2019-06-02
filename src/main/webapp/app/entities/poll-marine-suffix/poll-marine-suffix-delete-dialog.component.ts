@@ -45,7 +45,7 @@ export class PollMarineSuffixDeletePopupComponent implements OnInit, OnDestroy {
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(PollMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.poll = poll;
                 this.ngbModalRef.result.then(

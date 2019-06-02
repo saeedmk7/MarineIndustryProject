@@ -49,7 +49,7 @@ export class NavBarItemMarineSuffixDeletePopupComponent implements OnInit, OnDes
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(NavBarItemMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.navBarItem = navBarItem;
                 this.ngbModalRef.result.then(

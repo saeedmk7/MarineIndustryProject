@@ -105,6 +105,20 @@
                         <input type="text" name="educationalModuleTitle" id="field_educationalModule" class="form-control"
                                [(ngModel)]="finalNiazsanjiReport.educationalModuleTitle">
                     </div>
+                    <div class="form-group half">
+                        <label class="form-control-label" for="field_educationalModule">افراد</label>
+                        <ng-select
+                            [items]="recommendedPeople"
+                            [multiple]="false"
+                            [closeOnSelect]="true"
+                            [searchable]="true"
+                            bindLabel="fullName"
+                            bindValue="id"
+                            placeholder="انتخاب نمائید."
+                            name="personId"
+                            id="field_personId"
+                            [(ngModel)]="personId">
+                    </div>
                     <!--<div class="form-group half">
                         <label class="form-control-label" for="field_educationalModule">پودمان آموزشی</label>
                         <ng-select

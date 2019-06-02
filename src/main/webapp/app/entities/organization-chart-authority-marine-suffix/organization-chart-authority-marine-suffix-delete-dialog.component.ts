@@ -49,7 +49,7 @@ export class OrganizationChartAuthorityMarineSuffixDeletePopupComponent implemen
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(OrganizationChartAuthorityMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.organizationChartAuthority = organizationChartAuthority;
                 this.ngbModalRef.result.then(

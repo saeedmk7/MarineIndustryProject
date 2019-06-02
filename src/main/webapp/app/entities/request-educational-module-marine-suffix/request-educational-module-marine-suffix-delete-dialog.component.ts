@@ -49,7 +49,7 @@ export class RequestEducationalModuleMarineSuffixDeletePopupComponent implements
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(RequestEducationalModuleMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.requestEducationalModule = requestEducationalModule;
                 this.ngbModalRef.result.then(

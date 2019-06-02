@@ -49,7 +49,7 @@ export class InstructionMarineSuffixDeletePopupComponent implements OnInit, OnDe
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(InstructionMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.instruction = instruction;
                 this.ngbModalRef.result.then(

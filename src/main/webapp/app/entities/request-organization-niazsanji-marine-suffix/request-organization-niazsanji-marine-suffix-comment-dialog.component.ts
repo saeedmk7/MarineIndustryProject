@@ -242,7 +242,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixCommentPopupComponent imple
 
                     this.ngbModalRef = this.modalService.open(RequestOrganizationNiazsanjiMarineSuffixCommentDialogComponent as Component, {
                         size: 'lg',
-                        backdrop: 'static'
+                        backdrop: false
                     });
                     this.ngbModalRef.componentInstance.requestOrganizationNiazsanji = requestOrganizationNiazsanji;
                     this.ngbModalRef.componentInstance.commentType = commentType;

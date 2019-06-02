@@ -1,9 +1,9 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.marineindustryproj.domain.JamHelp;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.JamHelpService;
+import com.marineindustryproj.service.StorageService;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -13,18 +13,21 @@ import com.marineindustryproj.service.JamHelpQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -44,11 +47,55 @@ public class JamHelpResource {
 
     private final JamHelpQueryService jamHelpQueryService;
 
-    public JamHelpResource(JamHelpService jamHelpService, JamHelpQueryService jamHelpQueryService) {
+    private final StorageService storageService;
+
+    public JamHelpResource(JamHelpService jamHelpService,
+                           JamHelpQueryService jamHelpQueryService,
+                           StorageService storageService) {
         this.jamHelpService = jamHelpService;
         this.jamHelpQueryService = jamHelpQueryService;
+        this.storageService = storageService;
     }
+    @PostMapping("/jam-helps/upload-file")
+    @Timed
+    public ResponseEntity<String> uploadJamHelp(@Valid @RequestBody @RequestParam("file") MultipartFile file) throws URISyntaxException {
+        String fileName = storageService.storeJamHelpFile(file);
+        String fileAddress = "api/jam-helps/download/" + fileName;
 
+        return ResponseEntity.created(new URI("/api/jam-helps/" + fileAddress))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, fileAddress))
+            .body(fileAddress);
+    }
+    @DeleteMapping("/jam-helps/delete/{fileName:.+}")
+    @Timed
+    public ResponseEntity<Void> deleteFile(@PathVariable String fileName) {
+        log.debug("REST request to delete JamHelpFile : {}", fileName);
+        storageService.deleteJamHelpFile(fileName);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, fileName)).build();
+    }
+    @GetMapping("/jam-helps/download/{fileName:.+}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+        // Load file as Resource
+        Resource resource = storageService.loadJamHelpFileAsResource(fileName);
+
+        // Try to determine file's content type
+        String contentType = null;
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex) {
+            log.info("Could not determine file type.");
+        }
+
+        // Fallback to the default content type if type could not be determined
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok()
+            .contentType(MediaType.parseMediaType(contentType))
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+            .body(resource);
+    }
     /**
      * POST  /jam-helps : Create a new jamHelp.
      *

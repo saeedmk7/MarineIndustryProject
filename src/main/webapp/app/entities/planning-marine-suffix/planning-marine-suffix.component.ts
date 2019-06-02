@@ -45,7 +45,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     currentAccount: any;
     finalNiazsanjiReport: IFinalNiazsanjiReportMarineSuffix = {};
     finalNiazsanjiReports: IFinalNiazsanjiReportMarineSuffix[];
-
+    personId: number;
 
     finalNiazsanjiReportsFardis: IFinalNiazsanjiReportFardiMarineSuffix[] = [];
     finalNiazsanjiReportsOrganizations: IFinalNiazsanjiReportOrganizationMarineSuffix[] = [];
@@ -56,6 +56,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     @ViewChild(GridComponent) grid: GridComponent;
 
     people: IPersonMarineSuffix[];
+    recommendedPeople: IPersonMarineSuffix[];
     currentPerson: IPersonMarineSuffix;
     organizationcharts: IOrganizationChartMarineSuffix[];
     recommenedOrgCharts: IOrganizationChartMarineSuffix[];
@@ -248,6 +249,12 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                 });
             }
         }
+        if (f.value['personId']) {
+            let val = +f.value['personId'];
+            criteria.push({
+                key: 'personId.in', value: val
+            });
+        }
         /*if (f.value['educationalModuleId']) {
             let val = +f.value['educationalModuleId'];
             criteria.push({
@@ -439,7 +446,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
 
                 this.prepareSearchOrgChart();
                 this.prepareSearchEducationalModule();
-                this.prepareSearchPerson();
+                this.preparePeople();
                 this.prepareSearchDate();
             });
         });
@@ -471,19 +478,58 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         }
     }
 
-    prepareSearchPerson() {
-        if (this.personService.people) {
-            this.people = this.personService.people;
-        }
-        else {
-            this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
-                    this.people = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message));
-        }
-    }
+    prepareSearchPerson(orgs: IOrganizationChartMarineSuffix[]) {
 
-    prepareSearchDate() {
+        if(this.isSuperUsers)
+        {
+            if(!this.people) {
+                if (this.personService.people) {
+                    this.people = this.personService.people;
+                    this.recommendedPeople = this.convertObjectDatesService.goClone(this.people);
+                }
+                else {
+                    this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
+
+                            this.people = res.body;
+                            this.recommendedPeople = this.convertObjectDatesService.goClone(this.people);
+                        },
+                        (res: HttpErrorResponse) => this.onError(res.message));
+                }
+            }
+            else{
+                this.recommendedPeople = this.convertObjectDatesService.goClone(this.people);
+            }
+            return;
+        }
+        const orgIds = orgs.map(a => a.id);
+        let criteria = [{
+            key:'organizationChartId.in',
+            value: orgIds
+        }];
+        this.personService.query({
+            page: 0,
+            size: 20000,
+            criteria,
+            sort: ["id","asc"]
+        }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
+                this.recommendedPeople = resp.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message));
+    }
+        preparePeople() {
+            if (this.personService.people) {
+                this.people = this.personService.people;
+            }
+            else {
+                this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
+                        this.people = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message));
+            }
+        }
+
+
+        prepareSearchDate() {
         this.finalNiazsanjiReport.niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
         this.dates = this.convertObjectDatesService.getYearsArray();
     }
@@ -508,6 +554,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
             this.showPlanningReport();
             const orgs = this.handleOrgChartView();
+            this.prepareSearchPerson(orgs);
             this.prepareRootsSearch(orgs);
         }
         else {
@@ -517,6 +564,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                     this.organizationcharts = res.body;
                     this.showPlanningReport();
                     const orgs = this.handleOrgChartView();
+                    this.prepareSearchPerson(orgs);
                     this.prepareRootsSearch(orgs);
                 },
                 (res: HttpErrorResponse) => this.onError(res.message));

@@ -192,7 +192,7 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
     }
     deleteUser(user: User) {
         this.message = "";
-        const modalRef = this.modalService.open(UserMgmtDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+        const modalRef = this.modalService.open(UserMgmtDeleteDialogComponent, { size: 'lg', backdrop: false });
         modalRef.componentInstance.user = user;
         modalRef.result.then(
             result => {

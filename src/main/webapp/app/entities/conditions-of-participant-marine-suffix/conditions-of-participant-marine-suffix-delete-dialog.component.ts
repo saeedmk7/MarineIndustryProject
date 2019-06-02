@@ -49,7 +49,7 @@ export class ConditionsOfParticipantMarineSuffixDeletePopupComponent implements 
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(ConditionsOfParticipantMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.conditionsOfParticipant = conditionsOfParticipant;
                 this.ngbModalRef.result.then(

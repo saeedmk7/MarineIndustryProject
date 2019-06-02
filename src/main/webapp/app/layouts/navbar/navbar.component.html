@@ -12,15 +12,15 @@
                 <a class="nav-link" [attr.data-toggle]="node.children.length > 0 ? 'collapse' : null" attr.href="#{{node.url}}" role="button" aria-expanded="false" attr.aria-controls="{{node.url}}">
                     <ng-container [ngSwitch]="node.faicon">
                         <img *ngSwitchCase="'one'" src="../../../content/images/navbar/one.png" />
-                        <img *ngSwitchCase="'two'" src="../../../content/images/navbar/one.png" />
-                        <img *ngSwitchCase="'three'" src="../../../content/images/navbar/one.png" />
-                        <img *ngSwitchCase="'four'" src="../../../content/images/navbar/one.png" />
-                        <img *ngSwitchCase="'five'" src="../../../content/images/navbar/one.png" />
-                        <img *ngSwitchCase="'six'" src="../../../content/images/navbar/one.png" />
-                        <img *ngSwitchCase="'seven'" src="../../../content/images/navbar/one.png" />
-                        <img *ngSwitchCase="'eight'" src="../../../content/images/navbar/one.png" />
-                        <img *ngSwitchCase="'nine'" src="../../../content/images/navbar/one.png" />
-                        <img *ngSwitchCase="'ten'" src="../../../content/images/navbar/one.png" />
+                        <img *ngSwitchCase="'two'" src="../../../content/images/navbar/two.png" />
+                        <img *ngSwitchCase="'three'" src="../../../content/images/navbar/three.png" />
+                        <img *ngSwitchCase="'four'" src="../../../content/images/navbar/four.png" />
+                        <img *ngSwitchCase="'five'" src="../../../content/images/navbar/five.png" />
+                        <img *ngSwitchCase="'six'" src="../../../content/images/navbar/six.png" />
+                        <img *ngSwitchCase="'seven'" src="../../../content/images/navbar/seven.png" />
+                        <img *ngSwitchCase="'eight'" src="../../../content/images/navbar/eight.png" />
+                        <img *ngSwitchCase="'nine'" src="../../../content/images/navbar/nine.png" />
+                        <img *ngSwitchCase="'ten'" src="../../../content/images/navbar/ten.png" />
                         <fa-icon *ngSwitchDefault [icon]="node.faicon"></fa-icon>
                     </ng-container>
                     <span class="pr-2 aLittleShadow">{{node.title}}</span>
@@ -31,15 +31,15 @@
                         <a href="{{child.url}}" class="nchild">
                             <ng-container [ngSwitch]="child.faicon">
                                 <img *ngSwitchCase="'one'" src="../../../content/images/navbar/one.png" />
-                                <img *ngSwitchCase="'two'" src="../../../content/images/navbar/one.png" />
-                                <img *ngSwitchCase="'three'" src="../../../content/images/navbar/one.png" />
-                                <img *ngSwitchCase="'four'" src="../../../content/images/navbar/one.png" />
-                                <img *ngSwitchCase="'five'" src="../../../content/images/navbar/one.png" />
-                                <img *ngSwitchCase="'six'" src="../../../content/images/navbar/one.png" />
-                                <img *ngSwitchCase="'seven'" src="../../../content/images/navbar/one.png" />
-                                <img *ngSwitchCase="'eight'" src="../../../content/images/navbar/one.png" />
-                                <img *ngSwitchCase="'nine'" src="../../../content/images/navbar/one.png" />
-                                <img *ngSwitchCase="'ten'" src="../../../content/images/navbar/one.png" />
+                                <img *ngSwitchCase="'two'" src="../../../content/images/navbar/two.png" />
+                                <img *ngSwitchCase="'three'" src="../../../content/images/navbar/three.png" />
+                                <img *ngSwitchCase="'four'" src="../../../content/images/navbar/four.png" />
+                                <img *ngSwitchCase="'five'" src="../../../content/images/navbar/five.png" />
+                                <img *ngSwitchCase="'six'" src="../../../content/images/navbar/six.png" />
+                                <img *ngSwitchCase="'seven'" src="../../../content/images/navbar/seven.png" />
+                                <img *ngSwitchCase="'eight'" src="../../../content/images/navbar/eight.png" />
+                                <img *ngSwitchCase="'nine'" src="../../../content/images/navbar/nine.png" />
+                                <img *ngSwitchCase="'ten'" src="../../../content/images/navbar/ten.png" />
                                 <fa-icon *ngSwitchDefault [icon]="child.faicon"></fa-icon>
                             </ng-container>
                             <span class="aLittleShadow">{{child.title}}</span>

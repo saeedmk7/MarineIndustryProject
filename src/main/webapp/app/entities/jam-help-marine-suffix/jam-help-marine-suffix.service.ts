@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpRequest, HttpResponse} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
@@ -17,7 +17,23 @@ export class JamHelpMarineSuffixService {
     public resourceUrl = SERVER_API_URL + 'api/jam-helps';
 
     constructor(protected http: HttpClient) {}
+    uploadFile(formdata: FormData): Observable<HttpEvent<{}>> {
 
+        /*return this.http
+            .post<any>(this.resourceUrl, formdata, { observe: 'response', reportProgress:true });*/
+        const url = this.resourceUrl + "/upload-file";
+        const req = new HttpRequest('POST', url, formdata, {
+            reportProgress: true,
+            responseType: 'text'
+        });
+
+        return this.http.request(req);
+    }
+    deleteFile(address: string): Observable<HttpResponse<any>> {
+        debugger
+        let fileName = address.split('/')[address.split('/').length-1];
+        return this.http.delete<any>(`${this.resourceUrl}/delete/${fileName}`, { observe: 'response' });
+    }
     create(jamHelp: IJamHelpMarineSuffix): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(jamHelp);
         return this.http

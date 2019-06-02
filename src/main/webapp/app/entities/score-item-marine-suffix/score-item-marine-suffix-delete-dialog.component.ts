@@ -49,7 +49,7 @@ export class ScoreItemMarineSuffixDeletePopupComponent implements OnInit, OnDest
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(ScoreItemMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.scoreItem = scoreItem;
                 this.ngbModalRef.result.then(

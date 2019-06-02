@@ -56,7 +56,7 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
     version: string;
     requestOrganizationNiazsanjiCounter: number;
     usersRequestCounter: number;
-    /*EducationalModuleRequestCounter: number;*/
+    educationalModuleRequestCounter: number;
     educationalHistoryCounter: number;
     niazSanjiFardiRequestCounter: number;
     niazSanjiFardiCounter: number;
@@ -76,7 +76,8 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
     isModirKolAmozesh: boolean = false;
     isKarshenasArshadAmozeshSazman: boolean = false;
     isModirAmozesh: boolean = false;
-
+    isSuperUsers: boolean = false;
+    isTopUsers: boolean = false;
 
     badError: string;
     currentAccount: any;
@@ -155,14 +156,19 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
             this.currentAccount = account;
 
             if(account) {
-                if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+                if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
                     this.isAdmin = true;
-                if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+                if (account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
                     this.isModirAmozesh = true;
-                if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+                if (account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
                     this.isModirKolAmozesh = true;
-                if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+                if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
                     this.isKarshenasArshadAmozeshSazman = true;
+
+                if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+                    this.isSuperUsers = true;
+                if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh)
+                    this.isTopUsers = true;
 
                 if (account.imageUrl) {
                     this.imgUrl = account.imageUrl;
@@ -187,6 +193,8 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.getFinalNiazSanjiFardis();
                 this.getFinalorganizationNiazsanji();
                 this.getEducationalHistories();
+                if(this.isTopUsers)
+                    this.getEducationalModuleRequests();
                 //this.checkCurrentFullName();
             }, 20000);
            /* if(this.isAdmin || this.isModirKolAmozesh) {
@@ -217,6 +225,46 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
             this.registerChangeInUsers();*/
         });
 
+    }
+    getEducationalModuleRequests(){
+        if(this.currentPerson) {
+            let orgId = this.currentPerson.organizationChartId;
+            let criteria = [];
+            if(this.isSuperUsers)
+            {
+                criteria.push({
+                    key: 'status.equals',
+                    value: 0
+                });
+                criteria.push({
+                        key: 'requestStatus.equals',
+                        value: 'NEW'
+                    });
+            }
+            else{
+                criteria.push({
+                    key: 'status.equals',
+                    value: orgId
+                })
+                criteria.push({
+                        key: 'requestStatus.equals',
+                        value: 'NEW'
+                    });
+            }
+            this.requestEducationalModuleMarineSuffixService
+                .count({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: null
+                })
+                .subscribe(
+                    (res: HttpResponse<any>) => {
+                        this.educationalModuleRequestCounter = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
     }
     getEducationalHistories(){
         if(this.currentPerson) {
@@ -364,6 +412,8 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
         this.getFinalNiazSanjiFardis();
         this.getFinalorganizationNiazsanji();
         this.getEducationalHistories();
+        if(this.isTopUsers)
+            this.getEducationalModuleRequests();
     }
 
     onPersonError(body) {

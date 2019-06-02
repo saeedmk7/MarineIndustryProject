@@ -49,7 +49,7 @@ export class SecurityLevelMarineSuffixDeletePopupComponent implements OnInit, On
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(SecurityLevelMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.securityLevel = securityLevel;
                 this.ngbModalRef.result.then(

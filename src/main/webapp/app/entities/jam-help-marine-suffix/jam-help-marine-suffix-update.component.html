@@ -72,6 +72,54 @@
                         </small>
                     </div>
                 </div>
+                <div class="form-group">
+                    <a href="#/admin/authority" jhiTranslate="userManagement.profiles">Profiles</a>
+                    <!--<select class="form-control" multiple name="authority" [(ngModel)]="user.authorities">
+                        <option *ngFor="let authority of authorities" [value]="authority.name">{{authority.name}}</option>
+                    </select>-->
+                    <ng-select
+                        name="authorities"
+                        [items]="authorities"
+                        [multiple]="true"
+                        [required]="true"
+                        [closeOnSelect]="true"
+                        [hideSelected]="true"
+                        bindLabel="name"
+                        bindValue="name"
+                        placeholder="نقش ها را مشخص کنید."
+                        [(ngModel)]="selectedAuthorities">
+                    </ng-select>
+                </div>
+                <ng-container *ngIf="jamHelp.id === undefined">
+                    <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">آپلود راهنما</div></div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.fileDoc" for="file_fileDoc">File Doc</label>
+                        <div>
+                            <input type="file" id="file_fileDoc" required (change)="setFileData($event, jamHelp, 'fileDoc', false)" jhiTranslate="entity.action.addblob"/>
+                        </div>
+                        <!--<input type="hidden" class="form-control" name="fileDoc" id="field_fileDoc"
+                               [(ngModel)]="educationalHistory.fileDoc" required/>-->
+
+                        <div [hidden]="!(editForm.controls.fileDoc?.dirty && editForm.controls.fileDoc?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.fileDoc?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div *ngIf="fileMessage" class="alert" style="display: inline" [ngClass]="{'alert-danger': fileHasError,'alert-success': !fileHasError}">{{fileMessage}}</div>
+                    <div class="alert alert-info">
+                        لطفا قبل از آپلود به موارد زیر دقت فرمائید.
+                        <ol>
+                            <li>
+                                نام فایل انتخابی شما نباید شامل تعداد زیادی نقطه(.) یا کاما (,) و امثالهم باشد.
+                            </li>
+                            <li>
+                                حجم فایل شما نباید بیش از 400 مگابایت باشد.
+                            </li>
+                        </ol>
+                    </div>
+                </ng-container>
                 <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.jamHelp.createUserLogin" for="field_createUserLogin">Create User Login</label>
                     <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"

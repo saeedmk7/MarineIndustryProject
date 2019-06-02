@@ -49,7 +49,7 @@ export class BeautySpeechMarineSuffixDeletePopupComponent implements OnInit, OnD
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(BeautySpeechMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.beautySpeech = beautySpeech;
                 this.ngbModalRef.result.then(

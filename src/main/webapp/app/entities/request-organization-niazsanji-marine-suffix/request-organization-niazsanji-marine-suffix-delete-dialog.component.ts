@@ -49,7 +49,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixDeletePopupComponent implem
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(RequestOrganizationNiazsanjiMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.requestOrganizationNiazsanji = requestOrganizationNiazsanji;
                 this.ngbModalRef.result.then(
