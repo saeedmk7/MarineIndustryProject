@@ -369,15 +369,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             data: sortedChartResults.map(a => a.totalPriceCost),
             color: "blue"
         }];
-        this.groups.forEach(a => {
-           sortedChartResults.filter(e => e.groupId == a.id).forEach(w => {
-               debugger;
-               this.personHourNewPercentSeries.push((w.educationalModuleTotalHourNew / w.totalPersonHour) * 100);
-               this.personHourFinishedPercentSeries.push((w.educationalModuleTotalHourFinished / w.totalPersonHour) * 100);
-               this.priceCostNewPercentSeries.push((w.priceCostNew / w.totalPriceCost) * 100);
-               this.priceCostFinishedPercentSeries.push((w.priceCostFinished / w.totalPriceCost) * 100);
-           });
-        });
+
         this.personHourSeries = [{
             name: "اجرا شده",
             data: sortedChartResults.map(a => a.educationalModuleTotalHourFinished),
@@ -391,6 +383,20 @@ export class HomeComponent implements OnInit, OnDestroy {
             data: sortedChartResults.map(a => a.totalPersonHour),
             color: "blue",
         }];
+
+        this.personHourNewPercentSeries = [];
+        this.personHourFinishedPercentSeries = [];
+        this.priceCostNewPercentSeries = [];
+        this.priceCostFinishedPercentSeries = [];
+        this.groups.forEach(a => {
+            sortedChartResults.filter(e => e.groupId == a.id).forEach(w => {
+                debugger;
+                this.personHourNewPercentSeries.push((w.educationalModuleTotalHourNew / w.totalPersonHour) * 100);
+                this.personHourFinishedPercentSeries.push((w.educationalModuleTotalHourFinished / w.totalPersonHour) * 100);
+                this.priceCostNewPercentSeries.push((w.priceCostNew / w.totalPriceCost) * 100);
+                this.priceCostFinishedPercentSeries.push((w.priceCostFinished / w.totalPriceCost) * 100);
+            });
+        });
         this.loadChart();
     }
     loadChart(){

@@ -10,17 +10,18 @@
 
 
                 <ng-container *ngIf="isTopUsers">
-                    <p style="text-align: center; direction: rtl; font-family: IranSans, SansSerif, IranYekan">
-                        سال نیازسنجی:
-                        <select style="display: inline-block; text-align: center" [(ngModel)]="selectedNiazsanjiYear"
-                                id="selectedYear" name="selectedYear" (change)="makeChartResult()">
-                            <option [ngValue]="year" [selected]="year == selectedNiazsanjiYear"
-                                    *ngFor="let year of years">{{year}}
-                            </option>
-                        </select>
-                    </p>
+
                     <ng-container [ngSwitch]="pageName">
                         <div *ngSwitchCase="'home'" [@enterAnimation]>
+                            <p style="text-align: center; direction: rtl; font-family: IranSans, SansSerif, IranYekan">
+                                سال نیازسنجی:
+                                <select style="display: inline-block; text-align: center" [(ngModel)]="selectedNiazsanjiYear"
+                                        id="selectedYear" name="selectedYear" (change)="makeChartResult()">
+                                    <option [ngValue]="year" [selected]="year == selectedNiazsanjiYear"
+                                            *ngFor="let year of years">{{year}}
+                                    </option>
+                                </select>
+                            </p>
                             <div [chart]="personHourChart"></div>
                             <div style="font-family: IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman" class="table-responsive" *ngIf="personHourSeries">
                                 <h4 style="text-align: center">جدول درصدی نفر ساعت گروه های سازمان</h4>

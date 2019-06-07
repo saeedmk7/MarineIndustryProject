@@ -368,6 +368,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
                 this.isAdmin = true;
             this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
                 this.currentPerson = resp.body;
+                this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
                 this.prepareSearchOrgChart();
                 this.prepareDate();
                 this.prepareSearchEducationalModule();
@@ -383,7 +384,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
 
     }
     prepareSearchEducationalModule() {
-        this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
+
         if (this.educationalModuleService.educationalModules) {
             this.educationalModules = this.educationalModuleService.educationalModules;
             /*this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle', 'half'));*/
@@ -422,9 +423,10 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
             this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'personId', 'select', 'equals', this.recommenedPeople, 'fullName', 'half'));
         }
         else {
+            debugger;
             const orgIds = this.recommenedOrgCharts.map(a => a.id);
             let criteria = [{
-                key: 'organizationChartId.equals',
+                key: 'organizationChartId.in',
                 value: orgIds
             }];
             this.personService.query({
@@ -433,6 +435,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
                 criteria,
                 sort: ["id", "asc"]
             }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
+                debugger;
                     let orgPeople = resp.body;
                     if (orgPeople.length > 0) {
                         this.recommenedPeople = orgPeople;
