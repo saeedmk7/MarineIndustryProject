@@ -31,6 +31,7 @@ export interface ITeacherMarineSuffix {
     archivedUserLogin?: string;
     archivedDate?: Moment;
     status?: number;
+    guid?: string;
     requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[];
     finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
@@ -73,6 +74,7 @@ export class TeacherMarineSuffix implements ITeacherMarineSuffix {
         public archivedUserLogin?: string,
         public archivedDate?: Moment,
         public status?: number,
+        public guid?: string,
         public requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[],
         public finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],

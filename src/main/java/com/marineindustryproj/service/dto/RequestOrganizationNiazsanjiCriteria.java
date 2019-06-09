@@ -75,6 +75,8 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
 
     private IntegerFilter status;
 
+    private StringFilter guid;
+
     private LongFilter finalOrganizationNiazsanjiId;
 
     private LongFilter personId;
@@ -269,6 +271,14 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
         this.status = status;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getFinalOrganizationNiazsanjiId() {
         return finalOrganizationNiazsanjiId;
     }
@@ -372,6 +382,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
             Objects.equals(archivedUserLogin, that.archivedUserLogin) &&
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(documentId, that.documentId) &&
@@ -408,6 +419,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
         archivedUserLogin,
         archivedDate,
         status,
+        guid,
         finalOrganizationNiazsanjiId,
         personId,
         documentId,
@@ -445,6 +457,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
                 (archivedUserLogin != null ? "archivedUserLogin=" + archivedUserLogin + ", " : "") +
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +

@@ -49,6 +49,8 @@ public class JobCriteria implements Serializable {
 
     private IntegerFilter status;
 
+    private StringFilter guid;
+
     private LongFilter jobPersonId;
 
     private LongFilter practicaljobPersonId;
@@ -177,6 +179,14 @@ public class JobCriteria implements Serializable {
         this.status = status;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getJobPersonId() {
         return jobPersonId;
     }
@@ -297,6 +307,7 @@ public class JobCriteria implements Serializable {
             Objects.equals(archivedUserLogin, that.archivedUserLogin) &&
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(jobPersonId, that.jobPersonId) &&
             Objects.equals(practicaljobPersonId, that.practicaljobPersonId) &&
             Objects.equals(jobId, that.jobId) &&
@@ -327,6 +338,7 @@ public class JobCriteria implements Serializable {
         archivedUserLogin,
         archivedDate,
         status,
+        guid,
         jobPersonId,
         practicaljobPersonId,
         jobId,
@@ -358,6 +370,7 @@ public class JobCriteria implements Serializable {
                 (archivedUserLogin != null ? "archivedUserLogin=" + archivedUserLogin + ", " : "") +
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (jobPersonId != null ? "jobPersonId=" + jobPersonId + ", " : "") +
                 (practicaljobPersonId != null ? "practicaljobPersonId=" + practicaljobPersonId + ", " : "") +
                 (jobId != null ? "jobId=" + jobId + ", " : "") +

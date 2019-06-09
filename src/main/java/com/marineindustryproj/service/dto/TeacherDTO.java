@@ -78,6 +78,9 @@ public class TeacherDTO implements Serializable {
     @NotNull
     private Integer status;
 
+    @Size(max = 50)
+    private String guid;
+
     private Set<DocumentDTO> documents = new HashSet<>();
 
     private Long lastQualificationId;
@@ -288,6 +291,14 @@ public class TeacherDTO implements Serializable {
         this.status = status;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
@@ -408,6 +419,7 @@ public class TeacherDTO implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", guid='" + getGuid() + "'" +
             ", lastQualification=" + getLastQualificationId() +
             ", lastQualification='" + getLastQualificationTitle() + "'" +
             ", lastFieldOfStudy=" + getLastFieldOfStudyId() +

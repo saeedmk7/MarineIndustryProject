@@ -116,6 +116,10 @@ public class Teacher implements Serializable {
     @Column(name = "status", nullable = false)
     private Integer status;
 
+    @Size(max = 50)
+    @Column(name = "guid", length = 50)
+    private String guid;
+
     @OneToMany(mappedBy = "teacher")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<RequestOrganizationNiazsanji> requestOrganizationNiazsanjis = new HashSet<>();
@@ -463,6 +467,19 @@ public class Teacher implements Serializable {
         this.status = status;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public Teacher guid(String guid) {
+        this.guid = guid;
+        return this;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<RequestOrganizationNiazsanji> getRequestOrganizationNiazsanjis() {
         return requestOrganizationNiazsanjis;
     }
@@ -688,6 +705,7 @@ public class Teacher implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 }

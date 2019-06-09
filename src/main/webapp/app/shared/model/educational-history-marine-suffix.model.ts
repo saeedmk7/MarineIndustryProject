@@ -26,6 +26,7 @@ export interface IEducationalHistoryMarineSuffix {
     changeStatusUserLogin?: string;
     personFullName?: string;
     personName?: string;
+    guid?: string;
     personFamily?: string;
     personId?: number;
     educationalModuleTitle?: string;
@@ -59,6 +60,7 @@ export class EducationalHistoryMarineSuffix implements IEducationalHistoryMarine
         public changeStatusUserLogin?: string,
         public personFullName?: string,
         public personName?: string,
+        public guid?: string,
         public personFamily?: string,
         public personId?: number,
         public educationalModuleTitle?: string,

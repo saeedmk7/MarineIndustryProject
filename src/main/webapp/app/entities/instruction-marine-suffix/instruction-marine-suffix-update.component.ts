@@ -51,6 +51,8 @@ export class InstructionMarineSuffixUpdateComponent implements OnInit {
         this.isSaving = true;
         /*this.instruction.createDate = this.createDate != null ? moment(this.createDate, DATE_TIME_FORMAT) : null;
         this.instruction.modifyDate = this.modifyDate != null ? moment(this.modifyDate, DATE_TIME_FORMAT) : null;*/
+        if(!this.instruction.description)
+            this.instruction.description = ' ';
         if (this.instruction.id !== undefined) {
             this.subscribeToSaveResponse(this.instructionService.update(this.instruction));
         } else {

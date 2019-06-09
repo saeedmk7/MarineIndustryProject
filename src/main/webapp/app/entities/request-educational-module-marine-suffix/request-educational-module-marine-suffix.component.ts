@@ -240,30 +240,22 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
     }
     loadAll(criteria?,excelExport: boolean = false) {
         debugger;
-        if(!this.isSuperUsers)
-        {
-            let orgs = this.treeUtilities.getParentIds(this.organizationcharts,this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
-            if(orgs.length > 0){
-                orgs.push(0);
-                criteria.push({
-                    key: 'status.in',
-                    value: orgs
-                });
-            }
-            else{
-                orgs = [0];
-                criteria.push({
-                    key: 'status.equals',
-                    value: orgs
-                });
-            }
-        }
-        else{
+        let orgs = this.treeUtilities.getParentIds(this.organizationcharts,this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
+        if(orgs.length > 0){
+            orgs.push(0);
             criteria.push({
-                key: 'status.equals',
-                value: '0'
+                key: 'status.in',
+                value: orgs
             });
         }
+        else{
+            orgs = [0];
+            criteria.push({
+                key: 'status.equals',
+                value: orgs
+            });
+        }
+
         if(excelExport) {
             this.requestEducationalModuleService
                 .query({

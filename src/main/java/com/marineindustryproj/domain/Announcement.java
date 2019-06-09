@@ -65,6 +65,10 @@ public class Announcement implements Serializable {
     @Column(name = "modify_date")
     private ZonedDateTime modifyDate;
 
+    @Size(max = 50)
+    @Column(name = "guid", length = 50)
+    private String guid;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "announcement_document",
@@ -211,6 +215,19 @@ public class Announcement implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public Announcement guid(String guid) {
+        this.guid = guid;
+        return this;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<Document> getDocuments() {
         return documents;
     }
@@ -271,6 +288,7 @@ public class Announcement implements Serializable {
             ", createDate='" + getCreateDate() + "'" +
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +
             ", modifyDate='" + getModifyDate() + "'" +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 }

@@ -1,0 +1,171 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-job-record-marine-suffix-heading" jhiTranslate="marineindustryprojApp.jobRecord.home.createOrEditLabel">Create or edit a Job Record</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!jobRecord.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="jobRecord.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.workOrganization" for="field_workOrganization">Work Organization</label>
+                    <input type="text" class="form-control" name="workOrganization" id="field_workOrganization"
+                        [(ngModel)]="jobRecord.workOrganization" maxlength="1000"/>
+                    <div [hidden]="!(editForm.controls.workOrganization?.dirty && editForm.controls.workOrganization?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.workOrganization?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1000 }">
+                        This field cannot be longer than 1000 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.workSection" for="field_workSection">Work Section</label>
+                    <input type="text" class="form-control" name="workSection" id="field_workSection"
+                        [(ngModel)]="jobRecord.workSection" maxlength="1000"/>
+                    <div [hidden]="!(editForm.controls.workSection?.dirty && editForm.controls.workSection?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.workSection?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1000 }">
+                        This field cannot be longer than 1000 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.jobResponsibility" for="field_jobResponsibility">Job Responsibility</label>
+                    <input type="text" class="form-control" name="jobResponsibility" id="field_jobResponsibility"
+                        [(ngModel)]="jobRecord.jobResponsibility" maxlength="1000"/>
+                    <div [hidden]="!(editForm.controls.jobResponsibility?.dirty && editForm.controls.jobResponsibility?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.jobResponsibility?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1000 }">
+                        This field cannot be longer than 1000 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.jobPosition" for="field_jobPosition">Job Position</label>
+                    <input type="text" class="form-control" name="jobPosition" id="field_jobPosition"
+                        [(ngModel)]="jobRecord.jobPosition" maxlength="1000"/>
+                    <div [hidden]="!(editForm.controls.jobPosition?.dirty && editForm.controls.jobPosition?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.jobPosition?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1000 }">
+                        This field cannot be longer than 1000 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.totalHour" for="field_totalHour">Total Hour</label>
+                    <input type="number" class="form-control" name="totalHour" id="field_totalHour"
+                        [(ngModel)]="jobRecord.totalHour" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.startDate" for="field_startDate">Start Date</label>
+                    <input type="text" class="form-control" name="startDate" id="field_startDate"
+                        [(ngModel)]="jobRecord.startDate" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.startDate?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.endDate" for="field_endDate">End Date</label>
+                    <input type="text" class="form-control" name="endDate" id="field_endDate"
+                        [(ngModel)]="jobRecord.endDate" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.endDate?.dirty && editForm.controls.endDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.endDate?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.leaveReason" for="field_leaveReason">Leave Reason</label>
+                    <input type="text" class="form-control" name="leaveReason" id="field_leaveReason"
+                        [(ngModel)]="jobRecord.leaveReason" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.leaveReason?.dirty && editForm.controls.leaveReason?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.leaveReason?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="jobRecord.description" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.createUserLogin" for="field_createUserLogin">Create User Login</label>
+                    <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
+                        [(ngModel)]="jobRecord.createUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.createUserLogin?.dirty && editForm.controls.createUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.createDate" for="field_createDate">Create Date</label>
+                    <div class="d-flex">
+                        <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="createDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.modifyUserLogin" for="field_modifyUserLogin">Modify User Login</label>
+                    <input type="text" class="form-control" name="modifyUserLogin" id="field_modifyUserLogin"
+                        [(ngModel)]="jobRecord.modifyUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.modifyUserLogin?.dirty && editForm.controls.modifyUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.modifyUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.modifyDate" for="field_modifyDate">Modify Date</label>
+                    <div class="d-flex">
+                        <input id="field_modifyDate" type="datetime-local" class="form-control" name="modifyDate" [(ngModel)]="modifyDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.guid" for="field_guid">Guid</label>
+                    <input type="text" class="form-control" name="guid" id="field_guid"
+                        [(ngModel)]="jobRecord.guid" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.guid?.dirty && editForm.controls.guid?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.guid?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.person" for="field_person">Person</label>
+                    <select class="form-control" id="field_person" name="person" [(ngModel)]="jobRecord.personId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="personOption.id" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.family}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

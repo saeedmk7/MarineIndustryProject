@@ -116,6 +116,9 @@ public class AnnouncementQueryService extends QueryService<Announcement> {
             if (criteria.getModifyDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getModifyDate(), Announcement_.modifyDate));
             }
+            if (criteria.getGuid() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getGuid(), Announcement_.guid));
+            }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(Announcement_.documents, JoinType.LEFT).get(Document_.id)));

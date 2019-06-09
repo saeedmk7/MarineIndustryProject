@@ -22,6 +22,7 @@ export interface IDesignAndPlanningMarineSuffix {
     archivedDate?: Moment;
     status?: number;
     runMonth?: number;
+    guid?: string;
     runMonthName?: string;
     people?: IPersonMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
@@ -77,6 +78,7 @@ export class DesignAndPlanningMarineSuffix implements IDesignAndPlanningMarineSu
         public status?: number,
         public runMonth?: number,
         public runMonthName?: string,
+        public guid?: string,
         public people?: IPersonMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public organizationChartTitle?: string,

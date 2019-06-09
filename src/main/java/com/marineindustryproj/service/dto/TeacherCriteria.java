@@ -71,6 +71,8 @@ public class TeacherCriteria implements Serializable {
 
     private IntegerFilter status;
 
+    private StringFilter guid;
+
     private LongFilter requestOrganizationNiazsanjiId;
 
     private LongFilter finalOrganizationNiazsanjiId;
@@ -281,6 +283,14 @@ public class TeacherCriteria implements Serializable {
         this.status = status;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getRequestOrganizationNiazsanjiId() {
         return requestOrganizationNiazsanjiId;
     }
@@ -388,6 +398,7 @@ public class TeacherCriteria implements Serializable {
             Objects.equals(archivedUserLogin, that.archivedUserLogin) &&
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(requestOrganizationNiazsanjiId, that.requestOrganizationNiazsanjiId) &&
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
             Objects.equals(documentId, that.documentId) &&
@@ -426,6 +437,7 @@ public class TeacherCriteria implements Serializable {
         archivedUserLogin,
         archivedDate,
         status,
+        guid,
         requestOrganizationNiazsanjiId,
         finalOrganizationNiazsanjiId,
         documentId,
@@ -465,6 +477,7 @@ public class TeacherCriteria implements Serializable {
                 (archivedUserLogin != null ? "archivedUserLogin=" + archivedUserLogin + ", " : "") +
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (requestOrganizationNiazsanjiId != null ? "requestOrganizationNiazsanjiId=" + requestOrganizationNiazsanjiId + ", " : "") +
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +

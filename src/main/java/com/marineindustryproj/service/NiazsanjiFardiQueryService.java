@@ -128,6 +128,9 @@ public class NiazsanjiFardiQueryService extends QueryService<NiazsanjiFardi> {
             if (criteria.getChangeStatusUserLogin() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getChangeStatusUserLogin(), NiazsanjiFardi_.changeStatusUserLogin));
             }
+            if (criteria.getGuid() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getGuid(), NiazsanjiFardi_.guid));
+            }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(NiazsanjiFardi_.documents, JoinType.LEFT).get(Document_.id)));

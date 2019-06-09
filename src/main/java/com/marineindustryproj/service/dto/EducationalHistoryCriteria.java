@@ -63,6 +63,8 @@ public class EducationalHistoryCriteria implements Serializable {
 
     private StringFilter changeStatusUserLogin;
 
+    private StringFilter guid;
+
     private LongFilter personId;
 
     private LongFilter educationalModuleId;
@@ -205,6 +207,14 @@ public class EducationalHistoryCriteria implements Serializable {
         this.changeStatusUserLogin = changeStatusUserLogin;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getPersonId() {
         return personId;
     }
@@ -257,6 +267,7 @@ public class EducationalHistoryCriteria implements Serializable {
             Objects.equals(status, that.status) &&
             Objects.equals(requestStatus, that.requestStatus) &&
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(organizationChartId, that.organizationChartId);
@@ -282,6 +293,7 @@ public class EducationalHistoryCriteria implements Serializable {
         status,
         requestStatus,
         changeStatusUserLogin,
+        guid,
         personId,
         educationalModuleId,
         organizationChartId
@@ -308,6 +320,7 @@ public class EducationalHistoryCriteria implements Serializable {
                 (status != null ? "status=" + status + ", " : "") +
                 (requestStatus != null ? "requestStatus=" + requestStatus + ", " : "") +
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +

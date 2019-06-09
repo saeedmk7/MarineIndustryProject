@@ -29,6 +29,7 @@ export interface IFinalOrganizationNiazsanjiMarineSuffix {
     archivedUserLogin?: string;
     archivedDate?: Moment;
     status?: number;
+    guid?: string;
     people?: IPersonMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     courseTypeTitle?: string;
@@ -73,6 +74,7 @@ export class FinalOrganizationNiazsanjiMarineSuffix implements IFinalOrganizatio
         public archivedUserLogin?: string,
         public archivedDate?: Moment,
         public status?: number,
+        public guid?: string,
         public people?: IPersonMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public courseTypeTitle?: string,

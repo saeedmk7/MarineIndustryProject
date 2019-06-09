@@ -13,6 +13,7 @@ export interface IJamHelpMarineSuffix {
     createDate?: Moment;
     modifyUserLogin?: string;
     modifyDate?: Moment;
+    guid?: string;
     jamHelpAuthorities?: IJamHelpAuthorityMarineSuffix[];
 }
 
@@ -29,6 +30,7 @@ export class JamHelpMarineSuffix implements IJamHelpMarineSuffix {
         public createDate?: Moment,
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
+        public guid?: string,
         public jamHelpAuthorities?: IJamHelpAuthorityMarineSuffix[]
     ) {}
 }

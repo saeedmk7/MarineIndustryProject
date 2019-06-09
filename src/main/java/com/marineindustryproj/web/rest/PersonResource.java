@@ -13,6 +13,7 @@ import com.marineindustryproj.service.dto.PersonDTO;
 import com.marineindustryproj.service.dto.PersonCriteria;
 import com.marineindustryproj.service.PersonQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.hibernate.id.GUIDGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -30,6 +31,7 @@ import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * REST controller for managing Person.
@@ -67,6 +69,7 @@ public class PersonResource {
         }
 
         try {
+            personDTO.setGuid(UUID.randomUUID().toString());
             personDTO.setId(Long.parseLong(personDTO.getPersonelCode()));
             personDTO.setCreateDate(ZonedDateTime.now());
             personDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
@@ -103,7 +106,7 @@ public class PersonResource {
         }
 
         PersonDTO person = personService.findOne(personDTO.getId()).get();
-
+        personDTO.setGuid(person.getGuid());
         personDTO.setCreateUserLogin(person.getCreateUserLogin());
         personDTO.setCreateDate(person.getCreateDate());
         personDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());

@@ -47,6 +47,8 @@ public class UsersRequestCriteria implements Serializable {
 
     private StringFilter changeStatusUserLogin;
 
+    private StringFilter guid;
+
     private LongFilter documentId;
 
     public LongFilter getId() {
@@ -121,6 +123,14 @@ public class UsersRequestCriteria implements Serializable {
         this.changeStatusUserLogin = changeStatusUserLogin;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -149,6 +159,7 @@ public class UsersRequestCriteria implements Serializable {
             Objects.equals(modifyDate, that.modifyDate) &&
             Objects.equals(requestStatus, that.requestStatus) &&
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(documentId, that.documentId);
     }
 
@@ -164,6 +175,7 @@ public class UsersRequestCriteria implements Serializable {
         modifyDate,
         requestStatus,
         changeStatusUserLogin,
+        guid,
         documentId
         );
     }
@@ -180,6 +192,7 @@ public class UsersRequestCriteria implements Serializable {
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
                 (requestStatus != null ? "requestStatus=" + requestStatus + ", " : "") +
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
             "}";
     }

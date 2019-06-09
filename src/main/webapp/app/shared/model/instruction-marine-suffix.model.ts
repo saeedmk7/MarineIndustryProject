@@ -10,6 +10,7 @@ export interface IInstructionMarineSuffix {
     createDate?: Moment;
     modifyUserLogin?: string;
     modifyDate?: Moment;
+    guid?: string;
     documents?: IDocumentMarineSuffix[];
 }
 
@@ -23,6 +24,7 @@ export class InstructionMarineSuffix implements IInstructionMarineSuffix {
         public createDate?: Moment,
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
+        public guid?: string,
         public documents?: IDocumentMarineSuffix[]
     ) {}
 }

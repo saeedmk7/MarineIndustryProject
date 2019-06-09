@@ -9,6 +9,7 @@ imageuploads/*
 upload-dir/*
 uploads/*
 runPhaseUploads/*
+jamHelpUploads/*
 
 ######################
 # Node

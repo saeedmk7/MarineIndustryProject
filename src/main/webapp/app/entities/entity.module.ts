@@ -31,6 +31,7 @@ import { MarineindustryprojDocumentMarineSuffixModule } from './document-marine-
 import { MarineindustryprojMainTaskMarineSuffixModule } from './main-task-marine-suffix/main-task-marine-suffix.module';
 import { MarineindustryprojSubTaskMarineSuffixModule } from './sub-task-marine-suffix/sub-task-marine-suffix.module';
 import { MarineindustryprojNiazsanjiGroupMarineSuffixModule } from './niazsanji-group-marine-suffix/niazsanji-group-marine-suffix.module';
+
 // prettier-ignore
 import {
     MarineindustryprojRequestOrganizationNiazsanjiMarineSuffixModule
@@ -71,6 +72,10 @@ import {MarineindustryprojPlanningMarineSuffixModule} from "app/entities/plannin
 import {MarineindustryprojInstructionMarineSuffixModule} from "app/entities/instruction-marine-suffix/instruction-marine-suffix.module";
 import { MarineindustryprojJamHelpMarineSuffixModule } from './jam-help-marine-suffix/jam-help-marine-suffix.module';
 import { MarineindustryprojJamHelpAuthorityMarineSuffixModule } from './jam-help-authority-marine-suffix/jam-help-authority-marine-suffix.module';
+import { MarineindustryprojEducationalRecordMarineSuffixModule } from './educational-record-marine-suffix/educational-record-marine-suffix.module';
+import { MarineindustryprojJobRecordMarineSuffixModule } from './job-record-marine-suffix/job-record-marine-suffix.module';
+import {MarineindustryprojPersonEducationalRecordsMarineSuffixModule} from "./person-educational-records-marine-suffix/person-educational-records-marine-suffix.module";
+
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -143,7 +148,11 @@ import { MarineindustryprojJamHelpAuthorityMarineSuffixModule } from './jam-help
         MarineindustryprojPlanningMarineSuffixModule,
         MarineindustryprojJamHelpMarineSuffixModule,
         MarineindustryprojJamHelpAuthorityMarineSuffixModule,
-        MarineindustryprojInstructionMarineSuffixModule
+        MarineindustryprojInstructionMarineSuffixModule,
+        MarineindustryprojEducationalRecordMarineSuffixModule,
+        MarineindustryprojJobRecordMarineSuffixModule,
+        MarineindustryprojPersonEducationalRecordsMarineSuffixModule
+
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

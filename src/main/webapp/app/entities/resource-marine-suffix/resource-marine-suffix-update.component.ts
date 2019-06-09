@@ -49,6 +49,8 @@ export class ResourceMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        if(!this.resource.description)
+            this.resource.description = ' ';
         if (this.resource.id !== undefined) {
             this.subscribeToSaveResponse(this.resourceService.update(this.resource));
         } else {

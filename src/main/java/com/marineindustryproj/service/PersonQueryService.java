@@ -143,6 +143,9 @@ public class PersonQueryService extends QueryService<Person> {
             if (criteria.getStatus() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getStatus(), Person_.status));
             }
+            if (criteria.getGuid() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getGuid(), Person_.guid));
+            }
             if (criteria.getFinalNiazsanjiReportPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportPersonId(),
                     root -> root.join(Person_.finalNiazsanjiReportPeople, JoinType.LEFT).get(FinalNiazsanjiReportPerson_.id)));
@@ -162,6 +165,14 @@ public class PersonQueryService extends QueryService<Person> {
             if (criteria.getEducationalHistoryId() != null) {
                 specification = specification.and(buildSpecification(criteria.getEducationalHistoryId(),
                     root -> root.join(Person_.educationalHistories, JoinType.LEFT).get(EducationalHistory_.id)));
+            }
+            if (criteria.getEducationalRecordId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalRecordId(),
+                    root -> root.join(Person_.educationalRecords, JoinType.LEFT).get(EducationalRecord_.id)));
+            }
+            if (criteria.getJobRecordId() != null) {
+                specification = specification.and(buildSpecification(criteria.getJobRecordId(),
+                    root -> root.join(Person_.jobRecords, JoinType.LEFT).get(JobRecord_.id)));
             }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),

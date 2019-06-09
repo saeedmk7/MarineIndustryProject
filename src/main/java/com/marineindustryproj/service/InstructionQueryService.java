@@ -110,6 +110,9 @@ public class InstructionQueryService extends QueryService<Instruction> {
             if (criteria.getModifyDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getModifyDate(), Instruction_.modifyDate));
             }
+            if (criteria.getGuid() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getGuid(), Instruction_.guid));
+            }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(Instruction_.documents, JoinType.LEFT).get(Document_.id)));

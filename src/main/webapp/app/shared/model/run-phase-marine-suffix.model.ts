@@ -22,6 +22,7 @@ export interface IRunPhaseMarineSuffix {
     archivedUserLogin?: string;
     archivedDate?: Moment;
     status?: number;
+    guid?: string;
     runRunningSteps?: IRunRunningStepMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     people?: IPersonMarineSuffix[];
@@ -56,6 +57,7 @@ export class RunPhaseMarineSuffix implements IRunPhaseMarineSuffix {
         public archivedUserLogin?: string,
         public archivedDate?: Moment,
         public status?: number,
+        public guid?: string,
         public runRunningSteps?: IRunRunningStepMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public people?: IPersonMarineSuffix[],

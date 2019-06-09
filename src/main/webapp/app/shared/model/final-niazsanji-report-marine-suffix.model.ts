@@ -23,6 +23,7 @@ export interface IFinalNiazsanjiReportMarineSuffix {
     runMonth?: number;
     planningRunMonth?: number;
     finalizeCost?: number;
+    guid?: string;
     finalNiazsanjiReportPeople?: IFinalNiazsanjiReportPersonMarineSuffix[];
     designAndPlannings?: IDesignAndPlanningMarineSuffix[];
     runPhases?: IRunPhaseMarineSuffix[];
@@ -54,6 +55,7 @@ export class FinalNiazsanjiReportMarineSuffix implements IFinalNiazsanjiReportMa
         public runMonth?: number,
         public planningRunMonth?: number,
         public finalizeCost?: number,
+        public guid?: string,
         public finalNiazsanjiReportPeople?: IFinalNiazsanjiReportPersonMarineSuffix[],
         public designAndPlannings?: IDesignAndPlanningMarineSuffix[],
         public runPhases?: IRunPhaseMarineSuffix[],

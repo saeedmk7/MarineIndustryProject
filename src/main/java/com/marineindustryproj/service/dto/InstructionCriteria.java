@@ -39,6 +39,8 @@ public class InstructionCriteria implements Serializable {
 
     private ZonedDateTimeFilter modifyDate;
 
+    private StringFilter guid;
+
     private LongFilter documentId;
 
     public LongFilter getId() {
@@ -105,6 +107,14 @@ public class InstructionCriteria implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -132,6 +142,7 @@ public class InstructionCriteria implements Serializable {
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(documentId, that.documentId);
     }
 
@@ -146,6 +157,7 @@ public class InstructionCriteria implements Serializable {
         createDate,
         modifyUserLogin,
         modifyDate,
+        guid,
         documentId
         );
     }
@@ -161,6 +173,7 @@ public class InstructionCriteria implements Serializable {
                 (createDate != null ? "createDate=" + createDate + ", " : "") +
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
             "}";
     }

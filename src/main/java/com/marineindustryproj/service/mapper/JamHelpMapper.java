@@ -11,6 +11,7 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {})
 public interface JamHelpMapper extends EntityMapper<JamHelpDTO, JamHelp> {
 
+
     @Mapping(target = "jamHelpAuthorities", ignore = true)
     JamHelp toEntity(JamHelpDTO jamHelpDTO);
 

@@ -39,6 +39,8 @@ public class ResourceCriteria implements Serializable {
 
     private ZonedDateTimeFilter modifyDate;
 
+    private StringFilter guid;
+
     private LongFilter documentId;
 
     private LongFilter educationalModuleId;
@@ -109,6 +111,14 @@ public class ResourceCriteria implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -152,6 +162,7 @@ public class ResourceCriteria implements Serializable {
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(requestEducationalModuleId, that.requestEducationalModuleId);
@@ -168,6 +179,7 @@ public class ResourceCriteria implements Serializable {
         createDate,
         modifyUserLogin,
         modifyDate,
+        guid,
         documentId,
         educationalModuleId,
         requestEducationalModuleId
@@ -185,6 +197,7 @@ public class ResourceCriteria implements Serializable {
                 (createDate != null ? "createDate=" + createDate + ", " : "") +
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (requestEducationalModuleId != null ? "requestEducationalModuleId=" + requestEducationalModuleId + ", " : "") +

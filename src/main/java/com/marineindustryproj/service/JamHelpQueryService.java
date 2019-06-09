@@ -113,6 +113,9 @@ public class JamHelpQueryService extends QueryService<JamHelp> {
             if (criteria.getModifyDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getModifyDate(), JamHelp_.modifyDate));
             }
+            if (criteria.getGuid() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getGuid(), JamHelp_.guid));
+            }
             if (criteria.getJamHelpAuthorityId() != null) {
                 specification = specification.and(buildSpecification(criteria.getJamHelpAuthorityId(),
                     root -> root.join(JamHelp_.jamHelpAuthorities, JoinType.LEFT).get(JamHelpAuthority_.id)));

@@ -47,6 +47,7 @@ export interface IEducationalModuleMarineSuffix {
     status?: number;
     goalsText?: string;
     teachersText?: string;
+    guid?: string;
     educationalModuleJobs?: IEducationalModuleJobMarineSuffix[];
     requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[];
     finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[];
@@ -108,6 +109,7 @@ export class EducationalModuleMarineSuffix implements IEducationalModuleMarineSu
         public status?: number,
         public goalsText?: string,
         public teachersText?: string,
+        public guid?: string,
         public educationalModuleJobs?: IEducationalModuleJobMarineSuffix[],
         public requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[],
         public finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[],

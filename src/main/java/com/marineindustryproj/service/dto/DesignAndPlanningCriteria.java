@@ -61,6 +61,8 @@ public class DesignAndPlanningCriteria implements Serializable {
 
     private IntegerFilter runMonth;
 
+    private StringFilter guid;
+
     private LongFilter personId;
 
     private LongFilter documentId;
@@ -247,6 +249,14 @@ public class DesignAndPlanningCriteria implements Serializable {
         this.runMonth = runMonth;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getPersonId() {
         return personId;
     }
@@ -403,6 +413,7 @@ public class DesignAndPlanningCriteria implements Serializable {
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
             Objects.equals(runMonth, that.runMonth) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(organizationChartId, that.organizationChartId) &&
@@ -443,6 +454,7 @@ public class DesignAndPlanningCriteria implements Serializable {
         archivedDate,
         status,
         runMonth,
+        guid,
         personId,
         documentId,
         organizationChartId,
@@ -484,6 +496,7 @@ public class DesignAndPlanningCriteria implements Serializable {
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
                 (runMonth != null ? "runMonth=" + runMonth + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +

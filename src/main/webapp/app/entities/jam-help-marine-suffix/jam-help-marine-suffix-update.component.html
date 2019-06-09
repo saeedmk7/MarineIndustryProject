@@ -27,7 +27,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.jamHelp.description" for="field_description">Description</label>
                     <textarea type="text" class="form-control" name="description" id="field_description"
-                              [(ngModel)]="jamHelp.description" required maxlength="1024"></textarea>
+                              [(ngModel)]="jamHelp.description" maxlength="1024"></textarea>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">

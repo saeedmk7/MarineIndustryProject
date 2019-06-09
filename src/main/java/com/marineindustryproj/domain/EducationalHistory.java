@@ -100,6 +100,10 @@ public class EducationalHistory implements Serializable {
     @Column(name = "change_status_user_login", length = 50)
     private String changeStatusUserLogin;
 
+    @Size(max = 50)
+    @Column(name = "guid", length = 50)
+    private String guid;
+
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties("educationalHistories")
@@ -369,6 +373,19 @@ public class EducationalHistory implements Serializable {
         this.changeStatusUserLogin = changeStatusUserLogin;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public EducationalHistory guid(String guid) {
+        this.guid = guid;
+        return this;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Person getPerson() {
         return person;
     }
@@ -452,6 +469,7 @@ public class EducationalHistory implements Serializable {
             ", conversation='" + getConversation() + "'" +
             ", requestStatus='" + getRequestStatus() + "'" +
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 }

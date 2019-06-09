@@ -134,6 +134,10 @@ public class EducationalModule implements Serializable {
     @Column(name = "teachers_text", length = 4096)
     private String teachersText;
 
+    @Size(max = 50)
+    @Column(name = "guid", length = 50)
+    private String guid;
+
     @OneToMany(mappedBy = "educationalModule")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EducationalModuleJob> educationalModuleJobs = new HashSet<>();
@@ -589,6 +593,19 @@ public class EducationalModule implements Serializable {
 
     public void setTeachersText(String teachersText) {
         this.teachersText = teachersText;
+    }
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public EducationalModule guid(String guid) {
+        this.guid = guid;
+        return this;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
     }
 
     public Set<EducationalModuleJob> getEducationalModuleJobs() {
@@ -1133,6 +1150,7 @@ public class EducationalModule implements Serializable {
             ", status=" + getStatus() +
             ", goalsText='" + getGoalsText() + "'" +
             ", teachersText='" + getTeachersText() + "'" +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 }

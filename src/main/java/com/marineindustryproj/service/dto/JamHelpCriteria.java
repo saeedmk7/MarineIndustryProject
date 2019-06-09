@@ -41,6 +41,8 @@ public class JamHelpCriteria implements Serializable {
 
     private ZonedDateTimeFilter modifyDate;
 
+    private StringFilter guid;
+
     private LongFilter jamHelpAuthorityId;
 
     public LongFilter getId() {
@@ -115,6 +117,14 @@ public class JamHelpCriteria implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getJamHelpAuthorityId() {
         return jamHelpAuthorityId;
     }
@@ -143,6 +153,7 @@ public class JamHelpCriteria implements Serializable {
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(jamHelpAuthorityId, that.jamHelpAuthorityId);
     }
 
@@ -158,6 +169,7 @@ public class JamHelpCriteria implements Serializable {
         createDate,
         modifyUserLogin,
         modifyDate,
+        guid,
         jamHelpAuthorityId
         );
     }
@@ -174,6 +186,7 @@ public class JamHelpCriteria implements Serializable {
                 (createDate != null ? "createDate=" + createDate + ", " : "") +
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (jamHelpAuthorityId != null ? "jamHelpAuthorityId=" + jamHelpAuthorityId + ", " : "") +
             "}";
     }

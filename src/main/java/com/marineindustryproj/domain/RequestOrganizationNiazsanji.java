@@ -115,6 +115,10 @@ public class RequestOrganizationNiazsanji implements Serializable {
     @Column(name = "conversation")
     private String conversation;
 
+    @Size(max = 50)
+    @Column(name = "guid", length = 50)
+    private String guid;
+
     @OneToMany(mappedBy = "requestOrganizationNiazsanji")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<FinalOrganizationNiazsanji> finalOrganizationNiazsanjis = new HashSet<>();
@@ -447,6 +451,19 @@ public class RequestOrganizationNiazsanji implements Serializable {
         this.conversation = conversation;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public RequestOrganizationNiazsanji guid(String guid) {
+        this.guid = guid;
+        return this;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<FinalOrganizationNiazsanji> getFinalOrganizationNiazsanjis() {
         return finalOrganizationNiazsanjis;
     }
@@ -634,6 +651,7 @@ public class RequestOrganizationNiazsanji implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", conversation='" + getConversation() + "'" +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 }

@@ -57,6 +57,9 @@ public class FieldOfStudy implements Serializable {
     @OneToMany(mappedBy = "lastFieldOfStudy")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Teacher> teachers = new HashSet<>();
+    @OneToMany(mappedBy = "fieldOfStudy")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<EducationalRecord> educationalRecords = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -192,6 +195,31 @@ public class FieldOfStudy implements Serializable {
 
     public void setTeachers(Set<Teacher> teachers) {
         this.teachers = teachers;
+    }
+
+    public Set<EducationalRecord> getEducationalRecords() {
+        return educationalRecords;
+    }
+
+    public FieldOfStudy educationalRecords(Set<EducationalRecord> educationalRecords) {
+        this.educationalRecords = educationalRecords;
+        return this;
+    }
+
+    public FieldOfStudy addEducationalRecord(EducationalRecord educationalRecord) {
+        this.educationalRecords.add(educationalRecord);
+        educationalRecord.setFieldOfStudy(this);
+        return this;
+    }
+
+    public FieldOfStudy removeEducationalRecord(EducationalRecord educationalRecord) {
+        this.educationalRecords.remove(educationalRecord);
+        educationalRecord.setFieldOfStudy(null);
+        return this;
+    }
+
+    public void setEducationalRecords(Set<EducationalRecord> educationalRecords) {
+        this.educationalRecords = educationalRecords;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

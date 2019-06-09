@@ -128,6 +128,12 @@
     <include file="config/liquibase/changelog/20190601142540_added_entity_JamHelpAuthority.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190601142540_added_entity_constraints_JamHelpAuthority.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190601175937_update_entity_requestEducationalModule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190608171541_added_entity_EducationalRecord.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190608171541_added_entity_constraints_EducationalRecord.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190608171542_added_entity_JobRecord.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190608175937_update_entity_addGuidAndColors.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190608175947_update_entity_addPersonIdToJobRecord.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190608174218_added_entity_constraints_JobRecord.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

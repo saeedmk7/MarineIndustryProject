@@ -66,6 +66,9 @@ public class EducationalHistoryDTO implements Serializable {
     @Size(max = 50)
     private String changeStatusUserLogin;
 
+    @Size(max = 50)
+    private String guid;
+
     private Long personId;
 
     private String personName;
@@ -240,6 +243,14 @@ public class EducationalHistoryDTO implements Serializable {
         this.changeStatusUserLogin = changeStatusUserLogin;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Long getPersonId() {
         return personId;
     }
@@ -340,6 +351,7 @@ public class EducationalHistoryDTO implements Serializable {
             ", conversation='" + getConversation() + "'" +
             ", requestStatus='" + getRequestStatus() + "'" +
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
+            ", guid='" + getGuid() + "'" +
             ", person=" + getPersonId() +
             ", person='" + getPersonName() + "'" +
             ", person='" + getPersonFamily() + "'" +

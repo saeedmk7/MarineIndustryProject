@@ -59,6 +59,8 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
 
     private StringFilter changeStatusUserLogin;
 
+    private StringFilter guid;
+
     private LongFilter niazsanjiFardiId;
 
     private LongFilter documentId;
@@ -187,6 +189,14 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
         this.changeStatusUserLogin = changeStatusUserLogin;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getNiazsanjiFardiId() {
         return niazsanjiFardiId;
     }
@@ -274,6 +284,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
             Objects.equals(status, that.status) &&
             Objects.equals(requestStatus, that.requestStatus) &&
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(courseTypeId, that.courseTypeId) &&
@@ -301,6 +312,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
         status,
         requestStatus,
         changeStatusUserLogin,
+        guid,
         niazsanjiFardiId,
         documentId,
         courseTypeId,
@@ -329,6 +341,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
                 (status != null ? "status=" + status + ", " : "") +
                 (requestStatus != null ? "requestStatus=" + requestStatus + ", " : "") +
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +

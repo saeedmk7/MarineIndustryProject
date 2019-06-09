@@ -1,0 +1,85 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="jobRecord">
+            <h2><span jhiTranslate="marineindustryprojApp.jobRecord.detail.title">Job Record</span> {{jobRecord.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.workOrganization">Work Organization</span></dt>
+                <dd>
+                    <span>{{jobRecord.workOrganization}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.workSection">Work Section</span></dt>
+                <dd>
+                    <span>{{jobRecord.workSection}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.jobResponsibility">Job Responsibility</span></dt>
+                <dd>
+                    <span>{{jobRecord.jobResponsibility}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.jobPosition">Job Position</span></dt>
+                <dd>
+                    <span>{{jobRecord.jobPosition}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.totalHour">Total Hour</span></dt>
+                <dd>
+                    <span>{{jobRecord.totalHour}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.startDate">Start Date</span></dt>
+                <dd>
+                    <span>{{jobRecord.startDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.endDate">End Date</span></dt>
+                <dd>
+                    <span>{{jobRecord.endDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.leaveReason">Leave Reason</span></dt>
+                <dd>
+                    <span>{{jobRecord.leaveReason}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.description">Description</span></dt>
+                <dd>
+                    <span>{{jobRecord.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{jobRecord.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{jobRecord.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{jobRecord.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{jobRecord.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.guid">Guid</span></dt>
+                <dd>
+                    <span>{{jobRecord.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobRecord.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="jobRecord.personId">
+                        <a [routerLink]="['/person-marine-suffix', jobRecord.personId, 'view']">{{jobRecord.personFamily}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/job-record-marine-suffix', jobRecord.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

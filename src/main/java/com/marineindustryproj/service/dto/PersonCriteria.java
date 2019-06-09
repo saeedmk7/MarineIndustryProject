@@ -61,6 +61,8 @@ public class PersonCriteria implements Serializable {
 
     private IntegerFilter status;
 
+    private StringFilter guid;
+
     private LongFilter finalNiazsanjiReportPersonId;
 
     private LongFilter pollScoreId;
@@ -70,6 +72,10 @@ public class PersonCriteria implements Serializable {
     private LongFilter requestNiazsanjiFardiId;
 
     private LongFilter educationalHistoryId;
+
+    private LongFilter educationalRecordId;
+
+    private LongFilter jobRecordId;
 
     private LongFilter documentId;
 
@@ -253,6 +259,14 @@ public class PersonCriteria implements Serializable {
         this.status = status;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getFinalNiazsanjiReportPersonId() {
         return finalNiazsanjiReportPersonId;
     }
@@ -291,6 +305,22 @@ public class PersonCriteria implements Serializable {
 
     public void setEducationalHistoryId(LongFilter educationalHistoryId) {
         this.educationalHistoryId = educationalHistoryId;
+    }
+
+    public LongFilter getEducationalRecordId() {
+        return educationalRecordId;
+    }
+
+    public void setEducationalRecordId(LongFilter educationalRecordId) {
+        this.educationalRecordId = educationalRecordId;
+    }
+
+    public LongFilter getJobRecordId() {
+        return jobRecordId;
+    }
+
+    public void setJobRecordId(LongFilter jobRecordId) {
+        this.jobRecordId = jobRecordId;
     }
 
     public LongFilter getDocumentId() {
@@ -443,11 +473,14 @@ public class PersonCriteria implements Serializable {
             Objects.equals(archivedUserLogin, that.archivedUserLogin) &&
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(finalNiazsanjiReportPersonId, that.finalNiazsanjiReportPersonId) &&
             Objects.equals(pollScoreId, that.pollScoreId) &&
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
             Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId) &&
             Objects.equals(educationalHistoryId, that.educationalHistoryId) &&
+            Objects.equals(educationalRecordId, that.educationalRecordId) &&
+            Objects.equals(jobRecordId, that.jobRecordId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(scientificWorkGroupId, that.scientificWorkGroupId) &&
             Objects.equals(lastQualificationId, that.lastQualificationId) &&
@@ -487,11 +520,14 @@ public class PersonCriteria implements Serializable {
         archivedUserLogin,
         archivedDate,
         status,
+        guid,
         finalNiazsanjiReportPersonId,
         pollScoreId,
         niazsanjiFardiId,
         requestNiazsanjiFardiId,
         educationalHistoryId,
+        educationalRecordId,
+        jobRecordId,
         documentId,
         scientificWorkGroupId,
         lastQualificationId,
@@ -532,11 +568,14 @@ public class PersonCriteria implements Serializable {
                 (archivedUserLogin != null ? "archivedUserLogin=" + archivedUserLogin + ", " : "") +
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (finalNiazsanjiReportPersonId != null ? "finalNiazsanjiReportPersonId=" + finalNiazsanjiReportPersonId + ", " : "") +
                 (pollScoreId != null ? "pollScoreId=" + pollScoreId + ", " : "") +
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
                 (requestNiazsanjiFardiId != null ? "requestNiazsanjiFardiId=" + requestNiazsanjiFardiId + ", " : "") +
                 (educationalHistoryId != null ? "educationalHistoryId=" + educationalHistoryId + ", " : "") +
+                (educationalRecordId != null ? "educationalRecordId=" + educationalRecordId + ", " : "") +
+                (jobRecordId != null ? "jobRecordId=" + jobRecordId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (scientificWorkGroupId != null ? "scientificWorkGroupId=" + scientificWorkGroupId + ", " : "") +
                 (lastQualificationId != null ? "lastQualificationId=" + lastQualificationId + ", " : "") +

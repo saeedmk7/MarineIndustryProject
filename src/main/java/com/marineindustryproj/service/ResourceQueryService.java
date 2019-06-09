@@ -110,6 +110,9 @@ public class ResourceQueryService extends QueryService<Resource> {
             if (criteria.getModifyDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getModifyDate(), Resource_.modifyDate));
             }
+            if (criteria.getGuid() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getGuid(), Resource_.guid));
+            }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(Resource_.documents, JoinType.LEFT).get(Document_.id)));

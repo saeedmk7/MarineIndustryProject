@@ -15,6 +15,8 @@ export interface INavBarItemMarineSuffix {
     createDate?: Moment;
     modifyUserLogin?: string;
     modifyDate?: Moment;
+    textColor?: string;
+    backgroundColor?: string;
     navBarItems?: INavBarItemMarineSuffix[];
     navBarItemAuthorities?: INavBarItemAuthorityMarineSuffix[];
     parentTitle?: string;
@@ -35,6 +37,8 @@ export class NavBarItemMarineSuffix implements INavBarItemMarineSuffix {
         public createDate?: Moment,
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
+        public textColor?: string,
+        public backgroundColor?: string,
         public navBarItems?: INavBarItemMarineSuffix[],
         public navBarItemAuthorities?: INavBarItemAuthorityMarineSuffix[],
         public parentTitle?: string,

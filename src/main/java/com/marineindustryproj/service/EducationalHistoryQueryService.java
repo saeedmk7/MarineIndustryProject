@@ -137,6 +137,9 @@ public class EducationalHistoryQueryService extends QueryService<EducationalHist
             if (criteria.getChangeStatusUserLogin() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getChangeStatusUserLogin(), EducationalHistory_.changeStatusUserLogin));
             }
+            if (criteria.getGuid() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getGuid(), EducationalHistory_.guid));
+            }
             if (criteria.getPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPersonId(),
                     root -> root.join(EducationalHistory_.person, JoinType.LEFT).get(Person_.id)));

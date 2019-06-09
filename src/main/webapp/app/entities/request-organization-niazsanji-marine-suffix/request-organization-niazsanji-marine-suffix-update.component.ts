@@ -197,6 +197,10 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+    addAllPeopleOfThisUser(){
+        const orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationCharts , this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
+        this.requestOrganizationNiazsanji.people = this.people.filter(a => orgIds.includes(a.organizationChartId)).filter(this.treeUtilities.onlyUnique);
+    }
     findTargetPeople(){
         let organization = this.organizationCharts.find(a => a.id == this.currentPerson.organizationChartId);
         if(organization.parentId > 0) {

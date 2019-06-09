@@ -83,6 +83,10 @@ public class FinalNiazsanjiReport implements Serializable {
     @Column(name = "finalize_cost")
     private Integer finalizeCost;
 
+    @Size(max = 50)
+    @Column(name = "guid", length = 50)
+    private String guid;
+
     @OneToMany(mappedBy = "finalNiazsanjiReport", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = new HashSet<>();
@@ -319,6 +323,19 @@ public class FinalNiazsanjiReport implements Serializable {
         this.finalizeCost = finalizeCost;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public FinalNiazsanjiReport guid(String guid) {
+        this.guid = guid;
+        return this;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<FinalNiazsanjiReportPerson> getFinalNiazsanjiReportPeople() {
         return finalNiazsanjiReportPeople;
     }
@@ -523,6 +540,7 @@ public class FinalNiazsanjiReport implements Serializable {
             ", runMonth=" + getRunMonth() +
             ", planningRunMonth=" + getPlanningRunMonth() +
             ", finalizeCost=" + getFinalizeCost() +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 }

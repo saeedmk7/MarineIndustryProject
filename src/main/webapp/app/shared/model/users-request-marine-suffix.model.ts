@@ -14,6 +14,7 @@ export interface IUsersRequestMarineSuffix {
     conversation?: any;
     requestStatus?: RequestStatus;
     changeStatusUserLogin?: string;
+    guid?: string;
     documents?: IDocumentMarineSuffix[];
 }
 
@@ -30,6 +31,7 @@ export class UsersRequestMarineSuffix implements IUsersRequestMarineSuffix {
         public conversation?: any,
         public requestStatus?: RequestStatus,
         public changeStatusUserLogin?: string,
+        public guid?: string,
         public documents?: IDocumentMarineSuffix[]
     ) {}
 }

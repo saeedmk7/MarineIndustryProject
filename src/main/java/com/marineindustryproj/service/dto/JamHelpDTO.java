@@ -45,6 +45,9 @@ public class JamHelpDTO implements Serializable {
 
     private ZonedDateTime modifyDate;
 
+    @Size(max = 50)
+    private String guid;
+
     private String authorityNames;
 
     public Long getId() {
@@ -127,6 +130,14 @@ public class JamHelpDTO implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public String getAuthorityNames() {
         return authorityNames;
     }
@@ -170,6 +181,7 @@ public class JamHelpDTO implements Serializable {
             ", createDate='" + getCreateDate() + "'" +
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +
             ", modifyDate='" + getModifyDate() + "'" +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 

@@ -95,6 +95,10 @@ public class DesignAndPlanning implements Serializable {
     @Column(name = "run_month")
     private Integer runMonth;
 
+    @Size(max = 50)
+    @Column(name = "guid", length = 50)
+    private String guid;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "design_and_planning_person",
@@ -404,6 +408,19 @@ public class DesignAndPlanning implements Serializable {
         this.runMonth = runMonth;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public DesignAndPlanning guid(String guid) {
+        this.guid = guid;
+        return this;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<Person> getPeople() {
         return people;
     }
@@ -666,6 +683,7 @@ public class DesignAndPlanning implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", runMonth=" + getRunMonth() +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 }

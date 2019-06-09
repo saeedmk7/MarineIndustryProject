@@ -68,6 +68,10 @@ public class UsersRequest implements Serializable {
     @Column(name = "change_status_user_login", length = 50)
     private String changeStatusUserLogin;
 
+    @Size(max = 50)
+    @Column(name = "guid", length = 50)
+    private String guid;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "users_request_document",
@@ -214,6 +218,19 @@ public class UsersRequest implements Serializable {
         this.changeStatusUserLogin = changeStatusUserLogin;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public UsersRequest guid(String guid) {
+        this.guid = guid;
+        return this;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<Document> getDocuments() {
         return documents;
     }
@@ -274,6 +291,7 @@ public class UsersRequest implements Serializable {
             ", conversation='" + getConversation() + "'" +
             ", requestStatus='" + getRequestStatus() + "'" +
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 }

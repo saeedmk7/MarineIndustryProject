@@ -122,6 +122,12 @@ public class NavBarItemQueryService extends QueryService<NavBarItem> {
             if (criteria.getModifyDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getModifyDate(), NavBarItem_.modifyDate));
             }
+            if (criteria.getTextColor() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getTextColor(), NavBarItem_.textColor));
+            }
+            if (criteria.getBackgroundColor() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getBackgroundColor(), NavBarItem_.backgroundColor));
+            }
             if (criteria.getNavBarItemId() != null) {
                 specification = specification.and(buildSpecification(criteria.getNavBarItemId(),
                     root -> root.join(NavBarItem_.navBarItems, JoinType.LEFT).get(NavBarItem_.id)));

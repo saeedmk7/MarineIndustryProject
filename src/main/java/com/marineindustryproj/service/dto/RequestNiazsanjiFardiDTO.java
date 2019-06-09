@@ -55,6 +55,9 @@ public class RequestNiazsanjiFardiDTO implements Serializable {
     @Size(max = 50)
     private String changeStatusUserLogin;
 
+    @Size(max = 50)
+    private String guid;
+
     private Set<DocumentDTO> documents = new HashSet<>();
 
     private Long courseTypeId;
@@ -207,6 +210,14 @@ public class RequestNiazsanjiFardiDTO implements Serializable {
         this.changeStatusUserLogin = changeStatusUserLogin;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
@@ -343,6 +354,7 @@ public class RequestNiazsanjiFardiDTO implements Serializable {
             ", conversation='" + getConversation() + "'" +
             ", requestStatus='" + getRequestStatus() + "'" +
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
+            ", guid='" + getGuid() + "'" +
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +
             ", approvedEducationalModule=" + getApprovedEducationalModuleId() +

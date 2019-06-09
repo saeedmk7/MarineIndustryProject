@@ -47,6 +47,10 @@ public class NavBarItemCriteria implements Serializable {
 
     private ZonedDateTimeFilter modifyDate;
 
+    private StringFilter textColor;
+
+    private StringFilter backgroundColor;
+
     private LongFilter navBarItemId;
 
     private LongFilter navBarItemAuthorityId;
@@ -149,6 +153,22 @@ public class NavBarItemCriteria implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public StringFilter getTextColor() {
+        return textColor;
+    }
+
+    public void setTextColor(StringFilter textColor) {
+        this.textColor = textColor;
+    }
+
+    public StringFilter getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(StringFilter backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
     public LongFilter getNavBarItemId() {
         return navBarItemId;
     }
@@ -196,6 +216,8 @@ public class NavBarItemCriteria implements Serializable {
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
+            Objects.equals(textColor, that.textColor) &&
+            Objects.equals(backgroundColor, that.backgroundColor) &&
             Objects.equals(navBarItemId, that.navBarItemId) &&
             Objects.equals(navBarItemAuthorityId, that.navBarItemAuthorityId) &&
             Objects.equals(parentId, that.parentId);
@@ -216,6 +238,8 @@ public class NavBarItemCriteria implements Serializable {
         createDate,
         modifyUserLogin,
         modifyDate,
+        textColor,
+        backgroundColor,
         navBarItemId,
         navBarItemAuthorityId,
         parentId
@@ -237,6 +261,8 @@ public class NavBarItemCriteria implements Serializable {
                 (createDate != null ? "createDate=" + createDate + ", " : "") +
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
+                (textColor != null ? "textColor=" + textColor + ", " : "") +
+                (backgroundColor != null ? "backgroundColor=" + backgroundColor + ", " : "") +
                 (navBarItemId != null ? "navBarItemId=" + navBarItemId + ", " : "") +
                 (navBarItemAuthorityId != null ? "navBarItemAuthorityId=" + navBarItemAuthorityId + ", " : "") +
                 (parentId != null ? "parentId=" + parentId + ", " : "") +

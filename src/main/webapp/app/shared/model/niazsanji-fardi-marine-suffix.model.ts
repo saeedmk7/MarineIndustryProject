@@ -19,6 +19,7 @@ export interface INiazsanjiFardiMarineSuffix {
     status?: number;
     conversation?: any;
     changeStatusUserLogin?: string;
+    guid?: string;
     documents?: IDocumentMarineSuffix[];
     courseTypeTitle?: string;
     courseTypeId?: number;
@@ -55,6 +56,7 @@ export class NiazsanjiFardiMarineSuffix implements INiazsanjiFardiMarineSuffix {
         public status?: number,
         public conversation?: any,
         public changeStatusUserLogin?: string,
+        public guid?: string,
         public documents?: IDocumentMarineSuffix[],
         public courseTypeTitle?: string,
         public courseTypeId?: number,

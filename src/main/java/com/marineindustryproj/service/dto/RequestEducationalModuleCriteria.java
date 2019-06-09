@@ -89,6 +89,8 @@ public class RequestEducationalModuleCriteria implements Serializable {
 
     private StringFilter teachersText;
 
+    private StringFilter guid;
+
     private LongFilter educationalModuleId;
 
     private LongFilter scientificWorkGroupId;
@@ -351,6 +353,14 @@ public class RequestEducationalModuleCriteria implements Serializable {
         this.teachersText = teachersText;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getEducationalModuleId() {
         return educationalModuleId;
     }
@@ -480,6 +490,7 @@ public class RequestEducationalModuleCriteria implements Serializable {
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
             Objects.equals(goalsText, that.goalsText) &&
             Objects.equals(teachersText, that.teachersText) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(scientificWorkGroupId, that.scientificWorkGroupId) &&
             Objects.equals(documentId, that.documentId) &&
@@ -526,6 +537,7 @@ public class RequestEducationalModuleCriteria implements Serializable {
         changeStatusUserLogin,
         goalsText,
         teachersText,
+        guid,
         educationalModuleId,
         scientificWorkGroupId,
         documentId,
@@ -573,6 +585,7 @@ public class RequestEducationalModuleCriteria implements Serializable {
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
                 (goalsText != null ? "goalsText=" + goalsText + ", " : "") +
                 (teachersText != null ? "teachersText=" + teachersText + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (scientificWorkGroupId != null ? "scientificWorkGroupId=" + scientificWorkGroupId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +

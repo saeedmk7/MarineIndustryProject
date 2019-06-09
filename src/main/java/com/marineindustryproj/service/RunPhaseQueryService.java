@@ -134,6 +134,9 @@ public class RunPhaseQueryService extends QueryService<RunPhase> {
             if (criteria.getStatus() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getStatus(), RunPhase_.status));
             }
+            if (criteria.getGuid() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getGuid(), RunPhase_.guid));
+            }
             if (criteria.getRunRunningStepId() != null) {
                 specification = specification.and(buildSpecification(criteria.getRunRunningStepId(),
                     root -> root.join(RunPhase_.runRunningSteps, JoinType.LEFT).get(RunRunningStep_.id)));

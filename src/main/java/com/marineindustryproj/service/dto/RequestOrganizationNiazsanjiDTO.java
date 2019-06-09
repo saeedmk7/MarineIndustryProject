@@ -77,6 +77,9 @@ public class RequestOrganizationNiazsanjiDTO implements Serializable {
     @Lob
     private String conversation;
 
+    @Size(max = 50)
+    private String guid;
+
     private Set<PersonDTO> people = new HashSet<>();
 
     private Set<DocumentDTO> documents = new HashSet<>();
@@ -285,6 +288,14 @@ public class RequestOrganizationNiazsanjiDTO implements Serializable {
         this.conversation = conversation;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<PersonDTO> getPeople() {
         return people;
     }
@@ -428,6 +439,7 @@ public class RequestOrganizationNiazsanjiDTO implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", conversation='" + getConversation() + "'" +
+            ", guid='" + getGuid() + "'" +
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +
             ", organizationChart=" + getOrganizationChartId() +

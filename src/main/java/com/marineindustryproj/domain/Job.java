@@ -76,6 +76,10 @@ public class Job implements Serializable {
     @Column(name = "status", nullable = false)
     private Integer status;
 
+    @Size(max = 50)
+    @Column(name = "guid", length = 50)
+    private String guid;
+
     @OneToMany(mappedBy = "job")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Person> jobPeople = new HashSet<>();
@@ -288,6 +292,19 @@ public class Job implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public Job guid(String guid) {
+        this.guid = guid;
+        return this;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
     }
 
     public Set<Person> getJobPeople() {
@@ -567,6 +584,7 @@ public class Job implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 }

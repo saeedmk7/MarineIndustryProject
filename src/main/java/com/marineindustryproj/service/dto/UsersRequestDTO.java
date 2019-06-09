@@ -44,6 +44,9 @@ public class UsersRequestDTO implements Serializable {
     @Size(max = 50)
     private String changeStatusUserLogin;
 
+    @Size(max = 50)
+    private String guid;
+
     private Set<DocumentDTO> documents = new HashSet<>();
 
     public Long getId() {
@@ -134,6 +137,14 @@ public class UsersRequestDTO implements Serializable {
         this.changeStatusUserLogin = changeStatusUserLogin;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
@@ -177,6 +188,7 @@ public class UsersRequestDTO implements Serializable {
             ", conversation='" + getConversation() + "'" +
             ", requestStatus='" + getRequestStatus() + "'" +
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 }

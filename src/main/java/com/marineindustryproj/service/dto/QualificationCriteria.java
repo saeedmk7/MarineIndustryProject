@@ -41,6 +41,8 @@ public class QualificationCriteria implements Serializable {
 
     private LongFilter teacherId;
 
+    private LongFilter educationalRecordId;
+
     public LongFilter getId() {
         return id;
     }
@@ -113,6 +115,14 @@ public class QualificationCriteria implements Serializable {
         this.teacherId = teacherId;
     }
 
+    public LongFilter getEducationalRecordId() {
+        return educationalRecordId;
+    }
+
+    public void setEducationalRecordId(LongFilter educationalRecordId) {
+        this.educationalRecordId = educationalRecordId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -132,7 +142,8 @@ public class QualificationCriteria implements Serializable {
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
             Objects.equals(personId, that.personId) &&
-            Objects.equals(teacherId, that.teacherId);
+            Objects.equals(teacherId, that.teacherId) &&
+            Objects.equals(educationalRecordId, that.educationalRecordId);
     }
 
     @Override
@@ -146,7 +157,8 @@ public class QualificationCriteria implements Serializable {
         modifyUserLogin,
         modifyDate,
         personId,
-        teacherId
+        teacherId,
+        educationalRecordId
         );
     }
 
@@ -162,6 +174,7 @@ public class QualificationCriteria implements Serializable {
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
+                (educationalRecordId != null ? "educationalRecordId=" + educationalRecordId + ", " : "") +
             "}";
     }
 

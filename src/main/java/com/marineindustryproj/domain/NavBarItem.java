@@ -72,6 +72,12 @@ public class NavBarItem implements Serializable {
     @Column(name = "modify_date")
     private ZonedDateTime modifyDate;
 
+    @Column(name = "text_color")
+    private String textColor;
+
+    @Column(name = "background_color")
+    private String backgroundColor;
+
     @OneToMany(mappedBy = "parent")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<NavBarItem> navBarItems = new HashSet<>();
@@ -234,6 +240,32 @@ public class NavBarItem implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public String getTextColor() {
+        return textColor;
+    }
+
+    public NavBarItem textColor(String textColor) {
+        this.textColor = textColor;
+        return this;
+    }
+
+    public void setTextColor(String textColor) {
+        this.textColor = textColor;
+    }
+
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public NavBarItem backgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
+        return this;
+    }
+
+    public void setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
     public Set<NavBarItem> getNavBarItems() {
         return navBarItems;
     }
@@ -333,6 +365,8 @@ public class NavBarItem implements Serializable {
             ", createDate='" + getCreateDate() + "'" +
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +
             ", modifyDate='" + getModifyDate() + "'" +
+            ", textColor='" + getTextColor() + "'" +
+            ", backgroundColor='" + getBackgroundColor() + "'" +
             "}";
     }
 }

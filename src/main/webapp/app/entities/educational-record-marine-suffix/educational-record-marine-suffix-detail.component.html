@@ -1,0 +1,93 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="educationalRecord">
+            <h2><span jhiTranslate="marineindustryprojApp.educationalRecord.detail.title">Educational Record</span> {{educationalRecord.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.qualificationText">Qualification Text</span></dt>
+                <dd>
+                    <span>{{educationalRecord.qualificationText}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.fieldOfStudyText">Field Of Study Text</span></dt>
+                <dd>
+                    <span>{{educationalRecord.fieldOfStudyText}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.educationalCenterText">Educational Center Text</span></dt>
+                <dd>
+                    <span>{{educationalRecord.educationalCenterText}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.totalAverage">Total Average</span></dt>
+                <dd>
+                    <span>{{educationalRecord.totalAverage}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.totalHour">Total Hour</span></dt>
+                <dd>
+                    <span>{{educationalRecord.totalHour}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.startDate">Start Date</span></dt>
+                <dd>
+                    <span>{{educationalRecord.startDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.endDate">End Date</span></dt>
+                <dd>
+                    <span>{{educationalRecord.endDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.description">Description</span></dt>
+                <dd>
+                    <span>{{educationalRecord.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{educationalRecord.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{educationalRecord.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{educationalRecord.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{educationalRecord.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.guid">Guid</span></dt>
+                <dd>
+                    <span>{{educationalRecord.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.qualification">Qualification</span></dt>
+                <dd>
+                    <div *ngIf="educationalRecord.qualificationId">
+                        <a [routerLink]="['/qualification-marine-suffix', educationalRecord.qualificationId, 'view']">{{educationalRecord.qualificationTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.fieldOfStudy">Field Of Study</span></dt>
+                <dd>
+                    <div *ngIf="educationalRecord.fieldOfStudyId">
+                        <a [routerLink]="['/field-of-study-marine-suffix', educationalRecord.fieldOfStudyId, 'view']">{{educationalRecord.fieldOfStudyTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalRecord.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="educationalRecord.personId">
+                        <a [routerLink]="['/person-marine-suffix', educationalRecord.personId, 'view']">{{educationalRecord.personFamily}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/educational-record-marine-suffix', educationalRecord.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

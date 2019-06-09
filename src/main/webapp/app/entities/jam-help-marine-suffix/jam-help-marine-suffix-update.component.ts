@@ -82,6 +82,8 @@ export class JamHelpMarineSuffixUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         this.message = "";
+        if(!this.jamHelp.description)
+            this.jamHelp.description = ' ';
         this.jamHelp.authorityNames = this.selectedAuthorities.join(',');
         if (this.jamHelp.id !== undefined) {
             this.subscribeToSaveResponse(this.jamHelpService.update(this.jamHelp));

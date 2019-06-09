@@ -1,0 +1,36 @@
+{
+    "marineindustryprojApp": {
+        "educationalRecord": {
+            "home": {
+                "title": "Educational Records",
+                "createLabel": "Create a new Educational Record",
+                "createOrEditLabel": "Create or edit a Educational Record"
+            },
+            "created": "A new Educational Record is created with identifier {{ param }}",
+            "updated": "A Educational Record is updated with identifier {{ param }}",
+            "deleted": "A Educational Record is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Educational Record {{ id }}?"
+            },
+            "detail": {
+                "title": "Educational Record"
+            },
+            "qualificationText": "Qualification Text",
+            "fieldOfStudyText": "Field Of Study Text",
+            "educationalCenterText": "Educational Center Text",
+            "totalAverage": "Total Average",
+            "totalHour": "Total Hour",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "guid": "Guid",
+            "qualification": "Qualification",
+            "fieldOfStudy": "Field Of Study",
+            "person": "Person"
+        }
+    }
+}

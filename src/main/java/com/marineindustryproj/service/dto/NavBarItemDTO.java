@@ -44,6 +44,10 @@ public class NavBarItemDTO implements Serializable {
 
     private ZonedDateTime modifyDate;
 
+    private String textColor;
+
+    private String backgroundColor;
+
     private Long parentId;
 
     private String parentTitle;
@@ -144,6 +148,22 @@ public class NavBarItemDTO implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public String getTextColor() {
+        return textColor;
+    }
+
+    public void setTextColor(String textColor) {
+        this.textColor = textColor;
+    }
+
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
     public Long getParentId() {
         return parentId;
     }
@@ -196,6 +216,8 @@ public class NavBarItemDTO implements Serializable {
             ", createDate='" + getCreateDate() + "'" +
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +
             ", modifyDate='" + getModifyDate() + "'" +
+            ", textColor='" + getTextColor() + "'" +
+            ", backgroundColor='" + getBackgroundColor() + "'" +
             ", parent=" + getParentId() +
             ", parent='" + getParentTitle() + "'" +
             "}";

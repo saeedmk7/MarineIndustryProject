@@ -30,6 +30,7 @@ export interface IRequestOrganizationNiazsanjiMarineSuffix {
     status?: number;
     statusMeaning?: string;
     conversation?: any;
+    guid?: string;
     finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[];
     people?: IPersonMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
@@ -73,6 +74,7 @@ export class RequestOrganizationNiazsanjiMarineSuffix implements IRequestOrganiz
         public archivedDate?: Moment,
         public status?: number,
         public conversation?: any,
+        public guid?: string,
         public finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[],
         public people?: IPersonMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],

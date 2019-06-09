@@ -51,6 +51,9 @@ public class FinalNiazsanjiReportDTO implements Serializable {
 
     private Integer finalizeCost;
 
+    @Size(max = 50)
+    private String guid;
+
     private Set<DocumentDTO> documents = new HashSet<>();
 
     private Long courseTypeId;
@@ -193,6 +196,14 @@ public class FinalNiazsanjiReportDTO implements Serializable {
         this.finalizeCost = finalizeCost;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
@@ -289,6 +300,7 @@ public class FinalNiazsanjiReportDTO implements Serializable {
             ", runMonth=" + getRunMonth() +
             ", planningRunMonth=" + getPlanningRunMonth() +
             ", finalizeCost=" + getFinalizeCost() +
+            ", guid='" + getGuid() + "'" +
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +
             ", organizationChart=" + getOrganizationChartId() +

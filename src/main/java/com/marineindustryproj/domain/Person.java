@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.id.GUIDGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -102,6 +103,10 @@ public class Person implements Serializable {
     @Column(name = "status", nullable = false)
     private Integer status;
 
+    @Size(max = 50)
+    @Column(name = "guid", length = 50, unique = true)
+    private String guid;
+
     @OneToMany(mappedBy = "person")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = new HashSet<>();
@@ -117,6 +122,12 @@ public class Person implements Serializable {
     @OneToMany(mappedBy = "person")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EducationalHistory> educationalHistories = new HashSet<>();
+    @OneToMany(mappedBy = "person")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<EducationalRecord> educationalRecords = new HashSet<>();
+    @OneToMany(mappedBy = "person")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<JobRecord> jobRecords = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "person_document",
@@ -431,6 +442,19 @@ public class Person implements Serializable {
         this.status = status;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public Person guid(String guid) {
+        this.guid = guid;
+        return this;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<FinalNiazsanjiReportPerson> getFinalNiazsanjiReportPeople() {
         return finalNiazsanjiReportPeople;
     }
@@ -554,6 +578,56 @@ public class Person implements Serializable {
 
     public void setEducationalHistories(Set<EducationalHistory> educationalHistories) {
         this.educationalHistories = educationalHistories;
+    }
+
+    public Set<EducationalRecord> getEducationalRecords() {
+        return educationalRecords;
+    }
+
+    public Person educationalRecords(Set<EducationalRecord> educationalRecords) {
+        this.educationalRecords = educationalRecords;
+        return this;
+    }
+
+    public Person addEducationalRecord(EducationalRecord educationalRecord) {
+        this.educationalRecords.add(educationalRecord);
+        educationalRecord.setPerson(this);
+        return this;
+    }
+
+    public Person removeEducationalRecord(EducationalRecord educationalRecord) {
+        this.educationalRecords.remove(educationalRecord);
+        educationalRecord.setPerson(null);
+        return this;
+    }
+
+    public void setEducationalRecords(Set<EducationalRecord> educationalRecords) {
+        this.educationalRecords = educationalRecords;
+    }
+
+    public Set<JobRecord> getJobRecords() {
+        return jobRecords;
+    }
+
+    public Person jobRecords(Set<JobRecord> jobRecords) {
+        this.jobRecords = jobRecords;
+        return this;
+    }
+
+    public Person addJobRecord(JobRecord jobRecord) {
+        this.jobRecords.add(jobRecord);
+        jobRecord.setPerson(this);
+        return this;
+    }
+
+    public Person removeJobRecord(JobRecord jobRecord) {
+        this.jobRecords.remove(jobRecord);
+        jobRecord.setPerson(null);
+        return this;
+    }
+
+    public void setJobRecords(Set<JobRecord> jobRecords) {
+        this.jobRecords = jobRecords;
     }
 
     public Set<Document> getDocuments() {
@@ -878,6 +952,7 @@ public class Person implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 }

@@ -70,6 +70,8 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
 
     private IntegerFilter finalizeCost;
 
+    private StringFilter guid;
+
     private LongFilter finalNiazsanjiReportPersonId;
 
     private LongFilter personId;
@@ -218,6 +220,14 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         this.finalizeCost = finalizeCost;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getFinalNiazsanjiReportPersonId() {
         return finalNiazsanjiReportPersonId;
     }
@@ -315,6 +325,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
             Objects.equals(runMonth, that.runMonth) &&
             Objects.equals(planningRunMonth, that.planningRunMonth) &&
             Objects.equals(finalizeCost, that.finalizeCost) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(finalNiazsanjiReportPersonId, that.finalNiazsanjiReportPersonId) &&
             Objects.equals(designAndPlanningId, that.designAndPlanningId) &&
             Objects.equals(runPhaseId, that.runPhaseId) &&
@@ -346,6 +357,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         runMonth,
         planningRunMonth,
         finalizeCost,
+        guid,
         finalNiazsanjiReportPersonId,
         designAndPlanningId,
         runPhaseId,
@@ -378,6 +390,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
                 (runMonth != null ? "runMonth=" + runMonth + ", " : "") +
                 (planningRunMonth != null ? "planningRunMonth=" + planningRunMonth + ", " : "") +
                 (finalizeCost != null ? "finalizeCost=" + finalizeCost + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (finalNiazsanjiReportPersonId != null ? "finalNiazsanjiReportPersonId=" + finalNiazsanjiReportPersonId + ", " : "") +
                 (designAndPlanningId != null ? "designAndPlanningId=" + designAndPlanningId + ", " : "") +
                 (runPhaseId != null ? "runPhaseId=" + runPhaseId + ", " : "") +

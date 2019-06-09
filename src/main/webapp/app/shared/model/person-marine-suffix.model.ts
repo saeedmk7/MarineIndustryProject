@@ -4,6 +4,8 @@ import { IPollScoreMarineSuffix } from 'app/shared/model//poll-score-marine-suff
 import { INiazsanjiFardiMarineSuffix } from 'app/shared/model//niazsanji-fardi-marine-suffix.model';
 import { IRequestNiazsanjiFardiMarineSuffix } from 'app/shared/model//request-niazsanji-fardi-marine-suffix.model';
 import { IEducationalHistoryMarineSuffix } from 'app/shared/model//educational-history-marine-suffix.model';
+import { IEducationalRecordMarineSuffix } from 'app/shared/model//educational-record-marine-suffix.model';
+import { IJobRecordMarineSuffix } from 'app/shared/model//job-record-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IScientificWorkGroupMarineSuffix } from 'app/shared/model//scientific-work-group-marine-suffix.model';
 import { IMainTaskMarineSuffix } from 'app/shared/model//main-task-marine-suffix.model';
@@ -33,11 +35,14 @@ export interface IPersonMarineSuffix {
     archivedUserLogin?: string;
     archivedDate?: Moment;
     status?: number;
+    guid?: string;
     finalNiazsanjiReportPeople?: IFinalNiazsanjiReportPersonMarineSuffix[];
     pollScores?: IPollScoreMarineSuffix[];
     niazsanjiFardis?: INiazsanjiFardiMarineSuffix[];
     requestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[];
     educationalHistories?: IEducationalHistoryMarineSuffix[];
+    educationalRecords?: IEducationalRecordMarineSuffix[];
+    jobRecords?: IJobRecordMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     scientificWorkGroups?: IScientificWorkGroupMarineSuffix[];
     lastQualificationTitle?: string;
@@ -87,11 +92,14 @@ export class PersonMarineSuffix implements IPersonMarineSuffix {
         public archivedUserLogin?: string,
         public archivedDate?: Moment,
         public status?: number,
+        public guid?: string,
         public finalNiazsanjiReportPeople?: IFinalNiazsanjiReportPersonMarineSuffix[],
         public pollScores?: IPollScoreMarineSuffix[],
         public niazsanjiFardis?: INiazsanjiFardiMarineSuffix[],
         public requestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[],
         public educationalHistories?: IEducationalHistoryMarineSuffix[],
+        public educationalRecords?: IEducationalRecordMarineSuffix[],
+        public jobRecords?: IJobRecordMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public scientificWorkGroups?: IScientificWorkGroupMarineSuffix[],
         public lastQualificationTitle?: string,

@@ -69,6 +69,9 @@ public class PersonDTO implements Serializable {
     @NotNull
     private Integer status;
 
+    @Size(max = 50)
+    private String guid;
+
     private Set<DocumentDTO> documents = new HashSet<>();
 
     private Set<ScientificWorkGroupDTO> scientificWorkGroups = new HashSet<>();
@@ -259,6 +262,14 @@ public class PersonDTO implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
     }
 
     public Set<DocumentDTO> getDocuments() {
@@ -464,6 +475,7 @@ public class PersonDTO implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", guid='" + getGuid() + "'" +
             ", lastQualification=" + getLastQualificationId() +
             ", lastQualification='" + getLastQualificationTitle() + "'" +
             ", lastFieldOfStudy=" + getLastFieldOfStudyId() +

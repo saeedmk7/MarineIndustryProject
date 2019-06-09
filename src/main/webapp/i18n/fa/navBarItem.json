@@ -27,6 +27,8 @@
             "createDate": "تاریخ ایجاد",
             "modifyUserLogin": "کاربر ویرایش کننده",
             "modifyDate": "تاریخ ویرایش شده",
+            "textColor": "Text Color",
+            "backgroundColor": "Background Color",
             "navBarItem": "Nav Bar Item",
             "navBarItemAuthority": "Nav Bar Item Authority",
             "parent": "منو پدر"

@@ -14,6 +14,7 @@ public interface QualificationMapper extends EntityMapper<QualificationDTO, Qual
 
     @Mapping(target = "people", ignore = true)
     @Mapping(target = "teachers", ignore = true)
+    @Mapping(target = "educationalRecords", ignore = true)
     Qualification toEntity(QualificationDTO qualificationDTO);
 
     default Qualification fromId(Long id) {

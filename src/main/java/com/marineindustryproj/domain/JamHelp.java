@@ -65,6 +65,10 @@ public class JamHelp implements Serializable {
     @Column(name = "modify_date")
     private ZonedDateTime modifyDate;
 
+    @Size(max = 50)
+    @Column(name = "guid", length = 50)
+    private String guid;
+
     @OneToMany(mappedBy = "jamHelp", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<JamHelpAuthority> jamHelpAuthorities = new HashSet<>();
@@ -194,6 +198,19 @@ public class JamHelp implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public JamHelp guid(String guid) {
+        this.guid = guid;
+        return this;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<JamHelpAuthority> getJamHelpAuthorities() {
         return jamHelpAuthorities;
     }
@@ -253,6 +270,7 @@ public class JamHelp implements Serializable {
             ", createDate='" + getCreateDate() + "'" +
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +
             ", modifyDate='" + getModifyDate() + "'" +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 }

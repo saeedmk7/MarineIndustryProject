@@ -86,6 +86,10 @@ public class RequestNiazsanjiFardi implements Serializable {
     @Column(name = "change_status_user_login", length = 50)
     private String changeStatusUserLogin;
 
+    @Size(max = 50)
+    @Column(name = "guid", length = 50)
+    private String guid;
+
     @OneToMany(mappedBy = "requestNiazsanjiFardi")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<NiazsanjiFardi> niazsanjiFardis = new HashSet<>();
@@ -321,6 +325,19 @@ public class RequestNiazsanjiFardi implements Serializable {
         this.changeStatusUserLogin = changeStatusUserLogin;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public RequestNiazsanjiFardi guid(String guid) {
+        this.guid = guid;
+        return this;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<NiazsanjiFardi> getNiazsanjiFardis() {
         return niazsanjiFardis;
     }
@@ -476,6 +493,7 @@ public class RequestNiazsanjiFardi implements Serializable {
             ", conversation='" + getConversation() + "'" +
             ", requestStatus='" + getRequestStatus() + "'" +
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 }

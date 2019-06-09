@@ -57,6 +57,8 @@ public class RunPhaseCriteria implements Serializable {
 
     private IntegerFilter status;
 
+    private StringFilter guid;
+
     private LongFilter runRunningStepId;
 
     private LongFilter documentId;
@@ -205,6 +207,14 @@ public class RunPhaseCriteria implements Serializable {
         this.status = status;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getRunRunningStepId() {
         return runRunningStepId;
     }
@@ -308,6 +318,7 @@ public class RunPhaseCriteria implements Serializable {
             Objects.equals(archivedUserLogin, that.archivedUserLogin) &&
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(runRunningStepId, that.runRunningStepId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(personId, that.personId) &&
@@ -339,6 +350,7 @@ public class RunPhaseCriteria implements Serializable {
         archivedUserLogin,
         archivedDate,
         status,
+        guid,
         runRunningStepId,
         documentId,
         personId,
@@ -371,6 +383,7 @@ public class RunPhaseCriteria implements Serializable {
                 (archivedUserLogin != null ? "archivedUserLogin=" + archivedUserLogin + ", " : "") +
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (runRunningStepId != null ? "runRunningStepId=" + runRunningStepId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +

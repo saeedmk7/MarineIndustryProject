@@ -77,6 +77,8 @@ public class EducationalModuleCriteria implements Serializable {
 
     private StringFilter teachersText;
 
+    private StringFilter guid;
+
     private LongFilter educationalModuleJobId;
 
     private LongFilter requestOrganizationNiazsanjiId;
@@ -337,6 +339,14 @@ public class EducationalModuleCriteria implements Serializable {
         this.teachersText = teachersText;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getEducationalModuleJobId() {
         return educationalModuleJobId;
     }
@@ -551,6 +561,7 @@ public class EducationalModuleCriteria implements Serializable {
             Objects.equals(status, that.status) &&
             Objects.equals(goalsText, that.goalsText) &&
             Objects.equals(teachersText, that.teachersText) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(educationalModuleJobId, that.educationalModuleJobId) &&
             Objects.equals(requestOrganizationNiazsanjiId, that.requestOrganizationNiazsanjiId) &&
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
@@ -605,6 +616,7 @@ public class EducationalModuleCriteria implements Serializable {
         status,
         goalsText,
         teachersText,
+        guid,
         educationalModuleJobId,
         requestOrganizationNiazsanjiId,
         finalOrganizationNiazsanjiId,
@@ -660,6 +672,7 @@ public class EducationalModuleCriteria implements Serializable {
                 (status != null ? "status=" + status + ", " : "") +
                 (goalsText != null ? "goalsText=" + goalsText + ", " : "") +
                 (teachersText != null ? "teachersText=" + teachersText + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (educationalModuleJobId != null ? "educationalModuleJobId=" + educationalModuleJobId + ", " : "") +
                 (requestOrganizationNiazsanjiId != null ? "requestOrganizationNiazsanjiId=" + requestOrganizationNiazsanjiId + ", " : "") +
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +

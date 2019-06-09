@@ -59,6 +59,8 @@ public class NiazsanjiFardiCriteria implements Serializable {
 
     private StringFilter changeStatusUserLogin;
 
+    private StringFilter guid;
+
     private LongFilter documentId;
 
     private LongFilter courseTypeId;
@@ -185,6 +187,14 @@ public class NiazsanjiFardiCriteria implements Serializable {
         this.changeStatusUserLogin = changeStatusUserLogin;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -265,6 +275,7 @@ public class NiazsanjiFardiCriteria implements Serializable {
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId) &&
@@ -291,6 +302,7 @@ public class NiazsanjiFardiCriteria implements Serializable {
         archivedDate,
         status,
         changeStatusUserLogin,
+        guid,
         documentId,
         courseTypeId,
         requestNiazsanjiFardiId,
@@ -318,6 +330,7 @@ public class NiazsanjiFardiCriteria implements Serializable {
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (requestNiazsanjiFardiId != null ? "requestNiazsanjiFardiId=" + requestNiazsanjiFardiId + ", " : "") +

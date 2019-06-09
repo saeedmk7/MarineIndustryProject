@@ -114,6 +114,10 @@ public class FinalOrganizationNiazsanji implements Serializable {
     @Column(name = "status", nullable = false)
     private Integer status;
 
+    @Size(max = 50)
+    @Column(name = "guid", length = 50)
+    private String guid;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "final_organization_niazsanji_person",
@@ -447,6 +451,19 @@ public class FinalOrganizationNiazsanji implements Serializable {
         this.status = status;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
+    public FinalOrganizationNiazsanji guid(String guid) {
+        this.guid = guid;
+        return this;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public Set<Person> getPeople() {
         return people;
     }
@@ -622,6 +639,7 @@ public class FinalOrganizationNiazsanji implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", guid='" + getGuid() + "'" +
             "}";
     }
 }

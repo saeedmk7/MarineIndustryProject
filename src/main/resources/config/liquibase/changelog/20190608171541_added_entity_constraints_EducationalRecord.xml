@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity EducationalRecord.
+    -->
+    <changeSet id="20190608171541-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="qualification_id"
+                                 baseTableName="educational_record"
+                                 constraintName="fk_educational_record_qualification_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="qualification"/>
+
+        <addForeignKeyConstraint baseColumnNames="field_of_study_id"
+                                 baseTableName="educational_record"
+                                 constraintName="fk_educational_record_field_of_study_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="field_of_study"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="educational_record"
+                                 constraintName="fk_educational_record_person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -21,6 +21,7 @@ export interface IRequestNiazsanjiFardiMarineSuffix {
     conversation?: any;
     requestStatus?: RequestStatus;
     changeStatusUserLogin?: string;
+    guid?: string;
     niazsanjiFardis?: INiazsanjiFardiMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     courseTypeTitle?: string;
@@ -60,6 +61,7 @@ export class RequestNiazsanjiFardiMarineSuffix implements IRequestNiazsanjiFardi
         public conversation?: any,
         public requestStatus?: RequestStatus,
         public changeStatusUserLogin?: string,
+        public guid?: string,
         public niazsanjiFardis?: INiazsanjiFardiMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public courseTypeTitle?: string,

@@ -74,6 +74,8 @@ public class FinalOrganizationNiazsanjiCriteria implements Serializable {
 
     private IntegerFilter status;
 
+    private StringFilter guid;
+
     private LongFilter personId;
 
     private LongFilter documentId;
@@ -268,6 +270,14 @@ public class FinalOrganizationNiazsanjiCriteria implements Serializable {
         this.status = status;
     }
 
+    public StringFilter getGuid() {
+        return guid;
+    }
+
+    public void setGuid(StringFilter guid) {
+        this.guid = guid;
+    }
+
     public LongFilter getPersonId() {
         return personId;
     }
@@ -372,6 +382,7 @@ public class FinalOrganizationNiazsanjiCriteria implements Serializable {
             Objects.equals(archivedUserLogin, that.archivedUserLogin) &&
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
+            Objects.equals(guid, that.guid) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(courseTypeId, that.courseTypeId) &&
@@ -408,6 +419,7 @@ public class FinalOrganizationNiazsanjiCriteria implements Serializable {
         archivedUserLogin,
         archivedDate,
         status,
+        guid,
         personId,
         documentId,
         courseTypeId,
@@ -445,6 +457,7 @@ public class FinalOrganizationNiazsanjiCriteria implements Serializable {
                 (archivedUserLogin != null ? "archivedUserLogin=" + archivedUserLogin + ", " : "") +
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
+                (guid != null ? "guid=" + guid + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +

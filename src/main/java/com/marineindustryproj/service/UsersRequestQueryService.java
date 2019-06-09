@@ -113,6 +113,9 @@ public class UsersRequestQueryService extends QueryService<UsersRequest> {
             if (criteria.getChangeStatusUserLogin() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getChangeStatusUserLogin(), UsersRequest_.changeStatusUserLogin));
             }
+            if (criteria.getGuid() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getGuid(), UsersRequest_.guid));
+            }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(UsersRequest_.documents, JoinType.LEFT).get(Document_.id)));

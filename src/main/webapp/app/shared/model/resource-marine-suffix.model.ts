@@ -12,6 +12,7 @@ export interface IResourceMarineSuffix {
     createDate?: Moment;
     modifyUserLogin?: string;
     modifyDate?: Moment;
+    guid?: string;
     documents?: IDocumentMarineSuffix[];
     educationalModules?: IEducationalModuleMarineSuffix[];
     requestEducationalModules?: IRequestEducationalModuleMarineSuffix[];
@@ -27,6 +28,7 @@ export class ResourceMarineSuffix implements IResourceMarineSuffix {
         public createDate?: Moment,
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
+        public guid?: string,
         public documents?: IDocumentMarineSuffix[],
         public educationalModules?: IEducationalModuleMarineSuffix[],
         public requestEducationalModules?: IRequestEducationalModuleMarineSuffix[]

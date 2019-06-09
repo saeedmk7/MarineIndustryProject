@@ -13,6 +13,7 @@ export interface IAnnouncementMarineSuffix {
     createDate?: Moment;
     modifyUserLogin?: string;
     modifyDate?: Moment;
+    guid?: string;
     documents?: IDocumentMarineSuffix[];
 }
 
@@ -29,6 +30,7 @@ export class AnnouncementMarineSuffix implements IAnnouncementMarineSuffix {
         public createDate?: Moment,
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
+        public guid?: string,
         public documents?: IDocumentMarineSuffix[]
     ) {
         this.isActive = this.isActive || false;
