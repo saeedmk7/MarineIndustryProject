@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { IEducationalRecordMarineSuffix } from 'app/shared/model/educational-record-marine-suffix.model';
-import { AccountService } from 'app/core';
+import {AccountService, Principal} from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { EducationalRecordMarineSuffixService } from './educational-record-marine-suffix.service';
@@ -34,7 +34,7 @@ export class EducationalRecordMarineSuffixComponent implements OnInit, OnDestroy
         protected educationalRecordService: EducationalRecordMarineSuffixService,
         protected parseLinks: JhiParseLinks,
         protected jhiAlertService: JhiAlertService,
-        protected accountService: AccountService,
+        protected accountService: Principal,
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
         protected eventManager: JhiEventManager

@@ -116,10 +116,10 @@ export class ResourceMarineSuffixComponent implements OnInit, OnDestroy {
         this.searchbarModel.push(new SearchPanelModel('resource','title','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('resource','code','text','contains'));
 
-        if(!this.done)
+        /*if(!this.done)
         {
             this.loadAll();
-        }
+        }*/
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });

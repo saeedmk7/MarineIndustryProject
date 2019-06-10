@@ -131,9 +131,9 @@ export class EducationalCenterMarineSuffixComponent implements OnInit, OnDestroy
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if(!this.done){
+        /*if(!this.done){
             this.loadAll();
-        }
+        }*/
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });

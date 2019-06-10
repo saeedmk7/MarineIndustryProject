@@ -114,10 +114,10 @@ export class InstructionMarineSuffixComponent implements OnInit, OnDestroy {
         this.searchbarModel = new Array<SearchPanelModel>();
         this.searchbarModel.push(new SearchPanelModel('instruction','title','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('instruction','code','text','contains'));
-        if(!this.done)
+        /*if(!this.done)
         {
             this.loadAll();
-        }
+        }*/
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });

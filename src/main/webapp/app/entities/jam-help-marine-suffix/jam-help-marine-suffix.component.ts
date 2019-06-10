@@ -117,10 +117,10 @@ export class JamHelpMarineSuffixComponent implements OnInit, OnDestroy {
         this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
-        if(!this.done)
+        /*if(!this.done)
         {
             this.loadAll();
-        }
+        }*/
         //this.registerChangeInJamHelps();
     }
 

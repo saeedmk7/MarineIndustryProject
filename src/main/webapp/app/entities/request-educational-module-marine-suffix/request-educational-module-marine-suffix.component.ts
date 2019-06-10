@@ -396,16 +396,16 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
     prepareSearchPerson(){
         if(this.personService.people){
             this.people = this.personService.people;
-            if (!this.done) {
+            /*if (!this.done) {
                 this.makeCriteria();
-            }
+            }*/
         }
         else {
             this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
                     this.people = res.body;
-                    if (!this.done) {
+                    /*if (!this.done) {
                         this.makeCriteria();
-                    }
+                    }*/
                     //this.people.forEach(a => a["title"] = a.fullName);
                     //this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'personId', 'select', 'equals', this.people, "fullName"));
                 },

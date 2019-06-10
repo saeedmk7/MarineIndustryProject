@@ -18,6 +18,7 @@ export interface IJobRecordMarineSuffix {
     guid?: string;
     personFamily?: string;
     personId?: number;
+    personGuid?: string;
 }
 
 export class JobRecordMarineSuffix implements IJobRecordMarineSuffix {
@@ -38,6 +39,8 @@ export class JobRecordMarineSuffix implements IJobRecordMarineSuffix {
         public modifyDate?: Moment,
         public guid?: string,
         public personFamily?: string,
-        public personId?: number
+        public personId?: number,
+        public personGuid?: string
+
     ) {}
 }

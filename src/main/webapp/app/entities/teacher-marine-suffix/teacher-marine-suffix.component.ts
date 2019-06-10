@@ -36,7 +36,7 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
 
-    searchbarModel: SearchPanelModel[];
+    searchbarModel: SearchPanelModel[] = [];
     done:boolean = false;
     criteria: any;
 
@@ -62,6 +62,7 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
             this.predicate = data.pagingParams.predicate;
         });
         this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
+            debugger;
             this.criteria = criteria.content;
             this.done = true;
             this.loadAll(criteria.content);
@@ -149,17 +150,16 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
 
         let expiredOptions = [{id:0,title:'هیچکدام'},{id:1,title:'به پایان رسیده'},{id:2,title:'به پایان نرسیده'}];
 
-        this.searchbarModel = new Array<SearchPanelModel>();
         this.searchbarModel.push(new SearchPanelModel('teacher','name','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('teacher','family','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('teacher','phoneNumber','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('teacher','teachingSubject','text', 'contains'));
-        this.searchbarModel.push(new SearchPanelModel('teacher','expired','select','equals', expiredOptions))
+        this.searchbarModel.push(new SearchPanelModel('teacher','expired','select','equals', expiredOptions));
 
-        if(!this.done)
+        /*if(!this.done)
         {
             this.loadAll();
-        }
+        }*/
         //this.registerChangeInTeachers();
     }
 

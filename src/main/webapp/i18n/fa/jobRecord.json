@@ -2,9 +2,9 @@
     "marineindustryprojApp": {
         "jobRecord": {
             "home": {
-                "title": "سوابق شعلی",
+                "title": "سوابق شغلی",
                 "createLabel": "جدید",
-                "createOrEditLabel": " سابقه شغلی"
+                "createOrEditLabel": "سابقه شغلی"
             },
             "created": "سابقه شغلی با شناسه {{ param }} ایجاد شد.",
             "updated": "سابقه شغلی با شناسه {{ param }} ویرایش شد.",

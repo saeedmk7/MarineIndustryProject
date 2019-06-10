@@ -322,9 +322,9 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
             })
         });
 
-        if (!this.done) {
+        /*if (!this.done) {
             this.makeCriteria();
-        }
+        }*/
     }
     prepareSearchPerson(orgs: IOrganizationChartMarineSuffix[]) {
 

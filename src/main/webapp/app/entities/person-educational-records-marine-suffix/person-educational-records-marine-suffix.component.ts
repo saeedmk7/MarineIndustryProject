@@ -10,6 +10,10 @@ import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-char
 import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
 import {PersonEducationalRecordsMarineSuffixService} from "./person-educational-records-marine-suffix.service";
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+import {IJobRecordMarineSuffix} from "app/shared/model/job-record-marine-suffix.model";
+import {JobRecordMarineSuffixService} from "app/entities/job-record-marine-suffix";
+import {IEducationalRecordMarineSuffix} from "app/shared/model/educational-record-marine-suffix.model";
+import {EducationalRecordMarineSuffixService} from "app/entities/educational-record-marine-suffix";
 
 
 @Component({
@@ -22,6 +26,8 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     success: string;
     settingsAccount: any;
     myAccount: any;
+    jobRecords: IJobRecordMarineSuffix[];
+    educationalRecords: IEducationalRecordMarineSuffix[];
 
     currentUserFullName: string;
     jobTitle: string;
@@ -44,7 +50,10 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         private settingService: PersonEducationalRecordsMarineSuffixService,
         private organizationChartService: OrganizationChartMarineSuffixService,
         private personMarineSuffixService: PersonMarineSuffixService,
-        private convertObjectDatesService: ConvertObjectDatesService
+        private convertObjectDatesService: ConvertObjectDatesService,
+        private jobRecordService: JobRecordMarineSuffixService,
+        private educationalRecordService: EducationalRecordMarineSuffixService,
+
     ) {}
 
     ngOnInit() {
@@ -80,10 +89,43 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
             this.currentUserFullName = this.person.name + " " + this.person.family;
             this.jobTitle = this.person.jobTitle;
             this.prepareOrgChart(this.person.organizationChartId);
+
+            this.prepareJobRecords(this.person.id);
+            this.prepareEducationalRecords(this.person.id);
         }
         else {
             this.currentUserFullName = this.settingsAccount.login;
         }
+    }
+    prepareJobRecords(personId: number){
+        let criteria = [{
+            key: 'personId.equals',
+            value: personId
+        }];
+        this.jobRecordService.query({
+            page: 0,
+            size: 20000,
+            criteria,
+            sort: ["id", "asc"]
+        }).subscribe((resp:HttpResponse<IJobRecordMarineSuffix[]>) => {
+            this.jobRecords = resp.body;
+        },
+        (res: HttpResponse<any>) => this.onPersonError(res.body));
+    }
+    prepareEducationalRecords(personId: number){
+        let criteria = [{
+            key: 'personId.equals',
+            value: personId
+        }];
+        this.educationalRecordService.query({
+            page: 0,
+            size: 20000,
+            criteria,
+            sort: ["id", "asc"]
+        }).subscribe((resp:HttpResponse<IEducationalRecordMarineSuffix[]>) => {
+            this.educationalRecords = resp.body;
+        },
+        (res: HttpResponse<any>) => this.onPersonError(res.body));
     }
     prepareOrgChart(orgId: number){
         if(this.organizationChartService.organizationchartsAll)

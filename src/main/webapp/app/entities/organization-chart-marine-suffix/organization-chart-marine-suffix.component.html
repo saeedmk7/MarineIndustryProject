@@ -45,7 +45,8 @@
                 name="searchPeople"
                 [(ngModel)]="searchPerson">
             </ng-select>
-        </div>
+         </div>
+        <span>{{fullOrgTitle}}</span>
         <tree-root #tree [nodes]="nodes" [options]="options" (activate)="nodeActive($event)"></tree-root>
     </div>
     <div class="col-5">
@@ -61,6 +62,7 @@
                 name="selectedPeople"
                 [(ngModel)]="selectedPeople">
             </ng-select>
+
         </div>
     </div>
     <br/>

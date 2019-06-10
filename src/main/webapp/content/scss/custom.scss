@@ -494,9 +494,9 @@ nav.back-cover {
     /*background: url(/content/images/login.jpg) no-repeat center center;*/
     white-space: pre-wrap;
     content: "سیستم جامع آموزش منابع انسانی \A           سازمان صنایع دریایی";
-    color: blue;
+    color: antiquewhite;
     font-family: BTitrBold;
-    font-size: 45px;
+    font-size: 40px;
     display: block;
     position: absolute;
     top: 3%;
@@ -639,7 +639,7 @@ tr.new td {
     opacity: 1 !important;
 }
 .modal-backdrop{
-    background: url("/content/images/loginBack.jpg") no-repeat center center !important;
+    background: url("/content/images/loginBack3.png") no-repeat top center !important;
     background-size: cover !important;
 }
 .modal.show .modal-dialog {

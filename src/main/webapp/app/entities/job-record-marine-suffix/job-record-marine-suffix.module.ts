@@ -11,11 +11,13 @@ import {
     jobRecordRoute,
     jobRecordPopupRoute
 } from './';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {InputsModule} from "@progress/kendo-angular-inputs";
 
 const ENTITY_STATES = [...jobRecordRoute, ...jobRecordPopupRoute];
 
 @NgModule({
-    imports: [MarineindustryprojSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [MarineindustryprojSharedModule, BrowserAnimationsModule, InputsModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         JobRecordMarineSuffixComponent,
         JobRecordMarineSuffixDetailComponent,

@@ -34,8 +34,8 @@ export class OrganizationChartMarineSuffixComponent implements OnInit, OnDestroy
     };
     @ViewChild(TreeComponent)
     private tree: TreeComponent;
-
-    searchtxt:string;
+    fullOrgTitle: string;
+    searchtxt: string;
     error: string;
     success: string;
     isAdmin: boolean;
@@ -58,8 +58,9 @@ export class OrganizationChartMarineSuffixComponent implements OnInit, OnDestroy
 
 
         this.personService.find($event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
-
+            debugger;
             this.searchtxt = resp.body.organizationChartTitle;
+            this.fullOrgTitle = this.organizationCharts.find(a => a.id == resp.body.organizationChartId).fullTitle;
             this.search(this.searchtxt);
         },
             (res: HttpErrorResponse) => this.onError(res.message));

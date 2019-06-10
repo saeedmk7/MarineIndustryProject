@@ -10,6 +10,7 @@ import { IJobRecordMarineSuffix } from 'app/shared/model/job-record-marine-suffi
 import { JobRecordMarineSuffixService } from './job-record-marine-suffix.service';
 import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
 import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
+import * as persianMoment from 'jalali-moment';
 
 @Component({
     selector: 'mi-job-record-marine-suffix-update',
@@ -20,6 +21,9 @@ export class JobRecordMarineSuffixUpdateComponent implements OnInit {
     isSaving: boolean;
 
     people: IPersonMarineSuffix[];
+    person: IPersonMarineSuffix;
+    dateStartDateValid: number;
+    dateEndDateValid: number;
     /*createDate: string;
     modifyDate: string;*/
 
@@ -33,7 +37,29 @@ export class JobRecordMarineSuffixUpdateComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ jobRecord }) => {
+            debugger;
             this.jobRecord = jobRecord;
+            if(!this.jobRecord.personId)
+            {
+                let criteria = [{
+                    key: 'guid.equals',
+                    value: this.jobRecord.personGuid
+                }];
+                this.personService.query({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: ["id", "asc"]
+                }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
+                    this.person = resp.body[0];
+                    this.jobRecord.personId = this.person.id;
+                });
+            }
+            else{
+                this.personService.find(this.jobRecord.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
+                   this.person = resp.body;
+                });
+            }
         });
         this.personService.query().subscribe(
             (res: HttpResponse<IPersonMarineSuffix[]>) => {
@@ -42,13 +68,36 @@ export class JobRecordMarineSuffixUpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
-
+    checkDateValidation(event, dateType){
+        debugger;
+        try {
+            if (persianMoment(event.target.value, 'jYYYY/jMM/jDD').isValid()) {
+                if(dateType == 1)
+                    this.dateStartDateValid = 1;
+                else
+                    this.dateEndDateValid = 1;
+            }
+            else {
+                if(dateType == 1)
+                    this.dateStartDateValid = 2;
+                else
+                    this.dateEndDateValid = 2;
+            }
+        }
+        catch (e) {
+            if(dateType == 1)
+                this.dateStartDateValid = 2;
+            else
+                this.dateEndDateValid = 2;
+        }
+    }
     previousState() {
         window.history.back();
     }
 
     save() {
         this.isSaving = true;
+
         /*this.jobRecord.createDate = this.createDate != null ? moment(this.createDate, DATE_TIME_FORMAT) : null;
         this.jobRecord.modifyDate = this.modifyDate != null ? moment(this.modifyDate, DATE_TIME_FORMAT) : null;*/
         if (this.jobRecord.id !== undefined) {

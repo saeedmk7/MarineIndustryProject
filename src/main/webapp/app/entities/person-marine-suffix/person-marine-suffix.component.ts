@@ -133,9 +133,9 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if(!this.done){
+        /*if(!this.done){
             this.loadAll();
-        }
+        }*/
         //this.registerChangeInPeople();
     }
 

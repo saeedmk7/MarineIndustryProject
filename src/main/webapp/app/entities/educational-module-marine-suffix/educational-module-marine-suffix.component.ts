@@ -40,7 +40,7 @@ export class EducationalModuleMarineSuffixComponent implements OnInit, OnDestroy
     predicate: any;
     previousPage: any;
     reverse: any;
-    searchbarModel: SearchPanelModel[];
+    searchbarModel: SearchPanelModel[] = [];
     done:boolean = false;
     criteria: any;
 
@@ -130,32 +130,40 @@ export class EducationalModuleMarineSuffixComponent implements OnInit, OnDestroy
     }
 
     ngOnInit() {
-        this.scientificWorkGroupService.query().subscribe(
-            (res: HttpResponse<IScientificWorkGroupMarineSuffix[]>) => {
-                this.scientificWorkGroups = res.body;
-                this.skillableLevelOfSkillService.query().subscribe(
-                    (res: HttpResponse<ISkillableLevelOfSkillMarineSuffix[]>) => {
-                        this.skillableLevelOfSkills = res.body;
-                        this.organizationService.query().subscribe((res) => {
-                            this.organizations = res.body;
-                            this.searchbarModel = new Array<SearchPanelModel>();
-                            this.searchbarModel.push(new SearchPanelModel('educationalModule','title','text', 'contains'));
-                            this.searchbarModel.push(new SearchPanelModel('educationalModule','code','number', 'equals'));
-                            this.searchbarModel.push(new SearchPanelModel('educationalModule','scientificWorkGroupId','select','equals', this.scientificWorkGroups));
-                            this.searchbarModel.push(new SearchPanelModel('educationalModule','skillableLevelOfSkillId','select','equals', this.skillableLevelOfSkills));
-                            this.searchbarModel.push(new SearchPanelModel('educationalModule','organizationId','select','equals', this.organizations));
-                            /*this.searchbarModel.push(new SearchPanelModel('educationalModule','recommendedBy','text','contains'));*/
-                        }),
-                            (res: HttpErrorResponse) => this.onError(res.message);
-                    }),
-                    (res: HttpErrorResponse) => this.onError(res.message);
-            }),
-            (res: HttpErrorResponse) => this.onError(res.message);
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
-        if(!this.done)
-            this.loadAll();
+        this.searchbarModel.push(new SearchPanelModel('educationalModule','title','text', 'contains'));
+        this.searchbarModel.push(new SearchPanelModel('educationalModule','code','number', 'equals'));
+        this.prepareOrganization();
+        this.prepareScientific();
+        this.prepareSkillableLevelOfSkill();
+        /*if(!this.done)
+            this.loadAll();*/
+    }
+    prepareOrganization(){
+        this.organizationService.query().subscribe((res) => {
+            this.organizations = res.body;
+            this.searchbarModel.push(new SearchPanelModel('educationalModule','organizationId','select','equals', this.organizations));
+        }),
+            (res: HttpErrorResponse) => this.onError(res.message);
+    }
+    prepareScientific()
+    {
+        this.scientificWorkGroupService.query().subscribe(
+            (res: HttpResponse<IScientificWorkGroupMarineSuffix[]>) => {
+                this.scientificWorkGroups = res.body;
+                this.searchbarModel.push(new SearchPanelModel('educationalModule','scientificWorkGroupId','select','equals', this.scientificWorkGroups));
+            }),
+            (res: HttpErrorResponse) => this.onError(res.message);
+    }
+    prepareSkillableLevelOfSkill(){
+        this.skillableLevelOfSkillService.query().subscribe(
+            (res: HttpResponse<ISkillableLevelOfSkillMarineSuffix[]>) => {
+                this.skillableLevelOfSkills = res.body;
+                this.searchbarModel.push(new SearchPanelModel('educationalModule','skillableLevelOfSkillId','select','equals', this.skillableLevelOfSkills));
+            }),
+            (res: HttpErrorResponse) => this.onError(res.message);
     }
     ngOnDestroy() {
         //this.eventManager.destroy(this.eventSubscriber);

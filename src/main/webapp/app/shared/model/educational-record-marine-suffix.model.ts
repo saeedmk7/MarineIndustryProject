@@ -21,6 +21,7 @@ export interface IEducationalRecordMarineSuffix {
     fieldOfStudyId?: number;
     personFamily?: string;
     personId?: number;
+    personGuid?: string;
 }
 
 export class EducationalRecordMarineSuffix implements IEducationalRecordMarineSuffix {
@@ -44,6 +45,7 @@ export class EducationalRecordMarineSuffix implements IEducationalRecordMarineSu
         public fieldOfStudyTitle?: string,
         public fieldOfStudyId?: number,
         public personFamily?: string,
-        public personId?: number
+        public personId?: number,
+        public personGuid?: string
     ) {}
 }

@@ -99,22 +99,25 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
     }
 
     makeCriteria(criteria?,excelExport: boolean = false){
-
+        debugger;
         if (criteria) {
-            let val = +criteria.find(a => a.key == 'yearId.equals').value;
-            //criteria.pop('yearId');
-            criteria = criteria.filter(a => a.key != 'yearId.equals');
-            if (val) {
-                let yearDetail = this.yearsCollections.find(a => a.year == val);
-                let beginDate = new Date(yearDetail.beginDate).toISOString();
-                let endDate = new Date(yearDetail.endDate).toISOString();
+            const year = criteria.find(a => a.key == 'yearId.equals');
+            if(year) {
+                const val = +year.value;
+                //criteria.pop('yearId');
+                criteria = criteria.filter(a => a.key != 'yearId.equals');
+                if (val) {
+                    let yearDetail = this.yearsCollections.find(a => a.year == val);
+                    let beginDate = new Date(yearDetail.beginDate).toISOString();
+                    let endDate = new Date(yearDetail.endDate).toISOString();
 
-                criteria.push({
-                    key: 'createDate.lessOrEqualThan', value: endDate
-                });
-                criteria.push({
-                    key: 'createDate.greaterOrEqualThan', value: beginDate
-                });
+                    criteria.push({
+                        key: 'createDate.lessOrEqualThan', value: endDate
+                    });
+                    criteria.push({
+                        key: 'createDate.greaterOrEqualThan', value: beginDate
+                    });
+                }
             }
         }
         else{
@@ -388,18 +391,18 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
         if (this.educationalModuleService.educationalModules) {
             this.educationalModules = this.educationalModuleService.educationalModules;
             /*this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle', 'half'));*/
-            if (!this.done) {
+            /*if (!this.done) {
                 this.makeCriteria();
-            }
+            }*/
         }
         else {
             this.educationalModuleService.query().subscribe(
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                     this.educationalModules = res.body;
                     /*this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle', 'half'));*/
-                    if (!this.done) {
+                    /*if (!this.done) {
                         this.makeCriteria();
-                    }
+                    }*/
                 },
                 (res: HttpErrorResponse) => this.onError(res.message))
         }
@@ -527,20 +530,44 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.requestNiazsanjiFardis = this.convertObjectDatesService.changeArrayDate(data);
-
+        if(!this.educationalModules) {
+            if (this.educationalModuleService.educationalModules) {
+                this.educationalModules = this.educationalModuleService.educationalModules;
+                this.prepareResult();
+                /*this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle', 'half'));*/
+                /*if (!this.done) {
+                    this.makeCriteria();
+                }*/
+            }
+            else {
+                this.educationalModuleService.query().subscribe(
+                    (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
+                        this.educationalModules = res.body;
+                        this.prepareResult();
+                        /*this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle', 'half'));*/
+                        /*if (!this.done) {
+                            this.makeCriteria();
+                        }*/
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message))
+            }
+        }
+        else{
+            this.prepareResult();
+        }
+    }
+    prepareResult(){
         this.requestNiazsanjiFardis.forEach((a: IRequestNiazsanjiFardiMarineSuffix) => {
-           a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
+            a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
 
-           let education: IEducationalModuleMarineSuffix;
-            if(a.allEducationalModuleId)
-            {
+            let education: IEducationalModuleMarineSuffix;
+            if (a.allEducationalModuleId) {
                 education = this.educationalModules.find(w => w.id == a.allEducationalModuleId);
             }
-            if(a.approvedEducationalModuleId)
-            {
+            if (a.approvedEducationalModuleId) {
                 education = this.educationalModules.find(w => w.id == a.approvedEducationalModuleId);
             }
-            if(education){
+            if (education) {
                 a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
                 a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)
             }

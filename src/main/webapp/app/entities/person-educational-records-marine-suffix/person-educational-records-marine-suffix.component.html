@@ -39,114 +39,125 @@
         </div>
         <div class="dataTable">
                 <h4>2- سوابق تحصیلی</h4>
-        <table border="1" style="width: 100%">
-            <tr class="special-tr">
-                <td>نام: {{person.name}}</td>
-                <td>نام خانوادگی: {{person.family}}</td>
-                <td>نام پدر: {{person.fatherName}}</td>
-                <td>شماره شناسنامه: {{person.certificateNumber}}</td>
-            </tr>
-            <tr class="special-tr">
-                <td>شغل سازمانی: {{person.jobTitle}}</td>
-                <td>شغل عملی: {{person.practicaljobTitle}}</td>
-                <td>تاریخ تولد: {{person.birthDate}}</td>
-                <td>کدملی: {{person.nationalId}}</td>
-            </tr>
-            <tr class="special-tr">
-                <td>نوع عضویت: {{person.employmentTypeTitle}}</td>
-                <td>شماره پرسنلی: {{person.personelCode}}</td>
-                <td colspan="2">جایگاه در سازمان: {{organizationTitle}}</td>
-            </tr>
-        </table>
+            <div class="table-responsive" *ngIf="educationalRecords">
+                <table class="table table-striped table-bordered table-hover table-sm">
+                    <thead>
+                        <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> </th>-->
+                        <th>ردیف</th>
+                        <th><span jhiTranslate="marineindustryprojApp.educationalRecord.qualificationText">Qualification Text</span> </th>
+                        <th><span jhiTranslate="marineindustryprojApp.educationalRecord.fieldOfStudyText">Field Of Study Text</span> </th>
+                        <th><span jhiTranslate="marineindustryprojApp.educationalRecord.educationalCenterText">Educational Center Text</span> </th>
+                        <th><span jhiTranslate="marineindustryprojApp.educationalRecord.totalAverage">Total Average</span> </th>
+                        <th><span jhiTranslate="marineindustryprojApp.educationalRecord.startDate">Start Date</span> </th>
+                        <th><span jhiTranslate="marineindustryprojApp.educationalRecord.endDate">End Date</span> </th>
+                        <th><span jhiTranslate="marineindustryprojApp.educationalRecord.description">Description</span> </th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let educationalRecord of educationalRecords ;let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{educationalRecord.qualificationText}}</td>
+                        <td>{{educationalRecord.fieldOfStudyText}}</td>
+                        <td>{{educationalRecord.educationalCenterText}}</td>
+                        <td>{{educationalRecord.totalAverage}}</td>
+                        <td>{{educationalRecord.startDate}}</td>
+                        <td>{{educationalRecord.endDate}}</td>
+                        <td>{{educationalRecord.description}}</td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="submit"
+                                        [routerLink]="['/educational-record-marine-suffix', educationalRecord.id, 'edit']"
+                                        class="btn btn-primary btn-sm">
+                                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="20">
+                            <span>
+                                <!--<fa-icon [icon]="'plus'"></fa-icon>&nbsp;افزودن سابقه شغلی-->
+                                <a class="enableLink" [href]="'#/educational-record-marine-suffix/new/' + person.guid">
+                                    <fa-icon [icon]="'plus'"></fa-icon>
+                                    افزودن سابقه تحصیلی
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            <div class="dataTable">
+                <h4>3- سوابق شغلی (از بدو استخدام تاکنون)</h4>
+                <div class="table-responsive" *ngIf="jobRecords">
+                    <table class="table table-striped table-bordered table-hover table-sm">
+                        <thead>
+                        <tr>
+                            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> </th>-->
+                            <th>ردیف</th>
+                            <th><span jhiTranslate="marineindustryprojApp.jobRecord.workOrganization">Work Organization</span> </th>
+                            <th><span jhiTranslate="marineindustryprojApp.jobRecord.workSection">Work Section</span> </th>
+                            <th><span jhiTranslate="marineindustryprojApp.jobRecord.jobResponsibility">Job Responsibility</span> </th>
+                            <th><span jhiTranslate="marineindustryprojApp.jobRecord.jobPosition">Job Position</span> </th>
+                            <th><span jhiTranslate="marineindustryprojApp.jobRecord.startDate">Start Date</span> </th>
+                            <th><span jhiTranslate="marineindustryprojApp.jobRecord.endDate">End Date</span> </th>
+                            <th><span jhiTranslate="marineindustryprojApp.jobRecord.leaveReason">Leave Reason</span> </th>
+                            <!--<th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.jobRecord.description">Description</span> </th>-->
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let jobRecord of jobRecords ;let i = index">
+                            <!--<td><a [routerLink]="['/job-record-marine-suffix', jobRecord.id, 'view' ]">{{jobRecord.id}}</a></td>-->
+                            <td>{{i+1}}</td>
+                            <td>{{jobRecord.workOrganization}}</td>
+                            <td>{{jobRecord.workSection}}</td>
+                            <td>{{jobRecord.jobResponsibility}}</td>
+                            <td>{{jobRecord.jobPosition}}</td>
+                            <!--<td>{{jobRecord.totalHour}}</td>-->
+                            <td>{{jobRecord.startDate}}</td>
+                            <td>{{jobRecord.endDate}}</td>
+                            <td>{{jobRecord.leaveReason}}</td>
+                            <!--<td>{{jobRecord.description}}</td>-->
+                            <!--<td>{{jobRecord.createUserLogin}}</td>
+                            <td>{{jobRecord.createDate | date:'medium'}}</td>
+                            <td>{{jobRecord.modifyUserLogin}}</td>
+                            <td>{{jobRecord.modifyDate | date:'medium'}}</td>
+                            <td>{{jobRecord.guid}}</td>
+                            <td>
+                                <div *ngIf="jobRecord.personId">
+                                    <a [routerLink]="['../person-marine-suffix', jobRecord.personId , 'view' ]" >{{jobRecord.personFamily}}</a>
+                                </div>
+                            </td>-->
+                            <td class="text-right">
+                                <button type="submit"
+                                        [routerLink]="['/job-record-marine-suffix', jobRecord.id, 'edit']"
+                                        class="btn btn-primary btn-sm">
+                                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="20">
+
+                            <span>
+                                <!--<fa-icon [icon]="'plus'"></fa-icon>&nbsp;افزودن سابقه شغلی-->
+                                <a id="jh-create-entity" class="enableLink" [href]="'#/job-record-marine-suffix/new/' + person.guid">
+                                    <fa-icon [icon]="'plus'"></fa-icon>
+                                    افزودن سابقه شغلی
+                                </a>
+                            </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
         </div>
         </div>
-                <div class="card border-success ">
-                    <a class="card-header center" style="background-color: aliceblue;">
-                        <span class="panel-title">پنل اطلاعات کاربر</span>
-                    </a>
-                <div class="card-body">
-                    <div class="col-md-4">
-                        <div class="col-md-3">
-                            <label>نام:</label>
-                        </div>
-                        <div class="col-md-9">
-                            <label>{{person.name}}</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="col-md-6">
-                            <label>نام خانوادگی:</label>
-                        </div>
-                        <div class="col-md-6">
-                            <label>{{person.family}}</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="col-md-3">
-                            <label>کدپرسنلی:</label>
-                        </div>
-                        <div class="col-md-9">
-                            <label>{{person.personelCode}}</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="col-md-3">
-                            <label>کدملی:</label>
-                        </div>
-                        <div class="col-md-9">
-                            <label>{{person.nationalId}}</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="col-md-6">
-                            <label>نام پدر:</label>
-                        </div>
-                        <div class="col-md-6">
-                            <label>{{person.fatherName}}</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="col-md-6">
-                            <label><span jhiTranslate="marineindustryprojApp.person.employmentType">Employment Type</span>:</label>
-                        </div>
-                        <div class="col-md-6">
-                            <label>{{person.employmentTypeTitle}}</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                    <div class="col-md-6">
-                        <label>شناسه شغل:</label>
-                    </div>
-                    <div class="col-md-6">
-                        <label>{{person.jobId}}</label>
-                    </div>
-                </div>
-                    <div class="col-md-4">
-                    <div class="col-md-6">
-                        <label><span jhiTranslate="marineindustryprojApp.person.job">Job</span>:</label>
-                    </div>
-                    <div class="col-md-6">
-                        <label>{{person.jobTitle}}</label>
-                    </div>
-                </div>
-                    <div class="col-md-4">
-                    <div class="col-md-6">
-                        <label><span jhiTranslate="marineindustryprojApp.person.practicaljob">Practicaljob</span>:</label>
-                    </div>
-                    <div class="col-md-6">
-                        <label>{{person.practicaljobTitle}}</label>
-                    </div>
-                </div>
-                    <div class="col-md-12">
-                        <div class="col-md-3">
-                            <label>جایگاه در سازمان:</label>
-                        </div>
-                        <div class="col-md-9">
-                            <label>{{organizationTitle}}</label>
-                        </div>
-                    </div>
-                </div>
-                </div>
 
     </div>
 

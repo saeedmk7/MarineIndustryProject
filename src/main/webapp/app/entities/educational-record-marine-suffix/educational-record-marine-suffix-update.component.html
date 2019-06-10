@@ -9,7 +9,7 @@
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="educationalRecord.id" readonly />
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.qualificationText" for="field_qualificationText">Qualification Text</label>
                     <input type="text" class="form-control" name="qualificationText" id="field_qualificationText"
                         [(ngModel)]="educationalRecord.qualificationText" maxlength="1000"/>
@@ -30,6 +30,44 @@
                         This field cannot be longer than 1000 characters.
                         </small>
                     </div>
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.qualification" for="field_qualification">Qualification</label>
+                    <!--<select class="form-control" id="field_qualification" name="qualification" [(ngModel)]="educationalRecord.qualificationId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="qualificationOption.id" *ngFor="let qualificationOption of qualifications; trackBy: trackQualificationById">{{qualificationOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="qualifications"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="qualification"
+                        id="field_qualification"
+                        [(ngModel)]="educationalRecord.qualificationId">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.fieldOfStudy" for="field_fieldOfStudy">Field Of Study</label>
+                    <!--<select class="form-control" id="field_fieldOfStudy" name="fieldOfStudy" [(ngModel)]="educationalRecord.fieldOfStudyId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="fieldOfStudyOption.id" *ngFor="let fieldOfStudyOption of fieldofstudies; trackBy: trackFieldOfStudyById">{{fieldOfStudyOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="fieldofstudies"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید"
+                        name="fieldOfStudy"
+                        id="field_fieldOfStudy"
+                        [(ngModel)]="educationalRecord.fieldOfStudyId">
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.educationalCenterText" for="field_educationalCenterText">Educational Center Text</label>
@@ -44,30 +82,43 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.totalAverage" for="field_totalAverage">Total Average</label>
-                    <input type="text" class="form-control" name="totalAverage" id="field_totalAverage"
-                        [(ngModel)]="educationalRecord.totalAverage" maxlength="50"/>
-                    <div [hidden]="!(editForm.controls.totalAverage?.dirty && editForm.controls.totalAverage?.invalid)">
+                    <!--<input type="text" class="form-control" name="totalAverage" id="field_totalAverage"
+                        [(ngModel)]="educationalRecord.totalAverage" maxlength="50"/>-->
+                    <kendo-maskedtextbox
+                        [includeLiterals]="true"
+                        [maskValidation]="valid"
+                        [(ngModel)]="educationalRecord.totalAverage"
+                        name="totalAverage"
+                        class="form-control"
+                        id="field_totalAverage"
+                        (blur)="checkValidation($event)"
+                        mask="00.00">
+                    </kendo-maskedtextbox>
+                    <span *ngIf="valid" class="alert-success">مقدار معتبر است</span>
+                    <span *ngIf="!valid" class="alert-danger">مقدار نامعتبر است</span>
+                    <!--<div [hidden]="!(editForm.controls.totalAverage?.dirty && editForm.controls.totalAverage?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.totalAverage?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
                         This field cannot be longer than 50 characters.
                         </small>
-                    </div>
+                    </div>-->
                 </div>
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.totalHour" for="field_totalHour">Total Hour</label>
                     <input type="number" class="form-control" name="totalHour" id="field_totalHour"
                         [(ngModel)]="educationalRecord.totalHour" />
-                </div>
+                </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.startDate" for="field_startDate">Start Date</label>
-                    <input type="text" class="form-control" name="startDate" id="field_startDate"
-                        [(ngModel)]="educationalRecord.startDate" maxlength="50"/>
-                    <div [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.startDate?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                        This field cannot be longer than 50 characters.
-                        </small>
-                    </div>
+                    <ng-select
+                        [items]="years"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        placeholder="انتخاب نمائید."
+                        name="startDate"
+                        id="field_startDate"
+                        [(ngModel)]="educationalRecord.startDate">
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.endDate" for="field_endDate">End Date</label>
@@ -91,7 +142,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+              <!--  <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.createUserLogin" for="field_createUserLogin">Create User Login</label>
                     <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
                         [(ngModel)]="educationalRecord.createUserLogin" maxlength="50"/>
@@ -139,27 +190,14 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.qualification" for="field_qualification">Qualification</label>
-                    <select class="form-control" id="field_qualification" name="qualification" [(ngModel)]="educationalRecord.qualificationId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="qualificationOption.id" *ngFor="let qualificationOption of qualifications; trackBy: trackQualificationById">{{qualificationOption.title}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.fieldOfStudy" for="field_fieldOfStudy">Field Of Study</label>
-                    <select class="form-control" id="field_fieldOfStudy" name="fieldOfStudy" [(ngModel)]="educationalRecord.fieldOfStudyId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="fieldOfStudyOption.id" *ngFor="let fieldOfStudyOption of fieldofstudies; trackBy: trackFieldOfStudyById">{{fieldOfStudyOption.title}}</option>
-                    </select>
-                </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.person" for="field_person">Person</label>
                     <select class="form-control" id="field_person" name="person" [(ngModel)]="educationalRecord.personId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="personOption.id" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.family}}</option>
                     </select>
-                </div>
+                </div>-->
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

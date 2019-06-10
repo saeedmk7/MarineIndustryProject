@@ -14,6 +14,7 @@ import { IFieldOfStudyMarineSuffix } from 'app/shared/model/field-of-study-marin
 import { FieldOfStudyMarineSuffixService } from 'app/entities/field-of-study-marine-suffix';
 import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
 import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
+import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 
 @Component({
     selector: 'mi-educational-record-marine-suffix-update',
@@ -23,14 +24,13 @@ export class EducationalRecordMarineSuffixUpdateComponent implements OnInit {
     educationalRecord: IEducationalRecordMarineSuffix;
     isSaving: boolean;
 
+    person: IPersonMarineSuffix;
     qualifications: IQualificationMarineSuffix[];
 
     fieldofstudies: IFieldOfStudyMarineSuffix[];
-
+    years: any[] = [];
     people: IPersonMarineSuffix[];
-    createDate: string;
-    modifyDate: string;
-
+    valid: boolean;
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected educationalRecordService: EducationalRecordMarineSuffixService,
@@ -39,13 +39,44 @@ export class EducationalRecordMarineSuffixUpdateComponent implements OnInit {
         protected personService: PersonMarineSuffixService,
         protected activatedRoute: ActivatedRoute
     ) {}
-
+    checkValidation(event){
+        debugger;
+        try {
+            const two = event.split(',');
+            if(two[0] > 20 || two[0] < 0)
+                this.valid = false;
+            else
+                this.valid = true;
+        }
+        catch (e) {
+            this.valid = false;
+        }
+    }
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ educationalRecord }) => {
             this.educationalRecord = educationalRecord;
-            this.createDate = this.educationalRecord.createDate != null ? this.educationalRecord.createDate.format(DATE_TIME_FORMAT) : null;
-            this.modifyDate = this.educationalRecord.modifyDate != null ? this.educationalRecord.modifyDate.format(DATE_TIME_FORMAT) : null;
+            if(!this.educationalRecord.personId)
+            {
+                let criteria = [{
+                    key: 'guid.equals',
+                    value: this.educationalRecord.personGuid
+                }];
+                this.personService.query({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: ["id", "asc"]
+                }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
+                    this.person = resp.body[0];
+                    this.educationalRecord.personId = this.person.id;
+                });
+            }
+            else{
+                this.personService.find(this.educationalRecord.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
+                    this.person = resp.body;
+                });
+            }
         });
         this.qualificationService.query().subscribe(
             (res: HttpResponse<IQualificationMarineSuffix[]>) => {
@@ -65,6 +96,9 @@ export class EducationalRecordMarineSuffixUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        for (let i = 1300; i < 1500; i++) {
+            this.years.push(i);
+        }
     }
 
     previousState() {
@@ -73,8 +107,6 @@ export class EducationalRecordMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.educationalRecord.createDate = this.createDate != null ? moment(this.createDate, DATE_TIME_FORMAT) : null;
-        this.educationalRecord.modifyDate = this.modifyDate != null ? moment(this.modifyDate, DATE_TIME_FORMAT) : null;
         if (this.educationalRecord.id !== undefined) {
             this.subscribeToSaveResponse(this.educationalRecordService.update(this.educationalRecord));
         } else {

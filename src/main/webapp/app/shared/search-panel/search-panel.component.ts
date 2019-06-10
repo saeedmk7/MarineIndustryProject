@@ -17,6 +17,7 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
     ngOnInit() {
 
         this.eventSubscriber = this.router.events.subscribe((val: NavigationEnd) => {
+
             if(val instanceof NavigationEnd) {
                 if(this.lastUrl != val.urlAfterRedirects){
                     this.lastUrl = val.urlAfterRedirects;
@@ -27,10 +28,12 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
                 }
             }
         });
+        setTimeout(() => this.search(), 1000);
 
         console.log("I got:", this.searchPanelModel);
     }
     search(){
+        debugger;
         let url = window.location.href;
         let criteria = [];
         this.searchPanelModel.forEach((a) => {

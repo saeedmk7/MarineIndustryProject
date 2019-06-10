@@ -123,10 +123,10 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
         this.searchbarModel.push(new SearchPanelModel('job','jobCode','text','contains'));
         this.searchbarModel.push(new SearchPanelModel('job','first3JobCode','text','contains'));
 
-        if(!this.done)
+        /*if(!this.done)
         {
             this.loadAll();
-        }
+        }*/
     }
 
     ngOnDestroy() {

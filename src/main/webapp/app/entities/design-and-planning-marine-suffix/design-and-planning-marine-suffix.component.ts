@@ -181,18 +181,18 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         if (this.educationalModuleService.educationalModules) {
             this.educationalModules = this.educationalModuleService.educationalModules;
             //this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle'));
-            if (!this.done) {
+            /*if (!this.done) {
                 this.loadAll();
-            }
+            }*/
         }
         else {
             this.educationalModuleService.query().subscribe(
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                     this.educationalModules = res.body;
                     //this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle'));
-                    if (!this.done) {
+                    /*if (!this.done) {
                         this.loadAll();
-                    }
+                    }*/
                 },
                 (res: HttpErrorResponse) => this.onError(res.message))
         }

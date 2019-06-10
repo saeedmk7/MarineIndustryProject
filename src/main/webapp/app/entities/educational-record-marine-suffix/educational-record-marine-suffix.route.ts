@@ -12,6 +12,7 @@ import { EducationalRecordMarineSuffixDetailComponent } from './educational-reco
 import { EducationalRecordMarineSuffixUpdateComponent } from './educational-record-marine-suffix-update.component';
 import { EducationalRecordMarineSuffixDeletePopupComponent } from './educational-record-marine-suffix-delete-dialog.component';
 import { IEducationalRecordMarineSuffix } from 'app/shared/model/educational-record-marine-suffix.model';
+import {JobRecordMarineSuffix} from "app/shared/model/job-record-marine-suffix.model";
 
 @Injectable({ providedIn: 'root' })
 export class EducationalRecordMarineSuffixResolve implements Resolve<IEducationalRecordMarineSuffix> {
@@ -25,7 +26,16 @@ export class EducationalRecordMarineSuffixResolve implements Resolve<IEducationa
                 map((educationalRecord: HttpResponse<EducationalRecordMarineSuffix>) => educationalRecord.body)
             );
         }
-        return of(new EducationalRecordMarineSuffix());
+        const personGuid = route.params['personGuid'] ? route.params['personGuid'] : null;
+        if(personGuid)
+        {
+            let newObject = new EducationalRecordMarineSuffix();
+            newObject.personGuid = personGuid;
+            return of(newObject);
+        }
+        else {
+            return of(new EducationalRecordMarineSuffix());
+        }
     }
 }
 
@@ -57,6 +67,17 @@ export const educationalRecordRoute: Routes = [
     },
     {
         path: 'educational-record-marine-suffix/new',
+        component: EducationalRecordMarineSuffixUpdateComponent,
+        resolve: {
+            educationalRecord: EducationalRecordMarineSuffixResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'marineindustryprojApp.educationalRecord.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },{
+        path: 'educational-record-marine-suffix/new/:personGuid',
         component: EducationalRecordMarineSuffixUpdateComponent,
         resolve: {
             educationalRecord: EducationalRecordMarineSuffixResolve

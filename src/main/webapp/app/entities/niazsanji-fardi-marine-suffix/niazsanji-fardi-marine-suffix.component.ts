@@ -132,27 +132,33 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
     createCriteria(criteria?): any {
 
         if (criteria) {
-            let val = +criteria.find(a => a.key == 'yearId.equals').value;
-            criteria = criteria.filter(a => a.key != 'yearId.equals');
-            if (val) {
-                let yearDetail = this.yearsCollections.find(a => a.year == val);
-                let beginDate = new Date(yearDetail.beginDate).toISOString();
-                let endDate = new Date(yearDetail.endDate).toISOString();
+            const year = criteria.find(a => a.key == 'yearId.equals');
+            if(year) {
+                const val = +year.value;
+                criteria = criteria.filter(a => a.key != 'yearId.equals');
+                if (val) {
+                    let yearDetail = this.yearsCollections.find(a => a.year == val);
+                    let beginDate = new Date(yearDetail.beginDate).toISOString();
+                    let endDate = new Date(yearDetail.endDate).toISOString();
 
-                criteria.push({
-                    key: 'createDate.lessOrEqualThan', value: endDate
-                });
-                criteria.push({
-                    key: 'createDate.greaterOrEqualThan', value: beginDate
-                });
+                    criteria.push({
+                        key: 'createDate.lessOrEqualThan', value: endDate
+                    });
+                    criteria.push({
+                        key: 'createDate.greaterOrEqualThan', value: beginDate
+                    });
+                }
             }
-            const orgId = +criteria.find(a => a.key == 'organizationChartId.equals').value;
-            criteria = criteria.filter(a => a.key != 'organizationChartId.equals');
-            if(orgId){
-                const childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, orgId);
-                criteria.push({
-                    key:'organizationChartId.in', value: childIds
-                });
+            const org = criteria.find(a => a.key == 'organizationChartId.equals');
+            if(org) {
+                const orgId = +org.value;
+                criteria = criteria.filter(a => a.key != 'organizationChartId.equals');
+                if (orgId) {
+                    const childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, orgId);
+                    criteria.push({
+                        key: 'organizationChartId.in', value: childIds
+                    });
+                }
             }
         }
         else{
@@ -308,18 +314,18 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
         if(this.educationalModuleService.educationalModules){
             this.educationalModules = this.educationalModuleService.educationalModules
             /*this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, "fullTitle",'half'));*/
-            if (!this.done) {
+            /*if (!this.done) {
                 this.loadAll();
-            }
+            }*/
         }
         else {
             this.educationalModuleService.query().subscribe(
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                     this.educationalModules = res.body;
               /*      this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', res.body, "fullTitle",'half'));*/
-                    if (!this.done) {
+                    /*if (!this.done) {
                         this.loadAll();
-                    }
+                    }*/
                 },
                 (res: HttpErrorResponse) => this.onError(res.message))
         }
