@@ -2,34 +2,34 @@
     "marineindustryprojApp": {
         "jobRecord": {
             "home": {
-                "title": "Job Records",
-                "createLabel": "Create a new Job Record",
-                "createOrEditLabel": "Create or edit a Job Record"
+                "title": "سوابق شعلی",
+                "createLabel": "جدید",
+                "createOrEditLabel": " سابقه شغلی"
             },
-            "created": "A new Job Record is created with identifier {{ param }}",
-            "updated": "A Job Record is updated with identifier {{ param }}",
-            "deleted": "A Job Record is deleted with identifier {{ param }}",
+            "created": "سابقه شغلی با شناسه {{ param }} ایجاد شد.",
+            "updated": "سابقه شغلی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "سابقه شغلی با شناسه {{ param }} حذف شد.",
             "delete": {
-                "question": "Are you sure you want to delete Job Record {{ id }}?"
+                "question": "آیا برای حذف سابقه شغلی با شناسه {{ id }} مطمئنید؟"
             },
             "detail": {
-                "title": "Job Record"
+                "title": "جزئیات اطلاعات سابقه شغلی"
             },
-            "workOrganization": "Work Organization",
-            "workSection": "Work Section",
-            "jobResponsibility": "Job Responsibility",
-            "jobPosition": "Job Position",
-            "totalHour": "Total Hour",
-            "startDate": "Start Date",
-            "endDate": "End Date",
-            "leaveReason": "Leave Reason",
-            "description": "Description",
-            "createUserLogin": "Create User Login",
-            "createDate": "Create Date",
-            "modifyUserLogin": "Modify User Login",
-            "modifyDate": "Modify Date",
+            "workOrganization": "سازمان محل خدمت",
+            "workSection": "واحد/قسمت",
+            "jobResponsibility": "شغل/مسئولیت",
+            "jobPosition": "جایگاه",
+            "totalHour": "مدت کل",
+            "startDate": "ازتاریخ",
+            "endDate": "تا تاریخ",
+            "leaveReason": "علت کناره گیری از شغل یا فعالیت",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
             "guid": "Guid",
-            "person": "Person"
+            "person": "پرسنل"
         }
     }
 }

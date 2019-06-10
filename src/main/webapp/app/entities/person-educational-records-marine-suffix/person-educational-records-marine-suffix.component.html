@@ -1,5 +1,6 @@
 <div>
     <div class="row justify-content-center">
+        <div class="myContent">
         <table border="1" style="width: 100%">
             <tr>
                 <td style="text-align: center"><img src="/content/images/Sanaye192.png" style="width: 150px;"/> </td>
@@ -14,6 +15,7 @@
             </tr>
         </table>
             <mi-alert-error></mi-alert-error>
+        <div class="dataTable">
                 <h4>1- مشخصات فردی:</h4>
         <table border="1" style="width: 100%">
             <tr class="special-tr">
@@ -22,7 +24,42 @@
                 <td>نام پدر: {{person.fatherName}}</td>
                 <td>شماره شناسنامه: {{person.certificateNumber}}</td>
             </tr>
+            <tr class="special-tr">
+                <td>شغل سازمانی: {{person.jobTitle}}</td>
+                <td>شغل عملی: {{person.practicaljobTitle}}</td>
+                <td>تاریخ تولد: {{person.birthDate}}</td>
+                <td>کدملی: {{person.nationalId}}</td>
+            </tr>
+            <tr class="special-tr">
+                <td>نوع عضویت: {{person.employmentTypeTitle}}</td>
+                <td>شماره پرسنلی: {{person.personelCode}}</td>
+                <td colspan="2">جایگاه در سازمان: {{organizationTitle}}</td>
+            </tr>
         </table>
+        </div>
+        <div class="dataTable">
+                <h4>2- سوابق تحصیلی</h4>
+        <table border="1" style="width: 100%">
+            <tr class="special-tr">
+                <td>نام: {{person.name}}</td>
+                <td>نام خانوادگی: {{person.family}}</td>
+                <td>نام پدر: {{person.fatherName}}</td>
+                <td>شماره شناسنامه: {{person.certificateNumber}}</td>
+            </tr>
+            <tr class="special-tr">
+                <td>شغل سازمانی: {{person.jobTitle}}</td>
+                <td>شغل عملی: {{person.practicaljobTitle}}</td>
+                <td>تاریخ تولد: {{person.birthDate}}</td>
+                <td>کدملی: {{person.nationalId}}</td>
+            </tr>
+            <tr class="special-tr">
+                <td>نوع عضویت: {{person.employmentTypeTitle}}</td>
+                <td>شماره پرسنلی: {{person.personelCode}}</td>
+                <td colspan="2">جایگاه در سازمان: {{organizationTitle}}</td>
+            </tr>
+        </table>
+        </div>
+        </div>
                 <div class="card border-success ">
                     <a class="card-header center" style="background-color: aliceblue;">
                         <span class="panel-title">پنل اطلاعات کاربر</span>

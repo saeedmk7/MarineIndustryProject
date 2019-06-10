@@ -20,8 +20,8 @@ export class JobRecordMarineSuffixUpdateComponent implements OnInit {
     isSaving: boolean;
 
     people: IPersonMarineSuffix[];
-    createDate: string;
-    modifyDate: string;
+    /*createDate: string;
+    modifyDate: string;*/
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -34,8 +34,6 @@ export class JobRecordMarineSuffixUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ jobRecord }) => {
             this.jobRecord = jobRecord;
-            this.createDate = this.jobRecord.createDate != null ? this.jobRecord.createDate.format(DATE_TIME_FORMAT) : null;
-            this.modifyDate = this.jobRecord.modifyDate != null ? this.jobRecord.modifyDate.format(DATE_TIME_FORMAT) : null;
         });
         this.personService.query().subscribe(
             (res: HttpResponse<IPersonMarineSuffix[]>) => {
@@ -51,8 +49,8 @@ export class JobRecordMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.jobRecord.createDate = this.createDate != null ? moment(this.createDate, DATE_TIME_FORMAT) : null;
-        this.jobRecord.modifyDate = this.modifyDate != null ? moment(this.modifyDate, DATE_TIME_FORMAT) : null;
+        /*this.jobRecord.createDate = this.createDate != null ? moment(this.createDate, DATE_TIME_FORMAT) : null;
+        this.jobRecord.modifyDate = this.modifyDate != null ? moment(this.modifyDate, DATE_TIME_FORMAT) : null;*/
         if (this.jobRecord.id !== undefined) {
             this.subscribeToSaveResponse(this.jobRecordService.update(this.jobRecord));
         } else {

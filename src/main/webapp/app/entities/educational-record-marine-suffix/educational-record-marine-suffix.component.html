@@ -14,38 +14,40 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th>ردیف</th>
             <th jhiSortBy="qualificationText"><span jhiTranslate="marineindustryprojApp.educationalRecord.qualificationText">Qualification Text</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="fieldOfStudyText"><span jhiTranslate="marineindustryprojApp.educationalRecord.fieldOfStudyText">Field Of Study Text</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="educationalCenterText"><span jhiTranslate="marineindustryprojApp.educationalRecord.educationalCenterText">Educational Center Text</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="totalAverage"><span jhiTranslate="marineindustryprojApp.educationalRecord.totalAverage">Total Average</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="totalHour"><span jhiTranslate="marineindustryprojApp.educationalRecord.totalHour">Total Hour</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="totalHour"><span jhiTranslate="marineindustryprojApp.educationalRecord.totalHour">Total Hour</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="startDate"><span jhiTranslate="marineindustryprojApp.educationalRecord.startDate">Start Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="endDate"><span jhiTranslate="marineindustryprojApp.educationalRecord.endDate">End Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.educationalRecord.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.educationalRecord.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.educationalRecord.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.educationalRecord.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.educationalRecord.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.educationalRecord.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="guid"><span jhiTranslate="marineindustryprojApp.educationalRecord.guid">Guid</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="qualificationTitle"><span jhiTranslate="marineindustryprojApp.educationalRecord.qualification">Qualification</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="fieldOfStudyTitle"><span jhiTranslate="marineindustryprojApp.educationalRecord.fieldOfStudy">Field Of Study</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.educationalRecord.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.educationalRecord.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let educationalRecord of educationalRecords ;trackBy: trackId">
-                <td><a [routerLink]="['/educational-record-marine-suffix', educationalRecord.id, 'view' ]">{{educationalRecord.id}}</a></td>
+            <tr *ngFor="let educationalRecord of educationalRecords ;let i = index">
+                <!--<td><a [routerLink]="['/educational-record-marine-suffix', educationalRecord.id, 'view' ]">{{educationalRecord.id}}</a></td>-->
+                <td>{{i+1}}</td>
                 <td>{{educationalRecord.qualificationText}}</td>
                 <td>{{educationalRecord.fieldOfStudyText}}</td>
                 <td>{{educationalRecord.educationalCenterText}}</td>
                 <td>{{educationalRecord.totalAverage}}</td>
-                <td>{{educationalRecord.totalHour}}</td>
+                <!--<td>{{educationalRecord.totalHour}}</td>-->
                 <td>{{educationalRecord.startDate}}</td>
                 <td>{{educationalRecord.endDate}}</td>
                 <td>{{educationalRecord.description}}</td>
-                <td>{{educationalRecord.createUserLogin}}</td>
+                <!--<td>{{educationalRecord.createUserLogin}}</td>
                 <td>{{educationalRecord.createDate | date:'medium'}}</td>
                 <td>{{educationalRecord.modifyUserLogin}}</td>
                 <td>{{educationalRecord.modifyDate | date:'medium'}}</td>
@@ -64,7 +66,7 @@
                     <div *ngIf="educationalRecord.personId">
                         <a [routerLink]="['../person-marine-suffix', educationalRecord.personId , 'view' ]" >{{educationalRecord.personFamily}}</a>
                     </div>
-                </td>
+                </td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
@@ -79,7 +81,7 @@
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
                                 [routerLink]="['/', { outlets: { popup: 'educational-record-marine-suffix/'+ educationalRecord.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

@@ -53,11 +53,11 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+<!--                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.totalHour" for="field_totalHour">Total Hour</label>
                     <input type="number" class="form-control" name="totalHour" id="field_totalHour"
                         [(ngModel)]="jobRecord.totalHour" />
-                </div>
+                </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.startDate" for="field_startDate">Start Date</label>
                     <input type="text" class="form-control" name="startDate" id="field_startDate"
@@ -82,8 +82,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.leaveReason" for="field_leaveReason">Leave Reason</label>
-                    <input type="text" class="form-control" name="leaveReason" id="field_leaveReason"
-                        [(ngModel)]="jobRecord.leaveReason" maxlength="4096"/>
+                    <textarea type="text" class="form-control" name="leaveReason" id="field_leaveReason"
+                              [(ngModel)]="jobRecord.leaveReason" maxlength="4096"></textarea>
                     <div [hidden]="!(editForm.controls.leaveReason?.dirty && editForm.controls.leaveReason?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.leaveReason?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
@@ -93,8 +93,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.description" for="field_description">Description</label>
-                    <input type="text" class="form-control" name="description" id="field_description"
-                        [(ngModel)]="jobRecord.description" maxlength="4096"/>
+                    <textarea type="text" class="form-control" name="description" id="field_description"
+                              [(ngModel)]="jobRecord.description" maxlength="4096"></textarea>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
@@ -102,7 +102,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.createUserLogin" for="field_createUserLogin">Create User Login</label>
                     <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
                         [(ngModel)]="jobRecord.createUserLogin" maxlength="50"/>
@@ -156,7 +156,7 @@
                         <option [ngValue]="null"></option>
                         <option [ngValue]="personOption.id" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.family}}</option>
                     </select>
-                </div>
+                </div>-->
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

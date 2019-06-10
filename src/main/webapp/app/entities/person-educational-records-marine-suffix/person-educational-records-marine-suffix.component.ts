@@ -9,6 +9,7 @@ import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
 import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
 import {PersonEducationalRecordsMarineSuffixService} from "./person-educational-records-marine-suffix.service";
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 
 
 @Component({
@@ -42,7 +43,8 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         private jhiAlertService : JhiAlertService,
         private settingService: PersonEducationalRecordsMarineSuffixService,
         private organizationChartService: OrganizationChartMarineSuffixService,
-        private personMarineSuffixService: PersonMarineSuffixService
+        private personMarineSuffixService: PersonMarineSuffixService,
+        private convertObjectDatesService: ConvertObjectDatesService
     ) {}
 
     ngOnInit() {
@@ -73,7 +75,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         });
     }
     onPersonSuccess(body) {
-        this.person = body;
+        this.person = this.convertObjectDatesService.changeDate(body);
         if (this.person) {
             this.currentUserFullName = this.person.name + " " + this.person.family;
             this.jobTitle = this.person.jobTitle;

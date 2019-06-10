@@ -2,35 +2,35 @@
     "marineindustryprojApp": {
         "educationalRecord": {
             "home": {
-                "title": "Educational Records",
-                "createLabel": "Create a new Educational Record",
-                "createOrEditLabel": "Create or edit a Educational Record"
+                "title": "سوابق تحصیلی",
+                "createLabel": "جدید",
+                "createOrEditLabel": " سابقه تحصیلی"
             },
-            "created": "A new Educational Record is created with identifier {{ param }}",
-            "updated": "A Educational Record is updated with identifier {{ param }}",
-            "deleted": "A Educational Record is deleted with identifier {{ param }}",
+            "created": "سابقه تحصیلی با شناسه {{ param }} ایجاد شد.",
+            "updated": "سابقه تحصیلی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "سابقه تحصیلی با شناسه {{ param }} حذف شد.",
             "delete": {
-                "question": "Are you sure you want to delete Educational Record {{ id }}?"
+                "question": "آیا برای حذف سابقه تحصیلی با شناسه {{ id }} مطمئنید؟"
             },
             "detail": {
-                "title": "Educational Record"
+                "title": "جزئیات اطلاعات سابقه تحصیلی"
             },
-            "qualificationText": "Qualification Text",
-            "fieldOfStudyText": "Field Of Study Text",
-            "educationalCenterText": "Educational Center Text",
-            "totalAverage": "Total Average",
-            "totalHour": "Total Hour",
-            "startDate": "Start Date",
-            "endDate": "End Date",
-            "description": "Description",
-            "createUserLogin": "Create User Login",
-            "createDate": "Create Date",
-            "modifyUserLogin": "Modify User Login",
-            "modifyDate": "Modify Date",
+            "qualificationText": "مقطع تحصیلی",
+            "fieldOfStudyText": "رشته/گرایش",
+            "educationalCenterText": "نام مرکز آموزش/دانشگاه",
+            "totalAverage": "معدل کل",
+            "totalHour": "مدت کل",
+            "startDate": "سال شروع",
+            "endDate": "سال خاتمه",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
             "guid": "Guid",
-            "qualification": "Qualification",
-            "fieldOfStudy": "Field Of Study",
-            "person": "Person"
+            "qualification": "مقطع تحصیلی",
+            "fieldOfStudy": "رشته/گرایش",
+            "person": "پرسنل"
         }
     }
 }
