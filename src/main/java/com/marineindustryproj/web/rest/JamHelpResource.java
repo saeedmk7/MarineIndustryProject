@@ -31,6 +31,7 @@ import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * REST controller for managing JamHelp.
@@ -110,6 +111,7 @@ public class JamHelpResource {
         if (jamHelpDTO.getId() != null) {
             throw new BadRequestAlertException("A new jamHelp cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        jamHelpDTO.setGuid(UUID.randomUUID().toString());
         jamHelpDTO.setCreateDate(ZonedDateTime.now());
         jamHelpDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
         JamHelpDTO result = jamHelpService.save(jamHelpDTO);
@@ -136,6 +138,7 @@ public class JamHelpResource {
         }
         JamHelpDTO jamHelp = jamHelpService.findOne(jamHelpDTO.getId()).get();
 
+        jamHelpDTO.setGuid(jamHelp.getGuid());
         jamHelpDTO.setCreateUserLogin(jamHelp.getCreateUserLogin());
         jamHelpDTO.setCreateDate(jamHelp.getCreateDate());
         jamHelpDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());

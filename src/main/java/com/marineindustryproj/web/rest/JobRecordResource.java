@@ -1,7 +1,9 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.JobRecordService;
+import com.marineindustryproj.service.dto.MainTaskDTO;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -22,8 +24,10 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * REST controller for managing JobRecord.
@@ -59,6 +63,11 @@ public class JobRecordResource {
         if (jobRecordDTO.getId() != null) {
             throw new BadRequestAlertException("A new jobRecord cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        jobRecordDTO.setGuid(UUID.randomUUID().toString());
+        jobRecordDTO.setCreateDate(ZonedDateTime.now());
+        jobRecordDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+
         JobRecordDTO result = jobRecordService.save(jobRecordDTO);
         return ResponseEntity.created(new URI("/api/job-records/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -81,6 +90,15 @@ public class JobRecordResource {
         if (jobRecordDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+        JobRecordDTO jobRecord = jobRecordService.findOne(jobRecordDTO.getId()).get();
+
+        jobRecordDTO.setGuid(jobRecord.getGuid());
+        jobRecordDTO.setCreateUserLogin(jobRecord.getCreateUserLogin());
+        jobRecordDTO.setCreateDate(jobRecord.getCreateDate());
+        jobRecordDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        jobRecordDTO.setModifyDate(ZonedDateTime.now());
+
         JobRecordDTO result = jobRecordService.save(jobRecordDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, jobRecordDTO.getId().toString()))

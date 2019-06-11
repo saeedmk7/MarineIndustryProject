@@ -8,8 +8,9 @@
                 </a>
             </li>
             <ng-container *ngIf="treeNode">
-            <li  *ngFor="let node of treeNode" class="nav-item navbarmenu">
-                <a class="nav-link" [attr.data-toggle]="node.children.length > 0 ? 'collapse' : null" attr.href="#{{node.url}}" role="button" aria-expanded="false" attr.aria-controls="{{node.url}}">
+            <li  *ngFor="let node of treeNode" class="nav-item navbarmenu" >
+                <a class="nav-link" [attr.data-toggle]="node.children.length > 0 ? 'collapse' : null" attr.href="#{{node.url}}" role="button" aria-expanded="false" attr.aria-controls="{{node.url}}"
+                   [ngStyle]="{'color': node.textColor, 'background-color': node.backgroundColor}">
                     <ng-container [ngSwitch]="node.faicon">
                         <img *ngSwitchCase="'one'" src="../../../content/images/navbar/one.png" />
                         <img *ngSwitchCase="'two'" src="../../../content/images/navbar/two.png" />
@@ -27,8 +28,8 @@
                     <i [ngClass]="{'fa fa-angle-left menuArrow':node.children.length>0}"></i>
                 </a>
                 <ul *ngIf="node.children.length>0" id="{{node.url}}" class="collapse" data-parent="#accordionExample">
-                    <li class="nchild" *ngFor="let child of node.children">
-                        <a href="{{child.url}}" class="nchild">
+                    <li class="nchild" *ngFor="let child of node.children" >
+                        <a href="{{child.url}}" class="nchild" [ngStyle]="{'background-color': child.backgroundColor, 'color': child.textColor}">
                             <ng-container [ngSwitch]="child.faicon">
                                 <img *ngSwitchCase="'one'" src="../../../content/images/navbar/one.png" />
                                 <img *ngSwitchCase="'two'" src="../../../content/images/navbar/two.png" />

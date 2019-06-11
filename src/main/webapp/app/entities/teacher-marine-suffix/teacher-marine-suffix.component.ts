@@ -14,6 +14,10 @@ import {ExcelService} from "app/plugin/export-excel/excel-service";
 import {TranslateService} from '@ngx-translate/core';
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
+import {IQualificationMarineSuffix} from "app/shared/model/qualification-marine-suffix.model";
+import {IFieldOfStudyMarineSuffix} from "app/shared/model/field-of-study-marine-suffix.model";
+import {QualificationMarineSuffixService} from "app/entities/qualification-marine-suffix";
+import {FieldOfStudyMarineSuffixService} from "app/entities/field-of-study-marine-suffix";
 
 @Component({
     selector: 'mi-teacher-marine-suffix',
@@ -40,6 +44,8 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
     done:boolean = false;
     criteria: any;
 
+    qualifications: IQualificationMarineSuffix[];
+    fieldofstudies: IFieldOfStudyMarineSuffix[];
 
 
     constructor(
@@ -52,6 +58,8 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private location: PlatformLocation,
         private jhiTranslate: TranslateService,
+        private qualificationService: QualificationMarineSuffixService,
+        private fieldOfStudyService: FieldOfStudyMarineSuffixService,
         private convertObjectDatesService : ConvertObjectDatesService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -149,13 +157,25 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
         });
 
         let expiredOptions = [{id:0,title:'هیچکدام'},{id:1,title:'به پایان رسیده'},{id:2,title:'به پایان نرسیده'}];
-
         this.searchbarModel.push(new SearchPanelModel('teacher','name','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('teacher','family','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('teacher','phoneNumber','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('teacher','teachingSubject','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('teacher','expired','select','equals', expiredOptions));
-
+        this.qualificationService.query().subscribe(
+            (res: HttpResponse<IQualificationMarineSuffix[]>) => {
+                this.qualifications = res.body;
+                this.searchbarModel.push(new SearchPanelModel('teacher', 'lastQualificationId', 'select', 'equals', this.qualifications));
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.fieldOfStudyService.query().subscribe(
+            (res: HttpResponse<IFieldOfStudyMarineSuffix[]>) => {
+                this.fieldofstudies = res.body;
+                this.searchbarModel.push(new SearchPanelModel('teacher', 'lastFieldOfStudyId', 'select', 'equals', this.fieldofstudies));
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         /*if(!this.done)
         {
             this.loadAll();

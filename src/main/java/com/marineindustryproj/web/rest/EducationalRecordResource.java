@@ -1,6 +1,7 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.EducationalRecordService;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
@@ -22,8 +23,10 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * REST controller for managing EducationalRecord.
@@ -59,6 +62,11 @@ public class EducationalRecordResource {
         if (educationalRecordDTO.getId() != null) {
             throw new BadRequestAlertException("A new educationalRecord cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        educationalRecordDTO.setGuid(UUID.randomUUID().toString());
+        educationalRecordDTO.setCreateDate(ZonedDateTime.now());
+        educationalRecordDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+
         EducationalRecordDTO result = educationalRecordService.save(educationalRecordDTO);
         return ResponseEntity.created(new URI("/api/educational-records/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -81,6 +89,15 @@ public class EducationalRecordResource {
         if (educationalRecordDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+        EducationalRecordDTO educationalRecord = educationalRecordService.findOne(educationalRecordDTO.getId()).get();
+
+        educationalRecordDTO.setGuid(educationalRecord.getGuid());
+        educationalRecordDTO.setCreateUserLogin(educationalRecord.getCreateUserLogin());
+        educationalRecordDTO.setCreateDate(educationalRecord.getCreateDate());
+        educationalRecordDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        educationalRecordDTO.setModifyDate(ZonedDateTime.now());
+
         EducationalRecordDTO result = educationalRecordService.save(educationalRecordDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, educationalRecordDTO.getId().toString()))
