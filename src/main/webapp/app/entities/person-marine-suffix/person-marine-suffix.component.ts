@@ -38,9 +38,16 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
     employmenttypes: IEmploymentTypeMarineSuffix[];
 
     criteriaSubscriber: Subscription;
-    searchbarModel: SearchPanelModel[];
+    searchbarModel: SearchPanelModel[] = [];
     done:boolean = false;
     criteria: any;
+
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
+    isTopUsers: boolean = false;
     constructor(
         private personService: PersonMarineSuffixService,
         private employmentTypeService: EmploymentTypeMarineSuffixService,
@@ -75,7 +82,13 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     loadAll(criteria?) {
+        if(!criteria)
+        {
+            criteria = [];
+        }
+        if(this.isModirAmozesh){
 
+        }
         this.personService
             .query({
                 page: this.page - 1,
@@ -118,21 +131,40 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
         ]);
         this.loadAll();
     }
+    private setRoles(account: any){
+        if(account) {
+            if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+                this.isAdmin = true;
+            if (account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+                this.isModirAmozesh = true;
+            if (account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+                this.isModirKolAmozesh = true;
+            if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+                this.isKarshenasArshadAmozeshSazman = true;
 
+            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+                this.isSuperUsers = true;
+            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh)
+                this.isTopUsers = true;
+        }
+    }
     ngOnInit() {
+        this.searchbarModel.push(new SearchPanelModel('person','name','text', 'contains'));
+        this.searchbarModel.push(new SearchPanelModel('person','family','text','contains'));
+        this.searchbarModel.push(new SearchPanelModel('person','nationalId','text','contains'));
+        this.searchbarModel.push(new SearchPanelModel('person','personelCode','text','contains'));
         this.employmentTypeService.query().subscribe(
             (res: HttpResponse<IEmploymentTypeMarineSuffix[]>) => {
 
                 this.employmenttypes = res.body;
-                this.searchbarModel = new Array<SearchPanelModel>();
-                this.searchbarModel.push(new SearchPanelModel('person','name','text', 'contains'));
-                this.searchbarModel.push(new SearchPanelModel('person','family','text','contains'));
-                this.searchbarModel.push(new SearchPanelModel('person','nationalId','text','contains'));
-                this.searchbarModel.push(new SearchPanelModel('person','personelCode','text','contains'));
+
                 this.searchbarModel.push(new SearchPanelModel('person','employmentTypeId','select','equals', res.body));
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        this.principal.identity().then((account) => {
+            this.setRoles(account);
+        });
         /*if(!this.done){
             this.loadAll();
         }*/

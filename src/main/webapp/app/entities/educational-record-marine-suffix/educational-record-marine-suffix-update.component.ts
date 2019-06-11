@@ -30,7 +30,7 @@ export class EducationalRecordMarineSuffixUpdateComponent implements OnInit {
     fieldofstudies: IFieldOfStudyMarineSuffix[];
     years: any[] = [];
     people: IPersonMarineSuffix[];
-    valid: boolean;
+    valid: number;
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected educationalRecordService: EducationalRecordMarineSuffixService,
@@ -42,14 +42,13 @@ export class EducationalRecordMarineSuffixUpdateComponent implements OnInit {
     checkValidation(event){
         debugger;
         try {
-            const two = event.split(',');
-            if(two[0] > 20 || two[0] < 0)
-                this.valid = false;
+            if(event.target.value > 20 || event.target.value < 0)
+                this.valid = 2;
             else
-                this.valid = true;
+                this.valid = 1;
         }
         catch (e) {
-            this.valid = false;
+            this.valid = 2;
         }
     }
     ngOnInit() {
@@ -107,6 +106,12 @@ export class EducationalRecordMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        debugger;
+        if(this.educationalRecord.qualificationId)
+            this.educationalRecord.qualificationText = this.qualifications.find(a => a.id == this.educationalRecord.qualificationId).title;
+        if(this.educationalRecord.fieldOfStudyId)
+            this.educationalRecord.fieldOfStudyText = this.fieldofstudies.find(a => a.id == this.educationalRecord.fieldOfStudyId).title;
+
         if (this.educationalRecord.id !== undefined) {
             this.subscribeToSaveResponse(this.educationalRecordService.update(this.educationalRecord));
         } else {

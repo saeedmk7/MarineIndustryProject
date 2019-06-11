@@ -11,7 +11,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.workOrganization" for="field_workOrganization">Work Organization</label>
-                    <input type="text" class="form-control" name="workOrganization" id="field_workOrganization"
+                    <input type="text" class="form-control" required name="workOrganization" id="field_workOrganization"
                         [(ngModel)]="jobRecord.workOrganization" maxlength="1000"/>
                     <div [hidden]="!(editForm.controls.workOrganization?.dirty && editForm.controls.workOrganization?.invalid)">
                         <small class="form-text text-danger"
@@ -130,7 +130,6 @@
                         </small>
                     </div>
                 </div>
-                <input type="hidden" [(ngModel)]="jobRecord.personId" required name="personId" id="personId" />
                 <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.jobRecord.createUserLogin" for="field_createUserLogin">Create User Login</label>
                     <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"

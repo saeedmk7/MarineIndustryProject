@@ -72,7 +72,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.educationalCenterText" for="field_educationalCenterText">Educational Center Text</label>
                     <input type="text" class="form-control" name="educationalCenterText" id="field_educationalCenterText"
-                        [(ngModel)]="educationalRecord.educationalCenterText" maxlength="1000"/>
+                        [(ngModel)]="educationalRecord.educationalCenterText" required maxlength="1000"/>
                     <div [hidden]="!(editForm.controls.educationalCenterText?.dirty && editForm.controls.educationalCenterText?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.educationalCenterText?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1000 }">
@@ -86,7 +86,6 @@
                         [(ngModel)]="educationalRecord.totalAverage" maxlength="50"/>-->
                     <kendo-maskedtextbox
                         [includeLiterals]="true"
-                        [maskValidation]="valid"
                         [(ngModel)]="educationalRecord.totalAverage"
                         name="totalAverage"
                         class="form-control"
@@ -94,8 +93,8 @@
                         (blur)="checkValidation($event)"
                         mask="00.00">
                     </kendo-maskedtextbox>
-                    <span *ngIf="valid" class="alert-success">مقدار معتبر است</span>
-                    <span *ngIf="!valid" class="alert-danger">مقدار نامعتبر است</span>
+                    <span *ngIf="valid == 1" class="alert-success">مقدار معتبر است</span>
+                    <span *ngIf="valid == 2" class="alert-danger">مقدار نامعتبر است</span>
                     <!--<div [hidden]="!(editForm.controls.totalAverage?.dirty && editForm.controls.totalAverage?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.totalAverage?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
@@ -122,19 +121,28 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.endDate" for="field_endDate">End Date</label>
-                    <input type="text" class="form-control" name="endDate" id="field_endDate"
-                        [(ngModel)]="educationalRecord.endDate" maxlength="50"/>
-                    <div [hidden]="!(editForm.controls.endDate?.dirty && editForm.controls.endDate?.invalid)">
+                   <!-- <input type="text" class="form-control" name="endDate" id="field_endDate"
+                        [(ngModel)]="educationalRecord.endDate" maxlength="50"/>-->
+                    <ng-select
+                        [items]="years"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        placeholder="انتخاب نمائید."
+                        name="endDate"
+                        id="field_endDate"
+                        [(ngModel)]="educationalRecord.endDate">
+                    <!--<div [hidden]="!(editForm.controls.endDate?.dirty && editForm.controls.endDate?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.endDate?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
                         This field cannot be longer than 50 characters.
                         </small>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalRecord.description" for="field_description">Description</label>
-                    <input type="text" class="form-control" name="description" id="field_description"
-                        [(ngModel)]="educationalRecord.description" maxlength="4096"/>
+                    <textarea type="text" class="form-control" name="description" id="field_description"
+                              [(ngModel)]="educationalRecord.description" maxlength="4096"></textarea>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">

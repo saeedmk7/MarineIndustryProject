@@ -14,6 +14,8 @@ import {IJobRecordMarineSuffix} from "app/shared/model/job-record-marine-suffix.
 import {JobRecordMarineSuffixService} from "app/entities/job-record-marine-suffix";
 import {IEducationalRecordMarineSuffix} from "app/shared/model/educational-record-marine-suffix.model";
 import {EducationalRecordMarineSuffixService} from "app/entities/educational-record-marine-suffix";
+import {IHomePagePersonEducationalModule} from "app/shared/model/custom/home-page-person-educational-module";
+import {FinalNiazsanjiReportMarineSuffixService} from "app/entities/final-niazsanji-report-marine-suffix";
 
 
 @Component({
@@ -40,6 +42,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     isNewImage: boolean = false;
     organizationTitle: string = "";
     person: IPersonMarineSuffix = new PersonMarineSuffix();
+    homePagePersonEducationalModules: IHomePagePersonEducationalModule[] = [];
     constructor(
         private dataUtils: JhiDataUtils,
         private account: AccountService,
@@ -53,6 +56,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         private convertObjectDatesService: ConvertObjectDatesService,
         private jobRecordService: JobRecordMarineSuffixService,
         private educationalRecordService: EducationalRecordMarineSuffixService,
+        private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService
 
     ) {}
 
@@ -92,10 +96,39 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
 
             this.prepareJobRecords(this.person.id);
             this.prepareEducationalRecords(this.person.id);
+            this.prepareHomePagePersonEducationalModule(this.person.id);
         }
         else {
             this.currentUserFullName = this.settingsAccount.login;
         }
+    }
+    prepareHomePagePersonEducationalModule(personId: number){
+        this.finalNiazsanjiReportService.getHomePagePersonEducationalModule(personId).subscribe((resp: HttpResponse<IHomePagePersonEducationalModule[]>) => {
+
+                this.homePagePersonEducationalModules = resp.body.filter(a => a.status != 0);
+                this.homePagePersonEducationalModules.forEach(a => {
+                    a.totalLearningTime = a.learningTimePractical == undefined ? 0 : a.learningTimePractical + a.learningTimeTheorical == undefined ? 0 : a.learningTimeTheorical;
+                    switch (a.status) {
+                        case 100:
+                            a.statusMeaning = "خاتمه دوره";
+                            break;
+                        case 90:
+                            a.statusMeaning = "اجرا شده";
+                            break;
+                        case 80:
+                            a.statusMeaning = "برنامه ریزی شده";
+                            break;
+                        case 70:
+                            a.statusMeaning = "تصویب شوراء";
+                            break;
+                        case 0:
+                            a.statusMeaning = "شناسنامه آموزشی";
+                            break;
+                    }
+                });
+                //this.makePersonHourPieChart(resp.body);
+            },
+            (res: HttpErrorResponse) => this.onError(res.message));
     }
     prepareJobRecords(personId: number){
         let criteria = [{
@@ -251,11 +284,6 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
             this.success = null;
         }
 
-    }
-    setFileData(event, entity, field, isImage) {
-
-        this.dataUtils.setFileData(event, entity, field, isImage);
-        this.file = event;
     }
 
     copyAccount(account) {
