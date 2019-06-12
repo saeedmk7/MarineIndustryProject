@@ -367,7 +367,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         },{
             name: "کل هزینه",
             data: sortedChartResults.map(a => a.totalPriceCost),
-            color: "blue"
+            color: "#5edbff"
         }];
 
         this.personHourSeries = [{
@@ -381,7 +381,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         },{
             name: "کل نفرساعت",
             data: sortedChartResults.map(a => a.totalPersonHour),
-            color: "blue",
+            color: "#5edbff",
         }];
 
         this.personHourNewPercentSeries = [];

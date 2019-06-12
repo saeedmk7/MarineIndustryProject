@@ -43,6 +43,14 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     organizationTitle: string = "";
     person: IPersonMarineSuffix = new PersonMarineSuffix();
     homePagePersonEducationalModules: IHomePagePersonEducationalModule[] = [];
+
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
+    isTopUsers: boolean = false;
+
     constructor(
         private dataUtils: JhiDataUtils,
         private account: AccountService,
@@ -63,7 +71,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     ngOnInit() {
 
         this.principal.identity().then(account => {
-
+            this.setRoles(account);
             this.settingsAccount = this.copyAccount(account);
             if(this.settingsAccount.imageUrl){
                 this.oldPicUrl = this.settingsAccount.imageUrl;
@@ -102,6 +110,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
             this.currentUserFullName = this.settingsAccount.login;
         }
     }
+
     prepareHomePagePersonEducationalModule(personId: number){
         this.finalNiazsanjiReportService.getHomePagePersonEducationalModule(personId).subscribe((resp: HttpResponse<IHomePagePersonEducationalModule[]>) => {
 
@@ -297,5 +306,23 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
             imageUrl: account.imageUrl,
             personId: account.personId
         };
+    }
+
+    private setRoles(account: any){
+        if(account) {
+            if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+                this.isAdmin = true;
+            if (account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+                this.isModirAmozesh = true;
+            if (account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+                this.isModirKolAmozesh = true;
+            if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+                this.isKarshenasArshadAmozeshSazman = true;
+
+            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+                this.isSuperUsers = true;
+            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh)
+                this.isTopUsers = true;
+        }
     }
 }

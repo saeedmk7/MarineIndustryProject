@@ -8,7 +8,7 @@ export const PersonEducationalRecordsMarineSuffixRoute: Route = {
     component: PersonEducationalRecordsMarineSuffixComponent,
     data: {
         authorities: ['ROLE_USER'],
-        pageTitle: 'global.menu.account.settings'
+        pageTitle: 'global.menu.entities.personEducationalRecordsMarineSuffix'
     },
     canActivate: [UserRouteAccessService]
 };
