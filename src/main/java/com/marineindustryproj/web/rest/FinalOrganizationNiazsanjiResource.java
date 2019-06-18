@@ -65,6 +65,8 @@ public class FinalOrganizationNiazsanjiResource {
 
         finalOrganizationNiazsanjiDTO.setCreateDate(ZonedDateTime.now());
         finalOrganizationNiazsanjiDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        finalOrganizationNiazsanjiDTO.setModifyDate(ZonedDateTime.now());
+        finalOrganizationNiazsanjiDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
 
         FinalOrganizationNiazsanjiDTO result = finalOrganizationNiazsanjiService.save(finalOrganizationNiazsanjiDTO);
         return ResponseEntity.created(new URI("/api/final-organization-niazsanjis/" + result.getId()))

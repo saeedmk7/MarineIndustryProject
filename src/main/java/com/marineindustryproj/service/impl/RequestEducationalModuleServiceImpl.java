@@ -117,6 +117,8 @@ public class RequestEducationalModuleServiceImpl implements RequestEducationalMo
             educationalModuleDTO.setVersion(requestEducationalModuleDTO.getVersion());
             educationalModuleDTO.setCreateDate(ZonedDateTime.now());
             educationalModuleDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            educationalModuleDTO.setModifyDate(ZonedDateTime.now());
+            educationalModuleDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
 
             educationalModuleService.save(educationalModuleDTO);
         }

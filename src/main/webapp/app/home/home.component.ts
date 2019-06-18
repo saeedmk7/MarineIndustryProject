@@ -390,7 +390,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.priceCostFinishedPercentSeries = [];
         this.groups.forEach(a => {
             sortedChartResults.filter(e => e.groupId == a.id).forEach(w => {
-                debugger;
+
                 this.personHourNewPercentSeries.push((w.educationalModuleTotalHourNew / w.totalPersonHour) * 100);
                 this.personHourFinishedPercentSeries.push((w.educationalModuleTotalHourFinished / w.totalPersonHour) * 100);
                 this.priceCostNewPercentSeries.push((w.priceCostNew / w.totalPriceCost) * 100);
@@ -601,7 +601,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
         if(org)
         {
-            debugger;
+
             const rootId = this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
             if(this.isSuperUsers || org.id == rootId) {
                 this.changePage('detail');
@@ -678,7 +678,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.pieRunnningPriceCostChart = this.showPieChart('نمودار درصد هزینه اجرا شده گروه ' + this.selectedGroup +' به تفکیک ماه', pieRunnningCostSeries);
     }
     makePiePersonHourSeries(reportType: number){
-        debugger;
+
         const filtered = this.planningAndRunMonthReports.filter(a => a.reportType == reportType);
         const allHour = filtered[0].totalHour;
         let array: any = [];
@@ -695,7 +695,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         return array;
     }
     makePieCostSeries(reportType: number){
-        debugger;
+
         const filtered = this.planningAndRunMonthReports.filter(a => a.reportType == reportType);
         const allHour = filtered[0].totalPriceCost; //filtered.map(a => a.personCost).reduce((sum, current) => sum + current);
         let array: any = [];

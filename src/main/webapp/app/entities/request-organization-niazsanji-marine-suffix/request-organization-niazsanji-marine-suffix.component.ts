@@ -27,6 +27,8 @@ import {OrganizationChartMarineSuffixService} from "app/entities/organization-ch
 import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
+import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
+import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 
 @Component({
     selector: 'mi-request-organization-niazsanji-marine-suffix',
@@ -60,11 +62,13 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
     criteria: any;
 
     yearsCollections: any[];
+    coursetypes: ICourseTypeMarineSuffix[];
     constructor(
         private requestOrganizationNiazsanjiService: RequestOrganizationNiazsanjiMarineSuffixService,
         private finalOrganizationNiazsanjiMarineSuffixService: FinalOrganizationNiazsanjiMarineSuffixService,
         private organizationChartService: OrganizationChartMarineSuffixService,
         private educationalModuleService: EducationalModuleMarineSuffixService,
+        private courseTypeService: CourseTypeMarineSuffixService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
@@ -87,6 +91,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
         });
         this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
             this.criteria = criteria.content;
+
             this.done = true;
             this.makeCriteria(criteria.content);
 
@@ -436,8 +441,18 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
             this.prepareSearchDate();
             this.prepareSearchEducationalModule();
             this.prepareSearchOrgChart();
-
+            this.prepareSearchCourseType();
         });
+    }
+    prepareSearchCourseType(){
+        this.courseTypeService.query().subscribe(
+            (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                debugger;
+                this.coursetypes = res.body;
+                this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'courseTypeId', 'select', 'equals', this.coursetypes));
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
     prepareSearchEducationalModule(){
         this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));

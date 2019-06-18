@@ -82,7 +82,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
     }
 
     loadAll(criteria?) {
-        debugger;
+
         if(!criteria){
             criteria = [];
         }

@@ -21,6 +21,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {IPersonMarineSuffix, PersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
+import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
+import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 
 @Component({
     selector: 'mi-request-niazsanji-fardi-marine-suffix',
@@ -57,7 +59,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
     criteria: any;
 
     yearsCollections: any[];
-
+    coursetypes: ICourseTypeMarineSuffix[];
     constructor(
         protected requestNiazsanjiFardiService: RequestNiazsanjiFardiMarineSuffixService,
         private educationalModuleService: EducationalModuleMarineSuffixService,
@@ -73,6 +75,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
         protected jhiTranslate: TranslateService,
         protected treeUtilities: TreeUtilities,
         protected userService: UserService,
+        private courseTypeService: CourseTypeMarineSuffixService,
         private convertObjectDatesService: ConvertObjectDatesService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -99,7 +102,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
     }
 
     makeCriteria(criteria?,excelExport: boolean = false){
-        debugger;
+
         if (criteria) {
             const year = criteria.find(a => a.key == 'yearId.equals');
             if(year) {
@@ -375,11 +378,22 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
                 this.prepareSearchOrgChart();
                 this.prepareDate();
                 this.prepareSearchEducationalModule();
+                this.prepareSearchCourseType();
             })
         });
 
 
         //this.registerChangeInRequestNiazsanjiFardis();
+    }
+    prepareSearchCourseType(){
+        this.courseTypeService.query().subscribe(
+            (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                debugger;
+                this.coursetypes = res.body;
+                this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'courseTypeId', 'select', 'equals', this.coursetypes));
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
     prepareDate(){
         let dates = this.convertObjectDatesService.getYearsArray();
@@ -426,7 +440,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
             this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'personId', 'select', 'equals', this.recommenedPeople, 'fullName', 'half'));
         }
         else {
-            debugger;
+
             const orgIds = this.recommenedOrgCharts.map(a => a.id);
             let criteria = [{
                 key: 'organizationChartId.in',
@@ -438,7 +452,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
                 criteria,
                 sort: ["id", "asc"]
             }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
-                debugger;
+
                     let orgPeople = resp.body;
                     if (orgPeople.length > 0) {
                         this.recommenedPeople = orgPeople;

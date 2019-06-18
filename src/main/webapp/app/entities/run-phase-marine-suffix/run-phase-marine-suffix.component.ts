@@ -31,6 +31,8 @@ import { saveAs } from '@progress/kendo-file-saver';
 import {IFinalNiazsanjiReportMarineSuffix} from "app/shared/model/final-niazsanji-report-marine-suffix.model";
 import {IPlanningAndRunMonthReport} from "app/shared/model/custom/planning-month-report";
 import {FinalNiazsanjiReportMarineSuffixService} from "app/entities/final-niazsanji-report-marine-suffix";
+import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
+import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 
 @Component({
     selector: 'mi-run-phase-marine-suffix',
@@ -48,6 +50,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     personId: number;
     runPhaseFardis: IRunPhaseFardiMarineSuffix[] = [];
     runPhaseOrganizations: IRunPhaseOrganizationMarineSuffix[] = [];
+    coursetypes: ICourseTypeMarineSuffix[];
 
     @ViewChild(GridComponent) grid: GridComponent;
 
@@ -108,6 +111,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         private eventManager: JhiEventManager,
         private convertObjectDatesService: ConvertObjectDatesService,
         private personService: PersonMarineSuffixService,
+        private courseTypeService: CourseTypeMarineSuffixService,
         private organizationChartService: OrganizationChartMarineSuffixService,
         private treeUtilities: TreeUtilities
     ) {
@@ -238,9 +242,15 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             });
         }*/
         if (f.value['educationalModuleTitle']) {
-            let val = +f.value['educationalModuleTitle'];
+            let val = f.value['educationalModuleTitle'];
             criteria.push({
                 key: 'educationalModuleTitle.contains', value: val
+            });
+        }
+        if (f.value['courseTypeId']) {
+            let val = +f.value['courseTypeId'];
+            criteria.push({
+                key: 'courseTypeId.in', value: val
             });
         }
         return criteria;
@@ -394,7 +404,15 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             this.isSuperUsers = true;
         }
     }
-
+    prepareSearchCourseType(){
+        this.courseTypeService.query().subscribe(
+            (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                debugger;
+                this.coursetypes = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     prepareSearchEducationalModule() {
         if (this.educationalModuleService.educationalModules) {
             this.educationalModules = this.educationalModuleService.educationalModules
@@ -587,6 +605,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                 this.prepareSearchEducationalModule();
                 this.preparePeople();
                 this.prepareSearchDate();
+                this.prepareSearchCourseType();
             });
         });
         this.registerChangeInRunPhases();

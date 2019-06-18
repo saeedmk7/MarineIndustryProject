@@ -37,7 +37,7 @@ export class JobRecordMarineSuffixUpdateComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ jobRecord }) => {
-            debugger;
+
             this.jobRecord = jobRecord;
             if(!this.jobRecord.personId)
             {
@@ -69,7 +69,7 @@ export class JobRecordMarineSuffixUpdateComponent implements OnInit {
         );
     }
     checkDateValidation(event, dateType){
-        debugger;
+
         try {
             if (persianMoment(event.target.value, 'jYYYY/jMM/jDD').isValid()) {
                 if(dateType == 1)

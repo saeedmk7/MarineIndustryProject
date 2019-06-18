@@ -69,7 +69,7 @@ export class RequestEducationalModuleMarineSuffixCommentDialogComponent implemen
     }
     isSaving: boolean = false;
     save(){
-        debugger;
+
         this.isSaving = true;
         this.message = "";
         let currentUserFullName = this.currentPerson.fullName;

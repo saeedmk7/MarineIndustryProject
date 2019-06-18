@@ -71,6 +71,8 @@ public class RequestOrganizationNiazsanjiServiceImpl implements RequestOrganizat
         finalOrganizationNiazsanji.setArchived(false);
         finalOrganizationNiazsanji.setCreateDate(ZonedDateTime.now());
         finalOrganizationNiazsanji.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        finalOrganizationNiazsanji.setModifyDate(ZonedDateTime.now());
+        finalOrganizationNiazsanji.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
         finalOrganizationNiazsanji.setDescription(requestOrganizationNiazsanji.getDescription());
         finalOrganizationNiazsanji.setDocuments(requestOrganizationNiazsanji.getDocuments());
         finalOrganizationNiazsanji.setNeededHardware(requestOrganizationNiazsanji.getNeededHardware());

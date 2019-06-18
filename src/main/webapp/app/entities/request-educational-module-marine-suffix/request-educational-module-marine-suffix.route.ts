@@ -38,7 +38,7 @@ export const requestEducationalModuleRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
+            defaultSort: 'modifyDate,desc',
             pageTitle: 'marineindustryprojApp.requestEducationalModule.home.title'
         },
         canActivate: [UserRouteAccessService]

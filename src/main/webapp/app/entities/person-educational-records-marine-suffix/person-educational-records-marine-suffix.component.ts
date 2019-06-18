@@ -16,6 +16,8 @@ import {IEducationalRecordMarineSuffix} from "app/shared/model/educational-recor
 import {EducationalRecordMarineSuffixService} from "app/entities/educational-record-marine-suffix";
 import {IHomePagePersonEducationalModule} from "app/shared/model/custom/home-page-person-educational-module";
 import {FinalNiazsanjiReportMarineSuffixService} from "app/entities/final-niazsanji-report-marine-suffix";
+import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
+import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 
 
 @Component({
@@ -30,8 +32,12 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     myAccount: any;
     jobRecords: IJobRecordMarineSuffix[];
     educationalRecords: IEducationalRecordMarineSuffix[];
+    people: IPersonMarineSuffix[];
+    searchPerson: IPersonMarineSuffix;
+    orgCharts: IOrganizationChartMarineSuffix[];
 
     currentUserFullName: string;
+
     jobTitle: string;
     languages: any[];
     document: any;
@@ -42,6 +48,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     isNewImage: boolean = false;
     organizationTitle: string = "";
     person: IPersonMarineSuffix = new PersonMarineSuffix();
+    currentPerson: IPersonMarineSuffix = new PersonMarineSuffix();
     homePagePersonEducationalModules: IHomePagePersonEducationalModule[] = [];
 
     isAdmin: boolean;
@@ -62,8 +69,10 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         private organizationChartService: OrganizationChartMarineSuffixService,
         private personMarineSuffixService: PersonMarineSuffixService,
         private convertObjectDatesService: ConvertObjectDatesService,
+        private treeUtilities: TreeUtilities,
         private jobRecordService: JobRecordMarineSuffixService,
         private educationalRecordService: EducationalRecordMarineSuffixService,
+        private personService : PersonMarineSuffixService,
         private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService
 
     ) {}
@@ -97,49 +106,47 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     }
     onPersonSuccess(body) {
         this.person = this.convertObjectDatesService.changeDate(body);
+        this.currentPerson = this.convertObjectDatesService.changeDate(body);
+        debugger;
         if (this.person) {
-            this.currentUserFullName = this.person.name + " " + this.person.family;
-            this.jobTitle = this.person.jobTitle;
             this.prepareOrgChart(this.person.organizationChartId);
-
-            this.prepareJobRecords(this.person.id);
-            this.prepareEducationalRecords(this.person.id);
-            this.prepareHomePagePersonEducationalModule(this.person.id);
+            this.finalLoad(this.person);
         }
         else {
             this.currentUserFullName = this.settingsAccount.login;
         }
     }
+    finalLoad(person: IPersonMarineSuffix){
+        debugger;
+        this.currentUserFullName = person.fullName;
+        this.jobTitle = person.jobTitle;
+        if(this.orgCharts) {
+            const org =this.orgCharts.find(a => a.id == person.organizationChartId);
+            if (org)
+                this.organizationTitle = org.fullTitle;
+        }
 
-    prepareHomePagePersonEducationalModule(personId: number){
-        this.finalNiazsanjiReportService.getHomePagePersonEducationalModule(personId).subscribe((resp: HttpResponse<IHomePagePersonEducationalModule[]>) => {
-
-                this.homePagePersonEducationalModules = resp.body.filter(a => a.status != 0);
-                this.homePagePersonEducationalModules.forEach(a => {
-                    a.totalLearningTime = a.learningTimePractical == undefined ? 0 : a.learningTimePractical + a.learningTimeTheorical == undefined ? 0 : a.learningTimeTheorical;
-                    switch (a.status) {
-                        case 100:
-                            a.statusMeaning = "خاتمه دوره";
-                            break;
-                        case 90:
-                            a.statusMeaning = "اجرا شده";
-                            break;
-                        case 80:
-                            a.statusMeaning = "برنامه ریزی شده";
-                            break;
-                        case 70:
-                            a.statusMeaning = "تصویب شوراء";
-                            break;
-                        case 0:
-                            a.statusMeaning = "شناسنامه آموزشی";
-                            break;
-                    }
-                });
-                //this.makePersonHourPieChart(resp.body);
-            },
-            (res: HttpErrorResponse) => this.onError(res.message));
+        this.prepareJobRecords(person.id);
+        this.prepareEducationalRecords(person.id);
+        this.prepareHomePagePersonEducationalModule(person.id);
+    }
+    loadPersonData($event: IPersonMarineSuffix)
+    {
+        if($event){
+            this.personMarineSuffixService.find($event.id).subscribe(
+                (res: HttpResponse<PersonMarineSuffix>) =>
+                {
+                    this.person = this.convertObjectDatesService.changeDate(res.body);
+                    this.finalLoad(this.person);
+                },
+                (res: HttpResponse<any>) => this.onPersonError(res.body)
+            )
+            this.person = $event;
+            this.finalLoad($event);
+        }
     }
     prepareJobRecords(personId: number){
+        debugger;
         let criteria = [{
             key: 'personId.equals',
             value: personId
@@ -169,20 +176,96 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         },
         (res: HttpResponse<any>) => this.onPersonError(res.body));
     }
+    prepareHomePagePersonEducationalModule(personId: number){
+        this.finalNiazsanjiReportService.getHomePagePersonEducationalModule(personId).subscribe((resp: HttpResponse<IHomePagePersonEducationalModule[]>) => {
+
+                this.homePagePersonEducationalModules = resp.body.filter(a => a.status != 0);
+                this.homePagePersonEducationalModules.forEach(a => {
+                    a.totalLearningTime = a.learningTimePractical == undefined ? 0 : a.learningTimePractical + a.learningTimeTheorical == undefined ? 0 : a.learningTimeTheorical;
+                    switch (a.status) {
+                        case 100:
+                            a.statusMeaning = "خاتمه دوره";
+                            break;
+                        case 90:
+                            a.statusMeaning = "اجرا شده";
+                            break;
+                        case 80:
+                            a.statusMeaning = "برنامه ریزی شده";
+                            break;
+                        case 70:
+                            a.statusMeaning = "تصویب شوراء";
+                            break;
+                        case 0:
+                            a.statusMeaning = "شناسنامه آموزشی";
+                            break;
+                    }
+                });
+                //this.makePersonHourPieChart(resp.body);
+            },
+            (res: HttpErrorResponse) => this.onError(res.message));
+    }
     prepareOrgChart(orgId: number){
+        debugger;
         if(this.organizationChartService.organizationchartsAll)
         {
-            this.organizationTitle = this.organizationChartService.organizationchartsAll.find(a => a.id == orgId).fullTitle;
+            this.orgCharts = this.organizationChartService.organizationchartsAll;
+            const org = this.organizationChartService.organizationchartsAll.find(a => a.id == orgId);
+            if(org)
+                this.organizationTitle = org.fullTitle;
+            if(this.isSuperUsers)
+                this.prepareSearchPerson([]);
+            else if(this.isTopUsers) {
+                const orgIds = this.treeUtilities.getAllOfThisTreeIds(this.orgCharts, this.person.organizationChartId);
+                this.prepareSearchPerson(orgIds);
+            }
         }
         else {
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
-
-                    this.organizationTitle = res.body.find(a => a.id == orgId).fullTitle;
+                    this.orgCharts = res.body;
+                    const org = res.body.find(a => a.id == orgId);
+                    if(org)
+                        this.organizationTitle = org.fullTitle;
+                    debugger;
+                    if(this.isSuperUsers)
+                        this.prepareSearchPerson([]);
+                    else if(this.isTopUsers) {
+                        const orgIds = this.treeUtilities.getAllOfThisTreeIds(this.orgCharts, this.person.organizationChartId);
+                        this.prepareSearchPerson(orgIds);
+                    }
                 },
                 (res: HttpErrorResponse) => this.onError(res.message));
         }
 
+    }
+    prepareSearchPerson(orgIds: number[]) {
+        if(orgIds.length > 0)
+        {
+            let criteria = [{
+                key: 'organizationChartId.in',
+                value: orgIds
+            }];
+            this.personService.query({
+                page: 0,
+                size: 20000,
+                criteria,
+                sort: ["id", "asc"]
+            }).subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
+                    this.people = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message));
+        }
+        else {
+            if (this.personService.people) {
+                this.people = this.personService.people;
+            }
+            else {
+                this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
+                        this.people = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message));
+            }
+        }
     }
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);

@@ -85,6 +85,8 @@ public class RequestNiazsanjiFardiServiceImpl implements RequestNiazsanjiFardiSe
             NiazsanjiFardi niazsanjiFardi = new NiazsanjiFardi();
             niazsanjiFardi.setCreateDate(ZonedDateTime.now());
             niazsanjiFardi.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            niazsanjiFardi.setModifyDate(ZonedDateTime.now());
+            niazsanjiFardi.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
             niazsanjiFardi.setDocuments(requestNiazsanjiFardi.getDocuments());
             niazsanjiFardi.setArchived(false);
 
@@ -106,6 +108,8 @@ public class RequestNiazsanjiFardiServiceImpl implements RequestNiazsanjiFardiSe
             NiazsanjiFardi niazsanjiFardi = new NiazsanjiFardi();
             niazsanjiFardi.setCreateDate(ZonedDateTime.now());
             niazsanjiFardi.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            niazsanjiFardi.setModifyDate(ZonedDateTime.now());
+            niazsanjiFardi.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
             niazsanjiFardi.setDocuments(requestNiazsanjiFardi.getDocuments());
             niazsanjiFardi.setArchived(false);
 

@@ -54,6 +54,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
     searchbarModel: SearchPanelModel[] = new Array<SearchPanelModel>();
     done: boolean = false;
     criteria: any;
+    unchangedCriteria: any;
 
     yearsCollections: any[];
 
@@ -86,6 +87,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) => {
 
             this.criteria = criteria.content;
+            this.unchangedCriteria = criteria.content;
             this.done = true;
             this.makeCriteria(criteria.content);
 
@@ -161,8 +163,9 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
     handleAfterChart(wantOrgIds: number[],criteria,excelExport: boolean = false){
         if(this.isSuperUsers) {
 
-            if(criteria.find(a => a.key == 'organizationChartId.equals')){
-                let val = +criteria.find(a => a.key == 'organizationChartId.equals').value;
+            const organizationChartIdFilter = criteria.find(a => a.key == 'organizationChartId.equals');
+            if(organizationChartIdFilter){
+                let val = +organizationChartIdFilter.value;
                 //criteria.pop('yearId');
                 criteria = criteria.filter(a => a.key != 'organizationChartId.equals');
                 if (val) {
@@ -263,7 +266,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         }
     }
     export() {
-        this.makeCriteria(this.criteria,true);
+        this.makeCriteria(this.unchangedCriteria,true);
     }
     prepareForExportExcel(res : IEducationalHistoryMarineSuffix[]){
         res = this.convertObjectDatesService.changeArrayDate(res);
@@ -284,7 +287,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });*/
-        this.makeCriteria(this.criteria);
+        this.makeCriteria(this.unchangedCriteria);
     }
 
     clear() {
@@ -296,7 +299,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         ]);
-        this.makeCriteria(this.criteria);
+        this.makeCriteria(this.unchangedCriteria);
     }
 
     ngOnInit() {

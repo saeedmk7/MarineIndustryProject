@@ -58,7 +58,7 @@ export class OrganizationChartMarineSuffixComponent implements OnInit, OnDestroy
 
 
         this.personService.find($event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
-            debugger;
+
             this.searchtxt = resp.body.organizationChartTitle;
             this.fullOrgTitle = this.organizationCharts.find(a => a.id == resp.body.organizationChartId).fullTitle;
             this.search(this.searchtxt);
@@ -195,7 +195,10 @@ export class OrganizationChartMarineSuffixComponent implements OnInit, OnDestroy
         //this.selectedPeople = this.people.filter(a => a.organizationChartId == this.myId);
 
     }
-
+    collapseTree(){
+        debugger;
+        this.tree.treeModel.collapseAll();
+    }
 
 
     search(event)

@@ -21,7 +21,7 @@ export class JobRecordMarineSuffixResolve implements Resolve<IJobRecordMarineSuf
         private personService: PersonMarineSuffixService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<JobRecordMarineSuffix> {
-        debugger;
+
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
             return this.service.find(id).pipe(

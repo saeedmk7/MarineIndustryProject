@@ -43,6 +43,7 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
     searchbarModel: SearchPanelModel[] = [];
     done:boolean = false;
     criteria: any;
+    unchangedCriteria: any;
 
     qualifications: IQualificationMarineSuffix[];
     fieldofstudies: IFieldOfStudyMarineSuffix[];
@@ -70,8 +71,9 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
             this.predicate = data.pagingParams.predicate;
         });
         this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
-            debugger;
+
             this.criteria = criteria.content;
+            this.unchangedCriteria = criteria.content;
             this.done = true;
             this.loadAll(criteria.content);
 
@@ -79,28 +81,29 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     loadAll(criteria?) {
-
+        debugger;
         if(criteria)
         {
-            let val = +criteria.find(a => a.key == 'expired.equals').value;
-            criteria.pop('expired');
-
-            if(val){
-                let date = new Date().toISOString()
-                if(val == 1){
-                    criteria.push({
-                        key: 'expirationDate.lessOrEqualThan',
-                        value: date
-                    });
-                }
-                if(val == 2){
-                    criteria.push({
-                        key: 'expirationDate.greaterOrEqualThan',
-                        value: date
-                    });
+            const expire = criteria.find(a => a.key == 'expired.equals');
+            if(expire) {
+                let val = +expire;
+                criteria = criteria.filter(a => a.key != 'expired.equals');
+                if (val) {
+                    let date = new Date().toISOString()
+                    if (val == 1) {
+                        criteria.push({
+                            key: 'expirationDate.lessOrEqualThan',
+                            value: date
+                        });
+                    }
+                    if (val == 2) {
+                        criteria.push({
+                            key: 'expirationDate.greaterOrEqualThan',
+                            value: date
+                        });
+                    }
                 }
             }
-
 
         }
         this.teacherService
@@ -122,6 +125,7 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     loadPage(page: number) {
+        debugger;
         if (page !== this.previousPage) {
             this.previousPage = page;
             this.transition();
@@ -136,7 +140,7 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });*/
-        this.loadAll(this.criteria);
+        this.loadAll(this.unchangedCriteria);
     }
 
     clear() {
@@ -205,6 +209,7 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     private paginateTeachers(data: ITeacherMarineSuffix[], headers: HttpHeaders) {
+        debugger;
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;

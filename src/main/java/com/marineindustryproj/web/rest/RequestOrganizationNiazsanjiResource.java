@@ -64,6 +64,8 @@ public class RequestOrganizationNiazsanjiResource {
 
         requestOrganizationNiazsanjiDTO.setCreateDate(ZonedDateTime.now());
         requestOrganizationNiazsanjiDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        requestOrganizationNiazsanjiDTO.setModifyDate(ZonedDateTime.now());
+        requestOrganizationNiazsanjiDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
         //requestOrganizationNiazsanjiDTO.setChangeStatusUserLogin(SecurityUtils.getCurrentUserLogin().get());
 
         RequestOrganizationNiazsanjiDTO result = requestOrganizationNiazsanjiService.save(requestOrganizationNiazsanjiDTO);

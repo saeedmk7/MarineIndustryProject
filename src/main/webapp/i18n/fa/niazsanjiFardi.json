@@ -23,6 +23,7 @@
             "code": "کد",
             "educationalModuleType": "نوع پودمان انتخابی",
             "courseType": "نوع دوره",
+            "courseTypeId": "نوع دوره",
             "priceCost": "هزینه(ریال)",
             "description": "توضیحات",
             "createUserLogin": "کاربر درخواست کننده",

@@ -39,7 +39,7 @@ export const requestNiazsanjiFardiRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
+            defaultSort: 'modifyDate,desc',
             pageTitle: 'marineindustryprojApp.requestNiazsanjiFardi.home.title'
         },
         canActivate: [UserRouteAccessService]

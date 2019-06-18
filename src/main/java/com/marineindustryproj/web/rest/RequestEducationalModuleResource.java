@@ -66,6 +66,8 @@ public class RequestEducationalModuleResource {
 
         requestEducationalModuleDTO.setCreateDate(ZonedDateTime.now());
         requestEducationalModuleDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        requestEducationalModuleDTO.setModifyDate(ZonedDateTime.now());
+        requestEducationalModuleDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
         requestEducationalModuleDTO.setChangeStatusUserLogin(SecurityUtils.getCurrentUserLogin().get());
 
         RequestEducationalModuleDTO result = requestEducationalModuleService.save(requestEducationalModuleDTO);

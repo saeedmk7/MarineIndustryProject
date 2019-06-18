@@ -71,6 +71,8 @@ public class RequestNiazsanjiFardiResource {
         PersonDTO personDTO = personService.findOne(requestNiazsanjiFardiDTO.getPersonId()).get();
         requestNiazsanjiFardiDTO.setCreateDate(ZonedDateTime.now());
         requestNiazsanjiFardiDTO.setCreateUserLogin(personDTO.getNationalId());
+        requestNiazsanjiFardiDTO.setModifyDate(ZonedDateTime.now());
+        requestNiazsanjiFardiDTO.setModifyUserLogin(personDTO.getNationalId());
         //requestNiazsanjiFardiDTO.setChangeStatusUserLogin(SecurityUtils.getCurrentUserLogin().get());
 
         RequestNiazsanjiFardiDTO result = requestNiazsanjiFardiService.save(requestNiazsanjiFardiDTO);

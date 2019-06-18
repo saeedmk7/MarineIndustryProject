@@ -97,6 +97,8 @@ public class NiazsanjiFardiServiceImpl implements NiazsanjiFardiService {
         finalNiazsanjiReport.setArchived(false);
         finalNiazsanjiReport.setCreateDate(ZonedDateTime.now());
         finalNiazsanjiReport.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        finalNiazsanjiReport.setModifyDate(ZonedDateTime.now());
+        finalNiazsanjiReport.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
         finalNiazsanjiReport.setDescription(niazsanjiFardi.getDescription());
         finalNiazsanjiReport.setDocuments(niazsanjiFardi.getDocuments());
         finalNiazsanjiReport.setNiazSanjiSource(NiazSanjiSource.FARDI);
@@ -113,6 +115,8 @@ public class NiazsanjiFardiServiceImpl implements NiazsanjiFardiService {
         finalNiazsanjiReportPerson.setArchived(false);
         finalNiazsanjiReportPerson.setCreateDate(ZonedDateTime.now());
         finalNiazsanjiReportPerson.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        finalNiazsanjiReportPerson.setModifyDate(ZonedDateTime.now());
+        finalNiazsanjiReportPerson.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
         finalNiazsanjiReportPerson.setNiazSanjiSource(NiazSanjiSource.FARDI);
         finalNiazsanjiReportPerson.setPriceCost(niazsanjiFardi.getPriceCost().intValue());
         finalNiazsanjiReportPerson.setSourceId(niazsanjiFardi.getId());

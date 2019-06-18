@@ -40,7 +40,7 @@ export class EducationalRecordMarineSuffixUpdateComponent implements OnInit {
         protected activatedRoute: ActivatedRoute
     ) {}
     checkValidation(event){
-        debugger;
+
         try {
             if(event.target.value > 20 || event.target.value < 0)
                 this.valid = 2;
@@ -106,7 +106,7 @@ export class EducationalRecordMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        debugger;
+
         if(this.educationalRecord.qualificationId)
             this.educationalRecord.qualificationText = this.qualifications.find(a => a.id == this.educationalRecord.qualificationId).title;
         if(this.educationalRecord.fieldOfStudyId)

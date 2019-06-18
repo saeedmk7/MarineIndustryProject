@@ -500,6 +500,8 @@ public class FinalNiazsanjiReportResource {
 
         finalNiazsanjiReportDTO.setCreateDate(ZonedDateTime.now());
         finalNiazsanjiReportDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        finalNiazsanjiReportDTO.setModifyDate(ZonedDateTime.now());
+        finalNiazsanjiReportDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
         finalNiazsanjiReportDTO.setNiazSanjiSource(NiazSanjiSource.FARDI);
 
         FinalNiazsanjiReportDTO result = finalNiazsanjiReportService.saveAndComplete(finalNiazsanjiReportDTO);

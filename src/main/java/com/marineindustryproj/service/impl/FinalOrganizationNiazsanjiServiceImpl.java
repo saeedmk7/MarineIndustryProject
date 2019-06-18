@@ -75,6 +75,8 @@ public class FinalOrganizationNiazsanjiServiceImpl implements FinalOrganizationN
         finalNiazsanjiReport.setArchived(false);
         finalNiazsanjiReport.setCreateDate(ZonedDateTime.now());
         finalNiazsanjiReport.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        finalNiazsanjiReport.setModifyDate(ZonedDateTime.now());
+        finalNiazsanjiReport.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
         finalNiazsanjiReport.setDescription(finalOrganizationNiazsanjiDTO.getDescription());
         finalNiazsanjiReport.setDocuments(finalOrganizationNiazsanji.getDocuments());
         finalNiazsanjiReport.setNiazSanjiSource(NiazSanjiSource.ORGANIZATION);
@@ -91,6 +93,8 @@ public class FinalOrganizationNiazsanjiServiceImpl implements FinalOrganizationN
             finalNiazsanjiReportPerson.setArchived(false);
             finalNiazsanjiReportPerson.setCreateDate(ZonedDateTime.now());
             finalNiazsanjiReportPerson.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            finalNiazsanjiReportPerson.setModifyDate(ZonedDateTime.now());
+            finalNiazsanjiReportPerson.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
             finalNiazsanjiReportPerson.setNiazSanjiSource(NiazSanjiSource.ORGANIZATION);
             finalNiazsanjiReportPerson.setPriceCost(finalOrganizationNiazsanji.getPriceCost());
             finalNiazsanjiReportPerson.setSourceId(finalOrganizationNiazsanjiDTO.getId());

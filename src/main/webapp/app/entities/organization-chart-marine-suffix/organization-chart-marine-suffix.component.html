@@ -46,7 +46,10 @@
                 [(ngModel)]="searchPerson">
             </ng-select>
          </div>
+        <br/>
         <span>{{fullOrgTitle}}</span>
+        <br/>
+        <button type="button" class="btn btn-sm btn-info" (click)="collapseTree()">جمع کردن رخت</button>
         <tree-root #tree [nodes]="nodes" [options]="options" (activate)="nodeActive($event)"></tree-root>
     </div>
     <div class="col-5">

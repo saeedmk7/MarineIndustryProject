@@ -297,6 +297,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
             this.requestOrganizationNiazsanji.recommendedByOrgchart = this.organizationCharts.find(a => a.id == this.requestOrganizationNiazsanji.organizationChartId).fullTitle;
         }
         this.currentUserFullName = this.currentPerson.fullName;
+        debugger;
 
         if (this.requestOrganizationNiazsanji.id !== undefined) {
             this.subscribeToSaveResponse(this.requestOrganizationNiazsanjiService.update(this.requestOrganizationNiazsanji),true);

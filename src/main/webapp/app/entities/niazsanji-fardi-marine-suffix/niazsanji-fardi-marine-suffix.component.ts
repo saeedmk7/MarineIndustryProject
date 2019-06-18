@@ -28,6 +28,8 @@ import {
 import {RequestNiazsanjiFardiMarineSuffixService} from "app/entities/request-niazsanji-fardi-marine-suffix/request-niazsanji-fardi-marine-suffix.service";
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
+import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
+import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 
 @Component({
     selector: 'mi-niazsanji-fardi-marine-suffix',
@@ -64,6 +66,7 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
     selectedNiazSanji: number[] = [];
     selectedYear: number;
     counter: number = 0;
+    coursetypes: ICourseTypeMarineSuffix[];
     constructor(
         protected niazsanjiFardiService: NiazsanjiFardiMarineSuffixService,
         protected requestNiazsanjiFardiService: RequestNiazsanjiFardiMarineSuffixService,
@@ -79,6 +82,7 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
         protected eventManager: JhiEventManager,
         private convertObjectDatesService: ConvertObjectDatesService,
         private treeUtilities: TreeUtilities,
+        private courseTypeService: CourseTypeMarineSuffixService,
         private jhiTranslate: TranslateService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -304,11 +308,21 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
             this.prepareSearchPerson();
             this.prepareSearchEducationalModule();
             this.prepareSearchDate();
+            this.prepareSearchCourseType();
 
         });
         //this.registerChangeInNiazsanjiFardis();
     }
-
+    prepareSearchCourseType(){
+        this.courseTypeService.query().subscribe(
+            (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                debugger;
+                this.coursetypes = res.body;
+                this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'courseTypeId', 'select', 'equals', this.coursetypes));
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     prepareSearchEducationalModule(){
         this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
         if(this.educationalModuleService.educationalModules){

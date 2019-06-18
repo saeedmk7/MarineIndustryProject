@@ -250,14 +250,14 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
 
     save() {
         this.isSaving = true;
-        debugger;
+
         this.currentUserFullName = this.currentPerson.fullName;
         this.requestEducationalModule.code = this.requestEducationalModule.code ? this.requestEducationalModule.code : "";
         this.requestEducationalModule.title = this.requestEducationalModule.title ? this.requestEducationalModule.title : "";
         this.requestEducationalModule.learningTimePractical = this.requestEducationalModule.learningTimePractical ? this.requestEducationalModule.learningTimePractical : 0;
         this.requestEducationalModule.learningTimeTheorical = this.requestEducationalModule.learningTimeTheorical ? this.requestEducationalModule.learningTimeTheorical : 0;
         this.message = "";
-        debugger;
+
         if(!this.currentPerson.organizationChartId) {
             this.message = "موقعیت در چارت سازمانی برای شما تنظیم نشده است، لطفا مراتب را با مدیریت سامانه در میان بگذارید."
             this.isSaving = false;

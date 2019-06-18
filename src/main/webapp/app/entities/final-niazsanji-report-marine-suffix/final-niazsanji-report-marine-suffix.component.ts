@@ -32,6 +32,8 @@ import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 import {MONTHS} from "app/shared/constants/months.constants";
 import {FINALNIAZSANJISTATUSMEANING} from "app/shared/constants/final-niazsanji-report-status-meaning.constants";
 import {IPlanningAndRunMonthReport} from "app/shared/model/custom/planning-month-report";
+import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
+import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 
 @Component({
     selector: 'mi-final-niazsanji-report-marine-suffix',
@@ -43,6 +45,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     currentAccount: any;
     finalNiazsanjiReport: IFinalNiazsanjiReportMarineSuffix = {};
     finalNiazsanjiReports: IFinalNiazsanjiReportMarineSuffix[];
+    coursetypes: ICourseTypeMarineSuffix[];
     personId: number;
 
     finalNiazsanjiReportsFardis: IFinalNiazsanjiReportFardiMarineSuffix[] = [];
@@ -111,6 +114,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         private jhiTranslate: TranslateService,
         private convertObjectDatesService: ConvertObjectDatesService,
         private personService: PersonMarineSuffixService,
+        private courseTypeService: CourseTypeMarineSuffixService,
         private organizationChartService: OrganizationChartMarineSuffixService,
         private treeUtilities: TreeUtilities
     ) {
@@ -253,10 +257,18 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 key: 'personId.in', value: val
             });
         }
+
         if (f.value['educationalModuleTitle']) {
-            let val = +f.value['educationalModuleTitle'];
+            let val = f.value['educationalModuleTitle'];
             criteria.push({
                 key: 'educationalModuleTitle.contains', value: val
+            });
+        }
+
+        if (f.value['courseTypeId']) {
+            let val = +f.value['courseTypeId'];
+            criteria.push({
+                key: 'courseTypeId.in', value: val
             });
         }
         /*if (f.value['educationalModuleId']) {
@@ -290,7 +302,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                     else {
                         this.prepareForOrganizationFinal(res.body, data);
                     }
-                    debugger;
+
                     $('#collapseExample').addClass('collapse');
                     $('#collapseExample').removeClass('show');
                 }, (res: HttpErrorResponse) => this.onError(res.message)
@@ -459,6 +471,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 this.prepareSearchEducationalModule();
                 this.preparePeople();
                 this.prepareSearchDate();
+                this.prepareSearchCourseType();
             });
         });
         this.registerChangeInFinalNiazsanjiReports();
@@ -475,6 +488,15 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
 
         if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
             this.isSuperUsers = true;
+    }
+    prepareSearchCourseType(){
+        this.courseTypeService.query().subscribe(
+            (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                debugger;
+                this.coursetypes = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
     prepareSearchEducationalModule() {
         if (this.educationalModuleService.educationalModules) {

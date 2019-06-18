@@ -33,7 +33,7 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
         console.log("I got:", this.searchPanelModel);
     }
     search(){
-        debugger;
+
         let url = window.location.href;
         let criteria = [];
         this.searchPanelModel.forEach((a) => {

@@ -1,6 +1,23 @@
 <div>
     <div class="row justify-content-center">
         <div class="myContent">
+            <div *ngIf="isTopUsers" style="text-align: center;">
+            <div class=" form-group">
+                <label class="form-control-label">جستجو پرسنل </label>
+                <ng-select
+                    [items]="people"
+                    [multiple]="false"
+                    [closeOnSelect]="true"
+                    [searchable]="true"
+                    (change)="loadPersonData($event)"
+                    bindLabel="fullName"
+                    bindValue="id"
+                    placeholder="جستجو پرسنل"
+                    name="searchPerson"
+                    [(ngModel)]="searchPerson">
+                </ng-select>
+            </div>
+            </div>
         <table border="1" style="width: 100%">
             <tr>
                 <td style="text-align: center"><img src="/content/images/Sanaye192.png" style="width: 150px;"/> </td>

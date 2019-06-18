@@ -59,13 +59,13 @@ export class RequestOrganizationNiazsanjiMarineSuffixDetailComponent implements 
                         (res: HttpErrorResponse) => this.onError(res.message));
                 }
 
-                if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+                /*if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
                 {
                     if(this.requestOrganizationNiazsanji.requestStatus === 'NEW') {
                         this.requestOrganizationNiazsanji.requestStatus = RequestStatus.READ;
                         this.subscribeToSaveResponse(this.requestOrganizationNiazsanjiMarineSuffixService.update(this.requestOrganizationNiazsanji));
                     }
-                }
+                }*/
                 this.requestOrganizationNiazsanji = this.convertObjectDatesService.changeDate(requestOrganizationNiazsanji);
             });
 

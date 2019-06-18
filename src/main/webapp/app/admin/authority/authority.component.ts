@@ -6,7 +6,6 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import {Principal, User} from 'app/core';
 
-import { ITEMS_PER_PAGE } from 'app/shared';
 import { AuthorityService } from './authority.service';
 import {Authority, IAuthority} from "app/shared/model/authority.model";
 import {AuthorityDeleteDialogComponent, UserMgmtDeleteDialogComponent} from "app/admin";
@@ -56,6 +55,7 @@ export class AuthorityComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
+        debugger;
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;
@@ -63,7 +63,7 @@ export class AuthorityComponent implements OnInit, OnDestroy {
         this.registerChangeInAuthority();
     }
     deleteAuthority(authority: Authority) {
-        const modalRef = this.modalService.open(AuthorityDeleteDialogComponent, { size: 'lg', backdrop: false });
+        const modalRef = this.modalService.open(AuthorityDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
         modalRef.componentInstance.authority = authority;
         modalRef.result.then(
             result => {

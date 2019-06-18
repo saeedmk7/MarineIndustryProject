@@ -116,7 +116,7 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
         this.yearsCollections = GREGORIAN_START_END_DATE;
     }
     makeCriteria(criteria?,excelExport: boolean = false){
-        debugger;
+
         if (criteria) {
             /*let val = +criteria.find(a => a.key == 'yearId.equals').value;
             //criteria.pop('yearId');
@@ -180,11 +180,12 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
 
     }
     handleAfterChart(wantOrgIds: number[],criteria,excelExport: boolean = false){
-        debugger;
+
         if(this.isSuperUsers) {
 
-            if(criteria.find(a => a.key == 'organizationChartId.equals')){
-                let val = +criteria.find(a => a.key == 'organizationChartId.equals').value;
+            let org = criteria.find(a => a.key == 'organizationChartId.equals');
+            if(org){
+                const val = +org.value;
                 //criteria.pop('yearId');
                 criteria = criteria.filter(a => a.key != 'organizationChartId.equals');
                 if (val) {
@@ -239,7 +240,7 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
         }
     }
     loadAll(criteria?,excelExport: boolean = false) {
-        debugger;
+
         let orgs = this.treeUtilities.getParentIds(this.organizationcharts,this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
         if(orgs.length > 0){
             orgs.push(0);

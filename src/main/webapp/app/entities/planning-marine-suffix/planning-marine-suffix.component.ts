@@ -34,6 +34,8 @@ import {
 } from "app/shared/model/final-niazsanji-report-marine-suffix.model";
 import {IFinalNiazsanjiReportFardiMarineSuffix} from "app/entities/final-niazsanji-report-marine-suffix/final-niazsanji-report-fardi-marine-suffix.model";
 import {FinalNiazsanjiReportMarineSuffixService} from "app/entities/final-niazsanji-report-marine-suffix";
+import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
+import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 
 @Component({
     selector: 'mi-planning-marine-suffix',
@@ -61,6 +63,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     organizationcharts: IOrganizationChartMarineSuffix[];
     recommenedOrgCharts: IOrganizationChartMarineSuffix[];
     orgsRoot: IOrganizationChartMarineSuffix[];
+    coursetypes: ICourseTypeMarineSuffix[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -114,6 +117,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         private convertObjectDatesService: ConvertObjectDatesService,
         private personService: PersonMarineSuffixService,
         private organizationChartService: OrganizationChartMarineSuffixService,
+        private courseTypeService: CourseTypeMarineSuffixService,
         private treeUtilities: TreeUtilities
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -262,9 +266,15 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             });
         }*/
         if (f.value['educationalModuleTitle']) {
-            let val = +f.value['educationalModuleTitle'];
+            let val = f.value['educationalModuleTitle'];
             criteria.push({
                 key: 'educationalModuleTitle.contains', value: val
+            });
+        }
+        if (f.value['courseTypeId']) {
+            let val = +f.value['courseTypeId'];
+            criteria.push({
+                key: 'courseTypeId.in', value: val
             });
         }
         return criteria;
@@ -448,6 +458,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                 this.prepareSearchEducationalModule();
                 this.preparePeople();
                 this.prepareSearchDate();
+                this.prepareSearchCourseType();
             });
         });
         this.registerChangeInFinalNiazsanjiReports();
@@ -464,6 +475,15 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
 
         if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
             this.isSuperUsers = true;
+    }
+    prepareSearchCourseType(){
+        this.courseTypeService.query().subscribe(
+            (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                debugger;
+                this.coursetypes = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
     prepareSearchEducationalModule() {
         if (this.educationalModuleService.educationalModules) {

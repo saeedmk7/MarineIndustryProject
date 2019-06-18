@@ -19,7 +19,7 @@ export const authorityRoute: Routes = [
         path: 'authority',
         component: AuthorityComponent,
         data: {
-            authorities: ['ROLE_ADMIN'],
+            authorities: ['ROLE_USER'],
             pageTitle: 'marineindustryprojApp.authority.home.title'
         }
     },
@@ -30,7 +30,7 @@ export const authorityRoute: Routes = [
             authority: AuthorityResolve
         },
         data: {
-            authorities: ['ROLE_ADMIN'],
+            authorities: ['ROLE_USER'],
             pageTitle: 'marineindustryprojApp.authority.home.title'
         }
     }
@@ -44,7 +44,7 @@ export const authorityPopupRoute: Routes = [
             authority: AuthorityResolve
         },
         data: {
-            authorities: ['ROLE_ADMIN'],
+            authorities: ['ROLE_USER'],
             pageTitle: 'marineindustryprojApp.authority.home.title'
         },
         canActivate: [UserRouteAccessService],
