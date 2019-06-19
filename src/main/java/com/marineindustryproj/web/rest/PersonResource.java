@@ -12,6 +12,8 @@ import com.marineindustryproj.web.rest.util.PaginationUtil;
 import com.marineindustryproj.service.dto.PersonDTO;
 import com.marineindustryproj.service.dto.PersonCriteria;
 import com.marineindustryproj.service.PersonQueryService;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.hibernate.id.GUIDGenerator;
 import org.slf4j.Logger;
@@ -129,6 +131,12 @@ public class PersonResource {
     @Timed
     public ResponseEntity<List<PersonDTO>> getAllPeople(PersonCriteria criteria, Pageable pageable) {
         log.debug("REST request to get People by criteria: {}, pageable: {}", criteria, pageable);
+        if(criteria.getArchived() == null)
+        {
+            BooleanFilter booleanFilter = new BooleanFilter();
+            booleanFilter.setEquals(true);
+            criteria.setArchived(booleanFilter);
+        }
         if(pageable != null && pageable.getPageSize() < 2000) {
             Page<PersonDTO> page = personQueryService.findByCriteria(criteria,
                                                                      pageable);

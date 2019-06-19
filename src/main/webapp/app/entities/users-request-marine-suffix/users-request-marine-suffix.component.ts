@@ -12,6 +12,8 @@ import {UsersRequestMarineSuffixService} from './users-request-marine-suffix.ser
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import {IRequestNiazsanjiFardiMarineSuffix} from "app/shared/model/request-niazsanji-fardi-marine-suffix.model";
+import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
+import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 
 @Component({
     selector: 'mi-users-request-marine-suffix',
@@ -44,6 +46,7 @@ export class UsersRequestMarineSuffixComponent implements OnInit, OnDestroy {
         private dataUtils: JhiDataUtils,
         private router: Router,
         private eventManager: JhiEventManager,
+        private personService: PersonMarineSuffixService,
         private convertObjectDatesService : ConvertObjectDatesService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -176,6 +179,22 @@ export class UsersRequestMarineSuffixComponent implements OnInit, OnDestroy {
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.usersRequests = this.convertObjectDatesService.changeArrayDate(data);
+        /*if(this.personService.people)
+        {
+            this.people = this.personService.people;
+        }
+        else {
+            this.personService.query().subscribe(
+                (res: HttpResponse<IPersonMarineSuffix[]>) => {
+
+                    this.people = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
+        this.usersRequests.forEach(a => {
+            a.createUserLogin =
+        })*/
     }
 
     private onError(errorMessage: string) {

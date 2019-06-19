@@ -198,7 +198,16 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         );
     }
     addAllPeopleOfThisUser(){
-        const orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationCharts , this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
+        let orgIds = [];
+        debugger;
+        if(this.requestOrganizationNiazsanji.organizationChartId)
+        {
+            orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationCharts , this.requestOrganizationNiazsanji.organizationChartId).filter(this.treeUtilities.onlyUnique);
+        }
+        else
+        {
+            orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationCharts , this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
+        }
         this.requestOrganizationNiazsanji.people = this.people.filter(a => orgIds.includes(a.organizationChartId)).filter(this.treeUtilities.onlyUnique);
     }
     findTargetPeople(){

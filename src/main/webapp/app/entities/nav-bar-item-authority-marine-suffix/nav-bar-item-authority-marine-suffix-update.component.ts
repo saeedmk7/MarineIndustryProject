@@ -25,12 +25,8 @@ export class NavBarItemAuthorityMarineSuffixUpdateComponent implements OnInit {
     resultAuthorityBody: INavBarItemAuthorityMarineSuffix[];
     isSaving: boolean;
     navbaritems: INavBarItemMarineSuffix[];
-    /*tempNavbaritems: INavBarItemMarineSuffix[];*/
     createDate: string;
     modifyDate: string;
-
-    myId:number=0;
-    //selectedIds: String="";
 
     nodes : any;
     @ViewChild(TreeComponent)
@@ -42,15 +38,7 @@ export class NavBarItemAuthorityMarineSuffixUpdateComponent implements OnInit {
         rtl: true
     };
 
-    optionsDisabled: ITreeOptions = {
-        useCheckbox: true,
-        useTriState: true
-    };
-
     searchtxt:string;
-    selectedTreeList: number[];
-    selectedTreeListString: String[];
-    private ng: any;
 
     constructor(
         private jhiAlertService: JhiAlertService,

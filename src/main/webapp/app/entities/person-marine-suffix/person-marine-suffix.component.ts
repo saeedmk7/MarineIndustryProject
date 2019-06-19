@@ -15,6 +15,10 @@ import {TranslateService} from '@ngx-translate/core';
 import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 import {IEmploymentTypeMarineSuffix} from "app/shared/model/employment-type-marine-suffix.model";
 import {EmploymentTypeMarineSuffixService} from "app/entities/employment-type-marine-suffix";
+import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
+import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 
 @Component({
     selector: 'mi-person-marine-suffix',
@@ -22,9 +26,12 @@ import {EmploymentTypeMarineSuffixService} from "app/entities/employment-type-ma
 })
 export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
     people: IPersonMarineSuffix[];
+    currentPerson: IPersonMarineSuffix;
+    orgIds: number[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
+    organizationcharts: IOrganizationChartMarineSuffix[];
 
     routeData: any;
     links: any;
@@ -46,10 +53,12 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
     isModirKolAmozesh: boolean = false;
     isKarshenasArshadAmozeshSazman: boolean = false;
     isModirAmozesh: boolean = false;
+    isModirAmozesh2: boolean = false;
     isSuperUsers: boolean = false;
     isTopUsers: boolean = false;
     constructor(
         private personService: PersonMarineSuffixService,
+        private organizationChartService: OrganizationChartMarineSuffixService,
         private employmentTypeService: EmploymentTypeMarineSuffixService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
@@ -58,7 +67,10 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
         private router: Router,
         private eventManager: JhiEventManager,
         private location: PlatformLocation,
-        private jhiTranslate: TranslateService
+        private jhiTranslate: TranslateService,
+        private convertObjectDatesService : ConvertObjectDatesService,
+        private treeUtilities : TreeUtilities
+
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -82,12 +94,16 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     loadAll(criteria?) {
+        debugger;
         if(!criteria)
         {
             criteria = [];
         }
-        if(this.isModirAmozesh){
-
+        if(!this.isSuperUsers && this.isTopUsers){
+            criteria.push({
+                key: 'organizationChartId.in',
+                value: this.orgIds
+            });
         }
         this.personService
             .query({
@@ -101,7 +117,24 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
+    prepareOrgIds(){
+        debugger;
+        if(this.organizationChartService.organizationchartsAll)
+        {
+            this.organizationcharts = this.organizationChartService.organizationchartsAll;
+            this.orgIds = this.treeUtilities.getAllOfThisTreeIds(this.organizationcharts, this.currentPerson.organizationChartId);
 
+        }
+        else {
+            this.organizationChartService.query().subscribe(
+                (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
+
+                    this.organizationcharts = res.body;
+                    this.orgIds = this.treeUtilities.getAllOfThisTreeIds(this.organizationcharts, this.currentPerson.organizationChartId);
+                },
+                (res: HttpErrorResponse) => this.onError(res.message));
+        }
+    }
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
@@ -137,6 +170,8 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
                 this.isAdmin = true;
             if (account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
                 this.isModirAmozesh = true;
+            if (account.authorities.find(a => a == "ROLE_MODIR_AMOZESH_2") !== undefined)
+                this.isModirAmozesh2 = true;
             if (account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
                 this.isModirKolAmozesh = true;
             if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
@@ -144,7 +179,7 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
 
             if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
                 this.isSuperUsers = true;
-            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh)
+            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh || this.isModirAmozesh2)
                 this.isTopUsers = true;
         }
     }
@@ -164,6 +199,10 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
         );
         this.principal.identity().then((account) => {
             this.setRoles(account);
+            this.personService.find(account.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
+                this.currentPerson = resp.body;
+                this.prepareOrgIds();
+            }, (res: HttpErrorResponse) => this.onError(res.message));
         });
         /*if(!this.done){
             this.loadAll();
