@@ -17,6 +17,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.usersRequest.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="telephone"><span jhiTranslate="marineindustryprojApp.usersRequest.telephone">Telephone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th><span jhiTranslate="marineindustryprojApp.usersRequest.orgChartRoot">orgChartRoot</span> </th>
             <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.usersRequest.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.usersRequest.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.usersRequest.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -35,6 +36,7 @@
                 <td><a [routerLink]="['/users-request-marine-suffix', usersRequest.id, 'view' ]">{{usersRequest.id}}</a></td>
                 <td>{{usersRequest.title}}</td>
                 <td>{{usersRequest.telephone}}</td>
+                <td>{{usersRequest.orgChartRoot}}</td>
                 <td>{{usersRequest.description}}</td>
                 <td>{{usersRequest.createUserLogin}}</td>
                 <td>{{usersRequest.createDate}}</td>

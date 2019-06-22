@@ -134,7 +134,7 @@ public class PersonResource {
         if(criteria.getArchived() == null)
         {
             BooleanFilter booleanFilter = new BooleanFilter();
-            booleanFilter.setEquals(true);
+            booleanFilter.setEquals(false);
             criteria.setArchived(booleanFilter);
         }
         if(pageable != null && pageable.getPageSize() < 2000) {

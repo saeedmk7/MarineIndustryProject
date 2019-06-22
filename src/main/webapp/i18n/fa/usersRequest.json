@@ -19,13 +19,14 @@
             "title": "عنوان",
             "telephone": "شماره تماس",
             "description": "توضیحات",
-            "createUserLogin": "کاربر ایجاد کننده",
+            "createUserLogin": "کاربر درخواست کننده",
             "createDate": "تاریخ ایجاد",
             "modifyUserLogin": "کاربر ویرایش کننده",
             "modifyDate": "تاریخ ویرایش شده",
             "conversation": "مکالمات",
             "requestStatus": "وضعیت درخواست",
             "changeStatusUserLogin": "کاربر تغییر دهنده وضعیت درخواست",
+            "orgChartRoot": "گروه درخواست کننده",
             "document": "مدارک",
             "answer": "جواب"
         }

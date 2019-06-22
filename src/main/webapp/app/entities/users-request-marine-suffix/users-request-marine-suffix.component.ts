@@ -14,6 +14,8 @@ import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import {IRequestNiazsanjiFardiMarineSuffix} from "app/shared/model/request-niazsanji-fardi-marine-suffix.model";
 import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
+import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
+import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
 
 @Component({
     selector: 'mi-users-request-marine-suffix',
@@ -23,6 +25,8 @@ import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 export class UsersRequestMarineSuffixComponent implements OnInit, OnDestroy {
     currentAccount: any;
     usersRequests: IUsersRequestMarineSuffix[];
+    people: IPersonMarineSuffix[];
+    organizationcharts: IOrganizationChartMarineSuffix[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -47,6 +51,7 @@ export class UsersRequestMarineSuffixComponent implements OnInit, OnDestroy {
         private router: Router,
         private eventManager: JhiEventManager,
         private personService: PersonMarineSuffixService,
+        private organizationChartService: OrganizationChartMarineSuffixService,
         private convertObjectDatesService : ConvertObjectDatesService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -179,22 +184,63 @@ export class UsersRequestMarineSuffixComponent implements OnInit, OnDestroy {
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.usersRequests = this.convertObjectDatesService.changeArrayDate(data);
-        /*if(this.personService.people)
+        this.loadPeople();
+    }
+    loadPeople(){
+        if(this.personService.people)
         {
             this.people = this.personService.people;
+            this.loadChart();
         }
         else {
             this.personService.query().subscribe(
                 (res: HttpResponse<IPersonMarineSuffix[]>) => {
 
                     this.people = res.body;
+                    this.loadChart();
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
         }
+
+    }
+    loadChart()
+    {
+        if(this.organizationChartService.organizationchartsAll)
+        {
+            this.organizationcharts = this.organizationChartService.organizationchartsAll;
+            this.makeData();
+        }
+        else {
+            this.organizationChartService.query().subscribe(
+                (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
+
+                    this.organizationcharts = res.body;
+                    this.makeData();
+                },
+                (res: HttpErrorResponse) => this.onError(res.message));
+        }
+    }
+    makeData(){
         this.usersRequests.forEach(a => {
-            a.createUserLogin =
-        })*/
+            debugger;
+            let person = this.people.find(w => w.nationalId.includes(a.createUserLogin));
+            if(person)
+            {
+                a.createUserLogin = person.fullName;
+                const org = this.organizationcharts.find(w => w.id == person.organizationChartId);
+                if(org)
+                    a.orgChartRoot = org.fullTitle.split('>')[0];
+            }
+            person = this.people.find(w => w.nationalId.includes(a.changeStatusUserLogin));
+            if(person)
+            {
+                a.changeStatusUserLogin = person.fullName;
+                const org = this.organizationcharts.find(w => w.id == person.organizationChartId);
+                if(org)
+                    a.orgChartRoot = org.fullTitle.split('>')[0];
+            }
+        })
     }
 
     private onError(errorMessage: string) {
