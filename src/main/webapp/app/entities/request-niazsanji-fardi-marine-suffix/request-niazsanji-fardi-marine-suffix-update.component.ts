@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Route, Router} from '@angular/router';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {JhiAlertService, JhiDataUtils} from 'ng-jhipster';
@@ -35,6 +35,7 @@ import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffi
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 import {IHomePagePersonEducationalModule} from "app/shared/model/custom/home-page-person-educational-module";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'mi-request-niazsanji-fardi-marine-suffix-update',
@@ -84,6 +85,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
 
     hasNoRow:boolean = false;
     currentUserFullName: string = "";
+    mustNew: boolean = false;
     constructor(
         protected dataUtils: JhiDataUtils,
         private courseTypeService: CourseTypeMarineSuffixService,
@@ -100,7 +102,8 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         protected activatedRoute: ActivatedRoute,
         private treeUtilities: TreeUtilities,
         private userService: UserService,
-        private convertObjectDatesService: ConvertObjectDatesService
+        private convertObjectDatesService: ConvertObjectDatesService,
+        private router: Router
     ) {}
     ngOnInit() {
 
@@ -290,6 +293,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
                 (error) => this.onError("موردی یافت نشد"));
         }
     }
+
     onAllPersonChange(event: IPersonMarineSuffix){
         if(event.id){
             this.personService.find(event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
@@ -460,10 +464,13 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
     }
 
     previousState() {
+        /*this.router.navigate(['/request-niazsanji-fardi-marine-suffix']);*/
         window.history.back();
-
     }
-
+    saveAndNew(){
+        this.mustNew = true;
+        $('#save-entity').trigger('click');
+    }
     save() {
 
         this.isSaving = true;
@@ -594,7 +601,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
     }
 
     protected onSaveSuccess(res: IRequestNiazsanjiFardiMarineSuffix, isEdit:boolean = false) {
-
+        debugger;
         if(!isEdit) {
             if(res.status == 0){
                 res.conversation += "\n ------------------------------------- \n";
@@ -606,6 +613,16 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
             }
         }
         this.isSaving = false;
+        if(this.mustNew)
+        {
+            /*this.router.routeReuseStrategy.shouldReuseRoute = function () {
+                return false;
+            };*/
+
+            setTimeout(() => {
+                this.router.navigate(['/request-niazsanji-fardi-marine-suffix/new']);
+            }, 1000)
+        }
         this.previousState();
     }
 

@@ -12,10 +12,11 @@ import {UsersRequestMarineSuffixService} from './users-request-marine-suffix.ser
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import {IRequestNiazsanjiFardiMarineSuffix} from "app/shared/model/request-niazsanji-fardi-marine-suffix.model";
-import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
+import {IPersonMarineSuffix, PersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
 import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
+import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 
 @Component({
     selector: 'mi-users-request-marine-suffix',
@@ -52,7 +53,8 @@ export class UsersRequestMarineSuffixComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private personService: PersonMarineSuffixService,
         private organizationChartService: OrganizationChartMarineSuffixService,
-        private convertObjectDatesService : ConvertObjectDatesService
+        private convertObjectDatesService : ConvertObjectDatesService,
+        private treeUtilities: TreeUtilities
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -184,25 +186,31 @@ export class UsersRequestMarineSuffixComponent implements OnInit, OnDestroy {
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.usersRequests = this.convertObjectDatesService.changeArrayDate(data);
-        this.loadPeople();
+        const personNationalIds = this.usersRequests.map(a => a.createUserLogin);
+        this.usersRequests.map(a => a.changeStatusUserLogin).forEach(a => {
+            personNationalIds.push(a);
+        });
+        this.loadPeople(personNationalIds.filter(this.treeUtilities.onlyUnique));
     }
-    loadPeople(){
-        if(this.personService.people)
+    loadPeople(personNationalIds: string[]){
+        if(personNationalIds)
         {
-            this.people = this.personService.people;
-            this.loadChart();
-        }
-        else {
-            this.personService.query().subscribe(
-                (res: HttpResponse<IPersonMarineSuffix[]>) => {
 
-                    this.people = res.body;
+            let criteria = [{
+                key: 'nationalId.in',
+                value: personNationalIds
+            }];
+            this.personService.query({
+                page: 0,
+                size: 20000,
+                criteria,
+                sort: ["id", "asc"]
+            }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
+                    this.people = resp.body;
                     this.loadChart();
                 },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+                (error) => this.onError("فردی یافت نشد."));
         }
-
     }
     loadChart()
     {
@@ -236,9 +244,6 @@ export class UsersRequestMarineSuffixComponent implements OnInit, OnDestroy {
             if(person)
             {
                 a.changeStatusUserLogin = person.fullName;
-                const org = this.organizationcharts.find(w => w.id == person.organizationChartId);
-                if(org)
-                    a.orgChartRoot = org.fullTitle.split('>')[0];
             }
         })
     }

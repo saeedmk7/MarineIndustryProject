@@ -70,19 +70,19 @@
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['/educational-record-marine-suffix', educationalRecord.id, 'view' ]"
+                                [routerLink]="['/educational-record-marine-suffix', 'view', educationalRecord.id ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/educational-record-marine-suffix', educationalRecord.id, 'edit']"
+                                [routerLink]="['/educational-record-marine-suffix', 'edit', educationalRecord.id]"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
-                                [routerLink]="['/', { outlets: { popup: 'educational-record-marine-suffix/'+ educationalRecord.id + '/delete'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'educational-record-marine-suffix/' + 'delete/' + educationalRecord.id} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

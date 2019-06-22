@@ -44,7 +44,7 @@ export class JobRecordMarineSuffixResolve implements Resolve<IJobRecordMarineSuf
 
 export const jobRecordRoute: Routes = [
     {
-        path: 'job-record-marine-suffix',
+        path: 'job-record-marine-suffix/list',
         component: JobRecordMarineSuffixComponent,
         resolve: {
             pagingParams: JhiResolvePagingParams
@@ -57,7 +57,7 @@ export const jobRecordRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'job-record-marine-suffix/:id/view',
+        path: 'job-record-marine-suffix/view/:id',
         component: JobRecordMarineSuffixDetailComponent,
         resolve: {
             jobRecord: JobRecordMarineSuffixResolve
@@ -92,7 +92,7 @@ export const jobRecordRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'job-record-marine-suffix/:id/edit',
+        path: 'job-record-marine-suffix/edit/:id',
         component: JobRecordMarineSuffixUpdateComponent,
         resolve: {
             jobRecord: JobRecordMarineSuffixResolve
@@ -107,7 +107,7 @@ export const jobRecordRoute: Routes = [
 
 export const jobRecordPopupRoute: Routes = [
     {
-        path: 'job-record-marine-suffix/:id/delete',
+        path: 'job-record-marine-suffix/delete/:id',
         component: JobRecordMarineSuffixDeletePopupComponent,
         resolve: {
             jobRecord: JobRecordMarineSuffixResolve

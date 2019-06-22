@@ -84,13 +84,13 @@
                         <td class="text-right">
                             <div class="btn-group flex-btn-group-container">
                                 <button type="submit" *ngIf="isTopUsers"
-                                        [routerLink]="['/educational-record-marine-suffix', educationalRecord.id, 'edit']"
+                                        [routerLink]="['/educational-record-marine-suffix', 'edit', educationalRecord.id]"
                                         class="btn btn-primary btn-sm">
                                     <fa-icon [icon]="'pencil-alt'"></fa-icon>
                                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                                 </button>
                                 <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
-                                        [routerLink]="['/', { outlets: { popup: 'educational-record-marine-suffix/'+ educationalRecord.id + '/delete'} }]"
+                                        [routerLink]="['/', { outlets: { popup: 'educational-record-marine-suffix/' + 'delete/'+ educationalRecord.id} }]"
                                         replaceUrl="true"
                                         queryParamsHandling="merge"
                                         class="btn btn-danger btn-sm">
@@ -159,13 +159,13 @@
                             </td>-->
                             <td class="text-right">
                                 <button type="submit"
-                                        [routerLink]="['/job-record-marine-suffix', jobRecord.id, 'edit']"
+                                        [routerLink]="['/job-record-marine-suffix', 'edit', jobRecord.id]"
                                         class="btn btn-primary btn-sm">
                                     <fa-icon [icon]="'pencil-alt'"></fa-icon>
                                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                                 </button>
                                 <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
-                                        [routerLink]="['/', { outlets: { popup: 'job-record-marine-suffix/'+ jobRecord.id + '/delete'} }]"
+                                        [routerLink]="['/', { outlets: { popup: 'job-record-marine-suffix/' + 'delete/'+ jobRecord.id} }]"
                                         replaceUrl="true"
                                         queryParamsHandling="merge"
                                         class="btn btn-danger btn-sm">

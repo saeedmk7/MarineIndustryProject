@@ -41,7 +41,7 @@ export class EducationalRecordMarineSuffixResolve implements Resolve<IEducationa
 
 export const educationalRecordRoute: Routes = [
     {
-        path: 'educational-record-marine-suffix',
+        path: 'educational-record-marine-suffix/list',
         component: EducationalRecordMarineSuffixComponent,
         resolve: {
             pagingParams: JhiResolvePagingParams
@@ -54,7 +54,7 @@ export const educationalRecordRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'educational-record-marine-suffix/:id/view',
+        path: 'educational-record-marine-suffix/view/:id',
         component: EducationalRecordMarineSuffixDetailComponent,
         resolve: {
             educationalRecord: EducationalRecordMarineSuffixResolve
@@ -89,7 +89,7 @@ export const educationalRecordRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'educational-record-marine-suffix/:id/edit',
+        path: 'educational-record-marine-suffix/edit/:id',
         component: EducationalRecordMarineSuffixUpdateComponent,
         resolve: {
             educationalRecord: EducationalRecordMarineSuffixResolve
@@ -104,7 +104,7 @@ export const educationalRecordRoute: Routes = [
 
 export const educationalRecordPopupRoute: Routes = [
     {
-        path: 'educational-record-marine-suffix/:id/delete',
+        path: 'educational-record-marine-suffix/delete/:id',
         component: EducationalRecordMarineSuffixDeletePopupComponent,
         resolve: {
             educationalRecord: EducationalRecordMarineSuffixResolve

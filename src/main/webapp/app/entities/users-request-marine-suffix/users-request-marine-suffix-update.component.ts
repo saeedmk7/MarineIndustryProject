@@ -46,7 +46,6 @@ export class UsersRequestMarineSuffixUpdateComponent implements OnInit {
             this.currentRequestStatus = this.usersRequest.requestStatus;
         });
         this.principal.identity().then(account => {
-
             this.currentAccount = account;
             if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
                 this.isAdmin = true;
