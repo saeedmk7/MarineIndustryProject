@@ -23,8 +23,10 @@ export interface IPersonMarineSuffix {
     certificateNumber?: string;
     nationalId?: string;
     birthDate?: Moment;
+    birthDatePersian?: string;
     personelCode?: string;
     employmentDate?: Moment;
+    employmentDatePersian?: string;
     yearOfService?: number;
     code?: string;
     createUserLogin?: string;

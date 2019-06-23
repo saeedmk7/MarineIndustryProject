@@ -4,6 +4,9 @@ import {JhiLanguageService} from "ng-jhipster";
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 import {MONTHS} from "app/shared/constants/months.constants";
+import {DATE_FORMAT, PERSIAN_DATE_FORMAT} from "app/shared";
+import * as gregorainMoment from 'moment';
+import {Moment} from "moment";
 
 @Injectable({ providedIn: 'root' })
 export class ConvertObjectDatesService {
@@ -54,11 +57,32 @@ export class ConvertObjectDatesService {
         return objs;
     }
     public miladi2Shamsi(date: Date): string {
-        return date.getHours() + ":" + date.getMinutes() + "  " + moment(date).format('jYYYY/jMM/jDD');
+        return date.getHours() + ":" + date.getMinutes() + "  " + moment(date).format(PERSIAN_DATE_FORMAT);
+    }
+    public miladi2ShamsiMoment(date: Moment): string {
+        return moment(date.toISOString()).format(PERSIAN_DATE_FORMAT);
+    }
+    public getYearsOfService(date: Moment): number{
+        debugger;
+        const startYear: number = date.year();
+        const nowYear: number = gregorainMoment(Date()).toDate().getFullYear();
+        return nowYear - startYear;
+    }
+    public shamsi2miladi(date: string): string {
+        //return date.getHours() + ":" + date.getMinutes() + "  " + moment(date).format('jYYYY/jMM/jDD');
+        return moment(date).toDate().toISOString();
+    }
+    public shamsi2miladiMoment(date: string): Moment {
+        //return date.getHours() + ":" + date.getMinutes() + "  " + moment(date).format('jYYYY/jMM/jDD');
+
+        return gregorainMoment(moment.from(date, 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD'));// .clone();
     }
     public getNowShamsiYear(): number {
 
         return +moment().format('jYYYY');
+    }
+    public get30YearsBeforeNow(): string {
+        return moment().add(-30,'years').toISOString();
     }
     convertString2RequestStatus(newStatus: string): RequestStatus {
         switch (newStatus) {

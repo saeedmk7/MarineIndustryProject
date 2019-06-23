@@ -15,11 +15,13 @@ import {DpDatePickerModule} from 'ng2-jalali-date-picker';
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {FormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {InputsModule} from "@progress/kendo-angular-inputs";
 
 const ENTITY_STATES = [...personRoute, ...personPopupRoute];
 
 @NgModule({
-    imports: [MarineindustryprojSharedModule, NgSelectModule, FormsModule, DpDatePickerModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [MarineindustryprojSharedModule, NgSelectModule, FormsModule, BrowserAnimationsModule, InputsModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         PersonMarineSuffixComponent,
         PersonMarineSuffixDetailComponent,

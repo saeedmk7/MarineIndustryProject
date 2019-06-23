@@ -107,7 +107,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     onPersonSuccess(body) {
         this.person = this.convertObjectDatesService.changeDate(body);
         this.currentPerson = this.convertObjectDatesService.changeDate(body);
-        debugger;
+
         if (this.person) {
             this.prepareOrgChart(this.person.organizationChartId);
             this.finalLoad(this.person);
@@ -117,7 +117,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         }
     }
     finalLoad(person: IPersonMarineSuffix){
-        debugger;
+
         this.currentUserFullName = person.fullName;
         this.jobTitle = person.jobTitle;
         if(this.orgCharts) {
@@ -146,7 +146,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         }
     }
     prepareJobRecords(personId: number){
-        debugger;
+
         let criteria = [{
             key: 'personId.equals',
             value: personId
@@ -205,7 +205,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message));
     }
     prepareOrgChart(orgId: number){
-        debugger;
+
         if(this.organizationChartService.organizationchartsAll)
         {
             this.orgCharts = this.organizationChartService.organizationchartsAll;
@@ -226,7 +226,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
                     const org = res.body.find(a => a.id == orgId);
                     if(org)
                         this.organizationTitle = org.fullTitle;
-                    debugger;
+
                     if(this.isSuperUsers)
                         this.prepareSearchPerson([]);
                     else if(this.isTopUsers) {

@@ -321,7 +321,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             this.prepareSearchPerson();
             this.prepareSearchEducationalModule();
             this.prepareSearchDate();
-            debugger;
+
             this.prepareSearchCourseType();
 
 
@@ -331,7 +331,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
     prepareSearchCourseType(){
         this.courseTypeService.query().subscribe(
             (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
-                debugger;
+
                 this.coursetypes = res.body;
                 this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'courseTypeId', 'select', 'equals', this.coursetypes));
             },

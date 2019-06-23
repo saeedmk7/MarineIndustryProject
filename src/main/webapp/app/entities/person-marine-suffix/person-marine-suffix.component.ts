@@ -94,17 +94,8 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     loadAll(criteria?) {
-        debugger;
-        if(!criteria)
-        {
-            criteria = [];
-        }
-        if(!this.isSuperUsers && this.isTopUsers){
-            criteria.push({
-                key: 'organizationChartId.in',
-                value: this.orgIds
-            });
-        }
+
+        criteria = this.makeCriteria(criteria);
         this.personService
             .query({
                 page: this.page - 1,
@@ -117,8 +108,42 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
+    makeCriteria(criteria?){
+        if(!criteria)
+        {
+            criteria = [];
+        }
+        else{
+
+            const retiredOption = criteria.find(a => a.key == 'retired.equals');
+            if(retiredOption){
+                let val = +retiredOption.value;
+                //criteria.pop('yearId');
+                criteria = criteria.filter(a => a.key != 'retired.equals');
+                if (val == 1) {
+                    criteria.push({
+                        key: 'employmentDate.lessOrEqualThan',
+                        value: this.convertObjectDatesService.get30YearsBeforeNow()
+                    });
+                }
+                else if(val == 2){
+                    criteria.push({
+                        key: 'employmentDate.greaterOrEqualThan',
+                        value: this.convertObjectDatesService.get30YearsBeforeNow()
+                    });
+                }
+            }
+        }
+        if(!this.isSuperUsers && this.isTopUsers){
+            criteria.push({
+                key: 'organizationChartId.in',
+                value: this.orgIds
+            });
+        }
+        return criteria;
+    }
     prepareOrgIds(){
-        debugger;
+
         if(this.organizationChartService.organizationchartsAll)
         {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
@@ -188,6 +213,17 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
         this.searchbarModel.push(new SearchPanelModel('person','family','text','contains'));
         this.searchbarModel.push(new SearchPanelModel('person','nationalId','text','contains'));
         this.searchbarModel.push(new SearchPanelModel('person','personelCode','text','contains'));
+        const retiredOptions = [{
+            id: 0,
+            title: 'همه'
+        },{
+            id: 1,
+            title: 'بازنشست شده'
+        },{
+            id: 2,
+            title: 'بازنشست نشده'
+        }];
+        this.searchbarModel.push(new SearchPanelModel('person','retired','select','equals', retiredOptions));
         this.employmentTypeService.query().subscribe(
             (res: HttpResponse<IEmploymentTypeMarineSuffix[]>) => {
 

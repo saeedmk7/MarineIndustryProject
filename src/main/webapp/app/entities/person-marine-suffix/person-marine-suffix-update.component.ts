@@ -1,30 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute,Router } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import {DATE_FORMAT, DATE_TIME_FORMAT} from 'app/shared/constants/input.constants';
-import { JhiAlertService } from 'ng-jhipster';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpResponse, HttpErrorResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {JhiAlertService} from 'ng-jhipster';
 
-import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
-import { PersonMarineSuffixService } from './person-marine-suffix.service';
-import { IQualificationMarineSuffix } from 'app/shared/model/qualification-marine-suffix.model';
-import { QualificationMarineSuffixService } from 'app/entities/qualification-marine-suffix';
-import { IFieldOfStudyMarineSuffix } from 'app/shared/model/field-of-study-marine-suffix.model';
-import { FieldOfStudyMarineSuffixService } from 'app/entities/field-of-study-marine-suffix';
-import { IEmploymentTypeMarineSuffix } from 'app/shared/model/employment-type-marine-suffix.model';
-import { EmploymentTypeMarineSuffixService } from 'app/entities/employment-type-marine-suffix';
-import { IWorkGroupMarineSuffix } from 'app/shared/model/work-group-marine-suffix.model';
-import { WorkGroupMarineSuffixService } from 'app/entities/work-group-marine-suffix';
-import { IWorkIndustryMarineSuffix } from 'app/shared/model/work-industry-marine-suffix.model';
-import { WorkIndustryMarineSuffixService } from 'app/entities/work-industry-marine-suffix';
-import { IJobMarineSuffix } from 'app/shared/model/job-marine-suffix.model';
-import { JobMarineSuffixService } from 'app/entities/job-marine-suffix';
-import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
-import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
-import * as moment from 'moment';
+import {IPersonMarineSuffix} from 'app/shared/model/person-marine-suffix.model';
+import {PersonMarineSuffixService} from './person-marine-suffix.service';
+import {IQualificationMarineSuffix} from 'app/shared/model/qualification-marine-suffix.model';
+import {QualificationMarineSuffixService} from 'app/entities/qualification-marine-suffix';
+import {IFieldOfStudyMarineSuffix} from 'app/shared/model/field-of-study-marine-suffix.model';
+import {FieldOfStudyMarineSuffixService} from 'app/entities/field-of-study-marine-suffix';
+import {IEmploymentTypeMarineSuffix} from 'app/shared/model/employment-type-marine-suffix.model';
+import {EmploymentTypeMarineSuffixService} from 'app/entities/employment-type-marine-suffix';
+import {IWorkGroupMarineSuffix} from 'app/shared/model/work-group-marine-suffix.model';
+import {WorkGroupMarineSuffixService} from 'app/entities/work-group-marine-suffix';
+import {IWorkIndustryMarineSuffix} from 'app/shared/model/work-industry-marine-suffix.model';
+import {WorkIndustryMarineSuffixService} from 'app/entities/work-industry-marine-suffix';
+import {IJobMarineSuffix} from 'app/shared/model/job-marine-suffix.model';
+import {JobMarineSuffixService} from 'app/entities/job-marine-suffix';
+import {IOrganizationChartMarineSuffix} from 'app/shared/model/organization-chart-marine-suffix.model';
+import {OrganizationChartMarineSuffixService} from 'app/entities/organization-chart-marine-suffix';
 import * as persianMoment from 'jalali-moment';
 import {JhiLanguageService} from "ng-jhipster/src/language/language.service";
-import {LOGIN_ALREADY_USED_TYPE, PERSON_ALREADY_USED_TYPE, PERSONELCODE_ALREADY_USED_TYPE} from "app/shared";
+import {PERSONELCODE_ALREADY_USED_TYPE} from "app/shared";
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 
 @Component({
     selector: 'mi-person-marine-suffix-update',
@@ -50,14 +49,14 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
 
     isfa: boolean;
 
-    birthDate: string;
-    employmentDate: string;
-    createDate: string;
-
-    birthDateChange:boolean = false;
-    employmentDateChange:boolean = false;
+    birthDateChange: boolean = false;
+    employmentDateChange: boolean = false;
 
     message: string;
+    retiredDate: string;
+
+    dateBirthDateValid: number;
+    dateEmploymentDateValid: number;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -69,6 +68,7 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
         private workIndustryService: WorkIndustryMarineSuffixService,
         private jobService: JobMarineSuffixService,
         private organizationChartService: OrganizationChartMarineSuffixService,
+        private convertObjectDatesService: ConvertObjectDatesService,
         private activatedRoute: ActivatedRoute,
         private languageManager: JhiLanguageService,
         private router: Router
@@ -76,18 +76,17 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
         this.isfa = languageManager.currentLang == 'fa';
 
     }
-    birthDatechanged(){
 
-        this.birthDateChange = true;
-    }
-    employmentDateChanged(){
-
-        this.employmentDateChange = true;
-    }
     ngOnInit() {
         this.isSaving = false;
-        this.activatedRoute.data.subscribe(({ person }) => {
+        this.activatedRoute.data.subscribe(({person}) => {
             this.person = person;
+            if(this.person.employmentDate && this.person.employmentDate.isValid()) {
+                this.person.yearOfService = this.convertObjectDatesService.getYearsOfService(this.person.employmentDate);
+                this.retiredDate = this.convertObjectDatesService.miladi2ShamsiMoment(this.person.employmentDate.add(30, 'years'));
+            }
+            else
+                this.retiredDate = "";
         });
         this.qualificationService.query().subscribe(
             (res: HttpResponse<IQualificationMarineSuffix[]>) => {
@@ -125,7 +124,7 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if(this.organizationChartService.organizationchartsAll){
+        if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
         }
         else {
@@ -142,38 +141,42 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
         window.history.back();
     }
 
+    checkDateValidation(event, dateType) {
+        try {
+            if (persianMoment(event.target.value, 'jYYYY/jMM/jDD').isValid()) {
+                if (dateType == 1) {
+                    this.dateBirthDateValid = 1;
+                } else {
+                    this.dateEmploymentDateValid = 1;
+                }
+            }
+            else {
+                if (dateType == 1) {
+                    this.dateBirthDateValid = 2;
+                } else {
+                    this.dateEmploymentDateValid = 2;
+                }
+            }
+        }
+        catch (e) {
+            if (dateType == 1) {
+                this.dateBirthDateValid = 2;
+            } else {
+                this.dateEmploymentDateValid = 2;
+            }
+        }
+    }
+
     save() {
 
         this.isSaving = true;
         this.person.status = 0;
 
-        if(this.isfa) {
-
-            //this.person.birthDate = persianMoment(this.birthDate);
-            if(this.birthDateChange) {
-                let birthDatePersian: string = persianMoment.from(this.birthDate, 'fa', 'YYYY-MM-DD').format('YYYY/MM/DD');
-                if(birthDatePersian === "Invalid date")
-                    this.person.birthDate = moment(this.birthDate);
-                else
-                    this.person.birthDate = moment(birthDatePersian);
-            }
-            else
-                this.person.birthDate = moment(this.birthDate);
-
-            if(this.employmentDateChange) {
-                let employmentDatePersian: string = persianMoment.from(this.employmentDate, 'fa', 'YYYY-MM-DD').format('YYYY/MM/DD');
-                if(employmentDatePersian === "Invalid date")
-                    this.person.employmentDate = moment(this.employmentDate);
-                else
-                    this.person.employmentDate = moment(employmentDatePersian);
-
-            }
-            else
-                this.person.employmentDate = moment(this.employmentDate);
+        if (this.person.employmentDatePersian) {
+            this.person.employmentDate = this.convertObjectDatesService.shamsi2miladiMoment(this.person.employmentDatePersian);
         }
-        else {
-            this.person.birthDate = moment(this.person.birthDate);
-            this.person.employmentDate = moment(this.person.employmentDate);
+        if (this.person.birthDatePersian) {
+            this.person.birthDate = this.convertObjectDatesService.shamsi2miladiMoment(this.person.birthDatePersian);
         }
         if (this.person.id !== undefined) {
             this.subscribeToSaveResponse(this.personService.update(this.person));
@@ -181,12 +184,15 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
             this.subscribeToSaveResponse(this.personService.create(this.person));
         }
     }
+
     isValidDate(date) {
         return date instanceof Date && !isNaN(date.getDate());
     }
-    change(i){
+
+    change(i) {
         this.router.navigateByUrl(i);
     }
+
     private subscribeToSaveResponse(result: Observable<HttpResponse<IPersonMarineSuffix>>) {
         result.subscribe((res: HttpResponse<IPersonMarineSuffix>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError(res));
     }
@@ -209,8 +215,6 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
-
-
 
     trackQualificationById(index: number, item: IQualificationMarineSuffix) {
         return item.id;
@@ -250,31 +254,27 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
         }
         return option;
     }
+
     get person() {
         return this._person;
     }
 
-    get fullName(){
+
+
+    get fullName() {
         return (this.person.name ? this.person.name : "") + " " + (this.person.family ? this.person.family : "")
     }
+
     set person(person: IPersonMarineSuffix) {
 
-        this._person = person;
-        if(this.isfa)
-        {
-            if(person.birthDate)
-                this.birthDate = moment(person.birthDate).format(DATE_FORMAT);
-            else
-                this.birthDate = moment().format(DATE_FORMAT);
+        if (person.birthDate && person.birthDate.isValid()) {
+            person.birthDatePersian = this.convertObjectDatesService.miladi2ShamsiMoment(person.birthDate);
+        }
 
-            if(person.employmentDate)
-                this.employmentDate = moment(person.employmentDate).format(DATE_FORMAT);
-            else
-                this.employmentDate = moment().format(DATE_FORMAT);
+        if (person.employmentDate && person.employmentDate.isValid()) {
+            person.employmentDatePersian = this.convertObjectDatesService.miladi2ShamsiMoment(person.employmentDate);
         }
-        else {
-            this.birthDate = moment(person.birthDate).format(DATE_TIME_FORMAT);
-            this.employmentDate = moment(person.employmentDate).format(DATE_TIME_FORMAT);
-        }
+        this._person = person;
+
     }
 }

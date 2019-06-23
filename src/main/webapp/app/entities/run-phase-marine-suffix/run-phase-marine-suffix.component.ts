@@ -407,7 +407,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     prepareSearchCourseType(){
         this.courseTypeService.query().subscribe(
             (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
-                debugger;
+
                 this.coursetypes = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
