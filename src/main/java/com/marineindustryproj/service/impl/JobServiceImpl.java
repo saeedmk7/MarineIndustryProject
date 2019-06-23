@@ -1,11 +1,15 @@
 package com.marineindustryproj.service.impl;
 
+import com.marineindustryproj.domain.*;
+import com.marineindustryproj.service.JobQueryService;
 import com.marineindustryproj.service.JobService;
-import com.marineindustryproj.domain.Job;
 import com.marineindustryproj.repository.JobRepository;
+import com.marineindustryproj.service.dto.DocumentDTO;
+import com.marineindustryproj.service.dto.JobCriteria;
 import com.marineindustryproj.service.dto.JobDTO;
 import com.marineindustryproj.service.dto.customs.JobMinDTO;
 import com.marineindustryproj.service.mapper.JobMapper;
+import io.github.jhipster.service.filter.StringFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,14 +34,17 @@ public class JobServiceImpl implements JobService {
 
     private final JobRepository jobRepository;
 
+    private final JobQueryService jobQueryService;
+
     private final JobMapper jobMapper;
 
     private final CacheManager cacheManager;
 
     public JobServiceImpl(JobRepository jobRepository,
-                          JobMapper jobMapper,
+                          JobQueryService jobQueryService, JobMapper jobMapper,
                           CacheManager cacheManager) {
         this.jobRepository = jobRepository;
+        this.jobQueryService = jobQueryService;
         this.jobMapper = jobMapper;
         this.cacheManager = cacheManager;
     }
@@ -53,6 +60,43 @@ public class JobServiceImpl implements JobService {
         log.debug("Request to save Job : {}", jobDTO);
 
         Job job = jobMapper.toEntity(jobDTO);
+        job = jobRepository.save(job);
+        clearJobCaches();
+        return jobMapper.toDto(job);
+    }
+    @Override
+    public JobDTO aggregateJob(JobDTO jobDTO) {
+        log.debug("Request to Aggregate Job : {}", jobDTO);
+
+        Job job = jobMapper.toEntity(jobDTO);
+
+        JobCriteria criteria = new JobCriteria();
+        StringFilter titleFilter = new StringFilter();
+        titleFilter.setEquals(job.getTitle());
+        criteria.setTitle(titleFilter);
+        List<JobDTO> jobDTOS = jobQueryService.findByCriteria(criteria);
+        jobDTOS.remove(jobDTO);
+        if(!jobDTOS.isEmpty()) {
+            for (JobDTO dto : jobDTOS) {
+                Job dtoJob = jobMapper.toEntity(dto);
+                for (EducationalModuleJob educationalModuleJob : dtoJob.getEducationalModuleJobs()) {
+                    job.addEducationalModuleJob(educationalModuleJob);
+                }
+                for (Document document : dtoJob.getDocuments()) {
+                    job.addDocument(document);
+                }
+                for (Person jobPerson : dtoJob.getJobPeople()) {
+                    job.addJobPerson(jobPerson);
+                }
+                for (MainTask mainTask : dtoJob.getMainTasks()) {
+                    job.addMainTask(mainTask);
+                }
+                for (Person practicaljobPerson : dtoJob.getPracticaljobPeople()) {
+                    job.addPracticaljobPerson(practicaljobPerson);
+                }
+                jobRepository.delete(dtoJob);
+            }
+        }
         job = jobRepository.save(job);
         clearJobCaches();
         return jobMapper.toDto(job);
