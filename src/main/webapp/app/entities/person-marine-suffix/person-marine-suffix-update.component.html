@@ -12,32 +12,25 @@
                 <input type="hidden" class="form-control col-md-4" id="id" name="id"
                        [(ngModel)]="person.id" readonly/>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.personelCode" for="field_personelCode">Personel Code</label>
-                    <input type="number" class="form-control" [disabled]="person.id !== undefined" name="personelCode" id="field_personelCode"
-                           [(ngModel)]="person.personelCode" required maxlength="50" jhiMax="999999999999" jhiMin="99"/>
-                    <div [hidden]="!(editForm.controls.personelCode?.dirty && editForm.controls.personelCode?.invalid)">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.nationalId" for="field_nationalId">National Id</label>
+                    <input type="text" class="form-control" [disabled]="person.id !== undefined" name="nationalId" id="field_nationalId"
+                           [(ngModel)]="person.nationalId" required maxlength="10" pattern="[0-9]{10}"/>
+                    <div [hidden]="!(editForm.controls.nationalId?.dirty && editForm.controls.nationalId?.invalid)">
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.personelCode?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                            This field cannot be longer than 50 characters.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.personelCode?.errors?.required" jhiTranslate="entity.validation.required">
+                               [hidden]="!editForm.controls.nationalId?.errors?.required" jhiTranslate="entity.validation.required">
                             This field is required.
                         </small>
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.personelCode?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 999999999999 }">
-                            This field cannot be more than 999999.
+                               [hidden]="!editForm.controls.nationalId?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 10 }">
+                            This field cannot be longer than 10 characters.
                         </small>
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.personelCode?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 99 }">
-                            This field cannot be less than 100000.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.personelCode?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
+                               [hidden]="!editForm.controls.nationalId?.errors?.pattern" jhiTranslate="entity.validation.pattern" translateValues="{ pattern: 'National Id' }">
+                            This field should follow pattern for "National Id".
                         </small>
                     </div>
                 </div>
+
                 <div style="display: inline;" class="alert alert-warning">این فیلد باید برای هر فرد یکتا باشد در غیر اینصورت امکان ثبت اطلاعات فرد وجود ندارد.</div>
                 <div class="dropdown-divider pt-3 mt-4">
                     <div class="divider-title">اطلاعات شناسنامه ای {{fullName}}</div>
@@ -102,26 +95,36 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.nationalId" for="field_nationalId">National Id</label>
-                    <input type="text" class="form-control" name="nationalId" id="field_nationalId"
-                           [(ngModel)]="person.nationalId" required maxlength="10" pattern="[0-9]{10}"/>
-                    <div [hidden]="!(editForm.controls.nationalId?.dirty && editForm.controls.nationalId?.invalid)">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.personelCode" for="field_personelCode">Personel Code</label>
+                    <input type="number" class="form-control"  name="personelCode" id="field_personelCode"
+                           [(ngModel)]="person.personelCode" maxlength="50" jhiMax="999999999999"/>
+                    <div [hidden]="!(editForm.controls.personelCode?.dirty && editForm.controls.personelCode?.invalid)">
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.nationalId?.errors?.required" jhiTranslate="entity.validation.required">
+                               [hidden]="!editForm.controls.personelCode?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                        <!--<small class="form-text text-danger"
+                               [hidden]="!editForm.controls.personelCode?.errors?.required" jhiTranslate="entity.validation.required">
                             This field is required.
-                        </small>
+                        </small>-->
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.nationalId?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 10 }">
-                            This field cannot be longer than 10 characters.
+                               [hidden]="!editForm.controls.personelCode?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 999999999999 }">
+                            This field cannot be more than 999999.
                         </small>
+                        <!--<small class="form-text text-danger"
+                               [hidden]="!editForm.controls.personelCode?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 99 }">
+                            This field cannot be less than 100000.
+                        </small>-->
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.nationalId?.errors?.pattern" jhiTranslate="entity.validation.pattern" translateValues="{ pattern: 'National Id' }">
-                            This field should follow pattern for "National Id".
+                               [hidden]="!editForm.controls.personelCode?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
                         </small>
                     </div>
                 </div>
-                <div class="alert alert-warning" style="display: inline">فیلد کد ملی نیز باید برای هر فرد یکتا باشد.</div>
+                <div class="alert alert-warning" style="display: inline">فیلد کد پرسنلی نیز باید برای هر فرد یکتا باشد.</div>
+                <!--<div style="display: inline;" class="alert alert-warning">این فیلد باید برای هر فرد یکتا باشد در غیر اینصورت امکان ثبت اطلاعات فرد وجود ندارد.</div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.birthDate" for="field_birthDate">Birth Date</label>
                     <kendo-maskedtextbox
@@ -331,6 +334,23 @@
                         name="lastFieldOfStudy"
                         id="field_lastFieldOfStudy"
                         [(ngModel)]="person.lastFieldOfStudyId">
+                </div>
+                <div class="dropdown-divider pt-3 mt-4">
+                    <div class="divider-title">اطلاعات تکمیلی {{fullName}}</div>
+                </div>
+                <div class="form-group bighalf">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.archived" for="field_archived">Archived</label>
+                    <input type="checkbox" class="form-control" name="archived" id="field_archived"
+                           [(ngModel)]="person.archived" />
+                    <span class="alert alert-warning">
+                        لطفا قبل از اینکه فردی را آرشیو(غیرفعال) نمائید، حتما موقعیت آن را در چارت سازمانی تغییر دهید.
+                    </span>
+                    <div [hidden]="!(editForm.controls.archived?.dirty && editForm.controls.archived?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.archived?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
             </div>
             <div>

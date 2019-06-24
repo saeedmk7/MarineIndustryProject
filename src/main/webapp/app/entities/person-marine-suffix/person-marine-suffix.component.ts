@@ -224,6 +224,14 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
             title: 'بازنشست نشده'
         }];
         this.searchbarModel.push(new SearchPanelModel('person','retired','select','equals', retiredOptions));
+        const archivedOptions = [{
+            id: 0,
+            title: 'خیر'
+        },{
+            id: 1,
+            title: 'بلی'
+        }];
+        this.searchbarModel.push(new SearchPanelModel('person','archived','select','equals', archivedOptions));
         this.employmentTypeService.query().subscribe(
             (res: HttpResponse<IEmploymentTypeMarineSuffix[]>) => {
 

@@ -74,7 +74,7 @@ public class PersonResource {
 
         try {
             personDTO.setGuid(UUID.randomUUID().toString());
-            personDTO.setId(Long.parseLong(personDTO.getPersonelCode()));
+            personDTO.setId(Long.parseLong(personDTO.getNationalId()));
             personDTO.setCreateDate(ZonedDateTime.now());
             personDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
 

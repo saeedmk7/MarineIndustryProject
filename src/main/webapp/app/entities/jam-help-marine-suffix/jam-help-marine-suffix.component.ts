@@ -68,6 +68,7 @@ export class JamHelpMarineSuffixComponent implements OnInit, OnDestroy {
         a.exportAsExcelFile(this.jamHelps, 'jamHelps', 'marineindustryprojApp.jamHelp');
     }
     loadAll(criteria?) {
+
         this.jamHelpService
             .query({
                 page: this.page - 1,
