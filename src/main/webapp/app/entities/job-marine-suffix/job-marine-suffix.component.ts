@@ -92,7 +92,17 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
             this.transition();
         }
     }
+    aggregateJob(job: IJobMarineSuffix){
+        if(job){
+            this.jobService.find(job.id).subscribe((resp: HttpResponse<IJobMarineSuffix>) => {
+                debugger;
+                this.jobService.aggregateJob(resp.body).subscribe((res: HttpResponse<IJobMarineSuffix>) => {
+                    debugger;
+                });
+            });
 
+        }
+    }
     transition() {
 
         /*this.router.navigate(['/job-marine-suffix'], {

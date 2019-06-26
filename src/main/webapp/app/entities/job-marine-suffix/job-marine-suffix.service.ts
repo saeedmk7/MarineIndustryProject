@@ -24,6 +24,14 @@ export class JobMarineSuffixService {
             .post<IJobMarineSuffix>(this.resourceUrl, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
+    aggregateJob(job: IJobMarineSuffix): Observable<EntityResponseType> {
+
+        //const copy = this.convertDateFromClient(job);
+        const requestUrl = this.resourceUrl + "/jobAggregation";
+        return this.http
+            .post<IJobMarineSuffix>(requestUrl, job, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
 
     update(job: IJobMarineSuffix): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(job);

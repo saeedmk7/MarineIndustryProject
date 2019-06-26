@@ -22,6 +22,8 @@ public interface JobService {
      */
     JobDTO save(JobDTO jobDTO);
 
+    JobDTO aggregateJob(JobDTO jobDTO);
+
     /**
      * Get all the jobs.
      *

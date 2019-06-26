@@ -85,6 +85,27 @@ public class JobResource {
                                                "jobexists");
         }
     }
+    @PostMapping("/jobs/jobAggregation")
+    @Timed
+    public ResponseEntity<JobDTO> jobAggregation(@Valid @RequestBody JobDTO jobDTO) throws URISyntaxException {
+        log.debug("REST request to save Job : {}", jobDTO);
+        if (jobDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        try {
+            JobDTO result = jobService.aggregateJob(jobDTO);
+            return ResponseEntity.created(new URI("/api/jobs/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME,
+                    result.getId().toString()))
+                .body(result);
+        }
+        catch (Exception ex){
+            throw new BadRequestAlertException(ErrorConstants.JOBKEY_ALREADY_USED_TYPE,
+                "JobKey already used!",
+                "job",
+                "jobexists");
+        }
+    }
 
     /**
      * PUT  /jobs : Updates an existing job.
@@ -117,6 +138,7 @@ public class JobResource {
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, jobDTO.getId().toString()))
             .body(result);
     }
+
 
     /**
      * GET  /jobs : get all the jobs.
