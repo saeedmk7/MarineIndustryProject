@@ -196,7 +196,7 @@ export class OrganizationChartMarineSuffixComponent implements OnInit, OnDestroy
 
     }
     collapseTree(){
-        debugger;
+
         this.tree.treeModel.collapseAll();
     }
 

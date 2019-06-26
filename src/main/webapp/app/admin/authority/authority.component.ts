@@ -55,7 +55,7 @@ export class AuthorityComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
-        debugger;
+
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;

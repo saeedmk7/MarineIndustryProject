@@ -23,12 +23,13 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th>ردیف</th>
-            <th jhiSortBy="personelCode"><span jhiTranslate="marineindustryprojApp.person.personelCode">Personel Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="nationalId"><span jhiTranslate="marineindustryprojApp.person.nationalId">National Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="marineindustryprojApp.person.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="family"><span jhiTranslate="marineindustryprojApp.person.family">Family</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="fatherName"><span jhiTranslate="marineindustryprojApp.person.fatherName">Father Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="certificateNumber"><span jhiTranslate="marineindustryprojApp.person.certificateNumber">Certificate Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="nationalId"><span jhiTranslate="marineindustryprojApp.person.nationalId">National Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
+                <th jhiSortBy="personelCode"><span jhiTranslate="marineindustryprojApp.person.personelCode">Personel Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="birthDate"><span jhiTranslate="marineindustryprojApp.person.birthDate">Birth Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             
             <th jhiSortBy="employmentDate"><span jhiTranslate="marineindustryprojApp.person.employmentDate">Employment Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -58,12 +59,13 @@
             <tr *ngFor="let person of people;let i = index">
                 <!--<td><a [routerLink]="['/person-marine-suffix', person.id, 'view' ]">{{person.id}}</a></td>-->
                 <td>{{i+1}}</td>
-                <td>{{person.personelCode}}</td>
+                <td>{{person.nationalId}}</td>
+
                 <!--<td>{{person.name}} {{person.family}}</td>-->
                 <td>{{person.fullName}}</td>
                 <td>{{person.fatherName}}</td>
                 <!--<td>{{person.certificateNumber}}</td>-->
-                <td>{{person.nationalId}}</td>
+                <td>{{person.personelCode}}</td>
                 <!--<td>{{person.birthDate | date:'medium'}}</td>
             
                 <td>{{person.employmentDate | date:'medium'}}</td>

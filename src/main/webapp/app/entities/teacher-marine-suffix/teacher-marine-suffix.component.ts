@@ -81,7 +81,7 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     loadAll(criteria?) {
-        debugger;
+
         if(criteria)
         {
             const expire = criteria.find(a => a.key == 'expired.equals');
@@ -125,7 +125,7 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     loadPage(page: number) {
-        debugger;
+
         if (page !== this.previousPage) {
             this.previousPage = page;
             this.transition();
@@ -209,7 +209,7 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     private paginateTeachers(data: ITeacherMarineSuffix[], headers: HttpHeaders) {
-        debugger;
+
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;

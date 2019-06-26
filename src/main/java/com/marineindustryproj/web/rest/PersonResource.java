@@ -14,6 +14,8 @@ import com.marineindustryproj.service.dto.PersonCriteria;
 import com.marineindustryproj.service.PersonQueryService;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.github.jhipster.service.filter.BooleanFilter;
+import io.github.jhipster.service.filter.StringFilter;
+import io.github.jhipster.service.filter.ZonedDateTimeFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.hibernate.id.GUIDGenerator;
 import org.slf4j.Logger;
@@ -72,7 +74,7 @@ public class PersonResource {
 
         try {
             personDTO.setGuid(UUID.randomUUID().toString());
-            personDTO.setId(Long.parseLong(personDTO.getPersonelCode()));
+            personDTO.setId(Long.parseLong(personDTO.getNationalId()));
             personDTO.setCreateDate(ZonedDateTime.now());
             personDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
 
@@ -136,6 +138,8 @@ public class PersonResource {
             BooleanFilter booleanFilter = new BooleanFilter();
             booleanFilter.setEquals(false);
             criteria.setArchived(booleanFilter);
+
+            //new ZonedDateTimeFilter().setGreaterOrEqualThan()
         }
         if(pageable != null && pageable.getPageSize() < 2000) {
             Page<PersonDTO> page = personQueryService.findByCriteria(criteria,

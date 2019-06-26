@@ -199,7 +199,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
     }
     addAllPeopleOfThisUser(){
         let orgIds = [];
-        debugger;
+
         if(this.requestOrganizationNiazsanji.organizationChartId)
         {
             orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationCharts , this.requestOrganizationNiazsanji.organizationChartId).filter(this.treeUtilities.onlyUnique);
@@ -306,7 +306,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
             this.requestOrganizationNiazsanji.recommendedByOrgchart = this.organizationCharts.find(a => a.id == this.requestOrganizationNiazsanji.organizationChartId).fullTitle;
         }
         this.currentUserFullName = this.currentPerson.fullName;
-        debugger;
+
 
         if (this.requestOrganizationNiazsanji.id !== undefined) {
             this.subscribeToSaveResponse(this.requestOrganizationNiazsanjiService.update(this.requestOrganizationNiazsanji),true);

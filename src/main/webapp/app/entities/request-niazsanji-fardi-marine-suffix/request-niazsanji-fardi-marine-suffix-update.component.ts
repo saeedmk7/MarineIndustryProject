@@ -601,7 +601,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
     }
 
     protected onSaveSuccess(res: IRequestNiazsanjiFardiMarineSuffix, isEdit:boolean = false) {
-        debugger;
+
         if(!isEdit) {
             if(res.status == 0){
                 res.conversation += "\n ------------------------------------- \n";

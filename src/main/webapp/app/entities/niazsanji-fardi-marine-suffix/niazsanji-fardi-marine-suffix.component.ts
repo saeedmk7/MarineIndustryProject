@@ -316,7 +316,7 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
     prepareSearchCourseType(){
         this.courseTypeService.query().subscribe(
             (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
-                debugger;
+
                 this.coursetypes = res.body;
                 this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'courseTypeId', 'select', 'equals', this.coursetypes));
             },

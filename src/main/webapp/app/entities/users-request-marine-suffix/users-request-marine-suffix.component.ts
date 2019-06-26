@@ -231,7 +231,7 @@ export class UsersRequestMarineSuffixComponent implements OnInit, OnDestroy {
     }
     makeData(){
         this.usersRequests.forEach(a => {
-            debugger;
+
             let person = this.people.find(w => w.nationalId.includes(a.createUserLogin));
             if(person)
             {
