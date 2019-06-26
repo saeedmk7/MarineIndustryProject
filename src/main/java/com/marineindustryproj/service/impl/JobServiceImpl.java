@@ -1,14 +1,15 @@
 package com.marineindustryproj.service.impl;
 
 import com.marineindustryproj.domain.*;
-import com.marineindustryproj.service.JobQueryService;
-import com.marineindustryproj.service.JobService;
+import com.marineindustryproj.service.*;
 import com.marineindustryproj.repository.JobRepository;
-import com.marineindustryproj.service.dto.DocumentDTO;
-import com.marineindustryproj.service.dto.JobCriteria;
-import com.marineindustryproj.service.dto.JobDTO;
+import com.marineindustryproj.service.dto.*;
 import com.marineindustryproj.service.dto.customs.JobMinDTO;
+import com.marineindustryproj.service.mapper.DocumentMapper;
+import com.marineindustryproj.service.mapper.EducationalModuleJobMapper;
 import com.marineindustryproj.service.mapper.JobMapper;
+import com.marineindustryproj.service.mapper.MainTaskMapper;
+import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,14 +39,38 @@ public class JobServiceImpl implements JobService {
 
     private final JobMapper jobMapper;
 
+    private final EducationalModuleJobQueryService educationalModuleJobQueryService;
+
+    private final EducationalModuleJobMapper educationalModuleJobMapper;
+
+    private final DocumentMapper documentMapper;
+
+    private final DocumentQueryService documentQueryService;
+
+    private final PersonQueryService personQueryService;
+
+    private final PersonService personService;
+
+    private final MainTaskQueryService mainTaskQueryService;
+
+    private final MainTaskMapper mainTaskMapper;
+
     private final CacheManager cacheManager;
 
     public JobServiceImpl(JobRepository jobRepository,
                           JobQueryService jobQueryService, JobMapper jobMapper,
-                          CacheManager cacheManager) {
+                          EducationalModuleJobQueryService educationalModuleJobQueryService, EducationalModuleJobMapper educationalModuleJobMapper, DocumentMapper documentMapper, DocumentQueryService documentQueryService, PersonQueryService personQueryService, PersonService personService, MainTaskQueryService mainTaskQueryService, MainTaskMapper mainTaskMapper, CacheManager cacheManager) {
         this.jobRepository = jobRepository;
         this.jobQueryService = jobQueryService;
         this.jobMapper = jobMapper;
+        this.educationalModuleJobQueryService = educationalModuleJobQueryService;
+        this.educationalModuleJobMapper = educationalModuleJobMapper;
+        this.documentMapper = documentMapper;
+        this.documentQueryService = documentQueryService;
+        this.personQueryService = personQueryService;
+        this.personService = personService;
+        this.mainTaskQueryService = mainTaskQueryService;
+        this.mainTaskMapper = mainTaskMapper;
         this.cacheManager = cacheManager;
     }
 
@@ -78,11 +103,48 @@ public class JobServiceImpl implements JobService {
         jobDTOS.remove(jobDTO);
         if(!jobDTOS.isEmpty()) {
             for (JobDTO dto : jobDTOS) {
-                Job dtoJob = jobMapper.toEntity(dto);
-                for (EducationalModuleJob educationalModuleJob : dtoJob.getEducationalModuleJobs()) {
+                LongFilter jobId = new LongFilter();
+                jobId.setEquals(dto.getId());
+
+                EducationalModuleJobCriteria educationalModuleJobCriteria = new EducationalModuleJobCriteria();
+                educationalModuleJobCriteria.setJobId(jobId);
+                List<EducationalModuleJobDTO> educationalModuleJobs = educationalModuleJobQueryService.findByCriteria(educationalModuleJobCriteria);
+                for (EducationalModuleJobDTO educationalModuleJobDTO : educationalModuleJobs) {
+                    EducationalModuleJob educationalModuleJob = educationalModuleJobMapper.toEntity(educationalModuleJobDTO);
                     job.addEducationalModuleJob(educationalModuleJob);
                 }
-                for (Document document : dtoJob.getDocuments()) {
+                
+                DocumentCriteria documentCriteria = new DocumentCriteria();
+                documentCriteria.setJobId(jobId);
+                List<DocumentDTO> documents = documentQueryService.findByCriteria(documentCriteria);
+                for (DocumentDTO documentDTO : documents) {
+                    Document document = documentMapper.toEntity(documentDTO);
+                    job.addDocument(document);
+                }
+
+                MainTaskCriteria mainTaskCriteria = new MainTaskCriteria();
+                mainTaskCriteria.setJobId(jobId);
+                List<MainTaskDTO> mainTasks = mainTaskQueryService.findByCriteria(mainTaskCriteria);
+                for (MainTaskDTO mainTaskDTO : mainTasks) {
+                    MainTask mainTask = mainTaskMapper.toEntity(mainTaskDTO);
+                    job.addMainTask(mainTask);
+                }
+
+                PersonCriteria jobPersonCriteria = new PersonCriteria();
+                jobPersonCriteria.setJobId(jobId);
+                List<PersonDTO> jobPersons = personQueryService.findByCriteria(jobPersonCriteria);
+                for (PersonDTO jobPersonDTO : jobPersons) {
+                    jobPersonDTO.setJobId(job.getId());
+                    personService.save(jobPersonDTO);
+                }
+                PersonCriteria practicalJobPersonCriteria = new PersonCriteria();
+                practicalJobPersonCriteria.setPracticaljobId(jobId);
+                List<PersonDTO> practicalJobPersons = personQueryService.findByCriteria(practicalJobPersonCriteria);
+                for (PersonDTO practicalJobPersonDTO : practicalJobPersons) {
+                    practicalJobPersonDTO.setPracticaljobId(job.getId());
+                    personService.save(practicalJobPersonDTO);
+                }
+                /*for (Document document : dtoJob.getDocuments()) {
                     job.addDocument(document);
                 }
                 for (Person jobPerson : dtoJob.getJobPeople()) {
@@ -93,8 +155,8 @@ public class JobServiceImpl implements JobService {
                 }
                 for (Person practicaljobPerson : dtoJob.getPracticaljobPeople()) {
                     job.addPracticaljobPerson(practicaljobPerson);
-                }
-                jobRepository.delete(dtoJob);
+                }*/
+                this.delete(dto.getId());
             }
         }
         job = jobRepository.save(job);
