@@ -120,6 +120,10 @@ public class JamHelpQueryService extends QueryService<JamHelp> {
                 specification = specification.and(buildSpecification(criteria.getJamHelpAuthorityId(),
                     root -> root.join(JamHelp_.jamHelpAuthorities, JoinType.LEFT).get(JamHelpAuthority_.id)));
             }
+            if (criteria.getJamHelpAuthorityName() != null) {
+                specification = specification.and(buildSpecification(criteria.getJamHelpAuthorityName(),
+                    root -> root.join(JamHelp_.jamHelpAuthorities, JoinType.LEFT).get(JamHelpAuthority_.authorityName)));
+            }
         }
         return specification;
     }

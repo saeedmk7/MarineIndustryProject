@@ -134,6 +134,9 @@
     <include file="config/liquibase/changelog/20190608175937_update_entity_addGuidAndColors.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190608175947_update_entity_addPersonIdToJobRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190608174218_added_entity_constraints_JobRecord.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190626171916_added_entity_BeautySpeechAuthority.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190626171916_added_entity_constraints_BeautySpeechAuthority.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190626175947_update_entity_personAndRunPhase.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

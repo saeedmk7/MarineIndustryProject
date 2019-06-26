@@ -50,7 +50,9 @@
         <span>{{fullOrgTitle}}</span>
         <br/>
         <button type="button" class="btn btn-sm btn-info" (click)="collapseTree()">جمع کردن رخت</button>
-        <tree-root #tree [nodes]="nodes" [options]="options" (activate)="nodeActive($event)"></tree-root>
+        <div style="font-size: large">
+            <tree-root #tree [nodes]="nodes" [options]="options" (activate)="nodeActive($event)"></tree-root>
+        </div>
     </div>
     <div class="col-5">
         <div class="form-group" style="width: 100%">

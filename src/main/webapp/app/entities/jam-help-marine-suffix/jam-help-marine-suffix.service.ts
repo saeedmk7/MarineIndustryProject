@@ -30,7 +30,7 @@ export class JamHelpMarineSuffixService {
         return this.http.request(req);
     }
     deleteFile(address: string): Observable<HttpResponse<any>> {
-        debugger
+
         let fileName = address.split('/')[address.split('/').length-1];
         return this.http.delete<any>(`${this.resourceUrl}/delete/${fileName}`, { observe: 'response' });
     }

@@ -63,7 +63,7 @@ export class ConvertObjectDatesService {
         return moment(date.toISOString()).format(PERSIAN_DATE_FORMAT);
     }
     public getYearsOfService(date: Moment): number{
-        debugger;
+
         const startYear: number = date.year();
         const nowYear: number = gregorainMoment(Date()).toDate().getFullYear();
         return nowYear - startYear;

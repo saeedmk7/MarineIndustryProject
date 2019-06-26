@@ -45,6 +45,8 @@ public class JamHelpCriteria implements Serializable {
 
     private LongFilter jamHelpAuthorityId;
 
+    private StringFilter jamHelpAuthorityName;
+
     public LongFilter getId() {
         return id;
     }
@@ -129,8 +131,16 @@ public class JamHelpCriteria implements Serializable {
         return jamHelpAuthorityId;
     }
 
+
     public void setJamHelpAuthorityId(LongFilter jamHelpAuthorityId) {
         this.jamHelpAuthorityId = jamHelpAuthorityId;
+    }
+
+    public StringFilter getJamHelpAuthorityName() {
+        return jamHelpAuthorityName;
+    }
+    public void setJamHelpAuthorityName(StringFilter jamHelpAuthorityName) {
+        this.jamHelpAuthorityName = jamHelpAuthorityName;
     }
 
 
@@ -154,7 +164,8 @@ public class JamHelpCriteria implements Serializable {
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
             Objects.equals(guid, that.guid) &&
-            Objects.equals(jamHelpAuthorityId, that.jamHelpAuthorityId);
+            Objects.equals(jamHelpAuthorityId, that.jamHelpAuthorityId) &&
+            Objects.equals(jamHelpAuthorityName, that.jamHelpAuthorityName);
     }
 
     @Override
@@ -170,7 +181,8 @@ public class JamHelpCriteria implements Serializable {
         modifyUserLogin,
         modifyDate,
         guid,
-        jamHelpAuthorityId
+        jamHelpAuthorityId,
+        jamHelpAuthorityName
         );
     }
 
@@ -188,6 +200,7 @@ public class JamHelpCriteria implements Serializable {
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
                 (jamHelpAuthorityId != null ? "jamHelpAuthorityId=" + jamHelpAuthorityId + ", " : "") +
+                (jamHelpAuthorityName != null ? "jamHelpAuthorityName=" + jamHelpAuthorityName + ", " : "") +
             "}";
     }
 

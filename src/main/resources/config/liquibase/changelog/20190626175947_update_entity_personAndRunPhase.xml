@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the entity UsersRequest.
+    -->
+    <changeSet id="20190608175947" author="saeed">
+        <addColumn schemaName="public"
+                   tableName="person">
+            <column name="phone_number" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="mobile" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="address" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <modifyDataType columnName="national_id"
+                        newDataType="varchar(20)"
+                        schemaName="public"
+                        tableName="person"/>
+        <dropUniqueConstraint constraintName="ux_person_personel_code"
+                              schemaName="public"
+                              tableName="person"
+                              uniqueColumns="personel_code"/>
+        <addColumn schemaName="public"
+                   tableName="run_phase">
+            <column name="finish_date" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

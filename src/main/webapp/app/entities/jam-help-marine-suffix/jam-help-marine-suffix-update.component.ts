@@ -11,6 +11,8 @@ import { JamHelpMarineSuffixService } from './jam-help-marine-suffix.service';
 import {JamHelpAuthorityMarineSuffixService} from "app/entities/jam-help-authority-marine-suffix";
 import {AuthorityService} from "app/admin/authority";
 import {IAuthority} from "app/shared/model/authority.model";
+import {IPersonMarineSuffix, PersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
+import {IJamHelpAuthorityMarineSuffix} from "app/shared/model/jam-help-authority-marine-suffix.model";
 
 @Component({
     selector: 'mi-jam-help-marine-suffix-update',
@@ -20,7 +22,7 @@ export class JamHelpMarineSuffixUpdateComponent implements OnInit {
     jamHelp: IJamHelpMarineSuffix;
     isSaving: boolean;
     authorities: IAuthority[];
-    selectedAuthorities: IAuthority[];
+    selectedAuthorities: IAuthority[] = [];
 
     progress: { percentage: number } = { percentage: 0 }
     file: File;
@@ -39,14 +41,33 @@ export class JamHelpMarineSuffixUpdateComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.authorityService
-            .authorities()
-            .subscribe(
-                (res: HttpResponse<IAuthority[]>) => this.authorities = res.body,
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
         this.activatedRoute.data.subscribe(({ jamHelp }) => {
             this.jamHelp = jamHelp;
+            this.authorityService
+                .authorities()
+                .subscribe(
+                    (res: HttpResponse<IAuthority[]>) => {
+                        debugger;
+                        this.authorities = res.body;
+                        let criteria = [{
+                            key: 'jamHelpId.equals',
+                            value: this.jamHelp.id
+                        }];
+                        this.jamHelpAuthorityService.query({
+                            page: 0,
+                            size: 20000,
+                            criteria,
+                            sort: ["id", "asc"]
+                        }).subscribe((resp: HttpResponse<IJamHelpAuthorityMarineSuffix[]>) => {
+                            debugger;
+                                const names = resp.body.map(a => a.authorityName);
+                                this.selectedAuthorities = this.authorities.filter(a => names.includes(a.name));
+                            },
+                            (error) => this.onError("موردی یافت نشد."));
+
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
         });
     }
 

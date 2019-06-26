@@ -83,12 +83,12 @@
                         [multiple]="true"
                         [required]="true"
                         [closeOnSelect]="true"
-                        [hideSelected]="true"
                         bindLabel="name"
                         bindValue="name"
                         placeholder="نقش ها را مشخص کنید."
                         [(ngModel)]="selectedAuthorities">
                     </ng-select>
+                    <span>{{selectedAuthorities[0].name}}</span>
                 </div>
                 <ng-container *ngIf="jamHelp.id === undefined">
                     <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">آپلود راهنما</div></div>
