@@ -12,6 +12,8 @@ import org.mapstruct.*;
 public interface BeautySpeechMapper extends EntityMapper<BeautySpeechDTO, BeautySpeech> {
 
 
+    @Mapping(target = "beautySpeechAuthorities", ignore = true)
+    BeautySpeech toEntity(BeautySpeechDTO beautySpeechDTO);
 
     default BeautySpeech fromId(Long id) {
         if (id == null) {

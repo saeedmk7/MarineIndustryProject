@@ -12,6 +12,7 @@ export interface IRunPhaseFardiMarineSuffix {
     niazsanjiYear?: number;
     status?: number;
     finalizeCost?: number;
+    finishDate?: string;
     runMonthPersian?: string;
 }
 
@@ -30,6 +31,7 @@ export class RunPhaseFardiMarineSuffix implements IRunPhaseFardiMarineSuffix  {
         public courseTypeTitle?: string,
         public status?: number,
         public finalizeCost?: number,
+        public finishDate?: string,
         public runMonthPersian?: string) {
 
     }

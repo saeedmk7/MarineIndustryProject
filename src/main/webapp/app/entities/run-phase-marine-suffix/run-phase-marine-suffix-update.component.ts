@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpResponse, HttpErrorResponse, HttpEventType} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { JhiAlertService } from 'ng-jhipster';
+import {DATE_TIME_FORMAT} from 'app/shared/constants/input.constants';
+import {JhiAlertService} from 'ng-jhipster';
 
-import { IRunPhaseMarineSuffix } from 'app/shared/model/run-phase-marine-suffix.model';
-import { RunPhaseMarineSuffixService } from './run-phase-marine-suffix.service';
-import { IDocumentMarineSuffix } from 'app/shared/model/document-marine-suffix.model';
-import { DocumentMarineSuffixService } from 'app/entities/document-marine-suffix';
-import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
-import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
-import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
-import { FinalNiazsanjiReportMarineSuffixService } from 'app/entities/final-niazsanji-report-marine-suffix';
+import {IRunPhaseMarineSuffix} from 'app/shared/model/run-phase-marine-suffix.model';
+import {RunPhaseMarineSuffixService} from './run-phase-marine-suffix.service';
+import {IDocumentMarineSuffix} from 'app/shared/model/document-marine-suffix.model';
+import {DocumentMarineSuffixService} from 'app/entities/document-marine-suffix';
+import {IPersonMarineSuffix} from 'app/shared/model/person-marine-suffix.model';
+import {PersonMarineSuffixService} from 'app/entities/person-marine-suffix';
+import {IFinalNiazsanjiReportMarineSuffix} from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
+import {FinalNiazsanjiReportMarineSuffixService} from 'app/entities/final-niazsanji-report-marine-suffix';
 import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
 import {IFinalNiazsanjiReportPersonMarineSuffix} from "app/shared/model/final-niazsanji-report-person-marine-suffix.model";
 import {EducationalModuleMarineSuffixService} from "app/entities/educational-module-marine-suffix";
@@ -21,6 +21,7 @@ import {FinalNiazsanjiReportPersonMarineSuffixService} from "app/entities/final-
 import {Principal} from "app/core";
 import {RunningStepMarineSuffixService} from "app/entities/running-step-marine-suffix";
 import {IRunningStepMarineSuffix} from "app/shared/model/running-step-marine-suffix.model";
+import * as persianMoment from 'jalali-moment';
 import {
     IRunPhaseTabModel,
     RunPhaseTabModel
@@ -43,7 +44,7 @@ import {MONTHS} from "app/shared/constants/months.constants";
 @Component({
     selector: 'mi-run-phase-marine-suffix-update',
     templateUrl: './run-phase-marine-suffix-update.component.html',
-    styleUrls:['./run-phase-marine-suffix.component.scss']
+    styleUrls: ['./run-phase-marine-suffix.component.scss']
 })
 export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     private _runPhase: IRunPhaseMarineSuffix;
@@ -65,6 +66,8 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     fileHasError: boolean = true;
     fileMessage: string;
 
+    finishDateValidation: number;
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private runPhaseService: RunPhaseMarineSuffixService,
@@ -78,19 +81,33 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
         private principal: Principal,
         private treeUtilities: TreeUtilities,
         private router: Router
-    ) {}
+    ) {
+    }
+
+    checkDateValidation(event) {
+        try {
+            if (persianMoment(event.target.value, 'jYYYY/jMM/jDD').isValid()) {
+                this.finishDateValidation = 1;
+            }
+            else {
+                this.finishDateValidation = 2;
+            }
+        }
+        catch (e) {
+            this.finishDateValidation = 2;
+        }
+    }
 
     ngOnInit() {
         this.isSaving = false;
-        this.activatedRoute.data.subscribe(({ runPhase }) => {
-        this.runPhase = runPhase;
-        this.documentUrl = 'document-marine-suffix/runphase/' + this.runPhase.id;
-        this.runningStepService.query().subscribe(
+        this.activatedRoute.data.subscribe(({runPhase}) => {
+            this.runPhase = runPhase;
+            this.documentUrl = 'document-marine-suffix/runphase/' + this.runPhase.id;
+            this.runningStepService.query().subscribe(
                 (resp: HttpResponse<IRunningStepMarineSuffix[]>) => {
                     this.runningSteps = resp.body;
 
-                    let stepNumbers = resp.body.filter(a => a.isHeader).sort(function(a,b)
-                    {
+                    let stepNumbers = resp.body.filter(a => a.isHeader).sort(function (a, b) {
                         return (a.stepNumber > b.stepNumber) ? 1 : ((b.stepNumber > a.stepNumber) ? -1 : 0);
                     });
                     stepNumbers.forEach(a => {
@@ -119,7 +136,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                         this.runPhaseTabModel.push(tab);
                     });
 
-                    if(this.runPhase.id != undefined) {
+                    if (this.runPhase.id != undefined) {
                         const criteria1 = [{
                             key: 'runPhaseId.equals',
                             value: this.runPhase.id
@@ -131,20 +148,20 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                             sort: ["id", "asc"]
                         }).subscribe(
                             (response: HttpResponse<IRunRunningStepMarineSuffix[]>) => {
-                            response.body.forEach(x => {
-                                this.runPhaseTabModel.forEach(w => {
-                                   w.runPhaseItems.forEach(r => {
-                                       if(r.id == x.runningStepId){
-                                           r.descMessage = x.description == null ? "" : x.description;
-                                           r.fileDoc = x.fileDoc;
-                                           r.checked = x.done;
-                                       }
-                                   })
-                                });
-                            })
-                        },
+                                response.body.forEach(x => {
+                                    this.runPhaseTabModel.forEach(w => {
+                                        w.runPhaseItems.forEach(r => {
+                                            if (r.id == x.runningStepId) {
+                                                r.descMessage = x.description == null ? "" : x.description;
+                                                r.fileDoc = x.fileDoc;
+                                                r.checked = x.done;
+                                            }
+                                        })
+                                    });
+                                })
+                            },
                             (res: HttpErrorResponse) => this.onError(res.message));
-                        }
+                    }
                     //this.runPhaseTabModel = resp.body.map(a => new RunPhaseTabModel(a.id))
                 },
                 (res: HttpErrorResponse) => this.onError(res.message));
@@ -221,22 +238,22 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );*/
     }
-    uploadFile(id: number){
+
+    uploadFile(id: number) {
 
 
-
-        let fileToUpload = $('#file-'+ id).prop('files')[0];
+        let fileToUpload = $('#file-' + id).prop('files')[0];
 
         let formdata: FormData = new FormData();
 
         formdata.append('file', fileToUpload);
-        this.runPhaseService.uploadFile(formdata).subscribe(event =>{
-                if(event instanceof HttpResponse){
-                    if(event.body){
+        this.runPhaseService.uploadFile(formdata).subscribe(event => {
+                if (event instanceof HttpResponse) {
+                    if (event.body) {
 
                         //$('#fileDoc-'+ id).val(event.body);
                         this.runPhaseTabModel.filter(a => a.runPhaseItems.forEach(w => {
-                            if(w.id == id)
+                            if (w.id == id)
                                 w.fileDoc = event.body.toString();
                         }));
                         //this.educationalHistory.fileDoc = event.body;
@@ -246,36 +263,39 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
             },
             () => this.onSaveError());
     }
-    deleteFile(fileDoc: string, id: number){
+
+    deleteFile(fileDoc: string, id: number) {
         this.runPhaseTabModel.filter(a => a.runPhaseItems.forEach(w => {
-            if(w.id == id)
+            if (w.id == id)
                 w.fileDoc = "";
         }));
         /*this.runPhaseService.deleteFile(fileDoc).subscribe(response => {
 
         });*/
     }
-    validateFile(event, id){
+
+    validateFile(event, id) {
 
         //file.name.split('.')[file.name.split('.').length-1] == 'rar'
         if (event && event.target.files && event.target.files[0]) {
             let file = event.target.files[0];
-            if((file.size / 1024 / 1024) < 10) {
+            if ((file.size / 1024 / 1024) < 10) {
                 this.successRaised(id, "فایل معتبر است. امکان بارگذاری وجود دارد.");
                 /*this.fileHasError = false;
                 this.fileMessage = "فایل معتبر است.";*/
             }
-            else{
+            else {
                 this.errorRaised(id, "حجم فایل بیش از حد مجاز است.");
                 /*this.fileHasError = true;
                 this.fileMessage = "حجم فایل بیش از حد مجاز است.";*/
             }
         }
-        else{
+        else {
             this.errorRaised(id, "لطفا فایل را انتخاب نمائید.");
         }
     }
-    errorRaised(id, message){
+
+    errorRaised(id, message) {
         $('#message-' + id).attr('style', '');
         $('#message-' + id).removeClass('alert-success');
         $('#message-' + id).addClass('alert-danger');
@@ -283,7 +303,8 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
 
         $('#uploadBtn-' + id).prop('disabled', true);
     }
-    successRaised(id, message){
+
+    successRaised(id, message) {
         $('#message-' + id).attr('style', '');
         $('#message-' + id).removeClass('alert-danger');
         $('#message-' + id).addClass('alert-success');
@@ -291,6 +312,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
 
         $('#uploadBtn-' + id).prop('disabled', false);
     }
+
     change(i) {
 
         this.router.navigateByUrl(i);
@@ -299,14 +321,16 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     previousState() {
         window.history.back();
     }
+
     errorMessage: string;
-    finalize(){
+
+    finalize() {
 
         let isValid: boolean = true;
         this.errorMessage = "";
         this.runningSteps.forEach(a => {
 
-            if(!a.isHeader) {
+            if (!a.isHeader) {
                 if (a.stepRequired) {
                     if (!($('#chk-' + a.id).is(":checked"))) {
                         let tab = this.runningSteps.filter(e => e.isHeader && e.stepNumber == a.stepNumber)[0];
@@ -315,8 +339,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                     }
 
                 }
-                if(a.fileDocRequired)
-                {
+                if (a.fileDocRequired) {
                     if (!($('#fileDoc-' + a.id).val())) {
                         let tab = this.runningSteps.filter(e => e.isHeader && e.stepNumber == a.stepNumber)[0];
                         isValid = false;
@@ -325,7 +348,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                 }
             }
         });
-        if(isValid){
+        if (isValid) {
             this.runPhase.done = true;
             $('#save-entity').trigger('click');
         }
@@ -343,10 +366,11 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
         runPhaseSaveData.done = this.runPhase.done;
         runPhaseSaveData.stepNumber = 1;
         runPhaseSaveData.finalizeCost = this.runPhase.finalizeCost;
+        runPhaseSaveData.finishDate = this.runPhase.finishDate;
         runPhaseSaveData.status = this.runPhase.status == undefined ? 0 : this.runPhase.status;
         runPhaseSaveData.runPhaseSaveDataItemModels = [];
         this.runningSteps.forEach(a => {
-            if(!a.isHeader) {
+            if (!a.isHeader) {
                 let runPhaseSaveDataItemModel: IRunPhaseSaveDataItemModel = new RunPhaseSaveDataItemModel;
                 runPhaseSaveDataItemModel.runningStepId = a.id;
                 runPhaseSaveDataItemModel.description = $('#txt-' + a.id).val();
@@ -375,7 +399,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     private onSaveSuccess(res: IRunPhaseMarineSuffix) {
         this.isSaving = false;
 
-        if(res.done)
+        if (res.done)
             this.previousState();
         else {
             this.runPhase = res;
@@ -413,6 +437,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
         }
         return option;
     }
+
     get runPhase() {
         return this._runPhase;
     }

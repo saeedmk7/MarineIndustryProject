@@ -34,6 +34,7 @@
             "runRunningStep": "Run Running Step",
             "document": "Document",
             "person": "Person",
+            "finishDate": "تاریخ دقیق برگزاری دوره",
             "organizationChart": "پیشنهاد دهنده",
             "educationalModule": "پودمان آموزشی",
             "educationalModuleTitle": "عنوان پودمان آموزشی",

@@ -1,8 +1,11 @@
 package com.marineindustryproj.service.impl;
 
+import com.marineindustryproj.security.SecurityUtils;
+import com.marineindustryproj.service.BeautySpeechAuthorityService;
 import com.marineindustryproj.service.BeautySpeechService;
 import com.marineindustryproj.domain.BeautySpeech;
 import com.marineindustryproj.repository.BeautySpeechRepository;
+import com.marineindustryproj.service.dto.BeautySpeechAuthorityDTO;
 import com.marineindustryproj.service.dto.BeautySpeechDTO;
 import com.marineindustryproj.service.mapper.BeautySpeechMapper;
 import org.slf4j.Logger;
@@ -13,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
@@ -27,10 +31,13 @@ public class BeautySpeechServiceImpl implements BeautySpeechService {
     private final BeautySpeechRepository beautySpeechRepository;
 
     private final BeautySpeechMapper beautySpeechMapper;
+    
+    private final BeautySpeechAuthorityService beautySpeechAuthorityService;
 
-    public BeautySpeechServiceImpl(BeautySpeechRepository beautySpeechRepository, BeautySpeechMapper beautySpeechMapper) {
+    public BeautySpeechServiceImpl(BeautySpeechRepository beautySpeechRepository, BeautySpeechMapper beautySpeechMapper, BeautySpeechAuthorityService beautySpeechAuthorityService) {
         this.beautySpeechRepository = beautySpeechRepository;
         this.beautySpeechMapper = beautySpeechMapper;
+        this.beautySpeechAuthorityService = beautySpeechAuthorityService;
     }
 
     /**
@@ -42,9 +49,32 @@ public class BeautySpeechServiceImpl implements BeautySpeechService {
     @Override
     public BeautySpeechDTO save(BeautySpeechDTO beautySpeechDTO) {
         log.debug("Request to save BeautySpeech : {}", beautySpeechDTO);
-
+        boolean isEdit = false;
+        if(beautySpeechDTO.getId() != null)
+            isEdit = true;
         BeautySpeech beautySpeech = beautySpeechMapper.toEntity(beautySpeechDTO);
         beautySpeech = beautySpeechRepository.save(beautySpeech);
+
+        if(!beautySpeechDTO.getAuthorityNames().isEmpty())
+        {
+
+            String[] splitedValues = beautySpeechDTO.getAuthorityNames().split(",");
+            if(splitedValues.length > 0){
+                if(isEdit)
+                    beautySpeechAuthorityService.deleteByBeautySpeechId(beautySpeech.getId());
+                //beautySpeechRepository
+                for (String authority: splitedValues) {
+                    BeautySpeechAuthorityDTO beautySpeechAuthority = new BeautySpeechAuthorityDTO();
+                    beautySpeechAuthority.setAuthorityName(authority);
+                    beautySpeechAuthority.setCreateDate(ZonedDateTime.now());
+                    beautySpeechAuthority.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                    beautySpeechAuthority.setHasEditPermission(true);
+                    beautySpeechAuthority.setBeautySpeechId(beautySpeech.getId());
+                    beautySpeechAuthorityService.save(beautySpeechAuthority);
+                }
+            }
+        }
+        
         return beautySpeechMapper.toDto(beautySpeech);
     }
 

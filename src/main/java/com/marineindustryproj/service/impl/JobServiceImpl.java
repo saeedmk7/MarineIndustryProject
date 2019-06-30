@@ -1,6 +1,7 @@
 package com.marineindustryproj.service.impl;
 
 import com.marineindustryproj.domain.*;
+import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.*;
 import com.marineindustryproj.repository.JobRepository;
 import com.marineindustryproj.service.dto.*;
@@ -20,9 +21,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Job.
@@ -41,11 +45,15 @@ public class JobServiceImpl implements JobService {
 
     private final EducationalModuleJobQueryService educationalModuleJobQueryService;
 
+    private final EducationalModuleJobService educationalModuleJobService;
+
     private final EducationalModuleJobMapper educationalModuleJobMapper;
 
     private final DocumentMapper documentMapper;
 
     private final DocumentQueryService documentQueryService;
+
+    private final DocumentService documentService;
 
     private final PersonQueryService personQueryService;
 
@@ -53,23 +61,28 @@ public class JobServiceImpl implements JobService {
 
     private final MainTaskQueryService mainTaskQueryService;
 
+    private final MainTaskService mainTaskService;
+
     private final MainTaskMapper mainTaskMapper;
 
     private final CacheManager cacheManager;
 
     public JobServiceImpl(JobRepository jobRepository,
                           JobQueryService jobQueryService, JobMapper jobMapper,
-                          EducationalModuleJobQueryService educationalModuleJobQueryService, EducationalModuleJobMapper educationalModuleJobMapper, DocumentMapper documentMapper, DocumentQueryService documentQueryService, PersonQueryService personQueryService, PersonService personService, MainTaskQueryService mainTaskQueryService, MainTaskMapper mainTaskMapper, CacheManager cacheManager) {
+                          EducationalModuleJobQueryService educationalModuleJobQueryService, EducationalModuleJobService educationalModuleJobService, EducationalModuleJobMapper educationalModuleJobMapper, DocumentMapper documentMapper, DocumentQueryService documentQueryService, DocumentService documentService, PersonQueryService personQueryService, PersonService personService, MainTaskQueryService mainTaskQueryService, MainTaskService mainTaskService, MainTaskMapper mainTaskMapper, CacheManager cacheManager) {
         this.jobRepository = jobRepository;
         this.jobQueryService = jobQueryService;
         this.jobMapper = jobMapper;
         this.educationalModuleJobQueryService = educationalModuleJobQueryService;
+        this.educationalModuleJobService = educationalModuleJobService;
         this.educationalModuleJobMapper = educationalModuleJobMapper;
         this.documentMapper = documentMapper;
         this.documentQueryService = documentQueryService;
+        this.documentService = documentService;
         this.personQueryService = personQueryService;
         this.personService = personService;
         this.mainTaskQueryService = mainTaskQueryService;
+        this.mainTaskService = mainTaskService;
         this.mainTaskMapper = mainTaskMapper;
         this.cacheManager = cacheManager;
     }
@@ -95,6 +108,12 @@ public class JobServiceImpl implements JobService {
 
         Job job = jobMapper.toEntity(jobDTO);
 
+        EducationalModuleJobCriteria moduleJobCriteria = new EducationalModuleJobCriteria();
+        LongFilter myJobId = new LongFilter();
+        myJobId.setEquals(job.getId());
+        moduleJobCriteria.setJobId(myJobId);
+        List<EducationalModuleJobDTO> educationalModuleJobDTOS = educationalModuleJobQueryService.findByCriteria(moduleJobCriteria);
+
         JobCriteria criteria = new JobCriteria();
         StringFilter titleFilter = new StringFilter();
         titleFilter.setEquals(job.getTitle());
@@ -102,17 +121,15 @@ public class JobServiceImpl implements JobService {
         List<JobDTO> jobDTOS = jobQueryService.findByCriteria(criteria);
         jobDTOS.remove(jobDTO);
         if(!jobDTOS.isEmpty()) {
+            List<EducationalModuleJobDTO> educationalModuleJobs = new ArrayList<>();
             for (JobDTO dto : jobDTOS) {
                 LongFilter jobId = new LongFilter();
                 jobId.setEquals(dto.getId());
 
                 EducationalModuleJobCriteria educationalModuleJobCriteria = new EducationalModuleJobCriteria();
                 educationalModuleJobCriteria.setJobId(jobId);
-                List<EducationalModuleJobDTO> educationalModuleJobs = educationalModuleJobQueryService.findByCriteria(educationalModuleJobCriteria);
-                for (EducationalModuleJobDTO educationalModuleJobDTO : educationalModuleJobs) {
-                    EducationalModuleJob educationalModuleJob = educationalModuleJobMapper.toEntity(educationalModuleJobDTO);
-                    job.addEducationalModuleJob(educationalModuleJob);
-                }
+                educationalModuleJobs.addAll(educationalModuleJobQueryService.findByCriteria(educationalModuleJobCriteria));
+
                 
                 DocumentCriteria documentCriteria = new DocumentCriteria();
                 documentCriteria.setJobId(jobId);
@@ -156,10 +173,37 @@ public class JobServiceImpl implements JobService {
                 for (Person practicaljobPerson : dtoJob.getPracticaljobPeople()) {
                     job.addPracticaljobPerson(practicaljobPerson);
                 }*/
-                this.delete(dto.getId());
+
+            }
+            for (EducationalModuleJobDTO educationalModuleJobDTO : educationalModuleJobs) {
+                    /*EducationalModuleJob educationalModuleJob = educationalModuleJobMapper.toEntity(educationalModuleJobDTO);
+                    job.addEducationalModuleJob(educationalModuleJob);*/
+                    /*LongFilter jobIdNew = new LongFilter();
+                    jobIdNew.setEquals(job.getId());
+                    LongFilter educationId = new LongFilter();
+                    educationId.setEquals(educationalModuleJobDTO.getEducationalModuleId());
+                    EducationalModuleJobCriteria educationalModuleJobCriteriaNew = new EducationalModuleJobCriteria();
+                    educationalModuleJobCriteriaNew.setJobId(jobIdNew);
+                    educationalModuleJobCriteriaNew.setEducationalModuleId(educationId);
+                    List<EducationalModuleJobDTO> educationalModuleJobsWithEduc = educationalModuleJobQueryService.findByCriteria(educationalModuleJobCriteriaNew);*/
+                List<EducationalModuleJobDTO> educationalModuleJobsWithEduc = educationalModuleJobDTOS.stream().filter(a -> a.getEducationalModuleId().equals(educationalModuleJobDTO.getEducationalModuleId())).collect(Collectors.toList());
+                if(educationalModuleJobsWithEduc.isEmpty()) {
+                    EducationalModuleJobDTO educationalModuleJobDTONew = new EducationalModuleJobDTO();
+                    educationalModuleJobDTONew.setCreateDate(ZonedDateTime.now());
+                    educationalModuleJobDTONew.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                    educationalModuleJobDTONew.setEducationalModuleId(educationalModuleJobDTO.getEducationalModuleId());
+                    educationalModuleJobDTONew.setJobId(job.getId());
+                    educationalModuleJobService.save(educationalModuleJobDTONew);
+                    educationalModuleJobDTOS.add(educationalModuleJobDTONew);
+                }
             }
         }
         job = jobRepository.save(job);
+        if(!jobDTOS.isEmpty()) {
+            for (JobDTO dto : jobDTOS) {
+                this.delete(dto.getId());
+            }
+        }
         clearJobCaches();
         return jobMapper.toDto(job);
     }

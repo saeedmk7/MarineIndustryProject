@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="beautySpeechAuthority">
+            <h2><span jhiTranslate="marineindustryprojApp.beautySpeechAuthority.detail.title">Beauty Speech Authority</span> {{beautySpeechAuthority.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.beautySpeechAuthority.authorityName">Authority Name</span></dt>
+                <dd>
+                    <span>{{beautySpeechAuthority.authorityName}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.beautySpeechAuthority.hasEditPermission">Has Edit Permission</span></dt>
+                <dd>
+                    <span>{{beautySpeechAuthority.hasEditPermission}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.beautySpeechAuthority.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{beautySpeechAuthority.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.beautySpeechAuthority.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{beautySpeechAuthority.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.beautySpeechAuthority.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{beautySpeechAuthority.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.beautySpeechAuthority.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{beautySpeechAuthority.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.beautySpeechAuthority.beautySpeech">Beauty Speech</span></dt>
+                <dd>
+                    <div *ngIf="beautySpeechAuthority.beautySpeechId">
+                        <a [routerLink]="['/beauty-speech-marine-suffix', beautySpeechAuthority.beautySpeechId, 'view']">{{beautySpeechAuthority.beautySpeechTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/beauty-speech-authority-marine-suffix', beautySpeechAuthority.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

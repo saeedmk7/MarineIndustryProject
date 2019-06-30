@@ -68,7 +68,6 @@ public class JobResource {
             if (!jobDTO.getJobCode().isEmpty()) {
                 jobDTO.setFirst3JobCode(jobDTO.getJobCode().substring(0,  3));
             }
-            jobDTO.setId(Long.parseLong(jobDTO.getJobKey()));
             jobDTO.setCreateDate(ZonedDateTime.now());
             jobDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
 
@@ -123,7 +122,7 @@ public class JobResource {
         if (jobDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-         JobDTO job = jobService.findOne(jobDTO.getId()).get();
+        JobDTO job = jobService.findOne(jobDTO.getId()).get();
         if(!jobDTO.getJobCode().isEmpty())
         {
             jobDTO.setFirst3JobCode(jobDTO.getJobCode().substring(0,3));

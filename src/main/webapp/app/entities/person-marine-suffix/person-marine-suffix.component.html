@@ -43,6 +43,10 @@
             <th jhiSortBy="archivedUserLogin"><span jhiTranslate="marineindustryprojApp.person.archivedUserLogin">Archived User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="archivedDate"><span jhiTranslate="marineindustryprojApp.person.archivedDate">Archived Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.person.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="guid"><span jhiTranslate="marineindustryprojApp.person.guid">Guid</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="phoneNumber"><span jhiTranslate="marineindustryprojApp.person.phoneNumber">Phone Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mobile"><span jhiTranslate="marineindustryprojApp.person.mobile">Mobile</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="address"><span jhiTranslate="marineindustryprojApp.person.address">Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="lastQualificationTitle"><span jhiTranslate="marineindustryprojApp.person.lastQualification">Last Qualification</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="lastFieldOfStudyTitle"><span jhiTranslate="marineindustryprojApp.person.lastFieldOfStudy">Last Field Of Study</span> <fa-icon [icon]="'sort'"></fa-icon></th>
 
@@ -79,6 +83,10 @@
                 <td>{{person.archivedUserLogin}}</td>
                 <td>{{person.archivedDate | date:'medium'}}</td>
                 <td>{{person.status}}</td>-->
+                 <!-- <td>{{person.guid}}</td>
+                <td>{{person.phoneNumber}}</td>
+                <td>{{person.mobile}}</td>
+                <td>{{person.address}}</td>-->
                 <!--<td>
                     <div *ngIf="person.lastQualificationId">
                         <a [routerLink]="['../qualification-marine-suffix', person.lastQualificationId , 'view' ]" >{{person.lastQualificationTitle}}</a>

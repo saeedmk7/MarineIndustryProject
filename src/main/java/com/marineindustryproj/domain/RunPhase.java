@@ -88,6 +88,9 @@ public class RunPhase implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Size(max = 50)
+    @Column(name = "finish_date", length = 50)
+    private String finishDate;
 
     @OneToMany(mappedBy = "runPhase", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -335,6 +338,19 @@ public class RunPhase implements Serializable {
         this.guid = guid;
     }
 
+    public String getFinishDate() {
+        return finishDate;
+    }
+
+    public RunPhase finishDate(String finishDate) {
+        this.finishDate = finishDate;
+        return this;
+    }
+
+    public void setFinishDate(String finishDate) {
+        this.finishDate = finishDate;
+    }
+
     public Set<RunRunningStep> getRunRunningSteps() {
         return runRunningSteps;
     }
@@ -490,6 +506,7 @@ public class RunPhase implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", guid='" + getGuid() + "'" +
+            ", finishDate='" + getFinishDate() + "'" +
             "}";
     }
 }

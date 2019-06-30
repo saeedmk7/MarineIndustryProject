@@ -31,6 +31,7 @@ export class SettingsComponent implements OnInit {
     oldPicUrl: string = "";
     isNewImage: boolean = false;
     organizationTitle: string = "";
+    mobile: string;
     person: IPersonMarineSuffix = new PersonMarineSuffix();
     constructor(
         private dataUtils: JhiDataUtils,
@@ -71,9 +72,21 @@ export class SettingsComponent implements OnInit {
             this.languages = languages;
         });
     }
+    saveMobile(){
+        this.personMarineSuffixService.find(this.person.id).subscribe((resp: HttpResponse<PersonMarineSuffix>) => {
+            debugger;
+            this.person = resp.body;
+            this.person.mobile = this.mobile;
+            this.personMarineSuffixService.update(this.person).subscribe((res: HttpResponse<PersonMarineSuffix>) => {
+                debugger;
+                window.location.reload();
+            });
+        })
+    }
     onPersonSuccess(body) {
         this.person = body;
         if (this.person) {
+            this.mobile = this.person.mobile;
             this.currentUserFullName = this.person.name + " " + this.person.family;
             this.jobTitle = this.person.jobTitle;
             this.prepareOrgChart(this.person.organizationChartId);

@@ -31,8 +31,26 @@
                         </small>
                     </div>
                 </div>
-                <div class="row" style="padding-right: 5%">
                 <div class="form-group">
+                    <a href="#/admin/authority" jhiTranslate="userManagement.profiles">Profiles</a>
+                    <!--<select class="form-control" multiple name="authority" [(ngModel)]="user.authorities">
+                        <option *ngFor="let authority of authorities" [value]="authority.name">{{authority.name}}</option>
+                    </select>-->
+                    <ng-select
+                        name="authorities"
+                        [items]="authorities"
+                        [multiple]="true"
+                        [required]="true"
+                        [closeOnSelect]="true"
+                        bindLabel="name"
+                        bindValue="name"
+                        placeholder="نقش ها را مشخص کنید."
+                        [(ngModel)]="selectedAuthorities">
+                    </ng-select>
+                    <span *ngFor="let authority of selectedAuthorities">{{authority.name}} , </span>
+                </div>
+                <div class="row" style="padding-right: 5%">
+                <div class="form-group bighalf">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.beautySpeech.description" for="field_description">Description</label>
                     <textarea type="text" class="form-control" name="description" id="field_description"
                               [(ngModel)]="beautySpeech.description" required maxlength="1024"></textarea>

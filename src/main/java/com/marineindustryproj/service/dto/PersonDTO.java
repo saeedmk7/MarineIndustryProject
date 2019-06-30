@@ -31,8 +31,7 @@ public class PersonDTO implements Serializable {
     private String certificateNumber;
 
     @NotNull
-    @Size(max = 10)
-    @Pattern(regexp = "[0-9]{10}")
+    @Size(max = 20)
     private String nationalId;
 
     @NotNull
@@ -71,6 +70,15 @@ public class PersonDTO implements Serializable {
 
     @Size(max = 50)
     private String guid;
+
+    @Size(max = 50)
+    private String phoneNumber;
+
+    @Size(max = 50)
+    private String mobile;
+
+    @Size(max = 4096)
+    private String address;
 
     private Set<DocumentDTO> documents = new HashSet<>();
 
@@ -270,6 +278,30 @@ public class PersonDTO implements Serializable {
 
     public void setGuid(String guid) {
         this.guid = guid;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Set<DocumentDTO> getDocuments() {
@@ -476,6 +508,9 @@ public class PersonDTO implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", guid='" + getGuid() + "'" +
+            ", phoneNumber='" + getPhoneNumber() + "'" +
+            ", mobile='" + getMobile() + "'" +
+            ", address='" + getAddress() + "'" +
             ", lastQualification=" + getLastQualificationId() +
             ", lastQualification='" + getLastQualificationTitle() + "'" +
             ", lastFieldOfStudy=" + getLastFieldOfStudyId() +

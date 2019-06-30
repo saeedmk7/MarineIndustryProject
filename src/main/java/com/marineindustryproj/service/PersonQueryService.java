@@ -146,6 +146,15 @@ public class PersonQueryService extends QueryService<Person> {
             if (criteria.getGuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGuid(), Person_.guid));
             }
+            if (criteria.getPhoneNumber() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getPhoneNumber(), Person_.phoneNumber));
+            }
+            if (criteria.getMobile() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getMobile(), Person_.mobile));
+            }
+            if (criteria.getAddress() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getAddress(), Person_.address));
+            }
             if (criteria.getFinalNiazsanjiReportPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportPersonId(),
                     root -> root.join(Person_.finalNiazsanjiReportPeople, JoinType.LEFT).get(FinalNiazsanjiReportPerson_.id)));

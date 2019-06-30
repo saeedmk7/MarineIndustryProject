@@ -30,6 +30,7 @@ export class EducationalModuleJobMarineSuffixUpdateComponent implements OnInit {
     tempJobs: IJobMarineSuffix[];
 
     first3jobCode: string;
+    jobId: number;
     jobCode: string;
     jobTitle: string;
     selectedJobs: any;
@@ -51,6 +52,7 @@ export class EducationalModuleJobMarineSuffixUpdateComponent implements OnInit {
         this.first3jobCode = "";
         this.jobCode = "";
         this.jobTitle = "";
+        this.jobId = 0;
         this.selectedJobs = [];
         this.selectedEducationalModules = [];
         this.disable = true;
@@ -70,6 +72,8 @@ export class EducationalModuleJobMarineSuffixUpdateComponent implements OnInit {
             this.tempJobs = this.jobs.filter((a:IJobMarineSuffix) => a.title.includes(this.jobTitle));
         else if(this.first3jobCode)
             this.tempJobs = this.jobs.filter((a:IJobMarineSuffix) => a.jobCode.startsWith(this.first3jobCode));
+        else if(this.jobId)
+            this.tempJobs = this.jobs.filter((a:IJobMarineSuffix) => a.id == this.jobId);
         console.log(this.tempJobs);
         this.selectedJobs = this.tempJobs;
         this.disable = false;

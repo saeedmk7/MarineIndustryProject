@@ -247,6 +247,7 @@
             </kendo-grid-column>
             <kendo-grid-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="finishDate" title="تاریخ دقیق برگزاری دوره" [width]="200"></kendo-grid-column>
             <kendo-grid-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="500"></kendo-grid-column>
             <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
                 <kendo-excelexport-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="300"></kendo-excelexport-column>
@@ -261,6 +262,7 @@
                 <!--<kendo-excelexport-column field="priceCost" title="هزینه" [width]="100"></kendo-excelexport-column>-->
                 <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="finishDate" title="تاریخ دقیق برگزاری دوره" [width]="200"></kendo-excelexport-column>
             </kendo-grid-excel>
         </kendo-grid>
     </div>
@@ -331,6 +333,7 @@
             </kendo-grid-column>
             <kendo-grid-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="finishDate" title="تاریخ دقیق برگزاری دوره" [width]="200"></kendo-grid-column>
             <div *kendoGridDetailTemplate="let dataItem">
                 <mi-run-phase-marine-suffix-detail-people [people]="dataItem.people"></mi-run-phase-marine-suffix-detail-people>
             </div>
@@ -347,6 +350,7 @@
                 <!--<kendo-excelexport-column field="priceCost" title="هزینه" [width]="100"></kendo-excelexport-column>-->
                 <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="finishDate" title="تاریخ دقیق برگزاری دوره" [width]="200"></kendo-excelexport-column>
                 <!-- <div *kendoGridDetailTemplate="let dataItem">
                      <mi-final-niazsanji-report-marine-suffix-detail-people [people]="dataItem.people"></mi-final-niazsanji-report-marine-suffix-detail-people>
                  </div>-->

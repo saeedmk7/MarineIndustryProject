@@ -63,6 +63,12 @@ public class PersonCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private StringFilter phoneNumber;
+
+    private StringFilter mobile;
+
+    private StringFilter address;
+
     private LongFilter finalNiazsanjiReportPersonId;
 
     private LongFilter pollScoreId;
@@ -265,6 +271,30 @@ public class PersonCriteria implements Serializable {
 
     public void setGuid(StringFilter guid) {
         this.guid = guid;
+    }
+
+    public StringFilter getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(StringFilter phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public StringFilter getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(StringFilter mobile) {
+        this.mobile = mobile;
+    }
+
+    public StringFilter getAddress() {
+        return address;
+    }
+
+    public void setAddress(StringFilter address) {
+        this.address = address;
     }
 
     public LongFilter getFinalNiazsanjiReportPersonId() {
@@ -474,6 +504,9 @@ public class PersonCriteria implements Serializable {
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(phoneNumber, that.phoneNumber) &&
+            Objects.equals(mobile, that.mobile) &&
+            Objects.equals(address, that.address) &&
             Objects.equals(finalNiazsanjiReportPersonId, that.finalNiazsanjiReportPersonId) &&
             Objects.equals(pollScoreId, that.pollScoreId) &&
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
@@ -521,6 +554,9 @@ public class PersonCriteria implements Serializable {
         archivedDate,
         status,
         guid,
+        phoneNumber,
+        mobile,
+        address,
         finalNiazsanjiReportPersonId,
         pollScoreId,
         niazsanjiFardiId,
@@ -569,6 +605,9 @@ public class PersonCriteria implements Serializable {
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (phoneNumber != null ? "phoneNumber=" + phoneNumber + ", " : "") +
+                (mobile != null ? "mobile=" + mobile + ", " : "") +
+                (address != null ? "address=" + address + ", " : "") +
                 (finalNiazsanjiReportPersonId != null ? "finalNiazsanjiReportPersonId=" + finalNiazsanjiReportPersonId + ", " : "") +
                 (pollScoreId != null ? "pollScoreId=" + pollScoreId + ", " : "") +
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +

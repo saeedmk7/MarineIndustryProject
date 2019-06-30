@@ -34,6 +34,8 @@ public class BeautySpeechDTO implements Serializable {
 
     private ZonedDateTime modifyDate;
 
+    private String authorityNames;
+
     public Long getId() {
         return id;
     }
@@ -106,6 +108,14 @@ public class BeautySpeechDTO implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public String getAuthorityNames() {
+        return authorityNames;
+    }
+
+    public void setAuthorityNames(String authorityNames) {
+        this.authorityNames = authorityNames;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -139,6 +149,9 @@ public class BeautySpeechDTO implements Serializable {
             ", createDate='" + getCreateDate() + "'" +
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +
             ", modifyDate='" + getModifyDate() + "'" +
+            ", authorityNames='" + getAuthorityNames() + "'" +
             "}";
     }
+
+
 }

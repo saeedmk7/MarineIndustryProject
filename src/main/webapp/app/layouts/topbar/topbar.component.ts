@@ -116,6 +116,11 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
             let criteria = [
                 {key: 'isActive.equals', value: true}
             ];
+            debugger;
+            criteria.push({
+                key: 'beautySpeechAuthorityName.in',
+                value: this.currentAccount.authorities
+            });
             this.beautySpeechService
                 .query({
                     page: 0,
@@ -135,19 +140,6 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
             this.languages = languages;
         });
 
-        let criteria = [
-            {key: 'isActive.equals', value: true}
-        ];
-        this.beautySpeechService
-            .query({
-                page: 0,
-                size: 1000,
-                criteria
-            })
-            .subscribe(
-                (res: HttpResponse<IBeautySpeechMarineSuffix[]>) => this.showBeautySpeechResult(res.body),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
         this.profileService.getProfileInfo().then(profileInfo => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
@@ -197,6 +189,24 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.getEducationalModuleRequests();
                 //this.checkCurrentFullName();
             }, 20000);
+            debugger;
+            let criteria = [
+                {key: 'isActive.equals', value: true}
+            ];
+            criteria.push({
+                key: 'beautySpeechAuthorityName.in',
+                value: this.currentAccount.authorities
+            });
+            this.beautySpeechService
+                .query({
+                    page: 0,
+                    size: 1000,
+                    criteria
+                })
+                .subscribe(
+                    (res: HttpResponse<IBeautySpeechMarineSuffix[]>) => this.showBeautySpeechResult(res.body),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
            /* if(this.isAdmin || this.isModirKolAmozesh) {
                 this.getNewRequestOrganization();
                 this.getNewUsersRequest();

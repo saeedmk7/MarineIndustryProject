@@ -59,6 +59,9 @@ public class RunPhaseDTO implements Serializable {
     @Size(max = 50)
     private String guid;
 
+    @Size(max = 50)
+    private String finishDate;
+
     private Set<DocumentDTO> documents = new HashSet<>();
 
     private Set<PersonDTO> people = new HashSet<>();
@@ -219,6 +222,14 @@ public class RunPhaseDTO implements Serializable {
         this.guid = guid;
     }
 
+    public String getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(String finishDate) {
+        this.finishDate = finishDate;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
@@ -356,6 +367,7 @@ public class RunPhaseDTO implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", guid='" + getGuid() + "'" +
+             ", finishDate='" + getFinishDate() + "'" +
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +
             ", organizationChart=" + getOrganizationChartId() +

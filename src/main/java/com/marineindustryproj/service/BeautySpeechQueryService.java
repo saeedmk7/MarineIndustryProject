@@ -113,6 +113,14 @@ public class BeautySpeechQueryService extends QueryService<BeautySpeech> {
             if (criteria.getModifyDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getModifyDate(), BeautySpeech_.modifyDate));
             }
+            if (criteria.getBeautySpeechAuthorityId() != null) {
+                specification = specification.and(buildSpecification(criteria.getBeautySpeechAuthorityId(),
+                    root -> root.join(BeautySpeech_.beautySpeechAuthorities, JoinType.LEFT).get(BeautySpeechAuthority_.id)));
+            }
+            if (criteria.getBeautySpeechAuthorityName() != null) {
+                specification = specification.and(buildSpecification(criteria.getBeautySpeechAuthorityName(),
+                    root -> root.join(BeautySpeech_.beautySpeechAuthorities, JoinType.LEFT).get(BeautySpeechAuthority_.authorityName)));
+            }
         }
         return specification;
     }

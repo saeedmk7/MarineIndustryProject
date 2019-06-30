@@ -51,9 +51,9 @@ public class Person implements Serializable {
     private String certificateNumber;
 
     @NotNull
-    @Size(max = 10)
-    @Pattern(regexp = "[0-9]{10}")
-    @Column(name = "national_id", length = 10, nullable = false, unique = true)
+    @Size(max = 20)
+    /*@Pattern(regexp = "[0-9]{11}")*/
+    @Column(name = "national_id", length = 20, nullable = false, unique = true)
     private String nationalId;
 
     @NotNull
@@ -61,7 +61,7 @@ public class Person implements Serializable {
     private ZonedDateTime birthDate;
 
     @Size(max = 50)
-    @Column(name = "personel_code", length = 50, unique = true)
+    @Column(name = "personel_code", length = 50)
     private String personelCode;
 
     @Column(name = "employment_date")
@@ -106,6 +106,18 @@ public class Person implements Serializable {
     @Size(max = 50)
     @Column(name = "guid", length = 50, unique = true)
     private String guid;
+
+    @Size(max = 50)
+    @Column(name = "phone_number", length = 50)
+    private String phoneNumber;
+
+    @Size(max = 50)
+    @Column(name = "mobile", length = 50)
+    private String mobile;
+
+    @Size(max = 4096)
+    @Column(name = "address", length = 4096)
+    private String address;
 
     @OneToMany(mappedBy = "person")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -453,6 +465,45 @@ public class Person implements Serializable {
 
     public void setGuid(String guid) {
         this.guid = guid;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public Person phoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public Person mobile(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Person address(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Set<FinalNiazsanjiReportPerson> getFinalNiazsanjiReportPeople() {
@@ -953,6 +1004,9 @@ public class Person implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", guid='" + getGuid() + "'" +
+            ", phoneNumber='" + getPhoneNumber() + "'" +
+            ", mobile='" + getMobile() + "'" +
+            ", address='" + getAddress() + "'" +
             "}";
     }
 }

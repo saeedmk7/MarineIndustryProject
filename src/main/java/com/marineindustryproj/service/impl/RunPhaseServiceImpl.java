@@ -112,6 +112,7 @@ public class RunPhaseServiceImpl implements RunPhaseService {
         }
         runPhase.setDescription(runPhaseSaveDataModel.getDescription());
         runPhase.setFinalizeCost(runPhaseSaveDataModel.getFinalizeCost());
+        runPhase.setFinishDate(runPhaseSaveDataModel.getFinishDate());
         runPhase.setStepNumber(runPhaseSaveDataModel.getStepNumber());
         runPhase.setRunMonth(runPhaseSaveDataModel.getRunMonth());
         runPhase.setEducationalModule(finalNiazsanjiReport.getEducationalModule());

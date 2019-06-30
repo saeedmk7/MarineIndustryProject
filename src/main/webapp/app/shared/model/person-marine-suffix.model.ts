@@ -38,6 +38,9 @@ export interface IPersonMarineSuffix {
     archivedDate?: Moment;
     status?: number;
     guid?: string;
+    phoneNumber?: string;
+    mobile?: string;
+    address?: string;
     finalNiazsanjiReportPeople?: IFinalNiazsanjiReportPersonMarineSuffix[];
     pollScores?: IPollScoreMarineSuffix[];
     niazsanjiFardis?: INiazsanjiFardiMarineSuffix[];
@@ -95,6 +98,9 @@ export class PersonMarineSuffix implements IPersonMarineSuffix {
         public archivedDate?: Moment,
         public status?: number,
         public guid?: string,
+        public phoneNumber?: string,
+        public mobile?: string,
+        public address?: string,
         public finalNiazsanjiReportPeople?: IFinalNiazsanjiReportPersonMarineSuffix[],
         public pollScores?: IPollScoreMarineSuffix[],
         public niazsanjiFardis?: INiazsanjiFardiMarineSuffix[],

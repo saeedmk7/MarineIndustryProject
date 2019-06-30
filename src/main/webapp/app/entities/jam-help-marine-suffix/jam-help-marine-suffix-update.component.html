@@ -88,7 +88,7 @@
                         placeholder="نقش ها را مشخص کنید."
                         [(ngModel)]="selectedAuthorities">
                     </ng-select>
-                    <span>{{selectedAuthorities[0].name}}</span>
+                    <span *ngFor="let authority of selectedAuthorities">{{authority.name}} , </span>
                 </div>
                 <ng-container *ngIf="jamHelp.id === undefined">
                     <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">آپلود راهنما</div></div>

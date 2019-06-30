@@ -41,6 +41,10 @@ public class BeautySpeechCriteria implements Serializable {
 
     private ZonedDateTimeFilter modifyDate;
 
+    private LongFilter beautySpeechAuthorityId;
+
+    private StringFilter beautySpeechAuthorityName;
+
     public LongFilter getId() {
         return id;
     }
@@ -113,6 +117,21 @@ public class BeautySpeechCriteria implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public LongFilter getBeautySpeechAuthorityId() {
+        return beautySpeechAuthorityId;
+    }
+
+    public void setBeautySpeechAuthorityId(LongFilter beautySpeechAuthorityId) {
+        this.beautySpeechAuthorityId = beautySpeechAuthorityId;
+    }
+
+    public StringFilter getBeautySpeechAuthorityName() {
+        return beautySpeechAuthorityName;
+    }
+
+    public void setBeautySpeechAuthorityName(StringFilter beautySpeechAuthorityName) {
+        this.beautySpeechAuthorityName = beautySpeechAuthorityName;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -132,7 +151,9 @@ public class BeautySpeechCriteria implements Serializable {
             Objects.equals(createUserLogin, that.createUserLogin) &&
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
-            Objects.equals(modifyDate, that.modifyDate);
+            Objects.equals(modifyDate, that.modifyDate) &&
+            Objects.equals(beautySpeechAuthorityName, that.beautySpeechAuthorityName) &&
+            Objects.equals(beautySpeechAuthorityId, that.beautySpeechAuthorityId);
     }
 
     @Override
@@ -146,7 +167,9 @@ public class BeautySpeechCriteria implements Serializable {
         createUserLogin,
         createDate,
         modifyUserLogin,
-        modifyDate
+        modifyDate,
+        beautySpeechAuthorityId,
+        beautySpeechAuthorityName
         );
     }
 
@@ -162,7 +185,10 @@ public class BeautySpeechCriteria implements Serializable {
                 (createDate != null ? "createDate=" + createDate + ", " : "") +
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
+                (beautySpeechAuthorityId != null ? "beautySpeechAuthorityId=" + beautySpeechAuthorityId + ", " : "") +
+                (beautySpeechAuthorityName != null ? "beautySpeechAuthorityName=" + beautySpeechAuthorityName + ", " : "") +
             "}";
     }
+
 
 }

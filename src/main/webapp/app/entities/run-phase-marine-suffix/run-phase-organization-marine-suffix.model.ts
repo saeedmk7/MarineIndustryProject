@@ -12,6 +12,7 @@ export interface IRunPhaseOrganizationMarineSuffix {
     priceCost?: number;
     niazsanjiYear?: number;
     finalizeCost?: number;
+    finishDate?: string;
     people?: IPersonMarineSuffix[];
     status?: number;
     runMonthPersian?: string;
@@ -29,6 +30,7 @@ export class RunPhaseOrganizationMarineSuffix implements IRunPhaseOrganizationMa
         public niazsanjiYear?: number,
         public organizationChartTitle?: string,
         public finalizeCost?: number,
+        public finishDate?: string,
         public people?: IPersonMarineSuffix[],
         public priceCost?: number,
         public runMonthPersian?: string,

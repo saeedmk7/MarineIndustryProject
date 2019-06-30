@@ -1,5 +1,6 @@
 package com.marineindustryproj.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,6 +9,8 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -55,6 +58,9 @@ public class BeautySpeech implements Serializable {
     @Column(name = "modify_date")
     private ZonedDateTime modifyDate;
 
+    @OneToMany(mappedBy = "beautySpeech")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<BeautySpeechAuthority> beautySpeechAuthorities = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -166,6 +172,31 @@ public class BeautySpeech implements Serializable {
 
     public void setModifyDate(ZonedDateTime modifyDate) {
         this.modifyDate = modifyDate;
+    }
+
+    public Set<BeautySpeechAuthority> getBeautySpeechAuthorities() {
+        return beautySpeechAuthorities;
+    }
+
+    public BeautySpeech beautySpeechAuthorities(Set<BeautySpeechAuthority> beautySpeechAuthorities) {
+        this.beautySpeechAuthorities = beautySpeechAuthorities;
+        return this;
+    }
+
+    public BeautySpeech addBeautySpeechAuthority(BeautySpeechAuthority beautySpeechAuthority) {
+        this.beautySpeechAuthorities.add(beautySpeechAuthority);
+        beautySpeechAuthority.setBeautySpeech(this);
+        return this;
+    }
+
+    public BeautySpeech removeBeautySpeechAuthority(BeautySpeechAuthority beautySpeechAuthority) {
+        this.beautySpeechAuthorities.remove(beautySpeechAuthority);
+        beautySpeechAuthority.setBeautySpeech(null);
+        return this;
+    }
+
+    public void setBeautySpeechAuthorities(Set<BeautySpeechAuthority> beautySpeechAuthorities) {
+        this.beautySpeechAuthorities = beautySpeechAuthorities;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

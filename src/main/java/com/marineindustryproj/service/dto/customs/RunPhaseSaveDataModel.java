@@ -12,6 +12,8 @@ public class RunPhaseSaveDataModel implements Serializable {
 
     private Integer finalizeCost;
 
+    private String finishDate;
+
     private Integer stepNumber;
 
     private Boolean done;
@@ -94,5 +96,13 @@ public class RunPhaseSaveDataModel implements Serializable {
 
     public void setRunMonth(Integer runMonth) {
         this.runMonth = runMonth;
+    }
+
+    public String getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(String finishDate) {
+        this.finishDate = finishDate;
     }
 }

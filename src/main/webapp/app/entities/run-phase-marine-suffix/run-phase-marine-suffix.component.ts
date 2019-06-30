@@ -295,6 +295,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             } //a.organizationChartTitle;
             //runPhaseFardi.priceCost = a.finalizeCost;
             runPhaseFardi.finalizeCost = a.finalizeCost;
+            runPhaseFardi.finishDate = a.finishDate;
             runPhaseFardi.courseTypeTitle = a.courseTypeTitle;
             runPhaseFardi.runMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
             if (a.people.length > 0) {
@@ -335,6 +336,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             //runPhaseOrganization.organizationChartTitle = a.organizationChartTitle;
             //runPhaseOrganization.priceCost = a.priceCost;
             runPhaseOrganization.finalizeCost = a.finalizeCost;
+            runPhaseOrganization.finishDate = a.finishDate;
             runPhaseOrganization.runMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
             runPhaseOrganization.courseTypeTitle = a.courseTypeTitle;
 

@@ -9,6 +9,7 @@ export interface IRunPhaseSaveDataModel {
     done?: boolean;
     status?: number;
     finalizeCost?: number;
+    finishDate?: string;
     runPhaseSaveDataItemModels?: IRunPhaseSaveDataItemModel[]
 }
 
@@ -22,6 +23,7 @@ export class RunPhaseSaveDataModel implements IRunPhaseSaveDataModel {
         public done?: boolean,
         public status?: number,
         public finalizeCost?: number,
+        public finishDate?: string,
         public runPhaseSaveDataItemModels?: IRunPhaseSaveDataItemModel[]
     ) {}
 }
