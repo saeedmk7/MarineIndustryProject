@@ -115,7 +115,18 @@ public class FieldOfStudyResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/field-of-studies");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-
+    /**
+     * GET  /field-of-studies/all : get all the fieldOfStudies.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of fieldOfStudies in body
+     */
+    @GetMapping("/field-of-studies/all")
+    @Timed
+    public ResponseEntity<List<FieldOfStudyDTO>> getAllFieldOfStudies() {
+        log.debug("REST request to get all of fieldOfStudies");
+        List<FieldOfStudyDTO> fieldOfStudyDTOS = fieldOfStudyService.findAll();
+        return ResponseEntity.ok().body(fieldOfStudyDTOS);
+    }
     /**
     * GET  /field-of-studies/count : count all the fieldOfStudies.
     *

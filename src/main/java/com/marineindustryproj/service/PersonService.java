@@ -20,7 +20,7 @@ public interface PersonService {
      * @param personDTO the entity to save
      * @return the persisted entity
      */
-    PersonDTO save(PersonDTO personDTO);
+    PersonDTO save(PersonDTO personDTO, Boolean isEdit);
 
     /**
      * Get all the people.

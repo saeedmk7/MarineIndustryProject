@@ -5,6 +5,7 @@ import com.marineindustryproj.service.dto.FieldOfStudyDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,6 +28,12 @@ public interface FieldOfStudyService {
      * @return the list of entities
      */
     Page<FieldOfStudyDTO> findAll(Pageable pageable);
+    /**
+     * Get all the fieldOfStudies.
+     *
+     * @return the list of entities
+     */
+    List<FieldOfStudyDTO> findAll();
 
 
     /**

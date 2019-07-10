@@ -1,9 +1,13 @@
 package com.marineindustryproj.service.impl;
 
+import com.marineindustryproj.domain.User;
+import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.PersonService;
 import com.marineindustryproj.domain.Person;
 import com.marineindustryproj.repository.PersonRepository;
+import com.marineindustryproj.service.UserService;
 import com.marineindustryproj.service.dto.PersonDTO;
+import com.marineindustryproj.service.dto.UserDTO;
 import com.marineindustryproj.service.dto.customs.PersonMinDTO;
 import com.marineindustryproj.service.mapper.PersonMapper;
 import org.slf4j.Logger;
@@ -15,10 +19,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.Set;
 
 /**
  * Service Implementation for managing Person.
@@ -33,13 +39,17 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonMapper personMapper;
 
+    private final UserService userService;
+
     private final CacheManager cacheManager;
 
     public PersonServiceImpl(PersonRepository personRepository,
                              PersonMapper personMapper,
+                             UserService userService,
                              CacheManager cacheManager) {
         this.personRepository = personRepository;
         this.personMapper = personMapper;
+        this.userService = userService;
         this.cacheManager = cacheManager;
     }
 
@@ -50,13 +60,44 @@ public class PersonServiceImpl implements PersonService {
      * @return the persisted entity
      */
     @Override
-    public PersonDTO save(PersonDTO personDTO) {
+    public PersonDTO save(PersonDTO personDTO, Boolean isEit) {
         log.debug("Request to save Person : {}", personDTO);
 
         Person person = personMapper.toEntity(personDTO);
         person = personRepository.save(person);
         clearPersonCaches();
+
+        if(!isEit){
+            User newUser = saveNewUser(person,
+                        userService);
+            userService.clearUserCaches(newUser);
+        }
         return personMapper.toDto(person);
+    }
+
+    public static User saveNewUser(Person person,
+                                   UserService userService
+                                   ) {
+        if(!userService.getUserWithAuthoritiesByLogin(person.getNationalId()).isPresent()) {
+            UserDTO userDTO = new UserDTO();
+            userDTO.setActivated(true);
+            userDTO.setCreatedBy(SecurityUtils.getCurrentUserLogin().get());
+            userDTO.setLastModifiedBy(SecurityUtils.getCurrentUserLogin().get());
+            userDTO.setCreatedDate(Instant.now());
+            userDTO.setLastModifiedDate(Instant.now());
+            userDTO.setEmail(person.getNationalId() + "@amoozesh.com");
+            userDTO.setLangKey("fa");
+            userDTO.setLogin(person.getNationalId());
+            userDTO.setPassword("123456");
+            userDTO.setPersonId(person.getId());
+            Set<String> authorities = new HashSet<>();
+            authorities.add("ROLE_USER");
+            userDTO.setAuthorities(authorities);
+
+            User newUser = userService.createUser(userDTO);
+            return newUser;
+        }
+        return null;
     }
 
     /**

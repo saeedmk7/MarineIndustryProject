@@ -19,6 +19,11 @@ import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-char
 import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
+import {
+    IQualificationMarineSuffix,
+    QualificationMarineSuffix
+} from "app/shared/model/qualification-marine-suffix.model";
+import {QualificationMarineSuffixService} from "app/entities/qualification-marine-suffix";
 
 @Component({
     selector: 'mi-person-marine-suffix',
@@ -32,6 +37,7 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
     success: any;
     eventSubscriber: Subscription;
     organizationcharts: IOrganizationChartMarineSuffix[];
+    allOrganizationcharts: IOrganizationChartMarineSuffix[];
 
     routeData: any;
     links: any;
@@ -43,6 +49,7 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     employmenttypes: IEmploymentTypeMarineSuffix[];
+    qualifications: IQualificationMarineSuffix[];
 
     criteriaSubscriber: Subscription;
     searchbarModel: SearchPanelModel[] = [];
@@ -60,6 +67,7 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
         private personService: PersonMarineSuffixService,
         private organizationChartService: OrganizationChartMarineSuffixService,
         private employmentTypeService: EmploymentTypeMarineSuffixService,
+        private qualificationService: QualificationMarineSuffixService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
@@ -109,9 +117,11 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
             );
     }
     makeCriteria(criteria?){
+        debugger;
         if(!criteria)
         {
             criteria = [];
+
         }
         else{
 
@@ -133,8 +143,20 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
                     });
                 }
             }
+            const org = criteria.find(a => a.key == 'organizationChartId.equals');
+            if(org) {
+                const orgId = +org.value;
+                criteria = criteria.filter(a => a.key != 'organizationChartId.equals');
+                if (orgId) {
+                    const childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, orgId);
+                    criteria.push({
+                        key: 'organizationChartId.in', value: childIds
+                    });
+                }
+            }
         }
-        if(!this.isSuperUsers && this.isTopUsers){
+        const orgIn = criteria.find(a => a.key == 'organizationChartId.in');
+        if(!orgIn && !this.isSuperUsers && this.isTopUsers) {
             criteria.push({
                 key: 'organizationChartId.in',
                 value: this.orgIds
@@ -142,24 +164,7 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
         }
         return criteria;
     }
-    prepareOrgIds(){
 
-        if(this.organizationChartService.organizationchartsAll)
-        {
-            this.organizationcharts = this.organizationChartService.organizationchartsAll;
-            this.orgIds = this.treeUtilities.getAllOfThisTreeIds(this.organizationcharts, this.currentPerson.organizationChartId);
-
-        }
-        else {
-            this.organizationChartService.query().subscribe(
-                (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
-
-                    this.organizationcharts = res.body;
-                    this.orgIds = this.treeUtilities.getAllOfThisTreeIds(this.organizationcharts, this.currentPerson.organizationChartId);
-                },
-                (res: HttpErrorResponse) => this.onError(res.message));
-        }
-    }
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
@@ -213,6 +218,7 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
         this.searchbarModel.push(new SearchPanelModel('person','family','text','contains'));
         this.searchbarModel.push(new SearchPanelModel('person','nationalId','text','contains'));
         this.searchbarModel.push(new SearchPanelModel('person','personelCode','text','contains'));
+        this.searchbarModel.push(new SearchPanelModel('person','mobile','text','contains'));
         const retiredOptions = [{
             id: 0,
             title: 'همه'
@@ -232,20 +238,13 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
             title: 'بلی'
         }];
         this.searchbarModel.push(new SearchPanelModel('person','archived','select','equals', archivedOptions));
-        this.employmentTypeService.query().subscribe(
-            (res: HttpResponse<IEmploymentTypeMarineSuffix[]>) => {
-
-                this.employmenttypes = res.body;
-
-                this.searchbarModel.push(new SearchPanelModel('person','employmentTypeId','select','equals', res.body));
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.prepareEmploymentType();
+        this.prepareQualification();
         this.principal.identity().then((account) => {
             this.setRoles(account);
             this.personService.find(account.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
                 this.currentPerson = resp.body;
-                this.prepareOrgIds();
+                this.prepareSearchOrgChart();
             }, (res: HttpErrorResponse) => this.onError(res.message));
         });
         /*if(!this.done){
@@ -253,7 +252,55 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
         }*/
         //this.registerChangeInPeople();
     }
+    prepareQualification(){
+        this.qualificationService.query().subscribe(
+            (res: HttpResponse<IQualificationMarineSuffix[]>) => {
 
+                this.employmenttypes = res.body;
+
+                this.searchbarModel.push(new SearchPanelModel('person','lastQualificationId','select','equals', res.body));
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+    prepareEmploymentType(){
+        this.employmentTypeService.query().subscribe(
+            (res: HttpResponse<IEmploymentTypeMarineSuffix[]>) => {
+
+                this.qualifications = res.body;
+
+                this.searchbarModel.push(new SearchPanelModel('person','employmentTypeId','select','equals', res.body));
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+    prepareSearchOrgChart(){
+        if(this.organizationChartService.organizationchartsAll)
+        {
+            this.allOrganizationcharts = this.organizationChartService.organizationchartsAll;
+            this.organizationcharts = this.convertObjectDatesService.goClone(this.allOrganizationcharts);
+            this.orgIds = this.treeUtilities.getAllOfThisTreeIds(this.organizationcharts, this.currentPerson.organizationChartId);
+            this.organizationcharts = this.organizationcharts.filter(a => this.orgIds.includes(a.id));
+            const groups = this.organizationcharts.filter(a => a.parentId == null);
+            this.searchbarModel.push(new SearchPanelModel('person', 'organizationChartId', 'select', 'equals', groups, 'title'));
+            this.searchbarModel.push(new SearchPanelModel('person', 'organizationChartId', 'select', 'equals', this.organizationcharts, 'fullTitle', 'half'));
+        }
+        else {
+            this.organizationChartService.query().subscribe(
+                (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
+
+                    this.allOrganizationcharts = res.body;
+                    this.organizationcharts = this.convertObjectDatesService.goClone(this.allOrganizationcharts);
+                    this.orgIds = this.treeUtilities.getAllOfThisTreeIds(this.organizationcharts, this.currentPerson.organizationChartId);
+                    this.organizationcharts = this.organizationcharts.filter(a => this.orgIds.includes(a.id));
+                    const groups = this.organizationcharts.filter(a => a.parentId == null);
+                    this.searchbarModel.push(new SearchPanelModel('person', 'organizationChartId', 'select', 'equals', groups, 'title'));
+                    this.searchbarModel.push(new SearchPanelModel('person', 'organizationChartId', 'select', 'equals', this.organizationcharts, 'fullTitle', 'half'));
+                },
+                (res: HttpErrorResponse) => this.onError(res.message));
+        }
+
+    }
     ngOnDestroy() {
         //this.eventManager.destroy(this.eventSubscriber);
         this.eventManager.destroy(this.criteriaSubscriber);

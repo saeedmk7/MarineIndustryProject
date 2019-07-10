@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {JhiDataUtils, JhiLanguageService} from 'ng-jhipster';
 
-import { Principal, AccountService, JhiLanguageHelper } from 'app/core';
+import {Principal, AccountService, JhiLanguageHelper, UserService, IUser} from 'app/core';
 import {JhiAlertService} from "ng-jhipster/src/service/alert.service";
 import {IPersonMarineSuffix, PersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
@@ -50,6 +50,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     person: IPersonMarineSuffix = new PersonMarineSuffix();
     currentPerson: IPersonMarineSuffix = new PersonMarineSuffix();
     homePagePersonEducationalModules: IHomePagePersonEducationalModule[] = [];
+    sumHourPersonEducationalModules: number = 0;
 
     isAdmin: boolean;
     isModirKolAmozesh: boolean = false;
@@ -73,8 +74,8 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         private jobRecordService: JobRecordMarineSuffixService,
         private educationalRecordService: EducationalRecordMarineSuffixService,
         private personService : PersonMarineSuffixService,
-        private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService
-
+        private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService,
+        private userService: UserService
     ) {}
 
     ngOnInit() {
@@ -94,6 +95,17 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
                 this.personMarineSuffixService.find(this.settingsAccount.personId).subscribe(
                     (res: HttpResponse<PersonMarineSuffix>) => this.onPersonSuccess(res.body),
                     (res: HttpResponse<any>) => this.onPersonError(res.body)
+                );
+                this.userService.findByPersonId(this.settingsAccount.personId).subscribe(
+                    (res: HttpResponse<IUser>) => {
+                        if(res.body.imageUrl){
+                            this.oldPicUrl = res.body.imageUrl;
+                        }
+                        else {
+                            this.oldPicUrl = "/content/images/home/man.png";
+                        }
+                    },
+                    (res: HttpResponse<any>) => this.onPersonError(res.body)
                 )
             }
             else {
@@ -105,8 +117,9 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         });
     }
     onPersonSuccess(body) {
+        debugger;
         this.person = this.convertObjectDatesService.changeDate(body);
-        this.currentPerson = this.convertObjectDatesService.changeDate(body);
+        this.currentPerson = this.person;
 
         if (this.person) {
             this.prepareOrgChart(this.person.organizationChartId);
@@ -140,9 +153,20 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
                     this.finalLoad(this.person);
                 },
                 (res: HttpResponse<any>) => this.onPersonError(res.body)
-            )
-            this.person = $event;
-            this.finalLoad($event);
+            );
+            this.userService.findByPersonId($event.id).subscribe(
+                (res: HttpResponse<IUser>) => {
+                    if(res.body.imageUrl){
+                        this.oldPicUrl = res.body.imageUrl;
+                    }
+                    else {
+                        this.oldPicUrl = "/content/images/home/man.png";
+                    }
+                },
+                (res: HttpResponse<any>) => this.onPersonError(res.body)
+            );
+            /*this.person = $event;
+            this.finalLoad($event);*/
         }
     }
     prepareJobRecords(personId: number){
@@ -200,6 +224,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
                             break;
                     }
                 });
+                this.sumHourPersonEducationalModules = this.homePagePersonEducationalModules.map(a => a.totalLearningTime ? a.totalLearningTime : 0).reduce((sum, current) => sum + current);
                 //this.makePersonHourPieChart(resp.body);
             },
             (res: HttpErrorResponse) => this.onError(res.message));

@@ -15,6 +15,7 @@
             "detail": {
                 "title": "جزئیات اطلاعات"
             },
+
             "name": "نام",
             "family": "نام خانوادگی",
             "code": "کد کاربر",
@@ -41,6 +42,7 @@
             "document": "مدارک",
             "scientificWorkGroup": "گروه علمی شغلی",
             "lastQualification": "آخرین مدرک تحصیلی",
+            "lastQualificationId": "آخرین مدرک تحصیلی",
             "lastQualificationTitle": "آخرین مدرک تحصیلی",
             "lastFieldOfStudy": "آخرین رشته نحصیلی",
             "lastFieldOfStudyTitle": "آخرین رشته نحصیلی",
@@ -56,6 +58,7 @@
             "practicaljob": "شغل عملی",
             "practicaljobTitle": "شغل عملی",
             "organizationChart": "موقعیت در چارت سازمانی",
+            "organizationChartId": "موقعیت در چارت سازمانی",
             "organizationChartTitle": "موقعیت در چارت سازمانی",
             "mainTask": "Main Task",
             "requestOrganizationNiazsanji": "Request Organization Niazsanji",

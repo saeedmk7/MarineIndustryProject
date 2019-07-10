@@ -78,7 +78,7 @@ public class PersonResource {
             personDTO.setCreateDate(ZonedDateTime.now());
             personDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
 
-            PersonDTO result = personService.save(personDTO);
+            PersonDTO result = personService.save(personDTO, false);
             return ResponseEntity.created(new URI("/api/people/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME,
                                                               result.getId().toString()))
@@ -116,7 +116,7 @@ public class PersonResource {
         personDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
         personDTO.setModifyDate(ZonedDateTime.now());
 
-        PersonDTO result = personService.save(personDTO);
+        PersonDTO result = personService.save(personDTO, true);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, personDTO.getId().toString()))
             .body(result);

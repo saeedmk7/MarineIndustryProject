@@ -12,6 +12,7 @@ export interface IUser {
     password?: string;
     personId?: any;
     personFullName?: string;
+    imageUrl?:string;
 }
 
 export class User implements IUser {
@@ -28,7 +29,8 @@ export class User implements IUser {
         public lastModifiedDate?: Date,
         public password?: string,
         public personId?: any,
-        public personFullName?: string
+        public personFullName?: string,
+        public imageUrl?:string
     ) {
         this.id = id ? id : null;
         this.login = login ? login : null;
@@ -43,5 +45,6 @@ export class User implements IUser {
         this.password = password ? password : null;
         this.personId = personId ? personId : null;
         this.personFullName = personFullName ? personFullName : null;
+        this.imageUrl = imageUrl ? imageUrl : null;
     }
 }

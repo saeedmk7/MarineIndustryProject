@@ -113,7 +113,7 @@ public class OrganizationChartServiceImpl implements OrganizationChartService {
         {
             for (PersonDTO person: personDTOS) {
                 person.setOrganizationChartId(null);
-                personService.save(person);
+                personService.save(person, true);
             }
         }
         organizationChartRepository.deleteById(id);

@@ -1,12 +1,14 @@
 package com.marineindustryproj.service.dto.customs;
 
+import com.marineindustryproj.domain.enumeration.EducationalModuleType;
 import com.marineindustryproj.service.dto.EducationalHistoryDTO;
 import com.marineindustryproj.service.dto.EducationalModuleDTO;
 import com.marineindustryproj.service.dto.FinalNiazsanjiReportDTO;
 
 public class HomePagePersonEducationalModule {
 
-    public HomePagePersonEducationalModule(FinalNiazsanjiReportDTO finalNiazsanjiReportDTO, EducationalModuleDTO educationalModuleDTO) {
+    public HomePagePersonEducationalModule(FinalNiazsanjiReportDTO finalNiazsanjiReportDTO,
+                                           EducationalModuleType educationalModuleType, EducationalModuleDTO educationalModuleDTO) {
         this.id = educationalModuleDTO.getId();
         this.title = educationalModuleDTO.getTitle();
         this.code = educationalModuleDTO.getCode();
@@ -16,8 +18,14 @@ public class HomePagePersonEducationalModule {
         this.organizationTitle = educationalModuleDTO.getOrganizationTitle();
         this.skillableLevelOfSkillId = educationalModuleDTO.getSkillableLevelOfSkillId();
         this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
-        this.educationalModuleType = "از کلیه پودمان ها";
-        this.runDate = finalNiazsanjiReportDTO.getNiazsanjiYear().toString();
+        if(educationalModuleType == EducationalModuleType.ALL)
+            this.educationalModuleType = "از کلیه پودمان ها";
+        else
+            this.educationalModuleType = "از شناسنامه آموزشی";
+
+        this.courseType = finalNiazsanjiReportDTO.getCourseTypeTitle();
+        if(finalNiazsanjiReportDTO.getNiazsanjiYear() != null)
+            this.runDate = finalNiazsanjiReportDTO.getNiazsanjiYear().toString();
         switch (finalNiazsanjiReportDTO.getStatus())
         {
             case 0:
@@ -96,6 +104,8 @@ public class HomePagePersonEducationalModule {
     private String organizationTitle;
 
     private String educationalModuleType;
+
+    private String courseType;
 
     private Integer status;
 
@@ -213,5 +223,13 @@ public class HomePagePersonEducationalModule {
 
     public void setEducationalHistoryId(Long educationalHistoryId) {
         this.educationalHistoryId = educationalHistoryId;
+    }
+
+    public String getCourseType() {
+        return courseType;
+    }
+
+    public void setCourseType(String courseType) {
+        this.courseType = courseType;
     }
 }

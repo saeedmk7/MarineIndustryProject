@@ -15,7 +15,7 @@ type EntityArrayResponseType = HttpResponse<IFieldOfStudyMarineSuffix[]>;
 @Injectable({ providedIn: 'root' })
 export class FieldOfStudyMarineSuffixService {
     private resourceUrl = SERVER_API_URL + 'api/field-of-studies';
-
+    public fieldOfStudies: IFieldOfStudyMarineSuffix[];
     constructor(private http: HttpClient) {}
 
     create(fieldOfStudy: IFieldOfStudyMarineSuffix): Observable<EntityResponseType> {
@@ -39,10 +39,15 @@ export class FieldOfStudyMarineSuffixService {
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {
-        const options = createRequestOption(req);
-        return this.http
-            .get<IFieldOfStudyMarineSuffix[]>(this.resourceUrl, { params: options, observe: 'response' })
-            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+        if(req) {
+            const options = createRequestOption(req);
+            return this.http
+                .get<IFieldOfStudyMarineSuffix[]>(this.resourceUrl, {params: options, observe: 'response'})
+                .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+        }
+        else{
+
+        }
     }
 
     delete(id: number): Observable<HttpResponse<any>> {

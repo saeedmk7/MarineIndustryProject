@@ -299,7 +299,7 @@ public class DocumentResource {
                 Set<DocumentDTO> documents = person.getDocuments();
                 documents.add(result);
                 person.setDocuments(documents);
-                personService.save(person);
+                personService.save(person, true);
             }
             if (documentDTO.getEntityName().toLowerCase().equals("job")) {
                 JobDTO job = jobService.findOne(documentDTO.getEntityId()).get();
@@ -518,7 +518,7 @@ public class DocumentResource {
             Set<DocumentDTO> documents = personDTO.getDocuments();
             documents.remove(documentService.findOne(id).get());
             personDTO.setDocuments(documents);
-            personService.save(personDTO);
+            personService.save(personDTO, true);
         }
         if (entityName.toLowerCase().equals("job")) {
 

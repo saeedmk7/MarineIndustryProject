@@ -152,14 +152,14 @@ public class JobServiceImpl implements JobService {
                 List<PersonDTO> jobPersons = personQueryService.findByCriteria(jobPersonCriteria);
                 for (PersonDTO jobPersonDTO : jobPersons) {
                     jobPersonDTO.setJobId(job.getId());
-                    personService.save(jobPersonDTO);
+                    personService.save(jobPersonDTO, true);
                 }
                 PersonCriteria practicalJobPersonCriteria = new PersonCriteria();
                 practicalJobPersonCriteria.setPracticaljobId(jobId);
                 List<PersonDTO> practicalJobPersons = personQueryService.findByCriteria(practicalJobPersonCriteria);
                 for (PersonDTO practicalJobPersonDTO : practicalJobPersons) {
                     practicalJobPersonDTO.setPracticaljobId(job.getId());
-                    personService.save(practicalJobPersonDTO);
+                    personService.save(practicalJobPersonDTO, true);
                 }
                 /*for (Document document : dtoJob.getDocuments()) {
                     job.addDocument(document);

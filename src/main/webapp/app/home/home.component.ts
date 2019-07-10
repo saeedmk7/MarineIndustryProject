@@ -45,6 +45,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     homePageNiazsanjiReport: IHomePageNiazsanjiReport = {};
     homePagePersonHourChart: IHomePagePersonHourChart = {};
     homePagePersonEducationalModules: IHomePagePersonEducationalModule[] = [];
+    sumHourPersonEducationalModules: number = 0;
     planningAndRunMonthReports: IPlanningAndRunMonthReport[] = [];
     isHomePageCharts: boolean = true;
     account: Account;
@@ -251,6 +252,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.finalNiazsanjiReportService.getHomePagePersonEducationalModule(personId).subscribe((resp: HttpResponse<IHomePagePersonEducationalModule[]>) => {
 
                 this.homePagePersonEducationalModules = resp.body;
+
                 this.homePagePersonEducationalModules.forEach(a => {
                     a.totalLearningTime = a.learningTimePractical == undefined ? 0 : a.learningTimePractical + a.learningTimeTheorical == undefined ? 0 : a.learningTimeTheorical;
                    switch (a.status) {
@@ -271,6 +273,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                            break;
                    }
                 });
+                this.sumHourPersonEducationalModules = this.homePagePersonEducationalModules.map(a => a.totalLearningTime ? a.totalLearningTime : 0).reduce((sum, current) => sum + current);
                 //this.makePersonHourPieChart(resp.body);
             },
             (res: HttpErrorResponse) => this.onError(res.message));

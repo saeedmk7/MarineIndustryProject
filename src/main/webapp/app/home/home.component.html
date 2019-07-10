@@ -108,6 +108,7 @@
                                 <th><span jhiTranslate="marineindustryprojApp.educationalModule.skillableLevelOfSkill">Skillable Level Of Skill</span>
                                 </th>
                                 <th><span>نوع پودمان</span></th>
+                                <th><span>نوع دوره</span></th>
                                 <th><span>تاریخ برگزاری</span></th>
                                 <th>وضعیت</th>
                             </tr>
@@ -133,6 +134,9 @@
                                     {{educationalModule.educationalModuleType}}
                                 </td>
                                 <td>
+                                    {{educationalModule.courseType}}
+                                </td>
+                                <td>
                                     {{educationalModule.runDate}}
                                 </td>
                                 <td>
@@ -140,6 +144,11 @@
                                        *ngIf="educationalModule.status == 100">{{educationalModule.statusMeaning}}</a>
                                     <span *ngIf="educationalModule.status != 100">{{educationalModule.statusMeaning}}</span>
                                 </td>
+                            </tr>
+                            <tr class="success" *ngIf="homePagePersonEducationalModules">
+                                <td colspan="3">مجموع</td>
+                                <td colspan="1">{{sumHourPersonEducationalModules | number}}</td>
+                                <td colspan="8"></td>
                             </tr>
                             <tr *ngIf="!homePagePersonEducationalModules">
                                 <td colspan="5" class="alert-danger">

@@ -1,6 +1,7 @@
 package com.marineindustryproj.service.impl;
 
 import com.marineindustryproj.domain.*;
+import com.marineindustryproj.domain.enumeration.EducationalModuleType;
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
 import com.marineindustryproj.domain.enumeration.RequestStatus;
 import com.marineindustryproj.repository.OrganizationChartRepository;
@@ -92,6 +93,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
     private final CacheManager cacheManager;
 
+    private final NiazsanjiFardiService niazsanjiFardiService;
+
     public FinalNiazsanjiReportServiceImpl(FinalNiazsanjiReportRepository finalNiazsanjiReportRepository,
                                            FinalNiazsanjiReportMapper finalNiazsanjiReportMapper,
                                            NiazsanjiGroupService niazsanjiGroupService,
@@ -118,7 +121,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                                            DesignAndPlanningService designAndPlanningService,
                                            RunPhaseQueryService runPhaseQueryService,
                                            RunPhaseService runPhaseService,
-                                           CacheManager cacheManager) {
+                                           CacheManager cacheManager,
+                                           NiazsanjiFardiService niazsanjiFardiService) {
         this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
         this.finalNiazsanjiReportMapper = finalNiazsanjiReportMapper;
         this.niazsanjiGroupService = niazsanjiGroupService;
@@ -145,6 +149,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         this.runPhaseQueryService = runPhaseQueryService;
         this.runPhaseService = runPhaseService;
         this.cacheManager = cacheManager;
+        this.niazsanjiFardiService = niazsanjiFardiService;
     }
     /**
      * Save a finalNiazsanjiReport.
@@ -693,10 +698,18 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             FinalNiazsanjiReportPersonCriteria finalNiazsanjiReportPersonCriteria = new FinalNiazsanjiReportPersonCriteria();
             finalNiazsanjiReportPersonCriteria.setPersonId(personIdFilter);
 
-            List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPersonDTOS = finalNiazsanjiReportPersonQueryService.findByCriteria(finalNiazsanjiReportPersonCriteria);
+            List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPersonDTOS =
+                finalNiazsanjiReportPersonQueryService.findByCriteria(finalNiazsanjiReportPersonCriteria);
             long[] finalIds = finalNiazsanjiReportPersonDTOS.stream().mapToLong(a -> a.getFinalNiazsanjiReportId()).toArray();
 
             if(finalIds.length > 0) {
+                EducationalModuleType educationalModuleType = EducationalModuleType.ALL;
+                FinalNiazsanjiReportPersonDTO niazsanji = finalNiazsanjiReportPersonDTOS.get(0);
+                if(niazsanji.getNiazSanjiSource() == NiazSanjiSource.FARDI){
+                    Optional<NiazsanjiFardiDTO> niazsanjiFardiDTO = niazsanjiFardiService.findOne(niazsanji.getSourceId());
+                    if(niazsanjiFardiDTO.isPresent())
+                        educationalModuleType = niazsanjiFardiDTO.get().getEducationalModuleType();
+                }
                 FinalNiazsanjiReportCriteria finalNiazsanjiReportCriteria = new FinalNiazsanjiReportCriteria();
                 LongFilter finalIdFilter = new LongFilter();
                 List<Long> listFinalIds = new ArrayList<>();
@@ -712,7 +725,9 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                     if(report.stream().filter(a -> a.getTitle().equals(finalNiazsanjiReportDTO.getEducationalModuleTitle())).count() == 0){
                         Optional<EducationalModuleDTO> educationalModuleDTO = educationalModuleService.findOne(finalNiazsanjiReportDTO.getEducationalModuleId());
                         if(educationalModuleDTO.isPresent()) {
-                            HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(finalNiazsanjiReportDTO, educationalModuleDTO.get());
+                            HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(finalNiazsanjiReportDTO,
+                                                                                                                                  educationalModuleType,
+                                                                                                                                  educationalModuleDTO.get());
                             report.add(homePagePersonEducationalModule);
                         }
                     }

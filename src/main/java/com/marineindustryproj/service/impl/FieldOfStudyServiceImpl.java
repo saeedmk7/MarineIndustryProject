@@ -13,7 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing FieldOfStudy.
@@ -60,6 +62,18 @@ public class FieldOfStudyServiceImpl implements FieldOfStudyService {
         log.debug("Request to get all FieldOfStudies");
         return fieldOfStudyRepository.findAll(pageable)
             .map(fieldOfStudyMapper::toDto);
+    }
+    /**
+     * Get all the fieldOfStudies.
+     *
+     * @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<FieldOfStudyDTO> findAll() {
+        log.debug("Request to get all FieldOfStudies");
+        return fieldOfStudyRepository.findAll().stream()
+            .map(fieldOfStudyMapper::toDto).collect(Collectors.toList());
     }
 
 

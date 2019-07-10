@@ -2,9 +2,12 @@ package com.marineindustryproj.service.parseExcel;
 
 import com.ghasemkiani.util.icu.PersianCalendar;
 import com.ibm.icu.util.Calendar;
+import com.marineindustryproj.domain.Person;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.*;
 import com.marineindustryproj.service.dto.*;
+import com.marineindustryproj.service.impl.PersonServiceImpl;
+import com.marineindustryproj.service.mapper.PersonMapper;
 import com.marineindustryproj.service.util.ConvertDateUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.*;
@@ -48,6 +51,8 @@ public class PersonExcel {
 
     private static PersonService personService = null;
 
+    private static PersonMapper personMapper = null;
+
     private static ImportUtilities importUtilities = null;
 
     private static UserService userService = null;
@@ -57,6 +62,7 @@ public class PersonExcel {
     public PersonExcel(QualificationService qualificationService,
                        FieldOfStudyService fieldOfStudyService, EmploymentTypeService employmentTypeService, WorkGroupService workGroupService, WorkIndustryService workIndustryService, JobService jobService,
                        PersonService personService,
+                       PersonMapper personMapper,
                        UserService userService,
                        ImportUtilities importUtilities) {
         this.qualificationService = qualificationService;
@@ -68,6 +74,7 @@ public class PersonExcel {
         this.personService = personService;
         this.importUtilities = importUtilities;
         this.userService = userService;
+        this.personMapper = personMapper;
     }
     public PersonExcel(){}
 
@@ -416,27 +423,12 @@ public class PersonExcel {
                     personDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
                     personDTO.setArchived(false);
                     personDTO.setStatus(0);
-                    personDTO = personService.save(personDTO);
+                    personDTO = personService.save(personDTO, false);
 
-                    if(!userService.getUserWithAuthoritiesByLogin(personDTO.getNationalId()).isPresent()) {
-                        UserDTO userDTO = new UserDTO();
-                        userDTO.setActivated(true);
-                        userDTO.setCreatedBy(SecurityUtils.getCurrentUserLogin().get());
-                        userDTO.setLastModifiedBy(SecurityUtils.getCurrentUserLogin().get());
-                        userDTO.setCreatedDate(Instant.now());
-                        userDTO.setLastModifiedDate(Instant.now());
-                        userDTO.setEmail(personDTO.getNationalId() + "@amoozesh.com");
-                        userDTO.setLangKey("fa");
-                        userDTO.setLogin(personDTO.getNationalId());
-                        userDTO.setPassword("123456");
-                        userDTO.setPersonId(personDTO.getId());
-                        Set<String> authorities = new HashSet<String>();
-                        authorities.add("ROLE_USER");
-                        userDTO.setAuthorities(authorities);
+                    Person person = personMapper.toEntity(personDTO);
 
-                        userService.createUser(userDTO);
-                    }
-
+                    PersonServiceImpl.saveNewUser(person,
+                                                  userService);
                 }
                 catch (Exception ex){
                     importUtilities.addError(rowNum, 0, "", 3, ex.getMessage(), sb);
