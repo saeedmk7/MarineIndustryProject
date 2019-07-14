@@ -34,4 +34,7 @@ public interface FinalNiazsanjiReportRepository extends JpaRepository<FinalNiazs
     @Query("select new com.marineindustryproj.service.dto.customs.FinalNiazsanjiReportCustomDTO(finalNiazsanjiReport.id, finalNiazsanjiReport.priceCost, finalNiazsanjiReport.finalizeCost,finalNiazsanjiReport.educationalModule, finalNiazsanjiReport.status) from FinalNiazsanjiReport finalNiazsanjiReport where finalNiazsanjiReport.niazsanjiYear = :niazsanjiYear and finalNiazsanjiReport.organizationChart.id in :orgChartIds")
     List<FinalNiazsanjiReportCustomDTO> findAllFromCache(@Param("orgChartIds") List<Long> orgChartIds, @Param("niazsanjiYear") Integer niazsanjiYear);
 
+    @Query("select final_niazsanji_report from FinalNiazsanjiReport final_niazsanji_report where final_niazsanji_report.niazsanjiYear =:niazsanjiYear")
+    List<FinalNiazsanjiReport> findAllByNiazsanjiYear(@Param("niazsanjiYear") Integer niazsanjiYear);
+
 }

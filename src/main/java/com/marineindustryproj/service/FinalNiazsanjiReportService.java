@@ -59,7 +59,7 @@ public interface FinalNiazsanjiReportService {
 
     HomePagePersonHourChart getHomePagePersonHourChart(Long personId);
 
-    HomePageReport getHomePageReport();
+    HomePageReport getHomePageReport(Integer niazsanjiYear);
 
     List<HomePagePersonEducationalModule> getHomePagePersonEducationalModules(Long personId);
     /**

@@ -666,9 +666,20 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
     @Override
     @Transactional(readOnly = true)
-    public HomePageReport getHomePageReport() {
+    public HomePageReport getHomePageReport(Integer niazsanjiYear) {
         log.debug("Request to get HomePageReport");
         List<CourseTypeDTO> courseTypeDTOS = courseTypeService.findAll();
+        List<OrganizationChart> organizationCharts = organizationChartRepository.findAll();
+        List<OrganizationChart> groups = organizationCharts.stream().filter(a -> a.getParent() == null).collect(Collectors.toList());
+        List<FinalNiazsanjiReport> finalNiazsanjiReports = finalNiazsanjiReportRepository.findAllByNiazsanjiYear(niazsanjiYear);
+
+        for (OrganizationChart group: groups) {
+            List<Long> orgIds = this.getAllOfChilderenIdsOfThisId(organizationCharts, group.getId(), true);
+
+            List<FinalNiazsanjiReportCustomDTO> finalNiazsanjiReportCustomDTOS = finalNiazsanjiReportRepository.findAllFromCache(orgIds, niazsanjiYear);
+
+        }
+
         return  null;
 
     }
