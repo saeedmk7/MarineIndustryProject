@@ -95,6 +95,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
     private final NiazsanjiFardiService niazsanjiFardiService;
 
+    private final CourseTypeService courseTypeService;
+
     public FinalNiazsanjiReportServiceImpl(FinalNiazsanjiReportRepository finalNiazsanjiReportRepository,
                                            FinalNiazsanjiReportMapper finalNiazsanjiReportMapper,
                                            NiazsanjiGroupService niazsanjiGroupService,
@@ -122,7 +124,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                                            RunPhaseQueryService runPhaseQueryService,
                                            RunPhaseService runPhaseService,
                                            CacheManager cacheManager,
-                                           NiazsanjiFardiService niazsanjiFardiService) {
+                                           NiazsanjiFardiService niazsanjiFardiService, CourseTypeService courseTypeService) {
         this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
         this.finalNiazsanjiReportMapper = finalNiazsanjiReportMapper;
         this.niazsanjiGroupService = niazsanjiGroupService;
@@ -150,6 +152,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         this.runPhaseService = runPhaseService;
         this.cacheManager = cacheManager;
         this.niazsanjiFardiService = niazsanjiFardiService;
+        this.courseTypeService = courseTypeService;
     }
     /**
      * Save a finalNiazsanjiReport.
@@ -659,6 +662,15 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         }
 
         return report;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public HomePageReport getHomePageReport() {
+        log.debug("Request to get HomePageReport");
+        List<CourseTypeDTO> courseTypeDTOS = courseTypeService.findAll();
+        return  null;
+
     }
 
     @Override

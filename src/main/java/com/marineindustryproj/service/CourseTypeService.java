@@ -2,9 +2,12 @@ package com.marineindustryproj.service;
 
 import com.marineindustryproj.service.dto.CourseTypeDTO;
 
+import net.bytebuddy.agent.builder.AgentBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import javax.validation.constraints.Max;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,6 +30,13 @@ public interface CourseTypeService {
      * @return the list of entities
      */
     Page<CourseTypeDTO> findAll(Pageable pageable);
+
+    /**
+     * Get all the courseTypes.
+     *
+     * @return the list of entities
+     */
+    List<CourseTypeDTO> findAll();
 
 
     /**

@@ -2,11 +2,7 @@ package com.marineindustryproj.service;
 
 import com.marineindustryproj.service.dto.FinalNiazsanjiReportDTO;
 
-import com.marineindustryproj.service.dto.customs.ChartResult;
-import com.marineindustryproj.service.dto.customs.HomePageNiazsanjiReport;
-import com.marineindustryproj.service.dto.customs.HomePagePersonEducationalModule;
-import com.marineindustryproj.service.dto.customs.HomePagePersonHourChart;
-import com.marineindustryproj.service.dto.customs.PlanningAndRunMonthReport;
+import com.marineindustryproj.service.dto.customs.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -62,6 +58,8 @@ public interface FinalNiazsanjiReportService {
     List<PlanningAndRunMonthReport> getPlanningAndRunMonthReport(Integer niazsanjiYear, Integer reportType, Long rootOrgId);
 
     HomePagePersonHourChart getHomePagePersonHourChart(Long personId);
+
+    HomePageReport getHomePageReport();
 
     List<HomePagePersonEducationalModule> getHomePagePersonEducationalModules(Long personId);
     /**

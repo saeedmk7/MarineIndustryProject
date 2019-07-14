@@ -26,11 +26,7 @@ import com.marineindustryproj.service.dto.NiazsanjiGroupDTO;
 import com.marineindustryproj.service.dto.PersonCriteria;
 import com.marineindustryproj.service.dto.PersonDTO;
 import com.marineindustryproj.service.dto.ReportDTO;
-import com.marineindustryproj.service.dto.customs.ChartResult;
-import com.marineindustryproj.service.dto.customs.HomePageNiazsanjiReport;
-import com.marineindustryproj.service.dto.customs.HomePagePersonEducationalModule;
-import com.marineindustryproj.service.dto.customs.HomePagePersonHourChart;
-import com.marineindustryproj.service.dto.customs.PlanningAndRunMonthReport;
+import com.marineindustryproj.service.dto.customs.*;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -621,6 +617,16 @@ public class FinalNiazsanjiReportResource {
         HomePagePersonHourChart homePagePersonHourChart = finalNiazsanjiReportService.getHomePagePersonHourChart(personId);
         return ResponseEntity.ok().body(homePagePersonHourChart);
     }
+
+    @GetMapping("/final-niazsanji-reports/getHomePageReport")
+    @Timed
+    public ResponseEntity<HomePageReport> getHomePageReport() {
+        log.debug("REST request to get homePageReport");
+
+        HomePageReport homePageReport = finalNiazsanjiReportService.getHomePageReport();
+        return ResponseEntity.ok().body(homePageReport);
+    }
+
     @GetMapping("/final-niazsanji-reports/getHomePagePersonEducationalModule/{personId}")
     @Timed
     public ResponseEntity<List<HomePagePersonEducationalModule>> getHomePagePersonEducationalModule(@PathVariable Long personId) {

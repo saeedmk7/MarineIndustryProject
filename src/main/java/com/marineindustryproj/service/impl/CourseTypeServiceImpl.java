@@ -13,7 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing CourseType.
@@ -60,6 +62,14 @@ public class CourseTypeServiceImpl implements CourseTypeService {
         log.debug("Request to get all CourseTypes");
         return courseTypeRepository.findAll(pageable)
             .map(courseTypeMapper::toDto);
+    }
+
+    @Override
+    public List<CourseTypeDTO> findAll() {
+        log.debug("Request to get all CourseTypes");
+        return courseTypeRepository.findAll().stream()
+            .map(courseTypeMapper::toDto)
+            .collect(Collectors.toList());
     }
 
 
