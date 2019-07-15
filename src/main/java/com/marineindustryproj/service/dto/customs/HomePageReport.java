@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class HomePageReport implements Serializable {
 
+    public HomePageReport(){}
     public HomePageReport(Float total,
                           Float totalManagers,
                           Float totalManagersPercent,

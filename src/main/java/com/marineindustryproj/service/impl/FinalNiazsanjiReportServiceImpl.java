@@ -673,6 +673,15 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         List<OrganizationChart> groups = organizationCharts.stream().filter(a -> a.getParent() == null).collect(Collectors.toList());
         List<FinalNiazsanjiReport> finalNiazsanjiReports = finalNiazsanjiReportRepository.findAllByNiazsanjiYear(niazsanjiYear);
 
+        HomePageReport homePageReport = new HomePageReport();
+        homePageReport.setTotal((float) finalNiazsanjiReports.stream().mapToLong(a -> a.getEducationalModule().getLearningTimeTheorical() + a.getEducationalModule().getLearningTimePractical()).sum());
+
+        List<JobMinDTO> jobMinDTOS = jobService.findAllFromCache();
+        List<String> managerIds = jobMinDTOS.stream().filter(a -> a.getJobCode().startsWith("18") || a.getJobCode().startsWith("19") || a.getJobCode().startsWith("20")).map(a -> a.getJobCode()).distinct().collect(Collectors.toList());
+
+        homePageReport.setTotalManagers((float) finalNiazsanjiReports.stream().filter(a -> a.getFinalNiazsanjiReportPeople().stream().anyMatch(w -> managerIds.contains(w.getPerson().getJob().getJobCode()))).mapToDouble(a -> a.getEducationalModule().getLearningTimePractical() + a.getEducationalModule().getLearningTimeTheorical()).sum());
+
+
         for (OrganizationChart group: groups) {
             List<Long> orgIds = this.getAllOfChilderenIdsOfThisId(organizationCharts, group.getId(), true);
 
