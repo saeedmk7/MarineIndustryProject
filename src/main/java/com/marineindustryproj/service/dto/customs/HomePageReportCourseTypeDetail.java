@@ -6,12 +6,12 @@ public class HomePageReportCourseTypeDetail implements Serializable {
 
     public HomePageReportCourseTypeDetail(Long courseTypeId,
                                           String courseTypeTitle,
-                                          Float total,
-                                          Float totalPercent,
-                                          Float totalManagers,
-                                          Float totalManagersPercent,
-                                          Float totalStuffs,
-                                          Float totalStuffsPercent) {
+                                          float total,
+                                          float totalPercent,
+                                          float totalManagers,
+                                          float totalManagersPercent,
+                                          float totalStuffs,
+                                          float totalStuffsPercent) {
         this.courseTypeId = courseTypeId;
         this.courseTypeTitle = courseTypeTitle;
         this.total = total;
@@ -26,17 +26,17 @@ public class HomePageReportCourseTypeDetail implements Serializable {
 
     private String courseTypeTitle;
 
-    private Float total;
+    private float total;
 
-    private Float totalPercent;
+    private float totalPercent;
 
-    private Float totalManagers;
+    private float totalManagers;
 
-    private Float totalManagersPercent;
+    private float totalManagersPercent;
 
-    private Float totalStuffs;
+    private float totalStuffs;
 
-    private Float totalStuffsPercent;
+    private float totalStuffsPercent;
 
     public Long getCourseTypeId() {
         return courseTypeId;
@@ -54,51 +54,51 @@ public class HomePageReportCourseTypeDetail implements Serializable {
         this.courseTypeTitle = courseTypeTitle;
     }
 
-    public Float getTotal() {
+    public float getTotal() {
         return total;
     }
 
-    public void setTotal(Float total) {
+    public void setTotal(float total) {
         this.total = total;
     }
 
-    public Float getTotalPercent() {
+    public float getTotalPercent() {
         return totalPercent;
     }
 
-    public void setTotalPercent(Float totalPercent) {
+    public void setTotalPercent(float totalPercent) {
         this.totalPercent = totalPercent;
     }
 
-    public Float getTotalManagers() {
+    public float getTotalManagers() {
         return totalManagers;
     }
 
-    public void setTotalManagers(Float totalManagers) {
+    public void setTotalManagers(float totalManagers) {
         this.totalManagers = totalManagers;
     }
 
-    public Float getTotalManagersPercent() {
+    public float getTotalManagersPercent() {
         return totalManagersPercent;
     }
 
-    public void setTotalManagersPercent(Float totalManagersPercent) {
+    public void setTotalManagersPercent(float totalManagersPercent) {
         this.totalManagersPercent = totalManagersPercent;
     }
 
-    public Float getTotalStuffs() {
+    public float getTotalStuffs() {
         return totalStuffs;
     }
 
-    public void setTotalStuffs(Float totalStuffs) {
+    public void setTotalStuffs(float totalStuffs) {
         this.totalStuffs = totalStuffs;
     }
 
-    public Float getTotalStuffsPercent() {
+    public float getTotalStuffsPercent() {
         return totalStuffsPercent;
     }
 
-    public void setTotalStuffsPercent(Float totalStuffsPercent) {
+    public void setTotalStuffsPercent(float totalStuffsPercent) {
         this.totalStuffsPercent = totalStuffsPercent;
     }
 }

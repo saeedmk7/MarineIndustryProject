@@ -7,13 +7,14 @@ import org.springframework.boot.loader.tools.LibraryScope;
 
 public class HomePageReportOrgDetail implements Serializable {
 
-    public HomePageReportOrgDetail(Long courseTypeId,
-                                   Float total,
-                                   Float totalPercent,
-                                   Float passed,
-                                   Float passedPercent,
-                                   Float remaining,
-                                   Float remainingPercent) {
+    public HomePageReportOrgDetail(){}
+    public HomePageReportOrgDetail(long courseTypeId,
+                                   float total,
+                                   float totalPercent,
+                                   float passed,
+                                   float passedPercent,
+                                   float remaining,
+                                   float remainingPercent) {
         this.courseTypeId = courseTypeId;
         this.total = total;
         this.totalPercent = totalPercent;
@@ -23,73 +24,73 @@ public class HomePageReportOrgDetail implements Serializable {
         this.remainingPercent = remainingPercent;
     }
 
-    private Long courseTypeId;
+    private long courseTypeId;
 
-    private Float total;
+    private float total;
 
-    private Float totalPercent;
+    private float totalPercent;
 
-    private Float passed;
+    private float passed;
 
-    private Float passedPercent;
+    private float passedPercent;
 
-    private Float remaining;
+    private float remaining;
 
-    private Float remainingPercent;
+    private float remainingPercent;
 
-    public Long getCourseTypeId() {
+    public long getCourseTypeId() {
         return courseTypeId;
     }
 
-    public void setCourseTypeId(Long courseTypeId) {
+    public void setCourseTypeId(long courseTypeId) {
         this.courseTypeId = courseTypeId;
     }
 
-    public Float getTotal() {
+    public float getTotal() {
         return total;
     }
 
-    public void setTotal(Float total) {
+    public void setTotal(float total) {
         this.total = total;
     }
 
-    public Float getTotalPercent() {
+    public float getTotalPercent() {
         return totalPercent;
     }
 
-    public void setTotalPercent(Float totalPercent) {
+    public void setTotalPercent(float totalPercent) {
         this.totalPercent = totalPercent;
     }
 
-    public Float getPassed() {
+    public float getPassed() {
         return passed;
     }
 
-    public void setPassed(Float passed) {
+    public void setPassed(float passed) {
         this.passed = passed;
     }
 
-    public Float getPassedPercent() {
+    public float getPassedPercent() {
         return passedPercent;
     }
 
-    public void setPassedPercent(Float passedPercent) {
+    public void setPassedPercent(float passedPercent) {
         this.passedPercent = passedPercent;
     }
 
-    public Float getRemaining() {
+    public float getRemaining() {
         return remaining;
     }
 
-    public void setRemaining(Float remaining) {
+    public void setRemaining(float remaining) {
         this.remaining = remaining;
     }
 
-    public Float getRemainingPercent() {
+    public float getRemainingPercent() {
         return remainingPercent;
     }
 
-    public void setRemainingPercent(Float remainingPercent) {
+    public void setRemainingPercent(float remainingPercent) {
         this.remainingPercent = remainingPercent;
     }
 }

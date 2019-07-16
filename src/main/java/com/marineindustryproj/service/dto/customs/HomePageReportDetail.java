@@ -5,6 +5,7 @@ import java.util.List;
 
 public class HomePageReportDetail implements Serializable {
 
+    public HomePageReportDetail(){}
     public HomePageReportDetail(Long organizationChartId,
                                 String organizationChartTitle,
                                 Float total,
