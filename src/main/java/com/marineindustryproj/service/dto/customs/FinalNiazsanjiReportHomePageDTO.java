@@ -10,7 +10,6 @@ import com.marineindustryproj.domain.CourseType;
 import com.marineindustryproj.domain.EducationalModule;
 import com.marineindustryproj.domain.FinalNiazsanjiReportPerson;
 import com.marineindustryproj.domain.OrganizationChart;
-import org.omg.CORBA.INTERNAL;
 
 /**
  * A DTO for the FinalNiazsanjiReport entity.
