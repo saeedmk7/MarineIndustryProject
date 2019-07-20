@@ -44,6 +44,115 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            <div style="font-family: IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman" class="table-responsive" *ngIf="homePageReport">
+                                <!--<h4 style="text-align: center">گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی</h4>-->
+                                <table class="table table-striped  table-bordered table-hover table-sm">
+                                    <tr>
+                                        <th colspan="10" style="text-align: center">گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="5" style="text-align: center">کل نفر ساعت نیازسنجی شده برای سازمان</th>
+                                        <td colspan="5" style="text-align: center">{{homePageReport.total}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="5" style="text-align: center">کل نفر ساعت اجرا شده سازمان</th>
+                                        <td colspan="5" style="text-align: center">{{homePageReport.totalPassed}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="5" style="text-align: center">درصد کل نفر ساعت اجرا شده سازمان</th>
+                                        <td colspan="5" style="text-align: center">{{homePageReport.totalPassedPercent}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3" style="text-align: center">نفر ساعت نیازسنجی شده مدیران</th>
+                                        <td colspan="2" style="text-align: center">{{homePageReport.totalManagers}}</td>
+                                        <th colspan="3" style="text-align: center">نفر ساعت نیازسنجی شده کارکنان</th>
+                                        <td colspan="2" style="text-align: center">{{homePageReport.totalStuffs}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3" style="text-align: center">درصد نفر ساعت نیازسنجی شده مدیران</th>
+                                        <td colspan="2" style="text-align: center">{{homePageReport.totalManagersPercent}} %</td>
+                                        <th colspan="3" style="text-align: center">درصد نفر ساعت نیازسنجی شده کارکنان</th>
+                                        <td colspan="2" style="text-align: center">{{homePageReport.totalStuffsPercent}} %</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3" style="text-align: center">نفر ساعت اجرا شده مدیران</th>
+                                        <td colspan="2" style="text-align: center">{{homePageReport.totalPassedManagers}}</td>
+                                        <th colspan="3" style="text-align: center">نفر ساعت اجرا شده کارکنان</th>
+                                        <td colspan="2" style="text-align: center">{{homePageReport.totalPassedStuffs}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3" style="text-align: center">درصد نفر ساعت اجرا شده مدیران</th>
+                                        <td colspan="2" style="text-align: center">{{homePageReport.totalPassedManagersPercent}} %</td>
+                                        <th colspan="3" style="text-align: center">درصد نفر ساعت اجرا شده کارکنان</th>
+                                        <td colspan="2" style="text-align: center">{{homePageReport.totalPassedStuffsPercent}} %</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="10" style="text-align: center">جمع کل نیازسنجی سازمان به تفکیک نوع دوره</th>
+                                    </tr>
+                                    <tr>
+                                        <th *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
+                                            {{item.courseTypeTitle}}
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
+                                            {{item.total}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
+                                            {{item.totalPercent}} %
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="10" style="text-align: center">جمع نفرساعت اجرا شده برای مدیران به تفکیک نوع دوره</th>
+                                    </tr>
+                                    <tr>
+                                        <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
+                                            {{item.totalManagers}}
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
+                                            {{item.totalManagersPercent}} %
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center" colspan="10">جمع نفرساعت اجرا شده برای کارکنان به تفکیک نوع دوره</th>
+                                    </tr>
+                                    <tr>
+                                        <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
+                                            {{item.totalStuffs}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
+                                            {{item.totalStuffsPercent}} %
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="5" style="text-align: center">نفر ساعت اجرا شده مدیران</th>
+                                        <td colspan="5" style="text-align: center">{{homePageReport.totalPassedManagers}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th *ngFor="let item of categories">{{item}}</th>
+                                    </tr>
+                                    <tbody>
+                                    <tr>
+                                        <td>اجرا نشده</td>
+                                        <td *ngFor="let item of personHourNewPercentSeries">{{item | number:'1.0-0'}} <span *ngIf="item">%</span><span *ngIf="!item">صفر درصد</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>اجرا شده</td>
+                                        <td *ngFor="let item of personHourFinishedPercentSeries">{{item | number:'1.0-0'}} <span *ngIf="item">%</span><span *ngIf="!item">صفر درصد</span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
                             <div [chart]="priceCostChart"></div>
                             <div style="font-family: IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman" class="table-responsive" *ngIf="priceCostSeries">
                                 <h4 style="text-align: center">جدول درصدی هزینه گروه های سازمان</h4>

@@ -27,8 +27,8 @@ public class FinalNiazsanjiReportHomePageDTO implements Serializable {
                                            OrganizationChart organizationChart,
                                            Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople) {
         this.id = id;
-        this.priceCost = priceCost.longValue();
-        this.finalizeCost = finalizeCost.longValue();
+        this.priceCost = priceCost != null ? priceCost.longValue() : 0;
+        this.finalizeCost = finalizeCost != null ? finalizeCost.longValue() : 0;
         this.status = status;
         this.niazsanjiYear = niazsanjiYear;
         this.totalLearningTime = (educationalModule.getLearningTimePractical() > 0 ? educationalModule.getLearningTimePractical().longValue() : 0) + (educationalModule.getLearningTimeTheorical() > 0 ? educationalModule.getLearningTimeTheorical().longValue() : 0);
