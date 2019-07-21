@@ -133,6 +133,27 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <th style="text-align: center" colspan="10">ریز نیازسنجی سازمان به تفکیک نوع دوره</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            نوع دوره
+                                        </th>
+                                        <th *ngFor="let item of homePageReport.homePageReportDetails" style="text-align: center">
+                                            {{item.organizationChartTitle}}
+                                        </th>
+                                    </tr>
+                                    <tr *ngFor="let item1 of homePageReport.homePageReportDetails" style="text-align: center">
+                                        <th>
+                                            {{item1.homePageReportOrgDetailList}}
+                                        </th>
+                                        <th>
+                                           {{item.courseTypeTitle}}
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                    <tr>
                                         <th colspan="5" style="text-align: center">نفر ساعت اجرا شده مدیران</th>
                                         <td colspan="5" style="text-align: center">{{homePageReport.totalPassedManagers}}</td>
                                     </tr>
