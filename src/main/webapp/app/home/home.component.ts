@@ -30,6 +30,7 @@ import {IHomePagePersonHourChart} from "app/shared/model/custom/home-page-person
 import {IHomePagePersonEducationalModule} from "app/shared/model/custom/home-page-person-educational-module";
 import {IPlanningAndRunMonthReport} from "app/shared/model/custom/planning-month-report";
 import {MONTHS} from "app/shared/constants/months.constants";
+import {IHomePageReport} from "app/shared/model/custom/home-page-report";
 
 
 @Component({
@@ -95,6 +96,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     pieRunnningPersonHourChart: Chart;
     piePlanningPriceCostChart: Chart;
     pieRunnningPriceCostChart: Chart;
+
+    homePageReport: IHomePageReport;
+
+
     constructor(
         private principal: Principal,
         private organizationChartService: OrganizationChartMarineSuffixService,
@@ -121,6 +126,13 @@ export class HomeComponent implements OnInit, OnDestroy {
                 else
                     this.pageName = 'home';
         });
+    }
+
+    showHomePageReport(niazsanjiYear: number){
+        this.finalNiazsanjiReportService.getHomePageReport(niazsanjiYear).subscribe((resp: HttpResponse<IHomePageReport>) => {
+           this.homePageReport = resp.body;
+        },
+            (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     deleteElement(i)
@@ -175,8 +187,11 @@ export class HomeComponent implements OnInit, OnDestroy {
                     //this.prepareHomePageNiazsanjiReport(resp.body.id);
                 })
             }
-            if(this.isTopUsers)
+            if(this.isTopUsers) {
                 this.prepareOrgChart();
+                debugger;
+                this.showHomePageReport(this.selectedNiazsanjiYear);
+            }
         });
         this.registerAuthenticationSuccess();
         let criteria = [
@@ -193,28 +208,6 @@ export class HomeComponent implements OnInit, OnDestroy {
                 (res: HttpResponse<IAnnouncementMarineSuffix[]>) => this.loadNews(res.body),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
-
-        /*this.welcomeState = this.welcomeState === 'out' ? 'in' : 'out';
-        this.centerLinksState = this.centerLinksState === 'out' ? 'in' : 'out';*/
-
-
-        /*let now : any = new Date();
-        let colors : string[] = ["#C8C8C8","#A0A0A0","#787878","#282828","#787878","#A0A0A0","#C8C8C8"]
-        let offset : any[] = [this.addDays(now,-3),this.addDays(now,-2),this.addDays(now,-1),now,this.addDays(now,+1),this.addDays(now,+2),this.addDays(now,+3)];
-        //this.calendars = [offset.length];
-        offset.forEach((w,index) => {
-            let calendar : HomeCalendarModel = new HomeCalendarModel();
-            if(this.isfa) {
-                calendar.date = moment(w).locale('fa').format('YYYY/MM/DD');
-                calendar.title = moment(w).locale('fa').format('dddd');
-            }
-            else {
-                calendar.date = moment(w).locale('en').format('YYYY/MM/DD');
-                calendar.title = moment(w).locale('en').format('dddd');
-            }
-            calendar.color = colors[index];
-            this.calendars.push(calendar);
-        });*/
     }
     prepareOrgChart(){
         if(this.organizationChartService.organizationchartsAll)
@@ -286,7 +279,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.chartResults = resp.body;
             this.makeSeries();
         });
-
+        this.showHomePageReport(this.selectedNiazsanjiYear);
         /*const groupCount = groups.length;
         let index = 0;
         groups.forEach((group: IOrganizationChartMarineSuffix) => {

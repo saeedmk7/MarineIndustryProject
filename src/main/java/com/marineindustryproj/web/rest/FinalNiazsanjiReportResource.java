@@ -618,12 +618,12 @@ public class FinalNiazsanjiReportResource {
         return ResponseEntity.ok().body(homePagePersonHourChart);
     }
 
-    @GetMapping("/final-niazsanji-reports/getHomePageReport")
+    @GetMapping("/final-niazsanji-reports/getHomePageReport/{niazsanjiYear}")
     @Timed
-    public ResponseEntity<HomePageReport> getHomePageReport() {
+    public ResponseEntity<HomePageReport> getHomePageReport(@PathVariable Integer niazsanjiYear) {
         log.debug("REST request to get homePageReport");
 
-        HomePageReport homePageReport = finalNiazsanjiReportService.getHomePageReport();
+        HomePageReport homePageReport = finalNiazsanjiReportService.getHomePageReport(niazsanjiYear);
         return ResponseEntity.ok().body(homePageReport);
     }
 

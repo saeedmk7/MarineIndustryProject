@@ -14,6 +14,7 @@ import {HomePageNiazsanjiReport, IHomePageNiazsanjiReport} from "app/shared/mode
 import {IHomePagePersonHourChart} from "app/shared/model/custom/home-page-person-hour-chart";
 import {IHomePagePersonEducationalModule} from "app/shared/model/custom/home-page-person-educational-module";
 import {IPlanningAndRunMonthReport} from "app/shared/model/custom/planning-month-report";
+import {IHomePageReport} from "app/shared/model/custom/home-page-report";
 
 type EntityResponseType = HttpResponse<IFinalNiazsanjiReportMarineSuffix>;
 type EntityResponseTypeReport = HttpResponse<IReportMarineSuffix>;
@@ -65,6 +66,13 @@ export class FinalNiazsanjiReportMarineSuffixService {
         return this.http
             .get<IChartResult[]>(url, { observe: 'response' })
             .pipe(map((res: HttpResponse<IChartResult[]>) => res));
+    }
+    getHomePageReport(niazsanjiYear: number): Observable<HttpResponse<IHomePageReport>> {
+
+        let url = this.resourceUrl + '/getHomePageReport/' + niazsanjiYear;
+        return this.http
+            .get<IHomePageReport>(url, { observe: 'response' })
+            .pipe(map((res: HttpResponse<IHomePageReport>) => res));
     }
     getHomePageNiazsanjiReport(personId: number): Observable<HttpResponse<IHomePageNiazsanjiReport>> {
         let url = this.resourceUrl + '/getHomePageNiazsanjiReport/' + personId;

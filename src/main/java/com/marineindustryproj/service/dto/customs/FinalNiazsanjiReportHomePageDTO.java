@@ -36,7 +36,7 @@ public class FinalNiazsanjiReportHomePageDTO implements Serializable {
         this.courseTypeTitle = courseType.getTitle();
         this.organizationChartId = organizationChart.getId();
         this.organizationChartTitle = organizationChart.getTitle();
-        this.jobIds = finalNiazsanjiReportPeople.stream().mapToLong(a -> a.getPerson().getJob().getId()).toArray();
+        this.jobIds = finalNiazsanjiReportPeople.stream().mapToLong(a -> a.getPerson().getJob().getId()).distinct().toArray();
     }
 
     private Long id;
