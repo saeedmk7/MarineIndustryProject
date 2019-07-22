@@ -1,4 +1,4 @@
-import {IHomePageReportOrgDetail} from "app/shared/model/custom/home-page-report-org-detail";
+import {IHomePageReportSecondLevelDetail} from "app/shared/model/custom/home-page-report-second-level-detail";
 
 export interface IHomePageReportDetail {
     organizationChartId?: number;
@@ -21,7 +21,7 @@ export interface IHomePageReportDetail {
     remainingManagersPercent?: number;
     remainingStuffs?: number;
     remainingStuffsPercent?: number;
-    homePageReportOrgDetailList?: IHomePageReportOrgDetail[]
+    homePageReportSecondLevelDetail?: IHomePageReportSecondLevelDetail[]
 }
 
 export class HomePageReportDetail implements IHomePageReportDetail {
@@ -46,7 +46,7 @@ export class HomePageReportDetail implements IHomePageReportDetail {
         public remainingManagersPercent?: number,
         public remainingStuffs?: number,
         public remainingStuffsPercent?: number,
-        public homePageReportOrgDetailList?: IHomePageReportOrgDetail[]
+        public homePageReportSecondLevelDetail?: IHomePageReportSecondLevelDetail[]
     ) {
     }
 }

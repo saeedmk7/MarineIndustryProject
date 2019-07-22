@@ -136,24 +136,32 @@
                                         <th style="text-align: center" colspan="10">ریز نیازسنجی سازمان به تفکیک نوع دوره</th>
                                     </tr>
                                     <tr>
-                                        <th>
+                                        <th style="text-align: center">
                                             نوع دوره
                                         </th>
                                         <th *ngFor="let item of homePageReport.homePageReportDetails" style="text-align: center">
                                             {{item.organizationChartTitle}}
                                         </th>
                                     </tr>
-                                    <tr *ngFor="let item1 of homePageReport.homePageReportDetails" style="text-align: center">
-                                        <th>
-                                            {{item1.homePageReportOrgDetailList}}
-                                        </th>
-                                        <th>
-                                           {{item.courseTypeTitle}}
-                                        </th>
-                                        <th>
-                                        </th>
-                                    </tr>
-                                    <tr>
+                                    <ng-container *ngFor="let item1 of homePageReport.homePageReportDetails">
+                                        <ng-container *ngFor="let item2 of item1.homePageReportSecondLevelDetail">
+                                            <tr style="text-align: center">
+                                                    <th rowspan="2">
+                                                        {{item2.courseTypeTitle}}
+                                                    </th>
+                                                    <th *ngFor="let item3 of item2.homePageReportThirdLevelDetails">
+                                                        {{item3.total}}
+                                                    </th>
+                                            </tr>
+                                            <tr style="text-align: center">
+                                                <th *ngFor="let item3 of item2.homePageReportThirdLevelDetails">
+                                                    {{item3.total}}
+                                                </th>
+                                            </tr>
+                                        </ng-container>
+                                    </ng-container>
+
+                                    <!--<tr>
                                         <th colspan="5" style="text-align: center">نفر ساعت اجرا شده مدیران</th>
                                         <td colspan="5" style="text-align: center">{{homePageReport.totalPassedManagers}}</td>
                                     </tr>
@@ -169,7 +177,7 @@
                                     <tr>
                                         <td>اجرا شده</td>
                                         <td *ngFor="let item of personHourFinishedPercentSeries">{{item | number:'1.0-0'}} <span *ngIf="item">%</span><span *ngIf="!item">صفر درصد</span></td>
-                                    </tr>
+                                    </tr>-->
                                     </tbody>
                                 </table>
                             </div>

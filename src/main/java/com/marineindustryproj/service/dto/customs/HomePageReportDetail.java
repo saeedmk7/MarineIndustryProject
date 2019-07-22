@@ -26,7 +26,7 @@ public class HomePageReportDetail implements Serializable {
                                 Float remainingManagersPercent,
                                 Float remainingStuffs,
                                 Float remainingStuffsPercent,
-                                List<HomePageReportOrgDetail> homePageReportOrgDetailList) {
+                                List<HomePageReportSecondLevelDetail> homePageReportSecondLevelDetails) {
         this.organizationChartId = organizationChartId;
         this.organizationChartTitle = organizationChartTitle;
         this.total = total;
@@ -47,7 +47,7 @@ public class HomePageReportDetail implements Serializable {
         this.remainingManagersPercent = remainingManagersPercent;
         this.remainingStuffs = remainingStuffs;
         this.remainingStuffsPercent = remainingStuffsPercent;
-        this.homePageReportOrgDetailList = homePageReportOrgDetailList;
+        this.homePageReportSecondLevelDetails = homePageReportSecondLevelDetails;
     }
 
     private Long organizationChartId;
@@ -90,7 +90,7 @@ public class HomePageReportDetail implements Serializable {
 
     private Float remainingStuffsPercent;
 
-    private List<HomePageReportOrgDetail> homePageReportOrgDetailList;
+    private List<HomePageReportSecondLevelDetail> homePageReportSecondLevelDetails;
 
     public Long getOrganizationChartId() {
         return organizationChartId;
@@ -252,11 +252,12 @@ public class HomePageReportDetail implements Serializable {
         this.remainingStuffsPercent = remainingStuffsPercent;
     }
 
-    public List<HomePageReportOrgDetail> getHomePageReportOrgDetailList() {
-        return homePageReportOrgDetailList;
+
+    public List<HomePageReportSecondLevelDetail> getHomePageReportSecondLevelDetails() {
+        return homePageReportSecondLevelDetails;
     }
 
-    public void setHomePageReportOrgDetailList(List<HomePageReportOrgDetail> homePageReportOrgDetailList) {
-        this.homePageReportOrgDetailList = homePageReportOrgDetailList;
+    public void setHomePageReportSecondLevelDetails(List<HomePageReportSecondLevelDetail> homePageReportSecondLevelDetails) {
+        this.homePageReportSecondLevelDetails = homePageReportSecondLevelDetails;
     }
 }

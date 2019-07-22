@@ -1,6 +1,5 @@
 
-export interface IHomePageReportOrgDetail {
-    courseTypeId?: number;
+export interface IHomePageReportThirdLevelDetail {
     total?: number;
     totalPercent?: number;
     passed?: number;
@@ -9,9 +8,8 @@ export interface IHomePageReportOrgDetail {
     remainingPercent?: number;
 }
 
-export class HomePageReportOrgDetail implements IHomePageReportOrgDetail {
+export class HomePageReportThirdLevelDetail implements IHomePageReportThirdLevelDetail {
     constructor(
-        public courseTypeId?: number,
         public total?: number,
         public totalPercent?: number,
         public passed?: number,

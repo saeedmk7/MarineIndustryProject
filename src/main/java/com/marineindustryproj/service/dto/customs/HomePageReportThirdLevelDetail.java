@@ -5,17 +5,15 @@ import java.util.List;
 
 import org.springframework.boot.loader.tools.LibraryScope;
 
-public class HomePageReportOrgDetail implements Serializable {
+public class HomePageReportThirdLevelDetail implements Serializable {
 
-    public HomePageReportOrgDetail(){}
-    public HomePageReportOrgDetail(long courseTypeId,
-                                   float total,
-                                   float totalPercent,
-                                   float passed,
-                                   float passedPercent,
-                                   float remaining,
-                                   float remainingPercent) {
-        this.courseTypeId = courseTypeId;
+    public HomePageReportThirdLevelDetail(){}
+    public HomePageReportThirdLevelDetail(float total,
+                                          float totalPercent,
+                                          float passed,
+                                          float passedPercent,
+                                          float remaining,
+                                          float remainingPercent) {
         this.total = total;
         this.totalPercent = totalPercent;
         this.passed = passed;
@@ -23,8 +21,6 @@ public class HomePageReportOrgDetail implements Serializable {
         this.remaining = remaining;
         this.remainingPercent = remainingPercent;
     }
-
-    private long courseTypeId;
 
     private float total;
 
@@ -37,14 +33,6 @@ public class HomePageReportOrgDetail implements Serializable {
     private float remaining;
 
     private float remainingPercent;
-
-    public long getCourseTypeId() {
-        return courseTypeId;
-    }
-
-    public void setCourseTypeId(long courseTypeId) {
-        this.courseTypeId = courseTypeId;
-    }
 
     public float getTotal() {
         return total;

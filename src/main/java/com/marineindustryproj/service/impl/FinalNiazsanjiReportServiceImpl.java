@@ -24,7 +24,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import springfox.documentation.swagger2.mappers.ModelMapper;
 
 import java.time.ZonedDateTime;
 import java.util.*;
@@ -790,13 +789,18 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                 .filter(a -> a.getStatus() < 20 && stuffJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0).mapToDouble(a -> a.getTotalLearningTime()).sum());
             homePageReportDetail.setRemainingStuffsPercent((homePageReportDetail.getRemainingStuffs() / homePageReportDetail.getTotal()) * 100);
 
-            List<HomePageReportOrgDetail> homePageReportOrgDetails = new ArrayList<>();
+            List<HomePageReportSecondLevelDetail> homePageReportSecondLevelDetails = new ArrayList<>();
             for (CourseTypeDTO courseTypeDTO : courseTypeDTOS) {
-                HomePageReportOrgDetail homePageReportOrgDetail = new HomePageReportOrgDetail();
+                HomePageReportSecondLevelDetail homePageReportSecondLevelDetail = new HomePageReportSecondLevelDetail();
+                homePageReportSecondLevelDetail.setCourseTypeId(courseTypeDTO.getId());
+                homePageReportSecondLevelDetail.setCourseTypeTitle(courseTypeDTO.getTitle());
+
+                List<HomePageReportThirdLevelDetail> homePageReportThirdLevelDetails = new ArrayList<>();
+                HomePageReportThirdLevelDetail homePageReportOrgDetail = new HomePageReportThirdLevelDetail();
                 homePageReportOrgDetail.setTotal((float) finalNiazsanjiReportDTOs.stream()
                     .filter(a -> a.getCourseTypeId().equals(courseTypeDTO.getId())).mapToDouble(a -> a.getTotalLearningTime()).sum());
                 homePageReportOrgDetail.setTotalPercent((homePageReportOrgDetail.getTotal() / homePageReport.getTotal()) * 100);
-                homePageReportOrgDetail.setCourseTypeId(courseTypeDTO.getId());
+
                 homePageReportOrgDetail.setPassed((float) finalNiazsanjiReportDTOs.stream()
                                                       .filter(a -> a.getCourseTypeId().equals(courseTypeDTO.getId()) && a.getStatus().equals(20))
                                                       .mapToDouble(a -> a.getTotalLearningTime()).sum());
@@ -805,9 +809,11 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                     .filter(a -> a.getCourseTypeId().equals(courseTypeDTO.getId()) && a.getStatus() < 20)
                     .mapToDouble(a -> a.getTotalLearningTime()).sum());
                 homePageReportOrgDetail.setRemainingPercent((homePageReportOrgDetail.getRemaining() / homePageReportOrgDetail.getTotal()) * 100);
-                homePageReportOrgDetails.add(homePageReportOrgDetail);
+                homePageReportThirdLevelDetails.add(homePageReportOrgDetail);
+                homePageReportSecondLevelDetail.setHomePageReportThirdLevelDetails(homePageReportThirdLevelDetails);
+                homePageReportSecondLevelDetails.add(homePageReportSecondLevelDetail);
             }
-            homePageReportDetail.setHomePageReportOrgDetailList(homePageReportOrgDetails);
+            homePageReportDetail.setHomePageReportSecondLevelDetails(homePageReportSecondLevelDetails);
             homePageReportDetails.add(homePageReportDetail);
         }
         homePageReport.setHomePageReportDetails(homePageReportDetails);
