@@ -132,35 +132,61 @@
                                             {{item.totalStuffsPercent}} %
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th style="text-align: center" colspan="10">ریز نیازسنجی سازمان به تفکیک نوع دوره</th>
-                                    </tr>
-                                    <tr>
-                                        <th style="text-align: center">
-                                            نوع دوره
-                                        </th>
-                                        <th *ngFor="let item of homePageReport.homePageReportDetails" style="text-align: center">
-                                            {{item.organizationChartTitle}}
-                                        </th>
-                                    </tr>
-                                    <ng-container *ngFor="let item1 of homePageReport.homePageReportDetails">
-                                        <ng-container *ngFor="let item2 of item1.homePageReportSecondLevelDetail">
-                                            <tr style="text-align: center">
-                                                    <th rowspan="2">
-                                                        {{item2.courseTypeTitle}}
-                                                    </th>
-                                                    <th *ngFor="let item3 of item2.homePageReportThirdLevelDetails">
-                                                        {{item3.total}}
-                                                    </th>
-                                            </tr>
-                                            <tr style="text-align: center">
-                                                <th *ngFor="let item3 of item2.homePageReportThirdLevelDetails">
-                                                    {{item3.total}}
-                                                </th>
-                                            </tr>
-                                        </ng-container>
-                                    </ng-container>
+                                    </tbody>
+                                </table>
+                                <div id="HomePage1" class="box box-primary newsbox">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title center">ریز نیازسنجی سازمان به تفکیک نوع دوره</h3>
 
+                                        <div class="box-tools pull-left">
+                                            <button type="button" class="btn btn-box-tool"
+                                                    (click)="toggleColappse('collapseHomePage1')" data-widget="collapse"><i
+                                                class="fa fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-box-tool" (click)="deleteElement('HomePage1')"
+                                                    data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body" id="collapseHomePage1">
+                                        <div class="rTable">
+                                            <div class="rTableRow">
+                                                <div class="rTableHead"><span style="font-weight: bold;"><strong>نوع دوره</strong></span></div>
+                                                <div class="rTableHead" *ngFor="let item of homePageReport.homePageReportDetails">{{item.organizationChartTitle}}</div>
+                                            </div>
+                                            <!--<ng-template ngFor let-item [ngForOf]="homePageReport.homePageReportDetails" let-i="index">-->
+                                            <ng-container *ngFor="let item2 of homePageReport.homePageReportDetails">
+                                                <ng-container *ngFor="let homePageReportSecondLevelDetail of item2.homePageReportSecondLevelDetails" class="item2">
+                                                    <!--{{homePageReportSecondLevelDetail.courseTypeTitle}}-->
+                                                    <div class="rTableRow">
+                                                        <div class="rTableCell">{{homePageReportSecondLevelDetail.courseTypeTitle}}</div>
+                                                        <div *ngFor="let item3 of homePageReportSecondLevelDetail.homePageReportThirdLevelDetails" class="rTableCell">{{item3.total}}</div>
+                                                    </div>
+                                                    <div class="rTableRow">
+                                                        <div *ngFor="let item3 of homePageReportSecondLevelDetail.homePageReportThirdLevelDetails" class="rTableCell">{{item3.total}}</div>
+                                                    </div>
+                                                </ng-container>
+                                            </ng-container>
+                                        </div>
+                                        <table>
+                                            <tr>
+                                                <th>نوع دوره</th>
+                                                <th *ngFor="let item of homePageReport.homePageReportDetails">{{item.organizationChartTitle}}</th>
+                                            </tr>
+                                            <ng-container *ngFor="let item2 of homePageReport.homePageReportDetails">
+                                                <ng-container *ngFor="let homePageReportSecondLevelDetail of item2.homePageReportSecondLevelDetails" class="item2">
+                                                    <tr>
+                                                        <th rowspan="2">{{homePageReportSecondLevelDetail.courseTypeTitle}}</th>
+                                                        <th *ngFor="let item3 of homePageReportSecondLevelDetail.homePageReportThirdLevelDetails">{{item3.total}}</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th *ngFor="let item3 of homePageReportSecondLevelDetail.homePageReportThirdLevelDetails">{{item3.total}}</th>
+                                                    </tr>
+                                                </ng-container>
+                                            </ng-container>
+                                        </table>
+                                    </div>
+                                </div>
                                     <!--<tr>
                                         <th colspan="5" style="text-align: center">نفر ساعت اجرا شده مدیران</th>
                                         <td colspan="5" style="text-align: center">{{homePageReport.totalPassedManagers}}</td>
@@ -178,8 +204,7 @@
                                         <td>اجرا شده</td>
                                         <td *ngFor="let item of personHourFinishedPercentSeries">{{item | number:'1.0-0'}} <span *ngIf="item">%</span><span *ngIf="!item">صفر درصد</span></td>
                                     </tr>-->
-                                    </tbody>
-                                </table>
+
                             </div>
 
                             <div [chart]="priceCostChart"></div>

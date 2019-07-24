@@ -21,7 +21,7 @@ export interface IHomePageReportDetail {
     remainingManagersPercent?: number;
     remainingStuffs?: number;
     remainingStuffsPercent?: number;
-    homePageReportSecondLevelDetail?: IHomePageReportSecondLevelDetail[]
+    homePageReportSecondLevelDetails?: IHomePageReportSecondLevelDetail[]
 }
 
 export class HomePageReportDetail implements IHomePageReportDetail {
@@ -46,7 +46,7 @@ export class HomePageReportDetail implements IHomePageReportDetail {
         public remainingManagersPercent?: number,
         public remainingStuffs?: number,
         public remainingStuffsPercent?: number,
-        public homePageReportSecondLevelDetail?: IHomePageReportSecondLevelDetail[]
+        public homePageReportSecondLevelDetails?: IHomePageReportSecondLevelDetail[]
     ) {
     }
 }
