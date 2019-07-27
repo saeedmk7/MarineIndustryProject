@@ -173,13 +173,20 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.fieldOfStudyService.query().subscribe(
-            (res: HttpResponse<IFieldOfStudyMarineSuffix[]>) => {
-                this.fieldofstudies = res.body;
-                this.searchbarModel.push(new SearchPanelModel('teacher', 'lastFieldOfStudyId', 'select', 'equals', this.fieldofstudies));
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        if(this.fieldOfStudyService.fieldOfStudies)
+        {
+            this.fieldofstudies = this.fieldOfStudyService.fieldOfStudies;
+            this.searchbarModel.push(new SearchPanelModel('teacher', 'lastFieldOfStudyId', 'select', 'equals', this.fieldofstudies));
+        }
+        else {
+            this.fieldOfStudyService.query().subscribe(
+                (res: HttpResponse<IFieldOfStudyMarineSuffix[]>) => {
+                    this.fieldofstudies = res.body;
+                    this.searchbarModel.push(new SearchPanelModel('teacher', 'lastFieldOfStudyId', 'select', 'equals', this.fieldofstudies));
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
         /*if(!this.done)
         {
             this.loadAll();

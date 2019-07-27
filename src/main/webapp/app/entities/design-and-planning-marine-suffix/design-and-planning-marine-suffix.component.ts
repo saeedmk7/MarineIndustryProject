@@ -53,6 +53,10 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
     isModirAmozesh: boolean = false;
     isSuperUsers: boolean = false;
 
+    totalHour: number;
+    totalDirectCost: number;
+    totalUnDirectCost: number;
+
     constructor(
         private designAndPlanningService: DesignAndPlanningMarineSuffixService,
         private parseLinks: JhiParseLinks,
@@ -242,8 +246,14 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
                 a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
                 a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)
             }
-        })
+        });
         this.designAndPlannings = data;
+
+        debugger;
+
+        this.totalHour =  this.designAndPlannings.filter(a => a.totalLearningTime).map(a => a.totalLearningTime).reduce((sum, current) => sum + current);
+        this.totalDirectCost =  this.designAndPlannings.filter(a => a.directCost).map(a => a.directCost).reduce((sum, current) => sum + current);
+        this.totalUnDirectCost =  this.designAndPlannings.filter(a => a.undirectCost).map(a => a.undirectCost).reduce((sum, current) => sum + current);
     }
 
     private onError(errorMessage: string) {

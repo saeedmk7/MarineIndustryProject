@@ -66,6 +66,10 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
     years: any[];
     counter: number = 0;
     coursetypes: ICourseTypeMarineSuffix[];
+
+    totalHour: number;
+    totalPriceCost: number;
+
     constructor(
         private finalOrganizationNiazsanjiService: FinalOrganizationNiazsanjiMarineSuffixService,
         private requestOrganizationNiazsanjiMarineSuffixService: RequestOrganizationNiazsanjiMarineSuffixService,
@@ -439,6 +443,9 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
                 a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)
             }
         });
+
+        this.totalHour = this.finalOrganizationNiazsanjis.filter(a => a.totalLearningTime).map(a => a.totalLearningTime).reduce((sum, current) => sum + current);
+        this.totalPriceCost = this.finalOrganizationNiazsanjis.filter(a => a.priceCost).map(a => a.priceCost).reduce((sum, current) => sum + current);
     }
     private onSuccess(errorMessage: string) {
         this.jhiAlertService.success(errorMessage, null, null);

@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IFieldOfStudyMarineSuffix } from 'app/shared/model/field-of-study-marine-suffix.model';
+import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
 
 type EntityResponseType = HttpResponse<IFieldOfStudyMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<IFieldOfStudyMarineSuffix[]>;
@@ -46,7 +47,10 @@ export class FieldOfStudyMarineSuffixService {
                 .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
         }
         else{
-
+            let url = this.resourceUrl + "/all";
+            return this.http
+                .get<IEducationalModuleMarineSuffix[]>(url, {observe: 'response'})
+                .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res, true)));
         }
     }
 
@@ -68,11 +72,13 @@ export class FieldOfStudyMarineSuffixService {
         return res;
     }
 
-    private convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
+    private convertDateArrayFromServer(res: EntityArrayResponseType, isAll:boolean = false): EntityArrayResponseType {
         res.body.forEach((fieldOfStudy: IFieldOfStudyMarineSuffix) => {
             fieldOfStudy.createDate = fieldOfStudy.createDate != null ? moment(fieldOfStudy.createDate) : null;
             fieldOfStudy.modifyDate = fieldOfStudy.modifyDate != null ? moment(fieldOfStudy.modifyDate) : null;
         });
+        if(isAll)
+            this.fieldOfStudies = res.body;
         return res;
     }
 }

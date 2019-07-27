@@ -72,12 +72,18 @@ export class TeacherMarineSuffixUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.fieldOfStudyService.query().subscribe(
-            (res: HttpResponse<IFieldOfStudyMarineSuffix[]>) => {
-                this.fieldofstudies = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        if(this.fieldOfStudyService.fieldOfStudies)
+        {
+            this.fieldofstudies = this.fieldOfStudyService.fieldOfStudies;
+        }
+        else {
+            this.fieldOfStudyService.query().subscribe(
+                (res: HttpResponse<IFieldOfStudyMarineSuffix[]>) => {
+                    this.fieldofstudies = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
         this.serviceUnitService.query().subscribe(
             (res: HttpResponse<IServiceUnitMarineSuffix[]>) => {
                 this.serviceunits = res.body;

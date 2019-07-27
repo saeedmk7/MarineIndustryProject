@@ -94,12 +94,18 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.fieldOfStudyService.query().subscribe(
-            (res: HttpResponse<IFieldOfStudyMarineSuffix[]>) => {
-                this.fieldofstudies = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        if(this.fieldOfStudyService.fieldOfStudies)
+        {
+            this.fieldofstudies = this.fieldOfStudyService.fieldOfStudies;
+        }
+        else {
+            this.fieldOfStudyService.query().subscribe(
+                (res: HttpResponse<IFieldOfStudyMarineSuffix[]>) => {
+                    this.fieldofstudies = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
         this.employmentTypeService.query().subscribe(
             (res: HttpResponse<IEmploymentTypeMarineSuffix[]>) => {
                 this.employmenttypes = res.body;
