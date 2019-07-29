@@ -74,11 +74,11 @@ export class SettingsComponent implements OnInit {
     }
     saveMobile(){
         this.personMarineSuffixService.find(this.person.id).subscribe((resp: HttpResponse<PersonMarineSuffix>) => {
-            debugger;
+
             this.person = resp.body;
             this.person.mobile = this.mobile;
             this.personMarineSuffixService.update(this.person).subscribe((res: HttpResponse<PersonMarineSuffix>) => {
-                debugger;
+
                 window.location.reload();
             });
         })

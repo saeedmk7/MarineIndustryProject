@@ -18,6 +18,10 @@ import {IQualificationMarineSuffix} from "app/shared/model/qualification-marine-
 import {IFieldOfStudyMarineSuffix} from "app/shared/model/field-of-study-marine-suffix.model";
 import {QualificationMarineSuffixService} from "app/entities/qualification-marine-suffix";
 import {FieldOfStudyMarineSuffixService} from "app/entities/field-of-study-marine-suffix";
+import {IServiceUnitMarineSuffix} from "app/shared/model/service-unit-marine-suffix.model";
+import {IAcademicRankMarineSuffix} from "app/shared/model/academic-rank-marine-suffix.model";
+import {ServiceUnitMarineSuffixService} from "app/entities/service-unit-marine-suffix";
+import {AcademicRankMarineSuffixService} from "app/entities/academic-rank-marine-suffix";
 
 @Component({
     selector: 'mi-teacher-marine-suffix',
@@ -48,6 +52,8 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
     qualifications: IQualificationMarineSuffix[];
     fieldofstudies: IFieldOfStudyMarineSuffix[];
 
+    serviceunits: IServiceUnitMarineSuffix[];
+    academicranks: IAcademicRankMarineSuffix[];
 
     constructor(
         private teacherService: TeacherMarineSuffixService,
@@ -61,6 +67,8 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
         private jhiTranslate: TranslateService,
         private qualificationService: QualificationMarineSuffixService,
         private fieldOfStudyService: FieldOfStudyMarineSuffixService,
+        private serviceUnitService: ServiceUnitMarineSuffixService,
+        private academicRankService: AcademicRankMarineSuffixService,
         private convertObjectDatesService : ConvertObjectDatesService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -187,6 +195,20 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
         }
+        this.serviceUnitService.query().subscribe(
+            (res: HttpResponse<IServiceUnitMarineSuffix[]>) => {
+                this.serviceunits = res.body;
+                this.searchbarModel.push(new SearchPanelModel('teacher', 'serviceUnitId', 'select', 'equals', this.serviceunits));
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.academicRankService.query().subscribe(
+            (res: HttpResponse<IAcademicRankMarineSuffix[]>) => {
+                this.academicranks = res.body;
+                this.searchbarModel.push(new SearchPanelModel('teacher', 'academicRankId', 'select', 'equals', this.academicranks));
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         /*if(!this.done)
         {
             this.loadAll();

@@ -120,14 +120,15 @@ export class EducationalCenterMarineSuffixComponent implements OnInit, OnDestroy
     }
 
     ngOnInit() {
+        this.searchbarModel = new Array<SearchPanelModel>();
+        this.searchbarModel.push(new SearchPanelModel('educationalCenter','name','text', 'contains'));
+        this.searchbarModel.push(new SearchPanelModel('educationalCenter','connectionPerson','text', 'contains'));
+        this.searchbarModel.push(new SearchPanelModel('educationalCenter','telephone','text', 'contains'));
         this.activityAreasService.query().subscribe(
             (res: HttpResponse<IActivityAreaMarineSuffix[]>) => {
 
                 this.activityAreas = res.body;
-        this.searchbarModel = new Array<SearchPanelModel>();
-        this.searchbarModel.push(new SearchPanelModel('educationalCenter','name','text', 'contains'));
-        this.searchbarModel.push(new SearchPanelModel('educationalCenter','connectionPerson','text', 'contains'));
-        this.searchbarModel.push(new SearchPanelModel('educationalCenter','activityAreaId','select', 'equals', res.body));
+                this.searchbarModel.push(new SearchPanelModel('educationalCenter','activityAreaId','select', 'equals', res.body));
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

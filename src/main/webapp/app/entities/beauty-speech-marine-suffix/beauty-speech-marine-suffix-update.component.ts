@@ -43,7 +43,7 @@ export class BeautySpeechMarineSuffixUpdateComponent implements OnInit {
                 .authorities()
                 .subscribe(
                     (res: HttpResponse<IAuthority[]>) => {
-                        debugger;
+
                         this.authorities = res.body;
                         let criteria = [{
                             key: 'beautySpeechId.equals',
@@ -55,7 +55,7 @@ export class BeautySpeechMarineSuffixUpdateComponent implements OnInit {
                             criteria,
                             sort: ["id", "asc"]
                         }).subscribe((resp: HttpResponse<IBeautySpeechAuthorityMarineSuffix[]>) => {
-                                debugger;
+
                                 const names = resp.body.map(a => a.authorityName);
                                 this.selectedAuthorities = this.authorities.filter(a => names.includes(a.name));
                             },

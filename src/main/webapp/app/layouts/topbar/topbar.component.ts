@@ -116,7 +116,7 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
             let criteria = [
                 {key: 'isActive.equals', value: true}
             ];
-            debugger;
+
             criteria.push({
                 key: 'beautySpeechAuthorityName.in',
                 value: this.currentAccount.authorities
@@ -189,7 +189,7 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.getEducationalModuleRequests();
                 //this.checkCurrentFullName();
             }, 20000);
-            debugger;
+
             let criteria = [
                 {key: 'isActive.equals', value: true}
             ];

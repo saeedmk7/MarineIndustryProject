@@ -22,6 +22,13 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  */
 public class RequestOrganizationNiazsanjiCriteria implements Serializable {
 
+    public LongFilter getSkillableLevelOfSkillId() {
+        return skillableLevelOfSkillId;
+    }
+
+    public void setSkillableLevelOfSkillId(LongFilter skillableLevelOfSkillId) {
+        this.skillableLevelOfSkillId = skillableLevelOfSkillId;
+    }
 
     /**
      * Class for filtering RequestStatus
@@ -92,6 +99,8 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
     private LongFilter educationalModuleId;
 
     private StringFilter educationalModuleTitle;
+
+    private LongFilter skillableLevelOfSkillId;
 
     private LongFilter teachApproachId;
 
@@ -391,6 +400,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
             Objects.equals(teacherId, that.teacherId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
+            Objects.equals(skillableLevelOfSkillId, that.skillableLevelOfSkillId) &&
             Objects.equals(teachApproachId, that.teachApproachId);
     }
 
@@ -428,7 +438,8 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
         teacherId,
         educationalModuleId,
         educationalModuleTitle,
-        teachApproachId
+        teachApproachId,
+        skillableLevelOfSkillId
         );
     }
 
@@ -467,6 +478,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
                 (teachApproachId != null ? "teachApproachId=" + teachApproachId + ", " : "") +
+                (skillableLevelOfSkillId != null ? "skillableLevelOfSkillId=" + skillableLevelOfSkillId + ", " : "") +
             "}";
     }
 

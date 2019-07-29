@@ -187,6 +187,12 @@ public class RequestOrganizationNiazsanjiQueryService extends QueryService<Reque
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleTitle(),
                     root -> root.join(RequestOrganizationNiazsanji_.educationalModule, JoinType.LEFT).get(EducationalModule_.title)));
             }
+            if (criteria.getSkillableLevelOfSkillId() != null) {
+                specification = specification.and(buildSpecification(criteria.getSkillableLevelOfSkillId(),
+                                                                     root -> root.join(RequestOrganizationNiazsanji_.educationalModule, JoinType.LEFT)
+                                                                         .join(EducationalModule_.skillableLevelOfSkill, JoinType.LEFT)
+                                                                         .get(SkillableLevelOfSkill_.id)));
+            }
             if (criteria.getTeachApproachId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTeachApproachId(),
                     root -> root.join(RequestOrganizationNiazsanji_.teachApproach, JoinType.LEFT).get(TeachApproach_.id)));

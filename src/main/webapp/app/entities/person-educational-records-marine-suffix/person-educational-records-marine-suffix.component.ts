@@ -117,7 +117,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         });
     }
     onPersonSuccess(body) {
-        debugger;
+
         this.person = this.convertObjectDatesService.changeDate(body);
         this.currentPerson = this.person;
 

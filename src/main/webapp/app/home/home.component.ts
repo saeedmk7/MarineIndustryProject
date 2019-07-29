@@ -127,10 +127,9 @@ export class HomeComponent implements OnInit, OnDestroy {
                     this.pageName = 'home';
         });
     }
-
     showHomePageReport(niazsanjiYear: number){
         this.finalNiazsanjiReportService.getHomePageReport(niazsanjiYear).subscribe((resp: HttpResponse<IHomePageReport>) => {
-            debugger;
+
            this.homePageReport = resp.body;
            this.homePageReport.homePageReportDetails.filter(a => a.homePageReportSecondLevelDetails.filter(w => w.courseTypeId == 1));
            let myNewModel;
@@ -202,7 +201,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             }
             if(this.isTopUsers) {
                 this.prepareOrgChart();
-                debugger;
+
                 this.showHomePageReport(this.selectedNiazsanjiYear);
             }
         });

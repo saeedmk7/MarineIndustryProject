@@ -40,6 +40,10 @@ export class FinalNiazsanjiReportPersonMarineSuffixUpdateComponent implements On
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ finalNiazsanjiReportPerson }) => {
             this.finalNiazsanjiReportPerson = finalNiazsanjiReportPerson;
+            this.activatedRoute.params.subscribe((params) => {
+                this.finalNiazsanjiReportPerson.finalNiazsanjiReportId = params['finalNiazsanjiReportId'];
+
+            });
         });
         if(this.personService.people){
             this.people = this.personService.people;
@@ -66,9 +70,12 @@ export class FinalNiazsanjiReportPersonMarineSuffixUpdateComponent implements On
 
     save() {
         this.isSaving = true;
-        this.finalNiazsanjiReportPerson.createDate = moment(this.createDate, DATE_TIME_FORMAT);
-        this.finalNiazsanjiReportPerson.modifyDate = moment(this.modifyDate, DATE_TIME_FORMAT);
-        this.finalNiazsanjiReportPerson.archivedDate = moment(this.archivedDate, DATE_TIME_FORMAT);
+
+        this.finalNiazsanjiReportPerson.status = 0;
+        if(!this.finalNiazsanjiReportPerson.sourceId)
+        {
+            this.finalNiazsanjiReportPerson.sourceId = 0;
+        }
         if (this.finalNiazsanjiReportPerson.id !== undefined) {
             this.subscribeToSaveResponse(this.finalNiazsanjiReportPersonService.update(this.finalNiazsanjiReportPerson));
         } else {
@@ -109,8 +116,8 @@ export class FinalNiazsanjiReportPersonMarineSuffixUpdateComponent implements On
 
     set finalNiazsanjiReportPerson(finalNiazsanjiReportPerson: IFinalNiazsanjiReportPersonMarineSuffix) {
         this._finalNiazsanjiReportPerson = finalNiazsanjiReportPerson;
-        this.createDate = moment(finalNiazsanjiReportPerson.createDate).format(DATE_TIME_FORMAT);
+        /*this.createDate = moment(finalNiazsanjiReportPerson.createDate).format(DATE_TIME_FORMAT);
         this.modifyDate = moment(finalNiazsanjiReportPerson.modifyDate).format(DATE_TIME_FORMAT);
-        this.archivedDate = moment(finalNiazsanjiReportPerson.archivedDate).format(DATE_TIME_FORMAT);
+        this.archivedDate = moment(finalNiazsanjiReportPerson.archivedDate).format(DATE_TIME_FORMAT);*/
     }
 }

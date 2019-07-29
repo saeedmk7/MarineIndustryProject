@@ -71,30 +71,8 @@ public class FinalNiazsanjiReportPersonServiceImpl implements FinalNiazsanjiRepo
     @Override
     public FinalNiazsanjiReportPersonDTO save(FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPersonDTO) {
         log.debug("Request to save FinalNiazsanjiReportPerson : {}", finalNiazsanjiReportPersonDTO);
-        FinalNiazsanjiReportPerson finalNiazsanjiReportPerson = finalNiazsanjiReportPersonMapper.toEntity(finalNiazsanjiReportPersonDTO);
-        Optional<RunPhaseDTO> runPhaseDTO = runPhaseService.findByFinalNiazsanjiReportId(finalNiazsanjiReportPerson.getFinalNiazsanjiReport().getId());
-        if(runPhaseDTO.isPresent()){
-            RunPhaseDTO runPhase = runPhaseDTO.get();
-            Set<PersonDTO> runPhasePeople = runPhase.getPeople();
-            Optional<PersonDTO> runPhasePersonDTO = personService.findOne(finalNiazsanjiReportPerson.getPerson().getId());
-            if(runPhasePersonDTO.isPresent()) {
-                runPhasePeople.add(runPhasePersonDTO.get());
-            }
-            runPhase.setPeople(runPhasePeople);
-            runPhase = runPhaseService.save(runPhase);
-        }
-        Optional<DesignAndPlanningDTO> designAndPlanningDTO = designAndPlanningService.findByFinalNiazsanjiReportId(finalNiazsanjiReportPerson.getFinalNiazsanjiReport().getId());
-        if(designAndPlanningDTO.isPresent()){
-            DesignAndPlanningDTO designAndPlanning = designAndPlanningDTO.get();
-            Set<PersonDTO> people = designAndPlanning.getPeople();
-            Optional<PersonDTO> personDTO = personService.findOne(finalNiazsanjiReportPerson.getPerson().getId());
-            if(personDTO.isPresent()) {
-                people.add(personDTO.get());
-            }
-            designAndPlanning.setPeople(people);
-            designAndPlanningService.save(designAndPlanning);
-        }
 
+        FinalNiazsanjiReportPerson finalNiazsanjiReportPerson = finalNiazsanjiReportPersonMapper.toEntity(finalNiazsanjiReportPersonDTO);
         finalNiazsanjiReportPerson = finalNiazsanjiReportPersonRepository.save(finalNiazsanjiReportPerson);
         return finalNiazsanjiReportPersonMapper.toDto(finalNiazsanjiReportPerson);
     }
@@ -136,32 +114,6 @@ public class FinalNiazsanjiReportPersonServiceImpl implements FinalNiazsanjiRepo
     @Override
     public void delete(Long id) {
         log.debug("Request to delete FinalNiazsanjiReportPerson : {}", id);
-        Optional<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPersonDTO1 = findOne(id);
-        if(finalNiazsanjiReportPersonDTO1.isPresent()) {
-            FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPersonDTO = finalNiazsanjiReportPersonDTO1.get();
-            Optional<RunPhaseDTO> runPhaseDTO = runPhaseService.findByFinalNiazsanjiReportId(finalNiazsanjiReportPersonDTO.getFinalNiazsanjiReportId());
-            if (runPhaseDTO.isPresent()) {
-                RunPhaseDTO runPhase = runPhaseDTO.get();
-                Set<PersonDTO> runPhasePeople = runPhase.getPeople();
-                Optional<PersonDTO> runPhasePersonDTO = personService.findOne(finalNiazsanjiReportPersonDTO.getPersonId());
-                if (runPhasePersonDTO.isPresent()) {
-                    runPhasePeople.remove(runPhasePersonDTO.get());
-                }
-                runPhase.setPeople(runPhasePeople);
-                runPhaseService.save(runPhase);
-            }
-            Optional<DesignAndPlanningDTO> designAndPlanningDTO = designAndPlanningService.findByFinalNiazsanjiReportId(finalNiazsanjiReportPersonDTO.getFinalNiazsanjiReportId());
-            if (designAndPlanningDTO.isPresent()) {
-                DesignAndPlanningDTO designAndPlanning = designAndPlanningDTO.get();
-                Set<PersonDTO> people = designAndPlanning.getPeople();
-                Optional<PersonDTO> personDTO = personService.findOne(finalNiazsanjiReportPersonDTO.getPersonId());
-                if (personDTO.isPresent()) {
-                    people.remove(personDTO.get());
-                }
-                designAndPlanning.setPeople(people);
-                designAndPlanningService.save(designAndPlanning);
-            }
-        }
         finalNiazsanjiReportPersonRepository.deleteById(id);
     }
 

@@ -48,8 +48,10 @@
             "lastFieldOfStudyId": "آخرین رشته تحصیلی",
             "lastFieldOfStudyTitle": "آخرین رشته تحصیلی",
             "serviceUnit": "واحد خدمتی",
+            "serviceUnitId": "واحد خدمتی",
             "serviceUnitTitle": "واحد خدمتی",
             "academicRank": "مرتبه علمی",
+            "academicRankId": "مرتبه علمی",
             "academicRankTitle": "مرتبه علمی",
             "educationalModule": "Educational Module",
             "expired": "تاریخ اتمام اعتبار"

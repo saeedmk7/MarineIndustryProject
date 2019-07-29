@@ -2,7 +2,7 @@
     "marineindustryprojApp": {
         "educationalHistory": {
             "home": {
-                "title": "پرنده و سوابق آموزشی کارکنان",
+                "title": "پرونده و سوابق آموزشی کارکنان",
                 "createLabel": "جدید",
                 "createOrEditLabel": " پرونده"
             },
@@ -24,9 +24,9 @@
             },
             "index": "ردیف",
             "educationalModuleName": "عنوان پودمان آموزشی",
-            "learningTimeTheorical": "مدت زمان نظری(ساعت)",
-            "learningTimePractical": "مدت زمان عملی(ساعت)",
-            "totalTime": "مجموع (ساعت)",
+            "learningTimeTheorical": "مدت زمان نظری",
+            "learningTimePractical": "مدت زمان عملی",
+            "totalTime": "مجموع",
             "educationalCenter": "مرکز آموزشی",
             "dateOfStart": "تاریخ برگزاری دوره",
             "fileDoc": "فایل گواهینامه",

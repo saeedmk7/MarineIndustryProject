@@ -60,6 +60,10 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
 
     yearsCollections: any[];
     coursetypes: ICourseTypeMarineSuffix[];
+
+    totalHour: number;
+    totalPriceCost: number;
+
     constructor(
         protected requestNiazsanjiFardiService: RequestNiazsanjiFardiMarineSuffixService,
         private educationalModuleService: EducationalModuleMarineSuffixService,
@@ -374,6 +378,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
                 this.isAdmin = true;
             this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
                 this.currentPerson = resp.body;
+                /*this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleId', 'number', 'equals'));*/
                 this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
                 this.prepareSearchOrgChart();
                 this.prepareDate();
@@ -586,6 +591,9 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
                 a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)
             }
         });
+        this.totalHour = this.requestNiazsanjiFardis.filter(a => a.totalLearningTime).map(a => a.totalLearningTime).reduce((sum, current) => sum + current);
+        this.totalPriceCost = this.requestNiazsanjiFardis.filter(a => a.costApprovedEducationalModule || a.costAllEducationalModule)
+            .map(a => (a.costApprovedEducationalModule ? a.costApprovedEducationalModule : 0) + (a.costAllEducationalModule ? a.costAllEducationalModule : 0)).reduce((sum, current) => sum + current);
     }
 
     protected onError(errorMessage: string) {

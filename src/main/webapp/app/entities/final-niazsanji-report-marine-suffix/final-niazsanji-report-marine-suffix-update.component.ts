@@ -42,6 +42,8 @@ export class FinalNiazsanjiReportMarineSuffixUpdateComponent implements OnInit {
     selectedPersonIds: number[];
     coursetypes: ICourseTypeMarineSuffix[];
 
+    editPeopleLink: string = "";
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService,
@@ -61,43 +63,7 @@ export class FinalNiazsanjiReportMarineSuffixUpdateComponent implements OnInit {
 
         this.activatedRoute.data.subscribe(({ finalNiazsanjiReport }) => {
             this.finalNiazsanjiReport = finalNiazsanjiReport;
-
-            let criteria = [{
-                key: 'finalNiazsanjiReportId.equals',
-                value: this.finalNiazsanjiReport.id
-            }];
-
-            this.finalNiazsanjiReportPersonService.query({
-                    page: 0,
-                    size: 20000,
-                    criteria,
-                    sort: ["id", "asc"]
-            })
-            .subscribe(
-                (res: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>) => {
-
-                    this.finalNiazsanjiReportPeople = res.body;
-                    this.selectedPersonIds = this.finalNiazsanjiReportPeople.map(a => a.personId);
-
-                    if(this.personService.people) {
-                        this.people = this.personService.people;
-                        this.selectedPeople = this.people.filter(a => this.selectedPersonIds.includes(a.id));
-                    }
-                    else{
-                        this.personService.query().subscribe(
-                            (res: HttpResponse<IPersonMarineSuffix[]>) => {
-
-                                this.people = res.body;
-                                this.selectedPeople = this.people.filter(a => this.selectedPersonIds.includes(a.id));
-                            },
-                            (res: HttpErrorResponse) => this.onError(res.message)
-                        );
-                    }
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-
-
+            this.editPeopleLink = "#/final-niazsanji-report-person-marine-suffix/" + this.finalNiazsanjiReport.id;
         });
         if(this.educationalModuleService.educationalModules) {
             this.educationalmodules = this.educationalModuleService.educationalModules;

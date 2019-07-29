@@ -22,6 +22,14 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  */
 public class FinalOrganizationNiazsanjiCriteria implements Serializable {
 
+    public LongFilter getSkillableLevelOfSkillId() {
+        return skillableLevelOfSkillId;
+    }
+
+    public void setSkillableLevelOfSkillId(LongFilter skillableLevelOfSkillId) {
+        this.skillableLevelOfSkillId = skillableLevelOfSkillId;
+    }
+
     /**
      * Class for filtering RequestStatus
      */
@@ -89,6 +97,8 @@ public class FinalOrganizationNiazsanjiCriteria implements Serializable {
     private LongFilter educationalModuleId;
 
     private StringFilter educationalModuleTitle;
+
+    private LongFilter skillableLevelOfSkillId;
 
     private LongFilter teachApproachId;
 
@@ -391,6 +401,7 @@ public class FinalOrganizationNiazsanjiCriteria implements Serializable {
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
             Objects.equals(teachApproachId, that.teachApproachId) &&
+            Objects.equals(skillableLevelOfSkillId, that.skillableLevelOfSkillId) &&
             Objects.equals(requestOrganizationNiazsanjiId, that.requestOrganizationNiazsanjiId);
     }
 
@@ -428,6 +439,7 @@ public class FinalOrganizationNiazsanjiCriteria implements Serializable {
         educationalModuleId,
         educationalModuleTitle,
         teachApproachId,
+        skillableLevelOfSkillId,
         requestOrganizationNiazsanjiId
         );
     }
@@ -466,6 +478,7 @@ public class FinalOrganizationNiazsanjiCriteria implements Serializable {
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
                 (teachApproachId != null ? "teachApproachId=" + teachApproachId + ", " : "") +
+                (skillableLevelOfSkillId != null ? "skillableLevelOfSkillId=" + skillableLevelOfSkillId + ", " : "") +
                 (requestOrganizationNiazsanjiId != null ? "requestOrganizationNiazsanjiId=" + requestOrganizationNiazsanjiId + ", " : "") +
             "}";
     }

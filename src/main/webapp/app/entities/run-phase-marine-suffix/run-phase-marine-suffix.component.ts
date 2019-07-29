@@ -178,9 +178,9 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
 
     createCriteria(criteria, f): any {
 
-        if (f.value['status']) {
+        if (f.value['status'] != undefined) {
             let val = f.value['status'];
-            if (val) {
+            if (val != undefined) {
                 /*let yearDetail = this.yearsCollections.find(a => a.year == val);
                 let beginDate = new Date(yearDetail.beginDate).toISOString();
                 let endDate = new Date(yearDetail.endDate).toISOString();*/

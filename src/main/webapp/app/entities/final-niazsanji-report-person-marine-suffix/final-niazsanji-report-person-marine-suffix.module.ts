@@ -12,11 +12,14 @@ import {
     finalNiazsanjiReportPersonPopupRoute
 } from './';
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+import {NgSelectModule} from "@ng-select/ng-select";
+import {FormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 const ENTITY_STATES = [...finalNiazsanjiReportPersonRoute, ...finalNiazsanjiReportPersonPopupRoute];
 
 @NgModule({
-    imports: [MarineindustryprojSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [MarineindustryprojSharedModule, NgSelectModule, FormsModule, BrowserAnimationsModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         FinalNiazsanjiReportPersonMarineSuffixComponent,
         FinalNiazsanjiReportPersonMarineSuffixDetailComponent,

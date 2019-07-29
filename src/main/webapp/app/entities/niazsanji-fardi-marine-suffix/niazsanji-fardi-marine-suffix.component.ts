@@ -30,6 +30,9 @@ import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
+import {EducationalModuleType} from "app/shared/model/enums/EducationalModuleType";
+import {SkillableLevelOfSkillMarineSuffixService} from "app/entities/skillable-level-of-skill-marine-suffix";
+import {ISkillableLevelOfSkillMarineSuffix} from "app/shared/model/skillable-level-of-skill-marine-suffix.model";
 
 @Component({
     selector: 'mi-niazsanji-fardi-marine-suffix',
@@ -40,6 +43,7 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
     niazsanjiFardis: INiazsanjiFardiMarineSuffix[];
     educationalModules: IEducationalModuleMarineSuffix[];
     organizationcharts: IOrganizationChartMarineSuffix[];
+    skillableLevelOfSkills: ISkillableLevelOfSkillMarineSuffix[];
     people: IPersonMarineSuffix[];
     error: any;
     success: any;
@@ -67,6 +71,10 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
     selectedYear: number;
     counter: number = 0;
     coursetypes: ICourseTypeMarineSuffix[];
+
+    totalHour: number;
+    totalPriceCost: number;
+
     constructor(
         protected niazsanjiFardiService: NiazsanjiFardiMarineSuffixService,
         protected requestNiazsanjiFardiService: RequestNiazsanjiFardiMarineSuffixService,
@@ -83,6 +91,7 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
         private convertObjectDatesService: ConvertObjectDatesService,
         private treeUtilities: TreeUtilities,
         private courseTypeService: CourseTypeMarineSuffixService,
+        private skillableLevelOfSkillService: SkillableLevelOfSkillMarineSuffixService,
         private jhiTranslate: TranslateService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -303,15 +312,36 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
             if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined) {
                 this.isKarshenasArshadAmozesh = true;
             }
-
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'number', 'equals'));
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
+            let educationalModuleType = [{
+                id: EducationalModuleType.ALL,
+                title: 'کل پودمان'
+            },{
+                id: EducationalModuleType.APPROVED,
+                title: 'از شناسنامه آموزشی'
+            }];
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleType', 'select', 'equals', educationalModuleType));
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'priceCost', 'number', 'equals'));
             this.prepareSearchOrgChart();
             this.prepareSearchPerson();
             this.prepareSearchEducationalModule();
             this.prepareSearchDate();
             this.prepareSearchCourseType();
+            this.prepareSkillLevelOfSkill();
 
         });
         //this.registerChangeInNiazsanjiFardis();
+    }
+    prepareSkillLevelOfSkill(){
+        this.skillableLevelOfSkillService.query().subscribe(
+            (res: HttpResponse<ISkillableLevelOfSkillMarineSuffix[]>) => {
+
+                this.skillableLevelOfSkills = res.body;
+                this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'skillableLevelOfSkillId', 'select', 'equals', this.skillableLevelOfSkills));
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
     prepareSearchCourseType(){
         this.courseTypeService.query().subscribe(
@@ -324,7 +354,7 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
         );
     }
     prepareSearchEducationalModule(){
-        this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
+
         if(this.educationalModuleService.educationalModules){
             this.educationalModules = this.educationalModuleService.educationalModules
             /*this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, "fullTitle",'half'));*/
@@ -347,6 +377,7 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
     prepareSearchPerson(){
         if(this.personService.people){
             this.people = this.personService.people;
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'personId', 'select', 'equals', this.people, "fullName"));
         }
         else {
             this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
@@ -500,7 +531,16 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
                 a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
                 a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)
             }
-        })
+        });
+        if(this.niazsanjiFardis) {
+            const totalLearningTimes = this.niazsanjiFardis.filter(a => a.totalLearningTime).map(a => a.totalLearningTime);
+            if(totalLearningTimes)
+                this.totalHour = totalLearningTimes.reduce((sum, current) => sum + current);
+
+            const priceCosts = this.niazsanjiFardis.filter(a => a.priceCost).map(a => a.priceCost);
+            if(priceCosts)
+                this.totalPriceCost = priceCosts.reduce((sum, current) => sum + current);
+        }
     }
 
     private onSuccess(successMessage: string) {

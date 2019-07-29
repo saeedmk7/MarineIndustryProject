@@ -28,6 +28,8 @@ import * as $ from 'jquery';
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
+import {ISkillableLevelOfSkillMarineSuffix} from "app/shared/model/skillable-level-of-skill-marine-suffix.model";
+import {SkillableLevelOfSkillMarineSuffixService} from "app/entities/skillable-level-of-skill-marine-suffix";
 
 @Component({
     selector: 'mi-final-organization-niazsanji-marine-suffix',
@@ -66,6 +68,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
     years: any[];
     counter: number = 0;
     coursetypes: ICourseTypeMarineSuffix[];
+    skillableLevelOfSkills: ISkillableLevelOfSkillMarineSuffix[];
 
     totalHour: number;
     totalPriceCost: number;
@@ -85,6 +88,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         private jhiTranslate: TranslateService,
         private treeUtilities: TreeUtilities,
         private courseTypeService: CourseTypeMarineSuffixService,
+        private skillableLevelOfSkillService: SkillableLevelOfSkillMarineSuffixService,
         private convertObjectDatesService : ConvertObjectDatesService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -321,16 +325,30 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined) {
                 this.isKarshenasArshadAmozesh = true;
             }
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'number', 'equals'));
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'priceCost', 'number', 'equals'));
             this.prepareSearchOrgChart();
             this.prepareSearchPerson();
             this.prepareSearchEducationalModule();
             this.prepareSearchDate();
 
             this.prepareSearchCourseType();
+            this.prepareSkillLevelOfSkill();
 
 
         });
         //this.registerChangeInFinalOrganizationNiazsanjis();
+    }
+    prepareSkillLevelOfSkill(){
+        this.skillableLevelOfSkillService.query().subscribe(
+            (res: HttpResponse<ISkillableLevelOfSkillMarineSuffix[]>) => {
+
+                this.skillableLevelOfSkills = res.body;
+                this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'skillableLevelOfSkillId', 'select', 'equals', this.skillableLevelOfSkills));
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
     prepareSearchCourseType(){
         this.courseTypeService.query().subscribe(
@@ -343,7 +361,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         );
     }
     prepareSearchEducationalModule(){
-        this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
+
         if(this.educationalModuleService.educationalModules){
             this.educationalModules = this.educationalModuleService.educationalModules;
             /*this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, "fullTitle",'half'));*/
@@ -366,6 +384,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
     prepareSearchPerson(){
         if(this.personService.people){
             this.people = this.personService.people;
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'personId', 'select', 'equals', this.people, "fullName"));
         }
         else {
             this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {

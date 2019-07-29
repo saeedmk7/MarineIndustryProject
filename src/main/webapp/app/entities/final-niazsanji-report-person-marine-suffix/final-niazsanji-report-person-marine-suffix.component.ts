@@ -29,6 +29,7 @@ export class FinalNiazsanjiReportPersonMarineSuffixComponent implements OnInit, 
     predicate: any;
     previousPage: any;
     reverse: any;
+    finalNiazsanjiReportId: number;
 
     constructor(
         private finalNiazsanjiReportPersonService: FinalNiazsanjiReportPersonMarineSuffixService,
@@ -46,14 +47,22 @@ export class FinalNiazsanjiReportPersonMarineSuffixComponent implements OnInit, 
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
         });
+        this.eventSubscriber = this.activatedRoute.params.subscribe((params) => {
+            this.finalNiazsanjiReportId = params['finalNiazsanjiReportId'];
+        });
     }
 
     loadAll() {
+        const criteria = [{
+            key: 'finalNiazsanjiReportId.equals',
+            value: this.finalNiazsanjiReportId
+        }];
         this.finalNiazsanjiReportPersonService
             .query({
                 page: this.page - 1,
                 size: this.itemsPerPage,
-                sort: this.sort()
+                sort: this.sort(),
+                criteria: criteria
             })
             .subscribe(
                 (res: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>) =>
@@ -72,6 +81,7 @@ export class FinalNiazsanjiReportPersonMarineSuffixComponent implements OnInit, 
     transition() {
         this.router.navigate(['/final-niazsanji-report-person-marine-suffix'], {
             queryParams: {
+                finalNiazsanjiReportId: this.finalNiazsanjiReportId,
                 page: this.page,
                 size: this.itemsPerPage,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -85,6 +95,7 @@ export class FinalNiazsanjiReportPersonMarineSuffixComponent implements OnInit, 
         this.router.navigate([
             '/final-niazsanji-report-person-marine-suffix',
             {
+                finalNiazsanjiReportId: this.finalNiazsanjiReportId,
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }

@@ -249,7 +249,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         });
         this.designAndPlannings = data;
 
-        debugger;
+
 
         this.totalHour =  this.designAndPlannings.filter(a => a.totalLearningTime).map(a => a.totalLearningTime).reduce((sum, current) => sum + current);
         this.totalDirectCost =  this.designAndPlannings.filter(a => a.directCost).map(a => a.directCost).reduce((sum, current) => sum + current);

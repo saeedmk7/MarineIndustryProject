@@ -75,6 +75,8 @@ public class NiazsanjiFardiCriteria implements Serializable {
 
     private LongFilter organizationChartId;
 
+    private LongFilter skillableLevelOfSkillId;
+
     public LongFilter getId() {
         return id;
     }
@@ -249,6 +251,13 @@ public class NiazsanjiFardiCriteria implements Serializable {
     public void setOrganizationChartId(LongFilter organizationChartId) {
         this.organizationChartId = organizationChartId;
     }
+    public LongFilter getSkillableLevelOfSkillId() {
+        return skillableLevelOfSkillId;
+    }
+
+    public void setSkillableLevelOfSkillId(LongFilter skillableLevelOfSkillId) {
+        this.skillableLevelOfSkillId = skillableLevelOfSkillId;
+    }
 
 
     @Override
@@ -282,6 +291,7 @@ public class NiazsanjiFardiCriteria implements Serializable {
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
             Objects.equals(personId, that.personId) &&
+            Objects.equals(skillableLevelOfSkillId, that.skillableLevelOfSkillId) &&
             Objects.equals(organizationChartId, that.organizationChartId);
     }
 
@@ -309,6 +319,7 @@ public class NiazsanjiFardiCriteria implements Serializable {
         educationalModuleId,
         educationalModuleTitle,
         personId,
+        skillableLevelOfSkillId,
         organizationChartId
         );
     }
@@ -337,6 +348,7 @@ public class NiazsanjiFardiCriteria implements Serializable {
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
+                (skillableLevelOfSkillId != null ? "skillableLevelOfSkillId=" + skillableLevelOfSkillId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
             "}";
     }

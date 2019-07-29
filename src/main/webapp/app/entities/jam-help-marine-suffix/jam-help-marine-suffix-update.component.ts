@@ -47,7 +47,7 @@ export class JamHelpMarineSuffixUpdateComponent implements OnInit {
                 .authorities()
                 .subscribe(
                     (res: HttpResponse<IAuthority[]>) => {
-                        debugger;
+
                         this.authorities = res.body;
                         let criteria = [{
                             key: 'jamHelpId.equals',
@@ -59,7 +59,7 @@ export class JamHelpMarineSuffixUpdateComponent implements OnInit {
                             criteria,
                             sort: ["id", "asc"]
                         }).subscribe((resp: HttpResponse<IJamHelpAuthorityMarineSuffix[]>) => {
-                            debugger;
+
                                 const names = resp.body.map(a => a.authorityName);
                                 this.selectedAuthorities = this.authorities.filter(a => names.includes(a.name));
                             },

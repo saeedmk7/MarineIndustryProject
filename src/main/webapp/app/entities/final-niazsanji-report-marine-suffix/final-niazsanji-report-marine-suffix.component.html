@@ -285,18 +285,12 @@
                         <span class="d-none d-md-inline">برنامه ریزی</span>
                     </kendo-buttongroup>-->
                     <kendo-buttongroup>
-                       <!-- <button kendoButton type="submit"
+                        <button kendoButton type="submit"
                                 [routerLink]="['/final-niazsanji-report-marine-suffix', dataItem.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>-->
-                        <!--<button kendoButton type="submit" class="btn btn-success btn-sm"  [disabled]="dataItem.status < 10"
-                                [routerLink]="['/run-phase-marine-suffix', dataItem.id, 'edit']"
-                        >
-                            <span class="fa fa-file"></span>
-                            <span class="d-none d-md-inline">اجرا</span>
-                        </button>-->
+                        </button>
                     </kendo-buttongroup>
                     <kendo-buttongroup type="submit" *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                        [routerLink]="['/', { outlets: { popup: 'final-niazsanji-report-marine-suffix/'+ dataItem.id + '/delete'} }]"

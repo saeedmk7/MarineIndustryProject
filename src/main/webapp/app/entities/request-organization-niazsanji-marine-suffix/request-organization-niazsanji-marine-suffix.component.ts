@@ -11,12 +11,7 @@ import {ITEMS_PER_PAGE} from 'app/shared';
 import {RequestOrganizationNiazsanjiMarineSuffixService} from './request-organization-niazsanji-marine-suffix.service';
 import {ExcelService} from "app/plugin/export-excel/excel-service";
 import {TranslateService} from '@ngx-translate/core';
-import {
-    FinalOrganizationNiazsanjiMarineSuffix,
-    IFinalOrganizationNiazsanjiMarineSuffix
-} from "app/shared/model/final-organization-niazsanji-marine-suffix.model";
 import {FinalOrganizationNiazsanjiMarineSuffixService} from "app/entities/final-organization-niazsanji-marine-suffix/final-organization-niazsanji-marine-suffix.service";
-import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
@@ -29,6 +24,8 @@ import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
+import {ISkillableLevelOfSkillMarineSuffix} from "app/shared/model/skillable-level-of-skill-marine-suffix.model";
+import {SkillableLevelOfSkillMarineSuffixService} from "app/entities/skillable-level-of-skill-marine-suffix";
 
 @Component({
     selector: 'mi-request-organization-niazsanji-marine-suffix',
@@ -63,6 +60,11 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
 
     yearsCollections: any[];
     coursetypes: ICourseTypeMarineSuffix[];
+    skillableLevelOfSkills: ISkillableLevelOfSkillMarineSuffix[];
+
+    totalHour: number;
+    totalPriceCost: number;
+
     constructor(
         private requestOrganizationNiazsanjiService: RequestOrganizationNiazsanjiMarineSuffixService,
         private finalOrganizationNiazsanjiMarineSuffixService: FinalOrganizationNiazsanjiMarineSuffixService,
@@ -78,6 +80,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
         private jhiTranslate: TranslateService,
         private convertObjectDatesService : ConvertObjectDatesService,
         private treeUtilities: TreeUtilities,
+        private skillableLevelOfSkillService: SkillableLevelOfSkillMarineSuffixService,
         private personService: PersonMarineSuffixService,
     ) {
 
@@ -437,12 +440,25 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
             this.currentAccount = account;
             if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
                 this.isAdmin = true;
-
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'number', 'equals'));
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'priceCost', 'number', 'equals'));
             this.prepareSearchDate();
             this.prepareSearchEducationalModule();
             this.prepareSearchOrgChart();
             this.prepareSearchCourseType();
+            this.prepareSkillLevelOfSkill();
         });
+    }
+    prepareSkillLevelOfSkill(){
+        this.skillableLevelOfSkillService.query().subscribe(
+            (res: HttpResponse<ISkillableLevelOfSkillMarineSuffix[]>) => {
+
+                this.skillableLevelOfSkills = res.body;
+                this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'skillableLevelOfSkillId', 'select', 'equals', this.skillableLevelOfSkills));
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
     prepareSearchCourseType(){
         this.courseTypeService.query().subscribe(
@@ -455,7 +471,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
         );
     }
     prepareSearchEducationalModule(){
-        this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
+        //this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
         if(this.educationalModuleService.educationalModules) {
             this.educationalModules = this.educationalModuleService.educationalModules;
             /*this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'select', 'equals', this.educationalModules, 'fullTitle', 'half'));*/
@@ -534,6 +550,8 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
                 a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)
             }
         });
+        this.totalHour = this.requestOrganizationNiazsanjis.filter(a => a.totalLearningTime).map(a => a.totalLearningTime).reduce((sum, current) => sum + current);
+        this.totalPriceCost = this.requestOrganizationNiazsanjis.filter(a => a.priceCost).map(a => a.priceCost).reduce((sum, current) => sum + current);
     }
 
     private onError(errorMessage: string) {

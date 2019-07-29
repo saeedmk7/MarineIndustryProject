@@ -113,7 +113,7 @@
         "acceptedRoles": "['ROLE_ADMIN','ROLE_USER']",
         "children": [
             {
-                "title": "درخواست نیازسنجی سازمانی",
+                "title": "درخواست نیازسنجی دوره متمرکز",
                 "url": "#/request-organization-niazsanji-marine-suffix",
                 "faicon": "faReceipt",
                 "isActive": false,

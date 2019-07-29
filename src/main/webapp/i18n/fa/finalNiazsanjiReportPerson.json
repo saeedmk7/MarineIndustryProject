@@ -3,32 +3,32 @@
     "marineindustryprojApp": {
         "finalNiazsanjiReportPerson" : {
             "home": {
-                "title": "Final Niazsanji Report People",
-                "createLabel": "Create a new Final Niazsanji Report Person",
-                "createOrEditLabel": "Create or edit a Final Niazsanji Report Person"
+                "title": "فهرست افراد شرکت کننده در دوره",
+                "createLabel": "جدید",
+                "createOrEditLabel": "شرکت کننده در دوره"
             },
-            "created": "A new Final Niazsanji Report Person is created with identifier {{ param }}",
-            "updated": "A Final Niazsanji Report Person is updated with identifier {{ param }}",
-            "deleted": "A Final Niazsanji Report Person is deleted with identifier {{ param }}",
+            "created": "شرکت کننده در دوره با شناسه {{ param }} ایجاد شد.",
+            "updated": "شرکت کننده در دوره با شناسه {{ param }} ویرایش شد.",
+            "deleted": "شرکت کننده در دوره با شناسه {{ param }} حذف شد.",
             "delete": {
-                "question": "Are you sure you want to delete Final Niazsanji Report Person {{ id }}?"
+                "question": "آیا از حذف نیازسنجی مصوب شوراء با شناسه {{ id }} مطمئنید؟"
             },
             "detail": {
-                "title": "Final Niazsanji Report Person"
+                "title": "جزئیات اطلاعات نیازسنجی مصوب شوراء"
             },
-            "niazSanjiSource": "Niaz Sanji Source",
-            "priceCost": "Price Cost",
-            "description": "Description",
-            "createUserLogin": "Create User Login",
-            "createDate": "Create Date",
-            "modifyUserLogin": "Modify User Login",
-            "modifyDate": "Modify Date",
-            "archived": "Archived",
-            "archivedUserLogin": "Archived User Login",
-            "archivedDate": "Archived Date",
-            "status": "Status",
-            "sourceId": "Source Id",
-            "person": "Person",
+            "niazSanjiSource": "منبع نیازسنجی",
+            "priceCost": "سرمایه گذاری",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "sourceId": "منبع",
+            "person": "نام و نام خانوادگی",
             "finalNiazsanjiReport": "Final Niazsanji Report"
         }
     }

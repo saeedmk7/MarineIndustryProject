@@ -117,7 +117,7 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
             );
     }
     makeCriteria(criteria?){
-        debugger;
+
         if(!criteria)
         {
             criteria = [];

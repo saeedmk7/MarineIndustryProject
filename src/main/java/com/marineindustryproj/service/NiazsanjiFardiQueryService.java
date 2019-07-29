@@ -151,6 +151,12 @@ public class NiazsanjiFardiQueryService extends QueryService<NiazsanjiFardi> {
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleTitle(),
                     root -> root.join(NiazsanjiFardi_.educationalModule, JoinType.LEFT).get(EducationalModule_.title)));
             }
+            if (criteria.getSkillableLevelOfSkillId() != null) {
+                specification = specification.and(buildSpecification(criteria.getSkillableLevelOfSkillId(),
+                    root -> root.join(NiazsanjiFardi_.educationalModule, JoinType.LEFT)
+                        .join(EducationalModule_.skillableLevelOfSkill, JoinType.LEFT)
+                        .get(SkillableLevelOfSkill_.id)));
+            }
             if (criteria.getPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPersonId(),
                     root -> root.join(NiazsanjiFardi_.person, JoinType.LEFT).get(Person_.id)));

@@ -10,10 +10,35 @@
                         [(ngModel)]="finalNiazsanjiReportPerson.id" readonly />
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.person" for="field_person">Person</label>
+                    <!--<select class="form-control" id="field_person" name="person" [(ngModel)]="finalNiazsanjiReportPerson.personId"  required>
+                        <option *ngIf="!editForm.value.person" [ngValue]="null" selected></option>
+                        <option [ngValue]="personOption.id" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.family}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="people"
+                        [required]="true"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        bindLabel="fullName"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="person"
+                        id="field_person"
+                        [(ngModel)]="finalNiazsanjiReportPerson.personId">
+                </div>
+                <div [hidden]="!(editForm.controls.person?.dirty && editForm.controls.person?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.person?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.niazSanjiSource" for="field_niazSanjiSource">Niaz Sanji Source</label>
                     <select class="form-control" name="niazSanjiSource" [(ngModel)]="finalNiazsanjiReportPerson.niazSanjiSource" id="field_niazSanjiSource"  required>
                         <option value="FARDI">{{'marineindustryprojApp.NiazSanjiSource.FARDI' | translate}}</option>
-                        <option value="GROUP">{{'marineindustryprojApp.NiazSanjiSource.GROUP' | translate}}</option>
+                        <!--<option value="GROUP">{{'marineindustryprojApp.NiazSanjiSource.GROUP' | translate}}</option>-->
                         <option value="ORGANIZATION">{{'marineindustryprojApp.NiazSanjiSource.ORGANIZATION' | translate}}</option>
                     </select>
                     <div [hidden]="!(editForm.controls.niazSanjiSource?.dirty && editForm.controls.niazSanjiSource?.invalid)">
@@ -30,8 +55,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.description" for="field_description">Description</label>
-                    <input type="text" class="form-control" name="description" id="field_description"
-                        [(ngModel)]="finalNiazsanjiReportPerson.description" maxlength="4096"/>
+                    <textarea type="text" class="form-control" name="description" id="field_description"
+                              [(ngModel)]="finalNiazsanjiReportPerson.description" maxlength="4096" ></textarea>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
@@ -39,7 +64,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.createUserLogin" for="field_createUserLogin">Create User Login</label>
                     <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
                         [(ngModel)]="finalNiazsanjiReportPerson.createUserLogin" maxlength="50"/>
@@ -118,22 +143,10 @@
                             This field should be a number.
                         </small>
                     </div>
-                </div>
+                </div>-->
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.person" for="field_person">Person</label>
-                    <select class="form-control" id="field_person" name="person" [(ngModel)]="finalNiazsanjiReportPerson.personId"  required>
-                        <option *ngIf="!editForm.value.person" [ngValue]="null" selected></option>
-                        <option [ngValue]="personOption.id" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.family}}</option>
-                    </select>
-                </div>
-                <div [hidden]="!(editForm.controls.person?.dirty && editForm.controls.person?.invalid)">
-                    <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.person?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
-                <div class="form-group">
+
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.finalNiazsanjiReport" for="field_finalNiazsanjiReport">Final Niazsanji Report</label>
                     <select class="form-control" id="field_finalNiazsanjiReport" name="finalNiazsanjiReport" [(ngModel)]="finalNiazsanjiReportPerson.finalNiazsanjiReportId"  required>
                         <option *ngIf="!editForm.value.finalNiazsanjiReport" [ngValue]="null" selected></option>
@@ -145,7 +158,7 @@
                         [hidden]="!editForm.controls.finalNiazsanjiReport?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                     </small>
-                </div>
+                </div>-->
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

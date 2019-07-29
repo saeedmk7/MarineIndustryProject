@@ -27,6 +27,7 @@ import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestroy {
     organizationcharts: IOrganizationChartMarineSuffix[];
     recommenedOrgCharts: IOrganizationChartMarineSuffix[];
+    groups: IOrganizationChartMarineSuffix[];
     people: IPersonMarineSuffix[];
     currentPerson: IPersonMarineSuffix;
 
@@ -369,6 +370,10 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         if(this.organizationChartService.organizationchartsAll)
         {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
+            if(this.isSuperUsers) {
+                this.groups = this.organizationcharts.filter(a => a.parentId == null).sort((a, b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0);
+                this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'organizationChartId', 'select', 'equals', this.groups, 'fullTitle', 'half'));
+            }
             const orgs = this.handleOrgChartView();
             this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'organizationChartId', 'select', 'equals', orgs, 'fullTitle', 'half'));
             this.prepareSearchPerson(orgs);
@@ -378,6 +383,10 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
 
                     this.organizationcharts = res.body;
+                    if(this.isSuperUsers) {
+                        this.groups = this.organizationcharts.filter(a => a.parentId == null).sort((a, b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0);
+                        this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'organizationChartId', 'select', 'equals', this.groups, 'fullTitle', 'half'));
+                    }
                     const orgs = this.handleOrgChartView();
                     this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'organizationChartId', 'select', 'equals', orgs, 'fullTitle', 'half'));
                     this.prepareSearchPerson(orgs);

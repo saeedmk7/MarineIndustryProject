@@ -30,8 +30,6 @@ import { IOrganizationMarineSuffix } from 'app/shared/model/organization-marine-
 import { OrganizationMarineSuffixService } from 'app/entities/organization-marine-suffix';
 import { INiazsanjiGroupMarineSuffix } from 'app/shared/model/niazsanji-group-marine-suffix.model';
 import { NiazsanjiGroupMarineSuffixService } from 'app/entities/niazsanji-group-marine-suffix';
-import * as persianMoment from 'jalali-moment';
-import { v4 as uuid } from 'uuid';
 import {IRequestEducationalModuleMarineSuffix} from "app/shared/model/request-educational-module-marine-suffix.model";
 import {RequestEducationalModuleMarineSuffixService} from "app/entities/request-educational-module-marine-suffix";
 
@@ -66,8 +64,6 @@ export class EducationalModuleMarineSuffixUpdateComponent implements OnInit {
 
     requestEducationalModules: IRequestEducationalModuleMarineSuffix[];
 
-    timePassed: string;
-    credit: string;
     isfa: boolean;
 
     constructor(
@@ -171,7 +167,7 @@ export class EducationalModuleMarineSuffixUpdateComponent implements OnInit {
         this.isSaving = true;
 
         this.educationalModule.status = 0;
-        if(this.isfa)
+        /*if(this.isfa)
         {
             let timePassedPersian: string = persianMoment.from(this.timePassed, 'fa', 'YYYY-MM-DD').format('YYYY/MM/DD');
             this.educationalModule.timePassed = moment(timePassedPersian);
@@ -181,7 +177,7 @@ export class EducationalModuleMarineSuffixUpdateComponent implements OnInit {
         else {
             this.educationalModule.timePassed = moment(this.timePassed, DATE_TIME_FORMAT);
             this.educationalModule.credit = moment(this.credit, DATE_TIME_FORMAT);
-        }
+        }*/
 
         if (this.educationalModule.id !== undefined) {
             this.subscribeToSaveResponse(this.educationalModuleService.update(this.educationalModule));
@@ -266,7 +262,7 @@ export class EducationalModuleMarineSuffixUpdateComponent implements OnInit {
 
     set educationalModule(educationalModule: IEducationalModuleMarineSuffix) {
         this._educationalModule = educationalModule;
-        if(this.isfa)
+        /*if(this.isfa)
         {
             if(educationalModule.timePassed)
                 this.timePassed = moment(educationalModule.timePassed).format(DATE_FORMAT);
@@ -281,6 +277,6 @@ export class EducationalModuleMarineSuffixUpdateComponent implements OnInit {
         else {
             this.timePassed = moment(educationalModule.timePassed).format(DATE_TIME_FORMAT);
             this.credit = moment(educationalModule.credit).format(DATE_TIME_FORMAT);
-        }
+        }*/
     }
 }

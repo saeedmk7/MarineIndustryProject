@@ -95,7 +95,7 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
     aggregateJob(job: IJobMarineSuffix){
         if(job){
             this.jobService.find(job.id).subscribe((resp: HttpResponse<IJobMarineSuffix>) => {
-                debugger;
+
                 this.jobService.aggregateJob(resp.body).subscribe((res: HttpResponse<IJobMarineSuffix>) => {
                     this.loadAll(this.criteria);
                 });

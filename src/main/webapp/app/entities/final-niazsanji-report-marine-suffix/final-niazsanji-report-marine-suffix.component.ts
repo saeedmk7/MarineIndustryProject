@@ -125,39 +125,8 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
         });
-        /*this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
-            this.criteria = criteria.content;
-            this.done = true;
-            this.loadAll(criteria.content);
-
-        });*/
         this.yearsCollections = GREGORIAN_START_END_DATE;
     }
-    /*finalize(dataItem){
-
-        this.finalNiazsanjiReportService.find(dataItem.id).subscribe((resp: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) =>{
-            resp.body.status = 10;
-            this.finalNiazsanjiReportService.update(resp.body).subscribe((resp: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => resp);
-        });
-
-    }*/
-
-    /*showPlanningReport(){
-
-        let niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
-        let orgRootId = this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
-        this.finalNiazsanjiReportService.getPlanningAndRunMonthReport(niazsanjiYear,1, orgRootId)
-            .subscribe(
-                (res: HttpResponse<IPlanningAndRunMonthReport[]>) => {
-
-                    this.planningAndRunMonthReports = res.body;
-                    this.planningAndRunMonthReports.forEach(a => {
-                        a.persianMonth = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.month);
-                    });
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-    }*/
     public ngAfterViewInit(): void {
         // Expand the first row initially
         //this.grid.expandRow(0);
@@ -200,13 +169,10 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     createCriteria(criteria, f): any {
-
-        if (f.value['status']) {
+        debugger;
+        if (f.value['status'] != undefined) {
             let val = f.value['status'];
-            if (val) {
-                /*let yearDetail = this.yearsCollections.find(a => a.year == val);
-                let beginDate = new Date(yearDetail.beginDate).toISOString();
-                let endDate = new Date(yearDetail.endDate).toISOString();*/
+            if (val != undefined) {
                 criteria.push({
                     key: 'status.equals', value: val
                 });
@@ -215,9 +181,6 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         if (f.value['planningRunMonth']) {
             let val = f.value['planningRunMonth'];
             if (val) {
-                /*let yearDetail = this.yearsCollections.find(a => a.year == val);
-                let beginDate = new Date(yearDetail.beginDate).toISOString();
-                let endDate = new Date(yearDetail.endDate).toISOString();*/
                 criteria.push({
                     key: 'planningRunMonth.equals', value: val
                 });
@@ -226,9 +189,6 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         if (f.value['niazsanjiYear']) {
             let val = f.value['niazsanjiYear'];
             if (val) {
-                /*let yearDetail = this.yearsCollections.find(a => a.year == val);
-                let beginDate = new Date(yearDetail.beginDate).toISOString();
-                let endDate = new Date(yearDetail.endDate).toISOString();*/
                 criteria.push({
                     key: 'niazsanjiYear.equals', value: val
                 });
@@ -271,12 +231,6 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 key: 'courseTypeId.in', value: val
             });
         }
-        /*if (f.value['educationalModuleId']) {
-            let val = +f.value['educationalModuleId'];
-            criteria.push({
-                key: 'educationalModuleId.equals', value: val
-            });
-        }*/
         return criteria;
     }
 

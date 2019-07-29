@@ -53,11 +53,12 @@
                     </select>
                 </div>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات افراد شرکت کننده</div></div>
-                <div class="form-group bighalf">
+                <a [href]="editPeopleLink" class="enableLink btn btn-info">تصحیح افراد شرکت کننده</a>
+                <!--<div class="form-group bighalf">
                     <a (click)="change('person-marine-suffix')" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.person" for="field_person">Person</a>
-                    <!--<select class="form-control" id="field_person" multiple name="person" [(ngModel)]="finalOrganizationNiazsanji.people">
+                    &lt;!&ndash;<select class="form-control" id="field_person" multiple name="person" [(ngModel)]="finalOrganizationNiazsanji.people">
                         <option [ngValue]="getSelected(finalOrganizationNiazsanji.people, personOption)" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.family}}</option>
-                    </select>-->
+                    </select>&ndash;&gt;
                     <ng-select
                         [items]="people"
                         [multiple]="true"
@@ -69,7 +70,7 @@
                         name="person"
                         id="field_person"
                         [(ngModel)]="selectedPeople">
-                </div>
+                </div>-->
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات تکمیلی نیازسنجی</div></div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.priceCost" for="field_priceCost">Price Cost</label>

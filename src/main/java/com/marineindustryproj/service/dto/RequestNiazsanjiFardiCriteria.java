@@ -22,6 +22,13 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  */
 public class RequestNiazsanjiFardiCriteria implements Serializable {
 
+    public LongFilter getSkillableLevelOfSkillId() {
+        return skillableLevelOfSkillId;
+    }
+
+    public void setSkillableLevelOfSkillId(LongFilter skillableLevelOfSkillId) {
+        this.skillableLevelOfSkillId = skillableLevelOfSkillId;
+    }
 
     /**
      * Class for filtering RequestStatus
@@ -72,6 +79,8 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
     private LongFilter allEducationalModuleId;
 
     private StringFilter educationalModuleTitle;
+
+    private LongFilter skillableLevelOfSkillId;
 
     private LongFilter personId;
 
@@ -292,6 +301,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
             Objects.equals(allEducationalModuleId, that.allEducationalModuleId) &&
             Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
             Objects.equals(personId, that.personId) &&
+            Objects.equals(skillableLevelOfSkillId, that.skillableLevelOfSkillId) &&
             Objects.equals(organizationChartId, that.organizationChartId);
     }
 
@@ -320,6 +330,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
         allEducationalModuleId,
         educationalModuleTitle,
         personId,
+        skillableLevelOfSkillId,
         organizationChartId
         );
     }
@@ -349,6 +360,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
                 (allEducationalModuleId != null ? "allEducationalModuleId=" + allEducationalModuleId + ", " : "") +
                 (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
+                (skillableLevelOfSkillId != null ? "skillableLevelOfSkillId=" + skillableLevelOfSkillId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
             "}";
     }

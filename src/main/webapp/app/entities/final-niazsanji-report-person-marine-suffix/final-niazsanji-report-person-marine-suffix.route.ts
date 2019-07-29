@@ -35,7 +35,7 @@ export class FinalNiazsanjiReportPersonMarineSuffixResolve implements Resolve<IF
 
 export const finalNiazsanjiReportPersonRoute: Routes = [
     {
-        path: 'final-niazsanji-report-person-marine-suffix',
+        path: 'final-niazsanji-report-person-marine-suffix/:finalNiazsanjiReportId',
         component: FinalNiazsanjiReportPersonMarineSuffixComponent,
         resolve: {
             pagingParams: JhiResolvePagingParams
@@ -60,7 +60,7 @@ export const finalNiazsanjiReportPersonRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'final-niazsanji-report-person-marine-suffix/new',
+        path: 'final-niazsanji-report-person-marine-suffix/new/:finalNiazsanjiReportId',
         component: FinalNiazsanjiReportPersonMarineSuffixUpdateComponent,
         resolve: {
             finalNiazsanjiReportPerson: FinalNiazsanjiReportPersonMarineSuffixResolve
