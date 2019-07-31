@@ -274,6 +274,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         return;
     }
     loadPage(page: number) {
+        debugger;
         if (page !== this.previousPage) {
             this.previousPage = page;
             this.transition();
@@ -288,6 +289,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });*/
+        debugger;
         this.makeCriteria(this.unchangedCriteria);
     }
 

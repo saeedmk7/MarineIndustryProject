@@ -103,34 +103,6 @@ export class FinalNiazsanjiReportMarineSuffixUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
 
-
-        const finalSelectedIds = this.selectedPeople.map(a => a.id);
-        if(finalSelectedIds.length <= 0) {
-            this.onError('حداقل یک نفر را باید انتخاب نمائید.');
-            return;
-        }
-        const  finalPersonIds = this.finalNiazsanjiReportPeople.map(a => a.personId);
-        const  mustDeletedPersonIds = finalPersonIds.filter(a => !finalSelectedIds.includes(a));
-        const  nustDelete = this.finalNiazsanjiReportPeople.filter(a => mustDeletedPersonIds.includes(a.personId));
-        nustDelete.forEach(a => {
-            this.finalNiazsanjiReportPersonService.delete(a.id).subscribe(response => {});
-        });
-        const  mustInsertPersonIds = finalSelectedIds.filter(a => !finalPersonIds.includes(a));
-        const  mustInsert = this.people.filter(a => mustInsertPersonIds.includes(a.id));
-        mustInsert.forEach(a => {
-            let final: IFinalNiazsanjiReportPersonMarineSuffix = new FinalNiazsanjiReportPersonMarineSuffix();
-            final.personId = a.id;
-            final.finalNiazsanjiReportId = this.finalNiazsanjiReport.id;
-            final.archived = false;
-            final.niazSanjiSource = this.finalNiazsanjiReport.niazSanjiSource;
-            final.priceCost = this.finalNiazsanjiReport.priceCost;
-            final.sourceId = this.finalNiazsanjiReportPeople[0].sourceId;
-            final.status = 0;
-            this.finalNiazsanjiReportPersonService.create(final).subscribe((resp: IFinalNiazsanjiReportPersonMarineSuffix) => {
-
-            });
-        });
-
         if (this.finalNiazsanjiReport.id !== undefined) {
             this.subscribeToSaveResponse(this.finalNiazsanjiReportService.update(this.finalNiazsanjiReport));
         } else {

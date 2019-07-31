@@ -5,7 +5,9 @@
                 <!--<button (click)="changeTyping()" style="display: inline" class="btn btn-sm btn-info">تغییر حالت</button>-->
                 <div id="typingDiv" class="typingClass" [@enterAnimation] *ngIf="show">
                     <!--<div id="typing"></div>-->
-                    {{currentSpeech}}
+                    <button (click)="changeSpeech(false)" class="btn circle btn-info btn-sm">&#60;</button>
+                    <span> {{currentSpeech}} </span>
+                    <button (click)="changeSpeech(true)" class="btn circle btn-info btn-sm">&#62;</button>
                 </div>
 
             </li>

@@ -1,45 +1,45 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {JhiAlertService, JhiLanguageService} from 'ng-jhipster';
+    import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+    import {Router} from '@angular/router';
+    import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+    import {JhiAlertService, JhiLanguageService} from 'ng-jhipster';
 
-import {VERSION} from 'app/app.constants';
-import {JhiLanguageHelper, Principal, LoginModalService, LoginService, UserService, IUser, User} from 'app/core';
-import {ProfileService} from '../profiles/profile.service';
-import {RequestOrganizationNiazsanjiMarineSuffixService} from "app/entities/request-organization-niazsanji-marine-suffix";
-import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
+    import {VERSION} from 'app/app.constants';
+    import {JhiLanguageHelper, Principal, LoginModalService, LoginService, UserService, IUser, User} from 'app/core';
+    import {ProfileService} from '../profiles/profile.service';
+    import {RequestOrganizationNiazsanjiMarineSuffixService} from "app/entities/request-organization-niazsanji-marine-suffix";
+    import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 
-import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
-import {IPersonMarineSuffix, PersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
-import {IBeautySpeechMarineSuffix} from "app/shared/model/beauty-speech-marine-suffix.model";
-import {BeautySpeechMarineSuffixService} from "app/entities/beauty-speech-marine-suffix";
-/*import {TypedOptions} from 'typed.js';
-import Typed from 'typed.js/src/typed.js';*/
-import {RequestStatus} from "app/shared/model/enums/RequestStatus";
-import * as $ from 'jquery';
-import {UsersRequestMarineSuffixService} from "app/entities/users-request-marine-suffix";
-import {RequestEducationalModuleMarineSuffixService} from "app/entities/request-educational-module-marine-suffix";
-import {SlideInOutAnimation} from "app/shared/animations";
-import {RequestNiazsanjiFardiMarineSuffixService} from "app/entities/request-niazsanji-fardi-marine-suffix";
-import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
-import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
-import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
-import {IRequestNiazsanjiFardiMarineSuffix} from "app/shared/model/request-niazsanji-fardi-marine-suffix.model";
-import {EducationalModuleMarineSuffixService} from "app/entities/educational-module-marine-suffix";
-import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
-import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
-import {NiazsanjiFardiMarineSuffixService} from "app/entities/niazsanji-fardi-marine-suffix";
-import {FinalOrganizationNiazsanjiMarineSuffixService} from "app/entities/final-organization-niazsanji-marine-suffix";
-import {EducationalHistoryMarineSuffixService} from "app/entities/educational-history-marine-suffix/educational-history-marine-suffix.service";
+    import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
+    import {IPersonMarineSuffix, PersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
+    import {IBeautySpeechMarineSuffix} from "app/shared/model/beauty-speech-marine-suffix.model";
+    import {BeautySpeechMarineSuffixService} from "app/entities/beauty-speech-marine-suffix";
+    /*import {TypedOptions} from 'typed.js';
+    import Typed from 'typed.js/src/typed.js';*/
+    import {RequestStatus} from "app/shared/model/enums/RequestStatus";
+    import * as $ from 'jquery';
+    import {UsersRequestMarineSuffixService} from "app/entities/users-request-marine-suffix";
+    import {RequestEducationalModuleMarineSuffixService} from "app/entities/request-educational-module-marine-suffix";
+    import {SlideInOutAnimation} from "app/shared/animations";
+    import {RequestNiazsanjiFardiMarineSuffixService} from "app/entities/request-niazsanji-fardi-marine-suffix";
+    import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
+    import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
+    import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
+    import {IRequestNiazsanjiFardiMarineSuffix} from "app/shared/model/request-niazsanji-fardi-marine-suffix.model";
+    import {EducationalModuleMarineSuffixService} from "app/entities/educational-module-marine-suffix";
+    import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
+    import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
+    import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+    import {NiazsanjiFardiMarineSuffixService} from "app/entities/niazsanji-fardi-marine-suffix";
+    import {FinalOrganizationNiazsanjiMarineSuffixService} from "app/entities/final-organization-niazsanji-marine-suffix";
+    import {EducationalHistoryMarineSuffixService} from "app/entities/educational-history-marine-suffix/educational-history-marine-suffix.service";
 
-@Component({
+    @Component({
     selector: 'mi-topbar',
     templateUrl: './topbar.component.html',
     styleUrls: ['topbar.scss'],
     animations: [SlideInOutAnimation]
-})
-export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
+    })
+    export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
     requestNiazsanjiFardis: IRequestNiazsanjiFardiMarineSuffix[];
     educationalModules: IEducationalModuleMarineSuffix[];
@@ -438,28 +438,34 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     showBeautySpeechResult(result: IBeautySpeechMarineSuffix[]) {
-        this.speeches = result.map(a => a.description);
-        let index = 0;
-        this.currentSpeech = this.speeches[index];
-        this.speechIntervals = setInterval(() => {
-
-            index++;
-            this.show = false;
-            this.sleep(1000).then(() =>{
-                this.show = true;
-            });
-            if(this.speeches.length > index)
-            {
-                this.currentSpeech = this.speeches[index];
-            }
-            else{
-                index = 0;
-            }
-        }, 120000);
+        debugger;
+        this.speeches = result.map(a => a.description).filter(this.treeUtilities.onlyUnique);
+        this.speechIntervals = setInterval(this.showSpeech(this.speeches), 30000);
     }
-
-
-
+    index: number = 0;
+    showSpeech(speeches: string[]){
+        debugger;
+        this.index++;
+        if(this.index < 0)
+        {
+            this.index = this.speeches.length - 1;
+        }
+        else if(this.index > speeches.length - 1)
+        {
+            this.index = 0;
+        }
+        this.currentSpeech = speeches[this.index];
+        this.show = false;
+        this.sleep(1000).then(() => {
+            this.show = true;
+        });
+    }
+    changeSpeech(incremental: boolean){
+        debugger;
+        if(!incremental)
+            this.index = this.index - 2;
+        this.showSpeech(this.speeches);
+    }
 
     onError(str) {
         this.jhiAlertService.error(str);
@@ -500,25 +506,6 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
     }
 
-    private getNewUsersRequest() {
-        if(this.isAdmin) {
-            let criteria = [
-                {key: 'requestStatus.equals', value: RequestStatus.NEW}
-            ];
-            this.usersRequestMarineSuffixService.count({
-                page: 0,
-                size: 2000,
-                criteria,
-                sort: null
-            }).subscribe(
-                (res: HttpResponse<any>) => {
-                    //localStorage.setItem('usersRequestCount', res.body);
-                    this.usersRequestCounter = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-        }
-    }
     //request niazsanji fardi
     countAllRequestNiazSanjiFardi() {
         if(this.currentPerson) {
@@ -546,6 +533,12 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
                 );
         }
     }
+
+    ngOnDestroy(): void {
+        clearInterval(this.intervals);
+        clearInterval(this.dailyIntervals);
+        clearInterval(this.speechIntervals);
+    }
     //end
 
 
@@ -569,9 +562,23 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }*/
 
-    ngOnDestroy(): void {
-        clearInterval(this.intervals);
-        clearInterval(this.dailyIntervals);
-        clearInterval(this.speechIntervals);
+    private getNewUsersRequest() {
+        if(this.isAdmin) {
+            let criteria = [
+                {key: 'requestStatus.equals', value: RequestStatus.NEW}
+            ];
+            this.usersRequestMarineSuffixService.count({
+                page: 0,
+                size: 2000,
+                criteria,
+                sort: null
+            }).subscribe(
+                (res: HttpResponse<any>) => {
+                    //localStorage.setItem('usersRequestCount', res.body);
+                    this.usersRequestCounter = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
     }
-}
+    }
