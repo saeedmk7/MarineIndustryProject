@@ -373,7 +373,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             data: sortedChartResults.map(a => a.priceCostNew),
             color: "red"
         },{
-            name: "کل هزینه",
+            name: "کل سرمایه گذاری",
             data: sortedChartResults.map(a => a.totalPriceCost),
             color: "#5edbff"
         }];
@@ -485,7 +485,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 thousandsSep: '.'
             },
             title: {
-                text: 'نمودار هزینه (ریال) گروه های سازمان'
+                text: 'نمودار سرمایه گذاری (ریال) گروه های سازمان'
             },
             xAxis: {
                 categories: this.categories,
@@ -494,7 +494,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'میزان هزینه'
+                    text: 'میزان سرمایه گذاری'
                 },
                 opposite: true
             },
@@ -638,13 +638,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     makeDetailSeries(){
 
         this.detailMonthPriceCostSeries = [{
-                name: "هزینه اجرا شده",
+                name: "سرمایه گذاری اجرا شده",
                 data: this.planningAndRunMonthReports.filter(a => a.reportType == 2)
                     .sort((a,b) => (a.month > b.month) ? -1 : (a.month < b.month) ? 1 : 0)
                     .map(a => a.personCost),
                 color: "#28a745"
             },{
-            name: "هزینه برنامه ریزی شده",
+            name: "سرمایه گذاری برنامه ریزی شده",
             data: this.planningAndRunMonthReports.filter(a => a.reportType == 1)
                 .sort((a,b) => (a.month > b.month) ? -1 : (a.month < b.month) ? 1 : 0)
                 .map(a => a.personCost),
@@ -670,8 +670,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         // @ts-ignore
         this.detailMonthPersonHourChart = this.showColumnChart(' نمودار نفر ساعت به تفکیک ماه برنامه ریزی و اجرا - ' + this.selectedGroup, this.detailMonthPersonHourSeries,
             'میزان نفر ساعت', cats);
-        this.detailMonthPriceCostChart = this.showColumnChart(' نمودار هزینه (ریال) به تفکیک ماه برنامه ریزی و اجرا - ' + this.selectedGroup, this.detailMonthPriceCostSeries,
-            'میزان هزینه', cats);
+        this.detailMonthPriceCostChart = this.showColumnChart(' نمودار سرمایه گذاری (ریال) به تفکیک ماه برنامه ریزی و اجرا - ' + this.selectedGroup, this.detailMonthPriceCostSeries,
+            'میزان سرمایه گذاری', cats);
     }
     makePiesSeries()
     {
@@ -681,9 +681,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.pieRunnningPersonHourChart = this.showPieChart('نمودار درصد نفر ساعت اجرا شده گروه ' + this.selectedGroup +' به تفکیک ماه', pieRunnningPersonHourSeries);
 
         let piePlanningCostSeries: any = this.makePieCostSeries(1);
-        this.piePlanningPriceCostChart = this.showPieChart('نمودار درصد هزینه برنامه ریزی شده گروه ' + this.selectedGroup +' به تفکیک ماه', piePlanningCostSeries);
+        this.piePlanningPriceCostChart = this.showPieChart('نمودار درصد سرمایه گذاری برنامه ریزی شده گروه ' + this.selectedGroup +' به تفکیک ماه', piePlanningCostSeries);
         let pieRunnningCostSeries: any = this.makePieCostSeries(2);
-        this.pieRunnningPriceCostChart = this.showPieChart('نمودار درصد هزینه اجرا شده گروه ' + this.selectedGroup +' به تفکیک ماه', pieRunnningCostSeries);
+        this.pieRunnningPriceCostChart = this.showPieChart('نمودار درصد سرمایه گذاری اجرا شده گروه ' + this.selectedGroup +' به تفکیک ماه', pieRunnningCostSeries);
     }
     makePiePersonHourSeries(reportType: number){
 

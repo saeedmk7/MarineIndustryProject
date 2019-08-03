@@ -507,7 +507,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         else {
             if(isNaN(this.requestNiazsanjiFardi.costAllEducationalModule))
             {
-                this.message = "لطفا در باکس هزینه کلیه پودمان فقط عدد وارد نمائید.";
+                this.message = "لطفا در باکس سرمایه گذاری کلیه پودمان فقط عدد وارد نمائید.";
                 this.isSaving = false;
                 return;
             }
@@ -517,7 +517,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         else {
             if(isNaN(this.requestNiazsanjiFardi.costApprovedEducationalModule))
             {
-                this.message = "لطفا در باکس هزینه از شناسنامه آموزشی فقط عدد وارد نمائید.";
+                this.message = "لطفا در باکس سرمایه گذاری از شناسنامه آموزشی فقط عدد وارد نمائید.";
                 this.isSaving = false;
                 return;
             }

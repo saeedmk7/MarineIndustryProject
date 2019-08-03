@@ -16,10 +16,10 @@
             "detail": {
                 "title": "جزئیات اطلاعات برنامه ریزی"
             },
-            "directCost": "هزینه های مستقیم",
-            "directCostDescription": "تشریح هزینه های مستقیم",
-            "undirectCost": "هزینه های غیرمستقیم",
-            "undirectCostDescription": "تشریح هزینه های غیرمستقیم",
+            "directCost": "سرمایه گذاری های مستقیم",
+            "directCostDescription": "تشریح سرمایه گذاری های مستقیم",
+            "undirectCost": "سرمایه گذاری های غیرمستقیم",
+            "undirectCostDescription": "تشریح سرمایه گذاری های غیرمستقیم",
             "step": "مرحله",
             "finished": "تایید نهایی شده؟",
             "finishedUserLogin": "کاربر نهایی کننده",

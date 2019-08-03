@@ -27,6 +27,7 @@ import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import * as $ from 'jquery';
 import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
+import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 
 @Component({
     selector: 'mi-request-organization-niazsanji-marine-suffix-update',
@@ -48,6 +49,12 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
     educationalmodules: IEducationalModuleMarineSuffix[];
     organizationCharts: IOrganizationChartMarineSuffix[];
 
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
+
     targetPeople: IPersonMarineSuffix[];
 
     recommenedOrgCharts: IOrganizationChartMarineSuffix[];
@@ -57,7 +64,6 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
     selectionType: boolean = false;
     disable: boolean = false;
     currentAccount: any;
-    isAdmin: boolean = false;
     constructor(
         private jhiAlertService: JhiAlertService,
         private requestOrganizationNiazsanjiService: RequestOrganizationNiazsanjiMarineSuffixService,
@@ -92,8 +98,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         this.principal.identity().then(account => {
 
             this.currentAccount = account;
-            if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-                this.isAdmin = true;
+            this.setRoles(this.currentAccount);
             this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
                  this.currentPerson = resp.body;
                  this.currentUserFullName = this.currentPerson.fullName;
@@ -140,6 +145,20 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         );
 
     }
+    setRoles(account: any){
+
+        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+            this.isAdmin = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+            this.isModirAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+            this.isModirKolAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+            this.isKarshenasArshadAmozeshSazman = true;
+
+        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isSuperUsers = true;
+    }
     loadOrgCharts(){
         if(this.organizationChartService.organizationchartsAll)
         {
@@ -174,7 +193,6 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         }
     }
     handlePeopleList(){
-
         const rootId = this.treeUtilities.getRootId(this.organizationCharts ,this.currentPerson.organizationChartId);
         const orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationCharts ,rootId).filter(this.treeUtilities.onlyUnique);
 
@@ -209,6 +227,19 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
             orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationCharts , this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
         }
         this.requestOrganizationNiazsanji.people = this.people.filter(a => orgIds.includes(a.organizationChartId)).filter(this.treeUtilities.onlyUnique);
+    }
+    addAllPeople(){
+        if(this.personService.people){
+            this.people = this.personService.people;
+            //this.requestOrganizationNiazsanji.people = this.people;
+        }
+        else{
+            this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
+                    this.people = res.body;
+                    //this.requestOrganizationNiazsanji.people = this.people;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message));
+        }
     }
     findTargetPeople(){
         let organization = this.organizationCharts.find(a => a.id == this.currentPerson.organizationChartId);
@@ -297,7 +328,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         }
         if(this.requestOrganizationNiazsanji.priceCost && isNaN(this.requestOrganizationNiazsanji.priceCost))
         {
-            this.message = "لطفا در باکس هزینه فقط عدد وارد نمائید.";
+            this.message = "لطفا در باکس سرمایه گذاری فقط عدد وارد نمائید.";
             this.isSaving = false;
             return;
         }

@@ -213,6 +213,7 @@
                 </div>
                 <div class="form-group">
                     <button type="button" (click)="addAllPeopleOfThisUser()" class="btn btn-primary">اضافه کردن تمامی افراد زیر مجموعه</button>
+                    <button type="button" style="margin: 5%" *ngIf="isSuperUsers" (click)="addAllPeople()" class="btn btn-warning">انتخاب از کلیه افراد سازمان</button>
                 </div>
                 <ng-container *ngIf="selectionType">
                 <div class="form-group">
@@ -291,7 +292,7 @@
                     </div>
                 </div>
                 <div class="form-group bighalf">
-                    <div class="alert alert-info">لطفا در کادر هزینه، مجموع هزینه به ازای تمامی افراد انتخابی را وارد نمائید.</div>
+                    <div class="alert alert-info">لطفا در کادر سرمایه گذاری، مجموع سرمایه گذاری به ازای تمامی افراد انتخابی را وارد نمائید.</div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.description" for="field_description">Description</label>

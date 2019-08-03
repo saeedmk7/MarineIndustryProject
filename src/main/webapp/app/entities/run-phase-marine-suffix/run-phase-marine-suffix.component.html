@@ -180,7 +180,7 @@
                 </td>
             </tr>
             <tr>
-                <td>هزینه</td>
+                <td>سرمایه گذاری</td>
                 <td *ngFor="let planningAndRunMonthReport of planningAndRunMonthReports">
                     {{((planningAndRunMonthReport.personCost / planningAndRunMonthReport.totalPriceCost) * 100) | number:'1.0-0'}} %
                 </td>
@@ -240,7 +240,7 @@
             <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="250"></kendo-grid-column>
             <kendo-grid-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="200"></kendo-grid-column>
-            <kendo-grid-column field="finalizeCost" title="هزینه صرف شده" [width]="100">
+            <kendo-grid-column field="finalizeCost" title="سرمایه گذاری صرف شده" [width]="100">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalFinalizeCost | number}}</ng-template>
@@ -256,10 +256,10 @@
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="200"></kendo-excelexport-column>
-                <kendo-excelexport-column field="finalizeCost" title="هزینه پایانی" [width]="200"></kendo-excelexport-column>
+                <kendo-excelexport-column field="finalizeCost" title="سرمایه گذاری پایانی" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="200"></kendo-excelexport-column>
-                <!--<kendo-excelexport-column field="priceCost" title="هزینه" [width]="100"></kendo-excelexport-column>-->
+                <!--<kendo-excelexport-column field="priceCost" title="سرمایه گذاری" [width]="100"></kendo-excelexport-column>-->
                 <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="finishDate" title="تاریخ دقیق برگزاری دوره" [width]="200"></kendo-excelexport-column>
@@ -318,7 +318,7 @@
                     let-column="column">جمع کل (نفر ساعت): {{total | number}}</ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>
-            <kendo-grid-column field="finalizeCost" title="هزینه صرف شده" [width]="100">
+            <kendo-grid-column field="finalizeCost" title="سرمایه گذاری صرف شده" [width]="100">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalFinalizeCost | number}}</ng-template>
@@ -326,7 +326,7 @@
 
             <!--<kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="300"></kendo-grid-column>
             <kendo-grid-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="300"></kendo-grid-column>-->
-            <!--<kendo-grid-column field="priceCost" title="هزینه اولیه" [width]="100">-->
+            <!--<kendo-grid-column field="priceCost" title="سرمایه گذاری اولیه" [width]="100">-->
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalCost | number}}</ng-template>
@@ -345,9 +345,9 @@
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-excelexport-column>
-                <kendo-excelexport-column field="finalizeCost" title="هزینه پایانی" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="finalizeCost" title="سرمایه گذاری پایانی" [width]="100"></kendo-excelexport-column>
 
-                <!--<kendo-excelexport-column field="priceCost" title="هزینه" [width]="100"></kendo-excelexport-column>-->
+                <!--<kendo-excelexport-column field="priceCost" title="سرمایه گذاری" [width]="100"></kendo-excelexport-column>-->
                 <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="finishDate" title="تاریخ دقیق برگزاری دوره" [width]="200"></kendo-excelexport-column>

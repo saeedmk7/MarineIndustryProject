@@ -100,6 +100,10 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     public totalFinalizeCost: any;
     public message: string;
 
+    searchbarModel: SearchPanelModel[] = [];
+    criteriaSubscriber: Subscription;
+    criteria: any;
+
     constructor(
         private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService,
         private finalNiazsanjiReportPersonService: FinalNiazsanjiReportPersonMarineSuffixService,
@@ -125,6 +129,12 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
         });
+        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
+            this.criteria = criteria.content;
+            this.done = true;
+            this.loadAll(criteria.content);
+
+        });
         this.yearsCollections = GREGORIAN_START_END_DATE;
     }
     public ngAfterViewInit(): void {
@@ -132,16 +142,15 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         //this.grid.expandRow(0);
     }
 
-    onSubmit(f: any) {
+    loadAll(criteria?) {
 
         this.message = "";
         this.finalNiazsanjiReportsFardis = [];
         this.finalNiazsanjiReportsOrganizations = [];
-        if(f.value['niazsanjiYear'] == null)
+        if(!criteria)
             return;
-        const niazSanjiSource = f.value['niazSanjiSource'];
-        let criteria = [];
-        criteria = this.createCriteria(criteria, f);
+
+        criteria = this.createCriteria(criteria);
 
         if (niazSanjiSource) {
             criteria.push({
@@ -168,39 +177,25 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             );
     }
 
-    createCriteria(criteria, f): any {
+    createCriteria(criteria): any {
         debugger;
-        if (f.value['status'] != undefined) {
-            let val = f.value['status'];
-            if (val != undefined) {
+        const org = criteria.find(a => a.key == 'organizationChartId.equals');
+        if(org) {
+            const orgId = +org.value;
+            criteria = criteria.filter(a => a.key != 'organizationChartId.equals');
+            if (orgId) {
+                const childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, orgId).filter(this.treeUtilities.onlyUnique);
                 criteria.push({
-                    key: 'status.equals', value: val
+                    key: 'organizationChartId.in', value: childIds
                 });
             }
-        }
-        if (f.value['planningRunMonth']) {
-            let val = f.value['planningRunMonth'];
-            if (val) {
+            else if(this.isModirAmozesh){
+                let org = this.recommenedOrgCharts.find(a => a.parentId == null);
+                let childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, org.id).filter(this.treeUtilities.onlyUnique);
                 criteria.push({
-                    key: 'planningRunMonth.equals', value: val
+                    key: 'organizationChartId.in', value: childIds
                 });
             }
-        }
-        if (f.value['niazsanjiYear']) {
-            let val = f.value['niazsanjiYear'];
-            if (val) {
-                criteria.push({
-                    key: 'niazsanjiYear.equals', value: val
-                });
-            }
-        }
-
-        if (f.value['organizationChartId']) {
-            let val = +f.value['organizationChartId'];
-            let childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, val).filter(this.treeUtilities.onlyUnique);
-            criteria.push({
-                key: 'organizationChartId.in', value: childIds
-            });
         }
         else{
             if(this.isModirAmozesh){
@@ -210,26 +205,6 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                     key: 'organizationChartId.in', value: childIds
                 });
             }
-        }
-        if (f.value['personId']) {
-            let val = +f.value['personId'];
-            criteria.push({
-                key: 'personId.in', value: val
-            });
-        }
-
-        if (f.value['educationalModuleTitle']) {
-            let val = f.value['educationalModuleTitle'];
-            criteria.push({
-                key: 'educationalModuleTitle.contains', value: val
-            });
-        }
-
-        if (f.value['courseTypeId']) {
-            let val = +f.value['courseTypeId'];
-            criteria.push({
-                key: 'courseTypeId.in', value: val
-            });
         }
         return criteria;
     }
