@@ -19,8 +19,8 @@
         </h2>
     </div>-->
     <mi-alert></mi-alert>
-    <!--<search-panel [searchPanelModel]="searchbarModel"></search-panel>-->
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <search-panel [searchPanelModel]="searchbarModel"></search-panel>
+    <!--<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
         <div class="card border-success ">
             <a data-toggle="collapse" href="#collapseExample" class="card-header center" style="background-color: aliceblue;">
                 <span class="panel-title">پنل جستجو</span>
@@ -70,8 +70,8 @@
                             id="field_planningRunMonth"
                             [(ngModel)]="finalNiazsanjiReport.planningRunMonth">
                     </div>
-                  <!--  <div class="form-group">
-                    </div>-->
+                  &lt;!&ndash;  <div class="form-group">
+                    </div>&ndash;&gt;
                     <div class="form-group" *ngIf="isSuperUsers">
                         <label class="form-control-label" for="field_organizationChart">گروه</label>
                         <ng-select
@@ -119,7 +119,7 @@
                             id="field_personId"
                             [(ngModel)]="personId">
                     </div>
-                    <!--<div class="form-group half">
+                    &lt;!&ndash;<div class="form-group half">
                         <label class="form-control-label" for="field_educationalModule">پودمان آموزشی</label>
                         <ng-select
                             [items]="educationalModules"
@@ -132,7 +132,7 @@
                             name="educationalModuleId"
                             id="field_educationalModule"
                             [(ngModel)]="finalNiazsanjiReport.educationalModuleId">
-                    </div>-->
+                    </div>&ndash;&gt;
 
                     <div class="form-group">
                         <label class="form-control-label" for="field_status">وضعیت برنامه ریزی</label>
@@ -171,7 +171,7 @@
                 </div>
             </div>
         </div>
-    </form>
+    </form>-->
     <br/>
     <div class="table-responsive" *ngIf="finalNiazsanjiReportsFardis.length > 0">
         <kendo-grid

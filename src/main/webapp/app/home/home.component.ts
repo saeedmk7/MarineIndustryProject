@@ -131,17 +131,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.finalNiazsanjiReportService.getHomePageReport(niazsanjiYear).subscribe((resp: HttpResponse<IHomePageReport>) => {
 
            this.homePageReport = resp.body;
-           this.homePageReport.homePageReportDetails.filter(a => a.homePageReportSecondLevelDetails.filter(w => w.courseTypeId == 1));
-           let myNewModel;
-           this.homePageReport.homePageReportDetails.forEach(w => {
-               myNewModel = [
-                   w.homePageReportSecondLevelDetails.map(e => {
-
-                   })
-               ]
-
-           })
-
            console.log(this.homePageReport);
         },
             (res: HttpErrorResponse) => this.onError(res.message));

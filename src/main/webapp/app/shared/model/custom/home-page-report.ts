@@ -1,5 +1,6 @@
 import {IHomePageReportDetail} from "app/shared/model/custom/home-page-report-detail";
 import {IHomePageReportCourseTypeDetail} from "app/shared/model/custom/home-page-report-course-type-detail";
+import {IHomePageReportOrganizationAndCourseTypeDetail} from 'app/shared/model/custom/home-page-report-organization-and-course-type-detail';
 
 export interface IHomePageReport {
     total?: number;
@@ -21,6 +22,7 @@ export interface IHomePageReport {
     remainingStuffsPercent?: number;
     homePageReportDetails?: IHomePageReportDetail[];
     homePageReportCourseTypeDetails?: IHomePageReportCourseTypeDetail[];
+    homePageReportOrganizationAndCourseTypeDetails?: IHomePageReportOrganizationAndCourseTypeDetail[];
 }
 
 export class HomePageReport implements IHomePageReport {
@@ -44,6 +46,7 @@ export class HomePageReport implements IHomePageReport {
         public remainingStuffsPercent?: number,
         public homePageReportDetails?: IHomePageReportDetail[],
         public homePageReportCourseTypeDetails?: IHomePageReportCourseTypeDetail[],
+        public homePageReportOrganizationAndCourseTypeDetails?: IHomePageReportOrganizationAndCourseTypeDetail[]
     ) {
     }
 }

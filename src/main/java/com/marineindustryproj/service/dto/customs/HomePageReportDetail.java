@@ -25,8 +25,7 @@ public class HomePageReportDetail implements Serializable {
                                 Float remainingManagers,
                                 Float remainingManagersPercent,
                                 Float remainingStuffs,
-                                Float remainingStuffsPercent,
-                                List<HomePageReportSecondLevelDetail> homePageReportSecondLevelDetails) {
+                                Float remainingStuffsPercent) {
         this.organizationChartId = organizationChartId;
         this.organizationChartTitle = organizationChartTitle;
         this.total = total;
@@ -47,7 +46,6 @@ public class HomePageReportDetail implements Serializable {
         this.remainingManagersPercent = remainingManagersPercent;
         this.remainingStuffs = remainingStuffs;
         this.remainingStuffsPercent = remainingStuffsPercent;
-        this.homePageReportSecondLevelDetails = homePageReportSecondLevelDetails;
     }
 
     private Long organizationChartId;
@@ -89,8 +87,6 @@ public class HomePageReportDetail implements Serializable {
     private Float remainingStuffs;
 
     private Float remainingStuffsPercent;
-
-    private List<HomePageReportSecondLevelDetail> homePageReportSecondLevelDetails;
 
     public Long getOrganizationChartId() {
         return organizationChartId;
@@ -250,14 +246,5 @@ public class HomePageReportDetail implements Serializable {
 
     public void setRemainingStuffsPercent(Float remainingStuffsPercent) {
         this.remainingStuffsPercent = remainingStuffsPercent;
-    }
-
-
-    public List<HomePageReportSecondLevelDetail> getHomePageReportSecondLevelDetails() {
-        return homePageReportSecondLevelDetails;
-    }
-
-    public void setHomePageReportSecondLevelDetails(List<HomePageReportSecondLevelDetail> homePageReportSecondLevelDetails) {
-        this.homePageReportSecondLevelDetails = homePageReportSecondLevelDetails;
     }
 }

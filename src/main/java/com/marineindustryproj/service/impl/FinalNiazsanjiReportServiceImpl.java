@@ -789,34 +789,42 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                 .filter(a -> a.getStatus() < 20 && stuffJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0).mapToDouble(a -> a.getTotalLearningTime()).sum());
             homePageReportDetail.setRemainingStuffsPercent((homePageReportDetail.getRemainingStuffs() / homePageReportDetail.getTotal()) * 100);
 
-            List<HomePageReportSecondLevelDetail> homePageReportSecondLevelDetails = new ArrayList<>();
-            for (CourseTypeDTO courseTypeDTO : courseTypeDTOS) {
-                HomePageReportSecondLevelDetail homePageReportSecondLevelDetail = new HomePageReportSecondLevelDetail();
-                homePageReportSecondLevelDetail.setCourseTypeId(courseTypeDTO.getId());
-                homePageReportSecondLevelDetail.setCourseTypeTitle(courseTypeDTO.getTitle());
-
-                List<HomePageReportThirdLevelDetail> homePageReportThirdLevelDetails = new ArrayList<>();
-                HomePageReportThirdLevelDetail homePageReportOrgDetail = new HomePageReportThirdLevelDetail();
-                homePageReportOrgDetail.setTotal((float) finalNiazsanjiReportDTOs.stream()
-                    .filter(a -> a.getCourseTypeId().equals(courseTypeDTO.getId())).mapToDouble(a -> a.getTotalLearningTime()).sum());
-                homePageReportOrgDetail.setTotalPercent((homePageReportOrgDetail.getTotal() / homePageReport.getTotal()) * 100);
-
-                homePageReportOrgDetail.setPassed((float) finalNiazsanjiReportDTOs.stream()
-                                                      .filter(a -> a.getCourseTypeId().equals(courseTypeDTO.getId()) && a.getStatus().equals(20))
-                                                      .mapToDouble(a -> a.getTotalLearningTime()).sum());
-                homePageReportOrgDetail.setPassedPercent((homePageReportOrgDetail.getPassed() / homePageReportOrgDetail.getTotal()) * 100);
-                homePageReportOrgDetail.setRemaining((float) finalNiazsanjiReportDTOs.stream()
-                    .filter(a -> a.getCourseTypeId().equals(courseTypeDTO.getId()) && a.getStatus() < 20)
-                    .mapToDouble(a -> a.getTotalLearningTime()).sum());
-                homePageReportOrgDetail.setRemainingPercent((homePageReportOrgDetail.getRemaining() / homePageReportOrgDetail.getTotal()) * 100);
-                homePageReportThirdLevelDetails.add(homePageReportOrgDetail);
-                homePageReportSecondLevelDetail.setHomePageReportThirdLevelDetails(homePageReportThirdLevelDetails);
-                homePageReportSecondLevelDetails.add(homePageReportSecondLevelDetail);
-            }
-            homePageReportDetail.setHomePageReportSecondLevelDetails(homePageReportSecondLevelDetails);
             homePageReportDetails.add(homePageReportDetail);
         }
         homePageReport.setHomePageReportDetails(homePageReportDetails);
+
+        List<HomePageReportOrganizationAndCourseTypeDetail> homePageReportOrganizationAndCourseTypeDetails = new ArrayList<>();
+
+        for (CourseTypeDTO courseTypeDTO : courseTypeDTOS) {
+            HomePageReportOrganizationAndCourseTypeDetail homePageReportOrganizationAndCourseTypeDetail = new HomePageReportOrganizationAndCourseTypeDetail();
+            homePageReportOrganizationAndCourseTypeDetail.setCourseTypeId(courseTypeDTO.getId());
+            homePageReportOrganizationAndCourseTypeDetail.setCourseTypeTitle(courseTypeDTO.getTitle());
+
+            List<HomePageReportChartOrganizationDetail> homePageReportChartOrganizationDetails = new ArrayList<>();
+            for (OrganizationChart group: groups) {
+                HomePageReportChartOrganizationDetail homePageReportChartOrganizationDetail = new HomePageReportChartOrganizationDetail();
+                homePageReportChartOrganizationDetail.setOrganizationChartId(group.getId());
+                homePageReportChartOrganizationDetail.setOrganizationChartTitle(group.getTitle());
+
+                List<Long> orgIds = this.getAllOfChilderenIdsOfThisId(organizationCharts, group.getId(), true);
+                List<FinalNiazsanjiReportHomePageDTO> finalNiazsanjiReportDTOs = finalNiazsanjiReportHomePageDTOS.stream()
+                    .filter(a -> orgIds.contains(a.getOrganizationChartId()) && a.getCourseTypeId().equals(courseTypeDTO.getId()) && a.getNiazsanjiYear().equals(niazsanjiYear)).collect(Collectors.toList());
+
+                homePageReportChartOrganizationDetail.setTotal((float) finalNiazsanjiReportDTOs.stream().mapToDouble(a -> a.getTotalLearningTime()).sum());
+                homePageReportChartOrganizationDetail.setTotalPercent((homePageReportChartOrganizationDetail.getTotal() / homePageReport.getTotal()) * 100);
+
+                homePageReportChartOrganizationDetail.setPassed((float) finalNiazsanjiReportDTOs.stream().filter(a -> a.getStatus().equals(20)).mapToDouble(a -> a.getTotalLearningTime()).sum());
+                homePageReportChartOrganizationDetail.setTotalPercent((homePageReportChartOrganizationDetail.getPassed() / homePageReport.getTotal()) * 100);
+
+                homePageReportChartOrganizationDetail.setRemaining((float) finalNiazsanjiReportDTOs.stream().filter(a -> a.getStatus() < 20).mapToDouble(a -> a.getTotalLearningTime()).sum());
+                homePageReportChartOrganizationDetail.setTotalPercent((homePageReportChartOrganizationDetail.getRemaining() / homePageReport.getTotal()) * 100);
+
+                homePageReportChartOrganizationDetails.add(homePageReportChartOrganizationDetail);
+            }
+            homePageReportOrganizationAndCourseTypeDetail.setHomePageReportChartOrganizationDetails(homePageReportChartOrganizationDetails);
+            homePageReportOrganizationAndCourseTypeDetails.add(homePageReportOrganizationAndCourseTypeDetail);
+        }
+        homePageReport.setHomePageReportOrganizationAndCourseTypeDetails(homePageReportOrganizationAndCourseTypeDetails);
         return  homePageReport;
     }
 

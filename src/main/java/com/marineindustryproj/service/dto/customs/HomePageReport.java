@@ -27,7 +27,8 @@ public class HomePageReport implements Serializable {
                           Float remainingStuffs,
                           Float remainingStuffsPercent,
                           List<HomePageReportDetail> homePageReportDetails,
-                          List<HomePageReportCourseTypeDetail> homePageReportCourseTypeDetails) {
+                          List<HomePageReportCourseTypeDetail> homePageReportCourseTypeDetails,
+                          List<HomePageReportOrganizationAndCourseTypeDetail> homePageReportOrganizationAndCourseTypeDetails) {
         this.total = total;
         this.totalManagers = totalManagers;
         this.totalManagersPercent = totalManagersPercent;
@@ -47,6 +48,7 @@ public class HomePageReport implements Serializable {
         this.remainingStuffsPercent = remainingStuffsPercent;
         this.homePageReportDetails = homePageReportDetails;
         this.homePageReportCourseTypeDetails = homePageReportCourseTypeDetails;
+        this.homePageReportOrganizationAndCourseTypeDetails = homePageReportOrganizationAndCourseTypeDetails;
     }
 
     private Float total;
@@ -86,6 +88,8 @@ public class HomePageReport implements Serializable {
     private List<HomePageReportDetail> homePageReportDetails;
 
     private List<HomePageReportCourseTypeDetail> homePageReportCourseTypeDetails;
+
+    private List<HomePageReportOrganizationAndCourseTypeDetail> homePageReportOrganizationAndCourseTypeDetails;
 
     public Float getTotal() {
         return total;
@@ -237,5 +241,13 @@ public class HomePageReport implements Serializable {
 
     public void setHomePageReportCourseTypeDetails(List<HomePageReportCourseTypeDetail> homePageReportCourseTypeDetails) {
         this.homePageReportCourseTypeDetails = homePageReportCourseTypeDetails;
+    }
+
+    public List<HomePageReportOrganizationAndCourseTypeDetail> getHomePageReportOrganizationAndCourseTypeDetails() {
+        return homePageReportOrganizationAndCourseTypeDetails;
+    }
+
+    public void setHomePageReportOrganizationAndCourseTypeDetails(List<HomePageReportOrganizationAndCourseTypeDetail> homePageReportOrganizationAndCourseTypeDetails) {
+        this.homePageReportOrganizationAndCourseTypeDetails = homePageReportOrganizationAndCourseTypeDetails;
     }
 }

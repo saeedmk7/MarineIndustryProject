@@ -152,18 +152,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
 
         criteria = this.createCriteria(criteria);
 
-        if (niazSanjiSource) {
-            criteria.push({
-                key: 'niazSanjiSource.equals',
-                value: 'FARDI'
-            });
-        }
-        else {
-            criteria.push({
-                key: 'niazSanjiSource.equals',
-                value: 'ORGANIZATION'
-            });
-        }
+
         this.finalNiazsanjiReportService
             .query({
                 page: 0,
@@ -206,6 +195,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 });
             }
         }
+
         return criteria;
     }
 
@@ -389,21 +379,34 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         this.principal.identity().then(account => {
             this.currentAccount = account;
             this.setRoles(account);
-            /*if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined) {
-                this.isAdmin = true;
-            }*/
 
             this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
                 this.currentPerson = resp.body;
 
+                const values = [{
+                    value: 'FARDI',
+                    text: 'نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی',
+                    checked: 'checked'
+                },{
+                    value: 'ORGANIZATION',
+                    text: 'نیازسنجی پودمان سازمانی (متمرکز و گروهی)',
+                    checked: ''
+                }];
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','niazSanjiSource','radio', 'equals', values));
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','niazsanjiYear','select', 'equals', this.yearsCollections, 'year', '', this.convertObjectDatesService.getNowShamsiYear().toString()));
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','planningRunMonth','select', 'equals', this.months, 'persianMonth'));
+
                 this.prepareSearchOrgChart();
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','educationalModuleTitle','text', 'contains'));
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','status','select', 'equals', this.statusMeaning, 'mean'));
+                this.prepareSearchCourseType();
                 this.prepareSearchEducationalModule();
                 this.preparePeople();
-                this.prepareSearchDate();
-                this.prepareSearchCourseType();
+                //this.prepareSearchDate();
+
             });
         });
-        this.registerChangeInFinalNiazsanjiReports();
+        //this.registerChangeInFinalNiazsanjiReports();
     }
     setRoles(account: any){
         if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
@@ -421,8 +424,8 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     prepareSearchCourseType(){
         this.courseTypeService.query().subscribe(
             (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
-
                 this.coursetypes = res.body;
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','courseTypeId','select', 'equals', this.coursetypes));
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -430,35 +433,39 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     prepareSearchEducationalModule() {
         if (this.educationalModuleService.educationalModules) {
             this.educationalModules = this.educationalModuleService.educationalModules
+            //this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','educationalModuleId','select', 'equals', this.educationalModules, 'fullTitle'));
         }
         else {
             this.educationalModuleService.query().subscribe(
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                     this.educationalModules = res.body;
+                    //this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','educationalModuleId','select', 'equals', this.educationalModules, 'fullTitle'));
                 },
                 (res: HttpErrorResponse) => this.onError(res.message))
         }
     }
     prepareSearchPerson(orgs: IOrganizationChartMarineSuffix[]) {
-
         if(this.isSuperUsers)
         {
             if(!this.people) {
                 if (this.personService.people) {
                     this.people = this.personService.people;
                     this.recommendedPeople = this.convertObjectDatesService.goClone(this.people);
+                    this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.recommendedPeople, 'fullName'));
                 }
                 else {
                     this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
 
                             this.people = res.body;
                             this.recommendedPeople = this.convertObjectDatesService.goClone(this.people);
+                            this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.recommendedPeople, 'fullName'));
                         },
                         (res: HttpErrorResponse) => this.onError(res.message));
                 }
             }
             else{
                 this.recommendedPeople = this.convertObjectDatesService.goClone(this.people);
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.recommendedPeople, 'fullName'));
             }
             return;
         }
@@ -474,6 +481,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             sort: ["id","asc"]
         }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
                 this.recommendedPeople = resp.body;
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.recommendedPeople, 'fullName'));
             },
             (res: HttpErrorResponse) => this.onError(res.message));
     }
@@ -490,8 +498,10 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     prepareSearchDate() {
+        debugger;
         this.finalNiazsanjiReport.niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
         this.dates = this.convertObjectDatesService.getYearsArray();
+        this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.dates, 'title','', this.finalNiazsanjiReport.niazsanjiYear.toString()));
     }
 
     /*prepareSearchOrgChart() {
@@ -514,8 +524,12 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
             //this.showPlanningReport();
             const orgs = this.handleOrgChartView();
+            if(this.isSuperUsers) {
+                this.prepareRootsSearch(orgs);
+            }
+            this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','organizationChartId','select', 'equals', orgs, 'fullTitle', 'bighalf'));
             this.prepareSearchPerson(orgs);
-            this.prepareRootsSearch(orgs);
+
         }
         else {
             this.organizationChartService.query().subscribe(
@@ -524,8 +538,12 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                     this.organizationcharts = res.body;
                     //this.showPlanningReport();
                     const orgs = this.handleOrgChartView();
+                    if(this.isSuperUsers) {
+                        this.prepareRootsSearch(orgs);
+                    }
+                    this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','organizationChartId','select', 'equals', orgs, 'fullTitle'));
                     this.prepareSearchPerson(orgs);
-                    this.prepareRootsSearch(orgs);
+
                 },
                 (res: HttpErrorResponse) => this.onError(res.message));
         }
@@ -551,6 +569,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     prepareRootsSearch(orgs: IOrganizationChartMarineSuffix[]){
 
         this.orgsRoot = orgs.filter(a => a.parentId == null);
+        this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','organizationChartId','select', 'equals', this.orgsRoot, 'fullTitle'));
     }
     byteSize(field) {
         return this.dataUtils.byteSize(field);
@@ -561,8 +580,8 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
-        //this.eventManager.destroy(this.criteriaSubscriber);
+        //this.eventManager.destroy(this.eventSubscriber);
+        this.eventManager.destroy(this.criteriaSubscriber);
     }
 
     trackId(index: number, item: IFinalNiazsanjiReportMarineSuffix) {
@@ -571,6 +590,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
 
     registerChangeInFinalNiazsanjiReports() {
         this.eventSubscriber = this.eventManager.subscribe('finalNiazsanjiReportListModification', response => this.onSearchClick());
+        //this.eventSubscriber = this.eventManager.subscribe('finalNiazsanjiReportListModification', response => this.onSearchClick());
     }
 
     onSearchClick() {

@@ -149,41 +149,87 @@
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body" id="collapseHomePage1">
-                                        <div class="rTable">
+                                        <!--<div class="rTable">
                                             <div class="rTableRow">
                                                 <div class="rTableHead"><span style="font-weight: bold;"><strong>نوع دوره</strong></span></div>
                                                 <div class="rTableHead" *ngFor="let item of homePageReport.homePageReportDetails">{{item.organizationChartTitle}}</div>
                                             </div>
-                                            <!--<ng-template ngFor let-item [ngForOf]="homePageReport.homePageReportDetails" let-i="index">-->
+                                            &lt;!&ndash;<ng-template ngFor let-item [ngForOf]="homePageReport.homePageReportDetails" let-i="index">&ndash;&gt;
                                             <ng-container *ngFor="let item2 of homePageReport.homePageReportDetails">
                                                 <ng-container *ngFor="let homePageReportSecondLevelDetail of item2.homePageReportSecondLevelDetails" class="item2">
-                                                    <!--{{homePageReportSecondLevelDetail.courseTypeTitle}}-->
+                                                    &lt;!&ndash;{{homePageReportSecondLevelDetail.courseTypeTitle}}&ndash;&gt;
                                                     <div class="rTableRow">
                                                         <div class="rTableCell">{{homePageReportSecondLevelDetail.courseTypeTitle}}</div>
-                                                        <div *ngFor="let item3 of homePageReportSecondLevelDetail.homePageReportThirdLevelDetails" class="rTableCell">{{item3.total}}</div>
+                                                        <div class="rTableCell">{{homePageReportSecondLevelDetail.total}}</div>
+                                                        &lt;!&ndash;<div *ngFor="let item3 of homePageReportSecondLevelDetail.homePageReportThirdLevelDetails" class="rTableCell">{{item3.total}}</div>&ndash;&gt;
                                                     </div>
-                                                    <div class="rTableRow">
-                                                        <div *ngFor="let item3 of homePageReportSecondLevelDetail.homePageReportThirdLevelDetails" class="rTableCell">{{item3.total}}</div>
-                                                    </div>
+                                                    &lt;!&ndash;<div class="rTableRow">
+                                                        <div class="rTableCell">{{homePageReportSecondLevelDetail.totalPercent}}</div>
+                                                        &lt;!&ndash;<div *ngFor="let item3 of homePageReportSecondLevelDetail.homePageReportThirdLevelDetails" class="rTableCell">{{item3.total}}</div>&ndash;&gt;
+                                                    </div>&ndash;&gt;
                                                 </ng-container>
                                             </ng-container>
-                                        </div>
-                                        <table>
-                                            <tr>
-                                                <th>نوع دوره</th>
-                                                <th *ngFor="let item of homePageReport.homePageReportDetails">{{item.organizationChartTitle}}</th>
-                                            </tr>
-                                            <ng-container *ngFor="let item2 of homePageReport.homePageReportDetails">
-                                                <ng-container *ngFor="let homePageReportSecondLevelDetail of item2.homePageReportSecondLevelDetails" class="item2">
+                                        </div>-->
+                                        <table class="table table-striped  table-bordered table-hover table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>نوع دوره</th>
+                                                    <th *ngFor="let item02 of homePageReport.homePageReportOrganizationAndCourseTypeDetails[0].homePageReportChartOrganizationDetails">{{item02.organizationChartTitle}}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <ng-container *ngFor="let item of homePageReport.homePageReportOrganizationAndCourseTypeDetails">
                                                     <tr>
-                                                        <th rowspan="2">{{homePageReportSecondLevelDetail.courseTypeTitle}}</th>
-                                                        <th *ngFor="let item3 of homePageReportSecondLevelDetail.homePageReportThirdLevelDetails">{{item3.total}}</th>
+                                                        <td rowspan="2">{{item.courseTypeTitle}}</td>
+                                                        <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.total}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <th *ngFor="let item3 of homePageReportSecondLevelDetail.homePageReportThirdLevelDetails">{{item3.total}}</th>
+                                                        <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.totalPercent}}</td>
                                                     </tr>
                                                 </ng-container>
-                                            </ng-container>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-striped  table-bordered table-hover table-sm">
+                                                <tr>
+                                                    <th style="text-align: center">
+                                                        جمع نفرساعت برای مدیران به تفکیک گروه
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                       {{item.totalManagers}}
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                       {{item.totalManagersPercent}}
+                                                   </td>
+                                                </tr>
+                                        </table>
+                                        <table class="table table-striped  table-bordered table-hover table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center">
+                                                        جمع نفرساعت برای کارکنان به تفکیک گروه
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                   <td></td>
+                                                   <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                       {{item.totalStuffs}}
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                       {{item.totalStuffsPercent}}
+                                                   </td>
+                                                </tr>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
