@@ -50,6 +50,9 @@
             "practicaljob": "شغل عملی",
             "organizationChart": "موقعیت در سازمان",
             "organizationChartId": "موقعیت در سازمان",
+            "courseType": "نوع دوره",
+            "courseTypeId": "نوع دوره",
+            "courseTypeTitle": "نوع دوره",
             "educationalModule": "پودمان آموزشی"
         }
     }

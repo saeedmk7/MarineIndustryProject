@@ -17,6 +17,8 @@ import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import * as persianMoment from 'jalali-moment';
 import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
 import {EducationalModuleMarineSuffixService} from "app/entities/educational-module-marine-suffix";
+import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
+import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 
 @Component({
     selector: 'mi-educational-history-marine-suffix-update',
@@ -25,6 +27,7 @@ import {EducationalModuleMarineSuffixService} from "app/entities/educational-mod
 export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
     educationalHistory: IEducationalHistoryMarineSuffix;
     organizationCharts: IOrganizationChartMarineSuffix[];
+    courseTypes: ICourseTypeMarineSuffix[];
     isSaving: boolean;
     educationalmodules: IEducationalModuleMarineSuffix[];
     people: IPersonMarineSuffix[];
@@ -53,7 +56,8 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
         private principal : Principal,
         private convertObjectDatesService: ConvertObjectDatesService,
         private treeUtilities: TreeUtilities,
-        private educationalModuleService: EducationalModuleMarineSuffixService
+        private educationalModuleService: EducationalModuleMarineSuffixService,
+        private courseTypeService: CourseTypeMarineSuffixService
     ) {}
 
     ngOnInit() {
@@ -87,6 +91,13 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
         }
+
+        this.courseTypeService.query().subscribe(
+            (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                this.courseTypes = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        )
 
     }
     loadOrgCharts(){

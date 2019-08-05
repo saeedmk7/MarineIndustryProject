@@ -30,7 +30,6 @@ public class EducationalHistoryDTO implements Serializable {
     @Size(max = 50)
     private String dateOfStart;
 
-    
     @Lob
     private String fileDoc;
 
@@ -78,6 +77,10 @@ public class EducationalHistoryDTO implements Serializable {
     private Long educationalModuleId;
 
     private String educationalModuleTitle;
+
+    private Long courseTypeId;
+
+    private String courseTypeTitle;
 
     private Long organizationChartId;
 
@@ -291,6 +294,22 @@ public class EducationalHistoryDTO implements Serializable {
         this.educationalModuleTitle = educationalModuleTitle;
     }
 
+    public Long getCourseTypeId() {
+        return courseTypeId;
+    }
+
+    public void setCourseTypeId(Long courseTypeId) {
+        this.courseTypeId = courseTypeId;
+    }
+
+    public String getCourseTypeTitle() {
+        return courseTypeTitle;
+    }
+
+    public void setCourseTypeTitle(String courseTypeTitle) {
+        this.courseTypeTitle = courseTypeTitle;
+    }
+
     public Long getOrganizationChartId() {
         return organizationChartId;
     }
@@ -357,6 +376,8 @@ public class EducationalHistoryDTO implements Serializable {
             ", person='" + getPersonFamily() + "'" +
             ", educationalModule=" + getEducationalModuleId() +
             ", educationalModule='" + getEducationalModuleTitle() + "'" +
+            ", courseType=" + getCourseTypeId() +
+            ", courseType='" + getCourseTypeTitle() + "'" +
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             "}";

@@ -26,7 +26,7 @@
                         </ng-select>
                         <div *ngSwitchCase="'radio'">
                             <label class="form-check-label" *ngFor="let radio of item.values; let i = index">
-                                <input type="radio" class="form-check-input" [name]="item.fieldName" [id]="item.fieldName + ' ' + i" [value]="radio.value" [checked]="radio.checked" ngModel /> {{radio.text}}
+                                <input type="radio" class="form-check-input" name="{{item.fieldName}}" id="{{radio.id}}" value="{{radio.value}}" checked="{{radio.checked}}" ngModel/> {{radio.text}}
                             </label>
                         </div>
                     </ng-container>

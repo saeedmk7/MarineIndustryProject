@@ -131,9 +131,11 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         });
         this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
             this.criteria = criteria.content;
-            this.done = true;
-            this.loadAll(criteria.content);
 
+            if(this.done) {
+                this.loadAll(criteria.content);
+            }
+            this.done = true;
         });
         this.yearsCollections = GREGORIAN_START_END_DATE;
     }
@@ -143,13 +145,25 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     loadAll(criteria?) {
-
+        debugger;
         this.message = "";
         this.finalNiazsanjiReportsFardis = [];
         this.finalNiazsanjiReportsOrganizations = [];
         if(!criteria)
             return;
 
+        const niazsanjiYear = criteria.find(a => a.key == 'niazsanjiYear.equals');
+        if(niazsanjiYear) {
+            if(!niazsanjiYear.value)
+            {
+                this.message = 'لطفا سال نیازسنجی را انتخاب نمائید.';
+                return;
+            }
+        }
+        else{
+            this.message = 'لطفا سال نیازسنجی را انتخاب نمائید.';
+            return;
+        }
         criteria = this.createCriteria(criteria);
 
 
@@ -167,7 +181,25 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     createCriteria(criteria): any {
-        debugger;
+
+        const niazsanjiSource = criteria.find(a => a.key == 'niazSanjiSource.equals');
+        if(niazsanjiSource) {
+
+            if(niazsanjiSource.value == 'ORGANIZATION')
+                this.niazSanjiSource = false;
+            else {
+                this.niazSanjiSource = true;
+                if(niazsanjiSource.value != 'FARDI')
+                {
+                    criteria = criteria.filter(a => a.key != 'niazSanjiSource.equals');
+                    criteria.push({
+                        key: 'niazSanjiSource.equals',
+                        value: 'FARDI'
+                    });
+                }
+            }
+        }
+
         const org = criteria.find(a => a.key == 'organizationChartId.equals');
         if(org) {
             const orgId = +org.value;
@@ -386,14 +418,24 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 const values = [{
                     value: 'FARDI',
                     text: 'نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی',
-                    checked: 'checked'
+                    id: 'niazSanjiSource_FARDI',
+                    checked: true
                 },{
                     value: 'ORGANIZATION',
                     text: 'نیازسنجی پودمان سازمانی (متمرکز و گروهی)',
-                    checked: ''
+                    id: 'niazSanjiSource_ORGANIZATION',
+                    checked: false
                 }];
+                let yearArray = [];
+                this.yearsCollections.forEach(a => {
+                    let year = {
+                        id: a.year,
+                        year: a.year.toString()
+                    };
+                    yearArray.push(year);
+                });
                 this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','niazSanjiSource','radio', 'equals', values));
-                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','niazsanjiYear','select', 'equals', this.yearsCollections, 'year', '', this.convertObjectDatesService.getNowShamsiYear().toString()));
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','niazsanjiYear','select', 'equals', yearArray, 'year', '', this.convertObjectDatesService.getNowShamsiYear().toString()));
                 this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','planningRunMonth','select', 'equals', this.months, 'persianMonth'));
 
                 this.prepareSearchOrgChart();
@@ -402,6 +444,8 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 this.prepareSearchCourseType();
                 this.prepareSearchEducationalModule();
                 this.preparePeople();
+
+                this.done = true;
                 //this.prepareSearchDate();
 
             });
@@ -451,21 +495,21 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 if (this.personService.people) {
                     this.people = this.personService.people;
                     this.recommendedPeople = this.convertObjectDatesService.goClone(this.people);
-                    this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.recommendedPeople, 'fullName'));
+                    this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.recommendedPeople, 'fullName', 'half'));
                 }
                 else {
                     this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
 
                             this.people = res.body;
                             this.recommendedPeople = this.convertObjectDatesService.goClone(this.people);
-                            this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.recommendedPeople, 'fullName'));
+                            this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.recommendedPeople, 'fullName', 'half'));
                         },
                         (res: HttpErrorResponse) => this.onError(res.message));
                 }
             }
             else{
                 this.recommendedPeople = this.convertObjectDatesService.goClone(this.people);
-                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.recommendedPeople, 'fullName'));
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.recommendedPeople, 'fullName', 'half'));
             }
             return;
         }
@@ -481,7 +525,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             sort: ["id","asc"]
         }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
                 this.recommendedPeople = resp.body;
-                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.recommendedPeople, 'fullName'));
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.recommendedPeople, 'fullName', 'half'));
             },
             (res: HttpErrorResponse) => this.onError(res.message));
     }
@@ -498,7 +542,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     prepareSearchDate() {
-        debugger;
+
         this.finalNiazsanjiReport.niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
         this.dates = this.convertObjectDatesService.getYearsArray();
         this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.dates, 'title','', this.finalNiazsanjiReport.niazsanjiYear.toString()));
@@ -527,7 +571,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             if(this.isSuperUsers) {
                 this.prepareRootsSearch(orgs);
             }
-            this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','organizationChartId','select', 'equals', orgs, 'fullTitle', 'bighalf'));
+            this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','organizationChartId','select', 'equals', orgs, 'fullTitle', 'half'));
             this.prepareSearchPerson(orgs);
 
         }
@@ -541,7 +585,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                     if(this.isSuperUsers) {
                         this.prepareRootsSearch(orgs);
                     }
-                    this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','organizationChartId','select', 'equals', orgs, 'fullTitle'));
+                    this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','organizationChartId','select', 'equals', orgs, 'fullTitle', 'half'));
                     this.prepareSearchPerson(orgs);
 
                 },

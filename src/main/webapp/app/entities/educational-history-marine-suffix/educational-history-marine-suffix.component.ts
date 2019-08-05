@@ -19,6 +19,8 @@ import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
 import {Principal} from "app/core/auth/principal.service";
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
+import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
+import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 
 @Component({
     selector: 'mi-educational-history-marine-suffix',
@@ -29,6 +31,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
     recommenedOrgCharts: IOrganizationChartMarineSuffix[];
     groups: IOrganizationChartMarineSuffix[];
     people: IPersonMarineSuffix[];
+    courseTypes: ICourseTypeMarineSuffix[];
     currentPerson: IPersonMarineSuffix;
 
     currentAccount: any;
@@ -76,6 +79,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         protected router: Router,
         protected eventManager: JhiEventManager,
         protected treeUtilities: TreeUtilities,
+        private courseTypeService: CourseTypeMarineSuffixService,
         private convertObjectDatesService: ConvertObjectDatesService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -274,7 +278,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         return;
     }
     loadPage(page: number) {
-        debugger;
+
         if (page !== this.previousPage) {
             this.previousPage = page;
             this.transition();
@@ -289,7 +293,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });*/
-        debugger;
+
         this.makeCriteria(this.unchangedCriteria);
     }
 
@@ -318,6 +322,13 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
                 this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'educationalModuleName', 'text', 'contains'));
                 this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'educationalCenter', 'text', 'contains'));
                 this.prepareSearchOrgChart();
+                this.courseTypeService.query().subscribe(
+                    (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                        this.courseTypes = res.body;
+                        this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'courseTypeId', 'select', 'equals', this.courseTypes));
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                )
                 if(this.isSuperUsers){
 
                     let status = [{id: 'ACCEPT', title: 'تایید شده'},{id: 'IGNORE', title: 'رد شده'},{id:'NEW',title: 'جدید'}];

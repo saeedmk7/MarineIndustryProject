@@ -69,6 +69,8 @@ public class EducationalHistoryCriteria implements Serializable {
 
     private LongFilter educationalModuleId;
 
+    private LongFilter courseTypeId;
+
     private LongFilter organizationChartId;
 
     public LongFilter getId() {
@@ -230,6 +232,13 @@ public class EducationalHistoryCriteria implements Serializable {
     public void setEducationalModuleId(LongFilter educationalModuleId) {
         this.educationalModuleId = educationalModuleId;
     }
+    public LongFilter getCourseTypeId() {
+        return courseTypeId;
+    }
+
+    public void setCourseTypeId(LongFilter courseTypeId) {
+        this.courseTypeId = courseTypeId;
+    }
 
     public LongFilter getOrganizationChartId() {
         return organizationChartId;
@@ -270,6 +279,7 @@ public class EducationalHistoryCriteria implements Serializable {
             Objects.equals(guid, that.guid) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
+            Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(organizationChartId, that.organizationChartId);
     }
 
@@ -296,6 +306,7 @@ public class EducationalHistoryCriteria implements Serializable {
         guid,
         personId,
         educationalModuleId,
+        courseTypeId,
         organizationChartId
         );
     }
@@ -323,6 +334,7 @@ public class EducationalHistoryCriteria implements Serializable {
                 (guid != null ? "guid=" + guid + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
             "}";
     }

@@ -3,19 +3,21 @@ import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 import {NavigationEnd, Router} from "@angular/router";
 import {JhiEventManager} from "ng-jhipster";
 import {Subscription} from "rxjs";
+import {FormGroup} from "@angular/forms";
 @Component({
     selector: 'search-panel',
     templateUrl: './search-panel.component.html'
 })
 export class SearchPanelComponent implements OnInit, OnDestroy {
     @Input('searchPanelModel') searchPanelModel: SearchPanelModel[];
+    @Input('immediatelyLoad') immediatelyLoad: boolean = true;
     lastUrl: string = '';
     eventSubscriber: Subscription;
     constructor(private router: Router, private eventManager: JhiEventManager) {
     }
 
     ngOnInit() {
-
+        debugger;
         this.eventSubscriber = this.router.events.subscribe((val: NavigationEnd) => {
 
             if(val instanceof NavigationEnd) {
@@ -23,11 +25,13 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
                     this.lastUrl = val.urlAfterRedirects;
                     if(!this.lastUrl.includes('popup'))
                     {
+                        debugger;
                         this.search();
                     }
                 }
             }
         });
+
         setTimeout(() => this.search(), 1000);
 
         console.log("I got:", this.searchPanelModel);
@@ -37,8 +41,16 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
         let url = window.location.href;
         let criteria = [];
         this.searchPanelModel.forEach((a) => {
+
            let value = this.getParameterByName(a.fieldName,url);
-           a.selectedValue = value;
+            if(!a.selectedValue)
+            {
+               a.selectedValue = value;
+            }
+            if(value)
+            {
+                a.selectedValue = value;
+            }
            if(value != "undefined")
            {
                criteria.push({
@@ -46,13 +58,26 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
                    value: value
                });
            }
+           /*if(a.type == 'radio')
+           {
+               a.values.forEach((w) => {
+                   if(w.checked)
+                   {
+                       //document.getElementById(w.id).checked = true;
+                   }
+               })
+           }*/
         });
-
-        this.eventManager.broadcast({ name: 'marineindustryprojApp.criteria', content: criteria });
+        debugger;
+        if(this.immediatelyLoad) {
+            this.eventManager.broadcast({name: 'marineindustryprojApp.criteria', content: criteria});
+        }
+        else {
+            this.immediatelyLoad = true;
+        }
     }
     onSubmit(f: any){
-
-
+        debugger;
         let url = this.deleteQueryString();
         for (let j = 0; j < this.searchPanelModel.length; j++) {
             let value = f.value[this.searchPanelModel[j].fieldName];

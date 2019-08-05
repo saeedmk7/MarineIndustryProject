@@ -130,6 +130,10 @@ public class CourseTypeQueryService extends QueryService<CourseType> {
                 specification = specification.and(buildSpecification(criteria.getNiazsanjiFardiId(),
                     root -> root.join(CourseType_.niazsanjiFardis, JoinType.LEFT).get(NiazsanjiFardi_.id)));
             }
+            if (criteria.getEducationalHistoryId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalHistoryId(),
+                    root -> root.join(CourseType_.educationalHistories, JoinType.LEFT).get(EducationalHistory_.id)));
+            }
             if (criteria.getRequestNiazsanjiFardiId() != null) {
                 specification = specification.and(buildSpecification(criteria.getRequestNiazsanjiFardiId(),
                     root -> root.join(CourseType_.requestNiazsanjiFardis, JoinType.LEFT).get(RequestNiazsanjiFardi_.id)));

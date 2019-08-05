@@ -23,7 +23,7 @@
                                 </select>
                             </p>
                             <div [chart]="personHourChart"></div>
-                            <div style="font-family: IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman" class="table-responsive" *ngIf="personHourSeries">
+                            <!--<div style="font-family: IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman" class="table-responsive" *ngIf="personHourSeries">
                                 <h4 style="text-align: center">جدول درصدی نفر ساعت گروه های سازمان</h4>
                                 <table class="table table-striped  table-bordered table-hover table-sm">
                                     <thead>
@@ -43,91 +43,91 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                            </div>
+                            </div>-->
 
                             <div style="font-family: IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman" class="table-responsive" *ngIf="homePageReport">
                                 <!--<h4 style="text-align: center">گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی</h4>-->
-                                <table class="table table-striped  table-bordered table-hover table-sm">
+                                <table class="table table-bordered table-sm">
                                     <tr>
-                                        <th colspan="10" style="text-align: center">گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی</th>
+                                        <th colspan="10" style="text-align: center; background-color: cornsilk">گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی</th>
                                     </tr>
-                                    <tr>
+                                    <tr style="background-color: coral;">
                                         <th colspan="5" style="text-align: center">کل نفر ساعت نیازسنجی شده برای سازمان</th>
                                         <td colspan="5" style="text-align: center">{{homePageReport.total}}</td>
                                     </tr>
-                                    <tr>
+                                    <tr style="background-color: coral;">
                                         <th colspan="5" style="text-align: center">کل نفر ساعت اجرا شده سازمان</th>
                                         <td colspan="5" style="text-align: center">{{homePageReport.totalPassed}}</td>
                                     </tr>
-                                    <tr>
+                                    <tr style="background-color: coral;">
                                         <th colspan="5" style="text-align: center">درصد کل نفر ساعت اجرا شده سازمان</th>
                                         <td colspan="5" style="text-align: center">{{homePageReport.totalPassedPercent}}</td>
                                     </tr>
                                     <tr>
-                                        <th colspan="3" style="text-align: center">نفر ساعت نیازسنجی شده مدیران</th>
-                                        <td colspan="2" style="text-align: center">{{homePageReport.totalManagers}}</td>
-                                        <th colspan="3" style="text-align: center">نفر ساعت نیازسنجی شده کارکنان</th>
-                                        <td colspan="2" style="text-align: center">{{homePageReport.totalStuffs}}</td>
+                                        <th colspan="3" style="text-align: center; background-color: skyblue">نفر ساعت نیازسنجی شده مدیران</th>
+                                        <td colspan="2" style="text-align: center; background-color: skyblue">{{homePageReport.totalManagers}}</td>
+                                        <th colspan="3" style="text-align: center; background-color: lightgoldenrodyellow">نفر ساعت نیازسنجی شده کارکنان</th>
+                                        <td colspan="2" style="text-align: center; background-color: lightgoldenrodyellow">{{homePageReport.totalStuffs}}</td>
                                     </tr>
                                     <tr>
-                                        <th colspan="3" style="text-align: center">درصد نفر ساعت نیازسنجی شده مدیران</th>
-                                        <td colspan="2" style="text-align: center">{{homePageReport.totalManagersPercent}} %</td>
-                                        <th colspan="3" style="text-align: center">درصد نفر ساعت نیازسنجی شده کارکنان</th>
-                                        <td colspan="2" style="text-align: center">{{homePageReport.totalStuffsPercent}} %</td>
+                                        <th colspan="3" style="text-align: center; background-color: skyblue">درصد نفر ساعت نیازسنجی شده مدیران</th>
+                                        <td colspan="2" style="text-align: center; background-color: skyblue">{{homePageReport.totalManagersPercent}} %</td>
+                                        <th colspan="3" style="text-align: center; background-color: lightgoldenrodyellow">درصد نفر ساعت نیازسنجی شده کارکنان</th>
+                                        <td colspan="2" style="text-align: center; background-color: lightgoldenrodyellow">{{homePageReport.totalStuffsPercent}} %</td>
                                     </tr>
                                     <tr>
-                                        <th colspan="3" style="text-align: center">نفر ساعت اجرا شده مدیران</th>
-                                        <td colspan="2" style="text-align: center">{{homePageReport.totalPassedManagers}}</td>
-                                        <th colspan="3" style="text-align: center">نفر ساعت اجرا شده کارکنان</th>
-                                        <td colspan="2" style="text-align: center">{{homePageReport.totalPassedStuffs}}</td>
+                                        <th colspan="3" style="text-align: center; background-color: skyblue">نفر ساعت اجرا شده مدیران</th>
+                                        <td colspan="2" style="text-align: center; background-color: skyblue">{{homePageReport.totalPassedManagers}}</td>
+                                        <th colspan="3" style="text-align: center; background-color: lightgoldenrodyellow">نفر ساعت اجرا شده کارکنان</th>
+                                        <td colspan="2" style="text-align: center; background-color: lightgoldenrodyellow">{{homePageReport.totalPassedStuffs}}</td>
                                     </tr>
                                     <tr>
-                                        <th colspan="3" style="text-align: center">درصد نفر ساعت اجرا شده مدیران</th>
-                                        <td colspan="2" style="text-align: center">{{homePageReport.totalPassedManagersPercent}} %</td>
-                                        <th colspan="3" style="text-align: center">درصد نفر ساعت اجرا شده کارکنان</th>
-                                        <td colspan="2" style="text-align: center">{{homePageReport.totalPassedStuffsPercent}} %</td>
+                                        <th colspan="3" style="text-align: center; background-color: skyblue">درصد نفر ساعت اجرا شده مدیران</th>
+                                        <td colspan="2" style="text-align: center; background-color: skyblue">{{homePageReport.totalPassedManagersPercent}} %</td>
+                                        <th colspan="3" style="text-align: center; background-color: lightgoldenrodyellow">درصد نفر ساعت اجرا شده کارکنان</th>
+                                        <td colspan="2" style="text-align: center; background-color: lightgoldenrodyellow">{{homePageReport.totalPassedStuffsPercent}} %</td>
                                     </tr>
-                                    <tr>
+                                    <tr style="background-color: #c6fab7;">
                                         <th colspan="10" style="text-align: center">جمع کل نیازسنجی سازمان به تفکیک نوع دوره</th>
                                     </tr>
-                                    <tr>
+                                    <tr style="background-color: lavender;">
                                         <th *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
                                             {{item.courseTypeTitle}}
                                         </th>
                                     </tr>
-                                    <tr>
+                                    <tr style="background-color: lavender;">
                                         <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
                                             {{item.total}}
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr style="background-color: lavender;">
                                         <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
                                             {{item.totalPercent}} %
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr style="background-color: skyblue;">
                                         <th colspan="10" style="text-align: center">جمع نفرساعت اجرا شده برای مدیران به تفکیک نوع دوره</th>
                                     </tr>
-                                    <tr>
+                                    <tr style="background-color: skyblue;">
                                         <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
                                             {{item.totalManagers}}
                                         </td>
 
                                     </tr>
-                                    <tr>
+                                    <tr style="background-color: skyblue;">
                                         <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
                                             {{item.totalManagersPercent}} %
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr style="background-color: lightgoldenrodyellow;">
                                         <th style="text-align: center" colspan="10">جمع نفرساعت اجرا شده برای کارکنان به تفکیک نوع دوره</th>
                                     </tr>
-                                    <tr>
+                                    <tr style="background-color: lightgoldenrodyellow;">
                                         <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
                                             {{item.totalStuffs}}
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr style="background-color: lightgoldenrodyellow;">
                                         <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
                                             {{item.totalStuffsPercent}} %
                                         </td>
@@ -150,20 +150,17 @@
                                     <!-- /.box-header -->
                                     <div class="box-body" id="collapseHomePage1">
 
-                                        <table class="table table-striped  table-bordered table-hover table-sm">
-                                            <thead>
-                                                <tr>
-                                                    <th>نوع دوره</th>
-                                                    <th *ngFor="let item02 of homePageReport.homePageReportOrganizationAndCourseTypeDetails[0].homePageReportChartOrganizationDetails">{{item02.organizationChartTitle}}</th>
+                                        <table class="table table-bordered table-sm">
+                                                <tr style="background-color: #22e9ff; text-align: center">
+                                                    <th style="text-align: center">نوع دوره</th>
+                                                    <th style="text-align: center" *ngFor="let item02 of homePageReport.homePageReportOrganizationAndCourseTypeDetails[0].homePageReportChartOrganizationDetails">{{item02.organizationChartTitle}}</th>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                <ng-container *ngFor="let item of homePageReport.homePageReportOrganizationAndCourseTypeDetails">
-                                                    <tr>
+                                                <ng-container *ngFor="let item of homePageReport.homePageReportOrganizationAndCourseTypeDetails; let i = index;">
+                                                    <tr [style.background-color]="cyanColors[i]">
                                                         <td rowspan="2">{{item.courseTypeTitle}}</td>
                                                         <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.total}}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr [style.background-color]="cyanColors[i]">
                                                         <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.totalPercent}}</td>
                                                     </tr>
                                                 </ng-container>
@@ -201,7 +198,6 @@
                                                         {{item.totalStuffsPercent}}
                                                     </td>
                                                 </tr>
-                                            </tbody>
                                         </table>
 
                                     </div>

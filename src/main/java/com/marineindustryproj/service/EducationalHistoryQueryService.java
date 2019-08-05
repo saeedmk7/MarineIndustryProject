@@ -148,6 +148,10 @@ public class EducationalHistoryQueryService extends QueryService<EducationalHist
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
                     root -> root.join(EducationalHistory_.educationalModule, JoinType.LEFT).get(EducationalModule_.id)));
             }
+            if (criteria.getCourseTypeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getCourseTypeId(),
+                    root -> root.join(EducationalHistory_.courseType, JoinType.LEFT).get(CourseType_.id)));
+            }
             if (criteria.getOrganizationChartId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOrganizationChartId(),
                     root -> root.join(EducationalHistory_.organizationChart, JoinType.LEFT).get(OrganizationChart_.id)));

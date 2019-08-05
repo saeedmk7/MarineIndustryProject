@@ -29,6 +29,8 @@ export interface IEducationalHistoryMarineSuffix {
     guid?: string;
     personFamily?: string;
     personId?: number;
+    courseTypeTitle?: string;
+    courseTypeId?: number;
     educationalModuleTitle?: string;
     educationalModuleId?: number;
     organizationChartTitle?: string;
@@ -65,6 +67,8 @@ export class EducationalHistoryMarineSuffix implements IEducationalHistoryMarine
         public personId?: number,
         public educationalModuleTitle?: string,
         public educationalModuleId?: number,
+        public courseTypeTitle?: string,
+        public courseTypeId?: number,
         public organizationChartTitle?: string,
         public organizationChartId?: number
     ) {

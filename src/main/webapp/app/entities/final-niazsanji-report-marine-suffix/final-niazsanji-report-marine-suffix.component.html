@@ -19,7 +19,9 @@
         </h2>
     </div>-->
     <mi-alert></mi-alert>
-    <search-panel [searchPanelModel]="searchbarModel"></search-panel>
+    <search-panel [searchPanelModel]="searchbarModel" [immediatelyLoad]="false"></search-panel>
+    <div style="display: inline" class="alert alert-info">برای دیدن کلیه نیازسنجی های فردی و نیازسنجی های متمرکز پس از انتخاب سال نیازسنجی دکمه جستجو را کلیک کنید.</div>
+    <div style="display: inline" class="alert alert-danger" *ngIf="message">{{message}}</div>
     <!--<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
         <div class="card border-success ">
             <a data-toggle="collapse" href="#collapseExample" class="card-header center" style="background-color: aliceblue;">

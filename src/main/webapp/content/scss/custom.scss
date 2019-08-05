@@ -504,7 +504,7 @@ nav.back-cover {
     /*height: 900px;*/
     max-width: 900px;
     margin: auto;
-    background-size: 100%;
+    /*background-size: 100%;*/
     z-index: 1041;
 }
 .back-cover .modal-dialog {
@@ -640,7 +640,7 @@ tr.new td {
 }
 .modal-backdrop{
     background: url("/content/images/finalLogin.jpg") no-repeat top center !important;
-    background-size: cover !important;
+    background-size: 100vw 100vh !important;
 }
 .modal.show .modal-dialog {
     left: 25% !important;

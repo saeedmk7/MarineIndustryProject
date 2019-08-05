@@ -58,7 +58,21 @@
                         </small>
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.courseType" for="field_courseType">Course Type</label>
+                    <ng-select
+                        [items]="courseTypes"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="نوع دوره"
+                        name="courseType"
+                        id="field_courseType"
+                        [(ngModel)]="educationalHistory.courseTypeId">
+                </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.learningTimeTheorical" for="field_learningTimeTheorical">Learning Time Theorical</label>
                     <!--<input type="number" (keypress)="validateKeyStrokes($event)" value="0" jhiMax="2000000000" max="2000000000" min="0" jhiMin="0" class="form-control" name="learningTimeTheorical" id="field_learningTimeTheorical"

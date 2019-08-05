@@ -73,6 +73,9 @@ public class CourseType implements Serializable {
     @OneToMany(mappedBy = "courseType")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<RequestNiazsanjiFardi> requestNiazsanjiFardis = new HashSet<>();
+    @OneToMany(mappedBy = "courseType")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<EducationalHistory> educationalHistories = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -296,6 +299,31 @@ public class CourseType implements Serializable {
 
     public void setNiazsanjiFardis(Set<NiazsanjiFardi> niazsanjiFardis) {
         this.niazsanjiFardis = niazsanjiFardis;
+    }
+
+    public Set<EducationalHistory> getEducationalHistories() {
+        return educationalHistories;
+    }
+
+    public CourseType educationalHistories(Set<EducationalHistory> educationalHistories) {
+        this.educationalHistories = educationalHistories;
+        return this;
+    }
+
+    public CourseType addEducationalHistory(EducationalHistory educationalHistory) {
+        this.educationalHistories.add(educationalHistory);
+        educationalHistory.setCourseType(this);
+        return this;
+    }
+
+    public CourseType removeEducationalHistory(EducationalHistory educationalHistory) {
+        this.educationalHistories.remove(educationalHistory);
+        educationalHistory.setCourseType(null);
+        return this;
+    }
+
+    public void setEducationalHistories(Set<EducationalHistory> educationalHistories) {
+        this.educationalHistories = educationalHistories;
     }
 
     public Set<RequestNiazsanjiFardi> getRequestNiazsanjiFardis() {

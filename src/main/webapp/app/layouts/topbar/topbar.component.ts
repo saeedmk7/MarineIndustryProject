@@ -438,13 +438,13 @@
     }
 
     showBeautySpeechResult(result: IBeautySpeechMarineSuffix[]) {
-        debugger;
+
         this.speeches = result.map(a => a.description).filter(this.treeUtilities.onlyUnique);
         this.speechIntervals = setInterval(this.showSpeech(this.speeches), 30000);
     }
     index: number = 0;
     showSpeech(speeches: string[]){
-        debugger;
+
         this.index++;
         if(this.index < 0)
         {
@@ -461,7 +461,7 @@
         });
     }
     changeSpeech(incremental: boolean){
-        debugger;
+
         if(!incremental)
             this.index = this.index - 2;
         this.showSpeech(this.speeches);

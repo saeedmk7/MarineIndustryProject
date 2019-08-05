@@ -49,6 +49,8 @@ public class CourseTypeCriteria implements Serializable {
 
     private LongFilter niazsanjiFardiId;
 
+    private LongFilter educationalHistoryId;
+
     private LongFilter requestNiazsanjiFardiId;
 
     public LongFilter getId() {
@@ -155,6 +157,14 @@ public class CourseTypeCriteria implements Serializable {
         this.niazsanjiFardiId = niazsanjiFardiId;
     }
 
+    public LongFilter getEducationalHistoryId() {
+        return educationalHistoryId;
+    }
+
+    public void setEducationalHistoryId(LongFilter educationalHistoryId) {
+        this.educationalHistoryId = educationalHistoryId;
+    }
+
     public LongFilter getRequestNiazsanjiFardiId() {
         return requestNiazsanjiFardiId;
     }
@@ -187,6 +197,7 @@ public class CourseTypeCriteria implements Serializable {
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
             Objects.equals(designAndPlanningId, that.designAndPlanningId) &&
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
+            Objects.equals(educationalHistoryId, that.educationalHistoryId) &&
             Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId);
     }
 
@@ -206,6 +217,7 @@ public class CourseTypeCriteria implements Serializable {
         finalNiazsanjiReportId,
         designAndPlanningId,
         niazsanjiFardiId,
+        educationalHistoryId,
         requestNiazsanjiFardiId
         );
     }
@@ -226,6 +238,7 @@ public class CourseTypeCriteria implements Serializable {
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
                 (designAndPlanningId != null ? "designAndPlanningId=" + designAndPlanningId + ", " : "") +
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
+                (educationalHistoryId != null ? "educationalHistoryId=" + educationalHistoryId + ", " : "") +
                 (requestNiazsanjiFardiId != null ? "requestNiazsanjiFardiId=" + requestNiazsanjiFardiId + ", " : "") +
             "}";
     }

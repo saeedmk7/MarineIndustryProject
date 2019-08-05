@@ -115,6 +115,10 @@ public class EducationalHistory implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("educationalHistories")
+    private CourseType courseType;
+
+    @ManyToOne
+    @JsonIgnoreProperties("educationalHistories")
     private OrganizationChart organizationChart;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -410,6 +414,19 @@ public class EducationalHistory implements Serializable {
 
     public void setEducationalModule(EducationalModule educationalModule) {
         this.educationalModule = educationalModule;
+    }
+
+    public CourseType getCourseType() {
+        return courseType;
+    }
+
+    public EducationalHistory courseType(CourseType courseType) {
+        this.courseType = courseType;
+        return this;
+    }
+
+    public void setCourseType(CourseType courseType) {
+        this.courseType = courseType;
     }
 
     public OrganizationChart getOrganizationChart() {

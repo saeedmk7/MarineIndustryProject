@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity EducationalHistory and its DTO EducationalHistoryDTO.
  */
-@Mapper(componentModel = "spring", uses = {PersonMapper.class, EducationalModuleMapper.class, OrganizationChartMapper.class})
+@Mapper(componentModel = "spring", uses = {CourseTypeMapper.class, PersonMapper.class, EducationalModuleMapper.class, OrganizationChartMapper.class})
 public interface EducationalHistoryMapper extends EntityMapper<EducationalHistoryDTO, EducationalHistory> {
 
     @Mapping(source = "person.id", target = "personId")
@@ -18,11 +18,14 @@ public interface EducationalHistoryMapper extends EntityMapper<EducationalHistor
     @Mapping(source = "educationalModule.title", target = "educationalModuleTitle")
     @Mapping(source = "organizationChart.id", target = "organizationChartId")
     @Mapping(source = "organizationChart.title", target = "organizationChartTitle")
+    @Mapping(source = "courseType.id", target = "courseTypeId")
+    @Mapping(source = "courseType.title", target = "courseTypeTitle")
     EducationalHistoryDTO toDto(EducationalHistory educationalHistory);
 
     @Mapping(source = "personId", target = "person")
     @Mapping(source = "educationalModuleId", target = "educationalModule")
     @Mapping(source = "organizationChartId", target = "organizationChart")
+    @Mapping(source = "courseTypeId", target = "courseType")
     EducationalHistory toEntity(EducationalHistoryDTO educationalHistoryDTO);
 
     default EducationalHistory fromId(Long id) {

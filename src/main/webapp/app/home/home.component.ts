@@ -98,7 +98,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     pieRunnningPriceCostChart: Chart;
 
     homePageReport: IHomePageReport;
-
+    cyanColors: string[] = ['#E0F7FA','#B2EBF2','#80DEEA','#4DD0E1','#26C6DA','#00BCD4','#00ACC1','#0097A7','#84FFFF','#18FFFF','#00E5FF','#00B8D4','#00838F','#006064'];
+    greenColors: string[] = ['#E8F5E9', '#C8E6C9', '#A5D6A7', '#81C784', '#66BB6A', '#4CAF50', '#43A047', '#388E3C', '#B9F6CA', '#69F0AE', '#00E676', '#00C853', '#2E7D32', '#1B5E20'];
+    redColors: string[] = ['#FFEBEE', '#FFCDD2', '#EF9A9A', '#E57373', '#EF5350', '#F44336', '#E53935', '#FF8A80', '#FF5252', '#FF1744', '#D32F2F', '#C62828', '#B71C1C'];
 
     constructor(
         private principal: Principal,
