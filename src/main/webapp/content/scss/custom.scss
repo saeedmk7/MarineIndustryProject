@@ -493,7 +493,7 @@ nav.back-cover {
 .back-cover:before {
     /*background: url(/content/images/login.jpg) no-repeat center center;*/
     white-space: pre-wrap;
-    content: "سیستم جامع آموزش منابع انسانی \A           سازمان صنایع دریایی";
+    /*content: "سیستم جامع آموزش منابع انسانی \A           سازمان صنایع دریایی";*/
     color: antiquewhite;
     font-family: BTitrBold;
     font-size: 40px;
@@ -639,7 +639,7 @@ tr.new td {
     opacity: 1 !important;
 }
 .modal-backdrop{
-    background: url("/content/images/loginBack3.png") no-repeat top center !important;
+    background: url("/content/images/finalLogin.jpg") no-repeat top center !important;
     background-size: cover !important;
 }
 .modal.show .modal-dialog {
