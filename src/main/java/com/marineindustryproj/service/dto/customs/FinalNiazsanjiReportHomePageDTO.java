@@ -16,8 +16,8 @@ import com.marineindustryproj.domain.OrganizationChart;
  */
 public class FinalNiazsanjiReportHomePageDTO implements Serializable {
 
-
     public FinalNiazsanjiReportHomePageDTO(Long id,
+                                           HomePageReportType homePageReportType,
                                            Integer priceCost,
                                            Integer finalizeCost,
                                            EducationalModule educationalModule,
@@ -27,6 +27,8 @@ public class FinalNiazsanjiReportHomePageDTO implements Serializable {
                                            OrganizationChart organizationChart,
                                            Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople) {
         this.id = id;
+
+
         this.priceCost = priceCost != null ? priceCost.longValue() : 0;
         this.finalizeCost = finalizeCost != null ? finalizeCost.longValue() : 0;
         this.status = status;
@@ -37,9 +39,17 @@ public class FinalNiazsanjiReportHomePageDTO implements Serializable {
         this.organizationChartId = organizationChart.getId();
         this.organizationChartTitle = organizationChart.getTitle();
         this.jobIds = finalNiazsanjiReportPeople.stream().mapToLong(a -> a.getPerson().getJob().getId()).distinct().toArray();
+        this.peopleCount = finalNiazsanjiReportPeople.size();
+
+        if(homePageReportType == HomePageReportType.PersonHour)
+            this.value = this.totalLearningTime * this.peopleCount;
+        else
+            this.value = this.priceCost;
     }
 
     private Long id;
+
+    private Long value;
 
     private Long priceCost;
 
@@ -60,6 +70,8 @@ public class FinalNiazsanjiReportHomePageDTO implements Serializable {
     private Integer niazsanjiYear;
 
     private long[] jobIds;
+
+    private long peopleCount;
 
     public Long getTotalLearningTime() {
         return totalLearningTime;
@@ -157,6 +169,22 @@ public class FinalNiazsanjiReportHomePageDTO implements Serializable {
         return Objects.equals(getId(), finalNiazsanjiReportDTO.getId());
     }
 
+    public Integer getNiazsanjiYear() {
+        return niazsanjiYear;
+    }
+
+    public void setNiazsanjiYear(Integer niazsanjiYear) {
+        this.niazsanjiYear = niazsanjiYear;
+    }
+
+    public long getPeopleCount() {
+        return peopleCount;
+    }
+
+    public void setPeopleCount(long peopleCount) {
+        this.peopleCount = peopleCount;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hashCode(getId());
@@ -173,11 +201,12 @@ public class FinalNiazsanjiReportHomePageDTO implements Serializable {
             "}";
     }
 
-    public Integer getNiazsanjiYear() {
-        return niazsanjiYear;
+
+    public Long getValue() {
+        return value;
     }
 
-    public void setNiazsanjiYear(Integer niazsanjiYear) {
-        this.niazsanjiYear = niazsanjiYear;
+    public void setValue(Long value) {
+        this.value = value;
     }
 }

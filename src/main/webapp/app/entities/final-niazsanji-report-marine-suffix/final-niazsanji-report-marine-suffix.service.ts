@@ -67,9 +67,9 @@ export class FinalNiazsanjiReportMarineSuffixService {
             .get<IChartResult[]>(url, { observe: 'response' })
             .pipe(map((res: HttpResponse<IChartResult[]>) => res));
     }
-    getHomePageReport(niazsanjiYear: number): Observable<HttpResponse<IHomePageReport>> {
+    getHomePageReport(niazsanjiYear: number, reportType: number): Observable<HttpResponse<IHomePageReport>> {
 
-        let url = this.resourceUrl + '/getHomePageReport/' + niazsanjiYear;
+        let url = this.resourceUrl + '/getHomePageReport/' + niazsanjiYear + '/' + reportType;
         return this.http
             .get<IHomePageReport>(url, { observe: 'response' })
             .pipe(map((res: HttpResponse<IHomePageReport>) => res));

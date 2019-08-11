@@ -229,12 +229,12 @@
             <!--<kendo-grid-column field="finalizeCost" title="سرمایه گذاری پایانی" [width]="100"></kendo-grid-column>-->
             <kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="250"></kendo-grid-column>
             <kendo-grid-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="200"></kendo-grid-column>
-            <kendo-grid-column field="finalizeCost" title="سرمایه گذاری صرف شده" [width]="100">
+            <kendo-grid-column field="finalizeCost"  format="{0:n0}" title="سرمایه گذاری صرف شده" [width]="100">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalFinalizeCost | number}}</ng-template>
             </kendo-grid-column>
-            <kendo-grid-column field="priceCost" type="number" title="سرمایه گذاری اولیه" [width]="100">
+            <kendo-grid-column field="priceCost" format="{0:n0}" title="سرمایه گذاری اولیه" [width]="100">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalCost | number}}</ng-template>
@@ -315,7 +315,7 @@
                     let-column="column">جمع کل (نفر ساعت): {{total | number}}</ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>
-            <kendo-grid-column field="finalizeCost" title="سرمایه گذاری صرف شده" [width]="100">
+            <kendo-grid-column field="finalizeCost" format="{0:n0}" title="سرمایه گذاری صرف شده" [width]="100">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalFinalizeCost | number}}</ng-template>
@@ -323,7 +323,7 @@
 
             <!--<kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="300"></kendo-grid-column>
             <kendo-grid-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="300"></kendo-grid-column>-->
-            <kendo-grid-column field="priceCost" title="سرمایه گذاری اولیه" [width]="100">
+            <kendo-grid-column field="priceCost" format="{0:n0}" title="سرمایه گذاری اولیه" [width]="100">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalCost | number}}</ng-template>
