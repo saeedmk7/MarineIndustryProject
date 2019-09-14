@@ -114,8 +114,8 @@
                                     </tbody>
                                 </table>
                                 <div id="HomePage1" class="box box-primary newsbox" >
-                                    <div class="box-header with-border" (click)="toggleColappse('collapseHomePage1')">
-                                        <h3 class="box-title center">ریز نیازسنجی سازمان به تفکیک نوع دوره</h3>
+                                    <div class="box-header with-border collapseTitr" style="text-align: center;cursor: pointer;" (click)="toggleColappse('collapseHomePage1')">
+                                        <h3 class="box-title center" style="color: limegreen;">ریز نیازسنجی سازمان به تفکیک نوع دوره (براساس نفر ساعت)</h3>
 
                                         <div class="box-tools pull-left">
                                             <button type="button" class="btn btn-box-tool"
@@ -144,7 +144,7 @@
                                                     </tr>
                                                 </ng-container>
                                                 <tr style="background-color: skyblue;">
-                                                    <th colspan="4" style="text-align: center">
+                                                    <th colspan="15" style="text-align: center">
                                                         جمع نفرساعت برای مدیران به تفکیک گروه
                                                     </th>
                                                 </tr>
@@ -161,7 +161,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr style="background-color: lightgoldenrodyellow;">
-                                                    <th colspan="4" style="text-align: center">
+                                                    <th colspan="15" style="text-align: center">
                                                         جمع نفرساعت برای کارکنان به تفکیک گروه
                                                     </th>
                                                 </tr>
@@ -182,8 +182,8 @@
                                     </div>
                                 </div>
                                 <div id="HomePage2" class="box box-primary newsbox">
-                                    <div class="box-header with-border" (click)="toggleColappse('collapseHomePage2')">
-                                        <h3 class="box-title center">نحوه عملکرد کل سازمان به تفکیک نوع دوره</h3>
+                                    <div class="box-header with-border collapseTitr" style="text-align: center;cursor: pointer;" (click)="toggleColappse('collapseHomePage2')">
+                                        <h3 class="box-title center" style="color: limegreen;">نحوه عملکرد کل سازمان به تفکیک نوع دوره (براساس نفر ساعت)</h3>
 
                                         <div class="box-tools pull-left">
                                             <button type="button" class="btn btn-box-tool"
@@ -399,8 +399,8 @@
                                     </tbody>
                                 </table>
                                 <div id="HomePage3" class="box box-primary newsbox" >
-                                    <div class="box-header with-border" (click)="toggleColappse('collapseHomePage3')">
-                                        <h3 class="box-title center">ریز نیازسنجی سازمان به تفکیک نوع دوره</h3>
+                                    <div class="box-header with-border collapseTitr" style="text-align: center;cursor: pointer;" (click)="toggleColappse('collapseHomePage3')">
+                                        <h3 class="box-title center" style="color: hotpink;">ریز نیازسنجی سازمان به تفکیک نوع دوره (براساس سرمایه گذاری)</h3>
 
                                         <div class="box-tools pull-left">
                                             <button type="button" class="btn btn-box-tool"
@@ -467,8 +467,8 @@
                                     </div>
                                 </div>
                                 <div id="HomePage4" class="box box-primary newsbox">
-                                    <div class="box-header with-border" (click)="toggleColappse('collapseHomePage4')">
-                                        <h3 class="box-title center">نحوه عملکرد کل سازمان به تفکیک نوع دوره</h3>
+                                    <div class="box-header with-border collapseTitr" (click)="toggleColappse('collapseHomePage4')">
+                                        <h3 class="box-title center" style="color: hotpink;">نحوه عملکرد کل سازمان به تفکیک نوع دوره (براساس سرمایه گذاری)</h3>
 
                                         <div class="box-tools pull-left">
                                             <button type="button" class="btn btn-box-tool"
@@ -542,6 +542,8 @@
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
                         <div *ngSwitchCase="'detail'" [@updownAnimation]>
                             <div [chart]="detailMonthPersonHourChart"></div>
@@ -555,262 +557,162 @@
                         </div>
                     </ng-container>
                 </ng-container>
-                <!--<ng-container>
-                    <div [chart]="homePagePersonHourPieChart"></div>
-                </ng-container>-->
-                <div id="educationalModules" class="box box-primary newsbox">
-                    <div class="box-header with-border">
-                        <h3 class="box-title center">شناسنامه آموزشی</h3>
+                <ng-container *ngIf="pageName == 'home'">
+                    <div id="educationalModules" class="box box-primary newsbox">
+                        <div class="box-header with-border">
+                            <h3 class="box-title center">شناسنامه آموزشی</h3>
 
-                        <div class="box-tools pull-left">
-                            <button type="button" class="btn btn-box-tool"
-                                    (click)="toggleColappse('collapseEducationalModules')" data-widget="collapse"><i
-                                class="fa fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-box-tool" (click)="deleteElement('educationalModules')"
-                                    data-widget="remove"><i class="fa fa-times"></i></button>
+                            <div class="box-tools pull-left">
+                                <button type="button" class="btn btn-box-tool"
+                                        (click)="toggleColappse('collapseEducationalModules')" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" (click)="deleteElement('educationalModules')"
+                                        data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
                         </div>
+                        <!-- /.box-header -->
+                        <div class="box-body" id="collapseEducationalModules">
+                            <table class="table table-bordered table-hover table-sm">
+                                <thead>
+                                <tr>
+                                    <th>ردیف</th>
+                                    <th><span jhiTranslate="marineindustryprojApp.educationalModule.code">Code</span></th>
+                                    <th><span jhiTranslate="marineindustryprojApp.educationalModule.title">Title</span></th>
+                                    <th><span>مدت کل پودمان</span></th>
+                                    <!--<th><span jhiTranslate="marineindustryprojApp.educationalModule.organization">Organization</span> </th>-->
+                                    <th><span jhiTranslate="marineindustryprojApp.educationalModule.skillableLevelOfSkill">Skillable Level Of Skill</span>
+                                    </th>
+                                    <th><span>نوع پودمان</span></th>
+                                    <th><span>نوع دوره</span></th>
+                                    <th><span>تاریخ برگزاری</span></th>
+                                    <th>وضعیت</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let educationalModule of homePagePersonEducationalModules; let i = index;"
+                                    [ngClass]="{'success': educationalModule.status == 100, 'info': educationalModule.status == 90, 'warning': educationalModule.status == 80, 'light': educationalModule.status == 70, 'danger': educationalModule.status == 0}">
+                                    <td>{{i+1}}</td>
+                                    <td>{{educationalModule.code}}</td>
+                                    <td>{{educationalModule.title}}</td>
+                                    <td>{{educationalModule.totalLearningTime | number}}</td>
+                                    <!--<td>
+                                        <div *ngIf="educationalModule.organizationId">
+                                            <a [routerLink]="['../organization-marine-suffix', educationalModule.organizationId , 'view' ]" >{{educationalModule.organizationTitle}}</a>
+                                        </div>
+                                    </td>-->
+                                    <td>
+                                        <div *ngIf="educationalModule.skillableLevelOfSkillId">
+                                            <a [routerLink]="['../skillable-level-of-skill-marine-suffix', educationalModule.skillableLevelOfSkillId , 'view' ]">{{educationalModule.skillableLevelOfSkillTitle}}</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{educationalModule.educationalModuleType}}
+                                    </td>
+                                    <td>
+                                        {{educationalModule.courseType}}
+                                    </td>
+                                    <td>
+                                        {{educationalModule.runDate}}
+                                    </td>
+                                    <td>
+                                        <a class="enableLink" [href]="'#/educational-history-marine-suffix/' + educationalModule.educationalHistoryId + '/view'"
+                                           *ngIf="educationalModule.status == 100">{{educationalModule.statusMeaning}}</a>
+                                        <span *ngIf="educationalModule.status != 100">{{educationalModule.statusMeaning}}</span>
+                                    </td>
+                                </tr>
+                                <tr class="success" *ngIf="homePagePersonEducationalModules">
+                                    <td colspan="3">مجموع</td>
+                                    <td colspan="1">{{sumHourPersonEducationalModules | number}}</td>
+                                    <td colspan="8"></td>
+                                </tr>
+                                <tr *ngIf="!homePagePersonEducationalModules">
+                                    <td colspan="5" class="alert-danger">
+                                        دوره ای برای شما تعریف نشده.
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer text-center">
+                            <!--<a href="#/announcement-marine-suffix" class="uppercase">نمایش تمام اخبار</a>-->
+                        </div>
+                        <!-- /.box-footer -->
                     </div>
-                    <!-- /.box-header -->
-                    <div class="box-body" id="collapseEducationalModules">
-                        <table class="table table-bordered table-hover table-sm">
-                            <thead>
-                            <tr>
-                                <th>ردیف</th>
-                                <th><span jhiTranslate="marineindustryprojApp.educationalModule.code">Code</span></th>
-                                <th><span jhiTranslate="marineindustryprojApp.educationalModule.title">Title</span></th>
-                                <th><span>مدت کل پودمان</span></th>
-                                <!--<th><span jhiTranslate="marineindustryprojApp.educationalModule.organization">Organization</span> </th>-->
-                                <th><span jhiTranslate="marineindustryprojApp.educationalModule.skillableLevelOfSkill">Skillable Level Of Skill</span>
-                                </th>
-                                <th><span>نوع پودمان</span></th>
-                                <th><span>نوع دوره</span></th>
-                                <th><span>تاریخ برگزاری</span></th>
-                                <th>وضعیت</th>
-                            </tr>
-                            </thead>
+                    <div class="table-home" *ngIf="isSuperUsers">
+                        <table  cellspacing="2" cellpadding="0" style="border:0px;">
                             <tbody>
-                            <tr *ngFor="let educationalModule of homePagePersonEducationalModules; let i = index;"
-                                [ngClass]="{'success': educationalModule.status == 100, 'info': educationalModule.status == 90, 'warning': educationalModule.status == 80, 'light': educationalModule.status == 70, 'danger': educationalModule.status == 0}">
-                                <td>{{i+1}}</td>
-                                <td>{{educationalModule.code}}</td>
-                                <td>{{educationalModule.title}}</td>
-                                <td>{{educationalModule.totalLearningTime | number}}</td>
-                                <!--<td>
-                                    <div *ngIf="educationalModule.organizationId">
-                                        <a [routerLink]="['../organization-marine-suffix', educationalModule.organizationId , 'view' ]" >{{educationalModule.organizationTitle}}</a>
-                                    </div>
-                                </td>-->
-                                <td>
-                                    <div *ngIf="educationalModule.skillableLevelOfSkillId">
-                                        <a [routerLink]="['../skillable-level-of-skill-marine-suffix', educationalModule.skillableLevelOfSkillId , 'view' ]">{{educationalModule.skillableLevelOfSkillTitle}}</a>
-                                    </div>
-                                </td>
-                                <td>
-                                    {{educationalModule.educationalModuleType}}
-                                </td>
-                                <td>
-                                    {{educationalModule.courseType}}
-                                </td>
-                                <td>
-                                    {{educationalModule.runDate}}
-                                </td>
-                                <td>
-                                    <a class="enableLink" [href]="'#/educational-history-marine-suffix/' + educationalModule.educationalHistoryId + '/view'"
-                                       *ngIf="educationalModule.status == 100">{{educationalModule.statusMeaning}}</a>
-                                    <span *ngIf="educationalModule.status != 100">{{educationalModule.statusMeaning}}</span>
-                                </td>
-                            </tr>
-                            <tr class="success" *ngIf="homePagePersonEducationalModules">
-                                <td colspan="3">مجموع</td>
-                                <td colspan="1">{{sumHourPersonEducationalModules | number}}</td>
-                                <td colspan="8"></td>
-                            </tr>
-                            <tr *ngIf="!homePagePersonEducationalModules">
-                                <td colspan="5" class="alert-danger">
-                                    دوره ای برای شما تعریف نشده.
+                            <tr>
+                                <td style="width:37%;text-align:center;padding-right:15px">
+                                    <a class="HomeBox" href="#/request-educational-module-marine-suffix"
+                                       style="opacity: 1;">
+                                        <img src="../../content/images/home/Course.png">
+                                        <div class="HomeBoxTitle">درخواست پودمان آموزشی</div>
+                                    </a>
+                                    <a class="HomeBox" href="#/educational-module-marine-suffix" style="opacity: 1;">
+                                        <img src="../../content/images/home/Course.png">
+                                        <div class="HomeBoxTitle">فهرست پودمان آموزشی</div>
+                                    </a>
+                                    <a class="HomeBox" href="#/request-niazsanji-fardi-marine-suffix" style="opacity: 1;">
+                                        <img src="../../content/images/home/Process.png">
+                                        <div class="HomeBoxTitle"> درخواست نیازسنجی پودمانی شغلی و فردی</div>
+                                    </a>
+                                    <a class="HomeBox" href="#/niazsanji-fardi-marine-suffix" style="opacity: 1;">
+                                        <img src="../../content/images/home/Process.png">
+                                        <div class="HomeBoxTitle"> فهرست نیازسنجی پودمانی شغلی و فردی</div>
+                                    </a>
+                                    <a class="HomeBox" href="#/request-organization-niazsanji-marine-suffix"
+                                       style="opacity: 1;">
+                                        <img src="../../content/images/home/Evaluation.png">
+                                        <div class="HomeBoxTitle"> درخواست نیازسنجی پودمانی سازمانی (متمرکز)</div>
+                                    </a>
+                                    <a class="HomeBox" href="#/final-organization-niazsanji-marine-suffix"
+                                       style="opacity: 1;">
+                                        <img src="../../content/images/home/Evaluation.png">
+                                        <div class="HomeBoxTitle"> فهرست نیازسنجی پودمانی سازمانی (متمرکز)</div>
+                                    </a>
+                                    <a class="HomeBox" href="#/teacher-marine-suffix" style="opacity: 1;">
+                                        <img src="../../content/images/home/Class.png">
+                                        <div class="HomeBoxTitle"> مدرسان آموزشی ودجا</div>
+                                    </a>
+                                    <a class="HomeBox" href="#/person-marine-suffix" style="opacity: 1;">
+                                        <img src="../../content/images/home/Personel.png">
+                                        <div class="HomeBoxTitle">اطلاعات پرسنلی</div>
+                                    </a>
+                                    <a class="HomeBox" href="#/resource-marine-suffix" style="opacity: 1;">
+                                        <img src="../../content/images/home/Library.png">
+                                        <div class="HomeBoxTitle">منابع آموزشی</div>
+                                    </a>
+                                    <a class="HomeBox" href="#/instruction-marine-suffix" style="opacity: 1;">
+                                        <img src="../../content/images/home/Ico-Request-Manage.png">
+                                        <div class="HomeBoxTitle">قوانین و دستورالعمل ها</div>
+                                    </a>
+                                    <a class="HomeBox" href="#" style="opacity: 1;">
+                                        <img src="../../content/images/home/Report.png">
+                                        <div class="HomeBoxTitle">گزارشات</div>
+                                    </a>
+                                    <a class="HomeBox" href="#/jam-help-marine-suffix" style="opacity: 1;">
+                                        <img src="../../content/images/home/Help.png">
+                                        <div class="HomeBoxTitle">راهنما</div>
+                                    </a>
+                                    <!--<a class="HomeBox" href="#/admin/user-management" style="opacity: 1;">
+                                    <img src="../../content/images/home/Password.png">
+                                    <div class="HomeBoxTitle">مدیریت کاربران</div>
+                                    </a>-->
+                                    <!--          <a routerLink="password">
+                                                  <div class="HomeBox" style="opacity: 1;">
+                                                      <img src="../../content/images/home/Password.png">
+                                                      <div class="HomeBoxTitle">مدیریت کاربران</div>
+                                                  </div>
+                                              </a>-->
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer text-center">
-                        <!--<a href="#/announcement-marine-suffix" class="uppercase">نمایش تمام اخبار</a>-->
-                    </div>
-                    <!-- /.box-footer -->
-                </div>
-                <!--<ng-container>
-                    <table class="table table-striped  table-bordered table-hover table-sm">
-                        <thead>
-                        <tr >
-                            <th><span>درخواست های نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی</span> </th>
-                            <th><span>درخواست های نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی نهایی شده</span></th>
-                            <th><span>درخواست های نیازسنجی سازمانی</span> </th>
-                            <th><span>درخواست های نیازسنجی سازمانی نهایی شده</span></th>
-                            <th><span>درخواست های نیازسنجی در حال برنامه ریزی</span></th>
-                            <th><span>درخواست های نیازسنجی در حال اجرا</span></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{homePageNiazsanjiReport.niazsanjiFardiCount}}</td>
-                            <td>{{homePageNiazsanjiReport.niazsanjiFardiSucceedCount}}</td>
-                            <td>{{homePageNiazsanjiReport.organizationNiazsanjiCount}}</td>
-                            <td>{{homePageNiazsanjiReport.organizationNiazsanjiSucceedCount}}</td>
-                            <td>{{homePageNiazsanjiReport.designAndPlanningStepCount}}</td>
-                            <td>{{homePageNiazsanjiReport.runningStepCount}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </ng-container>-->
 
-                <!--<ng-container *ngIf="isAdmin" [ngSwitch]="pageName">
-                    <div class="div-pic-home" *ngSwitchCase="'home'"  [@enterAnimation]>
-                        <img class="img-home" src="../../content/images/home/ShotTerm-Learning.png"/>
-                        <div (click)="changePage('niazsanjishow')" class="niazsanjiLink" > </div>
-                        <a href="#/final-niazsanji-report-marine-suffix" class="planningLink" > </a>
-                        <div (click)="changePage('niazsanjishow')" class="runningLink" > </div>
-                        <div (click)="changePage('niazsanjishow')" class="reportLink" > </div>
                     </div>
-                    <div class="div-pic-home" *ngSwitchCase="'niazsanjishow'" [@updownAnimation]>
-                        <div class="Item1 table-home niazsanjiPage">
-                            <table cellspacing="2" cellpadding="0" style="border:0px;">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <a class="HomeBox" href="#/request-niazsanji-fardi-marine-suffix" style="opacity: 1;background-color: orangered;">
-                                            <img src="../../content/images/home/man.png">
-                                            <div class="HomeBoxTitle">درخواست نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی</div>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="HomeBox" href="#/niazsanji-fardi-marine-suffix" style="opacity: 1;background-color: darkseagreen;">
-                                            <img src="../../content/images/home/archives.png">
-                                            <div class="HomeBoxTitle">فهرست نهایی شده نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی</div>
-                                        </a>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a class="HomeBox" href="#/request-organization-niazsanji-marine-suffix" style="opacity: 1;    background-color: darkslateblue;">
-                                            <img src="../../content/images/home/teamwork.png">
-                                            <div class="HomeBoxTitle">تعریف نیازسنجی های پودمان سازمانی (متمرکز و گروهی)</div>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="HomeBox" href="#/final-organization-niazsanji-marine-suffix" style="opacity: 1;background-color: mediumseagreen;">
-                                            <img src="../../content/images/home/archives.png">
-                                            <div class="HomeBoxTitle">فهرست نهایی شده نیازسنجی های پودمان سازمانی (متمرکز و گروهی)</div>
-                                        </a>
-                                    </td>
-                                </tr>
-                                </tbody></table>
-
-                        </div>
-                        <div>
-                            <button onclick="window.history.back()" class="btn btn-info">بازگشت</button>
-                        </div>
-                    </div>
-                    <div class="div-pic-home" *ngSwitchCase="'niazsanjigroupshow'" [@enterAnimation]>
-                        <div class="table-home niazsanjiPage">
-                            <table cellspacing="2" cellpadding="0" style="border:0px;">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <a class="HomeBox" href="#/niazsanji-group-marine-suffix" style="opacity: 1;background-color: darkseagreen;">
-                                            <img src="../../content/images/home/reunion.png">
-                                            <div class="HomeBoxTitle">تعریف گروهی دوره آموزشی</div>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="HomeBox" href="#/educational-module-job-marine-suffix" style="opacity: 1;background-color: darkslateblue;">
-                                            <img src="../../content/images/home/account.png"/>
-                                            <div class="HomeBoxTitle">تخصیص پودمان به گروه های شغلی</div>
-                                        </a>
-                                    </td>
-                                </tr>
-                                </tbody></table>
-                        </div>
-                        <div>
-                            <button onclick="window.history.back()" class="btn btn-info">بازگشت</button>
-                        </div>
-                    </div>
-                </ng-container>-->
-                <div class="table-home" *ngIf="isSuperUsers">
-                    <table  cellspacing="2" cellpadding="0" style="border:0px;">
-                        <tbody>
-                        <tr>
-                            <td style="width:37%;text-align:center;padding-right:15px">
-                                <a class="HomeBox" href="#/request-educational-module-marine-suffix"
-                                   style="opacity: 1;">
-                                    <img src="../../content/images/home/Course.png">
-                                    <div class="HomeBoxTitle">درخواست پودمان آموزشی</div>
-                                </a>
-                                <a class="HomeBox" href="#/educational-module-marine-suffix" style="opacity: 1;">
-                                    <img src="../../content/images/home/Course.png">
-                                    <div class="HomeBoxTitle">فهرست پودمان آموزشی</div>
-                                </a>
-                                <a class="HomeBox" href="#/request-niazsanji-fardi-marine-suffix" style="opacity: 1;">
-                                    <img src="../../content/images/home/Process.png">
-                                    <div class="HomeBoxTitle"> درخواست نیازسنجی پودمانی شغلی و فردی</div>
-                                </a>
-                                <a class="HomeBox" href="#/niazsanji-fardi-marine-suffix" style="opacity: 1;">
-                                    <img src="../../content/images/home/Process.png">
-                                    <div class="HomeBoxTitle"> فهرست نیازسنجی پودمانی شغلی و فردی</div>
-                                </a>
-                                <a class="HomeBox" href="#/request-organization-niazsanji-marine-suffix"
-                                   style="opacity: 1;">
-                                    <img src="../../content/images/home/Evaluation.png">
-                                    <div class="HomeBoxTitle"> درخواست نیازسنجی پودمانی سازمانی (متمرکز)</div>
-                                </a>
-                                <a class="HomeBox" href="#/final-organization-niazsanji-marine-suffix"
-                                   style="opacity: 1;">
-                                    <img src="../../content/images/home/Evaluation.png">
-                                    <div class="HomeBoxTitle"> فهرست نیازسنجی پودمانی سازمانی (متمرکز)</div>
-                                </a>
-                                <a class="HomeBox" href="#/teacher-marine-suffix" style="opacity: 1;">
-                                    <img src="../../content/images/home/Class.png">
-                                    <div class="HomeBoxTitle"> مدرسان آموزشی ودجا</div>
-                                </a>
-                                <a class="HomeBox" href="#/person-marine-suffix" style="opacity: 1;">
-                                    <img src="../../content/images/home/Personel.png">
-                                    <div class="HomeBoxTitle">اطلاعات پرسنلی</div>
-                                </a>
-                                <a class="HomeBox" href="#/resource-marine-suffix" style="opacity: 1;">
-                                    <img src="../../content/images/home/Library.png">
-                                    <div class="HomeBoxTitle">منابع آموزشی</div>
-                                </a>
-                                <a class="HomeBox" href="#/instruction-marine-suffix" style="opacity: 1;">
-                                    <img src="../../content/images/home/Ico-Request-Manage.png">
-                                    <div class="HomeBoxTitle">قوانین و دستورالعمل ها</div>
-                                </a>
-                                <a class="HomeBox" href="#" style="opacity: 1;">
-                                    <img src="../../content/images/home/Report.png">
-                                    <div class="HomeBoxTitle">گزارشات</div>
-                                </a>
-                                <a class="HomeBox" href="#/jam-help-marine-suffix" style="opacity: 1;">
-                                    <img src="../../content/images/home/Help.png">
-                                    <div class="HomeBoxTitle">راهنما</div>
-                                </a>
-                                <!--<a class="HomeBox" href="#/admin/user-management" style="opacity: 1;">
-                                <img src="../../content/images/home/Password.png">
-                                <div class="HomeBoxTitle">مدیریت کاربران</div>
-                                </a>-->
-                                <!--          <a routerLink="password">
-                                              <div class="HomeBox" style="opacity: 1;">
-                                                  <img src="../../content/images/home/Password.png">
-                                                  <div class="HomeBoxTitle">مدیریت کاربران</div>
-                                              </div>
-                                          </a>-->
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-                <div id="news" class="box box-primary newsbox">
+                    <div id="news" class="box box-primary newsbox">
                     <div class="box-header with-border">
                         <h3 class="box-title center">آخرین اخبار و اخطارها</h3>
 
@@ -845,6 +747,7 @@
                     </div>
                     <!-- /.box-footer -->
                 </div>
+                </ng-container>
             </div>
 
         </div>

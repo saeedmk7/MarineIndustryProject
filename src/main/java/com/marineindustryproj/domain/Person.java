@@ -140,6 +140,12 @@ public class Person implements Serializable {
     @OneToMany(mappedBy = "person")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<JobRecord> jobRecords = new HashSet<>();
+    @OneToMany(mappedBy = "person")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<ResearchRecord> researchRecords = new HashSet<>();
+    @OneToMany(mappedBy = "person")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<TeachingRecord> teachingRecords = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "person_document",
@@ -679,6 +685,56 @@ public class Person implements Serializable {
 
     public void setJobRecords(Set<JobRecord> jobRecords) {
         this.jobRecords = jobRecords;
+    }
+
+    public Set<ResearchRecord> getResearchRecords() {
+        return researchRecords;
+    }
+
+    public Person researchRecords(Set<ResearchRecord> researchRecords) {
+        this.researchRecords = researchRecords;
+        return this;
+    }
+
+    public Person addResearchRecord(ResearchRecord researchRecord) {
+        this.researchRecords.add(researchRecord);
+        researchRecord.setPerson(this);
+        return this;
+    }
+
+    public Person removeResearchRecord(ResearchRecord researchRecord) {
+        this.researchRecords.remove(researchRecord);
+        researchRecord.setPerson(null);
+        return this;
+    }
+
+    public void setResearchRecords(Set<ResearchRecord> researchRecords) {
+        this.researchRecords = researchRecords;
+    }
+
+    public Set<TeachingRecord> getTeachingRecords() {
+        return teachingRecords;
+    }
+
+    public Person teachingRecords(Set<TeachingRecord> teachingRecords) {
+        this.teachingRecords = teachingRecords;
+        return this;
+    }
+
+    public Person addTeachingRecord(TeachingRecord teachingRecord) {
+        this.teachingRecords.add(teachingRecord);
+        teachingRecord.setPerson(this);
+        return this;
+    }
+
+    public Person removeTeachingRecord(TeachingRecord teachingRecord) {
+        this.teachingRecords.remove(teachingRecord);
+        teachingRecord.setPerson(null);
+        return this;
+    }
+
+    public void setTeachingRecords(Set<TeachingRecord> teachingRecords) {
+        this.teachingRecords = teachingRecords;
     }
 
     public Set<Document> getDocuments() {

@@ -70,7 +70,9 @@ public class PersonServiceImpl implements PersonService {
         if(!isEit){
             User newUser = saveNewUser(person,
                         userService);
-            userService.clearUserCaches(newUser);
+            if(newUser != null) {
+                userService.clearUserCaches(newUser);
+            }
         }
         return personMapper.toDto(person);
     }
@@ -78,26 +80,31 @@ public class PersonServiceImpl implements PersonService {
     public static User saveNewUser(Person person,
                                    UserService userService
                                    ) {
-        if(!userService.getUserWithAuthoritiesByLogin(person.getNationalId()).isPresent()) {
-            UserDTO userDTO = new UserDTO();
-            userDTO.setActivated(true);
-            userDTO.setCreatedBy(SecurityUtils.getCurrentUserLogin().get());
-            userDTO.setLastModifiedBy(SecurityUtils.getCurrentUserLogin().get());
-            userDTO.setCreatedDate(Instant.now());
-            userDTO.setLastModifiedDate(Instant.now());
-            userDTO.setEmail(person.getNationalId() + "@amoozesh.com");
-            userDTO.setLangKey("fa");
-            userDTO.setLogin(person.getNationalId());
-            userDTO.setPassword("123456");
-            userDTO.setPersonId(person.getId());
-            Set<String> authorities = new HashSet<>();
-            authorities.add("ROLE_USER");
-            userDTO.setAuthorities(authorities);
+        try {
+            if (!userService.getUserWithAuthoritiesByLogin(person.getNationalId()).isPresent()) {
+                UserDTO userDTO = new UserDTO();
+                userDTO.setActivated(true);
+                userDTO.setCreatedBy(SecurityUtils.getCurrentUserLogin().get());
+                userDTO.setLastModifiedBy(SecurityUtils.getCurrentUserLogin().get());
+                userDTO.setCreatedDate(Instant.now());
+                userDTO.setLastModifiedDate(Instant.now());
+                userDTO.setEmail(person.getNationalId() + "@amoozesh.com");
+                userDTO.setLangKey("fa");
+                userDTO.setLogin(person.getNationalId());
+                userDTO.setPassword("123456");
+                userDTO.setPersonId(person.getId());
+                Set<String> authorities = new HashSet<>();
+                authorities.add("ROLE_USER");
+                userDTO.setAuthorities(authorities);
 
-            User newUser = userService.createUser(userDTO);
-            return newUser;
+                User newUser = userService.createUser(userDTO);
+                return newUser;
+            }
+            return null;
         }
-        return null;
+        catch(Exception ex) {
+            return null;
+        }
     }
 
     /**

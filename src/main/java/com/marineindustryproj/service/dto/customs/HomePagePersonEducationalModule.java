@@ -74,7 +74,7 @@ public class HomePagePersonEducationalModule {
         this.title = educationalHistoryDTO.getEducationalModuleName();
         this.learningTimePractical = educationalHistoryDTO.getLearningTimePractical();
         this.learningTimeTheorical = educationalHistoryDTO.getLearningTimeTheorical();
-
+        this.courseType = educationalHistoryDTO.getCourseTypeTitle();
         this.code = educationalHistoryDTO.getEducationalModuleId().toString();
         this.skillableLevelOfSkillId = educationalModuleDTO.getSkillableLevelOfSkillId();
         this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();

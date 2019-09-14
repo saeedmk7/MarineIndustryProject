@@ -49,7 +49,10 @@ import {MONTHS} from "app/shared/constants/months.constants";
 export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     private _runPhase: IRunPhaseMarineSuffix;
     isSaving: boolean;
-    runMonths: any = MONTHS;
+    runMonths: any = MONTHS.sort(function(a,b)
+    {
+        return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+    });
     educationalModule: IEducationalModuleMarineSuffix = {};
     people: IPersonMarineSuffix[];
     runningSteps: IRunningStepMarineSuffix[];

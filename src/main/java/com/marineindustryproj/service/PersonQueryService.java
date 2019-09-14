@@ -183,6 +183,14 @@ public class PersonQueryService extends QueryService<Person> {
                 specification = specification.and(buildSpecification(criteria.getJobRecordId(),
                     root -> root.join(Person_.jobRecords, JoinType.LEFT).get(JobRecord_.id)));
             }
+            if (criteria.getResearchRecordId() != null) {
+                specification = specification.and(buildSpecification(criteria.getResearchRecordId(),
+                    root -> root.join(Person_.researchRecords, JoinType.LEFT).get(ResearchRecord_.id)));
+            }
+            if (criteria.getTeachingRecordId() != null) {
+                specification = specification.and(buildSpecification(criteria.getTeachingRecordId(),
+                    root -> root.join(Person_.teachingRecords, JoinType.LEFT).get(TeachingRecord_.id)));
+            }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(Person_.documents, JoinType.LEFT).get(Document_.id)));

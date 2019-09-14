@@ -138,6 +138,10 @@
     <include file="config/liquibase/changelog/20190626171916_added_entity_constraints_BeautySpeechAuthority.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190626175947_update_entity_personAndRunPhase.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190626180101_added_entity_constraints_educationalHistory_courseType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190905175341_added_entity_ResearchRecord.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190905175341_added_entity_constraints_ResearchRecord.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190905175342_added_entity_TeachingRecord.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190905175342_added_entity_constraints_TeachingRecord.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

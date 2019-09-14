@@ -83,6 +83,10 @@ public class PersonCriteria implements Serializable {
 
     private LongFilter jobRecordId;
 
+    private LongFilter researchRecordId;
+
+    private LongFilter teachingRecordId;
+
     private LongFilter documentId;
 
     private LongFilter scientificWorkGroupId;
@@ -353,6 +357,22 @@ public class PersonCriteria implements Serializable {
         this.jobRecordId = jobRecordId;
     }
 
+    public LongFilter getResearchRecordId() {
+        return researchRecordId;
+    }
+
+    public void setResearchRecordId(LongFilter researchRecordId) {
+        this.researchRecordId = researchRecordId;
+    }
+
+    public LongFilter getTeachingRecordId() {
+        return teachingRecordId;
+    }
+
+    public void setTeachingRecordId(LongFilter teachingRecordId) {
+        this.teachingRecordId = teachingRecordId;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -514,6 +534,8 @@ public class PersonCriteria implements Serializable {
             Objects.equals(educationalHistoryId, that.educationalHistoryId) &&
             Objects.equals(educationalRecordId, that.educationalRecordId) &&
             Objects.equals(jobRecordId, that.jobRecordId) &&
+            Objects.equals(researchRecordId, that.researchRecordId) &&
+            Objects.equals(teachingRecordId, that.teachingRecordId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(scientificWorkGroupId, that.scientificWorkGroupId) &&
             Objects.equals(lastQualificationId, that.lastQualificationId) &&
@@ -564,6 +586,8 @@ public class PersonCriteria implements Serializable {
         educationalHistoryId,
         educationalRecordId,
         jobRecordId,
+        researchRecordId,
+        teachingRecordId,
         documentId,
         scientificWorkGroupId,
         lastQualificationId,
@@ -615,6 +639,8 @@ public class PersonCriteria implements Serializable {
                 (educationalHistoryId != null ? "educationalHistoryId=" + educationalHistoryId + ", " : "") +
                 (educationalRecordId != null ? "educationalRecordId=" + educationalRecordId + ", " : "") +
                 (jobRecordId != null ? "jobRecordId=" + jobRecordId + ", " : "") +
+                (researchRecordId != null ? "researchRecordId=" + researchRecordId + ", " : "") +
+                (teachingRecordId != null ? "teachingRecordId=" + teachingRecordId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (scientificWorkGroupId != null ? "scientificWorkGroupId=" + scientificWorkGroupId + ", " : "") +
                 (lastQualificationId != null ? "lastQualificationId=" + lastQualificationId + ", " : "") +

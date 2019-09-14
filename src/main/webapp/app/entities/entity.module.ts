@@ -75,6 +75,8 @@ import { MarineindustryprojJamHelpAuthorityMarineSuffixModule } from './jam-help
 import { MarineindustryprojEducationalRecordMarineSuffixModule } from './educational-record-marine-suffix/educational-record-marine-suffix.module';
 import { MarineindustryprojJobRecordMarineSuffixModule } from './job-record-marine-suffix/job-record-marine-suffix.module';
 import {MarineindustryprojPersonEducationalRecordsMarineSuffixModule} from "./person-educational-records-marine-suffix/person-educational-records-marine-suffix.module";
+import {MarineindustryprojTeachingRecordMarineSuffixModule} from "./teaching-record-marine-suffix/teaching-record-marine-suffix.module";
+import {MarineindustryprojResearchRecordMarineSuffixModule} from "./research-record-marine-suffix/research-record-marine-suffix.module";
 
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
@@ -151,7 +153,9 @@ import {MarineindustryprojPersonEducationalRecordsMarineSuffixModule} from "./pe
         MarineindustryprojInstructionMarineSuffixModule,
         MarineindustryprojEducationalRecordMarineSuffixModule,
         MarineindustryprojJobRecordMarineSuffixModule,
-        MarineindustryprojPersonEducationalRecordsMarineSuffixModule
+        MarineindustryprojPersonEducationalRecordsMarineSuffixModule,
+        MarineindustryprojTeachingRecordMarineSuffixModule,
+        MarineindustryprojResearchRecordMarineSuffixModule
 
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],

@@ -86,7 +86,7 @@ public class PersonExcel {
             FileInputStream excelFile = new FileInputStream(new File(this.rootLocation.resolve(fileName).toAbsolutePath().toString()));
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheet("Sheet1");
-            List<Long> ids = personService.findAllFromCache().stream().map(a -> a.getId()).collect(Collectors.toList());
+            List<String> nationalIds = personService.findAllFromCache().stream().map(a -> a.getNationalId()).collect(Collectors.toList());
             Iterator<Row> iterator = datatypeSheet.iterator();
             while (iterator.hasNext()) {
                 Row currentRow = iterator.next();
@@ -111,7 +111,7 @@ public class PersonExcel {
                                     personelCode = currentCell.getNumericCellValue();
                                 else
                                     personelCode = Double.valueOf(currentCell.getStringCellValue());
-                                if (personelCode == 0) {
+                                /*if (personelCode == 0) {
                                     importUtilities.addError(rowNum,
                                         columnNum,
                                         "personelCode",
@@ -120,11 +120,11 @@ public class PersonExcel {
                                         sb);
                                     hasError = true;
                                     continue;
-                                }
-                                if(ids.contains(personelCode.longValue())){
+                                }*/
+                                /*if(ids.contains(personelCode.longValue())){
                                     hasError = true;
                                     continue;
-                                }
+                                }*/
                                 /*if (!isNumeric(jobKey)) {
                                     addError(rowNum,
                                              columnNum,
@@ -135,7 +135,7 @@ public class PersonExcel {
                                     continue;
                                 }*/
                                 personDTO.setPersonelCode(String.valueOf(personelCode.longValue()));
-                                personDTO.setId(personelCode.longValue());
+                                //personDTO.setId(personelCode.longValue());
                                 break;
                             case 1: //name
                                 String name = "";
@@ -225,6 +225,13 @@ public class PersonExcel {
                                     hasError = true;
                                     continue;
                                 }
+                                String nationalIdStr = String.valueOf(nationalId.longValue());
+                                personDTO.setNationalId(StringUtils.leftPad(nationalIdStr,10, '0'));
+                                if(nationalIds.contains(personDTO.getNationalId())){
+                                    hasError = true;
+                                    continue;
+                                }
+                                personDTO.setId(nationalId.longValue());
                                 /*if (!isNumeric(jobCode)) {
                                     addError(rowNum,
                                              columnNum,
@@ -234,8 +241,7 @@ public class PersonExcel {
                                     hasError = true;
                                     continue;
                                 }*/
-                                String nationalIdStr = String.valueOf(nationalId.longValue());
-                                personDTO.setNationalId(StringUtils.leftPad(nationalIdStr,10, '0'));
+
                                 break;
                             case 6: // birthDate
                                 Double birthDate = Double.valueOf(0);
@@ -427,8 +433,8 @@ public class PersonExcel {
 
                     Person person = personMapper.toEntity(personDTO);
 
-                    PersonServiceImpl.saveNewUser(person,
-                                                  userService);
+                    /*PersonServiceImpl.saveNewUser(person,
+                                                  userService);*/
                 }
                 catch (Exception ex){
                     importUtilities.addError(rowNum, 0, "", 3, ex.getMessage(), sb);

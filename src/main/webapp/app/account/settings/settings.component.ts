@@ -194,7 +194,7 @@ export class SettingsComponent implements OnInit {
 
             if(allowedTypes.includes(file.type))
             {
-                if(file.size < 80000) {
+                if(file.size < 2000000) {
                     this.dataUtils.toBase64(file, function (base64Data) {
                         picUrl = "data:" + file.type + ";base64, " + base64Data;
                     });
@@ -204,7 +204,7 @@ export class SettingsComponent implements OnInit {
                     }, 1000);
                 }
                 else {
-                    this.error = 'عکس انتخابی شما باید کوچکتر از 80 کیلوبایت باشد';
+                    this.error = 'عکس انتخابی شما باید کوچکتر از 2 مگابایت باشد';
                     this.success = null;
                 }
             }

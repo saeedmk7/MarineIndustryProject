@@ -86,6 +86,7 @@ public class FinalOrganizationNiazsanjiServiceImpl implements FinalOrganizationN
         finalNiazsanjiReport.setCourseType(finalOrganizationNiazsanji.getCourseType());
         finalNiazsanjiReport = finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
 
+        Integer peopleCount = finalOrganizationNiazsanji.getPeople().size();
         for (Person item: finalOrganizationNiazsanji.getPeople()) {
             FinalNiazsanjiReportPerson finalNiazsanjiReportPerson = new FinalNiazsanjiReportPerson();
             finalNiazsanjiReportPerson.setFinalNiazsanjiReport(finalNiazsanjiReport);
@@ -96,7 +97,7 @@ public class FinalOrganizationNiazsanjiServiceImpl implements FinalOrganizationN
             finalNiazsanjiReportPerson.setModifyDate(ZonedDateTime.now());
             finalNiazsanjiReportPerson.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
             finalNiazsanjiReportPerson.setNiazSanjiSource(NiazSanjiSource.ORGANIZATION);
-            finalNiazsanjiReportPerson.setPriceCost(finalOrganizationNiazsanji.getPriceCost());
+            finalNiazsanjiReportPerson.setPriceCost(finalOrganizationNiazsanji.getPriceCost() / peopleCount);
             finalNiazsanjiReportPerson.setSourceId(finalOrganizationNiazsanjiDTO.getId());
             finalNiazsanjiReportPerson.setStatus(0);
             finalNiazsanjiReportPersonRepository.save(finalNiazsanjiReportPerson);

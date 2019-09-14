@@ -99,9 +99,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     homePageReport: IHomePageReport;
     homePageReportPrice: IHomePageReport;
-    cyanColors: string[] = ['#E0F7FA','#B2EBF2','#80DEEA','#4DD0E1','#64e8da', '#84FFFF','#18FFFF','#00E5FF','#00B8D4','#28A78E', '#00BCD4','#00ACC1','#0097A7','#006064'];
-    greenColors: string[] = ['#c4f5bc', '#C8E6C9', '#A5D6A7', '#81C784', '#66BB6A', '#4CAF50', '#43A047', '#388E3C', '#B9F6CA', '#69F0AE', '#00E676', '#00C853', '#2E7D32', '#1B5E20'];
-    redColors: string[] = ['#ffced2', '#FFCDD2', '#EF9A9A', '#E57373', '#EF5350', '#F44336', '#E53935', '#FF8A80', '#FF5252', '#FF1744', '#D32F2F', '#C62828', '#B71C1C'];
+    cyanColors: string[] = ['#D6EAF8','#AED6F1','#85C1E9','#5DADE2','#3498DB', '#5DADE2','#85C1E9','#AED6F1','#D6EAF8','#AED6F1', '#85C1E9','#5DADE2','#3498DB','#2E86C1'];
+    greenColors: string[] = ['#c4f5bc', '#C8E6C9', '#A5D6A7', '#81C784', '#66BB6A', '#81C784', '#A5D6A7', '#C8E6C9', '#c4f5bc', '#C8E6C9', '#A5D6A7', '#81C784', '#66BB6A', '#81C784'];
+    redColors: string[] = ['#FADBD8', '#F5B7B1', '#F1948A', '#EC7063', '#E74C3C', '#EC7063', '#F1948A', '#F5B7B1', '#FADBD8', '#F5B7B1', '#F1948A', '#EC7063', '#E74C3C'];
 
     constructor(
         private principal: Principal,
@@ -253,7 +253,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     prepareHomePagePersonEducationalModule(personId: number){
         this.finalNiazsanjiReportService.getHomePagePersonEducationalModule(personId).subscribe((resp: HttpResponse<IHomePagePersonEducationalModule[]>) => {
 
-                this.homePagePersonEducationalModules = resp.body;
+                this.homePagePersonEducationalModules = resp.body.sort((a,b) => (a.runDate > b.runDate) ? 1 : (a.runDate < b.runDate) ? -1 : 0);
 
                 this.homePagePersonEducationalModules.forEach(a => {
                     a.totalLearningTime = a.learningTimePractical == undefined ? 0 : a.learningTimePractical + a.learningTimeTheorical == undefined ? 0 : a.learningTimeTheorical;

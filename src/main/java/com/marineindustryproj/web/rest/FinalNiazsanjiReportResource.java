@@ -55,6 +55,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -626,7 +627,7 @@ public class FinalNiazsanjiReportResource {
         if(reportType == 2)
             homePageReportType = HomePageReportType.Price;
         HomePageReport homePageReport = finalNiazsanjiReportService.getHomePageReport(niazsanjiYear, homePageReportType);
-        return ResponseEntity.ok().body(homePageReport);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(homePageReport);
     }
 
     @GetMapping("/final-niazsanji-reports/getHomePagePersonEducationalModule/{personId}")

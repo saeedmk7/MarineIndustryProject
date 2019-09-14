@@ -211,10 +211,10 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
     private onSaveError(response: HttpErrorResponse) {
         this.isSaving = false;
         if (response.status === 400 && response.error.type === PERSONELCODE_ALREADY_USED_TYPE) {
-            this.message = 'این کدپرسنلی برای فرد دیگری استفاده شده است لطفا کدی دیگر انتخاب نمائید.';
+            this.message = 'این کدملی برای فرد دیگری استفاده شده است لطفا کدی دیگر انتخاب نمائید.';
         }
         else {
-            this.message = 'این کدپرسنلی برای فرد دیگری استفاده شده است لطفا کدی دیگر انتخاب نمائید.';
+            this.message = 'این کدملی برای فرد دیگری استفاده شده است لطفا کدی دیگر انتخاب نمائید.';
         }
     }
 

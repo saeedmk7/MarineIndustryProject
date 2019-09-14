@@ -696,7 +696,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
         List<JobMinDTO> jobMinDTOS = jobService.findAllFromCache();
         List<Long> managerJobIds = jobMinDTOS.stream().filter(a -> a.getJobCode().startsWith("18") || a.getJobCode().startsWith("19") || a.getJobCode().startsWith("20")).map(a -> a.getId()).distinct().collect(Collectors.toList());
-        List<Long> stuffJobIds = jobMinDTOS.stream().filter(a -> (!a.getJobCode().startsWith("18")) || (!a.getJobCode().startsWith("19")) || (!a.getJobCode().startsWith("20"))).map(a -> a.getId()).distinct().collect(Collectors.toList());
+        List<Long> stuffJobIds = jobMinDTOS.stream().filter(a -> managerJobIds.stream().noneMatch(w -> w.equals(a.getId()))).map(a -> a.getId()).distinct().collect(Collectors.toList());
+        //List<Long> stuffJobIds = jobMinDTOS.stream().filter(a -> (!a.getJobCode().startsWith("18")) || (!a.getJobCode().startsWith("19")) || (!a.getJobCode().startsWith("20"))).map(a -> a.getId()).distinct().collect(Collectors.toList());
 
         homePageReport.setTotalManagers((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> managerJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0).mapToDouble(a -> a.getValue()).sum());
         homePageReport.setTotalManagersPercent((homePageReport.getTotalManagers() / homePageReport.getTotal()) * 100);

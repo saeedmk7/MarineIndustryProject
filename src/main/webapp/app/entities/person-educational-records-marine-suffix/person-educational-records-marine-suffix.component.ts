@@ -18,6 +18,10 @@ import {IHomePagePersonEducationalModule} from "app/shared/model/custom/home-pag
 import {FinalNiazsanjiReportMarineSuffixService} from "app/entities/final-niazsanji-report-marine-suffix";
 import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
+import {IResearchRecordMarineSuffix} from "app/shared/model/research-record-marine-suffix.model";
+import {ITeachingRecordMarineSuffix} from "app/shared/model/teaching-record-marine-suffix.model";
+import {ResearchRecordMarineSuffixService} from "app/entities/research-record-marine-suffix";
+import {TeachingRecordMarineSuffixService} from "app/entities/teaching-record-marine-suffix";
 
 
 @Component({
@@ -30,9 +34,11 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     success: string;
     settingsAccount: any;
     myAccount: any;
-    jobRecords: IJobRecordMarineSuffix[];
-    educationalRecords: IEducationalRecordMarineSuffix[];
-    people: IPersonMarineSuffix[];
+    jobRecords: IJobRecordMarineSuffix[] = [];
+    educationalRecords: IEducationalRecordMarineSuffix[] = [];
+    researchRecords: IResearchRecordMarineSuffix[] = [];
+    teachingRecords: ITeachingRecordMarineSuffix[] = [];
+    people: IPersonMarineSuffix[] = [];
     searchPerson: IPersonMarineSuffix;
     orgCharts: IOrganizationChartMarineSuffix[];
 
@@ -73,6 +79,8 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         private treeUtilities: TreeUtilities,
         private jobRecordService: JobRecordMarineSuffixService,
         private educationalRecordService: EducationalRecordMarineSuffixService,
+        private researchRecordService: ResearchRecordMarineSuffixService,
+        private teachingRecordService: TeachingRecordMarineSuffixService,
         private personService : PersonMarineSuffixService,
         private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService,
         private userService: UserService
@@ -141,6 +149,8 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
 
         this.prepareJobRecords(person.id);
         this.prepareEducationalRecords(person.id);
+        this.prepareTeachingRecords(person.id);
+        this.prepareResearchRecords(person.id);
         this.prepareHomePagePersonEducationalModule(person.id);
     }
     loadPersonData($event: IPersonMarineSuffix)
@@ -200,10 +210,40 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         },
         (res: HttpResponse<any>) => this.onPersonError(res.body));
     }
+    prepareResearchRecords(personId: number){
+        let criteria = [{
+            key: 'personId.equals',
+            value: personId
+        }];
+        this.researchRecordService.query({
+            page: 0,
+            size: 20000,
+            criteria,
+            sort: ["id", "asc"]
+        }).subscribe((resp:HttpResponse<IResearchRecordMarineSuffix[]>) => {
+            this.researchRecords = resp.body;
+        },
+        (res: HttpResponse<any>) => this.onPersonError(res.body));
+    }
+    prepareTeachingRecords(personId: number){
+        let criteria = [{
+            key: 'personId.equals',
+            value: personId
+        }];
+        this.teachingRecordService.query({
+            page: 0,
+            size: 20000,
+            criteria,
+            sort: ["id", "asc"]
+        }).subscribe((resp:HttpResponse<ITeachingRecordMarineSuffix[]>) => {
+            this.teachingRecords = resp.body;
+        },
+        (res: HttpResponse<any>) => this.onPersonError(res.body));
+    }
     prepareHomePagePersonEducationalModule(personId: number){
         this.finalNiazsanjiReportService.getHomePagePersonEducationalModule(personId).subscribe((resp: HttpResponse<IHomePagePersonEducationalModule[]>) => {
 
-                this.homePagePersonEducationalModules = resp.body.filter(a => a.status != 0);
+                this.homePagePersonEducationalModules = resp.body.filter(a => a.status != 0).sort((a,b) => (a.runDate > b.runDate) ? 1 : (a.runDate < b.runDate) ? -1 : 0);
                 if(this.homePagePersonEducationalModules) {
                     this.homePagePersonEducationalModules.forEach(a => {
                         a.totalLearningTime = a.learningTimePractical == undefined ? 0 : a.learningTimePractical + a.learningTimeTheorical == undefined ? 0 : a.learningTimeTheorical;
