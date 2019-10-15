@@ -19,7 +19,7 @@ export class ConvertObjectDatesService {
 
         if(this.isfa) {
             const mustChangeList: string[] = ['timepassed'];
-            const exceptionFields: string[] = ['dateOfStart'];
+            const exceptionFields: string[] = ['dateOfStart','investDate'];
             for (let key in obj) {
                 if (obj.hasOwnProperty(key)) {
                     let value = obj[key];

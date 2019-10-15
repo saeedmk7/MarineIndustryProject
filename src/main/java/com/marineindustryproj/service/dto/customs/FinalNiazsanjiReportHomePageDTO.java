@@ -25,10 +25,11 @@ public class FinalNiazsanjiReportHomePageDTO implements Serializable {
                                            Integer niazsanjiYear,
                                            CourseType courseType,
                                            OrganizationChart organizationChart,
-                                           Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople) {
+                                           Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople,
+                                           Boolean isManager) {
         this.id = id;
 
-
+        this.isManager = isManager;
         this.priceCost = priceCost != null ? priceCost.longValue() : 0;
         this.finalizeCost = finalizeCost != null ? finalizeCost.longValue() : 0;
         this.status = status;
@@ -72,6 +73,8 @@ public class FinalNiazsanjiReportHomePageDTO implements Serializable {
     private long[] jobIds;
 
     private long peopleCount;
+
+    private boolean isManager;
 
     public Long getTotalLearningTime() {
         return totalLearningTime;
@@ -208,5 +211,13 @@ public class FinalNiazsanjiReportHomePageDTO implements Serializable {
 
     public void setValue(Long value) {
         this.value = value;
+    }
+
+    public boolean isManager() {
+        return isManager;
+    }
+
+    public void setManager(boolean manager) {
+        isManager = manager;
     }
 }

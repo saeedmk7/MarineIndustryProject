@@ -164,7 +164,7 @@
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
-                            <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                            <button type="submit"
                                     [routerLink]="['/', { outlets: { popup: 'job-record-marine-suffix/' + 'delete/'+ jobRecord.id} }]"
                                     replaceUrl="true"
                                     queryParamsHandling="merge"
@@ -274,13 +274,13 @@
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button type="submit" *ngIf="isTopUsers"
+                            <button type="submit"
                                     [routerLink]="['/research-record-marine-suffix', 'edit', researchRecord.id]"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
-                            <button type="submit" *ngIf="isTopUsers"
+                            <button type="submit"
                                     [routerLink]="['/', { outlets: { popup: 'research-record-marine-suffix/' + 'delete/'+ researchRecord.id} }]"
                                     replaceUrl="true"
                                     queryParamsHandling="merge"
@@ -332,13 +332,13 @@
                             <td>{{teachingRecord.teachLocation}}</td>
                             <td class="text-right">
                                 <div class="btn-group flex-btn-group-container">
-                                    <button type="submit" *ngIf="isTopUsers"
+                                    <button type="submit"
                                             [routerLink]="['/teaching-record-marine-suffix', 'edit', teachingRecord.id]"
                                             class="btn btn-primary btn-sm">
                                         <fa-icon [icon]="'pencil-alt'"></fa-icon>
                                         <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                                     </button>
-                                    <button type="submit" *ngIf="isTopUsers"
+                                    <button type="submit"
                                             [routerLink]="['/', { outlets: { popup: 'teaching-record-marine-suffix/' + 'delete/'+ teachingRecord.id} }]"
                                             replaceUrl="true"
                                             queryParamsHandling="merge"
@@ -374,3 +374,4 @@
     </div>
 
 </div>
+<router-outlet name=""></router-outlet>

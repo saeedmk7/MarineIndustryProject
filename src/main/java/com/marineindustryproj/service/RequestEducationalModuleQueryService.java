@@ -179,6 +179,9 @@ public class RequestEducationalModuleQueryService extends QueryService<RequestEd
             if (criteria.getGuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGuid(), RequestEducationalModule_.guid));
             }
+            if (criteria.getHasImportantMessage() != null) {
+                specification = specification.and(buildSpecification(criteria.getHasImportantMessage(), RequestEducationalModule_.hasImportantMessage));
+            }
             if (criteria.getEducationalModuleId() != null) {
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
                     root -> root.join(RequestEducationalModule_.educationalModules, JoinType.LEFT).get(EducationalModule_.id)));

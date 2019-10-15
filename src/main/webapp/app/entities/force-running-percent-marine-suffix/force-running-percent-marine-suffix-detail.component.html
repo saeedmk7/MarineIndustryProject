@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="forceRunningPercent" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.forceRunningPercent.detail.title">Force Running Percent</span> {{forceRunningPercent.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.forceRunningPercent.title">Title</span></dt>
+                <dd>
+                    <span>{{forceRunningPercent.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.forceRunningPercent.description">Description</span></dt>
+                <dd>
+                    <span>{{forceRunningPercent.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.forceRunningPercent.percentAmount">Percent Amount</span></dt>
+                <dd>
+                    <span>{{forceRunningPercent.percentAmount}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.forceRunningPercent.runMonth">Run Month</span></dt>
+                <dd>
+                    <span>{{forceRunningPercent.runMonth}}</span>
+                </dd>
+<!--                <dt><span jhiTranslate="marineindustryprojApp.forceRunningPercent.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{forceRunningPercent.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.forceRunningPercent.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{forceRunningPercent.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.forceRunningPercent.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{forceRunningPercent.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.forceRunningPercent.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{forceRunningPercent.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.forceRunningPercent.guid">Guid</span></dt>
+                <dd>
+                    <span>{{forceRunningPercent.guid}}</span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.forceRunningPercent.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <span *ngFor="let organizationChart of forceRunningPercent.organizationCharts; let last = last">
+                        <a [routerLink]="['/organization-chart-marine-suffix', organizationChart?.id, 'view' ]">{{organizationChart.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <!--<button type="button"
+                    [routerLink]="['/force-running-percent-marine-suffix', forceRunningPercent.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>-->
+</div>
+        </div>
+    </div>
+</div>

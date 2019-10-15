@@ -91,6 +91,8 @@ public class RequestEducationalModuleCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private BooleanFilter hasImportantMessage;
+
     private LongFilter educationalModuleId;
 
     private LongFilter scientificWorkGroupId;
@@ -361,6 +363,14 @@ public class RequestEducationalModuleCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public BooleanFilter getHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public void setHasImportantMessage(BooleanFilter hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public LongFilter getEducationalModuleId() {
         return educationalModuleId;
     }
@@ -491,6 +501,7 @@ public class RequestEducationalModuleCriteria implements Serializable {
             Objects.equals(goalsText, that.goalsText) &&
             Objects.equals(teachersText, that.teachersText) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(scientificWorkGroupId, that.scientificWorkGroupId) &&
             Objects.equals(documentId, that.documentId) &&
@@ -538,6 +549,7 @@ public class RequestEducationalModuleCriteria implements Serializable {
         goalsText,
         teachersText,
         guid,
+        hasImportantMessage,
         educationalModuleId,
         scientificWorkGroupId,
         documentId,
@@ -586,6 +598,7 @@ public class RequestEducationalModuleCriteria implements Serializable {
                 (goalsText != null ? "goalsText=" + goalsText + ", " : "") +
                 (teachersText != null ? "teachersText=" + teachersText + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (scientificWorkGroupId != null ? "scientificWorkGroupId=" + scientificWorkGroupId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +

@@ -27,6 +27,7 @@ export interface IEducationalHistoryMarineSuffix {
     personFullName?: string;
     personName?: string;
     guid?: string;
+    hasImportantMessage?: boolean;
     personFamily?: string;
     personId?: number;
     courseTypeTitle?: string;
@@ -62,6 +63,7 @@ export class EducationalHistoryMarineSuffix implements IEducationalHistoryMarine
         public changeStatusUserLogin?: string,
         public personFullName?: string,
         public personName?: string,
+        public hasImportantMessage?: boolean,
         public guid?: string,
         public personFamily?: string,
         public personId?: number,
@@ -73,5 +75,6 @@ export class EducationalHistoryMarineSuffix implements IEducationalHistoryMarine
         public organizationChartId?: number
     ) {
         this.archived = this.archived || false;
+        this.hasImportantMessage = this.hasImportantMessage || false;
     }
 }

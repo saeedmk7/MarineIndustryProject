@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "researchRecord": {
+            "home": {
+                "title": "Research Records",
+                "createLabel": "Create a new Research Record",
+                "createOrEditLabel": "Create or edit a Research Record"
+            },
+            "created": "A new Research Record is created with identifier {{ param }}",
+            "updated": "A Research Record is updated with identifier {{ param }}",
+            "deleted": "A Research Record is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Research Record {{ id }}?"
+            },
+            "detail": {
+                "title": "Research Record"
+            },
+            "title": "Title",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "guid": "Guid",
+            "person": "Person"
+        }
+    }
+}

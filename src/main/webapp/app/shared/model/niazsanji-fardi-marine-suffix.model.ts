@@ -20,6 +20,7 @@ export interface INiazsanjiFardiMarineSuffix {
     conversation?: any;
     changeStatusUserLogin?: string;
     guid?: string;
+    hasImportantMessage?: boolean;
     documents?: IDocumentMarineSuffix[];
     courseTypeTitle?: string;
     courseTypeId?: number;
@@ -57,6 +58,7 @@ export class NiazsanjiFardiMarineSuffix implements INiazsanjiFardiMarineSuffix {
         public conversation?: any,
         public changeStatusUserLogin?: string,
         public guid?: string,
+        public hasImportantMessage?: boolean,
         public documents?: IDocumentMarineSuffix[],
         public courseTypeTitle?: string,
         public courseTypeId?: number,
@@ -74,5 +76,6 @@ export class NiazsanjiFardiMarineSuffix implements INiazsanjiFardiMarineSuffix {
         public skillLevelOfSkillTitle?: string
     ) {
         this.archived = this.archived || false;
+        this.hasImportantMessage = this.hasImportantMessage || false;
     }
 }

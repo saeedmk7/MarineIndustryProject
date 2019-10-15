@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8"  >
+        <div *ngIf="investToGroupTransaction" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.investToGroupTransaction.detail.title">Invest To Group Transaction</span> {{investToGroupTransaction.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.investToGroupTransaction.title">Title</span></dt>
+                <dd>
+                    <span>{{investToGroupTransaction.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.investToGroupTransaction.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="investToGroupTransaction.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', investToGroupTransaction.organizationChartId, 'view']">{{investToGroupTransaction.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+
+                <dt><span jhiTranslate="marineindustryprojApp.investToGroupTransaction.investDate">Invest Date</span></dt>
+                <dd>
+                    <span>{{investToGroupTransaction.investDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.investToGroupTransaction.investYear">Invest Year</span></dt>
+                <dd>
+                    <span>{{investToGroupTransaction.investYear}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.investToGroupTransaction.investAmount">Invest Amount</span></dt>
+                <dd>
+                    <span>{{investToGroupTransaction.investAmount | number}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.investToGroupTransaction.checkNumber">Check Number</span></dt>
+                <dd>
+                    <span>{{investToGroupTransaction.checkNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.investToGroupTransaction.description">Description</span></dt>
+                <dd>
+                    <span>{{investToGroupTransaction.description}}</span>
+                </dd>
+            </dl>
+            <div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <!--<button type="button"
+                    [routerLink]="['/invest-to-group-transaction-marine-suffix', investToGroupTransaction.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>-->
+        </div>
+        </div>
+    </div>
+</div>

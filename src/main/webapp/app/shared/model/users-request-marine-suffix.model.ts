@@ -15,6 +15,7 @@ export interface IUsersRequestMarineSuffix {
     requestStatus?: RequestStatus;
     changeStatusUserLogin?: string;
     guid?: string;
+    hasImportantMessage?: boolean;
     documents?: IDocumentMarineSuffix[];
     orgChartRoot?: string;
 
@@ -34,7 +35,9 @@ export class UsersRequestMarineSuffix implements IUsersRequestMarineSuffix {
         public requestStatus?: RequestStatus,
         public changeStatusUserLogin?: string,
         public guid?: string,
-        public documents?: IDocumentMarineSuffix[],
-        public orgChartRoot?: string
-    ) {}
+        public hasImportantMessage?: boolean,
+        public documents?: IDocumentMarineSuffix[]
+    ) {
+        this.hasImportantMessage = this.hasImportantMessage || false;
+    }
 }

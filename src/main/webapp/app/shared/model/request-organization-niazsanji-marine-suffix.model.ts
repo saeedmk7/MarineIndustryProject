@@ -31,6 +31,7 @@ export interface IRequestOrganizationNiazsanjiMarineSuffix {
     statusMeaning?: string;
     conversation?: any;
     guid?: string;
+    hasImportantMessage?: boolean;
     finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[];
     people?: IPersonMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
@@ -75,6 +76,7 @@ export class RequestOrganizationNiazsanjiMarineSuffix implements IRequestOrganiz
         public status?: number,
         public conversation?: any,
         public guid?: string,
+        public hasImportantMessage?: boolean,
         public finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[],
         public people?: IPersonMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
@@ -93,5 +95,6 @@ export class RequestOrganizationNiazsanjiMarineSuffix implements IRequestOrganiz
     ) {
         this.teacherNotFound = this.teacherNotFound || false;
         this.archived = this.archived || false;
+        this.hasImportantMessage = this.hasImportantMessage || false;
     }
 }

@@ -68,6 +68,8 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private BooleanFilter hasImportantMessage;
+
     private LongFilter niazsanjiFardiId;
 
     private LongFilter documentId;
@@ -206,6 +208,14 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public BooleanFilter getHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public void setHasImportantMessage(BooleanFilter hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public LongFilter getNiazsanjiFardiId() {
         return niazsanjiFardiId;
     }
@@ -294,6 +304,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
             Objects.equals(requestStatus, that.requestStatus) &&
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(courseTypeId, that.courseTypeId) &&
@@ -323,6 +334,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
         requestStatus,
         changeStatusUserLogin,
         guid,
+        hasImportantMessage,
         niazsanjiFardiId,
         documentId,
         courseTypeId,
@@ -353,6 +365,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
                 (requestStatus != null ? "requestStatus=" + requestStatus + ", " : "") +
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +

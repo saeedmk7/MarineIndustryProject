@@ -63,6 +63,8 @@ public class DesignAndPlanningCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private BooleanFilter hasImportantMessage;
+
     private LongFilter personId;
 
     private LongFilter documentId;
@@ -257,6 +259,14 @@ public class DesignAndPlanningCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public BooleanFilter getHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public void setHasImportantMessage(BooleanFilter hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public LongFilter getPersonId() {
         return personId;
     }
@@ -414,6 +424,7 @@ public class DesignAndPlanningCriteria implements Serializable {
             Objects.equals(status, that.status) &&
             Objects.equals(runMonth, that.runMonth) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(organizationChartId, that.organizationChartId) &&
@@ -455,6 +466,7 @@ public class DesignAndPlanningCriteria implements Serializable {
         status,
         runMonth,
         guid,
+        hasImportantMessage,
         personId,
         documentId,
         organizationChartId,
@@ -497,6 +509,7 @@ public class DesignAndPlanningCriteria implements Serializable {
                 (status != null ? "status=" + status + ", " : "") +
                 (runMonth != null ? "runMonth=" + runMonth + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +

@@ -72,6 +72,8 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private BooleanFilter hasImportantMessage;
+
     private LongFilter finalNiazsanjiReportPersonId;
 
     private LongFilter personId;
@@ -228,6 +230,14 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public BooleanFilter getHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public void setHasImportantMessage(BooleanFilter hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public LongFilter getFinalNiazsanjiReportPersonId() {
         return finalNiazsanjiReportPersonId;
     }
@@ -326,6 +336,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
             Objects.equals(planningRunMonth, that.planningRunMonth) &&
             Objects.equals(finalizeCost, that.finalizeCost) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
             Objects.equals(finalNiazsanjiReportPersonId, that.finalNiazsanjiReportPersonId) &&
             Objects.equals(designAndPlanningId, that.designAndPlanningId) &&
             Objects.equals(runPhaseId, that.runPhaseId) &&
@@ -358,6 +369,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         planningRunMonth,
         finalizeCost,
         guid,
+        hasImportantMessage,
         finalNiazsanjiReportPersonId,
         designAndPlanningId,
         runPhaseId,
@@ -391,6 +403,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
                 (planningRunMonth != null ? "planningRunMonth=" + planningRunMonth + ", " : "") +
                 (finalizeCost != null ? "finalizeCost=" + finalizeCost + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
                 (finalNiazsanjiReportPersonId != null ? "finalNiazsanjiReportPersonId=" + finalNiazsanjiReportPersonId + ", " : "") +
                 (designAndPlanningId != null ? "designAndPlanningId=" + designAndPlanningId + ", " : "") +
                 (runPhaseId != null ? "runPhaseId=" + runPhaseId + ", " : "") +

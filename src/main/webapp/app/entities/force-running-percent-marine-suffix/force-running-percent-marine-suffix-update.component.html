@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-force-running-percent-marine-suffix-heading" jhiTranslate="marineindustryprojApp.forceRunningPercent.home.createOrEditLabel">Create or edit a Force Running Percent</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!forceRunningPercent.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="forceRunningPercent.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.forceRunningPercent.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="forceRunningPercent.title" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.forceRunningPercent.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="forceRunningPercent.description" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.forceRunningPercent.percentAmount" for="field_percentAmount">Percent Amount</label>
+                    <input type="number" class="form-control" name="percentAmount" [required]="true" id="field_percentAmount"
+                        [(ngModel)]="forceRunningPercent.percentAmount" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.forceRunningPercent.runMonth" for="field_runMonth">Run Month</label>
+                    <select class="form-control" id="field_runMonth" name="runMonth" [required]="true" [(ngModel)]="forceRunningPercent.runMonth" >
+                        <option [ngValue]="runMonth.id" *ngFor="let runMonth of runMonths">{{runMonth.persianMonth}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="marineindustryprojApp.forceRunningPercent.organizationChart"  for="field_organizationChart">Organization Chart</label>
+                    <select class="form-control" id="field_organizationChart" multiple name="organizationChart" [required]="true" [(ngModel)]="forceRunningPercent.organizationCharts">
+                        <option [ngValue]="getSelected(forceRunningPercent.organizationCharts, organizationChartOption)" *ngFor="let organizationChartOption of groups; trackBy: trackOrganizationChartById">{{organizationChartOption.title}}</option>
+                    </select>
+                    <button type="button" (click)="selectAll()" class="btn btn-info">انتخاب همه</button>
+                    <!--<ng-select
+                        [items]="groups"
+                        [multiple]="true"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="گروه"
+                        name="organizationChart"
+                        id="field_organizationChart"
+                        [(ngModel)]="forceRunningPercent.organizationCharts">
+                </div>-->
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

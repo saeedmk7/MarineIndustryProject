@@ -50,6 +50,41 @@ public class HomePageReport implements Serializable {
         this.homePageReportCourseTypeDetails = homePageReportCourseTypeDetails;
         this.homePageReportOrganizationAndCourseTypeDetails = homePageReportOrganizationAndCourseTypeDetails;
     }
+    public HomePageReport(Float total,
+                          Float totalManagers,
+                          Float totalManagersPercent,
+                          Float totalStuffs,
+                          Float totalStuffsPercent,
+                          Float totalPassed,
+                          Float totalPassedPercent,
+                          Float totalPassedManagers,
+                          Float totalPassedManagersPercent,
+                          Float totalPassedStuffs,
+                          Float totalPassedStuffsPercent,
+                          Float remaining,
+                          Float remainingPercent,
+                          Float remainingManagers,
+                          Float remainingManagersPercent,
+                          Float remainingStuffs,
+                          Float remainingStuffsPercent) {
+        this.total = total;
+        this.totalManagers = totalManagers;
+        this.totalManagersPercent = totalManagersPercent;
+        this.totalStuffs = totalStuffs;
+        this.totalStuffsPercent = totalStuffsPercent;
+        this.totalPassed = totalPassed;
+        this.totalPassedPercent = totalPassedPercent;
+        this.totalPassedManagers = totalPassedManagers;
+        this.totalPassedManagersPercent = totalPassedManagersPercent;
+        this.totalPassedStuffs = totalPassedStuffs;
+        this.totalPassedStuffsPercent = totalPassedStuffsPercent;
+        this.remaining = remaining;
+        this.remainingPercent = remainingPercent;
+        this.remainingManagers = remainingManagers;
+        this.remainingManagersPercent = remainingManagersPercent;
+        this.remainingStuffs = remainingStuffs;
+        this.remainingStuffsPercent = remainingStuffsPercent;
+    }
 
     private Float total;
 

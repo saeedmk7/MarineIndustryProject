@@ -26,7 +26,9 @@ public interface OrganizationChartMapper extends EntityMapper<OrganizationChartD
     @Mapping(target = "niazsanjiFardis", ignore = true)
     @Mapping(target = "requestNiazsanjiFardis", ignore = true)
     @Mapping(target = "educationalHistories", ignore = true)
+    @Mapping(target = "investToGroupTransactions", ignore = true)
     @Mapping(source = "parentId", target = "parent")
+    @Mapping(target = "forceRunningPercents", ignore = true)
     OrganizationChart toEntity(OrganizationChartDTO organizationChartDTO);
 
     default OrganizationChart fromId(Long id) {

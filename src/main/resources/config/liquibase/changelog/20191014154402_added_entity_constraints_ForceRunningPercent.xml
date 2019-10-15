@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity ForceRunningPercent.
+    -->
+    <changeSet id="20191014154402-2" author="saeed">
+        
+        <addForeignKeyConstraint baseColumnNames="force_running_percents_id"
+                                 baseTableName="force_running_percent_organization_chart"
+                                 constraintName="force_running_percent_organiza_force_running_percents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="force_running_percent"/>
+        <addForeignKeyConstraint baseColumnNames="organization_charts_id"
+                                 baseTableName="force_running_percent_organization_chart"
+                                 constraintName="force_running_percent_organiza_organization_charts_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+        
+    </changeSet>
+</databaseChangeLog>

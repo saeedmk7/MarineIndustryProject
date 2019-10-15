@@ -1,0 +1,33 @@
+{
+    "marineindustryprojApp": {
+        "investToGroupTransaction": {
+            "home": {
+                "title": "تراکنش های سرمایه گذاری در گروه",
+                "createLabel": "جدید",
+                "createOrEditLabel": "سرمایه گذاری"
+            },
+            "created": "سرمایه گذاری با شناسه {{ param }} ایجاد شد.",
+            "updated": "سرمایه گذاری با شناسه {{ param }} ویرایش شد.",
+            "deleted": "سرمایه گذاری با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف سرمایه گذاری با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات سرمایه گذاری"
+            },
+            "title": "عنوان",
+            "description": "توضیحات",
+            "investDate": "تاریخ",
+            "investYear": "سال",
+            "investAmount": "مبلغ",
+            "checkNumber": "شماره حواله",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "guid": "Guid",
+            "organizationChart": "گروه",
+            "organizationChartId": "گروه"
+        }
+    }
+}

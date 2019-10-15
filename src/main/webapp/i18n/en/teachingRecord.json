@@ -1,0 +1,30 @@
+{
+    "marineindustryprojApp": {
+        "teachingRecord": {
+            "home": {
+                "title": "Teaching Records",
+                "createLabel": "Create a new Teaching Record",
+                "createOrEditLabel": "Create or edit a Teaching Record"
+            },
+            "created": "A new Teaching Record is created with identifier {{ param }}",
+            "updated": "A Teaching Record is updated with identifier {{ param }}",
+            "deleted": "A Teaching Record is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Teaching Record {{ id }}?"
+            },
+            "detail": {
+                "title": "Teaching Record"
+            },
+            "title": "Title",
+            "record": "Record",
+            "teachLocation": "Teach Location",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "guid": "Guid",
+            "person": "Person"
+        }
+    }
+}

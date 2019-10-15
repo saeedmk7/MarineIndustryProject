@@ -65,6 +65,7 @@ public class EducationalHistoryCriteria implements Serializable {
 
     private StringFilter guid;
 
+private BooleanFilter hasImportantMessage;
     private LongFilter personId;
 
     private LongFilter educationalModuleId;
@@ -216,7 +217,13 @@ public class EducationalHistoryCriteria implements Serializable {
     public void setGuid(StringFilter guid) {
         this.guid = guid;
     }
+public BooleanFilter getHasImportantMessage() {
+        return hasImportantMessage;
+    }
 
+    public void setHasImportantMessage(BooleanFilter hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
     public LongFilter getPersonId() {
         return personId;
     }
@@ -277,6 +284,7 @@ public class EducationalHistoryCriteria implements Serializable {
             Objects.equals(requestStatus, that.requestStatus) &&
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(courseTypeId, that.courseTypeId) &&
@@ -304,6 +312,7 @@ public class EducationalHistoryCriteria implements Serializable {
         requestStatus,
         changeStatusUserLogin,
         guid,
+        hasImportantMessage,
         personId,
         educationalModuleId,
         courseTypeId,
@@ -332,6 +341,7 @@ public class EducationalHistoryCriteria implements Serializable {
                 (requestStatus != null ? "requestStatus=" + requestStatus + ", " : "") +
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +

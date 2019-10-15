@@ -118,6 +118,9 @@ public class FinalOrganizationNiazsanji implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Column(name = "has_important_message")
+    private Boolean hasImportantMessage;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "final_organization_niazsanji_person",
@@ -464,6 +467,19 @@ public class FinalOrganizationNiazsanji implements Serializable {
         this.guid = guid;
     }
 
+    public Boolean isHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public FinalOrganizationNiazsanji hasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+        return this;
+    }
+
+    public void setHasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public Set<Person> getPeople() {
         return people;
     }
@@ -640,6 +656,7 @@ public class FinalOrganizationNiazsanji implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", guid='" + getGuid() + "'" +
+            ", hasImportantMessage='" + isHasImportantMessage() + "'" +
             "}";
     }
 }

@@ -47,6 +47,8 @@ public class UsersRequestDTO implements Serializable {
     @Size(max = 50)
     private String guid;
 
+    private Boolean hasImportantMessage;
+
     private Set<DocumentDTO> documents = new HashSet<>();
 
     public Long getId() {
@@ -145,6 +147,14 @@ public class UsersRequestDTO implements Serializable {
         this.guid = guid;
     }
 
+    public Boolean isHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public void setHasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
@@ -189,6 +199,7 @@ public class UsersRequestDTO implements Serializable {
             ", requestStatus='" + getRequestStatus() + "'" +
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", hasImportantMessage='" + isHasImportantMessage() + "'" +
             "}";
     }
 }

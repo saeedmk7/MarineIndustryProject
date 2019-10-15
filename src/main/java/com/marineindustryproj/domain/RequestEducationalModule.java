@@ -150,6 +150,9 @@ public class RequestEducationalModule implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Column(name = "has_important_message")
+    private Boolean hasImportantMessage;
+
     @OneToMany(mappedBy = "requestEducationalModule")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EducationalModule> educationalModules = new HashSet<>();
@@ -623,6 +626,19 @@ public class RequestEducationalModule implements Serializable {
         this.guid = guid;
     }
 
+    public Boolean isHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public RequestEducationalModule hasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+        return this;
+    }
+
+    public void setHasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public Set<EducationalModule> getEducationalModules() {
         return educationalModules;
     }
@@ -906,6 +922,7 @@ public class RequestEducationalModule implements Serializable {
             ", goalsText='" + getGoalsText() + "'" +
             ", teachersText='" + getTeachersText() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", hasImportantMessage='" + isHasImportantMessage() + "'" +
             "}";
     }
 }

@@ -25,6 +25,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -163,7 +165,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
     @Override
     public FinalNiazsanjiReportDTO save(FinalNiazsanjiReportDTO finalNiazsanjiReportDTO) {
         log.debug("Request to save FinalNiazsanjiReport : {}",
-                  finalNiazsanjiReportDTO);
+            finalNiazsanjiReportDTO);
         FinalNiazsanjiReport finalNiazsanjiReport = finalNiazsanjiReportMapper.toEntity(finalNiazsanjiReportDTO);
         Optional<RunPhaseDTO> runPhaseDTO = runPhaseService.findByFinalNiazsanjiReportId(finalNiazsanjiReportDTO.getId());
         if(runPhaseDTO.isPresent())
@@ -212,22 +214,22 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         }
         List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPersonDTOS = new ArrayList<>();
         try{
-        NiazsanjiGroupCriteria niazsanjiGroupCriteria = new NiazsanjiGroupCriteria();
+            NiazsanjiGroupCriteria niazsanjiGroupCriteria = new NiazsanjiGroupCriteria();
 
-        LongFilter niazsanjiGroupFilter = new LongFilter();
-        niazsanjiGroupFilter.setEquals(finalNiazsanjiReportResult.getEducationalModuleId());
-        niazsanjiGroupCriteria.setEducationalModuleId(niazsanjiGroupFilter);
-        BooleanFilter niazsanjiGroupBooleanFilter = new BooleanFilter();
-        niazsanjiGroupBooleanFilter.setEquals(false);
-        niazsanjiGroupCriteria.setArchived(niazsanjiGroupBooleanFilter);
-        IntegerFilter niazsanjiGroupStatusFilter = new IntegerFilter();
-        niazsanjiGroupStatusFilter.setEquals(0);
-        niazsanjiGroupCriteria.setStatus(niazsanjiGroupStatusFilter);
-        List<NiazsanjiGroupDTO> niazsanjiGroupDTOS = niazsanjiGroupQueryService.findByCriteria(niazsanjiGroupCriteria);
+            LongFilter niazsanjiGroupFilter = new LongFilter();
+            niazsanjiGroupFilter.setEquals(finalNiazsanjiReportResult.getEducationalModuleId());
+            niazsanjiGroupCriteria.setEducationalModuleId(niazsanjiGroupFilter);
+            BooleanFilter niazsanjiGroupBooleanFilter = new BooleanFilter();
+            niazsanjiGroupBooleanFilter.setEquals(false);
+            niazsanjiGroupCriteria.setArchived(niazsanjiGroupBooleanFilter);
+            IntegerFilter niazsanjiGroupStatusFilter = new IntegerFilter();
+            niazsanjiGroupStatusFilter.setEquals(0);
+            niazsanjiGroupCriteria.setStatus(niazsanjiGroupStatusFilter);
+            List<NiazsanjiGroupDTO> niazsanjiGroupDTOS = niazsanjiGroupQueryService.findByCriteria(niazsanjiGroupCriteria);
 
 
-        if(!niazsanjiGroupDTOS.isEmpty()) {
-            for (NiazsanjiGroupDTO niazsanjiGroupDTO : niazsanjiGroupDTOS){
+            if(!niazsanjiGroupDTOS.isEmpty()) {
+                for (NiazsanjiGroupDTO niazsanjiGroupDTO : niazsanjiGroupDTOS){
                     for(JobDTO jobDTO : niazsanjiGroupDTO.getJobs()){
                         PersonCriteria personCriteria = new PersonCriteria();
 
@@ -261,8 +263,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                     niazsanjiGroupDTO.setStatus(1);
                     niazsanjiGroupService.save(niazsanjiGroupDTO);
 
+                }
             }
-        }
         }
         catch (Exception ex){
             log.error("in niazsanjiGroup save section error: {}",ex.getMessage());
@@ -271,40 +273,40 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         }
         try
         {
-        FinalOrganizationNiazsanjiCriteria finalOrganizationNiazsanjiCriteria = new FinalOrganizationNiazsanjiCriteria();
+            FinalOrganizationNiazsanjiCriteria finalOrganizationNiazsanjiCriteria = new FinalOrganizationNiazsanjiCriteria();
 
-        LongFilter finalOrganizationNiazsanjiFilter = new LongFilter();
-        finalOrganizationNiazsanjiFilter.setEquals(finalNiazsanjiReportResult.getEducationalModuleId());
-        finalOrganizationNiazsanjiCriteria.setEducationalModuleId(finalOrganizationNiazsanjiFilter);
-        BooleanFilter finalOrganizationNiazsanjiBooleanFilter = new BooleanFilter();
-        finalOrganizationNiazsanjiBooleanFilter.setEquals(false);
-        finalOrganizationNiazsanjiCriteria.setArchived(finalOrganizationNiazsanjiBooleanFilter);
-        IntegerFilter finalOrganizationNiazsanjiStatusFilter = new IntegerFilter();
-        finalOrganizationNiazsanjiStatusFilter.setEquals(0);
-        finalOrganizationNiazsanjiCriteria.setStatus(finalOrganizationNiazsanjiStatusFilter);
+            LongFilter finalOrganizationNiazsanjiFilter = new LongFilter();
+            finalOrganizationNiazsanjiFilter.setEquals(finalNiazsanjiReportResult.getEducationalModuleId());
+            finalOrganizationNiazsanjiCriteria.setEducationalModuleId(finalOrganizationNiazsanjiFilter);
+            BooleanFilter finalOrganizationNiazsanjiBooleanFilter = new BooleanFilter();
+            finalOrganizationNiazsanjiBooleanFilter.setEquals(false);
+            finalOrganizationNiazsanjiCriteria.setArchived(finalOrganizationNiazsanjiBooleanFilter);
+            IntegerFilter finalOrganizationNiazsanjiStatusFilter = new IntegerFilter();
+            finalOrganizationNiazsanjiStatusFilter.setEquals(0);
+            finalOrganizationNiazsanjiCriteria.setStatus(finalOrganizationNiazsanjiStatusFilter);
 
-        List<FinalOrganizationNiazsanjiDTO> finalOrganizationNiazsanjiDTOS = finalOrganizationNiazsanjiQueryService.findByCriteria(finalOrganizationNiazsanjiCriteria);
+            List<FinalOrganizationNiazsanjiDTO> finalOrganizationNiazsanjiDTOS = finalOrganizationNiazsanjiQueryService.findByCriteria(finalOrganizationNiazsanjiCriteria);
 
-        if(!finalOrganizationNiazsanjiDTOS.isEmpty()) {
-            for(FinalOrganizationNiazsanjiDTO finalOrganizationNiazsanjiDTO :finalOrganizationNiazsanjiDTOS)
-            {
-                for(PersonDTO personDTO : finalOrganizationNiazsanjiDTO.getPeople()){
-                    FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPersonDTO = new FinalNiazsanjiReportPersonDTO();
-                    finalNiazsanjiReportPersonDTO.setPersonId(personDTO.getId());
-                    finalNiazsanjiReportPersonDTO.setArchived(false);
-                    finalNiazsanjiReportPersonDTO.setCreateDate(ZonedDateTime.now());
-                    finalNiazsanjiReportPersonDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
-                    finalNiazsanjiReportPersonDTO.setFinalNiazsanjiReportId(finalNiazsanjiReportResult.getId());
-                    finalNiazsanjiReportPersonDTO.setNiazSanjiSource(NiazSanjiSource.ORGANIZATION);
-                    finalNiazsanjiReportPersonDTO.setPriceCost(finalOrganizationNiazsanjiDTO.getPriceCost());
-                    finalNiazsanjiReportPersonDTO.setStatus(0);
+            if(!finalOrganizationNiazsanjiDTOS.isEmpty()) {
+                for(FinalOrganizationNiazsanjiDTO finalOrganizationNiazsanjiDTO :finalOrganizationNiazsanjiDTOS)
+                {
+                    for(PersonDTO personDTO : finalOrganizationNiazsanjiDTO.getPeople()){
+                        FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPersonDTO = new FinalNiazsanjiReportPersonDTO();
+                        finalNiazsanjiReportPersonDTO.setPersonId(personDTO.getId());
+                        finalNiazsanjiReportPersonDTO.setArchived(false);
+                        finalNiazsanjiReportPersonDTO.setCreateDate(ZonedDateTime.now());
+                        finalNiazsanjiReportPersonDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                        finalNiazsanjiReportPersonDTO.setFinalNiazsanjiReportId(finalNiazsanjiReportResult.getId());
+                        finalNiazsanjiReportPersonDTO.setNiazSanjiSource(NiazSanjiSource.ORGANIZATION);
+                        finalNiazsanjiReportPersonDTO.setPriceCost(finalOrganizationNiazsanjiDTO.getPriceCost());
+                        finalNiazsanjiReportPersonDTO.setStatus(0);
 
-                    finalNiazsanjiReportPersonDTOS.add(finalNiazsanjiReportPersonDTO);
+                        finalNiazsanjiReportPersonDTOS.add(finalNiazsanjiReportPersonDTO);
+                    }
+                    finalOrganizationNiazsanjiDTO.setStatus(1);
+                    finalOrganizationNiazsanjiService.save(finalOrganizationNiazsanjiDTO);
                 }
-                finalOrganizationNiazsanjiDTO.setStatus(1);
-                finalOrganizationNiazsanjiService.save(finalOrganizationNiazsanjiDTO);
             }
-        }
         }
         catch (Exception ex){
             log.error("in finalOrganizationNiazsanji save section error: {}",ex.getMessage());
@@ -314,9 +316,9 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         try
         {
             finalNiazsanjiReportPersonDTOS = finalNiazsanjiReportPersonDTOS.stream().filter(distinctByKey(p -> p.getPersonId())).collect(Collectors.toList());
-        for(FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPersonDTO : finalNiazsanjiReportPersonDTOS) {
-            finalNiazsanjiReportPersonService.save(finalNiazsanjiReportPersonDTO);
-        }
+            for(FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPersonDTO : finalNiazsanjiReportPersonDTOS) {
+                finalNiazsanjiReportPersonService.save(finalNiazsanjiReportPersonDTO);
+            }
         }
         catch (Exception ex){
             log.error("in finalNiazsanjiReportPerson save section error: {}",ex.getMessage());
@@ -354,7 +356,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
     public Page<FinalNiazsanjiReportDTO> findAllWithEagerRelationships(Pageable pageable) {
         return finalNiazsanjiReportRepository.findAllWithEagerRelationships(pageable).map(finalNiazsanjiReportMapper::toDto);
     }
-    
+
 
     /**
      * Get one finalNiazsanjiReport by id.
@@ -396,23 +398,23 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
             Long totalHour = Long.valueOf(0);
             totalHour = getEducationHours(finalNiazsanjiReportCustomDTOS,
-                                                              idsTotal,
-                                                              totalHour);
+                idsTotal,
+                totalHour);
             chartResult.setTotalPersonHour(totalHour);
 
             List<Long> idsNew = finalNiazsanjiReportCustomDTOS.stream().filter(a -> a.getStatus() < 20).map(o -> o.getId()).collect(Collectors.toList());
 
             Long educationalModuleTotalHourNew = Long.valueOf(0);
             educationalModuleTotalHourNew = getEducationHours(finalNiazsanjiReportCustomDTOS,
-                                                              idsNew,
-                                                              educationalModuleTotalHourNew);
+                idsNew,
+                educationalModuleTotalHourNew);
             chartResult.setEducationalModuleTotalHourNew(educationalModuleTotalHourNew);
 
             List<Long> idsFinished = finalNiazsanjiReportCustomDTOS.stream().filter(a -> a.getStatus() == 20).map(o -> o.getId()).collect(Collectors.toList());
             Long educationalModuleTotalHourFinished = Long.valueOf(0);
             educationalModuleTotalHourFinished = getEducationHours(finalNiazsanjiReportCustomDTOS,
-                                                              idsFinished,
-                                                              educationalModuleTotalHourFinished);
+                idsFinished,
+                educationalModuleTotalHourFinished);
             chartResult.setEducationalModuleTotalHourFinished(educationalModuleTotalHourFinished);
             chartResults.add(chartResult);
         }
@@ -488,8 +490,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         List<Long> idsTotal = finalNiazsanjiReportCustomDTOS.stream().map(o -> o.getId()).collect(Collectors.toList());
         Long totalHour = Long.valueOf(0);
         totalHour = getEducationHours(finalNiazsanjiReportCustomDTOS,
-                                      idsTotal,
-                                      totalHour);
+            idsTotal,
+            totalHour);
 
         IntegerFilter niazsanjiYearFilter = new IntegerFilter();
         niazsanjiYearFilter.setEquals(niazsanjiYear);
@@ -504,45 +506,45 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         //if want just planning
         if(reportType == 1) {
             planningAndRunMonthReports.addAll(getDesignAndPlanningMonthResult(niazsanjiYearFilter,
-                                            orgIdsFilter,
-                                            booleanFilter,
-                                              totalCost,
-                                              totalHour,
-                                            educationalModuleMinDTOS));
+                orgIdsFilter,
+                booleanFilter,
+                totalCost,
+                totalHour,
+                educationalModuleMinDTOS));
         }
         //if want just run
         else if(reportType == 2){
             planningAndRunMonthReports.addAll(getRunPhaseMonthResult(niazsanjiYearFilter,
-                                                                              orgIdsFilter,
-                                                                              booleanFilter,
-                                                                             totalCost,
-                                                                             totalHour,
-                                                                              educationalModuleMinDTOS));
+                orgIdsFilter,
+                booleanFilter,
+                totalCost,
+                totalHour,
+                educationalModuleMinDTOS));
         }
         //if want them both
         else if(reportType == 3){
             planningAndRunMonthReports.addAll(getDesignAndPlanningMonthResult(niazsanjiYearFilter,
-                                                                              orgIdsFilter,
-                                                                              booleanFilter,
-                                                                              totalCost,
-                                                                              totalHour,
-                                                                              educationalModuleMinDTOS));
+                orgIdsFilter,
+                booleanFilter,
+                totalCost,
+                totalHour,
+                educationalModuleMinDTOS));
             planningAndRunMonthReports.addAll(getRunPhaseMonthResult(niazsanjiYearFilter,
-                                                                     orgIdsFilter,
-                                                                     booleanFilter,
-                                                                     totalCost,
-                                                                     totalHour,
-                                                                     educationalModuleMinDTOS));
+                orgIdsFilter,
+                booleanFilter,
+                totalCost,
+                totalHour,
+                educationalModuleMinDTOS));
         }
         return planningAndRunMonthReports;
     }
 
     private List<PlanningAndRunMonthReport> getRunPhaseMonthResult(IntegerFilter niazsanjiYearFilter,
-                                                                                   LongFilter orgIdsFilter,
-                                                                                   BooleanFilter booleanFilter,
-                                                                                   Long totalCost,
-                                                                                   Long totalHour,
-                                                                                   List<EducationalModuleMinDTO> educationalModuleMinDTOS) {
+                                                                   LongFilter orgIdsFilter,
+                                                                   BooleanFilter booleanFilter,
+                                                                   Long totalCost,
+                                                                   Long totalHour,
+                                                                   List<EducationalModuleMinDTO> educationalModuleMinDTOS) {
         List<PlanningAndRunMonthReport> planningAndRunMonthReports = new ArrayList<>();
         RunPhaseCriteria runPhaseCriteria = new RunPhaseCriteria();
         runPhaseCriteria.setNiazsanjiYear(niazsanjiYearFilter);
@@ -565,17 +567,17 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                 }
             }
             planningAndRunMonthReports.add(new PlanningAndRunMonthReport(month, totalHour, totalCost, personHour, personCost,
-                                                                         2));
+                2));
         }
         return planningAndRunMonthReports;
     }
 
     private List<PlanningAndRunMonthReport> getDesignAndPlanningMonthResult(IntegerFilter niazsanjiYearFilter,
-                                                 LongFilter orgIdsFilter,
-                                                 BooleanFilter booleanFilter,
-                                                 Long totalCost,
-                                                 Long totalHour,
-                                                 List<EducationalModuleMinDTO> educationalModuleMinDTOS) {
+                                                                            LongFilter orgIdsFilter,
+                                                                            BooleanFilter booleanFilter,
+                                                                            Long totalCost,
+                                                                            Long totalHour,
+                                                                            List<EducationalModuleMinDTO> educationalModuleMinDTOS) {
         List<PlanningAndRunMonthReport> planningAndRunMonthReports = new ArrayList<>();
         DesignAndPlanningCriteria designAndPlanningCriteria = new DesignAndPlanningCriteria();
         designAndPlanningCriteria.setNiazsanjiYear(niazsanjiYearFilter);
@@ -598,7 +600,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                 }
             }
             planningAndRunMonthReports.add(new PlanningAndRunMonthReport(month, totalHour, totalCost, personHour, personCost,
-                                                                         1));
+                1));
         }
         return planningAndRunMonthReports;
     }
@@ -674,59 +676,130 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         List<FinalNiazsanjiReport> finalNiazsanjiReports = finalNiazsanjiReportRepository.findAllByNiazsanjiYear(niazsanjiYear);
 
         List<FinalNiazsanjiReportHomePageDTO> finalNiazsanjiReportHomePageDTOS = new ArrayList<>();
-        for (FinalNiazsanjiReport finalNiazsanjiReport : finalNiazsanjiReports) {
-            FinalNiazsanjiReportHomePageDTO finalNiazsanjiReportHomePageDTO =
-                new FinalNiazsanjiReportHomePageDTO(finalNiazsanjiReport.getId(),
-                                                    homePageReportType,
-                                                    finalNiazsanjiReport.getPriceCost(),
-                                                    finalNiazsanjiReport.getFinalizeCost(),
-                                                    finalNiazsanjiReport.getEducationalModule(),
-                                                    finalNiazsanjiReport.getStatus(),
-                                                    finalNiazsanjiReport.getNiazsanjiYear(),
-                                                    finalNiazsanjiReport.getCourseType(),
-                                                    finalNiazsanjiReport.getOrganizationChart(),
-                                                    finalNiazsanjiReport.getFinalNiazsanjiReportPeople());
-            finalNiazsanjiReportHomePageDTOS.add(finalNiazsanjiReportHomePageDTO);
-        }
 
         HomePageReport homePageReport = new HomePageReport();
+
+        /*if(finalNiazsanjiReports.size() == 0) {
+                return emptyHomePageReport();
+        }*/
+
+        for (FinalNiazsanjiReport finalNiazsanjiReport : finalNiazsanjiReports) {
+            if(finalNiazsanjiReport.getFinalNiazsanjiReportPeople().size() > 1)
+            {
+                Set<FinalNiazsanjiReportPerson> managerPeople = new HashSet<>();
+                Set<FinalNiazsanjiReportPerson> stuffPeople = new HashSet<>();
+                for (FinalNiazsanjiReportPerson finalNiazsanjiReportPerson : finalNiazsanjiReport.getFinalNiazsanjiReportPeople()) {
+                    if(isManager(finalNiazsanjiReportPerson.getPerson().getJob().getJobCode())){
+                        managerPeople.add(finalNiazsanjiReportPerson);
+                    }
+                    else {
+                        stuffPeople.add(finalNiazsanjiReportPerson);
+                    }
+                }
+                Integer pricePerPerson = finalNiazsanjiReport.getPriceCost() / finalNiazsanjiReport.getFinalNiazsanjiReportPeople().size();
+                if(managerPeople.size() > 0)
+                {
+                    Integer finalPrice = pricePerPerson * managerPeople.size();
+                    FinalNiazsanjiReportHomePageDTO finalNiazsanjiReportHomePageDTO =
+                        new FinalNiazsanjiReportHomePageDTO(finalNiazsanjiReport.getId(),
+                            homePageReportType,
+                            finalPrice,
+                            finalNiazsanjiReport.getFinalizeCost(),
+                            finalNiazsanjiReport.getEducationalModule(),
+                            finalNiazsanjiReport.getStatus(),
+                            finalNiazsanjiReport.getNiazsanjiYear(),
+                            finalNiazsanjiReport.getCourseType(),
+                            finalNiazsanjiReport.getOrganizationChart(),
+                            managerPeople,
+                            true);
+                    finalNiazsanjiReportHomePageDTOS.add(finalNiazsanjiReportHomePageDTO);
+                }
+                if(stuffPeople.size() > 0)
+                {
+                    Integer finalPrice = pricePerPerson * stuffPeople.size();
+                    FinalNiazsanjiReportHomePageDTO finalNiazsanjiReportHomePageDTO =
+                        new FinalNiazsanjiReportHomePageDTO(finalNiazsanjiReport.getId(),
+                            homePageReportType,
+                            finalPrice,
+                            finalNiazsanjiReport.getFinalizeCost(),
+                            finalNiazsanjiReport.getEducationalModule(),
+                            finalNiazsanjiReport.getStatus(),
+                            finalNiazsanjiReport.getNiazsanjiYear(),
+                            finalNiazsanjiReport.getCourseType(),
+                            finalNiazsanjiReport.getOrganizationChart(),
+                            stuffPeople,
+                            false);
+                    finalNiazsanjiReportHomePageDTOS.add(finalNiazsanjiReportHomePageDTO);
+                }
+
+            }
+            else if(finalNiazsanjiReport.getFinalNiazsanjiReportPeople().size() == 1) {
+                FinalNiazsanjiReportHomePageDTO finalNiazsanjiReportHomePageDTO =
+                    new FinalNiazsanjiReportHomePageDTO(finalNiazsanjiReport.getId(),
+                        homePageReportType,
+                        finalNiazsanjiReport.getPriceCost(),
+                        finalNiazsanjiReport.getFinalizeCost(),
+                        finalNiazsanjiReport.getEducationalModule(),
+                        finalNiazsanjiReport.getStatus(),
+                        finalNiazsanjiReport.getNiazsanjiYear(),
+                        finalNiazsanjiReport.getCourseType(),
+                        finalNiazsanjiReport.getOrganizationChart(),
+                        finalNiazsanjiReport.getFinalNiazsanjiReportPeople(),
+                        isManager(finalNiazsanjiReport.getFinalNiazsanjiReportPeople().stream().findFirst().get().getPerson().getJob().getJobCode()));
+                finalNiazsanjiReportHomePageDTOS.add(finalNiazsanjiReportHomePageDTO);
+            }
+
+        }
+
+
         homePageReport.setTotal((float) finalNiazsanjiReportHomePageDTOS.stream().mapToLong(a -> a.getValue()).sum());
         homePageReport.setTotalPassed((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getStatus().equals(20)).mapToLong(a -> a.getValue()).sum());
         homePageReport.setTotalPassedPercent((homePageReport.getTotalPassed() / homePageReport.getTotal()) * 100);
 
-        List<JobMinDTO> jobMinDTOS = jobService.findAllFromCache();
-        List<Long> managerJobIds = jobMinDTOS.stream().filter(a -> a.getJobCode().startsWith("18") || a.getJobCode().startsWith("19") || a.getJobCode().startsWith("20")).map(a -> a.getId()).distinct().collect(Collectors.toList());
-        List<Long> stuffJobIds = jobMinDTOS.stream().filter(a -> managerJobIds.stream().noneMatch(w -> w.equals(a.getId()))).map(a -> a.getId()).distinct().collect(Collectors.toList());
+        /*List<JobMinDTO> jobMinDTOS = jobService.findAllFromCache();
+        List<Long> managerJobIds = new ArrayList<>();
+        for (JobMinDTO jobMinDTO : jobMinDTOS) {
+            if(jobMinDTO.getJobCode().startsWith("18") || jobMinDTO.getJobCode().startsWith("19") || jobMinDTO.getJobCode().startsWith("20")){
+                managerJobIds.add(jobMinDTO.getId());
+            }
+        }
+        //List<Long> managerJobIds = jobMinDTOS.stream().filter(a -> a.getJobCode().startsWith("18") || a.getJobCode().startsWith("19") || a.getJobCode().startsWith("20")).map(a -> a.getId()).distinct().collect(Collectors.toList());
+        List<Long> stuffJobIds = jobMinDTOS.stream().map(JobMinDTO::getId).collect(Collectors.toList());
+        for (Long id : managerJobIds) {
+            if(stuffJobIds.contains(id))
+                stuffJobIds.remove(id);
+        }*/
+        //= jobMinDTOS.stream().filter(a -> managerJobIds.stream().noneMatch(w -> w.equals(a.getId()))).map(a -> a.getId()).distinct().collect(Collectors.toList());
         //List<Long> stuffJobIds = jobMinDTOS.stream().filter(a -> (!a.getJobCode().startsWith("18")) || (!a.getJobCode().startsWith("19")) || (!a.getJobCode().startsWith("20"))).map(a -> a.getId()).distinct().collect(Collectors.toList());
 
-        homePageReport.setTotalManagers((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> managerJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0).mapToDouble(a -> a.getValue()).sum());
+        homePageReport.setTotalManagers((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.isManager()).mapToDouble(a -> a.getValue()).sum());
         homePageReport.setTotalManagersPercent((homePageReport.getTotalManagers() / homePageReport.getTotal()) * 100);
-        homePageReport.setTotalStuffs((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> stuffJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0).mapToDouble(a -> a.getValue()).sum());
+        homePageReport.setTotalStuffs((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> !a.isManager()).mapToDouble(a -> a.getValue()).sum());
         homePageReport.setTotalStuffsPercent((homePageReport.getTotalStuffs() / homePageReport.getTotal()) * 100);
 
-        homePageReport.setTotalPassedManagers((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getStatus().equals(20) && managerJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0).mapToLong(a -> a.getValue()).sum());
+        homePageReport.setTotalPassedManagers((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getStatus().equals(20) && a.isManager()).mapToLong(a -> a.getValue()).sum());
         homePageReport.setTotalPassedManagersPercent((homePageReport.getTotalPassedManagers() / homePageReport.getTotal()) * 100);
 
-        homePageReport.setTotalPassedStuffs((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getStatus().equals(20) && stuffJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0).mapToLong(a -> a.getValue()).sum());
+        homePageReport.setTotalPassedStuffs((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getStatus().equals(20) && !a.isManager()).mapToLong(a -> a.getValue()).sum());
         homePageReport.setTotalPassedStuffsPercent((homePageReport.getTotalPassedStuffs() / homePageReport.getTotal()) * 100);
 
         List<HomePageReportCourseTypeDetail> homePageReportCourseTypeDetails = new ArrayList<>();
         for (CourseTypeDTO courseTypeDTO : courseTypeDTOS) {
             float total =
                 (float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getCourseTypeId().equals(courseTypeDTO.getId()))
-                .mapToDouble(a -> a.getValue()).sum();
+                    .mapToDouble(a -> a.getValue()).sum();
             float totalPercent =
                 ((total / homePageReport.getTotal()) * 100);
 
             float totalManagers =
-                (float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getCourseTypeId().equals(courseTypeDTO.getId()) && managerJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0)
+                (float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getCourseTypeId().equals(courseTypeDTO.getId()) && a.isManager())
                     .mapToDouble(a -> a.getValue()).sum();
 
             float totalManagersPercent =
                 ((totalManagers / homePageReport.getTotal()) * 100);
 
             float totalStuffs =
-                (float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getCourseTypeId().equals(courseTypeDTO.getId()) && stuffJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0)
+                (float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getCourseTypeId().equals(courseTypeDTO.getId()) && !a.isManager())
                     .mapToDouble(a -> a.getValue()).sum();
 
             float totalStuffsPercent =
@@ -734,14 +807,14 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
             HomePageReportCourseTypeDetail homePageReportCourseTypeDetail =
                 new HomePageReportCourseTypeDetail(courseTypeDTO.getId(),
-                                                   courseTypeDTO.getTitle(),
-                                                   total,
-                                                   totalPercent,
-                                                   totalManagers,
-                                                   totalManagersPercent,
-                                                   totalStuffs,
-                                                   totalStuffsPercent
-                                                   );
+                    courseTypeDTO.getTitle(),
+                    total,
+                    totalPercent,
+                    totalManagers,
+                    totalManagersPercent,
+                    totalStuffs,
+                    totalStuffsPercent
+                );
             homePageReportCourseTypeDetails.add(homePageReportCourseTypeDetail);
         }
         homePageReport.setHomePageReportCourseTypeDetails(homePageReportCourseTypeDetails);
@@ -760,11 +833,11 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             homePageReportDetail.setTotalPercent((homePageReportDetail.getTotal() / homePageReport.getTotal()) * 100);
 
             homePageReportDetail.setTotalManagers((float) finalNiazsanjiReportDTOs.stream()
-                .filter(a -> managerJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0).mapToDouble(a -> a.getValue()).sum());
+                .filter(a -> a.isManager()).mapToDouble(a -> a.getValue()).sum());
             homePageReportDetail.setTotalManagersPercent((homePageReportDetail.getTotalManagers() / homePageReportDetail.getTotal()) * 100);
 
             homePageReportDetail.setTotalStuffs((float) finalNiazsanjiReportDTOs.stream()
-                .filter(a -> stuffJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0).mapToDouble(a -> a.getValue()).sum());
+                .filter(a -> !a.isManager()).mapToDouble(a -> a.getValue()).sum());
             homePageReportDetail.setTotalStuffsPercent((homePageReportDetail.getTotalStuffs() / homePageReportDetail.getTotal()) * 100);
 
             homePageReportDetail.setTotalPassed((float) finalNiazsanjiReportDTOs.stream()
@@ -772,11 +845,11 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             homePageReportDetail.setTotalPassedPercent((homePageReportDetail.getTotalPassed() / homePageReportDetail.getTotal()) * 100);
 
             homePageReportDetail.setTotalPassedManagers((float) finalNiazsanjiReportDTOs.stream()
-                .filter(a -> managerJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0 && a.getStatus().equals(20)).mapToDouble(a -> a.getValue()).sum());
+                .filter(a -> a.isManager() && a.getStatus().equals(20)).mapToDouble(a -> a.getValue()).sum());
             homePageReportDetail.setTotalPassedManagersPercent((homePageReportDetail.getTotalPassedManagers() / homePageReportDetail.getTotalPassed()) * 100);
 
             homePageReportDetail.setTotalPassedStuffs((float) finalNiazsanjiReportDTOs.stream()
-                .filter(a -> stuffJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0 && a.getStatus().equals(20)).mapToDouble(a -> a.getValue()).sum());
+                .filter(a -> !a.isManager() && a.getStatus().equals(20)).mapToDouble(a -> a.getValue()).sum());
             homePageReportDetail.setTotalPassedStuffsPercent((homePageReportDetail.getTotalPassedStuffs() / homePageReportDetail.getTotalPassed()) * 100);
 
             homePageReportDetail.setRemaining((float) finalNiazsanjiReportDTOs.stream()
@@ -784,11 +857,11 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             homePageReportDetail.setRemainingPercent((homePageReportDetail.getRemaining() / homePageReportDetail.getTotal()) * 100);
 
             homePageReportDetail.setRemainingManagers((float) finalNiazsanjiReportDTOs.stream()
-                .filter(a -> a.getStatus() < 20 && managerJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0).mapToDouble(a -> a.getValue()).sum());
+                .filter(a -> a.getStatus() < 20 && a.isManager()).mapToDouble(a -> a.getValue()).sum());
             homePageReportDetail.setRemainingManagersPercent((homePageReportDetail.getRemainingManagers() / homePageReportDetail.getRemaining()) * 100);
 
             homePageReportDetail.setRemainingStuffs((float) finalNiazsanjiReportDTOs.stream()
-                .filter(a -> a.getStatus() < 20 && stuffJobIds.stream().filter(w -> Arrays.stream(a.getJobIds()).anyMatch(r -> r == w)).count() > 0).mapToDouble(a -> a.getValue()).sum());
+                .filter(a -> a.getStatus() < 20 && !a.isManager()).mapToDouble(a -> a.getValue()).sum());
             homePageReportDetail.setRemainingStuffsPercent((homePageReportDetail.getRemainingStuffs() / homePageReportDetail.getRemaining()) * 100);
 
             homePageReportDetails.add(homePageReportDetail);
@@ -832,7 +905,23 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         homePageReport.setHomePageReportOrganizationAndCourseTypeDetails(homePageReportOrganizationAndCourseTypeDetails);
         return  homePageReport;
     }
-
+    public HomePageReport emptyHomePageReport(){
+        return new HomePageReport(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
+    }
+    public Boolean isManager(String jobCode){
+        if(jobCode.startsWith("18") || jobCode.startsWith("19") || jobCode.startsWith("20"))
+            return true;
+        return false;
+    }
+    public Boolean contains(List<Long> a, long[] b){
+        for (int i = 0; i < a.size(); i++) {
+            for (int j = 0; j < b.length; j++) {
+                if(a.get(i) == b[j])
+                    return true;
+            }
+        }
+        return false;
+    }
     @Override
     @Transactional(readOnly = true)
     public List<HomePagePersonEducationalModule> getHomePagePersonEducationalModules(Long personId) {
@@ -861,8 +950,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                 Optional<EducationalModuleDTO> educationalModuleDTO = educationalModuleService.findOne(educationalHistoryDTO.getEducationalModuleId());
                 if(educationalModuleDTO.isPresent()) {
                     HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(educationalHistoryDTO,
-                                                                                                                          educationalModuleDTO.get(),
-                                                                                                                          status);
+                        educationalModuleDTO.get(),
+                        status);
                     report.add(homePagePersonEducationalModule);
                 }
             }
@@ -898,8 +987,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                         Optional<EducationalModuleDTO> educationalModuleDTO = educationalModuleService.findOne(finalNiazsanjiReportDTO.getEducationalModuleId());
                         if(educationalModuleDTO.isPresent()) {
                             HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(finalNiazsanjiReportDTO,
-                                                                                                                                  educationalModuleType,
-                                                                                                                                  educationalModuleDTO.get());
+                                educationalModuleType,
+                                educationalModuleDTO.get());
                             report.add(homePagePersonEducationalModule);
                         }
                     }

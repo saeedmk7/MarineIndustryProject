@@ -90,6 +90,9 @@ public class NiazsanjiFardi implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Column(name = "has_important_message")
+    private Boolean hasImportantMessage;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "niazsanji_fardi_document",
@@ -336,6 +339,19 @@ public class NiazsanjiFardi implements Serializable {
         this.guid = guid;
     }
 
+    public Boolean isHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public NiazsanjiFardi hasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+        return this;
+    }
+
+    public void setHasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public Set<Document> getDocuments() {
         return documents;
     }
@@ -467,6 +483,7 @@ public class NiazsanjiFardi implements Serializable {
             ", conversation='" + getConversation() + "'" +
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", hasImportantMessage='" + isHasImportantMessage() + "'" +
             "}";
     }
 }

@@ -24,6 +24,7 @@ export interface IRunPhaseMarineSuffix {
     status?: number;
     guid?: string;
     finishDate?: string;
+    hasImportantMessage?: boolean;
     runRunningSteps?: IRunRunningStepMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     people?: IPersonMarineSuffix[];
@@ -60,6 +61,7 @@ export class RunPhaseMarineSuffix implements IRunPhaseMarineSuffix {
         public status?: number,
         public guid?: string,
         public finishDate?: string,
+        public hasImportantMessage?: boolean,
         public runRunningSteps?: IRunRunningStepMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public people?: IPersonMarineSuffix[],
@@ -76,5 +78,6 @@ export class RunPhaseMarineSuffix implements IRunPhaseMarineSuffix {
     ) {
         this.done = this.done || false;
         this.archived = this.archived || false;
+        this.hasImportantMessage = this.hasImportantMessage || false;
     }
 }

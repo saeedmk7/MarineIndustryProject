@@ -104,6 +104,13 @@ public class EducationalHistory implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Column(name = "has_important_message")
+    private Boolean hasImportantMessage;
+
+    @ManyToOne
+    @JsonIgnoreProperties("educationalHistories")
+    private CourseType courseType;
+
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties("educationalHistories")
@@ -112,10 +119,6 @@ public class EducationalHistory implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("educationalHistories")
     private EducationalModule educationalModule;
-
-    @ManyToOne
-    @JsonIgnoreProperties("educationalHistories")
-    private CourseType courseType;
 
     @ManyToOne
     @JsonIgnoreProperties("educationalHistories")
@@ -390,6 +393,32 @@ public class EducationalHistory implements Serializable {
         this.guid = guid;
     }
 
+    public Boolean isHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public EducationalHistory hasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+        return this;
+    }
+
+    public void setHasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
+    public CourseType getCourseType() {
+        return courseType;
+    }
+
+    public EducationalHistory courseType(CourseType courseType) {
+        this.courseType = courseType;
+        return this;
+    }
+
+    public void setCourseType(CourseType courseType) {
+        this.courseType = courseType;
+    }
+
     public Person getPerson() {
         return person;
     }
@@ -414,19 +443,6 @@ public class EducationalHistory implements Serializable {
 
     public void setEducationalModule(EducationalModule educationalModule) {
         this.educationalModule = educationalModule;
-    }
-
-    public CourseType getCourseType() {
-        return courseType;
-    }
-
-    public EducationalHistory courseType(CourseType courseType) {
-        this.courseType = courseType;
-        return this;
-    }
-
-    public void setCourseType(CourseType courseType) {
-        this.courseType = courseType;
     }
 
     public OrganizationChart getOrganizationChart() {
@@ -487,6 +503,7 @@ public class EducationalHistory implements Serializable {
             ", requestStatus='" + getRequestStatus() + "'" +
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", hasImportantMessage='" + isHasImportantMessage() + "'" +
             "}";
     }
 }

@@ -1,0 +1,35 @@
+{
+    "marineindustryprojApp": {
+        "jobRecord": {
+            "home": {
+                "title": "Job Records",
+                "createLabel": "Create a new Job Record",
+                "createOrEditLabel": "Create or edit a Job Record"
+            },
+            "created": "A new Job Record is created with identifier {{ param }}",
+            "updated": "A Job Record is updated with identifier {{ param }}",
+            "deleted": "A Job Record is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Job Record {{ id }}?"
+            },
+            "detail": {
+                "title": "Job Record"
+            },
+            "workOrganization": "Work Organization",
+            "workSection": "Work Section",
+            "jobResponsibility": "Job Responsibility",
+            "jobPosition": "Job Position",
+            "totalHour": "Total Hour",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "leaveReason": "Leave Reason",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "guid": "Guid",
+            "person": "Person"
+        }
+    }
+}

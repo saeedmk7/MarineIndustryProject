@@ -100,9 +100,17 @@ public class OrganizationChart implements Serializable {
     @OneToMany(mappedBy = "organizationChart")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EducationalHistory> educationalHistories = new HashSet<>();
+    @OneToMany(mappedBy = "organizationChart")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<InvestToGroupTransaction> investToGroupTransactions = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("organizationCharts")
     private OrganizationChart parent;
+
+    @ManyToMany(mappedBy = "organizationCharts")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<ForceRunningPercent> forceRunningPercents = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -518,6 +526,31 @@ public class OrganizationChart implements Serializable {
         this.educationalHistories = educationalHistories;
     }
 
+    public Set<InvestToGroupTransaction> getInvestToGroupTransactions() {
+        return investToGroupTransactions;
+    }
+
+    public OrganizationChart investToGroupTransactions(Set<InvestToGroupTransaction> investToGroupTransactions) {
+        this.investToGroupTransactions = investToGroupTransactions;
+        return this;
+    }
+
+    public OrganizationChart addInvestToGroupTransaction(InvestToGroupTransaction investToGroupTransaction) {
+        this.investToGroupTransactions.add(investToGroupTransaction);
+        investToGroupTransaction.setOrganizationChart(this);
+        return this;
+    }
+
+    public OrganizationChart removeInvestToGroupTransaction(InvestToGroupTransaction investToGroupTransaction) {
+        this.investToGroupTransactions.remove(investToGroupTransaction);
+        investToGroupTransaction.setOrganizationChart(null);
+        return this;
+    }
+
+    public void setInvestToGroupTransactions(Set<InvestToGroupTransaction> investToGroupTransactions) {
+        this.investToGroupTransactions = investToGroupTransactions;
+    }
+
     public OrganizationChart getParent() {
         return parent;
     }
@@ -529,6 +562,31 @@ public class OrganizationChart implements Serializable {
 
     public void setParent(OrganizationChart organizationChart) {
         this.parent = organizationChart;
+    }
+
+    public Set<ForceRunningPercent> getForceRunningPercents() {
+        return forceRunningPercents;
+    }
+
+    public OrganizationChart forceRunningPercents(Set<ForceRunningPercent> forceRunningPercents) {
+        this.forceRunningPercents = forceRunningPercents;
+        return this;
+    }
+
+    public OrganizationChart addForceRunningPercent(ForceRunningPercent forceRunningPercent) {
+        this.forceRunningPercents.add(forceRunningPercent);
+        forceRunningPercent.getOrganizationCharts().add(this);
+        return this;
+    }
+
+    public OrganizationChart removeForceRunningPercent(ForceRunningPercent forceRunningPercent) {
+        this.forceRunningPercents.remove(forceRunningPercent);
+        forceRunningPercent.getOrganizationCharts().remove(this);
+        return this;
+    }
+
+    public void setForceRunningPercents(Set<ForceRunningPercent> forceRunningPercents) {
+        this.forceRunningPercents = forceRunningPercents;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Lob;
 
 /**
  * A DTO for the EducationalRecord entity.
@@ -47,6 +48,9 @@ public class EducationalRecordDTO implements Serializable {
 
     @Size(max = 50)
     private String guid;
+
+    @Lob
+    private String fileDoc;
 
     private Long qualificationId;
 
@@ -172,6 +176,14 @@ public class EducationalRecordDTO implements Serializable {
         this.guid = guid;
     }
 
+    public String getFileDoc() {
+        return fileDoc;
+    }
+
+    public void setFileDoc(String fileDoc) {
+        this.fileDoc = fileDoc;
+    }
+
     public Long getQualificationId() {
         return qualificationId;
     }
@@ -258,6 +270,7 @@ public class EducationalRecordDTO implements Serializable {
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +
             ", modifyDate='" + getModifyDate() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", fileDoc='" + getFileDoc() + "'" +
             ", qualification=" + getQualificationId() +
             ", qualification='" + getQualificationTitle() + "'" +
             ", fieldOfStudy=" + getFieldOfStudyId() +

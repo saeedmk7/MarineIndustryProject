@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {JhiDataUtils, JhiLanguageService} from 'ng-jhipster';
+import {JhiDataUtils, JhiEventManager, JhiLanguageService} from 'ng-jhipster';
 
 import {Principal, AccountService, JhiLanguageHelper, UserService, IUser} from 'app/core';
 import {JhiAlertService} from "ng-jhipster/src/service/alert.service";
@@ -22,6 +22,7 @@ import {IResearchRecordMarineSuffix} from "app/shared/model/research-record-mari
 import {ITeachingRecordMarineSuffix} from "app/shared/model/teaching-record-marine-suffix.model";
 import {ResearchRecordMarineSuffixService} from "app/entities/research-record-marine-suffix";
 import {TeachingRecordMarineSuffixService} from "app/entities/teaching-record-marine-suffix";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -43,7 +44,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     orgCharts: IOrganizationChartMarineSuffix[];
 
     currentUserFullName: string;
-
+    eventSubscriber: Subscription;
     jobTitle: string;
     languages: any[];
     document: any;
@@ -83,7 +84,8 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         private teachingRecordService: TeachingRecordMarineSuffixService,
         private personService : PersonMarineSuffixService,
         private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService,
-        private userService: UserService
+        private userService: UserService,
+        private eventManager: JhiEventManager
     ) {}
 
     ngOnInit() {
@@ -123,6 +125,20 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         this.languageHelper.getAll().then(languages => {
             this.languages = languages;
         });
+        this.registerChangeSubscriber();
+    }
+    registerChangeSubscriber() {
+        this.eventSubscriber = this.eventManager
+            .subscribe('educationalRecordListModification', response => this.prepareEducationalRecords(this.currentPerson.id));
+        this.eventSubscriber = this.eventManager
+            .subscribe('jobRecordListModification', response => this.prepareJobRecords(this.currentPerson.id));
+        this.eventSubscriber = this.eventManager
+            .subscribe('researchRecordListModification', response => this.prepareResearchRecords(this.currentPerson.id));
+        this.eventSubscriber = this.eventManager
+            .subscribe('teachingRecordListModification', response => this.prepareTeachingRecords(this.currentPerson.id));
+    }
+    ngOnDestroy() {
+        this.eventManager.destroy(this.eventSubscriber);
     }
     onPersonSuccess(body) {
 

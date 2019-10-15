@@ -75,6 +75,10 @@ public class EducationalRecord implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Lob
+    @Column(name = "file_doc")
+    private String fileDoc;
+
     @ManyToOne
     @JsonIgnoreProperties("educationalRecords")
     private Qualification qualification;
@@ -265,6 +269,19 @@ public class EducationalRecord implements Serializable {
         this.guid = guid;
     }
 
+    public String getFileDoc() {
+        return fileDoc;
+    }
+
+    public EducationalRecord fileDoc(String fileDoc) {
+        this.fileDoc = fileDoc;
+        return this;
+    }
+
+    public void setFileDoc(String fileDoc) {
+        this.fileDoc = fileDoc;
+    }
+
     public Qualification getQualification() {
         return qualification;
     }
@@ -342,6 +359,7 @@ public class EducationalRecord implements Serializable {
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +
             ", modifyDate='" + getModifyDate() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", fileDoc='" + getFileDoc() + "'" +
             "}";
     }
 }

@@ -87,6 +87,9 @@ public class FinalNiazsanjiReport implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Column(name = "has_important_message")
+    private Boolean hasImportantMessage;
+
     @OneToMany(mappedBy = "finalNiazsanjiReport", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = new HashSet<>();
@@ -336,6 +339,19 @@ public class FinalNiazsanjiReport implements Serializable {
         this.guid = guid;
     }
 
+    public Boolean isHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public FinalNiazsanjiReport hasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+        return this;
+    }
+
+    public void setHasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public Set<FinalNiazsanjiReportPerson> getFinalNiazsanjiReportPeople() {
         return finalNiazsanjiReportPeople;
     }
@@ -541,6 +557,7 @@ public class FinalNiazsanjiReport implements Serializable {
             ", planningRunMonth=" + getPlanningRunMonth() +
             ", finalizeCost=" + getFinalizeCost() +
             ", guid='" + getGuid() + "'" +
+            ", hasImportantMessage='" + isHasImportantMessage() + "'" +
             "}";
     }
 }

@@ -62,6 +62,8 @@ public class RunPhaseDTO implements Serializable {
     @Size(max = 50)
     private String finishDate;
 
+    private Boolean hasImportantMessage;
+
     private Set<DocumentDTO> documents = new HashSet<>();
 
     private Set<PersonDTO> people = new HashSet<>();
@@ -230,6 +232,14 @@ public class RunPhaseDTO implements Serializable {
         this.finishDate = finishDate;
     }
 
+    public Boolean isHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public void setHasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
@@ -370,6 +380,7 @@ public class RunPhaseDTO implements Serializable {
              ", finishDate='" + getFinishDate() + "'" +
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +
+            ", hasImportantMessage='" + isHasImportantMessage() + "'" +
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             ", educationalModule=" + getEducationalModuleId() +

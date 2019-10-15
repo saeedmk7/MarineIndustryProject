@@ -67,7 +67,11 @@ public class OrganizationChartCriteria implements Serializable {
 
     private LongFilter educationalHistoryId;
 
+    private LongFilter investToGroupTransactionId;
+
     private LongFilter parentId;
+
+    private LongFilter forceRunningPercentId;
 
     public LongFilter getId() {
         return id;
@@ -245,12 +249,28 @@ public class OrganizationChartCriteria implements Serializable {
         this.educationalHistoryId = educationalHistoryId;
     }
 
+    public LongFilter getInvestToGroupTransactionId() {
+        return investToGroupTransactionId;
+    }
+
+    public void setInvestToGroupTransactionId(LongFilter investToGroupTransactionId) {
+        this.investToGroupTransactionId = investToGroupTransactionId;
+    }
+
     public LongFilter getParentId() {
         return parentId;
     }
 
     public void setParentId(LongFilter parentId) {
         this.parentId = parentId;
+    }
+
+    public LongFilter getForceRunningPercentId() {
+        return forceRunningPercentId;
+    }
+
+    public void setForceRunningPercentId(LongFilter forceRunningPercentId) {
+        this.forceRunningPercentId = forceRunningPercentId;
     }
 
 
@@ -286,7 +306,9 @@ public class OrganizationChartCriteria implements Serializable {
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
             Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId) &&
             Objects.equals(educationalHistoryId, that.educationalHistoryId) &&
-            Objects.equals(parentId, that.parentId);
+            Objects.equals(investToGroupTransactionId, that.investToGroupTransactionId) &&
+            Objects.equals(parentId, that.parentId) &&
+            Objects.equals(forceRunningPercentId, that.forceRunningPercentId);
     }
 
     @Override
@@ -314,7 +336,9 @@ public class OrganizationChartCriteria implements Serializable {
         niazsanjiFardiId,
         requestNiazsanjiFardiId,
         educationalHistoryId,
-        parentId
+        investToGroupTransactionId,
+        parentId,
+        forceRunningPercentId
         );
     }
 
@@ -343,7 +367,9 @@ public class OrganizationChartCriteria implements Serializable {
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
                 (requestNiazsanjiFardiId != null ? "requestNiazsanjiFardiId=" + requestNiazsanjiFardiId + ", " : "") +
                 (educationalHistoryId != null ? "educationalHistoryId=" + educationalHistoryId + ", " : "") +
+                (investToGroupTransactionId != null ? "investToGroupTransactionId=" + investToGroupTransactionId + ", " : "") +
                 (parentId != null ? "parentId=" + parentId + ", " : "") +
+                (forceRunningPercentId != null ? "forceRunningPercentId=" + forceRunningPercentId + ", " : "") +
             "}";
     }
 

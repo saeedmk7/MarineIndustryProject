@@ -24,6 +24,7 @@ export interface IDesignAndPlanningMarineSuffix {
     runMonth?: number;
     guid?: string;
     runMonthName?: string;
+    hasImportantMessage?: boolean;
     people?: IPersonMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     organizationChartTitle?: string;
@@ -79,6 +80,7 @@ export class DesignAndPlanningMarineSuffix implements IDesignAndPlanningMarineSu
         public runMonth?: number,
         public runMonthName?: string,
         public guid?: string,
+        public hasImportantMessage?: boolean,
         public people?: IPersonMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public organizationChartTitle?: string,
@@ -112,5 +114,6 @@ export class DesignAndPlanningMarineSuffix implements IDesignAndPlanningMarineSu
     ) {
         this.finished = this.finished || false;
         this.archived = this.archived || false;
+        this.hasImportantMessage = this.hasImportantMessage || false;
     }
 }

@@ -163,9 +163,17 @@ public class OrganizationChartQueryService extends QueryService<OrganizationChar
                 specification = specification.and(buildSpecification(criteria.getEducationalHistoryId(),
                     root -> root.join(OrganizationChart_.educationalHistories, JoinType.LEFT).get(EducationalHistory_.id)));
             }
+            if (criteria.getInvestToGroupTransactionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getInvestToGroupTransactionId(),
+                    root -> root.join(OrganizationChart_.investToGroupTransactions, JoinType.LEFT).get(InvestToGroupTransaction_.id)));
+            }
             if (criteria.getParentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getParentId(),
                     root -> root.join(OrganizationChart_.parent, JoinType.LEFT).get(OrganizationChart_.id)));
+            }
+            if (criteria.getForceRunningPercentId() != null) {
+                specification = specification.and(buildSpecification(criteria.getForceRunningPercentId(),
+                    root -> root.join(OrganizationChart_.forceRunningPercents, JoinType.LEFT).get(ForceRunningPercent_.id)));
             }
         }
         return specification;

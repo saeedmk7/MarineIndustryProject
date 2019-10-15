@@ -24,6 +24,7 @@ export interface IFinalNiazsanjiReportMarineSuffix {
     planningRunMonth?: number;
     finalizeCost?: number;
     guid?: string;
+    hasImportantMessage?: boolean;
     finalNiazsanjiReportPeople?: IFinalNiazsanjiReportPersonMarineSuffix[];
     designAndPlannings?: IDesignAndPlanningMarineSuffix[];
     runPhases?: IRunPhaseMarineSuffix[];
@@ -56,6 +57,7 @@ export class FinalNiazsanjiReportMarineSuffix implements IFinalNiazsanjiReportMa
         public planningRunMonth?: number,
         public finalizeCost?: number,
         public guid?: string,
+        public hasImportantMessage?: boolean,
         public finalNiazsanjiReportPeople?: IFinalNiazsanjiReportPersonMarineSuffix[],
         public designAndPlannings?: IDesignAndPlanningMarineSuffix[],
         public runPhases?: IRunPhaseMarineSuffix[],
@@ -69,5 +71,6 @@ export class FinalNiazsanjiReportMarineSuffix implements IFinalNiazsanjiReportMa
         public educationalModuleId?: number
     ) {
         this.archived = this.archived || false;
+        this.hasImportantMessage = this.hasImportantMessage || false;
     }
 }

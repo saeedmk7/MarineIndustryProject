@@ -91,6 +91,9 @@ public class RunPhase implements Serializable {
     @Size(max = 50)
     @Column(name = "finish_date", length = 50)
     private String finishDate;
+    
+    @Column(name = "has_important_message")
+    private Boolean hasImportantMessage;
 
     @OneToMany(mappedBy = "runPhase", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -351,6 +354,19 @@ public class RunPhase implements Serializable {
         this.finishDate = finishDate;
     }
 
+    public Boolean isHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public RunPhase hasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+        return this;
+    }
+
+    public void setHasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public Set<RunRunningStep> getRunRunningSteps() {
         return runRunningSteps;
     }
@@ -507,6 +523,7 @@ public class RunPhase implements Serializable {
             ", status=" + getStatus() +
             ", guid='" + getGuid() + "'" +
             ", finishDate='" + getFinishDate() + "'" +
+            ", hasImportantMessage='" + isHasImportantMessage() + "'" +
             "}";
     }
 }

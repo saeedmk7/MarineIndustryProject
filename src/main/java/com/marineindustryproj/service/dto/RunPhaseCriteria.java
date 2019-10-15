@@ -61,6 +61,8 @@ public class RunPhaseCriteria implements Serializable {
 
     private StringFilter finishDate;
 
+    private BooleanFilter hasImportantMessage;
+
     private LongFilter runRunningStepId;
 
     private LongFilter documentId;
@@ -225,6 +227,14 @@ public class RunPhaseCriteria implements Serializable {
         this.finishDate = finishDate;
     }
 
+    public BooleanFilter getHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public void setHasImportantMessage(BooleanFilter hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public LongFilter getRunRunningStepId() {
         return runRunningStepId;
     }
@@ -330,6 +340,7 @@ public class RunPhaseCriteria implements Serializable {
             Objects.equals(status, that.status) &&
             Objects.equals(guid, that.guid) &&
             Objects.equals(finishDate, that.finishDate) &&
+            Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
             Objects.equals(runRunningStepId, that.runRunningStepId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(personId, that.personId) &&
@@ -363,6 +374,7 @@ public class RunPhaseCriteria implements Serializable {
         status,
         guid,
         finishDate,
+        hasImportantMessage,
         runRunningStepId,
         documentId,
         personId,
@@ -397,6 +409,7 @@ public class RunPhaseCriteria implements Serializable {
                 (status != null ? "status=" + status + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
                 (finishDate != null ? "finishDate=" + finishDate + ", " : "") +
+                (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
                 (runRunningStepId != null ? "runRunningStepId=" + runRunningStepId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +

@@ -31,6 +31,9 @@ import {IHomePagePersonEducationalModule} from "app/shared/model/custom/home-pag
 import {IPlanningAndRunMonthReport} from "app/shared/model/custom/planning-month-report";
 import {MONTHS} from "app/shared/constants/months.constants";
 import {IHomePageReport} from "app/shared/model/custom/home-page-report";
+import {InvestToGroupTransactionMarineSuffixService} from "app/entities/invest-to-group-transaction-marine-suffix";
+import {IInvestToGroupTransactionMarineSuffix} from "app/shared/model/invest-to-group-transaction-marine-suffix.model";
+import {IJamHelpMarineSuffix} from "app/shared/model/jam-help-marine-suffix.model";
 
 
 @Component({
@@ -46,6 +49,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     homePageNiazsanjiReport: IHomePageNiazsanjiReport = {};
     homePagePersonHourChart: IHomePagePersonHourChart = {};
     homePagePersonEducationalModules: IHomePagePersonEducationalModule[] = [];
+    investToGroupTransactions: IInvestToGroupTransactionMarineSuffix[] = [];
+    investResult: any[] = [];
     sumHourPersonEducationalModules: number = 0;
     planningAndRunMonthReports: IPlanningAndRunMonthReport[] = [];
     isHomePageCharts: boolean = true;
@@ -113,6 +118,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         private languageManager: JhiLanguageService,
         private jhiAlertService: JhiAlertService,
         private announcementService: AnnouncementMarineSuffixService,
+        private investToGroupTransactionService: InvestToGroupTransactionMarineSuffixService,
         private convertObjectDatesService : ConvertObjectDatesService,
         private activatedRoute: ActivatedRoute,
         private router: Router,
@@ -137,8 +143,40 @@ export class HomeComponent implements OnInit, OnDestroy {
         },
             (res: HttpErrorResponse) => this.onError(res.message));
         this.finalNiazsanjiReportService.getHomePageReport(niazsanjiYear, 2).subscribe((resp: HttpResponse<IHomePageReport>) => {
-                this.homePageReportPrice = resp.body;
-                console.log(this.homePageReportPrice);
+            debugger;
+                const criteria = [{
+                    key: 'investYear.equals',
+                    value: this.selectedNiazsanjiYear
+                }];
+            this.investToGroupTransactionService.query({
+                page: 0,
+                size: 10000,
+                criteria,
+                sort: ["id", "asc"]
+            })
+                .subscribe(
+                    (res: HttpResponse<IInvestToGroupTransactionMarineSuffix[]>) => {
+                        debugger;
+                        this.homePageReportPrice = resp.body;
+
+
+                        console.log(this.homePageReportPrice);
+                        this.investToGroupTransactions = res.body;
+                        const orgs = this.organizationcharts.filter(a => !a.parentId).map(a => a.id).filter(a => this.treeUtilities.onlyUnique); //res.body.map(a => a.organizationChartId).filter(this.treeUtilities.onlyUnique);
+                        this.investResult = [];
+                        this.homePageReportPrice.homePageReportDetails.forEach(a => {
+                            const sumInvest = res.body.filter(w => w.organizationChartId == a.organizationChartId).map(w => w.investAmount).reduce((sum, current) => sum + current, 0 );
+                            this.investResult.push({
+                                orgTitle: a.organizationChartTitle,
+                                sumInvest: sumInvest,
+                                usedAmount: a.totalPassed,
+                                usedAmountPercent: (a.totalPassed / sumInvest) * 100
+                            });
+                        })
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+
             },
             (res: HttpErrorResponse) => this.onError(res.message));
 

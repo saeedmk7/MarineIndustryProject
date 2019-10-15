@@ -61,6 +61,8 @@ public class NiazsanjiFardiCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private BooleanFilter hasImportantMessage;
+
     private LongFilter documentId;
 
     private LongFilter courseTypeId;
@@ -197,6 +199,14 @@ public class NiazsanjiFardiCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public BooleanFilter getHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public void setHasImportantMessage(BooleanFilter hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -285,6 +295,7 @@ public class NiazsanjiFardiCriteria implements Serializable {
             Objects.equals(status, that.status) &&
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId) &&
@@ -313,6 +324,7 @@ public class NiazsanjiFardiCriteria implements Serializable {
         status,
         changeStatusUserLogin,
         guid,
+        hasImportantMessage,
         documentId,
         courseTypeId,
         requestNiazsanjiFardiId,
@@ -342,6 +354,7 @@ public class NiazsanjiFardiCriteria implements Serializable {
                 (status != null ? "status=" + status + ", " : "") +
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (requestNiazsanjiFardiId != null ? "requestNiazsanjiFardiId=" + requestNiazsanjiFardiId + ", " : "") +

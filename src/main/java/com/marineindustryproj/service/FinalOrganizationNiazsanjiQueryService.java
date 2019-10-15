@@ -155,6 +155,9 @@ public class FinalOrganizationNiazsanjiQueryService extends QueryService<FinalOr
             if (criteria.getGuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGuid(), FinalOrganizationNiazsanji_.guid));
             }
+            if (criteria.getHasImportantMessage() != null) {
+                specification = specification.and(buildSpecification(criteria.getHasImportantMessage(), FinalOrganizationNiazsanji_.hasImportantMessage));
+            }
             if (criteria.getPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPersonId(),
                     root -> root.join(FinalOrganizationNiazsanji_.people, JoinType.LEFT).get(Person_.id)));

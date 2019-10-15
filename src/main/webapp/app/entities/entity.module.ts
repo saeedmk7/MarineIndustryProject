@@ -64,6 +64,7 @@ import { MarineindustryprojAnnouncementMarineSuffixModule } from './announcement
 import { MarineindustryprojNavBarItemMarineSuffixModule } from './nav-bar-item-marine-suffix/nav-bar-item-marine-suffix.module';
 import { MarineindustryprojNavBarItemAuthorityMarineSuffixModule } from './nav-bar-item-authority-marine-suffix/nav-bar-item-authority-marine-suffix.module';
 import { MarineindustryprojBeautySpeechMarineSuffixModule } from './beauty-speech-marine-suffix/beauty-speech-marine-suffix.module';
+import { MarineindustryprojBeautySpeechAuthorityMarineSuffixModule } from './beauty-speech-authority-marine-suffix/beauty-speech-authority-marine-suffix.module';
 import { MarineindustryprojUsersRequestMarineSuffixModule } from './users-request-marine-suffix/users-request-marine-suffix.module';
 import { MarineindustryprojNiazsanjiFardiMarineSuffixModule } from './niazsanji-fardi-marine-suffix/niazsanji-fardi-marine-suffix.module';
 import { MarineindustryprojRequestNiazsanjiFardiMarineSuffixModule } from './request-niazsanji-fardi-marine-suffix/request-niazsanji-fardi-marine-suffix.module';
@@ -77,7 +78,8 @@ import { MarineindustryprojJobRecordMarineSuffixModule } from './job-record-mari
 import {MarineindustryprojPersonEducationalRecordsMarineSuffixModule} from "./person-educational-records-marine-suffix/person-educational-records-marine-suffix.module";
 import {MarineindustryprojTeachingRecordMarineSuffixModule} from "./teaching-record-marine-suffix/teaching-record-marine-suffix.module";
 import {MarineindustryprojResearchRecordMarineSuffixModule} from "./research-record-marine-suffix/research-record-marine-suffix.module";
-
+import { MarineindustryprojInvestToGroupTransactionMarineSuffixModule } from './invest-to-group-transaction-marine-suffix/invest-to-group-transaction-marine-suffix.module';
+import { MarineindustryprojForceRunningPercentMarineSuffixModule } from './force-running-percent-marine-suffix/force-running-percent-marine-suffix.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -143,6 +145,7 @@ import {MarineindustryprojResearchRecordMarineSuffixModule} from "./research-rec
         MarineindustryprojNavBarItemMarineSuffixModule,
         MarineindustryprojNavBarItemAuthorityMarineSuffixModule,
         MarineindustryprojBeautySpeechMarineSuffixModule,
+        MarineindustryprojBeautySpeechAuthorityMarineSuffixModule,
         MarineindustryprojUsersRequestMarineSuffixModule,
         MarineindustryprojNiazsanjiFardiMarineSuffixModule,
         MarineindustryprojRequestNiazsanjiFardiMarineSuffixModule,
@@ -155,8 +158,9 @@ import {MarineindustryprojResearchRecordMarineSuffixModule} from "./research-rec
         MarineindustryprojJobRecordMarineSuffixModule,
         MarineindustryprojPersonEducationalRecordsMarineSuffixModule,
         MarineindustryprojTeachingRecordMarineSuffixModule,
-        MarineindustryprojResearchRecordMarineSuffixModule
-
+        MarineindustryprojResearchRecordMarineSuffixModule,
+        MarineindustryprojInvestToGroupTransactionMarineSuffixModule,
+        MarineindustryprojForceRunningPercentMarineSuffixModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

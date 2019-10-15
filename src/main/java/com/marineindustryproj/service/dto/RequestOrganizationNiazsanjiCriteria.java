@@ -84,6 +84,8 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private BooleanFilter hasImportantMessage;
+
     private LongFilter finalOrganizationNiazsanjiId;
 
     private LongFilter personId;
@@ -288,6 +290,14 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public BooleanFilter getHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public void setHasImportantMessage(BooleanFilter hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public LongFilter getFinalOrganizationNiazsanjiId() {
         return finalOrganizationNiazsanjiId;
     }
@@ -392,6 +402,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(documentId, that.documentId) &&
@@ -430,6 +441,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
         archivedDate,
         status,
         guid,
+        hasImportantMessage,
         finalOrganizationNiazsanjiId,
         personId,
         documentId,
@@ -469,6 +481,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +

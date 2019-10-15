@@ -103,6 +103,8 @@ public class RequestEducationalModuleDTO implements Serializable {
     @Size(max = 50)
     private String guid;
 
+    private Boolean hasImportantMessage;
+
     private Set<ScientificWorkGroupDTO> scientificWorkGroups = new HashSet<>();
 
     private Set<DocumentDTO> documents = new HashSet<>();
@@ -387,6 +389,14 @@ public class RequestEducationalModuleDTO implements Serializable {
         this.guid = guid;
     }
 
+    public Boolean isHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public void setHasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public Set<ScientificWorkGroupDTO> getScientificWorkGroups() {
         return scientificWorkGroups;
     }
@@ -555,6 +565,7 @@ public class RequestEducationalModuleDTO implements Serializable {
             ", goalsText='" + getGoalsText() + "'" +
             ", teachersText='" + getTeachersText() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", hasImportantMessage='" + isHasImportantMessage() + "'" +
             ", securityLevel=" + getSecurityLevelId() +
             ", securityLevel='" + getSecurityLevelTitle() + "'" +
             ", skillableLevelOfSkill=" + getSkillableLevelOfSkillId() +

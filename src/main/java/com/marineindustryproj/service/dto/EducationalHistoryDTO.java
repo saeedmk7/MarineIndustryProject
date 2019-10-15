@@ -30,6 +30,7 @@ public class EducationalHistoryDTO implements Serializable {
     @Size(max = 50)
     private String dateOfStart;
 
+    
     @Lob
     private String fileDoc;
 
@@ -67,6 +68,8 @@ public class EducationalHistoryDTO implements Serializable {
 
     @Size(max = 50)
     private String guid;
+
+    private Boolean hasImportantMessage;
 
     private Long personId;
 
@@ -254,6 +257,14 @@ public class EducationalHistoryDTO implements Serializable {
         this.guid = guid;
     }
 
+    public Boolean isHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public void setHasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public Long getPersonId() {
         return personId;
     }
@@ -371,6 +382,7 @@ public class EducationalHistoryDTO implements Serializable {
             ", requestStatus='" + getRequestStatus() + "'" +
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", hasImportantMessage='" + isHasImportantMessage() + "'" +
             ", person=" + getPersonId() +
             ", person='" + getPersonName() + "'" +
             ", person='" + getPersonFamily() + "'" +

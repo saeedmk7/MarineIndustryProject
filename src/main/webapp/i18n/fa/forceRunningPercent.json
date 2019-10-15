@@ -1,0 +1,30 @@
+{
+    "marineindustryprojApp": {
+        "forceRunningPercent": {
+            "home": {
+                "title": "درصدهای اجباری اجرا",
+                "createLabel": "جدید",
+                "createOrEditLabel": "درصد اجباری اجرا"
+            },
+            "created": "درصد اجباری اجرا با شناسه {{ param }} ایجاد شد.",
+            "updated": "درصد اجباری اجرا با شناسه {{ param }} ویرایش شد.",
+            "deleted": "درصد اجباری اجرا با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف درصد اجباری اجرا با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات درصد اجباری اجرا"
+            },
+            "title": "عنوان",
+            "description": "توضیحات",
+            "percentAmount": "درصد",
+            "runMonth": "ماه اجرا",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "guid": "Guid",
+            "organizationChart": "گروه ها"
+        }
+    }
+}

@@ -130,7 +130,8 @@
             <tfoot>
             <tr>
                 <td colspan="8">
-                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll(criteria)">
+                    <select [(ngModel)] = "itemsPerPage" (change)="makeCriteria(criteria)">
+                        <option value="3">3</option>
                         <option value="10">۱۰</option>
                         <option selected="selected" value="20">۲۰</option>
                         <option value="50">۵۰</option>

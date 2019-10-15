@@ -1,0 +1,84 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.teachingRecord.home.title">Teaching Records</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-teaching-record-marine-suffix" [routerLink]="['/teaching-record-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.teachingRecord.home.createLabel">
+            Create new Teaching Record
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="teachingRecords">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.teachingRecord.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="record"><span jhiTranslate="marineindustryprojApp.teachingRecord.record">Record</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="teachLocation"><span jhiTranslate="marineindustryprojApp.teachingRecord.teachLocation">Teach Location</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.teachingRecord.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.teachingRecord.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.teachingRecord.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.teachingRecord.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.teachingRecord.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="guid"><span jhiTranslate="marineindustryprojApp.teachingRecord.guid">Guid</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.teachingRecord.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let teachingRecord of teachingRecords ;trackBy: trackId">
+                <td><a [routerLink]="['/teaching-record-marine-suffix', teachingRecord.id, 'view' ]">{{teachingRecord.id}}</a></td>
+                <td>{{teachingRecord.title}}</td>
+                <td>{{teachingRecord.record}}</td>
+                <td>{{teachingRecord.teachLocation}}</td>
+                <td>{{teachingRecord.description}}</td>
+                <td>{{teachingRecord.createUserLogin}}</td>
+                <td>{{teachingRecord.createDate | date:'medium'}}</td>
+                <td>{{teachingRecord.modifyUserLogin}}</td>
+                <td>{{teachingRecord.modifyDate | date:'medium'}}</td>
+                <td>{{teachingRecord.guid}}</td>
+                <td>
+                    <div *ngIf="teachingRecord.personId">
+                        <a [routerLink]="['../person-marine-suffix', teachingRecord.personId , 'view' ]" >{{teachingRecord.personFamily}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/teaching-record-marine-suffix', teachingRecord.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/teaching-record-marine-suffix', teachingRecord.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'teaching-record-marine-suffix/'+ teachingRecord.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="teachingRecords && teachingRecords.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

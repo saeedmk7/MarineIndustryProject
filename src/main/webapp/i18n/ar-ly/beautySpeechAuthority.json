@@ -1,0 +1,27 @@
+{
+    "marineindustryprojApp": {
+        "beautySpeechAuthority": {
+            "home": {
+                "title": "Beauty Speech Authorities",
+                "createLabel": "Create a new Beauty Speech Authority",
+                "createOrEditLabel": "Create or edit a Beauty Speech Authority"
+            },
+            "created": "A new Beauty Speech Authority is created with identifier {{ param }}",
+            "updated": "A Beauty Speech Authority is updated with identifier {{ param }}",
+            "deleted": "A Beauty Speech Authority is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Beauty Speech Authority {{ id }}?"
+            },
+            "detail": {
+                "title": "Beauty Speech Authority"
+            },
+            "authorityName": "Authority Name",
+            "hasEditPermission": "Has Edit Permission",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "beautySpeech": "Beauty Speech"
+        }
+    }
+}

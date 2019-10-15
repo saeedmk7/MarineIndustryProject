@@ -22,6 +22,7 @@ export interface IRequestNiazsanjiFardiMarineSuffix {
     requestStatus?: RequestStatus;
     changeStatusUserLogin?: string;
     guid?: string;
+    hasImportantMessage?: boolean;
     niazsanjiFardis?: INiazsanjiFardiMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     courseTypeTitle?: string;
@@ -62,6 +63,7 @@ export class RequestNiazsanjiFardiMarineSuffix implements IRequestNiazsanjiFardi
         public requestStatus?: RequestStatus,
         public changeStatusUserLogin?: string,
         public guid?: string,
+        public hasImportantMessage?: boolean,
         public niazsanjiFardis?: INiazsanjiFardiMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public courseTypeTitle?: string,
@@ -80,5 +82,6 @@ export class RequestNiazsanjiFardiMarineSuffix implements IRequestNiazsanjiFardi
         public skillLevelOfSkillTitle?: string
     ) {
         this.archived = this.archived || false;
+        this.hasImportantMessage = this.hasImportantMessage || false;
     }
 }

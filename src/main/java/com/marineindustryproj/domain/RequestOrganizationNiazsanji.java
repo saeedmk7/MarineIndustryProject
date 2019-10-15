@@ -119,6 +119,9 @@ public class RequestOrganizationNiazsanji implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Column(name = "has_important_message")
+    private Boolean hasImportantMessage;
+
     @OneToMany(mappedBy = "requestOrganizationNiazsanji")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<FinalOrganizationNiazsanji> finalOrganizationNiazsanjis = new HashSet<>();
@@ -464,6 +467,19 @@ public class RequestOrganizationNiazsanji implements Serializable {
         this.guid = guid;
     }
 
+    public Boolean isHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public RequestOrganizationNiazsanji hasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+        return this;
+    }
+
+    public void setHasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public Set<FinalOrganizationNiazsanji> getFinalOrganizationNiazsanjis() {
         return finalOrganizationNiazsanjis;
     }
@@ -652,6 +668,7 @@ public class RequestOrganizationNiazsanji implements Serializable {
             ", status=" + getStatus() +
             ", conversation='" + getConversation() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", hasImportantMessage='" + isHasImportantMessage() + "'" +
             "}";
     }
 }

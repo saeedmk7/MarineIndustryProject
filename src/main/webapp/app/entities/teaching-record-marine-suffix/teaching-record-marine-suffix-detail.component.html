@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="teachingRecord">
+            <h2><span jhiTranslate="marineindustryprojApp.teachingRecord.detail.title">Teaching Record</span> {{teachingRecord.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.teachingRecord.title">Title</span></dt>
+                <dd>
+                    <span>{{teachingRecord.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachingRecord.record">Record</span></dt>
+                <dd>
+                    <span>{{teachingRecord.record}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachingRecord.teachLocation">Teach Location</span></dt>
+                <dd>
+                    <span>{{teachingRecord.teachLocation}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachingRecord.description">Description</span></dt>
+                <dd>
+                    <span>{{teachingRecord.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachingRecord.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{teachingRecord.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachingRecord.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{teachingRecord.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachingRecord.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{teachingRecord.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachingRecord.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{teachingRecord.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachingRecord.guid">Guid</span></dt>
+                <dd>
+                    <span>{{teachingRecord.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teachingRecord.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="teachingRecord.personId">
+                        <a [routerLink]="['/person-marine-suffix', teachingRecord.personId, 'view']">{{teachingRecord.personFamily}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/teaching-record-marine-suffix', teachingRecord.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

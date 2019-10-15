@@ -1,0 +1,32 @@
+{
+    "marineindustryprojApp": {
+        "investToGroupTransaction": {
+            "home": {
+                "title": "Invest To Group Transactions",
+                "createLabel": "Create a new Invest To Group Transaction",
+                "createOrEditLabel": "Create or edit a Invest To Group Transaction"
+            },
+            "created": "A new Invest To Group Transaction is created with identifier {{ param }}",
+            "updated": "A Invest To Group Transaction is updated with identifier {{ param }}",
+            "deleted": "A Invest To Group Transaction is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Invest To Group Transaction {{ id }}?"
+            },
+            "detail": {
+                "title": "Invest To Group Transaction"
+            },
+            "title": "Title",
+            "description": "Description",
+            "investDate": "Invest Date",
+            "investYear": "Invest Year",
+            "investAmount": "Invest Amount",
+            "checkNumber": "Check Number",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "guid": "Guid",
+            "organizationChart": "Organization Chart"
+        }
+    }
+}

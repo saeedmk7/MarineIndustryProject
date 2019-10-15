@@ -49,6 +49,8 @@ public class UsersRequestCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private BooleanFilter hasImportantMessage;
+
     private LongFilter documentId;
 
     public LongFilter getId() {
@@ -131,6 +133,14 @@ public class UsersRequestCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public BooleanFilter getHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public void setHasImportantMessage(BooleanFilter hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -160,6 +170,7 @@ public class UsersRequestCriteria implements Serializable {
             Objects.equals(requestStatus, that.requestStatus) &&
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
             Objects.equals(documentId, that.documentId);
     }
 
@@ -176,6 +187,7 @@ public class UsersRequestCriteria implements Serializable {
         requestStatus,
         changeStatusUserLogin,
         guid,
+        hasImportantMessage,
         documentId
         );
     }
@@ -193,6 +205,7 @@ public class UsersRequestCriteria implements Serializable {
                 (requestStatus != null ? "requestStatus=" + requestStatus + ", " : "") +
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
             "}";
     }

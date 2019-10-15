@@ -1,0 +1,117 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-invest-to-group-transaction-marine-suffix-heading" jhiTranslate="marineindustryprojApp.investToGroupTransaction.home.createOrEditLabel">Create or edit a Invest To Group Transaction</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!investToGroupTransaction.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="investToGroupTransaction.id" readonly />
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.investToGroupTransaction.investAmount" for="field_investAmount">Invest Amount</label>
+                    <input type="number" class="form-control" name="investAmount" id="field_investAmount"
+                           [(ngModel)]="investToGroupTransaction.investAmount" />
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.investToGroupTransaction.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                           [(ngModel)]="investToGroupTransaction.title" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.investToGroupTransaction.organizationChart" for="field_organizationChart">Organization Chart</label>
+                    <ng-select
+                        [items]="groups"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="گروه"
+                        name="organizationChart"
+                        id="field_organizationChart"
+                        [(ngModel)]="investToGroupTransaction.organizationChartId">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.investToGroupTransaction.investAmount" for="field_investAmount">Invest Amount</label>
+                    <kendo-numerictextbox
+                        [(ngModel)]="investToGroupTransaction.investAmount" [min]="0" [max]="2000000000"
+                        name="investAmount" id="field_investAmount" [required]="true" [format]="'n0'" class="form-control">
+                    </kendo-numerictextbox>
+                </div>
+                <!--<div class="form-group">
+                    <input type="text" class="form-control" name="investDate" id="field_investDate"
+                           [(ngModel)]="investToGroupTransaction.investDate" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.investDate?.dirty && editForm.controls.investDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.investDate?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.investToGroupTransaction.investDate" for="field_investDate">Invest Date</label>
+                    <kendo-maskedtextbox
+                        [includeLiterals]="true"
+                        required="true"
+                        [(ngModel)]="investToGroupTransaction.investDate"
+                        name="investDate"
+                        class="form-control"
+                        id="field_investDate"
+                        (blur)="checkDateValidation($event)"
+                        mask="0000/00/00">
+                    </kendo-maskedtextbox>
+                    <span *ngIf="dateValid == 1" class="alert-success">تاریخ معتبر است</span>
+                    <span *ngIf="dateValid == 2" class="alert-danger">تاریخ نامعتبر است</span>
+                </div>
+
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.investToGroupTransaction.investYear" for="field_investYear">Invest Year</label>
+                    <input type="number" class="form-control" name="investYear" id="field_investYear"
+                        [(ngModel)]="investToGroupTransaction.investYear" />
+                </div>-->
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.investToGroupTransaction.checkNumber" for="field_checkNumber">Check Number</label>
+                    <input type="text" class="form-control" name="checkNumber" id="field_checkNumber"
+                        [(ngModel)]="investToGroupTransaction.checkNumber" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.checkNumber?.dirty && editForm.controls.checkNumber?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.checkNumber?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.investToGroupTransaction.description" for="field_description">Description</label>
+                    <textarea type="text" class="form-control" name="description" id="field_description"
+                              [(ngModel)]="investToGroupTransaction.description" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

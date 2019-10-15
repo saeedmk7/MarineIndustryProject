@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="researchRecord">
+            <h2><span jhiTranslate="marineindustryprojApp.researchRecord.detail.title">Research Record</span> {{researchRecord.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.researchRecord.title">Title</span></dt>
+                <dd>
+                    <span>{{researchRecord.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.researchRecord.description">Description</span></dt>
+                <dd>
+                    <span>{{researchRecord.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.researchRecord.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{researchRecord.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.researchRecord.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{researchRecord.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.researchRecord.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{researchRecord.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.researchRecord.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{researchRecord.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.researchRecord.guid">Guid</span></dt>
+                <dd>
+                    <span>{{researchRecord.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.researchRecord.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="researchRecord.personId">
+                        <a [routerLink]="['/person-marine-suffix', researchRecord.personId, 'view']">{{researchRecord.personFamily}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/research-record-marine-suffix', researchRecord.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

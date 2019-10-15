@@ -80,6 +80,8 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
     @Size(max = 50)
     private String guid;
 
+    private Boolean hasImportantMessage;
+
     private Set<PersonDTO> people = new HashSet<>();
 
     private Set<DocumentDTO> documents = new HashSet<>();
@@ -300,6 +302,14 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
         this.guid = guid;
     }
 
+    public Boolean isHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public void setHasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public Set<PersonDTO> getPeople() {
         return people;
     }
@@ -460,6 +470,7 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", guid='" + getGuid() + "'" +
+            ", hasImportantMessage='" + isHasImportantMessage() + "'" +
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +
             ", organizationChart=" + getOrganizationChartId() +

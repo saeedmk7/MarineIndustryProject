@@ -90,6 +90,9 @@ public class RequestNiazsanjiFardi implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Column(name = "has_important_message")
+    private Boolean hasImportantMessage;
+
     @OneToMany(mappedBy = "requestNiazsanjiFardi")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<NiazsanjiFardi> niazsanjiFardis = new HashSet<>();
@@ -338,6 +341,19 @@ public class RequestNiazsanjiFardi implements Serializable {
         this.guid = guid;
     }
 
+    public Boolean isHasImportantMessage() {
+        return hasImportantMessage;
+    }
+
+    public RequestNiazsanjiFardi hasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+        return this;
+    }
+
+    public void setHasImportantMessage(Boolean hasImportantMessage) {
+        this.hasImportantMessage = hasImportantMessage;
+    }
+
     public Set<NiazsanjiFardi> getNiazsanjiFardis() {
         return niazsanjiFardis;
     }
@@ -494,6 +510,7 @@ public class RequestNiazsanjiFardi implements Serializable {
             ", requestStatus='" + getRequestStatus() + "'" +
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", hasImportantMessage='" + isHasImportantMessage() + "'" +
             "}";
     }
 }

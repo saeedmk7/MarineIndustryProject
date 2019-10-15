@@ -30,6 +30,7 @@ export interface IFinalOrganizationNiazsanjiMarineSuffix {
     archivedDate?: Moment;
     status?: number;
     guid?: string;
+    hasImportantMessage?: boolean;
     people?: IPersonMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     courseTypeTitle?: string;
@@ -75,6 +76,7 @@ export class FinalOrganizationNiazsanjiMarineSuffix implements IFinalOrganizatio
         public archivedDate?: Moment,
         public status?: number,
         public guid?: string,
+        public hasImportantMessage?: boolean,
         public people?: IPersonMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public courseTypeTitle?: string,
@@ -93,5 +95,6 @@ export class FinalOrganizationNiazsanjiMarineSuffix implements IFinalOrganizatio
         public skillLevelOfSkillTitle?: string
     ) {
         this.archived = this.archived || false;
+        this.hasImportantMessage = this.hasImportantMessage || false;
     }
 }

@@ -166,6 +166,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
 
     }
     handleAfterChart(wantOrgIds: number[],criteria,excelExport: boolean = false){
+        debugger;
         if(this.isSuperUsers) {
 
             const organizationChartIdFilter = criteria.find(a => a.key == 'organizationChartId.equals');
@@ -195,7 +196,8 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
                 criteria: criteria1,
                 sort: ["id", "asc"]
             }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
-
+                debugger;
+                criteria = this.criteria.filter(a => a.key != "createUserLogin.in");
                 let selectedPeople = resp.body;
                 if (selectedPeople.length > 0) {
                     let logins: string[] = selectedPeople.map(a => a.nationalId);
@@ -216,6 +218,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
             });
         }
         else{
+            debugger;
             criteria.push({
                 key: 'createUserLogin.in',
                 value: [this.currentPerson.nationalId]
@@ -225,22 +228,25 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
     }
 
     loadAll(criteria?,excelExport: boolean = false) {
+        debugger;
         if(!this.isSuperUsers)
         {
-            let orgs = this.treeUtilities.getParentIds(this.organizationcharts,this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
-            if(orgs.length > 0){
-                orgs.push(0);
-                criteria.push({
-                    key: 'status.in',
-                    value: orgs
-                });
-            }
-            else{
-                orgs = [0];
-                criteria.push({
-                    key: 'status.equals',
-                    value: orgs
-                });
+            if(!criteria.find(a => a.key == "status.in")) {
+                let orgs = this.treeUtilities.getParentIds(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
+                if (orgs.length > 0) {
+                    orgs.push(0);
+                    criteria.push({
+                        key: 'status.in',
+                        value: orgs
+                    });
+                }
+                else {
+                    orgs = [0];
+                    criteria.push({
+                        key: 'status.equals',
+                        value: orgs
+                    });
+                }
             }
         }
         if(excelExport) {

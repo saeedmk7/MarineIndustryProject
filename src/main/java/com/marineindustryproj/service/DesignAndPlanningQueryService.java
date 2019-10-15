@@ -146,6 +146,9 @@ public class DesignAndPlanningQueryService extends QueryService<DesignAndPlannin
             if (criteria.getGuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGuid(), DesignAndPlanning_.guid));
             }
+            if (criteria.getHasImportantMessage() != null) {
+                specification = specification.and(buildSpecification(criteria.getHasImportantMessage(), DesignAndPlanning_.hasImportantMessage));
+            }
             if (criteria.getPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPersonId(),
                     root -> root.join(DesignAndPlanning_.people, JoinType.LEFT).get(Person_.id)));
