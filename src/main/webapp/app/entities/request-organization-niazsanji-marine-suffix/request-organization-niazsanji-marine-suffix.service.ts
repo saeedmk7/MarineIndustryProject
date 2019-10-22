@@ -40,7 +40,12 @@ export class RequestOrganizationNiazsanjiMarineSuffixService {
             .put<IRequestOrganizationNiazsanjiMarineSuffix>(this.resourceUrl, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
-
+    toggleImportantMessage(id: number, type: boolean): Observable<EntityResponseType> {
+        const url: string = this.resourceUrl + '/toggleImportantMessage/' + id + '/' + type;
+        return this.http
+            .put<IRequestOrganizationNiazsanjiMarineSuffix>(url, null, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => res));
+    }
     find(id: number): Observable<EntityResponseType> {
 
         return this.http

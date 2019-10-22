@@ -9,6 +9,7 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IRequestNiazsanjiFardiMarineSuffix } from 'app/shared/model/request-niazsanji-fardi-marine-suffix.model';
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+import {IRequestOrganizationNiazsanjiMarineSuffix} from "app/shared/model/request-organization-niazsanji-marine-suffix.model";
 
 type EntityResponseType = HttpResponse<IRequestNiazsanjiFardiMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<IRequestNiazsanjiFardiMarineSuffix[]>;
@@ -38,6 +39,13 @@ export class RequestNiazsanjiFardiMarineSuffixService {
         return this.http
             .put<IRequestNiazsanjiFardiMarineSuffix>(this.resourceUrl, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
+    toggleImportantMessage(id: number, type: boolean): Observable<EntityResponseType> {
+        const url: string = this.resourceUrl + '/toggleImportantMessage/' + id + '/' + type;
+        return this.http
+            .put<IRequestNiazsanjiFardiMarineSuffix>(url, null, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => res));
     }
 
     find(id: number): Observable<EntityResponseType> {

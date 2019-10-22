@@ -110,6 +110,7 @@ logging:
 file:
     upload-dir: ./uploads
     history-upload-dir: ./historyUploads
+    education-upload-dir: ./educationUploads
     image-upload-dir: ./imageuploads
     run-phase-upload-dir: ./runPhaseUploads
     jam-help-upload-dir: ./jamHelpUploads

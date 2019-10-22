@@ -15,6 +15,7 @@ export interface IEducationalRecordMarineSuffix {
     modifyUserLogin?: string;
     modifyDate?: Moment;
     guid?: string;
+    fileDoc?: any;
     qualificationTitle?: string;
     qualificationId?: number;
     fieldOfStudyTitle?: string;
@@ -40,6 +41,7 @@ export class EducationalRecordMarineSuffix implements IEducationalRecordMarineSu
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
         public guid?: string,
+        public fileDoc?: any,
         public qualificationTitle?: string,
         public qualificationId?: number,
         public fieldOfStudyTitle?: string,

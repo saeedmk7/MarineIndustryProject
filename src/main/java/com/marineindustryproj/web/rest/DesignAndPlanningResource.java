@@ -103,6 +103,20 @@ public class DesignAndPlanningResource {
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, designAndPlanningDTO.getId().toString()))
             .body(result);
     }
+    @PutMapping("/design-and-plannings/toggleImportantMessage/{id}/{type}")
+    @Timed
+    public ResponseEntity<DesignAndPlanningDTO> toggleImportantMessage(@PathVariable long id, @PathVariable boolean type) throws URISyntaxException {
+        log.debug("REST request to toggleImportantMessage DesignAndPlanning : {}", id);
+        DesignAndPlanningDTO designAndPlanning = designAndPlanningService.findOne(id).get();
+
+        designAndPlanning.setHasImportantMessage(type);
+        designAndPlanning.setModifyDate(ZonedDateTime.now());
+
+        DesignAndPlanningDTO result = designAndPlanningService.save(designAndPlanning);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, designAndPlanning.getId().toString()))
+            .body(result);
+    }
 
     /**
      * GET  /design-and-plannings : get all the designAndPlannings.

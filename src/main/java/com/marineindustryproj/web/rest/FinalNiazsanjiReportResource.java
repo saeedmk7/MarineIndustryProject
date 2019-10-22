@@ -536,6 +536,19 @@ public class FinalNiazsanjiReportResource {
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, finalNiazsanjiReportDTO.getId().toString()))
             .body(result);
     }
+    @PutMapping("/final-niazsanji-reports/toggleImportantMessage/{id}/{type}")
+    @Timed
+    public ResponseEntity<FinalNiazsanjiReportDTO> toggleImportantMessage(@PathVariable long id, @PathVariable boolean type) throws URISyntaxException,Exception {
+        FinalNiazsanjiReportDTO finalNiazsanjiReport = finalNiazsanjiReportService.findOne(id).get();
+
+        finalNiazsanjiReport.setModifyDate(ZonedDateTime.now());
+        finalNiazsanjiReport.setHasImportantMessage(type);
+
+        FinalNiazsanjiReportDTO result = finalNiazsanjiReportService.save(finalNiazsanjiReport);
+        return ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, finalNiazsanjiReport.getId().toString()))
+            .body(result);
+    }
 
     /**
      * GET  /final-niazsanji-reports : get all the finalNiazsanjiReports.

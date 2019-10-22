@@ -14,10 +14,10 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.code" for="field_code">Code</label>
                     <input type="number" class="form-control" name="code" id="field_code"
-                           [(ngModel)]="educationalModule.code" maxlength="18" jhiMax="9999999999999999" jhiMin="99" required/>
+                           [(ngModel)]="educationalModule.code" max="9999999999999999" min="99" [required]="true"/>
                     <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.phoneNumber?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 18 }">
+                               [hidden]="!editForm.controls.code?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 18 }">
                             This field cannot be longer than 18 characters.
                         </small>
                         <small class="form-text text-danger"

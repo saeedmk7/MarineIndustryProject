@@ -552,4 +552,14 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
         this.jhiAlertService.error(errorMessage, null, null);
         this.loadAll(this.criteria);
     }
+    toggleImportantMessage(id: number, type: boolean){
+        debugger;
+        this.niazsanjiFardiService.toggleImportantMessage(id, type).subscribe(
+            (res: HttpResponse<INiazsanjiFardiMarineSuffix>) => this.loadAll(this.criteria),
+            (res: HttpErrorResponse) => this.onSaveError()
+        );
+    }
+    private onSaveError(){
+
+    }
 }

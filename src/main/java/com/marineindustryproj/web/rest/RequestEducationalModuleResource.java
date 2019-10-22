@@ -105,6 +105,21 @@ public class RequestEducationalModuleResource {
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, requestEducationalModuleDTO.getId().toString()))
             .body(result);
     }
+    @PutMapping("/request-educational-modules/toggleImportantMessage/{id}/{type}")
+    @Timed
+    public ResponseEntity<RequestEducationalModuleDTO> toggleImportantMessage(@PathVariable long id, @PathVariable boolean type) throws URISyntaxException {
+        log.debug("REST request to toggleImportantMessage RequestEducationalModule : {}", id);
+
+        RequestEducationalModuleDTO requestEducationalModule = requestEducationalModuleService.findOne(id).get();
+
+        requestEducationalModule.setHasImportantMessage(type);
+        requestEducationalModule.setModifyDate(ZonedDateTime.now());
+
+        RequestEducationalModuleDTO result = requestEducationalModuleService.save(requestEducationalModule);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, requestEducationalModule.getId().toString()))
+            .body(result);
+    }
     @PostMapping("/finalize-request-educational-module")
     @Timed
     public ResponseEntity<RequestEducationalModuleDTO> finalizeRequestEducationalModule(@Valid @RequestBody RequestEducationalModuleDTO requestEducationalModuleDTO) throws URISyntaxException {

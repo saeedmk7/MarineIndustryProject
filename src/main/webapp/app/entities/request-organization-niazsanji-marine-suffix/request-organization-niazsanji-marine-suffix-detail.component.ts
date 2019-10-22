@@ -40,8 +40,8 @@ export class RequestOrganizationNiazsanjiMarineSuffixDetailComponent implements 
                 this.educationalModuleService.find(this.requestOrganizationNiazsanji.educationalModuleId).subscribe(
                     (resp: HttpResponse<IEducationalModuleMarineSuffix>) => {
                         this.educationalModule = resp.body;
-                        this.requestOrganizationNiazsanji.totalLearningTime = (this.educationalModule.learningTimePractical == undefined ? 0 : this.educationalModule.learningTimePractical) +
-                            (this.educationalModule.learningTimeTheorical == undefined ? 0 : this.educationalModule.learningTimeTheorical);
+                        this.requestOrganizationNiazsanji.totalLearningTime = (!this.educationalModule.learningTimePractical  ? 0 : this.educationalModule.learningTimePractical) +
+                            (!this.educationalModule.learningTimeTheorical ? 0 : this.educationalModule.learningTimeTheorical);
                         this.requestOrganizationNiazsanji.skillLevelOfSkillTitle = this.educationalModule.skillableLevelOfSkillTitle;
                     },
                 (res: HttpErrorResponse) => this.onSaveError()

@@ -5,6 +5,7 @@
 /target/www/**
 /src/test/javascript/coverage/
 historyUploads/*
+educationUploads/*
 imageuploads/*
 upload-dir/*
 uploads/*

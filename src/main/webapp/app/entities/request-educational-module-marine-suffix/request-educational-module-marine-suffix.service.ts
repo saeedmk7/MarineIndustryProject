@@ -39,6 +39,12 @@ export class RequestEducationalModuleMarineSuffixService {
             .post<IRequestEducationalModuleMarineSuffix>(url, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
+    toggleImportantMessage(id: number, type: boolean): Observable<EntityResponseType> {
+        const url: string = this.resourceUrl + '/toggleImportantMessage/' + id + '/' + type;
+        return this.http
+            .put<IRequestEducationalModuleMarineSuffix>(url, null, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => res));
+    }
     find(id: number): Observable<EntityResponseType> {
         return this.http
             .get<IRequestEducationalModuleMarineSuffix>(`${this.resourceUrl}/${id}`, { observe: 'response' })

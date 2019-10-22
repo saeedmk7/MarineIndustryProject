@@ -34,6 +34,17 @@ public class FileStorageProperties {
         this.historyUploadDir = historyUploadDir;
     }
 
+    private String educationUploadDir;
+
+    public String getEducationUploadDir() {
+        return educationUploadDir;
+    }
+
+    public void setEducationUploadDir(String educationUploadDir)
+    {
+        this.educationUploadDir = educationUploadDir;
+    }
+
     private String runPhaseUploadDir;
 
     public String getRunPhaseUploadDir() {

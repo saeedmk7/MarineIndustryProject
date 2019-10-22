@@ -1,10 +1,13 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.domain.RequestNiazsanjiFardi;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.NiazsanjiFardiService;
 import com.marineindustryproj.service.PersonService;
+import com.marineindustryproj.service.RequestNiazsanjiFardiService;
 import com.marineindustryproj.service.dto.PersonDTO;
+import com.marineindustryproj.service.dto.RequestNiazsanjiFardiDTO;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -41,14 +44,17 @@ public class NiazsanjiFardiResource {
 
     private final NiazsanjiFardiService niazsanjiFardiService;
 
+    private final RequestNiazsanjiFardiService requestNiazsanjiFardiService;
+
     private final NiazsanjiFardiQueryService niazsanjiFardiQueryService;
 
     private final PersonService personService;
 
     public NiazsanjiFardiResource(NiazsanjiFardiService niazsanjiFardiService,
-                                  NiazsanjiFardiQueryService niazsanjiFardiQueryService,
+                                  RequestNiazsanjiFardiService requestNiazsanjiFardiService, NiazsanjiFardiQueryService niazsanjiFardiQueryService,
                                   PersonService personService) {
         this.niazsanjiFardiService = niazsanjiFardiService;
+        this.requestNiazsanjiFardiService = requestNiazsanjiFardiService;
         this.niazsanjiFardiQueryService = niazsanjiFardiQueryService;
         this.personService = personService;
     }
@@ -134,6 +140,24 @@ public class NiazsanjiFardiResource {
         NiazsanjiFardiDTO result = niazsanjiFardiService.save(niazsanjiFardiDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, niazsanjiFardiDTO.getId().toString()))
+            .body(result);
+    }
+    @PutMapping("/niazsanji-fardis/toggleImportantMessage/{id}/{type}")
+    @Timed
+    public ResponseEntity<NiazsanjiFardiDTO> toggleImportantMessage(@PathVariable long id, @PathVariable boolean type) throws URISyntaxException {
+        NiazsanjiFardiDTO niazsanjiFardi = niazsanjiFardiService.findOne(id).get();
+
+        niazsanjiFardi.setModifyDate(ZonedDateTime.now());
+        niazsanjiFardi.setHasImportantMessage(type);
+        NiazsanjiFardiDTO result = niazsanjiFardiService.save(niazsanjiFardi);
+
+        Long requestNiazsanjiFardiId = niazsanjiFardi.getRequestNiazsanjiFardiId();
+        RequestNiazsanjiFardiDTO requestNiazsanjiFardi = requestNiazsanjiFardiService.findOne(requestNiazsanjiFardiId).get();
+        requestNiazsanjiFardi.setModifyDate(ZonedDateTime.now());
+        requestNiazsanjiFardi.setHasImportantMessage(type);
+        requestNiazsanjiFardiService.save(requestNiazsanjiFardi);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, niazsanjiFardi.getId().toString()))
             .body(result);
     }
 

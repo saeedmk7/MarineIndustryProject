@@ -141,6 +141,22 @@ public class RequestNiazsanjiFardiResource {
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, requestNiazsanjiFardiDTO.getId().toString()))
             .body(result);
     }
+    @PutMapping("/request-niazsanji-fardis/toggleImportantMessage/{id}/{type}")
+    @Timed
+    public ResponseEntity<RequestNiazsanjiFardiDTO> toggleImportantMessage(@PathVariable long id, @PathVariable boolean type) throws URISyntaxException {
+        log.debug("REST request to toggleImportantMessage RequestOrganizationNiazsanji : {}", id);
+
+        RequestNiazsanjiFardiDTO requestNiazsanjiFardi = requestNiazsanjiFardiService.findOne(id).get();
+
+        requestNiazsanjiFardi.setHasImportantMessage(type);
+        requestNiazsanjiFardi.setModifyDate(ZonedDateTime.now());
+        //requestOrganizationNiazsanjiDTO.setChangeStatusUserLogin(SecurityUtils.getCurrentUserLogin().get());
+
+        RequestNiazsanjiFardiDTO result = requestNiazsanjiFardiService.save(requestNiazsanjiFardi);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, requestNiazsanjiFardi.getId().toString()))
+            .body(result);
+    }
 
     /**
      * GET  /request-niazsanji-fardis : get all the requestNiazsanjiFardis.

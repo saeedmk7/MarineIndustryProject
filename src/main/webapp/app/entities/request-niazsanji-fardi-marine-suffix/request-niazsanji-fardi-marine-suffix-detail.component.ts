@@ -131,7 +131,7 @@ export class RequestNiazsanjiFardiMarineSuffixDetailComponent implements OnInit 
 
                     this.homePagePersonEducationalModules = resp.body.filter(a => a.status > 0).sort((a,b) => (a.runDate > b.runDate) ? 1 : (a.runDate < b.runDate) ? -1 : 0);
                     this.homePagePersonEducationalModules.forEach(a => {
-                        a.totalLearningTime = a.learningTimePractical == undefined ? 0 : a.learningTimePractical + a.learningTimeTheorical == undefined ? 0 : a.learningTimeTheorical;
+                        a.totalLearningTime = (!a.learningTimePractical ? 0 : a.learningTimePractical) + (!a.learningTimeTheorical ? 0 : a.learningTimeTheorical);
                         switch (a.status) {
                             case 100:
                                 a.statusMeaning = "خاتمه دوره";

@@ -101,6 +101,13 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
         });
         this.yearsCollections = GREGORIAN_START_END_DATE;
     }
+    toggleImportantMessage(id: number, type: boolean){
+        debugger;
+        this.requestOrganizationNiazsanjiService.toggleImportantMessage(id, type).subscribe(
+            (res: HttpResponse<IRequestOrganizationNiazsanjiMarineSuffix>) => this.makeCriteria(this.criteria),
+            (res: HttpErrorResponse) => this.onSaveError()
+        );
+    }
     makeCriteria(criteria?,excelExport: boolean = false){
 
         if (criteria) {
@@ -537,11 +544,11 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
     }
 
     private paginateRequestOrganizationNiazsanjis(data: IRequestOrganizationNiazsanjiMarineSuffix[], headers: HttpHeaders) {
-
+        debugger;
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
-        this.requestOrganizationNiazsanjis = this.convertObjectDatesService.changeArrayDate(data);
+        this.requestOrganizationNiazsanjis = this.convertObjectDatesService.changeArrayDate(data, true);
         this.requestOrganizationNiazsanjis.forEach((a: IRequestOrganizationNiazsanjiMarineSuffix) => {
             a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
             let education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);

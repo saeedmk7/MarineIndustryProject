@@ -21,6 +21,7 @@ import {Principal} from "app/core/auth/principal.service";
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
+import {IRequestOrganizationNiazsanjiMarineSuffix} from "app/shared/model/request-organization-niazsanji-marine-suffix.model";
 
 @Component({
     selector: 'mi-educational-history-marine-suffix',
@@ -166,7 +167,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
 
     }
     handleAfterChart(wantOrgIds: number[],criteria,excelExport: boolean = false){
-        debugger;
+
         if(this.isSuperUsers) {
 
             const organizationChartIdFilter = criteria.find(a => a.key == 'organizationChartId.equals');
@@ -196,7 +197,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
                 criteria: criteria1,
                 sort: ["id", "asc"]
             }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
-                debugger;
+
                 criteria = this.criteria.filter(a => a.key != "createUserLogin.in");
                 let selectedPeople = resp.body;
                 if (selectedPeople.length > 0) {
@@ -218,7 +219,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
             });
         }
         else{
-            debugger;
+
             criteria.push({
                 key: 'createUserLogin.in',
                 value: [this.currentPerson.nationalId]
@@ -228,7 +229,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
     }
 
     loadAll(criteria?,excelExport: boolean = false) {
-        debugger;
+
         if(!this.isSuperUsers)
         {
             if(!criteria.find(a => a.key == "status.in")) {
@@ -290,7 +291,16 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
             this.transition();
         }
     }
+    toggleImportantMessage(id: number, type: boolean){
+        debugger;
+        this.educationalHistoryService.toggleImportantMessage(id, type).subscribe(
+            (res: HttpResponse<IRequestOrganizationNiazsanjiMarineSuffix>) => this.makeCriteria(this.criteria),
+            (res: HttpErrorResponse) => this.onSaveError()
+        );
+    }
+    private onSaveError() {
 
+    }
     transition() {
         /*this.router.navigate(['/educational-history-marine-suffix'], {
             queryParams: {
@@ -462,7 +472,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
-        this.educationalHistories = this.convertObjectDatesService.changeArrayDate(data);
+        this.educationalHistories = this.convertObjectDatesService.changeArrayDate(data, true);
 
         this.educationalHistories.forEach((a: IEducationalHistoryMarineSuffix) => {
             a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);

@@ -160,6 +160,12 @@
                         <fa-icon [icon]="'eye'"></fa-icon>
                         <span class="d-none d-md-inline" alt="مشاهده" jhiTranslate="entity.action.view">View</span>
                     </button>
+                    <img src="../../../content/images/bulb-icon.png" title="پیام مهمی در جزئیات وجود دارد" alt="پیام مهمی در جزئیات وجود دارد"
+                         *ngIf="requestNiazsanjiFardi.hasImportantMessage == true" style="cursor: pointer;width: 20%;margin: 0;"
+                         (click)="toggleImportantMessage(requestNiazsanjiFardi.id, false)"/>
+                    <img src="../../../content/images/light-off-icon.png"
+                         *ngIf="requestNiazsanjiFardi.hasImportantMessage == false" style="cursor: pointer;width: 20%;margin: 0;"
+                         (click)="toggleImportantMessage(requestNiazsanjiFardi.id, true)"/>
                     <ng-container *ngIf="!(requestNiazsanjiFardi.requestStatus == 'ACCEPT'  || requestNiazsanjiFardi.requestStatus == 'IGNORE')">
                         <ng-container *ngIf="requestNiazsanjiFardi.status == currentPerson.organizationChartId">
                             <button type="submit" title="ویرایش"

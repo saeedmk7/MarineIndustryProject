@@ -145,7 +145,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     loadAll(criteria?) {
-        debugger;
+
         this.message = "";
         this.finalNiazsanjiReportsFardis = [];
         this.finalNiazsanjiReportsOrganizations = [];

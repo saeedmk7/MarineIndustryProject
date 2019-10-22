@@ -174,6 +174,20 @@ public class EducationalHistoryResource {
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, educationalHistoryDTO.getId().toString()))
             .body(result);
     }
+    @PutMapping("/educational-histories/toggleImportantMessage/{id}/{type}")
+    @Timed
+    public ResponseEntity<EducationalHistoryDTO> toggleImportantMessage(@PathVariable long id, @PathVariable boolean type) throws URISyntaxException {
+
+        EducationalHistoryDTO educationalHistory = educationalHistoryService.findOne(id).get();
+
+        educationalHistory.setModifyDate(ZonedDateTime.now());
+        educationalHistory.setHasImportantMessage(type);
+
+        EducationalHistoryDTO result = educationalHistoryService.save(educationalHistory);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, educationalHistory.getId().toString()))
+            .body(result);
+    }
 
     /**
      * GET  /educational-histories : get all the educationalHistories.

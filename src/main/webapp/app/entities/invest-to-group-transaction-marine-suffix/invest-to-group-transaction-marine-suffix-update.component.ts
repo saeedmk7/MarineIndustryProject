@@ -58,7 +58,7 @@ export class InvestToGroupTransactionMarineSuffixUpdateComponent implements OnIn
 
     save() {
         this.isSaving = true;
-        debugger;
+
         if(this.investToGroupTransaction.investDate)
         {
             this.investToGroupTransaction.investYear = +this.investToGroupTransaction.investDate.split('/')[0];

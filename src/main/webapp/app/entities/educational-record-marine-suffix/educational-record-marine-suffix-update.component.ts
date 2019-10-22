@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {HttpResponse, HttpErrorResponse, HttpEventType} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
@@ -31,6 +31,13 @@ export class EducationalRecordMarineSuffixUpdateComponent implements OnInit {
     years: any[] = [];
     people: IPersonMarineSuffix[];
     valid: number;
+
+    progress: { percentage: number } = { percentage: 0 }
+    file: File;
+
+    validFileTypes: string[] = ["image/gif","image/jpeg","image/jpg","image/png","image/TIFF","image/bmp","application/pdf","application/x-zip-compressed"];
+    fileHasError: boolean = true;
+    fileMessage: string;
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected educationalRecordService: EducationalRecordMarineSuffixService,
@@ -110,6 +117,56 @@ export class EducationalRecordMarineSuffixUpdateComponent implements OnInit {
         window.history.back();
     }
 
+    setFileData(event, entity, field, isImage) {
+
+        this.fileMessage = "";
+        this.fileHasError = true;
+        //this.dataUtils.setFileData(event, entity, field, isImage);
+        if (event && event.target.files && event.target.files[0]) {
+            this.file = event.target.files[0];
+            this.validateFile(this.file);
+        }
+        else{
+            this.fileHasError = true;
+            this.fileMessage = "انتخاب فایل اجباری است.";
+        }
+    }
+    dirty: boolean = false;
+    validateFile(file){
+        //file.name.split('.')[file.name.split('.').length-1] == 'rar'
+        if(this.validFileTypes.includes(file.type)){
+            if((file.size / 1024 / 1024) < 10) {
+                this.fileHasError = false;
+                this.fileMessage = "فایل معتبر است.";
+                this.dirty = true;
+            }
+            else{
+                this.fileHasError = true;
+                this.fileMessage = "حجم فایل بیش از حد مجاز است.";
+            }
+        }
+        else{
+            this.fileHasError = true;
+            this.fileMessage = "فرمت فایل غیر مجاز است.";
+        }
+    }
+    replaceFileDoc(){
+        let formdata: FormData = new FormData();
+
+        formdata.append('file', this.file);
+        this.educationalRecordService.uploadFile(formdata).subscribe(event =>{
+                if(event.type === HttpEventType.UploadProgress){
+                    this.progress.percentage = Math.round(100 * event.loaded / event.total);
+                }
+                else if(event instanceof HttpResponse){
+                    if(event.body){
+                        this.educationalRecord.fileDoc = event.body;
+                        this.subscribeToSaveResponse(this.educationalRecordService.update(this.educationalRecord));
+                    }
+                }
+            },
+            () => this.onSaveError());
+    }
     save() {
         this.isSaving = true;
 
@@ -121,7 +178,22 @@ export class EducationalRecordMarineSuffixUpdateComponent implements OnInit {
         if (this.educationalRecord.id !== undefined) {
             this.subscribeToSaveResponse(this.educationalRecordService.update(this.educationalRecord));
         } else {
-            this.subscribeToSaveResponse(this.educationalRecordService.create(this.educationalRecord));
+            let formdata: FormData = new FormData();
+
+            formdata.append('file', this.file);
+            this.educationalRecordService.uploadFile(formdata).subscribe(event =>{
+                    if(event.type === HttpEventType.UploadProgress){
+                        this.progress.percentage = Math.round(100 * event.loaded / event.total);
+                    }
+                    else if(event instanceof HttpResponse){
+                        if(event.body){
+                            this.educationalRecord.fileDoc = event.body;
+                            this.subscribeToSaveResponse(this.educationalRecordService.create(this.educationalRecord));
+                        }
+                    }
+                },
+                () => this.onSaveError());
+            //this.subscribeToSaveResponse(this.educationalRecordService.create(this.educationalRecord));
         }
     }
 

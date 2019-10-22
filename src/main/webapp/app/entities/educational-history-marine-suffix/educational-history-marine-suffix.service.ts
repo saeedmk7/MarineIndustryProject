@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IEducationalHistoryMarineSuffix } from 'app/shared/model/educational-history-marine-suffix.model';
+import {IRequestOrganizationNiazsanjiMarineSuffix} from "app/shared/model/request-organization-niazsanji-marine-suffix.model";
 
 type EntityResponseType = HttpResponse<IEducationalHistoryMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<IEducationalHistoryMarineSuffix[]>;
@@ -53,6 +54,13 @@ export class EducationalHistoryMarineSuffixService {
         return this.http
             .put<IEducationalHistoryMarineSuffix>(this.resourceUrl, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
+    toggleImportantMessage(id: number, type: boolean): Observable<EntityResponseType> {
+        const url: string = this.resourceUrl + '/toggleImportantMessage/' + id + '/' + type;
+        return this.http
+            .put<IEducationalHistoryMarineSuffix>(url, null, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => res));
     }
 
     find(id: number): Observable<EntityResponseType> {

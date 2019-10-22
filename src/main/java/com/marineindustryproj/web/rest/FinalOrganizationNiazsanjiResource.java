@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.marineindustryproj.domain.enumeration.RequestStatus;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.FinalOrganizationNiazsanjiService;
+import com.marineindustryproj.service.RequestOrganizationNiazsanjiService;
+import com.marineindustryproj.service.dto.RequestOrganizationNiazsanjiDTO;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -41,10 +43,13 @@ public class FinalOrganizationNiazsanjiResource {
 
     private final FinalOrganizationNiazsanjiService finalOrganizationNiazsanjiService;
 
+    private final RequestOrganizationNiazsanjiService requestOrganizationNiazsanjiService;
+
     private final FinalOrganizationNiazsanjiQueryService finalOrganizationNiazsanjiQueryService;
 
-    public FinalOrganizationNiazsanjiResource(FinalOrganizationNiazsanjiService finalOrganizationNiazsanjiService, FinalOrganizationNiazsanjiQueryService finalOrganizationNiazsanjiQueryService) {
+    public FinalOrganizationNiazsanjiResource(FinalOrganizationNiazsanjiService finalOrganizationNiazsanjiService, RequestOrganizationNiazsanjiService requestOrganizationNiazsanjiService, FinalOrganizationNiazsanjiQueryService finalOrganizationNiazsanjiQueryService) {
         this.finalOrganizationNiazsanjiService = finalOrganizationNiazsanjiService;
+        this.requestOrganizationNiazsanjiService = requestOrganizationNiazsanjiService;
         this.finalOrganizationNiazsanjiQueryService = finalOrganizationNiazsanjiQueryService;
     }
 
@@ -129,6 +134,26 @@ public class FinalOrganizationNiazsanjiResource {
         FinalOrganizationNiazsanjiDTO result = finalOrganizationNiazsanjiService.save(finalOrganizationNiazsanjiDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, finalOrganizationNiazsanjiDTO.getId().toString()))
+            .body(result);
+    }
+    @PutMapping("/final-organization-niazsanjis/toggleImportantMessage/{id}/{type}")
+    @Timed
+    public ResponseEntity<FinalOrganizationNiazsanjiDTO> toggleImportantMessage(@PathVariable long id, @PathVariable boolean type) throws URISyntaxException {
+
+        FinalOrganizationNiazsanjiDTO finalOrganizationNiazsanji = finalOrganizationNiazsanjiService.findOne(id).get();
+
+        finalOrganizationNiazsanji.setModifyDate(ZonedDateTime.now());
+        finalOrganizationNiazsanji.setHasImportantMessage(type);
+
+        FinalOrganizationNiazsanjiDTO result = finalOrganizationNiazsanjiService.save(finalOrganizationNiazsanji);
+
+        RequestOrganizationNiazsanjiDTO requestOrganizationNiazsanji = requestOrganizationNiazsanjiService.findOne(result.getRequestOrganizationNiazsanjiId()).get();
+        requestOrganizationNiazsanji.setHasImportantMessage(type);
+        requestOrganizationNiazsanji.setModifyDate(ZonedDateTime.now());
+        requestOrganizationNiazsanjiService.save(requestOrganizationNiazsanji);
+
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, finalOrganizationNiazsanji.getId().toString()))
             .body(result);
     }
 

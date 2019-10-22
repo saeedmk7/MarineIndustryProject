@@ -83,6 +83,10 @@
                         <td>{{educationalRecord.description}}</td>
                         <td class="text-right">
                             <div class="btn-group flex-btn-group-container">
+                                <a *ngIf="educationalRecord.fileDoc" title="دریافت مدرک" [href]="educationalRecord.fileDoc | safe" target="_blank"
+                                   class="btn btn-default btn-sm enableLink">
+                                    <fa-icon [icon]="'download'"></fa-icon>
+                                </a>
                                 <button type="submit" *ngIf="isTopUsers"
                                         [routerLink]="['/educational-record-marine-suffix', 'edit', educationalRecord.id]"
                                         class="btn btn-primary btn-sm">

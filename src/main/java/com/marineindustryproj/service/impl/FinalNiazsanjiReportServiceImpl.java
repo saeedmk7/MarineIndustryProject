@@ -754,7 +754,10 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
         homePageReport.setTotal((float) finalNiazsanjiReportHomePageDTOS.stream().mapToLong(a -> a.getValue()).sum());
         homePageReport.setTotalPassed((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getStatus().equals(20)).mapToLong(a -> a.getValue()).sum());
-        homePageReport.setTotalPassedPercent((homePageReport.getTotalPassed() / homePageReport.getTotal()) * 100);
+        if(homePageReport.getTotal() > 0)
+            homePageReport.setTotalPassedPercent((homePageReport.getTotalPassed() / homePageReport.getTotal()) * 100);
+        else
+            homePageReport.setTotalPassedPercent(0f);
 
         /*List<JobMinDTO> jobMinDTOS = jobService.findAllFromCache();
         List<Long> managerJobIds = new ArrayList<>();
@@ -773,37 +776,56 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         //List<Long> stuffJobIds = jobMinDTOS.stream().filter(a -> (!a.getJobCode().startsWith("18")) || (!a.getJobCode().startsWith("19")) || (!a.getJobCode().startsWith("20"))).map(a -> a.getId()).distinct().collect(Collectors.toList());
 
         homePageReport.setTotalManagers((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.isManager()).mapToDouble(a -> a.getValue()).sum());
-        homePageReport.setTotalManagersPercent((homePageReport.getTotalManagers() / homePageReport.getTotal()) * 100);
+        if(homePageReport.getTotal() > 0)
+            homePageReport.setTotalManagersPercent((homePageReport.getTotalManagers() / homePageReport.getTotal()) * 100);
+        else
+            homePageReport.setTotalManagersPercent(0f);
         homePageReport.setTotalStuffs((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> !a.isManager()).mapToDouble(a -> a.getValue()).sum());
-        homePageReport.setTotalStuffsPercent((homePageReport.getTotalStuffs() / homePageReport.getTotal()) * 100);
+        if(homePageReport.getTotal() > 0)
+            homePageReport.setTotalStuffsPercent((homePageReport.getTotalStuffs() / homePageReport.getTotal()) * 100);
+        else
+            homePageReport.setTotalStuffsPercent(0f);
 
         homePageReport.setTotalPassedManagers((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getStatus().equals(20) && a.isManager()).mapToLong(a -> a.getValue()).sum());
-        homePageReport.setTotalPassedManagersPercent((homePageReport.getTotalPassedManagers() / homePageReport.getTotal()) * 100);
+
+        if(homePageReport.getTotal() > 0)
+            homePageReport.setTotalPassedManagersPercent((homePageReport.getTotalPassedManagers() / homePageReport.getTotal()) * 100);
+        else
+            homePageReport.setTotalPassedManagersPercent(0f);
 
         homePageReport.setTotalPassedStuffs((float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getStatus().equals(20) && !a.isManager()).mapToLong(a -> a.getValue()).sum());
-        homePageReport.setTotalPassedStuffsPercent((homePageReport.getTotalPassedStuffs() / homePageReport.getTotal()) * 100);
+
+        if(homePageReport.getTotal() > 0)
+            homePageReport.setTotalPassedStuffsPercent((homePageReport.getTotalPassedStuffs() /
+                homePageReport.getTotal()) * 100);
+        else
+            homePageReport.setTotalPassedStuffsPercent(0f);
 
         List<HomePageReportCourseTypeDetail> homePageReportCourseTypeDetails = new ArrayList<>();
         for (CourseTypeDTO courseTypeDTO : courseTypeDTOS) {
             float total =
                 (float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getCourseTypeId().equals(courseTypeDTO.getId()))
                     .mapToDouble(a -> a.getValue()).sum();
-            float totalPercent =
-                ((total / homePageReport.getTotal()) * 100);
+            float totalPercent = 0;
+            if(homePageReport.getTotal() > 0)
+                totalPercent =
+                    ((total / homePageReport.getTotal()) * 100);
 
             float totalManagers =
                 (float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getCourseTypeId().equals(courseTypeDTO.getId()) && a.isManager())
                     .mapToDouble(a -> a.getValue()).sum();
 
-            float totalManagersPercent =
-                ((totalManagers / homePageReport.getTotal()) * 100);
+            float totalManagersPercent = 0;
+            if(homePageReport.getTotal() > 0)
+                 totalManagersPercent = ((totalManagers / homePageReport.getTotal()) * 100);
 
             float totalStuffs =
                 (float) finalNiazsanjiReportHomePageDTOS.stream().filter(a -> a.getCourseTypeId().equals(courseTypeDTO.getId()) && !a.isManager())
                     .mapToDouble(a -> a.getValue()).sum();
 
-            float totalStuffsPercent =
-                ((totalStuffs / homePageReport.getTotal()) * 100);
+            float totalStuffsPercent = 0;
+            if(homePageReport.getTotal() > 0)
+                totalStuffsPercent = ((totalStuffs / homePageReport.getTotal()) * 100);
 
             HomePageReportCourseTypeDetail homePageReportCourseTypeDetail =
                 new HomePageReportCourseTypeDetail(courseTypeDTO.getId(),
@@ -830,39 +852,71 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             homePageReportDetail.setOrganizationChartId(group.getId());
             homePageReportDetail.setOrganizationChartTitle(group.getTitle());
             homePageReportDetail.setTotal((float) finalNiazsanjiReportDTOs.stream().mapToDouble(a -> a.getValue()).sum());
-            homePageReportDetail.setTotalPercent((homePageReportDetail.getTotal() / homePageReport.getTotal()) * 100);
+            if(homePageReport.getTotal() > 0)
+                homePageReportDetail.setTotalPercent((homePageReportDetail.getTotal() / homePageReport.getTotal()) * 100);
+            else
+                homePageReportDetail.setTotalPercent(0f);
 
             homePageReportDetail.setTotalManagers((float) finalNiazsanjiReportDTOs.stream()
                 .filter(a -> a.isManager()).mapToDouble(a -> a.getValue()).sum());
-            homePageReportDetail.setTotalManagersPercent((homePageReportDetail.getTotalManagers() / homePageReportDetail.getTotal()) * 100);
+
+            if(homePageReportDetail.getTotal() > 0)
+                homePageReportDetail.setTotalManagersPercent((homePageReportDetail.getTotalManagers() / homePageReportDetail.getTotal()) * 100);
+            else
+                homePageReportDetail.setTotalManagersPercent(0f);
 
             homePageReportDetail.setTotalStuffs((float) finalNiazsanjiReportDTOs.stream()
                 .filter(a -> !a.isManager()).mapToDouble(a -> a.getValue()).sum());
-            homePageReportDetail.setTotalStuffsPercent((homePageReportDetail.getTotalStuffs() / homePageReportDetail.getTotal()) * 100);
+
+            if(homePageReportDetail.getTotal() > 0)
+                homePageReportDetail.setTotalStuffsPercent((homePageReportDetail.getTotalStuffs() / homePageReportDetail.getTotal()) * 100);
+            else
+                homePageReportDetail.setTotalStuffsPercent(0f);
 
             homePageReportDetail.setTotalPassed((float) finalNiazsanjiReportDTOs.stream()
                 .filter(a -> a.getStatus().equals(20)).mapToDouble(a -> a.getValue()).sum());
-            homePageReportDetail.setTotalPassedPercent((homePageReportDetail.getTotalPassed() / homePageReportDetail.getTotal()) * 100);
+            if(homePageReportDetail.getTotal() > 0)
+                homePageReportDetail.setTotalPassedPercent((homePageReportDetail.getTotalPassed() / homePageReportDetail.getTotal()) * 100);
+            else
+                homePageReportDetail.setTotalPassedPercent(0f);
 
             homePageReportDetail.setTotalPassedManagers((float) finalNiazsanjiReportDTOs.stream()
                 .filter(a -> a.isManager() && a.getStatus().equals(20)).mapToDouble(a -> a.getValue()).sum());
-            homePageReportDetail.setTotalPassedManagersPercent((homePageReportDetail.getTotalPassedManagers() / homePageReportDetail.getTotalPassed()) * 100);
+
+            if(homePageReportDetail.getTotalPassed() > 0)
+                homePageReportDetail.setTotalPassedManagersPercent((homePageReportDetail.getTotalPassedManagers() / homePageReportDetail.getTotalPassed()) * 100);
+            else
+                homePageReportDetail.setTotalPassedManagersPercent(0f);
 
             homePageReportDetail.setTotalPassedStuffs((float) finalNiazsanjiReportDTOs.stream()
                 .filter(a -> !a.isManager() && a.getStatus().equals(20)).mapToDouble(a -> a.getValue()).sum());
-            homePageReportDetail.setTotalPassedStuffsPercent((homePageReportDetail.getTotalPassedStuffs() / homePageReportDetail.getTotalPassed()) * 100);
+
+            if(homePageReportDetail.getTotalPassed() > 0)
+                homePageReportDetail.setTotalPassedStuffsPercent((homePageReportDetail.getTotalPassedStuffs() / homePageReportDetail.getTotalPassed()) * 100);
+            else
+                homePageReportDetail.setTotalPassedStuffsPercent(0f);
 
             homePageReportDetail.setRemaining((float) finalNiazsanjiReportDTOs.stream()
                 .filter(a -> a.getStatus() < 20).mapToDouble(a -> a.getValue()).sum());
-            homePageReportDetail.setRemainingPercent((homePageReportDetail.getRemaining() / homePageReportDetail.getTotal()) * 100);
+            if(homePageReportDetail.getTotal() > 0)
+                homePageReportDetail.setRemainingPercent((homePageReportDetail.getRemaining() / homePageReportDetail.getTotal()) * 100);
+            else
+                homePageReportDetail.setRemainingPercent(0f);
 
             homePageReportDetail.setRemainingManagers((float) finalNiazsanjiReportDTOs.stream()
                 .filter(a -> a.getStatus() < 20 && a.isManager()).mapToDouble(a -> a.getValue()).sum());
-            homePageReportDetail.setRemainingManagersPercent((homePageReportDetail.getRemainingManagers() / homePageReportDetail.getRemaining()) * 100);
+
+            if(homePageReportDetail.getRemaining() > 0)
+                homePageReportDetail.setRemainingManagersPercent((homePageReportDetail.getRemainingManagers() / homePageReportDetail.getRemaining()) * 100);
+            else
+                homePageReportDetail.setRemainingManagersPercent(0f);
 
             homePageReportDetail.setRemainingStuffs((float) finalNiazsanjiReportDTOs.stream()
                 .filter(a -> a.getStatus() < 20 && !a.isManager()).mapToDouble(a -> a.getValue()).sum());
-            homePageReportDetail.setRemainingStuffsPercent((homePageReportDetail.getRemainingStuffs() / homePageReportDetail.getRemaining()) * 100);
+            if(homePageReportDetail.getRemaining() > 0)
+                homePageReportDetail.setRemainingStuffsPercent((homePageReportDetail.getRemainingStuffs() / homePageReportDetail.getRemaining()) * 100);
+            else
+                homePageReportDetail.setRemainingStuffsPercent(0f);
 
             homePageReportDetails.add(homePageReportDetail);
         }
@@ -889,13 +943,22 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                 HomePageReportDetail homePageReportDetail = homePageReportDetails.stream().filter(a -> a.getOrganizationChartId() == group.getId()).collect(Collectors.toList()).get(0);
 
                 homePageReportChartOrganizationDetail.setTotal((float) finalNiazsanjiReportDTOs.stream().mapToDouble(a -> a.getValue()).sum());
-                homePageReportChartOrganizationDetail.setTotalPercent((homePageReportChartOrganizationDetail.getTotal() / homePageReportDetail.getTotal()) * 100);
+                if(homePageReportDetail.getTotal() > 0)
+                    homePageReportChartOrganizationDetail.setTotalPercent((homePageReportChartOrganizationDetail.getTotal() / homePageReportDetail.getTotal()) * 100);
+                else
+                    homePageReportChartOrganizationDetail.setTotalPercent(0f);
 
                 homePageReportChartOrganizationDetail.setPassed((float) finalNiazsanjiReportDTOs.stream().filter(a -> a.getStatus().equals(20)).mapToDouble(a -> a.getValue()).sum());
-                homePageReportChartOrganizationDetail.setPassedPercent((homePageReportChartOrganizationDetail.getPassed() / homePageReportDetail.getTotal()) * 100);
+                if(homePageReportDetail.getTotal() > 0)
+                    homePageReportChartOrganizationDetail.setPassedPercent((homePageReportChartOrganizationDetail.getPassed() / homePageReportDetail.getTotal()) * 100);
+                else
+                    homePageReportChartOrganizationDetail.setPassedPercent(0f);
 
                 homePageReportChartOrganizationDetail.setRemaining((float) finalNiazsanjiReportDTOs.stream().filter(a -> a.getStatus() < 20).mapToDouble(a -> a.getValue()).sum());
-                homePageReportChartOrganizationDetail.setRemainingPercent((homePageReportChartOrganizationDetail.getRemaining() / homePageReportDetail.getTotal()) * 100);
+                if(homePageReportDetail.getTotal() > 0)
+                    homePageReportChartOrganizationDetail.setRemainingPercent((homePageReportChartOrganizationDetail.getRemaining() / homePageReportDetail.getTotal()) * 100);
+                else
+                    homePageReportChartOrganizationDetail.setRemainingPercent(0f);
 
                 homePageReportChartOrganizationDetails.add(homePageReportChartOrganizationDetail);
             }
@@ -1063,9 +1126,10 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             finalNiazsanjiReportPersonCriteria.setFinalNiazsanjiReportId(newFilter);
 
             long count = finalNiazsanjiReportPersonQueryService.countByCriteria(finalNiazsanjiReportPersonCriteria);
-            educationalModuleTotalHour = educationalModuleTotalHour + (count * finalNiazsanjiReportCustomDTOS.stream()
+            long totalTime = finalNiazsanjiReportCustomDTOS.stream()
                 .filter(a -> a.getId() == id)
-                .mapToLong(o -> o.getTotalLearningTime()).sum());
+                .mapToLong(o -> o.getTotalLearningTime()).sum();
+            educationalModuleTotalHour = educationalModuleTotalHour + (count * totalTime);
         }
         return educationalModuleTotalHour;
     }

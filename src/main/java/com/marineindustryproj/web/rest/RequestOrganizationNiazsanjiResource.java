@@ -135,6 +135,31 @@ public class RequestOrganizationNiazsanjiResource {
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, requestOrganizationNiazsanjiDTO.getId().toString()))
             .body(result);
     }
+    /**
+     * PUT  /request-organization-niazsanjis : Updates an existing requestOrganizationNiazsanji.
+     *
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the updated requestOrganizationNiazsanjiDTO,
+     * or with status 400 (Bad Request) if the requestOrganizationNiazsanjiDTO is not valid,
+     * or with status 500 (Internal Server Error) if the requestOrganizationNiazsanjiDTO couldn't be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PutMapping("/request-organization-niazsanjis/toggleImportantMessage/{id}/{type}")
+    @Timed
+    public ResponseEntity<RequestOrganizationNiazsanjiDTO> toggleImportantMessage(@PathVariable long id, @PathVariable boolean type) throws URISyntaxException {
+        log.debug("REST request to toggleImportantMessage RequestOrganizationNiazsanji : {}", id);
+
+        RequestOrganizationNiazsanjiDTO requestOrganizationNiazsanji = requestOrganizationNiazsanjiService.findOne(id).get();
+
+        requestOrganizationNiazsanji.setHasImportantMessage(type);
+        requestOrganizationNiazsanji.setModifyDate(ZonedDateTime.now());
+        //requestOrganizationNiazsanjiDTO.setChangeStatusUserLogin(SecurityUtils.getCurrentUserLogin().get());
+
+        RequestOrganizationNiazsanjiDTO result = requestOrganizationNiazsanjiService.save(requestOrganizationNiazsanji);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, requestOrganizationNiazsanji.getId().toString()))
+            .body(result);
+    }
 
     /**
      * GET  /request-organization-niazsanjis : get all the requestOrganizationNiazsanjis.

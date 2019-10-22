@@ -100,7 +100,14 @@
                             id="field_organizationChart"
                             [(ngModel)]="finalNiazsanjiReport.organizationChartId">
                     </div>
-
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_status">وضعیت</label>
+                        <select class="form-control" name="status" id="field_status" [(ngModel)]="finalNiazsanjiReport.status">
+                            <option value="0">کاری انجام نشده</option>
+                            <option value="10">برنامه ریزی شده</option>
+                            <option value="20">اجرا شده</option>
+                        </select>
+                    </div>
                     <div class="form-group half">
                         <label class="form-control-label" for="field_educationalModule">پودمان آموزشی</label>
                         <input type="text" name="educationalModuleTitle" id="field_educationalModule" class="form-control"

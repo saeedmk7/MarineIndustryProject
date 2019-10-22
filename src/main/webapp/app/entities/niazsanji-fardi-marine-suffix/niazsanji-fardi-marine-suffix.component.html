@@ -111,6 +111,11 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
+                        <img src="../../../content/images/bulb-icon.png" alt="پیام مهمی در جزئیات وجود دارد" title="پیام مهمی در جزئیات وجود دارد"
+                             *ngIf="niazsanjiFardi.hasImportantMessage == true" style="cursor: pointer;width: 20%;margin: 0;"
+                             (click)="toggleImportantMessage(niazsanjiFardi.id, false)"/>
+                        <img src="../../../content/images/light-off-icon.png" *ngIf="niazsanjiFardi.hasImportantMessage == false" style="cursor: pointer;width: 20%;margin: 0;"
+                             (click)="toggleImportantMessage(niazsanjiFardi.id, true)"/>
                     </div>
                 </td>
                 <td class="text-right" width="250">

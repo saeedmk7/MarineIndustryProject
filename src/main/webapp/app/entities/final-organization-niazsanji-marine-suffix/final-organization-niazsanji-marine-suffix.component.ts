@@ -30,6 +30,7 @@ import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffi
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 import {ISkillableLevelOfSkillMarineSuffix} from "app/shared/model/skillable-level-of-skill-marine-suffix.model";
 import {SkillableLevelOfSkillMarineSuffixService} from "app/entities/skillable-level-of-skill-marine-suffix";
+import {IRequestOrganizationNiazsanjiMarineSuffix} from "app/shared/model/request-organization-niazsanji-marine-suffix.model";
 
 @Component({
     selector: 'mi-final-organization-niazsanji-marine-suffix',
@@ -473,5 +474,15 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
         this.loadAll(this.criteria);
+    }
+    toggleImportantMessage(id: number, type: boolean){
+        debugger;
+        this.finalOrganizationNiazsanjiService.toggleImportantMessage(id, type).subscribe(
+            (res: HttpResponse<IFinalOrganizationNiazsanjiMarineSuffix>) => this.loadAll(this.criteria),
+            (res: HttpErrorResponse) => this.onSaveError()
+        );
+    }
+    private onSaveError(){
+
     }
 }

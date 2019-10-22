@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -144,6 +145,19 @@ public class RunPhaseResource {
         if (runPhaseDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        RunPhaseDTO result = runPhaseService.save(runPhaseDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, runPhaseDTO.getId().toString()))
+            .body(result);
+    }
+    @PutMapping("/run-phases/toggleImportantMessage/{id}/{type}")
+    @Timed
+    public ResponseEntity<RunPhaseDTO> toggleImportantMessage(@PathVariable long id, @PathVariable boolean type) throws URISyntaxException {
+        RunPhaseDTO runPhaseDTO = runPhaseService.findOne(id).get();
+
+        runPhaseDTO.setHasImportantMessage(type);
+        runPhaseDTO.setModifyDate(ZonedDateTime.now());
+
         RunPhaseDTO result = runPhaseService.save(runPhaseDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, runPhaseDTO.getId().toString()))

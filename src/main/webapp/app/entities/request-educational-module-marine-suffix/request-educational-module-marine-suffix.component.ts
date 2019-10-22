@@ -34,6 +34,7 @@ import {ScientificWorkGroupMarineSuffixService} from "app/entities/scientific-wo
 import {SkillableLevelOfSkillMarineSuffixService} from "app/entities/skillable-level-of-skill-marine-suffix";
 import {OrganizationMarineSuffixService} from "app/entities/organization-marine-suffix";
 import {IOrganizationMarineSuffix} from "app/shared/model/organization-marine-suffix.model";
+import {IRequestOrganizationNiazsanjiMarineSuffix} from "app/shared/model/request-organization-niazsanji-marine-suffix.model";
 
 @Component({
     selector: 'mi-request-educational-module-marine-suffix',
@@ -495,7 +496,7 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
-        this.requestEducationalModules = this.convertObjectDatesService.changeArrayDate(data);
+        this.requestEducationalModules = this.convertObjectDatesService.changeArrayDate(data, true);
         this.requestEducationalModules.forEach(a => {
             a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
             const person = this.people.find(w => w.nationalId == a.createUserLogin);
@@ -507,4 +508,12 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
+    toggleImportantMessage(id: number, type: boolean){
+        debugger;
+        this.requestEducationalModuleService.toggleImportantMessage(id, type).subscribe(
+            (res: HttpResponse<IRequestEducationalModuleMarineSuffix>) => this.makeCriteria(this.criteria),
+            (res: HttpErrorResponse) => this.onSaveError()
+        );
+    }
+    private onSaveError(){}
 }

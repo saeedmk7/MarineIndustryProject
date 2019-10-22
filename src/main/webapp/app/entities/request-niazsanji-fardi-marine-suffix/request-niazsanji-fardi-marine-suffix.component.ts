@@ -23,6 +23,7 @@ import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
+import {IRequestOrganizationNiazsanjiMarineSuffix} from "app/shared/model/request-organization-niazsanji-marine-suffix.model";
 
 @Component({
     selector: 'mi-request-niazsanji-fardi-marine-suffix',
@@ -548,7 +549,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
-        this.requestNiazsanjiFardis = this.convertObjectDatesService.changeArrayDate(data);
+        this.requestNiazsanjiFardis = this.convertObjectDatesService.changeArrayDate(data, true);
         if(!this.educationalModules) {
             if (this.educationalModuleService.educationalModules) {
                 this.educationalModules = this.educationalModuleService.educationalModules;
@@ -599,5 +600,11 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
-
+    toggleImportantMessage(id: number, type: boolean){
+        debugger;
+        this.requestNiazsanjiFardiService.toggleImportantMessage(id, type).subscribe(
+            (res: HttpResponse<IRequestNiazsanjiFardiMarineSuffix>) => this.makeCriteria(this.criteria),
+            (res: HttpErrorResponse) => this.onSaveError()
+        );
+    }
 }

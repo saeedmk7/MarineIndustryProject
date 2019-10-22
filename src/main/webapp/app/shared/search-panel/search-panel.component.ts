@@ -17,7 +17,7 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        debugger;
+
         this.eventSubscriber = this.router.events.subscribe((val: NavigationEnd) => {
 
             if(val instanceof NavigationEnd) {
@@ -25,7 +25,7 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
                     this.lastUrl = val.urlAfterRedirects;
                     if(!this.lastUrl.includes('popup'))
                     {
-                        debugger;
+
                         this.search();
                     }
                 }
@@ -68,7 +68,7 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
                })
            }*/
         });
-        debugger;
+
         if(this.immediatelyLoad) {
             this.eventManager.broadcast({name: 'marineindustryprojApp.criteria', content: criteria});
         }
@@ -77,7 +77,7 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
         }
     }
     onSubmit(f: any){
-        debugger;
+
         let url = this.deleteQueryString();
         for (let j = 0; j < this.searchPanelModel.length; j++) {
             let value = f.value[this.searchPanelModel[j].fieldName];
