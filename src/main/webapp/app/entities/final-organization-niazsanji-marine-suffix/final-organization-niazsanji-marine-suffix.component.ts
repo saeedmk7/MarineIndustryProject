@@ -476,7 +476,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         this.loadAll(this.criteria);
     }
     toggleImportantMessage(id: number, type: boolean){
-        debugger;
+
         this.finalOrganizationNiazsanjiService.toggleImportantMessage(id, type).subscribe(
             (res: HttpResponse<IFinalOrganizationNiazsanjiMarineSuffix>) => this.loadAll(this.criteria),
             (res: HttpErrorResponse) => this.onSaveError()

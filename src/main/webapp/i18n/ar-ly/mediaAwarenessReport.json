@@ -1,0 +1,36 @@
+{
+    "marineindustryprojApp": {
+        "mediaAwarenessReport": {
+            "home": {
+                "title": "Media Awareness Reports",
+                "createLabel": "Create a new Media Awareness Report",
+                "createOrEditLabel": "Create or edit a Media Awareness Report"
+            },
+            "created": "A new Media Awareness Report is created with identifier {{ param }}",
+            "updated": "A Media Awareness Report is updated with identifier {{ param }}",
+            "deleted": "A Media Awareness Report is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Media Awareness Report {{ id }}?"
+            },
+            "detail": {
+                "title": "Media Awareness Report"
+            },
+            "designed": "Designed",
+            "designedNumber": "Designed Number",
+            "subject": "Subject",
+            "publishDate": "Publish Date",
+            "numberOfViewers": "Number Of Viewers",
+            "durationOfOperation": "Duration Of Operation",
+            "reportTime": "Report Time",
+            "personHour": "Person Hour",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "guid": "Guid",
+            "organizationChart": "Organization Chart",
+            "mediaProductType": "Media Product Type"
+        }
+    }
+}

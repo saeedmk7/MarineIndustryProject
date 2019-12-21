@@ -29,6 +29,9 @@ const ENTITY_STATES = [...designAndPlanningRoute, ...designAndPlanningPopupRoute
         DesignAndPlanningMarineSuffixDeleteDialogComponent,
         DesignAndPlanningMarineSuffixDeletePopupComponent
     ],
+    exports:[
+        DesignAndPlanningMarineSuffixDetailComponent
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MarineindustryprojDesignAndPlanningMarineSuffixModule {}

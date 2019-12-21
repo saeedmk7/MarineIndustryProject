@@ -1,0 +1,31 @@
+{
+    "marineindustryprojApp": {
+        "forceRunningPercent": {
+            "home": {
+                "title": "Force Running Percents",
+                "createLabel": "Create a new Force Running Percent",
+                "createOrEditLabel": "Create or edit a Force Running Percent"
+            },
+            "created": "A new Force Running Percent is created with identifier {{ param }}",
+            "updated": "A Force Running Percent is updated with identifier {{ param }}",
+            "deleted": "A Force Running Percent is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Force Running Percent {{ id }}?"
+            },
+            "detail": {
+                "title": "Force Running Percent"
+            },
+            "title": "Title",
+            "description": "Description",
+            "percentAmount": "Percent Amount",
+            "runMonth": "Run Month",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "guid": "Guid",
+            "year": "Year",
+            "organizationChart": "Organization Chart"
+        }
+    }
+}

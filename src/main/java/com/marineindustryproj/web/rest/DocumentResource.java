@@ -1,83 +1,13 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.domain.InvestToGroupTransaction;
 import com.marineindustryproj.security.SecurityUtils;
-import com.marineindustryproj.service.AnnouncementQueryService;
-import com.marineindustryproj.service.AnnouncementService;
-import com.marineindustryproj.service.DesignAndPlanningQueryService;
-import com.marineindustryproj.service.DesignAndPlanningService;
-import com.marineindustryproj.service.DocumentService;
-import com.marineindustryproj.service.EducationalCenterQueryService;
-import com.marineindustryproj.service.EducationalCenterService;
-import com.marineindustryproj.service.EducationalModuleQueryService;
-import com.marineindustryproj.service.EducationalModuleService;
-import com.marineindustryproj.service.FinalNiazsanjiReportQueryService;
-import com.marineindustryproj.service.FinalNiazsanjiReportService;
-import com.marineindustryproj.service.FinalOrganizationNiazsanjiQueryService;
-import com.marineindustryproj.service.FinalOrganizationNiazsanjiService;
-import com.marineindustryproj.service.InstructionQueryService;
-import com.marineindustryproj.service.InstructionService;
-import com.marineindustryproj.service.JobQueryService;
-import com.marineindustryproj.service.JobService;
-import com.marineindustryproj.service.NiazsanjiFardiQueryService;
-import com.marineindustryproj.service.NiazsanjiFardiService;
-import com.marineindustryproj.service.PersonQueryService;
-import com.marineindustryproj.service.PersonService;
-import com.marineindustryproj.service.RequestEducationalModuleQueryService;
-import com.marineindustryproj.service.RequestEducationalModuleService;
-import com.marineindustryproj.service.RequestNiazsanjiFardiQueryService;
-import com.marineindustryproj.service.RequestNiazsanjiFardiService;
-import com.marineindustryproj.service.RequestOrganizationNiazsanjiQueryService;
-import com.marineindustryproj.service.RequestOrganizationNiazsanjiService;
-import com.marineindustryproj.service.ResourceQueryService;
-import com.marineindustryproj.service.ResourceService;
-import com.marineindustryproj.service.RunPhaseQueryService;
-import com.marineindustryproj.service.RunPhaseService;
-import com.marineindustryproj.service.StorageService;
-import com.marineindustryproj.service.TeacherQueryService;
-import com.marineindustryproj.service.TeacherService;
-import com.marineindustryproj.service.UsersRequestQueryService;
-import com.marineindustryproj.service.UsersRequestService;
-import com.marineindustryproj.service.dto.AnnouncementCriteria;
-import com.marineindustryproj.service.dto.AnnouncementDTO;
-import com.marineindustryproj.service.dto.DesignAndPlanningCriteria;
-import com.marineindustryproj.service.dto.DesignAndPlanningDTO;
-import com.marineindustryproj.service.dto.EducationalCenterCriteria;
-import com.marineindustryproj.service.dto.EducationalCenterDTO;
-import com.marineindustryproj.service.dto.EducationalModuleCriteria;
-import com.marineindustryproj.service.dto.EducationalModuleDTO;
-import com.marineindustryproj.service.dto.FinalNiazsanjiReportCriteria;
-import com.marineindustryproj.service.dto.FinalNiazsanjiReportDTO;
-import com.marineindustryproj.service.dto.FinalOrganizationNiazsanjiCriteria;
-import com.marineindustryproj.service.dto.FinalOrganizationNiazsanjiDTO;
-import com.marineindustryproj.service.dto.InstructionCriteria;
-import com.marineindustryproj.service.dto.InstructionDTO;
-import com.marineindustryproj.service.dto.JobCriteria;
-import com.marineindustryproj.service.dto.JobDTO;
-import com.marineindustryproj.service.dto.NiazsanjiFardiCriteria;
-import com.marineindustryproj.service.dto.NiazsanjiFardiDTO;
-import com.marineindustryproj.service.dto.PersonCriteria;
-import com.marineindustryproj.service.dto.PersonDTO;
-import com.marineindustryproj.service.dto.RequestEducationalModuleCriteria;
-import com.marineindustryproj.service.dto.RequestEducationalModuleDTO;
-import com.marineindustryproj.service.dto.RequestNiazsanjiFardiCriteria;
-import com.marineindustryproj.service.dto.RequestNiazsanjiFardiDTO;
-import com.marineindustryproj.service.dto.RequestOrganizationNiazsanjiCriteria;
-import com.marineindustryproj.service.dto.RequestOrganizationNiazsanjiDTO;
-import com.marineindustryproj.service.dto.ResourceCriteria;
-import com.marineindustryproj.service.dto.ResourceDTO;
-import com.marineindustryproj.service.dto.RunPhaseCriteria;
-import com.marineindustryproj.service.dto.RunPhaseDTO;
-import com.marineindustryproj.service.dto.TeacherCriteria;
-import com.marineindustryproj.service.dto.TeacherDTO;
-import com.marineindustryproj.service.dto.UsersRequestCriteria;
-import com.marineindustryproj.service.dto.UsersRequestDTO;
+import com.marineindustryproj.service.*;
+import com.marineindustryproj.service.dto.*;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
-import com.marineindustryproj.service.dto.DocumentDTO;
-import com.marineindustryproj.service.dto.DocumentCriteria;
-import com.marineindustryproj.service.DocumentQueryService;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -180,6 +110,10 @@ public class DocumentResource {
 
     private final NiazsanjiFardiQueryService niazsanjiFardiQueryService;
 
+    private final InvestToGroupTransactionService investToGroupTransactionService;
+
+    private final InvestToGroupTransactionQueryService investToGroupTransactionQueryService;
+
     private final RequestNiazsanjiFardiService requestNiazsanjiFardiService;
 
     private final RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService;
@@ -219,7 +153,7 @@ public class DocumentResource {
                             UsersRequestQueryService usersRequestQueryService,
                             NiazsanjiFardiService niazsanjiFardiService,
                             NiazsanjiFardiQueryService niazsanjiFardiQueryService,
-                            RequestNiazsanjiFardiService requestNiazsanjiFardiService,
+                            InvestToGroupTransactionService investToGroupTransactionService, InvestToGroupTransactionQueryService investToGroupTransactionQueryService, RequestNiazsanjiFardiService requestNiazsanjiFardiService,
                             RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService) {
         this.documentService = documentService;
         this.documentQueryService = documentQueryService;
@@ -256,6 +190,8 @@ public class DocumentResource {
         this.usersRequestQueryService = usersRequestQueryService;
         this.niazsanjiFardiService = niazsanjiFardiService;
         this.niazsanjiFardiQueryService = niazsanjiFardiQueryService;
+        this.investToGroupTransactionService = investToGroupTransactionService;
+        this.investToGroupTransactionQueryService = investToGroupTransactionQueryService;
         this.requestNiazsanjiFardiService = requestNiazsanjiFardiService;
         this.requestNiazsanjiFardiQueryService = requestNiazsanjiFardiQueryService;
     }
@@ -412,6 +348,14 @@ public class DocumentResource {
                 documents.add(result);
                 niazsanjiFardi.setDocuments(documents);
                 niazsanjiFardiService.save(niazsanjiFardi);
+            }
+            if (documentDTO.getEntityName().toLowerCase().equals("investtogrouptransaction")) {
+                InvestToGroupTransactionDTO investToGroupTransaction =
+                    investToGroupTransactionService.findOne(documentDTO.getEntityId()).get();
+                Set<DocumentDTO> documents = investToGroupTransaction.getDocuments();
+                documents.add(result);
+                investToGroupTransaction.setDocuments(documents);
+                investToGroupTransactionService.save(investToGroupTransaction);
             }
         } catch (Exception ex) {
             log.debug(ex.getMessage());
@@ -718,6 +662,19 @@ public class DocumentResource {
             documents.remove(documentService.findOne(id).get());
             niazsanjiFardiDTO.setDocuments(documents);
             niazsanjiFardiService.save(niazsanjiFardiDTO);
+        }
+        if (entityName.toLowerCase().equals("investtogrouptransaction")) {
+            InvestToGroupTransactionCriteria criteria = new InvestToGroupTransactionCriteria();
+            LongFilter filter = new LongFilter();
+            filter.setEquals(id);
+            criteria.setDocumentId(filter);
+            InvestToGroupTransactionDTO investToGroupTransactionDTO =
+                investToGroupTransactionQueryService.findByCriteria(criteria).get(0);
+
+            Set<DocumentDTO> documents = investToGroupTransactionDTO.getDocuments();
+            documents.remove(documentService.findOne(id).get());
+            investToGroupTransactionDTO.setDocuments(documents);
+            investToGroupTransactionService.save(investToGroupTransactionDTO);
         }
         documentService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();

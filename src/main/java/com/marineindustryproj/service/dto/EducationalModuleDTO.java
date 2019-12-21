@@ -1,5 +1,7 @@
 package com.marineindustryproj.service.dto;
 
+import com.marineindustryproj.domain.Restriction;
+
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -95,6 +97,9 @@ public class EducationalModuleDTO implements Serializable {
     @Size(max = 50)
     private String guid;
 
+    @Size(max = 4096)
+    private String restrictionDescription;
+
     private Set<ScientificWorkGroupDTO> scientificWorkGroups = new HashSet<>();
 
     private Set<DocumentDTO> documents = new HashSet<>();
@@ -106,6 +111,8 @@ public class EducationalModuleDTO implements Serializable {
     private Set<ResourceDTO> resources = new HashSet<>();
 
     private Set<TeacherDTO> teachers = new HashSet<>();
+
+    private Set<RestrictionDTO> restrictions = new HashSet<>();
 
     private Long requestEducationalModuleId;
 
@@ -359,6 +366,14 @@ public class EducationalModuleDTO implements Serializable {
         this.guid = guid;
     }
 
+    public String getRestrictionDescription() {
+        return restrictionDescription;
+    }
+
+    public void setRestrictionDescription(String restrictionDescription) {
+        this.restrictionDescription = restrictionDescription;
+    }
+
     public Set<ScientificWorkGroupDTO> getScientificWorkGroups() {
         return scientificWorkGroups;
     }
@@ -405,6 +420,13 @@ public class EducationalModuleDTO implements Serializable {
 
     public void setTeachers(Set<TeacherDTO> teachers) {
         this.teachers = teachers;
+    }
+    public Set<RestrictionDTO> getRestrictions() {
+        return restrictions;
+    }
+
+    public void setRestrictions(Set<RestrictionDTO> restrictions) {
+        this.restrictions = restrictions;
     }
 
     public Long getRequestEducationalModuleId() {
@@ -540,6 +562,7 @@ public class EducationalModuleDTO implements Serializable {
             ", goalsText='" + getGoalsText() + "'" +
             ", teachersText='" + getTeachersText() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", restrictionDescription='" + getRestrictionDescription() + "'" +
             ", requestEducationalModule=" + getRequestEducationalModuleId() +
             ", requestEducationalModule='" + getRequestEducationalModuleTitle() + "'" +
             ", securityLevel=" + getSecurityLevelId() +

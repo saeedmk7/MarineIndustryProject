@@ -18,6 +18,7 @@ export class PersonMarineSuffixResolve implements Resolve<IPersonMarineSuffix> {
     constructor(private service: PersonMarineSuffixService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
             return this.service.find(id).pipe(map((person: HttpResponse<PersonMarineSuffix>) => person.body));

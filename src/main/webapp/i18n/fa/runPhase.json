@@ -35,10 +35,11 @@
             "document": "Document",
             "person": "Person",
             "finishDate": "تاریخ دقیق برگزاری دوره",
-            "organizationChart": "پیشنهاد دهنده",
+            "organizationChart": "گروه/صنعت/واحد",
             "educationalModule": "پودمان آموزشی",
             "educationalModuleTitle": "عنوان پودمان آموزشی",
-            "finalNiazsanjiReport": "Final Niazsanji Report"
+            "finalNiazsanjiReport": "Final Niazsanji Report",
+            "finalNiazsanjiReportId": "شناسه یکتا"
         }
     }
 }

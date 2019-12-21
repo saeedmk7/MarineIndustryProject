@@ -116,6 +116,9 @@ public class ForceRunningPercentQueryService extends QueryService<ForceRunningPe
             if (criteria.getGuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGuid(), ForceRunningPercent_.guid));
             }
+            if (criteria.getYear() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getYear(), ForceRunningPercent_.year));
+            }
             if (criteria.getOrganizationChartId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOrganizationChartId(),
                     root -> root.join(ForceRunningPercent_.organizationCharts, JoinType.LEFT).get(OrganizationChart_.id)));

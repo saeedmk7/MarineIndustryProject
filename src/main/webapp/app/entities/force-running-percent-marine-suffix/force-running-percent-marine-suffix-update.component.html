@@ -37,6 +37,12 @@
                         [(ngModel)]="forceRunningPercent.percentAmount" />
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.forceRunningPercent.year" for="field_year">Year</label>
+                    <select class="form-control" id="field_year" name="year" [required]="true" [(ngModel)]="forceRunningPercent.year" >
+                        <option [ngValue]="year" *ngFor="let year of years">{{year}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.forceRunningPercent.runMonth" for="field_runMonth">Run Month</label>
                     <select class="form-control" id="field_runMonth" name="runMonth" [required]="true" [(ngModel)]="forceRunningPercent.runMonth" >
                         <option [ngValue]="runMonth.id" *ngFor="let runMonth of runMonths">{{runMonth.persianMonth}}</option>

@@ -69,6 +69,8 @@ public class OrganizationChartCriteria implements Serializable {
 
     private LongFilter investToGroupTransactionId;
 
+    private LongFilter mediaAwarenessReportId;
+
     private LongFilter parentId;
 
     private LongFilter forceRunningPercentId;
@@ -257,6 +259,14 @@ public class OrganizationChartCriteria implements Serializable {
         this.investToGroupTransactionId = investToGroupTransactionId;
     }
 
+    public LongFilter getMediaAwarenessReportId() {
+        return mediaAwarenessReportId;
+    }
+
+    public void setMediaAwarenessReportId(LongFilter mediaAwarenessReportId) {
+        this.mediaAwarenessReportId = mediaAwarenessReportId;
+    }
+
     public LongFilter getParentId() {
         return parentId;
     }
@@ -307,6 +317,7 @@ public class OrganizationChartCriteria implements Serializable {
             Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId) &&
             Objects.equals(educationalHistoryId, that.educationalHistoryId) &&
             Objects.equals(investToGroupTransactionId, that.investToGroupTransactionId) &&
+            Objects.equals(mediaAwarenessReportId, that.mediaAwarenessReportId) &&
             Objects.equals(parentId, that.parentId) &&
             Objects.equals(forceRunningPercentId, that.forceRunningPercentId);
     }
@@ -337,6 +348,7 @@ public class OrganizationChartCriteria implements Serializable {
         requestNiazsanjiFardiId,
         educationalHistoryId,
         investToGroupTransactionId,
+        mediaAwarenessReportId,
         parentId,
         forceRunningPercentId
         );
@@ -368,6 +380,7 @@ public class OrganizationChartCriteria implements Serializable {
                 (requestNiazsanjiFardiId != null ? "requestNiazsanjiFardiId=" + requestNiazsanjiFardiId + ", " : "") +
                 (educationalHistoryId != null ? "educationalHistoryId=" + educationalHistoryId + ", " : "") +
                 (investToGroupTransactionId != null ? "investToGroupTransactionId=" + investToGroupTransactionId + ", " : "") +
+                (mediaAwarenessReportId != null ? "mediaAwarenessReportId=" + mediaAwarenessReportId + ", " : "") +
                 (parentId != null ? "parentId=" + parentId + ", " : "") +
                 (forceRunningPercentId != null ? "forceRunningPercentId=" + forceRunningPercentId + ", " : "") +
             "}";

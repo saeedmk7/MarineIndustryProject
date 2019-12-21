@@ -32,6 +32,8 @@ import { INiazsanjiGroupMarineSuffix } from 'app/shared/model/niazsanji-group-ma
 import { NiazsanjiGroupMarineSuffixService } from 'app/entities/niazsanji-group-marine-suffix';
 import {IRequestEducationalModuleMarineSuffix} from "app/shared/model/request-educational-module-marine-suffix.model";
 import {RequestEducationalModuleMarineSuffixService} from "app/entities/request-educational-module-marine-suffix";
+import {IRestrictionMarineSuffix} from "app/shared/model/restriction-marine-suffix.model";
+import {RestrictionMarineSuffixService} from "app/entities/restriction-marine-suffix";
 
 
 @Component({
@@ -64,6 +66,8 @@ export class EducationalModuleMarineSuffixUpdateComponent implements OnInit {
 
     requestEducationalModules: IRequestEducationalModuleMarineSuffix[];
 
+    restrictions: IRestrictionMarineSuffix[];
+
     isfa: boolean;
 
     constructor(
@@ -83,6 +87,7 @@ export class EducationalModuleMarineSuffixUpdateComponent implements OnInit {
         private niazsanjiGroupService: NiazsanjiGroupMarineSuffixService,
         private activatedRoute: ActivatedRoute,
         private languageManager: JhiLanguageService,
+        protected restrictionService: RestrictionMarineSuffixService,
         private router: Router
     ) {
         this.isfa = languageManager.currentLang == 'fa';
@@ -152,6 +157,12 @@ export class EducationalModuleMarineSuffixUpdateComponent implements OnInit {
         this.organizationService.query().subscribe(
             (res: HttpResponse<IOrganizationMarineSuffix[]>) => {
                 this.organizations = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.restrictionService.query().subscribe(
+            (res: HttpResponse<IRestrictionMarineSuffix[]>) => {
+                this.restrictions = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -262,21 +273,5 @@ export class EducationalModuleMarineSuffixUpdateComponent implements OnInit {
 
     set educationalModule(educationalModule: IEducationalModuleMarineSuffix) {
         this._educationalModule = educationalModule;
-        /*if(this.isfa)
-        {
-            if(educationalModule.timePassed)
-                this.timePassed = moment(educationalModule.timePassed).format(DATE_FORMAT);
-            else
-                this.timePassed = moment().format(DATE_FORMAT);
-
-            if(educationalModule.credit)
-                this.credit = moment(educationalModule.credit).format(DATE_FORMAT);
-            else
-                this.credit = moment().format(DATE_FORMAT);
-        }
-        else {
-            this.timePassed = moment(educationalModule.timePassed).format(DATE_TIME_FORMAT);
-            this.credit = moment(educationalModule.credit).format(DATE_TIME_FORMAT);
-        }*/
     }
 }

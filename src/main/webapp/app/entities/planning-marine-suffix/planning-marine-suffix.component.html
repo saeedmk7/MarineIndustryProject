@@ -87,7 +87,7 @@
                             [(ngModel)]="finalNiazsanjiReport.organizationChartId">
                     </div>
                     <div class="form-group half">
-                        <label class="form-control-label" for="field_organizationChart">پیشنهاد دهنده</label>
+                        <label class="form-control-label" for="field_organizationChart">گروه/صنعت/واحد</label>
                         <ng-select
                             [items]="recommenedOrgCharts"
                             [multiple]="false"
@@ -103,6 +103,7 @@
                     <div class="form-group">
                         <label class="form-control-label" for="field_status">وضعیت</label>
                         <select class="form-control" name="status" id="field_status" [(ngModel)]="finalNiazsanjiReport.status">
+                            <option value="">انتخاب نمائید</option>
                             <option value="0">کاری انجام نشده</option>
                             <option value="10">برنامه ریزی شده</option>
                             <option value="20">اجرا شده</option>
@@ -112,6 +113,11 @@
                         <label class="form-control-label" for="field_educationalModule">پودمان آموزشی</label>
                         <input type="text" name="educationalModuleTitle" id="field_educationalModule" class="form-control"
                                [(ngModel)]="finalNiazsanjiReport.educationalModuleTitle">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_educationalModuleId">َشناسه پودمان آموزشی</label>
+                        <input type="text" name="educationalModuleId" id="field_educationalModuleId" class="form-control"
+                               [(ngModel)]="finalNiazsanjiReport.educationalModuleId">
                     </div>
                     <div class="form-group half">
                         <label class="form-control-label" for="field_educationalModule">افراد</label>
@@ -158,6 +164,11 @@
                             [(ngModel)]="finalNiazsanjiReport.status">
                     </div>-->
                     <div class="form-group">
+                        <label class="form-control-label" for="field_id">َشناسه یکتا</label>
+                        <input type="text" name="id" id="field_id" class="form-control"
+                               [(ngModel)]="finalNiazsanjiReport.id">
+                    </div>
+                    <div class="form-group">
                         <label class="form-control-label" for="field_courseType">نوع دوره</label>
                         <ng-select
                             [items]="coursetypes"
@@ -181,7 +192,7 @@
         </div>
     </form>
     <br/>
-    <div class="table-responsive" *ngIf="planningAndRunMonthReports">
+    <!--<div class="table-responsive" *ngIf="planningAndRunMonthReports">
         <table class="table table-striped  table-bordered table-hover table-sm">
             <thead>
             <tr>
@@ -206,7 +217,7 @@
             </tr>
             </tbody>
         </table>
-    </div>
+    </div>-->
     <div class="table-responsive" *ngIf="finalNiazsanjiReportsFardis.length > 0">
         <kendo-grid
             [groupable]="true"
@@ -260,12 +271,12 @@
             <kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="250"></kendo-grid-column>
             <!--<kendo-grid-column field="finalizeCost" title="سرمایه گذاری پایانی" [width]="100"></kendo-grid-column>-->
             <kendo-grid-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="200"></kendo-grid-column>
-            <kendo-grid-column field="finalizeCost" format="{0:n0}" title="سرمایه گذاری صرف شده" [width]="100">
+            <kendo-grid-column field="finalizeCost" format="{0:n0}" title="سرمایه گذاری صرف شده" [width]="150">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalFinalizeCost | number}}</ng-template>
             </kendo-grid-column>
-            <kendo-grid-column field="priceCost" format="{0:n0}" title="سرمایه گذاری اولیه" [width]="100">
+            <kendo-grid-column field="priceCost" format="{0:n0}" title="سرمایه گذاری اولیه" [width]="150">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalCost | number}}</ng-template>
@@ -273,9 +284,10 @@
             <kendo-grid-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="planningRunMonthPersian" title="ماه برنامه ریزی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
-            <kendo-grid-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="500"></kendo-grid-column>
+            <kendo-grid-column field="id" title="شناسه یکتا" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="organizationChartTitle" title="گروه/صنعت/واحد" [width]="500"></kendo-grid-column>
             <kendo-grid-excel fileName="planning.xlsx">
-                <kendo-excelexport-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="300"></kendo-excelexport-column>
+                <kendo-excelexport-column field="organizationChartTitle" title="گروه/صنعت/واحد" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
@@ -287,6 +299,7 @@
                 <kendo-excelexport-column field="priceCost" title="سرمایه گذاری" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="id" title="شناسه یکتا" [width]="100"></kendo-excelexport-column>
             </kendo-grid-excel>
         </kendo-grid>
     </div>
@@ -348,14 +361,14 @@
                     let-column="column">جمع کل (نفر ساعت): {{total | number}}</ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-grid-column>
-            <kendo-grid-column field="finalizeCost" format="{0:n0}" title="سرمایه گذاری صرف شده" [width]="100">
+            <kendo-grid-column field="finalizeCost" format="{0:n0}" title="سرمایه گذاری صرف شده" [width]="150">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalFinalizeCost | number}}</ng-template>
             </kendo-grid-column>
             <!--<kendo-grid-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="300"></kendo-grid-column>
             <kendo-grid-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="300"></kendo-grid-column>-->
-            <kendo-grid-column field="priceCost" format="{0:n0}" title="سرمایه گذاری اولیه" [width]="100">
+            <kendo-grid-column field="priceCost" format="{0:n0}" title="سرمایه گذاری اولیه" [width]="150">
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل: {{totalCost | number}}</ng-template>
@@ -366,9 +379,10 @@
             <div *kendoGridDetailTemplate="let dataItem">
                 <mi-planning-marine-suffix-detail-people [people]="dataItem.people"></mi-planning-marine-suffix-detail-people>
             </div>
-            <kendo-grid-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="500"></kendo-grid-column>
+            <kendo-grid-column field="id" title="شناسه یکتا" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="organizationChartTitle" title="گروه/صنعت/واحد" [width]="500"></kendo-grid-column>
             <kendo-grid-excel fileName="planning.xlsx">
-                <kendo-excelexport-column field="organizationChartTitle" title="پیشنهاد دهنده" [width]="300"></kendo-excelexport-column>
+                <kendo-excelexport-column field="organizationChartTitle" title="گروه/صنعت/واحد" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
@@ -378,6 +392,7 @@
                 <kendo-excelexport-column field="priceCost" title="سرمایه گذاری" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="id" title="شناسه یکتا" [width]="100"></kendo-excelexport-column>
                <!-- <div *kendoGridDetailTemplate="let dataItem">
                     <mi-planning-marine-suffix-detail-people [people]="dataItem.people"></mi-planning-marine-suffix-detail-people>
                 </div>-->

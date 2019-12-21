@@ -1,0 +1,30 @@
+{
+    "marineindustryprojApp": {
+        "restriction": {
+            "home": {
+                "title": "محدودیت ها",
+                "createLabel": "جدید",
+                "createOrEditLabel": "محدودیت"
+            },
+            "created": "محدودیت با شناسه {{ param }} ایجاد شد.",
+            "updated": "محدودیت با شناسه {{ param }} ویرایش شد.",
+            "deleted": "محدودیت با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف محدودیت با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات محدودیت"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "guid": "Guid",
+            "requestEducationalModule": "Request Educational Module",
+            "educationalModule": "Educational Module"
+        }
+    }
+}

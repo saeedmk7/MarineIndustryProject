@@ -9,6 +9,8 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -65,6 +67,13 @@ public class InvestToGroupTransaction implements Serializable {
     @Size(max = 50)
     @Column(name = "guid", length = 50)
     private String guid;
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "invest_to_group_transaction_document",
+               joinColumns = @JoinColumn(name = "invest_to_group_transactions_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "documents_id", referencedColumnName = "id"))
+    private Set<Document> documents = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties("investToGroupTransactions")
@@ -220,6 +229,31 @@ public class InvestToGroupTransaction implements Serializable {
 
     public void setGuid(String guid) {
         this.guid = guid;
+    }
+
+    public Set<Document> getDocuments() {
+        return documents;
+    }
+
+    public InvestToGroupTransaction documents(Set<Document> documents) {
+        this.documents = documents;
+        return this;
+    }
+
+    public InvestToGroupTransaction addDocument(Document document) {
+        this.documents.add(document);
+        document.getInvestToGroupTransactions().add(this);
+        return this;
+    }
+
+    public InvestToGroupTransaction removeDocument(Document document) {
+        this.documents.remove(document);
+        document.getInvestToGroupTransactions().remove(this);
+        return this;
+    }
+
+    public void setDocuments(Set<Document> documents) {
+        this.documents = documents;
     }
 
     public OrganizationChart getOrganizationChart() {

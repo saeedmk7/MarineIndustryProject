@@ -3,20 +3,20 @@
     "marineindustryprojApp": {
         "requestEducationalModule" : {
             "home": {
-                "title": "درخواست های پودمان آموزشی",
+                "title": "طراحی های پودمان آموزشی",
                 "createLabel": "جدید",
-                "createOrEditLabel": "درخواست پودمان"
+                "createOrEditLabel": "طراحی پودمان"
             },
-            "created": "درخواست پودمان با شناسه {{ param }} ایجاد شد.",
-            "updated": "درخواست پودمان با شناسه {{ param }} ویرایش شد.",
-            "deleted": "درخواست پودمان با شناسه {{ param }} حذف شد.",
-            "completed": "درخواست پودمان آموزشی مورد نظر با موفقیت نهایی شد.",
-            "rejected": "درخواست پودمان آموزشی مورد نظر با موفقیت رد شد.",
+            "created": "طراحی پودمان با شناسه {{ param }} ایجاد شد.",
+            "updated": "طراحی پودمان با شناسه {{ param }} ویرایش شد.",
+            "deleted": "طراحی پودمان با شناسه {{ param }} حذف شد.",
+            "completed": "طراحی پودمان آموزشی مورد نظر با موفقیت نهایی شد.",
+            "rejected": "طراحی پودمان آموزشی مورد نظر با موفقیت رد شد.",
             "delete": {
-                "question": "آیا برای حذف درخواست پودمان با شناسه {{ id }} مطمئنید؟"
+                "question": "آیا برای حذف طراحی پودمان با شناسه {{ id }} مطمئنید؟"
             },
             "detail": {
-                "title": "جزئیات اطلاعات درخواست پودمان"
+                "title": "جزئیات اطلاعات طراحی پودمان"
             },
             "title": "عنوان پودمان",
             "code": "شناسه پودمان",
@@ -26,7 +26,7 @@
             "innerCode": "کد درون سازمانی پودمان",
             "centralizedCode": "کد متمرکز پودمان",
             "moreDescription": "توضیحات بیشتر",
-            "recommendedBy": "واحد پیشنهاد دهنده",
+            "recommendedBy": "واحد گروه/صنعت/واحد",
             "educationalModuleHeadlines": "سرفصل های پودمان",
             "prerequisite": "پیش نیازها",
             "drafters": "تدوین کنندگان",
@@ -61,7 +61,9 @@
             "organization": "سازمان",
             "organizationId": "سازمان",
             "goalsText": "اهداف",
-            "teachersText": "مدرسین خارج از ودجا"
+            "teachersText": "مدرسین خارج از ودجا",
+            "restriction": "محدودیت ها",
+            "restrictionDescription": "توضیحات محدودیت"
         }
     }
 }

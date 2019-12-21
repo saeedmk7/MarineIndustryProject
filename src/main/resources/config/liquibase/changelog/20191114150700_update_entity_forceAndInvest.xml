@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the entity UsersRequest.
+    -->
+    <changeSet id="20190608175947" author="saeed">
+        <addColumn schemaName="public"
+                   tableName="force_running_percent">
+            <column name="year" type="integer">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+
+
+        <createTable tableName="invest_to_group_transaction_document">
+            <column name="documents_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="invest_to_group_transactions_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="invest_to_group_transactions_id, documents_id" tableName="invest_to_group_transaction_document"/>
+
+        <addForeignKeyConstraint baseColumnNames="invest_to_group_transactions_id"
+                                 baseTableName="invest_to_group_transaction_document"
+                                 constraintName="invest_to_group_transaction_do_invest_to_group_transactions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="invest_to_group_transaction"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="invest_to_group_transaction_document"
+                                 constraintName="fk_invest_to_group_transaction_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

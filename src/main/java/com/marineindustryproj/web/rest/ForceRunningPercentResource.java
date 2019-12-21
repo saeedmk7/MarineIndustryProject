@@ -1,6 +1,8 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.domain.ForceRunningPercent;
+import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.ForceRunningPercentService;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
@@ -22,6 +24,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +62,13 @@ public class ForceRunningPercentResource {
         if (forceRunningPercentDTO.getId() != null) {
             throw new BadRequestAlertException("A new forceRunningPercent cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        forceRunningPercentDTO.setCreateDate(ZonedDateTime.now());
+        forceRunningPercentDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        forceRunningPercentDTO.setModifyDate(ZonedDateTime.now());
+        forceRunningPercentDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+
+
         ForceRunningPercentDTO result = forceRunningPercentService.save(forceRunningPercentDTO);
         return ResponseEntity.created(new URI("/api/force-running-percents/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -81,6 +91,14 @@ public class ForceRunningPercentResource {
         if (forceRunningPercentDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+        ForceRunningPercentDTO forceRunningPercent = forceRunningPercentService.findOne(forceRunningPercentDTO.getId()).get();
+
+        forceRunningPercentDTO.setCreateUserLogin(forceRunningPercent.getCreateUserLogin());
+        forceRunningPercentDTO.setCreateDate(forceRunningPercent.getCreateDate());
+        forceRunningPercentDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        forceRunningPercentDTO.setModifyDate(ZonedDateTime.now());
+
         ForceRunningPercentDTO result = forceRunningPercentService.save(forceRunningPercentDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, forceRunningPercentDTO.getId().toString()))

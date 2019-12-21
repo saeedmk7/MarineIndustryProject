@@ -440,11 +440,33 @@
     showBeautySpeechResult(result: IBeautySpeechMarineSuffix[]) {
 
         this.speeches = result.map(a => a.description).filter(this.treeUtilities.onlyUnique);
-        this.speechIntervals = setInterval(this.showSpeech(this.speeches), 7000);
+        this.showSpeech(this.speeches);
+        this.speechIntervals = setInterval(() => {
+
+            if(!this.speeches)
+                return;
+            this.index++;
+            if(this.index < 0)
+            {
+                this.index = this.speeches.length - 1;
+            }
+            else if(this.index > this.speeches.length - 1)
+            {
+                this.index = 0;
+            }
+            this.currentSpeech = this.speeches[this.index];
+            this.show = false;
+            this.sleep(1000).then(() => {
+                this.show = true;
+            });
+        }, 30000);
+
     }
     index: number = 0;
     showSpeech(speeches: string[]){
 
+        if(!this.speeches)
+            return;
         this.index++;
         if(this.index < 0)
         {

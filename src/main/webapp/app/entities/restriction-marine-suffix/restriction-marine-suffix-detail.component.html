@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="restriction">
+            <h2><span jhiTranslate="marineindustryprojApp.restriction.detail.title">Restriction</span> {{restriction.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.restriction.title">Title</span></dt>
+                <dd>
+                    <span>{{restriction.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.restriction.description">Description</span></dt>
+                <dd>
+                    <span>{{restriction.description}}</span>
+                </dd>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.restriction.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{restriction.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.restriction.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{restriction.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.restriction.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{restriction.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.restriction.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{restriction.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.restriction.guid">Guid</span></dt>
+                <dd>
+                    <span>{{restriction.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.restriction.requestEducationalModule">Request Educational Module</span></dt>
+                <dd>
+                    <span *ngFor="let requestEducationalModule of restriction.requestEducationalModules; let last = last">
+                        <a [routerLink]="['/request-educational-module-marine-suffix', requestEducationalModule?.id, 'view' ]">{{requestEducationalModule.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.restriction.educationalModule">Educational Module</span></dt>
+                <dd>
+                    <span *ngFor="let educationalModule of restriction.educationalModules; let last = last">
+                        <a [routerLink]="['/educational-module-marine-suffix', educationalModule?.id, 'view' ]">{{educationalModule.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>-->
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/restriction-marine-suffix', restriction.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

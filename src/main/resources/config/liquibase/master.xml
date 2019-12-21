@@ -147,6 +147,13 @@
     <include file="config/liquibase/changelog/20191014150700_update_entity_addHasImportantMessageAndFileDoc.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191014154402_added_entity_ForceRunningPercent.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191014154402_added_entity_constraints_ForceRunningPercent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191114150700_update_entity_forceAndInvest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191207172329_added_entity_Restriction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191207172329_added_entity_constraints_Restriction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191207230700_update_entity_add_restrictionDescs.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191210180223_added_entity_MediaProductType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191210180222_added_entity_MediaAwarenessReport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191210180222_added_entity_constraints_MediaAwarenessReport.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

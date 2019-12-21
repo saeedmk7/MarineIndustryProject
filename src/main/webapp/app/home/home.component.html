@@ -156,11 +156,13 @@
                                                     <tr [style.background-color]="cyanColors[i]">
                                                         <td rowspan="2">{{item.courseTypeTitle}}</td>
                                                         <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.total | number: '1.0-1'}}</td>
-                                                        <td>{{item.homePageReportChartOrganizationDetails | sum:'total' | number: '1.0-1'}}</td>
+                                                        <!--<td>{{item.homePageReportChartOrganizationDetails | sum:'total' | number: '1.0-1'}}</td>-->
+                                                        <td>{{homePageReport.homePageReportCourseTypeDetails[i].total | number:'1.0-1'}}</td>
                                                     </tr>
                                                     <tr [style.background-color]="cyanColors[i]">
                                                         <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.totalPercent | number: '1.0-1'}} %</td>
-                                                        <td>{{item.homePageReportChartOrganizationDetails | sum:'totalPercent' | number: '1.0-1'}} %</td>
+                                                        <!--<td>{{item.homePageReportChartOrganizationDetails | sum:'totalPercent' | number: '1.0-1'}} %</td>-->
+                                                        <td>{{homePageReport.homePageReportCourseTypeDetails[i].totalPercent | number: '1.0-1'}} %</td>
                                                     </tr>
                                                 </ng-container>
                                                 <tr style="background-color: skyblue;">
@@ -174,7 +176,8 @@
                                                         {{item.totalManagers | number: '1.0-1'}}
                                                     </td>
                                                     <td>
-                                                        {{homePageReport.homePageReportDetails | sum:'totalManagers' | number: '1.0-1'}}
+                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalManagers' | number: '1.0-1'}}-->
+                                                        {{homePageReport.totalManagers  | number:'1.0-1'}}
                                                     </td>
                                                 </tr>
                                                 <tr style="background-color: skyblue;">
@@ -183,7 +186,8 @@
                                                         {{item.totalManagersPercent | number: '1.0-1'}} %
                                                     </td>
                                                     <td>
-                                                        {{homePageReport.homePageReportDetails | sum:'totalManagersPercent' | number: '1.0-1'}} %
+                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalManagersPercent' | number: '1.0-1'}} %-->
+                                                        {{homePageReport.totalManagersPercent | number: '1.0-1'}} %
                                                     </td>
                                                 </tr>
                                                 <tr style="background-color: lightgoldenrodyellow;">
@@ -197,7 +201,8 @@
                                                         {{item.totalStuffs | number: '1.0-1'}}
                                                     </td>
                                                     <td>
-                                                        {{homePageReport.homePageReportDetails | sum:'totalStuffs' | number: '1.0-1'}}
+                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalStuffs' | number: '1.0-1'}}-->
+                                                        {{homePageReport.totalStuffs  | number:'1.0-1'}}
                                                     </td>
                                                 </tr>
                                                 <tr style="background-color: lightgoldenrodyellow;">
@@ -206,7 +211,8 @@
                                                         {{item.totalStuffsPercent | number: '1.0-1'}} %
                                                     </td>
                                                     <td>
-                                                        {{homePageReport.homePageReportDetails | sum:'totalStuffsPercent' | number: '1.0-1'}} %
+                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalStuffsPercent' | number: '1.0-1'}} %-->
+                                                        {{homePageReport.totalStuffsPercent | number:'1.0-1'}} %
                                                     </td>
                                                 </tr>
                                         </table>
@@ -238,11 +244,13 @@
                                             <tr style="background-color: #29c76a">
                                                 <td rowspan="2">دوره های اجرا شده</td>
                                                 <td *ngFor="let item02 of homePageReport.homePageReportDetails">{{item02.totalPassed | number: '1.0-1'}}</td>
-                                                <td> {{homePageReport.homePageReportDetails | sum:'totalPassed' | number: '1.0-1'}} </td>
+                                                <!--<td> {{homePageReport.homePageReportDetails | sum:'totalPassed' | number: '1.0-1'}} </td>-->
+                                                <td>{{homePageReport.totalPassed | number: '1.0-1'}}</td>
                                             </tr>
                                             <tr style="background-color: #29c76a">
                                                 <td *ngFor="let item02 of homePageReport.homePageReportDetails">{{item02.totalPassedPercent | number: '1.0-1'}} %</td>
-                                                <td> {{homePageReport.homePageReportDetails | sum:'totalPassedPercent' | number: '1.0-1'}} % </td>
+                                                <!--<td> {{homePageReport.homePageReportDetails | sum:'totalPassedPercent' | number: '1.0-1'}} % </td>-->
+                                                <td>{{homePageReport.totalPassedPercent  | number: '1.0-1'}} %</td>
                                             </tr>
                                                 <ng-container *ngFor="let item of homePageReport.homePageReportOrganizationAndCourseTypeDetails; let i = index">
                                                     <tr [style.background-color]="greenColors[i]">
@@ -252,7 +260,7 @@
                                                     </tr>
                                                     <tr [style.background-color]="greenColors[i]">
                                                         <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.passedPercent | number: '1.0-1'}} %</td>
-                                                        <td> {{item.homePageReportChartOrganizationDetails | sum:'passedPercent' | number: '1.0-1'}} % </td>
+                                                        <td> {{((item.homePageReportChartOrganizationDetails | sum:'passed') / homePageReport.totalPassed) * 100 | number: '1.0-1'}} % </td>
                                                     </tr>
                                                 </ng-container>
                                                 <tr style="background-color: skyblue;">
@@ -266,7 +274,8 @@
                                                         {{item.totalPassedManagers | number: '1.0-1'}}
                                                     </td>
                                                     <td>
-                                                        {{homePageReport.homePageReportDetails | sum:'totalPassedManagers' | number: '1.0-1'}}
+                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalPassedManagers' | number: '1.0-1'}}-->
+                                                        {{homePageReport.totalPassedManagers | number: '1.0-1'}}
                                                     </td>
                                                 </tr>
                                                 <tr style="background-color: skyblue;">
@@ -275,7 +284,8 @@
                                                         {{item.totalPassedManagersPercent | number: '1.0-1'}} %
                                                     </td>
                                                     <td>
-                                                        {{homePageReport.homePageReportDetails | sum:'totalPassedManagersPercent' | number: '1.0-1'}} %
+                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalPassedManagersPercent' | number: '1.0-1'}} %-->
+                                                        {{homePageReport.totalPassedManagersPercent | number: '1.0-1'}} %
                                                     </td>
                                                 </tr>
                                                 <tr style="background-color: lightgoldenrodyellow;">
@@ -289,7 +299,8 @@
                                                         {{item.totalPassedStuffs | number: '1.0-1'}}
                                                     </td>
                                                     <td>
-                                                        {{homePageReport.homePageReportDetails | sum:'totalPassedStuffs' | number: '1.0-1'}}
+                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalPassedStuffs' | number: '1.0-1'}}-->
+                                                        {{homePageReport.totalPassedStuffs | number: '1.0-1'}}
                                                     </td>
                                                 </tr>
                                                 <tr style="background-color: lightgoldenrodyellow;">
@@ -298,10 +309,11 @@
                                                         {{item.totalPassedStuffsPercent  | number: '1.0-1'}} %
                                                     </td>
                                                     <td>
-                                                        {{homePageReport.homePageReportDetails | sum:'totalPassedStuffsPercent' | number: '1.0-1'}} %
+                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalPassedStuffsPercent' | number: '1.0-1'}} %-->
+                                                        {{homePageReport.totalPassedStuffsPercent | number:'1.0-1'}} %
                                                     </td>
                                                 </tr>
-                                            <tr style="background-color: red">
+                                           <!-- <tr style="background-color: red">
                                                 <td rowspan="2">دوره های اجرا نشده</td>
                                                 <td *ngFor="let item02 of homePageReport.homePageReportDetails">{{item02.remaining | number: '1.0-1'}}</td>
                                                 <td>{{homePageReport.homePageReportDetails | sum:'remaining' | number: '1.0-1'}}</td>
@@ -320,51 +332,55 @@
                                                         <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.remainingPercent | number: '1.0-1'}} %</td>
                                                         <td>{{item.homePageReportChartOrganizationDetails | sum:'remainingPercent' | number: '1.0-1'}} %</td>
                                                     </tr>
-                                                </ng-container>
-                                                <tr  style="background-color: skyblue;">
+                                                </ng-container>-->
+                                                <tr  style="background-color: indianred;">
                                                     <th colspan="15" style="text-align: center">
                                                         جمع نفرساعت اجرا نشده برای مدیران به تفکیک گروه
                                                     </th>
                                                 </tr>
-                                                <tr style="background-color: skyblue;">
+                                                <tr style="background-color: indianred;">
                                                     <td></td>
                                                     <td *ngFor="let item of homePageReport.homePageReportDetails">
                                                         {{item.remainingManagers | number: '1.0-1'}}
                                                     </td>
                                                     <td>
-                                                        {{homePageReport.homePageReportDetails | sum:'remainingManagers' | number: '1.0-1'}}
+                                                        <!--{{homePageReport.homePageReportDetails | sum:'remainingManagers' | number: '1.0-1'}}-->
+                                                        {{(homePageReport.totalManagers - homePageReport.totalPassedManagers) | number: '1.0-1'}}
                                                     </td>
                                                 </tr>
-                                                <tr style="background-color: skyblue;">
+                                                <tr style="background-color: indianred;">
                                                     <td></td>
                                                     <td *ngFor="let item of homePageReport.homePageReportDetails">
                                                         {{item.remainingManagersPercent | number: '1.0-1'}} %
                                                     </td>
                                                     <td>
-                                                        {{homePageReport.homePageReportDetails | sum:'remainingManagersPercent' | number: '1.0-1'}} %
+                                                        <!--{{homePageReport.homePageReportDetails | sum:'remainingManagersPercent' | number: '1.0-1'}} %-->
+                                                        {{(100 - homePageReport.totalPassedManagersPercent) | number: '1.0-1'}} %
                                                     </td>
                                                 </tr>
-                                                <tr style="background-color: lightgoldenrodyellow;">
+                                                <tr style="background-color: palevioletred;">
                                                     <th colspan="15" style="text-align: center">
                                                         جمع نفرساعت اجرا نشده برای کارکنان به تفکیک گروه
                                                     </th>
                                                 </tr>
-                                                <tr style="background-color: lightgoldenrodyellow;">
+                                                <tr style="background-color: palevioletred;">
                                                     <td></td>
                                                     <td *ngFor="let item of homePageReport.homePageReportDetails">
                                                         {{item.remainingStuffs | number: '1.0-1'}}
                                                     </td>
                                                     <td>
-                                                        {{homePageReport.homePageReportDetails | sum:'remainingStuffs' | number: '1.0-1'}}
+                                                        <!--{{homePageReport.homePageReportDetails | sum:'remainingStuffs' | number: '1.0-1'}}-->
+                                                        {{(homePageReport.totalStuffs - homePageReport.totalPassedStuffs) | number: '1.0-1'}}
                                                     </td>
                                                 </tr>
-                                                <tr style="background-color: lightgoldenrodyellow;">
+                                                <tr style="background-color: palevioletred;">
                                                     <td></td>
                                                     <td *ngFor="let item of homePageReport.homePageReportDetails">
                                                         {{item.remainingStuffsPercent | number: '1.0-1'}} %
                                                     </td>
                                                     <td>
-                                                        {{homePageReport.homePageReportDetails | sum:'remainingStuffsPercent' | number: '1.0-1'}} %
+                                                        <!--{{homePageReport.homePageReportDetails | sum:'remainingStuffsPercent' | number: '1.0-1'}} %-->
+                                                        {{(100 - homePageReport.totalPassedStuffsPercent) | number:'1.0-1'}} %
                                                     </td>
                                                 </tr>
                                         </table>
@@ -506,11 +522,15 @@
                                                 <tr [style.background-color]="cyanColors[i]">
                                                     <td rowspan="2">{{item.courseTypeTitle}}</td>
                                                     <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.total | number: '1.0-1'}}</td>
-                                                    <td>{{item.homePageReportChartOrganizationDetails | sum:'total' | number: '1.0-1'}}</td>
+                                                    <!--<td>{{item.homePageReportChartOrganizationDetails | sum:'total' | number: '1.0-1'}}</td>-->
+                                                    <td>
+                                                        {{homePageReportPrice.homePageReportCourseTypeDetails[i].total | number: '1.0-1'}}
+                                                    </td>
                                                 </tr>
                                                 <tr [style.background-color]="cyanColors[i]">
                                                     <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.totalPercent | number: '1.0-1'}} %</td>
-                                                    <td>{{item.homePageReportChartOrganizationDetails | sum:'totalPercent' | number: '1.0-1'}} %</td>
+                                                    <!--<td>{{item.homePageReportChartOrganizationDetails | sum:'totalPercent' | number: '1.0-1'}} %</td>-->
+                                                    <td>{{homePageReportPrice.homePageReportCourseTypeDetails[i].totalPercent | number: '1.0-1'}} %</td>
                                                 </tr>
                                             </ng-container>
                                             <tr style="background-color: skyblue;">
@@ -523,14 +543,16 @@
                                                 <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
                                                     {{item.totalManagers | number: '1.0-1'}}
                                                 </td>
-                                                <td>{{homePageReportPrice.homePageReportDetails | sum:'totalManagers' | number: '1.0-1'}}</td>
+                                                <!--<td>{{homePageReportPrice.homePageReportDetails | sum:'totalManagers' | number: '1.0-1'}}</td>-->
+                                                <td>{{homePageReportPrice.totalManagers  | number:'1.0-1'}}</td>
                                             </tr>
                                             <tr style="background-color: skyblue;">
                                                 <td></td>
                                                 <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
                                                     {{item.totalManagersPercent | number: '1.0-1'}} %
                                                 </td>
-                                                <td>{{homePageReportPrice.homePageReportDetails | sum:'totalManagersPercent' | number: '1.0-1'}} %</td>
+                                                <!--<td>{{homePageReportPrice.homePageReportDetails | sum:'totalManagersPercent' | number: '1.0-1'}} %</td>-->
+                                                <td>{{homePageReportPrice.totalManagersPercent | number: '1.0-1'}} %</td>
                                             </tr>
                                             <tr style="background-color: lightgoldenrodyellow;">
                                                 <th colspan="15" style="text-align: center">
@@ -542,14 +564,16 @@
                                                 <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
                                                     {{item.totalStuffs | number: '1.0-1'}}
                                                 </td>
-                                                <td>{{homePageReportPrice.homePageReportDetails | sum:'totalStuffs' | number: '1.0-1'}}</td>
+                                                <!--<td>{{homePageReportPrice.homePageReportDetails | sum:'totalStuffs' | number: '1.0-1'}}</td>-->
+                                                <td>{{homePageReportPrice.totalStuffs  | number:'1.0-1'}}</td>
                                             </tr>
                                             <tr style="background-color: lightgoldenrodyellow;">
                                                 <td></td>
                                                 <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
                                                     {{item.totalStuffsPercent | number: '1.0-1'}} %
                                                 </td>
-                                                <td>{{homePageReportPrice.homePageReportDetails | sum:'totalStuffsPercent' | number: '1.0-1'}} %</td>
+                                                <!--<td>{{homePageReportPrice.homePageReportDetails | sum:'totalStuffsPercent' | number: '1.0-1'}} %</td>-->
+                                                <td>{{homePageReportPrice.totalStuffsPercent | number:'1.0-1'}} %</td>
                                             </tr>
                                         </table>
 
@@ -588,7 +612,8 @@
                                                 <td *ngFor="let item02 of homePageReportPrice.homePageReportDetails">{{item02.totalPassedPercent | number: '1.0-1'}} %</td>
 
                                                 <td>
-                                                    {{homePageReportPrice.homePageReportDetails | sum:'totalPassedPercent' | number: '1.0-1'}} %
+                                                    <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedPercent' | number: '1.0-1'}} %-->
+                                                    {{homePageReportPrice.totalPassedPercent | number: '1.0-1'}} %
                                                 </td>
                                             </tr>
                                             <ng-container *ngFor="let item of homePageReportPrice.homePageReportOrganizationAndCourseTypeDetails; let i = index">
@@ -602,7 +627,8 @@
                                                 <tr [style.background-color]="greenColors[i]">
                                                     <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.passedPercent | number: '1.0-1'}} %</td>
                                                     <td>
-                                                        {{item.homePageReportChartOrganizationDetails | sum:'passedPercent' | number: '1.0-1'}} %
+                                                        <!--{{item.homePageReportChartOrganizationDetails | sum:'passedPercent' | number: '1.0-1'}} %-->
+                                                        {{((item.homePageReportChartOrganizationDetails | sum:'passed') / homePageReportPrice.totalPassed) * 100 | number: '1.0-1'}}
                                                     </td>
                                                 </tr>
                                             </ng-container>
@@ -617,7 +643,8 @@
                                                     {{item.totalPassedManagers | number: '1.0-1'}}
                                                 </td>
                                                 <td>
-                                                    {{homePageReportPrice.homePageReportDetails | sum:'totalPassedManagers' | number: '1.0-1'}}
+                                                    <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedManagers' | number: '1.0-1'}}-->
+                                                    {{homePageReportPrice.totalPassedManagers | number:'1.0-1'}}
                                                 </td>
                                             </tr>
                                             <tr style="background-color: skyblue;">
@@ -626,7 +653,8 @@
                                                     {{item.totalPassedManagersPercent | number: '1.0-1'}} %
                                                 </td>
                                                 <td>
-                                                    {{homePageReportPrice.homePageReportDetails | sum:'totalPassedManagersPercent' | number: '1.0-1'}} %
+                                                    <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedManagersPercent' | number: '1.0-1'}} %-->
+                                                    {{homePageReportPrice.totalPassedManagersPercent | number:'1.0-1'}} %
                                                 </td>
                                             </tr>
                                             <tr style="background-color: lightgoldenrodyellow;">
@@ -640,7 +668,8 @@
                                                     {{item.totalPassedStuffs | number: '1.0-1'}}
                                                 </td>
                                                 <td>
-                                                    {{homePageReportPrice.homePageReportDetails | sum:'totalPassedStuffs' | number: '1.0-1'}}
+                                                    <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedStuffs' | number: '1.0-1'}}-->
+                                                    {{homePageReportPrice.totalPassedStuffs | number: '1.0-1'}}
                                                 </td>
                                             </tr>
                                             <tr style="background-color: lightgoldenrodyellow;">
@@ -649,7 +678,8 @@
                                                     {{item.totalPassedStuffsPercent  | number: '1.0-1'}} %
                                                 </td>
                                                 <td>
-                                                    {{homePageReportPrice.homePageReportDetails | sum:'totalPassedStuffsPercent' | number: '1.0-1'}} %
+                                                    <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedStuffsPercent' | number: '1.0-1'}} %-->
+                                                    {{homePageReportPrice.totalPassedStuffsPercent | number:'1.0-1'}} %
                                                 </td>
                                             </tr>
                                         </table>
@@ -692,7 +722,7 @@
                                         <td *ngFor="let item of workPercent; let i = index;"> {{item.runningPersonHourPercentPerMonth | number: '1.0-1'}} % </td>
                                     </tr>
                                     <tr style="background-color: darksalmon;">
-                                        <td> درصد اجبار </td>
+                                        <td> برنامه مصوب ودجا </td>
                                         <td *ngFor="let item of workPercent; let i = index;"> {{item.forcePercent | number: '1.0-1'}} % </td>
                                     </tr>
                                     <tr style="background-color: cornflowerblue;">
@@ -701,7 +731,7 @@
                                     </tr>
                                     <tr style="background-color: darkkhaki;">
                                         <td> درصد اجرا به ازای کل سال </td>
-                                        <td *ngFor="let item of workPercent; let i = index;"> {{item.planningPersonHourPercent | number: '1.0-1'}} % </td>
+                                        <td *ngFor="let item of workPercent; let i = index;"> {{item.runningPersonHourPercent | number: '1.0-1'}} % </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -723,7 +753,7 @@
                                     <td *ngFor="let item of workPercent; let i = index;"> {{item.runningPersonCostPercentPerMonth | number: '1.0-1'}} % </td>
                                 </tr>
                                 <tr style="background-color: darksalmon;">
-                                    <td> درصد اجباری </td>
+                                    <td> برنامه مصوب ودجا </td>
                                     <td *ngFor="let item of workPercent; let i = index;"> {{item.forcePercent | number: '1.0-1'}} % </td>
                                 </tr>
                                 <tr style="background-color: cornflowerblue;">
@@ -732,7 +762,7 @@
                                 </tr>
                                 <tr style="background-color: darkkhaki;">
                                     <td> درصد اجرا شده ها به کل سال </td>
-                                    <td *ngFor="let item of workPercent; let i = index;"> {{item.planningPersonCostPercent | number: '1.0-1'}} % </td>
+                                    <td *ngFor="let item of workPercent; let i = index;"> {{item.runningPersonCostPercent | number: '1.0-1'}} % </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -743,7 +773,7 @@
                 <ng-container *ngIf="pageName == 'home'">
                     <div id="educationalModules" class="box box-primary newsbox">
                         <div class="box-header with-border">
-                            <h3 class="box-title center">شناسنامه آموزشی</h3>
+                            <h3 class="box-title center">شناسنامه آموزشی شاغل و شناسنامه شغلی فرد</h3>
 
                             <div class="box-tools pull-left">
                                 <button type="button" class="btn btn-box-tool"

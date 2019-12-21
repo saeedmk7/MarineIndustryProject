@@ -5,7 +5,7 @@
             "home": {
                 "title": "فهرست دوره های برنامه ریزی شده",
                 "createLabel": "جدید",
-                "createOrEditLabel": "تکمیل فرآیند برنامه ریزی"
+                "createOrEditLabel": "طراحی و برنامه ریزی آموزشی دوره ها"
             },
             "created": "برنامه ریزی با شناسه {{ param }} ایجاد شد.",
             "updated": "برنامه ریزی با شناسه {{ param }} ویرایش شد.",
@@ -37,6 +37,7 @@
             "person": "افراد دوره",
             "document": "مدارک",
             "finalNiazsanjiReport": "نیازسنجی مربوطه",
+            "finalNiazsanjiReportId": "شناسه یکتا",
             "mahiatCourse": "ماهیت دوره",
             "courseType": "نوع دوره",
             "courseTypeId": "نوع دوره",
@@ -54,7 +55,7 @@
             "educationalModuleId": "پودمان آموزشی",
             "educationalModuleCode": "پودمان آموزشی",
             "personId": "نام و نام خانوادگی",
-            "organizationChart": "پیشنهاد دهنده"
+            "organizationChart": "گروه/صنعت/واحد"
         }
     }
 }

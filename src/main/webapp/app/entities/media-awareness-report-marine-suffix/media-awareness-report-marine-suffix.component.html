@@ -1,0 +1,129 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.home.title">Media Awareness Reports</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-media-awareness-report-marine-suffix" [routerLink]="['/media-awareness-report-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.mediaAwarenessReport.home.createLabel">
+            Create new Media Awareness Report
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <div class="row">
+        <search-panel class="col-md-12" [searchPanelModel]="searchbarModel"></search-panel>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="mediaAwarenessReports">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th>ردیف</th>
+                <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="mediaProductTypeTitle"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.mediaProductType">Media Product Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="designed"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.designed">Designed</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="designedNumber"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.designedNumber">Designed Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="subject"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.subject">Subject</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="publishDate"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.publishDate">Publish Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="numberOfViewers"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.numberOfViewers">Number Of Viewers</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="durationOfOperation"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.durationOfOperation">Duration Of Operation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="reportTime"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.reportTime">Report Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="personHour"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.personHour">Person Hour</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+<!--            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="guid"><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.guid">Guid</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+
+
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let mediaAwarenessReport of mediaAwarenessReports ;let i = index ">
+                <!--<td><a [routerLink]="['/media-awareness-report-marine-suffix', mediaAwarenessReport.id, 'view' ]">{{mediaAwarenessReport.id}}</a></td>-->
+                <td>{{i+1}}</td>
+                <td>
+                    <div *ngIf="mediaAwarenessReport.organizationChartId">
+                        <a [routerLink]="['../organization-chart-marine-suffix', mediaAwarenessReport.organizationChartId , 'view' ]" >{{mediaAwarenessReport.organizationChartTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="mediaAwarenessReport.mediaProductTypeId">
+                        <a [routerLink]="['../media-product-type-marine-suffix', mediaAwarenessReport.mediaProductTypeId , 'view' ]" >{{mediaAwarenessReport.mediaProductTypeTitle}}</a>
+                    </div>
+                </td>
+                <td>{{mediaAwarenessReport.designed}}</td>
+                <!--<td>{{mediaAwarenessReport.designedNumber}}</td>-->
+                <td>{{mediaAwarenessReport.subject}}</td>
+                <td>{{mediaAwarenessReport.publishDate}}</td>
+                <td>{{mediaAwarenessReport.numberOfViewers}}</td>
+                <td>{{mediaAwarenessReport.durationOfOperation}}</td>
+                <td>{{mediaAwarenessReport.reportTime}}</td>
+                <td>{{mediaAwarenessReport.personHour}}</td>
+                <!--<td>{{mediaAwarenessReport.description}}</td>-->
+                <!--<td>{{mediaAwarenessReport.createUserLogin}}</td>
+                <td>{{mediaAwarenessReport.createDate | date:'medium'}}</td>
+                <td>{{mediaAwarenessReport.modifyUserLogin}}</td>
+                <td>{{mediaAwarenessReport.modifyDate | date:'medium'}}</td>
+                <td>{{mediaAwarenessReport.guid}}</td>-->
+
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/media-awareness-report-marine-suffix', mediaAwarenessReport.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/media-awareness-report-marine-suffix', mediaAwarenessReport.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                                [routerLink]="['/', { outlets: { popup: 'media-awareness-report-marine-suffix/'+ mediaAwarenessReport.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll(criteria)">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="7">
+
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+    <div *ngIf="mediaAwarenessReports && mediaAwarenessReports.length">
+        <!--<div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>-->
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

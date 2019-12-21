@@ -1,0 +1,186 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-media-awareness-report-marine-suffix-heading" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.home.createOrEditLabel">Create or edit a Media Awareness Report</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!mediaAwarenessReport.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="mediaAwarenessReport.id" readonly />
+                </div>
+                <div class="form-group bighalf">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.organizationChart" for="field_organizationChart">Organization Chart</label>
+                    <!--<select class="form-control" id="field_organizationChart" name="organizationChart" [(ngModel)]="mediaAwarenessReport.organizationChartId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="organizationChartOption.id" *ngFor="let organizationChartOption of organizationcharts; trackBy: trackOrganizationChartById">{{organizationChartOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="recommenedOrgCharts"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="fullTitle"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="organizationChart"
+                        id="field_organizationChart"
+                        [(ngModel)]="mediaAwarenessReport.organizationChartId">
+                </div>
+                <div class="form-group">
+                    <a (click)="change('media-product-type-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.mediaProductType" for="field_mediaProductType">Media Product Type</a>
+                    <!--<select class="form-control" id="field_mediaProductType" name="mediaProductType" [(ngModel)]="mediaAwarenessReport.mediaProductTypeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="mediaProductTypeOption.id" *ngFor="let mediaProductTypeOption of mediaproducttypes; trackBy: trackMediaProductTypeById">{{mediaProductTypeOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="mediaproducttypes"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="mediaProductType"
+                        id="field_mediaProductType"
+                        [(ngModel)]="mediaAwarenessReport.mediaProductTypeId">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.designed" for="field_designed">Designed</label>
+                    <input type="checkbox" class="form-control" name="designed" id="field_designed"
+                        [(ngModel)]="mediaAwarenessReport.designed" />
+                    <div [hidden]="!(editForm.controls.designed?.dirty && editForm.controls.designed?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.designed?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+<!--                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.designedNumber" for="field_designedNumber">Designed Number</label>
+                    <input type="number" class="form-control" name="designedNumber" id="field_designedNumber"
+                        [(ngModel)]="mediaAwarenessReport.designedNumber" />
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.subject" for="field_subject">Subject</label>
+                    <input type="text" class="form-control" name="subject" id="field_subject"
+                        [(ngModel)]="mediaAwarenessReport.subject" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.subject?.dirty && editForm.controls.subject?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.subject?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.publishDate" for="field_publishDate">Publish Date</label>
+                    <input type="text" class="form-control" name="publishDate" id="field_publishDate"
+                        [(ngModel)]="mediaAwarenessReport.publishDate" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.publishDate?.dirty && editForm.controls.publishDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.publishDate?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.publishDate" for="field_publishDate">Publish Date</label>
+                    <kendo-maskedtextbox
+                        [includeLiterals]="true"
+                        [(ngModel)]="mediaAwarenessReport.publishDate"
+                        name="publishDate"
+                        class="form-control"
+                        id="field_publishDate"
+                        (blur)="checkDateValidation($event)"
+                        mask="0000/00/00">
+                    </kendo-maskedtextbox>
+                    <span *ngIf="finishDateValidation == 1" class="alert-success">تاریخ معتبر است</span>
+                    <span *ngIf="finishDateValidation == 2" class="alert-danger">تاریخ نامعتبر است</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.numberOfViewers" for="field_numberOfViewers">Number Of Viewers</label>
+                    <input type="number" class="form-control" name="numberOfViewers" id="field_numberOfViewers"
+                        [(ngModel)]="mediaAwarenessReport.numberOfViewers" required/>
+                    <div [hidden]="!(editForm.controls.numberOfViewers?.dirty && editForm.controls.numberOfViewers?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.numberOfViewers?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.numberOfViewers?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.durationOfOperation" for="field_durationOfOperation">Duration Of Operation</label>
+                    <input type="number" class="form-control" name="durationOfOperation" id="field_durationOfOperation"
+                        [(ngModel)]="mediaAwarenessReport.durationOfOperation" required/>
+                    <div [hidden]="!(editForm.controls.durationOfOperation?.dirty && editForm.controls.durationOfOperation?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.durationOfOperation?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.durationOfOperation?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.reportTime" for="field_reportTime">Report Time</label>
+                    <input type="number" class="form-control" name="reportTime" id="field_reportTime"
+                        [(ngModel)]="mediaAwarenessReport.reportTime" required/>
+                    <div [hidden]="!(editForm.controls.reportTime?.dirty && editForm.controls.reportTime?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.reportTime?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.reportTime?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.personHour" for="field_personHour">Person Hour</label>
+                    <input type="number" class="form-control" name="personHour" id="field_personHour"
+                        [(ngModel)]="mediaAwarenessReport.personHour" required/>
+                    <div [hidden]="!(editForm.controls.personHour?.dirty && editForm.controls.personHour?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.personHour?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.personHour?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.description" for="field_description">Description</label>
+                    <textarea type="text" class="form-control" name="description" id="field_description"
+                              [(ngModel)]="mediaAwarenessReport.description" maxlength="4096" ></textarea>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

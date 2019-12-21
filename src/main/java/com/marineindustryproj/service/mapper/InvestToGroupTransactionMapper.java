@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity InvestToGroupTransaction and its DTO InvestToGroupTransactionDTO.
  */
-@Mapper(componentModel = "spring", uses = {OrganizationChartMapper.class})
+@Mapper(componentModel = "spring", uses = {DocumentMapper.class, OrganizationChartMapper.class})
 public interface InvestToGroupTransactionMapper extends EntityMapper<InvestToGroupTransactionDTO, InvestToGroupTransaction> {
 
     @Mapping(source = "organizationChart.id", target = "organizationChartId")

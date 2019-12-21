@@ -46,11 +46,18 @@ public class FinalNiazsanjiReportHomePageDTO implements Serializable {
             this.value = this.totalLearningTime * this.peopleCount;
         else
             this.value = this.priceCost;
+
+        if(homePageReportType == HomePageReportType.PersonHour)
+            this.passedValue = this.totalLearningTime * this.peopleCount;
+        else
+            this.passedValue = this.finalizeCost;
     }
 
     private Long id;
 
     private Long value;
+
+    private Long passedValue;
 
     private Long priceCost;
 
@@ -219,5 +226,13 @@ public class FinalNiazsanjiReportHomePageDTO implements Serializable {
 
     public void setManager(boolean manager) {
         isManager = manager;
+    }
+
+    public Long getPassedValue() {
+        return passedValue;
+    }
+
+    public void setPassedValue(Long passedValue) {
+        this.passedValue = passedValue;
     }
 }

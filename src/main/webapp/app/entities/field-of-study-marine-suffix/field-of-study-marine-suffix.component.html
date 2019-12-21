@@ -79,13 +79,11 @@
 
             </tfoot>
         </table>
-        <td colspan="5">
             <div *ngIf="fieldOfStudies && fieldOfStudies.length">
 
                 <div class="row justify-content-center">
                     <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
                 </div>
             </div>
-        </td>
     </div>
 </div>

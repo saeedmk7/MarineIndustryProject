@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Restriction.
+    -->
+    <changeSet id="20191207172329-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="restrictions_id"
+                                 baseTableName="restriction_request_educational_module"
+                                 constraintName="fk_restriction_request_educational_module_restrictions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="restriction"/>
+        <addForeignKeyConstraint baseColumnNames="request_educational_modules_id"
+                                 baseTableName="restriction_request_educational_module"
+                                 constraintName="restriction_request_educationa_request_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_educational_module"/>
+        
+        <addForeignKeyConstraint baseColumnNames="restrictions_id"
+                                 baseTableName="restriction_educational_module"
+                                 constraintName="fk_restriction_educational_module_restrictions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="restriction"/>
+        <addForeignKeyConstraint baseColumnNames="educational_modules_id"
+                                 baseTableName="restriction_educational_module"
+                                 constraintName="fk_restriction_educational_module_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+        
+    </changeSet>
+</databaseChangeLog>

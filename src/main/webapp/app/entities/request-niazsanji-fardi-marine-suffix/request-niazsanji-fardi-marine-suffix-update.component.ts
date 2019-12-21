@@ -489,7 +489,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         }
 
         if (this.requestNiazsanjiFardi.organizationChartId == undefined) {
-            this.message = "لطفا قسمت پیشنهاد دهنده را انتخاب نمائید.";
+            this.message = "لطفا قسمت گروه/صنعت/واحد را انتخاب نمائید.";
             this.isSaving = false;
             return;
         }
@@ -517,7 +517,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         else {
             if(isNaN(this.requestNiazsanjiFardi.costApprovedEducationalModule))
             {
-                this.message = "لطفا در باکس سرمایه گذاری از شناسنامه آموزشی فقط عدد وارد نمائید.";
+                this.message = "لطفا در باکس سرمایه گذاری نیازسنجی از شناسنامه شغلی فقط عدد وارد نمائید.";
                 this.isSaving = false;
                 return;
             }
@@ -527,7 +527,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         {
             if(!this.requestNiazsanjiFardi.approvedCourseTypeId)
             {
-                this.message = "لطفا نوع دوره از شناسنامه آموزشی را انتخاب نمائید.";
+                this.message = "لطفا نوع دوره نیازسنجی از شناسنامه شغلی را انتخاب نمائید.";
                 this.isSaving = false;
                 return;
             }
@@ -537,7 +537,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         {
             if(!this.requestNiazsanjiFardi.allCourseTypeId)
             {
-                this.message = "لطفا نوع دوره از کلیه پودمان ها را انتخاب نمائید.";
+                this.message = "لطفا نوع دوره نیازسنجی فردی را انتخاب نمائید.";
                 this.isSaving = false;
                 return;
             }

@@ -101,6 +101,7 @@ public class RequestNiazsanjiFardiServiceImpl implements RequestNiazsanjiFardiSe
             niazsanjiFardi.setEducationalModule(requestNiazsanjiFardi.getAllEducationalModule());
             niazsanjiFardi.setPriceCost(requestNiazsanjiFardi.getCostAllEducationalModule());
             niazsanjiFardi.setCourseType(requestNiazsanjiFardi.getCourseType());
+            niazsanjiFardi.setHasImportantMessage(requestNiazsanjiFardi.isHasImportantMessage());
             niazsanjiFardiRepository.save(niazsanjiFardi);
         }
         if(requestNiazsanjiFardi.getApprovedEducationalModule() != null)
@@ -124,6 +125,7 @@ public class RequestNiazsanjiFardiServiceImpl implements RequestNiazsanjiFardiSe
             niazsanjiFardi.setEducationalModule(requestNiazsanjiFardi.getApprovedEducationalModule());
             niazsanjiFardi.setPriceCost(requestNiazsanjiFardi.getCostApprovedEducationalModule());
             niazsanjiFardi.setCourseType(requestNiazsanjiFardi.getCourseType());
+            niazsanjiFardi.setHasImportantMessage(requestNiazsanjiFardi.isHasImportantMessage());
             niazsanjiFardiRepository.save(niazsanjiFardi);
         }
 

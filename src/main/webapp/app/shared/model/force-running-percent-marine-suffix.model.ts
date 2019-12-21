@@ -6,6 +6,7 @@ export interface IForceRunningPercentMarineSuffix {
     title?: string;
     description?: string;
     percentAmount?: number;
+    year?: number;
     runMonth?: number;
     runMonthName?: string;
     createUserLogin?: string;
@@ -22,6 +23,7 @@ export class ForceRunningPercentMarineSuffix implements IForceRunningPercentMari
         public title?: string,
         public description?: string,
         public percentAmount?: number,
+        public year?: number,
         public runMonth?: number,
         public runMonthName?: string,
         public createUserLogin?: string,

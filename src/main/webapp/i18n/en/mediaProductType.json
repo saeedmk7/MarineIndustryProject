@@ -1,0 +1,27 @@
+{
+    "marineindustryprojApp": {
+        "mediaProductType": {
+            "home": {
+                "title": "Media Product Types",
+                "createLabel": "Create a new Media Product Type",
+                "createOrEditLabel": "Create or edit a Media Product Type"
+            },
+            "created": "A new Media Product Type is created with identifier {{ param }}",
+            "updated": "A Media Product Type is updated with identifier {{ param }}",
+            "deleted": "A Media Product Type is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Media Product Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Media Product Type"
+            },
+            "title": "Title",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "mediaAwarenessReport": "Media Awareness Report"
+        }
+    }
+}

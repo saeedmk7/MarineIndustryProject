@@ -102,7 +102,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
         this.yearsCollections = GREGORIAN_START_END_DATE;
     }
     toggleImportantMessage(id: number, type: boolean){
-        debugger;
+
         this.requestOrganizationNiazsanjiService.toggleImportantMessage(id, type).subscribe(
             (res: HttpResponse<IRequestOrganizationNiazsanjiMarineSuffix>) => this.makeCriteria(this.criteria),
             (res: HttpErrorResponse) => this.onSaveError()
@@ -544,7 +544,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
     }
 
     private paginateRequestOrganizationNiazsanjis(data: IRequestOrganizationNiazsanjiMarineSuffix[], headers: HttpHeaders) {
-        debugger;
+
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;

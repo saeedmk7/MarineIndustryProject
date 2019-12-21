@@ -28,7 +28,13 @@ public interface InvestToGroupTransactionService {
      */
     Page<InvestToGroupTransactionDTO> findAll(Pageable pageable);
 
-
+    /**
+     * Get all the InvestToGroupTransaction with eager load of many-to-many relationships.
+     *
+     * @return the list of entities
+     */
+    Page<InvestToGroupTransactionDTO> findAllWithEagerRelationships(Pageable pageable);
+    
     /**
      * Get the "id" investToGroupTransaction.
      *

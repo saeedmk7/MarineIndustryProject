@@ -122,6 +122,10 @@ public class InvestToGroupTransactionQueryService extends QueryService<InvestToG
             if (criteria.getGuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGuid(), InvestToGroupTransaction_.guid));
             }
+            if (criteria.getDocumentId() != null) {
+                specification = specification.and(buildSpecification(criteria.getDocumentId(),
+                    root -> root.join(InvestToGroupTransaction_.documents, JoinType.LEFT).get(Document_.id)));
+            }
             if (criteria.getOrganizationChartId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOrganizationChartId(),
                     root -> root.join(InvestToGroupTransaction_.organizationChart, JoinType.LEFT).get(OrganizationChart_.id)));

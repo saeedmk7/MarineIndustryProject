@@ -106,15 +106,16 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <img src="../../../content/images/bulb-icon.png" alt="پیام مهمی در جزئیات وجود دارد" title="پیام مهمی در جزئیات وجود دارد" *ngIf="finalOrganizationNiazsanji.hasImportantMessage == true" style="cursor: pointer;width: 20%;margin: 0;"
+                        <img src="../../../content/images/bulb-icon.png" alt="پیام مهمی در جزئیات وجود دارد" title="پیام مهمی در جزئیات وجود دارد" *ngIf="finalOrganizationNiazsanji.hasImportantMessage == true" style="cursor: pointer;width: 25%;margin: 0;"
                              (click)="toggleImportantMessage(finalOrganizationNiazsanji.id, false)"/>
-                        <img src="../../../content/images/light-off-icon.png" *ngIf="finalOrganizationNiazsanji.hasImportantMessage == false" style="cursor: pointer;width: 20%;margin: 0;"
+                        <img src="../../../content/images/light-off-icon.png" *ngIf="finalOrganizationNiazsanji.hasImportantMessage == false" style="cursor: pointer;width: 25%;margin: 0;"
                              (click)="toggleImportantMessage(finalOrganizationNiazsanji.id, true)"/>
                     </div>
                 </td>
                 <td class="text-right" width="250">
                     <div class="btn-group flex-btn-group-container">
-                        <button type="submit" title="مدارک" *ngIf="(isAdmin || isKarshenasArshadAmozesh || isModirKolAmozesh) && (finalOrganizationNiazsanji.status < 30 && finalOrganizationNiazsanji.status != 1 && finalOrganizationNiazsanji.status != 11 && finalOrganizationNiazsanji.status != 21)"
+                        <!--*ngIf="(isAdmin || isKarshenasArshadAmozesh || isModirKolAmozesh) && (finalOrganizationNiazsanji.status < 30 && finalOrganizationNiazsanji.status != 1 && finalOrganizationNiazsanji.status != 11 && finalOrganizationNiazsanji.status != 21)"-->
+                        <button type="submit" title="مدارک"
                                 [routerLink]="['../document-marine-suffix', 'finalorganizationniazsanji', finalOrganizationNiazsanji.id ]"
                                 class="btn btn-light btn-sm">
                             <span class="fa fa-file"></span>

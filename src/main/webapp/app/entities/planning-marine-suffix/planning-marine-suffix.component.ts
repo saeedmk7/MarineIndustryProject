@@ -259,12 +259,18 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                 key: 'personId.in', value: val
             });
         }
-        /*if (f.value['educationalModuleId']) {
+        if (f.value['id']) {
+            let val = +f.value['id'];
+            criteria.push({
+                key: 'id.equals', value: val
+            });
+        }
+        if (f.value['educationalModuleId']) {
             let val = +f.value['educationalModuleId'];
             criteria.push({
                 key: 'educationalModuleId.equals', value: val
             });
-        }*/
+        }
         if (f.value['educationalModuleTitle']) {
             let val = f.value['educationalModuleTitle'];
             criteria.push({
@@ -435,8 +441,8 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         this.totalFinalizeCost = 0;
         this.finalNiazsanjiReportsOrganizations.forEach(a => {
             this.total += a.educationalModuleTotalLearningTime * a.people.length;
-            this.totalCost += a.priceCost * a.people.length;
-            this.totalFinalizeCost += a.finalizeCost * a.people.length;
+            this.totalCost += a.priceCost;
+            this.totalFinalizeCost += a.finalizeCost;
         });
         //this.total = this.finalNiazsanjiReportsOrganizations.map(a => a.people.length);
         //this.totalCost = 0;//this.finalNiazsanjiReportsOrganizations.map(a => a.priceCost).reduce((a, b) => a + b, 0);

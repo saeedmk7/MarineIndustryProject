@@ -86,6 +86,7 @@ public class DesignAndPlanningServiceImpl implements DesignAndPlanningService {
             runPhase.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
             runPhase.setStatus(0);
             runPhase.setDone(false);
+            runPhase.setHasImportantMessage(designAndPlanningDTO.isHasImportantMessage());
             runPhase.setFinalizeCost(designAndPlanningDTO.getDirectCost() + designAndPlanningDTO.getUndirectCost());
             runPhase.setEducationalModule(finalNiazsanjiReport.getEducationalModule());
             runPhase.setOrganizationChart(finalNiazsanjiReport.getOrganizationChart());

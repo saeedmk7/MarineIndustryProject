@@ -170,6 +170,9 @@ public class EducationalModuleQueryService extends QueryService<EducationalModul
             if (criteria.getGuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGuid(), EducationalModule_.guid));
             }
+            if (criteria.getRestrictionDescription() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getRestrictionDescription(), EducationalModule_.restrictionDescription));
+            }
             if (criteria.getEducationalModuleJobId() != null) {
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleJobId(),
                     root -> root.join(EducationalModule_.educationalModuleJobs, JoinType.LEFT).get(EducationalModuleJob_.id)));
@@ -257,6 +260,10 @@ public class EducationalModuleQueryService extends QueryService<EducationalModul
             if (criteria.getNiazsanjiGroupId() != null) {
                 specification = specification.and(buildSpecification(criteria.getNiazsanjiGroupId(),
                     root -> root.join(EducationalModule_.niazsanjiGroups, JoinType.LEFT).get(NiazsanjiGroup_.id)));
+            }
+            if (criteria.getRestrictionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRestrictionId(),
+                    root -> root.join(EducationalModule_.restrictions, JoinType.LEFT).get(Restriction_.id)));
             }
         }
         return specification;

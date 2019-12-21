@@ -81,7 +81,8 @@ import {
     faDiceFour,
     faDiceFive,
     faDiceSix,
-    faQuestion
+    faQuestion,
+    faPrint
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -162,5 +163,6 @@ library.add(faDiceFour);
 library.add(faDiceFive);
 library.add(faDiceSix);
 library.add(faQuestion);
+library.add(faPrint);
 
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

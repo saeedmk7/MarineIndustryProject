@@ -153,6 +153,10 @@ public class RequestEducationalModule implements Serializable {
     @Column(name = "has_important_message")
     private Boolean hasImportantMessage;
 
+    @Size(max = 4096)
+    @Column(name = "restriction_description", length = 4096)
+    private String restrictionDescription;
+
     @OneToMany(mappedBy = "requestEducationalModule")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EducationalModule> educationalModules = new HashSet<>();
@@ -198,6 +202,13 @@ public class RequestEducationalModule implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "teachers_id", referencedColumnName = "id"))
     private Set<Teacher> teachers = new HashSet<>();
 
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "restriction_request_educational_module",
+        joinColumns = @JoinColumn(name = "request_educational_modules_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "restrictions_id", referencedColumnName = "id"))
+    private Set<Restriction> restrictions = new HashSet<>();
+
     @ManyToOne
     @JsonIgnoreProperties("requestEducationalModules")
     private SecurityLevel securityLevel;
@@ -213,6 +224,11 @@ public class RequestEducationalModule implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("requestEducationalModules")
     private Organization organization;
+
+    /*@ManyToMany(mappedBy = "requestEducationalModules")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<Restriction> restrictions = new HashSet<>();*/
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -639,6 +655,19 @@ public class RequestEducationalModule implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public String getRestrictionDescription() {
+        return restrictionDescription;
+    }
+
+    public RequestEducationalModule restrictionDescription(String restrictionDescription) {
+        this.restrictionDescription = restrictionDescription;
+        return this;
+    }
+
+    public void setRestrictionDescription(String restrictionDescription) {
+        this.restrictionDescription = restrictionDescription;
+    }
+
     public Set<EducationalModule> getEducationalModules() {
         return educationalModules;
     }
@@ -814,6 +843,31 @@ public class RequestEducationalModule implements Serializable {
         this.teachers = teachers;
     }
 
+    /*public Set<Restriction> getRestrictions() {
+        return restrictions;
+    }
+
+    public RequestEducationalModule restrictions(Set<Restriction> restrictions) {
+        this.restrictions = restrictions;
+        return this;
+    }
+
+    public RequestEducationalModule addRestriction(Restriction restriction) {
+        this.restrictions.add(restriction);
+        restriction.getRequestEducationalModules().add(this);
+        return this;
+    }
+
+    public RequestEducationalModule removeRestriction(Restriction restriction) {
+        this.restrictions.remove(restriction);
+        restriction.getRequestEducationalModules().remove(this);
+        return this;
+    }
+
+    public void setRestrictions(Set<Restriction> restrictions) {
+        this.restrictions = restrictions;
+    }*/
+
     public SecurityLevel getSecurityLevel() {
         return securityLevel;
     }
@@ -864,6 +918,31 @@ public class RequestEducationalModule implements Serializable {
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+    }
+
+    public Set<Restriction> getRestrictions() {
+        return restrictions;
+    }
+
+    public RequestEducationalModule restrictions(Set<Restriction> restrictions) {
+        this.restrictions = restrictions;
+        return this;
+    }
+
+    public RequestEducationalModule addRestriction(Restriction restriction) {
+        this.restrictions.add(restriction);
+        restriction.getRequestEducationalModules().add(this);
+        return this;
+    }
+
+    public RequestEducationalModule removeRestriction(Restriction restriction) {
+        this.restrictions.remove(restriction);
+        restriction.getRequestEducationalModules().remove(this);
+        return this;
+    }
+
+    public void setRestrictions(Set<Restriction> restrictions) {
+        this.restrictions = restrictions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -923,6 +1002,7 @@ public class RequestEducationalModule implements Serializable {
             ", teachersText='" + getTeachersText() + "'" +
             ", guid='" + getGuid() + "'" +
             ", hasImportantMessage='" + isHasImportantMessage() + "'" +
+            ", restrictionDescription='" + getRestrictionDescription() + "'" +
             "}";
     }
 }

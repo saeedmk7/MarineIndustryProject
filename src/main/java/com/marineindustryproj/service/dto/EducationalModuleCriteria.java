@@ -79,6 +79,8 @@ public class EducationalModuleCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private StringFilter restrictionDescription;
+
     private LongFilter educationalModuleJobId;
 
     private LongFilter requestOrganizationNiazsanjiId;
@@ -122,6 +124,8 @@ public class EducationalModuleCriteria implements Serializable {
     private LongFilter organizationId;
 
     private LongFilter niazsanjiGroupId;
+
+    private LongFilter restrictionId;
 
     public LongFilter getId() {
         return id;
@@ -347,6 +351,14 @@ public class EducationalModuleCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public StringFilter getRestrictionDescription() {
+        return restrictionDescription;
+    }
+
+    public void setRestrictionDescription(StringFilter restrictionDescription) {
+        this.restrictionDescription = restrictionDescription;
+    }
+
     public LongFilter getEducationalModuleJobId() {
         return educationalModuleJobId;
     }
@@ -523,6 +535,14 @@ public class EducationalModuleCriteria implements Serializable {
         this.niazsanjiGroupId = niazsanjiGroupId;
     }
 
+    public LongFilter getRestrictionId() {
+        return restrictionId;
+    }
+
+    public void setRestrictionId(LongFilter restrictionId) {
+        this.restrictionId = restrictionId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -562,6 +582,7 @@ public class EducationalModuleCriteria implements Serializable {
             Objects.equals(goalsText, that.goalsText) &&
             Objects.equals(teachersText, that.teachersText) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(restrictionDescription, that.restrictionDescription) &&
             Objects.equals(educationalModuleJobId, that.educationalModuleJobId) &&
             Objects.equals(requestOrganizationNiazsanjiId, that.requestOrganizationNiazsanjiId) &&
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
@@ -583,7 +604,8 @@ public class EducationalModuleCriteria implements Serializable {
             Objects.equals(skillableLevelOfSkillId, that.skillableLevelOfSkillId) &&
             Objects.equals(evaluationMethodId, that.evaluationMethodId) &&
             Objects.equals(organizationId, that.organizationId) &&
-            Objects.equals(niazsanjiGroupId, that.niazsanjiGroupId);
+            Objects.equals(niazsanjiGroupId, that.niazsanjiGroupId) &&
+            Objects.equals(restrictionId, that.restrictionId);
     }
 
     @Override
@@ -617,6 +639,7 @@ public class EducationalModuleCriteria implements Serializable {
         goalsText,
         teachersText,
         guid,
+        restrictionDescription,
         educationalModuleJobId,
         requestOrganizationNiazsanjiId,
         finalOrganizationNiazsanjiId,
@@ -638,7 +661,8 @@ public class EducationalModuleCriteria implements Serializable {
         skillableLevelOfSkillId,
         evaluationMethodId,
         organizationId,
-        niazsanjiGroupId
+        niazsanjiGroupId,
+        restrictionId
         );
     }
 
@@ -673,6 +697,7 @@ public class EducationalModuleCriteria implements Serializable {
                 (goalsText != null ? "goalsText=" + goalsText + ", " : "") +
                 (teachersText != null ? "teachersText=" + teachersText + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (restrictionDescription != null ? "restrictionDescription=" + restrictionDescription + ", " : "") +
                 (educationalModuleJobId != null ? "educationalModuleJobId=" + educationalModuleJobId + ", " : "") +
                 (requestOrganizationNiazsanjiId != null ? "requestOrganizationNiazsanjiId=" + requestOrganizationNiazsanjiId + ", " : "") +
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
@@ -695,6 +720,7 @@ public class EducationalModuleCriteria implements Serializable {
                 (evaluationMethodId != null ? "evaluationMethodId=" + evaluationMethodId + ", " : "") +
                 (organizationId != null ? "organizationId=" + organizationId + ", " : "") +
                 (niazsanjiGroupId != null ? "niazsanjiGroupId=" + niazsanjiGroupId + ", " : "") +
+                (restrictionId != null ? "restrictionId=" + restrictionId + ", " : "") +
             "}";
     }
 

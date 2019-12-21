@@ -21,14 +21,14 @@ public interface EducationalModuleRepository extends JpaRepository<EducationalMo
 
     String ALL_EDUCATIONALMODULE_CACHE = "allEducationalModule";
 
-    @Query(value = "select distinct educational_module from EducationalModule educational_module left join fetch educational_module.scientificWorkGroups left join fetch educational_module.documents left join fetch educational_module.educationalCenters left join fetch educational_module.goals left join fetch educational_module.resources left join fetch educational_module.teachers",
+    @Query(value = "select distinct educational_module from EducationalModule educational_module left join fetch educational_module.restrictions left join fetch educational_module.scientificWorkGroups left join fetch educational_module.documents left join fetch educational_module.educationalCenters left join fetch educational_module.goals left join fetch educational_module.resources left join fetch educational_module.teachers",
         countQuery = "select count(distinct educational_module) from EducationalModule educational_module")
     Page<EducationalModule> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(value = "select distinct educational_module from EducationalModule educational_module left join fetch educational_module.scientificWorkGroups left join fetch educational_module.documents left join fetch educational_module.educationalCenters left join fetch educational_module.goals left join fetch educational_module.resources left join fetch educational_module.teachers")
+    @Query(value = "select distinct educational_module from EducationalModule educational_module left join fetch educational_module.restrictions left join fetch educational_module.scientificWorkGroups left join fetch educational_module.documents left join fetch educational_module.educationalCenters left join fetch educational_module.goals left join fetch educational_module.resources left join fetch educational_module.teachers")
     List<EducationalModule> findAllWithEagerRelationships();
 
-    @Query("select educational_module from EducationalModule educational_module left join fetch educational_module.scientificWorkGroups left join fetch educational_module.documents left join fetch educational_module.educationalCenters left join fetch educational_module.goals left join fetch educational_module.resources left join fetch educational_module.teachers where educational_module.id =:id")
+    @Query("select educational_module from EducationalModule educational_module left join fetch educational_module.restrictions left join fetch educational_module.scientificWorkGroups left join fetch educational_module.documents left join fetch educational_module.educationalCenters left join fetch educational_module.goals left join fetch educational_module.resources left join fetch educational_module.teachers where educational_module.id =:id")
     Optional<EducationalModule> findOneWithEagerRelationships(@Param("id") Long id);
 
     @Cacheable(cacheNames = ALL_EDUCATIONALMODULE_CACHE)

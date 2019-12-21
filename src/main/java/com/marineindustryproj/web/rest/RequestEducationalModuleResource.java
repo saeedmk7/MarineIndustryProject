@@ -28,6 +28,7 @@ import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * REST controller for managing RequestEducationalModule.
@@ -69,6 +70,8 @@ public class RequestEducationalModuleResource {
         requestEducationalModuleDTO.setModifyDate(ZonedDateTime.now());
         requestEducationalModuleDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
         requestEducationalModuleDTO.setChangeStatusUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        requestEducationalModuleDTO.setGuid(UUID.randomUUID().toString());
+        requestEducationalModuleDTO.setHasImportantMessage(false);
 
         RequestEducationalModuleDTO result = requestEducationalModuleService.save(requestEducationalModuleDTO);
         return ResponseEntity.created(new URI("/api/request-educational-modules/" + result.getId()))
@@ -99,6 +102,8 @@ public class RequestEducationalModuleResource {
         requestEducationalModuleDTO.setCreateDate(requestEducationalModule.getCreateDate());
         requestEducationalModuleDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
         requestEducationalModuleDTO.setModifyDate(ZonedDateTime.now());
+        requestEducationalModuleDTO.setGuid(requestEducationalModule.getGuid());
+        requestEducationalModuleDTO.setHasImportantMessage(requestEducationalModule.isHasImportantMessage());
 
         RequestEducationalModuleDTO result = requestEducationalModuleService.save(requestEducationalModuleDTO);
         return ResponseEntity.ok()
@@ -135,6 +140,7 @@ public class RequestEducationalModuleResource {
         requestEducationalModuleDTO.setModifyDate(ZonedDateTime.now());
         requestEducationalModuleDTO.setChangeStatusUserLogin(SecurityUtils.getCurrentUserLogin().get());
         requestEducationalModuleDTO.setRequestStatus(RequestStatus.ACCEPT);
+        requestEducationalModuleDTO.setHasImportantMessage(requestEducationalModule.isHasImportantMessage());
 
         RequestEducationalModuleDTO result = requestEducationalModuleService.finalize(requestEducationalModuleDTO);
         return ResponseEntity.created(new URI("/api/finalize-request-educational-module/" + result.getId()))

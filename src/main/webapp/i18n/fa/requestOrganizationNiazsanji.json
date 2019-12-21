@@ -20,7 +20,7 @@
                 "title": "جزئیات اطلاعات نیازسنجی پودمانی سازمانی (متمرکز)"
             },
             "code": "کد",
-            "recommendedByOrgchart": "پیشنهاد دهنده",
+            "recommendedByOrgchart": "گروه/صنعت/واحد",
             "neededSoftwares": "تجهیزات آموزشی و کمک آموزشی نرم افزاری",
             "neededHardware": "تجهیزات آموزشی و کمک آموزشی سخت افزاری",
             "studentsType": "جامعه مخاطبین",
@@ -52,7 +52,7 @@
             "teachApproach": "روش آموزش",
             "priceCost": "سرمایه گذاری(ریال)",
             "selectionType": "انتخاب افراد به صورت گروهی؟",
-            "organizationChartId":"پیشنهاد دهنده",
+            "organizationChartId":"گروه/صنعت/واحد",
             "answer": "جواب"
 
         }

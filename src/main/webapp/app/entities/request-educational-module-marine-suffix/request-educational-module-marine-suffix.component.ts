@@ -509,7 +509,7 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
         this.jhiAlertService.error(errorMessage, null, null);
     }
     toggleImportantMessage(id: number, type: boolean){
-        debugger;
+
         this.requestEducationalModuleService.toggleImportantMessage(id, type).subscribe(
             (res: HttpResponse<IRequestEducationalModuleMarineSuffix>) => this.makeCriteria(this.criteria),
             (res: HttpErrorResponse) => this.onSaveError()

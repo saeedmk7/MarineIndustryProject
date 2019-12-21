@@ -37,6 +37,8 @@ public class ForceRunningPercentDTO implements Serializable {
     @Size(max = 50)
     private String guid;
 
+    private Integer year;
+
     private Set<OrganizationChartDTO> organizationCharts = new HashSet<>();
 
     public Long getId() {
@@ -119,6 +121,14 @@ public class ForceRunningPercentDTO implements Serializable {
         this.guid = guid;
     }
 
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
     public Set<OrganizationChartDTO> getOrganizationCharts() {
         return organizationCharts;
     }
@@ -161,6 +171,7 @@ public class ForceRunningPercentDTO implements Serializable {
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +
             ", modifyDate='" + getModifyDate() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", year=" + getYear() +
             "}";
     }
 }

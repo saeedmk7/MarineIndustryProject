@@ -133,7 +133,32 @@
                         id="field_scientificworkgroup"
                         [(ngModel)]="requestEducationalModule.scientificWorkGroups">
                 </div>
-
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">محدودیت های {{requestEducationalModule.title}}</div></div>
+                <div class="form-group half">
+                    <a (click)="change('restriction-marine-suffix')" jhiTranslate="marineindustryprojApp.requestEducationalModule.restriction" for="field_restriction">Restriction</a>
+                    <ng-select
+                        [items]="restrictions"
+                        [multiple]="true"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        placeholder="محدودیت ها"
+                        name="restriction"
+                        id="field_restriction"
+                        [(ngModel)]="requestEducationalModule.restrictions" >
+                </div>
+                <div class="form-group half">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestEducationalModule.restrictionDescription" for="field_restrictionDescription">restrictionDescription</label>
+                    <textarea type="text" class="form-control" name="restrictionDescription" id="field_restrictionDescription"
+                              [(ngModel)]="requestEducationalModule.restrictionDescription" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.restrictionDescription?.dirty && editForm.controls.restrictionDescription?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.restrictionDescription?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات تکمیلی پودمان {{requestEducationalModule.title}}</div></div>
                 <!--<div class="form-group half">
                     <a (click)="change('goal-marine-suffix')" jhiTranslate="marineindustryprojApp.requestEducationalModule.goal" for="field_goal">Goal</a>

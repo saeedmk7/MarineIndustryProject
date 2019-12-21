@@ -7,6 +7,7 @@ import { IGoalMarineSuffix } from 'app/shared/model//goal-marine-suffix.model';
 import { IResourceMarineSuffix } from 'app/shared/model//resource-marine-suffix.model';
 import { ITeacherMarineSuffix } from 'app/shared/model//teacher-marine-suffix.model';
 import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
+import { IRestrictionMarineSuffix } from 'app/shared/model//restriction-marine-suffix.model';
 
 export interface IRequestEducationalModuleMarineSuffix {
     id?: number;
@@ -46,6 +47,7 @@ export interface IRequestEducationalModuleMarineSuffix {
     teachersText?: string;
     guid?: string;
     hasImportantMessage?: boolean;
+    restrictionDescription?: string;
     educationalModules?: IEducationalModuleMarineSuffix[];
     scientificWorkGroups?: IScientificWorkGroupMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
@@ -61,6 +63,7 @@ export interface IRequestEducationalModuleMarineSuffix {
     evaluationMethodId?: number;
     organizationTitle?: string;
     organizationId?: number;
+    restrictions?: IRestrictionMarineSuffix[];
 }
 
 export class RequestEducationalModuleMarineSuffix implements IRequestEducationalModuleMarineSuffix {
@@ -102,6 +105,7 @@ export class RequestEducationalModuleMarineSuffix implements IRequestEducational
         public teachersText?: string,
         public guid?: string,
         public hasImportantMessage?: boolean,
+        public restrictionDescription?: string,
         public educationalModules?: IEducationalModuleMarineSuffix[],
         public scientificWorkGroups?: IScientificWorkGroupMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
@@ -116,7 +120,8 @@ export class RequestEducationalModuleMarineSuffix implements IRequestEducational
         public evaluationMethodTitle?: string,
         public evaluationMethodId?: number,
         public organizationTitle?: string,
-        public organizationId?: number
+        public organizationId?: number,
+        public restrictions?: IRestrictionMarineSuffix[]
     ) {
         this.archived = this.archived || false;
         this.fullTitle =  this.code + ' - ' + this.title;

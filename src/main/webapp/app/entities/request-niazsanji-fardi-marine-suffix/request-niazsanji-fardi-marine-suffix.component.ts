@@ -601,7 +601,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
         this.jhiAlertService.error(errorMessage, null, null);
     }
     toggleImportantMessage(id: number, type: boolean){
-        debugger;
+
         this.requestNiazsanjiFardiService.toggleImportantMessage(id, type).subscribe(
             (res: HttpResponse<IRequestNiazsanjiFardiMarineSuffix>) => this.makeCriteria(this.criteria),
             (res: HttpErrorResponse) => this.onSaveError()

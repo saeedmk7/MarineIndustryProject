@@ -1,19 +1,19 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="requestNiazsanjiFardi" class="detail-page">
-            <h2><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.detail.title">Request Niazsanji Fardi</span> {{requestNiazsanjiFardi.id}}</h2>
+            <h2><span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.detail.title">Request Niazsanji Fardi</span> <!--{{requestNiazsanjiFardi.id}}--></h2>
             <mi-alert-error></mi-alert-error>
             <dl class="row-md jh-entity-details">
                 <div class="dropdown-divider pt-3 mt-4">
-                    <div class="divider-title" *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">اطلاعات پودمان درخواستی <strong> از شناسنامه آموزشی</strong></div>
+                    <div class="divider-title" *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">اطلاعات پودمان درخواستی <strong> نیازسنجی از شناسنامه شغلی</strong></div>
                     <div class="divider-title" *ngIf="requestNiazsanjiFardi.allEducationalModuleId">اطلاعات پودمان درخواستی <strong> از کلیه پودمان ها</strong></div>
                 </div>
                 <dt><span>نوع پودمان</span></dt>
                 <dd *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
-                    از شناسنامه آموزشی
+                    نیازسنجی از شناسنامه شغلی
                 </dd>
                 <dd *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
-                    از کلیه پودمان ها
+                    نیازسنجی فردی
                 </dd>
                 <dt><span>عنوان پودمان</span></dt>
                 <dd *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">

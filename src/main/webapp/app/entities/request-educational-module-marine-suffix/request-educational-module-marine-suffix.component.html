@@ -57,6 +57,11 @@
                 <td>{{requestEducationalModule.createDate}}</td>
                 <td>{{requestEducationalModule.statusMeaning}}</td>
                 <td class="text-right">
+                    <button type="submit" title="مدارک"
+                            [routerLink]="['../document-marine-suffix', 'requesteducationalmodule',requestEducationalModule.id]"
+                            class="btn btn-light btn-sm">
+                        <span class="fa fa-file"></span>
+                    </button>
                     <button type="submit"
                             [routerLink]="['/request-educational-module-marine-suffix', requestEducationalModule.id, 'view' ]"
                             class="btn btn-info btn-sm">
@@ -64,10 +69,10 @@
                         <span class="d-none d-md-inline" alt="مشاهده" jhiTranslate="entity.action.view">View</span>
                     </button>
                     <img src="../../../content/images/bulb-icon.png" title="پیام مهمی در جزئیات وجود دارد" alt="پیام مهمی در جزئیات وجود دارد"
-                         *ngIf="requestEducationalModule.hasImportantMessage == true" style="cursor: pointer;width: 20%;margin: 0;"
+                         *ngIf="requestEducationalModule.hasImportantMessage == true" style="cursor: pointer;width: 12%;margin: 0;"
                          (click)="toggleImportantMessage(requestEducationalModule.id, false)"/>
                     <img src="../../../content/images/light-off-icon.png"
-                         *ngIf="requestEducationalModule.hasImportantMessage == false" style="cursor: pointer;width: 20%;margin: 0;"
+                         *ngIf="requestEducationalModule.hasImportantMessage == false" style="cursor: pointer;width: 12%;margin: 0;"
                          (click)="toggleImportantMessage(requestEducationalModule.id, true)"/>
                     <ng-container *ngIf="!(requestEducationalModule.requestStatus == 'ACCEPT'  || requestEducationalModule.requestStatus == 'IGNORE')">
                         <ng-container *ngIf="requestEducationalModule.status == currentPerson.organizationChartId">

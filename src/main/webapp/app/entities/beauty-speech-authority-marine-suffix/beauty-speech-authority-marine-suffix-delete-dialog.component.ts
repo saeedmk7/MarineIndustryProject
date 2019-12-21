@@ -49,7 +49,7 @@ export class BeautySpeechAuthorityMarineSuffixDeletePopupComponent implements On
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(BeautySpeechAuthorityMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.beautySpeechAuthority = beautySpeechAuthority;
                 this.ngbModalRef.result.then(

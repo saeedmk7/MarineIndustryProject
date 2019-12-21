@@ -292,7 +292,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         }
     }
     toggleImportantMessage(id: number, type: boolean){
-        debugger;
+
         this.educationalHistoryService.toggleImportantMessage(id, type).subscribe(
             (res: HttpResponse<IRequestOrganizationNiazsanjiMarineSuffix>) => this.makeCriteria(this.criteria),
             (res: HttpErrorResponse) => this.onSaveError()

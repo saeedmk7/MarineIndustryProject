@@ -54,3 +54,20 @@ tr.danger { background-color: #f2dede; color: #a94442; }
 tr.info { background-color: #d9edf7; color: #31708f; }
 tr.warning { background-color: #fcf8e3; color: #8a6d3b; }
 tr.light{ color:#818182;background-color:#fefefe;}
+
+/*print-person-educational-records-marine-suffix {
+    !* hide the printing component from @media screen *!
+    display: none;
+}*/
+@media print {
+    /* invert the display (show/hide) properties of the main */
+    /* aplication component and the printing component       */
+
+    print-person-educational-records-marine-suffix {
+        display: block;
+    }
+
+    person-educational-records-marine-suffix {
+        display: none;
+    }
+}

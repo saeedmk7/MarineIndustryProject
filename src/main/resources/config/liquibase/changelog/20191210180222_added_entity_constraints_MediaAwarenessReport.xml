@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity MediaAwarenessReport.
+    -->
+    <changeSet id="20191210180222-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="organization_chart_id"
+                                 baseTableName="media_awareness_report"
+                                 constraintName="fk_media_awareness_report_organization_chart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+
+        <addForeignKeyConstraint baseColumnNames="media_product_type_id"
+                                 baseTableName="media_awareness_report"
+                                 constraintName="fk_media_awareness_report_media_product_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="media_product_type"/>
+
+    </changeSet>
+</databaseChangeLog>

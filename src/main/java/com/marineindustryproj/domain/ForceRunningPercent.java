@@ -59,6 +59,9 @@ public class ForceRunningPercent implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Column(name = "year")
+    private Integer year;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "force_running_percent_organization_chart",
@@ -192,6 +195,19 @@ public class ForceRunningPercent implements Serializable {
         this.guid = guid;
     }
 
+    public Integer getYear() {
+        return year;
+    }
+
+    public ForceRunningPercent year(Integer year) {
+        this.year = year;
+        return this;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
     public Set<OrganizationChart> getOrganizationCharts() {
         return organizationCharts;
     }
@@ -251,6 +267,7 @@ public class ForceRunningPercent implements Serializable {
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +
             ", modifyDate='" + getModifyDate() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", year=" + getYear() +
             "}";
     }
 }

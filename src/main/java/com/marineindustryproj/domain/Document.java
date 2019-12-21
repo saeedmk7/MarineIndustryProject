@@ -133,6 +133,11 @@ public class Document implements Serializable {
     @JsonIgnore
     private Set<Instruction> instructions = new HashSet<>();
 
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<InvestToGroupTransaction> investToGroupTransactions = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -630,6 +635,31 @@ public class Document implements Serializable {
 
     public void setInstructions(Set<Instruction> instructions) {
         this.instructions = instructions;
+    }
+
+    public Set<InvestToGroupTransaction> getInvestToGroupTransactions() {
+        return investToGroupTransactions;
+    }
+
+    public Document investToGroupTransactions(Set<InvestToGroupTransaction> investToGroupTransactions) {
+        this.investToGroupTransactions = investToGroupTransactions;
+        return this;
+    }
+
+    public Document addInvestToGroupTransaction(InvestToGroupTransaction investToGroupTransaction) {
+        this.investToGroupTransactions.add(investToGroupTransaction);
+        investToGroupTransaction.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeInvestToGroupTransaction(InvestToGroupTransaction investToGroupTransaction) {
+        this.investToGroupTransactions.remove(investToGroupTransaction);
+        investToGroupTransaction.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setInvestToGroupTransactions(Set<InvestToGroupTransaction> investToGroupTransactions) {
+        this.investToGroupTransactions = investToGroupTransactions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

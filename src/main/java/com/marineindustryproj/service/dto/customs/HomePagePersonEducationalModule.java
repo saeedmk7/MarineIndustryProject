@@ -19,9 +19,9 @@ public class HomePagePersonEducationalModule {
         this.skillableLevelOfSkillId = educationalModuleDTO.getSkillableLevelOfSkillId();
         this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
         if(educationalModuleType == EducationalModuleType.ALL)
-            this.educationalModuleType = "از کلیه پودمان ها";
+            this.educationalModuleType = "نیازسنجی فردی";
         else
-            this.educationalModuleType = "از شناسنامه آموزشی";
+            this.educationalModuleType = "نیازسنجی از شناسنامه شغلی";
 
         this.courseType = finalNiazsanjiReportDTO.getCourseTypeTitle();
         if(finalNiazsanjiReportDTO.getNiazsanjiYear() != null)
@@ -51,7 +51,7 @@ public class HomePagePersonEducationalModule {
         this.organizationTitle = educationalModuleMinDTO.getOrganizationTitle();
         this.skillableLevelOfSkillId = educationalModuleMinDTO.getSkillableLevelOfSkillId();
         this.skillableLevelOfSkillTitle = educationalModuleMinDTO.getSkillableLevelOfSkillTitle();
-        this.educationalModuleType = "از شناسنامه آموزشی";
+        this.educationalModuleType = "نیازسنجی از شناسنامه شغلی";
         this.status = status;
 
     }
@@ -66,7 +66,7 @@ public class HomePagePersonEducationalModule {
         this.skillableLevelOfSkillId = educationalModuleDTO.getSkillableLevelOfSkillId();
         this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
         this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
-        this.educationalModuleType = "از شناسنامه آموزشی";
+        this.educationalModuleType = "نیازسنجی از شناسنامه شغلی";
         this.status = status;
     }
     public HomePagePersonEducationalModule(EducationalHistoryDTO educationalHistoryDTO, EducationalModuleDTO educationalModuleDTO, Integer status) {
@@ -81,7 +81,7 @@ public class HomePagePersonEducationalModule {
         this.organizationId = educationalModuleDTO.getOrganizationId();
         this.organizationTitle = educationalModuleDTO.getOrganizationTitle();
         this.runDate = educationalHistoryDTO.getDateOfStart();
-        this.educationalModuleType = "از کلیه پودمان ها";
+        this.educationalModuleType = "نیازسنجی فردی";
         this.status = status;
         this.educationalHistoryId = educationalHistoryDTO.getId();
     }

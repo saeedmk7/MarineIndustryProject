@@ -138,6 +138,10 @@ public class EducationalModule implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Size(max = 4096)
+    @Column(name = "restriction_description", length = 4096)
+    private String restrictionDescription;
+
     @OneToMany(mappedBy = "educationalModule")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EducationalModuleJob> educationalModuleJobs = new HashSet<>();
@@ -210,6 +214,13 @@ public class EducationalModule implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "teachers_id", referencedColumnName = "id"))
     private Set<Teacher> teachers = new HashSet<>();
 
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "restriction_educational_module",
+        joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "restrictions_id", referencedColumnName = "id"))
+    private Set<Restriction> restrictions = new HashSet<>();
+
     @ManyToOne
     @JsonIgnoreProperties("educationalModules")
     private RequestEducationalModule requestEducationalModule;
@@ -234,6 +245,11 @@ public class EducationalModule implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
     private Set<NiazsanjiGroup> niazsanjiGroups = new HashSet<>();
+
+    /*@ManyToMany(mappedBy = "educationalModules")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<Restriction> restrictions = new HashSet<>();*/
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -606,6 +622,19 @@ public class EducationalModule implements Serializable {
 
     public void setGuid(String guid) {
         this.guid = guid;
+    }
+
+    public String getRestrictionDescription() {
+        return restrictionDescription;
+    }
+
+    public EducationalModule restrictionDescription(String restrictionDescription) {
+        this.restrictionDescription = restrictionDescription;
+        return this;
+    }
+
+    public void setRestrictionDescription(String restrictionDescription) {
+        this.restrictionDescription = restrictionDescription;
     }
 
     public Set<EducationalModuleJob> getEducationalModuleJobs() {
@@ -1097,6 +1126,31 @@ public class EducationalModule implements Serializable {
     public void setNiazsanjiGroups(Set<NiazsanjiGroup> niazsanjiGroups) {
         this.niazsanjiGroups = niazsanjiGroups;
     }
+
+    public Set<Restriction> getRestrictions() {
+        return restrictions;
+    }
+
+    public EducationalModule restrictions(Set<Restriction> restrictions) {
+        this.restrictions = restrictions;
+        return this;
+    }
+
+    public EducationalModule addRestriction(Restriction restriction) {
+        this.restrictions.add(restriction);
+        restriction.getEducationalModules().add(this);
+        return this;
+    }
+
+    public EducationalModule removeRestriction(Restriction restriction) {
+        this.restrictions.remove(restriction);
+        restriction.getEducationalModules().remove(this);
+        return this;
+    }
+
+    public void setRestrictions(Set<Restriction> restrictions) {
+        this.restrictions = restrictions;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -1151,6 +1205,7 @@ public class EducationalModule implements Serializable {
             ", goalsText='" + getGoalsText() + "'" +
             ", teachersText='" + getTeachersText() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", restrictionDescription='" + getRestrictionDescription() + "'" +
             "}";
     }
 }

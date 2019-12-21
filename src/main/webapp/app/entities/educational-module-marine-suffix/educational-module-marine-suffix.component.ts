@@ -19,6 +19,8 @@ import {SkillableLevelOfSkillMarineSuffixService} from "app/entities/skillable-l
 import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 import {OrganizationMarineSuffixService} from "app/entities/organization-marine-suffix";
 import {IOrganizationMarineSuffix} from "app/shared/model/organization-marine-suffix.model";
+import {IRestrictionMarineSuffix} from "app/shared/model/restriction-marine-suffix.model";
+import {RestrictionMarineSuffixService} from "app/entities/restriction-marine-suffix";
 
 @Component({
     selector: 'mi-educational-module-marine-suffix',
@@ -50,6 +52,7 @@ export class EducationalModuleMarineSuffixComponent implements OnInit, OnDestroy
     skillableLevelOfSkills: ISkillableLevelOfSkillMarineSuffix[];
     organizations: IOrganizationMarineSuffix[];
 
+
     constructor(
         private educationalModuleService: EducationalModuleMarineSuffixService,
         private scientificWorkGroupService: ScientificWorkGroupMarineSuffixService,
@@ -62,6 +65,7 @@ export class EducationalModuleMarineSuffixComponent implements OnInit, OnDestroy
         private router: Router,
         private eventManager: JhiEventManager,
         private location: PlatformLocation,
+
         private jhiTranslate: TranslateService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;

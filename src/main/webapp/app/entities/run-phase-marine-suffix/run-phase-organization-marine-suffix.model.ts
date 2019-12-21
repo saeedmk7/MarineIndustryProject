@@ -2,6 +2,7 @@ import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 
 export interface IRunPhaseOrganizationMarineSuffix {
     id?: number;
+    finalNiazsanjiReportId?: number;
     organizationChartTitle?: string;
     educationalModuleTitle?: string;
     educationalModuleId?: number;
@@ -27,6 +28,7 @@ export class RunPhaseOrganizationMarineSuffix implements IRunPhaseOrganizationMa
         public courseTypeId?: number,
         public courseTypeTitle?: string,
         public id?: number,
+        public finalNiazsanjiReportId?: number,
         public niazsanjiYear?: number,
         public organizationChartTitle?: string,
         public finalizeCost?: number,

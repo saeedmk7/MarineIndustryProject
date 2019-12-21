@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SumPipe implements PipeTransform {
     transform(items: any[], attr: string): any {
         return items.reduce(function(a, b) {
-            debugger;
+
             if(b[attr] != "NaN")
                 return a + b[attr];
             return a;

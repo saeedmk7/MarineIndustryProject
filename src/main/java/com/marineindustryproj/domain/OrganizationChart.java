@@ -103,6 +103,9 @@ public class OrganizationChart implements Serializable {
     @OneToMany(mappedBy = "organizationChart")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<InvestToGroupTransaction> investToGroupTransactions = new HashSet<>();
+    @OneToMany(mappedBy = "organizationChart")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<MediaAwarenessReport> mediaAwarenessReports = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("organizationCharts")
     private OrganizationChart parent;
@@ -549,6 +552,31 @@ public class OrganizationChart implements Serializable {
 
     public void setInvestToGroupTransactions(Set<InvestToGroupTransaction> investToGroupTransactions) {
         this.investToGroupTransactions = investToGroupTransactions;
+    }
+
+    public Set<MediaAwarenessReport> getMediaAwarenessReports() {
+        return mediaAwarenessReports;
+    }
+
+    public OrganizationChart mediaAwarenessReports(Set<MediaAwarenessReport> mediaAwarenessReports) {
+        this.mediaAwarenessReports = mediaAwarenessReports;
+        return this;
+    }
+
+    public OrganizationChart addMediaAwarenessReport(MediaAwarenessReport mediaAwarenessReport) {
+        this.mediaAwarenessReports.add(mediaAwarenessReport);
+        mediaAwarenessReport.setOrganizationChart(this);
+        return this;
+    }
+
+    public OrganizationChart removeMediaAwarenessReport(MediaAwarenessReport mediaAwarenessReport) {
+        this.mediaAwarenessReports.remove(mediaAwarenessReport);
+        mediaAwarenessReport.setOrganizationChart(null);
+        return this;
+    }
+
+    public void setMediaAwarenessReports(Set<MediaAwarenessReport> mediaAwarenessReports) {
+        this.mediaAwarenessReports = mediaAwarenessReports;
     }
 
     public OrganizationChart getParent() {

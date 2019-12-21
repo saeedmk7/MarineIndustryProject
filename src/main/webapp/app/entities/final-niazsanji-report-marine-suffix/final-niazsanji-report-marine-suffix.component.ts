@@ -399,8 +399,8 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         this.totalFinalizeCost = 0;
         this.finalNiazsanjiReportsOrganizations.forEach(a => {
             this.total += a.educationalModuleTotalLearningTime * a.people.length;
-            this.totalCost += a.priceCost * a.people.length;
-            this.totalFinalizeCost += a.finalizeCost * a.people.length;
+            this.totalCost += a.priceCost;
+            this.totalFinalizeCost += a.finalizeCost;
         });
         //this.total = this.finalNiazsanjiReportsOrganizations.map(a => a.people.length);
         //this.totalCost = 0;//this.finalNiazsanjiReportsOrganizations.map(a => a.priceCost).reduce((a, b) => a + b, 0);
@@ -439,8 +439,10 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','planningRunMonth','select', 'equals', this.months, 'persianMonth'));
 
                 this.prepareSearchOrgChart();
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','educationalModuleId','text', 'equals'));
                 this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','educationalModuleTitle','text', 'contains'));
                 this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','status','select', 'equals', this.statusMeaning, 'mean'));
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','id','text', 'equals'));
                 this.prepareSearchCourseType();
                 this.prepareSearchEducationalModule();
                 this.preparePeople();

@@ -1,0 +1,29 @@
+{
+    "marineindustryprojApp": {
+        "restriction": {
+            "home": {
+                "title": "Restrictions",
+                "createLabel": "Create a new Restriction",
+                "createOrEditLabel": "Create or edit a Restriction"
+            },
+            "created": "A new Restriction is created with identifier {{ param }}",
+            "updated": "A Restriction is updated with identifier {{ param }}",
+            "deleted": "A Restriction is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Restriction {{ id }}?"
+            },
+            "detail": {
+                "title": "Restriction"
+            },
+            "title": "Title",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "guid": "Guid",
+            "requestEducationalModule": "Request Educational Module",
+            "educationalModule": "Educational Module"
+        }
+    }
+}

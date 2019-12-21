@@ -105,6 +105,9 @@ public class RequestEducationalModuleDTO implements Serializable {
 
     private Boolean hasImportantMessage;
 
+    @Size(max = 4096)
+    private String restrictionDescription;
+
     private Set<ScientificWorkGroupDTO> scientificWorkGroups = new HashSet<>();
 
     private Set<DocumentDTO> documents = new HashSet<>();
@@ -116,6 +119,8 @@ public class RequestEducationalModuleDTO implements Serializable {
     private Set<ResourceDTO> resources = new HashSet<>();
 
     private Set<TeacherDTO> teachers = new HashSet<>();
+
+    private Set<RestrictionDTO> restrictions = new HashSet<>();
 
     private Long securityLevelId;
 
@@ -397,6 +402,14 @@ public class RequestEducationalModuleDTO implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public String getRestrictionDescription() {
+        return restrictionDescription;
+    }
+
+    public void setRestrictionDescription(String restrictionDescription) {
+        this.restrictionDescription = restrictionDescription;
+    }
+
     public Set<ScientificWorkGroupDTO> getScientificWorkGroups() {
         return scientificWorkGroups;
     }
@@ -443,6 +456,14 @@ public class RequestEducationalModuleDTO implements Serializable {
 
     public void setTeachers(Set<TeacherDTO> teachers) {
         this.teachers = teachers;
+    }
+
+    public Set<RestrictionDTO> getRestrictions() {
+        return restrictions;
+    }
+
+    public void setRestrictions(Set<RestrictionDTO> restrictions) {
+        this.restrictions = restrictions;
     }
 
     public Long getSecurityLevelId() {
@@ -566,6 +587,7 @@ public class RequestEducationalModuleDTO implements Serializable {
             ", teachersText='" + getTeachersText() + "'" +
             ", guid='" + getGuid() + "'" +
             ", hasImportantMessage='" + isHasImportantMessage() + "'" +
+            ", restrictionDescription='" + getRestrictionDescription() + "'" +
             ", securityLevel=" + getSecurityLevelId() +
             ", securityLevel='" + getSecurityLevelTitle() + "'" +
             ", skillableLevelOfSkill=" + getSkillableLevelOfSkillId() +

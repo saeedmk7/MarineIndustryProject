@@ -163,6 +163,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                 value: 'ORGANIZATION'
             });
         }
+        debugger;
         this.runPhaseService
             .query({
                 page: 0,
@@ -235,12 +236,19 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                 key: 'personId.in', value: val
             });
         }
-        /*if (f.value['educationalModuleId']) {
+        debugger;
+        if (f.value['finalNiazsanjiReportId']) {
+            let val = +f.value['finalNiazsanjiReportId'];
+            criteria.push({
+                key: 'finalNiazsanjiReportId.equals', value: val
+            });
+        }
+        if (f.value['educationalModuleId']) {
             let val = +f.value['educationalModuleId'];
             criteria.push({
                 key: 'educationalModuleId.equals', value: val
             });
-        }*/
+        }
         if (f.value['educationalModuleTitle']) {
             let val = f.value['educationalModuleTitle'];
             criteria.push({
@@ -257,7 +265,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     }
 
     private prepareForFinal(data: IRunPhaseMarineSuffix[]) {
-
+        debugger;
         if (data.length > 0) {
             if (this.niazSanjiSource) {
                 this.prepareForFardiFinal(data);
@@ -275,10 +283,11 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     }
 
     prepareForFardiFinal(data: IRunPhaseMarineSuffix[]) {
-
+        debugger;
         data.forEach((a: IRunPhaseMarineSuffix) => {
             let runPhaseFardi: IRunPhaseFardiMarineSuffix = {};
             runPhaseFardi.id = a.id;
+            runPhaseFardi.finalNiazsanjiReportId = a.finalNiazsanjiReportId;
             runPhaseFardi.status = a.status;
             runPhaseFardi.educationalModuleId = a.educationalModuleId;
 
@@ -312,11 +321,12 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     }
 
     prepareForOrganizationFinal(data: IRunPhaseMarineSuffix[]) {
-
+        debugger;
         data.forEach((a: IRunPhaseMarineSuffix) => {
 
             let runPhaseOrganization: IRunPhaseOrganizationMarineSuffix = {};
             runPhaseOrganization.id = a.id;
+            runPhaseOrganization.finalNiazsanjiReportId = a.finalNiazsanjiReportId;
             runPhaseOrganization.status = a.status;
 
             runPhaseOrganization.educationalModuleId = a.educationalModuleId;
@@ -380,8 +390,8 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         this.totalFinalizeCost = 0;
         this.runPhaseOrganizations.forEach(a => {
             this.total += a.educationalModuleTotalLearningTime * a.people.length;
-            this.totalCost += a.priceCost * a.people.length;
-            this.totalFinalizeCost += a.finalizeCost * a.people.length;
+            this.totalCost += a.priceCost;
+            this.totalFinalizeCost += a.finalizeCost;
         });
         //this.total = this.runPhaseOrganizations.map(a => a.people.length);
         //this.totalCost = 0;//this.runPhaseOrganizations.map(a => a.priceCost).reduce((a, b) => a + b, 0);

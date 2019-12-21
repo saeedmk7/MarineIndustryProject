@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="document" class="detail-page">
-            <h2><span jhiTranslate="marineindustryprojApp.document.detail.title">Document</span> {{document.id}}</h2>
+            <h2><span jhiTranslate="marineindustryprojApp.document.detail.title">Document</span> <!--{{document.id}}--></h2>
             <hr>
             <mi-alert-error></mi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -16,7 +16,7 @@
                         {{document.fileDocContentType}}, {{byteSize(document.fileDoc)}}
                     </div>
                 </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.document.createUserLogin">Create User Login</span></dt>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.document.createUserLogin">Create User Login</span></dt>
                 <dd>
                     <span>{{document.createUserLogin}}</span>
                 </dd>
@@ -31,7 +31,7 @@
                 <dt><span jhiTranslate="marineindustryprojApp.document.modifyDate">Modify Date</span></dt>
                 <dd>
                     <span>{{document.modifyDate}}</span>
-                </dd>
+                </dd>-->
             </dl>
 
             <button type="submit"

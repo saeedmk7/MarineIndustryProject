@@ -3,7 +3,7 @@
     "marineindustryprojApp": {
         "planning" : {
             "home": {
-                "title": "تکمیل فرآیند برنامه ریزی",
+                "title": "طراحی و برنامه ریزی آموزشی دوره ها",
                 "createLabel": "جدید",
                 "createOrEditLabel": " فرآیند برنامه ریزی"
             },
@@ -16,6 +16,7 @@
             "detail": {
                 "title": "جزئیات اطلاعات نیازسنجی"
             },
+            "id": "شناسه یکتا",
             "niazsanjiYear": "سال نیازسنجی",
             "niazSanjiSource": "منبع نیازسنجی",
             "priceCost": "سرمایه گذاری دوره(ریال)",
@@ -40,8 +41,8 @@
             "educationalModule": "پودمان آموزشی",
             "educationalModuleId": "پودمان آموزشی",
             "educationalModuleTitle": "عنوان پودمان آموزشی",
-            "organizationChart": "پیشنهاد دهنده",
-            "organizationChartId": "پیشنهاد دهنده",
+            "organizationChart": "گروه/صنعت/واحد",
+            "organizationChartId": "گروه/صنعت/واحد",
             "person": "نام و نام خانوادگی",
             "personId": "نام و نام خانوادگی"
         }

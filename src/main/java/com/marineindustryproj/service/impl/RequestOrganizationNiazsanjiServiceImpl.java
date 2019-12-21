@@ -87,6 +87,7 @@ public class RequestOrganizationNiazsanjiServiceImpl implements RequestOrganizat
         finalOrganizationNiazsanji.setTeacherName(requestOrganizationNiazsanji.getTeacherName());
         finalOrganizationNiazsanji.setTrainingGoals(requestOrganizationNiazsanji.getTrainingGoals());
         finalOrganizationNiazsanji.setCourseType(requestOrganizationNiazsanji.getCourseType());
+        finalOrganizationNiazsanji.setHasImportantMessage(requestOrganizationNiazsanji.isHasImportantMessage());
 
         finalOrganizationNiazsanjiRepository.save(finalOrganizationNiazsanji);
 

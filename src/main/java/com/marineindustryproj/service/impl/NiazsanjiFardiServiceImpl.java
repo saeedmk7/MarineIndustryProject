@@ -106,6 +106,7 @@ public class NiazsanjiFardiServiceImpl implements NiazsanjiFardiService {
         finalNiazsanjiReport.setFinalizeCost(0);
         finalNiazsanjiReport.setCourseType(niazsanjiFardi.getCourseType());
         finalNiazsanjiReport.setStatus(0);
+        finalNiazsanjiReport.setHasImportantMessage(niazsanjiFardi.isHasImportantMessage());
         finalNiazsanjiReport = finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
 
         Person item = niazsanjiFardi.getPerson();

@@ -108,7 +108,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     greenColors: string[] = ['#c4f5bc', '#C8E6C9', '#A5D6A7', '#81C784', '#66BB6A', '#81C784', '#A5D6A7', '#C8E6C9', '#c4f5bc', '#C8E6C9', '#A5D6A7', '#81C784', '#66BB6A', '#81C784'];
     redColors: string[] = ['#FADBD8', '#F5B7B1', '#F1948A', '#EC7063', '#E74C3C', '#EC7063', '#F1948A', '#F5B7B1', '#FADBD8', '#F5B7B1', '#F1948A', '#EC7063', '#E74C3C'];
 
-    months: any[] = MONTHS.sort((a,b) => (a.id > b.id) ? -1 : (a.id < b.id) ? 1 : 0);
+    months: any[] = MONTHS.sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0);
     constructor(
         private principal: Principal,
         private organizationChartService: OrganizationChartMarineSuffixService,
@@ -311,7 +311,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                            a.statusMeaning = "تصویب شوراء";
                            break;
                        case 0:
-                           a.statusMeaning = "شناسنامه آموزشی";
+                           a.statusMeaning = "شناسنامه شغلی فرد";
                            break;
                    }
                 });
@@ -660,6 +660,9 @@ export class HomeComponent implements OnInit, OnDestroy {
                     const criteria = [{
                         key: 'organizationChart.equals',
                         values: orgRootId
+                    },{
+                        key: 'year.equals',
+                        values: niazsanjiYear
                     }];
                     this.forceRunningPercentService
                         .query({
@@ -682,6 +685,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     makeWorkPercentPerMonth(data:IForceRunningPercentMarineSuffix[], headers: any){
         if(data.length){
             this.forceRunningPercents = data;
+            this.workPercent = [];
 
             this.months.sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0).forEach(a => {
 
@@ -693,7 +697,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 const planning = this.planningAndRunMonthReports.find(w => w.reportType == 1 && w.month == a.id);
                 let planningPersonCost, planningPersonCostPercent, planningPersonHour, planningPersonHourPercent = 0;
                 //let planningPersonHour = 0;
-                debugger;
+
                 if(planning)
                 {
                     planningPersonCost = planning.personCost;
@@ -731,6 +735,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
     }
     makeDetailSeries(){
+        debugger;
 
         this.detailMonthPriceCostSeries = [{
                 name: "سرمایه گذاری اجرا شده",
@@ -761,7 +766,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.loadDetailMonthColumnChart();
     }
     loadDetailMonthColumnChart(){
-        const cats: any = this.months.map(a => a.persianMonth);
+
+        debugger;
+        const cats: any = this.months.sort((a,b) => (a.id > b.id) ? -1 : (a.id < b.id) ? 1 : 0).map(a => a.persianMonth);
         // @ts-ignore
         this.detailMonthPersonHourChart = this.showColumnChart(' نمودار نفر ساعت به تفکیک ماه برنامه ریزی و اجرا - ' + this.selectedGroup, this.detailMonthPersonHourSeries,
             'میزان نفر ساعت', cats);

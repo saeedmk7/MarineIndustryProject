@@ -155,6 +155,9 @@ public class DocumentQueryService extends QueryService<Document> {
         else if(entityName.equals("niazsanjifardi")) {
             criteria.setNiazsanjiFardiId(longFilter);
         }
+        else if(entityName.equals("investtogrouptransaction")) {
+            criteria.setInvestToGroupTransactionId(longFilter);
+        }
         else
         {
             LongFilter emptyLongFilter = new LongFilter();
@@ -248,6 +251,10 @@ public class DocumentQueryService extends QueryService<Document> {
             if (criteria.getInstructionId() != null) {
                 specification = specification.and(buildSpecification(criteria.getInstructionId(),
                     root -> root.join(Document_.instructions, JoinType.LEFT).get(Instruction_.id)));
+            }
+            if (criteria.getInvestToGroupTransactionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getInvestToGroupTransactionId(),
+                    root -> root.join(Document_.investToGroupTransactions, JoinType.LEFT).get(InvestToGroupTransaction_.id)));
             }
         }
         return specification;

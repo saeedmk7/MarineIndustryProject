@@ -100,7 +100,14 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
             this.finishDateValidation = 2;
         }
     }
-
+    deleteElement(i)
+    {
+        $('#' + i).remove();
+    }
+    toggleColappse(i)
+    {
+        $('#' + i).collapse('toggle');
+    }
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({runPhase}) => {

@@ -1,0 +1,37 @@
+{
+    "marineindustryprojApp": {
+        "mediaAwarenessReport": {
+            "home": {
+                "title": "گزارش آگاهسازی رسانه ای",
+                "createLabel": "جدید",
+                "createOrEditLabel": "گزارش آگاهسازی رسانه ای"
+            },
+            "created": "گزارش آگاهسازی رسانه ای با شناسه {{ param }} ایجاد شد.",
+            "updated": "گزارش آگاهسازی رسانه ای با شناسه {{ param }} ویرایش شد.",
+            "deleted": "گزارش آگاهسازی رسانه ای با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف گزارش آگاهسازی رسانه ای با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات سابقه شغلی"
+            },
+            "designed": "طراحی شده",
+            "designedNumber": "طراحی شده",
+            "subject": "موضوع یا محور رسانه تبلیغی",
+            "publishDate": "تاریخ انتشار",
+            "numberOfViewers": "تعداد رویت کنندگان",
+            "durationOfOperation": "مدت بهره برداری در هر مکان",
+            "reportTime": "زمان (دقیقه)",
+            "personHour": "نفر ساعت",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "guid": "Guid",
+            "organizationChart": "گروه/صنعت/واحد",
+            "mediaProductType": "نوع محصول رسانه ای",
+            "mediaProductTypeId": "نوع محصول رسانه ای"
+        }
+    }
+}

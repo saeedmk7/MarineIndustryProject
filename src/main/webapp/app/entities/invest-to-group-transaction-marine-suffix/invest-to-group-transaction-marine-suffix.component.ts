@@ -31,6 +31,7 @@ export class InvestToGroupTransactionMarineSuffixComponent implements OnInit, On
     links: any;
     totalItems: any;
     queryCount: any;
+    investSum: any;
     itemsPerPage: any;
     page: any;
     predicate: any;
@@ -117,6 +118,7 @@ export class InvestToGroupTransactionMarineSuffixComponent implements OnInit, On
 
     ngOnInit() {
         this.searchbarModel.push(new SearchPanelModel('investToGroupTransaction','title','text', 'contains'));
+        this.searchbarModel.push(new SearchPanelModel('investToGroupTransaction','investDate','text', 'contains'));
         //this.loadAll();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
@@ -169,6 +171,7 @@ export class InvestToGroupTransactionMarineSuffixComponent implements OnInit, On
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.investToGroupTransactions = this.convertObjectDatesService.changeArrayDate(data);
+        this.investSum = this.investToGroupTransactions.map(a => a.investAmount).reduce((sum, current) => sum + current);
     }
 
     protected onError(errorMessage: string) {

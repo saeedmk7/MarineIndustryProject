@@ -241,6 +241,9 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
                 (res: HttpErrorResponse) => this.onError(res.message));
         }
     }
+    addToListAllPeople(){
+        this.requestOrganizationNiazsanji.people = this.people;
+    }
     findTargetPeople(){
         let organization = this.organizationCharts.find(a => a.id == this.currentPerson.organizationChartId);
         if(organization.parentId > 0) {
@@ -317,7 +320,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         this.message = "";
 
         if (this.requestOrganizationNiazsanji.organizationChartId == undefined) {
-            this.message = "لطفا قسمت پیشنهاد دهنده را انتخاب نمائید.";
+            this.message = "لطفا قسمت گروه/صنعت/واحد را انتخاب نمائید.";
             this.isSaving = false;
             return;
         }

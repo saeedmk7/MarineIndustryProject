@@ -319,7 +319,7 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
                 title: 'کل پودمان'
             },{
                 id: EducationalModuleType.APPROVED,
-                title: 'از شناسنامه آموزشی'
+                title: 'نیازسنجی از شناسنامه شغلی'
             }];
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleType', 'select', 'equals', educationalModuleType));
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'priceCost', 'number', 'equals'));
@@ -553,7 +553,7 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
         this.loadAll(this.criteria);
     }
     toggleImportantMessage(id: number, type: boolean){
-        debugger;
+
         this.niazsanjiFardiService.toggleImportantMessage(id, type).subscribe(
             (res: HttpResponse<INiazsanjiFardiMarineSuffix>) => this.loadAll(this.criteria),
             (res: HttpErrorResponse) => this.onSaveError()

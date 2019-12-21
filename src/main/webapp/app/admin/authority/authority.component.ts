@@ -63,7 +63,7 @@ export class AuthorityComponent implements OnInit, OnDestroy {
         this.registerChangeInAuthority();
     }
     deleteAuthority(authority: Authority) {
-        const modalRef = this.modalService.open(AuthorityDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+        const modalRef = this.modalService.open(AuthorityDeleteDialogComponent, { size: 'lg', backdrop: false });
         modalRef.componentInstance.authority = authority;
         modalRef.result.then(
             result => {

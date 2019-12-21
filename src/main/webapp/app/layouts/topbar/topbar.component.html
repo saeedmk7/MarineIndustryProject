@@ -1,16 +1,13 @@
 <nav *ngIf="isAuthenticated()">
+    <div class="typingClass bgWhite lightShadow topMenu">
+        <button (click)="changeSpeech(false)" class="btn circle btn-info btn-sm">&#60;</button>
+        <button (click)="changeSpeech(true)" class="btn circle btn-info btn-sm">&#62;</button>
+        <div id="typingDiv" style="display: inline-block;"  [@simpleFadeAnimation] *ngIf="show">
+            <span> {{currentSpeech}} </span>
+        </div>
+    </div>
     <div class="col-xs-12 bgWhite lightShadow topMenu">
         <ul class="nav justify-content-end" style="padding-inline-start: 0px; font-size: larger">
-            <li class="nav-item" style="flex-grow: 1">
-                <!--<button (click)="changeTyping()" style="display: inline" class="btn btn-sm btn-info">تغییر حالت</button>-->
-                <div id="typingDiv" class="typingClass" [@enterAnimation] *ngIf="show">
-                    <!--<div id="typing"></div>-->
-                    <button (click)="changeSpeech(false)" class="btn circle btn-info btn-sm">&#60;</button>
-                    <span> {{currentSpeech}} </span>
-                    <button (click)="changeSpeech(true)" class="btn circle btn-info btn-sm">&#62;</button>
-                </div>
-
-            </li>
             <li class="nav-item seperate-left seperate-right" title="درخواست های جدید نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی">
                 <a class="nav-link excepted-menu" href="#/request-niazsanji-fardi-marine-suffix">
                     <span class="bell-contain" style="padding: 6px">

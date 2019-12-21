@@ -31,7 +31,7 @@ public class InvestToGroupTransactionCriteria implements Serializable {
 
     private StringFilter investDate;
 
-        private IntegerFilter investYear;
+    private IntegerFilter investYear;
 
     private IntegerFilter investAmount;
 
@@ -46,6 +46,8 @@ public class InvestToGroupTransactionCriteria implements Serializable {
     private ZonedDateTimeFilter modifyDate;
 
     private StringFilter guid;
+
+    private LongFilter documentId;
 
     private LongFilter organizationChartId;
 
@@ -145,6 +147,14 @@ public class InvestToGroupTransactionCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public LongFilter getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(LongFilter documentId) {
+        this.documentId = documentId;
+    }
+
     public LongFilter getOrganizationChartId() {
         return organizationChartId;
     }
@@ -176,6 +186,7 @@ public class InvestToGroupTransactionCriteria implements Serializable {
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(documentId, that.documentId) &&
             Objects.equals(organizationChartId, that.organizationChartId);
     }
 
@@ -194,6 +205,7 @@ public class InvestToGroupTransactionCriteria implements Serializable {
         modifyUserLogin,
         modifyDate,
         guid,
+        documentId,
         organizationChartId
         );
     }
@@ -213,6 +225,7 @@ public class InvestToGroupTransactionCriteria implements Serializable {
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
             "}";
     }

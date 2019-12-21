@@ -1,0 +1,27 @@
+{
+    "marineindustryprojApp": {
+        "mediaProductType": {
+            "home": {
+                "title": "انواع محصول رسانه ای",
+                "createLabel": "جدید",
+                "createOrEditLabel": "نوع محصول رسانه ای"
+            },
+            "created": "نوع محصول رسانه ای با شناسه {{ param }} ایجاد شد.",
+            "updated": "نوع محصول رسانه ای با شناسه {{ param }} ویرایش شد.",
+            "deleted": "نوع محصول رسانه ای با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف نوع محصول رسانه ای با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات نوع محصول رسانه ای"
+            },
+            "title": "عنوان",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "mediaAwarenessReport": "Media Awareness Report"
+        }
+    }
+}

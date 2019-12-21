@@ -1,0 +1,93 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="mediaAwarenessReport" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.detail.title">Media Awareness Report</span> {{mediaAwarenessReport.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="mediaAwarenessReport.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', mediaAwarenessReport.organizationChartId, 'view']">{{mediaAwarenessReport.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.mediaProductType">Media Product Type</span></dt>
+                <dd>
+                    <div *ngIf="mediaAwarenessReport.mediaProductTypeId">
+                        <a [routerLink]="['/media-product-type-marine-suffix', mediaAwarenessReport.mediaProductTypeId, 'view']">{{mediaAwarenessReport.mediaProductTypeTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.designed">Designed</span></dt>
+                <dd>
+                    <span>{{mediaAwarenessReport.designed}}</span>
+                </dd>
+<!--                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.designedNumber">Designed Number</span></dt>
+                <dd>
+                    <span>{{mediaAwarenessReport.designedNumber}}</span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.subject">Subject</span></dt>
+                <dd>
+                    <span>{{mediaAwarenessReport.subject}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.publishDate">Publish Date</span></dt>
+                <dd>
+                    <span>{{mediaAwarenessReport.publishDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.numberOfViewers">Number Of Viewers</span></dt>
+                <dd>
+                    <span>{{mediaAwarenessReport.numberOfViewers}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.durationOfOperation">Duration Of Operation</span></dt>
+                <dd>
+                    <span>{{mediaAwarenessReport.durationOfOperation}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.reportTime">Report Time</span></dt>
+                <dd>
+                    <span>{{mediaAwarenessReport.reportTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.personHour">Person Hour</span></dt>
+                <dd>
+                    <span>{{mediaAwarenessReport.personHour}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.description">Description</span></dt>
+                <dd>
+                    <span>{{mediaAwarenessReport.description}}</span>
+                </dd>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{mediaAwarenessReport.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{mediaAwarenessReport.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{mediaAwarenessReport.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{mediaAwarenessReport.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.mediaAwarenessReport.guid">Guid</span></dt>
+                <dd>
+                    <span>{{mediaAwarenessReport.guid}}</span>
+                </dd>-->
+
+            </dl>
+<div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/media-awareness-report-marine-suffix', mediaAwarenessReport.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+</div>
+        </div>
+    </div>
+</div>

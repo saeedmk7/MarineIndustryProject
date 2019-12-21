@@ -26,7 +26,7 @@ import {Subscription} from "rxjs";
 
 
 @Component({
-    selector: 'jhi-settings',
+    selector: 'person-educational-records-marine-suffix',
     templateUrl: './person-educational-records-marine-suffix.component.html',
     styleUrls: ['person-educational-records-marine-suffix.scss']
 })
@@ -46,7 +46,6 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     currentUserFullName: string;
     eventSubscriber: Subscription;
     jobTitle: string;
-    languages: any[];
     document: any;
     file: File;
     selectedFile: File;
@@ -70,8 +69,6 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         private dataUtils: JhiDataUtils,
         private account: AccountService,
         private principal: Principal,
-        private languageService: JhiLanguageService,
-        private languageHelper: JhiLanguageHelper,
         private jhiAlertService : JhiAlertService,
         private settingService: PersonEducationalRecordsMarineSuffixService,
         private organizationChartService: OrganizationChartMarineSuffixService,
@@ -87,7 +84,9 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         private userService: UserService,
         private eventManager: JhiEventManager
     ) {}
-
+    printPage(){
+        window.open('#/print-person-educational-records-marine-suffix', "_blank");
+    }
     ngOnInit() {
 
         this.principal.identity().then(account => {
@@ -102,6 +101,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
             this.myAccount = this.settingsAccount;
             if(this.settingsAccount.personId)
             {
+                this.urlToPrintFinal = this.urlToPrint + this.settingsAccount.personId;
                 this.personMarineSuffixService.find(this.settingsAccount.personId).subscribe(
                     (res: HttpResponse<PersonMarineSuffix>) => this.onPersonSuccess(res.body),
                     (res: HttpResponse<any>) => this.onPersonError(res.body)
@@ -121,9 +121,6 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
             else {
                 this.currentUserFullName = this.settingsAccount.login;
             }
-        });
-        this.languageHelper.getAll().then(languages => {
-            this.languages = languages;
         });
         this.registerChangeSubscriber();
     }
@@ -169,9 +166,12 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         this.prepareResearchRecords(person.id);
         this.prepareHomePagePersonEducationalModule(person.id);
     }
+    urlToPrint: string = "#/print-person-educational-records-marine-suffix/";
+    urlToPrintFinal: string = this.urlToPrint;
     loadPersonData($event: IPersonMarineSuffix)
     {
         if($event){
+            this.urlToPrintFinal = this.urlToPrint + $event.id;
             this.personMarineSuffixService.find($event.id).subscribe(
                 (res: HttpResponse<PersonMarineSuffix>) =>
                 {

@@ -80,6 +80,10 @@ import {MarineindustryprojTeachingRecordMarineSuffixModule} from "./teaching-rec
 import {MarineindustryprojResearchRecordMarineSuffixModule} from "./research-record-marine-suffix/research-record-marine-suffix.module";
 import { MarineindustryprojInvestToGroupTransactionMarineSuffixModule } from './invest-to-group-transaction-marine-suffix/invest-to-group-transaction-marine-suffix.module';
 import { MarineindustryprojForceRunningPercentMarineSuffixModule } from './force-running-percent-marine-suffix/force-running-percent-marine-suffix.module';
+import {MarineindustryprojPrintPersonEducationalRecordsMarineSuffixModule} from "./print-person-educational-records-marine-suffix/print-person-educational-records-marine-suffix.module";
+import { MarineindustryprojRestrictionMarineSuffixModule } from './restriction-marine-suffix/restriction-marine-suffix.module';
+import { MarineindustryprojMediaAwarenessReportMarineSuffixModule } from './media-awareness-report-marine-suffix/media-awareness-report-marine-suffix.module';
+import { MarineindustryprojMediaProductTypeMarineSuffixModule } from './media-product-type-marine-suffix/media-product-type-marine-suffix.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -161,6 +165,10 @@ import { MarineindustryprojForceRunningPercentMarineSuffixModule } from './force
         MarineindustryprojResearchRecordMarineSuffixModule,
         MarineindustryprojInvestToGroupTransactionMarineSuffixModule,
         MarineindustryprojForceRunningPercentMarineSuffixModule,
+        MarineindustryprojRestrictionMarineSuffixModule,
+        MarineindustryprojPrintPersonEducationalRecordsMarineSuffixModule,
+        MarineindustryprojMediaAwarenessReportMarineSuffixModule,
+        MarineindustryprojMediaProductTypeMarineSuffixModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

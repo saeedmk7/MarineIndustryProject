@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="organizationChart" class="detail-page">
-            <h2><span jhiTranslate="marineindustryprojApp.organizationChart.detail.title">Organization Chart</span> {{organizationChart.id}}</h2>
+            <h2><span jhiTranslate="marineindustryprojApp.organizationChart.detail.title">Organization Chart</span> <!--{{organizationChart.id}}--></h2>
             <hr>
             <mi-alert-error></mi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -13,7 +13,7 @@
                 <dd>
                     <span>{{organizationChart.code}}</span>
                 </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.organizationChart.createUserLogin">Create User Login</span></dt>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.organizationChart.createUserLogin">Create User Login</span></dt>
                 <dd>
                     <span>{{organizationChart.createUserLogin}}</span>
                 </dd>
@@ -44,7 +44,7 @@
                 <dt><span jhiTranslate="marineindustryprojApp.organizationChart.status">Status</span></dt>
                 <dd>
                     <span>{{organizationChart.status}}</span>
-                </dd>
+                </dd>-->
                 <dt><span jhiTranslate="marineindustryprojApp.organizationChart.parent">Parent</span></dt>
                 <dd>
                     <div *ngIf="organizationChart.parentId">

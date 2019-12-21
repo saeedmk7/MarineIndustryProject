@@ -11,6 +11,7 @@ import { ForceRunningPercentMarineSuffixService } from './force-running-percent-
 import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
 import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
 import {MONTHS} from "app/shared/constants/months.constants";
+import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 
 @Component({
     selector: 'mi-force-running-percent-marine-suffix-update',
@@ -26,6 +27,7 @@ export class ForceRunningPercentMarineSuffixUpdateComponent implements OnInit {
     {
         return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
     });
+    years: any = GREGORIAN_START_END_DATE.map(a => a.year);
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected forceRunningPercentService: ForceRunningPercentMarineSuffixService,

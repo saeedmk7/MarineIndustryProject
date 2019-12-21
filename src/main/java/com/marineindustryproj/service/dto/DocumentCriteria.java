@@ -65,6 +65,8 @@ public class DocumentCriteria implements Serializable {
 
     private LongFilter instructionId;
 
+    private LongFilter investToGroupTransactionId;
+
     public LongFilter getId() {
         return id;
     }
@@ -233,6 +235,14 @@ public class DocumentCriteria implements Serializable {
         this.instructionId = instructionId;
     }
 
+    public LongFilter getInvestToGroupTransactionId() {
+        return investToGroupTransactionId;
+    }
+
+    public void setInvestToGroupTransactionId(LongFilter investToGroupTransactionId) {
+        this.investToGroupTransactionId = investToGroupTransactionId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -264,7 +274,8 @@ public class DocumentCriteria implements Serializable {
             Objects.equals(usersRequestId, that.usersRequestId) &&
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
             Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId) &&
-            Objects.equals(instructionId, that.instructionId);
+            Objects.equals(instructionId, that.instructionId) &&
+            Objects.equals(investToGroupTransactionId, that.investToGroupTransactionId);
     }
 
     @Override
@@ -290,7 +301,8 @@ public class DocumentCriteria implements Serializable {
         usersRequestId,
         niazsanjiFardiId,
         requestNiazsanjiFardiId,
-        instructionId
+        instructionId,
+        investToGroupTransactionId
         );
     }
 
@@ -318,6 +330,7 @@ public class DocumentCriteria implements Serializable {
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
                 (requestNiazsanjiFardiId != null ? "requestNiazsanjiFardiId=" + requestNiazsanjiFardiId + ", " : "") +
                 (instructionId != null ? "instructionId=" + instructionId + ", " : "") +
+                (investToGroupTransactionId != null ? "investToGroupTransactionId=" + investToGroupTransactionId + ", " : "") +
             "}";
     }
 

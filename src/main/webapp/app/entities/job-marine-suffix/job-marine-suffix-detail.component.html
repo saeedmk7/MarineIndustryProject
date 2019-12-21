@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="job" class="detail-page">
-            <h2><span jhiTranslate="marineindustryprojApp.job.detail.title">Job</span> {{job.id}}</h2>
+            <h2><span jhiTranslate="marineindustryprojApp.job.detail.title">Job</span> <!--{{job.id}}--></h2>
             <mi-alert-error></mi-alert-error>
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="marineindustryprojApp.job.title">Title</span></dt>
@@ -16,7 +16,7 @@
                 <dd>
                     <span>{{job.jobCode}}</span>
                 </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.job.createUserLogin">Create User Login</span></dt>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.job.createUserLogin">Create User Login</span></dt>
                 <dd>
                     <span>{{job.createUserLogin}}</span>
                 </dd>
@@ -47,7 +47,7 @@
                 <dt><span jhiTranslate="marineindustryprojApp.job.status">Status</span></dt>
                 <dd>
                     <span>{{job.status}}</span>
-                </dd>
+                </dd>-->
                 <dt><span jhiTranslate="marineindustryprojApp.job.raste">Raste</span></dt>
                 <dd>
                     <div *ngIf="job.rasteId">

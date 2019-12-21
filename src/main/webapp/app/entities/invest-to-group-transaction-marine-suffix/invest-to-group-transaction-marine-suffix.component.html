@@ -61,6 +61,12 @@
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
+                                [routerLink]="['../document-marine-suffix', 'investtogrouptransaction',investToGroupTransaction.id ]"
+                                class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.documents">Documents</span>
+                        </button>
+                        <button type="submit"
                                 [routerLink]="['/invest-to-group-transaction-marine-suffix', investToGroupTransaction.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
@@ -82,6 +88,11 @@
                         </button>
                     </div>
                 </td>
+            </tr>
+            <tr>
+                <td colspan="4">مجموع</td>
+                <td>{{investSum | number}}</td>
+                <td colspan="4"></td>
             </tr>
             </tbody>
             <tfoot>

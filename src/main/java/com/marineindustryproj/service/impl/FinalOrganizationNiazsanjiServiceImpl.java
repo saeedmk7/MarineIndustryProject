@@ -84,6 +84,7 @@ public class FinalOrganizationNiazsanjiServiceImpl implements FinalOrganizationN
         finalNiazsanjiReport.setStatus(0);
         finalNiazsanjiReport.setFinalizeCost(0);
         finalNiazsanjiReport.setCourseType(finalOrganizationNiazsanji.getCourseType());
+        finalNiazsanjiReport.setHasImportantMessage(finalOrganizationNiazsanji.isHasImportantMessage());
         finalNiazsanjiReport = finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
 
         Integer peopleCount = finalOrganizationNiazsanji.getPeople().size();

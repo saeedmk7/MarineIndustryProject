@@ -62,6 +62,15 @@ public class InvestToGroupTransactionServiceImpl implements InvestToGroupTransac
             .map(investToGroupTransactionMapper::toDto);
     }
 
+    /**
+     * Get all the InvestToGroupTransaction with eager load of many-to-many relationships.
+     *
+     * @return the list of entities
+     */
+    public Page<InvestToGroupTransactionDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return investToGroupTransactionRepository.findAllWithEagerRelationships(pageable).map(investToGroupTransactionMapper::toDto);
+    }
+    
 
     /**
      * Get one investToGroupTransaction by id.
@@ -73,7 +82,7 @@ public class InvestToGroupTransactionServiceImpl implements InvestToGroupTransac
     @Transactional(readOnly = true)
     public Optional<InvestToGroupTransactionDTO> findOne(Long id) {
         log.debug("Request to get InvestToGroupTransaction : {}", id);
-        return investToGroupTransactionRepository.findById(id)
+        return investToGroupTransactionRepository.findOneWithEagerRelationships(id)
             .map(investToGroupTransactionMapper::toDto);
     }
 

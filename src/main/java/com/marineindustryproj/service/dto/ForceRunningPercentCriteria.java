@@ -43,6 +43,8 @@ public class ForceRunningPercentCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private IntegerFilter year;
+
     private LongFilter organizationChartId;
 
     public LongFilter getId() {
@@ -125,6 +127,14 @@ public class ForceRunningPercentCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public IntegerFilter getYear() {
+        return year;
+    }
+
+    public void setYear(IntegerFilter year) {
+        this.year = year;
+    }
+
     public LongFilter getOrganizationChartId() {
         return organizationChartId;
     }
@@ -154,6 +164,7 @@ public class ForceRunningPercentCriteria implements Serializable {
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(year, that.year) &&
             Objects.equals(organizationChartId, that.organizationChartId);
     }
 
@@ -170,6 +181,7 @@ public class ForceRunningPercentCriteria implements Serializable {
         modifyUserLogin,
         modifyDate,
         guid,
+        year,
         organizationChartId
         );
     }
@@ -187,6 +199,7 @@ public class ForceRunningPercentCriteria implements Serializable {
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (year != null ? "year=" + year + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
             "}";
     }

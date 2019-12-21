@@ -36,6 +36,8 @@ import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dat
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
+import {IRestrictionMarineSuffix} from "app/shared/model/restriction-marine-suffix.model";
+import {RestrictionMarineSuffixService} from "app/entities/restriction-marine-suffix";
 
 @Component({
     selector: 'mi-request-educational-module-marine-suffix-update',
@@ -63,6 +65,7 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
     documents: IDocumentMarineSuffix[];
 
     educationalcenters: IEducationalCenterMarineSuffix[];
+    restrictions: IRestrictionMarineSuffix[];
 
     goals: IGoalMarineSuffix[];
 
@@ -99,6 +102,7 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
         private treeUtilities: TreeUtilities,
         protected personService: PersonMarineSuffixService,
         protected organizationChartService: OrganizationChartMarineSuffixService,
+        protected restrictionService: RestrictionMarineSuffixService,
         private router: Router
     ) {}
     private setRoles(account: any){
@@ -184,6 +188,12 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
         this.evaluationMethodService.query().subscribe(
             (res: HttpResponse<IEvaluationMethodMarineSuffix[]>) => {
                 this.evaluationmethods = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.restrictionService.query().subscribe(
+            (res: HttpResponse<IRestrictionMarineSuffix[]>) => {
+                this.restrictions = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
