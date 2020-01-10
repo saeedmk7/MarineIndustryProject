@@ -1,0 +1,126 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="preJobNiazsanji">
+            <h2><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.detail.title">Pre Job Niazsanji</span> {{preJobNiazsanji.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.title">Title</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanji.title}}</span>
+                </dd>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اولیه نیازسنجی</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="preJobNiazsanji.organizationChartId">
+                        {{preJobNiazsanji.organizationChartTitle}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="preJobNiazsanji.personId">
+                        {{preJobNiazsanji.personFamily}}
+                    </div>
+                </dd>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات شغل</div></div>
+
+                <dl class="row-md jh-entity-details">
+                    <dt><span jhiTranslate="marineindustryprojApp.job.title">Title</span></dt>
+                    <dd>
+                        <span>{{job.title}}</span>
+                    </dd>
+                    <dt><span jhiTranslate="marineindustryprojApp.job.jobKey">Job Key</span></dt>
+                    <dd>
+                        <span>{{job.jobKey}}</span>
+                    </dd>
+                    <dt><span jhiTranslate="marineindustryprojApp.job.jobCode">Job Code</span></dt>
+                    <dd>
+                        <span>{{job.jobCode}}</span>
+                    </dd>
+                </dl>
+
+                <div *ngIf="!job.fileDoc" class="alert alert-danger">شناسنامه شغلی برای شغل این فرد تعریف نشده است.</div>
+                <a *ngIf="job.fileDoc" title="دریافت شناسنامه" [href]="job.fileDoc | safe" target="_blank"
+                   class="btn btn-default btn-sm enableLink">
+                    <fa-icon [icon]="'download'"></fa-icon>
+                    لینک دریافت شناسنامه شغلی شما
+                </a>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.reviewDate">Review Date</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanji.reviewDate}}</span>
+                </dd>
+
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">شایستگی های شغل</div></div>
+                <table style="alignment: center" class="table table-bordered table-sm">
+                    <!--<thead>
+                    <tr>
+                        <th>شایستگی ها</th>
+                        <th></th>
+                    </tr>
+                    </thead>-->
+                    <tbody>
+                    <tr *ngFor="let i of competencies">
+                        <td style="background-color: #00c4e6">
+                            {{i.title}}
+                        </td>
+                        <td>
+                            <span class="badge badge-info" *ngFor="let item of i.selectedItems">{{item}}</span>
+                            <!--<ng-select [items]="[]"
+                                       class="disable-arrow"
+                                       [addTag]="true"
+                                       [multiple]="true"
+                                       [selectOnTab]="true"
+                                       [isOpen]="false"
+                                       name="selectedItems"
+                                       [(ngModel)]="i.selectedItems"
+                            >
+                            </ng-select>-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">انتخاب نمایندگان</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.agents">agents</span></dt>
+                <dd>
+                    <span *ngFor="let person of preJobNiazsanji.people; let last = last" class="badge badge-info">
+                        <!--<a [routerLink]="['/person-marine-suffix', person?.id, 'view' ]">-->{{person.family}}<!--</a>{{last ? '' : ', '}}-->
+                    </span>
+                </dd>
+
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.description">Description</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanji.description}}</span>
+                </dd>
+                <dt>
+                    <span jhiTranslate="marineindustryprojApp.preJobNiazsanji.conversation">Conversation</span>
+                </dt>
+                <dd style="width: 100%">
+            <textarea class="form-control" cols="100" rows="10">
+                        {{preJobNiazsanji.conversation}}
+                    </textarea>
+                </dd>
+
+            </dl>
+
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+            <ng-container *ngIf="preJobNiazsanjiId">
+                <button type="button" id="step-forward" class="btn btn-info pull-left"  (click)="stepForward()">
+                    <fa-icon [icon]="'backward'"></fa-icon>&nbsp;گام بعدی (بدون ذخیره)
+                </button>
+               <!-- <button type="button" id="step-back" class="btn btn-warning pull-left"  (click)="stepBack()">
+                    <fa-icon [icon]="'forward'"></fa-icon>&nbsp;گام قبلی
+                </button>-->
+            </ng-container>
+            <!--<button type="button"
+                    [routerLink]="['/pre-job-niazsanji-marine-suffix', preJobNiazsanji.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>-->
+        </div>
+    </div>
+</div>

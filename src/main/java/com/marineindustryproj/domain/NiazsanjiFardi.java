@@ -93,6 +93,18 @@ public class NiazsanjiFardi implements Serializable {
     @Column(name = "has_important_message")
     private Boolean hasImportantMessage;
 
+    @Size(max = 4096)
+    @Column(name = "restriction_description", length = 4096)
+    private String restrictionDescription;
+
+    @Size(max = 4096)
+    @Column(name = "goals_text", length = 4096)
+    private String goalsText;
+
+    @Size(max = 4096)
+    @Column(name = "prerequisite", length = 4096)
+    private String prerequisite;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "niazsanji_fardi_document",
@@ -100,9 +112,20 @@ public class NiazsanjiFardi implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "documents_id", referencedColumnName = "id"))
     private Set<Document> documents = new HashSet<>();
 
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "niazsanji_fardi_restriction",
+               joinColumns = @JoinColumn(name = "niazsanji_fardis_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "restrictions_id", referencedColumnName = "id"))
+    private Set<Restriction> restrictions = new HashSet<>();
+
     @ManyToOne
     @JsonIgnoreProperties("niazsanjiFardis")
     private CourseType courseType;
+
+    @ManyToOne
+    @JsonIgnoreProperties("niazsanjiFardis")
+    private PreJobNiazsanji preJobNiazsanji;
 
     @ManyToOne
     @JsonIgnoreProperties("niazsanjiFardis")
@@ -121,6 +144,10 @@ public class NiazsanjiFardi implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("niazsanjiFardis")
     private OrganizationChart organizationChart;
+
+    @ManyToOne
+    @JsonIgnoreProperties("niazsanjiFardis")
+    private TeachingApproach teachingApproach;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -352,6 +379,45 @@ public class NiazsanjiFardi implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public String getRestrictionDescription() {
+        return restrictionDescription;
+    }
+
+    public NiazsanjiFardi restrictionDescription(String restrictionDescription) {
+        this.restrictionDescription = restrictionDescription;
+        return this;
+    }
+
+    public void setRestrictionDescription(String restrictionDescription) {
+        this.restrictionDescription = restrictionDescription;
+    }
+
+    public String getGoalsText() {
+        return goalsText;
+    }
+
+    public NiazsanjiFardi goalsText(String goalsText) {
+        this.goalsText = goalsText;
+        return this;
+    }
+
+    public void setGoalsText(String goalsText) {
+        this.goalsText = goalsText;
+    }
+
+    public String getPrerequisite() {
+        return prerequisite;
+    }
+
+    public NiazsanjiFardi prerequisite(String prerequisite) {
+        this.prerequisite = prerequisite;
+        return this;
+    }
+
+    public void setPrerequisite(String prerequisite) {
+        this.prerequisite = prerequisite;
+    }
+
     public Set<Document> getDocuments() {
         return documents;
     }
@@ -377,6 +443,31 @@ public class NiazsanjiFardi implements Serializable {
         this.documents = documents;
     }
 
+    public Set<Restriction> getRestrictions() {
+        return restrictions;
+    }
+
+    public NiazsanjiFardi restrictions(Set<Restriction> restrictions) {
+        this.restrictions = restrictions;
+        return this;
+    }
+
+    public NiazsanjiFardi addRestriction(Restriction restriction) {
+        this.restrictions.add(restriction);
+        restriction.getNiazsanjiFardis().add(this);
+        return this;
+    }
+
+    public NiazsanjiFardi removeRestriction(Restriction restriction) {
+        this.restrictions.remove(restriction);
+        restriction.getNiazsanjiFardis().remove(this);
+        return this;
+    }
+
+    public void setRestrictions(Set<Restriction> restrictions) {
+        this.restrictions = restrictions;
+    }
+
     public CourseType getCourseType() {
         return courseType;
     }
@@ -388,6 +479,19 @@ public class NiazsanjiFardi implements Serializable {
 
     public void setCourseType(CourseType courseType) {
         this.courseType = courseType;
+    }
+
+    public PreJobNiazsanji getPreJobNiazsanji() {
+        return preJobNiazsanji;
+    }
+
+    public NiazsanjiFardi preJobNiazsanji(PreJobNiazsanji preJobNiazsanji) {
+        this.preJobNiazsanji = preJobNiazsanji;
+        return this;
+    }
+
+    public void setPreJobNiazsanji(PreJobNiazsanji preJobNiazsanji) {
+        this.preJobNiazsanji = preJobNiazsanji;
     }
 
     public RequestNiazsanjiFardi getRequestNiazsanjiFardi() {
@@ -441,6 +545,19 @@ public class NiazsanjiFardi implements Serializable {
     public void setOrganizationChart(OrganizationChart organizationChart) {
         this.organizationChart = organizationChart;
     }
+
+    public TeachingApproach getTeachingApproach() {
+        return teachingApproach;
+    }
+
+    public NiazsanjiFardi teachingApproach(TeachingApproach teachingApproach) {
+        this.teachingApproach = teachingApproach;
+        return this;
+    }
+
+    public void setTeachingApproach(TeachingApproach teachingApproach) {
+        this.teachingApproach = teachingApproach;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -484,6 +601,9 @@ public class NiazsanjiFardi implements Serializable {
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
             ", guid='" + getGuid() + "'" +
             ", hasImportantMessage='" + isHasImportantMessage() + "'" +
+            ", restrictionDescription='" + getRestrictionDescription() + "'" +
+            ", goalsText='" + getGoalsText() + "'" +
+            ", prerequisite='" + getPrerequisite() + "'" +
             "}";
     }
 }

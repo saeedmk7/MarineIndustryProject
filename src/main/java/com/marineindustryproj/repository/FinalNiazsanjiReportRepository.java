@@ -21,14 +21,14 @@ public interface FinalNiazsanjiReportRepository extends JpaRepository<FinalNiazs
 
     String ALL_FINALNIAZSANJIREPORT_CACHE = "allFinalNiazsanjiReport";
 
-    @Query(value = "select distinct final_niazsanji_report from FinalNiazsanjiReport final_niazsanji_report left join fetch final_niazsanji_report.documents",
+    @Query(value = "select distinct final_niazsanji_report from FinalNiazsanjiReport final_niazsanji_report left join fetch final_niazsanji_report.documents left join fetch final_niazsanji_report.restrictions",
         countQuery = "select count(distinct final_niazsanji_report) from FinalNiazsanjiReport final_niazsanji_report")
     Page<FinalNiazsanjiReport> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(value = "select distinct final_niazsanji_report from FinalNiazsanjiReport final_niazsanji_report left join fetch final_niazsanji_report.documents")
+    @Query(value = "select distinct final_niazsanji_report from FinalNiazsanjiReport final_niazsanji_report left join fetch final_niazsanji_report.documents left join fetch final_niazsanji_report.restrictions")
     List<FinalNiazsanjiReport> findAllWithEagerRelationships();
 
-    @Query("select final_niazsanji_report from FinalNiazsanjiReport final_niazsanji_report left join fetch final_niazsanji_report.documents where final_niazsanji_report.id =:id")
+    @Query("select final_niazsanji_report from FinalNiazsanjiReport final_niazsanji_report left join fetch final_niazsanji_report.documents left join fetch final_niazsanji_report.restrictions where final_niazsanji_report.id =:id")
     Optional<FinalNiazsanjiReport> findOneWithEagerRelationships(@Param("id") Long id);
 
     @Query("select new com.marineindustryproj.service.dto.customs.FinalNiazsanjiReportCustomDTO(finalNiazsanjiReport.id, finalNiazsanjiReport.priceCost, finalNiazsanjiReport.finalizeCost,finalNiazsanjiReport.educationalModule, finalNiazsanjiReport.status) from FinalNiazsanjiReport finalNiazsanjiReport where finalNiazsanjiReport.niazsanjiYear = :niazsanjiYear and finalNiazsanjiReport.organizationChart.id in :orgChartIds")

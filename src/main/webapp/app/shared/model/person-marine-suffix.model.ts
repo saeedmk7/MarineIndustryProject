@@ -6,6 +6,9 @@ import { IRequestNiazsanjiFardiMarineSuffix } from 'app/shared/model//request-ni
 import { IEducationalHistoryMarineSuffix } from 'app/shared/model//educational-history-marine-suffix.model';
 import { IEducationalRecordMarineSuffix } from 'app/shared/model//educational-record-marine-suffix.model';
 import { IJobRecordMarineSuffix } from 'app/shared/model//job-record-marine-suffix.model';
+import { IResearchRecordMarineSuffix } from 'app/shared/model//research-record-marine-suffix.model';
+import { ITeachingRecordMarineSuffix } from 'app/shared/model//teaching-record-marine-suffix.model';
+import { IPreJobNiazsanjiMarineSuffix } from 'app/shared/model//pre-job-niazsanji-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IScientificWorkGroupMarineSuffix } from 'app/shared/model//scientific-work-group-marine-suffix.model';
 import { IMainTaskMarineSuffix } from 'app/shared/model//main-task-marine-suffix.model';
@@ -48,6 +51,9 @@ export interface IPersonMarineSuffix {
     educationalHistories?: IEducationalHistoryMarineSuffix[];
     educationalRecords?: IEducationalRecordMarineSuffix[];
     jobRecords?: IJobRecordMarineSuffix[];
+    researchRecords?: IResearchRecordMarineSuffix[];
+    teachingRecords?: ITeachingRecordMarineSuffix[];
+    preJobNiazsanjis?: IPreJobNiazsanjiMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     scientificWorkGroups?: IScientificWorkGroupMarineSuffix[];
     lastQualificationTitle?: string;
@@ -108,6 +114,9 @@ export class PersonMarineSuffix implements IPersonMarineSuffix {
         public educationalHistories?: IEducationalHistoryMarineSuffix[],
         public educationalRecords?: IEducationalRecordMarineSuffix[],
         public jobRecords?: IJobRecordMarineSuffix[],
+        public researchRecords?: IResearchRecordMarineSuffix[],
+        public teachingRecords?: ITeachingRecordMarineSuffix[],
+        public preJobNiazsanjis?: IPreJobNiazsanjiMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public scientificWorkGroups?: IScientificWorkGroupMarineSuffix[],
         public lastQualificationTitle?: string,
@@ -130,7 +139,7 @@ export class PersonMarineSuffix implements IPersonMarineSuffix {
         public requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[],
         public finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[],
         public designAndPlannings?: IDesignAndPlanningMarineSuffix[],
-        public runPhases?: IRunPhaseMarineSuffix[]
+        public runPhases?: IRunPhaseMarineSuffix[],
     ) {
 
         this.archived = this.archived || false;

@@ -17,14 +17,14 @@ import java.util.Optional;
 @Repository
 public interface NiazsanjiFardiRepository extends JpaRepository<NiazsanjiFardi, Long>, JpaSpecificationExecutor<NiazsanjiFardi> {
 
-    @Query(value = "select distinct niazsanji_fardi from NiazsanjiFardi niazsanji_fardi left join fetch niazsanji_fardi.documents",
+    @Query(value = "select distinct niazsanji_fardi from NiazsanjiFardi niazsanji_fardi left join fetch niazsanji_fardi.documents left join fetch niazsanji_fardi.restrictions",
         countQuery = "select count(distinct niazsanji_fardi) from NiazsanjiFardi niazsanji_fardi")
     Page<NiazsanjiFardi> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(value = "select distinct niazsanji_fardi from NiazsanjiFardi niazsanji_fardi left join fetch niazsanji_fardi.documents")
+    @Query(value = "select distinct niazsanji_fardi from NiazsanjiFardi niazsanji_fardi left join fetch niazsanji_fardi.documents left join fetch niazsanji_fardi.restrictions")
     List<NiazsanjiFardi> findAllWithEagerRelationships();
 
-    @Query("select niazsanji_fardi from NiazsanjiFardi niazsanji_fardi left join fetch niazsanji_fardi.documents where niazsanji_fardi.id =:id")
+    @Query("select niazsanji_fardi from NiazsanjiFardi niazsanji_fardi left join fetch niazsanji_fardi.documents left join fetch niazsanji_fardi.restrictions where niazsanji_fardi.id =:id")
     Optional<NiazsanjiFardi> findOneWithEagerRelationships(@Param("id") Long id);
 
 }

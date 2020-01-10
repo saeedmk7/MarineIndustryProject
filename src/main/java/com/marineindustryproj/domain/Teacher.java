@@ -126,6 +126,9 @@ public class Teacher implements Serializable {
     @OneToMany(mappedBy = "teacher")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<FinalOrganizationNiazsanji> finalOrganizationNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "teacher")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<FinalNiazsanjiReport> finalNiazsanjiReports = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "teacher_document",
@@ -528,6 +531,31 @@ public class Teacher implements Serializable {
 
     public void setFinalOrganizationNiazsanjis(Set<FinalOrganizationNiazsanji> finalOrganizationNiazsanjis) {
         this.finalOrganizationNiazsanjis = finalOrganizationNiazsanjis;
+    }
+
+    public Set<FinalNiazsanjiReport> getFinalNiazsanjiReports() {
+        return finalNiazsanjiReports;
+    }
+
+    public Teacher finalNiazsanjiReports(Set<FinalNiazsanjiReport> finalNiazsanjiReports) {
+        this.finalNiazsanjiReports = finalNiazsanjiReports;
+        return this;
+    }
+
+    public Teacher addFinalNiazsanjiReport(FinalNiazsanjiReport finalNiazsanjiReport) {
+        this.finalNiazsanjiReports.add(finalNiazsanjiReport);
+        finalNiazsanjiReport.setTeacher(this);
+        return this;
+    }
+
+    public Teacher removeFinalNiazsanjiReport(FinalNiazsanjiReport finalNiazsanjiReport) {
+        this.finalNiazsanjiReports.remove(finalNiazsanjiReport);
+        finalNiazsanjiReport.setTeacher(null);
+        return this;
+    }
+
+    public void setFinalNiazsanjiReports(Set<FinalNiazsanjiReport> finalNiazsanjiReports) {
+        this.finalNiazsanjiReports = finalNiazsanjiReports;
     }
 
     public Set<Document> getDocuments() {

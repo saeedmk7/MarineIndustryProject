@@ -55,6 +55,7 @@ export interface IRequestEducationalModuleMarineSuffix {
     goals?: IGoalMarineSuffix[];
     resources?: IResourceMarineSuffix[];
     teachers?: ITeacherMarineSuffix[];
+    restrictions?: IRestrictionMarineSuffix[];
     securityLevelTitle?: string;
     securityLevelId?: number;
     skillableLevelOfSkillTitle?: string;
@@ -63,7 +64,6 @@ export interface IRequestEducationalModuleMarineSuffix {
     evaluationMethodId?: number;
     organizationTitle?: string;
     organizationId?: number;
-    restrictions?: IRestrictionMarineSuffix[];
 }
 
 export class RequestEducationalModuleMarineSuffix implements IRequestEducationalModuleMarineSuffix {
@@ -113,6 +113,7 @@ export class RequestEducationalModuleMarineSuffix implements IRequestEducational
         public goals?: IGoalMarineSuffix[],
         public resources?: IResourceMarineSuffix[],
         public teachers?: ITeacherMarineSuffix[],
+        public restrictions?: IRestrictionMarineSuffix[],
         public securityLevelTitle?: string,
         public securityLevelId?: number,
         public skillableLevelOfSkillTitle?: string,
@@ -120,8 +121,7 @@ export class RequestEducationalModuleMarineSuffix implements IRequestEducational
         public evaluationMethodTitle?: string,
         public evaluationMethodId?: number,
         public organizationTitle?: string,
-        public organizationId?: number,
-        public restrictions?: IRestrictionMarineSuffix[]
+        public organizationId?: number
     ) {
         this.archived = this.archived || false;
         this.fullTitle =  this.code + ' - ' + this.title;

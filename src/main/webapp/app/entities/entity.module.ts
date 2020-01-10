@@ -31,7 +31,6 @@ import { MarineindustryprojDocumentMarineSuffixModule } from './document-marine-
 import { MarineindustryprojMainTaskMarineSuffixModule } from './main-task-marine-suffix/main-task-marine-suffix.module';
 import { MarineindustryprojSubTaskMarineSuffixModule } from './sub-task-marine-suffix/sub-task-marine-suffix.module';
 import { MarineindustryprojNiazsanjiGroupMarineSuffixModule } from './niazsanji-group-marine-suffix/niazsanji-group-marine-suffix.module';
-
 // prettier-ignore
 import {
     MarineindustryprojRequestOrganizationNiazsanjiMarineSuffixModule
@@ -84,6 +83,15 @@ import {MarineindustryprojPrintPersonEducationalRecordsMarineSuffixModule} from 
 import { MarineindustryprojRestrictionMarineSuffixModule } from './restriction-marine-suffix/restriction-marine-suffix.module';
 import { MarineindustryprojMediaAwarenessReportMarineSuffixModule } from './media-awareness-report-marine-suffix/media-awareness-report-marine-suffix.module';
 import { MarineindustryprojMediaProductTypeMarineSuffixModule } from './media-product-type-marine-suffix/media-product-type-marine-suffix.module';
+import { MarineindustryprojDesignNiazsanjiMarineSuffixModule } from './design-niazsanji-marine-suffix/design-niazsanji-marine-suffix.module';
+import { MarineindustryprojPreJobNiazsanjiMarineSuffixModule } from './pre-job-niazsanji-marine-suffix/pre-job-niazsanji-marine-suffix.module';
+import { MarineindustryprojPreJobNiazsanjiCompetencyMarineSuffixModule } from './pre-job-niazsanji-competency-marine-suffix/pre-job-niazsanji-competency-marine-suffix.module';
+import { MarineindustryprojCompetencyMarineSuffixModule } from './competency-marine-suffix/competency-marine-suffix.module';
+import { MarineindustryprojFixCompetencyDeficiencyMarineSuffixModule } from './fix-competency-deficiency-marine-suffix/fix-competency-deficiency-marine-suffix.module';
+import { MarineindustryprojPriorityCriteriaValueMarineSuffixModule } from './priority-criteria-value-marine-suffix/priority-criteria-value-marine-suffix.module';
+import { MarineindustryprojPriorityCriteriaMarineSuffixModule } from './priority-criteria-marine-suffix/priority-criteria-marine-suffix.module';
+import {MarineindustryprojPreJobNiazsanjiStepsMarineSuffixModule} from "app/entities/pre-job-niazsanji-steps-marine-suffix/pre-job-niazsanji-steps-marine-suffix.module";
+import {MarineindustryprojJobNiazsanjiMarineSuffixModule} from "app/entities/job-niazsanji-marine-suffix/job-niazsanji-marine-suffix.module";
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -168,7 +176,17 @@ import { MarineindustryprojMediaProductTypeMarineSuffixModule } from './media-pr
         MarineindustryprojRestrictionMarineSuffixModule,
         MarineindustryprojPrintPersonEducationalRecordsMarineSuffixModule,
         MarineindustryprojMediaAwarenessReportMarineSuffixModule,
-        MarineindustryprojMediaProductTypeMarineSuffixModule
+        MarineindustryprojMediaProductTypeMarineSuffixModule,
+        MarineindustryprojDesignNiazsanjiMarineSuffixModule,
+        MarineindustryprojPreJobNiazsanjiMarineSuffixModule,
+        MarineindustryprojPreJobNiazsanjiCompetencyMarineSuffixModule,
+        MarineindustryprojCompetencyMarineSuffixModule,
+        MarineindustryprojFixCompetencyDeficiencyMarineSuffixModule,
+        MarineindustryprojPriorityCriteriaValueMarineSuffixModule,
+        MarineindustryprojPriorityCriteriaMarineSuffixModule,
+        MarineindustryprojPreJobNiazsanjiStepsMarineSuffixModule,
+        MarineindustryprojJobNiazsanjiMarineSuffixModule
+
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

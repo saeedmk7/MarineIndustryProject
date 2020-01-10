@@ -80,10 +80,10 @@
                     {{requestNiazsanjiFardi.allEducationalModuleId}}
                 </td>
                 <td *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
-                    نیازسنجی فردی
+                    <label jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.allEducationalModule"></label>
                 </td>
                 <td *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
-                    نیازسنجی از شناسنامه شغلی
+                    <label jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.approvedEducationalModule"></label>
                 </td>
                 <td>
                     {{requestNiazsanjiFardi.skillLevelOfSkillTitle}}
@@ -199,49 +199,6 @@
                                 <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
                             </button>
                         </ng-container>
-                        <!--<ng-container *ngIf="isOther && requestNiazsanjiFardi.status == 10 && (!isModirSannat)">
-                        <button type="submit"
-                                [routerLink]="['/request-niazsanji-fardi-marine-suffix', requestNiazsanjiFardi.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit" title="ثبت نظر"
-                                [routerLink]="['/', { outlets: { popup: 'request-niazsanji-fardi-marine-suffix/'+ requestNiazsanjiFardi.id + '/' + 'COMMENT' + '/comment'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'comments'"></fa-icon>
-                            &lt;!&ndash;<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.comment">comment</span>&ndash;&gt;
-                        </button>
-
-                        <button type="submit" title="تایید کردن"
-                                [routerLink]="['/', { outlets: { popup: 'request-niazsanji-fardi-marine-suffix/'+ requestNiazsanjiFardi.id + '/' + 'ACCEPT' + '/comment'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-success btn-sm">
-                            <fa-icon [icon]="'check-double'"></fa-icon>
-                            &lt;!&ndash;<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.accept">comment</span>&ndash;&gt;
-                        </button>
-                        <button type="submit" title="رد کردن"
-                                [routerLink]="['/', { outlets: { popup: 'request-niazsanji-fardi-marine-suffix/'+ requestNiazsanjiFardi.id + '/' + 'REJECT' + '/comment'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'ban'"></fa-icon>
-                            &lt;!&ndash;<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>&ndash;&gt;
-                        </button>
-                    </ng-container>
-                        <ng-container *ngIf="isModirSannat && requestNiazsanjiFardi.status == 10">
-                            <button type="submit" title="ثبت نظر"
-                                    [routerLink]="['/', { outlets: { popup: 'request-niazsanji-fardi-marine-suffix/'+ requestNiazsanjiFardi.id + '/' + 'COMMENT' + '/comment'} }]"
-                                    replaceUrl="true"
-                                    queryParamsHandling="merge"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon [icon]="'comments'"></fa-icon>
-                                &lt;!&ndash;<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.comment">comment</span>&ndash;&gt;
-                            </button>
-                        </ng-container>-->
                     </ng-container>
                     <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
                             [routerLink]="['/', { outlets: { popup: 'request-niazsanji-fardi-marine-suffix/'+ requestNiazsanjiFardi.id + '/delete'} }]"
@@ -301,9 +258,9 @@
         </table>
     </div>
     <div *ngIf="requestNiazsanjiFardis && requestNiazsanjiFardis.length">
-        <div class="row justify-content-center">
+        <!--<div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
+        </div>-->
         <div class="row justify-content-center">
             <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>

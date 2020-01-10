@@ -49,9 +49,13 @@ public class CourseTypeCriteria implements Serializable {
 
     private LongFilter niazsanjiFardiId;
 
+    private LongFilter requestNiazsanjiFardiId;
+
     private LongFilter educationalHistoryId;
 
-    private LongFilter requestNiazsanjiFardiId;
+    private LongFilter designNiazsanjiId;
+
+    private LongFilter jobNiazsanjiId;
 
     public LongFilter getId() {
         return id;
@@ -157,6 +161,14 @@ public class CourseTypeCriteria implements Serializable {
         this.niazsanjiFardiId = niazsanjiFardiId;
     }
 
+    public LongFilter getRequestNiazsanjiFardiId() {
+        return requestNiazsanjiFardiId;
+    }
+
+    public void setRequestNiazsanjiFardiId(LongFilter requestNiazsanjiFardiId) {
+        this.requestNiazsanjiFardiId = requestNiazsanjiFardiId;
+    }
+
     public LongFilter getEducationalHistoryId() {
         return educationalHistoryId;
     }
@@ -165,12 +177,20 @@ public class CourseTypeCriteria implements Serializable {
         this.educationalHistoryId = educationalHistoryId;
     }
 
-    public LongFilter getRequestNiazsanjiFardiId() {
-        return requestNiazsanjiFardiId;
+    public LongFilter getDesignNiazsanjiId() {
+        return designNiazsanjiId;
     }
 
-    public void setRequestNiazsanjiFardiId(LongFilter requestNiazsanjiFardiId) {
-        this.requestNiazsanjiFardiId = requestNiazsanjiFardiId;
+    public void setDesignNiazsanjiId(LongFilter designNiazsanjiId) {
+        this.designNiazsanjiId = designNiazsanjiId;
+    }
+
+    public LongFilter getJobNiazsanjiId() {
+        return jobNiazsanjiId;
+    }
+
+    public void setJobNiazsanjiId(LongFilter jobNiazsanjiId) {
+        this.jobNiazsanjiId = jobNiazsanjiId;
     }
 
 
@@ -197,8 +217,10 @@ public class CourseTypeCriteria implements Serializable {
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
             Objects.equals(designAndPlanningId, that.designAndPlanningId) &&
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
+            Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId) &&
             Objects.equals(educationalHistoryId, that.educationalHistoryId) &&
-            Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId);
+            Objects.equals(designNiazsanjiId, that.designNiazsanjiId) &&
+            Objects.equals(jobNiazsanjiId, that.jobNiazsanjiId);
     }
 
     @Override
@@ -217,8 +239,10 @@ public class CourseTypeCriteria implements Serializable {
         finalNiazsanjiReportId,
         designAndPlanningId,
         niazsanjiFardiId,
+        requestNiazsanjiFardiId,
         educationalHistoryId,
-        requestNiazsanjiFardiId
+        designNiazsanjiId,
+        jobNiazsanjiId
         );
     }
 
@@ -238,8 +262,10 @@ public class CourseTypeCriteria implements Serializable {
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
                 (designAndPlanningId != null ? "designAndPlanningId=" + designAndPlanningId + ", " : "") +
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
-                (educationalHistoryId != null ? "educationalHistoryId=" + educationalHistoryId + ", " : "") +
                 (requestNiazsanjiFardiId != null ? "requestNiazsanjiFardiId=" + requestNiazsanjiFardiId + ", " : "") +
+                (educationalHistoryId != null ? "educationalHistoryId=" + educationalHistoryId + ", " : "") +
+                (designNiazsanjiId != null ? "designNiazsanjiId=" + designNiazsanjiId + ", " : "") +
+                (jobNiazsanjiId != null ? "jobNiazsanjiId=" + jobNiazsanjiId + ", " : "") +
             "}";
     }
 

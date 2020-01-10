@@ -17,11 +17,12 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ExcelModule, GridModule} from "@progress/kendo-angular-grid";
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 import {InputsModule} from "@progress/kendo-angular-inputs";
+import {MarineindustryprojDesignAndPlanningMarineSuffixModule} from "app/entities/design-and-planning-marine-suffix/design-and-planning-marine-suffix.module";
 
 const ENTITY_STATES = [...runPhaseRoute, ...runPhasePopupRoute];
 
 @NgModule({
-    imports: [MarineindustryprojSharedModule, NgSelectModule, FormsModule, BrowserAnimationsModule, GridModule , ExcelModule, InputsModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [MarineindustryprojSharedModule, MarineindustryprojDesignAndPlanningMarineSuffixModule , NgSelectModule, FormsModule, BrowserAnimationsModule, GridModule , ExcelModule, InputsModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         RunPhaseMarineSuffixComponent,
         RunPhaseMarineSuffixDetailPeopleComponent,

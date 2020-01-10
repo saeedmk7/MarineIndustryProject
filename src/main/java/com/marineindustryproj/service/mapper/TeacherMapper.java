@@ -23,6 +23,7 @@ public interface TeacherMapper extends EntityMapper<TeacherDTO, Teacher> {
 
     @Mapping(target = "requestOrganizationNiazsanjis", ignore = true)
     @Mapping(target = "finalOrganizationNiazsanjis", ignore = true)
+    @Mapping(target = "finalNiazsanjiReports", ignore = true)
     @Mapping(source = "lastQualificationId", target = "lastQualification")
     @Mapping(source = "lastFieldOfStudyId", target = "lastFieldOfStudy")
     @Mapping(source = "serviceUnitId", target = "serviceUnit")

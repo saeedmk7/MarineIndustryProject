@@ -40,7 +40,9 @@
             "parent": "والد",
             "mainTask": "وظیفه اصلی",
             "niazsanjiGroup": "نیازسنجی گروهی",
-            "first3JobCode": "سه رقم اول شناسه شغل"
+            "first3JobCode": "سه رقم اول شناسه شغل",
+            "fileDoc": "شناسنامه شغلی",
+            "reviewDate": "تاریخ آخرین بازنگری"
         }
     }
 }

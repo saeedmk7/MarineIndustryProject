@@ -2,17 +2,17 @@
     "marineindustryprojApp": {
         "requestNiazsanjiFardi": {
             "home": {
-                "title": "نیازسنجی شغلی و فردی",
+                "title": "نیازسنجی فردی",
                 "createLabel": "جدید",
-                "createOrEditLabel": " نیازسنجی شغلی و فردی"
+                "createOrEditLabel": " نیازسنجی فردی"
             },
-            "created": "نیازسنجی شغلی و فردی با شناسه {{ param }} ایجاد شد.",
-            "updated": "نیازسنجی شغلی و فردی با شناسه {{ param }} ویرایش شد.",
-            "deleted": "نیازسنجی شغلی و فردی با شناسه {{ param }} حذف شد.",
-            "completed": "نیازسنجی شغلی و فردی مورد نظر با موفقیت نهایی شد.",
-            "rejected": "نیازسنجی شغلی و فردی مورد نظر با موفقیت رد شد.",
+            "created": "نیازسنجی فردی با شناسه {{ param }} ایجاد شد.",
+            "updated": "نیازسنجی فردی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "نیازسنجی فردی با شناسه {{ param }} حذف شد.",
+            "completed": "نیازسنجی فردی مورد نظر با موفقیت نهایی شد.",
+            "rejected": "نیازسنجی فردی مورد نظر با موفقیت رد شد.",
             "delete": {
-                "question": "آیا از حذف درخواست نیازسنجی شغلی و فردی با شناسه {{ id }} مطمئنید؟"
+                "question": "آیا از حذف درخواست نیازسنجی فردی با شناسه {{ id }} مطمئنید؟"
             },
             "comment": {
                 "accept": "لطفا نظر خود را درج نمائید.",
@@ -20,7 +20,7 @@
                 "comment": "لطفا نظر خود را درج نمائید."
             },
             "detail": {
-                "title": "جزئیات اطلاعات درخواست نیازسنجی شغلی و فردی"
+                "title": "جزئیات اطلاعات درخواست نیازسنجی فردی"
             },
             "index": "ردیف",
             "code": "کد",
@@ -49,17 +49,17 @@
             "niazsanjiFardi": "نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی",
             "document": "مدرک",
             "educationalModule": "عنوان پودمان آموزشی",
-            "approvedEducationalModule": "پودمان های از شناسنامه شغلی",
-            "approvedEducationalModuleId": "پودمان های از شناسنامه شغلی",
+            "approvedEducationalModule": "پیشنهادی گروه علمی شغلی",
+            "approvedEducationalModuleId": "پیشنهادی گروه علمی شغلی",
             "educationalModuleId": "پودمان ها",
             "educationalModuleTitle": "عنوان پودمان آموزشی",
-            "allEducationalModule": "نیازسنجی فردی",
-            "allEducationalModuleId": "نیازسنجی فردی",
+            "allEducationalModule": "مورد نیاز از نظر فرد",
+            "allEducationalModuleId": "مورد نیاز از نظر فرد",
             "person": "نام و نام خانوادگی",
             "personId": "نام و نام خانوادگی",
             "personName": "نام و نام خانوادگی",
             "jobTitle": "شغل سازمانی",
-            "organizationChart": "گروه/صنعت/واحد",
+            "organizationChart": "محل خدمت: گروه/صنعت/واحد",
             "organizationChartId": "گروه/صنعت/واحد",
             "answer": "جواب"
         }

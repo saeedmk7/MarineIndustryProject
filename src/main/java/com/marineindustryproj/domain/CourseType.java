@@ -76,6 +76,12 @@ public class CourseType implements Serializable {
     @OneToMany(mappedBy = "courseType")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EducationalHistory> educationalHistories = new HashSet<>();
+    @OneToMany(mappedBy = "courseType")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<DesignNiazsanji> designNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "courseType")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<JobNiazsanji> jobNiazsanjis = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -349,6 +355,56 @@ public class CourseType implements Serializable {
 
     public void setRequestNiazsanjiFardis(Set<RequestNiazsanjiFardi> requestNiazsanjiFardis) {
         this.requestNiazsanjiFardis = requestNiazsanjiFardis;
+    }
+
+    public Set<DesignNiazsanji> getDesignNiazsanjis() {
+        return designNiazsanjis;
+    }
+
+    public CourseType designNiazsanjis(Set<DesignNiazsanji> designNiazsanjis) {
+        this.designNiazsanjis = designNiazsanjis;
+        return this;
+    }
+
+    public CourseType addDesignNiazsanji(DesignNiazsanji designNiazsanji) {
+        this.designNiazsanjis.add(designNiazsanji);
+        designNiazsanji.setCourseType(this);
+        return this;
+    }
+
+    public CourseType removeDesignNiazsanji(DesignNiazsanji designNiazsanji) {
+        this.designNiazsanjis.remove(designNiazsanji);
+        designNiazsanji.setCourseType(null);
+        return this;
+    }
+
+    public void setDesignNiazsanjis(Set<DesignNiazsanji> designNiazsanjis) {
+        this.designNiazsanjis = designNiazsanjis;
+    }
+
+    public Set<JobNiazsanji> getJobNiazsanjis() {
+        return jobNiazsanjis;
+    }
+
+    public CourseType jobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
+        this.jobNiazsanjis = jobNiazsanjis;
+        return this;
+    }
+
+    public CourseType addJobNiazsanji(JobNiazsanji jobNiazsanji) {
+        this.jobNiazsanjis.add(jobNiazsanji);
+        jobNiazsanji.setCourseType(this);
+        return this;
+    }
+
+    public CourseType removeJobNiazsanji(JobNiazsanji jobNiazsanji) {
+        this.jobNiazsanjis.remove(jobNiazsanji);
+        jobNiazsanji.setCourseType(null);
+        return this;
+    }
+
+    public void setJobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
+        this.jobNiazsanjis = jobNiazsanjis;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

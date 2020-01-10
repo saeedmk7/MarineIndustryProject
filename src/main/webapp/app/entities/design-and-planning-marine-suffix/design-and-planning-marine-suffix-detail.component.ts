@@ -21,9 +21,9 @@ export class DesignAndPlanningMarineSuffixDetailComponent implements OnInit {
                 private designAndPlanningService: DesignAndPlanningMarineSuffixService) {}
 
     ngOnInit() {
-        debugger;
+
         setTimeout(() => {
-            debugger;
+
             if(this.finalNiazsanjiReportId)
             {
                 this.showData(this.finalNiazsanjiReportId);

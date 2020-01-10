@@ -1,5 +1,6 @@
 package com.marineindustryproj.repository;
 
+import com.marineindustryproj.domain.Authority;
 import com.marineindustryproj.domain.User;
 
 import org.springframework.cache.annotation.Cacheable;
@@ -53,6 +54,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneWithAuthoritiesByEmail(String email);
 
     Page<User> findAllByLoginNot(Pageable pageable, String login);
+
+    List<User> findAllByAuthoritiesIs(Authority authority);
 
     /*@EntityGraph(attributePaths = "authorities")
     @Cacheable(cacheNames = ALL_USERS_CACHE)

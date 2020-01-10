@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the entity UsersRequest.
+    -->
+    <changeSet id="20190608175947" author="saeed">
+        <!--job changes-->
+        <addColumn schemaName="public"
+                   tableName="job">
+            <column name="file_doc" type="clob">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="review_date" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+
+        <!--request_organization_niazsanji changes-->
+        <addColumn schemaName="public"
+                   tableName="request_organization_niazsanji">
+            <column name="restriction_description" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="goals_text" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="prerequisite" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+            <column name="teaching_approach_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+
+        <createTable tableName="request_organization_niazsanji_restriction">
+            <column name="restrictions_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="request_organization_niazsanjis_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="request_organization_niazsanjis_id, restrictions_id" tableName="request_organization_niazsanji_restriction"/>
+
+        <addForeignKeyConstraint baseColumnNames="request_organization_niazsanjis_id"
+                                 baseTableName="request_organization_niazsanji_restriction"
+                                 constraintName="request_organization_niazsanji_request_organization_niazsanj_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_organization_niazsanji"/>
+        <addForeignKeyConstraint baseColumnNames="restrictions_id"
+                                 baseTableName="request_organization_niazsanji_restriction"
+                                 constraintName="fk_request_organization_niazsanji_restriction_restrictions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="restriction"/>
+        <addForeignKeyConstraint baseColumnNames="teaching_approach_id"
+                                 baseTableName="request_organization_niazsanji"
+                                 constraintName="fk_request_organization_niazsanji_teaching_approach_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teaching_approach"/>
+
+
+        <!--final_organization_niazsanji changes-->
+        <addColumn schemaName="public"
+                   tableName="final_organization_niazsanji">
+            <column name="restriction_description" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="goals_text" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="prerequisite" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+            <column name="teaching_approach_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+
+        <createTable tableName="final_organization_niazsanji_restriction">
+            <column name="restrictions_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="final_organization_niazsanjis_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="final_organization_niazsanjis_id, restrictions_id" tableName="final_organization_niazsanji_restriction"/>
+
+        <addForeignKeyConstraint baseColumnNames="final_organization_niazsanjis_id"
+                                 baseTableName="final_organization_niazsanji_restriction"
+                                 constraintName="final_organization_niazsanji_r_final_organization_niazsanjis_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="final_organization_niazsanji"/>
+        <addForeignKeyConstraint baseColumnNames="restrictions_id"
+                                 baseTableName="final_organization_niazsanji_restriction"
+                                 constraintName="fk_final_organization_niazsanji_restriction_restrictions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="restriction"/>
+        <addForeignKeyConstraint baseColumnNames="teaching_approach_id"
+                                 baseTableName="final_organization_niazsanji"
+                                 constraintName="fk_final_organization_niazsanji_teaching_approach_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teaching_approach"/>
+
+
+        <!--final_niazsanji_report changes-->
+        <addColumn schemaName="public"
+                   tableName="final_niazsanji_report">
+            <column name="restriction_description" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="goals_text" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="prerequisite" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="teacher_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="teaching_approach_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+
+        <createTable tableName="final_niazsanji_report_restriction">
+            <column name="restrictions_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="final_niazsanji_reports_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="final_niazsanji_reports_id, restrictions_id" tableName="final_niazsanji_report_restriction"/>
+
+        <addForeignKeyConstraint baseColumnNames="final_niazsanji_reports_id"
+                                 baseTableName="final_niazsanji_report_restriction"
+                                 constraintName="final_niazsanji_report_restric_final_niazsanji_reports_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="final_niazsanji_report"/>
+        <addForeignKeyConstraint baseColumnNames="restrictions_id"
+                                 baseTableName="final_niazsanji_report_restriction"
+                                 constraintName="fk_final_niazsanji_report_restriction_restrictions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="restriction"/>
+
+        <addForeignKeyConstraint baseColumnNames="teacher_id"
+                                 baseTableName="final_niazsanji_report"
+                                 constraintName="fk_final_niazsanji_report_teacher_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teacher"/>
+
+        <addForeignKeyConstraint baseColumnNames="teaching_approach_id"
+                                 baseTableName="final_niazsanji_report"
+                                 constraintName="fk_final_niazsanji_report_teaching_approach_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teaching_approach"/>
+
+        <!--niazsanji_fardi changes-->
+        <addColumn schemaName="public"
+                   tableName="niazsanji_fardi">
+            <column name="restriction_description" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="goals_text" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="prerequisite" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+            <column name="pre_job_niazsanji_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="teaching_approach_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+
+        <createTable tableName="niazsanji_fardi_restriction">
+            <column name="restrictions_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="niazsanji_fardis_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="niazsanji_fardis_id, restrictions_id" tableName="niazsanji_fardi_restriction"/>
+
+        <addForeignKeyConstraint baseColumnNames="niazsanji_fardis_id"
+                                 baseTableName="niazsanji_fardi_restriction"
+                                 constraintName="fk_niazsanji_fardi_restriction_niazsanji_fardis_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="niazsanji_fardi"/>
+        <addForeignKeyConstraint baseColumnNames="restrictions_id"
+                                 baseTableName="niazsanji_fardi_restriction"
+                                 constraintName="fk_niazsanji_fardi_restriction_restrictions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="restriction"/>
+        <addForeignKeyConstraint baseColumnNames="pre_job_niazsanji_id"
+                                 baseTableName="niazsanji_fardi"
+                                 constraintName="fk_niazsanji_fardi_pre_job_niazsanji_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pre_job_niazsanji"/>
+        <addForeignKeyConstraint baseColumnNames="teaching_approach_id"
+                                 baseTableName="niazsanji_fardi"
+                                 constraintName="fk_niazsanji_fardi_teaching_approach_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teaching_approach"/>
+
+
+        <!--media_awareness_report changes-->
+        <createTable tableName="media_awareness_report_document">
+            <column name="documents_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="media_awareness_reports_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="media_awareness_reports_id, documents_id" tableName="media_awareness_report_document"/>
+
+        <addForeignKeyConstraint baseColumnNames="media_awareness_reports_id"
+                                 baseTableName="media_awareness_report_document"
+                                 constraintName="fk_media_awareness_report_document_media_awareness_reports_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="media_awareness_report"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="media_awareness_report_document"
+                                 constraintName="fk_media_awareness_report_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

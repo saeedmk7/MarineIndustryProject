@@ -61,11 +61,26 @@ public class NiazsanjiFardiDTO implements Serializable {
 
     private Boolean hasImportantMessage;
 
+    @Size(max = 4096)
+    private String restrictionDescription;
+
+    @Size(max = 4096)
+    private String goalsText;
+
+    @Size(max = 4096)
+    private String prerequisite;
+
     private Set<DocumentDTO> documents = new HashSet<>();
+
+    private Set<RestrictionDTO> restrictions = new HashSet<>();
 
     private Long courseTypeId;
 
     private String courseTypeTitle;
+
+    private Long preJobNiazsanjiId;
+
+    private String preJobNiazsanjiCode;
 
     private Long requestNiazsanjiFardiId;
 
@@ -84,6 +99,10 @@ public class NiazsanjiFardiDTO implements Serializable {
     private Long organizationChartId;
 
     private String organizationChartTitle;
+
+    private Long teachingApproachId;
+
+    private String teachingApproachTitle;
 
     public Long getId() {
         return id;
@@ -229,12 +248,44 @@ public class NiazsanjiFardiDTO implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public String getRestrictionDescription() {
+        return restrictionDescription;
+    }
+
+    public void setRestrictionDescription(String restrictionDescription) {
+        this.restrictionDescription = restrictionDescription;
+    }
+
+    public String getGoalsText() {
+        return goalsText;
+    }
+
+    public void setGoalsText(String goalsText) {
+        this.goalsText = goalsText;
+    }
+
+    public String getPrerequisite() {
+        return prerequisite;
+    }
+
+    public void setPrerequisite(String prerequisite) {
+        this.prerequisite = prerequisite;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
 
     public void setDocuments(Set<DocumentDTO> documents) {
         this.documents = documents;
+    }
+
+    public Set<RestrictionDTO> getRestrictions() {
+        return restrictions;
+    }
+
+    public void setRestrictions(Set<RestrictionDTO> restrictions) {
+        this.restrictions = restrictions;
     }
 
     public Long getCourseTypeId() {
@@ -251,6 +302,22 @@ public class NiazsanjiFardiDTO implements Serializable {
 
     public void setCourseTypeTitle(String courseTypeTitle) {
         this.courseTypeTitle = courseTypeTitle;
+    }
+
+    public Long getPreJobNiazsanjiId() {
+        return preJobNiazsanjiId;
+    }
+
+    public void setPreJobNiazsanjiId(Long preJobNiazsanjiId) {
+        this.preJobNiazsanjiId = preJobNiazsanjiId;
+    }
+
+    public String getPreJobNiazsanjiCode() {
+        return preJobNiazsanjiCode;
+    }
+
+    public void setPreJobNiazsanjiCode(String preJobNiazsanjiCode) {
+        this.preJobNiazsanjiCode = preJobNiazsanjiCode;
     }
 
     public Long getRequestNiazsanjiFardiId() {
@@ -325,6 +392,22 @@ public class NiazsanjiFardiDTO implements Serializable {
         this.organizationChartTitle = organizationChartTitle;
     }
 
+    public Long getTeachingApproachId() {
+        return teachingApproachId;
+    }
+
+    public void setTeachingApproachId(Long teachingApproachId) {
+        this.teachingApproachId = teachingApproachId;
+    }
+
+    public String getTeachingApproachTitle() {
+        return teachingApproachTitle;
+    }
+
+    public void setTeachingApproachTitle(String teachingApproachTitle) {
+        this.teachingApproachTitle = teachingApproachTitle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -367,8 +450,13 @@ public class NiazsanjiFardiDTO implements Serializable {
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
             ", guid='" + getGuid() + "'" +
             ", hasImportantMessage='" + isHasImportantMessage() + "'" +
+            ", restrictionDescription='" + getRestrictionDescription() + "'" +
+            ", goalsText='" + getGoalsText() + "'" +
+            ", prerequisite='" + getPrerequisite() + "'" +
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +
+            ", preJobNiazsanji=" + getPreJobNiazsanjiId() +
+            ", preJobNiazsanji='" + getPreJobNiazsanjiCode() + "'" +
             ", requestNiazsanjiFardi=" + getRequestNiazsanjiFardiId() +
             ", requestNiazsanjiFardi='" + getRequestNiazsanjiFardiCode() + "'" +
             ", educationalModule=" + getEducationalModuleId() +
@@ -377,6 +465,8 @@ public class NiazsanjiFardiDTO implements Serializable {
             ", person='" + getPersonFamily() + "'" +
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
+            ", teachingApproach=" + getTeachingApproachId() +
+            ", teachingApproach='" + getTeachingApproachTitle() + "'" +
             "}";
     }
 }

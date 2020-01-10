@@ -86,11 +86,19 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
 
     private BooleanFilter hasImportantMessage;
 
+    private StringFilter restrictionDescription;
+
+    private StringFilter goalsText;
+
+    private StringFilter prerequisite;
+
     private LongFilter finalOrganizationNiazsanjiId;
 
     private LongFilter personId;
 
     private LongFilter documentId;
+
+    private LongFilter restrictionId;
 
     private LongFilter courseTypeId;
 
@@ -105,6 +113,8 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
     private LongFilter skillableLevelOfSkillId;
 
     private LongFilter teachApproachId;
+
+    private LongFilter teachingApproachId;
 
     public LongFilter getId() {
         return id;
@@ -298,6 +308,30 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public StringFilter getRestrictionDescription() {
+        return restrictionDescription;
+    }
+
+    public void setRestrictionDescription(StringFilter restrictionDescription) {
+        this.restrictionDescription = restrictionDescription;
+    }
+
+    public StringFilter getGoalsText() {
+        return goalsText;
+    }
+
+    public void setGoalsText(StringFilter goalsText) {
+        this.goalsText = goalsText;
+    }
+
+    public StringFilter getPrerequisite() {
+        return prerequisite;
+    }
+
+    public void setPrerequisite(StringFilter prerequisite) {
+        this.prerequisite = prerequisite;
+    }
+
     public LongFilter getFinalOrganizationNiazsanjiId() {
         return finalOrganizationNiazsanjiId;
     }
@@ -320,6 +354,14 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
 
     public void setDocumentId(LongFilter documentId) {
         this.documentId = documentId;
+    }
+
+    public LongFilter getRestrictionId() {
+        return restrictionId;
+    }
+
+    public void setRestrictionId(LongFilter restrictionId) {
+        this.restrictionId = restrictionId;
     }
 
     public LongFilter getCourseTypeId() {
@@ -361,6 +403,15 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
     public void setTeachApproachId(LongFilter teachApproachId) {
         this.teachApproachId = teachApproachId;
     }
+
+    public LongFilter getTeachingApproachId() {
+        return teachingApproachId;
+    }
+
+    public void setTeachingApproachId(LongFilter teachingApproachId) {
+        this.teachingApproachId = teachingApproachId;
+    }
+
     public StringFilter getEducationalModuleTitle() {
         return educationalModuleTitle;
     }
@@ -403,16 +454,21 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
             Objects.equals(status, that.status) &&
             Objects.equals(guid, that.guid) &&
             Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
+            Objects.equals(restrictionDescription, that.restrictionDescription) &&
+            Objects.equals(goalsText, that.goalsText) &&
+            Objects.equals(prerequisite, that.prerequisite) &&
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(documentId, that.documentId) &&
+            Objects.equals(restrictionId, that.restrictionId) &&
             Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(organizationChartId, that.organizationChartId) &&
             Objects.equals(teacherId, that.teacherId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
             Objects.equals(skillableLevelOfSkillId, that.skillableLevelOfSkillId) &&
-            Objects.equals(teachApproachId, that.teachApproachId);
+            Objects.equals(teachApproachId, that.teachApproachId) &&
+            Objects.equals(teachingApproachId, that.teachingApproachId);
     }
 
     @Override
@@ -442,15 +498,20 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
         status,
         guid,
         hasImportantMessage,
+        restrictionDescription,
+        goalsText,
+        prerequisite,
         finalOrganizationNiazsanjiId,
         personId,
         documentId,
+        restrictionId,
         courseTypeId,
         organizationChartId,
         teacherId,
         educationalModuleId,
         educationalModuleTitle,
         teachApproachId,
+        teachingApproachId,
         skillableLevelOfSkillId
         );
     }
@@ -482,15 +543,20 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
                 (status != null ? "status=" + status + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
                 (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
+                (restrictionDescription != null ? "restrictionDescription=" + restrictionDescription + ", " : "") +
+                (goalsText != null ? "goalsText=" + goalsText + ", " : "") +
+                (prerequisite != null ? "prerequisite=" + prerequisite + ", " : "") +
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
+                (restrictionId != null ? "restrictionId=" + restrictionId + ", " : "") +
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
                 (teachApproachId != null ? "teachApproachId=" + teachApproachId + ", " : "") +
+                (teachingApproachId != null ? "teachingApproachId=" + teachingApproachId + ", " : "") +
                 (skillableLevelOfSkillId != null ? "skillableLevelOfSkillId=" + skillableLevelOfSkillId + ", " : "") +
             "}";
     }

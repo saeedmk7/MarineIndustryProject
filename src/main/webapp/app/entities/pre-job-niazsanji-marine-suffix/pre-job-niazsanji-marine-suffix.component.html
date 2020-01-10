@@ -1,0 +1,172 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.preJobNiazsanji.home.title">Pre Job Niazsanjis</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-pre-job-niazsanji-marine-suffix" [routerLink]="['/pre-job-niazsanji-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.preJobNiazsanji.home.createLabel">
+            Create new Pre Job Niazsanji
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <search-panel [searchPanelModel]="searchbarModel"></search-panel>
+    <br/>
+    <div class="table-responsive" *ngIf="preJobNiazsanjis">
+        <table class="table  table-striped table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th>ردیف</th>
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="reviewDate"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.reviewDate">Review Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archived"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.archived">Archived</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedUserLogin"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.archivedUserLogin">Archived User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedDate"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.archivedDate">Archived Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="conversation"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.conversation">Conversation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="requestStatus"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.requestStatus">Request Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="changeStatusUserLogin"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.changeStatusUserLogin">Change Status User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="guid"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.guid">Guid</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hasImportantMessage"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.hasImportantMessage">Has Important Message</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let preJobNiazsanji of preJobNiazsanjis ;let i = index" [ngClass]="{'new': preJobNiazsanji.requestStatus == 'NEW','accept': preJobNiazsanji.requestStatus === 'ACCEPT','ignore': preJobNiazsanji.requestStatus === 'IGNORE'}">
+                <td>{{i + 1}}</td>
+                <td><a [routerLink]="['/pre-job-niazsanji-marine-suffix', preJobNiazsanji.id, 'view' ]">{{preJobNiazsanji.id}}</a></td>
+                <td>
+                    <div *ngIf="preJobNiazsanji.organizationChartId">
+                        <a [routerLink]="['../organization-chart-marine-suffix', preJobNiazsanji.organizationChartId , 'view' ]" >{{preJobNiazsanji.organizationChartTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="preJobNiazsanji.personId">
+                        <a [routerLink]="['../person-marine-suffix', preJobNiazsanji.personId , 'view' ]" >{{preJobNiazsanji.personFamily}}</a>
+                    </div>
+                </td>
+                <td>{{preJobNiazsanji.title}}</td>
+                <!--<td>{{preJobNiazsanji.reviewDate}}</td>
+                <td>{{preJobNiazsanji.code}}</td>-->
+                <td>{{preJobNiazsanji.description}}</td>
+                <!--<td>{{preJobNiazsanji.createUserLogin}}</td>-->
+                <td>{{preJobNiazsanji.createDate}}</td>
+                <td>{{preJobNiazsanji.statusMeaning}}</td>
+                <!--<td>{{preJobNiazsanji.modifyUserLogin}}</td>-->
+                <!--<td>{{preJobNiazsanji.modifyDate | date:'medium'}}</td>-->
+                <!--<td>{{preJobNiazsanji.archived}}</td>
+                <td>{{preJobNiazsanji.archivedUserLogin}}</td>
+                <td>{{preJobNiazsanji.archivedDate | date:'medium'}}</td>
+                <td>{{preJobNiazsanji.status}}</td>
+                <td>{{preJobNiazsanji.conversation}}</td>
+                <td jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + preJobNiazsanji.requestStatus}}">{{preJobNiazsanji.requestStatus}}</td>
+                <td>{{preJobNiazsanji.changeStatusUserLogin}}</td>
+                <td>{{preJobNiazsanji.guid}}</td>
+                <td>{{preJobNiazsanji.hasImportantMessage}}</td>-->
+
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit" title="مدارک"
+                                [routerLink]="['../document-marine-suffix', 'prejobniazsanji',preJobNiazsanji.id]"
+                                class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/pre-job-niazsanji-steps-marine-suffix', preJobNiazsanji.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <img src="../../../content/images/bulb-icon.png" title="پیام مهمی در جزئیات وجود دارد" alt="پیام مهمی در جزئیات وجود دارد"  *ngIf="preJobNiazsanji.hasImportantMessage == true" style="cursor: pointer;width: 12%;margin: 0;" (click)="toggleImportantMessage(preJobNiazsanji.id, false)"/>
+                        <img src="../../../content/images/light-off-icon.png" *ngIf="preJobNiazsanji.hasImportantMessage == false" style="cursor: pointer;width: 12%;margin: 0;" (click)="toggleImportantMessage(preJobNiazsanji.id, true)"/>
+
+                        <ng-container *ngIf="!(preJobNiazsanji.requestStatus == 'ACCEPT'  || preJobNiazsanji.requestStatus == 'IGNORE')">
+                            <button type="submit"  *ngIf="preJobNiazsanji.status > 0"
+                                    [routerLink]="['/pre-job-niazsanji-steps-marine-suffix', preJobNiazsanji.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                            <ng-container *ngIf="preJobNiazsanji.status == currentPerson.organizationChartId">
+
+                                <button type="submit" title="ثبت نظر"
+                                        [routerLink]="['/', { outlets: { popup: 'pre-job-niazsanji-marine-suffix/'+ preJobNiazsanji.id + '/' + 'COMMENT' + '/comment'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-info btn-sm">
+                                    <fa-icon [icon]="'comments'"></fa-icon>
+                                    <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.comment">comment</span>-->
+                                </button>
+                                <button type="submit" title="تایید کردن"
+                                        [routerLink]="['/', { outlets: { popup: 'pre-job-niazsanji-marine-suffix/'+ preJobNiazsanji.id + '/' + 'ACCEPT' + '/comment'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-success btn-sm">
+                                    <fa-icon [icon]="'check-double'"></fa-icon>
+                                    <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.accept">comment</span>-->
+                                </button>
+                                <button type="submit" title="رد کردن"
+                                        [routerLink]="['/', { outlets: { popup: 'pre-job-niazsanji-marine-suffix/'+ preJobNiazsanji.id + '/' + 'REJECT' + '/comment'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-danger btn-sm">
+                                    <fa-icon [icon]="'ban'"></fa-icon>
+                                    <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
+                                </button>
+                        </ng-container>
+                        </ng-container>
+                        <!--<button type="submit"
+                                [routerLink]="['/pre-job-niazsanji-marine-suffix', preJobNiazsanji.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>-->
+
+                        <button type="submit" *ngIf="isAdmin"
+                                [routerLink]="['/', { outlets: { popup: 'pre-job-niazsanji-marine-suffix/'+ preJobNiazsanji.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="20">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll(criteria)">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div *ngIf="preJobNiazsanjis && preJobNiazsanjis.length">
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

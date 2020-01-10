@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { IRequestOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//request-organization-niazsanji-marine-suffix.model';
 import { IFinalOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//final-organization-niazsanji-marine-suffix.model';
+import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model//final-niazsanji-report-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IEducationalModuleMarineSuffix } from 'app/shared/model//educational-module-marine-suffix.model';
 import { IRequestEducationalModuleMarineSuffix } from 'app/shared/model//request-educational-module-marine-suffix.model';
@@ -34,6 +35,7 @@ export interface ITeacherMarineSuffix {
     guid?: string;
     requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[];
     finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[];
+    finalNiazsanjiReports?: IFinalNiazsanjiReportMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     lastQualificationTitle?: string;
     lastQualificationId?: number;
@@ -77,6 +79,7 @@ export class TeacherMarineSuffix implements ITeacherMarineSuffix {
         public guid?: string,
         public requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[],
         public finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[],
+        public finalNiazsanjiReports?: IFinalNiazsanjiReportMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public lastQualificationTitle?: string,
         public lastQualificationId?: number,

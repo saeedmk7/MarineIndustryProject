@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="competency">
+            <h2><span jhiTranslate="marineindustryprojApp.competency.detail.title">Competency</span> {{competency.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.competency.title">Title</span></dt>
+                <dd>
+                    <span>{{competency.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.competency.description">Description</span></dt>
+                <dd>
+                    <span>{{competency.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.competency.displayOrder">Display Order</span></dt>
+                <dd>
+                    <span>{{competency.displayOrder}}</span>
+                </dd>
+<!--                <dt><span jhiTranslate="marineindustryprojApp.competency.competencyType">Competency Type</span></dt>
+                <dd>
+                    <span>{{competency.competencyType}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.competency.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{competency.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.competency.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{competency.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.competency.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{competency.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.competency.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{competency.modifyDate}}</span>
+                </dd>-->
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/competency-marine-suffix', competency.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

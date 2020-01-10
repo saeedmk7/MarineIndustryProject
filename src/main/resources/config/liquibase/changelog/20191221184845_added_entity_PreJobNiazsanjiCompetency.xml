@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity PreJobNiazsanjiCompetency.
+    -->
+    <changeSet id="20191221184845-1" author="jhipster">
+        <createTable tableName="pre_job_niazsanji_competency">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="need_to_improve" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="need_to_improve_description" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fix_competency_deficiency_description" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="educational_module_title" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sum_score" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="priority" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="selected" type="boolean">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="create_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="create_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modify_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modify_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fix_competency_deficiency_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="educational_module_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="pre_job_niazsanji_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="competency_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="pre_job_niazsanji_competency" columnName="create_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="pre_job_niazsanji_competency" columnName="modify_date" columnDataType="datetime"/>
+        
+        <createTable tableName="pre_job_niazsanji_competency_teaching_approach">
+            <column name="teaching_approaches_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pre_job_niazsanji_competencies_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="pre_job_niazsanji_competencies_id, teaching_approaches_id" tableName="pre_job_niazsanji_competency_teaching_approach"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity PreJobNiazsanji.
+    -->
+    <changeSet id="20191221184844-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="pre_job_niazsanjis_id"
+                                 baseTableName="pre_job_niazsanji_document"
+                                 constraintName="fk_pre_job_niazsanji_document_pre_job_niazsanjis_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pre_job_niazsanji"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="pre_job_niazsanji_document"
+                                 constraintName="fk_pre_job_niazsanji_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="pre_job_niazsanjis_id"
+                                 baseTableName="pre_job_niazsanji_person"
+                                 constraintName="fk_pre_job_niazsanji_person_pre_job_niazsanjis_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pre_job_niazsanji"/>
+        <addForeignKeyConstraint baseColumnNames="people_id"
+                                 baseTableName="pre_job_niazsanji_person"
+                                 constraintName="fk_pre_job_niazsanji_person_people_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+        
+        <addForeignKeyConstraint baseColumnNames="organization_chart_id"
+                                 baseTableName="pre_job_niazsanji"
+                                 constraintName="fk_pre_job_niazsanji_organization_chart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="pre_job_niazsanji"
+                                 constraintName="fk_pre_job_niazsanji_person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+    </changeSet>
+</databaseChangeLog>

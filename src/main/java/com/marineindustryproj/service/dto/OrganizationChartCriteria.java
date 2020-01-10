@@ -71,6 +71,10 @@ public class OrganizationChartCriteria implements Serializable {
 
     private LongFilter mediaAwarenessReportId;
 
+    private LongFilter preJobNiazsanjiId;
+
+    private LongFilter jobNiazsanjiId;
+
     private LongFilter parentId;
 
     private LongFilter forceRunningPercentId;
@@ -267,6 +271,22 @@ public class OrganizationChartCriteria implements Serializable {
         this.mediaAwarenessReportId = mediaAwarenessReportId;
     }
 
+    public LongFilter getPreJobNiazsanjiId() {
+        return preJobNiazsanjiId;
+    }
+
+    public void setPreJobNiazsanjiId(LongFilter preJobNiazsanjiId) {
+        this.preJobNiazsanjiId = preJobNiazsanjiId;
+    }
+
+    public LongFilter getJobNiazsanjiId() {
+        return jobNiazsanjiId;
+    }
+
+    public void setJobNiazsanjiId(LongFilter jobNiazsanjiId) {
+        this.jobNiazsanjiId = jobNiazsanjiId;
+    }
+
     public LongFilter getParentId() {
         return parentId;
     }
@@ -318,6 +338,8 @@ public class OrganizationChartCriteria implements Serializable {
             Objects.equals(educationalHistoryId, that.educationalHistoryId) &&
             Objects.equals(investToGroupTransactionId, that.investToGroupTransactionId) &&
             Objects.equals(mediaAwarenessReportId, that.mediaAwarenessReportId) &&
+            Objects.equals(preJobNiazsanjiId, that.preJobNiazsanjiId) &&
+            Objects.equals(jobNiazsanjiId, that.jobNiazsanjiId) &&
             Objects.equals(parentId, that.parentId) &&
             Objects.equals(forceRunningPercentId, that.forceRunningPercentId);
     }
@@ -349,6 +371,8 @@ public class OrganizationChartCriteria implements Serializable {
         educationalHistoryId,
         investToGroupTransactionId,
         mediaAwarenessReportId,
+        preJobNiazsanjiId,
+        jobNiazsanjiId,
         parentId,
         forceRunningPercentId
         );
@@ -381,6 +405,8 @@ public class OrganizationChartCriteria implements Serializable {
                 (educationalHistoryId != null ? "educationalHistoryId=" + educationalHistoryId + ", " : "") +
                 (investToGroupTransactionId != null ? "investToGroupTransactionId=" + investToGroupTransactionId + ", " : "") +
                 (mediaAwarenessReportId != null ? "mediaAwarenessReportId=" + mediaAwarenessReportId + ", " : "") +
+                (preJobNiazsanjiId != null ? "preJobNiazsanjiId=" + preJobNiazsanjiId + ", " : "") +
+                (jobNiazsanjiId != null ? "jobNiazsanjiId=" + jobNiazsanjiId + ", " : "") +
                 (parentId != null ? "parentId=" + parentId + ", " : "") +
                 (forceRunningPercentId != null ? "forceRunningPercentId=" + forceRunningPercentId + ", " : "") +
             "}";

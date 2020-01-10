@@ -84,6 +84,10 @@
                 </td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
+                        <a *ngIf="job.fileDoc" title="دریافت شناسنامه" [href]="job.fileDoc | safe" target="_blank"
+                           class="btn btn-default btn-sm enableLink">
+                            <fa-icon [icon]="'download'"></fa-icon>
+                        </a>
                         <button type="button" (click)="aggregateJob(job)"
                                 class="btn btn-warning btn-sm">
                             <span class="fa fa-sync"></span>

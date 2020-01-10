@@ -131,6 +131,10 @@ public class MediaAwarenessReportQueryService extends QueryService<MediaAwarenes
             if (criteria.getGuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGuid(), MediaAwarenessReport_.guid));
             }
+            if (criteria.getDocumentId() != null) {
+                specification = specification.and(buildSpecification(criteria.getDocumentId(),
+                    root -> root.join(MediaAwarenessReport_.documents, JoinType.LEFT).get(Document_.id)));
+            }
             if (criteria.getOrganizationChartId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOrganizationChartId(),
                     root -> root.join(MediaAwarenessReport_.organizationChart, JoinType.LEFT).get(OrganizationChart_.id)));

@@ -1,0 +1,185 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-pre-job-niazsanji-marine-suffix-heading" jhiTranslate="marineindustryprojApp.preJobNiazsanji.home.createOrEditLabel">Create or edit a Pre Job Niazsanji</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!preJobNiazsanji.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="preJobNiazsanji.id" readonly />
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanji.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="preJobNiazsanji.title" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>-->
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">مشخصات متقاضی</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanji.person" for="field_person">Person</label>
+                    <ng-select
+                        [items]="allPeople"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        [disabled]="orgChartDisabled"
+                        bindLabel="fullName"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="person"
+                        id="field_person"
+                        (change)="onPersonChange($event)"
+                        [(ngModel)]="preJobNiazsanji.personId" >
+                </div>
+                <div class="form-group bighalf">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanji.organizationChart" for="field_organizationChart">Organization Chart</label>
+                    <ng-select
+                        [items]="recommenedOrgCharts"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        [disabled]="true"
+                        bindLabel="fullTitle"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="organizationChart"
+                        id="field_organizationChart"
+                        [(ngModel)]="preJobNiazsanji.organizationChartId">
+                </div>
+
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات شغل</div></div>
+
+                <dl class="row-md jh-entity-details">
+                    <dt><span jhiTranslate="marineindustryprojApp.job.title">Title</span></dt>
+                    <dd>
+                        <span>{{job.title}}</span>
+                    </dd>
+                    <dt><span jhiTranslate="marineindustryprojApp.job.jobKey">Job Key</span></dt>
+                    <dd>
+                        <span>{{job.jobKey}}</span>
+                    </dd>
+                    <dt><span jhiTranslate="marineindustryprojApp.job.jobCode">Job Code</span></dt>
+                    <dd>
+                        <span>{{job.jobCode}}</span>
+                    </dd>
+                </dl>
+
+                <div *ngIf="jobNotFoundError" class="alert alert-danger">{{jobNotFoundError}}</div>
+                <div *ngIf="!job.fileDoc" class="alert alert-danger">شناسنامه شغلی برای شغل این فرد تعریف نشده است.</div>
+                <a *ngIf="job.fileDoc" title="دریافت شناسنامه" [href]="job.fileDoc | safe" target="_blank"
+                   class="btn btn-default btn-sm enableLink">
+                    <fa-icon [icon]="'download'"></fa-icon>
+                    لینک دریافت شناسنامه شغلی شما
+                </a>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanji.reviewDate" for="field_reviewDate">Review Date</label>
+                    <input type="text" class="form-control" name="reviewDate" id="field_reviewDate"
+                           [(ngModel)]="preJobNiazsanji.reviewDate" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.reviewDate?.dirty && editForm.controls.reviewDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.reviewDate?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">تعاریف</div></div>
+                <div class="alert alert-info">
+                    <img src="/content/images/info.png" style="max-width: 25px; vertical-align: bottom;" />
+                    <span><b> شایستگی:</b> ویژگیهای مورد نیاز برای توفیق در شغل با عملکرد برتر که می تواند ناشی از عناصر ذیل باشد:</span>
+                    <p><b> دانش:</b>مجموعه معلومات مورد نیاز برای انجام وظایف شغلی </p>
+                    <p><b> مهارت:</b>توانایی انجام آسان و دقیق وظایف شغلی</p>
+                    <p><b> نگرش:</b>ترجیحات و یا مفروضات ذهنی فرد برای انجام وظایف شغلی </p>
+                    <p><b>۲) نیازسنجی: </b>عبارت است از تعیین فاصله بین شایستگی های موجود و شایستگی های مورد انتظار برای انجام مطلوب وظایف، به عبارت دیگر، فرایند
+                        شناسایی دانش، مهارت و نگرش مورد نیاز کارکنان برای ایفاء نقش و انجام وظایف حرفه ای خود و اولویت بندی این نیازها. (نیازهای مطرح در حیطه های نگرشی، مهارتی و دانشی که از طریق آموزش قابل رفع است.)
+                    </p>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">شایستگی های شغل</div></div>
+                <div *ngIf="isAdmin">
+                    <a href="#/competency-marine-suffix" [ngClass]="{'enableLink': isAdmin}" class="btn btn-warning">
+                        <span class="fa fa-file"></span>
+                        <span class="d-none d-md-inline">ثبت شایستگی ها</span>
+                    </a>
+                </div>
+                <div class="alert alert-info">
+                    <img src="/content/images/info.png" style="max-width: 25px; vertical-align: bottom;" />
+                    <span>لطفا شایستگی های اولویت دار برای انجام وظایف را بمنظور انجام فرآیند آموزشی از قسمت های تعریف شده در شناسنامه شغل در قسمت های مربوطه در ذیل، درج نمائید و پس از خاتمه دکمه ثبت را بزنید. </span>
+                </div>
+
+
+                <table style="alignment: center" class="table table-bordered table-sm">
+                    <!--<thead>
+                    <tr>
+                        <th>شایستگی ها</th>
+                        <th></th>
+                    </tr>
+                    </thead>-->
+                    <tbody>
+                    <tr *ngFor="let i of competencies">
+                        <td style="background-color: #00c4e6">
+                            {{i.title}}
+                        </td>
+                        <td>
+                            <ng-select [items]="[]"
+                                       class="disable-arrow"
+                                       [addTag]="true"
+                                       [multiple]="true"
+                                       [selectOnTab]="true"
+                                       [isOpen]="false"
+                                       placeholder="لطفا متن مورد نظر خود را وارد نمائید سپس کلید Enter را وارد نمائید."
+                                       name="selectedItems"
+                                       [(ngModel)]="i.selectedItems"
+                            >
+                            </ng-select>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-info">
+                    <img src="/content/images/bulb-icon.png" style="max-width: 25px; vertical-align: bottom;" />
+                    <span>نکته: برای تکمیل قسمت های ذیل می توانید از راهنمائی های نمایندگان آموزش واحد خود بهره گیری نمائید.</span>
+                </div>
+                <!--<div class="dropdown-divider pt-3 mt-4"><div class="divider-title">انتخاب نمایندگان</div></div>-->
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanji.agents" for="field_agent">Agents</label>
+                    <ng-select
+                        [items]="agents"
+                        [multiple]="true"
+                        [closeOnSelect]="false"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="fullName"
+                        placeholder="انتخاب نمائید."
+                        name="people"
+                        id="field_agent"
+                        [(ngModel)]="preJobNiazsanji.people">
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanji.description" for="field_description">Description</label>
+                    <textarea class="form-control" name="description" id="field_description"
+                        [(ngModel)]="preJobNiazsanji.description" ></textarea>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.saveAndNextStep">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity RequestOrganizationNiazsanji and its DTO RequestOrganizationNiazsanjiDTO.
  */
-@Mapper(componentModel = "spring", uses = {PersonMapper.class, DocumentMapper.class, CourseTypeMapper.class, OrganizationChartMapper.class, TeacherMapper.class, EducationalModuleMapper.class, TeachApproachMapper.class})
+@Mapper(componentModel = "spring", uses = {PersonMapper.class, DocumentMapper.class, RestrictionMapper.class, CourseTypeMapper.class, OrganizationChartMapper.class, TeacherMapper.class, EducationalModuleMapper.class, TeachApproachMapper.class, TeachingApproachMapper.class})
 public interface RequestOrganizationNiazsanjiMapper extends EntityMapper<RequestOrganizationNiazsanjiDTO, RequestOrganizationNiazsanji> {
 
     @Mapping(source = "courseType.id", target = "courseTypeId")
@@ -21,6 +21,8 @@ public interface RequestOrganizationNiazsanjiMapper extends EntityMapper<Request
     @Mapping(source = "educationalModule.title", target = "educationalModuleTitle")
     @Mapping(source = "teachApproach.id", target = "teachApproachId")
     @Mapping(source = "teachApproach.title", target = "teachApproachTitle")
+    @Mapping(source = "teachingApproach.id", target = "teachingApproachId")
+    @Mapping(source = "teachingApproach.title", target = "teachingApproachTitle")
     RequestOrganizationNiazsanjiDTO toDto(RequestOrganizationNiazsanji requestOrganizationNiazsanji);
 
     @Mapping(target = "finalOrganizationNiazsanjis", ignore = true)
@@ -29,6 +31,7 @@ public interface RequestOrganizationNiazsanjiMapper extends EntityMapper<Request
     @Mapping(source = "teacherId", target = "teacher")
     @Mapping(source = "educationalModuleId", target = "educationalModule")
     @Mapping(source = "teachApproachId", target = "teachApproach")
+    @Mapping(source = "teachingApproachId", target = "teachingApproach")
     RequestOrganizationNiazsanji toEntity(RequestOrganizationNiazsanjiDTO requestOrganizationNiazsanjiDTO);
 
     default RequestOrganizationNiazsanji fromId(Long id) {

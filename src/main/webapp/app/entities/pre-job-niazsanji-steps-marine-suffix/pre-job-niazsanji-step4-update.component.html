@@ -1,0 +1,119 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-pre-job-niazsanji-competency-marine-suffix-heading" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.home.step4Title">Create or edit a Pre Job Niazsanji Competency</h2>
+            <div *jhiHasAnyAuthority="['ROLE_ADMIN']">
+                <a href="#/teaching-approach-marine-suffix" [ngClass]="{'enableLink': isAdmin}" class="btn btn-warning">
+                    <span class="fa fa-file"></span>
+                    <span class="d-none d-md-inline">ثبت روش های آموزش</span>
+                </a>
+            </div>
+            <div class="alert alert-info">
+                <img src="/content/images/info.png" style="max-width: 25px; vertical-align: bottom;" />
+                <span>لطفا دوره های مرتبط با شایستگی های موردنظر خود را شناسایی و همینطور روش های آموزش دادن آن ها را انتخاب نمائید و سپس آن ها را ذخیره نمائید. </span>
+            </div>
+            <table style="alignment: center" class="table table-bordered table-sm" id="content">
+                <thead>
+                <tr>
+                    <th>شایستگی</th>
+                    <th>عنوان دوره</th>
+                    <th>عنوان دوره (اگر در لیست دوره ها یافت نشد.)</th>
+                    <!--<th *ngFor="let teach of teachingapproaches">{{teach.title}}</th>-->
+                    <th>روش های آموزش</th>
+                    <!--<th>توضیحات</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of preJobNiazsanjiCompetencies; let i = index;" >
+                        <td style="background-color: #00c4e6">
+                            {{item.title}} ({{item.fixCompetencyDeficiencyTitle}})
+                        </td>
+                        <td>
+                            <ng-select
+                                [items]="educationalmodules"
+                                [multiple]="false"
+                                [closeOnSelect]="true"
+                                [searchable]="true"
+                                bindLabel="fullTitle"
+                                bindValue="id"
+                                placeholder="انتخاب نمائید."
+                                [name]="'educationalModuleId_'+i"
+                                [id]="'field_educationalModule_'+i"
+                                [(ngModel)]="item.educationalModuleId">
+                        </td>
+                        <td>
+                            <textarea type="text" [(ngModel)]="item.educationalModuleText" [name]="'educationalModuleText_'+i" class="form-control" ></textarea>
+                        </td>
+                        <!--<td *ngFor="let teach of teachingapproaches">-->
+                        <td>
+                            <span>انتخاب شده ها:</span>
+                            <span class="badge badge-info" *ngFor="let tea of item.teachingApproaches"><input type="button" (click)="deleteTeach(item.id ,tea.id)" value="X" class="btn btn-sm btn-danger" /> {{tea.title}}</span>
+                            <checkbox-group [name]="'teachingApproaches_' + i" [(ngModel)]="item.teachingApproaches">
+                                <checkbox *ngFor="let teachingApproach of teachingapproaches" [value]="teachingApproach">{{teachingApproach.title}}</checkbox>
+                            </checkbox-group>
+                            <!--{{item.teachingApproaches | json}}-->
+                        </td>
+                        <!--<td>
+                            <textarea [name]="'text_'+item.id" [id]="'text_'+item.id">{{item.fixCompetencyDeficiencyDescription}}</textarea>
+                        </td>-->
+                    </tr>
+                </tbody>
+            </table>
+            <div class="alert alert-info">
+                <img src="/content/images/bulb-icon.png" style="max-width: 25px; vertical-align: top;" />
+                <span>در این قسمت میتوانید پودمان آموزشی مورد نظر خود را جستجو کنید و اطلاعات آن را ببینید.</span>
+                <div class="form-group">
+                    <ng-select
+                        [items]="educationalmodules"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        bindLabel="fullTitle"
+                        placeholder="انتخاب نمائید."
+                        id="selectedEducationalModule"
+                        name="selectedEducationalModule"
+                        [(ngModel)]="selectedEducationalModule">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <table *ngIf="selectedEducationalModule" style="alignment: center" class="table table-bordered table-sm">
+                        <thead>
+                        <th><span jhiTranslate="marineindustryprojApp.educationalModule.title">Title</span></th>
+                        <th><span jhiTranslate="marineindustryprojApp.educationalModule.code">Code</span></th>
+                        <th><span jhiTranslate="marineindustryprojApp.educationalModule.learningTimeTheorical">Learning Time Theorical</span></th>
+                        <th><span jhiTranslate="marineindustryprojApp.educationalModule.learningTimePractical">Learning Time Practical</span></th>
+                        <th><span jhiTranslate="marineindustryprojApp.educationalModule.organization">Organization</span></th>
+                        <th><span jhiTranslate="marineindustryprojApp.educationalModule.skillableLevelOfSkill">Skillable Level Of Skill</span></th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{selectedEducationalModule.title}}</td>
+                            <td>{{selectedEducationalModule.code}}</td>
+                            <td>{{selectedEducationalModule.learningTimeTheorical}}</td>
+                            <td>{{selectedEducationalModule.learningTimePractical}}</td>
+                            <td>{{selectedEducationalModule.organizationTitle}}</td>
+                            <td>{{selectedEducationalModule.skillableLevelOfSkillTitle}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button *ngIf="editable" type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.saveAndNextStep">Save</span>
+                </button>
+                <button type="button" id="step-forward" class="btn btn-info pull-left"  (click)="stepForward()">
+                    <fa-icon [icon]="'backward'"></fa-icon>&nbsp;گام بعدی (بدون ذخیره)
+                </button>
+                <button type="button" id="step-back" class="btn btn-warning pull-left"  (click)="stepBack()">
+                    <fa-icon [icon]="'forward'"></fa-icon>&nbsp;گام قبلی
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

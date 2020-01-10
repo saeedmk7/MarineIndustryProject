@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.marineindustryproj.domain.Job;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.JobService;
+import com.marineindustryproj.service.StorageService;
 import com.marineindustryproj.service.dto.customs.JobMinDTO;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.errors.ErrorConstants;
@@ -21,6 +22,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -45,9 +47,12 @@ public class JobResource {
 
     private final JobQueryService jobQueryService;
 
-    public JobResource(JobService jobService, JobQueryService jobQueryService) {
+    private final StorageService storageService;
+
+    public JobResource(JobService jobService, JobQueryService jobQueryService, StorageService storageService) {
         this.jobService = jobService;
         this.jobQueryService = jobQueryService;
+        this.storageService = storageService;
     }
 
     /**
@@ -139,6 +144,28 @@ public class JobResource {
     }
 
 
+    /**
+     * POST  /educational-histories : Create a new educationalHistory.
+     *
+     * @return the ResponseEntity with status 201 (Created) and with body the new educationalHistoryDTO, or with status 400 (Bad Request) if the educationalHistory has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/jobs/upload-file")
+    @Timed
+    public ResponseEntity<String> uploadFileJob(@Valid @RequestBody @RequestParam("file") MultipartFile file) throws URISyntaxException, Exception {
+        String fileDownloadUri;
+        try
+        {
+            String fileName = storageService.storeJobFile(file);
+
+            fileDownloadUri = "api/downloadJobFile/" + fileName;
+        }
+        catch (Exception ex){
+            throw new Exception(ex);
+        }
+
+        return ResponseEntity.ok().body(fileDownloadUri);
+    }
     /**
      * GET  /jobs : get all the jobs.
      *

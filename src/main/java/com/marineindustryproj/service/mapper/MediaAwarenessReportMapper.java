@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity MediaAwarenessReport and its DTO MediaAwarenessReportDTO.
  */
-@Mapper(componentModel = "spring", uses = {OrganizationChartMapper.class, MediaProductTypeMapper.class})
+@Mapper(componentModel = "spring", uses = {DocumentMapper.class, OrganizationChartMapper.class, MediaProductTypeMapper.class})
 public interface MediaAwarenessReportMapper extends EntityMapper<MediaAwarenessReportDTO, MediaAwarenessReport> {
 
     @Mapping(source = "organizationChart.id", target = "organizationChartId")

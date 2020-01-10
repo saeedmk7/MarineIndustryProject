@@ -4,7 +4,6 @@
         "browsehappy": "شما از مرورگر <strong>قدیمی</strong> استفاده می‌کنید. لطفا <a href=\"http://browsehappy.com/?locale=en\">مرورگر خود را به روز کنید</a>",
         "menu": {
             "home": "خانه",
-            "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "personEducationalRecordsMarineSuffix": "شناسنامه آموزشی کارکنان",
                 "main": "اطلاعات پایه",
@@ -142,7 +141,11 @@
         "ribbon": {
             "dev":"در حال توسعه"
         },
-        "item-count": "نمایش {{first}} - {{second}} از {{total}} مورد."
+        "item-count": "نمایش {{first}} - {{second}} از {{total}} مورد.",
+        "sharedTitles":{
+            "educationHistoryTitle": "سوابق پودمان های آموزشی فرد",
+            "educationHistoryTitleAll": "شناسنامه آموزشی شاغل و شناسنامه شغلی فرد"
+        }
     },
     "entity": {
         "action": {
@@ -155,6 +158,7 @@
             "open": "نمایش مدرک",
             "save": "ذخیره",
             "saveAndNew": "ذخیره و جدید",
+            "saveAndNextStep": "ذخیره و گام بعدی",
             "view": "",
             "upexcel": "آپلود و ذخیره در دیتابیس",
             "documents": "مدارک",
@@ -211,5 +215,6 @@
         "successfileupload": "اطلاعات شما با موفقیت آپلود و در دیتابیس ذخیره شد.",
         "failedfileupload": "اطلاعات بنا به دلایلی برای ثبت با مشکل روبرو شده است. {{ message }}"
     },
+
     "footer": "این پاورقی است"
 }

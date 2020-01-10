@@ -256,7 +256,12 @@ public class UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }*/
-
+    @Transactional(readOnly = true)
+    public List<UserDTO> getAllUsersByAuthoritiesIs(String authority) {
+        Authority authority1 = new Authority();
+        authority1.setName(authority);
+        return userRepository.findAllByAuthoritiesIs(authority1).stream().map(UserDTO::new).collect(Collectors.toList());
+    }
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
         return userRepository.findOneWithAuthoritiesByLogin(login);

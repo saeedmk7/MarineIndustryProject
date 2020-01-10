@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity EducationalModule and its DTO EducationalModuleDTO.
  */
-@Mapper(componentModel = "spring", uses = {ScientificWorkGroupMapper.class, DocumentMapper.class, EducationalCenterMapper.class, RestrictionMapper.class, GoalMapper.class, ResourceMapper.class, TeacherMapper.class, RequestEducationalModuleMapper.class, SecurityLevelMapper.class, SkillableLevelOfSkillMapper.class, EvaluationMethodMapper.class, OrganizationMapper.class})
+@Mapper(componentModel = "spring", uses = {ScientificWorkGroupMapper.class, DocumentMapper.class, EducationalCenterMapper.class, GoalMapper.class, ResourceMapper.class, TeacherMapper.class, RestrictionMapper.class, RequestEducationalModuleMapper.class, SecurityLevelMapper.class, SkillableLevelOfSkillMapper.class, EvaluationMethodMapper.class, OrganizationMapper.class})
 public interface EducationalModuleMapper extends EntityMapper<EducationalModuleDTO, EducationalModule> {
 
     @Mapping(source = "requestEducationalModule.id", target = "requestEducationalModuleId")
@@ -33,13 +33,15 @@ public interface EducationalModuleMapper extends EntityMapper<EducationalModuleD
     @Mapping(target = "approvedRequestNiazsanjiFardis", ignore = true)
     @Mapping(target = "allRequestNiazsanjiFardis", ignore = true)
     @Mapping(target = "educationalHistories", ignore = true)
+    @Mapping(target = "designNiazsanjis", ignore = true)
+    @Mapping(target = "preJobNiazsanjiCompetencies", ignore = true)
+    @Mapping(target = "jobNiazsanjis", ignore = true)
     @Mapping(source = "requestEducationalModuleId", target = "requestEducationalModule")
     @Mapping(source = "securityLevelId", target = "securityLevel")
     @Mapping(source = "skillableLevelOfSkillId", target = "skillableLevelOfSkill")
     @Mapping(source = "evaluationMethodId", target = "evaluationMethod")
     @Mapping(source = "organizationId", target = "organization")
     @Mapping(target = "niazsanjiGroups", ignore = true)
-
     EducationalModule toEntity(EducationalModuleDTO educationalModuleDTO);
 
     default EducationalModule fromId(Long id) {

@@ -1,0 +1,64 @@
+<div class="row justify-content-center" >
+    <div class="col-12">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-pre-job-niazsanji-competency-marine-suffix-heading" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.home.step2Title">Create or edit a Pre Job Niazsanji Competency</h2>
+
+            <div class="alert alert-info">
+                <img src="/content/images/info.png" style="max-width: 25px; vertical-align: bottom;" />
+                <span>لطفا شایستگی هایی که با (نیازهای آموزشی) احصاء کمبودها نیاز به ارتقاء دارند را انتخاب نمائید و سپس ثبت نمائید.</span>
+            </div>
+            <table style="alignment: center" class="table table-bordered table-sm" id="content">
+                <thead>
+                <tr>
+                    <th colspan="2"> شایستگی های استاندارد</th>
+                    <th colspan="2">وضعیت موجود</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th colspan="2"></th>
+                    <th>نیاز به ارتقاء</th>
+                    <th>کفایت</th>
+                    <th>توضیحات</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let competency of competencies">
+                    <tr *ngFor="let item of competency.selectedItems; let i = index;" >
+                        <td style="background-color: #00c4e6" *ngIf="i == 0" [attr.rowspan]="competency.selectedItems.length">
+                            {{competency.title}}
+                        </td>
+                        <td>
+                            <span>{{item.title}}</span>
+                        </td>
+                        <td>
+                            <input type="radio" [name]="'radio_'+item.id" value="1" [checked]="item.needToImprove == 1">
+                        </td>
+                        <td>
+                            <input type="radio" [name]="'radio_'+item.id" value="0" [checked]="item.needToImprove == 0">
+                        </td>
+                        <th>
+                            <textarea class="form-control" [name]="'text_'+item.id" [id]="'text_'+item.id">{{item.needToImproveDescription}}</textarea>
+                        </th>
+                    </tr>
+                </ng-container>
+
+                </tbody>
+            </table>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button *ngIf="editable" type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.saveAndNextStep">Save</span>
+                </button>
+                <button type="button" id="step-forward" class="btn btn-info pull-left"  (click)="stepForward()">
+                    <fa-icon [icon]="'backward'"></fa-icon>&nbsp;گام بعدی (بدون ذخیره)
+                </button>
+                <button type="button" id="step-back" class="btn btn-warning pull-left"  (click)="stepBack()">
+                    <fa-icon [icon]="'forward'"></fa-icon>&nbsp;گام قبلی
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>

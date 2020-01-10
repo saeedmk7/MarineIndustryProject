@@ -191,6 +191,14 @@ public class PersonQueryService extends QueryService<Person> {
                 specification = specification.and(buildSpecification(criteria.getTeachingRecordId(),
                     root -> root.join(Person_.teachingRecords, JoinType.LEFT).get(TeachingRecord_.id)));
             }
+            if (criteria.getPreJobNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPreJobNiazsanjiId(),
+                    root -> root.join(Person_.preJobNiazsanjis, JoinType.LEFT).get(PreJobNiazsanji_.id)));
+            }
+            if (criteria.getJobNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getJobNiazsanjiId(),
+                    root -> root.join(Person_.jobNiazsanjis, JoinType.LEFT).get(JobNiazsanji_.id)));
+            }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(Person_.documents, JoinType.LEFT).get(Document_.id)));
@@ -250,6 +258,10 @@ public class PersonQueryService extends QueryService<Person> {
             if (criteria.getRunPhaseId() != null) {
                 specification = specification.and(buildSpecification(criteria.getRunPhaseId(),
                     root -> root.join(Person_.runPhases, JoinType.LEFT).get(RunPhase_.id)));
+            }
+            if (criteria.getPreJobNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPreJobNiazsanjiId(),
+                    root -> root.join(Person_.preJobNiazsanjis, JoinType.LEFT).get(PreJobNiazsanji_.id)));
             }
         }
         return specification;

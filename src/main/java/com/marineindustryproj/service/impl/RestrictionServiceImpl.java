@@ -62,6 +62,7 @@ public class RestrictionServiceImpl implements RestrictionService {
             .map(restrictionMapper::toDto);
     }
 
+
     /**
      * Get one restriction by id.
      *

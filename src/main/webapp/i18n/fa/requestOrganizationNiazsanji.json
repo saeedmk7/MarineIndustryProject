@@ -53,7 +53,12 @@
             "priceCost": "سرمایه گذاری(ریال)",
             "selectionType": "انتخاب افراد به صورت گروهی؟",
             "organizationChartId":"گروه/صنعت/واحد",
-            "answer": "جواب"
+            "answer": "جواب",
+            "restrictionDescription": "توضیح محدودیت",
+            "goalsText": "اهداف(نتایج مورد انتظار-اهداف کلی، جزئی، رفتاری و یادگیری و ...)",
+            "prerequisite": "پیش نیاز",
+            "restriction": "محدودیت",
+            "teachingApproach": "روش های آموزش"
 
         }
     }

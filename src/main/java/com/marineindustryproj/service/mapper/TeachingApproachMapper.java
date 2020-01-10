@@ -12,7 +12,14 @@ import org.mapstruct.*;
 public interface TeachingApproachMapper extends EntityMapper<TeachingApproachDTO, TeachingApproach> {
 
 
+    @Mapping(target = "requestOrganizationNiazsanjis", ignore = true)
+    @Mapping(target = "finalOrganizationNiazsanjis", ignore = true)
+    @Mapping(target = "finalNiazsanjiReports", ignore = true)
     @Mapping(target = "designAndPlannings", ignore = true)
+    @Mapping(target = "niazsanjiFardis", ignore = true)
+    @Mapping(target = "designNiazsanjis", ignore = true)
+    @Mapping(target = "jobNiazsanjis", ignore = true)
+    @Mapping(target = "preJobNiazsanjiCompetencies", ignore = true)
     TeachingApproach toEntity(TeachingApproachDTO teachingApproachDTO);
 
     default TeachingApproach fromId(Long id) {

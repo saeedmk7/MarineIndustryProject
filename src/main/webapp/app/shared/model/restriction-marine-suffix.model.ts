@@ -1,6 +1,11 @@
 import { Moment } from 'moment';
-import { IRequestEducationalModuleMarineSuffix } from 'app/shared/model//request-educational-module-marine-suffix.model';
 import { IEducationalModuleMarineSuffix } from 'app/shared/model//educational-module-marine-suffix.model';
+import { IRequestEducationalModuleMarineSuffix } from 'app/shared/model//request-educational-module-marine-suffix.model';
+import { IRequestOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//request-organization-niazsanji-marine-suffix.model';
+import { IFinalOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//final-organization-niazsanji-marine-suffix.model';
+import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model//final-niazsanji-report-marine-suffix.model';
+import { INiazsanjiFardiMarineSuffix } from 'app/shared/model//niazsanji-fardi-marine-suffix.model';
+import { IDesignNiazsanjiMarineSuffix } from 'app/shared/model//design-niazsanji-marine-suffix.model';
 
 export interface IRestrictionMarineSuffix {
     id?: number;
@@ -11,8 +16,13 @@ export interface IRestrictionMarineSuffix {
     modifyUserLogin?: string;
     modifyDate?: Moment;
     guid?: string;
-    requestEducationalModules?: IRequestEducationalModuleMarineSuffix[];
     educationalModules?: IEducationalModuleMarineSuffix[];
+    requestEducationalModules?: IRequestEducationalModuleMarineSuffix[];
+    requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[];
+    finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[];
+    finalNiazsanjiReports?: IFinalNiazsanjiReportMarineSuffix[];
+    niazsanjiFardis?: INiazsanjiFardiMarineSuffix[];
+    designNiazsanjis?: IDesignNiazsanjiMarineSuffix[];
 }
 
 export class RestrictionMarineSuffix implements IRestrictionMarineSuffix {
@@ -25,7 +35,12 @@ export class RestrictionMarineSuffix implements IRestrictionMarineSuffix {
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
         public guid?: string,
+        public educationalModules?: IEducationalModuleMarineSuffix[],
         public requestEducationalModules?: IRequestEducationalModuleMarineSuffix[],
-        public educationalModules?: IEducationalModuleMarineSuffix[]
+        public requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[],
+        public finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[],
+        public finalNiazsanjiReports?: IFinalNiazsanjiReportMarineSuffix[],
+        public niazsanjiFardis?: INiazsanjiFardiMarineSuffix[],
+        public designNiazsanjis?: IDesignNiazsanjiMarineSuffix[]
     ) {}
 }

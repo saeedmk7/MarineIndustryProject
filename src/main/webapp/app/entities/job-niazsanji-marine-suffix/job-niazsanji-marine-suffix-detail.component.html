@@ -1,0 +1,147 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="jobNiazsanji">
+            <h2><span jhiTranslate="marineindustryprojApp.jobNiazsanji.detail.title">Job Niazsanji</span> {{jobNiazsanji.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.niazsanjiYear">Niazsanji Year</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.niazsanjiYear}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.code">Code</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.priceCost">Price Cost</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.priceCost}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.description">Description</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.archived">Archived</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.status">Status</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.conversation">Conversation</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.conversation}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.changeStatusUserLogin">Change Status User Login</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.changeStatusUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.guid">Guid</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.hasImportantMessage">Has Important Message</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.hasImportantMessage}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.restrictionDescription">Restriction Description</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.restrictionDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.goalsText">Goals Text</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.goalsText}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.prerequisite">Prerequisite</span></dt>
+                <dd>
+                    <span>{{jobNiazsanji.prerequisite}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of jobNiazsanji.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.restriction">Restriction</span></dt>
+                <dd>
+                    <span *ngFor="let restriction of jobNiazsanji.restrictions; let last = last">
+                        <a [routerLink]="['/restriction-marine-suffix', restriction?.id, 'view' ]">{{restriction.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.courseType">Course Type</span></dt>
+                <dd>
+                    <div *ngIf="jobNiazsanji.courseTypeId">
+                        <a [routerLink]="['/course-type-marine-suffix', jobNiazsanji.courseTypeId, 'view']">{{jobNiazsanji.courseTypeTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.preJobNiazsanji">Pre Job Niazsanji</span></dt>
+                <dd>
+                    <div *ngIf="jobNiazsanji.preJobNiazsanjiId">
+                        <a [routerLink]="['/pre-job-niazsanji-marine-suffix', jobNiazsanji.preJobNiazsanjiId, 'view']">{{jobNiazsanji.preJobNiazsanjiCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.educationalModule">Educational Module</span></dt>
+                <dd>
+                    <div *ngIf="jobNiazsanji.educationalModuleId">
+                        <a [routerLink]="['/educational-module-marine-suffix', jobNiazsanji.educationalModuleId, 'view']">{{jobNiazsanji.educationalModuleTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="jobNiazsanji.personId">
+                        <a [routerLink]="['/person-marine-suffix', jobNiazsanji.personId, 'view']">{{jobNiazsanji.personFamily}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="jobNiazsanji.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', jobNiazsanji.organizationChartId, 'view']">{{jobNiazsanji.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.jobNiazsanji.teachingApproach">Teaching Approach</span></dt>
+                <dd>
+                    <div *ngIf="jobNiazsanji.teachingApproachId">
+                        <a [routerLink]="['/teaching-approach-marine-suffix', jobNiazsanji.teachingApproachId, 'view']">{{jobNiazsanji.teachingApproachTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/job-niazsanji-marine-suffix', jobNiazsanji.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

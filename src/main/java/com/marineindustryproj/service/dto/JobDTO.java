@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import javax.persistence.Lob;
 
 /**
  * A DTO for the Job entity.
@@ -51,6 +52,12 @@ public class JobDTO implements Serializable {
 
     @Size(max = 50)
     private String guid;
+
+    @Lob
+    private String fileDoc;
+
+    @Size(max = 50)
+    private String reviewDate;
 
     private Set<DocumentDTO> documents = new HashSet<>();
 
@@ -186,6 +193,22 @@ public class JobDTO implements Serializable {
         this.guid = guid;
     }
 
+    public String getFileDoc() {
+        return fileDoc;
+    }
+
+    public void setFileDoc(String fileDoc) {
+        this.fileDoc = fileDoc;
+    }
+
+    public String getReviewDate() {
+        return reviewDate;
+    }
+
+    public void setReviewDate(String reviewDate) {
+        this.reviewDate = reviewDate;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
@@ -312,6 +335,8 @@ public class JobDTO implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", guid='" + getGuid() + "'" +
+            ", fileDoc='" + getFileDoc() + "'" +
+            ", reviewDate='" + getReviewDate() + "'" +
             ", raste=" + getRasteId() +
             ", raste='" + getRasteTitle() + "'" +
             ", radeh=" + getRadehId() +

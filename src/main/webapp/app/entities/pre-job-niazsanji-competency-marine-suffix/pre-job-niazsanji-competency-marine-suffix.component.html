@@ -1,0 +1,108 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.home.title">Pre Job Niazsanji Competencies</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-pre-job-niazsanji-competency-marine-suffix" [routerLink]="['/pre-job-niazsanji-competency-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.home.createLabel">
+            Create new Pre Job Niazsanji Competency
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="preJobNiazsanjiCompetencies">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="needToImprove"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.needToImprove">Need To Improve</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="needToImproveDescription"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.needToImproveDescription">Need To Improve Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fixCompetencyDeficiencyDescription"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.fixCompetencyDeficiencyDescription">Fix Competency Deficiency Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.educationalModuleTitle">Educational Module Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sumScore"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.sumScore">Sum Score</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="priority"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.priority">Priority</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="selected"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.selected">Selected</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fixCompetencyDeficiencyTitle"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.fixCompetencyDeficiency">Fix Competency Deficiency</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="preJobNiazsanjiTitle"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.preJobNiazsanji">Pre Job Niazsanji</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="competencyTitle"><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.competency">Competency</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let preJobNiazsanjiCompetency of preJobNiazsanjiCompetencies ;trackBy: trackId">
+                <td><a [routerLink]="['/pre-job-niazsanji-competency-marine-suffix', preJobNiazsanjiCompetency.id, 'view' ]">{{preJobNiazsanjiCompetency.id}}</a></td>
+                <td>{{preJobNiazsanjiCompetency.title}}</td>
+                <td>{{preJobNiazsanjiCompetency.needToImprove}}</td>
+                <td>{{preJobNiazsanjiCompetency.needToImproveDescription}}</td>
+                <td>{{preJobNiazsanjiCompetency.fixCompetencyDeficiencyDescription}}</td>
+                <td>{{preJobNiazsanjiCompetency.educationalModuleTitle}}</td>
+                <td>{{preJobNiazsanjiCompetency.sumScore}}</td>
+                <td>{{preJobNiazsanjiCompetency.priority}}</td>
+                <td>{{preJobNiazsanjiCompetency.selected}}</td>
+                <td>{{preJobNiazsanjiCompetency.createUserLogin}}</td>
+                <td>{{preJobNiazsanjiCompetency.createDate | date:'medium'}}</td>
+                <td>{{preJobNiazsanjiCompetency.modifyUserLogin}}</td>
+                <td>{{preJobNiazsanjiCompetency.modifyDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="preJobNiazsanjiCompetency.fixCompetencyDeficiencyId">
+                        <a [routerLink]="['../fix-competency-deficiency-marine-suffix', preJobNiazsanjiCompetency.fixCompetencyDeficiencyId , 'view' ]" >{{preJobNiazsanjiCompetency.fixCompetencyDeficiencyTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="preJobNiazsanjiCompetency.educationalModuleId">
+                        <a [routerLink]="['../educational-module-marine-suffix', preJobNiazsanjiCompetency.educationalModuleId , 'view' ]" >{{preJobNiazsanjiCompetency.educationalModuleTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="preJobNiazsanjiCompetency.preJobNiazsanjiId">
+                        <a [routerLink]="['../pre-job-niazsanji-marine-suffix', preJobNiazsanjiCompetency.preJobNiazsanjiId , 'view' ]" >{{preJobNiazsanjiCompetency.preJobNiazsanjiTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="preJobNiazsanjiCompetency.competencyId">
+                        <a [routerLink]="['../competency-marine-suffix', preJobNiazsanjiCompetency.competencyId , 'view' ]" >{{preJobNiazsanjiCompetency.competencyTitle}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/pre-job-niazsanji-competency-marine-suffix', preJobNiazsanjiCompetency.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/pre-job-niazsanji-competency-marine-suffix', preJobNiazsanjiCompetency.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'pre-job-niazsanji-competency-marine-suffix/'+ preJobNiazsanjiCompetency.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="preJobNiazsanjiCompetencies && preJobNiazsanjiCompetencies.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

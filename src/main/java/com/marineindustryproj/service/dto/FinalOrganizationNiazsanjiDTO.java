@@ -82,9 +82,20 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
 
     private Boolean hasImportantMessage;
 
+    @Size(max = 4096)
+    private String restrictionDescription;
+
+    @Size(max = 4096)
+    private String goalsText;
+
+    @Size(max = 4096)
+    private String prerequisite;
+
     private Set<PersonDTO> people = new HashSet<>();
 
     private Set<DocumentDTO> documents = new HashSet<>();
+
+    private Set<RestrictionDTO> restrictions = new HashSet<>();
 
     private Long courseTypeId;
 
@@ -109,6 +120,10 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
     private Long requestOrganizationNiazsanjiId;
 
     private String requestOrganizationNiazsanjiRecommendedByOrgchart;
+
+    private Long teachingApproachId;
+
+    private String teachingApproachTitle;
 
     public Long getId() {
         return id;
@@ -310,6 +325,30 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public String getRestrictionDescription() {
+        return restrictionDescription;
+    }
+
+    public void setRestrictionDescription(String restrictionDescription) {
+        this.restrictionDescription = restrictionDescription;
+    }
+
+    public String getGoalsText() {
+        return goalsText;
+    }
+
+    public void setGoalsText(String goalsText) {
+        this.goalsText = goalsText;
+    }
+
+    public String getPrerequisite() {
+        return prerequisite;
+    }
+
+    public void setPrerequisite(String prerequisite) {
+        this.prerequisite = prerequisite;
+    }
+
     public Set<PersonDTO> getPeople() {
         return people;
     }
@@ -324,6 +363,14 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
 
     public void setDocuments(Set<DocumentDTO> documents) {
         this.documents = documents;
+    }
+
+    public Set<RestrictionDTO> getRestrictions() {
+        return restrictions;
+    }
+
+    public void setRestrictions(Set<RestrictionDTO> restrictions) {
+        this.restrictions = restrictions;
     }
 
     public Long getCourseTypeId() {
@@ -422,6 +469,22 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
         this.requestOrganizationNiazsanjiRecommendedByOrgchart = requestOrganizationNiazsanjiRecommendedByOrgchart;
     }
 
+    public Long getTeachingApproachId() {
+        return teachingApproachId;
+    }
+
+    public void setTeachingApproachId(Long teachingApproachId) {
+        this.teachingApproachId = teachingApproachId;
+    }
+
+    public String getTeachingApproachTitle() {
+        return teachingApproachTitle;
+    }
+
+    public void setTeachingApproachTitle(String teachingApproachTitle) {
+        this.teachingApproachTitle = teachingApproachTitle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -471,6 +534,9 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
             ", status=" + getStatus() +
             ", guid='" + getGuid() + "'" +
             ", hasImportantMessage='" + isHasImportantMessage() + "'" +
+            ", restrictionDescription='" + getRestrictionDescription() + "'" +
+            ", goalsText='" + getGoalsText() + "'" +
+            ", prerequisite='" + getPrerequisite() + "'" +
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +
             ", organizationChart=" + getOrganizationChartId() +
@@ -483,6 +549,8 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
             ", teachApproach='" + getTeachApproachTitle() + "'" +
             ", requestOrganizationNiazsanji=" + getRequestOrganizationNiazsanjiId() +
             ", requestOrganizationNiazsanji='" + getRequestOrganizationNiazsanjiRecommendedByOrgchart() + "'" +
+            ", teachingApproach=" + getTeachingApproachId() +
+            ", teachingApproach='" + getTeachingApproachTitle() + "'" +
             "}";
     }
 }

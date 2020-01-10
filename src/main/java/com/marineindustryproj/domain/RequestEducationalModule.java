@@ -225,11 +225,6 @@ public class RequestEducationalModule implements Serializable {
     @JsonIgnoreProperties("requestEducationalModules")
     private Organization organization;
 
-    /*@ManyToMany(mappedBy = "requestEducationalModules")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JsonIgnore
-    private Set<Restriction> restrictions = new HashSet<>();*/
-
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -843,7 +838,7 @@ public class RequestEducationalModule implements Serializable {
         this.teachers = teachers;
     }
 
-    /*public Set<Restriction> getRestrictions() {
+    public Set<Restriction> getRestrictions() {
         return restrictions;
     }
 
@@ -866,7 +861,7 @@ public class RequestEducationalModule implements Serializable {
 
     public void setRestrictions(Set<Restriction> restrictions) {
         this.restrictions = restrictions;
-    }*/
+    }
 
     public SecurityLevel getSecurityLevel() {
         return securityLevel;
@@ -918,31 +913,6 @@ public class RequestEducationalModule implements Serializable {
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
-    }
-
-    public Set<Restriction> getRestrictions() {
-        return restrictions;
-    }
-
-    public RequestEducationalModule restrictions(Set<Restriction> restrictions) {
-        this.restrictions = restrictions;
-        return this;
-    }
-
-    public RequestEducationalModule addRestriction(Restriction restriction) {
-        this.restrictions.add(restriction);
-        restriction.getRequestEducationalModules().add(this);
-        return this;
-    }
-
-    public RequestEducationalModule removeRestriction(Restriction restriction) {
-        this.restrictions.remove(restriction);
-        restriction.getRequestEducationalModules().remove(this);
-        return this;
-    }
-
-    public void setRestrictions(Set<Restriction> restrictions) {
-        this.restrictions = restrictions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity FinalOrganizationNiazsanji and its DTO FinalOrganizationNiazsanjiDTO.
  */
-@Mapper(componentModel = "spring", uses = {PersonMapper.class, DocumentMapper.class, CourseTypeMapper.class, OrganizationChartMapper.class, TeacherMapper.class, EducationalModuleMapper.class, TeachApproachMapper.class, RequestOrganizationNiazsanjiMapper.class})
+@Mapper(componentModel = "spring", uses = {PersonMapper.class, DocumentMapper.class, RestrictionMapper.class, CourseTypeMapper.class, OrganizationChartMapper.class, TeacherMapper.class, EducationalModuleMapper.class, TeachApproachMapper.class, RequestOrganizationNiazsanjiMapper.class, TeachingApproachMapper.class})
 public interface FinalOrganizationNiazsanjiMapper extends EntityMapper<FinalOrganizationNiazsanjiDTO, FinalOrganizationNiazsanji> {
 
     @Mapping(source = "courseType.id", target = "courseTypeId")
@@ -23,6 +23,8 @@ public interface FinalOrganizationNiazsanjiMapper extends EntityMapper<FinalOrga
     @Mapping(source = "teachApproach.title", target = "teachApproachTitle")
     @Mapping(source = "requestOrganizationNiazsanji.id", target = "requestOrganizationNiazsanjiId")
     @Mapping(source = "requestOrganizationNiazsanji.recommendedByOrgchart", target = "requestOrganizationNiazsanjiRecommendedByOrgchart")
+    @Mapping(source = "teachingApproach.id", target = "teachingApproachId")
+    @Mapping(source = "teachingApproach.title", target = "teachingApproachTitle")
     FinalOrganizationNiazsanjiDTO toDto(FinalOrganizationNiazsanji finalOrganizationNiazsanji);
 
     @Mapping(source = "courseTypeId", target = "courseType")
@@ -31,6 +33,7 @@ public interface FinalOrganizationNiazsanjiMapper extends EntityMapper<FinalOrga
     @Mapping(source = "educationalModuleId", target = "educationalModule")
     @Mapping(source = "teachApproachId", target = "teachApproach")
     @Mapping(source = "requestOrganizationNiazsanjiId", target = "requestOrganizationNiazsanji")
+    @Mapping(source = "teachingApproachId", target = "teachingApproach")
     FinalOrganizationNiazsanji toEntity(FinalOrganizationNiazsanjiDTO finalOrganizationNiazsanjiDTO);
 
     default FinalOrganizationNiazsanji fromId(Long id) {

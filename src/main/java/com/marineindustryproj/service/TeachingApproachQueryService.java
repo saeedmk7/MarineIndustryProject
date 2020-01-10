@@ -110,9 +110,37 @@ public class TeachingApproachQueryService extends QueryService<TeachingApproach>
             if (criteria.getModifyDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getModifyDate(), TeachingApproach_.modifyDate));
             }
+            if (criteria.getRequestOrganizationNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRequestOrganizationNiazsanjiId(),
+                    root -> root.join(TeachingApproach_.requestOrganizationNiazsanjis, JoinType.LEFT).get(RequestOrganizationNiazsanji_.id)));
+            }
+            if (criteria.getFinalOrganizationNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getFinalOrganizationNiazsanjiId(),
+                    root -> root.join(TeachingApproach_.finalOrganizationNiazsanjis, JoinType.LEFT).get(FinalOrganizationNiazsanji_.id)));
+            }
+            if (criteria.getFinalNiazsanjiReportId() != null) {
+                specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportId(),
+                    root -> root.join(TeachingApproach_.finalNiazsanjiReports, JoinType.LEFT).get(FinalNiazsanjiReport_.id)));
+            }
             if (criteria.getDesignAndPlanningId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDesignAndPlanningId(),
                     root -> root.join(TeachingApproach_.designAndPlannings, JoinType.LEFT).get(DesignAndPlanning_.id)));
+            }
+            if (criteria.getNiazsanjiFardiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getNiazsanjiFardiId(),
+                    root -> root.join(TeachingApproach_.niazsanjiFardis, JoinType.LEFT).get(NiazsanjiFardi_.id)));
+            }
+            if (criteria.getDesignNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getDesignNiazsanjiId(),
+                    root -> root.join(TeachingApproach_.designNiazsanjis, JoinType.LEFT).get(DesignNiazsanji_.id)));
+            }
+            if (criteria.getJobNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getJobNiazsanjiId(),
+                    root -> root.join(TeachingApproach_.jobNiazsanjis, JoinType.LEFT).get(JobNiazsanji_.id)));
+            }
+            if (criteria.getPreJobNiazsanjiCompetencyId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPreJobNiazsanjiCompetencyId(),
+                    root -> root.join(TeachingApproach_.preJobNiazsanjiCompetencies, JoinType.LEFT).get(PreJobNiazsanjiCompetency_.id)));
             }
         }
         return specification;

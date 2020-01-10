@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="priorityCriteria">
+            <h2><span jhiTranslate="marineindustryprojApp.priorityCriteria.detail.title">Priority Criteria</span> {{priorityCriteria.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.priorityCriteria.title">Title</span></dt>
+                <dd>
+                    <span>{{priorityCriteria.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.priorityCriteria.description">Description</span></dt>
+                <dd>
+                    <span>{{priorityCriteria.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.priorityCriteria.displayOrder">Display Order</span></dt>
+                <dd>
+                    <span>{{priorityCriteria.displayOrder}}</span>
+                </dd>
+<!--                <dt><span jhiTranslate="marineindustryprojApp.priorityCriteria.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{priorityCriteria.createUserLogin}}</span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.priorityCriteria.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{priorityCriteria.createDate}}</span>
+                </dd>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.priorityCriteria.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{priorityCriteria.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.priorityCriteria.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{priorityCriteria.modifyDate}}</span>
+                </dd>-->
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/priority-criteria-marine-suffix', priorityCriteria.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

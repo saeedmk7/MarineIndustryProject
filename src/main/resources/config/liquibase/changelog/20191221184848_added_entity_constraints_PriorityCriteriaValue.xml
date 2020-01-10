@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity PriorityCriteriaValue.
+    -->
+    <changeSet id="20191221184848-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="priority_criteria_id"
+                                 baseTableName="priority_criteria_value"
+                                 constraintName="fk_priority_criteria_value_priority_criteria_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="priority_criteria"/>
+
+        <addForeignKeyConstraint baseColumnNames="pre_job_niazsanji_competency_id"
+                                 baseTableName="priority_criteria_value"
+                                 constraintName="fk_priority_criteria_value_pre_job_niazsanji_competency_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pre_job_niazsanji_competency"/>
+
+    </changeSet>
+</databaseChangeLog>

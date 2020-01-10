@@ -9,6 +9,8 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -78,6 +80,13 @@ public class MediaAwarenessReport implements Serializable {
     @Size(max = 50)
     @Column(name = "guid", length = 50)
     private String guid;
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "media_awareness_report_document",
+               joinColumns = @JoinColumn(name = "media_awareness_reports_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "documents_id", referencedColumnName = "id"))
+    private Set<Document> documents = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties("mediaAwarenessReports")
@@ -276,6 +285,31 @@ public class MediaAwarenessReport implements Serializable {
 
     public void setGuid(String guid) {
         this.guid = guid;
+    }
+
+    public Set<Document> getDocuments() {
+        return documents;
+    }
+
+    public MediaAwarenessReport documents(Set<Document> documents) {
+        this.documents = documents;
+        return this;
+    }
+
+    public MediaAwarenessReport addDocument(Document document) {
+        this.documents.add(document);
+        document.getMediaAwarenessReports().add(this);
+        return this;
+    }
+
+    public MediaAwarenessReport removeDocument(Document document) {
+        this.documents.remove(document);
+        document.getMediaAwarenessReports().remove(this);
+        return this;
+    }
+
+    public void setDocuments(Set<Document> documents) {
+        this.documents = documents;
     }
 
     public OrganizationChart getOrganizationChart() {

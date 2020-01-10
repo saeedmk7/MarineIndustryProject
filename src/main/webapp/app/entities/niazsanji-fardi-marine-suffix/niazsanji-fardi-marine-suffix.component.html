@@ -111,12 +111,21 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <img src="../../../content/images/bulb-icon.png" alt="پیام مهمی در جزئیات وجود دارد" title="پیام مهمی در جزئیات وجود دارد"
-                             *ngIf="niazsanjiFardi.hasImportantMessage == true" style="cursor: pointer;width: 25%;margin: 0;"
-                             (click)="toggleImportantMessage(niazsanjiFardi.id, false)"/>
-                        <img src="../../../content/images/light-off-icon.png" *ngIf="niazsanjiFardi.hasImportantMessage == false" style="cursor: pointer;width: 25%;margin: 0;"
-                             (click)="toggleImportantMessage(niazsanjiFardi.id, true)"/>
                     </div>
+                    <div *ngIf="niazsanjiFardi.preJobNiazsanjiId">
+                        <!--<a [routerLink]="['../request-niazsanji-fardi-marine-suffix', niazsanjiFardi.requestNiazsanjiFardiId , 'view' ]" class="enableLink">{{niazsanjiFardi.requestNiazsanjiFardiId}}</a>-->
+                        <button type="submit" title="مشاهده"
+                                [routerLink]="['../pre-job-niazsanji-steps-marine-suffix', niazsanjiFardi.preJobNiazsanjiId , 'edit' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                    </div>
+                    <img src="../../../content/images/bulb-icon.png" alt="پیام مهمی در جزئیات وجود دارد" title="پیام مهمی در جزئیات وجود دارد"
+                         *ngIf="niazsanjiFardi.hasImportantMessage == true" style="cursor: pointer;width: 25%;margin: 0;"
+                         (click)="toggleImportantMessage(niazsanjiFardi.id, false)"/>
+                    <img src="../../../content/images/light-off-icon.png" *ngIf="niazsanjiFardi.hasImportantMessage == false" style="cursor: pointer;width: 25%;margin: 0;"
+                         (click)="toggleImportantMessage(niazsanjiFardi.id, true)"/>
                 </td>
                 <td class="text-right" width="250">
                     <div class="btn-group flex-btn-group-container">

@@ -1,6 +1,7 @@
 package com.marineindustryproj.web.rest;
 
 import com.marineindustryproj.config.Constants;
+import com.marineindustryproj.domain.Authority;
 import com.marineindustryproj.domain.User;
 import com.marineindustryproj.repository.UserRepository;
 import com.marineindustryproj.security.AuthoritiesConstants;
@@ -193,6 +194,18 @@ public class UserResource {
         final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    /**
+     * GET /users : get all users.
+     *
+     * @param authority
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     */
+    @GetMapping("/users/ByAuthority/{authority}")
+    @Timed
+    public ResponseEntity<List<UserDTO>> getAllUsersByAuthorityIs(@PathVariable String authority) {
+        List<UserDTO> users = userService.getAllUsersByAuthoritiesIs(authority);
+        return new ResponseEntity<>(users, null, HttpStatus.OK);
     }
     /**
      * GET /users : get all users.

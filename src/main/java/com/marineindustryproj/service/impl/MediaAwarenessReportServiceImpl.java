@@ -62,6 +62,15 @@ public class MediaAwarenessReportServiceImpl implements MediaAwarenessReportServ
             .map(mediaAwarenessReportMapper::toDto);
     }
 
+    /**
+     * Get all the MediaAwarenessReport with eager load of many-to-many relationships.
+     *
+     * @return the list of entities
+     */
+    public Page<MediaAwarenessReportDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return mediaAwarenessReportRepository.findAllWithEagerRelationships(pageable).map(mediaAwarenessReportMapper::toDto);
+    }
+    
 
     /**
      * Get one mediaAwarenessReport by id.
@@ -73,7 +82,7 @@ public class MediaAwarenessReportServiceImpl implements MediaAwarenessReportServ
     @Transactional(readOnly = true)
     public Optional<MediaAwarenessReportDTO> findOne(Long id) {
         log.debug("Request to get MediaAwarenessReport : {}", id);
-        return mediaAwarenessReportRepository.findById(id)
+        return mediaAwarenessReportRepository.findOneWithEagerRelationships(id)
             .map(mediaAwarenessReportMapper::toDto);
     }
 

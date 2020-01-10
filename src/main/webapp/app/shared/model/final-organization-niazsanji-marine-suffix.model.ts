@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { IPersonMarineSuffix } from 'app/shared/model//person-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
+import { IRestrictionMarineSuffix } from 'app/shared/model//restriction-marine-suffix.model';
 import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
 
 
@@ -31,8 +32,12 @@ export interface IFinalOrganizationNiazsanjiMarineSuffix {
     status?: number;
     guid?: string;
     hasImportantMessage?: boolean;
+    restrictionDescription?: string;
+    goalsText?: string;
+    prerequisite?: string;
     people?: IPersonMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
+    restrictions?: IRestrictionMarineSuffix[];
     courseTypeTitle?: string;
     courseTypeId?: number;
     organizationChartTitle?: string;
@@ -46,6 +51,8 @@ export interface IFinalOrganizationNiazsanjiMarineSuffix {
     teachApproachId?: number;
     requestOrganizationNiazsanjiRecommendedByOrgchart?: string;
     requestOrganizationNiazsanjiId?: number;
+    teachingApproachTitle?: string;
+    teachingApproachId?: number;
     totalLearningTime?: number;
     skillLevelOfSkillTitle?: string;
 }
@@ -77,8 +84,12 @@ export class FinalOrganizationNiazsanjiMarineSuffix implements IFinalOrganizatio
         public status?: number,
         public guid?: string,
         public hasImportantMessage?: boolean,
+        public restrictionDescription?: string,
+        public goalsText?: string,
+        public prerequisite?: string,
         public people?: IPersonMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
+        public restrictions?: IRestrictionMarineSuffix[],
         public courseTypeTitle?: string,
         public courseTypeId?: number,
         public organizationChartTitle?: string,
@@ -91,6 +102,8 @@ export class FinalOrganizationNiazsanjiMarineSuffix implements IFinalOrganizatio
         public teachApproachId?: number,
         public requestOrganizationNiazsanjiRecommendedByOrgchart?: string,
         public requestOrganizationNiazsanjiId?: number,
+        public teachingApproachTitle?: string,
+        public teachingApproachId?: number,
         public totalLearningTime?: number,
         public skillLevelOfSkillTitle?: string
     ) {

@@ -238,48 +238,13 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
             this.isSuperUsers = true;
     }
     onPersonChange(event){
-
+        debugger;
         if(event.id){
-            /*let criteria = [{
-                key:'personId.equals',
-                value: event.id
-            }];
-            this.finalNiazsanjiReportPersonMarineSuffixService.query({
-                page: 0,
-                size: 20000,
-                criteria,
-                sort: ["id","asc"]
-            }).subscribe((resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>) => this.showEducations(resp.body),
-                (error) => this.onError("موردی یافت نشد"));*/
-
-            this.finalNiazsanjiReportMarineSuffixService.getHomePagePersonEducationalModule(event.id).subscribe((resp: HttpResponse<IHomePagePersonEducationalModule[]>) => {
-
-                    this.homePagePersonEducationalModules = resp.body.filter(a => a.status > 0).sort((a,b) => (a.runDate > b.runDate) ? 1 : (a.runDate < b.runDate) ? -1 : 0);
-                    this.homePagePersonEducationalModules.forEach(a => {
-                        a.totalLearningTime = (!a.learningTimePractical ? 0 : a.learningTimePractical) + (!a.learningTimeTheorical ? 0 : a.learningTimeTheorical);
-                        switch (a.status) {
-                            case 100:
-                                a.statusMeaning = "خاتمه دوره";
-                                break;
-                            case 90:
-                                a.statusMeaning = "اجرا شده";
-                                break;
-                            case 80:
-                                a.statusMeaning = "برنامه ریزی شده";
-                                break;
-                            case 70:
-                                a.statusMeaning = "تصویب شوراء";
-                                break;
-                            case 0:
-                                a.statusMeaning = "شناسنامه آموزشی";
-                                break;
-                        }
-                    });
-                    //this.makePersonHourPieChart(resp.body);
+            this.personService.find(event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
+                    debugger;
+                    this.requestNiazsanjiFardi.organizationChartId = resp.body.organizationChartId;
                 },
-                (res: HttpErrorResponse) => this.onError(res.message));
-
-
+                (error) => this.onError("موردی یافت نشد"));
             const criteria = [{
                 key:'jobId.equals',
                 value: event.jobId

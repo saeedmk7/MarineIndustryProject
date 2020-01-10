@@ -57,7 +57,30 @@ public class TeachingApproach implements Serializable {
 
     @OneToMany(mappedBy = "teachingApproach")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<RequestOrganizationNiazsanji> requestOrganizationNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "teachingApproach")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<FinalOrganizationNiazsanji> finalOrganizationNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "teachingApproach")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<FinalNiazsanjiReport> finalNiazsanjiReports = new HashSet<>();
+    @OneToMany(mappedBy = "teachingApproach")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<DesignAndPlanning> designAndPlannings = new HashSet<>();
+    @OneToMany(mappedBy = "teachingApproach")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<NiazsanjiFardi> niazsanjiFardis = new HashSet<>();
+    @OneToMany(mappedBy = "teachingApproach")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<DesignNiazsanji> designNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "teachingApproach")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<JobNiazsanji> jobNiazsanjis = new HashSet<>();
+    @ManyToMany(mappedBy = "teachingApproaches")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<PreJobNiazsanjiCompetency> preJobNiazsanjiCompetencies = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -158,6 +181,81 @@ public class TeachingApproach implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public Set<RequestOrganizationNiazsanji> getRequestOrganizationNiazsanjis() {
+        return requestOrganizationNiazsanjis;
+    }
+
+    public TeachingApproach requestOrganizationNiazsanjis(Set<RequestOrganizationNiazsanji> requestOrganizationNiazsanjis) {
+        this.requestOrganizationNiazsanjis = requestOrganizationNiazsanjis;
+        return this;
+    }
+
+    public TeachingApproach addRequestOrganizationNiazsanji(RequestOrganizationNiazsanji requestOrganizationNiazsanji) {
+        this.requestOrganizationNiazsanjis.add(requestOrganizationNiazsanji);
+        requestOrganizationNiazsanji.setTeachingApproach(this);
+        return this;
+    }
+
+    public TeachingApproach removeRequestOrganizationNiazsanji(RequestOrganizationNiazsanji requestOrganizationNiazsanji) {
+        this.requestOrganizationNiazsanjis.remove(requestOrganizationNiazsanji);
+        requestOrganizationNiazsanji.setTeachingApproach(null);
+        return this;
+    }
+
+    public void setRequestOrganizationNiazsanjis(Set<RequestOrganizationNiazsanji> requestOrganizationNiazsanjis) {
+        this.requestOrganizationNiazsanjis = requestOrganizationNiazsanjis;
+    }
+
+    public Set<FinalOrganizationNiazsanji> getFinalOrganizationNiazsanjis() {
+        return finalOrganizationNiazsanjis;
+    }
+
+    public TeachingApproach finalOrganizationNiazsanjis(Set<FinalOrganizationNiazsanji> finalOrganizationNiazsanjis) {
+        this.finalOrganizationNiazsanjis = finalOrganizationNiazsanjis;
+        return this;
+    }
+
+    public TeachingApproach addFinalOrganizationNiazsanji(FinalOrganizationNiazsanji finalOrganizationNiazsanji) {
+        this.finalOrganizationNiazsanjis.add(finalOrganizationNiazsanji);
+        finalOrganizationNiazsanji.setTeachingApproach(this);
+        return this;
+    }
+
+    public TeachingApproach removeFinalOrganizationNiazsanji(FinalOrganizationNiazsanji finalOrganizationNiazsanji) {
+        this.finalOrganizationNiazsanjis.remove(finalOrganizationNiazsanji);
+        finalOrganizationNiazsanji.setTeachingApproach(null);
+        return this;
+    }
+
+    public void setFinalOrganizationNiazsanjis(Set<FinalOrganizationNiazsanji> finalOrganizationNiazsanjis) {
+        this.finalOrganizationNiazsanjis = finalOrganizationNiazsanjis;
+    }
+
+    public Set<FinalNiazsanjiReport> getFinalNiazsanjiReports() {
+        return finalNiazsanjiReports;
+    }
+
+    public TeachingApproach finalNiazsanjiReports(Set<FinalNiazsanjiReport> finalNiazsanjiReports) {
+        this.finalNiazsanjiReports = finalNiazsanjiReports;
+        return this;
+    }
+
+    public TeachingApproach addFinalNiazsanjiReport(FinalNiazsanjiReport finalNiazsanjiReport) {
+        this.finalNiazsanjiReports.add(finalNiazsanjiReport);
+        finalNiazsanjiReport.setTeachingApproach(this);
+        return this;
+    }
+
+    public TeachingApproach removeFinalNiazsanjiReport(FinalNiazsanjiReport finalNiazsanjiReport) {
+        this.finalNiazsanjiReports.remove(finalNiazsanjiReport);
+        finalNiazsanjiReport.setTeachingApproach(null);
+        return this;
+    }
+
+    public void setFinalNiazsanjiReports(Set<FinalNiazsanjiReport> finalNiazsanjiReports) {
+        this.finalNiazsanjiReports = finalNiazsanjiReports;
+    }
+
     public Set<DesignAndPlanning> getDesignAndPlannings() {
         return designAndPlannings;
     }
@@ -181,6 +279,106 @@ public class TeachingApproach implements Serializable {
 
     public void setDesignAndPlannings(Set<DesignAndPlanning> designAndPlannings) {
         this.designAndPlannings = designAndPlannings;
+    }
+
+    public Set<NiazsanjiFardi> getNiazsanjiFardis() {
+        return niazsanjiFardis;
+    }
+
+    public TeachingApproach niazsanjiFardis(Set<NiazsanjiFardi> niazsanjiFardis) {
+        this.niazsanjiFardis = niazsanjiFardis;
+        return this;
+    }
+
+    public TeachingApproach addNiazsanjiFardi(NiazsanjiFardi niazsanjiFardi) {
+        this.niazsanjiFardis.add(niazsanjiFardi);
+        niazsanjiFardi.setTeachingApproach(this);
+        return this;
+    }
+
+    public TeachingApproach removeNiazsanjiFardi(NiazsanjiFardi niazsanjiFardi) {
+        this.niazsanjiFardis.remove(niazsanjiFardi);
+        niazsanjiFardi.setTeachingApproach(null);
+        return this;
+    }
+
+    public void setNiazsanjiFardis(Set<NiazsanjiFardi> niazsanjiFardis) {
+        this.niazsanjiFardis = niazsanjiFardis;
+    }
+
+    public Set<DesignNiazsanji> getDesignNiazsanjis() {
+        return designNiazsanjis;
+    }
+
+    public TeachingApproach designNiazsanjis(Set<DesignNiazsanji> designNiazsanjis) {
+        this.designNiazsanjis = designNiazsanjis;
+        return this;
+    }
+
+    public TeachingApproach addDesignNiazsanji(DesignNiazsanji designNiazsanji) {
+        this.designNiazsanjis.add(designNiazsanji);
+        designNiazsanji.setTeachingApproach(this);
+        return this;
+    }
+
+    public TeachingApproach removeDesignNiazsanji(DesignNiazsanji designNiazsanji) {
+        this.designNiazsanjis.remove(designNiazsanji);
+        designNiazsanji.setTeachingApproach(null);
+        return this;
+    }
+
+    public void setDesignNiazsanjis(Set<DesignNiazsanji> designNiazsanjis) {
+        this.designNiazsanjis = designNiazsanjis;
+    }
+
+    public Set<JobNiazsanji> getJobNiazsanjis() {
+        return jobNiazsanjis;
+    }
+
+    public TeachingApproach jobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
+        this.jobNiazsanjis = jobNiazsanjis;
+        return this;
+    }
+
+    public TeachingApproach addJobNiazsanji(JobNiazsanji jobNiazsanji) {
+        this.jobNiazsanjis.add(jobNiazsanji);
+        jobNiazsanji.setTeachingApproach(this);
+        return this;
+    }
+
+    public TeachingApproach removeJobNiazsanji(JobNiazsanji jobNiazsanji) {
+        this.jobNiazsanjis.remove(jobNiazsanji);
+        jobNiazsanji.setTeachingApproach(null);
+        return this;
+    }
+
+    public void setJobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
+        this.jobNiazsanjis = jobNiazsanjis;
+    }
+
+    public Set<PreJobNiazsanjiCompetency> getPreJobNiazsanjiCompetencies() {
+        return preJobNiazsanjiCompetencies;
+    }
+
+    public TeachingApproach preJobNiazsanjiCompetencies(Set<PreJobNiazsanjiCompetency> preJobNiazsanjiCompetencies) {
+        this.preJobNiazsanjiCompetencies = preJobNiazsanjiCompetencies;
+        return this;
+    }
+
+    public TeachingApproach addPreJobNiazsanjiCompetency(PreJobNiazsanjiCompetency preJobNiazsanjiCompetency) {
+        this.preJobNiazsanjiCompetencies.add(preJobNiazsanjiCompetency);
+        preJobNiazsanjiCompetency.getTeachingApproaches().add(this);
+        return this;
+    }
+
+    public TeachingApproach removePreJobNiazsanjiCompetency(PreJobNiazsanjiCompetency preJobNiazsanjiCompetency) {
+        this.preJobNiazsanjiCompetencies.remove(preJobNiazsanjiCompetency);
+        preJobNiazsanjiCompetency.getTeachingApproaches().remove(this);
+        return this;
+    }
+
+    public void setPreJobNiazsanjiCompetencies(Set<PreJobNiazsanjiCompetency> preJobNiazsanjiCompetencies) {
+        this.preJobNiazsanjiCompetencies = preJobNiazsanjiCompetencies;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

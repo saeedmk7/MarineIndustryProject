@@ -8,24 +8,30 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity FinalNiazsanjiReport and its DTO FinalNiazsanjiReportDTO.
  */
-@Mapper(componentModel = "spring", uses = {DocumentMapper.class, CourseTypeMapper.class, OrganizationChartMapper.class, EducationalModuleMapper.class})
+@Mapper(componentModel = "spring", uses = {DocumentMapper.class, RestrictionMapper.class, TeacherMapper.class, CourseTypeMapper.class, OrganizationChartMapper.class, EducationalModuleMapper.class, TeachingApproachMapper.class})
 public interface FinalNiazsanjiReportMapper extends EntityMapper<FinalNiazsanjiReportDTO, FinalNiazsanjiReport> {
 
+    @Mapping(source = "teacher.id", target = "teacherId")
+    @Mapping(source = "teacher.family", target = "teacherFamily")
     @Mapping(source = "courseType.id", target = "courseTypeId")
     @Mapping(source = "courseType.title", target = "courseTypeTitle")
     @Mapping(source = "organizationChart.id", target = "organizationChartId")
     @Mapping(source = "organizationChart.title", target = "organizationChartTitle")
     @Mapping(source = "educationalModule.id", target = "educationalModuleId")
     @Mapping(source = "educationalModule.title", target = "educationalModuleTitle")
+    @Mapping(source = "teachingApproach.id", target = "teachingApproachId")
+    @Mapping(source = "teachingApproach.title", target = "teachingApproachTitle")
     FinalNiazsanjiReportDTO toDto(FinalNiazsanjiReport finalNiazsanjiReport);
 
     @Mapping(target = "finalNiazsanjiReportPeople", ignore = true)
     @Mapping(target = "designAndPlannings", ignore = true)
     @Mapping(target = "runPhases", ignore = true)
     @Mapping(target = "polls", ignore = true)
+    @Mapping(source = "teacherId", target = "teacher")
     @Mapping(source = "courseTypeId", target = "courseType")
     @Mapping(source = "organizationChartId", target = "organizationChart")
     @Mapping(source = "educationalModuleId", target = "educationalModule")
+    @Mapping(source = "teachingApproachId", target = "teachingApproach")
     FinalNiazsanjiReport toEntity(FinalNiazsanjiReportDTO finalNiazsanjiReportDTO);
 
     default FinalNiazsanjiReport fromId(Long id) {

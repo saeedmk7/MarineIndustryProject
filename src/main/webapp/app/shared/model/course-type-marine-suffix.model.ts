@@ -5,6 +5,8 @@ import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model//final-niazs
 import { IDesignAndPlanningMarineSuffix } from 'app/shared/model//design-and-planning-marine-suffix.model';
 import { INiazsanjiFardiMarineSuffix } from 'app/shared/model//niazsanji-fardi-marine-suffix.model';
 import { IRequestNiazsanjiFardiMarineSuffix } from 'app/shared/model//request-niazsanji-fardi-marine-suffix.model';
+import { IEducationalHistoryMarineSuffix } from 'app/shared/model//educational-history-marine-suffix.model';
+import { IDesignNiazsanjiMarineSuffix } from 'app/shared/model//design-niazsanji-marine-suffix.model';
 
 export interface ICourseTypeMarineSuffix {
     id?: number;
@@ -21,6 +23,8 @@ export interface ICourseTypeMarineSuffix {
     designAndPlannings?: IDesignAndPlanningMarineSuffix[];
     niazsanjiFardis?: INiazsanjiFardiMarineSuffix[];
     requestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[];
+    educationalHistories?: IEducationalHistoryMarineSuffix[];
+    designNiazsanjis?: IDesignNiazsanjiMarineSuffix[];
 }
 
 export class CourseTypeMarineSuffix implements ICourseTypeMarineSuffix {
@@ -38,6 +42,8 @@ export class CourseTypeMarineSuffix implements ICourseTypeMarineSuffix {
         public finalNiazsanjiReports?: IFinalNiazsanjiReportMarineSuffix[],
         public designAndPlannings?: IDesignAndPlanningMarineSuffix[],
         public niazsanjiFardis?: INiazsanjiFardiMarineSuffix[],
-        public requestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[]
+        public requestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[],
+        public educationalHistories?: IEducationalHistoryMarineSuffix[],
+        public designNiazsanjis?: IDesignNiazsanjiMarineSuffix[]
     ) {}
 }

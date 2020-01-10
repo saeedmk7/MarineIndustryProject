@@ -17,14 +17,14 @@ import java.util.Optional;
 @Repository
 public interface FinalOrganizationNiazsanjiRepository extends JpaRepository<FinalOrganizationNiazsanji, Long>, JpaSpecificationExecutor<FinalOrganizationNiazsanji> {
 
-    @Query(value = "select distinct final_organization_niazsanji from FinalOrganizationNiazsanji final_organization_niazsanji left join fetch final_organization_niazsanji.people left join fetch final_organization_niazsanji.documents",
+    @Query(value = "select distinct final_organization_niazsanji from FinalOrganizationNiazsanji final_organization_niazsanji left join fetch final_organization_niazsanji.people left join fetch final_organization_niazsanji.documents left join fetch final_organization_niazsanji.restrictions",
         countQuery = "select count(distinct final_organization_niazsanji) from FinalOrganizationNiazsanji final_organization_niazsanji")
     Page<FinalOrganizationNiazsanji> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(value = "select distinct final_organization_niazsanji from FinalOrganizationNiazsanji final_organization_niazsanji left join fetch final_organization_niazsanji.people left join fetch final_organization_niazsanji.documents")
+    @Query(value = "select distinct final_organization_niazsanji from FinalOrganizationNiazsanji final_organization_niazsanji left join fetch final_organization_niazsanji.people left join fetch final_organization_niazsanji.documents left join fetch final_organization_niazsanji.restrictions")
     List<FinalOrganizationNiazsanji> findAllWithEagerRelationships();
 
-    @Query("select final_organization_niazsanji from FinalOrganizationNiazsanji final_organization_niazsanji left join fetch final_organization_niazsanji.people left join fetch final_organization_niazsanji.documents where final_organization_niazsanji.id =:id")
+    @Query("select final_organization_niazsanji from FinalOrganizationNiazsanji final_organization_niazsanji left join fetch final_organization_niazsanji.people left join fetch final_organization_niazsanji.documents left join fetch final_organization_niazsanji.restrictions where final_organization_niazsanji.id =:id")
     Optional<FinalOrganizationNiazsanji> findOneWithEagerRelationships(@Param("id") Long id);
 
 }

@@ -1,0 +1,40 @@
+{
+    "marineindustryprojApp": {
+        "designNiazsanji": {
+            "home": {
+                "title": "Design Niazsanjis",
+                "createLabel": "Create a new Design Niazsanji",
+                "createOrEditLabel": "Create or edit a Design Niazsanji"
+            },
+            "created": "A new Design Niazsanji is created with identifier {{ param }}",
+            "updated": "A Design Niazsanji is updated with identifier {{ param }}",
+            "deleted": "A Design Niazsanji is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Design Niazsanji {{ id }}?"
+            },
+            "detail": {
+                "title": "Design Niazsanji"
+            },
+            "title": "Title",
+            "code": "Code",
+            "costEducationalModule": "Cost Educational Module",
+            "description": "Description",
+            "restrictionDescription": "Restriction Description",
+            "goalsText": "Goals Text",
+            "prerequisite": "Prerequisite",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "restriction": "Restriction",
+            "preJobNiazsanji": "Pre Job Niazsanji",
+            "courseType": "Course Type",
+            "educationalModule": "Educational Module",
+            "teachingApproach": "Teaching Approach"
+        }
+    }
+}

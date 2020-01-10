@@ -213,6 +213,18 @@ public class EducationalModuleQueryService extends QueryService<EducationalModul
                 specification = specification.and(buildSpecification(criteria.getEducationalHistoryId(),
                     root -> root.join(EducationalModule_.educationalHistories, JoinType.LEFT).get(EducationalHistory_.id)));
             }
+            if (criteria.getDesignNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getDesignNiazsanjiId(),
+                    root -> root.join(EducationalModule_.designNiazsanjis, JoinType.LEFT).get(DesignNiazsanji_.id)));
+            }
+            if (criteria.getPreJobNiazsanjiCompetencyId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPreJobNiazsanjiCompetencyId(),
+                    root -> root.join(EducationalModule_.preJobNiazsanjiCompetencies, JoinType.LEFT).get(PreJobNiazsanjiCompetency_.id)));
+            }
+            if (criteria.getJobNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getJobNiazsanjiId(),
+                    root -> root.join(EducationalModule_.jobNiazsanjis, JoinType.LEFT).get(JobNiazsanji_.id)));
+            }
             if (criteria.getScientificWorkGroupId() != null) {
                 specification = specification.and(buildSpecification(criteria.getScientificWorkGroupId(),
                     root -> root.join(EducationalModule_.scientificWorkGroups, JoinType.LEFT).get(ScientificWorkGroup_.id)));
@@ -237,6 +249,10 @@ public class EducationalModuleQueryService extends QueryService<EducationalModul
                 specification = specification.and(buildSpecification(criteria.getTeacherId(),
                     root -> root.join(EducationalModule_.teachers, JoinType.LEFT).get(Teacher_.id)));
             }
+            if (criteria.getRestrictionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRestrictionId(),
+                    root -> root.join(EducationalModule_.restrictions, JoinType.LEFT).get(Restriction_.id)));
+            }
             if (criteria.getRequestEducationalModuleId() != null) {
                 specification = specification.and(buildSpecification(criteria.getRequestEducationalModuleId(),
                     root -> root.join(EducationalModule_.requestEducationalModule, JoinType.LEFT).get(RequestEducationalModule_.id)));
@@ -260,10 +276,6 @@ public class EducationalModuleQueryService extends QueryService<EducationalModul
             if (criteria.getNiazsanjiGroupId() != null) {
                 specification = specification.and(buildSpecification(criteria.getNiazsanjiGroupId(),
                     root -> root.join(EducationalModule_.niazsanjiGroups, JoinType.LEFT).get(NiazsanjiGroup_.id)));
-            }
-            if (criteria.getRestrictionId() != null) {
-                specification = specification.and(buildSpecification(criteria.getRestrictionId(),
-                    root -> root.join(EducationalModule_.restrictions, JoinType.LEFT).get(Restriction_.id)));
             }
         }
         return specification;

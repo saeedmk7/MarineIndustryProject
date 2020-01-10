@@ -1,0 +1,44 @@
+{
+    "marineindustryprojApp": {
+        "preJobNiazsanji": {
+            "home": {
+                "title": "Pre Job Niazsanjis",
+                "createLabel": "Create a new Pre Job Niazsanji",
+                "createOrEditLabel": "Create or edit a Pre Job Niazsanji"
+            },
+            "created": "A new Pre Job Niazsanji is created with identifier {{ param }}",
+            "updated": "A Pre Job Niazsanji is updated with identifier {{ param }}",
+            "deleted": "A Pre Job Niazsanji is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Pre Job Niazsanji {{ id }}?"
+            },
+            "detail": {
+                "title": "Pre Job Niazsanji"
+            },
+            "title": "Title",
+            "reviewDate": "Review Date",
+            "code": "Code",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "conversation": "Conversation",
+            "requestStatus": "Request Status",
+            "changeStatusUserLogin": "Change Status User Login",
+            "guid": "Guid",
+            "hasImportantMessage": "Has Important Message",
+            "niazsanjiFardi": "Niazsanji Fardi",
+            "designNiazsanji": "Design Niazsanji",
+            "preJobNiazsanjiCompetency": "Pre Job Niazsanji Competency",
+            "document": "Document",
+            "person": "Person",
+            "organizationChart": "Organization Chart",
+            "person": "Person"
+        }
+    }
+}

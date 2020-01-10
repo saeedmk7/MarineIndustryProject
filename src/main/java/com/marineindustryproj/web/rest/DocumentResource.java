@@ -1,7 +1,7 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.marineindustryproj.domain.InvestToGroupTransaction;
+import com.marineindustryproj.domain.MediaAwarenessReport;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.*;
 import com.marineindustryproj.service.dto.*;
@@ -118,6 +118,14 @@ public class DocumentResource {
 
     private final RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService;
 
+    private final MediaAwarenessReportService mediaAwarenessReportService;
+
+    private final MediaAwarenessReportQueryService mediaAwarenessReportQueryService;
+
+    private final PreJobNiazsanjiService preJobNiazsanjiService;
+
+    private final PreJobNiazsanjiQueryService preJobNiazsanjiQueryService;
+
     public DocumentResource(DocumentService documentService,
                             DocumentQueryService documentQueryService,
                             PersonService personService,
@@ -154,7 +162,7 @@ public class DocumentResource {
                             NiazsanjiFardiService niazsanjiFardiService,
                             NiazsanjiFardiQueryService niazsanjiFardiQueryService,
                             InvestToGroupTransactionService investToGroupTransactionService, InvestToGroupTransactionQueryService investToGroupTransactionQueryService, RequestNiazsanjiFardiService requestNiazsanjiFardiService,
-                            RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService) {
+                            RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService, MediaAwarenessReportService mediaAwarenessReportService, MediaAwarenessReportQueryService mediaAwarenessReportQueryService, PreJobNiazsanjiService preJobNiazsanjiService, PreJobNiazsanjiQueryService preJobNiazsanjiQueryService) {
         this.documentService = documentService;
         this.documentQueryService = documentQueryService;
         this.personService = personService;
@@ -194,6 +202,10 @@ public class DocumentResource {
         this.investToGroupTransactionQueryService = investToGroupTransactionQueryService;
         this.requestNiazsanjiFardiService = requestNiazsanjiFardiService;
         this.requestNiazsanjiFardiQueryService = requestNiazsanjiFardiQueryService;
+        this.mediaAwarenessReportService = mediaAwarenessReportService;
+        this.mediaAwarenessReportQueryService = mediaAwarenessReportQueryService;
+        this.preJobNiazsanjiService = preJobNiazsanjiService;
+        this.preJobNiazsanjiQueryService = preJobNiazsanjiQueryService;
     }
     /**
      * POST  /documents : Create a new document.
@@ -356,6 +368,22 @@ public class DocumentResource {
                 documents.add(result);
                 investToGroupTransaction.setDocuments(documents);
                 investToGroupTransactionService.save(investToGroupTransaction);
+            }
+            if (documentDTO.getEntityName().toLowerCase().equals("mediaawarenessreport")) {
+                MediaAwarenessReportDTO mediaAwarenessReport =
+                    mediaAwarenessReportService.findOne(documentDTO.getEntityId()).get();
+                Set<DocumentDTO> documents = mediaAwarenessReport.getDocuments();
+                documents.add(result);
+                mediaAwarenessReport.setDocuments(documents);
+                mediaAwarenessReportService.save(mediaAwarenessReport);
+            }
+            if (documentDTO.getEntityName().toLowerCase().equals("prejobniazsanji")) {
+                PreJobNiazsanjiDTO preJobNiazsanji =
+                    preJobNiazsanjiService.findOne(documentDTO.getEntityId()).get();
+                Set<DocumentDTO> documents = preJobNiazsanji.getDocuments();
+                documents.add(result);
+                preJobNiazsanji.setDocuments(documents);
+                preJobNiazsanjiService.save(preJobNiazsanji);
             }
         } catch (Exception ex) {
             log.debug(ex.getMessage());
@@ -675,6 +703,32 @@ public class DocumentResource {
             documents.remove(documentService.findOne(id).get());
             investToGroupTransactionDTO.setDocuments(documents);
             investToGroupTransactionService.save(investToGroupTransactionDTO);
+        }
+        if (entityName.toLowerCase().equals("mediaawarenessreport")) {
+            MediaAwarenessReportCriteria criteria = new MediaAwarenessReportCriteria();
+            LongFilter filter = new LongFilter();
+            filter.setEquals(id);
+            criteria.setDocumentId(filter);
+            MediaAwarenessReportDTO mediaAwarenessReportDTO =
+                mediaAwarenessReportQueryService.findByCriteria(criteria).get(0);
+
+            Set<DocumentDTO> documents = mediaAwarenessReportDTO.getDocuments();
+            documents.remove(documentService.findOne(id).get());
+            mediaAwarenessReportDTO.setDocuments(documents);
+            mediaAwarenessReportService.save(mediaAwarenessReportDTO);
+        }
+        if (entityName.toLowerCase().equals("prejobniazsanji")) {
+            PreJobNiazsanjiCriteria criteria = new PreJobNiazsanjiCriteria();
+            LongFilter filter = new LongFilter();
+            filter.setEquals(id);
+            criteria.setDocumentId(filter);
+            PreJobNiazsanjiDTO preJobNiazsanjiDTO =
+                preJobNiazsanjiQueryService.findByCriteria(criteria).get(0);
+
+            Set<DocumentDTO> documents = preJobNiazsanjiDTO.getDocuments();
+            documents.remove(documentService.findOne(id).get());
+            preJobNiazsanjiDTO.setDocuments(documents);
+            preJobNiazsanjiService.save(preJobNiazsanjiDTO);
         }
         documentService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();

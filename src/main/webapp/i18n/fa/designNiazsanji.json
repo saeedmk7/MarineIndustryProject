@@ -1,0 +1,42 @@
+{
+    "marineindustryprojApp": {
+        "designNiazsanji": {
+            "home": {
+                "title": "تعریف مشخصات دوره آموزشی (از جدول اولویت بندی)",
+                "createLabel": "جدید",
+                "createOrEditLabel": "تعریف مشخصات دوره آموزشی {{ title }} (از جدول اولویت بندی) "
+            },
+            "created": "طراحی دوره با شناسه {{ param }} ایجاد شد.",
+            "updated": "طراحی دوره با شناسه {{ param }} ویرایش شد.",
+            "deleted": "طراحی دوره با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف طراحی دوره با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات طراحی دوره"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "costEducationalModule": "سرمایه گذاری پودمان (ریال)",
+            "description": "توضیحات",
+
+            "createUserLogin": "کاربر درخواست کننده",
+            "createDate": "تاریخ درخواست",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت درخواست",
+
+            "preJobNiazsanji": "نیازسنجی شغلی",
+            "courseType": "نوع دوره",
+            "educationalModule": "پودمان آموزشی",
+            "restriction": "محدودیت",
+            "restrictionDescription": "توضیح محدودیت",
+            "goalsText": "اهداف(نتایج مورد انتظار-اهداف کلی، جزئی، رفتاری و یادگیری و ...)",
+            "prerequisite": "پیش نیاز",
+            "teachingApproach": "روش های آموزش"
+        }
+    }
+}

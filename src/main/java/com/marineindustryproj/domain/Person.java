@@ -146,6 +146,12 @@ public class Person implements Serializable {
     @OneToMany(mappedBy = "person")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<TeachingRecord> teachingRecords = new HashSet<>();
+    @OneToMany(mappedBy = "person")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<PreJobNiazsanji> preJobNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "person")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<JobNiazsanji> jobNiazsanjis = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "person_document",
@@ -737,6 +743,56 @@ public class Person implements Serializable {
         this.teachingRecords = teachingRecords;
     }
 
+    public Set<PreJobNiazsanji> getPreJobNiazsanjis() {
+        return preJobNiazsanjis;
+    }
+
+    public Person preJobNiazsanjis(Set<PreJobNiazsanji> preJobNiazsanjis) {
+        this.preJobNiazsanjis = preJobNiazsanjis;
+        return this;
+    }
+
+    public Person addPreJobNiazsanji(PreJobNiazsanji preJobNiazsanji) {
+        this.preJobNiazsanjis.add(preJobNiazsanji);
+        preJobNiazsanji.setPerson(this);
+        return this;
+    }
+
+    public Person removePreJobNiazsanji(PreJobNiazsanji preJobNiazsanji) {
+        this.preJobNiazsanjis.remove(preJobNiazsanji);
+        preJobNiazsanji.setPerson(null);
+        return this;
+    }
+
+    public void setPreJobNiazsanjis(Set<PreJobNiazsanji> preJobNiazsanjis) {
+        this.preJobNiazsanjis = preJobNiazsanjis;
+    }
+
+    public Set<JobNiazsanji> getJobNiazsanjis() {
+        return jobNiazsanjis;
+    }
+
+    public Person jobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
+        this.jobNiazsanjis = jobNiazsanjis;
+        return this;
+    }
+
+    public Person addJobNiazsanji(JobNiazsanji jobNiazsanji) {
+        this.jobNiazsanjis.add(jobNiazsanji);
+        jobNiazsanji.setPerson(this);
+        return this;
+    }
+
+    public Person removeJobNiazsanji(JobNiazsanji jobNiazsanji) {
+        this.jobNiazsanjis.remove(jobNiazsanji);
+        jobNiazsanji.setPerson(null);
+        return this;
+    }
+
+    public void setJobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
+        this.jobNiazsanjis = jobNiazsanjis;
+    }
+
     public Set<Document> getDocuments() {
         return documents;
     }
@@ -1015,7 +1071,6 @@ public class Person implements Serializable {
     public void setRunPhases(Set<RunPhase> runPhases) {
         this.runPhases = runPhases;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

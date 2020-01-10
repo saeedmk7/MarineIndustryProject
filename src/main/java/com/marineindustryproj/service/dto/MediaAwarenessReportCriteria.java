@@ -53,6 +53,8 @@ public class MediaAwarenessReportCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private LongFilter documentId;
+
     private LongFilter organizationChartId;
 
     private LongFilter mediaProductTypeId;
@@ -177,6 +179,14 @@ public class MediaAwarenessReportCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public LongFilter getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(LongFilter documentId) {
+        this.documentId = documentId;
+    }
+
     public LongFilter getOrganizationChartId() {
         return organizationChartId;
     }
@@ -219,6 +229,7 @@ public class MediaAwarenessReportCriteria implements Serializable {
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(documentId, that.documentId) &&
             Objects.equals(organizationChartId, that.organizationChartId) &&
             Objects.equals(mediaProductTypeId, that.mediaProductTypeId);
     }
@@ -241,6 +252,7 @@ public class MediaAwarenessReportCriteria implements Serializable {
         modifyUserLogin,
         modifyDate,
         guid,
+        documentId,
         organizationChartId,
         mediaProductTypeId
         );
@@ -264,6 +276,7 @@ public class MediaAwarenessReportCriteria implements Serializable {
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (mediaProductTypeId != null ? "mediaProductTypeId=" + mediaProductTypeId + ", " : "") +
             "}";

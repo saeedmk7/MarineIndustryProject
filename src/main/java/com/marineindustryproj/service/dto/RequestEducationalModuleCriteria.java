@@ -109,6 +109,8 @@ public class RequestEducationalModuleCriteria implements Serializable {
 
     private LongFilter teacherId;
 
+    private LongFilter restrictionId;
+
     private LongFilter securityLevelId;
 
     private LongFilter skillableLevelOfSkillId;
@@ -116,8 +118,6 @@ public class RequestEducationalModuleCriteria implements Serializable {
     private LongFilter evaluationMethodId;
 
     private LongFilter organizationId;
-
-    private LongFilter restrictionId;
 
     public LongFilter getId() {
         return id;
@@ -439,6 +439,14 @@ public class RequestEducationalModuleCriteria implements Serializable {
         this.teacherId = teacherId;
     }
 
+    public LongFilter getRestrictionId() {
+        return restrictionId;
+    }
+
+    public void setRestrictionId(LongFilter restrictionId) {
+        this.restrictionId = restrictionId;
+    }
+
     public LongFilter getSecurityLevelId() {
         return securityLevelId;
     }
@@ -469,14 +477,6 @@ public class RequestEducationalModuleCriteria implements Serializable {
 
     public void setOrganizationId(LongFilter organizationId) {
         this.organizationId = organizationId;
-    }
-
-    public LongFilter getRestrictionId() {
-        return restrictionId;
-    }
-
-    public void setRestrictionId(LongFilter restrictionId) {
-        this.restrictionId = restrictionId;
     }
 
 
@@ -530,11 +530,11 @@ public class RequestEducationalModuleCriteria implements Serializable {
             Objects.equals(goalId, that.goalId) &&
             Objects.equals(resourceId, that.resourceId) &&
             Objects.equals(teacherId, that.teacherId) &&
+            Objects.equals(restrictionId, that.restrictionId) &&
             Objects.equals(securityLevelId, that.securityLevelId) &&
             Objects.equals(skillableLevelOfSkillId, that.skillableLevelOfSkillId) &&
             Objects.equals(evaluationMethodId, that.evaluationMethodId) &&
-            Objects.equals(organizationId, that.organizationId) &&
-            Objects.equals(restrictionId, that.restrictionId);
+            Objects.equals(organizationId, that.organizationId);
     }
 
     @Override
@@ -580,11 +580,11 @@ public class RequestEducationalModuleCriteria implements Serializable {
         goalId,
         resourceId,
         teacherId,
+        restrictionId,
         securityLevelId,
         skillableLevelOfSkillId,
         evaluationMethodId,
-        organizationId,
-        restrictionId
+        organizationId
         );
     }
 
@@ -631,11 +631,11 @@ public class RequestEducationalModuleCriteria implements Serializable {
                 (goalId != null ? "goalId=" + goalId + ", " : "") +
                 (resourceId != null ? "resourceId=" + resourceId + ", " : "") +
                 (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
+                (restrictionId != null ? "restrictionId=" + restrictionId + ", " : "") +
                 (securityLevelId != null ? "securityLevelId=" + securityLevelId + ", " : "") +
                 (skillableLevelOfSkillId != null ? "skillableLevelOfSkillId=" + skillableLevelOfSkillId + ", " : "") +
                 (evaluationMethodId != null ? "evaluationMethodId=" + evaluationMethodId + ", " : "") +
                 (organizationId != null ? "organizationId=" + organizationId + ", " : "") +
-                (restrictionId != null ? "restrictionId=" + restrictionId + ", " : "") +
             "}";
     }
 

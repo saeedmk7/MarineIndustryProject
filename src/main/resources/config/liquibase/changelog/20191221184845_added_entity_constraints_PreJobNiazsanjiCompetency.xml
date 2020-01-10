@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity PreJobNiazsanjiCompetency.
+    -->
+    <changeSet id="20191221184845-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="pre_job_niazsanji_competencies_id"
+                                 baseTableName="pre_job_niazsanji_competency_teaching_approach"
+                                 constraintName="pre_job_niazsanji_competency_t_pre_job_niazsanji_competencie_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pre_job_niazsanji_competency"/>
+        <addForeignKeyConstraint baseColumnNames="teaching_approaches_id"
+                                 baseTableName="pre_job_niazsanji_competency_teaching_approach"
+                                 constraintName="pre_job_niazsanji_competency_t_teaching_approaches_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teaching_approach"/>
+        
+        <addForeignKeyConstraint baseColumnNames="fix_competency_deficiency_id"
+                                 baseTableName="pre_job_niazsanji_competency"
+                                 constraintName="fk_pre_job_niazsanji_competency_fix_competency_deficiency_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fix_competency_deficiency"/>
+
+        <addForeignKeyConstraint baseColumnNames="educational_module_id"
+                                 baseTableName="pre_job_niazsanji_competency"
+                                 constraintName="fk_pre_job_niazsanji_competency_educational_module_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+
+        <addForeignKeyConstraint baseColumnNames="pre_job_niazsanji_id"
+                                 baseTableName="pre_job_niazsanji_competency"
+                                 constraintName="fk_pre_job_niazsanji_competency_pre_job_niazsanji_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pre_job_niazsanji"/>
+
+        <addForeignKeyConstraint baseColumnNames="competency_id"
+                                 baseTableName="pre_job_niazsanji_competency"
+                                 constraintName="fk_pre_job_niazsanji_competency_competency_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="competency"/>
+
+    </changeSet>
+</databaseChangeLog>

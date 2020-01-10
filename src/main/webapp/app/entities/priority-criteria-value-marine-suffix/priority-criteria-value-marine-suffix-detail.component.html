@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="priorityCriteriaValue">
+            <h2><span jhiTranslate="marineindustryprojApp.priorityCriteriaValue.detail.title">Priority Criteria Value</span> {{priorityCriteriaValue.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.priorityCriteriaValue.score">Score</span></dt>
+                <dd>
+                    <span>{{priorityCriteriaValue.score}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.priorityCriteriaValue.description">Description</span></dt>
+                <dd>
+                    <span>{{priorityCriteriaValue.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.priorityCriteriaValue.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{priorityCriteriaValue.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.priorityCriteriaValue.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{priorityCriteriaValue.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.priorityCriteriaValue.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{priorityCriteriaValue.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.priorityCriteriaValue.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{priorityCriteriaValue.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.priorityCriteriaValue.priorityCriteria">Priority Criteria</span></dt>
+                <dd>
+                    <div *ngIf="priorityCriteriaValue.priorityCriteriaId">
+                        <a [routerLink]="['/priority-criteria-marine-suffix', priorityCriteriaValue.priorityCriteriaId, 'view']">{{priorityCriteriaValue.priorityCriteriaTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.priorityCriteriaValue.preJobNiazsanjiCompetency">Pre Job Niazsanji Competency</span></dt>
+                <dd>
+                    <div *ngIf="priorityCriteriaValue.preJobNiazsanjiCompetencyId">
+                        <a [routerLink]="['/pre-job-niazsanji-competency-marine-suffix', priorityCriteriaValue.preJobNiazsanjiCompetencyId, 'view']">{{priorityCriteriaValue.preJobNiazsanjiCompetencyTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/priority-criteria-value-marine-suffix', priorityCriteriaValue.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -67,6 +67,12 @@ public class DocumentCriteria implements Serializable {
 
     private LongFilter investToGroupTransactionId;
 
+    private LongFilter mediaAwarenessReportId;
+
+    private LongFilter preJobNiazsanjiId;
+
+    private LongFilter jobNiazsanjiId;
+
     public LongFilter getId() {
         return id;
     }
@@ -243,6 +249,30 @@ public class DocumentCriteria implements Serializable {
         this.investToGroupTransactionId = investToGroupTransactionId;
     }
 
+    public LongFilter getMediaAwarenessReportId() {
+        return mediaAwarenessReportId;
+    }
+
+    public void setMediaAwarenessReportId(LongFilter mediaAwarenessReportId) {
+        this.mediaAwarenessReportId = mediaAwarenessReportId;
+    }
+
+    public LongFilter getPreJobNiazsanjiId() {
+        return preJobNiazsanjiId;
+    }
+
+    public void setPreJobNiazsanjiId(LongFilter preJobNiazsanjiId) {
+        this.preJobNiazsanjiId = preJobNiazsanjiId;
+    }
+
+    public LongFilter getJobNiazsanjiId() {
+        return jobNiazsanjiId;
+    }
+
+    public void setJobNiazsanjiId(LongFilter jobNiazsanjiId) {
+        this.jobNiazsanjiId = jobNiazsanjiId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -275,7 +305,10 @@ public class DocumentCriteria implements Serializable {
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
             Objects.equals(requestNiazsanjiFardiId, that.requestNiazsanjiFardiId) &&
             Objects.equals(instructionId, that.instructionId) &&
-            Objects.equals(investToGroupTransactionId, that.investToGroupTransactionId);
+            Objects.equals(investToGroupTransactionId, that.investToGroupTransactionId) &&
+            Objects.equals(mediaAwarenessReportId, that.mediaAwarenessReportId) &&
+            Objects.equals(preJobNiazsanjiId, that.preJobNiazsanjiId) &&
+            Objects.equals(jobNiazsanjiId, that.jobNiazsanjiId);
     }
 
     @Override
@@ -302,7 +335,10 @@ public class DocumentCriteria implements Serializable {
         niazsanjiFardiId,
         requestNiazsanjiFardiId,
         instructionId,
-        investToGroupTransactionId
+        investToGroupTransactionId,
+        mediaAwarenessReportId,
+        preJobNiazsanjiId,
+        jobNiazsanjiId
         );
     }
 
@@ -331,6 +367,9 @@ public class DocumentCriteria implements Serializable {
                 (requestNiazsanjiFardiId != null ? "requestNiazsanjiFardiId=" + requestNiazsanjiFardiId + ", " : "") +
                 (instructionId != null ? "instructionId=" + instructionId + ", " : "") +
                 (investToGroupTransactionId != null ? "investToGroupTransactionId=" + investToGroupTransactionId + ", " : "") +
+                (mediaAwarenessReportId != null ? "mediaAwarenessReportId=" + mediaAwarenessReportId + ", " : "") +
+                (preJobNiazsanjiId != null ? "preJobNiazsanjiId=" + preJobNiazsanjiId + ", " : "") +
+                (jobNiazsanjiId != null ? "jobNiazsanjiId=" + jobNiazsanjiId + ", " : "") +
             "}";
     }
 

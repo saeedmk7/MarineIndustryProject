@@ -24,26 +24,13 @@ export class NiazsanjiFardiMarineSuffixService {
             .post<INiazsanjiFardiMarineSuffix>(this.resourceUrl, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
-    finalize(niazsanjiFardi: INiazsanjiFardiMarineSuffix): Observable<EntityResponseType> {
-        const copy = this.convertDateFromClient(niazsanjiFardi);
-        let url = SERVER_API_URL + 'api/finalize-niazsanji-fardi';
-        return this.http
-            .post<INiazsanjiFardiMarineSuffix>(url, copy, { observe: 'response' })
-            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
-    }
-
     update(niazsanjiFardi: INiazsanjiFardiMarineSuffix): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(niazsanjiFardi);
         return this.http
             .put<INiazsanjiFardiMarineSuffix>(this.resourceUrl, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
-    toggleImportantMessage(id: number, type: boolean): Observable<EntityResponseType> {
-        const url: string = this.resourceUrl + '/toggleImportantMessage/' + id + '/' + type;
-        return this.http
-            .put<INiazsanjiFardiMarineSuffix>(url, null, { observe: 'response' })
-            .pipe(map((res: EntityResponseType) => res));
-    }
+
 
     find(id: number): Observable<EntityResponseType> {
         return this.http
@@ -56,6 +43,19 @@ export class NiazsanjiFardiMarineSuffixService {
         return this.http
             .get<INiazsanjiFardiMarineSuffix[]>(this.resourceUrl, { params: options, observe: 'response' })
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+    finalize(niazsanjiFardi: INiazsanjiFardiMarineSuffix): Observable<EntityResponseType> {
+        const copy = this.convertDateFromClient(niazsanjiFardi);
+        let url = SERVER_API_URL + 'api/finalize-niazsanji-fardi';
+        return this.http
+            .post<INiazsanjiFardiMarineSuffix>(url, copy, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+    toggleImportantMessage(id: number, type: boolean): Observable<EntityResponseType> {
+        const url: string = this.resourceUrl + '/toggleImportantMessage/' + id + '/' + type;
+        return this.http
+            .put<INiazsanjiFardiMarineSuffix>(url, null, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => res));
     }
     count(req?: any): Observable<EntityResponseType> {
         const options = createRequestOption(req);

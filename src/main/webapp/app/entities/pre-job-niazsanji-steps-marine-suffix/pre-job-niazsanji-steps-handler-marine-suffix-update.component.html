@@ -1,0 +1,30 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <steppers-panel [stepsList]="stepsList" (activeTabChanged)="activeTabChanged($event)"></steppers-panel>
+    </div>
+    <div [ngSwitch]="preJobNiazsanji.step" class="col-8">
+        <div *ngSwitchCase="1">
+            <mi-pre-job-niazsanji-marine-suffix-detail [preJobNiazsanjiId]="preJobNiazsanji.id" [editable]="editable" (updatePreJobNiazsanjiStep)="updatePreJobNiazsanjiStep($event)"></mi-pre-job-niazsanji-marine-suffix-detail>
+        </div>
+        <div *ngSwitchCase="2">
+            <mi-pre-job-niazsanji-step2-update [editable]="editable" [preJobNiazsanji]="preJobNiazsanji" (updatePreJobNiazsanjiStep)="updatePreJobNiazsanjiStep($event)"></mi-pre-job-niazsanji-step2-update>
+        </div>
+        <div *ngSwitchCase="3">
+            <mi-pre-job-niazsanji-step3-update [editable]="editable"[preJobNiazsanji]="preJobNiazsanji" [isAdmin]="isAdmin" (updatePreJobNiazsanjiStep)="updatePreJobNiazsanjiStep($event)"></mi-pre-job-niazsanji-step3-update>
+        </div>
+        <div *ngSwitchCase="4">
+            <mi-pre-job-niazsanji-step4-update [editable]="editable" [preJobNiazsanji]="preJobNiazsanji" [isAdmin]="isAdmin" (updatePreJobNiazsanjiStep)="updatePreJobNiazsanjiStep($event)"></mi-pre-job-niazsanji-step4-update>
+        </div>
+        <div *ngSwitchCase="5">
+
+            <mi-pre-job-niazsanji-step5-update [editable]="editable" *ngIf="isTopUsers" [preJobNiazsanji]="preJobNiazsanji" [isAdmin]="isAdmin" (updatePreJobNiazsanjiStep)="updatePreJobNiazsanjiStep($event)"></mi-pre-job-niazsanji-step5-update>
+            <div class="alert alert-danger" *ngIf="!isTopUsers">این گام مختص مدیران آموزش می باشد.</div>
+            <div class="row">
+                <input type="button" class="btn btn-info" (click)="updatePreJobNiazsanjiStep(4)" value="گام قبلی" />
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        <steppers-panel [stepsList]="stepsList" (activeTabChanged)="activeTabChanged($event)"></steppers-panel>
+    </div>
+</div>

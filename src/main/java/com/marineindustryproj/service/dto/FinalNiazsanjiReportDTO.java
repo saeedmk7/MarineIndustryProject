@@ -56,7 +56,22 @@ public class FinalNiazsanjiReportDTO implements Serializable {
 
     private Boolean hasImportantMessage;
 
+    @Size(max = 4096)
+    private String restrictionDescription;
+
+    @Size(max = 4096)
+    private String goalsText;
+
+    @Size(max = 4096)
+    private String prerequisite;
+
     private Set<DocumentDTO> documents = new HashSet<>();
+
+    private Set<RestrictionDTO> restrictions = new HashSet<>();
+
+    private Long teacherId;
+
+    private String teacherFamily;
 
     private Long courseTypeId;
 
@@ -69,6 +84,10 @@ public class FinalNiazsanjiReportDTO implements Serializable {
     private Long educationalModuleId;
 
     private String educationalModuleTitle;
+
+    private Long teachingApproachId;
+
+    private String teachingApproachTitle;
 
     public Long getId() {
         return id;
@@ -214,12 +233,60 @@ public class FinalNiazsanjiReportDTO implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public String getRestrictionDescription() {
+        return restrictionDescription;
+    }
+
+    public void setRestrictionDescription(String restrictionDescription) {
+        this.restrictionDescription = restrictionDescription;
+    }
+
+    public String getGoalsText() {
+        return goalsText;
+    }
+
+    public void setGoalsText(String goalsText) {
+        this.goalsText = goalsText;
+    }
+
+    public String getPrerequisite() {
+        return prerequisite;
+    }
+
+    public void setPrerequisite(String prerequisite) {
+        this.prerequisite = prerequisite;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
 
     public void setDocuments(Set<DocumentDTO> documents) {
         this.documents = documents;
+    }
+
+    public Set<RestrictionDTO> getRestrictions() {
+        return restrictions;
+    }
+
+    public void setRestrictions(Set<RestrictionDTO> restrictions) {
+        this.restrictions = restrictions;
+    }
+
+    public Long getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public String getTeacherFamily() {
+        return teacherFamily;
+    }
+
+    public void setTeacherFamily(String teacherFamily) {
+        this.teacherFamily = teacherFamily;
     }
 
     public Long getCourseTypeId() {
@@ -270,6 +337,22 @@ public class FinalNiazsanjiReportDTO implements Serializable {
         this.educationalModuleTitle = educationalModuleTitle;
     }
 
+    public Long getTeachingApproachId() {
+        return teachingApproachId;
+    }
+
+    public void setTeachingApproachId(Long teachingApproachId) {
+        this.teachingApproachId = teachingApproachId;
+    }
+
+    public String getTeachingApproachTitle() {
+        return teachingApproachTitle;
+    }
+
+    public void setTeachingApproachTitle(String teachingApproachTitle) {
+        this.teachingApproachTitle = teachingApproachTitle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -312,12 +395,19 @@ public class FinalNiazsanjiReportDTO implements Serializable {
             ", finalizeCost=" + getFinalizeCost() +
             ", guid='" + getGuid() + "'" +
             ", hasImportantMessage='" + isHasImportantMessage() + "'" +
+            ", restrictionDescription='" + getRestrictionDescription() + "'" +
+            ", goalsText='" + getGoalsText() + "'" +
+            ", prerequisite='" + getPrerequisite() + "'" +
+            ", teacher=" + getTeacherId() +
+            ", teacher='" + getTeacherFamily() + "'" +
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             ", educationalModule=" + getEducationalModuleId() +
             ", educationalModule='" + getEducationalModuleTitle() + "'" +
+            ", teachingApproach=" + getTeachingApproachId() +
+            ", teachingApproach='" + getTeachingApproachTitle() + "'" +
             "}";
     }
 }

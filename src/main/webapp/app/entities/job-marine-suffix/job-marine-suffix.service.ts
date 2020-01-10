@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpRequest, HttpResponse} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { map } from 'rxjs/operators';
@@ -16,6 +16,22 @@ export class JobMarineSuffixService {
     private resourceUrl = SERVER_API_URL + 'api/jobs';
 
     constructor(private http: HttpClient) {}
+
+    uploadFile(formdata: FormData): Observable<HttpEvent<{}>> {
+
+        const url = this.resourceUrl + "/upload-file";
+        const req = new HttpRequest('POST', url, formdata, {
+            reportProgress: true,
+            responseType: 'text'
+        });
+
+        return this.http.request(req);
+    }
+    deleteFile(address: string): Observable<HttpResponse<any>> {
+
+        let fileName = address.split('/')[address.split('/').length-1];
+        return this.http.delete<any>(`${this.resourceUrl}/delete/${fileName}`, { observe: 'response' });
+    }
 
     create(job: IJobMarineSuffix): Observable<EntityResponseType> {
 

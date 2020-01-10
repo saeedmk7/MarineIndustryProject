@@ -12,6 +12,7 @@ import { IRequestNiazsanjiFardiMarineSuffix } from 'app/shared/model//request-ni
 import { IEducationalHistoryMarineSuffix } from 'app/shared/model//educational-history-marine-suffix.model';
 import { IInvestToGroupTransactionMarineSuffix } from 'app/shared/model//invest-to-group-transaction-marine-suffix.model';
 import { IMediaAwarenessReportMarineSuffix } from 'app/shared/model//media-awareness-report-marine-suffix.model';
+import { IPreJobNiazsanjiMarineSuffix } from 'app/shared/model//pre-job-niazsanji-marine-suffix.model';
 import { IForceRunningPercentMarineSuffix } from 'app/shared/model//force-running-percent-marine-suffix.model';
 
 export interface IOrganizationChartMarineSuffix {
@@ -40,6 +41,7 @@ export interface IOrganizationChartMarineSuffix {
     educationalHistories?: IEducationalHistoryMarineSuffix[];
     investToGroupTransactions?: IInvestToGroupTransactionMarineSuffix[];
     mediaAwarenessReports?: IMediaAwarenessReportMarineSuffix[];
+    preJobNiazsanjis?: IPreJobNiazsanjiMarineSuffix[];
     parentTitle?: string;
     parentId?: number;
     forceRunningPercents?: IForceRunningPercentMarineSuffix[];
@@ -72,6 +74,7 @@ export class OrganizationChartMarineSuffix implements IOrganizationChartMarineSu
         public educationalHistories?: IEducationalHistoryMarineSuffix[],
         public investToGroupTransactions?: IInvestToGroupTransactionMarineSuffix[],
         public mediaAwarenessReports?: IMediaAwarenessReportMarineSuffix[],
+        public preJobNiazsanjis?: IPreJobNiazsanjiMarineSuffix[],
         public parentTitle?: string,
         public parentId?: number,
         public forceRunningPercents?: IForceRunningPercentMarineSuffix[]

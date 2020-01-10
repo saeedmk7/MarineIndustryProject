@@ -74,6 +74,12 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
 
     private BooleanFilter hasImportantMessage;
 
+    private StringFilter restrictionDescription;
+
+    private StringFilter goalsText;
+
+    private StringFilter prerequisite;
+
     private LongFilter finalNiazsanjiReportPersonId;
 
     private LongFilter personId;
@@ -86,6 +92,10 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
 
     private LongFilter documentId;
 
+    private LongFilter restrictionId;
+
+    private LongFilter teacherId;
+
     private LongFilter courseTypeId;
 
     private LongFilter organizationChartId;
@@ -93,6 +103,8 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
     private LongFilter educationalModuleId;
 
     private StringFilter educationalModuleTitle;
+
+    private LongFilter teachingApproachId;
 
     public LongFilter getId() {
         return id;
@@ -238,6 +250,30 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public StringFilter getRestrictionDescription() {
+        return restrictionDescription;
+    }
+
+    public void setRestrictionDescription(StringFilter restrictionDescription) {
+        this.restrictionDescription = restrictionDescription;
+    }
+
+    public StringFilter getGoalsText() {
+        return goalsText;
+    }
+
+    public void setGoalsText(StringFilter goalsText) {
+        this.goalsText = goalsText;
+    }
+
+    public StringFilter getPrerequisite() {
+        return prerequisite;
+    }
+
+    public void setPrerequisite(StringFilter prerequisite) {
+        this.prerequisite = prerequisite;
+    }
+
     public LongFilter getFinalNiazsanjiReportPersonId() {
         return finalNiazsanjiReportPersonId;
     }
@@ -278,6 +314,22 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         this.documentId = documentId;
     }
 
+    public LongFilter getRestrictionId() {
+        return restrictionId;
+    }
+
+    public void setRestrictionId(LongFilter restrictionId) {
+        this.restrictionId = restrictionId;
+    }
+
+    public LongFilter getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(LongFilter teacherId) {
+        this.teacherId = teacherId;
+    }
+
     public LongFilter getCourseTypeId() {
         return courseTypeId;
     }
@@ -309,6 +361,16 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         this.educationalModuleTitle = educationalModuleTitle;
     }
 
+
+    public LongFilter getTeachingApproachId() {
+        return teachingApproachId;
+    }
+
+    public void setTeachingApproachId(LongFilter teachingApproachId) {
+        this.teachingApproachId = teachingApproachId;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -337,16 +399,22 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
             Objects.equals(finalizeCost, that.finalizeCost) &&
             Objects.equals(guid, that.guid) &&
             Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
+            Objects.equals(restrictionDescription, that.restrictionDescription) &&
+            Objects.equals(goalsText, that.goalsText) &&
+            Objects.equals(prerequisite, that.prerequisite) &&
             Objects.equals(finalNiazsanjiReportPersonId, that.finalNiazsanjiReportPersonId) &&
             Objects.equals(designAndPlanningId, that.designAndPlanningId) &&
             Objects.equals(runPhaseId, that.runPhaseId) &&
             Objects.equals(pollId, that.pollId) &&
             Objects.equals(documentId, that.documentId) &&
+            Objects.equals(restrictionId, that.restrictionId) &&
+            Objects.equals(teacherId, that.teacherId) &&
             Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(organizationChartId, that.organizationChartId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(personId, that.personId) &&
-            Objects.equals(educationalModuleTitle, that.educationalModuleTitle);
+            Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
+                        Objects.equals(teachingApproachId, that.teachingApproachId);
     }
 
     @Override
@@ -370,16 +438,22 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         finalizeCost,
         guid,
         hasImportantMessage,
+        restrictionDescription,
+        goalsText,
+        prerequisite,
         finalNiazsanjiReportPersonId,
         designAndPlanningId,
         runPhaseId,
         pollId,
         documentId,
+        restrictionId,
+        teacherId,
         courseTypeId,
         organizationChartId,
         educationalModuleId,
         personId,
-        educationalModuleTitle
+        educationalModuleTitle,
+        teachingApproachId
         );
     }
 
@@ -404,16 +478,22 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
                 (finalizeCost != null ? "finalizeCost=" + finalizeCost + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
                 (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
+                (restrictionDescription != null ? "restrictionDescription=" + restrictionDescription + ", " : "") +
+                (goalsText != null ? "goalsText=" + goalsText + ", " : "") +
+                (prerequisite != null ? "prerequisite=" + prerequisite + ", " : "") +
                 (finalNiazsanjiReportPersonId != null ? "finalNiazsanjiReportPersonId=" + finalNiazsanjiReportPersonId + ", " : "") +
                 (designAndPlanningId != null ? "designAndPlanningId=" + designAndPlanningId + ", " : "") +
                 (runPhaseId != null ? "runPhaseId=" + runPhaseId + ", " : "") +
                 (pollId != null ? "pollId=" + pollId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
+                (restrictionId != null ? "restrictionId=" + restrictionId + ", " : "") +
+                (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
+                (teachingApproachId != null ? "teachingApproachId=" + teachingApproachId + ", " : "") +
             "}";
     }
 

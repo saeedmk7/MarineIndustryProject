@@ -16,6 +16,9 @@ import { IUsersRequestMarineSuffix } from 'app/shared/model//users-request-marin
 import { INiazsanjiFardiMarineSuffix } from 'app/shared/model//niazsanji-fardi-marine-suffix.model';
 import { IRequestNiazsanjiFardiMarineSuffix } from 'app/shared/model//request-niazsanji-fardi-marine-suffix.model';
 import { IInstructionMarineSuffix } from 'app/shared/model//instruction-marine-suffix.model';
+import { IInvestToGroupTransactionMarineSuffix } from 'app/shared/model//invest-to-group-transaction-marine-suffix.model';
+import { IMediaAwarenessReportMarineSuffix } from 'app/shared/model//media-awareness-report-marine-suffix.model';
+import { IPreJobNiazsanjiMarineSuffix } from 'app/shared/model//pre-job-niazsanji-marine-suffix.model';
 
 export interface IDocumentMarineSuffix {
     id?: number;
@@ -45,6 +48,9 @@ export interface IDocumentMarineSuffix {
     niazsanjiFardis?: INiazsanjiFardiMarineSuffix[];
     requestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[];
     instructions?: IInstructionMarineSuffix[];
+    investToGroupTransactions?: IInvestToGroupTransactionMarineSuffix[];
+    mediaAwarenessReports?: IMediaAwarenessReportMarineSuffix[];
+    preJobNiazsanjis?: IPreJobNiazsanjiMarineSuffix[];
 }
 
 export class DocumentMarineSuffix implements IDocumentMarineSuffix {
@@ -75,6 +81,9 @@ export class DocumentMarineSuffix implements IDocumentMarineSuffix {
         public usersRequests?: IUsersRequestMarineSuffix[],
         public niazsanjiFardis?: INiazsanjiFardiMarineSuffix[],
         public requestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[],
-        public instructions?: IInstructionMarineSuffix[]
+        public instructions?: IInstructionMarineSuffix[],
+        public investToGroupTransactions?: IInvestToGroupTransactionMarineSuffix[],
+        public mediaAwarenessReports?: IMediaAwarenessReportMarineSuffix[],
+        public preJobNiazsanjis?: IPreJobNiazsanjiMarineSuffix[]
     ) {}
 }

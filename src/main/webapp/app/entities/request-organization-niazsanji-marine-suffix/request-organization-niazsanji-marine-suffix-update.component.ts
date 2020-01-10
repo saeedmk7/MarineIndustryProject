@@ -28,6 +28,10 @@ import * as $ from 'jquery';
 import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
+import {ITeachingApproachMarineSuffix} from "app/shared/model/teaching-approach-marine-suffix.model";
+import {IRestrictionMarineSuffix} from "app/shared/model/restriction-marine-suffix.model";
+import {RestrictionMarineSuffixService} from "app/entities/restriction-marine-suffix";
+import {TeachingApproachMarineSuffixService} from "app/entities/teaching-approach-marine-suffix";
 
 @Component({
     selector: 'mi-request-organization-niazsanji-marine-suffix-update',
@@ -64,6 +68,9 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
     selectionType: boolean = false;
     disable: boolean = false;
     currentAccount: any;
+
+    teachingapproaches: ITeachingApproachMarineSuffix[];
+    restrictions: IRestrictionMarineSuffix[];
     constructor(
         private jhiAlertService: JhiAlertService,
         private requestOrganizationNiazsanjiService: RequestOrganizationNiazsanjiMarineSuffixService,
@@ -76,7 +83,9 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private principal : Principal,
+        protected restrictionService: RestrictionMarineSuffixService,
         private teacherService: TeacherMarineSuffixService,
+        protected teachingApproachService: TeachingApproachMarineSuffixService,
         private convertObjectDatesService: ConvertObjectDatesService,
         private treeUtilities: TreeUtilities
     ) {}
@@ -106,8 +115,18 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
             },
                 (res: HttpErrorResponse) => this.onError(res.message));
         });
-
-
+        this.restrictionService.query().subscribe(
+            (res: HttpResponse<IRestrictionMarineSuffix[]>) => {
+                this.restrictions = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.teachingApproachService.query().subscribe(
+            (res: HttpResponse<ITeachingApproachMarineSuffix[]>) => {
+                this.teachingapproaches = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         this.jobService.query().subscribe(
             (res: HttpResponse<IJobMarineSuffix[]>) => {
                 this.jobs = res.body;

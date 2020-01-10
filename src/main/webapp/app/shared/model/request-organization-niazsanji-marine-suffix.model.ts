@@ -2,6 +2,7 @@ import { Moment } from 'moment';
 import { IFinalOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//final-organization-niazsanji-marine-suffix.model';
 import { IPersonMarineSuffix } from 'app/shared/model//person-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
+import { IRestrictionMarineSuffix } from 'app/shared/model//restriction-marine-suffix.model';
 import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
 
 export interface IRequestOrganizationNiazsanjiMarineSuffix {
@@ -32,9 +33,13 @@ export interface IRequestOrganizationNiazsanjiMarineSuffix {
     conversation?: any;
     guid?: string;
     hasImportantMessage?: boolean;
+    restrictionDescription?: string;
+    goalsText?: string;
+    prerequisite?: string;
     finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[];
     people?: IPersonMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
+    restrictions?: IRestrictionMarineSuffix[];
     courseTypeTitle?: string;
     courseTypeId?: number;
     organizationChartTitle?: string;
@@ -47,6 +52,8 @@ export interface IRequestOrganizationNiazsanjiMarineSuffix {
     skillLevelOfSkillTitle?: string;
     teachApproachTitle?: string;
     teachApproachId?: number;
+    teachingApproachTitle?: string;
+    teachingApproachId?: number;
 }
 
 export class RequestOrganizationNiazsanjiMarineSuffix implements IRequestOrganizationNiazsanjiMarineSuffix {
@@ -77,9 +84,13 @@ export class RequestOrganizationNiazsanjiMarineSuffix implements IRequestOrganiz
         public conversation?: any,
         public guid?: string,
         public hasImportantMessage?: boolean,
+        public restrictionDescription?: string,
+        public goalsText?: string,
+        public prerequisite?: string,
         public finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[],
         public people?: IPersonMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
+        public restrictions?: IRestrictionMarineSuffix[],
         public courseTypeTitle?: string,
         public courseTypeId?: number,
         public organizationChartTitle?: string,
@@ -91,7 +102,9 @@ export class RequestOrganizationNiazsanjiMarineSuffix implements IRequestOrganiz
         public totalLearningTime?: number,
         public skillLevelOfSkillTitle?: string,
         public teachApproachTitle?: string,
-        public teachApproachId?: number
+        public teachApproachId?: number,
+        public teachingApproachTitle?: string,
+        public teachingApproachId?: number
     ) {
         this.teacherNotFound = this.teacherNotFound || false;
         this.archived = this.archived || false;

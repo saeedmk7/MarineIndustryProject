@@ -110,13 +110,37 @@ public class RestrictionQueryService extends QueryService<Restriction> {
             if (criteria.getGuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGuid(), Restriction_.guid));
             }
+            if (criteria.getEducationalModuleId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
+                    root -> root.join(Restriction_.educationalModules, JoinType.LEFT).get(EducationalModule_.id)));
+            }
             if (criteria.getRequestEducationalModuleId() != null) {
                 specification = specification.and(buildSpecification(criteria.getRequestEducationalModuleId(),
                     root -> root.join(Restriction_.requestEducationalModules, JoinType.LEFT).get(RequestEducationalModule_.id)));
             }
-            if (criteria.getEducationalModuleId() != null) {
-                specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
-                    root -> root.join(Restriction_.educationalModules, JoinType.LEFT).get(EducationalModule_.id)));
+            if (criteria.getRequestOrganizationNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRequestOrganizationNiazsanjiId(),
+                    root -> root.join(Restriction_.requestOrganizationNiazsanjis, JoinType.LEFT).get(RequestOrganizationNiazsanji_.id)));
+            }
+            if (criteria.getFinalOrganizationNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getFinalOrganizationNiazsanjiId(),
+                    root -> root.join(Restriction_.finalOrganizationNiazsanjis, JoinType.LEFT).get(FinalOrganizationNiazsanji_.id)));
+            }
+            if (criteria.getFinalNiazsanjiReportId() != null) {
+                specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportId(),
+                    root -> root.join(Restriction_.finalNiazsanjiReports, JoinType.LEFT).get(FinalNiazsanjiReport_.id)));
+            }
+            if (criteria.getNiazsanjiFardiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getNiazsanjiFardiId(),
+                    root -> root.join(Restriction_.niazsanjiFardis, JoinType.LEFT).get(NiazsanjiFardi_.id)));
+            }
+            if (criteria.getDesignNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getDesignNiazsanjiId(),
+                    root -> root.join(Restriction_.designNiazsanjis, JoinType.LEFT).get(DesignNiazsanji_.id)));
+            }
+            if (criteria.getJobNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getJobNiazsanjiId(),
+                    root -> root.join(Restriction_.jobNiazsanjis, JoinType.LEFT).get(JobNiazsanji_.id)));
             }
         }
         return specification;

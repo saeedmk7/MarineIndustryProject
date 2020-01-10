@@ -1,0 +1,61 @@
+{
+    "marineindustryprojApp": {
+        "jobNiazsanji": {
+            "home": {
+                "title": "فهرست نهایی نیازسنجی شغلی",
+                "createLabel": "جدید",
+                "setYear": "مشخص کردن سال نیازسنجی",
+                "createOrEditLabel": " نیازسنجی شغلی"
+            },
+            "created": "نیازسنجی شغلی با شناسه {{ param }} ایجاد شد.",
+            "updated": "نیازسنجی شغلی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "نیازسنجی شغلی با شناسه {{ param }} حذف شد.",
+            "completed": "نیازسنجی شغلی مورد نظر با موفقیت نهایی شد.",
+            "rejected": "نیازسنجی شغلی مورد نظر با موفقیت رد شد.",
+            "delete": {
+                "question": "آیا از حذف نیازسنجی شغلی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات نیازسنجی شغلی"
+            },
+            "niazsanjiYear": "سال نیازسنجی",
+            "index": "ردیف",
+            "code": "کد",
+            "educationalModuleType": "نوع پودمان انتخابی",
+            "courseType": "نوع دوره",
+            "courseTypeId": "نوع دوره",
+            "priceCost": "سرمایه گذاری(ریال)",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر درخواست کننده",
+            "createDate": "تاریخ درخواست",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "Status",
+            "conversation": "Conversation",
+            "changeStatusUserLogin": "Change Status User Login",
+            "document": "مدرک",
+            "skillableLevelOfSkillId": "سطح مهارت قابل تامین پودمان",
+            "preJobNiazsanji": "تاریخچه",
+            "educationalModule": "پودمان آموزشی",
+            "timeEducationalModule": "مدت زمان پودمان آموزشی",
+            "levelEducationalModule": "سطح پودمان آموزشی",
+            "costEducationalModule": "سرمایه گذاری پودمان آموزشی",
+            "educationalModuleId": "پودمان آموزشی",
+            "educationalModuleTitle": "عنوان پودمان آموزشی",
+            "person": "نام و نام خانوادگی",
+            "personName": "نام و نام خانوادگی",
+            "job": "شغل سازمانی",
+            "jobTitle": "شغل سازمانی",
+            "personId": "نام و نام خانوادگی",
+            "organizationChart": "گروه/صنعت/واحد",
+            "restriction": "محدودیت",
+            "restrictionDescription": "توضیح محدودیت",
+            "goalsText": "اهداف(نتایج مورد انتظار-اهداف کلی، جزئی، رفتاری و یادگیری و ...)",
+            "prerequisite": "پیش نیاز",
+            "teachingApproach": "روش های آموزش"
+        }
+    }
+}

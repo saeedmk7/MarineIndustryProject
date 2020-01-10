@@ -3,6 +3,8 @@ package com.marineindustryproj.service.dto;
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -50,6 +52,8 @@ public class MediaAwarenessReportDTO implements Serializable {
 
     @Size(max = 50)
     private String guid;
+
+    private Set<DocumentDTO> documents = new HashSet<>();
 
     private Long organizationChartId;
 
@@ -177,6 +181,14 @@ public class MediaAwarenessReportDTO implements Serializable {
 
     public void setGuid(String guid) {
         this.guid = guid;
+    }
+
+    public Set<DocumentDTO> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(Set<DocumentDTO> documents) {
+        this.documents = documents;
     }
 
     public Long getOrganizationChartId() {

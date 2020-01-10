@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity DesignNiazsanji.
+    -->
+    <changeSet id="20191221184843-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="design_niazsanjis_id"
+                                 baseTableName="design_niazsanji_restriction"
+                                 constraintName="fk_design_niazsanji_restriction_design_niazsanjis_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="design_niazsanji"/>
+        <addForeignKeyConstraint baseColumnNames="restrictions_id"
+                                 baseTableName="design_niazsanji_restriction"
+                                 constraintName="fk_design_niazsanji_restriction_restrictions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="restriction"/>
+        
+        <addForeignKeyConstraint baseColumnNames="pre_job_niazsanji_id"
+                                 baseTableName="design_niazsanji"
+                                 constraintName="fk_design_niazsanji_pre_job_niazsanji_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pre_job_niazsanji"/>
+
+        <addForeignKeyConstraint baseColumnNames="course_type_id"
+                                 baseTableName="design_niazsanji"
+                                 constraintName="fk_design_niazsanji_course_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="educational_module_id"
+                                 baseTableName="design_niazsanji"
+                                 constraintName="fk_design_niazsanji_educational_module_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+
+        <addForeignKeyConstraint baseColumnNames="teaching_approach_id"
+                                 baseTableName="design_niazsanji"
+                                 constraintName="fk_design_niazsanji_teaching_approach_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teaching_approach"/>
+
+    </changeSet>
+</databaseChangeLog>

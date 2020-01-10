@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {HttpResponse, HttpErrorResponse, HttpEventType} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
@@ -22,6 +22,7 @@ import { IMainTaskMarineSuffix } from 'app/shared/model/main-task-marine-suffix.
 import { MainTaskMarineSuffixService } from 'app/entities/main-task-marine-suffix';
 import { INiazsanjiGroupMarineSuffix } from 'app/shared/model/niazsanji-group-marine-suffix.model';
 import { NiazsanjiGroupMarineSuffixService } from 'app/entities/niazsanji-group-marine-suffix';
+import * as persianMoment from 'jalali-moment';
 
 @Component({
     selector: 'mi-job-marine-suffix-update',
@@ -30,6 +31,8 @@ import { NiazsanjiGroupMarineSuffixService } from 'app/entities/niazsanji-group-
 export class JobMarineSuffixUpdateComponent implements OnInit {
     private _job: IJobMarineSuffix;
     isSaving: boolean;
+
+    finishDateValidation: number;
 
     documents: IDocumentMarineSuffix[];
 
@@ -46,6 +49,13 @@ export class JobMarineSuffixUpdateComponent implements OnInit {
     maintasks: IMainTaskMarineSuffix[];
 
     niazsanjigroups: INiazsanjiGroupMarineSuffix[];
+
+    progress: { percentage: number } = { percentage: 0 }
+    file: File;
+    fileHasError: boolean = true;
+    fileMessage: string;
+    message: string;
+    isFileDirty: boolean = false;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -129,10 +139,72 @@ export class JobMarineSuffixUpdateComponent implements OnInit {
 
         this.isSaving = true;
         this.job.status= 0;
+        if(this.isFileDirty) {
+            let formdata: FormData = new FormData();
+            formdata.append('file', this.file);
+            this.jobService.uploadFile(formdata).subscribe(event => {
+                    if (event.type === HttpEventType.UploadProgress) {
+                        this.progress.percentage = Math.round(100 * event.loaded / event.total);
+                    }
+                    else if (event instanceof HttpResponse) {
+                        if (event.body) {
+                            this.job.fileDoc = event.body;
+                            this.saveJob();
+                        }
+                    }
+                },
+                () => this.onSaveError());
+        }
+        else{
+            this.saveJob();
+        }
+    }
+    saveJob(){
         if (this.job.id !== undefined) {
             this.subscribeToSaveResponse(this.jobService.update(this.job));
         } else {
             this.subscribeToSaveResponse(this.jobService.create(this.job));
+        }
+    }
+
+    setFileData(event, entity, field, isImage) {
+
+        this.fileMessage = "";
+        this.fileHasError = true;
+        //this.dataUtils.setFileData(event, entity, field, isImage);
+        if (event && event.target.files && event.target.files[0]) {
+            this.file = event.target.files[0];
+            this.validateFile(this.file);
+        }
+        else{
+            this.fileHasError = true;
+            this.fileMessage = "انتخاب فایل اجباری است.";
+        }
+    }
+    validateFile(file){
+        //file.name.split('.')[file.name.split('.').length-1] == 'rar'
+        if((file.size / 1024 / 1024) < 400) {
+            this.fileHasError = false;
+            this.fileMessage = "فایل معتبر است.";
+            this.isFileDirty = true;
+        }
+        else{
+            this.fileHasError = true;
+            this.fileMessage = "حجم فایل بیش از حد مجاز است.";
+        }
+    }
+
+    checkDateValidation(event) {
+        try {
+            if (persianMoment(event.target.value, 'jYYYY/jMM/jDD').isValid()) {
+                this.finishDateValidation = 1;
+            }
+            else {
+                this.finishDateValidation = 2;
+            }
+        }
+        catch (e) {
+            this.finishDateValidation = 2;
         }
     }
 

@@ -20,12 +20,12 @@
                         </small>
                     </div>
                 </div>-->
-                <div class="form-group" *ngIf="isSuperUsers || isModirAmozesh">
+                <!--<div class="form-group" *ngIf="isSuperUsers || isModirAmozesh">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.person" for="field_person">Person</label>
-                    <!--<select class="form-control" id="field_person" name="person" [(ngModel)]="requestNiazsanjiFardi.personId"  required>
+                    &lt;!&ndash;<select class="form-control" id="field_person" name="person" [(ngModel)]="requestNiazsanjiFardi.personId"  required>
                         <option *ngIf="!editForm.value.person" [ngValue]="null" selected></option>
                         <option [ngValue]="personOption.id" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.family}}</option>
-                    </select>-->
+                    </select>&ndash;&gt;
                     <ng-select
                         [items]="allPeople"
                         [multiple]="false"
@@ -37,29 +37,8 @@
                         placeholder="انتخاب نمائید."
                         name="allPerson"
                         id="field_allPerson">
-                </div>
-                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اولیه نیازسنجی</div></div>
-                <div class="form-group bighalf">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.organizationChart" for="field_organizationChart">Organization Chart</label>
-                    <!--<select class="form-control" id="field_organizationChart" name="organizationChart" [(ngModel)]="requestNiazsanjiFardi.organizationChartId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="organizationChartOption.id" *ngFor="let organizationChartOption of organizationcharts; trackBy: trackOrganizationChartById">{{organizationChartOption.title}}</option>
-                    </select>-->
-                    <ng-select
-                        [items]="recommenedOrgCharts"
-                        [multiple]="false"
-                        [closeOnSelect]="true"
-                        [searchable]="true"
-                        [required]="true"
-                        [disabled]="orgChartDisabled"
-                        (change)="onOrganizationChartChange($event)"
-                        bindLabel="fullTitle"
-                        bindValue="id"
-                        placeholder="انتخاب نمائید."
-                        name="organizationChart"
-                        id="field_organizationChart"
-                        [(ngModel)]="requestNiazsanjiFardi.organizationChartId">
-                </div>
+                </div>-->
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">مشخصات متقاضی</div></div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.person" for="field_person">Person</label>
                     <!--<select class="form-control" id="field_person" name="person" [(ngModel)]="requestNiazsanjiFardi.personId"  required>
@@ -67,7 +46,7 @@
                         <option [ngValue]="personOption.id" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.family}}</option>
                     </select>-->
                     <ng-select
-                        [items]="people"
+                        [items]="allPeople"
                         [multiple]="false"
                         [closeOnSelect]="true"
                         [searchable]="true"
@@ -87,96 +66,27 @@
                         This field is required.
                     </small>
                 </div>
-                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات دوره های شرکت کرده</div></div>
-                <!--<div class="table-responsive">
-                    <table class="table table-striped  table-bordered table-hover table-sm">
-                        <thead>
-                        <tr >
-                            <th>ردیف</th>
-                            <th><span jhiTranslate="global.field.id">ID</span> </th>
-                            <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazSanjiSource">Niaz Sanji Source</span> </th>
-                            <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.priceCost">Price Cost</span></th>
-                            <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.educationalModule">Educational Module</span></th>
-                            <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.courseType">Course Type</span></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let finalNiazsanjiReport of finalNiazsanjiReports; let i = index">
-                            <td>{{i+1}}</td>
-                            <td><a [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReport.id, 'view' ]">{{finalNiazsanjiReport.id}}</a></td>
-                            <td jhiTranslate="{{'marineindustryprojApp.NiazSanjiSource.' + finalNiazsanjiReport.niazSanjiSource}}">{{finalNiazsanjiReport.niazSanjiSource}}</td>
-                            <td>{{finalNiazsanjiReport.priceCost | number}}</td>
-                            <td>
-                                {{finalNiazsanjiReport.educationalModuleTitle}}
-                                &lt;!&ndash;<div *ngIf="finalNiazsanjiReport.educationalModuleId">
-                                    <a [routerLink]="['../educational-module-marine-suffix', finalNiazsanjiReport.educationalModuleId , 'view' ]" >{{finalNiazsanjiReport.educationalModuleTitle}}</a>
-                                </div>&ndash;&gt;
-                            </td>
-                            <td>
-                                {{finalNiazsanjiReport.courseTypeTitle}}
-                            </td>
-                        </tr>
-                        <tr *ngIf="hasNoRow" >
-                            <td colspan="6" class="alert-danger">
-                                این فرد تاکنون در دوره ای شرکت نکرده است.
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>-->
-                <div class="box-body" id="collapseEducationalModules">
-                    <table class="table table-bordered table-hover table-sm">
-                        <thead>
-                        <tr>
-                            <th>ردیف</th>
-                            <th><span jhiTranslate="marineindustryprojApp.educationalModule.code">Code</span></th>
-                            <th><span jhiTranslate="marineindustryprojApp.educationalModule.title">Title</span></th>
-                            <th><span>مدت کل پودمان</span></th>
-                            <!--<th><span jhiTranslate="marineindustryprojApp.educationalModule.organization">Organization</span> </th>-->
-                            <th><span jhiTranslate="marineindustryprojApp.educationalModule.skillableLevelOfSkill">Skillable Level Of Skill</span>
-                            </th>
-                            <th><span>نوع پودمان</span></th>
-                            <th><span>تاریخ برگزاری</span></th>
-                            <th>وضعیت</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let educationalModule of homePagePersonEducationalModules; let i = index;"
-                            [ngClass]="{'success': educationalModule.status == 100, 'info': educationalModule.status == 90, 'warning': educationalModule.status == 80, 'light': educationalModule.status == 70, 'danger': educationalModule.status == 0}">
-                            <td>{{i+1}}</td>
-                            <td>{{educationalModule.code}}</td>
-                            <td>{{educationalModule.title}}</td>
-                            <td>{{educationalModule.totalLearningTime | number}}</td>
-                            <!--<td>
-                                <div *ngIf="educationalModule.organizationId">
-                                    <a [routerLink]="['../organization-marine-suffix', educationalModule.organizationId , 'view' ]" >{{educationalModule.organizationTitle}}</a>
-                                </div>
-                            </td>-->
-                            <td>
-                                <div *ngIf="educationalModule.skillableLevelOfSkillId">
-                                    <a [routerLink]="['../skillable-level-of-skill-marine-suffix', educationalModule.skillableLevelOfSkillId , 'view' ]">{{educationalModule.skillableLevelOfSkillTitle}}</a>
-                                </div>
-                            </td>
-                            <td>
-                                {{educationalModule.educationalModuleType}}
-                            </td>
-                            <td>
-                                {{educationalModule.runDate}}
-                            </td>
-                            <td>
-                                <a class="enableLink" [href]="'#/educational-history-marine-suffix/' + educationalModule.educationalHistoryId + '/view'"
-                                   *ngIf="educationalModule.status == 100">{{educationalModule.statusMeaning}}</a>
-                                <span *ngIf="educationalModule.status != 100">{{educationalModule.statusMeaning}}</span>
-                            </td>
-                        </tr>
-                        <tr *ngIf="!homePagePersonEducationalModules">
-                            <td colspan="5" class="alert-danger">
-                                دوره ای برای شما تعریف نشده.
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="form-group bighalf">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.organizationChart" for="field_organizationChart">Organization Chart</label>
+                    <!--<select class="form-control" id="field_organizationChart" name="organizationChart" [(ngModel)]="requestNiazsanjiFardi.organizationChartId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="organizationChartOption.id" *ngFor="let organizationChartOption of organizationcharts; trackBy: trackOrganizationChartById">{{organizationChartOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="organizationcharts"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        [disabled]="true"
+                        bindLabel="fullTitle"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="organizationChart"
+                        id="field_organizationChart"
+                        [(ngModel)]="requestNiazsanjiFardi.organizationChartId">
                 </div>
+                <education-history-panel [personId]="requestNiazsanjiFardi.personId" [type]="2"></education-history-panel>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات پودمان های درخواستی</div></div>
                 <div>
                     <table class="table table-striped  table-bordered table-hover table-sm">
@@ -193,7 +103,7 @@
                         <tbody>
                         <tr *ngIf="(requestNiazsanjiFardi.id === undefined) || (requestNiazsanjiFardi.id !== undefined && requestNiazsanjiFardi.approvedEducationalModuleId)">
                             <td>
-                                نیازسنجی از شناسنامه شغلی
+                                <label for="field_approvedEducationalModule" jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.approvedEducationalModule"></label>
                             </td>
                             <td>
                                     <ng-select
@@ -233,7 +143,7 @@
                         </tr>
                         <tr *ngIf="(requestNiazsanjiFardi.id === undefined) || (requestNiazsanjiFardi.id !== undefined && requestNiazsanjiFardi.allEducationalModuleId)">
                             <td>
-                                نیازسنجی فردی
+                                <label for="field_allEducationalModule" jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.allEducationalModule"></label>
                             </td>
                             <td>
                                     <ng-select

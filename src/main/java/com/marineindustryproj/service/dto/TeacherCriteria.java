@@ -77,6 +77,8 @@ public class TeacherCriteria implements Serializable {
 
     private LongFilter finalOrganizationNiazsanjiId;
 
+    private LongFilter finalNiazsanjiReportId;
+
     private LongFilter documentId;
 
     private LongFilter lastQualificationId;
@@ -307,6 +309,14 @@ public class TeacherCriteria implements Serializable {
         this.finalOrganizationNiazsanjiId = finalOrganizationNiazsanjiId;
     }
 
+    public LongFilter getFinalNiazsanjiReportId() {
+        return finalNiazsanjiReportId;
+    }
+
+    public void setFinalNiazsanjiReportId(LongFilter finalNiazsanjiReportId) {
+        this.finalNiazsanjiReportId = finalNiazsanjiReportId;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -401,6 +411,7 @@ public class TeacherCriteria implements Serializable {
             Objects.equals(guid, that.guid) &&
             Objects.equals(requestOrganizationNiazsanjiId, that.requestOrganizationNiazsanjiId) &&
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
+            Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(lastQualificationId, that.lastQualificationId) &&
             Objects.equals(lastFieldOfStudyId, that.lastFieldOfStudyId) &&
@@ -440,6 +451,7 @@ public class TeacherCriteria implements Serializable {
         guid,
         requestOrganizationNiazsanjiId,
         finalOrganizationNiazsanjiId,
+        finalNiazsanjiReportId,
         documentId,
         lastQualificationId,
         lastFieldOfStudyId,
@@ -480,6 +492,7 @@ public class TeacherCriteria implements Serializable {
                 (guid != null ? "guid=" + guid + ", " : "") +
                 (requestOrganizationNiazsanjiId != null ? "requestOrganizationNiazsanjiId=" + requestOrganizationNiazsanjiId + ", " : "") +
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
+                (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (lastQualificationId != null ? "lastQualificationId=" + lastQualificationId + ", " : "") +
                 (lastFieldOfStudyId != null ? "lastFieldOfStudyId=" + lastFieldOfStudyId + ", " : "") +

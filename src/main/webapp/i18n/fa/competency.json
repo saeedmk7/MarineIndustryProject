@@ -1,0 +1,29 @@
+{
+    "marineindustryprojApp": {
+        "competency": {
+            "home": {
+                "title": "شایستگی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "شایستگی"
+            },
+            "created": "شایستگی با شناسه {{ param }} ایجاد شد.",
+            "updated": "شایستگی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "شایستگی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف شایستگی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات شایستگی"
+            },
+            "title": "عنوان",
+            "description": "توضیحات",
+            "displayOrder": "ترتیب نمایش",
+            "competencyType": "نوع شایستگی",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "preJobNiazsanjiCompetency": "Pre Job Niazsanji Competency"
+        }
+    }
+}

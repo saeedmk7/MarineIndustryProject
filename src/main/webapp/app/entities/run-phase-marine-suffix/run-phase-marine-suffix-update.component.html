@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div class="row">
-            <div id="HomePage9" class="box box-primary newsbox" style="display: none;" >
+            <div id="HomePage9" class="box box-primary newsbox">
                 <div class="box-header with-border collapseTitr" style="text-align: center;cursor: pointer;" (click)="toggleColappse('collapseRunPhase')">
                     <h3 class="box-title center" style="color: limegreen;">سربرگ طراحی و برنامه ریزی دوره</h3>
 
@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="box-body" id="collapseRunPhase">
-                    <mi-design-and-planning-marine-suffix-detail class="col-md-12" [(finalNiazsanjiReportId)]="runPhase.id"></mi-design-and-planning-marine-suffix-detail>
+                    <mi-design-and-planning-marine-suffix-detail class="col-md-12" [(finalNiazsanjiReportId)]="runPhase.finalNiazsanjiReportId"></mi-design-and-planning-marine-suffix-detail>
                 </div>
             </div>
         </div>

@@ -421,6 +421,7 @@ public class EducationalModuleDTO implements Serializable {
     public void setTeachers(Set<TeacherDTO> teachers) {
         this.teachers = teachers;
     }
+
     public Set<RestrictionDTO> getRestrictions() {
         return restrictions;
     }

@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fixCompetencyDeficiency">
+            <h2><span jhiTranslate="marineindustryprojApp.fixCompetencyDeficiency.detail.title">Fix Competency Deficiency</span> {{fixCompetencyDeficiency.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.fixCompetencyDeficiency.title">Title</span></dt>
+                <dd>
+                    <span>{{fixCompetencyDeficiency.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.fixCompetencyDeficiency.description">Description</span></dt>
+                <dd>
+                    <span>{{fixCompetencyDeficiency.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.fixCompetencyDeficiency.displayOrder">Display Order</span></dt>
+                <dd>
+                    <span>{{fixCompetencyDeficiency.displayOrder}}</span>
+                </dd>
+<!--                <dt><span jhiTranslate="marineindustryprojApp.fixCompetencyDeficiency.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{fixCompetencyDeficiency.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.fixCompetencyDeficiency.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{fixCompetencyDeficiency.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.fixCompetencyDeficiency.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{fixCompetencyDeficiency.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.fixCompetencyDeficiency.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{fixCompetencyDeficiency.modifyDate}}</span>
+                </dd>-->
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/fix-competency-deficiency-marine-suffix', fixCompetencyDeficiency.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

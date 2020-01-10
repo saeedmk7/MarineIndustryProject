@@ -36,6 +36,11 @@ export class UserService {
         let url: string = `${this.resourceUrl}/person/${personId}`;
         return this.http.get<IUser>(url, { observe: 'response' });
     }
+    findAllByAuthorityIs(authority: string): Observable<HttpResponse<IUser[]>> {
+
+        let url: string = `${this.resourceUrl}/ByAuthority/${authority}`;
+        return this.http.get<IUser[]>(url, { observe: 'response' });
+    }
 
     query(req?: any): Observable<HttpResponse<IUser[]>> {
 

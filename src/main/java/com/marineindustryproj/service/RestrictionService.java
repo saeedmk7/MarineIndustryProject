@@ -27,7 +27,8 @@ public interface RestrictionService {
      * @return the list of entities
      */
     Page<RestrictionDTO> findAll(Pageable pageable);
-    
+
+
     /**
      * Get the "id" restriction.
      *

@@ -20,7 +20,7 @@
             "subject": "موضوع یا محور رسانه تبلیغی",
             "publishDate": "تاریخ انتشار",
             "numberOfViewers": "تعداد رویت کنندگان",
-            "durationOfOperation": "مدت بهره برداری در هر مکان",
+            "durationOfOperation": "مدت بهره برداری در هر مکان (روز)",
             "reportTime": "زمان (دقیقه)",
             "personHour": "نفر ساعت",
             "description": "توضیحات",
@@ -30,7 +30,10 @@
             "modifyDate": "تاریخ ویرایش شده",
             "guid": "Guid",
             "organizationChart": "گروه/صنعت/واحد",
+            "organizationChartId": "گروه/صنعت/واحد",
+            "organizationChartTitle": "گروه/صنعت/واحد",
             "mediaProductType": "نوع محصول رسانه ای",
+            "mediaProductTypeTitle": "نوع محصول رسانه ای",
             "mediaProductTypeId": "نوع محصول رسانه ای"
         }
     }

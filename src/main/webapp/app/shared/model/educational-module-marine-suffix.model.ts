@@ -8,14 +8,16 @@ import { IRunPhaseMarineSuffix } from 'app/shared/model//run-phase-marine-suffix
 import { INiazsanjiFardiMarineSuffix } from 'app/shared/model//niazsanji-fardi-marine-suffix.model';
 import { IRequestNiazsanjiFardiMarineSuffix } from 'app/shared/model//request-niazsanji-fardi-marine-suffix.model';
 import { IEducationalHistoryMarineSuffix } from 'app/shared/model//educational-history-marine-suffix.model';
+import { IDesignNiazsanjiMarineSuffix } from 'app/shared/model//design-niazsanji-marine-suffix.model';
+import { IPreJobNiazsanjiCompetencyMarineSuffix } from 'app/shared/model//pre-job-niazsanji-competency-marine-suffix.model';
 import { IScientificWorkGroupMarineSuffix } from 'app/shared/model//scientific-work-group-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IEducationalCenterMarineSuffix } from 'app/shared/model//educational-center-marine-suffix.model';
 import { IGoalMarineSuffix } from 'app/shared/model//goal-marine-suffix.model';
 import { IResourceMarineSuffix } from 'app/shared/model//resource-marine-suffix.model';
 import { ITeacherMarineSuffix } from 'app/shared/model//teacher-marine-suffix.model';
-import { INiazsanjiGroupMarineSuffix } from 'app/shared/model//niazsanji-group-marine-suffix.model';
 import { IRestrictionMarineSuffix } from 'app/shared/model//restriction-marine-suffix.model';
+import { INiazsanjiGroupMarineSuffix } from 'app/shared/model//niazsanji-group-marine-suffix.model';
 
 export interface IEducationalModuleMarineSuffix {
     id?: number;
@@ -60,12 +62,15 @@ export interface IEducationalModuleMarineSuffix {
     approvedRequestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[];
     allRequestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[];
     educationalHistories?: IEducationalHistoryMarineSuffix[];
+    designNiazsanjis?: IDesignNiazsanjiMarineSuffix[];
+    preJobNiazsanjiCompetencies?: IPreJobNiazsanjiCompetencyMarineSuffix[];
     scientificWorkGroups?: IScientificWorkGroupMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     educationalCenters?: IEducationalCenterMarineSuffix[];
     goals?: IGoalMarineSuffix[];
     resources?: IResourceMarineSuffix[];
     teachers?: ITeacherMarineSuffix[];
+    restrictions?: IRestrictionMarineSuffix[];
     requestEducationalModuleTitle?: string;
     requestEducationalModuleId?: number;
     securityLevelTitle?: string;
@@ -77,7 +82,6 @@ export interface IEducationalModuleMarineSuffix {
     organizationTitle?: string;
     organizationId?: number;
     niazsanjiGroups?: INiazsanjiGroupMarineSuffix[];
-    restrictions?: IRestrictionMarineSuffix[];
 }
 
 export class EducationalModuleMarineSuffix implements IEducationalModuleMarineSuffix {
@@ -124,12 +128,15 @@ export class EducationalModuleMarineSuffix implements IEducationalModuleMarineSu
         public approvedRequestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[],
         public allRequestNiazsanjiFardis?: IRequestNiazsanjiFardiMarineSuffix[],
         public educationalHistories?: IEducationalHistoryMarineSuffix[],
+        public designNiazsanjis?: IDesignNiazsanjiMarineSuffix[],
+        public preJobNiazsanjiCompetencies?: IPreJobNiazsanjiCompetencyMarineSuffix[],
         public scientificWorkGroups?: IScientificWorkGroupMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public educationalCenters?: IEducationalCenterMarineSuffix[],
         public goals?: IGoalMarineSuffix[],
         public resources?: IResourceMarineSuffix[],
         public teachers?: ITeacherMarineSuffix[],
+        public restrictions?: IRestrictionMarineSuffix[],
         public requestEducationalModuleTitle?: string,
         public requestEducationalModuleId?: number,
         public securityLevelTitle?: string,
@@ -140,8 +147,7 @@ export class EducationalModuleMarineSuffix implements IEducationalModuleMarineSu
         public evaluationMethodId?: number,
         public organizationTitle?: string,
         public organizationId?: number,
-        public niazsanjiGroups?: INiazsanjiGroupMarineSuffix[],
-        public restrictions?: IRestrictionMarineSuffix[]
+        public niazsanjiGroups?: INiazsanjiGroupMarineSuffix[]
     ) {
         this.archived = this.archived || false;
         this.fullTitle =  this.code + ' - ' + this.title;

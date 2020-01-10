@@ -15,7 +15,7 @@ import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dat
 import {ActivatedRoute, NavigationStart, Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import * as $ from 'jquery';
-import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
+import {IPersonMarineSuffix, PersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
@@ -52,7 +52,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     forceRunningPercents: IForceRunningPercentMarineSuffix[];
     homePageNiazsanjiReport: IHomePageNiazsanjiReport = {};
     homePagePersonHourChart: IHomePagePersonHourChart = {};
-    homePagePersonEducationalModules: IHomePagePersonEducationalModule[] = [];
     investToGroupTransactions: IInvestToGroupTransactionMarineSuffix[] = [];
     investResult: any[] = [];
     sumHourPersonEducationalModules: number = 0;
@@ -231,9 +230,6 @@ export class HomeComponent implements OnInit, OnDestroy {
                     if(!resp.body.organizationChartId){
                         this.badError = "موقعیت در چارت سازمانی برای شما تنظیم نشده است، لطفا مراتب را با مدیریت سامانه در میان بگذارید.";
                     }
-                    //this.prepareHomePagePersonHourChart(resp.body.id);
-                    this.prepareHomePagePersonEducationalModule(resp.body.id);
-                    //this.prepareHomePageNiazsanjiReport(resp.body.id);
                 })
             }
             if(this.isTopUsers) {
@@ -290,36 +286,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             },
             (res: HttpErrorResponse) => this.onError(res.message));
     }
-    prepareHomePagePersonEducationalModule(personId: number){
-        this.finalNiazsanjiReportService.getHomePagePersonEducationalModule(personId).subscribe((resp: HttpResponse<IHomePagePersonEducationalModule[]>) => {
 
-                this.homePagePersonEducationalModules = resp.body.sort((a,b) => (a.runDate > b.runDate) ? 1 : (a.runDate < b.runDate) ? -1 : 0);
-
-                this.homePagePersonEducationalModules.forEach(a => {
-                    a.totalLearningTime = (!a.learningTimePractical ? 0 : a.learningTimePractical) + (!a.learningTimeTheorical ? 0 : a.learningTimeTheorical);
-                   switch (a.status) {
-                       case 100:
-                           a.statusMeaning = "خاتمه دوره";
-                           break;
-                       case 90:
-                           a.statusMeaning = "اجرا شده";
-                           break;
-                       case 80:
-                           a.statusMeaning = "برنامه ریزی شده";
-                           break;
-                       case 70:
-                           a.statusMeaning = "تصویب شوراء";
-                           break;
-                       case 0:
-                           a.statusMeaning = "شناسنامه شغلی فرد";
-                           break;
-                   }
-                });
-                this.sumHourPersonEducationalModules = this.homePagePersonEducationalModules.map(a => a.totalLearningTime ? a.totalLearningTime : 0).reduce((sum, current) => sum + current);
-                //this.makePersonHourPieChart(resp.body);
-            },
-            (res: HttpErrorResponse) => this.onError(res.message));
-    }
 
     makeChartResult(){
         this.groups = this.organizationcharts.filter(a => a.parentId == null).sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0);
@@ -735,7 +702,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
     }
     makeDetailSeries(){
-        debugger;
+        
 
         this.detailMonthPriceCostSeries = [{
                 name: "سرمایه گذاری اجرا شده",
@@ -767,7 +734,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     loadDetailMonthColumnChart(){
 
-        debugger;
+        
         const cats: any = this.months.sort((a,b) => (a.id > b.id) ? -1 : (a.id < b.id) ? 1 : 0).map(a => a.persianMonth);
         // @ts-ignore
         this.detailMonthPersonHourChart = this.showColumnChart(' نمودار نفر ساعت به تفکیک ماه برنامه ریزی و اجرا - ' + this.selectedGroup, this.detailMonthPersonHourSeries,

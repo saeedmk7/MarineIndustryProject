@@ -128,6 +128,9 @@ public class JobQueryService extends QueryService<Job> {
             if (criteria.getGuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGuid(), Job_.guid));
             }
+            if (criteria.getReviewDate() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getReviewDate(), Job_.reviewDate));
+            }
             if (criteria.getJobPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getJobPersonId(),
                     root -> root.join(Job_.jobPeople, JoinType.LEFT).get(Person_.id)));

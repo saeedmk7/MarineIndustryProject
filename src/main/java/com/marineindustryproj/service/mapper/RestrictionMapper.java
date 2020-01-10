@@ -11,8 +11,15 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {})
 public interface RestrictionMapper extends EntityMapper<RestrictionDTO, Restriction> {
 
-    @Mapping(target = "requestEducationalModules", ignore = true)
+
     @Mapping(target = "educationalModules", ignore = true)
+    @Mapping(target = "requestEducationalModules", ignore = true)
+    @Mapping(target = "requestOrganizationNiazsanjis", ignore = true)
+    @Mapping(target = "finalOrganizationNiazsanjis", ignore = true)
+    @Mapping(target = "finalNiazsanjiReports", ignore = true)
+    @Mapping(target = "niazsanjiFardis", ignore = true)
+    @Mapping(target = "designNiazsanjis", ignore = true)
+    @Mapping(target = "jobNiazsanjis", ignore = true)
     Restriction toEntity(RestrictionDTO restrictionDTO);
 
     default Restriction fromId(Long id) {

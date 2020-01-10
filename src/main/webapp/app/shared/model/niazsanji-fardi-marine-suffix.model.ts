@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
+import { IRestrictionMarineSuffix } from 'app/shared/model//restriction-marine-suffix.model';
 import {EducationalModuleType} from 'app/shared/model/enums/EducationalModuleType';
 
 export interface INiazsanjiFardiMarineSuffix {
@@ -21,9 +22,15 @@ export interface INiazsanjiFardiMarineSuffix {
     changeStatusUserLogin?: string;
     guid?: string;
     hasImportantMessage?: boolean;
+    restrictionDescription?: string;
+    goalsText?: string;
+    prerequisite?: string;
     documents?: IDocumentMarineSuffix[];
+    restrictions?: IRestrictionMarineSuffix[];
     courseTypeTitle?: string;
     courseTypeId?: number;
+    preJobNiazsanjiCode?: string;
+    preJobNiazsanjiId?: number;
     requestNiazsanjiFardiCode?: string;
     requestNiazsanjiFardiId?: number;
     educationalModuleTitle?: string;
@@ -35,6 +42,8 @@ export interface INiazsanjiFardiMarineSuffix {
     organizationChartTitle?: string;
     organizationChartRootTitle?: string;
     organizationChartId?: number;
+    teachingApproachTitle?: string;
+    teachingApproachId?: number;
     totalLearningTime?: number;
     skillLevelOfSkillTitle?: string;
 }
@@ -59,9 +68,15 @@ export class NiazsanjiFardiMarineSuffix implements INiazsanjiFardiMarineSuffix {
         public changeStatusUserLogin?: string,
         public guid?: string,
         public hasImportantMessage?: boolean,
+        public restrictionDescription?: string,
+        public goalsText?: string,
+        public prerequisite?: string,
         public documents?: IDocumentMarineSuffix[],
+        public restrictions?: IRestrictionMarineSuffix[],
         public courseTypeTitle?: string,
         public courseTypeId?: number,
+        public preJobNiazsanjiCode?: string,
+        public preJobNiazsanjiId?: number,
         public requestNiazsanjiFardiCode?: string,
         public requestNiazsanjiFardiId?: number,
         public educationalModuleTitle?: string,
@@ -72,6 +87,8 @@ export class NiazsanjiFardiMarineSuffix implements INiazsanjiFardiMarineSuffix {
         public personId?: number,
         public organizationChartTitle?: string,
         public organizationChartId?: number,
+        public teachingApproachTitle?: string,
+        public teachingApproachId?: number,
         public totalLearningTime?: number,
         public skillLevelOfSkillTitle?: string
     ) {

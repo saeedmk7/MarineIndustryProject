@@ -32,12 +32,14 @@ public class StorageService {
     private final Path rootLocation = Paths.get("upload-dir");
     private final Path historyRootLocation = Paths.get("history-upload-dir");
     private final Path educationRootLocation = Paths.get("education-upload-dir");
+    private final Path jobRootLocation = Paths.get("job-upload-dir");
     private final Path imagesRootLocation = Paths.get("images-dir");
     private final Path runPhaseRootLocation = Paths.get("run-phase-dir");
     private final Path jamHelpRootLocation = Paths.get("jam-help-dir");
     private final Path fileStorageLocation;
     private final Path historyFileStorageLocation;
     private final Path educationFileStorageLocation;
+    private final Path jobFileStorageLocation;
     private final Path imageFileStorageLocation;
     private final Path runPhaseStorageLocation;
     private final Path jamHelpStorageLocation;
@@ -52,6 +54,8 @@ public class StorageService {
             .toAbsolutePath().normalize();
         this.educationFileStorageLocation = Paths.get(fileStorageProperties.getEducationUploadDir())
             .toAbsolutePath().normalize();
+        this.jobFileStorageLocation = Paths.get(fileStorageProperties.getJobUploadDir())
+            .toAbsolutePath().normalize();
         this.runPhaseStorageLocation = Paths.get(fileStorageProperties.getRunPhaseUploadDir())
             .toAbsolutePath().normalize();
         this.jamHelpStorageLocation = Paths.get(fileStorageProperties.getJamHelpUploadDir())
@@ -62,6 +66,7 @@ public class StorageService {
             Files.createDirectories(this.imageFileStorageLocation);
             Files.createDirectories(this.historyFileStorageLocation);
             Files.createDirectories(this.educationFileStorageLocation);
+            Files.createDirectories(this.jobFileStorageLocation);
             Files.createDirectories(this.runPhaseStorageLocation);
             Files.createDirectories(this.jamHelpStorageLocation);
         } catch (Exception ex) {
@@ -108,6 +113,7 @@ public class StorageService {
             Files.createDirectory(jamHelpRootLocation);
             Files.createDirectory(historyRootLocation);
             Files.createDirectory(educationRootLocation);
+            Files.createDirectory(jobRootLocation);
         } catch (IOException e) {
             throw new RuntimeException("Could not initialize storage!");
         }
@@ -235,6 +241,7 @@ public class StorageService {
             throw new MyFileNotFoundException("File not found " + fileName, ex);
         }
     }
+
     public void deleteEducationFile(String fileName) {
         try {
             String[] fileNameSplit = fileName.split("/");
@@ -250,7 +257,56 @@ public class StorageService {
 
         }
     }
+    public String storeJobFile(MultipartFile file) {
+        // Normalize file name
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
+        try {
+            // Check if the file's name contains invalid characters
+            if(fileName.contains("..")) {
+                throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+            }
+            String[] fileNameSplit = fileName.split("\\.");
+            String extension = fileNameSplit[fileNameSplit.length - 1];
+            fileName = UUIDGenerate();
+            fileName += "." + extension;
+            // Copy file to the target location (Replacing existing file with the same name)
+            Path targetLocation = this.jobFileStorageLocation.resolve(fileName);
+            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+
+            return fileName;
+        } catch (IOException ex) {
+            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+        }
+    }
+    public Resource loadJobFileAsResource(String fileName) {
+        try {
+            Path filePath = this.jobFileStorageLocation.resolve(fileName).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+            if(resource.exists()) {
+                return resource;
+            } else {
+                throw new MyFileNotFoundException("File not found " + fileName);
+            }
+        } catch (MalformedURLException ex) {
+            throw new MyFileNotFoundException("File not found " + fileName, ex);
+        }
+    }
+    public void deleteJobFile(String fileName) {
+        try {
+            String[] fileNameSplit = fileName.split("/");
+            fileName = fileNameSplit[fileNameSplit.length - 1];
+            Path filePath = this.jobFileStorageLocation.resolve(fileName).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+            if(resource.exists()) {
+                Files.delete(filePath);
+            } else {
+
+            }
+        } catch (IOException ex) {
+
+        }
+    }
     public String storeHistoryFile(MultipartFile file) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());

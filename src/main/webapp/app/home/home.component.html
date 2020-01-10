@@ -15,7 +15,8 @@
                         <div *ngSwitchCase="'home'" [@enterAnimation]>
                             <p style="text-align: center; direction: rtl; font-family: IranSans, SansSerif, IranYekan">
                                 سال نیازسنجی:
-                                <select style="display: inline-block; text-align: center" [(ngModel)]="selectedNiazsanjiYear"
+                                <select style="display: inline-block; text-align: center"
+                                        [(ngModel)]="selectedNiazsanjiYear"
                                         id="selectedYear" name="selectedYear" (change)="makeChartResult()">
                                     <option [ngValue]="year" [selected]="year == selectedNiazsanjiYear"
                                             *ngFor="let year of years">{{year}}
@@ -23,687 +24,915 @@
                                 </select>
                             </p>
                             <div [chart]="personHourChart"></div>
-                                <div id="HomePage9" class="box box-primary newsbox" >
-                                <div class="box-header with-border collapseTitr" style="text-align: center;cursor: pointer;" (click)="toggleColappse('collapseHomePage9')">
-                                    <h3 class="box-title center" style="color: limegreen;">گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی(براساس نفر ساعت)</h3>
+                            <div id="HomePage9" class="box box-primary newsbox">
+                                <div class="box-header with-border collapseTitr"
+                                     style="text-align: center;cursor: pointer;"
+                                     (click)="toggleColappse('collapseHomePage9')">
+                                    <h3 class="box-title center" style="color: limegreen;">گزارش آماری برگزاری دوره های
+                                        آموزشی سازمان صنایع دریایی(براساس نفر ساعت)</h3>
 
                                     <div class="box-tools pull-left">
                                         <button type="button" class="btn btn-box-tool"
                                                 (click)="toggleColappse('collapseHomePage9')" data-widget="collapse"><i
                                             class="fa fa-minus"></i>
                                         </button>
-                                        <button type="button" class="btn btn-box-tool" (click)="deleteElement('HomePage9')"
+                                        <button type="button" class="btn btn-box-tool"
+                                                (click)="deleteElement('HomePage9')"
                                                 data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
                                 <div class="box-body collapse" id="collapseHomePage9">
-                            <div style="font-family: IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman" class="table-responsive" *ngIf="homePageReport">
+                                    <div
+                                        style="font-family: IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman"
+                                        class="table-responsive" *ngIf="homePageReport">
 
-                                <!--<h4 style="text-align: center">گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی</h4>-->
-                                <table class="table table-bordered table-sm">
-                                    <tr>
-                                        <th colspan="10" style="text-align: center; background-color: cornsilk">گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی(براساس نفر ساعت)</th>
-                                    </tr>
-                                    <tr style="background-color: coral;">
-                                        <th colspan="5" style="text-align: center">کل نفر ساعت نیازسنجی شده برای سازمان</th>
-                                        <td colspan="5" style="text-align: center">{{homePageReport.total  | number: '1.0-1'}}</td>
-                                    </tr>
-                                    <tr style="background-color: coral;">
-                                        <th colspan="5" style="text-align: center">کل نفر ساعت اجرا شده سازمان</th>
-                                        <td colspan="5" style="text-align: center">{{homePageReport.totalPassed | number: '1.0-1'}}</td>
-                                    </tr>
-                                    <tr style="background-color: coral;">
-                                        <th colspan="5" style="text-align: center">درصد کل نفر ساعت اجرا شده سازمان</th>
-                                        <td colspan="5" style="text-align: center">{{homePageReport.totalPassedPercent  | number: '1.0-1'}} %</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3" style="text-align: center; background-color: skyblue">نفر ساعت نیازسنجی شده مدیران</th>
-                                        <td colspan="2" style="text-align: center; background-color: skyblue">{{homePageReport.totalManagers  | number:'1.0-1'}}</td>
-                                        <th colspan="3" style="text-align: center; background-color: lightgoldenrodyellow">نفر ساعت نیازسنجی شده کارکنان</th>
-                                        <td colspan="2" style="text-align: center; background-color: lightgoldenrodyellow">{{homePageReport.totalStuffs  | number:'1.0-1'}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3" style="text-align: center; background-color: skyblue">درصد نفر ساعت نیازسنجی شده مدیران</th>
-                                        <td colspan="2" style="text-align: center; background-color: skyblue">{{homePageReport.totalManagersPercent | number: '1.0-1'}} %</td>
-                                        <th colspan="3" style="text-align: center; background-color: lightgoldenrodyellow">درصد نفر ساعت نیازسنجی شده کارکنان</th>
-                                        <td colspan="2" style="text-align: center; background-color: lightgoldenrodyellow">{{homePageReport.totalStuffsPercent | number:'1.0-1'}} %</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3" style="text-align: center; background-color: skyblue">نفر ساعت اجرا شده مدیران</th>
-                                        <td colspan="2" style="text-align: center; background-color: skyblue">{{homePageReport.totalPassedManagers | number: '1.0-1'}} </td>
-                                        <th colspan="3" style="text-align: center; background-color: lightgoldenrodyellow">نفر ساعت اجرا شده کارکنان</th>
-                                        <td colspan="2" style="text-align: center; background-color: lightgoldenrodyellow">{{homePageReport.totalPassedStuffs | number: '1.0-1'}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3" style="text-align: center; background-color: skyblue">درصد نفر ساعت اجرا شده مدیران</th>
-                                        <td colspan="2" style="text-align: center; background-color: skyblue">{{homePageReport.totalPassedManagersPercent | number:'1.0-1'}} %</td>
-                                        <th colspan="3" style="text-align: center; background-color: lightgoldenrodyellow">درصد نفر ساعت اجرا شده کارکنان</th>
-                                        <td colspan="2" style="text-align: center; background-color: lightgoldenrodyellow">{{homePageReport.totalPassedStuffsPercent | number:'1.0-1'}} %</td>
-                                    </tr>
-                                    <tr style="background-color: #c6fab7;">
-                                        <th colspan="10" style="text-align: center">جمع کل نیازسنجی سازمان به تفکیک نوع دوره</th>
-                                    </tr>
-                                    <tr style="background-color: lavender;">
-                                        <th *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
-                                            {{item.courseTypeTitle}}
-                                        </th>
-                                    </tr>
-                                    <tr style="background-color: lavender;">
-                                        <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
-                                            {{item.total | number: '1.0-1'}}
-                                        </td>
-                                    </tr>
-                                    <tr style="background-color: lavender;">
-                                        <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
-                                            {{item.totalPercent | number:'1.0-1'}} %
-                                        </td>
-                                    </tr>
-                                    <tr style="background-color: skyblue;">
-                                        <th colspan="10" style="text-align: center">جمع نفرساعت اجرا شده برای مدیران به تفکیک نوع دوره</th>
-                                    </tr>
-                                    <tr style="background-color: skyblue;">
-                                        <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
-                                            {{item.totalManagers | number: '1.0-1'}}
-                                        </td>
+                                        <!--<h4 style="text-align: center">گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی</h4>-->
+                                        <table class="table table-bordered table-sm">
+                                            <tr>
+                                                <th colspan="10" style="text-align: center; background-color: cornsilk">
+                                                    گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی(براساس نفر
+                                                    ساعت)
+                                                </th>
+                                            </tr>
+                                            <tr style="background-color: coral;">
+                                                <th colspan="5" style="text-align: center">کل نفر ساعت نیازسنجی شده برای
+                                                    سازمان
+                                                </th>
+                                                <td colspan="5" style="text-align: center">{{homePageReport.total |
+                                                    number: '1.0-1'}}
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: coral;">
+                                                <th colspan="5" style="text-align: center">کل نفر ساعت اجرا شده سازمان
+                                                </th>
+                                                <td colspan="5" style="text-align: center">{{homePageReport.totalPassed
+                                                    | number: '1.0-1'}}
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: coral;">
+                                                <th colspan="5" style="text-align: center">درصد کل نفر ساعت اجرا شده
+                                                    سازمان
+                                                </th>
+                                                <td colspan="5" style="text-align: center">
+                                                    {{homePageReport.totalPassedPercent | number: '1.0-1'}} %
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="3" style="text-align: center; background-color: skyblue">
+                                                    نفر ساعت نیازسنجی شده مدیران
+                                                </th>
+                                                <td colspan="2" style="text-align: center; background-color: skyblue">
+                                                    {{homePageReport.totalManagers | number:'1.0-1'}}
+                                                </td>
+                                                <th colspan="3"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
+                                                    نفر ساعت نیازسنجی شده کارکنان
+                                                </th>
+                                                <td colspan="2"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
+                                                    {{homePageReport.totalStuffs | number:'1.0-1'}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="3" style="text-align: center; background-color: skyblue">
+                                                    درصد نفر ساعت نیازسنجی شده مدیران
+                                                </th>
+                                                <td colspan="2" style="text-align: center; background-color: skyblue">
+                                                    {{homePageReport.totalManagersPercent | number: '1.0-1'}} %
+                                                </td>
+                                                <th colspan="3"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
+                                                    درصد نفر ساعت نیازسنجی شده کارکنان
+                                                </th>
+                                                <td colspan="2"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
+                                                    {{homePageReport.totalStuffsPercent | number:'1.0-1'}} %
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="3" style="text-align: center; background-color: skyblue">
+                                                    نفر ساعت اجرا شده مدیران
+                                                </th>
+                                                <td colspan="2" style="text-align: center; background-color: skyblue">
+                                                    {{homePageReport.totalPassedManagers | number: '1.0-1'}}
+                                                </td>
+                                                <th colspan="3"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
+                                                    نفر ساعت اجرا شده کارکنان
+                                                </th>
+                                                <td colspan="2"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
+                                                    {{homePageReport.totalPassedStuffs | number: '1.0-1'}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="3" style="text-align: center; background-color: skyblue">
+                                                    درصد نفر ساعت اجرا شده مدیران
+                                                </th>
+                                                <td colspan="2" style="text-align: center; background-color: skyblue">
+                                                    {{homePageReport.totalPassedManagersPercent | number:'1.0-1'}} %
+                                                </td>
+                                                <th colspan="3"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
+                                                    درصد نفر ساعت اجرا شده کارکنان
+                                                </th>
+                                                <td colspan="2"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
+                                                    {{homePageReport.totalPassedStuffsPercent | number:'1.0-1'}} %
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: #c6fab7;">
+                                                <th colspan="10" style="text-align: center">جمع کل نیازسنجی سازمان به
+                                                    تفکیک نوع دوره
+                                                </th>
+                                            </tr>
+                                            <tr style="background-color: lavender;">
+                                                <th *ngFor="let item of homePageReport.homePageReportCourseTypeDetails"
+                                                    style="text-align: center">
+                                                    {{item.courseTypeTitle}}
+                                                </th>
+                                            </tr>
+                                            <tr style="background-color: lavender;">
+                                                <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails"
+                                                    style="text-align: center">
+                                                    {{item.total | number: '1.0-1'}}
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: lavender;">
+                                                <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails"
+                                                    style="text-align: center">
+                                                    {{item.totalPercent | number:'1.0-1'}} %
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: skyblue;">
+                                                <th colspan="10" style="text-align: center">جمع نفرساعت اجرا شده برای
+                                                    مدیران به تفکیک نوع دوره
+                                                </th>
+                                            </tr>
+                                            <tr style="background-color: skyblue;">
+                                                <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails"
+                                                    style="text-align: center">
+                                                    {{item.totalManagers | number: '1.0-1'}}
+                                                </td>
 
-                                    </tr>
-                                    <tr style="background-color: skyblue;">
-                                        <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
-                                            {{item.totalManagersPercent | number: '1.0-1'}} %
-                                        </td>
-                                    </tr>
-                                    <tr style="background-color: lightgoldenrodyellow;">
-                                        <th style="text-align: center" colspan="10">جمع نفرساعت اجرا شده برای کارکنان به تفکیک نوع دوره</th>
-                                    </tr>
-                                    <tr style="background-color: lightgoldenrodyellow;">
-                                        <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
-                                            {{item.totalStuffs | number: '1.0-1'}}
-                                        </td>
-                                    </tr>
-                                    <tr style="background-color: lightgoldenrodyellow;">
-                                        <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails" style="text-align: center">
-                                            {{item.totalStuffsPercent | number: '1.0-1'}} %
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                            </tr>
+                                            <tr style="background-color: skyblue;">
+                                                <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails"
+                                                    style="text-align: center">
+                                                    {{item.totalManagersPercent | number: '1.0-1'}} %
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: lightgoldenrodyellow;">
+                                                <th style="text-align: center" colspan="10">جمع نفرساعت اجرا شده برای
+                                                    کارکنان به تفکیک نوع دوره
+                                                </th>
+                                            </tr>
+                                            <tr style="background-color: lightgoldenrodyellow;">
+                                                <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails"
+                                                    style="text-align: center">
+                                                    {{item.totalStuffs | number: '1.0-1'}}
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: lightgoldenrodyellow;">
+                                                <td *ngFor="let item of homePageReport.homePageReportCourseTypeDetails"
+                                                    style="text-align: center">
+                                                    {{item.totalStuffsPercent | number: '1.0-1'}} %
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                                <div id="HomePage1" class="box box-primary newsbox" >
-                                    <div class="box-header with-border collapseTitr" style="text-align: center;cursor: pointer;" (click)="toggleColappse('collapseHomePage1')">
-                                        <h3 class="box-title center" style="color: limegreen;">ریز نیازسنجی سازمان به تفکیک نوع دوره (براساس نفر ساعت)</h3>
+                            <div id="HomePage1" class="box box-primary newsbox">
+                                <div class="box-header with-border collapseTitr"
+                                     style="text-align: center;cursor: pointer;"
+                                     (click)="toggleColappse('collapseHomePage1')">
+                                    <h3 class="box-title center" style="color: limegreen;">ریز نیازسنجی سازمان به تفکیک
+                                        نوع دوره (براساس نفر ساعت)</h3>
 
-                                        <div class="box-tools pull-left">
-                                            <button type="button" class="btn btn-box-tool"
-                                                    (click)="toggleColappse('collapseHomePage1')" data-widget="collapse"><i
-                                                class="fa fa-minus"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-box-tool" (click)="deleteElement('HomePage1')"
-                                                    data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                    <!-- /.box-header -->
-                                    <div class="box-body collapse" id="collapseHomePage1">
-
-                                        <table class="table table-bordered table-sm">
-                                                <tr style="background-color: #22e9ff; text-align: center">
-                                                    <th style="text-align: center">نوع دوره</th>
-                                                    <th style="text-align: center" *ngFor="let item02 of homePageReport.homePageReportOrganizationAndCourseTypeDetails[0].homePageReportChartOrganizationDetails">{{item02.organizationChartTitle}}</th>
-                                                    <th style="text-align: center">مجموع</th>
-                                                </tr>
-                                                <ng-container *ngFor="let item of homePageReport.homePageReportOrganizationAndCourseTypeDetails; let i = index;">
-                                                    <tr [style.background-color]="cyanColors[i]">
-                                                        <td rowspan="2">{{item.courseTypeTitle}}</td>
-                                                        <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.total | number: '1.0-1'}}</td>
-                                                        <!--<td>{{item.homePageReportChartOrganizationDetails | sum:'total' | number: '1.0-1'}}</td>-->
-                                                        <td>{{homePageReport.homePageReportCourseTypeDetails[i].total | number:'1.0-1'}}</td>
-                                                    </tr>
-                                                    <tr [style.background-color]="cyanColors[i]">
-                                                        <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.totalPercent | number: '1.0-1'}} %</td>
-                                                        <!--<td>{{item.homePageReportChartOrganizationDetails | sum:'totalPercent' | number: '1.0-1'}} %</td>-->
-                                                        <td>{{homePageReport.homePageReportCourseTypeDetails[i].totalPercent | number: '1.0-1'}} %</td>
-                                                    </tr>
-                                                </ng-container>
-                                                <tr style="background-color: skyblue;">
-                                                    <th colspan="20" style="text-align: center">
-                                                        جمع نفرساعت برای مدیران به تفکیک گروه
-                                                    </th>
-                                                </tr>
-                                                <tr style="background-color: skyblue;">
-                                                    <td></td>
-                                                    <td *ngFor="let item of homePageReport.homePageReportDetails">
-                                                        {{item.totalManagers | number: '1.0-1'}}
-                                                    </td>
-                                                    <td>
-                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalManagers' | number: '1.0-1'}}-->
-                                                        {{homePageReport.totalManagers  | number:'1.0-1'}}
-                                                    </td>
-                                                </tr>
-                                                <tr style="background-color: skyblue;">
-                                                    <td></td>
-                                                    <td *ngFor="let item of homePageReport.homePageReportDetails">
-                                                        {{item.totalManagersPercent | number: '1.0-1'}} %
-                                                    </td>
-                                                    <td>
-                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalManagersPercent' | number: '1.0-1'}} %-->
-                                                        {{homePageReport.totalManagersPercent | number: '1.0-1'}} %
-                                                    </td>
-                                                </tr>
-                                                <tr style="background-color: lightgoldenrodyellow;">
-                                                    <th colspan="20" style="text-align: center">
-                                                        جمع نفرساعت برای کارکنان به تفکیک گروه
-                                                    </th>
-                                                </tr>
-                                                <tr style="background-color: lightgoldenrodyellow;">
-                                                    <td></td>
-                                                    <td *ngFor="let item of homePageReport.homePageReportDetails">
-                                                        {{item.totalStuffs | number: '1.0-1'}}
-                                                    </td>
-                                                    <td>
-                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalStuffs' | number: '1.0-1'}}-->
-                                                        {{homePageReport.totalStuffs  | number:'1.0-1'}}
-                                                    </td>
-                                                </tr>
-                                                <tr style="background-color: lightgoldenrodyellow;">
-                                                    <td></td>
-                                                    <td *ngFor="let item of homePageReport.homePageReportDetails">
-                                                        {{item.totalStuffsPercent | number: '1.0-1'}} %
-                                                    </td>
-                                                    <td>
-                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalStuffsPercent' | number: '1.0-1'}} %-->
-                                                        {{homePageReport.totalStuffsPercent | number:'1.0-1'}} %
-                                                    </td>
-                                                </tr>
-                                        </table>
-
+                                    <div class="box-tools pull-left">
+                                        <button type="button" class="btn btn-box-tool"
+                                                (click)="toggleColappse('collapseHomePage1')" data-widget="collapse"><i
+                                            class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-box-tool"
+                                                (click)="deleteElement('HomePage1')"
+                                                data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
-                                <div id="HomePage2" class="box box-primary newsbox">
-                                    <div class="box-header with-border collapseTitr" style="text-align: center;cursor: pointer;" (click)="toggleColappse('collapseHomePage2')">
-                                        <h3 class="box-title center" style="color: limegreen;">نحوه عملکرد کل سازمان به تفکیک نوع دوره (براساس نفر ساعت)</h3>
+                                <!-- /.box-header -->
+                                <div class="box-body collapse" id="collapseHomePage1">
 
-                                        <div class="box-tools pull-left">
-                                            <button type="button" class="btn btn-box-tool"
-                                                    (click)="toggleColappse('collapseHomePage2')" data-widget="collapse"><i
-                                                class="fa fa-minus"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-box-tool" (click)="deleteElement('HomePage2')"
-                                                    data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                    <!-- /.box-header -->
-                                    <div class="box-body collapse" id="collapseHomePage2">
+                                    <table class="table table-bordered table-sm">
+                                        <tr style="background-color: #22e9ff; text-align: center">
+                                            <th style="text-align: center">نوع دوره</th>
+                                            <th style="text-align: center"
+                                                *ngFor="let item02 of homePageReport.homePageReportOrganizationAndCourseTypeDetails[0].homePageReportChartOrganizationDetails">
+                                                {{item02.organizationChartTitle}}
+                                            </th>
+                                            <th style="text-align: center">مجموع</th>
+                                        </tr>
+                                        <ng-container
+                                            *ngFor="let item of homePageReport.homePageReportOrganizationAndCourseTypeDetails; let i = index;">
+                                            <tr [style.background-color]="cyanColors[i]">
+                                                <td rowspan="2">{{item.courseTypeTitle}}</td>
+                                                <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">
+                                                    {{item02.total | number: '1.0-1'}}
+                                                </td>
+                                                <!--<td>{{item.homePageReportChartOrganizationDetails | sum:'total' | number: '1.0-1'}}</td>-->
+                                                <td>{{homePageReport.homePageReportCourseTypeDetails[i].total |
+                                                    number:'1.0-1'}}
+                                                </td>
+                                            </tr>
+                                            <tr [style.background-color]="cyanColors[i]">
+                                                <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">
+                                                    {{item02.totalPercent | number: '1.0-1'}} %
+                                                </td>
+                                                <!--<td>{{item.homePageReportChartOrganizationDetails | sum:'totalPercent' | number: '1.0-1'}} %</td>-->
+                                                <td>{{homePageReport.homePageReportCourseTypeDetails[i].totalPercent |
+                                                    number: '1.0-1'}} %
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                        <tr style="background-color: skyblue;">
+                                            <th colspan="20" style="text-align: center">
+                                                جمع نفرساعت برای مدیران به تفکیک گروه
+                                            </th>
+                                        </tr>
+                                        <tr style="background-color: skyblue;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                {{item.totalManagers | number: '1.0-1'}}
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReport.homePageReportDetails | sum:'totalManagers' | number: '1.0-1'}}-->
+                                                {{homePageReport.totalManagers | number:'1.0-1'}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: skyblue;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                {{item.totalManagersPercent | number: '1.0-1'}} %
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReport.homePageReportDetails | sum:'totalManagersPercent' | number: '1.0-1'}} %-->
+                                                {{homePageReport.totalManagersPercent | number: '1.0-1'}} %
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: lightgoldenrodyellow;">
+                                            <th colspan="20" style="text-align: center">
+                                                جمع نفرساعت برای کارکنان به تفکیک گروه
+                                            </th>
+                                        </tr>
+                                        <tr style="background-color: lightgoldenrodyellow;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                {{item.totalStuffs | number: '1.0-1'}}
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReport.homePageReportDetails | sum:'totalStuffs' | number: '1.0-1'}}-->
+                                                {{homePageReport.totalStuffs | number:'1.0-1'}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: lightgoldenrodyellow;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                {{item.totalStuffsPercent | number: '1.0-1'}} %
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReport.homePageReportDetails | sum:'totalStuffsPercent' | number: '1.0-1'}} %-->
+                                                {{homePageReport.totalStuffsPercent | number:'1.0-1'}} %
+                                            </td>
+                                        </tr>
+                                    </table>
 
-                                        <table class="table table-bordered table-sm">
-                                                <tr style="background-color: #ad97c7">
-                                                    <th style="text-align: center">نوع دوره / نوع اجرا</th>
-                                                    <th style="text-align: center" *ngFor="let item02 of homePageReport.homePageReportOrganizationAndCourseTypeDetails[0].homePageReportChartOrganizationDetails">{{item02.organizationChartTitle}}</th>
-                                                    <th style="text-align: center">مجموع</th>
-                                                </tr>
-                                            <tr style="background-color: #29c76a">
-                                                <td rowspan="2">دوره های اجرا شده</td>
-                                                <td *ngFor="let item02 of homePageReport.homePageReportDetails">{{item02.totalPassed | number: '1.0-1'}}</td>
-                                                <!--<td> {{homePageReport.homePageReportDetails | sum:'totalPassed' | number: '1.0-1'}} </td>-->
-                                                <td>{{homePageReport.totalPassed | number: '1.0-1'}}</td>
-                                            </tr>
-                                            <tr style="background-color: #29c76a">
-                                                <td *ngFor="let item02 of homePageReport.homePageReportDetails">{{item02.totalPassedPercent | number: '1.0-1'}} %</td>
-                                                <!--<td> {{homePageReport.homePageReportDetails | sum:'totalPassedPercent' | number: '1.0-1'}} % </td>-->
-                                                <td>{{homePageReport.totalPassedPercent  | number: '1.0-1'}} %</td>
-                                            </tr>
-                                                <ng-container *ngFor="let item of homePageReport.homePageReportOrganizationAndCourseTypeDetails; let i = index">
-                                                    <tr [style.background-color]="greenColors[i]">
-                                                        <td rowspan="2">{{item.courseTypeTitle}}</td>
-                                                        <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.passed | number: '1.0-1'}}</td>
-                                                        <td> {{item.homePageReportChartOrganizationDetails | sum:'passed' | number: '1.0-1'}} </td>
-                                                    </tr>
-                                                    <tr [style.background-color]="greenColors[i]">
-                                                        <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.passedPercent | number: '1.0-1'}} %</td>
-                                                        <td> {{((item.homePageReportChartOrganizationDetails | sum:'passed') / homePageReport.totalPassed) * 100 | number: '1.0-1'}} % </td>
-                                                    </tr>
-                                                </ng-container>
-                                                <tr style="background-color: skyblue;">
-                                                    <th colspan="15" style="text-align: center">
-                                                        جمع نفرساعت اجرا شده برای مدیران به تفکیک گروه
-                                                    </th>
-                                                </tr>
-                                                <tr style="background-color: skyblue;">
-                                                    <td></td>
-                                                    <td *ngFor="let item of homePageReport.homePageReportDetails">
-                                                        {{item.totalPassedManagers | number: '1.0-1'}}
-                                                    </td>
-                                                    <td>
-                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalPassedManagers' | number: '1.0-1'}}-->
-                                                        {{homePageReport.totalPassedManagers | number: '1.0-1'}}
-                                                    </td>
-                                                </tr>
-                                                <tr style="background-color: skyblue;">
-                                                    <td></td>
-                                                    <td *ngFor="let item of homePageReport.homePageReportDetails">
-                                                        {{item.totalPassedManagersPercent | number: '1.0-1'}} %
-                                                    </td>
-                                                    <td>
-                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalPassedManagersPercent' | number: '1.0-1'}} %-->
-                                                        {{homePageReport.totalPassedManagersPercent | number: '1.0-1'}} %
-                                                    </td>
-                                                </tr>
-                                                <tr style="background-color: lightgoldenrodyellow;">
-                                                    <th colspan="15" style="text-align: center">
-                                                        جمع نفرساعت اجرا شده برای کارکنان به تفکیک گروه
-                                                    </th>
-                                                </tr>
-                                                <tr style="background-color: lightgoldenrodyellow;">
-                                                    <td></td>
-                                                    <td *ngFor="let item of homePageReport.homePageReportDetails">
-                                                        {{item.totalPassedStuffs | number: '1.0-1'}}
-                                                    </td>
-                                                    <td>
-                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalPassedStuffs' | number: '1.0-1'}}-->
-                                                        {{homePageReport.totalPassedStuffs | number: '1.0-1'}}
-                                                    </td>
-                                                </tr>
-                                                <tr style="background-color: lightgoldenrodyellow;">
-                                                    <td></td>
-                                                    <td *ngFor="let item of homePageReport.homePageReportDetails">
-                                                        {{item.totalPassedStuffsPercent  | number: '1.0-1'}} %
-                                                    </td>
-                                                    <td>
-                                                        <!--{{homePageReport.homePageReportDetails | sum:'totalPassedStuffsPercent' | number: '1.0-1'}} %-->
-                                                        {{homePageReport.totalPassedStuffsPercent | number:'1.0-1'}} %
-                                                    </td>
-                                                </tr>
-                                           <!-- <tr style="background-color: red">
-                                                <td rowspan="2">دوره های اجرا نشده</td>
-                                                <td *ngFor="let item02 of homePageReport.homePageReportDetails">{{item02.remaining | number: '1.0-1'}}</td>
-                                                <td>{{homePageReport.homePageReportDetails | sum:'remaining' | number: '1.0-1'}}</td>
-                                            </tr>
-                                            <tr style="background-color: red">
-                                                <td *ngFor="let item02 of homePageReport.homePageReportDetails">{{item02.remainingPercent | number: '1.0-1'}} %</td>
-                                                <td>{{homePageReport.homePageReportDetails | sum:'remainingPercent' | number: '1.0-1'}} %</td>
-                                            </tr>
-                                                <ng-container *ngFor="let item of homePageReport.homePageReportOrganizationAndCourseTypeDetails; let i = index;">
-                                                    <tr [style.background-color]="redColors[i]">
-                                                        <td rowspan="2">{{item.courseTypeTitle}}</td>
-                                                        <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.remaining | number: '1.0-1'}}</td>
-                                                        <td>{{item.homePageReportChartOrganizationDetails | sum:'remaining' | number: '1.0-1'}} </td>
-                                                    </tr>
-                                                    <tr [style.background-color]="redColors[i]">
-                                                        <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.remainingPercent | number: '1.0-1'}} %</td>
-                                                        <td>{{item.homePageReportChartOrganizationDetails | sum:'remainingPercent' | number: '1.0-1'}} %</td>
-                                                    </tr>
-                                                </ng-container>-->
-                                                <tr  style="background-color: indianred;">
-                                                    <th colspan="15" style="text-align: center">
-                                                        جمع نفرساعت اجرا نشده برای مدیران به تفکیک گروه
-                                                    </th>
-                                                </tr>
-                                                <tr style="background-color: indianred;">
-                                                    <td></td>
-                                                    <td *ngFor="let item of homePageReport.homePageReportDetails">
-                                                        {{item.remainingManagers | number: '1.0-1'}}
-                                                    </td>
-                                                    <td>
-                                                        <!--{{homePageReport.homePageReportDetails | sum:'remainingManagers' | number: '1.0-1'}}-->
-                                                        {{(homePageReport.totalManagers - homePageReport.totalPassedManagers) | number: '1.0-1'}}
-                                                    </td>
-                                                </tr>
-                                                <tr style="background-color: indianred;">
-                                                    <td></td>
-                                                    <td *ngFor="let item of homePageReport.homePageReportDetails">
-                                                        {{item.remainingManagersPercent | number: '1.0-1'}} %
-                                                    </td>
-                                                    <td>
-                                                        <!--{{homePageReport.homePageReportDetails | sum:'remainingManagersPercent' | number: '1.0-1'}} %-->
-                                                        {{(100 - homePageReport.totalPassedManagersPercent) | number: '1.0-1'}} %
-                                                    </td>
-                                                </tr>
-                                                <tr style="background-color: palevioletred;">
-                                                    <th colspan="15" style="text-align: center">
-                                                        جمع نفرساعت اجرا نشده برای کارکنان به تفکیک گروه
-                                                    </th>
-                                                </tr>
-                                                <tr style="background-color: palevioletred;">
-                                                    <td></td>
-                                                    <td *ngFor="let item of homePageReport.homePageReportDetails">
-                                                        {{item.remainingStuffs | number: '1.0-1'}}
-                                                    </td>
-                                                    <td>
-                                                        <!--{{homePageReport.homePageReportDetails | sum:'remainingStuffs' | number: '1.0-1'}}-->
-                                                        {{(homePageReport.totalStuffs - homePageReport.totalPassedStuffs) | number: '1.0-1'}}
-                                                    </td>
-                                                </tr>
-                                                <tr style="background-color: palevioletred;">
-                                                    <td></td>
-                                                    <td *ngFor="let item of homePageReport.homePageReportDetails">
-                                                        {{item.remainingStuffsPercent | number: '1.0-1'}} %
-                                                    </td>
-                                                    <td>
-                                                        <!--{{homePageReport.homePageReportDetails | sum:'remainingStuffsPercent' | number: '1.0-1'}} %-->
-                                                        {{(100 - homePageReport.totalPassedStuffsPercent) | number:'1.0-1'}} %
-                                                    </td>
-                                                </tr>
-                                        </table>
+                                </div>
+                            </div>
+                            <div id="HomePage2" class="box box-primary newsbox">
+                                <div class="box-header with-border collapseTitr"
+                                     style="text-align: center;cursor: pointer;"
+                                     (click)="toggleColappse('collapseHomePage2')">
+                                    <h3 class="box-title center" style="color: limegreen;">نحوه عملکرد کل سازمان به
+                                        تفکیک نوع دوره (براساس نفر ساعت)</h3>
 
+                                    <div class="box-tools pull-left">
+                                        <button type="button" class="btn btn-box-tool"
+                                                (click)="toggleColappse('collapseHomePage2')" data-widget="collapse"><i
+                                            class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-box-tool"
+                                                (click)="deleteElement('HomePage2')"
+                                                data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
-                                <div [chart]="priceCostChart"></div>
-                                <div id="HomePage10" class="box box-primary newsbox" >
-                                <div class="box-header with-border collapseTitr" style="text-align: center;cursor: pointer;" (click)="toggleColappse('collapseHomePage10')">
-                                    <h3 class="box-title center" style="color: hotpink;">گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی(براساس سرمایه گذاری)</h3>
+                                <!-- /.box-header -->
+                                <div class="box-body collapse" id="collapseHomePage2">
+
+                                    <table class="table table-bordered table-sm">
+                                        <tr style="background-color: #ad97c7">
+                                            <th style="text-align: center">نوع دوره / نوع اجرا</th>
+                                            <th style="text-align: center"
+                                                *ngFor="let item02 of homePageReport.homePageReportOrganizationAndCourseTypeDetails[0].homePageReportChartOrganizationDetails">
+                                                {{item02.organizationChartTitle}}
+                                            </th>
+                                            <th style="text-align: center">مجموع</th>
+                                        </tr>
+                                        <tr style="background-color: #29c76a">
+                                            <td rowspan="2">دوره های اجرا شده</td>
+                                            <td *ngFor="let item02 of homePageReport.homePageReportDetails">
+                                                {{item02.totalPassed | number: '1.0-1'}}
+                                            </td>
+                                            <!--<td> {{homePageReport.homePageReportDetails | sum:'totalPassed' | number: '1.0-1'}} </td>-->
+                                            <td>{{homePageReport.totalPassed | number: '1.0-1'}}</td>
+                                        </tr>
+                                        <tr style="background-color: #29c76a">
+                                            <td *ngFor="let item02 of homePageReport.homePageReportDetails">
+                                                {{item02.totalPassedPercent | number: '1.0-1'}} %
+                                            </td>
+                                            <!--<td> {{homePageReport.homePageReportDetails | sum:'totalPassedPercent' | number: '1.0-1'}} % </td>-->
+                                            <td>{{homePageReport.totalPassedPercent | number: '1.0-1'}} %</td>
+                                        </tr>
+                                        <ng-container
+                                            *ngFor="let item of homePageReport.homePageReportOrganizationAndCourseTypeDetails; let i = index">
+                                            <tr [style.background-color]="greenColors[i]">
+                                                <td rowspan="2">{{item.courseTypeTitle}}</td>
+                                                <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">
+                                                    {{item02.passed | number: '1.0-1'}}
+                                                </td>
+                                                <td> {{item.homePageReportChartOrganizationDetails | sum:'passed' |
+                                                    number: '1.0-1'}}
+                                                </td>
+                                            </tr>
+                                            <tr [style.background-color]="greenColors[i]">
+                                                <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">
+                                                    {{item02.passedPercent | number: '1.0-1'}} %
+                                                </td>
+                                                <td> {{((item.homePageReportChartOrganizationDetails | sum:'passed') /
+                                                    homePageReport.totalPassed) * 100 | number: '1.0-1'}} %
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                        <tr style="background-color: skyblue;">
+                                            <th colspan="15" style="text-align: center">
+                                                جمع نفرساعت اجرا شده برای مدیران به تفکیک گروه
+                                            </th>
+                                        </tr>
+                                        <tr style="background-color: skyblue;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                {{item.totalPassedManagers | number: '1.0-1'}}
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReport.homePageReportDetails | sum:'totalPassedManagers' | number: '1.0-1'}}-->
+                                                {{homePageReport.totalPassedManagers | number: '1.0-1'}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: skyblue;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                {{item.totalPassedManagersPercent | number: '1.0-1'}} %
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReport.homePageReportDetails | sum:'totalPassedManagersPercent' | number: '1.0-1'}} %-->
+                                                {{homePageReport.totalPassedManagersPercent | number: '1.0-1'}} %
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: lightgoldenrodyellow;">
+                                            <th colspan="15" style="text-align: center">
+                                                جمع نفرساعت اجرا شده برای کارکنان به تفکیک گروه
+                                            </th>
+                                        </tr>
+                                        <tr style="background-color: lightgoldenrodyellow;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                {{item.totalPassedStuffs | number: '1.0-1'}}
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReport.homePageReportDetails | sum:'totalPassedStuffs' | number: '1.0-1'}}-->
+                                                {{homePageReport.totalPassedStuffs | number: '1.0-1'}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: lightgoldenrodyellow;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                {{item.totalPassedStuffsPercent | number: '1.0-1'}} %
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReport.homePageReportDetails | sum:'totalPassedStuffsPercent' | number: '1.0-1'}} %-->
+                                                {{homePageReport.totalPassedStuffsPercent | number:'1.0-1'}} %
+                                            </td>
+                                        </tr>
+                                        <!-- <tr style="background-color: red">
+                                             <td rowspan="2">دوره های اجرا نشده</td>
+                                             <td *ngFor="let item02 of homePageReport.homePageReportDetails">{{item02.remaining | number: '1.0-1'}}</td>
+                                             <td>{{homePageReport.homePageReportDetails | sum:'remaining' | number: '1.0-1'}}</td>
+                                         </tr>
+                                         <tr style="background-color: red">
+                                             <td *ngFor="let item02 of homePageReport.homePageReportDetails">{{item02.remainingPercent | number: '1.0-1'}} %</td>
+                                             <td>{{homePageReport.homePageReportDetails | sum:'remainingPercent' | number: '1.0-1'}} %</td>
+                                         </tr>
+                                             <ng-container *ngFor="let item of homePageReport.homePageReportOrganizationAndCourseTypeDetails; let i = index;">
+                                                 <tr [style.background-color]="redColors[i]">
+                                                     <td rowspan="2">{{item.courseTypeTitle}}</td>
+                                                     <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.remaining | number: '1.0-1'}}</td>
+                                                     <td>{{item.homePageReportChartOrganizationDetails | sum:'remaining' | number: '1.0-1'}} </td>
+                                                 </tr>
+                                                 <tr [style.background-color]="redColors[i]">
+                                                     <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.remainingPercent | number: '1.0-1'}} %</td>
+                                                     <td>{{item.homePageReportChartOrganizationDetails | sum:'remainingPercent' | number: '1.0-1'}} %</td>
+                                                 </tr>
+                                             </ng-container>-->
+                                        <tr style="background-color: indianred;">
+                                            <th colspan="15" style="text-align: center">
+                                                جمع نفرساعت اجرا نشده برای مدیران به تفکیک گروه
+                                            </th>
+                                        </tr>
+                                        <tr style="background-color: indianred;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                {{item.remainingManagers | number: '1.0-1'}}
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReport.homePageReportDetails | sum:'remainingManagers' | number: '1.0-1'}}-->
+                                                {{(homePageReport.totalManagers - homePageReport.totalPassedManagers) |
+                                                number: '1.0-1'}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: indianred;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                {{item.remainingManagersPercent | number: '1.0-1'}} %
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReport.homePageReportDetails | sum:'remainingManagersPercent' | number: '1.0-1'}} %-->
+                                                {{(100 - homePageReport.totalPassedManagersPercent) | number: '1.0-1'}}
+                                                %
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: palevioletred;">
+                                            <th colspan="15" style="text-align: center">
+                                                جمع نفرساعت اجرا نشده برای کارکنان به تفکیک گروه
+                                            </th>
+                                        </tr>
+                                        <tr style="background-color: palevioletred;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                {{item.remainingStuffs | number: '1.0-1'}}
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReport.homePageReportDetails | sum:'remainingStuffs' | number: '1.0-1'}}-->
+                                                {{(homePageReport.totalStuffs - homePageReport.totalPassedStuffs) |
+                                                number: '1.0-1'}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: palevioletred;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReport.homePageReportDetails">
+                                                {{item.remainingStuffsPercent | number: '1.0-1'}} %
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReport.homePageReportDetails | sum:'remainingStuffsPercent' | number: '1.0-1'}} %-->
+                                                {{(100 - homePageReport.totalPassedStuffsPercent) | number:'1.0-1'}} %
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div [chart]="priceCostChart"></div>
+                            <div id="HomePage10" class="box box-primary newsbox">
+                                <div class="box-header with-border collapseTitr"
+                                     style="text-align: center;cursor: pointer;"
+                                     (click)="toggleColappse('collapseHomePage10')">
+                                    <h3 class="box-title center" style="color: hotpink;">گزارش آماری برگزاری دوره های
+                                        آموزشی سازمان صنایع دریایی(براساس سرمایه گذاری)</h3>
 
                                     <div class="box-tools pull-left">
                                         <button type="button" class="btn btn-box-tool"
                                                 (click)="toggleColappse('collapseHomePage10')" data-widget="collapse"><i
                                             class="fa fa-minus"></i>
                                         </button>
-                                        <button type="button" class="btn btn-box-tool" (click)="deleteElement('HomePage10')"
+                                        <button type="button" class="btn btn-box-tool"
+                                                (click)="deleteElement('HomePage10')"
                                                 data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body collapse" id="collapseHomePage10">
-                                <div style="font-family: IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman" class="table-responsive" *ngIf="homePageReportPrice">
-                                <!--<h4 style="text-align: center">گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی</h4>-->
-                                <table class="table table-bordered table-sm">
-                                    <tr>
-                                        <th colspan="10" style="text-align: center; background-color: cornsilk">گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی(براساس سرمایه گذاری)</th>
-                                    </tr>
-                                    <tr style="background-color: coral;">
-                                        <th colspan="5" style="text-align: center">کل سرمایه گذاری نیازسنجی شده برای سازمان</th>
-                                        <td colspan="5" style="text-align: center">{{homePageReportPrice.total  | number: '1.0-1'}}</td>
-
-                                    </tr>
-                                    <tr style="background-color: coral;">
-                                        <th colspan="5" style="text-align: center">کل سرمایه گذاری اجرا شده سازمان</th>
-                                        <td colspan="5" style="text-align: center">{{homePageReportPrice.totalPassed | number: '1.0-1'}}</td>
-                                    </tr>
-                                    <tr style="background-color: coral;">
-                                        <th colspan="5" style="text-align: center">درصد کل سرمایه گذاری اجرا شده سازمان</th>
-                                        <td colspan="5" style="text-align: center">{{homePageReportPrice.totalPassedPercent  | number: '1.0-1'}} %</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3" style="text-align: center; background-color: skyblue">سرمایه گذاری نیازسنجی شده مدیران</th>
-                                        <td colspan="2" style="text-align: center; background-color: skyblue">{{homePageReportPrice.totalManagers  | number:'1.0-1'}}</td>
-                                        <th colspan="3" style="text-align: center; background-color: lightgoldenrodyellow">سرمایه گذاری نیازسنجی شده کارکنان</th>
-                                        <td colspan="2" style="text-align: center; background-color: lightgoldenrodyellow">{{homePageReportPrice.totalStuffs  | number:'1.0-1'}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3" style="text-align: center; background-color: skyblue">درصد سرمایه گذاری نیازسنجی شده مدیران</th>
-                                        <td colspan="2" style="text-align: center; background-color: skyblue">{{homePageReportPrice.totalManagersPercent | number: '1.0-1'}} %</td>
-                                        <th colspan="3" style="text-align: center; background-color: lightgoldenrodyellow">درصد سرمایه گذاری نیازسنجی شده کارکنان</th>
-                                        <td colspan="2" style="text-align: center; background-color: lightgoldenrodyellow">{{homePageReportPrice.totalStuffsPercent | number:'1.0-1'}} %</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3" style="text-align: center; background-color: skyblue">سرمایه گذاری اجرا شده مدیران</th>
-                                        <td colspan="2" style="text-align: center; background-color: skyblue">{{homePageReportPrice.totalPassedManagers | number: '1.0-1'}} </td>
-                                        <th colspan="3" style="text-align: center; background-color: lightgoldenrodyellow">سرمایه گذاری اجرا شده کارکنان</th>
-                                        <td colspan="2" style="text-align: center; background-color: lightgoldenrodyellow">{{homePageReportPrice.totalPassedStuffs | number: '1.0-1'}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3" style="text-align: center; background-color: skyblue">درصد سرمایه گذاری اجرا شده مدیران</th>
-                                        <td colspan="2" style="text-align: center; background-color: skyblue">{{homePageReportPrice.totalPassedManagersPercent | number:'1.0-1'}} %</td>
-                                        <th colspan="3" style="text-align: center; background-color: lightgoldenrodyellow">درصد سرمایه گذاری اجرا شده کارکنان</th>
-                                        <td colspan="2" style="text-align: center; background-color: lightgoldenrodyellow">{{homePageReportPrice.totalPassedStuffsPercent | number:'1.0-1'}} %</td>
-                                    </tr>
-                                    <tr style="background-color: #c6fab7;">
-                                        <th colspan="10" style="text-align: center">جمع کل نیازسنجی سازمان به تفکیک نوع دوره</th>
-                                    </tr>
-                                    <tr style="background-color: lavender;">
-                                        <th *ngFor="let item of homePageReportPrice.homePageReportCourseTypeDetails" style="text-align: center">
-                                            {{item.courseTypeTitle}}
-                                        </th>
-                                    </tr>
-                                    <tr style="background-color: lavender;">
-                                        <td *ngFor="let item of homePageReportPrice.homePageReportCourseTypeDetails" style="text-align: center">
-                                            {{item.total | number: '1.0-1'}}
-                                        </td>
-                                    </tr>
-                                    <tr style="background-color: lavender;">
-                                        <td *ngFor="let item of homePageReportPrice.homePageReportCourseTypeDetails" style="text-align: center">
-                                            {{item.totalPercent | number:'1.0-1'}} %
-                                        </td>
-                                    </tr>
-                                    <tr style="background-color: skyblue;">
-                                        <th colspan="10" style="text-align: center">جمع سرمایه گذاری اجرا شده برای مدیران به تفکیک نوع دوره</th>
-                                    </tr>
-                                    <tr style="background-color: skyblue;">
-                                        <td *ngFor="let item of homePageReportPrice.homePageReportCourseTypeDetails" style="text-align: center">
-                                            {{item.totalManagers | number: '1.0-1'}}
-                                        </td>
-
-                                    </tr>
-                                    <tr style="background-color: skyblue;">
-                                        <td *ngFor="let item of homePageReportPrice.homePageReportCourseTypeDetails" style="text-align: center">
-                                            {{item.totalManagersPercent | number: '1.0-1'}} %
-                                        </td>
-                                    </tr>
-                                    <tr style="background-color: lightgoldenrodyellow;">
-                                        <th style="text-align: center" colspan="10">جمع سرمایه گذاری اجرا شده برای کارکنان به تفکیک نوع دوره</th>
-                                    </tr>
-                                    <tr style="background-color: lightgoldenrodyellow;">
-                                        <td *ngFor="let item of homePageReportPrice.homePageReportCourseTypeDetails" style="text-align: center">
-                                            {{item.totalStuffs | number: '1.0-1'}}
-                                        </td>
-                                    </tr>
-                                    <tr style="background-color: lightgoldenrodyellow;">
-                                        <td *ngFor="let item of homePageReportPrice.homePageReportCourseTypeDetails" style="text-align: center">
-                                            {{item.totalStuffsPercent | number: '1.0-1'}} %
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                                </div>
-                            </div>
-                                <div id="HomePage3" class="box box-primary newsbox" >
-                                    <div class="box-header with-border collapseTitr" style="text-align: center;cursor: pointer;" (click)="toggleColappse('collapseHomePage3')">
-                                        <h3 class="box-title center" style="color: hotpink;">ریز نیازسنجی سازمان به تفکیک نوع دوره (براساس سرمایه گذاری)</h3>
-
-                                        <div class="box-tools pull-left">
-                                            <button type="button" class="btn btn-box-tool"
-                                                    (click)="toggleColappse('collapseHomePage3')" data-widget="collapse"><i
-                                                class="fa fa-minus"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-box-tool" (click)="deleteElement('HomePage3')"
-                                                    data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                    <!-- /.box-header -->
-                                    <div class="box-body collapse" id="collapseHomePage3">
-
+                                    <div
+                                        style="font-family: IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman"
+                                        class="table-responsive" *ngIf="homePageReportPrice">
+                                        <!--<h4 style="text-align: center">گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی</h4>-->
                                         <table class="table table-bordered table-sm">
-                                            <tr style="background-color: #22e9ff; text-align: center">
-                                                <th style="text-align: center">نوع دوره</th>
-                                                <th style="text-align: center" *ngFor="let item02 of homePageReportPrice.homePageReportOrganizationAndCourseTypeDetails[0].homePageReportChartOrganizationDetails">{{item02.organizationChartTitle}}</th>
-                                                <th style="text-align: center">مجموع</th>
-                                            </tr>
-                                            <ng-container *ngFor="let item of homePageReportPrice.homePageReportOrganizationAndCourseTypeDetails; let i = index;">
-                                                <tr [style.background-color]="cyanColors[i]">
-                                                    <td rowspan="2">{{item.courseTypeTitle}}</td>
-                                                    <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.total | number: '1.0-1'}}</td>
-                                                    <!--<td>{{item.homePageReportChartOrganizationDetails | sum:'total' | number: '1.0-1'}}</td>-->
-                                                    <td>
-                                                        {{homePageReportPrice.homePageReportCourseTypeDetails[i].total | number: '1.0-1'}}
-                                                    </td>
-                                                </tr>
-                                                <tr [style.background-color]="cyanColors[i]">
-                                                    <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.totalPercent | number: '1.0-1'}} %</td>
-                                                    <!--<td>{{item.homePageReportChartOrganizationDetails | sum:'totalPercent' | number: '1.0-1'}} %</td>-->
-                                                    <td>{{homePageReportPrice.homePageReportCourseTypeDetails[i].totalPercent | number: '1.0-1'}} %</td>
-                                                </tr>
-                                            </ng-container>
-                                            <tr style="background-color: skyblue;">
-                                                <th colspan="15" style="text-align: center">
-                                                    جمع سرمایه گذاری برای مدیران به تفکیک گروه
+                                            <tr>
+                                                <th colspan="10" style="text-align: center; background-color: cornsilk">
+                                                    گزارش آماری برگزاری دوره های آموزشی سازمان صنایع دریایی(براساس
+                                                    سرمایه گذاری)
                                                 </th>
                                             </tr>
-                                            <tr style="background-color: skyblue;">
-                                                <td></td>
-                                                <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
-                                                    {{item.totalManagers | number: '1.0-1'}}
-                                                </td>
-                                                <!--<td>{{homePageReportPrice.homePageReportDetails | sum:'totalManagers' | number: '1.0-1'}}</td>-->
-                                                <td>{{homePageReportPrice.totalManagers  | number:'1.0-1'}}</td>
-                                            </tr>
-                                            <tr style="background-color: skyblue;">
-                                                <td></td>
-                                                <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
-                                                    {{item.totalManagersPercent | number: '1.0-1'}} %
-                                                </td>
-                                                <!--<td>{{homePageReportPrice.homePageReportDetails | sum:'totalManagersPercent' | number: '1.0-1'}} %</td>-->
-                                                <td>{{homePageReportPrice.totalManagersPercent | number: '1.0-1'}} %</td>
-                                            </tr>
-                                            <tr style="background-color: lightgoldenrodyellow;">
-                                                <th colspan="15" style="text-align: center">
-                                                    جمع سرمایه گذاری برای کارکنان به تفکیک گروه
+                                            <tr style="background-color: coral;">
+                                                <th colspan="5" style="text-align: center">کل سرمایه گذاری نیازسنجی شده
+                                                    برای سازمان
                                                 </th>
-                                            </tr>
-                                            <tr style="background-color: lightgoldenrodyellow;">
-                                                <td></td>
-                                                <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
-                                                    {{item.totalStuffs | number: '1.0-1'}}
+                                                <td colspan="5" style="text-align: center">{{homePageReportPrice.total |
+                                                    number: '1.0-1'}}
                                                 </td>
-                                                <!--<td>{{homePageReportPrice.homePageReportDetails | sum:'totalStuffs' | number: '1.0-1'}}</td>-->
-                                                <td>{{homePageReportPrice.totalStuffs  | number:'1.0-1'}}</td>
-                                            </tr>
-                                            <tr style="background-color: lightgoldenrodyellow;">
-                                                <td></td>
-                                                <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
-                                                    {{item.totalStuffsPercent | number: '1.0-1'}} %
-                                                </td>
-                                                <!--<td>{{homePageReportPrice.homePageReportDetails | sum:'totalStuffsPercent' | number: '1.0-1'}} %</td>-->
-                                                <td>{{homePageReportPrice.totalStuffsPercent | number:'1.0-1'}} %</td>
-                                            </tr>
-                                        </table>
 
-                                    </div>
-                                </div>
-                                <div id="HomePage4" class="box box-primary newsbox">
-                                    <div class="box-header with-border collapseTitr" (click)="toggleColappse('collapseHomePage4')">
-                                        <h3 class="box-title center" style="color: hotpink;">نحوه عملکرد کل سازمان به تفکیک نوع دوره (براساس سرمایه گذاری)</h3>
-
-                                        <div class="box-tools pull-left">
-                                            <button type="button" class="btn btn-box-tool"
-                                                    (click)="toggleColappse('collapseHomePage4')" data-widget="collapse"><i
-                                                class="fa fa-minus"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-box-tool" (click)="deleteElement('HomePage4')"
-                                                    data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                    <!-- /.box-header -->
-                                    <div class="box-body collapse" id="collapseHomePage4">
-
-                                        <table class="table table-bordered table-sm">
-                                            <tr style="background-color: #ad97c7">
-                                                <th style="text-align: center">نوع دوره / نوع اجرا</th>
-                                                <th style="text-align: center" *ngFor="let item02 of homePageReportPrice.homePageReportOrganizationAndCourseTypeDetails[0].homePageReportChartOrganizationDetails">{{item02.organizationChartTitle}}</th>
-                                                <th style="text-align: center">مجموع</th>
                                             </tr>
-                                            <tr style="background-color: #29c76a">
-                                                <td rowspan="2">دوره های اجرا شده</td>
-                                                <td *ngFor="let item02 of homePageReportPrice.homePageReportDetails">{{item02.totalPassed | number: '1.0-1'}}</td>
-                                                <td>
-                                                    {{homePageReportPrice.homePageReportDetails | sum:'totalPassed' | number: '1.0-1'}}
+                                            <tr style="background-color: coral;">
+                                                <th colspan="5" style="text-align: center">کل سرمایه گذاری اجرا شده
+                                                    سازمان
+                                                </th>
+                                                <td colspan="5" style="text-align: center">
+                                                    {{homePageReportPrice.totalPassed | number: '1.0-1'}}
                                                 </td>
                                             </tr>
-                                            <tr style="background-color: #29c76a">
-                                                <td *ngFor="let item02 of homePageReportPrice.homePageReportDetails">{{item02.totalPassedPercent | number: '1.0-1'}} %</td>
-
-                                                <td>
-                                                    <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedPercent' | number: '1.0-1'}} %-->
+                                            <tr style="background-color: coral;">
+                                                <th colspan="5" style="text-align: center">درصد کل سرمایه گذاری اجرا شده
+                                                    سازمان
+                                                </th>
+                                                <td colspan="5" style="text-align: center">
                                                     {{homePageReportPrice.totalPassedPercent | number: '1.0-1'}} %
                                                 </td>
                                             </tr>
-                                            <ng-container *ngFor="let item of homePageReportPrice.homePageReportOrganizationAndCourseTypeDetails; let i = index">
-                                                <tr [style.background-color]="greenColors[i]">
-                                                    <td rowspan="2">{{item.courseTypeTitle}}</td>
-                                                    <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.passed | number: '1.0-1'}}</td>
-                                                    <td>
-                                                        {{item.homePageReportChartOrganizationDetails | sum:'passed' | number: '1.0-1'}}
-                                                    </td>
-                                                </tr>
-                                                <tr [style.background-color]="greenColors[i]">
-                                                    <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">{{item02.passedPercent | number: '1.0-1'}} %</td>
-                                                    <td>
-                                                        <!--{{item.homePageReportChartOrganizationDetails | sum:'passedPercent' | number: '1.0-1'}} %-->
-                                                        {{((item.homePageReportChartOrganizationDetails | sum:'passed') / homePageReportPrice.totalPassed) * 100 | number: '1.0-1'}}
-                                                    </td>
-                                                </tr>
-                                            </ng-container>
-                                            <tr style="background-color: skyblue;">
-                                                <th colspan="15" style="text-align: center">
-                                                    جمع سرمایه گذاری اجرا شده برای مدیران به تفکیک گروه
+                                            <tr>
+                                                <th colspan="3" style="text-align: center; background-color: skyblue">
+                                                    سرمایه گذاری نیازسنجی شده مدیران
                                                 </th>
-                                            </tr>
-                                            <tr style="background-color: skyblue;">
-                                                <td></td>
-                                                <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
-                                                    {{item.totalPassedManagers | number: '1.0-1'}}
+                                                <td colspan="2" style="text-align: center; background-color: skyblue">
+                                                    {{homePageReportPrice.totalManagers | number:'1.0-1'}}
                                                 </td>
-                                                <td>
-                                                    <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedManagers' | number: '1.0-1'}}-->
-                                                    {{homePageReportPrice.totalPassedManagers | number:'1.0-1'}}
-                                                </td>
-                                            </tr>
-                                            <tr style="background-color: skyblue;">
-                                                <td></td>
-                                                <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
-                                                    {{item.totalPassedManagersPercent | number: '1.0-1'}} %
-                                                </td>
-                                                <td>
-                                                    <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedManagersPercent' | number: '1.0-1'}} %-->
-                                                    {{homePageReportPrice.totalPassedManagersPercent | number:'1.0-1'}} %
-                                                </td>
-                                            </tr>
-                                            <tr style="background-color: lightgoldenrodyellow;">
-                                                <th colspan="15" style="text-align: center">
-                                                    جمع سرمایه گذاری اجرا شده برای کارکنان به تفکیک گروه
+                                                <th colspan="3"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
+                                                    سرمایه گذاری نیازسنجی شده کارکنان
                                                 </th>
-                                            </tr>
-                                            <tr style="background-color: lightgoldenrodyellow;">
-                                                <td></td>
-                                                <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
-                                                    {{item.totalPassedStuffs | number: '1.0-1'}}
+                                                <td colspan="2"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
+                                                    {{homePageReportPrice.totalStuffs | number:'1.0-1'}}
                                                 </td>
-                                                <td>
-                                                    <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedStuffs' | number: '1.0-1'}}-->
+                                            </tr>
+                                            <tr>
+                                                <th colspan="3" style="text-align: center; background-color: skyblue">
+                                                    درصد سرمایه گذاری نیازسنجی شده مدیران
+                                                </th>
+                                                <td colspan="2" style="text-align: center; background-color: skyblue">
+                                                    {{homePageReportPrice.totalManagersPercent | number: '1.0-1'}} %
+                                                </td>
+                                                <th colspan="3"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
+                                                    درصد سرمایه گذاری نیازسنجی شده کارکنان
+                                                </th>
+                                                <td colspan="2"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
+                                                    {{homePageReportPrice.totalStuffsPercent | number:'1.0-1'}} %
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="3" style="text-align: center; background-color: skyblue">
+                                                    سرمایه گذاری اجرا شده مدیران
+                                                </th>
+                                                <td colspan="2" style="text-align: center; background-color: skyblue">
+                                                    {{homePageReportPrice.totalPassedManagers | number: '1.0-1'}}
+                                                </td>
+                                                <th colspan="3"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
+                                                    سرمایه گذاری اجرا شده کارکنان
+                                                </th>
+                                                <td colspan="2"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
                                                     {{homePageReportPrice.totalPassedStuffs | number: '1.0-1'}}
                                                 </td>
                                             </tr>
-                                            <tr style="background-color: lightgoldenrodyellow;">
-                                                <td></td>
-                                                <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
-                                                    {{item.totalPassedStuffsPercent  | number: '1.0-1'}} %
+                                            <tr>
+                                                <th colspan="3" style="text-align: center; background-color: skyblue">
+                                                    درصد سرمایه گذاری اجرا شده مدیران
+                                                </th>
+                                                <td colspan="2" style="text-align: center; background-color: skyblue">
+                                                    {{homePageReportPrice.totalPassedManagersPercent | number:'1.0-1'}}
+                                                    %
                                                 </td>
-                                                <td>
-                                                    <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedStuffsPercent' | number: '1.0-1'}} %-->
+                                                <th colspan="3"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
+                                                    درصد سرمایه گذاری اجرا شده کارکنان
+                                                </th>
+                                                <td colspan="2"
+                                                    style="text-align: center; background-color: lightgoldenrodyellow">
                                                     {{homePageReportPrice.totalPassedStuffsPercent | number:'1.0-1'}} %
                                                 </td>
                                             </tr>
-                                        </table>
-                                        <table class="table table-bordered table-sm">
-                                            <tr style="background-color: #ad97c7">
-                                                <th style="text-align: center"></th>
-                                                <th style="text-align: center" *ngFor="let invest of investResult">{{invest.orgTitle}}</th>
+                                            <tr style="background-color: #c6fab7;">
+                                                <th colspan="10" style="text-align: center">جمع کل نیازسنجی سازمان به
+                                                    تفکیک نوع دوره
+                                                </th>
                                             </tr>
-                                            <tr style="background-color: cornflowerblue">
-                                                <td style="text-align: center">سرمایه گذاری انجام شده</td>
-                                                <td *ngFor="let invest of investResult">{{invest.sumInvest | number: '1.0-1'}}</td>
+                                            <tr style="background-color: lavender;">
+                                                <th *ngFor="let item of homePageReportPrice.homePageReportCourseTypeDetails"
+                                                    style="text-align: center">
+                                                    {{item.courseTypeTitle}}
+                                                </th>
                                             </tr>
-                                            <tr style="background-color: lightgreen">
-                                                <td style="text-align: center">اجرا شده</td>
-                                                <td *ngFor="let invest of investResult">{{invest.usedAmount | number: '1.0-1'}}</td>
+                                            <tr style="background-color: lavender;">
+                                                <td *ngFor="let item of homePageReportPrice.homePageReportCourseTypeDetails"
+                                                    style="text-align: center">
+                                                    {{item.total | number: '1.0-1'}}
+                                                </td>
                                             </tr>
-                                            <tr style="background-color: chocolate">
-                                                <td style="text-align: center">درصد استفاده شده</td>
-                                                <td *ngFor="let invest of investResult">{{invest.usedAmountPercent | number: '1.0-1'}} %</td>
+                                            <tr style="background-color: lavender;">
+                                                <td *ngFor="let item of homePageReportPrice.homePageReportCourseTypeDetails"
+                                                    style="text-align: center">
+                                                    {{item.totalPercent | number:'1.0-1'}} %
+                                                </td>
                                             </tr>
+                                            <tr style="background-color: skyblue;">
+                                                <th colspan="10" style="text-align: center">جمع سرمایه گذاری اجرا شده
+                                                    برای مدیران به تفکیک نوع دوره
+                                                </th>
+                                            </tr>
+                                            <tr style="background-color: skyblue;">
+                                                <td *ngFor="let item of homePageReportPrice.homePageReportCourseTypeDetails"
+                                                    style="text-align: center">
+                                                    {{item.totalManagers | number: '1.0-1'}}
+                                                </td>
+
+                                            </tr>
+                                            <tr style="background-color: skyblue;">
+                                                <td *ngFor="let item of homePageReportPrice.homePageReportCourseTypeDetails"
+                                                    style="text-align: center">
+                                                    {{item.totalManagersPercent | number: '1.0-1'}} %
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: lightgoldenrodyellow;">
+                                                <th style="text-align: center" colspan="10">جمع سرمایه گذاری اجرا شده
+                                                    برای کارکنان به تفکیک نوع دوره
+                                                </th>
+                                            </tr>
+                                            <tr style="background-color: lightgoldenrodyellow;">
+                                                <td *ngFor="let item of homePageReportPrice.homePageReportCourseTypeDetails"
+                                                    style="text-align: center">
+                                                    {{item.totalStuffs | number: '1.0-1'}}
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: lightgoldenrodyellow;">
+                                                <td *ngFor="let item of homePageReportPrice.homePageReportCourseTypeDetails"
+                                                    style="text-align: center">
+                                                    {{item.totalStuffsPercent | number: '1.0-1'}} %
+                                                </td>
+                                            </tr>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
+                            </div>
+                            <div id="HomePage3" class="box box-primary newsbox">
+                                <div class="box-header with-border collapseTitr"
+                                     style="text-align: center;cursor: pointer;"
+                                     (click)="toggleColappse('collapseHomePage3')">
+                                    <h3 class="box-title center" style="color: hotpink;">ریز نیازسنجی سازمان به تفکیک
+                                        نوع دوره (براساس سرمایه گذاری)</h3>
 
+                                    <div class="box-tools pull-left">
+                                        <button type="button" class="btn btn-box-tool"
+                                                (click)="toggleColappse('collapseHomePage3')" data-widget="collapse"><i
+                                            class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-box-tool"
+                                                (click)="deleteElement('HomePage3')"
+                                                data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body collapse" id="collapseHomePage3">
+
+                                    <table class="table table-bordered table-sm">
+                                        <tr style="background-color: #22e9ff; text-align: center">
+                                            <th style="text-align: center">نوع دوره</th>
+                                            <th style="text-align: center"
+                                                *ngFor="let item02 of homePageReportPrice.homePageReportOrganizationAndCourseTypeDetails[0].homePageReportChartOrganizationDetails">
+                                                {{item02.organizationChartTitle}}
+                                            </th>
+                                            <th style="text-align: center">مجموع</th>
+                                        </tr>
+                                        <ng-container
+                                            *ngFor="let item of homePageReportPrice.homePageReportOrganizationAndCourseTypeDetails; let i = index;">
+                                            <tr [style.background-color]="cyanColors[i]">
+                                                <td rowspan="2">{{item.courseTypeTitle}}</td>
+                                                <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">
+                                                    {{item02.total | number: '1.0-1'}}
+                                                </td>
+                                                <!--<td>{{item.homePageReportChartOrganizationDetails | sum:'total' | number: '1.0-1'}}</td>-->
+                                                <td>
+                                                    {{homePageReportPrice.homePageReportCourseTypeDetails[i].total |
+                                                    number: '1.0-1'}}
+                                                </td>
+                                            </tr>
+                                            <tr [style.background-color]="cyanColors[i]">
+                                                <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">
+                                                    {{item02.totalPercent | number: '1.0-1'}} %
+                                                </td>
+                                                <!--<td>{{item.homePageReportChartOrganizationDetails | sum:'totalPercent' | number: '1.0-1'}} %</td>-->
+                                                <td>
+                                                    {{homePageReportPrice.homePageReportCourseTypeDetails[i].totalPercent
+                                                    | number: '1.0-1'}} %
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                        <tr style="background-color: skyblue;">
+                                            <th colspan="15" style="text-align: center">
+                                                جمع سرمایه گذاری برای مدیران به تفکیک گروه
+                                            </th>
+                                        </tr>
+                                        <tr style="background-color: skyblue;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
+                                                {{item.totalManagers | number: '1.0-1'}}
+                                            </td>
+                                            <!--<td>{{homePageReportPrice.homePageReportDetails | sum:'totalManagers' | number: '1.0-1'}}</td>-->
+                                            <td>{{homePageReportPrice.totalManagers | number:'1.0-1'}}</td>
+                                        </tr>
+                                        <tr style="background-color: skyblue;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
+                                                {{item.totalManagersPercent | number: '1.0-1'}} %
+                                            </td>
+                                            <!--<td>{{homePageReportPrice.homePageReportDetails | sum:'totalManagersPercent' | number: '1.0-1'}} %</td>-->
+                                            <td>{{homePageReportPrice.totalManagersPercent | number: '1.0-1'}} %</td>
+                                        </tr>
+                                        <tr style="background-color: lightgoldenrodyellow;">
+                                            <th colspan="15" style="text-align: center">
+                                                جمع سرمایه گذاری برای کارکنان به تفکیک گروه
+                                            </th>
+                                        </tr>
+                                        <tr style="background-color: lightgoldenrodyellow;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
+                                                {{item.totalStuffs | number: '1.0-1'}}
+                                            </td>
+                                            <!--<td>{{homePageReportPrice.homePageReportDetails | sum:'totalStuffs' | number: '1.0-1'}}</td>-->
+                                            <td>{{homePageReportPrice.totalStuffs | number:'1.0-1'}}</td>
+                                        </tr>
+                                        <tr style="background-color: lightgoldenrodyellow;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
+                                                {{item.totalStuffsPercent | number: '1.0-1'}} %
+                                            </td>
+                                            <!--<td>{{homePageReportPrice.homePageReportDetails | sum:'totalStuffsPercent' | number: '1.0-1'}} %</td>-->
+                                            <td>{{homePageReportPrice.totalStuffsPercent | number:'1.0-1'}} %</td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div id="HomePage4" class="box box-primary newsbox">
+                                <div class="box-header with-border collapseTitr"
+                                     (click)="toggleColappse('collapseHomePage4')">
+                                    <h3 class="box-title center" style="color: hotpink;">نحوه عملکرد کل سازمان به تفکیک
+                                        نوع دوره (براساس سرمایه گذاری)</h3>
+
+                                    <div class="box-tools pull-left">
+                                        <button type="button" class="btn btn-box-tool"
+                                                (click)="toggleColappse('collapseHomePage4')" data-widget="collapse"><i
+                                            class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-box-tool"
+                                                (click)="deleteElement('HomePage4')"
+                                                data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body collapse" id="collapseHomePage4">
+
+                                    <table class="table table-bordered table-sm">
+                                        <tr style="background-color: #ad97c7">
+                                            <th style="text-align: center">نوع دوره / نوع اجرا</th>
+                                            <th style="text-align: center"
+                                                *ngFor="let item02 of homePageReportPrice.homePageReportOrganizationAndCourseTypeDetails[0].homePageReportChartOrganizationDetails">
+                                                {{item02.organizationChartTitle}}
+                                            </th>
+                                            <th style="text-align: center">مجموع</th>
+                                        </tr>
+                                        <tr style="background-color: #29c76a">
+                                            <td rowspan="2">دوره های اجرا شده</td>
+                                            <td *ngFor="let item02 of homePageReportPrice.homePageReportDetails">
+                                                {{item02.totalPassed | number: '1.0-1'}}
+                                            </td>
+                                            <td>
+                                                {{homePageReportPrice.homePageReportDetails | sum:'totalPassed' |
+                                                number: '1.0-1'}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: #29c76a">
+                                            <td *ngFor="let item02 of homePageReportPrice.homePageReportDetails">
+                                                {{item02.totalPassedPercent | number: '1.0-1'}} %
+                                            </td>
+
+                                            <td>
+                                                <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedPercent' | number: '1.0-1'}} %-->
+                                                {{homePageReportPrice.totalPassedPercent | number: '1.0-1'}} %
+                                            </td>
+                                        </tr>
+                                        <ng-container
+                                            *ngFor="let item of homePageReportPrice.homePageReportOrganizationAndCourseTypeDetails; let i = index">
+                                            <tr [style.background-color]="greenColors[i]">
+                                                <td rowspan="2">{{item.courseTypeTitle}}</td>
+                                                <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">
+                                                    {{item02.passed | number: '1.0-1'}}
+                                                </td>
+                                                <td>
+                                                    {{item.homePageReportChartOrganizationDetails | sum:'passed' |
+                                                    number: '1.0-1'}}
+                                                </td>
+                                            </tr>
+                                            <tr [style.background-color]="greenColors[i]">
+                                                <td *ngFor="let item02 of item.homePageReportChartOrganizationDetails">
+                                                    {{item02.passedPercent | number: '1.0-1'}} %
+                                                </td>
+                                                <td>
+                                                    <!--{{item.homePageReportChartOrganizationDetails | sum:'passedPercent' | number: '1.0-1'}} %-->
+                                                    {{((item.homePageReportChartOrganizationDetails | sum:'passed') /
+                                                    homePageReportPrice.totalPassed) * 100 | number: '1.0-1'}}
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                        <tr style="background-color: skyblue;">
+                                            <th colspan="15" style="text-align: center">
+                                                جمع سرمایه گذاری اجرا شده برای مدیران به تفکیک گروه
+                                            </th>
+                                        </tr>
+                                        <tr style="background-color: skyblue;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
+                                                {{item.totalPassedManagers | number: '1.0-1'}}
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedManagers' | number: '1.0-1'}}-->
+                                                {{homePageReportPrice.totalPassedManagers | number:'1.0-1'}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: skyblue;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
+                                                {{item.totalPassedManagersPercent | number: '1.0-1'}} %
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedManagersPercent' | number: '1.0-1'}} %-->
+                                                {{homePageReportPrice.totalPassedManagersPercent | number:'1.0-1'}} %
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: lightgoldenrodyellow;">
+                                            <th colspan="15" style="text-align: center">
+                                                جمع سرمایه گذاری اجرا شده برای کارکنان به تفکیک گروه
+                                            </th>
+                                        </tr>
+                                        <tr style="background-color: lightgoldenrodyellow;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
+                                                {{item.totalPassedStuffs | number: '1.0-1'}}
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedStuffs' | number: '1.0-1'}}-->
+                                                {{homePageReportPrice.totalPassedStuffs | number: '1.0-1'}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: lightgoldenrodyellow;">
+                                            <td></td>
+                                            <td *ngFor="let item of homePageReportPrice.homePageReportDetails">
+                                                {{item.totalPassedStuffsPercent | number: '1.0-1'}} %
+                                            </td>
+                                            <td>
+                                                <!--{{homePageReportPrice.homePageReportDetails | sum:'totalPassedStuffsPercent' | number: '1.0-1'}} %-->
+                                                {{homePageReportPrice.totalPassedStuffsPercent | number:'1.0-1'}} %
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="table table-bordered table-sm">
+                                        <tr style="background-color: #ad97c7">
+                                            <th style="text-align: center"></th>
+                                            <th style="text-align: center" *ngFor="let invest of investResult">
+                                                {{invest.orgTitle}}
+                                            </th>
+                                        </tr>
+                                        <tr style="background-color: cornflowerblue">
+                                            <td style="text-align: center">سرمایه گذاری انجام شده</td>
+                                            <td *ngFor="let invest of investResult">{{invest.sumInvest | number:
+                                                '1.0-1'}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: lightgreen">
+                                            <td style="text-align: center">اجرا شده</td>
+                                            <td *ngFor="let invest of investResult">{{invest.usedAmount | number:
+                                                '1.0-1'}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: chocolate">
+                                            <td style="text-align: center">درصد استفاده شده</td>
+                                            <td *ngFor="let invest of investResult">{{invest.usedAmountPercent | number:
+                                                '1.0-1'}} %
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
 
 
                         </div>
@@ -717,22 +946,30 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr style="background-color: chartreuse;">
-                                        <td> درصد اجرا به ازای ماه </td>
-                                        <td *ngFor="let item of workPercent; let i = index;"> {{item.runningPersonHourPercentPerMonth | number: '1.0-1'}} % </td>
-                                    </tr>
-                                    <tr style="background-color: darksalmon;">
-                                        <td> برنامه مصوب ودجا </td>
-                                        <td *ngFor="let item of workPercent; let i = index;"> {{item.forcePercent | number: '1.0-1'}} % </td>
-                                    </tr>
-                                    <tr style="background-color: cornflowerblue;">
-                                        <td> درصد برنامه ریزی به ازای کل سال </td>
-                                        <td *ngFor="let item of workPercent; let i = index;"> {{item.planningPersonHourPercent | number: '1.0-1'}} % </td>
-                                    </tr>
-                                    <tr style="background-color: darkkhaki;">
-                                        <td> درصد اجرا به ازای کل سال </td>
-                                        <td *ngFor="let item of workPercent; let i = index;"> {{item.runningPersonHourPercent | number: '1.0-1'}} % </td>
-                                    </tr>
+                                <tr style="background-color: chartreuse;">
+                                    <td> درصد اجرا به ازای ماه</td>
+                                    <td *ngFor="let item of workPercent; let i = index;">
+                                        {{item.runningPersonHourPercentPerMonth | number: '1.0-1'}} %
+                                    </td>
+                                </tr>
+                                <tr style="background-color: darksalmon;">
+                                    <td> برنامه مصوب ودجا</td>
+                                    <td *ngFor="let item of workPercent; let i = index;"> {{item.forcePercent | number:
+                                        '1.0-1'}} %
+                                    </td>
+                                </tr>
+                                <tr style="background-color: cornflowerblue;">
+                                    <td> درصد برنامه ریزی به ازای کل سال</td>
+                                    <td *ngFor="let item of workPercent; let i = index;">
+                                        {{item.planningPersonHourPercent | number: '1.0-1'}} %
+                                    </td>
+                                </tr>
+                                <tr style="background-color: darkkhaki;">
+                                    <td> درصد اجرا به ازای کل سال</td>
+                                    <td *ngFor="let item of workPercent; let i = index;">
+                                        {{item.runningPersonHourPercent | number: '1.0-1'}} %
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                             <!--<div class="adjustPosition" [chart]="piePlanningPersonHourChart"></div>
@@ -749,20 +986,28 @@
                                 </thead>
                                 <tbody>
                                 <tr style="background-color: chartreuse;">
-                                    <td> درصد اجرا به ازای ماه </td>
-                                    <td *ngFor="let item of workPercent; let i = index;"> {{item.runningPersonCostPercentPerMonth | number: '1.0-1'}} % </td>
+                                    <td> درصد اجرا به ازای ماه</td>
+                                    <td *ngFor="let item of workPercent; let i = index;">
+                                        {{item.runningPersonCostPercentPerMonth | number: '1.0-1'}} %
+                                    </td>
                                 </tr>
                                 <tr style="background-color: darksalmon;">
-                                    <td> برنامه مصوب ودجا </td>
-                                    <td *ngFor="let item of workPercent; let i = index;"> {{item.forcePercent | number: '1.0-1'}} % </td>
+                                    <td> برنامه مصوب ودجا</td>
+                                    <td *ngFor="let item of workPercent; let i = index;"> {{item.forcePercent | number:
+                                        '1.0-1'}} %
+                                    </td>
                                 </tr>
                                 <tr style="background-color: cornflowerblue;">
-                                    <td> درصد برنامه ریزی انجام شده به کل سال </td>
-                                    <td *ngFor="let item of workPercent; let i = index;"> {{item.planningPersonCostPercent | number: '1.0-1'}} % </td>
+                                    <td> درصد برنامه ریزی انجام شده به کل سال</td>
+                                    <td *ngFor="let item of workPercent; let i = index;">
+                                        {{item.planningPersonCostPercent | number: '1.0-1'}} %
+                                    </td>
                                 </tr>
                                 <tr style="background-color: darkkhaki;">
-                                    <td> درصد اجرا شده ها به کل سال </td>
-                                    <td *ngFor="let item of workPercent; let i = index;"> {{item.runningPersonCostPercent | number: '1.0-1'}} % </td>
+                                    <td> درصد اجرا شده ها به کل سال</td>
+                                    <td *ngFor="let item of workPercent; let i = index;">
+                                        {{item.runningPersonCostPercent | number: '1.0-1'}} %
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -771,90 +1016,9 @@
                     </ng-container>
                 </ng-container>
                 <ng-container *ngIf="pageName == 'home'">
-                    <div id="educationalModules" class="box box-primary newsbox">
-                        <div class="box-header with-border">
-                            <h3 class="box-title center">شناسنامه آموزشی شاغل و شناسنامه شغلی فرد</h3>
-
-                            <div class="box-tools pull-left">
-                                <button type="button" class="btn btn-box-tool"
-                                        (click)="toggleColappse('collapseEducationalModules')" data-widget="collapse"><i
-                                    class="fa fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-box-tool" (click)="deleteElement('educationalModules')"
-                                        data-widget="remove"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body" id="collapseEducationalModules">
-                            <table class="table table-bordered table-hover table-sm">
-                                <thead>
-                                <tr>
-                                    <th>ردیف</th>
-                                    <th><span jhiTranslate="marineindustryprojApp.educationalModule.code">Code</span></th>
-                                    <th><span jhiTranslate="marineindustryprojApp.educationalModule.title">Title</span></th>
-                                    <th><span>مدت کل پودمان</span></th>
-                                    <!--<th><span jhiTranslate="marineindustryprojApp.educationalModule.organization">Organization</span> </th>-->
-                                    <th><span jhiTranslate="marineindustryprojApp.educationalModule.skillableLevelOfSkill">Skillable Level Of Skill</span>
-                                    </th>
-                                    <th><span>نوع پودمان</span></th>
-                                    <th><span>نوع دوره</span></th>
-                                    <th><span>تاریخ برگزاری</span></th>
-                                    <th>وضعیت</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr *ngFor="let educationalModule of homePagePersonEducationalModules; let i = index;"
-                                    [ngClass]="{'success': educationalModule.status == 100, 'info': educationalModule.status == 90, 'warning': educationalModule.status == 80, 'light': educationalModule.status == 70, 'danger': educationalModule.status == 0}">
-                                    <td>{{i+1}}</td>
-                                    <td>{{educationalModule.code}}</td>
-                                    <td>{{educationalModule.title}}</td>
-                                    <td>{{educationalModule.totalLearningTime | number}}</td>
-                                    <!--<td>
-                                        <div *ngIf="educationalModule.organizationId">
-                                            <a [routerLink]="['../organization-marine-suffix', educationalModule.organizationId , 'view' ]" >{{educationalModule.organizationTitle}}</a>
-                                        </div>
-                                    </td>-->
-                                    <td>
-                                        <div *ngIf="educationalModule.skillableLevelOfSkillId">
-                                            <a [routerLink]="['../skillable-level-of-skill-marine-suffix', educationalModule.skillableLevelOfSkillId , 'view' ]">{{educationalModule.skillableLevelOfSkillTitle}}</a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {{educationalModule.educationalModuleType}}
-                                    </td>
-                                    <td>
-                                        {{educationalModule.courseType}}
-                                    </td>
-                                    <td>
-                                        {{educationalModule.runDate}}
-                                    </td>
-                                    <td>
-                                        <a class="enableLink" [href]="'#/educational-history-marine-suffix/' + educationalModule.educationalHistoryId + '/view'"
-                                           *ngIf="educationalModule.status == 100">{{educationalModule.statusMeaning}}</a>
-                                        <span *ngIf="educationalModule.status != 100">{{educationalModule.statusMeaning}}</span>
-                                    </td>
-                                </tr>
-                                <tr class="success" *ngIf="homePagePersonEducationalModules">
-                                    <td colspan="3">مجموع</td>
-                                    <td colspan="1">{{sumHourPersonEducationalModules | number}}</td>
-                                    <td colspan="8"></td>
-                                </tr>
-                                <tr *ngIf="!homePagePersonEducationalModules">
-                                    <td colspan="5" class="alert-danger">
-                                        دوره ای برای شما تعریف نشده.
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer text-center">
-                            <!--<a href="#/announcement-marine-suffix" class="uppercase">نمایش تمام اخبار</a>-->
-                        </div>
-                        <!-- /.box-footer -->
-                    </div>
+                    <education-history-panel [type]="1" [(personId)]="currentPerson.id" [title]="'global.sharedTitles.educationHistoryTitleAll'"></education-history-panel>
                     <div class="table-home" *ngIf="isSuperUsers">
-                        <table  cellspacing="2" cellpadding="0" style="border:0px;">
+                        <table cellspacing="2" cellpadding="0" style="border:0px;">
                             <tbody>
                             <tr>
                                 <td style="width:37%;text-align:center;padding-right:15px">
@@ -867,7 +1031,8 @@
                                         <img src="../../content/images/home/Course.png">
                                         <div class="HomeBoxTitle">فهرست پودمان آموزشی</div>
                                     </a>
-                                    <a class="HomeBox" href="#/request-niazsanji-fardi-marine-suffix" style="opacity: 1;">
+                                    <a class="HomeBox" href="#/request-niazsanji-fardi-marine-suffix"
+                                       style="opacity: 1;">
                                         <img src="../../content/images/home/Process.png">
                                         <div class="HomeBoxTitle"> درخواست نیازسنجی پودمانی شغلی و فردی</div>
                                     </a>
@@ -926,40 +1091,42 @@
 
                     </div>
                     <div id="news" class="box box-primary newsbox">
-                    <div class="box-header with-border">
-                        <h3 class="box-title center">آخرین اخبار و اخطارها</h3>
+                        <div class="box-header with-border">
+                            <h3 class="box-title center">آخرین اخبار و اخطارها</h3>
 
-                        <div class="box-tools pull-left">
-                            <button type="button" class="btn btn-box-tool" (click)="toggleColappse('collapseExample')"
-                                    data-widget="collapse"><i class="fa fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-box-tool" (click)="deleteElement('news')"
-                                    data-widget="remove"><i class="fa fa-times"></i></button>
+                            <div class="box-tools pull-left">
+                                <button type="button" class="btn btn-box-tool"
+                                        (click)="toggleColappse('collapseExample')"
+                                        data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" (click)="deleteElement('news')"
+                                        data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
                         </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body" id="collapseExample">
-                        <ul class="products-list product-list-in-box">
-                            <li *ngFor="let announcement of announcements" class="item">
-                                <div class="product-info">
-                                    <a href="#/announcement-marine-suffix/{{announcement.id}}/view"
-                                       class="product-title">
-                                        <span>{{announcement.title}}</span>
-                                        <span class="label label-warning pull-left">{{announcement.createDate}}</span>
-                                    </a>
-                                    <span class="product-description">
+                        <!-- /.box-header -->
+                        <div class="box-body" id="collapseExample">
+                            <ul class="products-list product-list-in-box">
+                                <li *ngFor="let announcement of announcements" class="item">
+                                    <div class="product-info">
+                                        <a href="#/announcement-marine-suffix/{{announcement.id}}/view"
+                                           class="product-title">
+                                            <span>{{announcement.title}}</span>
+                                            <span
+                                                class="label label-warning pull-left">{{announcement.createDate}}</span>
+                                        </a>
+                                        <span class="product-description">
                                   {{announcement.description}}
                                 </span>
-                                </div>
-                            </li>
-                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer text-center">
+                            <a href="#/announcement-marine-suffix" class="uppercase">نمایش تمام اخبار</a>
+                        </div>
+                        <!-- /.box-footer -->
                     </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer text-center">
-                        <a href="#/announcement-marine-suffix" class="uppercase">نمایش تمام اخبار</a>
-                    </div>
-                    <!-- /.box-footer -->
-                </div>
                 </ng-container>
             </div>
 

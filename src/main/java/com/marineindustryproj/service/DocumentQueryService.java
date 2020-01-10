@@ -158,6 +158,12 @@ public class DocumentQueryService extends QueryService<Document> {
         else if(entityName.equals("investtogrouptransaction")) {
             criteria.setInvestToGroupTransactionId(longFilter);
         }
+        else if(entityName.equals("mediaawarenessreport")) {
+            criteria.setMediaAwarenessReportId(longFilter);
+        }
+        else if(entityName.equals("prejobniazsanji")) {
+            criteria.setPreJobNiazsanjiId(longFilter);
+        }
         else
         {
             LongFilter emptyLongFilter = new LongFilter();
@@ -255,6 +261,18 @@ public class DocumentQueryService extends QueryService<Document> {
             if (criteria.getInvestToGroupTransactionId() != null) {
                 specification = specification.and(buildSpecification(criteria.getInvestToGroupTransactionId(),
                     root -> root.join(Document_.investToGroupTransactions, JoinType.LEFT).get(InvestToGroupTransaction_.id)));
+            }
+            if (criteria.getMediaAwarenessReportId() != null) {
+                specification = specification.and(buildSpecification(criteria.getMediaAwarenessReportId(),
+                    root -> root.join(Document_.mediaAwarenessReports, JoinType.LEFT).get(MediaAwarenessReport_.id)));
+            }
+            if (criteria.getPreJobNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPreJobNiazsanjiId(),
+                    root -> root.join(Document_.preJobNiazsanjis, JoinType.LEFT).get(PreJobNiazsanji_.id)));
+            }
+            if (criteria.getJobNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getJobNiazsanjiId(),
+                    root -> root.join(Document_.jobNiazsanjis, JoinType.LEFT).get(JobNiazsanji_.id)));
             }
         }
         return specification;

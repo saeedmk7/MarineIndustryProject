@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "priorityCriteria": {
+            "home": {
+                "title": "Priority Criteria",
+                "createLabel": "Create a new Priority Criteria",
+                "createOrEditLabel": "Create or edit a Priority Criteria"
+            },
+            "created": "A new Priority Criteria is created with identifier {{ param }}",
+            "updated": "A Priority Criteria is updated with identifier {{ param }}",
+            "deleted": "A Priority Criteria is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Priority Criteria {{ id }}?"
+            },
+            "detail": {
+                "title": "Priority Criteria"
+            },
+            "title": "Title",
+            "description": "Description",
+            "displayOrder": "Display Order",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "priorityCriteriaValue": "Priority Criteria Value"
+        }
+    }
+}

@@ -87,6 +87,10 @@ public class PersonCriteria implements Serializable {
 
     private LongFilter teachingRecordId;
 
+    private LongFilter preJobNiazsanjiId;
+
+    private LongFilter jobNiazsanjiId;
+
     private LongFilter documentId;
 
     private LongFilter scientificWorkGroupId;
@@ -373,6 +377,22 @@ public class PersonCriteria implements Serializable {
         this.teachingRecordId = teachingRecordId;
     }
 
+    public LongFilter getPreJobNiazsanjiId() {
+        return preJobNiazsanjiId;
+    }
+
+    public void setPreJobNiazsanjiId(LongFilter preJobNiazsanjiId) {
+        this.preJobNiazsanjiId = preJobNiazsanjiId;
+    }
+
+    public LongFilter getJobNiazsanjiId() {
+        return jobNiazsanjiId;
+    }
+
+    public void setJobNiazsanjiId(LongFilter jobNiazsanjiId) {
+        this.jobNiazsanjiId = jobNiazsanjiId;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -536,6 +556,8 @@ public class PersonCriteria implements Serializable {
             Objects.equals(jobRecordId, that.jobRecordId) &&
             Objects.equals(researchRecordId, that.researchRecordId) &&
             Objects.equals(teachingRecordId, that.teachingRecordId) &&
+            Objects.equals(preJobNiazsanjiId, that.preJobNiazsanjiId) &&
+            Objects.equals(jobNiazsanjiId, that.jobNiazsanjiId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(scientificWorkGroupId, that.scientificWorkGroupId) &&
             Objects.equals(lastQualificationId, that.lastQualificationId) &&
@@ -550,7 +572,8 @@ public class PersonCriteria implements Serializable {
             Objects.equals(requestOrganizationNiazsanjiId, that.requestOrganizationNiazsanjiId) &&
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
             Objects.equals(designAndPlanningId, that.designAndPlanningId) &&
-            Objects.equals(runPhaseId, that.runPhaseId);
+            Objects.equals(runPhaseId, that.runPhaseId) &&
+            Objects.equals(preJobNiazsanjiId, that.preJobNiazsanjiId);
     }
 
     @Override
@@ -588,6 +611,8 @@ public class PersonCriteria implements Serializable {
         jobRecordId,
         researchRecordId,
         teachingRecordId,
+        preJobNiazsanjiId,
+        jobNiazsanjiId,
         documentId,
         scientificWorkGroupId,
         lastQualificationId,
@@ -602,7 +627,8 @@ public class PersonCriteria implements Serializable {
         requestOrganizationNiazsanjiId,
         finalOrganizationNiazsanjiId,
         designAndPlanningId,
-        runPhaseId
+        runPhaseId,
+        preJobNiazsanjiId
         );
     }
 
@@ -641,6 +667,8 @@ public class PersonCriteria implements Serializable {
                 (jobRecordId != null ? "jobRecordId=" + jobRecordId + ", " : "") +
                 (researchRecordId != null ? "researchRecordId=" + researchRecordId + ", " : "") +
                 (teachingRecordId != null ? "teachingRecordId=" + teachingRecordId + ", " : "") +
+                (preJobNiazsanjiId != null ? "preJobNiazsanjiId=" + preJobNiazsanjiId + ", " : "") +
+                (jobNiazsanjiId != null ? "jobNiazsanjiId=" + jobNiazsanjiId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (scientificWorkGroupId != null ? "scientificWorkGroupId=" + scientificWorkGroupId + ", " : "") +
                 (lastQualificationId != null ? "lastQualificationId=" + lastQualificationId + ", " : "") +
@@ -656,6 +684,7 @@ public class PersonCriteria implements Serializable {
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
                 (designAndPlanningId != null ? "designAndPlanningId=" + designAndPlanningId + ", " : "") +
                 (runPhaseId != null ? "runPhaseId=" + runPhaseId + ", " : "") +
+                (preJobNiazsanjiId != null ? "preJobNiazsanjiId=" + preJobNiazsanjiId + ", " : "") +
             "}";
     }
 

@@ -138,6 +138,21 @@ public class Document implements Serializable {
     @JsonIgnore
     private Set<InvestToGroupTransaction> investToGroupTransactions = new HashSet<>();
 
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<MediaAwarenessReport> mediaAwarenessReports = new HashSet<>();
+
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<PreJobNiazsanji> preJobNiazsanjis = new HashSet<>();
+
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<JobNiazsanji> jobNiazsanjis = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -660,6 +675,81 @@ public class Document implements Serializable {
 
     public void setInvestToGroupTransactions(Set<InvestToGroupTransaction> investToGroupTransactions) {
         this.investToGroupTransactions = investToGroupTransactions;
+    }
+
+    public Set<MediaAwarenessReport> getMediaAwarenessReports() {
+        return mediaAwarenessReports;
+    }
+
+    public Document mediaAwarenessReports(Set<MediaAwarenessReport> mediaAwarenessReports) {
+        this.mediaAwarenessReports = mediaAwarenessReports;
+        return this;
+    }
+
+    public Document addMediaAwarenessReport(MediaAwarenessReport mediaAwarenessReport) {
+        this.mediaAwarenessReports.add(mediaAwarenessReport);
+        mediaAwarenessReport.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeMediaAwarenessReport(MediaAwarenessReport mediaAwarenessReport) {
+        this.mediaAwarenessReports.remove(mediaAwarenessReport);
+        mediaAwarenessReport.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setMediaAwarenessReports(Set<MediaAwarenessReport> mediaAwarenessReports) {
+        this.mediaAwarenessReports = mediaAwarenessReports;
+    }
+
+    public Set<PreJobNiazsanji> getPreJobNiazsanjis() {
+        return preJobNiazsanjis;
+    }
+
+    public Document preJobNiazsanjis(Set<PreJobNiazsanji> preJobNiazsanjis) {
+        this.preJobNiazsanjis = preJobNiazsanjis;
+        return this;
+    }
+
+    public Document addPreJobNiazsanji(PreJobNiazsanji preJobNiazsanji) {
+        this.preJobNiazsanjis.add(preJobNiazsanji);
+        preJobNiazsanji.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removePreJobNiazsanji(PreJobNiazsanji preJobNiazsanji) {
+        this.preJobNiazsanjis.remove(preJobNiazsanji);
+        preJobNiazsanji.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setPreJobNiazsanjis(Set<PreJobNiazsanji> preJobNiazsanjis) {
+        this.preJobNiazsanjis = preJobNiazsanjis;
+    }
+
+    public Set<JobNiazsanji> getJobNiazsanjis() {
+        return jobNiazsanjis;
+    }
+
+    public Document jobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
+        this.jobNiazsanjis = jobNiazsanjis;
+        return this;
+    }
+
+    public Document addJobNiazsanji(JobNiazsanji jobNiazsanji) {
+        this.jobNiazsanjis.add(jobNiazsanji);
+        jobNiazsanji.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeJobNiazsanji(JobNiazsanji jobNiazsanji) {
+        this.jobNiazsanjis.remove(jobNiazsanji);
+        jobNiazsanji.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setJobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
+        this.jobNiazsanjis = jobNiazsanjis;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

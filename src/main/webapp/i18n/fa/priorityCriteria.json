@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "priorityCriteria": {
+            "home": {
+                "title": "معیارها",
+                "createLabel": "جدید",
+                "createOrEditLabel": "معیار"
+            },
+            "created": "معیار با شناسه {{ param }} ایجاد شد.",
+            "updated": "معیار با شناسه {{ param }} ویرایش شد.",
+            "deleted": "معیار با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف معیار با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات معیار"
+            },
+            "title": "عنوان",
+            "description": "توضیحات",
+            "displayOrder": "ترتیب نمایش",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "priorityCriteriaValue": "Priority Criteria Value"
+        }
+    }
+}

@@ -158,6 +158,15 @@ public class FinalOrganizationNiazsanjiQueryService extends QueryService<FinalOr
             if (criteria.getHasImportantMessage() != null) {
                 specification = specification.and(buildSpecification(criteria.getHasImportantMessage(), FinalOrganizationNiazsanji_.hasImportantMessage));
             }
+            if (criteria.getRestrictionDescription() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getRestrictionDescription(), FinalOrganizationNiazsanji_.restrictionDescription));
+            }
+            if (criteria.getGoalsText() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getGoalsText(), FinalOrganizationNiazsanji_.goalsText));
+            }
+            if (criteria.getPrerequisite() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getPrerequisite(), FinalOrganizationNiazsanji_.prerequisite));
+            }
             if (criteria.getPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPersonId(),
                     root -> root.join(FinalOrganizationNiazsanji_.people, JoinType.LEFT).get(Person_.id)));
@@ -165,6 +174,10 @@ public class FinalOrganizationNiazsanjiQueryService extends QueryService<FinalOr
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(FinalOrganizationNiazsanji_.documents, JoinType.LEFT).get(Document_.id)));
+            }
+            if (criteria.getRestrictionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRestrictionId(),
+                    root -> root.join(FinalOrganizationNiazsanji_.restrictions, JoinType.LEFT).get(Restriction_.id)));
             }
             if (criteria.getCourseTypeId() != null) {
                 specification = specification.and(buildSpecification(criteria.getCourseTypeId(),
@@ -199,6 +212,10 @@ public class FinalOrganizationNiazsanjiQueryService extends QueryService<FinalOr
             if (criteria.getRequestOrganizationNiazsanjiId() != null) {
                 specification = specification.and(buildSpecification(criteria.getRequestOrganizationNiazsanjiId(),
                     root -> root.join(FinalOrganizationNiazsanji_.requestOrganizationNiazsanji, JoinType.LEFT).get(RequestOrganizationNiazsanji_.id)));
+            }
+            if (criteria.getTeachingApproachId() != null) {
+                specification = specification.and(buildSpecification(criteria.getTeachingApproachId(),
+                    root -> root.join(FinalOrganizationNiazsanji_.teachingApproach, JoinType.LEFT).get(TeachingApproach_.id)));
             }
         }
         return specification;

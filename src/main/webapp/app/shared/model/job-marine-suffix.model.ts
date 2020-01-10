@@ -22,6 +22,8 @@ export interface IJobMarineSuffix {
     archivedDate?: Moment;
     status?: number;
     guid?: string;
+    fileDoc?: any;
+    reviewDate?: string;
     jobPeople?: IPersonMarineSuffix[];
     practicaljobPeople?: IPersonMarineSuffix[];
     jobs?: IJobMarineSuffix[];
@@ -58,6 +60,8 @@ export class JobMarineSuffix implements IJobMarineSuffix {
         public archivedDate?: Moment,
         public status?: number,
         public guid?: string,
+        public fileDoc?: any,
+        public reviewDate?: string,
         public jobPeople?: IPersonMarineSuffix[],
         public practicaljobPeople?: IPersonMarineSuffix[],
         public jobs?: IJobMarineSuffix[],

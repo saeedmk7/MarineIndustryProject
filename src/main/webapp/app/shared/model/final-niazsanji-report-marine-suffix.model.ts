@@ -5,6 +5,7 @@ import { IRunPhaseMarineSuffix } from 'app/shared/model//run-phase-marine-suffix
 import { IPollMarineSuffix } from 'app/shared/model//poll-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import {NiazSanjiSource} from 'app/shared/model/enums/NiazSanjiSource';
+import { IRestrictionMarineSuffix } from 'app/shared/model//restriction-marine-suffix.model';
 
 export interface IFinalNiazsanjiReportMarineSuffix {
     id?: number;
@@ -25,17 +26,25 @@ export interface IFinalNiazsanjiReportMarineSuffix {
     finalizeCost?: number;
     guid?: string;
     hasImportantMessage?: boolean;
+    restrictionDescription?: string;
+    goalsText?: string;
+    prerequisite?: string;
     finalNiazsanjiReportPeople?: IFinalNiazsanjiReportPersonMarineSuffix[];
     designAndPlannings?: IDesignAndPlanningMarineSuffix[];
     runPhases?: IRunPhaseMarineSuffix[];
     polls?: IPollMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
+    restrictions?: IRestrictionMarineSuffix[];
+    teacherFamily?: string;
+    teacherId?: number;
     courseTypeTitle?: string;
     courseTypeId?: number;
     organizationChartTitle?: string;
     organizationChartId?: number;
     educationalModuleTitle?: string;
     educationalModuleId?: number;
+    teachingApproachTitle?: string;
+    teachingApproachId?: number;
 }
 
 export class FinalNiazsanjiReportMarineSuffix implements IFinalNiazsanjiReportMarineSuffix {
@@ -58,17 +67,25 @@ export class FinalNiazsanjiReportMarineSuffix implements IFinalNiazsanjiReportMa
         public finalizeCost?: number,
         public guid?: string,
         public hasImportantMessage?: boolean,
+        public restrictionDescription?: string,
+        public goalsText?: string,
+        public prerequisite?: string,
         public finalNiazsanjiReportPeople?: IFinalNiazsanjiReportPersonMarineSuffix[],
         public designAndPlannings?: IDesignAndPlanningMarineSuffix[],
         public runPhases?: IRunPhaseMarineSuffix[],
         public polls?: IPollMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
+        public restrictions?: IRestrictionMarineSuffix[],
+        public teacherFamily?: string,
+        public teacherId?: number,
         public courseTypeTitle?: string,
         public courseTypeId?: number,
         public organizationChartTitle?: string,
         public organizationChartId?: number,
         public educationalModuleTitle?: string,
-        public educationalModuleId?: number
+        public educationalModuleId?: number,
+        public teachingApproachTitle?: string,
+        public teachingApproachId?: number
     ) {
         this.archived = this.archived || false;
         this.hasImportantMessage = this.hasImportantMessage || false;

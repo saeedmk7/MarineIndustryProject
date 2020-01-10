@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 
 export interface IMediaAwarenessReportMarineSuffix {
     id?: number;
@@ -16,6 +17,7 @@ export interface IMediaAwarenessReportMarineSuffix {
     modifyUserLogin?: string;
     modifyDate?: Moment;
     guid?: string;
+    documents?: IDocumentMarineSuffix[];
     organizationChartTitle?: string;
     organizationChartId?: number;
     mediaProductTypeTitle?: string;
@@ -39,6 +41,7 @@ export class MediaAwarenessReportMarineSuffix implements IMediaAwarenessReportMa
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
         public guid?: string,
+        public documents?: IDocumentMarineSuffix[],
         public organizationChartTitle?: string,
         public organizationChartId?: number,
         public mediaProductTypeTitle?: string,

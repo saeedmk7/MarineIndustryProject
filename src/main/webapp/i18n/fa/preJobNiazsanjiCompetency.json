@@ -1,0 +1,42 @@
+{
+    "marineindustryprojApp": {
+        "preJobNiazsanjiCompetency": {
+            "home": {
+                "title": "نیازسنجی شغلی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "مشخصات {{param}}",
+                "step2Title": "بررسی وضعیت شایستگی های شاغل و احصاء کمبودها(نیازهای آموزشی)",
+                "step3Title": "شناسایی راه حل ها برای رفع کمبودها",
+                "step4Title": "ارتباط بین راه حل و دوره های آموزشی",
+                "step5Title": "اولویت بندی"
+            },
+            "created": "فردی با شناسه {{ param }} ایجاد شد.",
+            "updated": "فردی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "فردی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف فردی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات"
+            },
+            "title": "Title",
+            "needToImprove": "Need To Improve",
+            "needToImproveDescription": "Need To Improve Description",
+            "fixCompetencyDeficiencyDescription": "Fix Competency Deficiency Description",
+            "educationalModuleTitle": "Educational Module Title",
+            "sumScore": "Sum Score",
+            "priority": "Priority",
+            "selected": "Selected",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "priorityCriteriaValue": "Priority Criteria Value",
+            "teachingApproach": "Teaching Approach",
+            "fixCompetencyDeficiency": "Fix Competency Deficiency",
+            "educationalModule": "Educational Module",
+            "preJobNiazsanji": "Pre Job Niazsanji",
+            "competency": "Competency"
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "marineindustryprojApp": {
+        "jobNiazsanji": {
+            "home": {
+                "title": "Job Niazsanjis",
+                "createLabel": "Create a new Job Niazsanji",
+                "createOrEditLabel": "Create or edit a Job Niazsanji"
+            },
+            "created": "A new Job Niazsanji is created with identifier {{ param }}",
+            "updated": "A Job Niazsanji is updated with identifier {{ param }}",
+            "deleted": "A Job Niazsanji is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Job Niazsanji {{ id }}?"
+            },
+            "detail": {
+                "title": "Job Niazsanji"
+            },
+            "niazsanjiYear": "Niazsanji Year",
+            "code": "Code",
+            "priceCost": "Price Cost",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "conversation": "Conversation",
+            "changeStatusUserLogin": "Change Status User Login",
+            "guid": "Guid",
+            "hasImportantMessage": "Has Important Message",
+            "restrictionDescription": "Restriction Description",
+            "goalsText": "Goals Text",
+            "prerequisite": "Prerequisite",
+            "document": "Document",
+            "restriction": "Restriction",
+            "courseType": "Course Type",
+            "preJobNiazsanji": "Pre Job Niazsanji",
+            "educationalModule": "Educational Module",
+            "person": "Person",
+            "organizationChart": "Organization Chart",
+            "teachingApproach": "Teaching Approach"
+        }
+    }
+}

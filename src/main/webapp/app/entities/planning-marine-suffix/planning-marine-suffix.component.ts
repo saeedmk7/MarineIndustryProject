@@ -259,6 +259,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                 key: 'personId.in', value: val
             });
         }
+        
         if (f.value['id']) {
             let val = +f.value['id'];
             criteria.push({
@@ -287,6 +288,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     }
 
     private prepareForFinal(data: IFinalNiazsanjiReportMarineSuffix[]) {
+        
         if(data.length > 0)
         {
             let reportIds = data.map(a => a.id);
@@ -321,6 +323,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
 
     prepareForFardiFinal(res: IFinalNiazsanjiReportPersonMarineSuffix[], data: IFinalNiazsanjiReportMarineSuffix[]) {
         data.forEach((a: IFinalNiazsanjiReportMarineSuffix) => {
+            
             let finalNiazsanjiReportsFardi: IFinalNiazsanjiReportFardiMarineSuffix = {};
             finalNiazsanjiReportsFardi.id = a.id;
             finalNiazsanjiReportsFardi.status = a.status;

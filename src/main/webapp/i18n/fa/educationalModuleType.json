@@ -2,8 +2,8 @@
     "marineindustryprojApp": {
         "EducationalModuleType": {
             "null": "",
-            "APPROVED": "نیازسنجی از شناسنامه شغلی",
-            "ALL": "کل پودمان"
+            "APPROVED": "از پیشنهادی گروه علمی شغلی",
+            "ALL": "مورد نیاز از نظر فرد"
         }
     }
 }

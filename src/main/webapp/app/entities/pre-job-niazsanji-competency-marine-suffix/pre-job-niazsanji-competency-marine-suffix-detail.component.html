@@ -1,0 +1,101 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="preJobNiazsanjiCompetency">
+            <h2><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.detail.title">Pre Job Niazsanji Competency</span> {{preJobNiazsanjiCompetency.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.title">Title</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanjiCompetency.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.needToImprove">Need To Improve</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanjiCompetency.needToImprove}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.needToImproveDescription">Need To Improve Description</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanjiCompetency.needToImproveDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.fixCompetencyDeficiencyDescription">Fix Competency Deficiency Description</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanjiCompetency.fixCompetencyDeficiencyDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.educationalModuleTitle">Educational Module Title</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanjiCompetency.educationalModuleTitle}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.sumScore">Sum Score</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanjiCompetency.sumScore}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.priority">Priority</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanjiCompetency.priority}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.selected">Selected</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanjiCompetency.selected}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanjiCompetency.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanjiCompetency.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanjiCompetency.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{preJobNiazsanjiCompetency.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.teachingApproach">Teaching Approach</span></dt>
+                <dd>
+                    <span *ngFor="let teachingApproach of preJobNiazsanjiCompetency.teachingApproaches; let last = last">
+                        <a [routerLink]="['/teaching-approach-marine-suffix', teachingApproach?.id, 'view' ]">{{teachingApproach.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.fixCompetencyDeficiency">Fix Competency Deficiency</span></dt>
+                <dd>
+                    <div *ngIf="preJobNiazsanjiCompetency.fixCompetencyDeficiencyId">
+                        <a [routerLink]="['/fix-competency-deficiency-marine-suffix', preJobNiazsanjiCompetency.fixCompetencyDeficiencyId, 'view']">{{preJobNiazsanjiCompetency.fixCompetencyDeficiencyTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.educationalModule">Educational Module</span></dt>
+                <dd>
+                    <div *ngIf="preJobNiazsanjiCompetency.educationalModuleId">
+                        <a [routerLink]="['/educational-module-marine-suffix', preJobNiazsanjiCompetency.educationalModuleId, 'view']">{{preJobNiazsanjiCompetency.educationalModuleTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.preJobNiazsanji">Pre Job Niazsanji</span></dt>
+                <dd>
+                    <div *ngIf="preJobNiazsanjiCompetency.preJobNiazsanjiId">
+                        <a [routerLink]="['/pre-job-niazsanji-marine-suffix', preJobNiazsanjiCompetency.preJobNiazsanjiId, 'view']">{{preJobNiazsanjiCompetency.preJobNiazsanjiTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.competency">Competency</span></dt>
+                <dd>
+                    <div *ngIf="preJobNiazsanjiCompetency.competencyId">
+                        <a [routerLink]="['/competency-marine-suffix', preJobNiazsanjiCompetency.competencyId, 'view']">{{preJobNiazsanjiCompetency.competencyTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pre-job-niazsanji-competency-marine-suffix', preJobNiazsanjiCompetency.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

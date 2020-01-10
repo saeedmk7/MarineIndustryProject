@@ -39,9 +39,21 @@ public class RestrictionCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private LongFilter educationalModuleId;
+
     private LongFilter requestEducationalModuleId;
 
-    private LongFilter educationalModuleId;
+    private LongFilter requestOrganizationNiazsanjiId;
+
+    private LongFilter finalOrganizationNiazsanjiId;
+
+    private LongFilter finalNiazsanjiReportId;
+
+    private LongFilter niazsanjiFardiId;
+
+    private LongFilter designNiazsanjiId;
+
+    private LongFilter jobNiazsanjiId;
 
     public LongFilter getId() {
         return id;
@@ -107,6 +119,14 @@ public class RestrictionCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public LongFilter getEducationalModuleId() {
+        return educationalModuleId;
+    }
+
+    public void setEducationalModuleId(LongFilter educationalModuleId) {
+        this.educationalModuleId = educationalModuleId;
+    }
+
     public LongFilter getRequestEducationalModuleId() {
         return requestEducationalModuleId;
     }
@@ -115,12 +135,52 @@ public class RestrictionCriteria implements Serializable {
         this.requestEducationalModuleId = requestEducationalModuleId;
     }
 
-    public LongFilter getEducationalModuleId() {
-        return educationalModuleId;
+    public LongFilter getRequestOrganizationNiazsanjiId() {
+        return requestOrganizationNiazsanjiId;
     }
 
-    public void setEducationalModuleId(LongFilter educationalModuleId) {
-        this.educationalModuleId = educationalModuleId;
+    public void setRequestOrganizationNiazsanjiId(LongFilter requestOrganizationNiazsanjiId) {
+        this.requestOrganizationNiazsanjiId = requestOrganizationNiazsanjiId;
+    }
+
+    public LongFilter getFinalOrganizationNiazsanjiId() {
+        return finalOrganizationNiazsanjiId;
+    }
+
+    public void setFinalOrganizationNiazsanjiId(LongFilter finalOrganizationNiazsanjiId) {
+        this.finalOrganizationNiazsanjiId = finalOrganizationNiazsanjiId;
+    }
+
+    public LongFilter getFinalNiazsanjiReportId() {
+        return finalNiazsanjiReportId;
+    }
+
+    public void setFinalNiazsanjiReportId(LongFilter finalNiazsanjiReportId) {
+        this.finalNiazsanjiReportId = finalNiazsanjiReportId;
+    }
+
+    public LongFilter getNiazsanjiFardiId() {
+        return niazsanjiFardiId;
+    }
+
+    public void setNiazsanjiFardiId(LongFilter niazsanjiFardiId) {
+        this.niazsanjiFardiId = niazsanjiFardiId;
+    }
+
+    public LongFilter getDesignNiazsanjiId() {
+        return designNiazsanjiId;
+    }
+
+    public void setDesignNiazsanjiId(LongFilter designNiazsanjiId) {
+        this.designNiazsanjiId = designNiazsanjiId;
+    }
+
+    public LongFilter getJobNiazsanjiId() {
+        return jobNiazsanjiId;
+    }
+
+    public void setJobNiazsanjiId(LongFilter jobNiazsanjiId) {
+        this.jobNiazsanjiId = jobNiazsanjiId;
     }
 
 
@@ -142,8 +202,14 @@ public class RestrictionCriteria implements Serializable {
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(requestEducationalModuleId, that.requestEducationalModuleId) &&
-            Objects.equals(educationalModuleId, that.educationalModuleId);
+            Objects.equals(requestOrganizationNiazsanjiId, that.requestOrganizationNiazsanjiId) &&
+            Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
+            Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
+            Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
+            Objects.equals(designNiazsanjiId, that.designNiazsanjiId) &&
+            Objects.equals(jobNiazsanjiId, that.jobNiazsanjiId);
     }
 
     @Override
@@ -157,8 +223,14 @@ public class RestrictionCriteria implements Serializable {
         modifyUserLogin,
         modifyDate,
         guid,
+        educationalModuleId,
         requestEducationalModuleId,
-        educationalModuleId
+        requestOrganizationNiazsanjiId,
+        finalOrganizationNiazsanjiId,
+        finalNiazsanjiReportId,
+        niazsanjiFardiId,
+        designNiazsanjiId,
+        jobNiazsanjiId
         );
     }
 
@@ -173,8 +245,14 @@ public class RestrictionCriteria implements Serializable {
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
-                (requestEducationalModuleId != null ? "requestEducationalModuleId=" + requestEducationalModuleId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (requestEducationalModuleId != null ? "requestEducationalModuleId=" + requestEducationalModuleId + ", " : "") +
+                (requestOrganizationNiazsanjiId != null ? "requestOrganizationNiazsanjiId=" + requestOrganizationNiazsanjiId + ", " : "") +
+                (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
+                (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
+                (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
+                (designNiazsanjiId != null ? "designNiazsanjiId=" + designNiazsanjiId + ", " : "") +
+                (jobNiazsanjiId != null ? "jobNiazsanjiId=" + jobNiazsanjiId + ", " : "") +
             "}";
     }
 

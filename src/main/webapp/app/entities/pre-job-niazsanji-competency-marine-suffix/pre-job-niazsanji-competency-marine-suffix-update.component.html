@@ -1,0 +1,144 @@
+<mi-pre-job-niazsanji-marine-suffix-detail></mi-pre-job-niazsanji-marine-suffix-detail>
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-pre-job-niazsanji-competency-marine-suffix-heading" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.home.createOrEditLabel">Create or edit a Pre Job Niazsanji Competency</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!preJobNiazsanjiCompetency.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="preJobNiazsanjiCompetency.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="preJobNiazsanjiCompetency.title" required maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.needToImprove" for="field_needToImprove">Need To Improve</label>
+                    <input type="number" class="form-control" name="needToImprove" id="field_needToImprove"
+                        [(ngModel)]="preJobNiazsanjiCompetency.needToImprove" required/>
+                    <div [hidden]="!(editForm.controls.needToImprove?.dirty && editForm.controls.needToImprove?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.needToImprove?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.needToImprove?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.needToImproveDescription" for="field_needToImproveDescription">Need To Improve Description</label>
+                    <input type="text" class="form-control" name="needToImproveDescription" id="field_needToImproveDescription"
+                        [(ngModel)]="preJobNiazsanjiCompetency.needToImproveDescription" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.needToImproveDescription?.dirty && editForm.controls.needToImproveDescription?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.needToImproveDescription?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.fixCompetencyDeficiencyDescription" for="field_fixCompetencyDeficiencyDescription">Fix Competency Deficiency Description</label>
+                    <input type="text" class="form-control" name="fixCompetencyDeficiencyDescription" id="field_fixCompetencyDeficiencyDescription"
+                        [(ngModel)]="preJobNiazsanjiCompetency.fixCompetencyDeficiencyDescription" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.fixCompetencyDeficiencyDescription?.dirty && editForm.controls.fixCompetencyDeficiencyDescription?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fixCompetencyDeficiencyDescription?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.educationalModuleTitle" for="field_educationalModuleTitle">Educational Module Title</label>
+                    <input type="text" class="form-control" name="educationalModuleTitle" id="field_educationalModuleTitle"
+                        [(ngModel)]="preJobNiazsanjiCompetency.educationalModuleTitle" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.educationalModuleTitle?.dirty && editForm.controls.educationalModuleTitle?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.educationalModuleTitle?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.sumScore" for="field_sumScore">Sum Score</label>
+                    <input type="number" class="form-control" name="sumScore" id="field_sumScore"
+                        [(ngModel)]="preJobNiazsanjiCompetency.sumScore" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.priority" for="field_priority">Priority</label>
+                    <input type="number" class="form-control" name="priority" id="field_priority"
+                        [(ngModel)]="preJobNiazsanjiCompetency.priority" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.selected" for="field_selected">Selected</label>
+                    <input type="checkbox" class="form-control" name="selected" id="field_selected"
+                        [(ngModel)]="preJobNiazsanjiCompetency.selected" />
+                    <div [hidden]="!(editForm.controls.selected?.dirty && editForm.controls.selected?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.selected?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.teachingApproach" for="field_teachingApproach">Teaching Approach</label>
+                    <select class="form-control" id="field_teachingApproach" multiple name="teachingApproach" [(ngModel)]="preJobNiazsanjiCompetency.teachingApproaches">
+                        <option [ngValue]="getSelected(preJobNiazsanjiCompetency.teachingApproaches, teachingApproachOption)" *ngFor="let teachingApproachOption of teachingapproaches; trackBy: trackTeachingApproachById">{{teachingApproachOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.fixCompetencyDeficiency" for="field_fixCompetencyDeficiency">Fix Competency Deficiency</label>
+                    <select class="form-control" id="field_fixCompetencyDeficiency" name="fixCompetencyDeficiency" [(ngModel)]="preJobNiazsanjiCompetency.fixCompetencyDeficiencyId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="fixCompetencyDeficiencyOption.id" *ngFor="let fixCompetencyDeficiencyOption of fixcompetencydeficiencies; trackBy: trackFixCompetencyDeficiencyById">{{fixCompetencyDeficiencyOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.educationalModule" for="field_educationalModule">Educational Module</label>
+                    <select class="form-control" id="field_educationalModule" name="educationalModule" [(ngModel)]="preJobNiazsanjiCompetency.educationalModuleId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="educationalModuleOption.id" *ngFor="let educationalModuleOption of educationalmodules; trackBy: trackEducationalModuleById">{{educationalModuleOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.preJobNiazsanji" for="field_preJobNiazsanji">Pre Job Niazsanji</label>
+                    <select class="form-control" id="field_preJobNiazsanji" name="preJobNiazsanji" [(ngModel)]="preJobNiazsanjiCompetency.preJobNiazsanjiId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="preJobNiazsanjiOption.id" *ngFor="let preJobNiazsanjiOption of prejobniazsanjis; trackBy: trackPreJobNiazsanjiById">{{preJobNiazsanjiOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.competency" for="field_competency">Competency</label>
+                    <select class="form-control" id="field_competency" name="competency" [(ngModel)]="preJobNiazsanjiCompetency.competencyId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="competencyOption.id" *ngFor="let competencyOption of competencies; trackBy: trackCompetencyById">{{competencyOption.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

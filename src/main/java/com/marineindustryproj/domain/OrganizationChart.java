@@ -106,6 +106,12 @@ public class OrganizationChart implements Serializable {
     @OneToMany(mappedBy = "organizationChart")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<MediaAwarenessReport> mediaAwarenessReports = new HashSet<>();
+    @OneToMany(mappedBy = "organizationChart")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<PreJobNiazsanji> preJobNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "organizationChart")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<JobNiazsanji> jobNiazsanjis = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("organizationCharts")
     private OrganizationChart parent;
@@ -577,6 +583,56 @@ public class OrganizationChart implements Serializable {
 
     public void setMediaAwarenessReports(Set<MediaAwarenessReport> mediaAwarenessReports) {
         this.mediaAwarenessReports = mediaAwarenessReports;
+    }
+
+    public Set<PreJobNiazsanji> getPreJobNiazsanjis() {
+        return preJobNiazsanjis;
+    }
+
+    public OrganizationChart preJobNiazsanjis(Set<PreJobNiazsanji> preJobNiazsanjis) {
+        this.preJobNiazsanjis = preJobNiazsanjis;
+        return this;
+    }
+
+    public OrganizationChart addPreJobNiazsanji(PreJobNiazsanji preJobNiazsanji) {
+        this.preJobNiazsanjis.add(preJobNiazsanji);
+        preJobNiazsanji.setOrganizationChart(this);
+        return this;
+    }
+
+    public OrganizationChart removePreJobNiazsanji(PreJobNiazsanji preJobNiazsanji) {
+        this.preJobNiazsanjis.remove(preJobNiazsanji);
+        preJobNiazsanji.setOrganizationChart(null);
+        return this;
+    }
+
+    public void setPreJobNiazsanjis(Set<PreJobNiazsanji> preJobNiazsanjis) {
+        this.preJobNiazsanjis = preJobNiazsanjis;
+    }
+
+    public Set<JobNiazsanji> getJobNiazsanjis() {
+        return jobNiazsanjis;
+    }
+
+    public OrganizationChart jobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
+        this.jobNiazsanjis = jobNiazsanjis;
+        return this;
+    }
+
+    public OrganizationChart addJobNiazsanji(JobNiazsanji jobNiazsanji) {
+        this.jobNiazsanjis.add(jobNiazsanji);
+        jobNiazsanji.setOrganizationChart(this);
+        return this;
+    }
+
+    public OrganizationChart removeJobNiazsanji(JobNiazsanji jobNiazsanji) {
+        this.jobNiazsanjis.remove(jobNiazsanji);
+        jobNiazsanji.setOrganizationChart(null);
+        return this;
+    }
+
+    public void setJobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
+        this.jobNiazsanjis = jobNiazsanjis;
     }
 
     public OrganizationChart getParent() {

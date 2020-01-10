@@ -1,0 +1,38 @@
+{
+    "marineindustryprojApp": {
+        "preJobNiazsanjiCompetency": {
+            "home": {
+                "title": "Pre Job Niazsanji Competencies",
+                "createLabel": "Create a new Pre Job Niazsanji Competency",
+                "createOrEditLabel": "Create or edit a Pre Job Niazsanji Competency"
+            },
+            "created": "A new Pre Job Niazsanji Competency is created with identifier {{ param }}",
+            "updated": "A Pre Job Niazsanji Competency is updated with identifier {{ param }}",
+            "deleted": "A Pre Job Niazsanji Competency is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Pre Job Niazsanji Competency {{ id }}?"
+            },
+            "detail": {
+                "title": "Pre Job Niazsanji Competency"
+            },
+            "title": "Title",
+            "needToImprove": "Need To Improve",
+            "needToImproveDescription": "Need To Improve Description",
+            "fixCompetencyDeficiencyDescription": "Fix Competency Deficiency Description",
+            "educationalModuleTitle": "Educational Module Title",
+            "sumScore": "Sum Score",
+            "priority": "Priority",
+            "selected": "Selected",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "priorityCriteriaValue": "Priority Criteria Value",
+            "teachingApproach": "Teaching Approach",
+            "fixCompetencyDeficiency": "Fix Competency Deficiency",
+            "educationalModule": "Educational Module",
+            "preJobNiazsanji": "Pre Job Niazsanji",
+            "competency": "Competency"
+        }
+    }
+}

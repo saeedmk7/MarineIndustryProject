@@ -134,13 +134,30 @@ public class NiazsanjiFardiQueryService extends QueryService<NiazsanjiFardi> {
             if (criteria.getHasImportantMessage() != null) {
                 specification = specification.and(buildSpecification(criteria.getHasImportantMessage(), NiazsanjiFardi_.hasImportantMessage));
             }
+            if (criteria.getRestrictionDescription() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getRestrictionDescription(), NiazsanjiFardi_.restrictionDescription));
+            }
+            if (criteria.getGoalsText() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getGoalsText(), NiazsanjiFardi_.goalsText));
+            }
+            if (criteria.getPrerequisite() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getPrerequisite(), NiazsanjiFardi_.prerequisite));
+            }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(NiazsanjiFardi_.documents, JoinType.LEFT).get(Document_.id)));
             }
+            if (criteria.getRestrictionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRestrictionId(),
+                    root -> root.join(NiazsanjiFardi_.restrictions, JoinType.LEFT).get(Restriction_.id)));
+            }
             if (criteria.getCourseTypeId() != null) {
                 specification = specification.and(buildSpecification(criteria.getCourseTypeId(),
                     root -> root.join(NiazsanjiFardi_.courseType, JoinType.LEFT).get(CourseType_.id)));
+            }
+            if (criteria.getPreJobNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPreJobNiazsanjiId(),
+                    root -> root.join(NiazsanjiFardi_.preJobNiazsanji, JoinType.LEFT).get(PreJobNiazsanji_.id)));
             }
             if (criteria.getRequestNiazsanjiFardiId() != null) {
                 specification = specification.and(buildSpecification(criteria.getRequestNiazsanjiFardiId(),
@@ -167,6 +184,10 @@ public class NiazsanjiFardiQueryService extends QueryService<NiazsanjiFardi> {
             if (criteria.getOrganizationChartId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOrganizationChartId(),
                     root -> root.join(NiazsanjiFardi_.organizationChart, JoinType.LEFT).get(OrganizationChart_.id)));
+            }
+            if (criteria.getTeachingApproachId() != null) {
+                specification = specification.and(buildSpecification(criteria.getTeachingApproachId(),
+                    root -> root.join(NiazsanjiFardi_.teachingApproach, JoinType.LEFT).get(TeachingApproach_.id)));
             }
         }
         return specification;

@@ -45,6 +45,17 @@ public class FileStorageProperties {
         this.educationUploadDir = educationUploadDir;
     }
 
+    private String jobUploadDir;
+
+    public String getJobUploadDir() {
+        return jobUploadDir;
+    }
+
+    public void setJobUploadDir(String jobUploadDir)
+    {
+        this.jobUploadDir = jobUploadDir;
+    }
+
     private String runPhaseUploadDir;
 
     public String getRunPhaseUploadDir() {

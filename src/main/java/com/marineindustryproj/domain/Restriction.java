@@ -54,20 +54,6 @@ public class Restriction implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
-    /*@ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "restriction_request_educational_module",
-               joinColumns = @JoinColumn(name = "restrictions_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "request_educational_modules_id", referencedColumnName = "id"))
-    private Set<RequestEducationalModule> requestEducationalModules = new HashSet<>();*/
-
-    /*@ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "restriction_educational_module",
-               joinColumns = @JoinColumn(name = "restrictions_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"))
-    private Set<EducationalModule> educationalModules = new HashSet<>();*/
-
     @ManyToMany(mappedBy = "restrictions")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
@@ -77,6 +63,36 @@ public class Restriction implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
     private Set<RequestEducationalModule> requestEducationalModules = new HashSet<>();
+
+    @ManyToMany(mappedBy = "restrictions")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<RequestOrganizationNiazsanji> requestOrganizationNiazsanjis = new HashSet<>();
+
+    @ManyToMany(mappedBy = "restrictions")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<FinalOrganizationNiazsanji> finalOrganizationNiazsanjis = new HashSet<>();
+
+    @ManyToMany(mappedBy = "restrictions")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<FinalNiazsanjiReport> finalNiazsanjiReports = new HashSet<>();
+
+    @ManyToMany(mappedBy = "restrictions")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<NiazsanjiFardi> niazsanjiFardis = new HashSet<>();
+
+    @ManyToMany(mappedBy = "restrictions")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<DesignNiazsanji> designNiazsanjis = new HashSet<>();
+
+    @ManyToMany(mappedBy = "restrictions")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<JobNiazsanji> jobNiazsanjis = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -178,6 +194,31 @@ public class Restriction implements Serializable {
         this.guid = guid;
     }
 
+    public Set<EducationalModule> getEducationalModules() {
+        return educationalModules;
+    }
+
+    public Restriction educationalModules(Set<EducationalModule> educationalModules) {
+        this.educationalModules = educationalModules;
+        return this;
+    }
+
+    public Restriction addEducationalModule(EducationalModule educationalModule) {
+        this.educationalModules.add(educationalModule);
+        educationalModule.getRestrictions().add(this);
+        return this;
+    }
+
+    public Restriction removeEducationalModule(EducationalModule educationalModule) {
+        this.educationalModules.remove(educationalModule);
+        educationalModule.getRestrictions().remove(this);
+        return this;
+    }
+
+    public void setEducationalModules(Set<EducationalModule> educationalModules) {
+        this.educationalModules = educationalModules;
+    }
+
     public Set<RequestEducationalModule> getRequestEducationalModules() {
         return requestEducationalModules;
     }
@@ -203,29 +244,154 @@ public class Restriction implements Serializable {
         this.requestEducationalModules = requestEducationalModules;
     }
 
-    public Set<EducationalModule> getEducationalModules() {
-        return educationalModules;
+    public Set<RequestOrganizationNiazsanji> getRequestOrganizationNiazsanjis() {
+        return requestOrganizationNiazsanjis;
     }
 
-    public Restriction educationalModules(Set<EducationalModule> educationalModules) {
-        this.educationalModules = educationalModules;
+    public Restriction requestOrganizationNiazsanjis(Set<RequestOrganizationNiazsanji> requestOrganizationNiazsanjis) {
+        this.requestOrganizationNiazsanjis = requestOrganizationNiazsanjis;
         return this;
     }
 
-    public Restriction addEducationalModule(EducationalModule educationalModule) {
-        this.educationalModules.add(educationalModule);
-        educationalModule.getRestrictions().add(this);
+    public Restriction addRequestOrganizationNiazsanji(RequestOrganizationNiazsanji requestOrganizationNiazsanji) {
+        this.requestOrganizationNiazsanjis.add(requestOrganizationNiazsanji);
+        requestOrganizationNiazsanji.getRestrictions().add(this);
         return this;
     }
 
-    public Restriction removeEducationalModule(EducationalModule educationalModule) {
-        this.educationalModules.remove(educationalModule);
-        educationalModule.getRestrictions().remove(this);
+    public Restriction removeRequestOrganizationNiazsanji(RequestOrganizationNiazsanji requestOrganizationNiazsanji) {
+        this.requestOrganizationNiazsanjis.remove(requestOrganizationNiazsanji);
+        requestOrganizationNiazsanji.getRestrictions().remove(this);
         return this;
     }
 
-    public void setEducationalModules(Set<EducationalModule> educationalModules) {
-        this.educationalModules = educationalModules;
+    public void setRequestOrganizationNiazsanjis(Set<RequestOrganizationNiazsanji> requestOrganizationNiazsanjis) {
+        this.requestOrganizationNiazsanjis = requestOrganizationNiazsanjis;
+    }
+
+    public Set<FinalOrganizationNiazsanji> getFinalOrganizationNiazsanjis() {
+        return finalOrganizationNiazsanjis;
+    }
+
+    public Restriction finalOrganizationNiazsanjis(Set<FinalOrganizationNiazsanji> finalOrganizationNiazsanjis) {
+        this.finalOrganizationNiazsanjis = finalOrganizationNiazsanjis;
+        return this;
+    }
+
+    public Restriction addFinalOrganizationNiazsanji(FinalOrganizationNiazsanji finalOrganizationNiazsanji) {
+        this.finalOrganizationNiazsanjis.add(finalOrganizationNiazsanji);
+        finalOrganizationNiazsanji.getRestrictions().add(this);
+        return this;
+    }
+
+    public Restriction removeFinalOrganizationNiazsanji(FinalOrganizationNiazsanji finalOrganizationNiazsanji) {
+        this.finalOrganizationNiazsanjis.remove(finalOrganizationNiazsanji);
+        finalOrganizationNiazsanji.getRestrictions().remove(this);
+        return this;
+    }
+
+    public void setFinalOrganizationNiazsanjis(Set<FinalOrganizationNiazsanji> finalOrganizationNiazsanjis) {
+        this.finalOrganizationNiazsanjis = finalOrganizationNiazsanjis;
+    }
+
+    public Set<FinalNiazsanjiReport> getFinalNiazsanjiReports() {
+        return finalNiazsanjiReports;
+    }
+
+    public Restriction finalNiazsanjiReports(Set<FinalNiazsanjiReport> finalNiazsanjiReports) {
+        this.finalNiazsanjiReports = finalNiazsanjiReports;
+        return this;
+    }
+
+    public Restriction addFinalNiazsanjiReport(FinalNiazsanjiReport finalNiazsanjiReport) {
+        this.finalNiazsanjiReports.add(finalNiazsanjiReport);
+        finalNiazsanjiReport.getRestrictions().add(this);
+        return this;
+    }
+
+    public Restriction removeFinalNiazsanjiReport(FinalNiazsanjiReport finalNiazsanjiReport) {
+        this.finalNiazsanjiReports.remove(finalNiazsanjiReport);
+        finalNiazsanjiReport.getRestrictions().remove(this);
+        return this;
+    }
+
+    public void setFinalNiazsanjiReports(Set<FinalNiazsanjiReport> finalNiazsanjiReports) {
+        this.finalNiazsanjiReports = finalNiazsanjiReports;
+    }
+
+    public Set<NiazsanjiFardi> getNiazsanjiFardis() {
+        return niazsanjiFardis;
+    }
+
+    public Restriction niazsanjiFardis(Set<NiazsanjiFardi> niazsanjiFardis) {
+        this.niazsanjiFardis = niazsanjiFardis;
+        return this;
+    }
+
+    public Restriction addNiazsanjiFardi(NiazsanjiFardi niazsanjiFardi) {
+        this.niazsanjiFardis.add(niazsanjiFardi);
+        niazsanjiFardi.getRestrictions().add(this);
+        return this;
+    }
+
+    public Restriction removeNiazsanjiFardi(NiazsanjiFardi niazsanjiFardi) {
+        this.niazsanjiFardis.remove(niazsanjiFardi);
+        niazsanjiFardi.getRestrictions().remove(this);
+        return this;
+    }
+
+    public void setNiazsanjiFardis(Set<NiazsanjiFardi> niazsanjiFardis) {
+        this.niazsanjiFardis = niazsanjiFardis;
+    }
+
+    public Set<DesignNiazsanji> getDesignNiazsanjis() {
+        return designNiazsanjis;
+    }
+
+    public Restriction designNiazsanjis(Set<DesignNiazsanji> designNiazsanjis) {
+        this.designNiazsanjis = designNiazsanjis;
+        return this;
+    }
+
+    public Restriction addDesignNiazsanji(DesignNiazsanji designNiazsanji) {
+        this.designNiazsanjis.add(designNiazsanji);
+        designNiazsanji.getRestrictions().add(this);
+        return this;
+    }
+
+    public Restriction removeDesignNiazsanji(DesignNiazsanji designNiazsanji) {
+        this.designNiazsanjis.remove(designNiazsanji);
+        designNiazsanji.getRestrictions().remove(this);
+        return this;
+    }
+
+    public void setDesignNiazsanjis(Set<DesignNiazsanji> designNiazsanjis) {
+        this.designNiazsanjis = designNiazsanjis;
+    }
+
+    public Set<JobNiazsanji> getJobNiazsanjis() {
+        return jobNiazsanjis;
+    }
+
+    public Restriction jobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
+        this.jobNiazsanjis = jobNiazsanjis;
+        return this;
+    }
+
+    public Restriction addJobNiazsanji(JobNiazsanji jobNiazsanji) {
+        this.jobNiazsanjis.add(jobNiazsanji);
+        jobNiazsanji.getRestrictions().add(this);
+        return this;
+    }
+
+    public Restriction removeJobNiazsanji(JobNiazsanji jobNiazsanji) {
+        this.jobNiazsanjis.remove(jobNiazsanji);
+        jobNiazsanji.getRestrictions().remove(this);
+        return this;
+    }
+
+    public void setJobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
+        this.jobNiazsanjis = jobNiazsanjis;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

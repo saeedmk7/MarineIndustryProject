@@ -17,6 +17,8 @@ import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-char
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
+import {ExcelService} from "app/plugin/export-excel/excel-service";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'mi-media-awareness-report-marine-suffix',
@@ -44,7 +46,7 @@ export class MediaAwarenessReportMarineSuffixComponent implements OnInit, OnDest
 
     currentPerson: IPersonMarineSuffix;
 
-    searchbarModel: SearchPanelModel[];
+    searchbarModel: SearchPanelModel[] = [];
     done:boolean = false;
     criteria: any;
 
@@ -65,6 +67,7 @@ export class MediaAwarenessReportMarineSuffixComponent implements OnInit, OnDest
         private treeUtilities: TreeUtilities,
         protected router: Router,
         protected eventManager: JhiEventManager,
+        private jhiTranslate: TranslateService,
         protected mediaProductTypeService: MediaProductTypeMarineSuffixService,
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -80,16 +83,44 @@ export class MediaAwarenessReportMarineSuffixComponent implements OnInit, OnDest
             this.loadAll(criteria.content);
         });
     }
-
+    export() {
+        
+        let a = new ExcelService(this.jhiTranslate);
+        let ee = this.mediaAwarenessReports.map(w => {
+            return { id: w.id, organizationChart: w.organizationChartTitle, mediaProductType: w.mediaProductTypeTitle, designed: w.designed,
+                subject: w.subject, publishDate: w.publishDate, numberOfViewers: w.numberOfViewers, durationOfOperation: w.durationOfOperation,
+                reportTime: w.reportTime, personHour: w.personHour }
+        });
+        a.exportAsExcelFile(ee, 'mediaAwarenessReports', 'marineindustryprojApp.mediaAwarenessReport');
+    }
     loadAll(criteria?) {
-        debugger;
+        
         if(!criteria)
             criteria = [];
-        if(!this.isSuperUsers){
-            criteria = [{
-                key: 'organizationChartId.in',
-                value: this.recommenedOrgCharts.map(a => a.id)
-            }];
+        
+        if(criteria){
+            const org = criteria.find(a => a.key == 'organizationChartId.equals');
+            if(org) {
+                const orgId = +org.value;
+                criteria = criteria.filter(a => a.key != 'organizationChartId.equals');
+                if (orgId) {
+                    const childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, orgId);
+                    criteria.push({
+                        key: 'organizationChartId.in', value: childIds
+                    });
+                }
+            }
+
+            if(!criteria.find(a => a.key == 'organizationChartId.in'))
+            {
+                if(!this.isSuperUsers)
+                {
+                    criteria = [{
+                        key: 'organizationChartId.in',
+                        value: this.recommenedOrgCharts.map(a => a.id)
+                    }];
+                }
+            }
         }
         this.mediaAwarenessReportService
             .query({
@@ -151,13 +182,13 @@ export class MediaAwarenessReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     ngOnInit() {
-        this.searchbarModel = new Array<SearchPanelModel>();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
 
             this.setRoles(account);
 
             this.searchbarModel.push(new SearchPanelModel('mediaAwarenessReport','subject','text', 'contains'));
+            this.searchbarModel.push(new SearchPanelModel('mediaAwarenessReport','publishDate','text', 'contains'));
             this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
                     this.currentPerson = resp.body;
                     this.loadOrgCharts();
@@ -192,16 +223,21 @@ export class MediaAwarenessReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     handleOrgChartView(){
-        if(this.treeUtilities.hasChild(this.organizationcharts, this.currentPerson.organizationChartId))
-        {
-            let orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
-            this.recommenedOrgCharts = this.organizationcharts.filter(a => orgIds.includes(a.id));
+        if(this.isSuperUsers) {
+            this.recommenedOrgCharts = this.organizationcharts;
         }
-        else{
-            this.recommenedOrgCharts = [];
-            this.recommenedOrgCharts.push(this.organizationcharts.find(a => a.id == this.currentPerson.organizationChartId));
+        else {
+            if (this.treeUtilities.hasChild(this.organizationcharts, this.currentPerson.organizationChartId)) {
+                let orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
+                this.recommenedOrgCharts = this.organizationcharts.filter(a => orgIds.includes(a.id));
+            }
+            else {
+                this.recommenedOrgCharts = [];
+                this.recommenedOrgCharts.push(this.organizationcharts.find(a => a.id == this.currentPerson.organizationChartId));
+            }
         }
-
+        this.searchbarModel.push(new SearchPanelModel('mediaAwarenessReport','organizationChartId','select', 'equals', this.recommenedOrgCharts.filter(a => a.parentId == null)));
+        this.searchbarModel.push(new SearchPanelModel('mediaAwarenessReport','organizationChartId','select', 'equals', this.recommenedOrgCharts, 'fullTitle', 'bighalf'));
     }
 
     ngOnDestroy() {
@@ -231,7 +267,7 @@ export class MediaAwarenessReportMarineSuffixComponent implements OnInit, OnDest
         this.queryCount = this.totalItems;
         this.mediaAwarenessReports = data;
         this.mediaAwarenessReports.forEach(a => {
-            debugger;
+            
             const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
             if(org)
                 a.organizationChartTitle = org.fullTitle.split('>')[0];

@@ -172,6 +172,15 @@ public class EducationalModule implements Serializable {
     @OneToMany(mappedBy = "educationalModule")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EducationalHistory> educationalHistories = new HashSet<>();
+    @OneToMany(mappedBy = "educationalModule")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<DesignNiazsanji> designNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "educationalModule")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<PreJobNiazsanjiCompetency> preJobNiazsanjiCompetencies = new HashSet<>();
+    @OneToMany(mappedBy = "educationalModule")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<JobNiazsanji> jobNiazsanjis = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_module_scientific_work_group",
@@ -245,11 +254,6 @@ public class EducationalModule implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
     private Set<NiazsanjiGroup> niazsanjiGroups = new HashSet<>();
-
-    /*@ManyToMany(mappedBy = "educationalModules")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JsonIgnore
-    private Set<Restriction> restrictions = new HashSet<>();*/
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -887,6 +891,81 @@ public class EducationalModule implements Serializable {
         this.educationalHistories = educationalHistories;
     }
 
+    public Set<DesignNiazsanji> getDesignNiazsanjis() {
+        return designNiazsanjis;
+    }
+
+    public EducationalModule designNiazsanjis(Set<DesignNiazsanji> designNiazsanjis) {
+        this.designNiazsanjis = designNiazsanjis;
+        return this;
+    }
+
+    public EducationalModule addDesignNiazsanji(DesignNiazsanji designNiazsanji) {
+        this.designNiazsanjis.add(designNiazsanji);
+        designNiazsanji.setEducationalModule(this);
+        return this;
+    }
+
+    public EducationalModule removeDesignNiazsanji(DesignNiazsanji designNiazsanji) {
+        this.designNiazsanjis.remove(designNiazsanji);
+        designNiazsanji.setEducationalModule(null);
+        return this;
+    }
+
+    public void setDesignNiazsanjis(Set<DesignNiazsanji> designNiazsanjis) {
+        this.designNiazsanjis = designNiazsanjis;
+    }
+
+    public Set<PreJobNiazsanjiCompetency> getPreJobNiazsanjiCompetencies() {
+        return preJobNiazsanjiCompetencies;
+    }
+
+    public EducationalModule preJobNiazsanjiCompetencies(Set<PreJobNiazsanjiCompetency> preJobNiazsanjiCompetencies) {
+        this.preJobNiazsanjiCompetencies = preJobNiazsanjiCompetencies;
+        return this;
+    }
+
+    public EducationalModule addPreJobNiazsanjiCompetency(PreJobNiazsanjiCompetency preJobNiazsanjiCompetency) {
+        this.preJobNiazsanjiCompetencies.add(preJobNiazsanjiCompetency);
+        preJobNiazsanjiCompetency.setEducationalModule(this);
+        return this;
+    }
+
+    public EducationalModule removePreJobNiazsanjiCompetency(PreJobNiazsanjiCompetency preJobNiazsanjiCompetency) {
+        this.preJobNiazsanjiCompetencies.remove(preJobNiazsanjiCompetency);
+        preJobNiazsanjiCompetency.setEducationalModule(null);
+        return this;
+    }
+
+    public void setPreJobNiazsanjiCompetencies(Set<PreJobNiazsanjiCompetency> preJobNiazsanjiCompetencies) {
+        this.preJobNiazsanjiCompetencies = preJobNiazsanjiCompetencies;
+    }
+
+    public Set<JobNiazsanji> getJobNiazsanjis() {
+        return jobNiazsanjis;
+    }
+
+    public EducationalModule jobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
+        this.jobNiazsanjis = jobNiazsanjis;
+        return this;
+    }
+
+    public EducationalModule addJobNiazsanji(JobNiazsanji jobNiazsanji) {
+        this.jobNiazsanjis.add(jobNiazsanji);
+        jobNiazsanji.setEducationalModule(this);
+        return this;
+    }
+
+    public EducationalModule removeJobNiazsanji(JobNiazsanji jobNiazsanji) {
+        this.jobNiazsanjis.remove(jobNiazsanji);
+        jobNiazsanji.setEducationalModule(null);
+        return this;
+    }
+
+    public void setJobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
+        this.jobNiazsanjis = jobNiazsanjis;
+    }
+
     public Set<ScientificWorkGroup> getScientificWorkGroups() {
         return scientificWorkGroups;
     }
@@ -1037,6 +1116,31 @@ public class EducationalModule implements Serializable {
         this.teachers = teachers;
     }
 
+    public Set<Restriction> getRestrictions() {
+        return restrictions;
+    }
+
+    public EducationalModule restrictions(Set<Restriction> restrictions) {
+        this.restrictions = restrictions;
+        return this;
+    }
+
+    public EducationalModule addRestriction(Restriction restriction) {
+        this.restrictions.add(restriction);
+        restriction.getEducationalModules().add(this);
+        return this;
+    }
+
+    public EducationalModule removeRestriction(Restriction restriction) {
+        this.restrictions.remove(restriction);
+        restriction.getEducationalModules().remove(this);
+        return this;
+    }
+
+    public void setRestrictions(Set<Restriction> restrictions) {
+        this.restrictions = restrictions;
+    }
+
     public RequestEducationalModule getRequestEducationalModule() {
         return requestEducationalModule;
     }
@@ -1125,31 +1229,6 @@ public class EducationalModule implements Serializable {
 
     public void setNiazsanjiGroups(Set<NiazsanjiGroup> niazsanjiGroups) {
         this.niazsanjiGroups = niazsanjiGroups;
-    }
-
-    public Set<Restriction> getRestrictions() {
-        return restrictions;
-    }
-
-    public EducationalModule restrictions(Set<Restriction> restrictions) {
-        this.restrictions = restrictions;
-        return this;
-    }
-
-    public EducationalModule addRestriction(Restriction restriction) {
-        this.restrictions.add(restriction);
-        restriction.getEducationalModules().add(this);
-        return this;
-    }
-
-    public EducationalModule removeRestriction(Restriction restriction) {
-        this.restrictions.remove(restriction);
-        restriction.getEducationalModules().remove(this);
-        return this;
-    }
-
-    public void setRestrictions(Set<Restriction> restrictions) {
-        this.restrictions = restrictions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

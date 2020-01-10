@@ -80,6 +80,14 @@ public class Job implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Lob
+    @Column(name = "file_doc")
+    private String fileDoc;
+
+    @Size(max = 50)
+    @Column(name = "review_date", length = 50)
+    private String reviewDate;
+
     @OneToMany(mappedBy = "job")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Person> jobPeople = new HashSet<>();
@@ -305,6 +313,32 @@ public class Job implements Serializable {
 
     public void setGuid(String guid) {
         this.guid = guid;
+    }
+
+    public String getFileDoc() {
+        return fileDoc;
+    }
+
+    public Job fileDoc(String fileDoc) {
+        this.fileDoc = fileDoc;
+        return this;
+    }
+
+    public void setFileDoc(String fileDoc) {
+        this.fileDoc = fileDoc;
+    }
+
+    public String getReviewDate() {
+        return reviewDate;
+    }
+
+    public Job reviewDate(String reviewDate) {
+        this.reviewDate = reviewDate;
+        return this;
+    }
+
+    public void setReviewDate(String reviewDate) {
+        this.reviewDate = reviewDate;
     }
 
     public Set<Person> getJobPeople() {
@@ -585,6 +619,8 @@ public class Job implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", guid='" + getGuid() + "'" +
+            ", fileDoc='" + getFileDoc() + "'" +
+            ", reviewDate='" + getReviewDate() + "'" +
             "}";
     }
 }

@@ -25,7 +25,6 @@ export class UserRouteAccessService implements CanActivate {
         return this.checkLogin(authorities, state.url) && this.canSeePage(state.url);
     }
     canSeePage(url: string): Promise<boolean> {
-
         const principal = this.principal;
         return Promise.resolve(
             principal.identity().then(account => {
@@ -57,6 +56,7 @@ export class UserRouteAccessService implements CanActivate {
             }));
     }
     checkLogin(authorities: string[], url: string): Promise<boolean> {
+        
         const principal = this.principal;
         return Promise.resolve(
             principal.identity().then(account => {

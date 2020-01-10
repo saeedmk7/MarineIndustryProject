@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "fixCompetencyDeficiency": {
+            "home": {
+                "title": "رفع کمبودهای شایستگی",
+                "createLabel": "جدید",
+                "createOrEditLabel": "رفع کمبود شایستگی"
+            },
+            "created": "رفع کمبود شایستگی با شناسه {{ param }} ایجاد شد.",
+            "updated": "رفع کمبود شایستگی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "رفع کمبود شایستگی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف رفع کمبود شایستگی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات رفع کمبود شایستگی"
+            },
+            "title": "عنوان",
+            "description": "توضیحات",
+            "displayOrder": "ترتیب نمایش",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "preJobNiazsanjiCompetency": "Pre Job Niazsanji Competency"
+        }
+    }
+}

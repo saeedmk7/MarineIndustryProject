@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-pre-job-niazsanji-competency-marine-suffix-heading" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.home.step3Title">Create or edit a Pre Job Niazsanji Competency</h2>
+            <div *jhiHasAnyAuthority="['ROLE_ADMIN']">
+                <a href="#/fix-competency-deficiency-marine-suffix" [ngClass]="{'enableLink': isAdmin}" class="btn btn-warning">
+                    <span class="fa fa-file"></span>
+                    <span class="d-none d-md-inline">ثبت موارد لازم برای رفع کمبودها</span>
+                </a>
+            </div>
+            <div class="alert alert-info">
+                <img src="/content/images/info.png" style="max-width: 25px; vertical-align: bottom;" />
+                <span>لطفا راه حل های لازم برای رفع کمبود شایستگی های موردنظر خود را شناسایی و انتخاب نمائید و سپس آن ها را ثبت نمائید. </span>
+            </div>
+            <table style="alignment: center" class="table table-bordered table-sm" id="content">
+                <thead>
+                <tr>
+                    <th colspan="2"></th>
+                    <th *ngFor="let fix of fixcompetencydeficiencies">{{fix.title}}</th>
+                    <th>توضیحات</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let competency of competencies">
+                    <tr *ngFor="let item of competency.selectedItems; let i = index;" >
+                        <td style="background-color: #00c4e6" *ngIf="i == 0" [attr.rowspan]="competency.selectedItems.length">
+                            {{competency.title}}
+                        </td>
+                        <td>
+                            <span>{{item.title}}</span>
+                        </td>
+                        <td *ngFor="let fix of fixcompetencydeficiencies">
+                            <input type="radio" [name]="'radio_'+item.id" [id]="'radio_'+item.id+'_'+fix.id" [value]="fix.id" [checked]="item.fixCompetencyDeficiencyId == fix.id" [alt]="fix.description" [title]="fix.description">
+                            <label [for]="'radio_'+item.id+'_'+fix.id"> {{fix.title}} </label>
+                        </td>
+                        <td>
+                            <textarea class="form-control" [name]="'text_'+item.id" [id]="'text_'+item.id">{{item.fixCompetencyDeficiencyDescription}}</textarea>
+                        </td>
+                    </tr>
+                </ng-container>
+                </tbody>
+            </table>
+            <div class="alert alert-info">
+                <img src="/content/images/bulb-icon.png" style="max-width: 25px; vertical-align: bottom;" />
+                <span>تعریف مهارت افزایی -> آموزش + کار و عمل</span>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button *ngIf="editable" type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.saveAndNextStep">Save</span>
+                </button>
+                <button type="button" id="step-forward" class="btn btn-info pull-left"  (click)="stepForward()">
+                    <fa-icon [icon]="'backward'"></fa-icon>&nbsp;گام بعدی (بدون ذخیره)
+                </button>
+                <button type="button" id="step-back" class="btn btn-warning pull-left"  (click)="stepBack()">
+                    <fa-icon [icon]="'forward'"></fa-icon>&nbsp;گام قبلی
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

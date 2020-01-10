@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "fixCompetencyDeficiency": {
+            "home": {
+                "title": "Fix Competency Deficiencies",
+                "createLabel": "Create a new Fix Competency Deficiency",
+                "createOrEditLabel": "Create or edit a Fix Competency Deficiency"
+            },
+            "created": "A new Fix Competency Deficiency is created with identifier {{ param }}",
+            "updated": "A Fix Competency Deficiency is updated with identifier {{ param }}",
+            "deleted": "A Fix Competency Deficiency is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Fix Competency Deficiency {{ id }}?"
+            },
+            "detail": {
+                "title": "Fix Competency Deficiency"
+            },
+            "title": "Title",
+            "description": "Description",
+            "displayOrder": "Display Order",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "preJobNiazsanjiCompetency": "Pre Job Niazsanji Competency"
+        }
+    }
+}

@@ -134,6 +134,51 @@
                     </select>
                 </div>
 
+
+                    <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">آپلود شناسنامه شغلی</div></div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.job.fileDoc" for="file_fileDoc">File Doc</label>
+                        <div>
+                            <input type="file" id="file_fileDoc" required (change)="setFileData($event, job, 'fileDoc', false)" jhiTranslate="entity.action.addblob"/>
+                        </div>
+                        <!--<input type="hidden" class="form-control" name="fileDoc" id="field_fileDoc"
+                               [(ngModel)]="educationalHistory.fileDoc" required/>-->
+
+                        <div [hidden]="!(editForm.controls.fileDoc?.dirty && editForm.controls.fileDoc?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.fileDoc?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div *ngIf="fileMessage" class="alert" style="display: inline" [ngClass]="{'alert-danger': fileHasError,'alert-success': !fileHasError}">{{fileMessage}}</div>
+                    <div class="alert alert-info">
+                        لطفا قبل از آپلود به موارد زیر دقت فرمائید.
+                        <ol>
+                            <li>
+                                نام فایل انتخابی شما نباید شامل تعداد زیادی نقطه(.) یا کاما (,) و امثالهم باشد.
+                            </li>
+                            <li>
+                                حجم فایل شما نباید بیش از 400 مگابایت باشد.
+                            </li>
+                        </ol>
+                    </div>
+
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.job.reviewDate" for="field_reviewDate">reviewDate</label>
+                    <kendo-maskedtextbox
+                        [includeLiterals]="true"
+                        [(ngModel)]="job.reviewDate"
+                        name="reviewDate"
+                        class="form-control"
+                        id="field_reviewDate"
+                        (blur)="checkDateValidation($event)"
+                        mask="0000/00/00">
+                    </kendo-maskedtextbox>
+                    <span *ngIf="finishDateValidation == 1" class="alert-success">تاریخ معتبر است</span>
+                    <span *ngIf="finishDateValidation == 2" class="alert-danger">تاریخ نامعتبر است</span>
+                </div>
                 <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.job.parent" for="field_parent">Parent</label>
                     <select class="form-control" id="field_parent" name="parent" [(ngModel)]="job.parentId" >
