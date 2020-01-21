@@ -82,6 +82,15 @@ public class CourseType implements Serializable {
     @OneToMany(mappedBy = "courseType")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<JobNiazsanji> jobNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "courseType")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<NiazsanjiOther> niazsanjiOthers = new HashSet<>();
+    @OneToMany(mappedBy = "courseType")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<RequestOtherNiazsanji> requestOtherNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "courseType")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -307,31 +316,6 @@ public class CourseType implements Serializable {
         this.niazsanjiFardis = niazsanjiFardis;
     }
 
-    public Set<EducationalHistory> getEducationalHistories() {
-        return educationalHistories;
-    }
-
-    public CourseType educationalHistories(Set<EducationalHistory> educationalHistories) {
-        this.educationalHistories = educationalHistories;
-        return this;
-    }
-
-    public CourseType addEducationalHistory(EducationalHistory educationalHistory) {
-        this.educationalHistories.add(educationalHistory);
-        educationalHistory.setCourseType(this);
-        return this;
-    }
-
-    public CourseType removeEducationalHistory(EducationalHistory educationalHistory) {
-        this.educationalHistories.remove(educationalHistory);
-        educationalHistory.setCourseType(null);
-        return this;
-    }
-
-    public void setEducationalHistories(Set<EducationalHistory> educationalHistories) {
-        this.educationalHistories = educationalHistories;
-    }
-
     public Set<RequestNiazsanjiFardi> getRequestNiazsanjiFardis() {
         return requestNiazsanjiFardis;
     }
@@ -355,6 +339,31 @@ public class CourseType implements Serializable {
 
     public void setRequestNiazsanjiFardis(Set<RequestNiazsanjiFardi> requestNiazsanjiFardis) {
         this.requestNiazsanjiFardis = requestNiazsanjiFardis;
+    }
+
+    public Set<EducationalHistory> getEducationalHistories() {
+        return educationalHistories;
+    }
+
+    public CourseType educationalHistories(Set<EducationalHistory> educationalHistories) {
+        this.educationalHistories = educationalHistories;
+        return this;
+    }
+
+    public CourseType addEducationalHistory(EducationalHistory educationalHistory) {
+        this.educationalHistories.add(educationalHistory);
+        educationalHistory.setCourseType(this);
+        return this;
+    }
+
+    public CourseType removeEducationalHistory(EducationalHistory educationalHistory) {
+        this.educationalHistories.remove(educationalHistory);
+        educationalHistory.setCourseType(null);
+        return this;
+    }
+
+    public void setEducationalHistories(Set<EducationalHistory> educationalHistories) {
+        this.educationalHistories = educationalHistories;
     }
 
     public Set<DesignNiazsanji> getDesignNiazsanjis() {
@@ -405,6 +414,81 @@ public class CourseType implements Serializable {
 
     public void setJobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
         this.jobNiazsanjis = jobNiazsanjis;
+    }
+
+    public Set<NiazsanjiOther> getNiazsanjiOthers() {
+        return niazsanjiOthers;
+    }
+
+    public CourseType niazsanjiOthers(Set<NiazsanjiOther> niazsanjiOthers) {
+        this.niazsanjiOthers = niazsanjiOthers;
+        return this;
+    }
+
+    public CourseType addNiazsanjiOther(NiazsanjiOther niazsanjiOther) {
+        this.niazsanjiOthers.add(niazsanjiOther);
+        niazsanjiOther.setCourseType(this);
+        return this;
+    }
+
+    public CourseType removeNiazsanjiOther(NiazsanjiOther niazsanjiOther) {
+        this.niazsanjiOthers.remove(niazsanjiOther);
+        niazsanjiOther.setCourseType(null);
+        return this;
+    }
+
+    public void setNiazsanjiOthers(Set<NiazsanjiOther> niazsanjiOthers) {
+        this.niazsanjiOthers = niazsanjiOthers;
+    }
+
+    public Set<RequestOtherNiazsanji> getRequestOtherNiazsanjis() {
+        return requestOtherNiazsanjis;
+    }
+
+    public CourseType requestOtherNiazsanjis(Set<RequestOtherNiazsanji> requestOtherNiazsanjis) {
+        this.requestOtherNiazsanjis = requestOtherNiazsanjis;
+        return this;
+    }
+
+    public CourseType addRequestOtherNiazsanji(RequestOtherNiazsanji requestOtherNiazsanji) {
+        this.requestOtherNiazsanjis.add(requestOtherNiazsanji);
+        requestOtherNiazsanji.setCourseType(this);
+        return this;
+    }
+
+    public CourseType removeRequestOtherNiazsanji(RequestOtherNiazsanji requestOtherNiazsanji) {
+        this.requestOtherNiazsanjis.remove(requestOtherNiazsanji);
+        requestOtherNiazsanji.setCourseType(null);
+        return this;
+    }
+
+    public void setRequestOtherNiazsanjis(Set<RequestOtherNiazsanji> requestOtherNiazsanjis) {
+        this.requestOtherNiazsanjis = requestOtherNiazsanjis;
+    }
+
+    public Set<PrioritizeRequestNiazsanji> getPrioritizeRequestNiazsanjis() {
+        return prioritizeRequestNiazsanjis;
+    }
+
+    public CourseType prioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
+        this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
+        return this;
+    }
+
+    public CourseType addPrioritizeRequestNiazsanji(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji) {
+        this.prioritizeRequestNiazsanjis.add(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji.setCourseType(this);
+        return this;
+    }
+
+    public CourseType removePrioritizeRequestNiazsanji(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji) {
+        this.prioritizeRequestNiazsanjis.remove(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji.setCourseType(null);
+        return this;
+    }
+
+    public void setPrioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
+        this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

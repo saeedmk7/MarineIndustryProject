@@ -1,0 +1,74 @@
+{
+    "marineindustryprojApp": {
+        "niazsanjiIntegration": {
+            "home": {
+                "title": "فهرست نهایی پودمان های نیازسنجی شده",
+                "createLabel": "جدید",
+                "createOrEditLabel": " فهرست نهایی پودمان های نیازسنجی شده",
+                "setYear": "مشخص کردن سال نیازسنجی"
+            },
+            "created": "فهرست نهایی پودمان ها با شناسه {{ param }} ایجاد شد.",
+            "updated": "فهرست نهایی پودمان ها با شناسه {{ param }} ویرایش شد.",
+            "deleted": "فهرست نهایی پودمان ها با شناسه {{ param }} حذف شد.",
+            "completed": "فهرست نهایی پودمان ها مورد نظر با موفقیت نهایی شد.",
+            "rejected": "فهرست نهایی پودمان ها مورد نظر با موفقیت رد شد.",
+            "delete": {
+                "question": "آیا از حذف درخواست فهرست نهایی پودمان ها با شناسه {{ id }} مطمئنید؟"
+            },
+            "comment": {
+                "accept": "لطفا نظر خود را درج نمائید.",
+                "reject": "لطفا علت عدم تایید را ثبت نمائید.",
+                "comment": "لطفا نظر خود را درج نمائید."
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات درخواست فهرست نهایی پودمان ها"
+            },
+            "niazsanjiYear": "سال نیازسنجی",
+            "priceCost": "سرمایه گذاری(ریال)",
+            "index": "ردیف",
+            "code": "Code",
+            "costEducationalModule": "سرمایه گذاری",
+            "skillLevelOfSkillTitle": "سطح پودمان",
+            "totalLearningTime": "مدت زمان پودمان",
+            "educationalModuleType": "نوع پودمان",
+            "description": "توضیحات",
+            "restrictionDescription": "توضیح محدودیت",
+            "goalsText": "اهداف(نتایج مورد انتظار-اهداف کلی، جزئی، رفتاری و یادگیری و ...)",
+            "prerequisite": "پیش نیاز",
+            "restriction": "محدودیت",
+            "teachingApproach": "روش های آموزش",
+            "createUserLogin": "کاربر درخواست کننده",
+            "createDate": "تاریخ درخواست",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "conversation": "مکالمات",
+            "requestStatus": "وضعیت درخواست",
+            "changeStatusUserLogin": "فرد تغییر دهنده وضعیت درخواست",
+            "guid": "Guid",
+            "hasImportantMessage": "Has Important Message",
+            "requestNiazsanjiType": "Request Niazsanji Type",
+            "priority": "اولویت بندی",
+            "niazsanjiIntegration": "Niazsanji Integration",
+            "document": "Document",
+            "requestNiazsanjiFardi": "Request Niazsanji Fardi",
+            "preJobNiazsanji": "Pre Job Niazsanji",
+            "requestOtherNiazsanji": "Request Other Niazsanji",
+            "niazsanjiInput": "ورودی نیازسنجی",
+            "courseType": "نوع دوره",
+            "educationalModule": "پودمان آموزشی",
+            "educationalModuleTitle": "عنوان پودمان آموزشی",
+            "educationalModuleId": "کد پودمان",
+            "person": "نام و نام خانوادگی",
+            "personId": "نام و نام خانوادگی",
+            "personName": "نام و نام خانوادگی",
+            "organizationChart": "محل خدمت",
+            "organizationChartId": "محل خدمت",
+            "finalNiazsanjiReport": "Final Niazsanji Report",
+            "prioritizeRequestNiazsanji": "Prioritize Request Niazsanji"
+        }
+    }
+}

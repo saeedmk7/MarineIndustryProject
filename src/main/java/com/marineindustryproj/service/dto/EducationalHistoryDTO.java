@@ -71,6 +71,10 @@ public class EducationalHistoryDTO implements Serializable {
 
     private Boolean hasImportantMessage;
 
+    private Long courseTypeId;
+
+    private String courseTypeTitle;
+
     private Long personId;
 
     private String personName;
@@ -80,10 +84,6 @@ public class EducationalHistoryDTO implements Serializable {
     private Long educationalModuleId;
 
     private String educationalModuleTitle;
-
-    private Long courseTypeId;
-
-    private String courseTypeTitle;
 
     private Long organizationChartId;
 
@@ -265,6 +265,22 @@ public class EducationalHistoryDTO implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public Long getCourseTypeId() {
+        return courseTypeId;
+    }
+
+    public void setCourseTypeId(Long courseTypeId) {
+        this.courseTypeId = courseTypeId;
+    }
+
+    public String getCourseTypeTitle() {
+        return courseTypeTitle;
+    }
+
+    public void setCourseTypeTitle(String courseTypeTitle) {
+        this.courseTypeTitle = courseTypeTitle;
+    }
+
     public Long getPersonId() {
         return personId;
     }
@@ -303,22 +319,6 @@ public class EducationalHistoryDTO implements Serializable {
 
     public void setEducationalModuleTitle(String educationalModuleTitle) {
         this.educationalModuleTitle = educationalModuleTitle;
-    }
-
-    public Long getCourseTypeId() {
-        return courseTypeId;
-    }
-
-    public void setCourseTypeId(Long courseTypeId) {
-        this.courseTypeId = courseTypeId;
-    }
-
-    public String getCourseTypeTitle() {
-        return courseTypeTitle;
-    }
-
-    public void setCourseTypeTitle(String courseTypeTitle) {
-        this.courseTypeTitle = courseTypeTitle;
     }
 
     public Long getOrganizationChartId() {
@@ -383,13 +383,13 @@ public class EducationalHistoryDTO implements Serializable {
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
             ", guid='" + getGuid() + "'" +
             ", hasImportantMessage='" + isHasImportantMessage() + "'" +
+            ", courseType=" + getCourseTypeId() +
+            ", courseType='" + getCourseTypeTitle() + "'" +
             ", person=" + getPersonId() +
             ", person='" + getPersonName() + "'" +
             ", person='" + getPersonFamily() + "'" +
             ", educationalModule=" + getEducationalModuleId() +
             ", educationalModule='" + getEducationalModuleTitle() + "'" +
-            ", courseType=" + getCourseTypeId() +
-            ", courseType='" + getCourseTypeTitle() + "'" +
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             "}";

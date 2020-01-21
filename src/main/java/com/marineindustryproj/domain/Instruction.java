@@ -1,5 +1,6 @@
 package com.marineindustryproj.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -59,6 +60,9 @@ public class Instruction implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @OneToMany(mappedBy = "instruction")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<InstructionAuthority> instructionAuthorities = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "instruction_document",
@@ -177,6 +181,31 @@ public class Instruction implements Serializable {
 
     public void setGuid(String guid) {
         this.guid = guid;
+    }
+
+    public Set<InstructionAuthority> getInstructionAuthorities() {
+        return instructionAuthorities;
+    }
+
+    public Instruction instructionAuthorities(Set<InstructionAuthority> instructionAuthorities) {
+        this.instructionAuthorities = instructionAuthorities;
+        return this;
+    }
+
+    public Instruction addInstructionAuthority(InstructionAuthority instructionAuthority) {
+        this.instructionAuthorities.add(instructionAuthority);
+        instructionAuthority.setInstruction(this);
+        return this;
+    }
+
+    public Instruction removeInstructionAuthority(InstructionAuthority instructionAuthority) {
+        this.instructionAuthorities.remove(instructionAuthority);
+        instructionAuthority.setInstruction(null);
+        return this;
+    }
+
+    public void setInstructionAuthorities(Set<InstructionAuthority> instructionAuthorities) {
+        this.instructionAuthorities = instructionAuthorities;
     }
 
     public Set<Document> getDocuments() {

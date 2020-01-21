@@ -291,7 +291,8 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         }
         else{
             this.targetPeople = [];
-            this.targetPeople.push(new PersonMarineSuffix(0, 'ثبت نهایی', 'ثبت نهایی', 'درخواست شما پس از ثبت تایید نهایی می شود و برای کارشناس ارشد آموزش سازمان برای بازبینی ارسال می شود.'));
+            //this.targetPeople.push(new PersonMarineSuffix(0, 'ثبت نهایی', 'ثبت نهایی', 'درخواست شما پس از ثبت تایید نهایی می شود و برای کارشناس ارشد آموزش سازمان برای بازبینی ارسال می شود.'));
+            this.targetPeople.push(new PersonMarineSuffix(0, 'ثبت نهایی', 'ثبت نهایی','درخواست شما پس از ثبت تایید در لیست اولویت بندی قرار میگیرد. برای ارسال نیازسنجی به کارشناس ارشد آموزش جهت بازبینی از لیست اولویت بندی استفاده نمائید.'));
         }
     }
     showRelatedJobs(input){
@@ -339,7 +340,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         this.message = "";
 
         if (this.requestOrganizationNiazsanji.organizationChartId == undefined) {
-            this.message = "لطفا قسمت گروه/صنعت/واحد را انتخاب نمائید.";
+            this.message = "لطفا قسمت محل خدمت را انتخاب نمائید.";
             this.isSaving = false;
             return;
         }

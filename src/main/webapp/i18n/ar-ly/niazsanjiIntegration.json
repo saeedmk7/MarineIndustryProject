@@ -1,0 +1,37 @@
+{
+    "marineindustryprojApp": {
+        "niazsanjiIntegration": {
+            "home": {
+                "title": "Niazsanji Integrations",
+                "createLabel": "Create a new Niazsanji Integration",
+                "createOrEditLabel": "Create or edit a Niazsanji Integration"
+            },
+            "created": "A new Niazsanji Integration is created with identifier {{ param }}",
+            "updated": "A Niazsanji Integration is updated with identifier {{ param }}",
+            "deleted": "A Niazsanji Integration is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Niazsanji Integration {{ id }}?"
+            },
+            "detail": {
+                "title": "Niazsanji Integration"
+            },
+            "niazsanjiYear": "Niazsanji Year",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "conversation": "Conversation",
+            "requestStatus": "Request Status",
+            "changeStatusUserLogin": "Change Status User Login",
+            "guid": "Guid",
+            "hasImportantMessage": "Has Important Message",
+            "requestNiazsanjiType": "Request Niazsanji Type",
+            "priority": "Priority",
+            "finalNiazsanjiReport": "Final Niazsanji Report",
+            "prioritizeRequestNiazsanji": "Prioritize Request Niazsanji"
+        }
+    }
+}

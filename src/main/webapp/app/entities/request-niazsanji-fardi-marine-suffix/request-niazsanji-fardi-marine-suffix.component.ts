@@ -93,8 +93,6 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
 
         //this.setPermission();
         this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) => {
-
-
             this.criteria = criteria.content;
             this.done = true;
             this.makeCriteria(criteria.content);
@@ -286,27 +284,6 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
     prepareForExportExcel(res : IRequestNiazsanjiFardiMarineSuffix[]){
         res = this.convertObjectDatesService.changeArrayDate(res);
         this.exportRequestsFinal(res);
-        /*let peopleIds = res.map(a => a.personId).filter(this.treeUtilities.onlyUnique);
-        let criteria = [{
-            key: 'id.in',
-            value: peopleIds
-        }];
-        this.personService.query({
-            page: 0,
-            size: 20000,
-            criteria,
-            sort: ["id","asc"]
-        }).subscribe((resp) => {
-                this.people = resp.body;
-                let peopleIds = res.map(a => a.personId).filter(this.treeUtilities.onlyUnique);
-                let criteria = [{
-                    key: 'id.in',
-                    value: peopleIds
-                }];
-
-            },
-            (error) => this.onError("فردی یافت نشد."));
-*/
     }
     exportRequestsFinal(res : IRequestNiazsanjiFardiMarineSuffix[]){
         let a = new ExcelService(this.jhiTranslate);

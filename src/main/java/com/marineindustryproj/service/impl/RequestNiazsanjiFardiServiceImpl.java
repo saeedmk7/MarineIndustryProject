@@ -2,9 +2,13 @@ package com.marineindustryproj.service.impl;
 
 import com.marineindustryproj.domain.NiazsanjiFardi;
 import com.marineindustryproj.domain.Person;
+import com.marineindustryproj.domain.PrioritizeRequestNiazsanji;
 import com.marineindustryproj.domain.enumeration.EducationalModuleType;
+import com.marineindustryproj.domain.enumeration.RequestNiazsanjiType;
+import com.marineindustryproj.domain.enumeration.RequestStatus;
 import com.marineindustryproj.repository.NiazsanjiFardiRepository;
 import com.marineindustryproj.repository.PersonRepository;
+import com.marineindustryproj.repository.PrioritizeRequestNiazsanjiRepository;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.RequestNiazsanjiFardiService;
 import com.marineindustryproj.domain.RequestNiazsanjiFardi;
@@ -21,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Service Implementation for managing RequestNiazsanjiFardi.
@@ -35,16 +40,19 @@ public class RequestNiazsanjiFardiServiceImpl implements RequestNiazsanjiFardiSe
 
     private final NiazsanjiFardiRepository niazsanjiFardiRepository;
 
+    private final PrioritizeRequestNiazsanjiRepository prioritizeRequestNiazsanjiRepository;
+
     private final PersonRepository personRepository;
 
     private final RequestNiazsanjiFardiMapper requestNiazsanjiFardiMapper;
 
     public RequestNiazsanjiFardiServiceImpl(RequestNiazsanjiFardiRepository requestNiazsanjiFardiRepository,
                                             NiazsanjiFardiRepository niazsanjiFardiRepository,
-                                            PersonRepository personRepository,
+                                            PrioritizeRequestNiazsanjiRepository prioritizeRequestNiazsanjiRepository, PersonRepository personRepository,
                                             RequestNiazsanjiFardiMapper requestNiazsanjiFardiMapper) {
         this.requestNiazsanjiFardiRepository = requestNiazsanjiFardiRepository;
         this.niazsanjiFardiRepository = niazsanjiFardiRepository;
+        this.prioritizeRequestNiazsanjiRepository = prioritizeRequestNiazsanjiRepository;
         this.personRepository = personRepository;
         this.requestNiazsanjiFardiMapper = requestNiazsanjiFardiMapper;
     }
@@ -82,51 +90,64 @@ public class RequestNiazsanjiFardiServiceImpl implements RequestNiazsanjiFardiSe
 
         if(requestNiazsanjiFardi.getAllEducationalModule() != null)
         {
-            NiazsanjiFardi niazsanjiFardi = new NiazsanjiFardi();
-            niazsanjiFardi.setCreateDate(ZonedDateTime.now());
-            niazsanjiFardi.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
-            niazsanjiFardi.setModifyDate(ZonedDateTime.now());
-            niazsanjiFardi.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
-            niazsanjiFardi.setDocuments(requestNiazsanjiFardi.getDocuments());
-            niazsanjiFardi.setArchived(false);
+            PrioritizeRequestNiazsanji prioritizeRequestNiazsanji = new PrioritizeRequestNiazsanji();
+            prioritizeRequestNiazsanji.setCreateDate(ZonedDateTime.now());
+            prioritizeRequestNiazsanji.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            prioritizeRequestNiazsanji.setModifyDate(ZonedDateTime.now());
+            prioritizeRequestNiazsanji.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            prioritizeRequestNiazsanji.setDocuments(requestNiazsanjiFardi.getDocuments());
+            prioritizeRequestNiazsanji.setArchived(false);
 
-            niazsanjiFardi.setOrganizationChart(requestNiazsanjiFardi.getOrganizationChart());
-            niazsanjiFardi.setPerson(requestNiazsanjiFardi.getPerson());
-            niazsanjiFardi.setRequestNiazsanjiFardi(requestNiazsanjiFardi);
-            niazsanjiFardi.setDescription(requestNiazsanjiFardi.getDescription());
-            niazsanjiFardi.setCode(requestNiazsanjiFardi.getCode());
-            niazsanjiFardi.setStatus(0);
+            prioritizeRequestNiazsanji.setOrganizationChart(requestNiazsanjiFardi.getOrganizationChart());
+            prioritizeRequestNiazsanji.setPerson(requestNiazsanjiFardi.getPerson());
+            prioritizeRequestNiazsanji.setRequestNiazsanjiFardi(requestNiazsanjiFardi);
+            prioritizeRequestNiazsanji.setDescription(requestNiazsanjiFardi.getDescription());
+            prioritizeRequestNiazsanji.setCode(requestNiazsanjiFardi.getCode());
+            prioritizeRequestNiazsanji.setStatus(0);
 
-            niazsanjiFardi.setEducationalModuleType(EducationalModuleType.ALL);
-            niazsanjiFardi.setEducationalModule(requestNiazsanjiFardi.getAllEducationalModule());
-            niazsanjiFardi.setPriceCost(requestNiazsanjiFardi.getCostAllEducationalModule());
-            niazsanjiFardi.setCourseType(requestNiazsanjiFardi.getCourseType());
-            niazsanjiFardi.setHasImportantMessage(requestNiazsanjiFardi.isHasImportantMessage());
-            niazsanjiFardiRepository.save(niazsanjiFardi);
+            prioritizeRequestNiazsanji.setEducationalModuleType(EducationalModuleType.ALL);
+            prioritizeRequestNiazsanji.setEducationalModule(requestNiazsanjiFardi.getAllEducationalModule());
+            prioritizeRequestNiazsanji.setCostEducationalModule(requestNiazsanjiFardi.getCostAllEducationalModule());
+            prioritizeRequestNiazsanji.setCourseType(requestNiazsanjiFardi.getCourseType());
+            prioritizeRequestNiazsanji.setHasImportantMessage(requestNiazsanjiFardi.isHasImportantMessage());
+            prioritizeRequestNiazsanji.setRequestNiazsanjiFardi(requestNiazsanjiFardi);
+            prioritizeRequestNiazsanji.setConversation(requestNiazsanjiFardi.getConversation());
+            prioritizeRequestNiazsanji.setGuid(UUID.randomUUID().toString());
+            prioritizeRequestNiazsanji.setRequestNiazsanjiType(RequestNiazsanjiType.FARDI);
+            prioritizeRequestNiazsanji.setRequestStatus(RequestStatus.NEW);
+
+            prioritizeRequestNiazsanjiRepository.save(prioritizeRequestNiazsanji);
         }
         if(requestNiazsanjiFardi.getApprovedEducationalModule() != null)
         {
-            NiazsanjiFardi niazsanjiFardi = new NiazsanjiFardi();
-            niazsanjiFardi.setCreateDate(ZonedDateTime.now());
-            niazsanjiFardi.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
-            niazsanjiFardi.setModifyDate(ZonedDateTime.now());
-            niazsanjiFardi.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
-            niazsanjiFardi.setDocuments(requestNiazsanjiFardi.getDocuments());
-            niazsanjiFardi.setArchived(false);
+            PrioritizeRequestNiazsanji prioritizeRequestNiazsanji = new PrioritizeRequestNiazsanji();
+            prioritizeRequestNiazsanji.setCreateDate(ZonedDateTime.now());
+            prioritizeRequestNiazsanji.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            prioritizeRequestNiazsanji.setModifyDate(ZonedDateTime.now());
+            prioritizeRequestNiazsanji.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            prioritizeRequestNiazsanji.setDocuments(requestNiazsanjiFardi.getDocuments());
+            prioritizeRequestNiazsanji.setArchived(false);
 
-            niazsanjiFardi.setOrganizationChart(requestNiazsanjiFardi.getOrganizationChart());
-            niazsanjiFardi.setPerson(requestNiazsanjiFardi.getPerson());
-            niazsanjiFardi.setRequestNiazsanjiFardi(requestNiazsanjiFardi);
-            niazsanjiFardi.setDescription(requestNiazsanjiFardi.getDescription());
-            niazsanjiFardi.setCode(requestNiazsanjiFardi.getCode());
-            niazsanjiFardi.setStatus(0);
+            prioritizeRequestNiazsanji.setOrganizationChart(requestNiazsanjiFardi.getOrganizationChart());
+            prioritizeRequestNiazsanji.setPerson(requestNiazsanjiFardi.getPerson());
+            prioritizeRequestNiazsanji.setRequestNiazsanjiFardi(requestNiazsanjiFardi);
+            prioritizeRequestNiazsanji.setDescription(requestNiazsanjiFardi.getDescription());
+            prioritizeRequestNiazsanji.setCode(requestNiazsanjiFardi.getCode());
+            prioritizeRequestNiazsanji.setStatus(0);
 
-            niazsanjiFardi.setEducationalModuleType(EducationalModuleType.APPROVED);
-            niazsanjiFardi.setEducationalModule(requestNiazsanjiFardi.getApprovedEducationalModule());
-            niazsanjiFardi.setPriceCost(requestNiazsanjiFardi.getCostApprovedEducationalModule());
-            niazsanjiFardi.setCourseType(requestNiazsanjiFardi.getCourseType());
-            niazsanjiFardi.setHasImportantMessage(requestNiazsanjiFardi.isHasImportantMessage());
-            niazsanjiFardiRepository.save(niazsanjiFardi);
+            prioritizeRequestNiazsanji.setEducationalModuleType(EducationalModuleType.APPROVED);
+            prioritizeRequestNiazsanji.setEducationalModule(requestNiazsanjiFardi.getApprovedEducationalModule());
+            prioritizeRequestNiazsanji.setCostEducationalModule(requestNiazsanjiFardi.getCostApprovedEducationalModule());
+            prioritizeRequestNiazsanji.setCourseType(requestNiazsanjiFardi.getCourseType());
+            prioritizeRequestNiazsanji.setHasImportantMessage(requestNiazsanjiFardi.isHasImportantMessage());
+            prioritizeRequestNiazsanji.setRequestNiazsanjiFardi(requestNiazsanjiFardi);
+            prioritizeRequestNiazsanji.setConversation(requestNiazsanjiFardi.getConversation());
+            prioritizeRequestNiazsanji.setGuid(UUID.randomUUID().toString());
+            prioritizeRequestNiazsanji.setRequestNiazsanjiType(RequestNiazsanjiType.FARDI);
+
+            prioritizeRequestNiazsanji.setRequestStatus(RequestStatus.NEW);
+
+            prioritizeRequestNiazsanjiRepository.save(prioritizeRequestNiazsanji);
         }
 
         requestNiazsanjiFardi = requestNiazsanjiFardiRepository.save(requestNiazsanjiFardi);

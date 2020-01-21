@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IInstructionAuthorityMarineSuffix } from 'app/shared/model//instruction-authority-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 
 export interface IInstructionMarineSuffix {
@@ -11,6 +12,7 @@ export interface IInstructionMarineSuffix {
     modifyUserLogin?: string;
     modifyDate?: Moment;
     guid?: string;
+    instructionAuthorities?: IInstructionAuthorityMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
 }
 
@@ -25,6 +27,7 @@ export class InstructionMarineSuffix implements IInstructionMarineSuffix {
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
         public guid?: string,
+        public instructionAuthorities?: IInstructionAuthorityMarineSuffix[],
         public documents?: IDocumentMarineSuffix[]
     ) {}
 }

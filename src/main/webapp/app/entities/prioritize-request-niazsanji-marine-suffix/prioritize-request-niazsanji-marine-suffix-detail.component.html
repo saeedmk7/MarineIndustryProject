@@ -1,0 +1,177 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="prioritizeRequestNiazsanji">
+            <h2><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.detail.title">Prioritize Request Niazsanji</span> {{prioritizeRequestNiazsanji.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.code">Code</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.costEducationalModule">Cost Educational Module</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.costEducationalModule}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.educationalModuleType">Educational Module Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.EducationalModuleType.' + prioritizeRequestNiazsanji.educationalModuleType}}">{{prioritizeRequestNiazsanji.educationalModuleType}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.description">Description</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.restrictionDescription">Restriction Description</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.restrictionDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.goalsText">Goals Text</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.goalsText}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.prerequisite">Prerequisite</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.prerequisite}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.archived">Archived</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.status">Status</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.conversation">Conversation</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.conversation}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.requestStatus">Request Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + prioritizeRequestNiazsanji.requestStatus}}">{{prioritizeRequestNiazsanji.requestStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.changeStatusUserLogin">Change Status User Login</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.changeStatusUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.guid">Guid</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.hasImportantMessage">Has Important Message</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.hasImportantMessage}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.requestNiazsanjiType">Request Niazsanji Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.RequestNiazsanjiType.' + prioritizeRequestNiazsanji.requestNiazsanjiType}}">{{prioritizeRequestNiazsanji.requestNiazsanjiType}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.priority">Priority</span></dt>
+                <dd>
+                    <span>{{prioritizeRequestNiazsanji.priority}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of prioritizeRequestNiazsanji.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.restriction">Restriction</span></dt>
+                <dd>
+                    <span *ngFor="let restriction of prioritizeRequestNiazsanji.restrictions; let last = last">
+                        <a [routerLink]="['/restriction-marine-suffix', restriction?.id, 'view' ]">{{restriction.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.requestNiazsanjiFardi">Request Niazsanji Fardi</span></dt>
+                <dd>
+                    <div *ngIf="prioritizeRequestNiazsanji.requestNiazsanjiFardiId">
+                        <a [routerLink]="['/request-niazsanji-fardi-marine-suffix', prioritizeRequestNiazsanji.requestNiazsanjiFardiId, 'view']">{{prioritizeRequestNiazsanji.requestNiazsanjiFardiCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.preJobNiazsanji">Pre Job Niazsanji</span></dt>
+                <dd>
+                    <div *ngIf="prioritizeRequestNiazsanji.preJobNiazsanjiId">
+                        <a [routerLink]="['/pre-job-niazsanji-marine-suffix', prioritizeRequestNiazsanji.preJobNiazsanjiId, 'view']">{{prioritizeRequestNiazsanji.preJobNiazsanjiTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.requestOtherNiazsanji">Request Other Niazsanji</span></dt>
+                <dd>
+                    <div *ngIf="prioritizeRequestNiazsanji.requestOtherNiazsanjiId">
+                        <a [routerLink]="['/request-other-niazsanji-marine-suffix', prioritizeRequestNiazsanji.requestOtherNiazsanjiId, 'view']">{{prioritizeRequestNiazsanji.requestOtherNiazsanjiCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.niazsanjiInput">Niazsanji Input</span></dt>
+                <dd>
+                    <div *ngIf="prioritizeRequestNiazsanji.niazsanjiInputId">
+                        <a [routerLink]="['/niazsanji-input-marine-suffix', prioritizeRequestNiazsanji.niazsanjiInputId, 'view']">{{prioritizeRequestNiazsanji.niazsanjiInputTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.courseType">Course Type</span></dt>
+                <dd>
+                    <div *ngIf="prioritizeRequestNiazsanji.courseTypeId">
+                        <a [routerLink]="['/course-type-marine-suffix', prioritizeRequestNiazsanji.courseTypeId, 'view']">{{prioritizeRequestNiazsanji.courseTypeTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.educationalModule">Educational Module</span></dt>
+                <dd>
+                    <div *ngIf="prioritizeRequestNiazsanji.educationalModuleId">
+                        <a [routerLink]="['/educational-module-marine-suffix', prioritizeRequestNiazsanji.educationalModuleId, 'view']">{{prioritizeRequestNiazsanji.educationalModuleTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="prioritizeRequestNiazsanji.personId">
+                        <a [routerLink]="['/person-marine-suffix', prioritizeRequestNiazsanji.personId, 'view']">{{prioritizeRequestNiazsanji.personFamily}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="prioritizeRequestNiazsanji.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', prioritizeRequestNiazsanji.organizationChartId, 'view']">{{prioritizeRequestNiazsanji.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.teachingApproach">Teaching Approach</span></dt>
+                <dd>
+                    <div *ngIf="prioritizeRequestNiazsanji.teachingApproachId">
+                        <a [routerLink]="['/teaching-approach-marine-suffix', prioritizeRequestNiazsanji.teachingApproachId, 'view']">{{prioritizeRequestNiazsanji.teachingApproachTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/prioritize-request-niazsanji-marine-suffix', prioritizeRequestNiazsanji.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

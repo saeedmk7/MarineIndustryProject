@@ -1,0 +1,98 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="requestOtherNiazsanji" class="detail-page">
+            <h2><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.detail.title">Request Other Niazsanji</span> {{requestOtherNiazsanji.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">مشخصات متقاضی</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="requestOtherNiazsanji.personId">
+                        <a [routerLink]="['/person-marine-suffix', requestOtherNiazsanji.personId, 'view']">{{requestOtherNiazsanji.personFamily}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="requestOtherNiazsanji.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', requestOtherNiazsanji.organizationChartId, 'view']">{{requestOtherNiazsanji.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">ورودی نیازسنجی</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.niazsanjiInput">Niazsanji Input</span></dt>
+                <dd>
+                    <div *ngIf="requestOtherNiazsanji.niazsanjiInputId">
+                        <a [routerLink]="['/niazsanji-input-marine-suffix', requestOtherNiazsanji.niazsanjiInputId, 'view']">{{requestOtherNiazsanji.niazsanjiInputTitle}}</a>
+                    </div>
+                </dd>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات پودمان های درخواستی</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.educationalModule">Educational Module</span></dt>
+                <dd>
+                    <div *ngIf="requestOtherNiazsanji.educationalModuleId">
+                        <a [routerLink]="['/educational-module-marine-suffix', requestOtherNiazsanji.educationalModuleId, 'view']">{{requestOtherNiazsanji.educationalModuleTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.costEducationalModule">Cost Educational Module</span></dt>
+                <dd>
+                    <span>{{requestOtherNiazsanji.costEducationalModule | number}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.courseType">Course Type</span></dt>
+                <dd>
+                    <div *ngIf="requestOtherNiazsanji.courseTypeId">
+                        <a [routerLink]="['/course-type-marine-suffix', requestOtherNiazsanji.courseTypeId, 'view']">{{requestOtherNiazsanji.courseTypeTitle}}</a>
+                    </div>
+                </dd>
+
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات طراحی دوره</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.restriction">Restriction</span></dt>
+                <dd>
+                    <span *ngFor="let restriction of requestOtherNiazsanji.restrictions; let last = last">
+                        <a [routerLink]="['/restriction-marine-suffix', restriction?.id, 'view' ]">{{restriction.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+
+                <dt><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.restrictionDescription">Restriction Description</span></dt>
+                <dd>
+                    <span>{{requestOtherNiazsanji.restrictionDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.teachingApproach">Teaching Approach</span></dt>
+                <dd>
+                    <div *ngIf="requestOtherNiazsanji.teachingApproachId">
+                        <a [routerLink]="['/teaching-approach-marine-suffix', requestOtherNiazsanji.teachingApproachId, 'view']">{{requestOtherNiazsanji.teachingApproachTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.goalsText">Goals Text</span></dt>
+                <dd>
+                    <span>{{requestOtherNiazsanji.goalsText}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.prerequisite">Prerequisite</span></dt>
+                <dd>
+                    <span>{{requestOtherNiazsanji.prerequisite}}</span>
+                </dd>
+
+                <dt><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{requestOtherNiazsanji.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.description">Description</span></dt>
+                <dd>
+                    <span>{{requestOtherNiazsanji.description}}</span>
+                </dd>
+
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">گردش درخواست و نظرات</div></div>
+                <textarea [disabled]="true" [rows]="rows" class="form-control">{{requestOtherNiazsanji.conversation}}</textarea>
+
+
+
+
+
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+        </div>
+    </div>
+</div>

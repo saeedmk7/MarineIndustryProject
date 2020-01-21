@@ -181,6 +181,15 @@ public class EducationalModule implements Serializable {
     @OneToMany(mappedBy = "educationalModule")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<JobNiazsanji> jobNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "educationalModule")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<NiazsanjiOther> niazsanjiOthers = new HashSet<>();
+    @OneToMany(mappedBy = "educationalModule")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<RequestOtherNiazsanji> requestOtherNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "educationalModule")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_module_scientific_work_group",
@@ -964,6 +973,81 @@ public class EducationalModule implements Serializable {
 
     public void setJobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
         this.jobNiazsanjis = jobNiazsanjis;
+    }
+
+    public Set<NiazsanjiOther> getNiazsanjiOthers() {
+        return niazsanjiOthers;
+    }
+
+    public EducationalModule niazsanjiOthers(Set<NiazsanjiOther> niazsanjiOthers) {
+        this.niazsanjiOthers = niazsanjiOthers;
+        return this;
+    }
+
+    public EducationalModule addNiazsanjiOther(NiazsanjiOther niazsanjiOther) {
+        this.niazsanjiOthers.add(niazsanjiOther);
+        niazsanjiOther.setEducationalModule(this);
+        return this;
+    }
+
+    public EducationalModule removeNiazsanjiOther(NiazsanjiOther niazsanjiOther) {
+        this.niazsanjiOthers.remove(niazsanjiOther);
+        niazsanjiOther.setEducationalModule(null);
+        return this;
+    }
+
+    public void setNiazsanjiOthers(Set<NiazsanjiOther> niazsanjiOthers) {
+        this.niazsanjiOthers = niazsanjiOthers;
+    }
+
+    public Set<RequestOtherNiazsanji> getRequestOtherNiazsanjis() {
+        return requestOtherNiazsanjis;
+    }
+
+    public EducationalModule requestOtherNiazsanjis(Set<RequestOtherNiazsanji> requestOtherNiazsanjis) {
+        this.requestOtherNiazsanjis = requestOtherNiazsanjis;
+        return this;
+    }
+
+    public EducationalModule addRequestOtherNiazsanji(RequestOtherNiazsanji requestOtherNiazsanji) {
+        this.requestOtherNiazsanjis.add(requestOtherNiazsanji);
+        requestOtherNiazsanji.setEducationalModule(this);
+        return this;
+    }
+
+    public EducationalModule removeRequestOtherNiazsanji(RequestOtherNiazsanji requestOtherNiazsanji) {
+        this.requestOtherNiazsanjis.remove(requestOtherNiazsanji);
+        requestOtherNiazsanji.setEducationalModule(null);
+        return this;
+    }
+
+    public void setRequestOtherNiazsanjis(Set<RequestOtherNiazsanji> requestOtherNiazsanjis) {
+        this.requestOtherNiazsanjis = requestOtherNiazsanjis;
+    }
+
+    public Set<PrioritizeRequestNiazsanji> getPrioritizeRequestNiazsanjis() {
+        return prioritizeRequestNiazsanjis;
+    }
+
+    public EducationalModule prioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
+        this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
+        return this;
+    }
+
+    public EducationalModule addPrioritizeRequestNiazsanji(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji) {
+        this.prioritizeRequestNiazsanjis.add(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji.setEducationalModule(this);
+        return this;
+    }
+
+    public EducationalModule removePrioritizeRequestNiazsanji(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji) {
+        this.prioritizeRequestNiazsanjis.remove(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji.setEducationalModule(null);
+        return this;
+    }
+
+    public void setPrioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
+        this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
     }
 
     public Set<ScientificWorkGroup> getScientificWorkGroups() {

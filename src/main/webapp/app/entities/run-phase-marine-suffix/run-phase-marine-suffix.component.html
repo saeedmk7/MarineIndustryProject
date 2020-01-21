@@ -21,10 +21,10 @@
                         <label class="form-control-label">منبع نیازسنجی</label>
                         <div class="form-control">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="true" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی
+                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="true" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان فردی
                             </label>
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="false" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان سازمانی (متمرکز و گروهی)
+                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="false" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان سازمانی
                             </label>
                         </div>
 
@@ -76,7 +76,7 @@
                             [(ngModel)]="runPhase.organizationChartId">
                     </div>
                     <div class="form-group half">
-                        <label class="form-control-label" for="field_organizationChart">گروه/صنعت/واحد</label>
+                        <label class="form-control-label" for="field_organizationChart">محل خدمت</label>
                         <ng-select
                             [items]="recommenedOrgCharts"
                             [multiple]="false"
@@ -173,7 +173,7 @@
                 </div>
                 <div class="card-footer text-muted success-color white-text">
                     <input type="submit" class="btn btn-primary btn-lg" id="searchButton" value="جستجو">
-                    <div style="display: inline" class="alert alert-info">برای دیدن کلیه نیازسنجی های فردی و نیازسنجی های متمرکز پس از انتخاب سال نیازسنجی دکمه جستجو را کلیک کنید.</div>
+                    <div style="display: inline" class="alert alert-info">برای دیدن کلیه نیازسنجی های فردی و نیازسنجی های سازمانی پس از انتخاب سال نیازسنجی دکمه جستجو را کلیک کنید.</div>
                     <div style="display: inline" class="alert alert-danger" *ngIf="message">{{message}}</div>
                 </div>
             </div>
@@ -267,9 +267,9 @@
             <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="finishDate" title="تاریخ دقیق برگزاری دوره" [width]="200"></kendo-grid-column>
             <kendo-grid-column field="finalNiazsanjiReportId" title="شناسه یکتا" [width]="150"></kendo-grid-column>
-            <kendo-grid-column field="organizationChartTitle" title="گروه/صنعت/واحد" [width]="500"></kendo-grid-column>
+            <kendo-grid-column field="organizationChartTitle" title="محل خدمت" [width]="500"></kendo-grid-column>
             <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
-                <kendo-excelexport-column field="organizationChartTitle" title="گروه/صنعت/واحد" [width]="300"></kendo-excelexport-column>
+                <kendo-excelexport-column field="organizationChartTitle" title="محل خدمت" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
@@ -358,9 +358,9 @@
                 <mi-run-phase-marine-suffix-detail-people [people]="dataItem.people"></mi-run-phase-marine-suffix-detail-people>
             </div>
             <kendo-grid-column field="finalNiazsanjiReportId" title="شناسه یکتا" [width]="150"></kendo-grid-column>
-            <kendo-grid-column field="organizationChartTitle" title="گروه/صنعت/واحد" [width]="500"></kendo-grid-column>
+            <kendo-grid-column field="organizationChartTitle" title="محل خدمت" [width]="500"></kendo-grid-column>
             <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
-                <kendo-excelexport-column field="organizationChartTitle" title="گروه/صنعت/واحد" [width]="300"></kendo-excelexport-column>
+                <kendo-excelexport-column field="organizationChartTitle" title="محل خدمت" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>

@@ -1,0 +1,48 @@
+{
+    "marineindustryprojApp": {
+        "niazsanjiOther": {
+            "home": {
+                "title": "Niazsanji Others",
+                "createLabel": "Create a new Niazsanji Other",
+                "createOrEditLabel": "Create or edit a Niazsanji Other"
+            },
+            "created": "A new Niazsanji Other is created with identifier {{ param }}",
+            "updated": "A Niazsanji Other is updated with identifier {{ param }}",
+            "deleted": "A Niazsanji Other is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Niazsanji Other {{ id }}?"
+            },
+            "detail": {
+                "title": "Niazsanji Other"
+            },
+            "niazsanjiYear": "Niazsanji Year",
+            "code": "Code",
+            "priceCost": "Price Cost",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "conversation": "Conversation",
+            "changeStatusUserLogin": "Change Status User Login",
+            "guid": "Guid",
+            "hasImportantMessage": "Has Important Message",
+            "restrictionDescription": "Restriction Description",
+            "goalsText": "Goals Text",
+            "prerequisite": "Prerequisite",
+            "document": "Document",
+            "restriction": "Restriction",
+            "niazsanjiInput": "Niazsanji Input",
+            "courseType": "Course Type",
+            "requestOtherNiazsanji": "Request Other Niazsanji",
+            "educationalModule": "Educational Module",
+            "person": "Person",
+            "organizationChart": "Organization Chart",
+            "teachingApproach": "Teaching Approach"
+        }
+    }
+}

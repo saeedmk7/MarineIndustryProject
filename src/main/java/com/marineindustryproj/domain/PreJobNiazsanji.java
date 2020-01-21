@@ -15,6 +15,8 @@ import java.util.Set;
 import java.util.Objects;
 
 import com.marineindustryproj.domain.enumeration.RequestStatus;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * A PreJobNiazsanji.
@@ -100,18 +102,21 @@ public class PreJobNiazsanji implements Serializable {
     @Column(name = "step", nullable = false)
     private Integer step;
 
-    @OneToMany(mappedBy = "preJobNiazsanji")
+    @OneToMany(mappedBy = "preJobNiazsanji", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<NiazsanjiFardi> niazsanjiFardis = new HashSet<>();
-    @OneToMany(mappedBy = "preJobNiazsanji")
+    @OneToMany(mappedBy = "preJobNiazsanji", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<DesignNiazsanji> designNiazsanjis = new HashSet<>();
-    @OneToMany(mappedBy = "preJobNiazsanji")
+    @OneToMany(mappedBy = "preJobNiazsanji", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PreJobNiazsanjiCompetency> preJobNiazsanjiCompetencies = new HashSet<>();
-    @OneToMany(mappedBy = "preJobNiazsanji")
+    @OneToMany(mappedBy = "preJobNiazsanji", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<JobNiazsanji> jobNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "preJobNiazsanji", orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "pre_job_niazsanji_document",
@@ -476,6 +481,31 @@ public class PreJobNiazsanji implements Serializable {
 
     public void setJobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
         this.jobNiazsanjis = jobNiazsanjis;
+    }
+
+    public Set<PrioritizeRequestNiazsanji> getPrioritizeRequestNiazsanjis() {
+        return prioritizeRequestNiazsanjis;
+    }
+
+    public PreJobNiazsanji prioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
+        this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
+        return this;
+    }
+
+    public PreJobNiazsanji addPrioritizeRequestNiazsanji(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji) {
+        this.prioritizeRequestNiazsanjis.add(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji.setPreJobNiazsanji(this);
+        return this;
+    }
+
+    public PreJobNiazsanji removePrioritizeRequestNiazsanji(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji) {
+        this.prioritizeRequestNiazsanjis.remove(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji.setPreJobNiazsanji(null);
+        return this;
+    }
+
+    public void setPrioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
+        this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
     }
 
     public Set<Document> getDocuments() {

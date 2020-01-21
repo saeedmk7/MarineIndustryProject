@@ -16,6 +16,10 @@ tr.light{ color:#818182;background-color:#fefefe;}
     cursor: pointer;
     font-family: BTitrBold;
     color: #97a0b3;
+    background-color: bisque;
+}
+.box-title:hover{
+    text-decoration: underline !important;
 }
 /*box*/
 .box {
@@ -26,6 +30,7 @@ tr.light{ color:#818182;background-color:#fefefe;}
     margin-bottom: 20px;
     width: 100%;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+
 }
 .box.box-primary {
     border-top-color: #3c8dbc;

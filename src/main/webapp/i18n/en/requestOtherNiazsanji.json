@@ -1,0 +1,48 @@
+{
+    "marineindustryprojApp": {
+        "requestOtherNiazsanji": {
+            "home": {
+                "title": "Request Other Niazsanjis",
+                "createLabel": "Create a new Request Other Niazsanji",
+                "createOrEditLabel": "Create or edit a Request Other Niazsanji"
+            },
+            "created": "A new Request Other Niazsanji is created with identifier {{ param }}",
+            "updated": "A Request Other Niazsanji is updated with identifier {{ param }}",
+            "deleted": "A Request Other Niazsanji is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Request Other Niazsanji {{ id }}?"
+            },
+            "detail": {
+                "title": "Request Other Niazsanji"
+            },
+            "code": "Code",
+            "costEducationalModule": "Cost Educational Module",
+            "description": "Description",
+            "restrictionDescription": "Restriction Description",
+            "goalsText": "Goals Text",
+            "prerequisite": "Prerequisite",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "conversation": "Conversation",
+            "requestStatus": "Request Status",
+            "changeStatusUserLogin": "Change Status User Login",
+            "guid": "Guid",
+            "hasImportantMessage": "Has Important Message",
+            "niazsanjiOther": "Niazsanji Other",
+            "document": "Document",
+            "restriction": "Restriction",
+            "niazsanjiInput": "Niazsanji Input",
+            "courseType": "Course Type",
+            "educationalModule": "Educational Module",
+            "person": "Person",
+            "organizationChart": "Organization Chart",
+            "teachingApproach": "Teaching Approach"
+        }
+    }
+}

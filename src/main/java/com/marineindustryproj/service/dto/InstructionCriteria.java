@@ -41,6 +41,8 @@ public class InstructionCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private LongFilter instructionAuthorityId;
+
     private LongFilter documentId;
 
     public LongFilter getId() {
@@ -115,6 +117,14 @@ public class InstructionCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public LongFilter getInstructionAuthorityId() {
+        return instructionAuthorityId;
+    }
+
+    public void setInstructionAuthorityId(LongFilter instructionAuthorityId) {
+        this.instructionAuthorityId = instructionAuthorityId;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -143,6 +153,7 @@ public class InstructionCriteria implements Serializable {
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(instructionAuthorityId, that.instructionAuthorityId) &&
             Objects.equals(documentId, that.documentId);
     }
 
@@ -158,6 +169,7 @@ public class InstructionCriteria implements Serializable {
         modifyUserLogin,
         modifyDate,
         guid,
+        instructionAuthorityId,
         documentId
         );
     }
@@ -174,6 +186,7 @@ public class InstructionCriteria implements Serializable {
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (instructionAuthorityId != null ? "instructionAuthorityId=" + instructionAuthorityId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
             "}";
     }

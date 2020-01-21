@@ -1,0 +1,166 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-niazsanji-integration-marine-suffix-heading" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.home.createOrEditLabel">Create or edit a Niazsanji Integration</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!niazsanjiIntegration.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="niazsanjiIntegration.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.niazsanjiYear" for="field_niazsanjiYear">Niazsanji Year</label>
+                    <input type="number" class="form-control" name="niazsanjiYear" id="field_niazsanjiYear"
+                        [(ngModel)]="niazsanjiIntegration.niazsanjiYear" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.createDate" for="field_createDate">Create Date</label>
+                    <div class="d-flex">
+                        <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="createDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.modifyUserLogin" for="field_modifyUserLogin">Modify User Login</label>
+                    <input type="text" class="form-control" name="modifyUserLogin" id="field_modifyUserLogin"
+                        [(ngModel)]="niazsanjiIntegration.modifyUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.modifyUserLogin?.dirty && editForm.controls.modifyUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.modifyUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.modifyDate" for="field_modifyDate">Modify Date</label>
+                    <div class="d-flex">
+                        <input id="field_modifyDate" type="datetime-local" class="form-control" name="modifyDate" [(ngModel)]="modifyDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.archived" for="field_archived">Archived</label>
+                    <input type="checkbox" class="form-control" name="archived" id="field_archived"
+                        [(ngModel)]="niazsanjiIntegration.archived" />
+                    <div [hidden]="!(editForm.controls.archived?.dirty && editForm.controls.archived?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.archived?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.archivedUserLogin" for="field_archivedUserLogin">Archived User Login</label>
+                    <input type="text" class="form-control" name="archivedUserLogin" id="field_archivedUserLogin"
+                        [(ngModel)]="niazsanjiIntegration.archivedUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.archivedUserLogin?.dirty && editForm.controls.archivedUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.archivedUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.archivedDate" for="field_archivedDate">Archived Date</label>
+                    <div class="d-flex">
+                        <input id="field_archivedDate" type="datetime-local" class="form-control" name="archivedDate" [(ngModel)]="archivedDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.status" for="field_status">Status</label>
+                    <input type="number" class="form-control" name="status" id="field_status"
+                        [(ngModel)]="niazsanjiIntegration.status" required/>
+                    <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.status?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.status?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.conversation" for="field_conversation">Conversation</label>
+                    <textarea class="form-control" name="conversation" id="field_conversation"
+                        [(ngModel)]="niazsanjiIntegration.conversation" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.requestStatus" for="field_requestStatus">Request Status</label>
+                    <select class="form-control" name="requestStatus" [(ngModel)]="niazsanjiIntegration.requestStatus" id="field_requestStatus" >
+                        <option value="NEW">{{'marineindustryprojApp.RequestStatus.NEW' | translate}}</option>
+                        <option value="READ">{{'marineindustryprojApp.RequestStatus.READ' | translate}}</option>
+                        <option value="IGNORE">{{'marineindustryprojApp.RequestStatus.IGNORE' | translate}}</option>
+                        <option value="ACCEPT">{{'marineindustryprojApp.RequestStatus.ACCEPT' | translate}}</option>
+                        <option value="RETURNED">{{'marineindustryprojApp.RequestStatus.RETURNED' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.changeStatusUserLogin" for="field_changeStatusUserLogin">Change Status User Login</label>
+                    <input type="text" class="form-control" name="changeStatusUserLogin" id="field_changeStatusUserLogin"
+                        [(ngModel)]="niazsanjiIntegration.changeStatusUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.changeStatusUserLogin?.dirty && editForm.controls.changeStatusUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.changeStatusUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.guid" for="field_guid">Guid</label>
+                    <input type="text" class="form-control" name="guid" id="field_guid"
+                        [(ngModel)]="niazsanjiIntegration.guid" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.guid?.dirty && editForm.controls.guid?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.guid?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.hasImportantMessage" for="field_hasImportantMessage">Has Important Message</label>
+                    <input type="checkbox" class="form-control" name="hasImportantMessage" id="field_hasImportantMessage"
+                        [(ngModel)]="niazsanjiIntegration.hasImportantMessage" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.requestNiazsanjiType" for="field_requestNiazsanjiType">Request Niazsanji Type</label>
+                    <select class="form-control" name="requestNiazsanjiType" [(ngModel)]="niazsanjiIntegration.requestNiazsanjiType" id="field_requestNiazsanjiType"  required>
+                        <option value="FARDI">{{'marineindustryprojApp.RequestNiazsanjiType.FARDI' | translate}}</option>
+                        <option value="JOB">{{'marineindustryprojApp.RequestNiazsanjiType.JOB' | translate}}</option>
+                        <option value="OTHER">{{'marineindustryprojApp.RequestNiazsanjiType.OTHER' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.requestNiazsanjiType?.dirty && editForm.controls.requestNiazsanjiType?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.requestNiazsanjiType?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.priority" for="field_priority">Priority</label>
+                    <input type="number" class="form-control" name="priority" id="field_priority"
+                        [(ngModel)]="niazsanjiIntegration.priority" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiIntegration.prioritizeRequestNiazsanji" for="field_prioritizeRequestNiazsanji">Prioritize Request Niazsanji</label>
+                    <select class="form-control" id="field_prioritizeRequestNiazsanji" name="prioritizeRequestNiazsanji" [(ngModel)]="niazsanjiIntegration.prioritizeRequestNiazsanjiId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="prioritizeRequestNiazsanjiOption.id" *ngFor="let prioritizeRequestNiazsanjiOption of prioritizerequestniazsanjis; trackBy: trackPrioritizeRequestNiazsanjiById">{{prioritizeRequestNiazsanjiOption.code}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

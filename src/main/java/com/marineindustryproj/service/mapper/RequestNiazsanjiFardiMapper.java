@@ -25,6 +25,7 @@ public interface RequestNiazsanjiFardiMapper extends EntityMapper<RequestNiazsan
     RequestNiazsanjiFardiDTO toDto(RequestNiazsanjiFardi requestNiazsanjiFardi);
 
     @Mapping(target = "niazsanjiFardis", ignore = true)
+    @Mapping(target = "prioritizeRequestNiazsanjis", ignore = true)
     @Mapping(source = "courseTypeId", target = "courseType")
     @Mapping(source = "approvedEducationalModuleId", target = "approvedEducationalModule")
     @Mapping(source = "allEducationalModuleId", target = "allEducationalModule")

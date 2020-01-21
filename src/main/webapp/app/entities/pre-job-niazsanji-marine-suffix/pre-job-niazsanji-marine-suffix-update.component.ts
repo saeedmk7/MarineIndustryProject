@@ -252,16 +252,30 @@ export class PreJobNiazsanjiMarineSuffixUpdateComponent implements OnInit {
     }
 
     onPersonChange(event: IPersonMarineSuffix) {
+        if(event.id) {
+            this.personService.find(event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
+                    debugger;
+                    const findPerson = resp.body;
+                    if (this.organizationcharts.find(a => a.id == findPerson.organizationChartId)) {
+                        this.preJobNiazsanji.organizationChartId = findPerson.organizationChartId;
+                    }
+                    else {
+                        this.organizationChartService.find(findPerson.organizationChartId).subscribe((org: HttpResponse<IOrganizationChartMarineSuffix>) => {
+                                this.organizationcharts.push(org.body);
+                                this.preJobNiazsanji.organizationChartId = findPerson.organizationChartId;
+                            },
+                            (res: HttpErrorResponse) => this.onError(res.message));
+                    }
+                },
+                (error) => this.onError("موردی یافت نشد"));
+        }
         if (event.jobId) {
-
             this.jobNotFoundError = "";
             this.jobService.find(event.jobId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
                     this.job = resp.body;
                     this.preJobNiazsanji.reviewDate = this.job.reviewDate;
                 },
                 (res: HttpErrorResponse) => this.onError(res.message));
-
-            this.preJobNiazsanji.organizationChartId = event.organizationChartId;
         }
         else
         {
@@ -292,13 +306,20 @@ export class PreJobNiazsanjiMarineSuffixUpdateComponent implements OnInit {
                     this.preJobNiazsanji.step = 2;
                     this.preJobNiazsanji.archived = false;
                     this.preJobNiazsanji.preJobNiazsanjiCompetencies = [];
-                    this.competencies.forEach(a => a.selectedItems.forEach(w => {
-                        let newPreJob: IPreJobNiazsanjiCompetencyMarineSuffix = {
-                            title: w,
-                            competencyId: a.id,
-                        };
-                        this.preJobNiazsanji.preJobNiazsanjiCompetencies.push(newPreJob);
-                    }));
+                    debugger;
+                    this.competencies.forEach(a => {
+                        if (a.selectedItems) {
+                            a.selectedItems.forEach(w => {
+                                debugger;
+                                let newPreJob: IPreJobNiazsanjiCompetencyMarineSuffix = {
+                                    title: w,
+                                    competencyId: a.id,
+                                };
+                                this.preJobNiazsanji.preJobNiazsanjiCompetencies.push(newPreJob);
+                            })
+                        }
+                    });
+                    debugger;
                     this.preJobNiazsanji.requestStatus = RequestStatus.NEW;
                     this.preJobNiazsanji.changeStatusUserLogin = this.currentAccount.login;
                     this.preJobNiazsanji.conversation = " درخواست توسط " + this.currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " ثبت شد. "

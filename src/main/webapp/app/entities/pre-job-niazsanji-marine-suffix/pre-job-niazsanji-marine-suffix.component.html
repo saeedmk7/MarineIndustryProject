@@ -19,7 +19,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -44,7 +44,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let preJobNiazsanji of preJobNiazsanjis ;let i = index" [ngClass]="{'new': preJobNiazsanji.requestStatus == 'NEW','accept': preJobNiazsanji.requestStatus === 'ACCEPT','ignore': preJobNiazsanji.requestStatus === 'IGNORE'}">
+            <tr *ngFor="let preJobNiazsanji of preJobNiazsanjis ;let i = index"
+                [ngClass]="{'new': preJobNiazsanji.requestStatus == 'NEW','read': preJobNiazsanji.requestStatus == 'READ','accept': preJobNiazsanji.requestStatus === 'ACCEPT','ignore': preJobNiazsanji.requestStatus === 'IGNORE'}">
                 <td>{{i + 1}}</td>
                 <td><a [routerLink]="['/pre-job-niazsanji-marine-suffix', preJobNiazsanji.id, 'view' ]">{{preJobNiazsanji.id}}</a></td>
                 <td>
@@ -57,7 +58,7 @@
                         <a [routerLink]="['../person-marine-suffix', preJobNiazsanji.personId , 'view' ]" >{{preJobNiazsanji.personFamily}}</a>
                     </div>
                 </td>
-                <td>{{preJobNiazsanji.title}}</td>
+                <!--<td>{{preJobNiazsanji.title}}</td>-->
                 <!--<td>{{preJobNiazsanji.reviewDate}}</td>
                 <td>{{preJobNiazsanji.code}}</td>-->
                 <td>{{preJobNiazsanji.description}}</td>

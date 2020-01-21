@@ -92,6 +92,12 @@ import { MarineindustryprojPriorityCriteriaValueMarineSuffixModule } from './pri
 import { MarineindustryprojPriorityCriteriaMarineSuffixModule } from './priority-criteria-marine-suffix/priority-criteria-marine-suffix.module';
 import {MarineindustryprojPreJobNiazsanjiStepsMarineSuffixModule} from "app/entities/pre-job-niazsanji-steps-marine-suffix/pre-job-niazsanji-steps-marine-suffix.module";
 import {MarineindustryprojJobNiazsanjiMarineSuffixModule} from "app/entities/job-niazsanji-marine-suffix/job-niazsanji-marine-suffix.module";
+import {MarineindustryprojNiazsanjiOtherMarineSuffixModule} from "app/entities/niazsanji-other-marine-suffix/niazsanji-other-marine-suffix.module";
+import {MarineindustryprojNiazsanjiInputMarineSuffixModule} from "app/entities/niazsanji-input-marine-suffix/niazsanji-input-marine-suffix.module";
+import {MarineindustryprojRequestOtherNiazsanjiMarineSuffixModule} from "app/entities/request-other-niazsanji-marine-suffix/request-other-niazsanji-marine-suffix.module";
+import {MarineindustryprojInstructionAuthorityMarineSuffixModule} from "app/entities/instruction-authority-marine-suffix/instruction-authority-marine-suffix.module";
+import {MarineindustryprojNiazsanjiIntegrationMarineSuffixModule} from "app/entities/niazsanji-integration-marine-suffix/niazsanji-integration-marine-suffix.module";
+import {MarineindustryprojPrioritizeRequestNiazsanjiMarineSuffixModule} from "app/entities/prioritize-request-niazsanji-marine-suffix/prioritize-request-niazsanji-marine-suffix.module";
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -166,6 +172,7 @@ import {MarineindustryprojJobNiazsanjiMarineSuffixModule} from "app/entities/job
         MarineindustryprojJamHelpMarineSuffixModule,
         MarineindustryprojJamHelpAuthorityMarineSuffixModule,
         MarineindustryprojInstructionMarineSuffixModule,
+        MarineindustryprojInstructionAuthorityMarineSuffixModule,
         MarineindustryprojEducationalRecordMarineSuffixModule,
         MarineindustryprojJobRecordMarineSuffixModule,
         MarineindustryprojPersonEducationalRecordsMarineSuffixModule,
@@ -185,8 +192,12 @@ import {MarineindustryprojJobNiazsanjiMarineSuffixModule} from "app/entities/job
         MarineindustryprojPriorityCriteriaValueMarineSuffixModule,
         MarineindustryprojPriorityCriteriaMarineSuffixModule,
         MarineindustryprojPreJobNiazsanjiStepsMarineSuffixModule,
-        MarineindustryprojJobNiazsanjiMarineSuffixModule
-
+        MarineindustryprojJobNiazsanjiMarineSuffixModule,
+        MarineindustryprojNiazsanjiOtherMarineSuffixModule,
+        MarineindustryprojRequestOtherNiazsanjiMarineSuffixModule,
+        MarineindustryprojNiazsanjiInputMarineSuffixModule,
+        MarineindustryprojPrioritizeRequestNiazsanjiMarineSuffixModule,
+        MarineindustryprojNiazsanjiIntegrationMarineSuffixModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

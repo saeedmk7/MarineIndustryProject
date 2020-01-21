@@ -624,6 +624,9 @@ nav.back-cover {
     text-decoration: underline !important;
     pointer-events: auto !important;
 }
+tr.read td {
+    color: darkgreen;
+}
 tr.accept td {
     color: green;
 }

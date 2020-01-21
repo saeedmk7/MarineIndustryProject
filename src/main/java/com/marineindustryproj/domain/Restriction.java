@@ -94,6 +94,21 @@ public class Restriction implements Serializable {
     @JsonIgnore
     private Set<JobNiazsanji> jobNiazsanjis = new HashSet<>();
 
+    @ManyToMany(mappedBy = "restrictions")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<NiazsanjiOther> niazsanjiOthers = new HashSet<>();
+
+    @ManyToMany(mappedBy = "restrictions")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<RequestOtherNiazsanji> requestOtherNiazsanjis = new HashSet<>();
+
+    @ManyToMany(mappedBy = "restrictions")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -392,6 +407,81 @@ public class Restriction implements Serializable {
 
     public void setJobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
         this.jobNiazsanjis = jobNiazsanjis;
+    }
+
+    public Set<NiazsanjiOther> getNiazsanjiOthers() {
+        return niazsanjiOthers;
+    }
+
+    public Restriction niazsanjiOthers(Set<NiazsanjiOther> niazsanjiOthers) {
+        this.niazsanjiOthers = niazsanjiOthers;
+        return this;
+    }
+
+    public Restriction addNiazsanjiOther(NiazsanjiOther niazsanjiOther) {
+        this.niazsanjiOthers.add(niazsanjiOther);
+        niazsanjiOther.getRestrictions().add(this);
+        return this;
+    }
+
+    public Restriction removeNiazsanjiOther(NiazsanjiOther niazsanjiOther) {
+        this.niazsanjiOthers.remove(niazsanjiOther);
+        niazsanjiOther.getRestrictions().remove(this);
+        return this;
+    }
+
+    public void setNiazsanjiOthers(Set<NiazsanjiOther> niazsanjiOthers) {
+        this.niazsanjiOthers = niazsanjiOthers;
+    }
+
+    public Set<RequestOtherNiazsanji> getRequestOtherNiazsanjis() {
+        return requestOtherNiazsanjis;
+    }
+
+    public Restriction requestOtherNiazsanjis(Set<RequestOtherNiazsanji> requestOtherNiazsanjis) {
+        this.requestOtherNiazsanjis = requestOtherNiazsanjis;
+        return this;
+    }
+
+    public Restriction addRequestOtherNiazsanji(RequestOtherNiazsanji requestOtherNiazsanji) {
+        this.requestOtherNiazsanjis.add(requestOtherNiazsanji);
+        requestOtherNiazsanji.getRestrictions().add(this);
+        return this;
+    }
+
+    public Restriction removeRequestOtherNiazsanji(RequestOtherNiazsanji requestOtherNiazsanji) {
+        this.requestOtherNiazsanjis.remove(requestOtherNiazsanji);
+        requestOtherNiazsanji.getRestrictions().remove(this);
+        return this;
+    }
+
+    public void setRequestOtherNiazsanjis(Set<RequestOtherNiazsanji> requestOtherNiazsanjis) {
+        this.requestOtherNiazsanjis = requestOtherNiazsanjis;
+    }
+
+    public Set<PrioritizeRequestNiazsanji> getPrioritizeRequestNiazsanjis() {
+        return prioritizeRequestNiazsanjis;
+    }
+
+    public Restriction prioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
+        this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
+        return this;
+    }
+
+    public Restriction addPrioritizeRequestNiazsanji(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji) {
+        this.prioritizeRequestNiazsanjis.add(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji.getRestrictions().add(this);
+        return this;
+    }
+
+    public Restriction removePrioritizeRequestNiazsanji(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji) {
+        this.prioritizeRequestNiazsanjis.remove(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji.getRestrictions().remove(this);
+        return this;
+    }
+
+    public void setPrioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
+        this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

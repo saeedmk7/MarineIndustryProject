@@ -33,6 +33,9 @@ public interface DocumentMapper extends EntityMapper<DocumentDTO, Document> {
     @Mapping(target = "mediaAwarenessReports", ignore = true)
     @Mapping(target = "preJobNiazsanjis", ignore = true)
     @Mapping(target = "jobNiazsanjis", ignore = true)
+    @Mapping(target = "niazsanjiOthers", ignore = true)
+    @Mapping(target = "requestOtherNiazsanjis", ignore = true)
+    @Mapping(target = "prioritizeRequestNiazsanjis", ignore = true)
     Document toEntity(DocumentDTO documentDTO);
 
     default Document fromId(Long id) {

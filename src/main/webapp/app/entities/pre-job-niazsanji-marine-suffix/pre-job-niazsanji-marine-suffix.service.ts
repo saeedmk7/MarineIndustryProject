@@ -61,6 +61,13 @@ export class PreJobNiazsanjiMarineSuffixService {
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
+    count(req?: any): Observable<EntityResponseType> {
+        const options = createRequestOption(req);
+        return this.http
+            .get<any>(`${this.resourceUrl}/count`, { params: options, observe: 'response' })
+            .pipe(map((res: EntityResponseType) => res));
+    }
+
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }

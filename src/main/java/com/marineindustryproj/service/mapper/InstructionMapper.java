@@ -12,6 +12,8 @@ import org.mapstruct.*;
 public interface InstructionMapper extends EntityMapper<InstructionDTO, Instruction> {
 
 
+    @Mapping(target = "instructionAuthorities", ignore = true)
+    Instruction toEntity(InstructionDTO instructionDTO);
 
     default Instruction fromId(Long id) {
         if (id == null) {

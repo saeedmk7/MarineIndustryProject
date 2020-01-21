@@ -1,0 +1,30 @@
+{
+    "marineindustryprojApp": {
+        "niazsanjiInput": {
+            "home": {
+                "title": "ورودی نیازسنجی",
+                "createLabel": "جدید",
+                "createOrEditLabel": " ورودی نیازسنجی"
+            },
+            "created": "ورودی نیازسنجی با شناسه {{ param }} ایجاد شد.",
+            "updated": "ورودی نیازسنجی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "ورودی نیازسنجی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف ورودی نیازسنجی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات ورودی نیازسنجی"
+            },
+            "title": "عنوان",
+            "description": "توضیحات",
+            "displayOrder": "ترتیب نمایش",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "finalNiazsanjiReport": "Final Niazsanji Report",
+            "niazsanjiOther": "Niazsanji Other",
+            "requestOtherNiazsanji": "Request Other Niazsanji"
+        }
+    }
+}

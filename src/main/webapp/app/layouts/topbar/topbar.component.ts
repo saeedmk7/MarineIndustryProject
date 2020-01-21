@@ -32,6 +32,8 @@
     import {NiazsanjiFardiMarineSuffixService} from "app/entities/niazsanji-fardi-marine-suffix";
     import {FinalOrganizationNiazsanjiMarineSuffixService} from "app/entities/final-organization-niazsanji-marine-suffix";
     import {EducationalHistoryMarineSuffixService} from "app/entities/educational-history-marine-suffix/educational-history-marine-suffix.service";
+    import {RequestOtherNiazsanjiMarineSuffixService} from "app/entities/request-other-niazsanji-marine-suffix";
+    import {PreJobNiazsanjiMarineSuffixService} from "app/entities/pre-job-niazsanji-marine-suffix";
 
     @Component({
     selector: 'mi-topbar',
@@ -59,6 +61,8 @@
     educationalModuleRequestCounter: number;
     educationalHistoryCounter: number;
     niazSanjiFardiRequestCounter: number;
+    niazsanjiOtherCounter: number;
+    niazsanjiJobCounter: number;
     niazSanjiFardiCounter: number;
     finalOrganizationNiazsanjiConter: number;
     imgUrl: string = "";
@@ -86,6 +90,8 @@
     constructor(
         private userService: UserService,
         protected requestNiazsanjiFardiService: RequestNiazsanjiFardiMarineSuffixService,
+        protected requestOtherNiazsanjiService: RequestOtherNiazsanjiMarineSuffixService,
+        protected preJobNiazsanjiService: PreJobNiazsanjiMarineSuffixService,
         protected niazsanjiFardiService: NiazsanjiFardiMarineSuffixService,
         protected finalOrganizationNiazsanjiService: FinalOrganizationNiazsanjiMarineSuffixService,
         private educationalModuleService: EducationalModuleMarineSuffixService,
@@ -181,8 +187,10 @@
             this.intervals = setInterval(() => {         //replaced function() by ()=>
                 this.getNewRequestOrganization();
                 this.countAllRequestNiazSanjiFardi();
+                this.countRequestNiazsanjiOther();
+                this.countPreJob();
                 this.getNewUsersRequest();
-                this.getFinalNiazSanjiFardis();
+                //this.getFinalNiazSanjiFardis();
                 this.getFinalorganizationNiazsanji();
                 this.getEducationalHistories();
                 if(this.isTopUsers)
@@ -418,8 +426,10 @@
             this.currentUserFullName = this.user.login;
         }
         this.countAllRequestNiazSanjiFardi();
+        this.countPreJob();
+        this.countRequestNiazsanjiOther();
         this.getNewRequestOrganization();
-        this.getFinalNiazSanjiFardis();
+        //this.getFinalNiazSanjiFardis();
         this.getFinalorganizationNiazsanji();
         this.getEducationalHistories();
         if(this.isTopUsers)
@@ -550,6 +560,58 @@
                 .subscribe(
                     (res: HttpResponse<any>) => {
                         this.niazSanjiFardiRequestCounter = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+    }
+    countRequestNiazsanjiOther() {
+        if(this.currentPerson) {
+            let orgId = this.currentPerson.organizationChartId;
+            let criteria = [{
+                key: 'status.equals',
+                value: orgId
+            },
+                {
+                    key: 'requestStatus.equals',
+                    value: 'NEW'
+                }];
+            this.requestOtherNiazsanjiService
+                .count({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: null
+                })
+                .subscribe(
+                    (res: HttpResponse<any>) => {
+                        this.niazsanjiOtherCounter = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+    }
+    countPreJob() {
+        if(this.currentPerson) {
+            let orgId = this.currentPerson.organizationChartId;
+            let criteria = [{
+                key: 'status.equals',
+                value: orgId
+            },
+                {
+                    key: 'requestStatus.equals',
+                    value: 'NEW'
+                }];
+            this.preJobNiazsanjiService
+                .count({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: null
+                })
+                .subscribe(
+                    (res: HttpResponse<any>) => {
+                        this.niazsanjiJobCounter = res.body;
                     },
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );

@@ -10,6 +10,10 @@ import { IRequestNiazsanjiFardiMarineSuffix } from 'app/shared/model//request-ni
 import { IEducationalHistoryMarineSuffix } from 'app/shared/model//educational-history-marine-suffix.model';
 import { IDesignNiazsanjiMarineSuffix } from 'app/shared/model//design-niazsanji-marine-suffix.model';
 import { IPreJobNiazsanjiCompetencyMarineSuffix } from 'app/shared/model//pre-job-niazsanji-competency-marine-suffix.model';
+import { IJobNiazsanjiMarineSuffix } from 'app/shared/model//job-niazsanji-marine-suffix.model';
+import { INiazsanjiOtherMarineSuffix } from 'app/shared/model//niazsanji-other-marine-suffix.model';
+import { IRequestOtherNiazsanjiMarineSuffix } from 'app/shared/model//request-other-niazsanji-marine-suffix.model';
+import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model//prioritize-request-niazsanji-marine-suffix.model';
 import { IScientificWorkGroupMarineSuffix } from 'app/shared/model//scientific-work-group-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IEducationalCenterMarineSuffix } from 'app/shared/model//educational-center-marine-suffix.model';
@@ -64,6 +68,10 @@ export interface IEducationalModuleMarineSuffix {
     educationalHistories?: IEducationalHistoryMarineSuffix[];
     designNiazsanjis?: IDesignNiazsanjiMarineSuffix[];
     preJobNiazsanjiCompetencies?: IPreJobNiazsanjiCompetencyMarineSuffix[];
+    jobNiazsanjis?: IJobNiazsanjiMarineSuffix[];
+    niazsanjiOthers?: INiazsanjiOtherMarineSuffix[];
+    requestOtherNiazsanjis?: IRequestOtherNiazsanjiMarineSuffix[];
+    prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[];
     scientificWorkGroups?: IScientificWorkGroupMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     educationalCenters?: IEducationalCenterMarineSuffix[];
@@ -130,6 +138,10 @@ export class EducationalModuleMarineSuffix implements IEducationalModuleMarineSu
         public educationalHistories?: IEducationalHistoryMarineSuffix[],
         public designNiazsanjis?: IDesignNiazsanjiMarineSuffix[],
         public preJobNiazsanjiCompetencies?: IPreJobNiazsanjiCompetencyMarineSuffix[],
+        public jobNiazsanjis?: IJobNiazsanjiMarineSuffix[],
+        public niazsanjiOthers?: INiazsanjiOtherMarineSuffix[],
+        public requestOtherNiazsanjis?: IRequestOtherNiazsanjiMarineSuffix[],
+        public prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[],
         public scientificWorkGroups?: IScientificWorkGroupMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public educationalCenters?: IEducationalCenterMarineSuffix[],

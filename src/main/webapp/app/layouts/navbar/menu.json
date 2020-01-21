@@ -88,7 +88,7 @@
     },
     {
         "id": 15,
-        "title": "درخواست نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی",
+        "title": "درخواست نیازسنجی پودمان فردی",
         "url": "#/request-organization-niazsanji-marine-suffix",
         "faicon": "receipt",
         "is_active": true,

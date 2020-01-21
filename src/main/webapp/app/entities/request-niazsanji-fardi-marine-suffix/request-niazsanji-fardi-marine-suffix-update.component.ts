@@ -45,7 +45,6 @@ import * as $ from 'jquery';
 export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit {
     requestNiazsanjiFardi: IRequestNiazsanjiFardiMarineSuffix;
     recommenedOrgCharts: IOrganizationChartMarineSuffix[];
-    homePagePersonEducationalModules: IHomePagePersonEducationalModule[] = [];
     orgChartDisabled: boolean;
     isSaving: boolean;
     coursetypes: ICourseTypeMarineSuffix[];
@@ -207,7 +206,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
                     (res: HttpErrorResponse) => this.onError(res.message));
             }
         }
-        if(this.isModirAmozesh){
+        else {
             let criteria = [{
                 key:'organizationChartId.in',
                 value: this.recommenedOrgCharts.map(a => a.id)
@@ -242,7 +241,18 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         if(event.id){
             this.personService.find(event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
                     debugger;
-                    this.requestNiazsanjiFardi.organizationChartId = resp.body.organizationChartId;
+                    const findPerson = resp.body;
+                    if(this.organizationcharts.find(a => a.id == findPerson.organizationChartId))
+                    {
+                        this.requestNiazsanjiFardi.organizationChartId = findPerson.organizationChartId;
+                    }
+                    else{
+                        this.organizationChartService.find(findPerson.organizationChartId).subscribe((org: HttpResponse<IOrganizationChartMarineSuffix>) => {
+                                this.organizationcharts.push(org.body);
+                                this.requestNiazsanjiFardi.organizationChartId = findPerson.organizationChartId;
+                            },
+                            (res: HttpErrorResponse) => this.onError(res.message));
+                    }
                 },
                 (error) => this.onError("موردی یافت نشد"));
             const criteria = [{
@@ -313,7 +323,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         }
         else{
             this.targetPeople = [];
-            this.targetPeople.push(new PersonMarineSuffix(0, 'ثبت نهایی', 'ثبت نهایی', 'درخواست شما پس از ثبت تایید نهایی می شود و برای کارشناس ارشد آموزش سازمان برای بازبینی ارسال می شود.'));
+            this.targetPeople.push(new PersonMarineSuffix(0, 'ثبت نهایی', 'ثبت نهایی', 'درخواست شما پس از ثبت تایید در لیست اولویت بندی قرار میگیرد. برای ارسال نیازسنجی به کارشناس ارشد آموزش جهت بازبینی از لیست اولویت بندی استفاده نمائید.'));
         }
     }
 
@@ -454,7 +464,7 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         }
 
         if (this.requestNiazsanjiFardi.organizationChartId == undefined) {
-            this.message = "لطفا قسمت گروه/صنعت/واحد را انتخاب نمائید.";
+            this.message = "لطفا قسمت محل خدمت را انتخاب نمائید.";
             this.isSaving = false;
             return;
         }

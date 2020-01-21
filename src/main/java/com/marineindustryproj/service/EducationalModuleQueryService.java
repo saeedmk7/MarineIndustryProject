@@ -225,6 +225,18 @@ public class EducationalModuleQueryService extends QueryService<EducationalModul
                 specification = specification.and(buildSpecification(criteria.getJobNiazsanjiId(),
                     root -> root.join(EducationalModule_.jobNiazsanjis, JoinType.LEFT).get(JobNiazsanji_.id)));
             }
+            if (criteria.getNiazsanjiOtherId() != null) {
+                specification = specification.and(buildSpecification(criteria.getNiazsanjiOtherId(),
+                    root -> root.join(EducationalModule_.niazsanjiOthers, JoinType.LEFT).get(NiazsanjiOther_.id)));
+            }
+            if (criteria.getRequestOtherNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRequestOtherNiazsanjiId(),
+                    root -> root.join(EducationalModule_.requestOtherNiazsanjis, JoinType.LEFT).get(RequestOtherNiazsanji_.id)));
+            }
+            if (criteria.getPrioritizeRequestNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPrioritizeRequestNiazsanjiId(),
+                    root -> root.join(EducationalModule_.prioritizeRequestNiazsanjis, JoinType.LEFT).get(PrioritizeRequestNiazsanji_.id)));
+            }
             if (criteria.getScientificWorkGroupId() != null) {
                 specification = specification.and(buildSpecification(criteria.getScientificWorkGroupId(),
                     root -> root.join(EducationalModule_.scientificWorkGroups, JoinType.LEFT).get(ScientificWorkGroup_.id)));

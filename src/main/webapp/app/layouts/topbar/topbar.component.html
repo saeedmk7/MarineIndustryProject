@@ -8,11 +8,27 @@
     </div>
     <div class="col-xs-12 bgWhite lightShadow topMenu">
         <ul class="nav justify-content-end" style="padding-inline-start: 0px; font-size: larger">
-            <li class="nav-item seperate-left seperate-right" title="درخواست های جدید نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی">
+            <li class="nav-item seperate-left seperate-right" title="درخواست های جدید نیازسنجی پودمان فردی">
                 <a class="nav-link excepted-menu" href="#/request-niazsanji-fardi-marine-suffix">
                     <span class="bell-contain" style="padding: 6px">
                     <fa-icon [icon]="'flag'"></fa-icon>
                     <span *ngIf="niazSanjiFardiRequestCounter != undefined" class="badge badge-info">{{niazSanjiFardiRequestCounter}}</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item seperate-left seperate-right" title="درخواست های جدید نیازسنجی پودمان شغلی">
+                <a class="nav-link excepted-menu" href="#/pre-job-niazsanji-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'toolbox'"></fa-icon>
+                    <span *ngIf="niazsanjiJobCounter != undefined" class="badge badge-info">{{niazsanjiJobCounter}}</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item seperate-left seperate-right" title="درخواست های جدید نیازسنجی سایر">
+                <a class="nav-link excepted-menu" href="#/request-other-niazsanji-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'question'"></fa-icon>
+                    <span *ngIf="niazsanjiOtherCounter != undefined" class="badge badge-info">{{niazsanjiOtherCounter}}</span>
                     </span>
                 </a>
             </li>
@@ -32,7 +48,7 @@
                     </span>
                 </a>
             </li>
-            <li class="nav-item seperate-left seperate-right" *ngIf="isModirAmozesh" title="تعداد درخواست های نیازسنجی متمرکز">
+            <li class="nav-item seperate-left seperate-right" *ngIf="isModirAmozesh" title="تعداد درخواست های نیازسنجی سازمانی">
                 <a class="nav-link excepted-menu" href="#/request-organization-niazsanji-marine-suffix">
                     <span class="bell-contain" style="padding: 6px">
                     <fa-icon [icon]="'bell'"></fa-icon>
@@ -50,15 +66,15 @@
             </li>
 
             <ng-container *ngIf="isModirKolAmozesh || isKarshenasArshadAmozeshSazman" >
-                <li class="nav-item seperate-left seperate-right" title="تعداد درخواست های نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی اجرا نشده">
+                <!--<li class="nav-item seperate-left seperate-right" title="تعداد درخواست های نیازسنجی پودمان فردی اجرا نشده">
                     <a class="nav-link excepted-menu" href="#/niazsanji-fardi-marine-suffix">
                         <span class="bell-contain" style="padding: 6px">
                         <fa-icon [icon]="'flag'"></fa-icon>
                         <span *ngIf="niazSanjiFardiCounter != undefined" class="badge badge-info">{{niazSanjiFardiCounter}}</span>
                         </span>
                     </a>
-                </li>
-                <li class="nav-item seperate-left seperate-right" title="تعداد درخواست های نیازسنجی پودمان سازمانی (متمرکز و گروهی) اجرا نشده">
+                </li>-->
+                <li class="nav-item seperate-left seperate-right" title="تعداد درخواست های نیازسنجی پودمان سازمانی اجرا نشده">
                     <a class="nav-link excepted-menu" href="#/final-organization-niazsanji-marine-suffix">
                         <span class="bell-contain" style="padding: 6px">
                         <fa-icon [icon]="'bell'"></fa-icon>

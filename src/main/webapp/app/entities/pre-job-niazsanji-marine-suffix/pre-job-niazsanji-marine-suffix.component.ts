@@ -316,7 +316,7 @@ export class PreJobNiazsanjiMarineSuffixComponent implements OnInit, OnDestroy {
             this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
                 this.currentPerson = resp.body;
                 /*this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleId', 'number', 'equals'));*/
-                this.searchbarModel.push(new SearchPanelModel('preJobNiazsanji', 'title', 'text', 'contains'));
+                //this.searchbarModel.push(new SearchPanelModel('preJobNiazsanji', 'title', 'text', 'contains'));
                 this.prepareSearchOrgChart();
                 this.prepareDate();
             })

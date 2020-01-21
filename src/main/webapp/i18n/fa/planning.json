@@ -41,8 +41,8 @@
             "educationalModule": "پودمان آموزشی",
             "educationalModuleId": "پودمان آموزشی",
             "educationalModuleTitle": "عنوان پودمان آموزشی",
-            "organizationChart": "گروه/صنعت/واحد",
-            "organizationChartId": "گروه/صنعت/واحد",
+            "organizationChart": "محل خدمت",
+            "organizationChartId": "محل خدمت",
             "person": "نام و نام خانوادگی",
             "personId": "نام و نام خانوادگی"
         }

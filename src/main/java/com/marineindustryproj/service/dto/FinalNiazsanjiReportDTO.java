@@ -65,13 +65,23 @@ public class FinalNiazsanjiReportDTO implements Serializable {
     @Size(max = 4096)
     private String prerequisite;
 
+    private Integer priority;
+
     private Set<DocumentDTO> documents = new HashSet<>();
 
     private Set<RestrictionDTO> restrictions = new HashSet<>();
 
+    private Long niazsanjiIntegrationId;
+
+    private String niazsanjiIntegrationNiazsanjiYear;
+
     private Long teacherId;
 
     private String teacherFamily;
+
+    private Long niazsanjiInputId;
+
+    private String niazsanjiInputTitle;
 
     private Long courseTypeId;
 
@@ -257,6 +267,14 @@ public class FinalNiazsanjiReportDTO implements Serializable {
         this.prerequisite = prerequisite;
     }
 
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
@@ -273,6 +291,22 @@ public class FinalNiazsanjiReportDTO implements Serializable {
         this.restrictions = restrictions;
     }
 
+    public Long getNiazsanjiIntegrationId() {
+        return niazsanjiIntegrationId;
+    }
+
+    public void setNiazsanjiIntegrationId(Long niazsanjiIntegrationId) {
+        this.niazsanjiIntegrationId = niazsanjiIntegrationId;
+    }
+
+    public String getNiazsanjiIntegrationNiazsanjiYear() {
+        return niazsanjiIntegrationNiazsanjiYear;
+    }
+
+    public void setNiazsanjiIntegrationNiazsanjiYear(String niazsanjiIntegrationNiazsanjiYear) {
+        this.niazsanjiIntegrationNiazsanjiYear = niazsanjiIntegrationNiazsanjiYear;
+    }
+
     public Long getTeacherId() {
         return teacherId;
     }
@@ -287,6 +321,22 @@ public class FinalNiazsanjiReportDTO implements Serializable {
 
     public void setTeacherFamily(String teacherFamily) {
         this.teacherFamily = teacherFamily;
+    }
+
+    public Long getNiazsanjiInputId() {
+        return niazsanjiInputId;
+    }
+
+    public void setNiazsanjiInputId(Long niazsanjiInputId) {
+        this.niazsanjiInputId = niazsanjiInputId;
+    }
+
+    public String getNiazsanjiInputTitle() {
+        return niazsanjiInputTitle;
+    }
+
+    public void setNiazsanjiInputTitle(String niazsanjiInputTitle) {
+        this.niazsanjiInputTitle = niazsanjiInputTitle;
     }
 
     public Long getCourseTypeId() {
@@ -398,8 +448,13 @@ public class FinalNiazsanjiReportDTO implements Serializable {
             ", restrictionDescription='" + getRestrictionDescription() + "'" +
             ", goalsText='" + getGoalsText() + "'" +
             ", prerequisite='" + getPrerequisite() + "'" +
+            ", priority=" + getPriority() +
+            ", niazsanjiIntegration=" + getNiazsanjiIntegrationId() +
+            ", niazsanjiIntegration='" + getNiazsanjiIntegrationNiazsanjiYear() + "'" +
             ", teacher=" + getTeacherId() +
             ", teacher='" + getTeacherFamily() + "'" +
+            ", niazsanjiInput=" + getNiazsanjiInputId() +
+            ", niazsanjiInput='" + getNiazsanjiInputTitle() + "'" +
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +
             ", organizationChart=" + getOrganizationChartId() +

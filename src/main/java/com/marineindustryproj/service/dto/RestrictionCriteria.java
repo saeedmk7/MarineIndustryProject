@@ -55,6 +55,12 @@ public class RestrictionCriteria implements Serializable {
 
     private LongFilter jobNiazsanjiId;
 
+    private LongFilter niazsanjiOtherId;
+
+    private LongFilter requestOtherNiazsanjiId;
+
+    private LongFilter prioritizeRequestNiazsanjiId;
+
     public LongFilter getId() {
         return id;
     }
@@ -183,6 +189,30 @@ public class RestrictionCriteria implements Serializable {
         this.jobNiazsanjiId = jobNiazsanjiId;
     }
 
+    public LongFilter getNiazsanjiOtherId() {
+        return niazsanjiOtherId;
+    }
+
+    public void setNiazsanjiOtherId(LongFilter niazsanjiOtherId) {
+        this.niazsanjiOtherId = niazsanjiOtherId;
+    }
+
+    public LongFilter getRequestOtherNiazsanjiId() {
+        return requestOtherNiazsanjiId;
+    }
+
+    public void setRequestOtherNiazsanjiId(LongFilter requestOtherNiazsanjiId) {
+        this.requestOtherNiazsanjiId = requestOtherNiazsanjiId;
+    }
+
+    public LongFilter getPrioritizeRequestNiazsanjiId() {
+        return prioritizeRequestNiazsanjiId;
+    }
+
+    public void setPrioritizeRequestNiazsanjiId(LongFilter prioritizeRequestNiazsanjiId) {
+        this.prioritizeRequestNiazsanjiId = prioritizeRequestNiazsanjiId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -209,7 +239,10 @@ public class RestrictionCriteria implements Serializable {
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
             Objects.equals(designNiazsanjiId, that.designNiazsanjiId) &&
-            Objects.equals(jobNiazsanjiId, that.jobNiazsanjiId);
+            Objects.equals(jobNiazsanjiId, that.jobNiazsanjiId) &&
+            Objects.equals(niazsanjiOtherId, that.niazsanjiOtherId) &&
+            Objects.equals(requestOtherNiazsanjiId, that.requestOtherNiazsanjiId) &&
+            Objects.equals(prioritizeRequestNiazsanjiId, that.prioritizeRequestNiazsanjiId);
     }
 
     @Override
@@ -230,7 +263,10 @@ public class RestrictionCriteria implements Serializable {
         finalNiazsanjiReportId,
         niazsanjiFardiId,
         designNiazsanjiId,
-        jobNiazsanjiId
+        jobNiazsanjiId,
+        niazsanjiOtherId,
+        requestOtherNiazsanjiId,
+        prioritizeRequestNiazsanjiId
         );
     }
 
@@ -253,6 +289,9 @@ public class RestrictionCriteria implements Serializable {
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
                 (designNiazsanjiId != null ? "designNiazsanjiId=" + designNiazsanjiId + ", " : "") +
                 (jobNiazsanjiId != null ? "jobNiazsanjiId=" + jobNiazsanjiId + ", " : "") +
+                (niazsanjiOtherId != null ? "niazsanjiOtherId=" + niazsanjiOtherId + ", " : "") +
+                (requestOtherNiazsanjiId != null ? "requestOtherNiazsanjiId=" + requestOtherNiazsanjiId + ", " : "") +
+                (prioritizeRequestNiazsanjiId != null ? "prioritizeRequestNiazsanjiId=" + prioritizeRequestNiazsanjiId + ", " : "") +
             "}";
     }
 

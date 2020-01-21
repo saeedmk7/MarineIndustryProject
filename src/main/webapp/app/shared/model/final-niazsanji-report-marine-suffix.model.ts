@@ -29,14 +29,19 @@ export interface IFinalNiazsanjiReportMarineSuffix {
     restrictionDescription?: string;
     goalsText?: string;
     prerequisite?: string;
+    priority?: number;
     finalNiazsanjiReportPeople?: IFinalNiazsanjiReportPersonMarineSuffix[];
     designAndPlannings?: IDesignAndPlanningMarineSuffix[];
     runPhases?: IRunPhaseMarineSuffix[];
     polls?: IPollMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     restrictions?: IRestrictionMarineSuffix[];
+    niazsanjiIntegrationNiazsanjiYear?: string;
+    niazsanjiIntegrationId?: number;
     teacherFamily?: string;
     teacherId?: number;
+    niazsanjiInputTitle?: string;
+    niazsanjiInputId?: number;
     courseTypeTitle?: string;
     courseTypeId?: number;
     organizationChartTitle?: string;
@@ -70,14 +75,19 @@ export class FinalNiazsanjiReportMarineSuffix implements IFinalNiazsanjiReportMa
         public restrictionDescription?: string,
         public goalsText?: string,
         public prerequisite?: string,
+        public priority?: number,
         public finalNiazsanjiReportPeople?: IFinalNiazsanjiReportPersonMarineSuffix[],
         public designAndPlannings?: IDesignAndPlanningMarineSuffix[],
         public runPhases?: IRunPhaseMarineSuffix[],
         public polls?: IPollMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public restrictions?: IRestrictionMarineSuffix[],
+        public niazsanjiIntegrationNiazsanjiYear?: string,
+        public niazsanjiIntegrationId?: number,
         public teacherFamily?: string,
         public teacherId?: number,
+        public niazsanjiInputTitle?: string,
+        public niazsanjiInputId?: number,
         public courseTypeTitle?: string,
         public courseTypeId?: number,
         public organizationChartTitle?: string,

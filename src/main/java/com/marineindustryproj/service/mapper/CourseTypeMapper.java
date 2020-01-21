@@ -21,6 +21,9 @@ public interface CourseTypeMapper extends EntityMapper<CourseTypeDTO, CourseType
     @Mapping(target = "educationalHistories", ignore = true)
     @Mapping(target = "designNiazsanjis", ignore = true)
     @Mapping(target = "jobNiazsanjis", ignore = true)
+    @Mapping(target = "niazsanjiOthers", ignore = true)
+    @Mapping(target = "requestOtherNiazsanjis", ignore = true)
+    @Mapping(target = "prioritizeRequestNiazsanjis", ignore = true)
     CourseType toEntity(CourseTypeDTO courseTypeDTO);
 
     default CourseType fromId(Long id) {

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity NiazsanjiIntegration.
+    -->
+    <changeSet id="20200117070702-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="prioritize_request_niazsanji_id"
+                                 baseTableName="niazsanji_integration"
+                                 constraintName="fk_niazsanji_integration_prioritize_request_niazsanji_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="prioritize_request_niazsanji"/>
+
+    </changeSet>
+</databaseChangeLog>

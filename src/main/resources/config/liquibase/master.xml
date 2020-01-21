@@ -169,6 +169,19 @@
     <include file="config/liquibase/changelog/20191228175947_update_entity_PreJobNiazsanjiAddStep.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200104182300_added_entity_JobNiazsanji.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200104182300_added_entity_constraints_JobNiazsanji.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200110171828_added_entity_InstructionAuthority.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200110171848_added_entity_NiazsanjiOther.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200110171849_added_entity_RequestOtherNiazsanji.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200110171850_added_entity_NiazsanjiInput.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200110171828_added_entity_constraints_InstructionAuthority.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200110171848_added_entity_constraints_NiazsanjiOther.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200110171849_added_entity_constraints_RequestOtherNiazsanji.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200110175947_update_entity_FinalNiazsanjiReport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200117070701_added_entity_PrioritizeRequestNiazsanji.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200117070702_added_entity_NiazsanjiIntegration.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200117070701_added_entity_constraints_PrioritizeRequestNiazsanji.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200117070702_added_entity_constraints_NiazsanjiIntegration.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200117175947_update_entity_FinalNiazsanjiReportAddedIntegratedFinal.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

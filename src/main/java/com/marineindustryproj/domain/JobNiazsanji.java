@@ -3,6 +3,8 @@ package com.marineindustryproj.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -116,7 +118,7 @@ public class JobNiazsanji implements Serializable {
     @JsonIgnoreProperties("jobNiazsanjis")
     private CourseType courseType;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("jobNiazsanjis")
     private PreJobNiazsanji preJobNiazsanji;
 

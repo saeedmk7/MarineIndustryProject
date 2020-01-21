@@ -8,11 +8,15 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity FinalNiazsanjiReport and its DTO FinalNiazsanjiReportDTO.
  */
-@Mapper(componentModel = "spring", uses = {DocumentMapper.class, RestrictionMapper.class, TeacherMapper.class, CourseTypeMapper.class, OrganizationChartMapper.class, EducationalModuleMapper.class, TeachingApproachMapper.class})
+@Mapper(componentModel = "spring", uses = {DocumentMapper.class, RestrictionMapper.class, NiazsanjiIntegrationMapper.class, TeacherMapper.class, NiazsanjiInputMapper.class, CourseTypeMapper.class, OrganizationChartMapper.class, EducationalModuleMapper.class, TeachingApproachMapper.class})
 public interface FinalNiazsanjiReportMapper extends EntityMapper<FinalNiazsanjiReportDTO, FinalNiazsanjiReport> {
 
+    @Mapping(source = "niazsanjiIntegration.id", target = "niazsanjiIntegrationId")
+    @Mapping(source = "niazsanjiIntegration.niazsanjiYear", target = "niazsanjiIntegrationNiazsanjiYear")
     @Mapping(source = "teacher.id", target = "teacherId")
     @Mapping(source = "teacher.family", target = "teacherFamily")
+    @Mapping(source = "niazsanjiInput.id", target = "niazsanjiInputId")
+    @Mapping(source = "niazsanjiInput.title", target = "niazsanjiInputTitle")
     @Mapping(source = "courseType.id", target = "courseTypeId")
     @Mapping(source = "courseType.title", target = "courseTypeTitle")
     @Mapping(source = "organizationChart.id", target = "organizationChartId")
@@ -27,7 +31,9 @@ public interface FinalNiazsanjiReportMapper extends EntityMapper<FinalNiazsanjiR
     @Mapping(target = "designAndPlannings", ignore = true)
     @Mapping(target = "runPhases", ignore = true)
     @Mapping(target = "polls", ignore = true)
+    @Mapping(source = "niazsanjiIntegrationId", target = "niazsanjiIntegration")
     @Mapping(source = "teacherId", target = "teacher")
+    @Mapping(source = "niazsanjiInputId", target = "niazsanjiInput")
     @Mapping(source = "courseTypeId", target = "courseType")
     @Mapping(source = "organizationChartId", target = "organizationChart")
     @Mapping(source = "educationalModuleId", target = "educationalModule")

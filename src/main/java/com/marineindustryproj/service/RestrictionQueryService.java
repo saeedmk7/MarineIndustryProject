@@ -142,6 +142,18 @@ public class RestrictionQueryService extends QueryService<Restriction> {
                 specification = specification.and(buildSpecification(criteria.getJobNiazsanjiId(),
                     root -> root.join(Restriction_.jobNiazsanjis, JoinType.LEFT).get(JobNiazsanji_.id)));
             }
+            if (criteria.getNiazsanjiOtherId() != null) {
+                specification = specification.and(buildSpecification(criteria.getNiazsanjiOtherId(),
+                    root -> root.join(Restriction_.niazsanjiOthers, JoinType.LEFT).get(NiazsanjiOther_.id)));
+            }
+            if (criteria.getRequestOtherNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRequestOtherNiazsanjiId(),
+                    root -> root.join(Restriction_.requestOtherNiazsanjis, JoinType.LEFT).get(RequestOtherNiazsanji_.id)));
+            }
+            if (criteria.getPrioritizeRequestNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPrioritizeRequestNiazsanjiId(),
+                    root -> root.join(Restriction_.prioritizeRequestNiazsanjis, JoinType.LEFT).get(PrioritizeRequestNiazsanji_.id)));
+            }
         }
         return specification;
     }

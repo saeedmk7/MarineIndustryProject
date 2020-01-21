@@ -14,6 +14,8 @@ import java.util.Set;
 import java.util.Objects;
 
 import com.marineindustryproj.domain.enumeration.RequestStatus;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * A FinalOrganizationNiazsanji.
@@ -174,7 +176,7 @@ public class FinalOrganizationNiazsanji implements Serializable {
     @JsonIgnoreProperties("finalOrganizationNiazsanjis")
     private TeachApproach teachApproach;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("finalOrganizationNiazsanjis")
     private RequestOrganizationNiazsanji requestOrganizationNiazsanji;
 

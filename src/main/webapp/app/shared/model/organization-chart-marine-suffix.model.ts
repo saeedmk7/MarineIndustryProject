@@ -13,6 +13,10 @@ import { IEducationalHistoryMarineSuffix } from 'app/shared/model//educational-h
 import { IInvestToGroupTransactionMarineSuffix } from 'app/shared/model//invest-to-group-transaction-marine-suffix.model';
 import { IMediaAwarenessReportMarineSuffix } from 'app/shared/model//media-awareness-report-marine-suffix.model';
 import { IPreJobNiazsanjiMarineSuffix } from 'app/shared/model//pre-job-niazsanji-marine-suffix.model';
+import { IJobNiazsanjiMarineSuffix } from 'app/shared/model//job-niazsanji-marine-suffix.model';
+import { INiazsanjiOtherMarineSuffix } from 'app/shared/model//niazsanji-other-marine-suffix.model';
+import { IRequestOtherNiazsanjiMarineSuffix } from 'app/shared/model//request-other-niazsanji-marine-suffix.model';
+import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model//prioritize-request-niazsanji-marine-suffix.model';
 import { IForceRunningPercentMarineSuffix } from 'app/shared/model//force-running-percent-marine-suffix.model';
 
 export interface IOrganizationChartMarineSuffix {
@@ -42,6 +46,10 @@ export interface IOrganizationChartMarineSuffix {
     investToGroupTransactions?: IInvestToGroupTransactionMarineSuffix[];
     mediaAwarenessReports?: IMediaAwarenessReportMarineSuffix[];
     preJobNiazsanjis?: IPreJobNiazsanjiMarineSuffix[];
+    jobNiazsanjis?: IJobNiazsanjiMarineSuffix[];
+    niazsanjiOthers?: INiazsanjiOtherMarineSuffix[];
+    requestOtherNiazsanjis?: IRequestOtherNiazsanjiMarineSuffix[];
+    prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[];
     parentTitle?: string;
     parentId?: number;
     forceRunningPercents?: IForceRunningPercentMarineSuffix[];
@@ -75,6 +83,10 @@ export class OrganizationChartMarineSuffix implements IOrganizationChartMarineSu
         public investToGroupTransactions?: IInvestToGroupTransactionMarineSuffix[],
         public mediaAwarenessReports?: IMediaAwarenessReportMarineSuffix[],
         public preJobNiazsanjis?: IPreJobNiazsanjiMarineSuffix[],
+        public jobNiazsanjis?: IJobNiazsanjiMarineSuffix[],
+        public niazsanjiOthers?: INiazsanjiOtherMarineSuffix[],
+        public requestOtherNiazsanjis?: IRequestOtherNiazsanjiMarineSuffix[],
+        public prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[],
         public parentTitle?: string,
         public parentId?: number,
         public forceRunningPercents?: IForceRunningPercentMarineSuffix[]

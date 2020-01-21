@@ -75,6 +75,12 @@ public class OrganizationChartCriteria implements Serializable {
 
     private LongFilter jobNiazsanjiId;
 
+    private LongFilter niazsanjiOtherId;
+
+    private LongFilter requestOtherNiazsanjiId;
+
+    private LongFilter prioritizeRequestNiazsanjiId;
+
     private LongFilter parentId;
 
     private LongFilter forceRunningPercentId;
@@ -287,6 +293,30 @@ public class OrganizationChartCriteria implements Serializable {
         this.jobNiazsanjiId = jobNiazsanjiId;
     }
 
+    public LongFilter getNiazsanjiOtherId() {
+        return niazsanjiOtherId;
+    }
+
+    public void setNiazsanjiOtherId(LongFilter niazsanjiOtherId) {
+        this.niazsanjiOtherId = niazsanjiOtherId;
+    }
+
+    public LongFilter getRequestOtherNiazsanjiId() {
+        return requestOtherNiazsanjiId;
+    }
+
+    public void setRequestOtherNiazsanjiId(LongFilter requestOtherNiazsanjiId) {
+        this.requestOtherNiazsanjiId = requestOtherNiazsanjiId;
+    }
+
+    public LongFilter getPrioritizeRequestNiazsanjiId() {
+        return prioritizeRequestNiazsanjiId;
+    }
+
+    public void setPrioritizeRequestNiazsanjiId(LongFilter prioritizeRequestNiazsanjiId) {
+        this.prioritizeRequestNiazsanjiId = prioritizeRequestNiazsanjiId;
+    }
+
     public LongFilter getParentId() {
         return parentId;
     }
@@ -340,6 +370,9 @@ public class OrganizationChartCriteria implements Serializable {
             Objects.equals(mediaAwarenessReportId, that.mediaAwarenessReportId) &&
             Objects.equals(preJobNiazsanjiId, that.preJobNiazsanjiId) &&
             Objects.equals(jobNiazsanjiId, that.jobNiazsanjiId) &&
+            Objects.equals(niazsanjiOtherId, that.niazsanjiOtherId) &&
+            Objects.equals(requestOtherNiazsanjiId, that.requestOtherNiazsanjiId) &&
+            Objects.equals(prioritizeRequestNiazsanjiId, that.prioritizeRequestNiazsanjiId) &&
             Objects.equals(parentId, that.parentId) &&
             Objects.equals(forceRunningPercentId, that.forceRunningPercentId);
     }
@@ -373,6 +406,9 @@ public class OrganizationChartCriteria implements Serializable {
         mediaAwarenessReportId,
         preJobNiazsanjiId,
         jobNiazsanjiId,
+        niazsanjiOtherId,
+        requestOtherNiazsanjiId,
+        prioritizeRequestNiazsanjiId,
         parentId,
         forceRunningPercentId
         );
@@ -407,6 +443,9 @@ public class OrganizationChartCriteria implements Serializable {
                 (mediaAwarenessReportId != null ? "mediaAwarenessReportId=" + mediaAwarenessReportId + ", " : "") +
                 (preJobNiazsanjiId != null ? "preJobNiazsanjiId=" + preJobNiazsanjiId + ", " : "") +
                 (jobNiazsanjiId != null ? "jobNiazsanjiId=" + jobNiazsanjiId + ", " : "") +
+                (niazsanjiOtherId != null ? "niazsanjiOtherId=" + niazsanjiOtherId + ", " : "") +
+                (requestOtherNiazsanjiId != null ? "requestOtherNiazsanjiId=" + requestOtherNiazsanjiId + ", " : "") +
+                (prioritizeRequestNiazsanjiId != null ? "prioritizeRequestNiazsanjiId=" + prioritizeRequestNiazsanjiId + ", " : "") +
                 (parentId != null ? "parentId=" + parentId + ", " : "") +
                 (forceRunningPercentId != null ? "forceRunningPercentId=" + forceRunningPercentId + ", " : "") +
             "}";

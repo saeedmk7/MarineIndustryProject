@@ -55,7 +55,7 @@ public class PriorityCriteria implements Serializable {
     @Column(name = "modify_date")
     private ZonedDateTime modifyDate;
 
-    @OneToMany(mappedBy = "priorityCriteria")
+    @OneToMany(mappedBy = "priorityCriteria", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PriorityCriteriaValue> priorityCriteriaValues = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

@@ -2,6 +2,8 @@ import { Moment } from 'moment';
 import { INiazsanjiFardiMarineSuffix } from 'app/shared/model//niazsanji-fardi-marine-suffix.model';
 import { IDesignNiazsanjiMarineSuffix } from 'app/shared/model//design-niazsanji-marine-suffix.model';
 import { IPreJobNiazsanjiCompetencyMarineSuffix } from 'app/shared/model//pre-job-niazsanji-competency-marine-suffix.model';
+import { IJobNiazsanjiMarineSuffix } from 'app/shared/model//job-niazsanji-marine-suffix.model';
+import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model//prioritize-request-niazsanji-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IPersonMarineSuffix } from 'app/shared/model//person-marine-suffix.model';
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
@@ -26,16 +28,18 @@ export interface IPreJobNiazsanjiMarineSuffix {
     changeStatusUserLogin?: string;
     guid?: string;
     hasImportantMessage?: boolean;
+    step?: number;
     niazsanjiFardis?: INiazsanjiFardiMarineSuffix[];
     designNiazsanjis?: IDesignNiazsanjiMarineSuffix[];
     preJobNiazsanjiCompetencies?: IPreJobNiazsanjiCompetencyMarineSuffix[];
+    jobNiazsanjis?: IJobNiazsanjiMarineSuffix[];
+    prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     people?: IPersonMarineSuffix[];
     organizationChartTitle?: string;
     organizationChartId?: number;
     personFamily?: string;
     personId?: number;
-    step?: number;
 }
 
 export class PreJobNiazsanjiMarineSuffix implements IPreJobNiazsanjiMarineSuffix {
@@ -59,16 +63,18 @@ export class PreJobNiazsanjiMarineSuffix implements IPreJobNiazsanjiMarineSuffix
         public changeStatusUserLogin?: string,
         public guid?: string,
         public hasImportantMessage?: boolean,
+        public step?: number,
         public niazsanjiFardis?: INiazsanjiFardiMarineSuffix[],
         public designNiazsanjis?: IDesignNiazsanjiMarineSuffix[],
         public preJobNiazsanjiCompetencies?: IPreJobNiazsanjiCompetencyMarineSuffix[],
+        public jobNiazsanjis?: IJobNiazsanjiMarineSuffix[],
+        public prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public people?: IPersonMarineSuffix[],
         public organizationChartTitle?: string,
         public organizationChartId?: number,
         public personFamily?: string,
-        public personId?: number,
-        public step?: number
+        public personId?: number
     ) {
         this.archived = this.archived || false;
         this.hasImportantMessage = this.hasImportantMessage || false;

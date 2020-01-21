@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     planningAndRunMonthReports: IPlanningAndRunMonthReport[] = [];
     isHomePageCharts: boolean = true;
     account: Account;
-    currentPerson: IPersonMarineSuffix;
+    currentPerson: IPersonMarineSuffix = new PersonMarineSuffix();
     modalRef: NgbModalRef;
    /* welcomeState = 'out';
     centerLinksState = 'out';

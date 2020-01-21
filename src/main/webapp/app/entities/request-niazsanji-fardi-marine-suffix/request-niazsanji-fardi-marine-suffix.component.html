@@ -54,7 +54,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let requestNiazsanjiFardi of requestNiazsanjiFardis ;let i = index" [ngClass]="{'new': requestNiazsanjiFardi.requestStatus == 'NEW','accept': requestNiazsanjiFardi.requestStatus === 'ACCEPT','ignore': requestNiazsanjiFardi.requestStatus === 'IGNORE'}">
+            <tr *ngFor="let requestNiazsanjiFardi of requestNiazsanjiFardis ;let i = index"
+                [ngClass]="{'new': requestNiazsanjiFardi.requestStatus == 'NEW','read': requestNiazsanjiFardi.requestStatus == 'READ','accept': requestNiazsanjiFardi.requestStatus === 'ACCEPT','ignore': requestNiazsanjiFardi.requestStatus === 'IGNORE'}">
                 <!--<td><a [routerLink]="['/request-niazsanji-fardi-marine-suffix', requestNiazsanjiFardi.id, 'view' ]">{{requestNiazsanjiFardi.id}}</a></td>-->
                 <td>{{i+1}}</td>
                 <!--<td>{{requestNiazsanjiFardi.code}}</td>-->

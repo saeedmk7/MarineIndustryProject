@@ -423,7 +423,7 @@ export class NiazsanjiFardiMarineSuffixComponent implements OnInit, OnDestroy {
                 if (confirm("آیا از اجرا کردن این دوره فردی مورد نظر مطمئنید.")) {
 
                     this.niazsanjiFardiService.finalize(model).subscribe(
-                        (res: HttpResponse<IFinalOrganizationNiazsanjiMarineSuffix>) => this.onSuccess("نیازسنجی پودمان سازمانی (متمرکز و گروهی) مورد نظر شما به مرحله اجرا وارد شد."),
+                        (res: HttpResponse<IFinalOrganizationNiazsanjiMarineSuffix>) => this.onSuccess("نیازسنجی پودمان سازمانی مورد نظر شما به مرحله اجرا وارد شد."),
                         (res: HttpErrorResponse) => this.onError(res.message)
                     );
                 }

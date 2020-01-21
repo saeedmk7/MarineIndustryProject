@@ -14,6 +14,8 @@ import java.util.Set;
 import java.util.Objects;
 
 import com.marineindustryproj.domain.enumeration.EducationalModuleType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * A NiazsanjiFardi.
@@ -123,11 +125,11 @@ public class NiazsanjiFardi implements Serializable {
     @JsonIgnoreProperties("niazsanjiFardis")
     private CourseType courseType;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("niazsanjiFardis")
     private PreJobNiazsanji preJobNiazsanji;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("niazsanjiFardis")
     private RequestNiazsanjiFardi requestNiazsanjiFardi;
 

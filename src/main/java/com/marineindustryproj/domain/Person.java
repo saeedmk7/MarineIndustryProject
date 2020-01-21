@@ -152,6 +152,15 @@ public class Person implements Serializable {
     @OneToMany(mappedBy = "person")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<JobNiazsanji> jobNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "person")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<NiazsanjiOther> niazsanjiOthers = new HashSet<>();
+    @OneToMany(mappedBy = "person")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<RequestOtherNiazsanji> requestOtherNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "person")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "person_document",
@@ -791,6 +800,81 @@ public class Person implements Serializable {
 
     public void setJobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
         this.jobNiazsanjis = jobNiazsanjis;
+    }
+
+    public Set<NiazsanjiOther> getNiazsanjiOthers() {
+        return niazsanjiOthers;
+    }
+
+    public Person niazsanjiOthers(Set<NiazsanjiOther> niazsanjiOthers) {
+        this.niazsanjiOthers = niazsanjiOthers;
+        return this;
+    }
+
+    public Person addNiazsanjiOther(NiazsanjiOther niazsanjiOther) {
+        this.niazsanjiOthers.add(niazsanjiOther);
+        niazsanjiOther.setPerson(this);
+        return this;
+    }
+
+    public Person removeNiazsanjiOther(NiazsanjiOther niazsanjiOther) {
+        this.niazsanjiOthers.remove(niazsanjiOther);
+        niazsanjiOther.setPerson(null);
+        return this;
+    }
+
+    public void setNiazsanjiOthers(Set<NiazsanjiOther> niazsanjiOthers) {
+        this.niazsanjiOthers = niazsanjiOthers;
+    }
+
+    public Set<RequestOtherNiazsanji> getRequestOtherNiazsanjis() {
+        return requestOtherNiazsanjis;
+    }
+
+    public Person requestOtherNiazsanjis(Set<RequestOtherNiazsanji> requestOtherNiazsanjis) {
+        this.requestOtherNiazsanjis = requestOtherNiazsanjis;
+        return this;
+    }
+
+    public Person addRequestOtherNiazsanji(RequestOtherNiazsanji requestOtherNiazsanji) {
+        this.requestOtherNiazsanjis.add(requestOtherNiazsanji);
+        requestOtherNiazsanji.setPerson(this);
+        return this;
+    }
+
+    public Person removeRequestOtherNiazsanji(RequestOtherNiazsanji requestOtherNiazsanji) {
+        this.requestOtherNiazsanjis.remove(requestOtherNiazsanji);
+        requestOtherNiazsanji.setPerson(null);
+        return this;
+    }
+
+    public void setRequestOtherNiazsanjis(Set<RequestOtherNiazsanji> requestOtherNiazsanjis) {
+        this.requestOtherNiazsanjis = requestOtherNiazsanjis;
+    }
+
+    public Set<PrioritizeRequestNiazsanji> getPrioritizeRequestNiazsanjis() {
+        return prioritizeRequestNiazsanjis;
+    }
+
+    public Person prioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
+        this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
+        return this;
+    }
+
+    public Person addPrioritizeRequestNiazsanji(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji) {
+        this.prioritizeRequestNiazsanjis.add(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji.setPerson(this);
+        return this;
+    }
+
+    public Person removePrioritizeRequestNiazsanji(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji) {
+        this.prioritizeRequestNiazsanjis.remove(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji.setPerson(null);
+        return this;
+    }
+
+    public void setPrioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
+        this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
     }
 
     public Set<Document> getDocuments() {

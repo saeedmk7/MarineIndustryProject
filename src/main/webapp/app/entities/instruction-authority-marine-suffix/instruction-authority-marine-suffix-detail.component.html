@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="instructionAuthority">
+            <h2><span jhiTranslate="marineindustryprojApp.instructionAuthority.detail.title">Instruction Authority</span> {{instructionAuthority.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.instructionAuthority.authorityName">Authority Name</span></dt>
+                <dd>
+                    <span>{{instructionAuthority.authorityName}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.instructionAuthority.hasEditPermission">Has Edit Permission</span></dt>
+                <dd>
+                    <span>{{instructionAuthority.hasEditPermission}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.instructionAuthority.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{instructionAuthority.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.instructionAuthority.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{instructionAuthority.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.instructionAuthority.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{instructionAuthority.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.instructionAuthority.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{instructionAuthority.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.instructionAuthority.instruction">Instruction</span></dt>
+                <dd>
+                    <div *ngIf="instructionAuthority.instructionId">
+                        <a [routerLink]="['/instruction-marine-suffix', instructionAuthority.instructionId, 'view']">{{instructionAuthority.instructionTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/instruction-authority-marine-suffix', instructionAuthority.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

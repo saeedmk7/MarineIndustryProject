@@ -153,6 +153,10 @@ public class PreJobNiazsanjiQueryService extends QueryService<PreJobNiazsanji> {
                 specification = specification.and(buildSpecification(criteria.getJobNiazsanjiId(),
                     root -> root.join(PreJobNiazsanji_.jobNiazsanjis, JoinType.LEFT).get(JobNiazsanji_.id)));
             }
+            if (criteria.getPrioritizeRequestNiazsanjiId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPrioritizeRequestNiazsanjiId(),
+                    root -> root.join(PreJobNiazsanji_.prioritizeRequestNiazsanjis, JoinType.LEFT).get(PrioritizeRequestNiazsanji_.id)));
+            }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(PreJobNiazsanji_.documents, JoinType.LEFT).get(Document_.id)));

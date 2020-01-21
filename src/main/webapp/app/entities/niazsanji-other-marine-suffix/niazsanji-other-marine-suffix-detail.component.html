@@ -1,0 +1,153 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="niazsanjiOther">
+            <h2><span jhiTranslate="marineindustryprojApp.niazsanjiOther.detail.title">Niazsanji Other</span> {{niazsanjiOther.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.niazsanjiYear">Niazsanji Year</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.niazsanjiYear}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.code">Code</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.priceCost">Price Cost</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.priceCost}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.description">Description</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.archived">Archived</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.status">Status</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.conversation">Conversation</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.conversation}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.changeStatusUserLogin">Change Status User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.changeStatusUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.guid">Guid</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.hasImportantMessage">Has Important Message</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.hasImportantMessage}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.restrictionDescription">Restriction Description</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.restrictionDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.goalsText">Goals Text</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.goalsText}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.prerequisite">Prerequisite</span></dt>
+                <dd>
+                    <span>{{niazsanjiOther.prerequisite}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of niazsanjiOther.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.restriction">Restriction</span></dt>
+                <dd>
+                    <span *ngFor="let restriction of niazsanjiOther.restrictions; let last = last">
+                        <a [routerLink]="['/restriction-marine-suffix', restriction?.id, 'view' ]">{{restriction.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.niazsanjiInput">Niazsanji Input</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiOther.niazsanjiInputId">
+                        <a [routerLink]="['/niazsanji-input-marine-suffix', niazsanjiOther.niazsanjiInputId, 'view']">{{niazsanjiOther.niazsanjiInputTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.courseType">Course Type</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiOther.courseTypeId">
+                        <a [routerLink]="['/course-type-marine-suffix', niazsanjiOther.courseTypeId, 'view']">{{niazsanjiOther.courseTypeTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.requestOtherNiazsanji">Request Other Niazsanji</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiOther.requestOtherNiazsanjiId">
+                        <a [routerLink]="['/request-other-niazsanji-marine-suffix', niazsanjiOther.requestOtherNiazsanjiId, 'view']">{{niazsanjiOther.requestOtherNiazsanjiCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.educationalModule">Educational Module</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiOther.educationalModuleId">
+                        <a [routerLink]="['/educational-module-marine-suffix', niazsanjiOther.educationalModuleId, 'view']">{{niazsanjiOther.educationalModuleTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiOther.personId">
+                        <a [routerLink]="['/person-marine-suffix', niazsanjiOther.personId, 'view']">{{niazsanjiOther.personFamily}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiOther.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', niazsanjiOther.organizationChartId, 'view']">{{niazsanjiOther.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiOther.teachingApproach">Teaching Approach</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiOther.teachingApproachId">
+                        <a [routerLink]="['/teaching-approach-marine-suffix', niazsanjiOther.teachingApproachId, 'view']">{{niazsanjiOther.teachingApproachTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/niazsanji-other-marine-suffix', niazsanjiOther.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -417,12 +417,12 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
 
                 const values = [{
                     value: 'FARDI',
-                    text: 'نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی',
+                    text: 'نیازسنجی پودمان فردی',
                     id: 'niazSanjiSource_FARDI',
                     checked: true
                 },{
                     value: 'ORGANIZATION',
-                    text: 'نیازسنجی پودمان سازمانی (متمرکز و گروهی)',
+                    text: 'نیازسنجی پودمان سازمانی ',
                     id: 'niazSanjiSource_ORGANIZATION',
                     checked: false
                 }];

@@ -29,9 +29,9 @@
             "modifyUserLogin": "کاربر ویرایش کننده",
             "modifyDate": "تاریخ ویرایش شده",
             "guid": "Guid",
-            "organizationChart": "گروه/صنعت/واحد",
-            "organizationChartId": "گروه/صنعت/واحد",
-            "organizationChartTitle": "گروه/صنعت/واحد",
+            "organizationChart": "محل خدمت",
+            "organizationChartId": "محل خدمت",
+            "organizationChartTitle": "محل خدمت",
             "mediaProductType": "نوع محصول رسانه ای",
             "mediaProductTypeTitle": "نوع محصول رسانه ای",
             "mediaProductTypeId": "نوع محصول رسانه ای"

@@ -93,9 +93,12 @@ public class RequestNiazsanjiFardi implements Serializable {
     @Column(name = "has_important_message")
     private Boolean hasImportantMessage;
 
-    @OneToMany(mappedBy = "requestNiazsanjiFardi")
+    @OneToMany(mappedBy = "requestNiazsanjiFardi", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<NiazsanjiFardi> niazsanjiFardis = new HashSet<>();
+    @OneToMany(mappedBy = "requestNiazsanjiFardi", orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "request_niazsanji_fardi_document",
@@ -377,6 +380,31 @@ public class RequestNiazsanjiFardi implements Serializable {
 
     public void setNiazsanjiFardis(Set<NiazsanjiFardi> niazsanjiFardis) {
         this.niazsanjiFardis = niazsanjiFardis;
+    }
+
+    public Set<PrioritizeRequestNiazsanji> getPrioritizeRequestNiazsanjis() {
+        return prioritizeRequestNiazsanjis;
+    }
+
+    public RequestNiazsanjiFardi prioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
+        this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
+        return this;
+    }
+
+    public RequestNiazsanjiFardi addPrioritizeRequestNiazsanji(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji) {
+        this.prioritizeRequestNiazsanjis.add(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji.setRequestNiazsanjiFardi(this);
+        return this;
+    }
+
+    public RequestNiazsanjiFardi removePrioritizeRequestNiazsanji(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji) {
+        this.prioritizeRequestNiazsanjis.remove(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji.setRequestNiazsanjiFardi(null);
+        return this;
+    }
+
+    public void setPrioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
+        this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
     }
 
     public Set<Document> getDocuments() {

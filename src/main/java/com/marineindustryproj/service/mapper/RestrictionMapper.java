@@ -20,6 +20,9 @@ public interface RestrictionMapper extends EntityMapper<RestrictionDTO, Restrict
     @Mapping(target = "niazsanjiFardis", ignore = true)
     @Mapping(target = "designNiazsanjis", ignore = true)
     @Mapping(target = "jobNiazsanjis", ignore = true)
+    @Mapping(target = "niazsanjiOthers", ignore = true)
+    @Mapping(target = "requestOtherNiazsanjis", ignore = true)
+    @Mapping(target = "prioritizeRequestNiazsanjis", ignore = true)
     Restriction toEntity(RestrictionDTO restrictionDTO);
 
     default Restriction fromId(Long id) {

@@ -65,12 +65,13 @@ public class EducationalHistoryCriteria implements Serializable {
 
     private StringFilter guid;
 
-private BooleanFilter hasImportantMessage;
+    private BooleanFilter hasImportantMessage;
+
+    private LongFilter courseTypeId;
+
     private LongFilter personId;
 
     private LongFilter educationalModuleId;
-
-    private LongFilter courseTypeId;
 
     private LongFilter organizationChartId;
 
@@ -217,13 +218,23 @@ private BooleanFilter hasImportantMessage;
     public void setGuid(StringFilter guid) {
         this.guid = guid;
     }
-public BooleanFilter getHasImportantMessage() {
+
+    public BooleanFilter getHasImportantMessage() {
         return hasImportantMessage;
     }
 
     public void setHasImportantMessage(BooleanFilter hasImportantMessage) {
         this.hasImportantMessage = hasImportantMessage;
     }
+
+    public LongFilter getCourseTypeId() {
+        return courseTypeId;
+    }
+
+    public void setCourseTypeId(LongFilter courseTypeId) {
+        this.courseTypeId = courseTypeId;
+    }
+
     public LongFilter getPersonId() {
         return personId;
     }
@@ -238,13 +249,6 @@ public BooleanFilter getHasImportantMessage() {
 
     public void setEducationalModuleId(LongFilter educationalModuleId) {
         this.educationalModuleId = educationalModuleId;
-    }
-    public LongFilter getCourseTypeId() {
-        return courseTypeId;
-    }
-
-    public void setCourseTypeId(LongFilter courseTypeId) {
-        this.courseTypeId = courseTypeId;
     }
 
     public LongFilter getOrganizationChartId() {
@@ -285,9 +289,9 @@ public BooleanFilter getHasImportantMessage() {
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
             Objects.equals(guid, that.guid) &&
             Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
+            Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
-            Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(organizationChartId, that.organizationChartId);
     }
 
@@ -313,9 +317,9 @@ public BooleanFilter getHasImportantMessage() {
         changeStatusUserLogin,
         guid,
         hasImportantMessage,
+        courseTypeId,
         personId,
         educationalModuleId,
-        courseTypeId,
         organizationChartId
         );
     }
@@ -342,9 +346,9 @@ public BooleanFilter getHasImportantMessage() {
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
                 (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
+                (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
-                (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
             "}";
     }

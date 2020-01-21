@@ -112,6 +112,15 @@ public class OrganizationChart implements Serializable {
     @OneToMany(mappedBy = "organizationChart")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<JobNiazsanji> jobNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "organizationChart")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<NiazsanjiOther> niazsanjiOthers = new HashSet<>();
+    @OneToMany(mappedBy = "organizationChart")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<RequestOtherNiazsanji> requestOtherNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "organizationChart")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("organizationCharts")
     private OrganizationChart parent;
@@ -633,6 +642,81 @@ public class OrganizationChart implements Serializable {
 
     public void setJobNiazsanjis(Set<JobNiazsanji> jobNiazsanjis) {
         this.jobNiazsanjis = jobNiazsanjis;
+    }
+
+    public Set<NiazsanjiOther> getNiazsanjiOthers() {
+        return niazsanjiOthers;
+    }
+
+    public OrganizationChart niazsanjiOthers(Set<NiazsanjiOther> niazsanjiOthers) {
+        this.niazsanjiOthers = niazsanjiOthers;
+        return this;
+    }
+
+    public OrganizationChart addNiazsanjiOther(NiazsanjiOther niazsanjiOther) {
+        this.niazsanjiOthers.add(niazsanjiOther);
+        niazsanjiOther.setOrganizationChart(this);
+        return this;
+    }
+
+    public OrganizationChart removeNiazsanjiOther(NiazsanjiOther niazsanjiOther) {
+        this.niazsanjiOthers.remove(niazsanjiOther);
+        niazsanjiOther.setOrganizationChart(null);
+        return this;
+    }
+
+    public void setNiazsanjiOthers(Set<NiazsanjiOther> niazsanjiOthers) {
+        this.niazsanjiOthers = niazsanjiOthers;
+    }
+
+    public Set<RequestOtherNiazsanji> getRequestOtherNiazsanjis() {
+        return requestOtherNiazsanjis;
+    }
+
+    public OrganizationChart requestOtherNiazsanjis(Set<RequestOtherNiazsanji> requestOtherNiazsanjis) {
+        this.requestOtherNiazsanjis = requestOtherNiazsanjis;
+        return this;
+    }
+
+    public OrganizationChart addRequestOtherNiazsanji(RequestOtherNiazsanji requestOtherNiazsanji) {
+        this.requestOtherNiazsanjis.add(requestOtherNiazsanji);
+        requestOtherNiazsanji.setOrganizationChart(this);
+        return this;
+    }
+
+    public OrganizationChart removeRequestOtherNiazsanji(RequestOtherNiazsanji requestOtherNiazsanji) {
+        this.requestOtherNiazsanjis.remove(requestOtherNiazsanji);
+        requestOtherNiazsanji.setOrganizationChart(null);
+        return this;
+    }
+
+    public void setRequestOtherNiazsanjis(Set<RequestOtherNiazsanji> requestOtherNiazsanjis) {
+        this.requestOtherNiazsanjis = requestOtherNiazsanjis;
+    }
+
+    public Set<PrioritizeRequestNiazsanji> getPrioritizeRequestNiazsanjis() {
+        return prioritizeRequestNiazsanjis;
+    }
+
+    public OrganizationChart prioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
+        this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
+        return this;
+    }
+
+    public OrganizationChart addPrioritizeRequestNiazsanji(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji) {
+        this.prioritizeRequestNiazsanjis.add(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji.setOrganizationChart(this);
+        return this;
+    }
+
+    public OrganizationChart removePrioritizeRequestNiazsanji(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji) {
+        this.prioritizeRequestNiazsanjis.remove(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji.setOrganizationChart(null);
+        return this;
+    }
+
+    public void setPrioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
+        this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
     }
 
     public OrganizationChart getParent() {

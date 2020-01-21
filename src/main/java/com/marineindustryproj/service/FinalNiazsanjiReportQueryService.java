@@ -149,6 +149,9 @@ public class FinalNiazsanjiReportQueryService extends QueryService<FinalNiazsanj
             if (criteria.getPrerequisite() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getPrerequisite(), FinalNiazsanjiReport_.prerequisite));
             }
+            if (criteria.getPriority() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getPriority(), FinalNiazsanjiReport_.priority));
+            }
             if (criteria.getFinalNiazsanjiReportPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportPersonId(),
                     root -> root.join(FinalNiazsanjiReport_.finalNiazsanjiReportPeople, JoinType.LEFT).get(FinalNiazsanjiReportPerson_.id)));
@@ -177,9 +180,17 @@ public class FinalNiazsanjiReportQueryService extends QueryService<FinalNiazsanj
                 specification = specification.and(buildSpecification(criteria.getRestrictionId(),
                     root -> root.join(FinalNiazsanjiReport_.restrictions, JoinType.LEFT).get(Restriction_.id)));
             }
+            if (criteria.getNiazsanjiIntegrationId() != null) {
+                specification = specification.and(buildSpecification(criteria.getNiazsanjiIntegrationId(),
+                    root -> root.join(FinalNiazsanjiReport_.niazsanjiIntegration, JoinType.LEFT).get(NiazsanjiIntegration_.id)));
+            }
             if (criteria.getTeacherId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTeacherId(),
                     root -> root.join(FinalNiazsanjiReport_.teacher, JoinType.LEFT).get(Teacher_.id)));
+            }
+            if (criteria.getNiazsanjiInputId() != null) {
+                specification = specification.and(buildSpecification(criteria.getNiazsanjiInputId(),
+                    root -> root.join(FinalNiazsanjiReport_.niazsanjiInput, JoinType.LEFT).get(NiazsanjiInput_.id)));
             }
             if (criteria.getCourseTypeId() != null) {
                 specification = specification.and(buildSpecification(criteria.getCourseTypeId(),

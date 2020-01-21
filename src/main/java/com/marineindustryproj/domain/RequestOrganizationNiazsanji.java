@@ -134,7 +134,7 @@ public class RequestOrganizationNiazsanji implements Serializable {
     @Column(name = "prerequisite", length = 4096)
     private String prerequisite;
 
-    @OneToMany(mappedBy = "requestOrganizationNiazsanji")
+    @OneToMany(mappedBy = "requestOrganizationNiazsanji", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<FinalOrganizationNiazsanji> finalOrganizationNiazsanjis = new HashSet<>();
     @ManyToMany

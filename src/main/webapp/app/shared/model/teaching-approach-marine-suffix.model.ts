@@ -5,6 +5,10 @@ import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model//final-niazs
 import { IDesignAndPlanningMarineSuffix } from 'app/shared/model//design-and-planning-marine-suffix.model';
 import { INiazsanjiFardiMarineSuffix } from 'app/shared/model//niazsanji-fardi-marine-suffix.model';
 import { IDesignNiazsanjiMarineSuffix } from 'app/shared/model//design-niazsanji-marine-suffix.model';
+import { IJobNiazsanjiMarineSuffix } from 'app/shared/model//job-niazsanji-marine-suffix.model';
+import { INiazsanjiOtherMarineSuffix } from 'app/shared/model//niazsanji-other-marine-suffix.model';
+import { IRequestOtherNiazsanjiMarineSuffix } from 'app/shared/model//request-other-niazsanji-marine-suffix.model';
+import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model//prioritize-request-niazsanji-marine-suffix.model';
 import { IPreJobNiazsanjiCompetencyMarineSuffix } from 'app/shared/model//pre-job-niazsanji-competency-marine-suffix.model';
 
 export interface ITeachingApproachMarineSuffix {
@@ -22,6 +26,10 @@ export interface ITeachingApproachMarineSuffix {
     designAndPlannings?: IDesignAndPlanningMarineSuffix[];
     niazsanjiFardis?: INiazsanjiFardiMarineSuffix[];
     designNiazsanjis?: IDesignNiazsanjiMarineSuffix[];
+    jobNiazsanjis?: IJobNiazsanjiMarineSuffix[];
+    niazsanjiOthers?: INiazsanjiOtherMarineSuffix[];
+    requestOtherNiazsanjis?: IRequestOtherNiazsanjiMarineSuffix[];
+    prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[];
     preJobNiazsanjiCompetencies?: IPreJobNiazsanjiCompetencyMarineSuffix[];
 }
 
@@ -41,6 +49,10 @@ export class TeachingApproachMarineSuffix implements ITeachingApproachMarineSuff
         public designAndPlannings?: IDesignAndPlanningMarineSuffix[],
         public niazsanjiFardis?: INiazsanjiFardiMarineSuffix[],
         public designNiazsanjis?: IDesignNiazsanjiMarineSuffix[],
+        public jobNiazsanjis?: IJobNiazsanjiMarineSuffix[],
+        public niazsanjiOthers?: INiazsanjiOtherMarineSuffix[],
+        public requestOtherNiazsanjis?: IRequestOtherNiazsanjiMarineSuffix[],
+        public prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[],
         public preJobNiazsanjiCompetencies?: IPreJobNiazsanjiCompetencyMarineSuffix[]
     ) {}
 }

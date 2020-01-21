@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -74,7 +76,7 @@ public class PreJobNiazsanjiCompetency implements Serializable {
     @Column(name = "modify_date")
     private ZonedDateTime modifyDate;
 
-    @OneToMany(mappedBy = "preJobNiazsanjiCompetency")
+    @OneToMany(mappedBy = "preJobNiazsanjiCompetency", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PriorityCriteriaValue> priorityCriteriaValues = new HashSet<>();
     @ManyToMany
@@ -92,7 +94,7 @@ public class PreJobNiazsanjiCompetency implements Serializable {
     @JsonIgnoreProperties("preJobNiazsanjiCompetencies")
     private EducationalModule educationalModule;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("preJobNiazsanjiCompetencies")
     private PreJobNiazsanji preJobNiazsanji;
 

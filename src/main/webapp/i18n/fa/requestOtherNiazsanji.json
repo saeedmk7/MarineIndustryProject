@@ -1,0 +1,64 @@
+{
+    "marineindustryprojApp": {
+        "requestOtherNiazsanji": {
+            "home": {
+                "title": "سایر نیازسنجی ها",
+                "createLabel": "جدید",
+                "createOrEditLabel": " سایر نیازسنجی ها"
+            },
+            "created": "سایر نیازسنجی ها با شناسه {{ param }} ایجاد شد.",
+            "updated": "سایر نیازسنجی ها با شناسه {{ param }} ویرایش شد.",
+            "deleted": "سایر نیازسنجی ها با شناسه {{ param }} حذف شد.",
+            "completed": "سایر نیازسنجی ها مورد نظر با موفقیت نهایی شد.",
+            "rejected": "سایر نیازسنجی ها مورد نظر با موفقیت رد شد.",
+            "delete": {
+                "question": "آیا از حذف درخواست سایر نیازسنجی ها با شناسه {{ id }} مطمئنید؟"
+            },
+            "comment": {
+                "accept": "لطفا نظر خود را درج نمائید.",
+                "reject": "لطفا علت عدم تایید را ثبت نمائید.",
+                "comment": "لطفا نظر خود را درج نمائید."
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات درخواست سایر نیازسنجی ها"
+            },
+            "index": "ردیف",
+            "code": "Code",
+            "costEducationalModule": "سرمایه گذاری",
+            "skillLevelOfSkillTitle": "سطح پودمان",
+            "totalLearningTime": "مدت زمان پودمان",
+            "description": "توضیحات",
+            "restrictionDescription": "توضیح محدودیت",
+            "goalsText": "اهداف(نتایج مورد انتظار-اهداف کلی، جزئی، رفتاری و یادگیری و ...)",
+            "prerequisite": "پیش نیاز",
+            "restriction": "محدودیت",
+            "teachingApproach": "روش های آموزش",
+            "createUserLogin": "کاربر درخواست کننده",
+            "createDate": "تاریخ درخواست",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "conversation": "مکالمات",
+            "requestStatus": "وضعیت درخواست",
+            "changeStatusUserLogin": "فرد تغییر دهنده وضعیت درخواست",
+            "guid": "Guid",
+            "hasImportantMessage": "Has Important Message",
+            "niazsanjiOther": "Niazsanji Other",
+            "document": "Document",
+            "niazsanjiInput": "ورودی نیازسنجی",
+            "courseType": "نوع دوره",
+            "educationalModule": "پودمان آموزشی",
+            "educationalModuleTitle": "عنوان پودمان آموزشی",
+            "educationalModuleId": "کد پودمان",
+            "person": "نام و نام خانوادگی",
+            "personId": "نام و نام خانوادگی",
+            "personName": "نام و نام خانوادگی",
+            "jobTitle": "شغل سازمانی",
+            "organizationChart": "محل خدمت",
+            "organizationChartId": "محل خدمت"
+        }
+    }
+}

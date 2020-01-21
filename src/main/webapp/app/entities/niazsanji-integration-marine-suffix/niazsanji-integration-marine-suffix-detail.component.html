@@ -1,0 +1,89 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="niazsanjiIntegration">
+            <h2><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.detail.title">Niazsanji Integration</span> {{niazsanjiIntegration.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.niazsanjiYear">Niazsanji Year</span></dt>
+                <dd>
+                    <span>{{niazsanjiIntegration.niazsanjiYear}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiIntegration.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiIntegration.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiIntegration.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.archived">Archived</span></dt>
+                <dd>
+                    <span>{{niazsanjiIntegration.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiIntegration.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiIntegration.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.status">Status</span></dt>
+                <dd>
+                    <span>{{niazsanjiIntegration.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.conversation">Conversation</span></dt>
+                <dd>
+                    <span>{{niazsanjiIntegration.conversation}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.requestStatus">Request Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + niazsanjiIntegration.requestStatus}}">{{niazsanjiIntegration.requestStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.changeStatusUserLogin">Change Status User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiIntegration.changeStatusUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.guid">Guid</span></dt>
+                <dd>
+                    <span>{{niazsanjiIntegration.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.hasImportantMessage">Has Important Message</span></dt>
+                <dd>
+                    <span>{{niazsanjiIntegration.hasImportantMessage}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.requestNiazsanjiType">Request Niazsanji Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.RequestNiazsanjiType.' + niazsanjiIntegration.requestNiazsanjiType}}">{{niazsanjiIntegration.requestNiazsanjiType}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.priority">Priority</span></dt>
+                <dd>
+                    <span>{{niazsanjiIntegration.priority}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.prioritizeRequestNiazsanji">Prioritize Request Niazsanji</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiIntegration.prioritizeRequestNiazsanjiId">
+                        <a [routerLink]="['/prioritize-request-niazsanji-marine-suffix', niazsanjiIntegration.prioritizeRequestNiazsanjiId, 'view']">{{niazsanjiIntegration.prioritizeRequestNiazsanjiCode}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/niazsanji-integration-marine-suffix', niazsanjiIntegration.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

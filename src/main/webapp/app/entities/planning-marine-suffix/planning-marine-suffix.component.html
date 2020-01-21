@@ -32,10 +32,10 @@
                         <label class="form-control-label">منبع نیازسنجی</label>
                         <div class="form-control">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="true" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی
+                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="true" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان فردی
                             </label>
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="false" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان سازمانی (متمرکز و گروهی)
+                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="false" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان سازمانی
                             </label>
                         </div>
 
@@ -87,7 +87,7 @@
                             [(ngModel)]="finalNiazsanjiReport.organizationChartId">
                     </div>
                     <div class="form-group half">
-                        <label class="form-control-label" for="field_organizationChart">گروه/صنعت/واحد</label>
+                        <label class="form-control-label" for="field_organizationChart">محل خدمت</label>
                         <ng-select
                             [items]="recommenedOrgCharts"
                             [multiple]="false"
@@ -285,9 +285,9 @@
             <kendo-grid-column field="planningRunMonthPersian" title="ماه برنامه ریزی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="id" title="شناسه یکتا" [width]="100"></kendo-grid-column>
-            <kendo-grid-column field="organizationChartTitle" title="گروه/صنعت/واحد" [width]="500"></kendo-grid-column>
+            <kendo-grid-column field="organizationChartTitle" title="محل خدمت" [width]="500"></kendo-grid-column>
             <kendo-grid-excel fileName="planning.xlsx">
-                <kendo-excelexport-column field="organizationChartTitle" title="گروه/صنعت/واحد" [width]="300"></kendo-excelexport-column>
+                <kendo-excelexport-column field="organizationChartTitle" title="محل خدمت" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
@@ -380,9 +380,9 @@
                 <mi-planning-marine-suffix-detail-people [people]="dataItem.people"></mi-planning-marine-suffix-detail-people>
             </div>
             <kendo-grid-column field="id" title="شناسه یکتا" [width]="100"></kendo-grid-column>
-            <kendo-grid-column field="organizationChartTitle" title="گروه/صنعت/واحد" [width]="500"></kendo-grid-column>
+            <kendo-grid-column field="organizationChartTitle" title="محل خدمت" [width]="500"></kendo-grid-column>
             <kendo-grid-excel fileName="planning.xlsx">
-                <kendo-excelexport-column field="organizationChartTitle" title="گروه/صنعت/واحد" [width]="300"></kendo-excelexport-column>
+                <kendo-excelexport-column field="organizationChartTitle" title="محل خدمت" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>

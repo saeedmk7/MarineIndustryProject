@@ -113,6 +113,10 @@ public class InstructionQueryService extends QueryService<Instruction> {
             if (criteria.getGuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGuid(), Instruction_.guid));
             }
+            if (criteria.getInstructionAuthorityId() != null) {
+                specification = specification.and(buildSpecification(criteria.getInstructionAuthorityId(),
+                    root -> root.join(Instruction_.instructionAuthorities, JoinType.LEFT).get(InstructionAuthority_.id)));
+            }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(Instruction_.documents, JoinType.LEFT).get(Document_.id)));

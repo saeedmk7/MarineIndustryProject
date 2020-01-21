@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20191228175947" author="saeed">
+        <!--job changes-->
+        <addColumn schemaName="public"
+                   tableName="final_niazsanji_report">
+            <column name="priority" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="niazsanji_integration_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="niazsanji_integration_id"
+                                 baseTableName="final_niazsanji_report"
+                                 constraintName="fk_final_niazsanji_report_niazsanji_integration_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="niazsanji_integration"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

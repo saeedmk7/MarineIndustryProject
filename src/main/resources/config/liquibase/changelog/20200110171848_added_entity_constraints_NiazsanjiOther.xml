@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity NiazsanjiOther.
+    -->
+    <changeSet id="20200110171848-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="niazsanji_others_id"
+                                 baseTableName="niazsanji_other_document"
+                                 constraintName="fk_niazsanji_other_document_niazsanji_others_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="niazsanji_other"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="niazsanji_other_document"
+                                 constraintName="fk_niazsanji_other_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="niazsanji_others_id"
+                                 baseTableName="niazsanji_other_restriction"
+                                 constraintName="fk_niazsanji_other_restriction_niazsanji_others_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="niazsanji_other"/>
+        <addForeignKeyConstraint baseColumnNames="restrictions_id"
+                                 baseTableName="niazsanji_other_restriction"
+                                 constraintName="fk_niazsanji_other_restriction_restrictions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="restriction"/>
+        
+        <addForeignKeyConstraint baseColumnNames="niazsanji_input_id"
+                                 baseTableName="niazsanji_other"
+                                 constraintName="fk_niazsanji_other_niazsanji_input_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="niazsanji_input"/>
+
+        <addForeignKeyConstraint baseColumnNames="course_type_id"
+                                 baseTableName="niazsanji_other"
+                                 constraintName="fk_niazsanji_other_course_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="request_other_niazsanji_id"
+                                 baseTableName="niazsanji_other"
+                                 constraintName="fk_niazsanji_other_request_other_niazsanji_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_other_niazsanji"/>
+
+        <addForeignKeyConstraint baseColumnNames="educational_module_id"
+                                 baseTableName="niazsanji_other"
+                                 constraintName="fk_niazsanji_other_educational_module_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="niazsanji_other"
+                                 constraintName="fk_niazsanji_other_person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+        <addForeignKeyConstraint baseColumnNames="organization_chart_id"
+                                 baseTableName="niazsanji_other"
+                                 constraintName="fk_niazsanji_other_organization_chart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+
+        <addForeignKeyConstraint baseColumnNames="teaching_approach_id"
+                                 baseTableName="niazsanji_other"
+                                 constraintName="fk_niazsanji_other_teaching_approach_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teaching_approach"/>
+
+    </changeSet>
+</databaseChangeLog>

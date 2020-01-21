@@ -1,0 +1,54 @@
+{
+    "marineindustryprojApp": {
+        "prioritizeRequestNiazsanji": {
+            "home": {
+                "title": "Prioritize Request Niazsanjis",
+                "createLabel": "Create a new Prioritize Request Niazsanji",
+                "createOrEditLabel": "Create or edit a Prioritize Request Niazsanji"
+            },
+            "created": "A new Prioritize Request Niazsanji is created with identifier {{ param }}",
+            "updated": "A Prioritize Request Niazsanji is updated with identifier {{ param }}",
+            "deleted": "A Prioritize Request Niazsanji is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Prioritize Request Niazsanji {{ id }}?"
+            },
+            "detail": {
+                "title": "Prioritize Request Niazsanji"
+            },
+            "code": "Code",
+            "costEducationalModule": "Cost Educational Module",
+            "educationalModuleType": "Educational Module Type",
+            "description": "Description",
+            "restrictionDescription": "Restriction Description",
+            "goalsText": "Goals Text",
+            "prerequisite": "Prerequisite",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "conversation": "Conversation",
+            "requestStatus": "Request Status",
+            "changeStatusUserLogin": "Change Status User Login",
+            "guid": "Guid",
+            "hasImportantMessage": "Has Important Message",
+            "requestNiazsanjiType": "Request Niazsanji Type",
+            "priority": "Priority",
+            "niazsanjiIntegration": "Niazsanji Integration",
+            "document": "Document",
+            "restriction": "Restriction",
+            "requestNiazsanjiFardi": "Request Niazsanji Fardi",
+            "preJobNiazsanji": "Pre Job Niazsanji",
+            "requestOtherNiazsanji": "Request Other Niazsanji",
+            "niazsanjiInput": "Niazsanji Input",
+            "courseType": "Course Type",
+            "educationalModule": "Educational Module",
+            "person": "Person",
+            "organizationChart": "Organization Chart",
+            "teachingApproach": "Teaching Approach"
+        }
+    }
+}

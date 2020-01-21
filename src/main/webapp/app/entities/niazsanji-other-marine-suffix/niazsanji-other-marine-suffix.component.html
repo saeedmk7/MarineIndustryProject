@@ -1,0 +1,140 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.niazsanjiOther.home.title">Niazsanji Others</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-niazsanji-other-marine-suffix" [routerLink]="['/niazsanji-other-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.niazsanjiOther.home.createLabel">
+            Create new Niazsanji Other
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="niazsanjiOthers">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="niazsanjiYear"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.niazsanjiYear">Niazsanji Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archived"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.archived">Archived</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedUserLogin"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.archivedUserLogin">Archived User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedDate"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.archivedDate">Archived Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="conversation"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.conversation">Conversation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="changeStatusUserLogin"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.changeStatusUserLogin">Change Status User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="guid"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.guid">Guid</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hasImportantMessage"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.hasImportantMessage">Has Important Message</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="restrictionDescription"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.restrictionDescription">Restriction Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="goalsText"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.goalsText">Goals Text</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="prerequisite"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.prerequisite">Prerequisite</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="niazsanjiInputTitle"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.niazsanjiInput">Niazsanji Input</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="requestOtherNiazsanjiCode"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.requestOtherNiazsanji">Request Other Niazsanji</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="teachingApproachTitle"><span jhiTranslate="marineindustryprojApp.niazsanjiOther.teachingApproach">Teaching Approach</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let niazsanjiOther of niazsanjiOthers ;trackBy: trackId">
+                <td><a [routerLink]="['/niazsanji-other-marine-suffix', niazsanjiOther.id, 'view' ]">{{niazsanjiOther.id}}</a></td>
+                <td>{{niazsanjiOther.niazsanjiYear}}</td>
+                <td>{{niazsanjiOther.code}}</td>
+                <td>{{niazsanjiOther.priceCost}}</td>
+                <td>{{niazsanjiOther.description}}</td>
+                <td>{{niazsanjiOther.createUserLogin}}</td>
+                <td>{{niazsanjiOther.createDate | date:'medium'}}</td>
+                <td>{{niazsanjiOther.modifyUserLogin}}</td>
+                <td>{{niazsanjiOther.modifyDate | date:'medium'}}</td>
+                <td>{{niazsanjiOther.archived}}</td>
+                <td>{{niazsanjiOther.archivedUserLogin}}</td>
+                <td>{{niazsanjiOther.archivedDate | date:'medium'}}</td>
+                <td>{{niazsanjiOther.status}}</td>
+                <td>{{niazsanjiOther.conversation}}</td>
+                <td>{{niazsanjiOther.changeStatusUserLogin}}</td>
+                <td>{{niazsanjiOther.guid}}</td>
+                <td>{{niazsanjiOther.hasImportantMessage}}</td>
+                <td>{{niazsanjiOther.restrictionDescription}}</td>
+                <td>{{niazsanjiOther.goalsText}}</td>
+                <td>{{niazsanjiOther.prerequisite}}</td>
+                <td>
+                    <div *ngIf="niazsanjiOther.niazsanjiInputId">
+                        <a [routerLink]="['../niazsanji-input-marine-suffix', niazsanjiOther.niazsanjiInputId , 'view' ]" >{{niazsanjiOther.niazsanjiInputTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="niazsanjiOther.courseTypeId">
+                        <a [routerLink]="['../course-type-marine-suffix', niazsanjiOther.courseTypeId , 'view' ]" >{{niazsanjiOther.courseTypeTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="niazsanjiOther.requestOtherNiazsanjiId">
+                        <a [routerLink]="['../request-other-niazsanji-marine-suffix', niazsanjiOther.requestOtherNiazsanjiId , 'view' ]" >{{niazsanjiOther.requestOtherNiazsanjiCode}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="niazsanjiOther.educationalModuleId">
+                        <a [routerLink]="['../educational-module-marine-suffix', niazsanjiOther.educationalModuleId , 'view' ]" >{{niazsanjiOther.educationalModuleTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="niazsanjiOther.personId">
+                        <a [routerLink]="['../person-marine-suffix', niazsanjiOther.personId , 'view' ]" >{{niazsanjiOther.personFamily}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="niazsanjiOther.organizationChartId">
+                        <a [routerLink]="['../organization-chart-marine-suffix', niazsanjiOther.organizationChartId , 'view' ]" >{{niazsanjiOther.organizationChartTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="niazsanjiOther.teachingApproachId">
+                        <a [routerLink]="['../teaching-approach-marine-suffix', niazsanjiOther.teachingApproachId , 'view' ]" >{{niazsanjiOther.teachingApproachTitle}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/niazsanji-other-marine-suffix', niazsanjiOther.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/niazsanji-other-marine-suffix', niazsanjiOther.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'niazsanji-other-marine-suffix/'+ niazsanjiOther.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="niazsanjiOthers && niazsanjiOthers.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -15,6 +15,8 @@ import java.util.Set;
 import java.util.Objects;
 
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * A FinalNiazsanjiReport.
@@ -102,6 +104,9 @@ public class FinalNiazsanjiReport implements Serializable {
     @Column(name = "prerequisite", length = 4096)
     private String prerequisite;
 
+    @Column(name = "priority")
+    private Integer priority;
+
     @OneToMany(mappedBy = "finalNiazsanjiReport", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = new HashSet<>();
@@ -130,7 +135,15 @@ public class FinalNiazsanjiReport implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("finalNiazsanjiReports")
+    private NiazsanjiIntegration niazsanjiIntegration;
+
+    @ManyToOne
+    @JsonIgnoreProperties("finalNiazsanjiReports")
     private Teacher teacher;
+
+    @ManyToOne
+    @JsonIgnoreProperties("finalNiazsanjiReports")
+    private NiazsanjiInput niazsanjiInput;
 
     @ManyToOne
     @JsonIgnoreProperties("finalNiazsanjiReports")
@@ -418,6 +431,19 @@ public class FinalNiazsanjiReport implements Serializable {
         this.prerequisite = prerequisite;
     }
 
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public FinalNiazsanjiReport priority(Integer priority) {
+        this.priority = priority;
+        return this;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+
     public Set<FinalNiazsanjiReportPerson> getFinalNiazsanjiReportPeople() {
         return finalNiazsanjiReportPeople;
     }
@@ -568,6 +594,19 @@ public class FinalNiazsanjiReport implements Serializable {
         this.restrictions = restrictions;
     }
 
+    public NiazsanjiIntegration getNiazsanjiIntegration() {
+        return niazsanjiIntegration;
+    }
+
+    public FinalNiazsanjiReport niazsanjiIntegration(NiazsanjiIntegration niazsanjiIntegration) {
+        this.niazsanjiIntegration = niazsanjiIntegration;
+        return this;
+    }
+
+    public void setNiazsanjiIntegration(NiazsanjiIntegration niazsanjiIntegration) {
+        this.niazsanjiIntegration = niazsanjiIntegration;
+    }
+
     public Teacher getTeacher() {
         return teacher;
     }
@@ -579,6 +618,19 @@ public class FinalNiazsanjiReport implements Serializable {
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+    public NiazsanjiInput getNiazsanjiInput() {
+        return niazsanjiInput;
+    }
+
+    public FinalNiazsanjiReport niazsanjiInput(NiazsanjiInput niazsanjiInput) {
+        this.niazsanjiInput = niazsanjiInput;
+        return this;
+    }
+
+    public void setNiazsanjiInput(NiazsanjiInput niazsanjiInput) {
+        this.niazsanjiInput = niazsanjiInput;
     }
 
     public CourseType getCourseType() {
@@ -678,6 +730,7 @@ public class FinalNiazsanjiReport implements Serializable {
             ", restrictionDescription='" + getRestrictionDescription() + "'" +
             ", goalsText='" + getGoalsText() + "'" +
             ", prerequisite='" + getPrerequisite() + "'" +
+            ", priority=" + getPriority() +
             "}";
     }
 }

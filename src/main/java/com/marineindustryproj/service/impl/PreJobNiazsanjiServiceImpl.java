@@ -1,15 +1,12 @@
 package com.marineindustryproj.service.impl;
 
-import com.marineindustryproj.domain.enumeration.EducationalModuleType;
+import com.marineindustryproj.domain.enumeration.RequestNiazsanjiType;
 import com.marineindustryproj.domain.enumeration.RequestStatus;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.*;
 import com.marineindustryproj.domain.PreJobNiazsanji;
 import com.marineindustryproj.repository.PreJobNiazsanjiRepository;
-import com.marineindustryproj.service.dto.DesignNiazsanjiCriteria;
-import com.marineindustryproj.service.dto.DesignNiazsanjiDTO;
-import com.marineindustryproj.service.dto.JobNiazsanjiDTO;
-import com.marineindustryproj.service.dto.PreJobNiazsanjiDTO;
+import com.marineindustryproj.service.dto.*;
 import com.marineindustryproj.service.mapper.PreJobNiazsanjiCompetencyMapper;
 import com.marineindustryproj.service.mapper.PreJobNiazsanjiMapper;
 import io.github.jhipster.service.filter.LongFilter;
@@ -24,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Service Implementation for managing PreJobNiazsanji.
@@ -45,13 +43,16 @@ public class PreJobNiazsanjiServiceImpl implements PreJobNiazsanjiService {
 
     private final JobNiazsanjiService jobNiazsanjiService;
 
-    public PreJobNiazsanjiServiceImpl(PreJobNiazsanjiRepository preJobNiazsanjiRepository, PreJobNiazsanjiCompetencyService preJobNiazsanjiCompetencyService, PreJobNiazsanjiCompetencyMapper preJobNiazsanjiCompetencyMapper, PreJobNiazsanjiMapper preJobNiazsanjiMapper, DesignNiazsanjiServiceImpl designNiazsanjiService, DesignNiazsanjiQueryService designNiazsanjiQueryService, NiazsanjiFardiService niazsanjiFardiService, JobNiazsanjiService jobNiazsanjiService) {
+    private final PrioritizeRequestNiazsanjiService prioritizeRequestNiazsanjiService;
+
+    public PreJobNiazsanjiServiceImpl(PreJobNiazsanjiRepository preJobNiazsanjiRepository, PreJobNiazsanjiCompetencyService preJobNiazsanjiCompetencyService, PreJobNiazsanjiCompetencyMapper preJobNiazsanjiCompetencyMapper, PreJobNiazsanjiMapper preJobNiazsanjiMapper, DesignNiazsanjiServiceImpl designNiazsanjiService, DesignNiazsanjiQueryService designNiazsanjiQueryService, NiazsanjiFardiService niazsanjiFardiService, JobNiazsanjiService jobNiazsanjiService, PrioritizeRequestNiazsanjiService prioritizeRequestNiazsanjiService) {
         this.preJobNiazsanjiRepository = preJobNiazsanjiRepository;
         this.preJobNiazsanjiMapper = preJobNiazsanjiMapper;
         this.designNiazsanjiService = designNiazsanjiService;
         this.designNiazsanjiQueryService = designNiazsanjiQueryService;
         this.niazsanjiFardiService = niazsanjiFardiService;
         this.jobNiazsanjiService = jobNiazsanjiService;
+        this.prioritizeRequestNiazsanjiService = prioritizeRequestNiazsanjiService;
     }
 
     /**
@@ -82,35 +83,42 @@ public class PreJobNiazsanjiServiceImpl implements PreJobNiazsanjiService {
             throw new Exception("حتما حداقل باید یک دوره طراحی شده باشد برای نهایی کردن پیش نیازسنجی.");
         }
         for (DesignNiazsanjiDTO designNiazsanjiDTO : designNiazsanjiDTOS) {
-            JobNiazsanjiDTO jobNiazsanjiDTO = new JobNiazsanjiDTO();
-            jobNiazsanjiDTO.setDocuments(preJobNiazsanjiDTO.getDocuments());
-            jobNiazsanjiDTO.setPreJobNiazsanjiId(preJobNiazsanjiDTO.getId());
-            jobNiazsanjiDTO.setHasImportantMessage(false);
-            jobNiazsanjiDTO.setCreateDate(ZonedDateTime.now());
-            jobNiazsanjiDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
-            jobNiazsanjiDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
-            jobNiazsanjiDTO.setModifyDate(ZonedDateTime.now());
-            jobNiazsanjiDTO.setArchived(false);
+            PrioritizeRequestNiazsanjiDTO prioritizeRequestNiazsanjiDTO = new PrioritizeRequestNiazsanjiDTO();
+            prioritizeRequestNiazsanjiDTO.setDocuments(preJobNiazsanjiDTO.getDocuments());
+            prioritizeRequestNiazsanjiDTO.setPreJobNiazsanjiId(preJobNiazsanjiDTO.getId());
+            prioritizeRequestNiazsanjiDTO.setHasImportantMessage(false);
+            prioritizeRequestNiazsanjiDTO.setCreateDate(ZonedDateTime.now());
+            prioritizeRequestNiazsanjiDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            prioritizeRequestNiazsanjiDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            prioritizeRequestNiazsanjiDTO.setModifyDate(ZonedDateTime.now());
+            prioritizeRequestNiazsanjiDTO.setArchived(false);
 
-            jobNiazsanjiDTO.setOrganizationChartId(preJobNiazsanjiDTO.getOrganizationChartId());
-            jobNiazsanjiDTO.setPersonId(preJobNiazsanjiDTO.getPersonId());
-            jobNiazsanjiDTO.setDescription(preJobNiazsanjiDTO.getDescription());
-            jobNiazsanjiDTO.setCode(preJobNiazsanjiDTO.getCode());
-            jobNiazsanjiDTO.setStatus(0);
+            prioritizeRequestNiazsanjiDTO.setOrganizationChartId(preJobNiazsanjiDTO.getOrganizationChartId());
+            prioritizeRequestNiazsanjiDTO.setPersonId(preJobNiazsanjiDTO.getPersonId());
+            prioritizeRequestNiazsanjiDTO.setDescription(preJobNiazsanjiDTO.getDescription());
+            prioritizeRequestNiazsanjiDTO.setCode(preJobNiazsanjiDTO.getCode());
+            prioritizeRequestNiazsanjiDTO.setStatus(0);
 
-            jobNiazsanjiDTO.setEducationalModuleId(designNiazsanjiDTO.getEducationalModuleId());
-            jobNiazsanjiDTO.setPriceCost(designNiazsanjiDTO.getCostEducationalModule());
-            jobNiazsanjiDTO.setCourseTypeId(designNiazsanjiDTO.getCourseTypeId());
-            jobNiazsanjiDTO.setConversation(preJobNiazsanjiDTO.getConversation());
-            jobNiazsanjiDTO.setGoalsText(designNiazsanjiDTO.getGoalsText());
-            jobNiazsanjiDTO.setGuid(preJobNiazsanjiDTO.getGuid());
-            jobNiazsanjiDTO.setPrerequisite(designNiazsanjiDTO.getPrerequisite());
-            jobNiazsanjiDTO.setRestrictionDescription(designNiazsanjiDTO.getRestrictionDescription());
-            jobNiazsanjiDTO.setRestrictions(designNiazsanjiDTO.getRestrictions());
-            jobNiazsanjiDTO.setTeachingApproachId(designNiazsanjiDTO.getTeachingApproachId());
+            prioritizeRequestNiazsanjiDTO.setEducationalModuleId(designNiazsanjiDTO.getEducationalModuleId());
+            prioritizeRequestNiazsanjiDTO.setCostEducationalModule(designNiazsanjiDTO.getCostEducationalModule());
+            prioritizeRequestNiazsanjiDTO.setCourseTypeId(designNiazsanjiDTO.getCourseTypeId());
+            prioritizeRequestNiazsanjiDTO.setConversation(preJobNiazsanjiDTO.getConversation());
+            prioritizeRequestNiazsanjiDTO.setGoalsText(designNiazsanjiDTO.getGoalsText());
+            prioritizeRequestNiazsanjiDTO.setGuid(preJobNiazsanjiDTO.getGuid());
+            prioritizeRequestNiazsanjiDTO.setPrerequisite(designNiazsanjiDTO.getPrerequisite());
+            prioritizeRequestNiazsanjiDTO.setRestrictionDescription(designNiazsanjiDTO.getRestrictionDescription());
+            prioritizeRequestNiazsanjiDTO.setRestrictions(designNiazsanjiDTO.getRestrictions());
+            prioritizeRequestNiazsanjiDTO.setTeachingApproachId(designNiazsanjiDTO.getTeachingApproachId());
+            prioritizeRequestNiazsanjiDTO.setRequestStatus(RequestStatus.NEW);
 
-            jobNiazsanjiService.save(jobNiazsanjiDTO);
+            prioritizeRequestNiazsanjiDTO.setGuid(UUID.randomUUID().toString());
+            prioritizeRequestNiazsanjiDTO.setConversation(preJobNiazsanjiDTO.getConversation());
+            prioritizeRequestNiazsanjiDTO.setPreJobNiazsanjiId(preJobNiazsanjiDTO.getId());
+            prioritizeRequestNiazsanjiDTO.setRequestNiazsanjiType(RequestNiazsanjiType.JOB);
+
+            prioritizeRequestNiazsanjiService.save(prioritizeRequestNiazsanjiDTO);
         }
+
         preJobNiazsanjiDTO.setRequestStatus(RequestStatus.NEW);
         preJobNiazsanjiDTO.setStatus(0);
         preJobNiazsanjiDTO.setChangeStatusUserLogin(SecurityUtils.getCurrentUserLogin().get());

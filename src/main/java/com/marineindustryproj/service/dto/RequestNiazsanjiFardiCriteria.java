@@ -72,6 +72,8 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
 
     private LongFilter niazsanjiFardiId;
 
+    private LongFilter prioritizeRequestNiazsanjiId;
+
     private LongFilter documentId;
 
     private LongFilter courseTypeId;
@@ -224,6 +226,14 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
         this.niazsanjiFardiId = niazsanjiFardiId;
     }
 
+    public LongFilter getPrioritizeRequestNiazsanjiId() {
+        return prioritizeRequestNiazsanjiId;
+    }
+
+    public void setPrioritizeRequestNiazsanjiId(LongFilter prioritizeRequestNiazsanjiId) {
+        this.prioritizeRequestNiazsanjiId = prioritizeRequestNiazsanjiId;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -306,6 +316,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
             Objects.equals(guid, that.guid) &&
             Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
             Objects.equals(niazsanjiFardiId, that.niazsanjiFardiId) &&
+            Objects.equals(prioritizeRequestNiazsanjiId, that.prioritizeRequestNiazsanjiId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(approvedEducationalModuleId, that.approvedEducationalModuleId) &&
@@ -336,6 +347,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
         guid,
         hasImportantMessage,
         niazsanjiFardiId,
+        prioritizeRequestNiazsanjiId,
         documentId,
         courseTypeId,
         approvedEducationalModuleId,
@@ -367,6 +379,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
                 (guid != null ? "guid=" + guid + ", " : "") +
                 (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
                 (niazsanjiFardiId != null ? "niazsanjiFardiId=" + niazsanjiFardiId + ", " : "") +
+                (prioritizeRequestNiazsanjiId != null ? "prioritizeRequestNiazsanjiId=" + prioritizeRequestNiazsanjiId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (approvedEducationalModuleId != null ? "approvedEducationalModuleId=" + approvedEducationalModuleId + ", " : "") +

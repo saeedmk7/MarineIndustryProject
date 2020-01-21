@@ -79,6 +79,8 @@ public class PreJobNiazsanjiCriteria implements Serializable {
 
     private LongFilter jobNiazsanjiId;
 
+    private LongFilter prioritizeRequestNiazsanjiId;
+
     private LongFilter documentId;
 
     private LongFilter personId;
@@ -255,6 +257,14 @@ public class PreJobNiazsanjiCriteria implements Serializable {
         this.jobNiazsanjiId = jobNiazsanjiId;
     }
 
+    public LongFilter getPrioritizeRequestNiazsanjiId() {
+        return prioritizeRequestNiazsanjiId;
+    }
+
+    public void setPrioritizeRequestNiazsanjiId(LongFilter prioritizeRequestNiazsanjiId) {
+        this.prioritizeRequestNiazsanjiId = prioritizeRequestNiazsanjiId;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -310,6 +320,7 @@ public class PreJobNiazsanjiCriteria implements Serializable {
             Objects.equals(designNiazsanjiId, that.designNiazsanjiId) &&
             Objects.equals(preJobNiazsanjiCompetencyId, that.preJobNiazsanjiCompetencyId) &&
             Objects.equals(jobNiazsanjiId, that.jobNiazsanjiId) &&
+            Objects.equals(prioritizeRequestNiazsanjiId, that.prioritizeRequestNiazsanjiId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(organizationChartId, that.organizationChartId) &&
@@ -341,6 +352,7 @@ public class PreJobNiazsanjiCriteria implements Serializable {
         designNiazsanjiId,
         preJobNiazsanjiCompetencyId,
         jobNiazsanjiId,
+        prioritizeRequestNiazsanjiId,
         documentId,
         personId,
         organizationChartId,
@@ -372,6 +384,7 @@ public class PreJobNiazsanjiCriteria implements Serializable {
                 (designNiazsanjiId != null ? "designNiazsanjiId=" + designNiazsanjiId + ", " : "") +
                 (preJobNiazsanjiCompetencyId != null ? "preJobNiazsanjiCompetencyId=" + preJobNiazsanjiCompetencyId + ", " : "") +
                 (jobNiazsanjiId != null ? "jobNiazsanjiId=" + jobNiazsanjiId + ", " : "") +
+                (prioritizeRequestNiazsanjiId != null ? "prioritizeRequestNiazsanjiId=" + prioritizeRequestNiazsanjiId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +

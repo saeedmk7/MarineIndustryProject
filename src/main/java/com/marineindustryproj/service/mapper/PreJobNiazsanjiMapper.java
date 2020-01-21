@@ -21,6 +21,7 @@ public interface PreJobNiazsanjiMapper extends EntityMapper<PreJobNiazsanjiDTO, 
     @Mapping(target = "designNiazsanjis", ignore = true)
     @Mapping(target = "preJobNiazsanjiCompetencies", ignore = true)
     @Mapping(target = "jobNiazsanjis", ignore = true)
+    @Mapping(target = "prioritizeRequestNiazsanjis", ignore = true)
     @Mapping(source = "organizationChartId", target = "organizationChart")
     @Mapping(source = "personId", target = "person")
     PreJobNiazsanji toEntity(PreJobNiazsanjiDTO preJobNiazsanjiDTO);

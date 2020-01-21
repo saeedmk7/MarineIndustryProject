@@ -55,7 +55,7 @@ public class FixCompetencyDeficiency implements Serializable {
     @Column(name = "modify_date")
     private ZonedDateTime modifyDate;
 
-    @OneToMany(mappedBy = "fixCompetencyDeficiency")
+    @OneToMany(mappedBy = "fixCompetencyDeficiency", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PreJobNiazsanjiCompetency> preJobNiazsanjiCompetencies = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

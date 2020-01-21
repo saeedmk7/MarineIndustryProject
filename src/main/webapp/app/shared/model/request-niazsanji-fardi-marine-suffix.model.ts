@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { INiazsanjiFardiMarineSuffix } from 'app/shared/model//niazsanji-fardi-marine-suffix.model';
+import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model//prioritize-request-niazsanji-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
 
@@ -24,6 +25,7 @@ export interface IRequestNiazsanjiFardiMarineSuffix {
     guid?: string;
     hasImportantMessage?: boolean;
     niazsanjiFardis?: INiazsanjiFardiMarineSuffix[];
+    prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     courseTypeTitle?: string;
     courseTypeId?: number;
@@ -65,6 +67,7 @@ export class RequestNiazsanjiFardiMarineSuffix implements IRequestNiazsanjiFardi
         public guid?: string,
         public hasImportantMessage?: boolean,
         public niazsanjiFardis?: INiazsanjiFardiMarineSuffix[],
+        public prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public courseTypeTitle?: string,
         public courseTypeId?: number,

@@ -107,6 +107,12 @@ public class EducationalModuleCriteria implements Serializable {
 
     private LongFilter jobNiazsanjiId;
 
+    private LongFilter niazsanjiOtherId;
+
+    private LongFilter requestOtherNiazsanjiId;
+
+    private LongFilter prioritizeRequestNiazsanjiId;
+
     private LongFilter scientificWorkGroupId;
 
     private LongFilter documentId;
@@ -469,6 +475,30 @@ public class EducationalModuleCriteria implements Serializable {
         this.jobNiazsanjiId = jobNiazsanjiId;
     }
 
+    public LongFilter getNiazsanjiOtherId() {
+        return niazsanjiOtherId;
+    }
+
+    public void setNiazsanjiOtherId(LongFilter niazsanjiOtherId) {
+        this.niazsanjiOtherId = niazsanjiOtherId;
+    }
+
+    public LongFilter getRequestOtherNiazsanjiId() {
+        return requestOtherNiazsanjiId;
+    }
+
+    public void setRequestOtherNiazsanjiId(LongFilter requestOtherNiazsanjiId) {
+        this.requestOtherNiazsanjiId = requestOtherNiazsanjiId;
+    }
+
+    public LongFilter getPrioritizeRequestNiazsanjiId() {
+        return prioritizeRequestNiazsanjiId;
+    }
+
+    public void setPrioritizeRequestNiazsanjiId(LongFilter prioritizeRequestNiazsanjiId) {
+        this.prioritizeRequestNiazsanjiId = prioritizeRequestNiazsanjiId;
+    }
+
     public LongFilter getScientificWorkGroupId() {
         return scientificWorkGroupId;
     }
@@ -626,6 +656,9 @@ public class EducationalModuleCriteria implements Serializable {
             Objects.equals(designNiazsanjiId, that.designNiazsanjiId) &&
             Objects.equals(preJobNiazsanjiCompetencyId, that.preJobNiazsanjiCompetencyId) &&
             Objects.equals(jobNiazsanjiId, that.jobNiazsanjiId) &&
+            Objects.equals(niazsanjiOtherId, that.niazsanjiOtherId) &&
+            Objects.equals(requestOtherNiazsanjiId, that.requestOtherNiazsanjiId) &&
+            Objects.equals(prioritizeRequestNiazsanjiId, that.prioritizeRequestNiazsanjiId) &&
             Objects.equals(scientificWorkGroupId, that.scientificWorkGroupId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(educationalCenterId, that.educationalCenterId) &&
@@ -686,6 +719,9 @@ public class EducationalModuleCriteria implements Serializable {
         designNiazsanjiId,
         preJobNiazsanjiCompetencyId,
         jobNiazsanjiId,
+        niazsanjiOtherId,
+        requestOtherNiazsanjiId,
+        prioritizeRequestNiazsanjiId,
         scientificWorkGroupId,
         documentId,
         educationalCenterId,
@@ -747,6 +783,9 @@ public class EducationalModuleCriteria implements Serializable {
                 (designNiazsanjiId != null ? "designNiazsanjiId=" + designNiazsanjiId + ", " : "") +
                 (preJobNiazsanjiCompetencyId != null ? "preJobNiazsanjiCompetencyId=" + preJobNiazsanjiCompetencyId + ", " : "") +
                 (jobNiazsanjiId != null ? "jobNiazsanjiId=" + jobNiazsanjiId + ", " : "") +
+                (niazsanjiOtherId != null ? "niazsanjiOtherId=" + niazsanjiOtherId + ", " : "") +
+                (requestOtherNiazsanjiId != null ? "requestOtherNiazsanjiId=" + requestOtherNiazsanjiId + ", " : "") +
+                (prioritizeRequestNiazsanjiId != null ? "prioritizeRequestNiazsanjiId=" + prioritizeRequestNiazsanjiId + ", " : "") +
                 (scientificWorkGroupId != null ? "scientificWorkGroupId=" + scientificWorkGroupId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (educationalCenterId != null ? "educationalCenterId=" + educationalCenterId + ", " : "") +

@@ -144,6 +144,8 @@ export class TreeUtilities {
         }
         else {
             if(status == 0 && requestStatus == RequestStatus.NEW)
+                return "منتظر در فهرست اولویت بندی";
+            if(status == 0 && requestStatus == RequestStatus.READ)
                 return "منتظر تصویب شوراء تربیت و آموزش سازمان";
             if(status == 0 && requestStatus == RequestStatus.IGNORE)
                 return "رد شده توسط شوراء تربیت و آموزش سازمان";

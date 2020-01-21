@@ -143,7 +143,7 @@
         },
         "item-count": "نمایش {{first}} - {{second}} از {{total}} مورد.",
         "sharedTitles":{
-            "educationHistoryTitle": "سوابق پودمان های آموزشی فرد",
+            "educationHistoryTitle": "مشاهده سوابق پودمان های آموزشی فرد",
             "educationHistoryTitleAll": "شناسنامه آموزشی شاغل و شناسنامه شغلی فرد"
         }
     },

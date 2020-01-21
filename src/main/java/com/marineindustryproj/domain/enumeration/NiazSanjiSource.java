@@ -4,5 +4,5 @@ package com.marineindustryproj.domain.enumeration;
  * The NiazSanjiSource enumeration.
  */
 public enum NiazSanjiSource {
-    FARDI, GROUP, ORGANIZATION, JOB
+    FARDI, GROUP, ORGANIZATION, JOB, OTHER
 }

@@ -94,6 +94,7 @@ public class PreJobNiazsanjiResource {
         preJobNiazsanjiDTO.setModifyDate(ZonedDateTime.now());
         preJobNiazsanjiDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
 
+
         PreJobNiazsanjiDTO result = preJobNiazsanjiService.finalize(preJobNiazsanjiDTO);
 
 

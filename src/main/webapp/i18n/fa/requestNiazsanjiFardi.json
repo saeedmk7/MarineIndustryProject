@@ -46,7 +46,7 @@
             "conversation": "مکالمات",
             "requestStatus": "وضعیت درخواست",
             "changeStatusUserLogin": "فرد تغییر دهنده وضعیت درخواست",
-            "niazsanjiFardi": "نیازسنجی پودمان شناسنامه مشاغل و پودمان فردی",
+            "niazsanjiFardi": "نیازسنجی پودمان فردی",
             "document": "مدرک",
             "educationalModule": "عنوان پودمان آموزشی",
             "approvedEducationalModule": "پیشنهادی گروه علمی شغلی",
@@ -59,8 +59,8 @@
             "personId": "نام و نام خانوادگی",
             "personName": "نام و نام خانوادگی",
             "jobTitle": "شغل سازمانی",
-            "organizationChart": "محل خدمت: گروه/صنعت/واحد",
-            "organizationChartId": "گروه/صنعت/واحد",
+            "organizationChart": "محل خدمت",
+            "organizationChartId": "محل خدمت",
             "answer": "جواب"
         }
     }
