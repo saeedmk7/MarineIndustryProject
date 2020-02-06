@@ -22,6 +22,7 @@ public interface FinalNiazsanjiReportMapper extends EntityMapper<FinalNiazsanjiR
     @Mapping(source = "organizationChart.id", target = "organizationChartId")
     @Mapping(source = "organizationChart.title", target = "organizationChartTitle")
     @Mapping(source = "educationalModule.id", target = "educationalModuleId")
+    @Mapping(source = "educationalModule.code", target = "educationalModuleCode")
     @Mapping(source = "educationalModule.title", target = "educationalModuleTitle")
     @Mapping(source = "teachingApproach.id", target = "teachingApproachId")
     @Mapping(source = "teachingApproach.title", target = "teachingApproachTitle")

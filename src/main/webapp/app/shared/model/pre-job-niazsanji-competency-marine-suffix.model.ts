@@ -21,6 +21,7 @@ export interface IPreJobNiazsanjiCompetencyMarineSuffix {
     fixCompetencyDeficiencyTitle?: string;
     fixCompetencyDeficiencyId?: number;
     educationalModuleTitle?: string;
+    educationalModuleCode?: string;
     educationalModuleId?: number;
     preJobNiazsanjiTitle?: string;
     preJobNiazsanjiId?: number;
@@ -48,6 +49,7 @@ export class PreJobNiazsanjiCompetencyMarineSuffix implements IPreJobNiazsanjiCo
         public fixCompetencyDeficiencyTitle?: string,
         public fixCompetencyDeficiencyId?: number,
         public educationalModuleTitle?: string,
+        public educationalModuleCode?: string,
         public educationalModuleId?: number,
         public preJobNiazsanjiTitle?: string,
         public preJobNiazsanjiId?: number,

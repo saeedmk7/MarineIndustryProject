@@ -12,6 +12,7 @@ import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model
 import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
 import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
 import { FinalNiazsanjiReportMarineSuffixService } from 'app/entities/final-niazsanji-report-marine-suffix';
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 
 @Component({
     selector: 'mi-final-niazsanji-report-person-marine-suffix-update',
@@ -33,6 +34,7 @@ export class FinalNiazsanjiReportPersonMarineSuffixUpdateComponent implements On
         private finalNiazsanjiReportPersonService: FinalNiazsanjiReportPersonMarineSuffixService,
         private personService: PersonMarineSuffixService,
         private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService,
+        private convertObjectDatesService: ConvertObjectDatesService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -46,7 +48,7 @@ export class FinalNiazsanjiReportPersonMarineSuffixUpdateComponent implements On
             });
         });
         if(this.personService.people){
-            this.people = this.personService.people;
+            this.people = this.convertObjectDatesService.goClone(this.personService.people);
         }
         else {
             this.personService.query().subscribe(

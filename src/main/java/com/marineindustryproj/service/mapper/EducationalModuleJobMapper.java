@@ -12,6 +12,7 @@ import org.mapstruct.*;
 public interface EducationalModuleJobMapper extends EntityMapper<EducationalModuleJobDTO, EducationalModuleJob> {
 
     @Mapping(source = "educationalModule.id", target = "educationalModuleId")
+    @Mapping(source = "educationalModule.code", target = "educationalModuleCode")
     @Mapping(source = "educationalModule.title", target = "educationalModuleTitle")
     @Mapping(source = "job.id", target = "jobId")
     @Mapping(source = "job.title", target = "jobTitle")

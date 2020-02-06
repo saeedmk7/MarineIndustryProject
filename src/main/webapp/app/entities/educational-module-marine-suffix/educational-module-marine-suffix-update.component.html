@@ -5,7 +5,7 @@
             <h2 class="mi-educational-module-marine-suffix-heading">اطلاعات پودمان {{educationalModule.title}}</h2>
             <div>
                 <mi-alert-error></mi-alert-error>
-                <div class="form-group" [hidden]="!educationalModule.id">
+                <div class="form-group" [hidden]="true">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="educationalModule.id" readonly />

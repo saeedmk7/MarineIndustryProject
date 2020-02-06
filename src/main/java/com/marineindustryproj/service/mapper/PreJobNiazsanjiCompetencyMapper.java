@@ -14,6 +14,7 @@ public interface PreJobNiazsanjiCompetencyMapper extends EntityMapper<PreJobNiaz
     @Mapping(source = "fixCompetencyDeficiency.id", target = "fixCompetencyDeficiencyId")
     @Mapping(source = "fixCompetencyDeficiency.title", target = "fixCompetencyDeficiencyTitle")
     @Mapping(source = "educationalModule.id", target = "educationalModuleId")
+    @Mapping(source = "educationalModule.code", target = "educationalModuleCode")
     @Mapping(source = "educationalModule.title", target = "educationalModuleTitle")
     @Mapping(source = "preJobNiazsanji.id", target = "preJobNiazsanjiId")
     @Mapping(source = "preJobNiazsanji.title", target = "preJobNiazsanjiTitle")

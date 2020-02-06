@@ -139,6 +139,53 @@ public class NiazsanjiIntegrationQueryService extends QueryService<NiazsanjiInte
                 specification = specification.and(buildSpecification(criteria.getPrioritizeRequestNiazsanjiId(),
                     root -> root.join(NiazsanjiIntegration_.prioritizeRequestNiazsanji, JoinType.LEFT).get(PrioritizeRequestNiazsanji_.id)));
             }
+            if (criteria.getEducationalModuleCode() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleCode(),
+                    root -> root.join(NiazsanjiIntegration_.prioritizeRequestNiazsanji, JoinType.LEFT)
+                        .join(PrioritizeRequestNiazsanji_.educationalModule)
+                        .get(EducationalModule_.code)));
+            }
+            if (criteria.getEducationalModuleCode() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleTitle(),
+                    root -> root.join(NiazsanjiIntegration_.prioritizeRequestNiazsanji, JoinType.LEFT)
+                        .join(PrioritizeRequestNiazsanji_.educationalModule)
+                        .get(EducationalModule_.title)));
+            }
+            if (criteria.getEducationalModuleType() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleType(),
+                    root -> root.join(NiazsanjiIntegration_.prioritizeRequestNiazsanji, JoinType.LEFT)
+                        .get(PrioritizeRequestNiazsanji_.educationalModuleType)));
+            }
+            if (criteria.getCostEducationalModule() != null) {
+                specification = specification.and(buildSpecification(criteria.getCostEducationalModule(),
+                    root -> root.join(NiazsanjiIntegration_.prioritizeRequestNiazsanji, JoinType.LEFT)
+                        .get(PrioritizeRequestNiazsanji_.costEducationalModule)));
+            }
+            if (criteria.getSkillableLevelOfSkillId() != null) {
+                specification = specification.and(buildSpecification(criteria.getSkillableLevelOfSkillId(),
+                    root -> root.join(NiazsanjiIntegration_.prioritizeRequestNiazsanji, JoinType.LEFT)
+                        .join(PrioritizeRequestNiazsanji_.educationalModule)
+                        .join(EducationalModule_.skillableLevelOfSkill)
+                        .get(SkillableLevelOfSkill_.id)));
+            }
+            if (criteria.getCourseTypeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getCourseTypeId(),
+                    root -> root.join(NiazsanjiIntegration_.prioritizeRequestNiazsanji, JoinType.LEFT)
+                        .join(PrioritizeRequestNiazsanji_.courseType)
+                        .get(CourseType_.id)));
+            }
+            if (criteria.getPersonId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPersonId(),
+                    root -> root.join(NiazsanjiIntegration_.prioritizeRequestNiazsanji, JoinType.LEFT)
+                        .join(PrioritizeRequestNiazsanji_.person)
+                        .get(Person_.id)));
+            }
+            if (criteria.getOrganizationChartId() != null) {
+                specification = specification.and(buildSpecification(criteria.getOrganizationChartId(),
+                    root -> root.join(NiazsanjiIntegration_.prioritizeRequestNiazsanji, JoinType.LEFT)
+                        .join(PrioritizeRequestNiazsanji_.organizationChart)
+                        .get(OrganizationChart_.id)));
+            }
         }
         return specification;
     }

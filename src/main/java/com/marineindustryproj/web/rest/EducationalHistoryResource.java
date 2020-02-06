@@ -80,6 +80,8 @@ public class EducationalHistoryResource {
 
         educationalHistoryDTO.setCreateDate(ZonedDateTime.now());
         educationalHistoryDTO.setCreateUserLogin(personDTO.getNationalId());
+        educationalHistoryDTO.setModifyDate(ZonedDateTime.now());
+        educationalHistoryDTO.setModifyUserLogin(personDTO.getNationalId());
 
         EducationalHistoryDTO result = educationalHistoryService.save(educationalHistoryDTO);
         return ResponseEntity.created(new URI("/api/educational-histories/" + result.getId()))

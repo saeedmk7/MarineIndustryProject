@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.home.title">Request Organization Niazsanjis</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-request-organization-niazsanji-marine-suffix" [routerLink]="['/request-organization-niazsanji-marine-suffix/new']">
+        <button id="jh-create-entity" class="btn btn-success float-right jh-create-entity create-request-organization-niazsanji-marine-suffix" [routerLink]="['/request-organization-niazsanji-marine-suffix/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.home.createLabel">
             Create new Request Organization Niazsanji
@@ -57,10 +57,10 @@
                 </td>
                 <td>
                     <div *ngIf="requestOrganizationNiazsanji.educationalModuleId">
-                        <a [routerLink]="['../educational-module-marine-suffix', requestOrganizationNiazsanji.educationalModuleId , 'view' ]" >{{requestOrganizationNiazsanji.educationalModuleTitle}}</a>
+                        <a [routerLink]="['../educational-module-marine-suffix', requestOrganizationNiazsanji.educationalModuleCode , 'view' ]" >{{requestOrganizationNiazsanji.educationalModuleTitle}}</a>
                     </div>
                 </td>
-                <td>{{requestOrganizationNiazsanji.educationalModuleId}}</td>
+                <td>{{requestOrganizationNiazsanji.educationalModuleCode}}</td>
                 <td>{{requestOrganizationNiazsanji.skillLevelOfSkillTitle}}</td>
                 <td>{{requestOrganizationNiazsanji.totalLearningTime | number}}</td>
                 <!--<td>{{requestOrganizationNiazsanji.studentsType}}</td>-->

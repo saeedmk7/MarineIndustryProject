@@ -3,6 +3,7 @@ export interface IRunPhaseFardiMarineSuffix {
     finalNiazsanjiReportId?: number;
     organizationChartTitle?: string;
     educationalModuleTitle?: string;
+    educationalModuleCode?: string;
     educationalModuleId?: number;
     educationalModuleLevel?: string;
     educationalModuleTotalLearningTime?: number;
@@ -22,6 +23,7 @@ export class RunPhaseFardiMarineSuffix implements IRunPhaseFardiMarineSuffix  {
         public educationalModuleId?: number,
         public educationalModuleLevel?: string,
         public educationalModuleTitle?: string,
+        public educationalModuleCode?: string,
         public educationalModuleTotalLearningTime?: number,
         public id?: number,
         public finalNiazsanjiReportId?: number,

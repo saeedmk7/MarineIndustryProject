@@ -326,7 +326,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined) {
                 this.isKarshenasArshadAmozesh = true;
             }
-            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'number', 'equals'));
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleCode', 'text', 'contains'));
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'priceCost', 'number', 'equals'));
             this.prepareSearchOrgChart();
@@ -384,7 +384,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
     }
     prepareSearchPerson(){
         if(this.personService.people){
-            this.people = this.personService.people;
+            this.people = this.convertObjectDatesService.goClone(this.personService.people);
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'personId', 'select', 'equals', this.people, "fullName"));
         }
         else {

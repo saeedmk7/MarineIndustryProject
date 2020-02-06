@@ -93,6 +93,8 @@ public class FinalNiazsanjiReportDTO implements Serializable {
 
     private Long educationalModuleId;
 
+    private String educationalModuleCode;
+
     private String educationalModuleTitle;
 
     private Long teachingApproachId;
@@ -460,9 +462,18 @@ public class FinalNiazsanjiReportDTO implements Serializable {
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             ", educationalModule=" + getEducationalModuleId() +
+            ", educationalModule='" + getEducationalModuleCode() + "'" +
             ", educationalModule='" + getEducationalModuleTitle() + "'" +
             ", teachingApproach=" + getTeachingApproachId() +
             ", teachingApproach='" + getTeachingApproachTitle() + "'" +
             "}";
+    }
+
+    public String getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
+
+    public void setEducationalModuleCode(String educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
     }
 }

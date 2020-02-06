@@ -53,6 +53,7 @@
             "educationalModule": "پودمان آموزشی",
             "educationalModuleTitle": "عنوان پودمان آموزشی",
             "educationalModuleId": "کد پودمان",
+            "educationalModuleCode": "کد پودمان",
             "person": "نام و نام خانوادگی",
             "personId": "نام و نام خانوادگی",
             "personName": "نام و نام خانوادگی",

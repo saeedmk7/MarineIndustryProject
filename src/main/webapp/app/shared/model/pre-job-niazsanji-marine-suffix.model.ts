@@ -39,6 +39,8 @@ export interface IPreJobNiazsanjiMarineSuffix {
     organizationChartTitle?: string;
     organizationChartId?: number;
     personFamily?: string;
+    personName?: string;
+    personFullName?: string;
     personId?: number;
 }
 
@@ -74,6 +76,8 @@ export class PreJobNiazsanjiMarineSuffix implements IPreJobNiazsanjiMarineSuffix
         public organizationChartTitle?: string,
         public organizationChartId?: number,
         public personFamily?: string,
+        public personName?: string,
+        public personFullName?: string,
         public personId?: number
     ) {
         this.archived = this.archived || false;

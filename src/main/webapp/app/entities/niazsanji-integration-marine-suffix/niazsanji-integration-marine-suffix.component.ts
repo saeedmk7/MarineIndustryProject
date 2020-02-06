@@ -186,6 +186,7 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
 
         }
         else{
+            debugger;
             this.niazsanjiIntegrationService
                 .query({
                     page: this.page - 1,
@@ -296,7 +297,7 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
             if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined) {
                 this.isKarshenasArshadAmozesh = true;
             }
-            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'number', 'equals'));
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleCode', 'text', 'contains'));
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
             let educationalModuleType = [{
                 id: EducationalModuleType.ALL,
@@ -306,7 +307,7 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
                 title: 'نیازسنجی از شناسنامه شغلی'
             }];
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleType', 'select', 'equals', educationalModuleType));
-            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'priceCost', 'number', 'equals'));
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'costEducationalModule', 'number', 'equals'));
             this.prepareSearchOrgChart();
             this.prepareSearchPerson();
             this.prepareSearchEducationalModule();
@@ -359,7 +360,7 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
     }
     prepareSearchPerson(){
         if(this.personService.people){
-            this.people = this.personService.people;
+            this.people = this.convertObjectDatesService.goClone(this.personService.people);
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'personId', 'select', 'equals', this.people, "fullName"));
         }
         else {
@@ -374,7 +375,7 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
     prepareSearchDate(){
         let dates = this.convertObjectDatesService.getYearsArray();
         const thisYear = this.convertObjectDatesService.getNowShamsiYear();
-        this.searchbarModel.push(new SearchPanelModel('requestOrganizationNiazsanji', 'yearId', 'select', 'equals', dates, 'title','',thisYear+''));
+        this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'niazsanjiYear', 'select', 'equals', dates, 'title'));
     }
     prepareSearchOrgChart(){
         if(this.organizationChartService.organizationchartsAll)
@@ -432,7 +433,7 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.niazsanjiIntegrations = this.convertObjectDatesService.changeArrayDate(data, true);
-        /*this.niazsanjiIntegrations.forEach(a => {
+        this.niazsanjiIntegrations.forEach(a => {
             const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
             if(org)
                 a.organizationChartRootTitle = org.fullTitle.split('>')[0];
@@ -442,7 +443,7 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
                 a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)
             }
         });
-        if(this.niazsanjiIntegrations) {
+        /*if(this.niazsanjiIntegrations) {
             const totalLearningTimes = this.niazsanjiIntegrations.filter(a => a.totalLearningTime).map(a => a.totalLearningTime);
             if(totalLearningTimes)
                 this.totalHour = totalLearningTimes.reduce((sum, current) => sum + current);

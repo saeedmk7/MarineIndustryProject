@@ -47,6 +47,7 @@ export interface IRequestOrganizationNiazsanjiMarineSuffix {
     teacherFamily?: string;
     teacherId?: number;
     educationalModuleTitle?: string;
+    educationalModuleCode?: string;
     educationalModuleId?: number;
     totalLearningTime?: number;
     skillLevelOfSkillTitle?: string;
@@ -98,6 +99,7 @@ export class RequestOrganizationNiazsanjiMarineSuffix implements IRequestOrganiz
         public teacherFamily?: string,
         public teacherId?: number,
         public educationalModuleTitle?: string,
+        public educationalModuleCode?: string,
         public educationalModuleId?: number,
         public totalLearningTime?: number,
         public skillLevelOfSkillTitle?: string,

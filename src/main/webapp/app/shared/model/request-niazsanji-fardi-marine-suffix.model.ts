@@ -32,8 +32,10 @@ export interface IRequestNiazsanjiFardiMarineSuffix {
     allCourseTypeId?: number;
     approvedCourseTypeId?: number;
     approvedEducationalModuleTitle?: string;
+    approvedEducationalModuleCode?: string;
     approvedEducationalModuleId?: number;
     allEducationalModuleTitle?: string;
+    allEducationalModuleCode?: string;
     allEducationalModuleId?: number;
     personFullName?: string;
     personName?: string;
@@ -72,8 +74,10 @@ export class RequestNiazsanjiFardiMarineSuffix implements IRequestNiazsanjiFardi
         public courseTypeTitle?: string,
         public courseTypeId?: number,
         public approvedEducationalModuleTitle?: string,
+        public approvedEducationalModuleCode?: string,
         public approvedEducationalModuleId?: number,
         public allEducationalModuleTitle?: string,
+        public allEducationalModuleCode?: string,
         public allEducationalModuleId?: number,
         public personFullName?: string,
         public personName?: string,

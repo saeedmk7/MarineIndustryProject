@@ -83,6 +83,8 @@ public class EducationalHistoryDTO implements Serializable {
 
     private Long educationalModuleId;
 
+    private String educationalModuleCode;
+
     private String educationalModuleTitle;
 
     private Long organizationChartId;
@@ -390,8 +392,17 @@ public class EducationalHistoryDTO implements Serializable {
             ", person='" + getPersonFamily() + "'" +
             ", educationalModule=" + getEducationalModuleId() +
             ", educationalModule='" + getEducationalModuleTitle() + "'" +
+            ", educationalModule='" + getEducationalModuleCode() + "'" +
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             "}";
+    }
+
+    public String getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
+
+    public void setEducationalModuleCode(String educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
     }
 }

@@ -91,6 +91,7 @@ export class PreJobNiazsanjiMarineSuffixService {
             res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
             res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
             res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
+            res.body.personFullName = (res.body.personName != null ? res.body.personName : '') + " " + (res.body.personFamily != null ? res.body.personFamily : '');
         }
         return res;
     }
@@ -101,6 +102,7 @@ export class PreJobNiazsanjiMarineSuffixService {
                 preJobNiazsanji.createDate = preJobNiazsanji.createDate != null ? moment(preJobNiazsanji.createDate) : null;
                 preJobNiazsanji.modifyDate = preJobNiazsanji.modifyDate != null ? moment(preJobNiazsanji.modifyDate) : null;
                 preJobNiazsanji.archivedDate = preJobNiazsanji.archivedDate != null ? moment(preJobNiazsanji.archivedDate) : null;
+                preJobNiazsanji.personFullName = (preJobNiazsanji.personName != null ? preJobNiazsanji.personName : '') + " " + (preJobNiazsanji.personFamily != null ? preJobNiazsanji.personFamily : '');
             });
         }
         return res;

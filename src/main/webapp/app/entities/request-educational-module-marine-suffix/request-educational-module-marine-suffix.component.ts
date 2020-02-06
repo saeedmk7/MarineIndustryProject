@@ -244,6 +244,7 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
 
         let orgs = this.treeUtilities.getParentIds(this.organizationcharts,this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
         if(orgs.length > 0){
+            criteria = criteria.filter(a => a.key != 'status.in');
             orgs.push(0);
             criteria.push({
                 key: 'status.in',
@@ -397,7 +398,7 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
     }*/
     prepareSearchPerson(){
         if(this.personService.people){
-            this.people = this.personService.people;
+            this.people = this.convertObjectDatesService.goClone(this.personService.people);
             /*if (!this.done) {
                 this.makeCriteria();
             }*/

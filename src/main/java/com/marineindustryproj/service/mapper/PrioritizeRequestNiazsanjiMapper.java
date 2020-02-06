@@ -22,6 +22,7 @@ public interface PrioritizeRequestNiazsanjiMapper extends EntityMapper<Prioritiz
     @Mapping(source = "courseType.id", target = "courseTypeId")
     @Mapping(source = "courseType.title", target = "courseTypeTitle")
     @Mapping(source = "educationalModule.id", target = "educationalModuleId")
+    @Mapping(source = "educationalModule.code", target = "educationalModuleCode")
     @Mapping(source = "educationalModule.title", target = "educationalModuleTitle")
     @Mapping(source = "person.id", target = "personId")
     @Mapping(source = "person.family", target = "personFamily")

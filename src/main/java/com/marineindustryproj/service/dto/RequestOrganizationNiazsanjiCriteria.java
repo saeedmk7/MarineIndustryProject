@@ -30,6 +30,14 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
         this.skillableLevelOfSkillId = skillableLevelOfSkillId;
     }
 
+    public StringFilter getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
+
+    public void setEducationalModuleCode(StringFilter educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
+    }
+
     /**
      * Class for filtering RequestStatus
      */
@@ -107,6 +115,8 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
     private LongFilter teacherId;
 
     private LongFilter educationalModuleId;
+
+    private StringFilter educationalModuleCode;
 
     private StringFilter educationalModuleTitle;
 
@@ -465,6 +475,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
             Objects.equals(organizationChartId, that.organizationChartId) &&
             Objects.equals(teacherId, that.teacherId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
+            Objects.equals(educationalModuleCode, that.educationalModuleCode) &&
             Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
             Objects.equals(skillableLevelOfSkillId, that.skillableLevelOfSkillId) &&
             Objects.equals(teachApproachId, that.teachApproachId) &&
@@ -509,6 +520,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
         organizationChartId,
         teacherId,
         educationalModuleId,
+        educationalModuleCode,
         educationalModuleTitle,
         teachApproachId,
         teachingApproachId,
@@ -554,6 +566,7 @@ public class RequestOrganizationNiazsanjiCriteria implements Serializable {
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (educationalModuleCode != null ? "educationalModuleCode=" + educationalModuleCode + ", " : "") +
                 (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
                 (teachApproachId != null ? "teachApproachId=" + teachApproachId + ", " : "") +
                 (teachingApproachId != null ? "teachingApproachId=" + teachingApproachId + ", " : "") +

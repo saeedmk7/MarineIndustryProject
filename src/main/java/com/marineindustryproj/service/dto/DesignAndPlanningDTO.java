@@ -78,6 +78,8 @@ public class DesignAndPlanningDTO implements Serializable {
 
     private Long educationalModuleId;
 
+    private String educationalModuleCode;
+
     private String educationalModuleTitle;
 
     private Long finalNiazsanjiReportId;
@@ -574,6 +576,7 @@ public class DesignAndPlanningDTO implements Serializable {
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             ", educationalModule=" + getEducationalModuleId() +
+            ", educationalModule='" + getEducationalModuleCode() + "'" +
             ", educationalModule='" + getEducationalModuleTitle() + "'" +
             ", finalNiazsanjiReport=" + getFinalNiazsanjiReportId() +
             ", finalNiazsanjiReport='" + getFinalNiazsanjiReportDescription() + "'" +
@@ -599,5 +602,13 @@ public class DesignAndPlanningDTO implements Serializable {
             ", niazsanjiYear=" + getNiazsanjiYear() +
             ", effectivenessIndex='" + getEffectivenessIndexTitle() + "'" +
             "}";
+    }
+
+    public String getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
+
+    public void setEducationalModuleCode(String educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
     }
 }

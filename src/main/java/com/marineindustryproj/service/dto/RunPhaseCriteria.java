@@ -73,6 +73,8 @@ public class RunPhaseCriteria implements Serializable {
 
     private LongFilter educationalModuleId;
 
+    private StringFilter educationalModuleCode;
+
     private StringFilter educationalModuleTitle;
 
     private LongFilter finalNiazsanjiReportId;
@@ -347,6 +349,7 @@ public class RunPhaseCriteria implements Serializable {
             Objects.equals(organizationChartId, that.organizationChartId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
+            Objects.equals(educationalModuleCode, that.educationalModuleCode) &&
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
             Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(niazsanjiYear, that.niazsanjiYear) &&
@@ -382,6 +385,7 @@ public class RunPhaseCriteria implements Serializable {
         organizationChartId,
         educationalModuleId,
         educationalModuleTitle,
+        educationalModuleCode,
         finalNiazsanjiReportId,
         niazsanjiYear,
         niazSanjiSource
@@ -416,6 +420,7 @@ public class RunPhaseCriteria implements Serializable {
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
+                (educationalModuleCode != null ? "educationalModuleCode=" + educationalModuleCode + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (niazsanjiYear != null ? "niazsanjiYear=" + niazsanjiYear + ", " : "") +
@@ -424,5 +429,11 @@ public class RunPhaseCriteria implements Serializable {
     }
 
 
+    public StringFilter getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
 
+    public void setEducationalModuleCode(StringFilter educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
+    }
 }

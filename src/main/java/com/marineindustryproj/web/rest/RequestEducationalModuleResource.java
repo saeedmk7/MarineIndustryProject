@@ -127,7 +127,7 @@ public class RequestEducationalModuleResource {
     }
     @PostMapping("/finalize-request-educational-module")
     @Timed
-    public ResponseEntity<RequestEducationalModuleDTO> finalizeRequestEducationalModule(@Valid @RequestBody RequestEducationalModuleDTO requestEducationalModuleDTO) throws URISyntaxException {
+    public ResponseEntity<RequestEducationalModuleDTO> finalizeRequestEducationalModule(@Valid @RequestBody RequestEducationalModuleDTO requestEducationalModuleDTO) throws Exception {
         log.debug("REST request to save RequestEducationalModule : {}", requestEducationalModuleDTO);
         if (requestEducationalModuleDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

@@ -102,6 +102,8 @@ public class PrioritizeRequestNiazsanjiDTO implements Serializable {
 
     private Long educationalModuleId;
 
+    private String educationalModuleCode;
+
     private String educationalModuleTitle;
 
     private Long personId;
@@ -520,6 +522,7 @@ public class PrioritizeRequestNiazsanjiDTO implements Serializable {
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +
             ", educationalModule=" + getEducationalModuleId() +
+            ", educationalModule='" + getEducationalModuleCode() + "'" +
             ", educationalModule='" + getEducationalModuleTitle() + "'" +
             ", person=" + getPersonId() +
             ", person='" + getPersonFamily() + "'" +
@@ -537,5 +540,13 @@ public class PrioritizeRequestNiazsanjiDTO implements Serializable {
 
     public void setPersonName(String personName) {
         this.personName = personName;
+    }
+
+    public String getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
+
+    public void setEducationalModuleCode(String educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
     }
 }

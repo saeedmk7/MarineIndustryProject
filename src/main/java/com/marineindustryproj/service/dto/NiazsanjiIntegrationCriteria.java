@@ -2,6 +2,8 @@ package com.marineindustryproj.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+
+import com.marineindustryproj.domain.enumeration.EducationalModuleType;
 import com.marineindustryproj.domain.enumeration.RequestStatus;
 import com.marineindustryproj.domain.enumeration.RequestNiazsanjiType;
 import io.github.jhipster.service.filter.BooleanFilter;
@@ -22,6 +24,70 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  * fix type specific filters.
  */
 public class NiazsanjiIntegrationCriteria implements Serializable {
+    public StringFilter getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
+
+    public void setEducationalModuleCode(StringFilter educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
+    }
+
+    public StringFilter getEducationalModuleTitle() {
+        return educationalModuleTitle;
+    }
+
+    public void setEducationalModuleTitle(StringFilter educationalModuleTitle) {
+        this.educationalModuleTitle = educationalModuleTitle;
+    }
+
+    public LongFilter getCostEducationalModule() {
+        return costEducationalModule;
+    }
+
+    public void setCostEducationalModule(LongFilter costEducationalModule) {
+        this.costEducationalModule = costEducationalModule;
+    }
+
+    public LongFilter getSkillableLevelOfSkillId() {
+        return skillableLevelOfSkillId;
+    }
+
+    public void setSkillableLevelOfSkillId(LongFilter skillableLevelOfSkillId) {
+        this.skillableLevelOfSkillId = skillableLevelOfSkillId;
+    }
+
+    public LongFilter getCourseTypeId() {
+        return courseTypeId;
+    }
+
+    public void setCourseTypeId(LongFilter courseTypeId) {
+        this.courseTypeId = courseTypeId;
+    }
+
+    public LongFilter getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(LongFilter personId) {
+        this.personId = personId;
+    }
+
+    public LongFilter getOrganizationChartId() {
+        return organizationChartId;
+    }
+
+    public void setOrganizationChartId(LongFilter organizationChartId) {
+        this.organizationChartId = organizationChartId;
+    }
+
+    public PrioritizeRequestNiazsanjiCriteria.EducationalModuleTypeFilter getEducationalModuleType() {
+        return educationalModuleType;
+    }
+
+    public void setEducationalModuleType(PrioritizeRequestNiazsanjiCriteria.EducationalModuleTypeFilter educationalModuleType) {
+        this.educationalModuleType = educationalModuleType;
+    }
+
     /**
      * Class for filtering RequestStatus
      */
@@ -68,6 +134,22 @@ public class NiazsanjiIntegrationCriteria implements Serializable {
     private LongFilter finalNiazsanjiReportId;
 
     private LongFilter prioritizeRequestNiazsanjiId;
+
+    private StringFilter educationalModuleCode;
+
+    private StringFilter educationalModuleTitle;
+
+    private PrioritizeRequestNiazsanjiCriteria.EducationalModuleTypeFilter educationalModuleType;
+
+    private LongFilter costEducationalModule;
+
+    private LongFilter skillableLevelOfSkillId;
+
+    private LongFilter courseTypeId;
+
+    private LongFilter personId;
+
+    private LongFilter organizationChartId;
 
     public LongFilter getId() {
         return id;
@@ -232,6 +314,7 @@ public class NiazsanjiIntegrationCriteria implements Serializable {
             Objects.equals(requestNiazsanjiType, that.requestNiazsanjiType) &&
             Objects.equals(priority, that.priority) &&
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
+            Objects.equals(educationalModuleCode, that.educationalModuleCode) &&
             Objects.equals(prioritizeRequestNiazsanjiId, that.prioritizeRequestNiazsanjiId);
     }
 
@@ -254,6 +337,7 @@ public class NiazsanjiIntegrationCriteria implements Serializable {
         requestNiazsanjiType,
         priority,
         finalNiazsanjiReportId,
+        educationalModuleCode,
         prioritizeRequestNiazsanjiId
         );
     }
@@ -277,6 +361,7 @@ public class NiazsanjiIntegrationCriteria implements Serializable {
                 (requestNiazsanjiType != null ? "requestNiazsanjiType=" + requestNiazsanjiType + ", " : "") +
                 (priority != null ? "priority=" + priority + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
+                (educationalModuleCode != null ? "educationalModuleCode=" + educationalModuleCode + ", " : "") +
                 (prioritizeRequestNiazsanjiId != null ? "prioritizeRequestNiazsanjiId=" + prioritizeRequestNiazsanjiId + ", " : "") +
             "}";
     }

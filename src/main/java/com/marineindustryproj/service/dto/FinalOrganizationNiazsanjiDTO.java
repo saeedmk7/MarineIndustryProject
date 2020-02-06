@@ -111,6 +111,8 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
 
     private Long educationalModuleId;
 
+    private String educationalModuleCode;
+
     private String educationalModuleTitle;
 
     private Long teachApproachId;
@@ -544,6 +546,7 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
             ", teacher=" + getTeacherId() +
             ", teacher='" + getTeacherFamily() + "'" +
             ", educationalModule=" + getEducationalModuleId() +
+            ", educationalModule='" + getEducationalModuleCode() + "'" +
             ", educationalModule='" + getEducationalModuleTitle() + "'" +
             ", teachApproach=" + getTeachApproachId() +
             ", teachApproach='" + getTeachApproachTitle() + "'" +
@@ -552,5 +555,13 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
             ", teachingApproach=" + getTeachingApproachId() +
             ", teachingApproach='" + getTeachingApproachTitle() + "'" +
             "}";
+    }
+
+    public String getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
+
+    public void setEducationalModuleCode(String educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
     }
 }

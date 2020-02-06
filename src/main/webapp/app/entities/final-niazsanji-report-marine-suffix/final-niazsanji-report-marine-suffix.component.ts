@@ -192,9 +192,10 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 if(niazsanjiSource.value != 'FARDI')
                 {
                     criteria = criteria.filter(a => a.key != 'niazSanjiSource.equals');
+                    const array = ['FARDI','OTHER','JOB']
                     criteria.push({
-                        key: 'niazSanjiSource.equals',
-                        value: 'FARDI'
+                        key: 'niazSanjiSource.in',
+                        value: array
                     });
                 }
             }
@@ -273,6 +274,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
 
 
             finalNiazsanjiReportsFardi.educationalModuleId = a.educationalModuleId;
+            finalNiazsanjiReportsFardi.educationalModuleCode = a.educationalModuleCode;
 
             let education = this.educationalModules.find(w => w.id == a.educationalModuleId);
             if (education) {
@@ -321,6 +323,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             finalNiazsanjiReportsOrganization.status = a.status;
 
             finalNiazsanjiReportsOrganization.educationalModuleId = a.educationalModuleId;
+            finalNiazsanjiReportsOrganization.educationalModuleCode = a.educationalModuleCode;
 
             let education = this.educationalModules.find(w => w.id == a.educationalModuleId);
             if (education) {
@@ -417,7 +420,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
 
                 const values = [{
                     value: 'FARDI',
-                    text: 'نیازسنجی پودمان فردی',
+                    text: 'نیازسنجی پودمان فردی و شغلی و سایر',
                     id: 'niazSanjiSource_FARDI',
                     checked: true
                 },{
@@ -439,7 +442,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','planningRunMonth','select', 'equals', this.months, 'persianMonth'));
 
                 this.prepareSearchOrgChart();
-                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','educationalModuleId','text', 'equals'));
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','educationalModuleCode','text', 'contains'));
                 this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','educationalModuleTitle','text', 'contains'));
                 this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','status','select', 'equals', this.statusMeaning, 'mean'));
                 this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','id','text', 'equals'));
@@ -495,7 +498,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         {
             if(!this.people) {
                 if (this.personService.people) {
-                    this.people = this.personService.people;
+                    this.people = this.convertObjectDatesService.goClone(this.personService.people);
                     this.recommendedPeople = this.convertObjectDatesService.goClone(this.people);
                     this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.recommendedPeople, 'fullName', 'half'));
                 }
@@ -533,7 +536,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
     preparePeople() {
         if (this.personService.people) {
-            this.people = this.personService.people;
+            this.people = this.convertObjectDatesService.goClone(this.personService.people);
         }
         else {
             this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {

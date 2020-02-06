@@ -63,7 +63,6 @@ export class RequestOtherNiazsanjiMarineSuffixUpdateComponent implements OnInit 
     recommenedOrgCharts: IOrganizationChartMarineSuffix[];
     orgChartDisabled: boolean;
 
-    finalNiazsanjiReports: IFinalNiazsanjiReportMarineSuffix[];
     allPeople: IPersonMarineSuffix[];
     currentPerson: IPersonMarineSuffix;
 
@@ -127,6 +126,9 @@ export class RequestOtherNiazsanjiMarineSuffixUpdateComponent implements OnInit 
         this.educationalModuleService.query().subscribe(
             (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                 this.educationalmodules = res.body;
+                if(this.requestOtherNiazsanji.educationalModuleId){
+                    this.onEducationalModuleChange(this.educationalmodules.find(a => a.id == this.requestOtherNiazsanji.educationalModuleId));
+                }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -248,20 +250,21 @@ export class RequestOtherNiazsanjiMarineSuffixUpdateComponent implements OnInit 
         if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
             this.isSuperUsers = true;
     }
-    onPersonChange(event){
+    selectedPerson: IPersonMarineSuffix = new PersonMarineSuffix();
+    onPersonChange(event: IPersonMarineSuffix){
         debugger;
         if(event.id){
             this.personService.find(event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
                     debugger;
-                    const findPerson = resp.body;
-                    if(this.organizationcharts.find(a => a.id == findPerson.organizationChartId))
+                    this.selectedPerson = resp.body;
+                    if(this.organizationcharts.find(a => a.id == this.selectedPerson.organizationChartId))
                     {
-                        this.requestOtherNiazsanji.organizationChartId = findPerson.organizationChartId;
+                        this.requestOtherNiazsanji.organizationChartId = this.selectedPerson.organizationChartId;
                     }
                     else{
-                        this.organizationChartService.find(findPerson.organizationChartId).subscribe((org: HttpResponse<IOrganizationChartMarineSuffix>) => {
+                        this.organizationChartService.find(this.selectedPerson.organizationChartId).subscribe((org: HttpResponse<IOrganizationChartMarineSuffix>) => {
                                 this.organizationcharts.push(org.body);
-                                this.requestOtherNiazsanji.organizationChartId = findPerson.organizationChartId;
+                                this.requestOtherNiazsanji.organizationChartId = this.selectedPerson.organizationChartId;
                             },
                             (res: HttpErrorResponse) => this.onError(res.message));
                     }

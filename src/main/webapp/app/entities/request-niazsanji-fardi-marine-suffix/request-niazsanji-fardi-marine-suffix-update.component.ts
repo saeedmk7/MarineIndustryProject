@@ -236,20 +236,21 @@ export class RequestNiazsanjiFardiMarineSuffixUpdateComponent implements OnInit 
         if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
             this.isSuperUsers = true;
     }
+    selectedPerson: IPersonMarineSuffix = new PersonMarineSuffix();
     onPersonChange(event){
         debugger;
         if(event.id){
             this.personService.find(event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
                     debugger;
-                    const findPerson = resp.body;
-                    if(this.organizationcharts.find(a => a.id == findPerson.organizationChartId))
+                    this.selectedPerson = resp.body;
+                    if(this.organizationcharts.find(a => a.id == this.selectedPerson.organizationChartId))
                     {
-                        this.requestNiazsanjiFardi.organizationChartId = findPerson.organizationChartId;
+                        this.requestNiazsanjiFardi.organizationChartId = this.selectedPerson.organizationChartId;
                     }
                     else{
-                        this.organizationChartService.find(findPerson.organizationChartId).subscribe((org: HttpResponse<IOrganizationChartMarineSuffix>) => {
+                        this.organizationChartService.find(this.selectedPerson.organizationChartId).subscribe((org: HttpResponse<IOrganizationChartMarineSuffix>) => {
                                 this.organizationcharts.push(org.body);
-                                this.requestNiazsanjiFardi.organizationChartId = findPerson.organizationChartId;
+                                this.requestNiazsanjiFardi.organizationChartId = this.selectedPerson.organizationChartId;
                             },
                             (res: HttpErrorResponse) => this.onError(res.message));
                     }

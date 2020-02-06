@@ -152,9 +152,11 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         criteria = this.createCriteria(criteria, f);
 
         if (niazSanjiSource) {
+
+            const array = ['FARDI','OTHER','JOB']
             criteria.push({
-                key: 'niazSanjiSource.equals',
-                value: 'FARDI'
+                key: 'niazSanjiSource.in',
+                value: array
             });
         }
         else {
@@ -249,6 +251,12 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                 key: 'educationalModuleId.equals', value: val
             });
         }
+        if (f.value['educationalModuleCode']) {
+            let val = +f.value['educationalModuleCode'];
+            criteria.push({
+                key: 'educationalModuleCode.contains', value: val
+            });
+        }
         if (f.value['educationalModuleTitle']) {
             let val = f.value['educationalModuleTitle'];
             criteria.push({
@@ -290,6 +298,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             runPhaseFardi.finalNiazsanjiReportId = a.finalNiazsanjiReportId;
             runPhaseFardi.status = a.status;
             runPhaseFardi.educationalModuleId = a.educationalModuleId;
+            runPhaseFardi.educationalModuleCode = a.educationalModuleCode;
 
             let education = this.educationalModules.find(w => w.id == a.educationalModuleId);
             if (education) {
@@ -330,6 +339,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             runPhaseOrganization.status = a.status;
 
             runPhaseOrganization.educationalModuleId = a.educationalModuleId;
+            runPhaseOrganization.educationalModuleCode = a.educationalModuleCode;
 
             let education = this.educationalModules.find(w => w.id == a.educationalModuleId);
             if (education) {

@@ -177,9 +177,10 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         criteria = this.createCriteria(criteria, f);
 
         if (niazSanjiSource) {
+            const array = ['FARDI','OTHER','JOB'];
             criteria.push({
-                key: 'niazSanjiSource.equals',
-                value: 'FARDI'
+                key: 'niazSanjiSource.in',
+                value: array
             });
         }
         else {
@@ -272,6 +273,12 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                 key: 'educationalModuleId.equals', value: val
             });
         }
+        if (f.value['educationalModuleCode']) {
+            let val = f.value['educationalModuleCode'];
+            criteria.push({
+                key: 'educationalModuleCode.contains', value: val
+            });
+        }
         if (f.value['educationalModuleTitle']) {
             let val = f.value['educationalModuleTitle'];
             criteria.push({
@@ -330,6 +337,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
 
 
             finalNiazsanjiReportsFardi.educationalModuleId = a.educationalModuleId;
+            finalNiazsanjiReportsFardi.educationalModuleCode = a.educationalModuleCode;
 
             let education = this.educationalModules.find(w => w.id == a.educationalModuleId);
             if (education) {
@@ -373,6 +381,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             finalNiazsanjiReportsOrganization.status = a.status;
 
             finalNiazsanjiReportsOrganization.educationalModuleId = a.educationalModuleId;
+            finalNiazsanjiReportsOrganization.educationalModuleCode = a.educationalModuleCode;
 
             let education = this.educationalModules.find(w => w.id == a.educationalModuleId);
             if (education) {
@@ -513,7 +522,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         {
             if(!this.people) {
                 if (this.personService.people) {
-                    this.people = this.personService.people;
+                    this.people = this.convertObjectDatesService.goClone(this.personService.people);
                     this.recommendedPeople = this.convertObjectDatesService.goClone(this.people);
                 }
                 else {
@@ -547,7 +556,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     }
         preparePeople() {
             if (this.personService.people) {
-                this.people = this.personService.people;
+                this.people = this.convertObjectDatesService.goClone(this.personService.people);
             }
             else {
                 this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {

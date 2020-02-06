@@ -50,10 +50,10 @@
                         </td>
                         <td style="background-color: #00c4e6">
                             <span *ngIf="item.educationalModuleId">{{item.educationalModuleTitle}}</span>
-                            <span *ngIf="!item.educationalModuleId">{{item.educationalModuleText}}</span>
+                            <span *ngIf="!item.educationalModuleId">{{item.educationalModuleText}}<a href="#/request-educational-module-marine-suffix">(طراحی و ثبت دوره)</a></span>
                         </td>
                         <td style="background-color: #00c4e6">
-                            <span *ngIf="item.educationalModuleId">{{item.educationalModuleId}}</span>
+                            <span *ngIf="item.educationalModuleId">{{item.educationalModuleCode}}</span>
                         </td>
                         <td *ngFor="let cv of item.priorityCriteriaValues; let io = index;">
                             <input type="number" [(ngModel)]="cv.score" [name]="'score_'+ io + '_' + i" class="form-control" />
@@ -72,6 +72,7 @@
                 </tr>
                 </tfoot>
             </table>
+            <span class="alert alert-info">پودمان هایی که در بالا استفاده کرده اید اگر در سیستم تعریف نشده است(کد ندارند) از <a href="#/request-educational-module-marine-suffix">قسمت طراحی پودمان های آموزشی </a>آن را طراحی نمائید.</span>
             <button *ngIf="editable" type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
                 <fa-icon [icon]="'save'"></fa-icon>&nbsp; ذخیره امتیازات و اولویت بندی ها
             </button>

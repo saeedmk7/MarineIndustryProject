@@ -14,6 +14,7 @@ public interface DesignAndPlanningMapper extends EntityMapper<DesignAndPlanningD
     @Mapping(source = "organizationChart.id", target = "organizationChartId")
     @Mapping(source = "organizationChart.title", target = "organizationChartTitle")
     @Mapping(source = "educationalModule.id", target = "educationalModuleId")
+    @Mapping(source = "educationalModule.code", target = "educationalModuleCode")
     @Mapping(source = "educationalModule.title", target = "educationalModuleTitle")
     @Mapping(source = "finalNiazsanjiReport.id", target = "finalNiazsanjiReportId")
     @Mapping(source = "finalNiazsanjiReport.description", target = "finalNiazsanjiReportDescription")

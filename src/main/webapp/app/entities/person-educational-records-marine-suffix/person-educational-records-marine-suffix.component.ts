@@ -341,7 +341,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
         }
         else {
             if (this.personService.people) {
-                this.people = this.personService.people;
+                this.people = this.convertObjectDatesService.goClone(this.personService.people);
             }
             else {
                 this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {

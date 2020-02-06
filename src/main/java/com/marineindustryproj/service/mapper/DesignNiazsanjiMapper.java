@@ -16,6 +16,7 @@ public interface DesignNiazsanjiMapper extends EntityMapper<DesignNiazsanjiDTO, 
     @Mapping(source = "courseType.id", target = "courseTypeId")
     @Mapping(source = "courseType.title", target = "courseTypeTitle")
     @Mapping(source = "educationalModule.id", target = "educationalModuleId")
+    @Mapping(source = "educationalModule.code", target = "educationalModuleCode")
     @Mapping(source = "educationalModule.title", target = "educationalModuleTitle")
     @Mapping(source = "teachingApproach.id", target = "teachingApproachId")
     @Mapping(source = "teachingApproach.title", target = "teachingApproachTitle")

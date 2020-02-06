@@ -19,7 +19,7 @@ public interface NiazsanjiIntegrationService {
      * @return the persisted entity
      */
     NiazsanjiIntegrationDTO save(NiazsanjiIntegrationDTO niazsanjiIntegrationDTO);
-    NiazsanjiIntegrationDTO finalize(NiazsanjiIntegrationDTO niazsanjiIntegrationDTO);
+    NiazsanjiIntegrationDTO finalize(NiazsanjiIntegrationDTO niazsanjiIntegrationDTO) throws Exception;
 
     /**
      * Get all the niazsanjiIntegrations.

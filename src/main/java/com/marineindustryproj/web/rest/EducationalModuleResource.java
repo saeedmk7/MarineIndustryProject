@@ -106,7 +106,7 @@ public class EducationalModuleResource {
         Optional<OrganizationDTO> organizationDTO = organizationService.findOne(educationalModuleDTO.getOrganizationId());
         if(organizationDTO.isPresent())
             educationalModuleDTO.setRecommendedBy(organizationDTO.get().getTitle());
-        educationalModuleDTO.setId(Long.parseLong(educationalModuleDTO.getCode()));
+        //educationalModuleDTO.setId(Long.parseLong(educationalModuleDTO.getCode()));
         educationalModuleDTO.setCreateUserLogin(educationalModule.getCreateUserLogin());
         educationalModuleDTO.setCreateDate(educationalModule.getCreateDate());
         educationalModuleDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());

@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="marineindustryprojApp.preJobNiazsanji.home.title">Pre Job Niazsanjis</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-pre-job-niazsanji-marine-suffix" [routerLink]="['/pre-job-niazsanji-marine-suffix/new']">
+        <button id="jh-create-entity" class="btn btn-success float-right jh-create-entity create-pre-job-niazsanji-marine-suffix" [routerLink]="['/pre-job-niazsanji-marine-suffix/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="marineindustryprojApp.preJobNiazsanji.home.createLabel">
             Create new Pre Job Niazsanji
@@ -16,7 +16,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th>ردیف</th>
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
@@ -47,7 +47,7 @@
             <tr *ngFor="let preJobNiazsanji of preJobNiazsanjis ;let i = index"
                 [ngClass]="{'new': preJobNiazsanji.requestStatus == 'NEW','read': preJobNiazsanji.requestStatus == 'READ','accept': preJobNiazsanji.requestStatus === 'ACCEPT','ignore': preJobNiazsanji.requestStatus === 'IGNORE'}">
                 <td>{{i + 1}}</td>
-                <td><a [routerLink]="['/pre-job-niazsanji-marine-suffix', preJobNiazsanji.id, 'view' ]">{{preJobNiazsanji.id}}</a></td>
+                <!--<td><a [routerLink]="['/pre-job-niazsanji-marine-suffix', preJobNiazsanji.id, 'view' ]">{{preJobNiazsanji.id}}</a></td>-->
                 <td>
                     <div *ngIf="preJobNiazsanji.organizationChartId">
                         <a [routerLink]="['../organization-chart-marine-suffix', preJobNiazsanji.organizationChartId , 'view' ]" >{{preJobNiazsanji.organizationChartTitle}}</a>
@@ -55,7 +55,7 @@
                 </td>
                 <td>
                     <div *ngIf="preJobNiazsanji.personId">
-                        <a [routerLink]="['../person-marine-suffix', preJobNiazsanji.personId , 'view' ]" >{{preJobNiazsanji.personFamily}}</a>
+                        <a [routerLink]="['../person-marine-suffix', preJobNiazsanji.personId , 'view' ]" >{{preJobNiazsanji.personFullName}}</a>
                     </div>
                 </td>
                 <!--<td>{{preJobNiazsanji.title}}</td>-->

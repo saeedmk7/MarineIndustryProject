@@ -7,6 +7,7 @@ export interface IEducationalModuleJobMarineSuffix {
     modifyUserLogin?: string;
     modifyDate?: Moment;
     educationalModuleTitle?: string;
+    educationalModuleCode?: string;
     educationalModuleId?: number;
     jobTitle?: string;
     jobCode?: string;
@@ -22,6 +23,7 @@ export class EducationalModuleJobMarineSuffix implements IEducationalModuleJobMa
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
         public educationalModuleTitle?: string,
+        public educationalModuleCode?: string,
         public educationalModuleId?: number,
         public jobTitle?: string,
         public jobCode?: string,

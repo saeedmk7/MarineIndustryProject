@@ -138,7 +138,7 @@ export class EducationalModuleMarineSuffixComponent implements OnInit, OnDestroy
             this.currentAccount = account;
         });
         this.searchbarModel.push(new SearchPanelModel('educationalModule','title','text', 'contains'));
-        this.searchbarModel.push(new SearchPanelModel('educationalModule','code','number', 'equals'));
+        this.searchbarModel.push(new SearchPanelModel('educationalModule','code','text', 'contains'));
         this.prepareOrganization();
         this.prepareScientific();
         this.prepareSkillableLevelOfSkill();

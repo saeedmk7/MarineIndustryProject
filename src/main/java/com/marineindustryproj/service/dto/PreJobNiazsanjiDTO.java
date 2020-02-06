@@ -78,6 +78,8 @@ public class PreJobNiazsanjiDTO implements Serializable {
 
     private Long personId;
 
+    private String personName;
+
     private String personFamily;
 
     public Long getId() {
@@ -326,6 +328,7 @@ public class PreJobNiazsanjiDTO implements Serializable {
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             ", person=" + getPersonId() +
+            ", person='" + getPersonName() + "'" +
             ", person='" + getPersonFamily() + "'" +
             "}";
     }
@@ -336,5 +339,13 @@ public class PreJobNiazsanjiDTO implements Serializable {
 
     public void setPreJobNiazsanjiCompetencies(Set<PreJobNiazsanjiCompetencyDTO> preJobNiazsanjiCompetencies) {
         this.preJobNiazsanjiCompetencies = preJobNiazsanjiCompetencies;
+    }
+
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
     }
 }

@@ -66,14 +66,22 @@
                     <dd>
                         <span>{{job.title}}</span>
                     </dd>
-                    <dt><span jhiTranslate="marineindustryprojApp.job.jobKey">Job Key</span></dt>
+                    <dt>عنوان شغل عملی</dt>
+                    <dd>
+                        <span *ngIf="selectedPerson.practicaljobTitle">{{selectedPerson.practicaljobTitle}}</span>
+                    </dd>
+                    <dt>نوع استخدام</dt>
+                    <dd>
+                        <span *ngIf="selectedPerson.employmentTypeTitle">{{selectedPerson.employmentTypeTitle}}</span>
+                    </dd>
+                    <!--<dt><span jhiTranslate="marineindustryprojApp.job.jobKey">Job Key</span></dt>
                     <dd>
                         <span>{{job.jobKey}}</span>
                     </dd>
                     <dt><span jhiTranslate="marineindustryprojApp.job.jobCode">Job Code</span></dt>
                     <dd>
                         <span>{{job.jobCode}}</span>
-                    </dd>
+                    </dd>-->
                 </dl>
 
                 <div *ngIf="jobNotFoundError" class="alert alert-danger">{{jobNotFoundError}}</div>
@@ -86,7 +94,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.preJobNiazsanji.reviewDate" for="field_reviewDate">Review Date</label>
                     <input type="text" class="form-control" name="reviewDate" id="field_reviewDate"
-                           [(ngModel)]="preJobNiazsanji.reviewDate" maxlength="50"/>
+                           [(ngModel)]="preJobNiazsanji.reviewDate" maxlength="50" [disabled]="true"/>
                     <div [hidden]="!(editForm.controls.reviewDate?.dirty && editForm.controls.reviewDate?.invalid)">
                         <small class="form-text text-danger"
                                [hidden]="!editForm.controls.reviewDate?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
@@ -116,6 +124,10 @@
                     <img src="/content/images/info.png" style="max-width: 25px; vertical-align: bottom;" />
                     <span>لطفا شایستگی های اولویت دار برای انجام وظایف را بمنظور انجام فرآیند آموزشی از قسمت های تعریف شده در شناسنامه شغل در قسمت های مربوطه در ذیل، درج نمائید و پس از خاتمه دکمه ثبت را بزنید. </span>
                 </div>
+                <div class="alert alert-info">
+                    <img src="/content/images/info.png" style="max-width: 25px; vertical-align: bottom;" />
+                    <span>کاربر گرامی، برای ثبت و انتقال هریک از شاخص های مورد انتظار در این شغل(در حوزه های دانشی، مهارتی، انگیزشی و ...)، ضروری است پس از وارد کردن تک تک شاخص ها دکمه Enter را بزنید. با تشکر </span>
+                </div>
 
 
                 <table style="alignment: center" class="table table-bordered table-sm">
@@ -137,7 +149,7 @@
                                        [multiple]="true"
                                        [selectOnTab]="true"
                                        [isOpen]="false"
-                                       placeholder="لطفا متن مورد نظر خود را وارد نمائید سپس کلید Enter را وارد نمائید."
+                                       placeholder="لطفا متن مورد نظر خود را وارد نمائید سپس کلید Enter را کلیک نمائید."
                                        name="selectedItems"
                                        [(ngModel)]="i.selectedItems"
                             >
@@ -179,6 +191,7 @@
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.saveAndNextStep">Save</span>
                 </button>
+                <span class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</span>
             </div>
         </form>
     </div>

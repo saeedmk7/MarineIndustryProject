@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { INiazsanjiIntegrationMarineSuffix } from 'app/shared/model/niazsanji-integration-marine-suffix.model';
+import {INiazsanjiIntegrationMarineSuffix} from "app/shared/model/niazsanji-integration-marine-suffix.model";
 
 type EntityResponseType = HttpResponse<INiazsanjiIntegrationMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<INiazsanjiIntegrationMarineSuffix[]>;
@@ -30,6 +30,20 @@ export class NiazsanjiIntegrationMarineSuffixService {
         return this.http
             .put<INiazsanjiIntegrationMarineSuffix>(this.resourceUrl, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
+    finalize(niazsanjiIntegration: INiazsanjiIntegrationMarineSuffix): Observable<EntityResponseType> {
+        const copy = this.convertDateFromClient(niazsanjiIntegration);
+        let url = SERVER_API_URL + 'api/niazsanji-integrations/finalize';
+        return this.http
+            .post<INiazsanjiIntegrationMarineSuffix>(url, copy, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+    toggleImportantMessage(id: number, type: boolean): Observable<EntityResponseType> {
+        const url: string = this.resourceUrl + '/toggleImportantMessage/' + id + '/' + type;
+        return this.http
+            .put<INiazsanjiIntegrationMarineSuffix>(url, null, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => res));
     }
 
     find(id: number): Observable<EntityResponseType> {
@@ -72,6 +86,7 @@ export class NiazsanjiIntegrationMarineSuffixService {
             res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
             res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
             res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
+            res.body.personFullName = (res.body.personName != null ? res.body.personName : '') + " " + (res.body.personFamily != null ? res.body.personFamily : '');
         }
         return res;
     }
@@ -83,6 +98,7 @@ export class NiazsanjiIntegrationMarineSuffixService {
                 niazsanjiIntegration.modifyDate = niazsanjiIntegration.modifyDate != null ? moment(niazsanjiIntegration.modifyDate) : null;
                 niazsanjiIntegration.archivedDate =
                     niazsanjiIntegration.archivedDate != null ? moment(niazsanjiIntegration.archivedDate) : null;
+                niazsanjiIntegration.personFullName = (niazsanjiIntegration.personName != null ? niazsanjiIntegration.personName : '') + " " + (niazsanjiIntegration.personFamily != null ? niazsanjiIntegration.personFamily : '');
             });
         }
         return res;

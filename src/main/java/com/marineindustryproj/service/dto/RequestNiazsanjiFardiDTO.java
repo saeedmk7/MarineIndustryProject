@@ -70,9 +70,13 @@ public class RequestNiazsanjiFardiDTO implements Serializable {
 
     private String approvedEducationalModuleTitle;
 
+    private String approvedEducationalModuleCode;
+
     private Long allEducationalModuleId;
 
     private String allEducationalModuleTitle;
+
+    private String allEducationalModuleCode;
 
     private Long personId;
 
@@ -369,8 +373,10 @@ public class RequestNiazsanjiFardiDTO implements Serializable {
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +
             ", approvedEducationalModule=" + getApprovedEducationalModuleId() +
+            ", approvedEducationalModule='" + getApprovedEducationalModuleCode() + "'" +
             ", approvedEducationalModule='" + getApprovedEducationalModuleTitle() + "'" +
             ", allEducationalModule=" + getAllEducationalModuleId() +
+            ", allEducationalModule='" + getAllEducationalModuleCode() + "'" +
             ", allEducationalModule='" + getAllEducationalModuleTitle() + "'" +
             ", person=" + getPersonId() +
             ", person='" + getPersonName() + "'" +
@@ -378,5 +384,21 @@ public class RequestNiazsanjiFardiDTO implements Serializable {
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             "}";
+    }
+
+    public String getApprovedEducationalModuleCode() {
+        return approvedEducationalModuleCode;
+    }
+
+    public void setApprovedEducationalModuleCode(String approvedEducationalModuleCode) {
+        this.approvedEducationalModuleCode = approvedEducationalModuleCode;
+    }
+
+    public String getAllEducationalModuleCode() {
+        return allEducationalModuleCode;
+    }
+
+    public void setAllEducationalModuleCode(String allEducationalModuleCode) {
+        this.allEducationalModuleCode = allEducationalModuleCode;
     }
 }

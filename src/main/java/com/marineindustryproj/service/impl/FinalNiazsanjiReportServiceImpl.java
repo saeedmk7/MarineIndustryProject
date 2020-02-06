@@ -696,15 +696,18 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                         stuffPeople.add(finalNiazsanjiReportPerson);
                     }
                 }
-                Integer pricePerPerson = finalNiazsanjiReport.getPriceCost() / finalNiazsanjiReport.getFinalNiazsanjiReportPeople().size();
+                Integer pricePerPerson = (finalNiazsanjiReport.getPriceCost() != null ? finalNiazsanjiReport.getPriceCost().intValue() : 0) / finalNiazsanjiReport.getFinalNiazsanjiReportPeople().size();
+                Integer finalizeCostPerPerson = (finalNiazsanjiReport.getFinalizeCost() != null ? finalNiazsanjiReport.getFinalizeCost().intValue() : 0) / finalNiazsanjiReport.getFinalNiazsanjiReportPeople().size();
                 if(managerPeople.size() > 0)
                 {
                     Integer finalPrice = pricePerPerson * managerPeople.size();
+                    Integer finalizeCost = finalizeCostPerPerson * managerPeople.size();
                     FinalNiazsanjiReportHomePageDTO finalNiazsanjiReportHomePageDTO =
                         new FinalNiazsanjiReportHomePageDTO(finalNiazsanjiReport.getId(),
                             homePageReportType,
                             finalPrice,
-                            finalNiazsanjiReport.getFinalizeCost(),
+                            //finalNiazsanjiReport.getFinalizeCost(),
+                            finalizeCost,
                             finalNiazsanjiReport.getEducationalModule(),
                             finalNiazsanjiReport.getStatus(),
                             finalNiazsanjiReport.getNiazsanjiYear(),
@@ -717,11 +720,13 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                 if(stuffPeople.size() > 0)
                 {
                     Integer finalPrice = pricePerPerson * stuffPeople.size();
+                    Integer finalizeCost = finalizeCostPerPerson * stuffPeople.size();
                     FinalNiazsanjiReportHomePageDTO finalNiazsanjiReportHomePageDTO =
                         new FinalNiazsanjiReportHomePageDTO(finalNiazsanjiReport.getId(),
                             homePageReportType,
                             finalPrice,
-                            finalNiazsanjiReport.getFinalizeCost(),
+                            //finalNiazsanjiReport.getFinalizeCost(),
+                            finalizeCost,
                             finalNiazsanjiReport.getEducationalModule(),
                             finalNiazsanjiReport.getStatus(),
                             finalNiazsanjiReport.getNiazsanjiYear(),

@@ -374,7 +374,7 @@ export class JobNiazsanjiMarineSuffixComponent implements OnInit, OnDestroy {
     }
     prepareSearchPerson(){
         if(this.personService.people){
-            this.people = this.personService.people;
+            this.people = this.convertObjectDatesService.goClone(this.personService.people);
             this.searchbarModel.push(new SearchPanelModel('jobNiazsanji', 'personId', 'select', 'equals', this.people, "fullName"));
         }
         else {

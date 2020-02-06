@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="marineindustryprojApp.planning.home.title">Final Niazsanji Reports</span>
-        <!--<button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-planning-marine-suffix" [routerLink]="['/planning-marine-suffix/new']">
+        <!--<button id="jh-create-entity" class="btn btn-success float-right jh-create-entity create-planning-marine-suffix" [routerLink]="['/planning-marine-suffix/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="marineindustryprojApp.planning.home.createLabel">
             Create new Final Niazsanji Report
@@ -32,7 +32,7 @@
                         <label class="form-control-label">منبع نیازسنجی</label>
                         <div class="form-control">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="true" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان فردی
+                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="true" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان فردی و شغلی و سایر
                             </label>
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="false" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان سازمانی
@@ -115,9 +115,9 @@
                                [(ngModel)]="finalNiazsanjiReport.educationalModuleTitle">
                     </div>
                     <div class="form-group">
-                        <label class="form-control-label" for="field_educationalModuleId">َشناسه پودمان آموزشی</label>
-                        <input type="text" name="educationalModuleId" id="field_educationalModuleId" class="form-control"
-                               [(ngModel)]="finalNiazsanjiReport.educationalModuleId">
+                        <label class="form-control-label" for="field_educationalModuleCode">َشناسه پودمان آموزشی</label>
+                        <input type="text" name="educationalModuleCode" id="field_educationalModuleCode" class="form-control"
+                               [(ngModel)]="finalNiazsanjiReport.educationalModuleCode">
                     </div>
                     <div class="form-group half">
                         <label class="form-control-label" for="field_educationalModule">افراد</label>
@@ -260,7 +260,7 @@
             </kendo-grid-column>
 
             <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-grid-column>
-            <kendo-grid-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="educationalModuleCode" title="شناسه پودمان" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="90"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100">
                 <ng-template
@@ -289,7 +289,7 @@
             <kendo-grid-excel fileName="planning.xlsx">
                 <kendo-excelexport-column field="organizationChartTitle" title="محل خدمت" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
-                <kendo-excelexport-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="educationalModuleCode" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="200"></kendo-excelexport-column>
@@ -352,7 +352,7 @@
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="200"></kendo-grid-column>
-            <kendo-grid-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="educationalModuleCode" title="شناسه پودمان" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100">
 
@@ -384,7 +384,7 @@
             <kendo-grid-excel fileName="planning.xlsx">
                 <kendo-excelexport-column field="organizationChartTitle" title="محل خدمت" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
-                <kendo-excelexport-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="educationalModuleCode" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-excelexport-column>

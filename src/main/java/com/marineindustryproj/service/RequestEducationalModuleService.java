@@ -26,7 +26,7 @@ public interface RequestEducationalModuleService {
      * @param requestEducationalModuleDTO the entity to save
      * @return the persisted entity
      */
-    RequestEducationalModuleDTO finalize(RequestEducationalModuleDTO requestEducationalModuleDTO);
+    RequestEducationalModuleDTO finalize(RequestEducationalModuleDTO requestEducationalModuleDTO) throws Exception;
 
     /**
      * Get all the requestEducationalModules.

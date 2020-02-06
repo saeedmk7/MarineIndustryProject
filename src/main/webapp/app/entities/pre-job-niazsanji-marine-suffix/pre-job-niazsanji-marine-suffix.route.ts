@@ -40,7 +40,7 @@ export const preJobNiazsanjiRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
+            defaultSort: 'modifyDate,desc',
             pageTitle: 'marineindustryprojApp.preJobNiazsanji.home.title'
         },
         canActivate: [UserRouteAccessService]

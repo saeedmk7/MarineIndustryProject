@@ -18,6 +18,7 @@ public interface FinalOrganizationNiazsanjiMapper extends EntityMapper<FinalOrga
     @Mapping(source = "teacher.id", target = "teacherId")
     @Mapping(source = "teacher.family", target = "teacherFamily")
     @Mapping(source = "educationalModule.id", target = "educationalModuleId")
+    @Mapping(source = "educationalModule.code", target = "educationalModuleCode")
     @Mapping(source = "educationalModule.title", target = "educationalModuleTitle")
     @Mapping(source = "teachApproach.id", target = "teachApproachId")
     @Mapping(source = "teachApproach.title", target = "teachApproachTitle")

@@ -71,13 +71,14 @@ public class RequestEducationalModuleServiceImpl implements RequestEducationalMo
      * @return the persisted entity
      */
     @Override
-    public RequestEducationalModuleDTO finalize(RequestEducationalModuleDTO requestEducationalModuleDTO) {
+    public RequestEducationalModuleDTO finalize(RequestEducationalModuleDTO requestEducationalModuleDTO) throws Exception {
         log.debug("Request to save RequestEducationalModule : {}", requestEducationalModuleDTO);
 
         EducationalModuleCriteria criteria = new EducationalModuleCriteria();
         LongFilter filter = new LongFilter();
         filter.setEquals(requestEducationalModuleDTO.getId());
         criteria.setRequestEducationalModuleId(filter);
+
         List<EducationalModuleDTO> educationalModules = educationalModuleQueryService.findByCriteria(criteria);
 
         if(educationalModules.isEmpty()) {
@@ -123,6 +124,9 @@ public class RequestEducationalModuleServiceImpl implements RequestEducationalMo
             educationalModuleDTO.setRestrictions(requestEducationalModuleDTO.getRestrictions());
 
             educationalModuleService.save(educationalModuleDTO);
+        }
+        else {
+            throw new Exception("کد پودمان آموزشی تکراریست و وجود دارد");
         }
         RequestEducationalModule requestEducationalModule = requestEducationalModuleMapper.toEntity(requestEducationalModuleDTO);
         requestEducationalModule = requestEducationalModuleRepository.save(requestEducationalModule);

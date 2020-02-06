@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="marineindustryprojApp.designAndPlanning.home.title">Design And Plannings</span>
-        <!--<button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-design-and-planning-marine-suffix" [routerLink]="['/design-and-planning-marine-suffix/new']">
+        <!--<button id="jh-create-entity" class="btn btn-success float-right jh-create-entity create-design-and-planning-marine-suffix" [routerLink]="['/design-and-planning-marine-suffix/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="marineindustryprojApp.designAndPlanning.home.createLabel">
             Create new Design And Planning
@@ -20,7 +20,7 @@
             <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th>ردیف</th>
             <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.educationalModuleTitle">Educational Module Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="educationalModuleId"><span jhiTranslate="marineindustryprojApp.designAndPlanning.educationalModuleCode">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleCode"><span jhiTranslate="marineindustryprojApp.designAndPlanning.educationalModuleCode">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th>سطح</th>
                 <th>ساعت</th>
             <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.designAndPlanning.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -68,7 +68,7 @@
                         <a [routerLink]="['../educational-module-marine-suffix', designAndPlanning.educationalModuleId , 'view' ]" >{{designAndPlanning.educationalModuleTitle}}</a>
                     </div>
                 </td>
-                <td>{{designAndPlanning.educationalModuleId}}</td>
+                <td>{{designAndPlanning.educationalModuleCode}}</td>
                 <td>{{designAndPlanning.skillLevelOfSkillTitle}}</td>
                 <td>{{designAndPlanning.totalLearningTime | number}}</td>
                 <td>

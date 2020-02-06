@@ -40,6 +40,7 @@
             "poll": "Poll",
             "document": "مدارک",
             "educationalModule": "پودمان آموزشی",
+            "educationalModuleCode": "کد پودمان آموزشی",
             "educationalModuleTitle": "عنوان پودمان آموزشی",
             "educationalModuleId": "کد پودمان آموزشی",
             "organizationChart": "محل خدمت",

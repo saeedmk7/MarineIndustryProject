@@ -20,6 +20,7 @@ import {IRestrictionMarineSuffix} from "app/shared/model/restriction-marine-suff
 import {ITeachingApproachMarineSuffix} from "app/shared/model/teaching-approach-marine-suffix.model";
 import {RestrictionMarineSuffixService} from "app/entities/restriction-marine-suffix";
 import {TeachingApproachMarineSuffixService} from "app/entities/teaching-approach-marine-suffix";
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 
 @Component({
     selector: 'mi-job-niazsanji-marine-suffix-update',
@@ -53,6 +54,7 @@ export class JobNiazsanjiMarineSuffixUpdateComponent implements OnInit {
         protected organizationChartService: OrganizationChartMarineSuffixService,
         protected restrictionService: RestrictionMarineSuffixService,
         protected teachingApproachService: TeachingApproachMarineSuffixService,
+        private convertObjectDatesService: ConvertObjectDatesService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -73,7 +75,7 @@ export class JobNiazsanjiMarineSuffixUpdateComponent implements OnInit {
             );
         }
         if(this.personService.people){
-            this.people = this.personService.people;
+            this.people = this.convertObjectDatesService.goClone(this.personService.people);
         }
         else {
             this.personService.query().subscribe(

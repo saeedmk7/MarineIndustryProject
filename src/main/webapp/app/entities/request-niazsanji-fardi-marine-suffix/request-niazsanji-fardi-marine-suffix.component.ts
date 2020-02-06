@@ -23,7 +23,6 @@ import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
-import {IRequestOrganizationNiazsanjiMarineSuffix} from "app/shared/model/request-organization-niazsanji-marine-suffix.model";
 
 @Component({
     selector: 'mi-request-niazsanji-fardi-marine-suffix',
@@ -53,6 +52,11 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
     previousPage: any;
     reverse: any;
     isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
+    isTopUsers: boolean = false;
 
     criteriaSubscriber: Subscription;
     searchbarModel: SearchPanelModel[] = new Array<SearchPanelModel>();
@@ -106,6 +110,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
 
     makeCriteria(criteria?,excelExport: boolean = false){
 
+        debugger;
         if (criteria) {
             const year = criteria.find(a => a.key == 'yearId.equals');
             if(year) {
@@ -148,8 +153,8 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
             this.principal.identity().then(account => {
 
                 this.currentAccount = account;
-                if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-                    this.isAdmin = true;
+
+                this.setRoles(account);
 
                 this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
                    this.currentPerson = resp.body;
@@ -268,6 +273,21 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
                 );
         }
     }
+    setRoles(account: any){
+        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+            this.isAdmin = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+            this.isModirAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+            this.isModirKolAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+            this.isKarshenasArshadAmozeshSazman = true;
+
+        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isSuperUsers = true;
+        if(this.isModirAmozesh || this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isTopUsers = true;
+    }
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
@@ -352,8 +372,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
         this.principal.identity().then(account => {
 
             this.currentAccount = account;
-            if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-                this.isAdmin = true;
+            this.setRoles(account);
             this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
                 this.currentPerson = resp.body;
                 /*this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleId', 'number', 'equals'));*/

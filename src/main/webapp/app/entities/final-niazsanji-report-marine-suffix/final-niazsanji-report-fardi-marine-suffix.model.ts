@@ -2,6 +2,7 @@ export interface IFinalNiazsanjiReportFardiMarineSuffix {
     id?: number;
     organizationChartTitle?: string;
     educationalModuleTitle?: string;
+    educationalModuleCode?: string;
     educationalModuleId?: number;
     educationalModuleLevel?: string;
     educationalModuleTotalLearningTime?: number;
@@ -24,6 +25,7 @@ export class FinalNiazsanjiReportFardiMarineSuffix implements IFinalNiazsanjiRep
         public educationalModuleId?: number,
         public educationalModuleLevel?: string,
         public educationalModuleTitle?: string,
+        public educationalModuleCode?: string,
         public educationalModuleTotalLearningTime?: number,
         public id?: number,
         public niazsanjiYear?: number,

@@ -447,7 +447,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
             this.currentAccount = account;
             if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
                 this.isAdmin = true;
-            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleId', 'number', 'equals'));
+            this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleCode', 'text', 'contains'));
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'priceCost', 'number', 'equals'));
             this.prepareSearchDate();

@@ -80,7 +80,7 @@ public class NiazsanjiIntegrationResource {
      */
     @PostMapping("/niazsanji-integrations/finalize")
     @Timed
-    public ResponseEntity<NiazsanjiIntegrationDTO> FinalizeNiazsanjiIntegration(@Valid @RequestBody NiazsanjiIntegrationDTO niazsanjiIntegrationDTO) throws URISyntaxException {
+    public ResponseEntity<NiazsanjiIntegrationDTO> FinalizeNiazsanjiIntegration(@Valid @RequestBody NiazsanjiIntegrationDTO niazsanjiIntegrationDTO) throws Exception {
         log.debug("REST request to finalize RequestOtherNiazsanji : {}", niazsanjiIntegrationDTO);
         if (niazsanjiIntegrationDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

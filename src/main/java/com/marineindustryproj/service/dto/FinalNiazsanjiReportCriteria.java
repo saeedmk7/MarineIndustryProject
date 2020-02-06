@@ -30,6 +30,14 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         this.personId = personId;
     }
 
+    public StringFilter getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
+
+    public void setEducationalModuleCode(StringFilter educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
+    }
+
     /**
      * Class for filtering NiazSanjiSource
      */
@@ -107,6 +115,8 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
     private LongFilter organizationChartId;
 
     private LongFilter educationalModuleId;
+
+    private StringFilter educationalModuleCode;
 
     private StringFilter educationalModuleTitle;
 
@@ -447,6 +457,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
+            Objects.equals(educationalModuleCode, that.educationalModuleCode) &&
                         Objects.equals(teachingApproachId, that.teachingApproachId);
     }
 
@@ -489,6 +500,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         educationalModuleId,
         personId,
         educationalModuleTitle,
+        educationalModuleCode,
         teachingApproachId
         );
     }
@@ -531,6 +543,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
+                (educationalModuleCode != null ? "educationalModuleCode=" + educationalModuleCode + ", " : "") +
                 (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
                 (teachingApproachId != null ? "teachingApproachId=" + teachingApproachId + ", " : "") +
             "}";

@@ -5,6 +5,7 @@ export interface IRunPhaseOrganizationMarineSuffix {
     finalNiazsanjiReportId?: number;
     organizationChartTitle?: string;
     educationalModuleTitle?: string;
+    educationalModuleCode?: string;
     educationalModuleId?: number;
     educationalModuleLevel?: string;
     educationalModuleTotalLearningTime?: number;
@@ -24,6 +25,7 @@ export class RunPhaseOrganizationMarineSuffix implements IRunPhaseOrganizationMa
         public educationalModuleId?: number,
         public educationalModuleLevel?: string,
         public educationalModuleTitle?: string,
+        public educationalModuleCode?: string,
         public educationalModuleTotalLearningTime?: number,
         public courseTypeId?: number,
         public courseTypeTitle?: string,

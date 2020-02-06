@@ -36,6 +36,7 @@ export interface IRequestOtherNiazsanjiMarineSuffix {
     courseTypeTitle?: string;
     courseTypeId?: number;
     educationalModuleTitle?: string;
+    educationalModuleCode?: string;
     educationalModuleId?: number;
     skillLevelOfSkillTitle?: string;
     totalLearningTime?: number;
@@ -81,6 +82,7 @@ export class RequestOtherNiazsanjiMarineSuffix implements IRequestOtherNiazsanji
         public courseTypeTitle?: string,
         public courseTypeId?: number,
         public educationalModuleTitle?: string,
+        public educationalModuleCode?: string,
         public educationalModuleId?: number,
         public skillLevelOfSkillTitle?: string,
         public totalLearningTime?: number,

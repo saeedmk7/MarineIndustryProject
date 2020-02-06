@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.home.title">Final Niazsanji Reports</span>
-        <!--<button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-final-niazsanji-report-marine-suffix" [routerLink]="['/final-niazsanji-report-marine-suffix/new']">
+        <!--<button id="jh-create-entity" class="btn btn-success float-right jh-create-entity create-final-niazsanji-report-marine-suffix" [routerLink]="['/final-niazsanji-report-marine-suffix/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.home.createLabel">
             Create new Final Niazsanji Report
@@ -217,7 +217,7 @@
             </kendo-grid-column>
 
             <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-grid-column>
-            <kendo-grid-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="educationalModuleCode" title="شناسه پودمان" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="90"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100">
                 <ng-template
@@ -249,7 +249,7 @@
             <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
                 <kendo-excelexport-column field="organizationChartTitle" title="محل خدمت" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
-                <kendo-excelexport-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="educationalModuleCode" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="finalizeCost" title="سرمایه گذاری پایانی" [width]="200"></kendo-excelexport-column>
@@ -308,7 +308,7 @@
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="200"></kendo-grid-column>
-            <kendo-grid-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="educationalModuleCode" title="شناسه پودمان" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100">
 
@@ -343,7 +343,7 @@
             <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
                 <kendo-excelexport-column field="organizationChartTitle" title="محل خدمت" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
-                <kendo-excelexport-column field="educationalModuleId" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="educationalModuleCode" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="finalizeCost" title="سرمایه گذاری پایانی" [width]="100"></kendo-excelexport-column>

@@ -330,6 +330,10 @@ public class FinalNiazsanjiReportResource {
     private String convertNiazSanjiSourceEnum(NiazSanjiSource niazSanjiSource){
         if(niazSanjiSource.equals(NiazSanjiSource.FARDI))
             return "فردی";
+        if(niazSanjiSource.equals(NiazSanjiSource.OTHER))
+            return "سایر";
+        if(niazSanjiSource.equals(NiazSanjiSource.JOB))
+            return "شغلی";
         if(niazSanjiSource.equals(NiazSanjiSource.GROUP))
             return "گروهی";
         if(niazSanjiSource.equals(NiazSanjiSource.ORGANIZATION))

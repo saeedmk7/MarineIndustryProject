@@ -5,6 +5,8 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Lob;
+
+import com.marineindustryproj.domain.enumeration.EducationalModuleType;
 import com.marineindustryproj.domain.enumeration.RequestStatus;
 import com.marineindustryproj.domain.enumeration.RequestNiazsanjiType;
 
@@ -56,6 +58,28 @@ public class NiazsanjiIntegrationDTO implements Serializable {
     private Long prioritizeRequestNiazsanjiId;
 
     private String prioritizeRequestNiazsanjiCode;
+
+    private Long costEducationalModule;
+
+    private EducationalModuleType educationalModuleType;
+
+    private String niazsanjiInputTitle;
+
+    private String courseTypeTitle;
+
+    private String educationalModuleId;
+
+    private String educationalModuleCode;
+
+    private String educationalModuleTitle;
+
+    private String personFamily;
+
+    private String personName;
+
+    private Long organizationChartId;
+
+    private String organizationChartTitle;
 
     public Long getId() {
         return id;
@@ -244,5 +268,93 @@ public class NiazsanjiIntegrationDTO implements Serializable {
             ", prioritizeRequestNiazsanji=" + getPrioritizeRequestNiazsanjiId() +
             ", prioritizeRequestNiazsanji='" + getPrioritizeRequestNiazsanjiCode() + "'" +
             "}";
+    }
+
+    public Long getCostEducationalModule() {
+        return costEducationalModule;
+    }
+
+    public void setCostEducationalModule(Long costEducationalModule) {
+        this.costEducationalModule = costEducationalModule;
+    }
+
+    public EducationalModuleType getEducationalModuleType() {
+        return educationalModuleType;
+    }
+
+    public void setEducationalModuleType(EducationalModuleType educationalModuleType) {
+        this.educationalModuleType = educationalModuleType;
+    }
+
+    public String getNiazsanjiInputTitle() {
+        return niazsanjiInputTitle;
+    }
+
+    public void setNiazsanjiInputTitle(String niazsanjiInputTitle) {
+        this.niazsanjiInputTitle = niazsanjiInputTitle;
+    }
+
+    public String getCourseTypeTitle() {
+        return courseTypeTitle;
+    }
+
+    public void setCourseTypeTitle(String courseTypeTitle) {
+        this.courseTypeTitle = courseTypeTitle;
+    }
+
+    public String getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
+
+    public void setEducationalModuleCode(String educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
+    }
+
+    public String getEducationalModuleTitle() {
+        return educationalModuleTitle;
+    }
+
+    public void setEducationalModuleTitle(String educationalModuleTitle) {
+        this.educationalModuleTitle = educationalModuleTitle;
+    }
+
+    public String getPersonFamily() {
+        return personFamily;
+    }
+
+    public void setPersonFamily(String personFamily) {
+        this.personFamily = personFamily;
+    }
+
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
+    public Long getOrganizationChartId() {
+        return organizationChartId;
+    }
+
+    public void setOrganizationChartId(Long organizationChartId) {
+        this.organizationChartId = organizationChartId;
+    }
+
+    public String getOrganizationChartTitle() {
+        return organizationChartTitle;
+    }
+
+    public void setOrganizationChartTitle(String organizationChartTitle) {
+        this.organizationChartTitle = organizationChartTitle;
+    }
+
+    public String getEducationalModuleId() {
+        return educationalModuleId;
+    }
+
+    public void setEducationalModuleId(String educationalModuleId) {
+        this.educationalModuleId = educationalModuleId;
     }
 }

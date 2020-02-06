@@ -23,6 +23,7 @@ import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-char
 import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
 import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 
 @Component({
     selector: 'mi-final-organization-niazsanji-marine-suffix-update',
@@ -55,6 +56,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixUpdateComponent implements On
         private teachApproachService: TeachApproachMarineSuffixService,
         private requestOrganizationNiazsanjiService: RequestOrganizationNiazsanjiMarineSuffixService,
         private activatedRoute: ActivatedRoute,
+        private convertObjectDatesService: ConvertObjectDatesService,
         private router: Router
     ) {}
 
@@ -77,7 +79,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixUpdateComponent implements On
             );
         }
         if(this.personService.people){
-            this.people = this.personService.people;
+            this.people = this.convertObjectDatesService.goClone(this.personService.people);
         }
         else {
             this.personService.query().subscribe(

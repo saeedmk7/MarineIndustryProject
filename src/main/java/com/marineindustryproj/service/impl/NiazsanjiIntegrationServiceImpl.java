@@ -1,19 +1,21 @@
 package com.marineindustryproj.service.impl;
 
-import com.marineindustryproj.domain.*;
+import com.marineindustryproj.domain.NiazsanjiIntegration;
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
 import com.marineindustryproj.domain.enumeration.RequestStatus;
-import com.marineindustryproj.repository.FinalNiazsanjiReportPersonRepository;
-import com.marineindustryproj.repository.FinalNiazsanjiReportRepository;
-import com.marineindustryproj.repository.PrioritizeRequestNiazsanjiRepository;
-import com.marineindustryproj.security.SecurityUtils;
-import com.marineindustryproj.service.NiazsanjiIntegrationService;
 import com.marineindustryproj.repository.NiazsanjiIntegrationRepository;
+import com.marineindustryproj.security.SecurityUtils;
+import com.marineindustryproj.service.FinalNiazsanjiReportPersonService;
+import com.marineindustryproj.service.FinalNiazsanjiReportService;
+import com.marineindustryproj.service.NiazsanjiIntegrationService;
+import com.marineindustryproj.service.PrioritizeRequestNiazsanjiService;
+import com.marineindustryproj.service.dto.FinalNiazsanjiReportDTO;
+import com.marineindustryproj.service.dto.FinalNiazsanjiReportPersonDTO;
 import com.marineindustryproj.service.dto.NiazsanjiIntegrationDTO;
+import com.marineindustryproj.service.dto.PrioritizeRequestNiazsanjiDTO;
 import com.marineindustryproj.service.mapper.NiazsanjiIntegrationMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,19 +35,19 @@ public class NiazsanjiIntegrationServiceImpl implements NiazsanjiIntegrationServ
 
     private final NiazsanjiIntegrationRepository niazsanjiIntegrationRepository;
 
-    private final PrioritizeRequestNiazsanjiRepository prioritizeRequestNiazsanjiRepository;
+    private final PrioritizeRequestNiazsanjiService prioritizeRequestNiazsanjiService;
 
-    private final FinalNiazsanjiReportRepository finalNiazsanjiReportRepository;
+    private final FinalNiazsanjiReportService finalNiazsanjiReportService;
 
-    private final FinalNiazsanjiReportPersonRepository finalNiazsanjiReportPersonRepository;
+    private final FinalNiazsanjiReportPersonService finalNiazsanjiReportPersonService;
 
     private final NiazsanjiIntegrationMapper niazsanjiIntegrationMapper;
 
-    public NiazsanjiIntegrationServiceImpl(NiazsanjiIntegrationRepository niazsanjiIntegrationRepository, PrioritizeRequestNiazsanjiRepository prioritizeRequestNiazsanjiRepository, FinalNiazsanjiReportRepository finalNiazsanjiReportRepository, FinalNiazsanjiReportPersonRepository finalNiazsanjiReportPersonRepository, NiazsanjiIntegrationMapper niazsanjiIntegrationMapper) {
+    public NiazsanjiIntegrationServiceImpl(NiazsanjiIntegrationRepository niazsanjiIntegrationRepository, PrioritizeRequestNiazsanjiService prioritizeRequestNiazsanjiService, FinalNiazsanjiReportService finalNiazsanjiReportService, FinalNiazsanjiReportPersonService finalNiazsanjiReportPersonService, NiazsanjiIntegrationMapper niazsanjiIntegrationMapper) {
         this.niazsanjiIntegrationRepository = niazsanjiIntegrationRepository;
-        this.prioritizeRequestNiazsanjiRepository = prioritizeRequestNiazsanjiRepository;
-        this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
-        this.finalNiazsanjiReportPersonRepository = finalNiazsanjiReportPersonRepository;
+        this.prioritizeRequestNiazsanjiService = prioritizeRequestNiazsanjiService;
+        this.finalNiazsanjiReportService = finalNiazsanjiReportService;
+        this.finalNiazsanjiReportPersonService = finalNiazsanjiReportPersonService;
         this.niazsanjiIntegrationMapper = niazsanjiIntegrationMapper;
     }
 
@@ -71,19 +73,22 @@ public class NiazsanjiIntegrationServiceImpl implements NiazsanjiIntegrationServ
      * @return the persisted entity
      */
     @Override
-    public NiazsanjiIntegrationDTO finalize(NiazsanjiIntegrationDTO niazsanjiIntegrationDTO) {
+    public NiazsanjiIntegrationDTO finalize(NiazsanjiIntegrationDTO niazsanjiIntegrationDTO) throws Exception {
         log.debug("Request to save NiazsanjiIntegration : {}", niazsanjiIntegrationDTO);
 
         NiazsanjiIntegration niazsanjiIntegration = niazsanjiIntegrationMapper.toEntity(niazsanjiIntegrationDTO);
 
-        PrioritizeRequestNiazsanji prioritizeRequestNiazsanji = niazsanjiIntegration.getPrioritizeRequestNiazsanji();
+        Optional<PrioritizeRequestNiazsanjiDTO> prioritizeRequestNiazsanjiOptional = prioritizeRequestNiazsanjiService.findOne(niazsanjiIntegration.getPrioritizeRequestNiazsanji().getId());
+        if (!prioritizeRequestNiazsanjiOptional.isPresent())
+            throw new Exception("اولویت بندی نیازسنجی مربوط به این درخواست حذف شده است.");
+        PrioritizeRequestNiazsanjiDTO prioritizeRequestNiazsanji = prioritizeRequestNiazsanjiOptional.get();
         prioritizeRequestNiazsanji.setRequestStatus(RequestStatus.ACCEPT);
-        FinalNiazsanjiReport finalNiazsanjiReport = new FinalNiazsanjiReport();
+        FinalNiazsanjiReportDTO finalNiazsanjiReport = new FinalNiazsanjiReportDTO();
 
-        EducationalModule educationalModule = prioritizeRequestNiazsanji.getEducationalModule();
-        finalNiazsanjiReport.setOrganizationChart(prioritizeRequestNiazsanji.getOrganizationChart());
+        //EducationalModuleDTO educationalModule = educationalModuleService.findOne(prioritizeRequestNiazsanji.getEducationalModuleId()).get();
+        finalNiazsanjiReport.setOrganizationChartId(prioritizeRequestNiazsanji.getOrganizationChartId());
         finalNiazsanjiReport.setNiazsanjiYear(niazsanjiIntegration.getNiazsanjiYear());
-        finalNiazsanjiReport.setEducationalModule(educationalModule);
+        finalNiazsanjiReport.setEducationalModuleId(prioritizeRequestNiazsanji.getEducationalModuleId());
         finalNiazsanjiReport.setArchived(false);
         finalNiazsanjiReport.setCreateDate(ZonedDateTime.now());
         finalNiazsanjiReport.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
@@ -94,21 +99,21 @@ public class NiazsanjiIntegrationServiceImpl implements NiazsanjiIntegrationServ
         finalNiazsanjiReport.setNiazSanjiSource(getNiazsanjiSource(prioritizeRequestNiazsanji));
         finalNiazsanjiReport.setPriceCost(prioritizeRequestNiazsanji.getCostEducationalModule().intValue());
         finalNiazsanjiReport.setFinalizeCost(0);
-        finalNiazsanjiReport.setCourseType(prioritizeRequestNiazsanji.getCourseType());
+        finalNiazsanjiReport.setCourseTypeId(prioritizeRequestNiazsanji.getCourseTypeId());
         finalNiazsanjiReport.setStatus(0);
         finalNiazsanjiReport.setHasImportantMessage(niazsanjiIntegration.isHasImportantMessage());
-        finalNiazsanjiReport.setTeachingApproach(prioritizeRequestNiazsanji.getTeachingApproach());
+        finalNiazsanjiReport.setTeachingApproachId(prioritizeRequestNiazsanji.getTeachingApproachId());
         finalNiazsanjiReport.setGoalsText(prioritizeRequestNiazsanji.getGoalsText());
         finalNiazsanjiReport.setPrerequisite(prioritizeRequestNiazsanji.getPrerequisite());
         finalNiazsanjiReport.setRestrictionDescription(prioritizeRequestNiazsanji.getRestrictionDescription());
         finalNiazsanjiReport.setRestrictions(prioritizeRequestNiazsanji.getRestrictions());
         finalNiazsanjiReport.setPriority(prioritizeRequestNiazsanji.getPriority());
-        finalNiazsanjiReport = finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
+        finalNiazsanjiReport = finalNiazsanjiReportService.save(finalNiazsanjiReport);
 
-        Person item = prioritizeRequestNiazsanji.getPerson();
-        FinalNiazsanjiReportPerson finalNiazsanjiReportPerson = new FinalNiazsanjiReportPerson();
-        finalNiazsanjiReportPerson.setFinalNiazsanjiReport(finalNiazsanjiReport);
-        finalNiazsanjiReportPerson.setPerson(item);
+        //Person item = prioritizeRequestNiazsanji.getPerson();
+        FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPerson = new FinalNiazsanjiReportPersonDTO();
+        finalNiazsanjiReportPerson.setFinalNiazsanjiReportId(finalNiazsanjiReport.getId());
+        finalNiazsanjiReportPerson.setPersonId(prioritizeRequestNiazsanji.getPersonId());
         finalNiazsanjiReportPerson.setArchived(false);
         finalNiazsanjiReportPerson.setCreateDate(ZonedDateTime.now());
         finalNiazsanjiReportPerson.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
@@ -118,18 +123,19 @@ public class NiazsanjiIntegrationServiceImpl implements NiazsanjiIntegrationServ
         finalNiazsanjiReportPerson.setPriceCost(prioritizeRequestNiazsanji.getCostEducationalModule().intValue());
         finalNiazsanjiReportPerson.setSourceId(niazsanjiIntegration.getId());
         finalNiazsanjiReportPerson.setStatus(0);
-        finalNiazsanjiReportPersonRepository.save(finalNiazsanjiReportPerson);
+        finalNiazsanjiReportPersonService.save(finalNiazsanjiReportPerson);
 
         //NiazsanjiIntegration niazsanjiIntegration = niazsanjiIntegrationMapper.toEntity(niazsanjiIntegrationDTO);
-        prioritizeRequestNiazsanji = prioritizeRequestNiazsanjiRepository.save(prioritizeRequestNiazsanji);
+        prioritizeRequestNiazsanji = prioritizeRequestNiazsanjiService.save(prioritizeRequestNiazsanji);
         niazsanjiIntegration = niazsanjiIntegrationRepository.save(niazsanjiIntegration);
         return niazsanjiIntegrationMapper.toDto(niazsanjiIntegration);
     }
-    private NiazSanjiSource getNiazsanjiSource(PrioritizeRequestNiazsanji prioritizeRequestNiazsanji){
+
+    private NiazSanjiSource getNiazsanjiSource(PrioritizeRequestNiazsanjiDTO prioritizeRequestNiazsanji) {
         NiazSanjiSource niazSanjiSource;
         switch (prioritizeRequestNiazsanji.getRequestNiazsanjiType()) {
             case FARDI:
-                niazSanjiSource =  NiazSanjiSource.FARDI;
+                niazSanjiSource = NiazSanjiSource.FARDI;
                 break;
             case JOB:
                 niazSanjiSource = NiazSanjiSource.JOB;
@@ -138,11 +144,12 @@ public class NiazsanjiIntegrationServiceImpl implements NiazsanjiIntegrationServ
                 niazSanjiSource = NiazSanjiSource.OTHER;
                 break;
             default:
-                niazSanjiSource =  NiazSanjiSource.FARDI;
+                niazSanjiSource = NiazSanjiSource.FARDI;
                 break;
         }
         return niazSanjiSource;
     }
+
     /**
      * Get all the niazsanjiIntegrations.
      *

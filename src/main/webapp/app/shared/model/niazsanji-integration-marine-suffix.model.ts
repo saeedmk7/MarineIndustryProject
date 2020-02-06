@@ -1,19 +1,8 @@
 import { Moment } from 'moment';
 import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model//final-niazsanji-report-marine-suffix.model';
-
-export const enum RequestStatus {
-    NEW = 'NEW',
-    READ = 'READ',
-    IGNORE = 'IGNORE',
-    ACCEPT = 'ACCEPT',
-    RETURNED = 'RETURNED'
-}
-
-export const enum RequestNiazsanjiType {
-    FARDI = 'FARDI',
-    JOB = 'JOB',
-    OTHER = 'OTHER'
-}
+import {RequestStatus} from "app/shared/model/enums/RequestStatus";
+import {RequestNiazsanjiType} from "app/shared/model/enums/RequestNiazsanjiType";
+import {EducationalModuleType} from "app/shared/model/enums/EducationalModuleType";
 
 export interface INiazsanjiIntegrationMarineSuffix {
     id?: number;
@@ -35,6 +24,21 @@ export interface INiazsanjiIntegrationMarineSuffix {
     finalNiazsanjiReports?: IFinalNiazsanjiReportMarineSuffix[];
     prioritizeRequestNiazsanjiCode?: string;
     prioritizeRequestNiazsanjiId?: number;
+    costEducationalModule?: number;
+    educationalModuleType?:EducationalModuleType;
+    niazsanjiInputTitle?:string;
+    courseTypeTitle?:string;
+    educationalModuleId?: number;
+    educationalModuleCode?:string;
+    educationalModuleTitle?:string;
+    personFullName?: string;
+    personFamily?:string;
+    personName?:string;
+    organizationChartId?:number;
+    organizationChartTitle?:string;
+    organizationChartRootTitle?:string;
+    totalLearningTime?: number;
+    skillLevelOfSkillTitle?: string;
 }
 
 export class NiazsanjiIntegrationMarineSuffix implements INiazsanjiIntegrationMarineSuffix {
@@ -57,7 +61,22 @@ export class NiazsanjiIntegrationMarineSuffix implements INiazsanjiIntegrationMa
         public priority?: number,
         public finalNiazsanjiReports?: IFinalNiazsanjiReportMarineSuffix[],
         public prioritizeRequestNiazsanjiCode?: string,
-        public prioritizeRequestNiazsanjiId?: number
+        public prioritizeRequestNiazsanjiId?: number,
+        public costEducationalModule?: number,
+        public educationalModuleType?:EducationalModuleType,
+        public niazsanjiInputTitle?:string,
+        public courseTypeTitle?:string,
+        public educationalModuleId?: number,
+        public educationalModuleCode?:string,
+        public educationalModuleTitle?:string,
+        public personFullName?: string,
+        public personFamily?:string,
+        public personName?:string,
+        public organizationChartId?:number,
+        public organizationChartTitle?:string,
+        public organizationChartRootTitle?:string,
+        public totalLearningTime?: number,
+        public skillLevelOfSkillTitle?: string
     ) {
         this.archived = this.archived || false;
         this.hasImportantMessage = this.hasImportantMessage || false;

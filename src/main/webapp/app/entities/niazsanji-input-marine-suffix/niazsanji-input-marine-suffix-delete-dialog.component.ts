@@ -49,7 +49,7 @@ export class NiazsanjiInputMarineSuffixDeletePopupComponent implements OnInit, O
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(NiazsanjiInputMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.niazsanjiInput = niazsanjiInput;
                 this.ngbModalRef.result.then(

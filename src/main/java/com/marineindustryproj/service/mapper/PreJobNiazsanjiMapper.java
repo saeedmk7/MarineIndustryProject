@@ -14,6 +14,7 @@ public interface PreJobNiazsanjiMapper extends EntityMapper<PreJobNiazsanjiDTO, 
     @Mapping(source = "organizationChart.id", target = "organizationChartId")
     @Mapping(source = "organizationChart.title", target = "organizationChartTitle")
     @Mapping(source = "person.id", target = "personId")
+    @Mapping(source = "person.name", target = "personName")
     @Mapping(source = "person.family", target = "personFamily")
     PreJobNiazsanjiDTO toDto(PreJobNiazsanji preJobNiazsanji);
 

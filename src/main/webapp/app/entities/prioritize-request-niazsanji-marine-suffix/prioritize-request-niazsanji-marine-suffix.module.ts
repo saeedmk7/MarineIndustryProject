@@ -13,11 +13,13 @@ import {
     PrioritizeRequestNiazsanjiMarineSuffixCommentDialogComponent,
     PrioritizeRequestNiazsanjiMarineSuffixCommentPopupComponent
 } from './';
+import {NgSelectModule} from "@ng-select/ng-select";
+import {FormsModule} from "@angular/forms";
 
 const ENTITY_STATES = [...prioritizeRequestNiazsanjiRoute, ...prioritizeRequestNiazsanjiPopupRoute];
 
 @NgModule({
-    imports: [MarineindustryprojSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [MarineindustryprojSharedModule, NgSelectModule, FormsModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         PrioritizeRequestNiazsanjiMarineSuffixComponent,
         PrioritizeRequestNiazsanjiMarineSuffixDetailComponent,

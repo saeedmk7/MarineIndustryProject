@@ -55,6 +55,8 @@ public class PreJobNiazsanjiCompetencyDTO implements Serializable {
 
     private Long educationalModuleId;
 
+    private String educationalModuleCode;
+
     private String educationalModuleTitle;
 
     private Long preJobNiazsanjiId;
@@ -281,11 +283,20 @@ public class PreJobNiazsanjiCompetencyDTO implements Serializable {
             ", fixCompetencyDeficiency=" + getFixCompetencyDeficiencyId() +
             ", fixCompetencyDeficiency='" + getFixCompetencyDeficiencyTitle() + "'" +
             ", educationalModule=" + getEducationalModuleId() +
+            ", educationalModule='" + getEducationalModuleCode() + "'" +
             ", educationalModule='" + getEducationalModuleTitle() + "'" +
             ", preJobNiazsanji=" + getPreJobNiazsanjiId() +
             ", preJobNiazsanji='" + getPreJobNiazsanjiTitle() + "'" +
             ", competency=" + getCompetencyId() +
             ", competency='" + getCompetencyTitle() + "'" +
             "}";
+    }
+
+    public String getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
+
+    public void setEducationalModuleCode(String educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
     }
 }

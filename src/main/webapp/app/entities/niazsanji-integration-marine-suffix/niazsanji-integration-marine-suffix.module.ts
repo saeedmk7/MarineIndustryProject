@@ -9,7 +9,9 @@ import {
     NiazsanjiIntegrationMarineSuffixDeletePopupComponent,
     NiazsanjiIntegrationMarineSuffixDeleteDialogComponent,
     niazsanjiIntegrationRoute,
-    niazsanjiIntegrationPopupRoute
+    niazsanjiIntegrationPopupRoute,
+    NiazsanjiIntegrationMarineSuffixCommentDialogComponent,
+    NiazsanjiIntegrationMarineSuffixCommentPopupComponent
 } from './';
 
 const ENTITY_STATES = [...niazsanjiIntegrationRoute, ...niazsanjiIntegrationPopupRoute];
@@ -21,13 +23,17 @@ const ENTITY_STATES = [...niazsanjiIntegrationRoute, ...niazsanjiIntegrationPopu
         NiazsanjiIntegrationMarineSuffixDetailComponent,
         NiazsanjiIntegrationMarineSuffixUpdateComponent,
         NiazsanjiIntegrationMarineSuffixDeleteDialogComponent,
-        NiazsanjiIntegrationMarineSuffixDeletePopupComponent
+        NiazsanjiIntegrationMarineSuffixDeletePopupComponent,
+        NiazsanjiIntegrationMarineSuffixCommentDialogComponent,
+        NiazsanjiIntegrationMarineSuffixCommentPopupComponent
     ],
     entryComponents: [
         NiazsanjiIntegrationMarineSuffixComponent,
         NiazsanjiIntegrationMarineSuffixUpdateComponent,
         NiazsanjiIntegrationMarineSuffixDeleteDialogComponent,
-        NiazsanjiIntegrationMarineSuffixDeletePopupComponent
+        NiazsanjiIntegrationMarineSuffixDeletePopupComponent,
+        NiazsanjiIntegrationMarineSuffixCommentDialogComponent,
+        NiazsanjiIntegrationMarineSuffixCommentPopupComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

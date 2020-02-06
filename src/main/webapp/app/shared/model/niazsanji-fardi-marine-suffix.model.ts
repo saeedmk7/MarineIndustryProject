@@ -34,6 +34,7 @@ export interface INiazsanjiFardiMarineSuffix {
     requestNiazsanjiFardiCode?: string;
     requestNiazsanjiFardiId?: number;
     educationalModuleTitle?: string;
+    educationalModuleCode?: string;
     educationalModuleId?: number;
     personFullName?: string;
     personName?: string;
@@ -80,6 +81,7 @@ export class NiazsanjiFardiMarineSuffix implements INiazsanjiFardiMarineSuffix {
         public requestNiazsanjiFardiCode?: string,
         public requestNiazsanjiFardiId?: number,
         public educationalModuleTitle?: string,
+        public educationalModuleCode?: string,
         public educationalModuleId?: number,
         public personFullName?: string,
         public personName?: string,

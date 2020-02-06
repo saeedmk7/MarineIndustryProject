@@ -163,6 +163,10 @@ public class RunPhaseQueryService extends QueryService<RunPhase> {
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
                     root -> root.join(RunPhase_.educationalModule, JoinType.LEFT).get(EducationalModule_.id)));
             }
+            if (criteria.getEducationalModuleCode() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleCode(),
+                    root -> root.join(RunPhase_.educationalModule, JoinType.LEFT).get(EducationalModule_.code)));
+            }
             if (criteria.getEducationalModuleTitle() != null) {
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleTitle(),
                     root -> root.join(RunPhase_.educationalModule, JoinType.LEFT).get(EducationalModule_.title)));

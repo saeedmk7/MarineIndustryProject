@@ -10,7 +10,7 @@ import { IPreJobNiazsanjiMarineSuffix } from 'app/shared/model/pre-job-niazsanji
 import { PreJobNiazsanjiMarineSuffixService } from './pre-job-niazsanji-marine-suffix.service';
 import { IDocumentMarineSuffix } from 'app/shared/model/document-marine-suffix.model';
 import { DocumentMarineSuffixService } from 'app/entities/document-marine-suffix';
-import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import {IPersonMarineSuffix, PersonMarineSuffix} from 'app/shared/model/person-marine-suffix.model';
 import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
 import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
 import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
@@ -45,6 +45,7 @@ export class PreJobNiazsanjiMarineSuffixUpdateComponent implements OnInit {
     homePagePersonEducationalModules: IHomePagePersonEducationalModule[] = [];
     orgChartDisabled: boolean;
     job: IJobMarineSuffix = {};
+    selectedPerson: IPersonMarineSuffix = new PersonMarineSuffix();
 
     documents: IDocumentMarineSuffix[];
 
@@ -65,7 +66,7 @@ export class PreJobNiazsanjiMarineSuffixUpdateComponent implements OnInit {
     isSuperUsers: boolean = false;
 
 
-
+    errorMessage: string;
     competencies: ICompetencyMarineSuffix[];
     preJobNiazsanjiCompetencies: IPreJobNiazsanjiCompetencyMarineSuffix[] = [];
     constructor(
@@ -194,7 +195,7 @@ export class PreJobNiazsanjiMarineSuffixUpdateComponent implements OnInit {
     preparePeople() {
         if(this.isSuperUsers) {
             if (this.personService.people) {
-                this.allPeople = this.personService.people;
+                this.allPeople = this.convertObjectDatesService.goClone(this.personService.people);
             }
             else {
                 this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
@@ -255,32 +256,33 @@ export class PreJobNiazsanjiMarineSuffixUpdateComponent implements OnInit {
         if(event.id) {
             this.personService.find(event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
                     debugger;
-                    const findPerson = resp.body;
-                    if (this.organizationcharts.find(a => a.id == findPerson.organizationChartId)) {
-                        this.preJobNiazsanji.organizationChartId = findPerson.organizationChartId;
+                    this.selectedPerson = resp.body;
+                    if (this.organizationcharts.find(a => a.id == this.selectedPerson.organizationChartId)) {
+                        this.preJobNiazsanji.organizationChartId = this.selectedPerson.organizationChartId;
                     }
                     else {
-                        this.organizationChartService.find(findPerson.organizationChartId).subscribe((org: HttpResponse<IOrganizationChartMarineSuffix>) => {
+                        this.organizationChartService.find(this.selectedPerson.organizationChartId).subscribe((org: HttpResponse<IOrganizationChartMarineSuffix>) => {
                                 this.organizationcharts.push(org.body);
-                                this.preJobNiazsanji.organizationChartId = findPerson.organizationChartId;
+                                this.preJobNiazsanji.organizationChartId = this.selectedPerson.organizationChartId;
                             },
                             (res: HttpErrorResponse) => this.onError(res.message));
+                    }
+                    if (this.selectedPerson.jobId) {
+                        this.jobNotFoundError = "";
+                        this.jobService.find(this.selectedPerson.jobId).subscribe((resp: HttpResponse<IJobMarineSuffix>) => {
+                                this.job = resp.body;
+                                this.preJobNiazsanji.reviewDate = this.job.reviewDate;
+                            },
+                            (res: HttpErrorResponse) => this.onError(res.message));
+                    }
+                    else
+                    {
+                        this.jobNotFoundError = "برای " + this.currentPerson.fullName + " شغل سازمانی تعیین نشده است.";
                     }
                 },
                 (error) => this.onError("موردی یافت نشد"));
         }
-        if (event.jobId) {
-            this.jobNotFoundError = "";
-            this.jobService.find(event.jobId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
-                    this.job = resp.body;
-                    this.preJobNiazsanji.reviewDate = this.job.reviewDate;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message));
-        }
-        else
-        {
-            this.jobNotFoundError = "برای " + this.currentPerson.fullName + " شغل سازمانی تعیین نشده است.";
-        }
+
     }
     previousState() {
         window.history.back();
@@ -297,6 +299,12 @@ export class PreJobNiazsanjiMarineSuffixUpdateComponent implements OnInit {
             }
             else{
                 if(this.currentPerson.organizationChartId) {
+                    if(!this.preJobNiazsanji.organizationChartId)
+                    {
+                        this.errorMessage = "فرد مورد نظر شما در چارت سازمانی تعریف نشده است لطفا ابتدا آن را در چارت سازمانی تعریف سپس اقدام به ثبت نیازسنجی آن فرد نمائید.";
+                        this.isSaving = false;
+                        return;
+                    }
 
                     let org = this.organizationcharts.find(a => a.id == this.currentPerson.organizationChartId);
                     if (org.parentId > 0)
@@ -319,6 +327,12 @@ export class PreJobNiazsanjiMarineSuffixUpdateComponent implements OnInit {
                             })
                         }
                     });
+                    if(this.preJobNiazsanji.preJobNiazsanjiCompetencies.length == 0)
+                    {
+                        this.errorMessage = "لطفا حداقل یک مورد از شاخص های مورد انتظار خود را در باکس های بالا وارد نمائید.";
+                        this.isSaving = false;
+                        return;
+                    }
                     debugger;
                     this.preJobNiazsanji.requestStatus = RequestStatus.NEW;
                     this.preJobNiazsanji.changeStatusUserLogin = this.currentAccount.login;

@@ -17,6 +17,7 @@ public interface EducationalHistoryMapper extends EntityMapper<EducationalHistor
     @Mapping(source = "person.name", target = "personName")
     @Mapping(source = "person.family", target = "personFamily")
     @Mapping(source = "educationalModule.id", target = "educationalModuleId")
+    @Mapping(source = "educationalModule.code", target = "educationalModuleCode")
     @Mapping(source = "educationalModule.title", target = "educationalModuleTitle")
     @Mapping(source = "organizationChart.id", target = "organizationChartId")
     @Mapping(source = "organizationChart.title", target = "organizationChartTitle")

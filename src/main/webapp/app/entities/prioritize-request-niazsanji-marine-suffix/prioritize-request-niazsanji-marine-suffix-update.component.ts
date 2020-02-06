@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -30,6 +30,9 @@ import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-ch
 import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
 import { ITeachingApproachMarineSuffix } from 'app/shared/model/teaching-approach-marine-suffix.model';
 import { TeachingApproachMarineSuffixService } from 'app/entities/teaching-approach-marine-suffix';
+import {Principal, UserService} from "app/core";
+import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 
 @Component({
     selector: 'mi-prioritize-request-niazsanji-marine-suffix-update',
@@ -60,9 +63,25 @@ export class PrioritizeRequestNiazsanjiMarineSuffixUpdateComponent implements On
     organizationcharts: IOrganizationChartMarineSuffix[];
 
     teachingapproaches: ITeachingApproachMarineSuffix[];
-    createDate: string;
-    modifyDate: string;
-    archivedDate: string;
+
+    recommenedOrgCharts: IOrganizationChartMarineSuffix[];
+    orgChartDisabled: boolean;
+
+    allPeople: IPersonMarineSuffix[];
+    currentPerson: IPersonMarineSuffix;
+
+    currentAccount: any;
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
+
+    message: string;
+    targetPeople: IPersonMarineSuffix[];
+
+    rowNumber:number = 10;
+    currentUserFullName: string = "";
 
     constructor(
         protected dataUtils: JhiDataUtils,
@@ -79,32 +98,20 @@ export class PrioritizeRequestNiazsanjiMarineSuffixUpdateComponent implements On
         protected personService: PersonMarineSuffixService,
         protected organizationChartService: OrganizationChartMarineSuffixService,
         protected teachingApproachService: TeachingApproachMarineSuffixService,
-        protected activatedRoute: ActivatedRoute
+        protected activatedRoute: ActivatedRoute,
+        private principal : Principal,
+        private treeUtilities: TreeUtilities,
+        private userService: UserService,
+        private convertObjectDatesService: ConvertObjectDatesService,
+        protected router: Router
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ prioritizeRequestNiazsanji }) => {
             this.prioritizeRequestNiazsanji = prioritizeRequestNiazsanji;
-            this.createDate =
-                this.prioritizeRequestNiazsanji.createDate != null
-                    ? this.prioritizeRequestNiazsanji.createDate.format(DATE_TIME_FORMAT)
-                    : null;
-            this.modifyDate =
-                this.prioritizeRequestNiazsanji.modifyDate != null
-                    ? this.prioritizeRequestNiazsanji.modifyDate.format(DATE_TIME_FORMAT)
-                    : null;
-            this.archivedDate =
-                this.prioritizeRequestNiazsanji.archivedDate != null
-                    ? this.prioritizeRequestNiazsanji.archivedDate.format(DATE_TIME_FORMAT)
-                    : null;
+            this.rowNumber = this.prioritizeRequestNiazsanji.conversation.split('\n').length;
         });
-        this.documentService.query().subscribe(
-            (res: HttpResponse<IDocumentMarineSuffix[]>) => {
-                this.documents = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
         this.restrictionService.query().subscribe(
             (res: HttpResponse<IRestrictionMarineSuffix[]>) => {
                 this.restrictions = res.body;
@@ -144,6 +151,9 @@ export class PrioritizeRequestNiazsanjiMarineSuffixUpdateComponent implements On
         this.educationalModuleService.query().subscribe(
             (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                 this.educationalmodules = res.body;
+                if(this.prioritizeRequestNiazsanji.educationalModuleId){
+                    this.onEducationalModuleChange(this.educationalmodules.find(a => a.id == this.prioritizeRequestNiazsanji.educationalModuleId));
+                }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -153,12 +163,31 @@ export class PrioritizeRequestNiazsanjiMarineSuffixUpdateComponent implements On
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.organizationChartService.query().subscribe(
-            (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
-                this.organizationcharts = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        if(this.organizationChartService.organizationchartsAll){
+            this.organizationcharts = this.convertObjectDatesService.goClone(this.organizationChartService.organizationchartsAll);
+
+            if(this.prioritizeRequestNiazsanji.organizationChartId){
+                let org = this.organizationcharts.find(a => a.id == this.prioritizeRequestNiazsanji.organizationChartId);
+                //this.onOrganizationChartChange(org);
+            }
+
+            this.setPermission();
+        }
+        else {
+            this.organizationChartService.query().subscribe(
+                (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
+
+                    this.organizationcharts = res.body;
+                    if (this.prioritizeRequestNiazsanji.organizationChartId) {
+                        let org = this.organizationcharts.find(a => a.id == this.prioritizeRequestNiazsanji.organizationChartId);
+                        //this.onOrganizationChartChange(org);
+                    }
+
+                    this.setPermission();
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
         this.teachingApproachService.query().subscribe(
             (res: HttpResponse<ITeachingApproachMarineSuffix[]>) => {
                 this.teachingapproaches = res.body;
@@ -166,7 +195,35 @@ export class PrioritizeRequestNiazsanjiMarineSuffixUpdateComponent implements On
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+    setPermission(){
+        this.principal.identity().then(account => {
+            this.currentAccount = account;
+            this.setRoles(account);
 
+            this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
+                this.currentPerson = resp.body;
+            }, (res: HttpErrorResponse) => this.onError(res.message));
+
+        });
+    }
+    setRoles(account: any){
+
+        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+            this.isAdmin = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+            this.isModirAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+            this.isModirKolAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+            this.isKarshenasArshadAmozeshSazman = true;
+
+        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isSuperUsers = true;
+    }
+    onEducationalModuleChange($event: IEducationalModuleMarineSuffix){
+        this.prioritizeRequestNiazsanji.skillLevelOfSkillTitle = $event.skillableLevelOfSkillTitle;
+        this.prioritizeRequestNiazsanji.totalLearningTime = ($event.learningTimeTheorical ? +$event.learningTimeTheorical : 0) + ($event.learningTimePractical ? +$event.learningTimePractical : 0);
+    }
     byteSize(field) {
         return this.dataUtils.byteSize(field);
     }
@@ -185,9 +242,7 @@ export class PrioritizeRequestNiazsanjiMarineSuffixUpdateComponent implements On
 
     save() {
         this.isSaving = true;
-        this.prioritizeRequestNiazsanji.createDate = this.createDate != null ? moment(this.createDate, DATE_TIME_FORMAT) : null;
-        this.prioritizeRequestNiazsanji.modifyDate = this.modifyDate != null ? moment(this.modifyDate, DATE_TIME_FORMAT) : null;
-        this.prioritizeRequestNiazsanji.archivedDate = this.archivedDate != null ? moment(this.archivedDate, DATE_TIME_FORMAT) : null;
+
         if (this.prioritizeRequestNiazsanji.id !== undefined) {
             this.subscribeToSaveResponse(this.prioritizeRequestNiazsanjiService.update(this.prioritizeRequestNiazsanji));
         } else {

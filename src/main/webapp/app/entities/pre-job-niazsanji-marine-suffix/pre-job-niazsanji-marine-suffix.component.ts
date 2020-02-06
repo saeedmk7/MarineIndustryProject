@@ -364,7 +364,7 @@ export class PreJobNiazsanjiMarineSuffixComponent implements OnInit, OnDestroy {
     }
     prepareSearchPerson() {
         if (this.personService.people) {
-            this.people = this.personService.people;
+            this.people = this.convertObjectDatesService.goClone(this.personService.people);
             this.handlePeople();
         }
         else {
@@ -414,7 +414,7 @@ export class PreJobNiazsanjiMarineSuffixComponent implements OnInit, OnDestroy {
     toggleImportantMessage(id: number, type: boolean){
 
         this.preJobNiazsanjiService.toggleImportantMessage(id, type).subscribe(
-            (res: HttpResponse<IRequestOrganizationNiazsanjiMarineSuffix>) => this.makeCriteria(this.criteria),
+            (res: HttpResponse<IPreJobNiazsanjiMarineSuffix>) => this.makeCriteria(this.criteria),
             (res: HttpErrorResponse) => this.onSaveError()
         );
     }

@@ -24,6 +24,7 @@ export interface IDesignNiazsanjiMarineSuffix {
     courseTypeTitle?: string;
     courseTypeId?: number;
     educationalModuleTitle?: string;
+    educationalModuleCode?: string;
     educationalModuleId?: number;
     teachingApproachTitle?: string;
     teachingApproachId?: number;
@@ -53,6 +54,7 @@ export class DesignNiazsanjiMarineSuffix implements IDesignNiazsanjiMarineSuffix
         public courseTypeTitle?: string,
         public courseTypeId?: number,
         public educationalModuleTitle?: string,
+        public educationalModuleCode?: string,
         public educationalModuleId?: number,
         public teachingApproachTitle?: string,
         public teachingApproachId?: number

@@ -19,6 +19,7 @@ import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-modul
 import {EducationalModuleMarineSuffixService} from "app/entities/educational-module-marine-suffix";
 import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
+import {IJobMarineSuffix} from "app/shared/model/job-marine-suffix.model";
 
 @Component({
     selector: 'mi-educational-history-marine-suffix-update',
@@ -334,6 +335,15 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
         }
         catch (e) {
             this.dateValid = 2;
+        }
+    }
+    selectedPerson: IPersonMarineSuffix = new PersonMarineSuffix();
+    onPersonChange(event: IPersonMarineSuffix){
+        if(event.id) {
+            this.personService.find(event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
+                    this.selectedPerson = resp.body;
+                },
+                (error) => this.onError("موردی یافت نشد"));
         }
     }
 }

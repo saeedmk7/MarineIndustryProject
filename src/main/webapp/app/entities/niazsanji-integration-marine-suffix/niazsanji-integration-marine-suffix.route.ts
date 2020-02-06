@@ -12,6 +12,7 @@ import { NiazsanjiIntegrationMarineSuffixDetailComponent } from './niazsanji-int
 import { NiazsanjiIntegrationMarineSuffixUpdateComponent } from './niazsanji-integration-marine-suffix-update.component';
 import { NiazsanjiIntegrationMarineSuffixDeletePopupComponent } from './niazsanji-integration-marine-suffix-delete-dialog.component';
 import { INiazsanjiIntegrationMarineSuffix } from 'app/shared/model/niazsanji-integration-marine-suffix.model';
+import {NiazsanjiIntegrationMarineSuffixCommentPopupComponent} from "app/entities/niazsanji-integration-marine-suffix/niazsanji-integration-marine-suffix-comment-dialog.component";
 
 @Injectable({ providedIn: 'root' })
 export class NiazsanjiIntegrationMarineSuffixResolve implements Resolve<INiazsanjiIntegrationMarineSuffix> {
@@ -85,6 +86,19 @@ export const niazsanjiIntegrationPopupRoute: Routes = [
     {
         path: 'niazsanji-integration-marine-suffix/:id/delete',
         component: NiazsanjiIntegrationMarineSuffixDeletePopupComponent,
+        resolve: {
+            niazsanjiIntegration: NiazsanjiIntegrationMarineSuffixResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'marineindustryprojApp.niazsanjiIntegration.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'niazsanji-integration-marine-suffix/:id/:CommentType/comment',
+        component: NiazsanjiIntegrationMarineSuffixCommentPopupComponent,
         resolve: {
             niazsanjiIntegration: NiazsanjiIntegrationMarineSuffixResolve
         },

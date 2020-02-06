@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.home.title">Request Niazsanji Fardis</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-request-niazsanji-fardi-marine-suffix" [routerLink]="['/request-niazsanji-fardi-marine-suffix/new']">
+        <button id="jh-create-entity" class="btn btn-success float-right jh-create-entity create-request-niazsanji-fardi-marine-suffix" [routerLink]="['/request-niazsanji-fardi-marine-suffix/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.home.createLabel">
             Create new Request Niazsanji Fardi
@@ -70,7 +70,7 @@
                     </div>
                 </td>
                 <td *ngIf="requestNiazsanjiFardi.approvedEducationalModuleId">
-                    {{requestNiazsanjiFardi.approvedEducationalModuleId}}
+                    {{requestNiazsanjiFardi.approvedEducationalModuleCode}}
                 </td>
                 <td *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
                     <div *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
@@ -78,7 +78,7 @@
                     </div>
                 </td>
                 <td *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
-                    {{requestNiazsanjiFardi.allEducationalModuleId}}
+                    {{requestNiazsanjiFardi.allEducationalModuleCode}}
                 </td>
                 <td *ngIf="requestNiazsanjiFardi.allEducationalModuleId">
                     <label jhiTranslate="marineindustryprojApp.requestNiazsanjiFardi.allEducationalModule"></label>
@@ -169,7 +169,7 @@
                          (click)="toggleImportantMessage(requestNiazsanjiFardi.id, true)"/>
                     <ng-container *ngIf="!(requestNiazsanjiFardi.requestStatus == 'ACCEPT'  || requestNiazsanjiFardi.requestStatus == 'IGNORE')">
                         <ng-container *ngIf="requestNiazsanjiFardi.status == currentPerson.organizationChartId">
-                            <button type="submit" title="ویرایش"
+                            <button type="submit" title="ویرایش" *ngIf="isTopUsers"
                                     [routerLink]="['/request-niazsanji-fardi-marine-suffix', requestNiazsanjiFardi.id, 'edit']"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>

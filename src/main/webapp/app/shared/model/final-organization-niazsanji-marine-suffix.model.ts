@@ -46,6 +46,7 @@ export interface IFinalOrganizationNiazsanjiMarineSuffix {
     teacherFamily?: string;
     teacherId?: number;
     educationalModuleTitle?: string;
+    educationalModuleCode?: string;
     educationalModuleId?: number;
     teachApproachTitle?: string;
     teachApproachId?: number;
@@ -97,6 +98,7 @@ export class FinalOrganizationNiazsanjiMarineSuffix implements IFinalOrganizatio
         public teacherFamily?: string,
         public teacherId?: number,
         public educationalModuleTitle?: string,
+        public educationalModuleCode?: string,
         public educationalModuleId?: number,
         public teachApproachTitle?: string,
         public teachApproachId?: number,
