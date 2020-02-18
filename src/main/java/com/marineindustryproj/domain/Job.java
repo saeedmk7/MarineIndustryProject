@@ -100,6 +100,9 @@ public class Job implements Serializable {
     @OneToMany(mappedBy = "job")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EducationalModuleJob> educationalModuleJobs = new HashSet<>();
+    @OneToMany(mappedBy = "job")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Soldier> jobSoldiers = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "job_document",
@@ -439,6 +442,31 @@ public class Job implements Serializable {
 
     public void setEducationalModuleJobs(Set<EducationalModuleJob> educationalModuleJobs) {
         this.educationalModuleJobs = educationalModuleJobs;
+    }
+
+    public Set<Soldier> getJobSoldiers() {
+        return jobSoldiers;
+    }
+
+    public Job jobSoldiers(Set<Soldier> soldiers) {
+        this.jobSoldiers = soldiers;
+        return this;
+    }
+
+    public Job addJobSoldier(Soldier soldier) {
+        this.jobSoldiers.add(soldier);
+        soldier.setJob(this);
+        return this;
+    }
+
+    public Job removeJobSoldier(Soldier soldier) {
+        this.jobSoldiers.remove(soldier);
+        soldier.setJob(null);
+        return this;
+    }
+
+    public void setJobSoldiers(Set<Soldier> soldiers) {
+        this.jobSoldiers = soldiers;
     }
 
     public Set<Document> getDocuments() {

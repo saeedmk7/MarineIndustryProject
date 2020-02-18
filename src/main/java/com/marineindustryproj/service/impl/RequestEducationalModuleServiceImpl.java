@@ -3,11 +3,13 @@ package com.marineindustryproj.service.impl;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.EducationalModuleQueryService;
 import com.marineindustryproj.service.EducationalModuleService;
+import com.marineindustryproj.service.HeadlineService;
 import com.marineindustryproj.service.RequestEducationalModuleService;
 import com.marineindustryproj.domain.RequestEducationalModule;
 import com.marineindustryproj.repository.RequestEducationalModuleRepository;
 import com.marineindustryproj.service.dto.EducationalModuleCriteria;
 import com.marineindustryproj.service.dto.EducationalModuleDTO;
+import com.marineindustryproj.service.dto.HeadlineDTO;
 import com.marineindustryproj.service.dto.RequestEducationalModuleDTO;
 import com.marineindustryproj.service.mapper.RequestEducationalModuleMapper;
 import io.github.jhipster.service.filter.LongFilter;
@@ -38,15 +40,18 @@ public class RequestEducationalModuleServiceImpl implements RequestEducationalMo
 
     private final EducationalModuleService educationalModuleService;
 
+    private final HeadlineService headlineService;
+
     private final EducationalModuleQueryService educationalModuleQueryService;
 
     public RequestEducationalModuleServiceImpl(RequestEducationalModuleRepository requestEducationalModuleRepository,
                                                RequestEducationalModuleMapper requestEducationalModuleMapper,
                                                EducationalModuleService educationalModuleService,
-                                               EducationalModuleQueryService educationalModuleQueryService) {
+                                               HeadlineService headlineService, EducationalModuleQueryService educationalModuleQueryService) {
         this.requestEducationalModuleRepository = requestEducationalModuleRepository;
         this.requestEducationalModuleMapper = requestEducationalModuleMapper;
         this.educationalModuleService = educationalModuleService;
+        this.headlineService = headlineService;
         this.educationalModuleQueryService = educationalModuleQueryService;
     }
 
@@ -62,8 +67,21 @@ public class RequestEducationalModuleServiceImpl implements RequestEducationalMo
 
         RequestEducationalModule requestEducationalModule = requestEducationalModuleMapper.toEntity(requestEducationalModuleDTO);
         requestEducationalModule = requestEducationalModuleRepository.save(requestEducationalModule);
+
+        if (!requestEducationalModuleDTO.getHeadlines().isEmpty()) {
+            for (HeadlineDTO headline : requestEducationalModuleDTO.getHeadlines()) {
+                headline.setRequestEducationalModuleId(requestEducationalModule.getId());
+                headline.setCreateDate(requestEducationalModule.getCreateDate());
+                headline.setCreateUserLogin(requestEducationalModule.getCreateUserLogin());
+                headline.setModifyDate(ZonedDateTime.now());
+                headline.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                headlineService.save(headline);
+            }
+        }
+
         return requestEducationalModuleMapper.toDto(requestEducationalModule);
     }
+
     /**
      * Finalize a requestEducationalModule.
      *
@@ -81,7 +99,7 @@ public class RequestEducationalModuleServiceImpl implements RequestEducationalMo
 
         List<EducationalModuleDTO> educationalModules = educationalModuleQueryService.findByCriteria(criteria);
 
-        if(educationalModules.isEmpty()) {
+        if (educationalModules.isEmpty()) {
             EducationalModuleDTO educationalModuleDTO = new EducationalModuleDTO();
             educationalModuleDTO.setLearningTimePractical(requestEducationalModuleDTO.getLearningTimePractical());
             educationalModuleDTO.setLearningTimeTheorical(requestEducationalModuleDTO.getLearningTimeTheorical());
@@ -123,15 +141,37 @@ public class RequestEducationalModuleServiceImpl implements RequestEducationalMo
             educationalModuleDTO.setRestrictionDescription(requestEducationalModuleDTO.getRestrictionDescription());
             educationalModuleDTO.setRestrictions(requestEducationalModuleDTO.getRestrictions());
 
-            educationalModuleService.save(educationalModuleDTO);
-        }
-        else {
+            educationalModuleDTO.setRecommendDate(requestEducationalModuleDTO.getRecommendDate());
+            educationalModuleDTO.setGoalsBehavioralText(requestEducationalModuleDTO.getGoalsBehavioralText());
+            educationalModuleDTO.setNeededHardware(requestEducationalModuleDTO.getNeededHardware());
+            educationalModuleDTO.setNeededSoftwares(requestEducationalModuleDTO.getNeededSoftwares());
+            educationalModuleDTO.setCourseContactsTerms(requestEducationalModuleDTO.getCourseContactsTerms());
+
+            educationalModuleDTO.setPeopleUnderTrainings(requestEducationalModuleDTO.getPeopleUnderTrainings());
+            educationalModuleDTO.setCompetencyId(requestEducationalModuleDTO.getCompetencyId());
+            educationalModuleDTO.setTeachingApproaches(requestEducationalModuleDTO.getTeachingApproaches());
+            educationalModuleDTO.setEffectivenessLevels(requestEducationalModuleDTO.getEffectivenessLevels());
+            educationalModuleDTO.setEffectivenessIndices(requestEducationalModuleDTO.getEffectivenessIndices());
+
+
+            EducationalModuleDTO educationalModule = educationalModuleService.save(educationalModuleDTO);
+
+            if(!requestEducationalModuleDTO.getHeadlines().isEmpty()){
+                for (HeadlineDTO headline : requestEducationalModuleDTO.getHeadlines()) {
+                    headline.setEducationalModuleId(educationalModule.getId());
+                    headline.setModifyDate(ZonedDateTime.now());
+                    headline.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                    headlineService.save(headline);
+                }
+            }
+        } else {
             throw new Exception("کد پودمان آموزشی تکراریست و وجود دارد");
         }
         RequestEducationalModule requestEducationalModule = requestEducationalModuleMapper.toEntity(requestEducationalModuleDTO);
         requestEducationalModule = requestEducationalModuleRepository.save(requestEducationalModule);
         return requestEducationalModuleMapper.toDto(requestEducationalModule);
     }
+
     /**
      * Get all the requestEducationalModules.
      *
@@ -154,7 +194,7 @@ public class RequestEducationalModuleServiceImpl implements RequestEducationalMo
     public Page<RequestEducationalModuleDTO> findAllWithEagerRelationships(Pageable pageable) {
         return requestEducationalModuleRepository.findAllWithEagerRelationships(pageable).map(requestEducationalModuleMapper::toDto);
     }
-    
+
 
     /**
      * Get one requestEducationalModule by id.

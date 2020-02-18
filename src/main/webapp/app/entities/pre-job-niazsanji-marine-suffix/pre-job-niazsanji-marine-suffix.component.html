@@ -20,7 +20,7 @@
                 <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-                <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <!--<th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="reviewDate"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.reviewDate">Review Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -61,7 +61,7 @@
                 <!--<td>{{preJobNiazsanji.title}}</td>-->
                 <!--<td>{{preJobNiazsanji.reviewDate}}</td>
                 <td>{{preJobNiazsanji.code}}</td>-->
-                <td>{{preJobNiazsanji.description}}</td>
+                <!--<td>{{preJobNiazsanji.description}}</td>-->
                 <!--<td>{{preJobNiazsanji.createUserLogin}}</td>-->
                 <td>{{preJobNiazsanji.createDate}}</td>
                 <td>{{preJobNiazsanji.statusMeaning}}</td>
@@ -90,8 +90,8 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <img src="../../../content/images/bulb-icon.png" title="پیام مهمی در جزئیات وجود دارد" alt="پیام مهمی در جزئیات وجود دارد"  *ngIf="preJobNiazsanji.hasImportantMessage == true" style="cursor: pointer;width: 12%;margin: 0;" (click)="toggleImportantMessage(preJobNiazsanji.id, false)"/>
-                        <img src="../../../content/images/light-off-icon.png" *ngIf="preJobNiazsanji.hasImportantMessage == false" style="cursor: pointer;width: 12%;margin: 0;" (click)="toggleImportantMessage(preJobNiazsanji.id, true)"/>
+                        <img src="../../../content/images/bulb-icon.png" title="پیام مهمی در جزئیات وجود دارد" alt="پیام مهمی در جزئیات وجود دارد"  *ngIf="preJobNiazsanji.hasImportantMessage == true" class="lightBulb" (click)="toggleImportantMessage(preJobNiazsanji.id, false)"/>
+                        <img src="../../../content/images/light-off-icon.png" *ngIf="preJobNiazsanji.hasImportantMessage == false" class="lightBulb" (click)="toggleImportantMessage(preJobNiazsanji.id, true)"/>
 
                         <ng-container *ngIf="!(preJobNiazsanji.requestStatus == 'ACCEPT'  || preJobNiazsanji.requestStatus == 'IGNORE')">
                             <button type="submit"  *ngIf="preJobNiazsanji.status > 0"

@@ -50,6 +50,13 @@ export class PrioritizeRequestNiazsanjiMarineSuffixService {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
+    count(req?: any): Observable<EntityResponseType> {
+        const options = createRequestOption(req);
+        return this.http
+            .get<any>(`${this.resourceUrl}/count`, { params: options, observe: 'response' })
+            .pipe(map((res: EntityResponseType) => res));
+    }
+
     finalize(prioritizeRequestNiazsanji: IPrioritizeRequestNiazsanjiMarineSuffix): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(prioritizeRequestNiazsanji);
         let url = this.resourceUrl + "/finalize";

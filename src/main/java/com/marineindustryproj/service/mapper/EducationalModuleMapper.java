@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity EducationalModule and its DTO EducationalModuleDTO.
  */
-@Mapper(componentModel = "spring", uses = {ScientificWorkGroupMapper.class, DocumentMapper.class, EducationalCenterMapper.class, GoalMapper.class, ResourceMapper.class, TeacherMapper.class, RestrictionMapper.class, RequestEducationalModuleMapper.class, SecurityLevelMapper.class, SkillableLevelOfSkillMapper.class, EvaluationMethodMapper.class, OrganizationMapper.class})
+@Mapper(componentModel = "spring", uses = {ScientificWorkGroupMapper.class, DocumentMapper.class, EducationalCenterMapper.class, GoalMapper.class, ResourceMapper.class, TeacherMapper.class, RestrictionMapper.class, PeopleUnderTrainingMapper.class, TeachingApproachMapper.class, EffectivenessLevelMapper.class, EffectivenessIndexMapper.class, RequestEducationalModuleMapper.class, SecurityLevelMapper.class, SkillableLevelOfSkillMapper.class, EvaluationMethodMapper.class, OrganizationMapper.class, CompetencyMapper.class})
 public interface EducationalModuleMapper extends EntityMapper<EducationalModuleDTO, EducationalModule> {
 
     @Mapping(source = "requestEducationalModule.id", target = "requestEducationalModuleId")
@@ -21,8 +21,11 @@ public interface EducationalModuleMapper extends EntityMapper<EducationalModuleD
     @Mapping(source = "evaluationMethod.title", target = "evaluationMethodTitle")
     @Mapping(source = "organization.id", target = "organizationId")
     @Mapping(source = "organization.title", target = "organizationTitle")
+    @Mapping(source = "competency.id", target = "competencyId")
+    @Mapping(source = "competency.title", target = "competencyTitle")
     EducationalModuleDTO toDto(EducationalModule educationalModule);
 
+    @Mapping(target = "headlines", ignore = true)
     @Mapping(target = "educationalModuleJobs", ignore = true)
     @Mapping(target = "requestOrganizationNiazsanjis", ignore = true)
     @Mapping(target = "finalOrganizationNiazsanjis", ignore = true)
@@ -44,6 +47,7 @@ public interface EducationalModuleMapper extends EntityMapper<EducationalModuleD
     @Mapping(source = "skillableLevelOfSkillId", target = "skillableLevelOfSkill")
     @Mapping(source = "evaluationMethodId", target = "evaluationMethod")
     @Mapping(source = "organizationId", target = "organization")
+    @Mapping(source = "competencyId", target = "competency")
     @Mapping(target = "niazsanjiGroups", ignore = true)
     EducationalModule toEntity(EducationalModuleDTO educationalModuleDTO);
 

@@ -69,6 +69,10 @@ export class RequestEducationalModuleMarineSuffixService {
 
     private convertDateFromClient(requestEducationalModule: IRequestEducationalModuleMarineSuffix): IRequestEducationalModuleMarineSuffix {
         const copy: IRequestEducationalModuleMarineSuffix = Object.assign({}, requestEducationalModule, {
+            recommendDate:
+                requestEducationalModule.recommendDate != null && requestEducationalModule.recommendDate.isValid()
+                    ? requestEducationalModule.recommendDate.toJSON()
+                    : null,
             timePassed:
                 requestEducationalModule.timePassed != null && requestEducationalModule.timePassed.isValid()
                     ? requestEducationalModule.timePassed.toJSON()
@@ -94,6 +98,7 @@ export class RequestEducationalModuleMarineSuffixService {
     }
 
     private convertDateFromServer(res: EntityResponseType): EntityResponseType {
+        res.body.recommendDate = res.body.recommendDate != null ? moment(res.body.recommendDate) : null;
         res.body.timePassed = res.body.timePassed != null ? moment(res.body.timePassed) : null;
         res.body.credit = res.body.credit != null ? moment(res.body.credit) : null;
         res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
@@ -106,6 +111,8 @@ export class RequestEducationalModuleMarineSuffixService {
 
     private convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
         res.body.forEach((requestEducationalModule: IRequestEducationalModuleMarineSuffix) => {
+            requestEducationalModule.recommendDate =
+                requestEducationalModule.recommendDate != null ? moment(requestEducationalModule.recommendDate) : null;
             requestEducationalModule.timePassed =
                 requestEducationalModule.timePassed != null ? moment(requestEducationalModule.timePassed) : null;
             requestEducationalModule.credit = requestEducationalModule.credit != null ? moment(requestEducationalModule.credit) : null;

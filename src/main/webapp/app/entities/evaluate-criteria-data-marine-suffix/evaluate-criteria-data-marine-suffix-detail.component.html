@@ -1,0 +1,113 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="evaluateCriteriaData">
+            <h2><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.detail.title">Evaluate Criteria Data</span> {{evaluateCriteriaData.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.title">Title</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.firstNumber">First Number</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.firstNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.secondNumber">Second Number</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.secondNumber}}</span>
+                </dd>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.thirdNumber">Third Number</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.thirdNumber}}</span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.measureCalc">Measure Calc</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.measureCalc}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.measureCalcPercent">Measure Calc Percent</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.measureCalcPercent}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.result">Result</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.result}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.resultPercent">Result Percent</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.resultPercent}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.year">Year</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.year}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.month">Month</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.month}}</span>
+                </dd>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.fileDoc">File Doc</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.fileDoc}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.reportTime">Report Time</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.reportTime}}</span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.description">Description</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.description}}</span>
+                </dd>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.guid">Guid</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaData.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of evaluateCriteriaData.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.evaluateCriteriaTraining">Evaluate Criteria Training</span></dt>
+                <dd>
+                    <div *ngIf="evaluateCriteriaData.evaluateCriteriaTrainingId">
+                        <a [routerLink]="['/evaluate-criteria-training-marine-suffix', evaluateCriteriaData.evaluateCriteriaTrainingId, 'view']">{{evaluateCriteriaData.evaluateCriteriaTrainingProcessTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="evaluateCriteriaData.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', evaluateCriteriaData.organizationChartId, 'view']">{{evaluateCriteriaData.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/evaluate-criteria-data-marine-suffix', evaluateCriteriaData.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

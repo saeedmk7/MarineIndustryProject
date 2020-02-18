@@ -113,6 +113,14 @@ public class CompetencyQueryService extends QueryService<Competency> {
             if (criteria.getModifyDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getModifyDate(), Competency_.modifyDate));
             }
+            if (criteria.getEducationalModuleId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
+                    root -> root.join(Competency_.educationalModules, JoinType.LEFT).get(EducationalModule_.id)));
+            }
+            if (criteria.getRequestEducationalModuleId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRequestEducationalModuleId(),
+                    root -> root.join(Competency_.requestEducationalModules, JoinType.LEFT).get(RequestEducationalModule_.id)));
+            }
             if (criteria.getPreJobNiazsanjiCompetencyId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPreJobNiazsanjiCompetencyId(),
                     root -> root.join(Competency_.preJobNiazsanjiCompetencies, JoinType.LEFT).get(PreJobNiazsanjiCompetency_.id)));

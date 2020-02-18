@@ -60,8 +60,6 @@ export class DesignNiazsanjiMarineSuffixUpdateComponent implements OnInit {
         /*this.activatedRoute.data.subscribe(({ designNiazsanji }) => {
             this.designNiazsanji = designNiazsanji;
         });*/
-        debugger;
-
         if(this.index || this.index == 0){
             if(this.preJobNiazsanji && this.preJobNiazsanji.designNiazsanjis && this.preJobNiazsanji.designNiazsanjis[this.index]){
                 this.designNiazsanji = this.preJobNiazsanji.designNiazsanjis[this.index];
@@ -72,7 +70,6 @@ export class DesignNiazsanjiMarineSuffixUpdateComponent implements OnInit {
         }
 
         setTimeout(() => {
-            debugger;
             if(!this.editable)
             {
                 $("#contentDesign :input").attr("disabled", true);

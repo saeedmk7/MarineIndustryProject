@@ -21,6 +21,14 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  * fix type specific filters.
  */
 public class EducationalHistoryCriteria implements Serializable {
+    public StringFilter getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
+
+    public void setEducationalModuleCode(StringFilter educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
+    }
+
     /**
      * Class for filtering RequestStatus
      */
@@ -32,6 +40,8 @@ public class EducationalHistoryCriteria implements Serializable {
     private LongFilter id;
 
     private StringFilter educationalModuleName;
+
+    private StringFilter educationalModuleCode;
 
     private IntegerFilter learningTimeTheorical;
 
@@ -272,6 +282,7 @@ public class EducationalHistoryCriteria implements Serializable {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(educationalModuleName, that.educationalModuleName) &&
+            Objects.equals(educationalModuleCode, that.educationalModuleCode) &&
             Objects.equals(learningTimeTheorical, that.learningTimeTheorical) &&
             Objects.equals(learningTimePractical, that.learningTimePractical) &&
             Objects.equals(totalTime, that.totalTime) &&
@@ -300,6 +311,7 @@ public class EducationalHistoryCriteria implements Serializable {
         return Objects.hash(
         id,
         educationalModuleName,
+        educationalModuleCode,
         learningTimeTheorical,
         learningTimePractical,
         totalTime,
@@ -329,6 +341,7 @@ public class EducationalHistoryCriteria implements Serializable {
         return "EducationalHistoryCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (educationalModuleName != null ? "educationalModuleName=" + educationalModuleName + ", " : "") +
+                (educationalModuleCode != null ? "educationalModuleCode=" + educationalModuleCode + ", " : "") +
                 (learningTimeTheorical != null ? "learningTimeTheorical=" + learningTimeTheorical + ", " : "") +
                 (learningTimePractical != null ? "learningTimePractical=" + learningTimePractical + ", " : "") +
                 (totalTime != null ? "totalTime=" + totalTime + ", " : "") +

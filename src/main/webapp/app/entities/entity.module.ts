@@ -98,6 +98,12 @@ import {MarineindustryprojRequestOtherNiazsanjiMarineSuffixModule} from "app/ent
 import {MarineindustryprojInstructionAuthorityMarineSuffixModule} from "app/entities/instruction-authority-marine-suffix/instruction-authority-marine-suffix.module";
 import {MarineindustryprojNiazsanjiIntegrationMarineSuffixModule} from "app/entities/niazsanji-integration-marine-suffix/niazsanji-integration-marine-suffix.module";
 import {MarineindustryprojPrioritizeRequestNiazsanjiMarineSuffixModule} from "app/entities/prioritize-request-niazsanji-marine-suffix/prioritize-request-niazsanji-marine-suffix.module";
+import {MarineindustryprojEvaluateCriteriaTrainingMarineSuffixModule} from "app/entities/evaluate-criteria-training-marine-suffix/evaluate-criteria-training-marine-suffix.module";
+import {MarineindustryprojSoldierMarineSuffixModule} from "app/entities/soldier-marine-suffix/soldier-marine-suffix.module";
+import {MarineindustryprojSoldierTrainingReportMarineSuffixModule} from "app/entities/soldier-training-report-marine-suffix/soldier-training-report-marine-suffix.module";
+import {MarineindustryprojPeopleUnderTrainingMarineSuffixModule} from "app/entities/people-under-training-marine-suffix/people-under-training-marine-suffix.module";
+import {MarineindustryprojHeadlineMarineSuffixModule} from "app/entities/headline-marine-suffix/headline-marine-suffix.module";
+import {MarineindustryprojEvaluateCriteriaDataMarineSuffixModule} from "app/entities/evaluate-criteria-data-marine-suffix/evaluate-criteria-data-marine-suffix.module";
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -198,6 +204,12 @@ import {MarineindustryprojPrioritizeRequestNiazsanjiMarineSuffixModule} from "ap
         MarineindustryprojNiazsanjiInputMarineSuffixModule,
         MarineindustryprojPrioritizeRequestNiazsanjiMarineSuffixModule,
         MarineindustryprojNiazsanjiIntegrationMarineSuffixModule,
+        MarineindustryprojEvaluateCriteriaTrainingMarineSuffixModule,
+        MarineindustryprojSoldierMarineSuffixModule,
+        MarineindustryprojSoldierTrainingReportMarineSuffixModule,
+        MarineindustryprojPeopleUnderTrainingMarineSuffixModule,
+        MarineindustryprojHeadlineMarineSuffixModule,
+        MarineindustryprojEvaluateCriteriaDataMarineSuffixModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

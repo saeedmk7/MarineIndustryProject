@@ -1,0 +1,43 @@
+{
+    "marineindustryprojApp": {
+        "soldierTrainingReport": {
+            "home": {
+                "title": "گزارش مهارت آموزی کارکنان وظیفه",
+                "createLabel": "جدید",
+                "createOrEditLabel": "گزارش مهارت آموزی کارکنان وظیفه"
+            },
+            "created": "گزارش مهارت آموزی کارکنان وظیفه با شناسه {{ param }} ایجاد شد.",
+            "updated": "گزارش مهارت آموزی کارکنان وظیفه با شناسه {{ param }} ویرایش شد.",
+            "deleted": "گزارش مهارت آموزی کارکنان وظیفه با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف گزارش مهارت آموزی کارکنان وظیفه با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات مهارت آموزی کارکنان وظیفه"
+            },
+            "title": "عنوان مهارت",
+            "personHour": "نفرساعت(ساعت)",
+            "executiveTrainingCompany": "دستگاه اجرایی متولی آموزش",
+            "certificateStatus": "وضعیت گواهینامه",
+            "certificateNumber": "شماره گواهینامه",
+            "year": "سال",
+            "month": "ماه",
+            "reportTime": "زمان گزارش",
+            "fileDoc": "گواهینامه",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "guid": "Guid",
+            "document": "Document",
+            "soldier": "سرباز",
+            "soldierId": "سرباز",
+            "soldierFullName": "نام و نام خانوادگی",
+            "soldierOrganizationChartTitle": "مکان آموزش",
+            "soldierOrganizationChartId": "مکان آموزش",
+            "soldierNationalId": "کدملی",
+            "soldierReleaseDate": "تاریخ اعزام"
+        }
+    }
+}

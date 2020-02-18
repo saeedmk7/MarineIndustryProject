@@ -40,6 +40,7 @@ import {
 } from "app/entities/run-phase-marine-suffix/run-phase-marine-suffix-save-data-item.model";
 import {IRunRunningStepMarineSuffix} from "app/shared/model/run-running-step-marine-suffix.model";
 import {MONTHS} from "app/shared/constants/months.constants";
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 
 @Component({
     selector: 'mi-run-phase-marine-suffix-update',
@@ -63,7 +64,9 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     isAdmin: boolean = false;
     isModirKolAmozesh: boolean;
     isKarshenasArshadAmozesh: boolean;
+    isSuperUser: boolean;
     currentAccount: any;
+    currentPerson: IPersonMarineSuffix;
 
     documentUrl: string;
     fileHasError: boolean = true;
@@ -83,7 +86,8 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private principal: Principal,
         private treeUtilities: TreeUtilities,
-        private router: Router
+        private router: Router,
+        private convertObjectDatesService: ConvertObjectDatesService
     ) {
     }
 
@@ -175,50 +179,6 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                     //this.runPhaseTabModel = resp.body.map(a => new RunPhaseTabModel(a.id))
                 },
                 (res: HttpErrorResponse) => this.onError(res.message));
-            /*this.finalNiazsanjiReportService.find(this.runPhase.finalNiazsanjiReportId).subscribe(
-                (res: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => {
-
-                    this.finalniazsanjireport = res.body;
-
-                    this.educationalModuleService.find(this.finalniazsanjireport.educationalModuleId).subscribe(
-                        (res: HttpResponse<IEducationalModuleMarineSuffix>) => {
-
-                            this.educationalModule = res.body;
-                        },
-                        (res: HttpErrorResponse) => this.onError(res.message));
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );*/
-
-            /*const criteria = [{
-                key: 'finalNiazsanjiReportId.equals',
-                value: this.runPhase.finalNiazsanjiReportId
-            }];
-            this.finalNiazsanjiReportPersonService.query({
-                page: 0,
-                size: 20000,
-                criteria: criteria,
-                sort: ["id", "asc"]
-            }).subscribe((resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>) => {
-                    this.finalniazsanjireportPeople = resp.body;
-                    /!*if (resp.body.length > 0) {
-                        const personIds = resp.body.map(a => a.personId);
-                        const criteria1 = [{
-                            key: 'id.in',
-                            value: personIds
-                        }];
-                        this.personService.query({
-                            page: 0,
-                            size: 20000,
-                            criteria: criteria1,
-                            sort: ["id", "asc"]
-                        }).subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
-                                this.people = res.body;
-                            },
-                            (res: HttpErrorResponse) => this.onError(res.message));
-                    }*!/
-                },
-                (res: HttpErrorResponse) => this.onError(res.message))*/
 
         });
 
@@ -232,6 +192,16 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
             if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined) {
                 this.isKarshenasArshadAmozesh = true;
             }
+            if (this.isModirKolAmozesh || this.isKarshenasArshadAmozesh) {
+                this.isSuperUser = true;
+            }
+
+            this.personService.find(this.currentAccount.personId).subscribe(
+                (res: HttpResponse<IPersonMarineSuffix>) => {
+                    this.currentPerson = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
         });
 
 
@@ -266,8 +236,8 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                             if (w.id == id)
                                 w.fileDoc = event.body.toString();
                         }));
-                        //this.educationalHistory.fileDoc = event.body;
-                        //this.subscribeToSaveResponse(this.educationalHistoryService.create(this.educationalHistory));
+                        //this.runPhase.fileDoc = event.body;
+                        //this.subscribeToSaveResponse(this.runPhaseService.create(this.runPhase));
                     }
                 }
             },
@@ -368,6 +338,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
 
+        debugger;
         let runPhaseSaveData: IRunPhaseSaveDataModel = new RunPhaseSaveDataModel();
         runPhaseSaveData.runPhaseId = this.runPhase.id;
         runPhaseSaveData.runMonth = this.runPhase.runMonth;
@@ -379,6 +350,20 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
         runPhaseSaveData.finishDate = this.runPhase.finishDate;
         runPhaseSaveData.status = this.runPhase.status == undefined ? 0 : this.runPhase.status;
         runPhaseSaveData.runPhaseSaveDataItemModels = [];
+
+        if(this.runPhase.conversation)
+            runPhaseSaveData.conversion = this.runPhase.conversation;
+
+
+        if(this.runPhase.comment) {
+            if(!runPhaseSaveData.conversion)
+                runPhaseSaveData.conversion = "";
+            runPhaseSaveData.conversion += " ثبت نظر توسط " + this.currentPerson.fullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " ثبت شد. ";
+            runPhaseSaveData.conversion += "\n";
+            runPhaseSaveData.conversion += this.currentPerson.fullName + ": " + this.runPhase.comment;
+            runPhaseSaveData.conversion += "\n ------------------------------------------------------ \n";
+        }
+
         this.runningSteps.forEach(a => {
             if (!a.isHeader) {
                 let runPhaseSaveDataItemModel: IRunPhaseSaveDataItemModel = new RunPhaseSaveDataItemModel;
@@ -409,7 +394,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     private onSaveSuccess(res: IRunPhaseMarineSuffix) {
         this.isSaving = false;
 
-        if (res.done)
+        if (res.done || res.status == 5)
             this.previousState();
         else {
             this.runPhase = res;

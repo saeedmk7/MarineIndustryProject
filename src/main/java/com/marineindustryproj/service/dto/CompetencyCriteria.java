@@ -41,6 +41,10 @@ public class CompetencyCriteria implements Serializable {
 
     private ZonedDateTimeFilter modifyDate;
 
+    private LongFilter educationalModuleId;
+
+    private LongFilter requestEducationalModuleId;
+
     private LongFilter preJobNiazsanjiCompetencyId;
 
     public LongFilter getId() {
@@ -115,6 +119,22 @@ public class CompetencyCriteria implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public LongFilter getEducationalModuleId() {
+        return educationalModuleId;
+    }
+
+    public void setEducationalModuleId(LongFilter educationalModuleId) {
+        this.educationalModuleId = educationalModuleId;
+    }
+
+    public LongFilter getRequestEducationalModuleId() {
+        return requestEducationalModuleId;
+    }
+
+    public void setRequestEducationalModuleId(LongFilter requestEducationalModuleId) {
+        this.requestEducationalModuleId = requestEducationalModuleId;
+    }
+
     public LongFilter getPreJobNiazsanjiCompetencyId() {
         return preJobNiazsanjiCompetencyId;
     }
@@ -143,6 +163,8 @@ public class CompetencyCriteria implements Serializable {
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
+            Objects.equals(educationalModuleId, that.educationalModuleId) &&
+            Objects.equals(requestEducationalModuleId, that.requestEducationalModuleId) &&
             Objects.equals(preJobNiazsanjiCompetencyId, that.preJobNiazsanjiCompetencyId);
     }
 
@@ -158,6 +180,8 @@ public class CompetencyCriteria implements Serializable {
         createDate,
         modifyUserLogin,
         modifyDate,
+        educationalModuleId,
+        requestEducationalModuleId,
         preJobNiazsanjiCompetencyId
         );
     }
@@ -174,6 +198,8 @@ public class CompetencyCriteria implements Serializable {
                 (createDate != null ? "createDate=" + createDate + ", " : "") +
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
+                (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (requestEducationalModuleId != null ? "requestEducationalModuleId=" + requestEducationalModuleId + ", " : "") +
                 (preJobNiazsanjiCompetencyId != null ? "preJobNiazsanjiCompetencyId=" + preJobNiazsanjiCompetencyId + ", " : "") +
             "}";
     }

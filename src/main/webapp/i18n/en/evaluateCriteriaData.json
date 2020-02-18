@@ -1,0 +1,41 @@
+{
+    "marineindustryprojApp": {
+        "evaluateCriteriaData": {
+            "home": {
+                "title": "Evaluate Criteria Data",
+                "createLabel": "Create a new Evaluate Criteria Data",
+                "createOrEditLabel": "Create or edit a Evaluate Criteria Data"
+            },
+            "created": "A new Evaluate Criteria Data is created with identifier {{ param }}",
+            "updated": "A Evaluate Criteria Data is updated with identifier {{ param }}",
+            "deleted": "A Evaluate Criteria Data is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Evaluate Criteria Data {{ id }}?"
+            },
+            "detail": {
+                "title": "Evaluate Criteria Data"
+            },
+            "title": "Title",
+            "firstNumber": "First Number",
+            "secondNumber": "Second Number",
+            "thirdNumber": "Third Number",
+            "measureCalc": "Measure Calc",
+            "measureCalcPercent": "Measure Calc Percent",
+            "result": "Result",
+            "resultPercent": "Result Percent",
+            "year": "Year",
+            "month": "Month",
+            "fileDoc": "File Doc",
+            "reportTime": "Report Time",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "guid": "Guid",
+            "document": "Document",
+            "evaluateCriteriaTraining": "Evaluate Criteria Training",
+            "organizationChart": "Organization Chart"
+        }
+    }
+}

@@ -121,6 +121,15 @@ public class OrganizationChart implements Serializable {
     @OneToMany(mappedBy = "organizationChart")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "organizationChart")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Soldier> soldiers = new HashSet<>();
+    @OneToMany(mappedBy = "organizationChart")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<EvaluateCriteriaTraining> evaluateCriteriaTrainings = new HashSet<>();
+    @OneToMany(mappedBy = "organizationChart")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<EvaluateCriteriaData> evaluateCriteriaData = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("organizationCharts")
     private OrganizationChart parent;
@@ -717,6 +726,81 @@ public class OrganizationChart implements Serializable {
 
     public void setPrioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
         this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
+    }
+
+    public Set<Soldier> getSoldiers() {
+        return soldiers;
+    }
+
+    public OrganizationChart soldiers(Set<Soldier> soldiers) {
+        this.soldiers = soldiers;
+        return this;
+    }
+
+    public OrganizationChart addSoldier(Soldier soldier) {
+        this.soldiers.add(soldier);
+        soldier.setOrganizationChart(this);
+        return this;
+    }
+
+    public OrganizationChart removeSoldier(Soldier soldier) {
+        this.soldiers.remove(soldier);
+        soldier.setOrganizationChart(null);
+        return this;
+    }
+
+    public void setSoldiers(Set<Soldier> soldiers) {
+        this.soldiers = soldiers;
+    }
+
+    public Set<EvaluateCriteriaTraining> getEvaluateCriteriaTrainings() {
+        return evaluateCriteriaTrainings;
+    }
+
+    public OrganizationChart evaluateCriteriaTrainings(Set<EvaluateCriteriaTraining> evaluateCriteriaTrainings) {
+        this.evaluateCriteriaTrainings = evaluateCriteriaTrainings;
+        return this;
+    }
+
+    public OrganizationChart addEvaluateCriteriaTraining(EvaluateCriteriaTraining evaluateCriteriaTraining) {
+        this.evaluateCriteriaTrainings.add(evaluateCriteriaTraining);
+        evaluateCriteriaTraining.setOrganizationChart(this);
+        return this;
+    }
+
+    public OrganizationChart removeEvaluateCriteriaTraining(EvaluateCriteriaTraining evaluateCriteriaTraining) {
+        this.evaluateCriteriaTrainings.remove(evaluateCriteriaTraining);
+        evaluateCriteriaTraining.setOrganizationChart(null);
+        return this;
+    }
+
+    public void setEvaluateCriteriaTrainings(Set<EvaluateCriteriaTraining> evaluateCriteriaTrainings) {
+        this.evaluateCriteriaTrainings = evaluateCriteriaTrainings;
+    }
+
+    public Set<EvaluateCriteriaData> getEvaluateCriteriaData() {
+        return evaluateCriteriaData;
+    }
+
+    public OrganizationChart evaluateCriteriaData(Set<EvaluateCriteriaData> evaluateCriteriaData) {
+        this.evaluateCriteriaData = evaluateCriteriaData;
+        return this;
+    }
+
+    public OrganizationChart addEvaluateCriteriaData(EvaluateCriteriaData evaluateCriteriaData) {
+        this.evaluateCriteriaData.add(evaluateCriteriaData);
+        evaluateCriteriaData.setOrganizationChart(this);
+        return this;
+    }
+
+    public OrganizationChart removeEvaluateCriteriaData(EvaluateCriteriaData evaluateCriteriaData) {
+        this.evaluateCriteriaData.remove(evaluateCriteriaData);
+        evaluateCriteriaData.setOrganizationChart(null);
+        return this;
+    }
+
+    public void setEvaluateCriteriaData(Set<EvaluateCriteriaData> evaluateCriteriaData) {
+        this.evaluateCriteriaData = evaluateCriteriaData;
     }
 
     public OrganizationChart getParent() {

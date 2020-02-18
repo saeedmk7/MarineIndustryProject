@@ -8,55 +8,8 @@
     </div>
     <div class="col-xs-12 bgWhite lightShadow topMenu">
         <ul class="nav justify-content-end" style="padding-inline-start: 0px; font-size: larger">
-            <li class="nav-item seperate-left seperate-right" title="درخواست های جدید نیازسنجی پودمان فردی">
-                <a class="nav-link excepted-menu" href="#/request-niazsanji-fardi-marine-suffix">
-                    <span class="bell-contain" style="padding: 6px">
-                    <fa-icon [icon]="'flag'"></fa-icon>
-                    <span *ngIf="niazSanjiFardiRequestCounter != undefined" class="badge badge-info">{{niazSanjiFardiRequestCounter}}</span>
-                    </span>
-                </a>
-            </li>
-            <li class="nav-item seperate-left seperate-right" title="درخواست های جدید نیازسنجی پودمان شغلی">
-                <a class="nav-link excepted-menu" href="#/pre-job-niazsanji-marine-suffix">
-                    <span class="bell-contain" style="padding: 6px">
-                    <fa-icon [icon]="'toolbox'"></fa-icon>
-                    <span *ngIf="niazsanjiJobCounter != undefined" class="badge badge-info">{{niazsanjiJobCounter}}</span>
-                    </span>
-                </a>
-            </li>
-            <li class="nav-item seperate-left seperate-right" title="درخواست های جدید نیازسنجی سایر">
-                <a class="nav-link excepted-menu" href="#/request-other-niazsanji-marine-suffix">
-                    <span class="bell-contain" style="padding: 6px">
-                    <fa-icon [icon]="'question'"></fa-icon>
-                    <span *ngIf="niazsanjiOtherCounter != undefined" class="badge badge-info">{{niazsanjiOtherCounter}}</span>
-                    </span>
-                </a>
-            </li>
-            <li class="nav-item seperate-left seperate-right" title="سابقه آموزشی جدید">
-                <a class="nav-link excepted-menu" href="#/educational-history-marine-suffix">
-                    <span class="bell-contain" style="padding: 6px">
-                    <fa-icon [icon]="'id-card'"></fa-icon>
-                    <span *ngIf="educationalHistoryCounter != undefined" class="badge badge-info">{{educationalHistoryCounter}}</span>
-                    </span>
-                </a>
-            </li>
-            <li class="nav-item seperate-left seperate-right" *ngIf="isTopUsers" title="درخواست پودمان جدید">
-                <a class="nav-link excepted-menu" href="#/request-educational-module-marine-suffix">
-                    <span class="bell-contain" style="padding: 6px">
-                    <fa-icon [icon]="'book'"></fa-icon>
-                    <span *ngIf="educationalModuleRequestCounter != undefined" class="badge badge-info">{{educationalModuleRequestCounter}}</span>
-                    </span>
-                </a>
-            </li>
-            <li class="nav-item seperate-left seperate-right" *ngIf="isModirAmozesh" title="تعداد درخواست های نیازسنجی سازمانی">
-                <a class="nav-link excepted-menu" href="#/request-organization-niazsanji-marine-suffix">
-                    <span class="bell-contain" style="padding: 6px">
-                    <fa-icon [icon]="'bell'"></fa-icon>
-                    <span *ngIf="requestOrganizationNiazsanjiCounter != undefined" class="badge badge-warning ">{{requestOrganizationNiazsanjiCounter}}</span>
-                    </span>
-                </a>
-            </li>
-            <li class="nav-item seperate-left seperate-right" *ngIf="isAdmin" title="تعداد درخواست های کاربران از مدیریت سیستم">
+
+            <li class="nav-item seperate-left seperate-right bgCyan" *ngIf="isAdmin" title="تعداد انتقادات و پیشنهادات کاربران به مدیریت سیستم">
                 <a class="nav-link excepted-menu" href="#/users-request-marine-suffix">
                     <span class="bell-contain" style="padding: 6px">
                     <fa-icon [icon]="'envelope'"></fa-icon>
@@ -64,8 +17,31 @@
                     </span>
                 </a>
             </li>
-
-            <ng-container *ngIf="isModirKolAmozesh || isKarshenasArshadAmozeshSazman" >
+            <li class="nav-item seperate-left seperate-right bgGreen" *ngIf="isSuperUsers" title="تعداد بررسی های تایید نهایی های اجرا">
+                <a class="nav-link excepted-menu" href="#/run-phase-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'glasses'"></fa-icon>
+                    <span *ngIf="runPhaseRequestCounter != undefined" class="badge badge-info">{{runPhaseRequestCounter}}</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item seperate-left seperate-right bgBrown" title="پرونده و سوابق آموزشی جدید">
+                <a class="nav-link excepted-menu" href="#/educational-history-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'id-card'"></fa-icon>
+                    <span *ngIf="educationalHistoryCounter != undefined" class="badge badge-info">{{educationalHistoryCounter}}</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item seperate-left seperate-right bgBlue" *ngIf="isTopUsers" title="طراحی پودمان جدید">
+                <a class="nav-link excepted-menu" href="#/request-educational-module-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'book'"></fa-icon>
+                    <span *ngIf="educationalModuleRequestCounter != undefined" class="badge badge-info">{{educationalModuleRequestCounter}}</span>
+                    </span>
+                </a>
+            </li>
+            <ng-container *ngIf="isSuperUsers" >
                 <!--<li class="nav-item seperate-left seperate-right" title="تعداد درخواست های نیازسنجی پودمان فردی اجرا نشده">
                     <a class="nav-link excepted-menu" href="#/niazsanji-fardi-marine-suffix">
                         <span class="bell-contain" style="padding: 6px">
@@ -74,7 +50,7 @@
                         </span>
                     </a>
                 </li>-->
-                <li class="nav-item seperate-left seperate-right" title="تعداد درخواست های نیازسنجی پودمان سازمانی اجرا نشده">
+                <li class="nav-item seperate-left seperate-right bgRed" title="تعداد درخواست های نیازسنجی پودمان سازمانی منتظر تصویب شوراء">
                     <a class="nav-link excepted-menu" href="#/final-organization-niazsanji-marine-suffix">
                         <span class="bell-contain" style="padding: 6px">
                         <fa-icon [icon]="'bell'"></fa-icon>
@@ -84,6 +60,59 @@
                 </li>
 
             </ng-container>
+
+            <ng-container *ngIf="isSuperUsers" >
+                <li class="nav-item seperate-left seperate-right bgRed" title="تعداد درخواست های منتظر تصویب شوراء">
+                    <a class="nav-link excepted-menu" href="#/niazsanji-integration-marine-suffix">
+                        <span class="bell-contain" style="padding: 6px">
+                        <fa-icon [icon]="'bell'"></fa-icon>
+                        <span *ngIf="niazsanjiIntegrationCounter != undefined" class="badge badge-warning">{{niazsanjiIntegrationCounter}}</span>
+                        </span>
+                    </a>
+                </li>
+
+            </ng-container>
+            <li class="nav-item seperate-left seperate-right bgRed" *ngIf="isTopUsers" title="تعداد درخواست های منتظر اولویت بندی">
+                <a class="nav-link excepted-menu" href="#/prioritize-request-niazsanji-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'tasks'"></fa-icon>
+                    <span *ngIf="prioritizeRequestsCounter != undefined" class="badge badge-warning ">{{prioritizeRequestsCounter}}</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item seperate-left seperate-right bgRed" title="درخواست های جدید نیازسنجی سایر">
+                <a class="nav-link excepted-menu" href="#/request-other-niazsanji-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'question'"></fa-icon>
+                    <span *ngIf="niazsanjiOtherCounter != undefined" class="badge badge-info">{{niazsanjiOtherCounter}}</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item seperate-left seperate-right bgRed" title="درخواست های جدید نیازسنجی پودمان فردی">
+                <a class="nav-link excepted-menu" href="#/request-niazsanji-fardi-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'flag'"></fa-icon>
+                    <span *ngIf="niazSanjiFardiRequestCounter != undefined" class="badge badge-info">{{niazSanjiFardiRequestCounter}}</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item seperate-left seperate-right bgRed" *ngIf="isTopUsers" title="تعداد درخواست های نیازسنجی سازمانی">
+                <a class="nav-link excepted-menu" href="#/request-organization-niazsanji-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'bell'"></fa-icon>
+                    <span *ngIf="requestOrganizationNiazsanjiCounter != undefined" class="badge badge-warning ">{{requestOrganizationNiazsanjiCounter}}</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item seperate-left seperate-right bgRed" title="درخواست های جدید نیازسنجی پودمان شغلی">
+                <a class="nav-link excepted-menu" href="#/pre-job-niazsanji-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'toolbox'"></fa-icon>
+                    <span *ngIf="niazsanjiJobCounter != undefined" class="badge badge-info">{{niazsanjiJobCounter}}</span>
+                    </span>
+                </a>
+            </li>
+
             <!--<li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{currentUserFullName}}</a>
                 <div class="dropdown-menu">

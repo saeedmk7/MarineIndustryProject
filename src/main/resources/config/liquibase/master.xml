@@ -182,6 +182,19 @@
     <include file="config/liquibase/changelog/20200117070701_added_entity_constraints_PrioritizeRequestNiazsanji.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200117070702_added_entity_constraints_NiazsanjiIntegration.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200117175947_update_entity_FinalNiazsanjiReportAddedIntegratedFinal.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200207095828_added_entity_Soldier.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200207095829_added_entity_SoldierTrainingReport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200207095830_added_entity_EvaluateCriteriaTraining.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200207095828_added_entity_constraints_Soldier.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200207095829_added_entity_constraints_SoldierTrainingReport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200207095830_added_entity_constraints_EvaluateCriteriaTraining.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200207175047_update_entity_preJobNiazsanjiCompetency_titleLength.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200214081406_added_entity_Headline.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200214081407_added_entity_PeopleUnderTraining.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200214081406_added_entity_constraints_Headline.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200214081537_added_entity_EvaluateCriteriaData.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200214081537_added_entity_constraints_EvaluateCriteriaData.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200214175947_update_entity_updateEducationalModuleAndRequestAndRunPhase.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

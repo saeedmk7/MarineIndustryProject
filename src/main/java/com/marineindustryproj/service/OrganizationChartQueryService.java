@@ -191,6 +191,18 @@ public class OrganizationChartQueryService extends QueryService<OrganizationChar
                 specification = specification.and(buildSpecification(criteria.getPrioritizeRequestNiazsanjiId(),
                     root -> root.join(OrganizationChart_.prioritizeRequestNiazsanjis, JoinType.LEFT).get(PrioritizeRequestNiazsanji_.id)));
             }
+            if (criteria.getSoldierId() != null) {
+                specification = specification.and(buildSpecification(criteria.getSoldierId(),
+                    root -> root.join(OrganizationChart_.soldiers, JoinType.LEFT).get(Soldier_.id)));
+            }
+            if (criteria.getEvaluateCriteriaTrainingId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEvaluateCriteriaTrainingId(),
+                    root -> root.join(OrganizationChart_.evaluateCriteriaTrainings, JoinType.LEFT).get(EvaluateCriteriaTraining_.id)));
+            }
+            if (criteria.getEvaluateCriteriaDataId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEvaluateCriteriaDataId(),
+                    root -> root.join(OrganizationChart_.evaluateCriteriaData, JoinType.LEFT).get(EvaluateCriteriaData_.id)));
+            }
             if (criteria.getParentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getParentId(),
                     root -> root.join(OrganizationChart_.parent, JoinType.LEFT).get(OrganizationChart_.id)));

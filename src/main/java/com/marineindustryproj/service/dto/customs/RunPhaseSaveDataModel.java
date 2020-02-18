@@ -10,6 +10,8 @@ public class RunPhaseSaveDataModel implements Serializable {
 
     private String description;
 
+    private String conversion;
+
     private Integer finalizeCost;
 
     private String finishDate;
@@ -104,5 +106,13 @@ public class RunPhaseSaveDataModel implements Serializable {
 
     public void setFinishDate(String finishDate) {
         this.finishDate = finishDate;
+    }
+
+    public String getConversion() {
+        return conversion;
+    }
+
+    public void setConversion(String conversion) {
+        this.conversion = conversion;
     }
 }

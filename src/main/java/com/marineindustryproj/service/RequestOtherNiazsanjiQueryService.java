@@ -172,6 +172,10 @@ public class RequestOtherNiazsanjiQueryService extends QueryService<RequestOther
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleTitle(),
                     root -> root.join(RequestOtherNiazsanji_.educationalModule, JoinType.LEFT).get(EducationalModule_.title)));
             }
+            if (criteria.getEducationalModuleCode() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleCode(),
+                    root -> root.join(RequestOtherNiazsanji_.educationalModule, JoinType.LEFT).get(EducationalModule_.code)));
+            }
             if (criteria.getPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPersonId(),
                     root -> root.join(RequestOtherNiazsanji_.person, JoinType.LEFT).get(Person_.id)));

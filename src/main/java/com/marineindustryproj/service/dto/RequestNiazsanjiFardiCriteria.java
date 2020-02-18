@@ -30,6 +30,14 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
         this.skillableLevelOfSkillId = skillableLevelOfSkillId;
     }
 
+    public StringFilter getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
+
+    public void setEducationalModuleCode(StringFilter educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
+    }
+
     /**
      * Class for filtering RequestStatus
      */
@@ -83,6 +91,8 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
     private LongFilter allEducationalModuleId;
 
     private StringFilter educationalModuleTitle;
+
+    private StringFilter educationalModuleCode;
 
     private LongFilter skillableLevelOfSkillId;
 
@@ -322,6 +332,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
             Objects.equals(approvedEducationalModuleId, that.approvedEducationalModuleId) &&
             Objects.equals(allEducationalModuleId, that.allEducationalModuleId) &&
             Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
+            Objects.equals(educationalModuleCode, that.educationalModuleCode) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(skillableLevelOfSkillId, that.skillableLevelOfSkillId) &&
             Objects.equals(organizationChartId, that.organizationChartId);
@@ -353,6 +364,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
         approvedEducationalModuleId,
         allEducationalModuleId,
         educationalModuleTitle,
+        educationalModuleCode,
         personId,
         skillableLevelOfSkillId,
         organizationChartId
@@ -385,6 +397,7 @@ public class RequestNiazsanjiFardiCriteria implements Serializable {
                 (approvedEducationalModuleId != null ? "approvedEducationalModuleId=" + approvedEducationalModuleId + ", " : "") +
                 (allEducationalModuleId != null ? "allEducationalModuleId=" + allEducationalModuleId + ", " : "") +
                 (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
+                (educationalModuleCode != null ? "educationalModuleCode=" + educationalModuleCode + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (skillableLevelOfSkillId != null ? "skillableLevelOfSkillId=" + skillableLevelOfSkillId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +

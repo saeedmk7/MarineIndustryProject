@@ -85,7 +85,6 @@ export class PreJobNiazsanjiStep5UpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );*/
         setTimeout(() => {
-            debugger;
             if(!this.editable)
             {
                 $("#content :input").attr("disabled", true);

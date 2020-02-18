@@ -1,0 +1,95 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="soldierTrainingReport">
+            <h2><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.detail.title">Soldier Training Report</span> {{soldierTrainingReport.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.title">Title</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.personHour">Person Hour</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.personHour}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.executiveTrainingCompany">Executive Training Company</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.executiveTrainingCompany}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.certificateStatus">Certificate Status</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.certificateStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.certificateNumber">Certificate Number</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.certificateNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.year">Year</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.year}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.month">Month</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.month}}</span>
+                </dd>
+               <!-- <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.reportTime">Report Time</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.reportTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.fileDoc">File Doc</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.fileDoc}}</span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.description">Description</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.description}}</span>
+                </dd>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.guid">Guid</span></dt>
+                <dd>
+                    <span>{{soldierTrainingReport.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of soldierTrainingReport.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.soldierTrainingReport.soldier">Soldier</span></dt>
+                <dd>
+                    <div *ngIf="soldierTrainingReport.soldierId">
+                        <a [routerLink]="['/soldier-marine-suffix', soldierTrainingReport.soldierId, 'view']">{{soldierTrainingReport.soldierFamily}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/soldier-training-report-marine-suffix', soldierTrainingReport.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

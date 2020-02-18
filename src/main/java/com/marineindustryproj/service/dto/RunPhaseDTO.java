@@ -1,6 +1,7 @@
 package com.marineindustryproj.service.dto;
 
 import java.time.ZonedDateTime;
+import javax.persistence.Lob;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -21,6 +22,8 @@ public class RunPhaseDTO implements Serializable {
 
     @NotNull
     private Integer finalizeCost;
+
+    private Integer priceCost;
 
     @NotNull
     private Integer stepNumber;
@@ -63,6 +66,9 @@ public class RunPhaseDTO implements Serializable {
     private String finishDate;
 
     private Boolean hasImportantMessage;
+
+    @Lob
+    private String conversation;
 
     private Set<DocumentDTO> documents = new HashSet<>();
 
@@ -242,6 +248,14 @@ public class RunPhaseDTO implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public String getConversation() {
+        return conversation;
+    }
+
+    public void setConversation(String conversation) {
+        this.conversation = conversation;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
@@ -383,6 +397,7 @@ public class RunPhaseDTO implements Serializable {
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +
             ", hasImportantMessage='" + isHasImportantMessage() + "'" +
+            ", conversation='" + getConversation() + "'" +
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             ", educationalModule=" + getEducationalModuleId() +
@@ -402,5 +417,13 @@ public class RunPhaseDTO implements Serializable {
 
     public void setEducationalModuleCode(String educationalModuleCode) {
         this.educationalModuleCode = educationalModuleCode;
+    }
+
+    public Integer getPriceCost() {
+        return priceCost;
+    }
+
+    public void setPriceCost(Integer priceCost) {
+        this.priceCost = priceCost;
     }
 }

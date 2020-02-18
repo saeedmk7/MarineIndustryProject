@@ -143,6 +143,28 @@ public class EducationalModule implements Serializable {
     @Column(name = "restriction_description", length = 4096)
     private String restrictionDescription;
 
+    @Column(name = "recommend_date")
+    private ZonedDateTime recommendDate;
+
+    @Size(max = 4096)
+    @Column(name = "goals_behavioral_text", length = 4096)
+    private String goalsBehavioralText;
+
+    @Size(max = 4096)
+    @Column(name = "needed_softwares", length = 4096)
+    private String neededSoftwares;
+
+    @Size(max = 4096)
+    @Column(name = "needed_hardware", length = 4096)
+    private String neededHardware;
+
+    @Size(max = 4096)
+    @Column(name = "course_contacts_terms", length = 4096)
+    private String courseContactsTerms;
+
+    @OneToMany(mappedBy = "educationalModule")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Headline> headlines = new HashSet<>();
     @OneToMany(mappedBy = "educationalModule")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EducationalModuleJob> educationalModuleJobs = new HashSet<>();
@@ -240,6 +262,34 @@ public class EducationalModule implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "restrictions_id", referencedColumnName = "id"))
     private Set<Restriction> restrictions = new HashSet<>();
 
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "educational_module_people_under_training",
+               joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "people_under_trainings_id", referencedColumnName = "id"))
+    private Set<PeopleUnderTraining> peopleUnderTrainings = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "educational_module_teaching_approach",
+               joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "teaching_approaches_id", referencedColumnName = "id"))
+    private Set<TeachingApproach> teachingApproaches = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "educational_module_effectiveness_level",
+               joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "effectiveness_levels_id", referencedColumnName = "id"))
+    private Set<EffectivenessLevel> effectivenessLevels = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "educational_module_effectiveness_index",
+               joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "effectiveness_indices_id", referencedColumnName = "id"))
+    private Set<EffectivenessIndex> effectivenessIndices = new HashSet<>();
+
     @ManyToOne
     @JsonIgnoreProperties("educationalModules")
     private RequestEducationalModule requestEducationalModule;
@@ -259,6 +309,10 @@ public class EducationalModule implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("educationalModules")
     private Organization organization;
+
+    @ManyToOne
+    @JsonIgnoreProperties("educationalModules")
+    private Competency competency;
 
     @ManyToMany(mappedBy = "educationalModules")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -649,6 +703,96 @@ public class EducationalModule implements Serializable {
 
     public void setRestrictionDescription(String restrictionDescription) {
         this.restrictionDescription = restrictionDescription;
+    }
+
+    public ZonedDateTime getRecommendDate() {
+        return recommendDate;
+    }
+
+    public EducationalModule recommendDate(ZonedDateTime recommendDate) {
+        this.recommendDate = recommendDate;
+        return this;
+    }
+
+    public void setRecommendDate(ZonedDateTime recommendDate) {
+        this.recommendDate = recommendDate;
+    }
+
+    public String getGoalsBehavioralText() {
+        return goalsBehavioralText;
+    }
+
+    public EducationalModule goalsBehavioralText(String goalsBehavioralText) {
+        this.goalsBehavioralText = goalsBehavioralText;
+        return this;
+    }
+
+    public void setGoalsBehavioralText(String goalsBehavioralText) {
+        this.goalsBehavioralText = goalsBehavioralText;
+    }
+
+    public String getNeededSoftwares() {
+        return neededSoftwares;
+    }
+
+    public EducationalModule neededSoftwares(String neededSoftwares) {
+        this.neededSoftwares = neededSoftwares;
+        return this;
+    }
+
+    public void setNeededSoftwares(String neededSoftwares) {
+        this.neededSoftwares = neededSoftwares;
+    }
+
+    public String getNeededHardware() {
+        return neededHardware;
+    }
+
+    public EducationalModule neededHardware(String neededHardware) {
+        this.neededHardware = neededHardware;
+        return this;
+    }
+
+    public void setNeededHardware(String neededHardware) {
+        this.neededHardware = neededHardware;
+    }
+
+    public String getCourseContactsTerms() {
+        return courseContactsTerms;
+    }
+
+    public EducationalModule courseContactsTerms(String courseContactsTerms) {
+        this.courseContactsTerms = courseContactsTerms;
+        return this;
+    }
+
+    public void setCourseContactsTerms(String courseContactsTerms) {
+        this.courseContactsTerms = courseContactsTerms;
+    }
+
+    public Set<Headline> getHeadlines() {
+        return headlines;
+    }
+
+    public EducationalModule headlines(Set<Headline> headlines) {
+        this.headlines = headlines;
+        return this;
+    }
+
+    public EducationalModule addHeadline(Headline headline) {
+        this.headlines.add(headline);
+        headline.setEducationalModule(this);
+        return this;
+    }
+
+    public EducationalModule removeHeadline(Headline headline) {
+        this.headlines.remove(headline);
+        headline.setEducationalModule(null);
+        return this;
+    }
+
+    public void setHeadlines(Set<Headline> headlines) {
+        this.headlines = headlines;
     }
 
     public Set<EducationalModuleJob> getEducationalModuleJobs() {
@@ -1226,6 +1370,106 @@ public class EducationalModule implements Serializable {
         this.restrictions = restrictions;
     }
 
+    public Set<PeopleUnderTraining> getPeopleUnderTrainings() {
+        return peopleUnderTrainings;
+    }
+
+    public EducationalModule peopleUnderTrainings(Set<PeopleUnderTraining> peopleUnderTrainings) {
+        this.peopleUnderTrainings = peopleUnderTrainings;
+        return this;
+    }
+
+    public EducationalModule addPeopleUnderTraining(PeopleUnderTraining peopleUnderTraining) {
+        this.peopleUnderTrainings.add(peopleUnderTraining);
+        peopleUnderTraining.getEducationalModules().add(this);
+        return this;
+    }
+
+    public EducationalModule removePeopleUnderTraining(PeopleUnderTraining peopleUnderTraining) {
+        this.peopleUnderTrainings.remove(peopleUnderTraining);
+        peopleUnderTraining.getEducationalModules().remove(this);
+        return this;
+    }
+
+    public void setPeopleUnderTrainings(Set<PeopleUnderTraining> peopleUnderTrainings) {
+        this.peopleUnderTrainings = peopleUnderTrainings;
+    }
+
+    public Set<TeachingApproach> getTeachingApproaches() {
+        return teachingApproaches;
+    }
+
+    public EducationalModule teachingApproaches(Set<TeachingApproach> teachingApproaches) {
+        this.teachingApproaches = teachingApproaches;
+        return this;
+    }
+
+    public EducationalModule addTeachingApproach(TeachingApproach teachingApproach) {
+        this.teachingApproaches.add(teachingApproach);
+        teachingApproach.getEducationalModules().add(this);
+        return this;
+    }
+
+    public EducationalModule removeTeachingApproach(TeachingApproach teachingApproach) {
+        this.teachingApproaches.remove(teachingApproach);
+        teachingApproach.getEducationalModules().remove(this);
+        return this;
+    }
+
+    public void setTeachingApproaches(Set<TeachingApproach> teachingApproaches) {
+        this.teachingApproaches = teachingApproaches;
+    }
+
+    public Set<EffectivenessLevel> getEffectivenessLevels() {
+        return effectivenessLevels;
+    }
+
+    public EducationalModule effectivenessLevels(Set<EffectivenessLevel> effectivenessLevels) {
+        this.effectivenessLevels = effectivenessLevels;
+        return this;
+    }
+
+    public EducationalModule addEffectivenessLevel(EffectivenessLevel effectivenessLevel) {
+        this.effectivenessLevels.add(effectivenessLevel);
+        effectivenessLevel.getEducationalModules().add(this);
+        return this;
+    }
+
+    public EducationalModule removeEffectivenessLevel(EffectivenessLevel effectivenessLevel) {
+        this.effectivenessLevels.remove(effectivenessLevel);
+        effectivenessLevel.getEducationalModules().remove(this);
+        return this;
+    }
+
+    public void setEffectivenessLevels(Set<EffectivenessLevel> effectivenessLevels) {
+        this.effectivenessLevels = effectivenessLevels;
+    }
+
+    public Set<EffectivenessIndex> getEffectivenessIndices() {
+        return effectivenessIndices;
+    }
+
+    public EducationalModule effectivenessIndices(Set<EffectivenessIndex> effectivenessIndices) {
+        this.effectivenessIndices = effectivenessIndices;
+        return this;
+    }
+
+    public EducationalModule addEffectivenessIndex(EffectivenessIndex effectivenessIndex) {
+        this.effectivenessIndices.add(effectivenessIndex);
+        effectivenessIndex.getEducationalModules().add(this);
+        return this;
+    }
+
+    public EducationalModule removeEffectivenessIndex(EffectivenessIndex effectivenessIndex) {
+        this.effectivenessIndices.remove(effectivenessIndex);
+        effectivenessIndex.getEducationalModules().remove(this);
+        return this;
+    }
+
+    public void setEffectivenessIndices(Set<EffectivenessIndex> effectivenessIndices) {
+        this.effectivenessIndices = effectivenessIndices;
+    }
+
     public RequestEducationalModule getRequestEducationalModule() {
         return requestEducationalModule;
     }
@@ -1289,6 +1533,19 @@ public class EducationalModule implements Serializable {
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+    }
+
+    public Competency getCompetency() {
+        return competency;
+    }
+
+    public EducationalModule competency(Competency competency) {
+        this.competency = competency;
+        return this;
+    }
+
+    public void setCompetency(Competency competency) {
+        this.competency = competency;
     }
 
     public Set<NiazsanjiGroup> getNiazsanjiGroups() {
@@ -1370,6 +1627,11 @@ public class EducationalModule implements Serializable {
             ", teachersText='" + getTeachersText() + "'" +
             ", guid='" + getGuid() + "'" +
             ", restrictionDescription='" + getRestrictionDescription() + "'" +
+            ", recommendDate='" + getRecommendDate() + "'" +
+            ", goalsBehavioralText='" + getGoalsBehavioralText() + "'" +
+            ", neededSoftwares='" + getNeededSoftwares() + "'" +
+            ", neededHardware='" + getNeededHardware() + "'" +
+            ", courseContactsTerms='" + getCourseContactsTerms() + "'" +
             "}";
     }
 }

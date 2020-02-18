@@ -17,6 +17,9 @@ import { IJobNiazsanjiMarineSuffix } from 'app/shared/model//job-niazsanji-marin
 import { INiazsanjiOtherMarineSuffix } from 'app/shared/model//niazsanji-other-marine-suffix.model';
 import { IRequestOtherNiazsanjiMarineSuffix } from 'app/shared/model//request-other-niazsanji-marine-suffix.model';
 import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model//prioritize-request-niazsanji-marine-suffix.model';
+import { ISoldierMarineSuffix } from 'app/shared/model//soldier-marine-suffix.model';
+import { IEvaluateCriteriaTrainingMarineSuffix } from 'app/shared/model//evaluate-criteria-training-marine-suffix.model';
+import { IEvaluateCriteriaDataMarineSuffix } from 'app/shared/model//evaluate-criteria-data-marine-suffix.model';
 import { IForceRunningPercentMarineSuffix } from 'app/shared/model//force-running-percent-marine-suffix.model';
 
 export interface IOrganizationChartMarineSuffix {
@@ -50,6 +53,9 @@ export interface IOrganizationChartMarineSuffix {
     niazsanjiOthers?: INiazsanjiOtherMarineSuffix[];
     requestOtherNiazsanjis?: IRequestOtherNiazsanjiMarineSuffix[];
     prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[];
+    soldiers?: ISoldierMarineSuffix[];
+    evaluateCriteriaTrainings?: IEvaluateCriteriaTrainingMarineSuffix[];
+    evaluateCriteriaData?: IEvaluateCriteriaDataMarineSuffix[];
     parentTitle?: string;
     parentId?: number;
     forceRunningPercents?: IForceRunningPercentMarineSuffix[];
@@ -87,6 +93,9 @@ export class OrganizationChartMarineSuffix implements IOrganizationChartMarineSu
         public niazsanjiOthers?: INiazsanjiOtherMarineSuffix[],
         public requestOtherNiazsanjis?: IRequestOtherNiazsanjiMarineSuffix[],
         public prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[],
+        public soldiers?: ISoldierMarineSuffix[],
+        public evaluateCriteriaTrainings?: IEvaluateCriteriaTrainingMarineSuffix[],
+        public evaluateCriteriaData?: IEvaluateCriteriaDataMarineSuffix[],
         public parentTitle?: string,
         public parentId?: number,
         public forceRunningPercents?: IForceRunningPercentMarineSuffix[]

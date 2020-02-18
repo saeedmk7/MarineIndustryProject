@@ -497,7 +497,38 @@
                                             </td>
                                         </tr>
                                     </table>
-
+                                    <table class="table table-bordered table-sm">
+                                        <tr style="background-color: #ad97c7">
+                                            <th style="text-align: center"></th>
+                                            <th style="text-align: center" *ngFor="let personHourAgg of personHourAggregationResult">
+                                                {{personHourAgg.orgTitle}}
+                                            </th>
+                                        </tr>
+                                        <tr style="background-color: cornflowerblue">
+                                            <td style="text-align: center">آگاهی سازی رسانه ای</td>
+                                            <td *ngFor="let personHourAgg of personHourAggregationResult">{{personHourAgg.sumMedia | number:
+                                                '1.0-1'}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: cornflowerblue">
+                                            <td style="text-align: center">مهارت آموزی کارکنان وظیفه</td>
+                                            <td *ngFor="let personHourAgg of personHourAggregationResult">{{personHourAgg.sumSoldier | number:
+                                                '1.0-1'}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: lightgreen">
+                                            <td style="text-align: center">اجرا شده</td>
+                                            <td *ngFor="let personHourAgg of personHourAggregationResult">{{personHourAgg.totalPassed | number:
+                                                '1.0-1'}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: chocolate">
+                                            <td style="text-align: center">مجموع</td>
+                                            <td *ngFor="let personHourAgg of personHourAggregationResult">{{personHourAgg.sumTotal | number:
+                                                '1.0-1'}}
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                             <div [chart]="priceCostChart"></div>

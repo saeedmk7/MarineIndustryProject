@@ -122,9 +122,9 @@
                         </button>
                     </div>
                     <img src="../../../content/images/bulb-icon.png" alt="پیام مهمی در جزئیات وجود دارد" title="پیام مهمی در جزئیات وجود دارد"
-                         *ngIf="niazsanjiFardi.hasImportantMessage == true" style="cursor: pointer;width: 25%;margin: 0;"
+                         *ngIf="niazsanjiFardi.hasImportantMessage == true" class="lightBulb"
                          (click)="toggleImportantMessage(niazsanjiFardi.id, false)"/>
-                    <img src="../../../content/images/light-off-icon.png" *ngIf="niazsanjiFardi.hasImportantMessage == false" style="cursor: pointer;width: 25%;margin: 0;"
+                    <img src="../../../content/images/light-off-icon.png" *ngIf="niazsanjiFardi.hasImportantMessage == false" class="lightBulb"
                          (click)="toggleImportantMessage(niazsanjiFardi.id, true)"/>
                 </td>
                 <td class="text-right" width="250">

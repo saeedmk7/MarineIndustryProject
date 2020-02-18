@@ -312,7 +312,9 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                 runPhaseFardi.organizationChartTitle = org.fullTitle;
             } //a.organizationChartTitle;
             //runPhaseFardi.priceCost = a.finalizeCost;
+
             runPhaseFardi.finalizeCost = a.finalizeCost;
+            runPhaseFardi.priceCost = a.priceCost;
             runPhaseFardi.finishDate = a.finishDate;
             runPhaseFardi.courseTypeTitle = a.courseTypeTitle;
             runPhaseFardi.runMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
@@ -354,7 +356,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                 runPhaseOrganization.organizationChartTitle = org.fullTitle;
             } //a.organizationChartTitle;
             //runPhaseOrganization.organizationChartTitle = a.organizationChartTitle;
-            //runPhaseOrganization.priceCost = a.priceCost;
+            runPhaseOrganization.priceCost = a.priceCost;
             runPhaseOrganization.finalizeCost = a.finalizeCost;
             runPhaseOrganization.finishDate = a.finishDate;
             runPhaseOrganization.runMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
@@ -381,7 +383,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         /*this.total = aggregateBy(this.runPhaseFardis, this.aggregates);
         this.totalCost = aggregateBy(this.runPhaseFardis, this.aggregatesCost);*/
         this.total = this.runPhaseFardis.map(a => a.educationalModuleTotalLearningTime).reduce((a, b) => a + b, 0);
-        //this.totalCost = this.runPhaseFardis.map(a => a.priceCost).reduce((a, b) => a + b, 0);
+        this.totalCost = this.runPhaseFardis.map(a => a.priceCost).reduce((a, b) => a + b, 0);
         this.totalFinalizeCost = this.runPhaseFardis.map(a => a.finalizeCost).reduce((a, b) => a + b, 0);
     }
 
@@ -557,6 +559,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     public rowCallback(context: RowClassArgs) {
         return {
             success: context.dataItem.status == 10,
+            pink: context.dataItem.status == 5,
             warning: context.dataItem.status == 0
         };
     }

@@ -79,6 +79,14 @@ public class DocumentCriteria implements Serializable {
 
     private LongFilter prioritizeRequestNiazsanjiId;
 
+    private LongFilter soldierId;
+
+    private LongFilter soldierTrainingReportId;
+
+    private LongFilter evaluateCriteriaTrainingId;
+
+    private LongFilter evaluateCriteriaDataId;
+
     public LongFilter getId() {
         return id;
     }
@@ -303,6 +311,38 @@ public class DocumentCriteria implements Serializable {
         this.prioritizeRequestNiazsanjiId = prioritizeRequestNiazsanjiId;
     }
 
+    public LongFilter getSoldierId() {
+        return soldierId;
+    }
+
+    public void setSoldierId(LongFilter soldierId) {
+        this.soldierId = soldierId;
+    }
+
+    public LongFilter getSoldierTrainingReportId() {
+        return soldierTrainingReportId;
+    }
+
+    public void setSoldierTrainingReportId(LongFilter soldierTrainingReportId) {
+        this.soldierTrainingReportId = soldierTrainingReportId;
+    }
+
+    public LongFilter getEvaluateCriteriaTrainingId() {
+        return evaluateCriteriaTrainingId;
+    }
+
+    public void setEvaluateCriteriaTrainingId(LongFilter evaluateCriteriaTrainingId) {
+        this.evaluateCriteriaTrainingId = evaluateCriteriaTrainingId;
+    }
+
+    public LongFilter getEvaluateCriteriaDataId() {
+        return evaluateCriteriaDataId;
+    }
+
+    public void setEvaluateCriteriaDataId(LongFilter evaluateCriteriaDataId) {
+        this.evaluateCriteriaDataId = evaluateCriteriaDataId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -341,7 +381,11 @@ public class DocumentCriteria implements Serializable {
             Objects.equals(jobNiazsanjiId, that.jobNiazsanjiId) &&
             Objects.equals(niazsanjiOtherId, that.niazsanjiOtherId) &&
             Objects.equals(requestOtherNiazsanjiId, that.requestOtherNiazsanjiId) &&
-            Objects.equals(prioritizeRequestNiazsanjiId, that.prioritizeRequestNiazsanjiId);
+            Objects.equals(prioritizeRequestNiazsanjiId, that.prioritizeRequestNiazsanjiId) &&
+            Objects.equals(soldierId, that.soldierId) &&
+            Objects.equals(soldierTrainingReportId, that.soldierTrainingReportId) &&
+            Objects.equals(evaluateCriteriaTrainingId, that.evaluateCriteriaTrainingId) &&
+            Objects.equals(evaluateCriteriaDataId, that.evaluateCriteriaDataId);
     }
 
     @Override
@@ -374,7 +418,11 @@ public class DocumentCriteria implements Serializable {
         jobNiazsanjiId,
         niazsanjiOtherId,
         requestOtherNiazsanjiId,
-        prioritizeRequestNiazsanjiId
+        prioritizeRequestNiazsanjiId,
+        soldierId,
+        soldierTrainingReportId,
+        evaluateCriteriaTrainingId,
+        evaluateCriteriaDataId
         );
     }
 
@@ -409,6 +457,10 @@ public class DocumentCriteria implements Serializable {
                 (niazsanjiOtherId != null ? "niazsanjiOtherId=" + niazsanjiOtherId + ", " : "") +
                 (requestOtherNiazsanjiId != null ? "requestOtherNiazsanjiId=" + requestOtherNiazsanjiId + ", " : "") +
                 (prioritizeRequestNiazsanjiId != null ? "prioritizeRequestNiazsanjiId=" + prioritizeRequestNiazsanjiId + ", " : "") +
+                (soldierId != null ? "soldierId=" + soldierId + ", " : "") +
+                (soldierTrainingReportId != null ? "soldierTrainingReportId=" + soldierTrainingReportId + ", " : "") +
+                (evaluateCriteriaTrainingId != null ? "evaluateCriteriaTrainingId=" + evaluateCriteriaTrainingId + ", " : "") +
+                (evaluateCriteriaDataId != null ? "evaluateCriteriaDataId=" + evaluateCriteriaDataId + ", " : "") +
             "}";
     }
 

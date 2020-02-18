@@ -95,7 +95,19 @@ public class RequestEducationalModuleCriteria implements Serializable {
 
     private StringFilter restrictionDescription;
 
+    private ZonedDateTimeFilter recommendDate;
+
+    private StringFilter goalsBehavioralText;
+
+    private StringFilter neededSoftwares;
+
+    private StringFilter neededHardware;
+
+    private StringFilter courseContactsTerms;
+
     private LongFilter educationalModuleId;
+
+    private LongFilter headlineId;
 
     private LongFilter scientificWorkGroupId;
 
@@ -111,6 +123,14 @@ public class RequestEducationalModuleCriteria implements Serializable {
 
     private LongFilter restrictionId;
 
+    private LongFilter peopleUnderTrainingId;
+
+    private LongFilter teachingApproachId;
+
+    private LongFilter effectivenessLevelId;
+
+    private LongFilter effectivenessIndexId;
+
     private LongFilter securityLevelId;
 
     private LongFilter skillableLevelOfSkillId;
@@ -118,6 +138,8 @@ public class RequestEducationalModuleCriteria implements Serializable {
     private LongFilter evaluationMethodId;
 
     private LongFilter organizationId;
+
+    private LongFilter competencyId;
 
     public LongFilter getId() {
         return id;
@@ -383,12 +405,60 @@ public class RequestEducationalModuleCriteria implements Serializable {
         this.restrictionDescription = restrictionDescription;
     }
 
+    public ZonedDateTimeFilter getRecommendDate() {
+        return recommendDate;
+    }
+
+    public void setRecommendDate(ZonedDateTimeFilter recommendDate) {
+        this.recommendDate = recommendDate;
+    }
+
+    public StringFilter getGoalsBehavioralText() {
+        return goalsBehavioralText;
+    }
+
+    public void setGoalsBehavioralText(StringFilter goalsBehavioralText) {
+        this.goalsBehavioralText = goalsBehavioralText;
+    }
+
+    public StringFilter getNeededSoftwares() {
+        return neededSoftwares;
+    }
+
+    public void setNeededSoftwares(StringFilter neededSoftwares) {
+        this.neededSoftwares = neededSoftwares;
+    }
+
+    public StringFilter getNeededHardware() {
+        return neededHardware;
+    }
+
+    public void setNeededHardware(StringFilter neededHardware) {
+        this.neededHardware = neededHardware;
+    }
+
+    public StringFilter getCourseContactsTerms() {
+        return courseContactsTerms;
+    }
+
+    public void setCourseContactsTerms(StringFilter courseContactsTerms) {
+        this.courseContactsTerms = courseContactsTerms;
+    }
+
     public LongFilter getEducationalModuleId() {
         return educationalModuleId;
     }
 
     public void setEducationalModuleId(LongFilter educationalModuleId) {
         this.educationalModuleId = educationalModuleId;
+    }
+
+    public LongFilter getHeadlineId() {
+        return headlineId;
+    }
+
+    public void setHeadlineId(LongFilter headlineId) {
+        this.headlineId = headlineId;
     }
 
     public LongFilter getScientificWorkGroupId() {
@@ -447,6 +517,38 @@ public class RequestEducationalModuleCriteria implements Serializable {
         this.restrictionId = restrictionId;
     }
 
+    public LongFilter getPeopleUnderTrainingId() {
+        return peopleUnderTrainingId;
+    }
+
+    public void setPeopleUnderTrainingId(LongFilter peopleUnderTrainingId) {
+        this.peopleUnderTrainingId = peopleUnderTrainingId;
+    }
+
+    public LongFilter getTeachingApproachId() {
+        return teachingApproachId;
+    }
+
+    public void setTeachingApproachId(LongFilter teachingApproachId) {
+        this.teachingApproachId = teachingApproachId;
+    }
+
+    public LongFilter getEffectivenessLevelId() {
+        return effectivenessLevelId;
+    }
+
+    public void setEffectivenessLevelId(LongFilter effectivenessLevelId) {
+        this.effectivenessLevelId = effectivenessLevelId;
+    }
+
+    public LongFilter getEffectivenessIndexId() {
+        return effectivenessIndexId;
+    }
+
+    public void setEffectivenessIndexId(LongFilter effectivenessIndexId) {
+        this.effectivenessIndexId = effectivenessIndexId;
+    }
+
     public LongFilter getSecurityLevelId() {
         return securityLevelId;
     }
@@ -477,6 +579,14 @@ public class RequestEducationalModuleCriteria implements Serializable {
 
     public void setOrganizationId(LongFilter organizationId) {
         this.organizationId = organizationId;
+    }
+
+    public LongFilter getCompetencyId() {
+        return competencyId;
+    }
+
+    public void setCompetencyId(LongFilter competencyId) {
+        this.competencyId = competencyId;
     }
 
 
@@ -523,7 +633,13 @@ public class RequestEducationalModuleCriteria implements Serializable {
             Objects.equals(guid, that.guid) &&
             Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
             Objects.equals(restrictionDescription, that.restrictionDescription) &&
+            Objects.equals(recommendDate, that.recommendDate) &&
+            Objects.equals(goalsBehavioralText, that.goalsBehavioralText) &&
+            Objects.equals(neededSoftwares, that.neededSoftwares) &&
+            Objects.equals(neededHardware, that.neededHardware) &&
+            Objects.equals(courseContactsTerms, that.courseContactsTerms) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
+            Objects.equals(headlineId, that.headlineId) &&
             Objects.equals(scientificWorkGroupId, that.scientificWorkGroupId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(educationalCenterId, that.educationalCenterId) &&
@@ -531,10 +647,15 @@ public class RequestEducationalModuleCriteria implements Serializable {
             Objects.equals(resourceId, that.resourceId) &&
             Objects.equals(teacherId, that.teacherId) &&
             Objects.equals(restrictionId, that.restrictionId) &&
+            Objects.equals(peopleUnderTrainingId, that.peopleUnderTrainingId) &&
+            Objects.equals(teachingApproachId, that.teachingApproachId) &&
+            Objects.equals(effectivenessLevelId, that.effectivenessLevelId) &&
+            Objects.equals(effectivenessIndexId, that.effectivenessIndexId) &&
             Objects.equals(securityLevelId, that.securityLevelId) &&
             Objects.equals(skillableLevelOfSkillId, that.skillableLevelOfSkillId) &&
             Objects.equals(evaluationMethodId, that.evaluationMethodId) &&
-            Objects.equals(organizationId, that.organizationId);
+            Objects.equals(organizationId, that.organizationId) &&
+            Objects.equals(competencyId, that.competencyId);
     }
 
     @Override
@@ -573,7 +694,13 @@ public class RequestEducationalModuleCriteria implements Serializable {
         guid,
         hasImportantMessage,
         restrictionDescription,
+        recommendDate,
+        goalsBehavioralText,
+        neededSoftwares,
+        neededHardware,
+        courseContactsTerms,
         educationalModuleId,
+        headlineId,
         scientificWorkGroupId,
         documentId,
         educationalCenterId,
@@ -581,10 +708,15 @@ public class RequestEducationalModuleCriteria implements Serializable {
         resourceId,
         teacherId,
         restrictionId,
+        peopleUnderTrainingId,
+        teachingApproachId,
+        effectivenessLevelId,
+        effectivenessIndexId,
         securityLevelId,
         skillableLevelOfSkillId,
         evaluationMethodId,
-        organizationId
+        organizationId,
+        competencyId
         );
     }
 
@@ -624,7 +756,13 @@ public class RequestEducationalModuleCriteria implements Serializable {
                 (guid != null ? "guid=" + guid + ", " : "") +
                 (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
                 (restrictionDescription != null ? "restrictionDescription=" + restrictionDescription + ", " : "") +
+                (recommendDate != null ? "recommendDate=" + recommendDate + ", " : "") +
+                (goalsBehavioralText != null ? "goalsBehavioralText=" + goalsBehavioralText + ", " : "") +
+                (neededSoftwares != null ? "neededSoftwares=" + neededSoftwares + ", " : "") +
+                (neededHardware != null ? "neededHardware=" + neededHardware + ", " : "") +
+                (courseContactsTerms != null ? "courseContactsTerms=" + courseContactsTerms + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (headlineId != null ? "headlineId=" + headlineId + ", " : "") +
                 (scientificWorkGroupId != null ? "scientificWorkGroupId=" + scientificWorkGroupId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (educationalCenterId != null ? "educationalCenterId=" + educationalCenterId + ", " : "") +
@@ -632,10 +770,15 @@ public class RequestEducationalModuleCriteria implements Serializable {
                 (resourceId != null ? "resourceId=" + resourceId + ", " : "") +
                 (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
                 (restrictionId != null ? "restrictionId=" + restrictionId + ", " : "") +
+                (peopleUnderTrainingId != null ? "peopleUnderTrainingId=" + peopleUnderTrainingId + ", " : "") +
+                (teachingApproachId != null ? "teachingApproachId=" + teachingApproachId + ", " : "") +
+                (effectivenessLevelId != null ? "effectivenessLevelId=" + effectivenessLevelId + ", " : "") +
+                (effectivenessIndexId != null ? "effectivenessIndexId=" + effectivenessIndexId + ", " : "") +
                 (securityLevelId != null ? "securityLevelId=" + securityLevelId + ", " : "") +
                 (skillableLevelOfSkillId != null ? "skillableLevelOfSkillId=" + skillableLevelOfSkillId + ", " : "") +
                 (evaluationMethodId != null ? "evaluationMethodId=" + evaluationMethodId + ", " : "") +
                 (organizationId != null ? "organizationId=" + organizationId + ", " : "") +
+                (competencyId != null ? "competencyId=" + competencyId + ", " : "") +
             "}";
     }
 

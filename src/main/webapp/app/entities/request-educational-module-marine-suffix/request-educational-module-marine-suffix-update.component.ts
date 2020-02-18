@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import * as moment from 'moment';
-import {DATE_TIME_FORMAT} from 'app/shared/constants/input.constants';
 import {JhiAlertService, JhiDataUtils} from 'ng-jhipster';
 
 import {IRequestEducationalModuleMarineSuffix} from 'app/shared/model/request-educational-module-marine-suffix.model';
@@ -38,10 +36,33 @@ import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
 import {IRestrictionMarineSuffix} from "app/shared/model/restriction-marine-suffix.model";
 import {RestrictionMarineSuffixService} from "app/entities/restriction-marine-suffix";
+import {IPeopleUnderTrainingMarineSuffix} from "app/shared/model/people-under-training-marine-suffix.model";
+import {PeopleUnderTrainingMarineSuffixService} from "app/entities/people-under-training-marine-suffix";
+import {ICompetencyMarineSuffix} from "app/shared/model/competency-marine-suffix.model";
+import {CompetencyMarineSuffixService} from "app/entities/competency-marine-suffix";
+import {HeadlineLevel} from "app/shared/model/enums/HeadlineLevel";
+import {HeadlineScope} from "app/shared/model/enums/HeadlineScope";
+import {HeadlineMarineSuffixService} from "app/entities/headline-marine-suffix";
+import {HeadlineMarineSuffix, IHeadlineMarineSuffix} from "app/shared/model/headline-marine-suffix.model";
+import {
+    ITeachApproachMarineSuffix,
+    TeachApproachMarineSuffix
+} from "app/shared/model/teach-approach-marine-suffix.model";
+import {TeachApproachMarineSuffixService} from "app/entities/teach-approach-marine-suffix";
+import {IEffectivenessLevelMarineSuffix} from "app/shared/model/effectiveness-level-marine-suffix.model";
+import {EffectivenessLevelMarineSuffixService} from "app/entities/effectiveness-level-marine-suffix";
+import {IEffectivenessIndexMarineSuffix} from "app/shared/model/effectiveness-index-marine-suffix.model";
+import {EffectivenessIndexMarineSuffixService} from "app/entities/effectiveness-index-marine-suffix";
+import * as moment from 'moment';
+import * as persianMoment from 'jalali-moment';
+import {TeachingRecordMarineSuffixService} from "app/entities/teaching-record-marine-suffix";
+import {TeachingApproachMarineSuffix} from "app/shared/model/teaching-approach-marine-suffix.model";
+import {TeachingApproachMarineSuffixService} from "app/entities/teaching-approach-marine-suffix";
 
 @Component({
     selector: 'mi-request-educational-module-marine-suffix-update',
-    templateUrl: './request-educational-module-marine-suffix-update.component.html'
+    templateUrl: './request-educational-module-marine-suffix-update.component.html',
+    styleUrls: ['./request-educational-module-marine-suffix.scss']
 })
 export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnInit {
     private _requestEducationalModule: IRequestEducationalModuleMarineSuffix;
@@ -77,11 +98,32 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
 
     skillablelevelofskills: ISkillableLevelOfSkillMarineSuffix[];
 
+    peopleUnderTrainings: IPeopleUnderTrainingMarineSuffix[];
+
+    teachingApproachs: ITeachApproachMarineSuffix[];
+
+    effectivenessLevels: IEffectivenessLevelMarineSuffix[];
+
+    effectivenessIndeces: IEffectivenessIndexMarineSuffix[];
+
+    competencies: ICompetencyMarineSuffix[];
+
+    headlines: IHeadlineMarineSuffix[] = [];
+
     evaluationmethods: IEvaluationMethodMarineSuffix[];
 
     organizations: IOrganizationMarineSuffix[];
 
     message: string;
+    peopleUnderTrainingDescs: string = "";
+
+    headlineLevelKeys: string[] = [];
+    headlineScopeKeys: string[] = [];
+    headlineRows: number = 0;
+
+    dateRecommendDateValid: number;
+    dateTimePassedValid: number;
+    dateCreditValid: number;
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
@@ -103,7 +145,13 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
         protected personService: PersonMarineSuffixService,
         protected organizationChartService: OrganizationChartMarineSuffixService,
         protected restrictionService: RestrictionMarineSuffixService,
-        private router: Router
+        private router: Router,
+        private peopleUnderTrainingService: PeopleUnderTrainingMarineSuffixService,
+        private competencyService: CompetencyMarineSuffixService,
+        private headlineService: HeadlineMarineSuffixService,
+        private teachingApproachService: TeachingApproachMarineSuffixService,
+        private effectivenessLevelService: EffectivenessLevelMarineSuffixService,
+        private effectivenessIndexService: EffectivenessIndexMarineSuffixService
     ) {}
     private setRoles(account: any){
         if(account) {
@@ -127,6 +175,8 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
     }
     ngOnInit() {
         this.isSaving = false;
+        this.headlineLevelKeys = Object.keys(HeadlineLevel);
+        this.headlineScopeKeys = Object.keys(HeadlineScope);
         this.principal.identity().then(account => {
 
             this.currentAccount = account;
@@ -142,6 +192,31 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
             this.requestEducationalModule = requestEducationalModule;
             if(this.requestEducationalModule.teachers)
                 this.requestEducationalModule.teachers.forEach(a => a.fullName = a.name + " " + a.family);
+
+            debugger;
+            if(this.requestEducationalModule.id === undefined)
+            {
+                this.requestEducationalModule.headlines = [];
+                this.addNewHeadline();
+            }
+            else{
+                this.headlineRows = this.requestEducationalModule.headlines.length;
+
+
+                if (this.requestEducationalModule.credit && this.requestEducationalModule.credit.isValid()) {
+                    this.requestEducationalModule.creditPersian = this.convertObjectDatesService.miladi2ShamsiMoment(this.requestEducationalModule.credit);
+                }
+
+                if (this.requestEducationalModule.timePassed && this.requestEducationalModule.timePassed.isValid()) {
+                    this.requestEducationalModule.timePassedPersian = this.convertObjectDatesService.miladi2ShamsiMoment(this.requestEducationalModule.timePassed);
+                }
+
+                if (this.requestEducationalModule.recommendDate && this.requestEducationalModule.recommendDate) {
+                    this.requestEducationalModule.recommendDatePersian = this.convertObjectDatesService.miladi2ShamsiMoment(this.requestEducationalModule.recommendDate);
+                }
+            }
+
+
         });
         this.scientificWorkGroupService.query().subscribe(
             (res: HttpResponse<IScientificWorkGroupMarineSuffix[]>) => {
@@ -203,6 +278,94 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        this.competencyService.query().subscribe(
+            (res: HttpResponse<ICompetencyMarineSuffix[]>) => {
+                this.competencies = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.teachingApproachService.query().subscribe(
+            (res: HttpResponse<ITeachApproachMarineSuffix[]>) => {
+                this.teachingApproachs = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.effectivenessLevelService.query().subscribe(
+            (res: HttpResponse<IEffectivenessLevelMarineSuffix[]>) => {
+                this.effectivenessLevels = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.effectivenessIndexService.query().subscribe(
+            (res: HttpResponse<IEffectivenessIndexMarineSuffix[]>) => {
+                this.effectivenessIndeces = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.peopleUnderTrainingService.query().subscribe(
+            (res: HttpResponse<IPeopleUnderTrainingMarineSuffix[]>) => {
+                this.peopleUnderTrainings = res.body;
+                this.peopleUnderTrainingDescs = this.peopleUnderTrainings.map(w => w.description).join('-');
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+    addNewHeadline(){
+        debugger;
+        this.headlineRows++;
+        let newHeadline: HeadlineMarineSuffix = {
+            headlineLevel: HeadlineLevel.FAMILIARITY,
+            headlineScope: HeadlineScope.KNOWLEDGE,
+            totalHour: 0
+        };
+        this.requestEducationalModule.headlines.push(newHeadline);
+    }
+    showHeadlines(id){
+        let criteria = [{
+            key: 'requestEducationalModuleId.equals',
+            value: id
+        }];
+        this.headlineService.query({
+            page: 0,
+            size: 20000,
+            criteria,
+            sort: ["id", "asc"]
+        }).subscribe((resp: HttpResponse<IHeadlineMarineSuffix[]>) => {
+                this.headlines = resp.body;
+            },
+            (error) => this.onError("موردی یافت نشد."));
+    }
+    checkDateValidation(event, dateType) {
+        try {
+            if (persianMoment(event.target.value, 'jYYYY/jMM/jDD').isValid()) {
+                if (dateType == 1) {
+                    this.dateRecommendDateValid = 1;
+                } else if(dateType == 2) {
+                    this.dateCreditValid = 1;
+                } else if(dateType == 3) {
+                    this.dateTimePassedValid = 1;
+                }
+
+            }
+            else {
+                if (dateType == 1) {
+                    this.dateRecommendDateValid = 2;
+                } else if(dateType == 2) {
+                    this.dateCreditValid = 2;
+                } else if(dateType == 3) {
+                    this.dateTimePassedValid = 2;
+                }
+            }
+        }
+        catch (e) {
+            if (dateType == 1) {
+                this.dateRecommendDateValid = 2;
+            } else if(dateType == 2) {
+                this.dateCreditValid = 2;
+            } else if(dateType == 3) {
+                this.dateTimePassedValid = 2;
+            }
+        }
     }
     loadOrgCharts(){
         if(this.organizationChartService.organizationchartsAll)
@@ -251,7 +414,7 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
         else{
             this.mustSendOrgChartId = 0;
             this.targetPeople = [];
-            this.targetPeople.push(new PersonMarineSuffix(0, 'ثبت نهایی', 'ثبت نهایی', 'پرونده/سابقه آموزشی شما شما پس از ثبت برای کارشناس ارشد آموزش سازمان برای بازبینی ارسال می شود.'));
+            this.targetPeople.push(new PersonMarineSuffix(0, 'ثبت نهایی', 'ثبت نهایی', 'درخواست طراحی شما پس از ثبت برای کارشناس ارشد آموزش سازمان برای بازبینی ارسال می شود.'));
         }
     }
     previousState() {
@@ -261,6 +424,16 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
     save() {
         this.isSaving = true;
 
+        if (this.requestEducationalModule.recommendDatePersian) {
+            this.requestEducationalModule.recommendDate = this.convertObjectDatesService.shamsi2miladiMoment(this.requestEducationalModule.recommendDatePersian);
+        }
+        if (this.requestEducationalModule.timePassedPersian) {
+            this.requestEducationalModule.timePassed = this.convertObjectDatesService.shamsi2miladiMoment(this.requestEducationalModule.timePassedPersian);
+        }
+        if (this.requestEducationalModule.creditPersian) {
+            this.requestEducationalModule.credit = this.convertObjectDatesService.shamsi2miladiMoment(this.requestEducationalModule.creditPersian);
+        }
+        debugger;
         this.currentUserFullName = this.currentPerson.fullName;
         this.requestEducationalModule.code = this.requestEducationalModule.code ? this.requestEducationalModule.code : "";
         this.requestEducationalModule.title = this.requestEducationalModule.title ? this.requestEducationalModule.title : "";
@@ -363,6 +536,10 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
     }
 
     set requestEducationalModule(requestEducationalModule: IRequestEducationalModuleMarineSuffix) {
+
         this._requestEducationalModule = requestEducationalModule;
+    }
+    get headlineRowSpan() {
+        return this.headlineRows + 4;
     }
 }

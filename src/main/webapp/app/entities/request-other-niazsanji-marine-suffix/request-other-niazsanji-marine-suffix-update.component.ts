@@ -252,10 +252,8 @@ export class RequestOtherNiazsanjiMarineSuffixUpdateComponent implements OnInit 
     }
     selectedPerson: IPersonMarineSuffix = new PersonMarineSuffix();
     onPersonChange(event: IPersonMarineSuffix){
-        debugger;
         if(event.id){
             this.personService.find(event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
-                    debugger;
                     this.selectedPerson = resp.body;
                     if(this.organizationcharts.find(a => a.id == this.selectedPerson.organizationChartId))
                     {

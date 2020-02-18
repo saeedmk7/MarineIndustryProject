@@ -61,6 +61,8 @@ public class JobCriteria implements Serializable {
 
     private LongFilter educationalModuleJobId;
 
+    private LongFilter jobSoldierId;
+
     private LongFilter documentId;
 
     private LongFilter rasteId;
@@ -229,6 +231,14 @@ public class JobCriteria implements Serializable {
         this.educationalModuleJobId = educationalModuleJobId;
     }
 
+    public LongFilter getJobSoldierId() {
+        return jobSoldierId;
+    }
+
+    public void setJobSoldierId(LongFilter jobSoldierId) {
+        this.jobSoldierId = jobSoldierId;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -323,6 +333,7 @@ public class JobCriteria implements Serializable {
             Objects.equals(practicaljobPersonId, that.practicaljobPersonId) &&
             Objects.equals(jobId, that.jobId) &&
             Objects.equals(educationalModuleJobId, that.educationalModuleJobId) &&
+            Objects.equals(jobSoldierId, that.jobSoldierId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(rasteId, that.rasteId) &&
             Objects.equals(radehId, that.radehId) &&
@@ -355,6 +366,7 @@ public class JobCriteria implements Serializable {
         practicaljobPersonId,
         jobId,
         educationalModuleJobId,
+        jobSoldierId,
         documentId,
         rasteId,
         radehId,
@@ -388,6 +400,7 @@ public class JobCriteria implements Serializable {
                 (practicaljobPersonId != null ? "practicaljobPersonId=" + practicaljobPersonId + ", " : "") +
                 (jobId != null ? "jobId=" + jobId + ", " : "") +
                 (educationalModuleJobId != null ? "educationalModuleJobId=" + educationalModuleJobId + ", " : "") +
+                (jobSoldierId != null ? "jobSoldierId=" + jobSoldierId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (rasteId != null ? "rasteId=" + rasteId + ", " : "") +
                 (radehId != null ? "radehId=" + radehId + ", " : "") +

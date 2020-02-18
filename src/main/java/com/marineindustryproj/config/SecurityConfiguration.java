@@ -82,6 +82,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/test/**")
             .antMatchers("/api/downloadFile/**")
             .antMatchers("/api/downloadHistoryFile/**")
+            .antMatchers("/api/downloadSoldierTrainingReportFile/**")
+            .antMatchers("/api/downloadEvaluateCriteriaDataFile/**")
             .antMatchers("/api/downloadJobFile/**")
             .antMatchers("/api/downloadEducationFile/**")
             .antMatchers("/api/downloadImageFile/**")

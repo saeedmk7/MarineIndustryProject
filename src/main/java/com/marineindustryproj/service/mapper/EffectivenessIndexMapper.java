@@ -13,6 +13,8 @@ public interface EffectivenessIndexMapper extends EntityMapper<EffectivenessInde
 
 
     @Mapping(target = "designAndPlannings", ignore = true)
+    @Mapping(target = "educationalModules", ignore = true)
+    @Mapping(target = "requestEducationalModules", ignore = true)
     EffectivenessIndex toEntity(EffectivenessIndexDTO effectivenessIndexDTO);
 
     default EffectivenessIndex fromId(Long id) {

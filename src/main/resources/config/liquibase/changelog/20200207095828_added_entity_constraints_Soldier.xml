@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Soldier.
+    -->
+    <changeSet id="20200207095828-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="soldiers_id"
+                                 baseTableName="soldier_document"
+                                 constraintName="fk_soldier_document_soldiers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="soldier"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="soldier_document"
+                                 constraintName="fk_soldier_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="last_qualification_id"
+                                 baseTableName="soldier"
+                                 constraintName="fk_soldier_last_qualification_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="qualification"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_field_of_study_id"
+                                 baseTableName="soldier"
+                                 constraintName="fk_soldier_last_field_of_study_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="field_of_study"/>
+
+        <addForeignKeyConstraint baseColumnNames="job_id"
+                                 baseTableName="soldier"
+                                 constraintName="fk_soldier_job_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="job"/>
+
+        <addForeignKeyConstraint baseColumnNames="organization_chart_id"
+                                 baseTableName="soldier"
+                                 constraintName="fk_soldier_organization_chart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+
+    </changeSet>
+</databaseChangeLog>

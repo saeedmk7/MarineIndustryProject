@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { IEducationalModuleMarineSuffix } from 'app/shared/model//educational-module-marine-suffix.model';
+import { IHeadlineMarineSuffix } from 'app/shared/model//headline-marine-suffix.model';
 import { IScientificWorkGroupMarineSuffix } from 'app/shared/model//scientific-work-group-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IEducationalCenterMarineSuffix } from 'app/shared/model//educational-center-marine-suffix.model';
@@ -8,6 +9,10 @@ import { IResourceMarineSuffix } from 'app/shared/model//resource-marine-suffix.
 import { ITeacherMarineSuffix } from 'app/shared/model//teacher-marine-suffix.model';
 import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
 import { IRestrictionMarineSuffix } from 'app/shared/model//restriction-marine-suffix.model';
+import { IPeopleUnderTrainingMarineSuffix } from 'app/shared/model//people-under-training-marine-suffix.model';
+import { ITeachingApproachMarineSuffix } from 'app/shared/model//teaching-approach-marine-suffix.model';
+import { IEffectivenessLevelMarineSuffix } from 'app/shared/model//effectiveness-level-marine-suffix.model';
+import { IEffectivenessIndexMarineSuffix } from 'app/shared/model//effectiveness-index-marine-suffix.model';
 
 export interface IRequestEducationalModuleMarineSuffix {
     id?: number;
@@ -29,7 +34,9 @@ export interface IRequestEducationalModuleMarineSuffix {
     educationalModuleGroup?: number;
     educationalModuleHour?: number;
     timePassed?: Moment;
+    timePassedPersian?: string;
     credit?: Moment;
+    creditPersian?: string;
     createUserLogin?: string;
     createUserLoginName?: string;
     createDate?: Moment;
@@ -48,7 +55,14 @@ export interface IRequestEducationalModuleMarineSuffix {
     guid?: string;
     hasImportantMessage?: boolean;
     restrictionDescription?: string;
+    recommendDate?: Moment;
+    recommendDatePersian?: string;
+    goalsBehavioralText?: string;
+    neededSoftwares?: string;
+    neededHardware?: string;
+    courseContactsTerms?: string;
     educationalModules?: IEducationalModuleMarineSuffix[];
+    headlines?: IHeadlineMarineSuffix[];
     scientificWorkGroups?: IScientificWorkGroupMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     educationalCenters?: IEducationalCenterMarineSuffix[];
@@ -56,6 +70,10 @@ export interface IRequestEducationalModuleMarineSuffix {
     resources?: IResourceMarineSuffix[];
     teachers?: ITeacherMarineSuffix[];
     restrictions?: IRestrictionMarineSuffix[];
+    peopleUnderTrainings?: IPeopleUnderTrainingMarineSuffix[];
+    teachingApproaches?: ITeachingApproachMarineSuffix[];
+    effectivenessLevels?: IEffectivenessLevelMarineSuffix[];
+    effectivenessIndices?: IEffectivenessIndexMarineSuffix[];
     securityLevelTitle?: string;
     securityLevelId?: number;
     skillableLevelOfSkillTitle?: string;
@@ -64,6 +82,8 @@ export interface IRequestEducationalModuleMarineSuffix {
     evaluationMethodId?: number;
     organizationTitle?: string;
     organizationId?: number;
+    competencyTitle?: string;
+    competencyId?: number;
 }
 
 export class RequestEducationalModuleMarineSuffix implements IRequestEducationalModuleMarineSuffix {
@@ -87,7 +107,9 @@ export class RequestEducationalModuleMarineSuffix implements IRequestEducational
         public educationalModuleGroup?: number,
         public educationalModuleHour?: number,
         public timePassed?: Moment,
+        public timePassedPersian?: string,
         public credit?: Moment,
+        public creditPersian?: string,
         public createUserLogin?: string,
         public createUserLoginName?: string,
         public createDate?: Moment,
@@ -106,7 +128,14 @@ export class RequestEducationalModuleMarineSuffix implements IRequestEducational
         public guid?: string,
         public hasImportantMessage?: boolean,
         public restrictionDescription?: string,
+        public recommendDate?: Moment,
+        public recommendDatePersian?: string,
+        public goalsBehavioralText?: string,
+        public neededSoftwares?: string,
+        public neededHardware?: string,
+        public courseContactsTerms?: string,
         public educationalModules?: IEducationalModuleMarineSuffix[],
+        public headlines?: IHeadlineMarineSuffix[],
         public scientificWorkGroups?: IScientificWorkGroupMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public educationalCenters?: IEducationalCenterMarineSuffix[],
@@ -114,6 +143,10 @@ export class RequestEducationalModuleMarineSuffix implements IRequestEducational
         public resources?: IResourceMarineSuffix[],
         public teachers?: ITeacherMarineSuffix[],
         public restrictions?: IRestrictionMarineSuffix[],
+        public peopleUnderTrainings?: IPeopleUnderTrainingMarineSuffix[],
+        public teachingApproaches?: ITeachingApproachMarineSuffix[],
+        public effectivenessLevels?: IEffectivenessLevelMarineSuffix[],
+        public effectivenessIndices?: IEffectivenessIndexMarineSuffix[],
         public securityLevelTitle?: string,
         public securityLevelId?: number,
         public skillableLevelOfSkillTitle?: string,
@@ -121,7 +154,9 @@ export class RequestEducationalModuleMarineSuffix implements IRequestEducational
         public evaluationMethodTitle?: string,
         public evaluationMethodId?: number,
         public organizationTitle?: string,
-        public organizationId?: number
+        public organizationId?: number,
+        public competencyTitle?: string,
+        public competencyId?: number
     ) {
         this.archived = this.archived || false;
         this.fullTitle =  this.code + ' - ' + this.title;

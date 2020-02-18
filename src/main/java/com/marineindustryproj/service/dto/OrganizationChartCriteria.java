@@ -81,6 +81,12 @@ public class OrganizationChartCriteria implements Serializable {
 
     private LongFilter prioritizeRequestNiazsanjiId;
 
+    private LongFilter soldierId;
+
+    private LongFilter evaluateCriteriaTrainingId;
+
+    private LongFilter evaluateCriteriaDataId;
+
     private LongFilter parentId;
 
     private LongFilter forceRunningPercentId;
@@ -317,6 +323,30 @@ public class OrganizationChartCriteria implements Serializable {
         this.prioritizeRequestNiazsanjiId = prioritizeRequestNiazsanjiId;
     }
 
+    public LongFilter getSoldierId() {
+        return soldierId;
+    }
+
+    public void setSoldierId(LongFilter soldierId) {
+        this.soldierId = soldierId;
+    }
+
+    public LongFilter getEvaluateCriteriaTrainingId() {
+        return evaluateCriteriaTrainingId;
+    }
+
+    public void setEvaluateCriteriaTrainingId(LongFilter evaluateCriteriaTrainingId) {
+        this.evaluateCriteriaTrainingId = evaluateCriteriaTrainingId;
+    }
+
+    public LongFilter getEvaluateCriteriaDataId() {
+        return evaluateCriteriaDataId;
+    }
+
+    public void setEvaluateCriteriaDataId(LongFilter evaluateCriteriaDataId) {
+        this.evaluateCriteriaDataId = evaluateCriteriaDataId;
+    }
+
     public LongFilter getParentId() {
         return parentId;
     }
@@ -373,6 +403,9 @@ public class OrganizationChartCriteria implements Serializable {
             Objects.equals(niazsanjiOtherId, that.niazsanjiOtherId) &&
             Objects.equals(requestOtherNiazsanjiId, that.requestOtherNiazsanjiId) &&
             Objects.equals(prioritizeRequestNiazsanjiId, that.prioritizeRequestNiazsanjiId) &&
+            Objects.equals(soldierId, that.soldierId) &&
+            Objects.equals(evaluateCriteriaTrainingId, that.evaluateCriteriaTrainingId) &&
+            Objects.equals(evaluateCriteriaDataId, that.evaluateCriteriaDataId) &&
             Objects.equals(parentId, that.parentId) &&
             Objects.equals(forceRunningPercentId, that.forceRunningPercentId);
     }
@@ -409,6 +442,9 @@ public class OrganizationChartCriteria implements Serializable {
         niazsanjiOtherId,
         requestOtherNiazsanjiId,
         prioritizeRequestNiazsanjiId,
+        soldierId,
+        evaluateCriteriaTrainingId,
+        evaluateCriteriaDataId,
         parentId,
         forceRunningPercentId
         );
@@ -446,6 +482,9 @@ public class OrganizationChartCriteria implements Serializable {
                 (niazsanjiOtherId != null ? "niazsanjiOtherId=" + niazsanjiOtherId + ", " : "") +
                 (requestOtherNiazsanjiId != null ? "requestOtherNiazsanjiId=" + requestOtherNiazsanjiId + ", " : "") +
                 (prioritizeRequestNiazsanjiId != null ? "prioritizeRequestNiazsanjiId=" + prioritizeRequestNiazsanjiId + ", " : "") +
+                (soldierId != null ? "soldierId=" + soldierId + ", " : "") +
+                (evaluateCriteriaTrainingId != null ? "evaluateCriteriaTrainingId=" + evaluateCriteriaTrainingId + ", " : "") +
+                (evaluateCriteriaDataId != null ? "evaluateCriteriaDataId=" + evaluateCriteriaDataId + ", " : "") +
                 (parentId != null ? "parentId=" + parentId + ", " : "") +
                 (forceRunningPercentId != null ? "forceRunningPercentId=" + forceRunningPercentId + ", " : "") +
             "}";

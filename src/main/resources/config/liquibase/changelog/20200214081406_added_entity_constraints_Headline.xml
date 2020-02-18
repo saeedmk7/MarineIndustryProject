@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Headline.
+    -->
+    <changeSet id="20200214081406-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="request_educational_module_id"
+                                 baseTableName="headline"
+                                 constraintName="fk_headline_request_educational_module_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_educational_module"/>
+
+        <addForeignKeyConstraint baseColumnNames="educational_module_id"
+                                 baseTableName="headline"
+                                 constraintName="fk_headline_educational_module_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,30 @@
+{
+    "marineindustryprojApp": {
+        "peopleUnderTraining": {
+            "home": {
+                "title": "افراد تحت آموزش",
+                "createLabel": "جدید",
+                "createOrEditLabel": " فرد تحت آموزش"
+            },
+            "created": "فرد تحت آموزش با شناسه {{ param }} ایجاد شد.",
+            "updated": "فرد تحت آموزش با شناسه {{ param }} ویرایش شد.",
+            "deleted": "فرد تحت آموزش با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف فرد تحت آموزش با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات فرد تحت آموزش"
+            },
+            "title": "عنوان",
+            "peopleCount": "تعداد افراد",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "educationalModule": "Educational Module",
+            "requestEducationalModule": "Request Educational Module"
+        }
+    }
+}

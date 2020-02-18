@@ -1,0 +1,157 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.home.title">Evaluate Criteria Data</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-evaluate-criteria-data-marine-suffix" [routerLink]="['/evaluate-criteria-data-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.evaluateCriteriaData.home.createLabel">
+            Create new Evaluate Criteria Data
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <div class="row">
+        <search-panel class="col-md-12" [searchPanelModel]="searchbarModel"></search-panel>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="evaluateCriteriaDatas">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th>ردیف</th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="evaluateCriteriaTrainingProcessTitle"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.evaluateCriteriaTraining">Evaluate Criteria Training</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="firstNumber"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.firstNumber">First Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="secondNumber"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.secondNumber">Second Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="thirdNumber"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.thirdNumber">Third Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="measureCalc"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.measureCalc">Measure Calc</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="measureCalcPercent"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.measureCalcPercent">Measure Calc Percent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="result"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.result">Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="resultPercent"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.resultPercent">Result Percent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="year"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.year">Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="month"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.month">Month</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="fileDoc"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.fileDoc">File Doc</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <!--<th jhiSortBy="reportTime"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.reportTime">Report Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let evaluateCriteriaData of evaluateCriteriaDatas ;let i = index">
+                <!--<td><a [routerLink]="['/evaluate-criteria-data-marine-suffix', evaluateCriteriaData.id, 'view' ]">{{evaluateCriteriaData.id}}</a></td>-->
+                <td>{{i+1}}</td>
+                <td>
+                    {{evaluateCriteriaData.organizationChartTitle}}
+                </td>
+                <td>
+                    <div *ngIf="evaluateCriteriaData.evaluateCriteriaTrainingId">
+                        <a [routerLink]="['../evaluate-criteria-training-marine-suffix', evaluateCriteriaData.evaluateCriteriaTrainingId , 'view' ]" >{{evaluateCriteriaData.evaluateCriteriaTrainingProcessTitle}}</a>
+                    </div>
+                </td>
+                <!--<td>{{evaluateCriteriaData.title}}</td>-->
+                <td>{{evaluateCriteriaData.firstNumber}}</td>
+                <td>{{evaluateCriteriaData.secondNumber}}</td>
+                <!--<td>{{evaluateCriteriaData.thirdNumber}}</td>-->
+                <td>{{evaluateCriteriaData.measureCalc}}</td>
+                <td>{{evaluateCriteriaData.measureCalcPercent}}</td>
+                <td>{{evaluateCriteriaData.result}}</td>
+                <td>{{evaluateCriteriaData.resultPercent}}</td>
+                <td>{{evaluateCriteriaData.year}}</td>
+                <td>{{evaluateCriteriaData.month}}</td>
+                <!--<td>{{evaluateCriteriaData.fileDoc}}</td>-->
+                <!--<td>{{evaluateCriteriaData.reportTime}}</td>-->
+                <td>{{evaluateCriteriaData.description}}</td>
+                <td>{{evaluateCriteriaData.createDate}}</td>
+
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <a *ngIf="evaluateCriteriaData.fileDoc" title="دریافت فایل" [href]="evaluateCriteriaData.fileDoc | safe" target="_blank"
+                           class="btn btn-default btn-sm enableLink">
+                            <fa-icon [icon]="'download'"></fa-icon>
+                        </a>
+                        <button type="submit"
+                                [routerLink]="['/evaluate-criteria-data-marine-suffix', evaluateCriteriaData.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <!--<button type="submit" title="مدارک"
+                                [routerLink]="['../document-marine-suffix', 'evaluatecriteriadata',evaluateCriteriaData.id]"
+                                class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                        </button>-->
+                        <button type="submit"
+                                [routerLink]="['/evaluate-criteria-data-marine-suffix', evaluateCriteriaData.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'evaluate-criteria-data-marine-suffix/'+ evaluateCriteriaData.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <tr style="background-color: #29c76a !important;">
+                <td colspan="3">مجموع</td>
+                <td>
+                    {{evaluateCriteriaDatas | sum:'firstNumber' | number: '1.0-1'}}
+                </td>
+                <td>
+                    {{evaluateCriteriaDatas | sum:'secondNumber' | number: '1.0-1'}}
+                </td>
+                <td>
+                    {{evaluateCriteriaDatas | sum:'measureCalc' | number: '1.0-1'}}
+                </td>
+                <td>
+                    {{evaluateCriteriaDatas | sum:'measureCalcPercent' | number: '1.0-1'}}
+                </td>
+                <td>
+                    {{evaluateCriteriaDatas | sum:'result' | number: '1.0-1'}}
+                </td>
+                <td>
+                    {{evaluateCriteriaDatas | sum:'resultPercent' | number: '1.0-1'}}
+                </td>
+                <td colspan="5"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="8">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll(criteria)">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="15">
+
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+    <div *ngIf="evaluateCriteriaDatas && evaluateCriteriaDatas.length">
+        <!--<div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>-->
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

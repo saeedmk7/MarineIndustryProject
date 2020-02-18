@@ -1,0 +1,88 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.headline.home.title">Headlines</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-headline-marine-suffix" [routerLink]="['/headline-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.headline.home.createLabel">
+            Create new Headline
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="headlines">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.headline.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="headlineLevel"><span jhiTranslate="marineindustryprojApp.headline.headlineLevel">Headline Level</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="headlineScope"><span jhiTranslate="marineindustryprojApp.headline.headlineScope">Headline Scope</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="totalHour"><span jhiTranslate="marineindustryprojApp.headline.totalHour">Total Hour</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.headline.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.headline.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.headline.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.headline.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="requestEducationalModuleTitle"><span jhiTranslate="marineindustryprojApp.headline.requestEducationalModule">Request Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.headline.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let headline of headlines ;trackBy: trackId">
+                <td><a [routerLink]="['/headline-marine-suffix', headline.id, 'view' ]">{{headline.id}}</a></td>
+                <td>{{headline.title}}</td>
+                <td jhiTranslate="{{'marineindustryprojApp.HeadlineLevel.' + headline.headlineLevel}}">{{headline.headlineLevel}}</td>
+                <td jhiTranslate="{{'marineindustryprojApp.HeadlineScope.' + headline.headlineScope}}">{{headline.headlineScope}}</td>
+                <td>{{headline.totalHour}}</td>
+                <td>{{headline.createUserLogin}}</td>
+                <td>{{headline.createDate | date:'medium'}}</td>
+                <td>{{headline.modifyUserLogin}}</td>
+                <td>{{headline.modifyDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="headline.requestEducationalModuleId">
+                        <a [routerLink]="['../request-educational-module-marine-suffix', headline.requestEducationalModuleId , 'view' ]" >{{headline.requestEducationalModuleTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="headline.educationalModuleId">
+                        <a [routerLink]="['../educational-module-marine-suffix', headline.educationalModuleId , 'view' ]" >{{headline.educationalModuleTitle}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/headline-marine-suffix', headline.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/headline-marine-suffix', headline.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'headline-marine-suffix/'+ headline.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="headlines && headlines.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

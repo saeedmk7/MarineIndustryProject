@@ -186,7 +186,6 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
 
         }
         else{
-            debugger;
             this.niazsanjiIntegrationService
                 .query({
                     page: this.page - 1,

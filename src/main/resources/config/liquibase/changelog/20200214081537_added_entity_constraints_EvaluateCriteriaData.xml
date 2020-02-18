@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity EvaluateCriteriaData.
+    -->
+    <changeSet id="20200214081537-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="evaluate_criteria_data_id"
+                                 baseTableName="evaluate_criteria_data_document"
+                                 constraintName="fk_evaluate_criteria_data_document_evaluate_criteria_data_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="evaluate_criteria_data"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="evaluate_criteria_data_document"
+                                 constraintName="fk_evaluate_criteria_data_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="evaluate_criteria_training_id"
+                                 baseTableName="evaluate_criteria_data"
+                                 constraintName="fk_evaluate_criteria_data_evaluate_criteria_training_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="evaluate_criteria_training"/>
+
+        <addForeignKeyConstraint baseColumnNames="organization_chart_id"
+                                 baseTableName="evaluate_criteria_data"
+                                 constraintName="fk_evaluate_criteria_data_organization_chart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+
+    </changeSet>
+</databaseChangeLog>

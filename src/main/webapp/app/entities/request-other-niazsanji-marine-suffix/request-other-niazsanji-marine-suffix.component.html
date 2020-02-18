@@ -141,11 +141,11 @@
                         <img src="../../../content/images/bulb-icon.png" title="پیام مهمی در جزئیات وجود دارد"
                              alt="پیام مهمی در جزئیات وجود دارد"
                              *ngIf="requestOtherNiazsanji.hasImportantMessage == true"
-                             style="cursor: pointer;width: 12%;margin: 0;"
+                             class="lightBulb"
                              (click)="toggleImportantMessage(requestOtherNiazsanji.id, false)"/>
                         <img src="../../../content/images/light-off-icon.png"
                              *ngIf="requestOtherNiazsanji.hasImportantMessage == false"
-                             style="cursor: pointer;width: 12%;margin: 0;"
+                             class="lightBulb"
                              (click)="toggleImportantMessage(requestOtherNiazsanji.id, true)"/>
 
                         <ng-container

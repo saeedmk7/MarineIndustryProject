@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20200214175947" author="saeed">
+        <!--job changes-->
+        <addColumn schemaName="public"
+                   tableName="educational_module">
+            <column name="recommend_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="goals_behavioral_text" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="needed_softwares" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="needed_hardware" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="course_contacts_terms" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="competency_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+
+        <dropDefaultValue tableName="educational_module" columnName="recommend_date" columnDataType="datetime"/>
+
+        <createTable tableName="educational_module_people_under_training">
+            <column name="people_under_trainings_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="educational_modules_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="educational_modules_id, people_under_trainings_id" tableName="educational_module_people_under_training"/>
+
+        <createTable tableName="educational_module_teaching_approach">
+            <column name="teaching_approaches_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="educational_modules_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="educational_modules_id, teaching_approaches_id" tableName="educational_module_teaching_approach"/>
+
+        <createTable tableName="educational_module_effectiveness_level">
+            <column name="effectiveness_levels_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="educational_modules_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="educational_modules_id, effectiveness_levels_id" tableName="educational_module_effectiveness_level"/>
+
+        <createTable tableName="educational_module_effectiveness_index">
+            <column name="effectiveness_indices_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="educational_modules_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="educational_modules_id, effectiveness_indices_id" tableName="educational_module_effectiveness_index"/>
+
+
+        <addForeignKeyConstraint baseColumnNames="educational_modules_id"
+                                 baseTableName="educational_module_people_under_training"
+                                 constraintName="educational_module_people_unde_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="people_under_trainings_id"
+                                 baseTableName="educational_module_people_under_training"
+                                 constraintName="educational_module_people_unde_people_under_trainings_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="people_under_training"/>
+
+        <addForeignKeyConstraint baseColumnNames="educational_modules_id"
+                                 baseTableName="educational_module_teaching_approach"
+                                 constraintName="fk_educational_module_teaching_approach_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="teaching_approaches_id"
+                                 baseTableName="educational_module_teaching_approach"
+                                 constraintName="fk_educational_module_teaching_approach_teaching_approaches_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teaching_approach"/>
+
+        <addForeignKeyConstraint baseColumnNames="educational_modules_id"
+                                 baseTableName="educational_module_effectiveness_level"
+                                 constraintName="educational_module_effectivene_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="effectiveness_levels_id"
+                                 baseTableName="educational_module_effectiveness_level"
+                                 constraintName="educational_module_effectivene_effectiveness_levels_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="effectiveness_level"/>
+
+        <addForeignKeyConstraint baseColumnNames="educational_modules_id"
+                                 baseTableName="educational_module_effectiveness_index"
+                                 constraintName="educational_module_effectivene_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="effectiveness_indices_id"
+                                 baseTableName="educational_module_effectiveness_index"
+                                 constraintName="educational_module_effectivene_effectiveness_indices_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="effectiveness_index"/>
+        <addForeignKeyConstraint baseColumnNames="competency_id"
+                                 baseTableName="educational_module"
+                                 constraintName="fk_educational_module_competency_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="competency"/>
+
+         <!-- Educational Module Changes -->
+
+        <addColumn schemaName="public"
+                   tableName="request_educational_module">
+
+            <column name="recommend_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="goals_behavioral_text" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="needed_softwares" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="needed_hardware" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="course_contacts_terms" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="competency_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+        </addColumn>
+
+        <dropDefaultValue tableName="request_educational_module" columnName="recommend_date" columnDataType="datetime"/>
+
+        <createTable tableName="request_educational_module_people_under_training">
+            <column name="people_under_trainings_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="request_educational_modules_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="request_educational_modules_id, people_under_trainings_id" tableName="request_educational_module_people_under_training"/>
+
+        <createTable tableName="request_educational_module_teaching_approach">
+            <column name="teaching_approaches_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="request_educational_modules_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="request_educational_modules_id, teaching_approaches_id" tableName="request_educational_module_teaching_approach"/>
+
+        <createTable tableName="request_educational_module_effectiveness_level">
+            <column name="effectiveness_levels_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="request_educational_modules_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="request_educational_modules_id, effectiveness_levels_id" tableName="request_educational_module_effectiveness_level"/>
+
+        <createTable tableName="request_educational_module_effectiveness_index">
+            <column name="effectiveness_indices_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="request_educational_modules_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="request_educational_modules_id, effectiveness_indices_id" tableName="request_educational_module_effectiveness_index"/>
+
+        <addForeignKeyConstraint baseColumnNames="request_educational_modules_id"
+                                 baseTableName="request_educational_module_people_under_training"
+                                 constraintName="request_educational_module_peo_request_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="people_under_trainings_id"
+                                 baseTableName="request_educational_module_people_under_training"
+                                 constraintName="request_educational_module_peo_people_under_trainings_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="people_under_training"/>
+
+        <addForeignKeyConstraint baseColumnNames="request_educational_modules_id"
+                                 baseTableName="request_educational_module_teaching_approach"
+                                 constraintName="request_educational_module_tea_request_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="teaching_approaches_id"
+                                 baseTableName="request_educational_module_teaching_approach"
+                                 constraintName="request_educational_module_tea_teaching_approaches_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teaching_approach"/>
+
+        <addForeignKeyConstraint baseColumnNames="request_educational_modules_id"
+                                 baseTableName="request_educational_module_effectiveness_level"
+                                 constraintName="request_educational_module_eff_request_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="effectiveness_levels_id"
+                                 baseTableName="request_educational_module_effectiveness_level"
+                                 constraintName="request_educational_module_eff_effectiveness_levels_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="effectiveness_level"/>
+
+        <addForeignKeyConstraint baseColumnNames="request_educational_modules_id"
+                                 baseTableName="request_educational_module_effectiveness_index"
+                                 constraintName="request_educational_module_eff_request_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="effectiveness_indices_id"
+                                 baseTableName="request_educational_module_effectiveness_index"
+                                 constraintName="request_educational_module_eff_effectiveness_indices_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="effectiveness_index"/>
+        <addForeignKeyConstraint baseColumnNames="competency_id"
+                                 baseTableName="request_educational_module"
+                                 constraintName="fk_request_educational_module_competency_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="competency"/>
+
+        <!--   request_educational_module changes   -->
+
+        <addColumn schemaName="public"
+                   tableName="run_phase">
+            <column name="conversation" type="clob">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

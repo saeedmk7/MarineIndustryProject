@@ -1,0 +1,45 @@
+{
+    "marineindustryprojApp": {
+        "evaluateCriteriaTraining": {
+            "home": {
+                "title": "معیارهای ارزیابی آموزش مبتنی بر ارتقاء سطح مهارت کارکنان",
+                "createLabel": "جدید",
+                "createOrEditLabel": "معیار ارزیابی آموزش"
+            },
+            "created": "معیار ارزیابی آموزش با شناسه {{ param }} ایجاد شد.",
+            "updated": "معیار ارزیابی آموزش با شناسه {{ param }} ویرایش شد.",
+            "deleted": "معیار ارزیابی آموزش با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف معیار ارزیابی آموزش با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات معیارهای ارزیابی آموزش مبتنی بر ارتقاء سطح مهارت کارکنان"
+            },
+            "processTitle": "فرآیند",
+            "processWeight": "وزن فرآیند",
+            "activityDescription": "محور/فعالیت",
+            "criteriaWeight": "وزن معیار",
+            "measureDescription": "سنجه",
+            "firstNumber": "عدد اول",
+            "secondNumber": "عدد دوم",
+            "thirdNumber": "عدد سوم",
+            "measureCalc": "محاسبه سنجه",
+            "measureCalcPercent": "درصد سنجه",
+            "result": "نتیجه نهایی",
+            "resultPercent": "درصد نتیجه نهایی",
+            "year": "سال",
+            "month": "ماه",
+            "reportTime": "تاریخ گزارش",
+            "description": "ملاحضات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "guid": "Guid",
+            "document": "Document",
+            "organizationChart": "محل خدمت",
+            "organizationChartId": "محل خدمت",
+            "organizationChartTitle": "محل خدمت"
+        }
+    }
+}

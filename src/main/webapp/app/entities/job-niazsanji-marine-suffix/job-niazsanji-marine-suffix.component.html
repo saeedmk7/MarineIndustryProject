@@ -111,9 +111,10 @@
                         </button>
                     </div>
                     <img src="../../../content/images/bulb-icon.png" alt="پیام مهمی در جزئیات وجود دارد" title="پیام مهمی در جزئیات وجود دارد"
-                         *ngIf="jobNiazsanji.hasImportantMessage == true" style="cursor: pointer;width: 25%;margin: 0;"
+                         *ngIf="jobNiazsanji.hasImportantMessage == true" class="lightBulb"
                          (click)="toggleImportantMessage(jobNiazsanji.id, false)"/>
-                    <img src="../../../content/images/light-off-icon.png" *ngIf="jobNiazsanji.hasImportantMessage == false" style="cursor: pointer;width: 25%;margin: 0;"
+                    <img src="../../../content/images/light-off-icon.png" *ngIf="jobNiazsanji.hasImportantMessage == false"
+                         class="lightBulb"
                          (click)="toggleImportantMessage(jobNiazsanji.id, true)"/>
                 </td>
                 <td class="text-right" width="250">

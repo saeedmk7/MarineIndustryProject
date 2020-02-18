@@ -111,6 +111,7 @@ public class RunPhaseServiceImpl implements RunPhaseService {
             runPhase.setDone(false);
         }
         runPhase.setDescription(runPhaseSaveDataModel.getDescription());
+        runPhase.setConversation(runPhaseSaveDataModel.getConversion());
         runPhase.setFinalizeCost(runPhaseSaveDataModel.getFinalizeCost());
         runPhase.setFinishDate(runPhaseSaveDataModel.getFinishDate());
         runPhase.setStepNumber(runPhaseSaveDataModel.getStepNumber());
@@ -121,13 +122,18 @@ public class RunPhaseServiceImpl implements RunPhaseService {
         finalNiazsanjiReport.setRunMonth(runPhase.getRunMonth());
         if(runPhaseSaveDataModel.getDone() && runPhase.getStatus() < 10)
         {
-            runPhase.setDone(runPhaseSaveDataModel.getDone());
-            runPhase.setDoneDate(ZonedDateTime.now());
-            runPhase.setDoneUserLogin(SecurityUtils.getCurrentUserLogin().get());
-            runPhase.setStatus(10);
+            if(SecurityUtils.isCurrentUserInRole("ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") || SecurityUtils.isCurrentUserInRole("ROLE_MODIR_KOL_AMOZESH")) {
+                runPhase.setDone(runPhaseSaveDataModel.getDone());
+                runPhase.setDoneDate(ZonedDateTime.now());
+                runPhase.setDoneUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                runPhase.setStatus(10);
 
-            finalNiazsanjiReport.setStatus(20);
-            finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
+                finalNiazsanjiReport.setStatus(20);
+                finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
+            }
+            else{
+                runPhase.setStatus(5);
+            }
         }
         //RunPhase runPhase = runPhaseMapper.toEntity(runPhaseDTO);
         runPhase = runPhaseRepository.save(runPhase);

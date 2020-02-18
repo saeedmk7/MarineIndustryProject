@@ -114,6 +114,14 @@ public class EffectivenessIndexQueryService extends QueryService<EffectivenessIn
                 specification = specification.and(buildSpecification(criteria.getDesignAndPlanningId(),
                     root -> root.join(EffectivenessIndex_.designAndPlannings, JoinType.LEFT).get(DesignAndPlanning_.id)));
             }
+            if (criteria.getEducationalModuleId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
+                    root -> root.join(EffectivenessIndex_.educationalModules, JoinType.LEFT).get(EducationalModule_.id)));
+            }
+            if (criteria.getRequestEducationalModuleId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRequestEducationalModuleId(),
+                    root -> root.join(EffectivenessIndex_.requestEducationalModules, JoinType.LEFT).get(RequestEducationalModule_.id)));
+            }
         }
         return specification;
     }

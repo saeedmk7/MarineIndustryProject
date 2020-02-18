@@ -1,0 +1,119 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="evaluateCriteriaTraining">
+            <h2><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.detail.title">Evaluate Criteria Training</span> {{evaluateCriteriaTraining.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.processTitle">Process Title</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.processTitle}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.processWeight">Process Weight</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.processWeight}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.activityDescription">Activity Description</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.activityDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.criteriaWeight">Criteria Weight</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.criteriaWeight}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.measureDescription">Measure Description</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.measureDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.firstNumber">First Number</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.firstNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.secondNumber">Second Number</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.secondNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.thirdNumber">Third Number</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.thirdNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.measureCalc">Measure Calc</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.measureCalc}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.measureCalcPercent">Measure Calc Percent</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.measureCalcPercent}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.result">Result</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.result}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.resultPercent">Result Percent</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.resultPercent}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.year">Year</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.year}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.month">Month</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.month}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.reportTime">Report Time</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.reportTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.description">Description</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.guid">Guid</span></dt>
+                <dd>
+                    <span>{{evaluateCriteriaTraining.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of evaluateCriteriaTraining.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="evaluateCriteriaTraining.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', evaluateCriteriaTraining.organizationChartId, 'view']">{{evaluateCriteriaTraining.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/evaluate-criteria-training-marine-suffix', evaluateCriteriaTraining.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

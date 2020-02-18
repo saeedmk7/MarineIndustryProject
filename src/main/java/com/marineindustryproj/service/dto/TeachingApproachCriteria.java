@@ -59,6 +59,10 @@ public class TeachingApproachCriteria implements Serializable {
 
     private LongFilter prioritizeRequestNiazsanjiId;
 
+    private LongFilter educationalModuleId;
+
+    private LongFilter requestEducationalModuleId;
+
     private LongFilter preJobNiazsanjiCompetencyId;
 
     public LongFilter getId() {
@@ -205,6 +209,22 @@ public class TeachingApproachCriteria implements Serializable {
         this.prioritizeRequestNiazsanjiId = prioritizeRequestNiazsanjiId;
     }
 
+    public LongFilter getEducationalModuleId() {
+        return educationalModuleId;
+    }
+
+    public void setEducationalModuleId(LongFilter educationalModuleId) {
+        this.educationalModuleId = educationalModuleId;
+    }
+
+    public LongFilter getRequestEducationalModuleId() {
+        return requestEducationalModuleId;
+    }
+
+    public void setRequestEducationalModuleId(LongFilter requestEducationalModuleId) {
+        this.requestEducationalModuleId = requestEducationalModuleId;
+    }
+
     public LongFilter getPreJobNiazsanjiCompetencyId() {
         return preJobNiazsanjiCompetencyId;
     }
@@ -242,6 +262,8 @@ public class TeachingApproachCriteria implements Serializable {
             Objects.equals(niazsanjiOtherId, that.niazsanjiOtherId) &&
             Objects.equals(requestOtherNiazsanjiId, that.requestOtherNiazsanjiId) &&
             Objects.equals(prioritizeRequestNiazsanjiId, that.prioritizeRequestNiazsanjiId) &&
+            Objects.equals(educationalModuleId, that.educationalModuleId) &&
+            Objects.equals(requestEducationalModuleId, that.requestEducationalModuleId) &&
             Objects.equals(preJobNiazsanjiCompetencyId, that.preJobNiazsanjiCompetencyId);
     }
 
@@ -266,6 +288,8 @@ public class TeachingApproachCriteria implements Serializable {
         niazsanjiOtherId,
         requestOtherNiazsanjiId,
         prioritizeRequestNiazsanjiId,
+        educationalModuleId,
+        requestEducationalModuleId,
         preJobNiazsanjiCompetencyId
         );
     }
@@ -291,6 +315,8 @@ public class TeachingApproachCriteria implements Serializable {
                 (niazsanjiOtherId != null ? "niazsanjiOtherId=" + niazsanjiOtherId + ", " : "") +
                 (requestOtherNiazsanjiId != null ? "requestOtherNiazsanjiId=" + requestOtherNiazsanjiId + ", " : "") +
                 (prioritizeRequestNiazsanjiId != null ? "prioritizeRequestNiazsanjiId=" + prioritizeRequestNiazsanjiId + ", " : "") +
+                (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (requestEducationalModuleId != null ? "requestEducationalModuleId=" + requestEducationalModuleId + ", " : "") +
                 (preJobNiazsanjiCompetencyId != null ? "preJobNiazsanjiCompetencyId=" + preJobNiazsanjiCompetencyId + ", " : "") +
             "}";
     }

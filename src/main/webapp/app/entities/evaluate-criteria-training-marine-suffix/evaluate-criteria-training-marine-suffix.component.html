@@ -1,0 +1,142 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.home.title">Evaluate Criteria Trainings</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-evaluate-criteria-training-marine-suffix" [routerLink]="['/evaluate-criteria-training-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.home.createLabel">
+            Create new Evaluate Criteria Training
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <div class="row">
+        <search-panel class="col-md-12" [searchPanelModel]="searchbarModel"></search-panel>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="evaluateCriteriaTrainings">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th>ردیف</th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <!--<th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="processTitle"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.processTitle">Process Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="processWeight"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.processWeight">Process Weight</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="activityDescription"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.activityDescription">Activity Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="criteriaWeight"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.criteriaWeight">Criteria Weight</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="measureDescription"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.measureDescription">Measure Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="firstNumber"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.firstNumber">First Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="secondNumber"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.secondNumber">Second Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            &lt;!&ndash;<th jhiSortBy="thirdNumber"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.thirdNumber">Third Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>&ndash;&gt;
+            <th jhiSortBy="measureCalc"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.measureCalc">Measure Calc</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="measureCalcPercent"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.measureCalcPercent">Measure Calc Percent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="result"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.result">Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            &lt;!&ndash;<th jhiSortBy="resultPercent"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.resultPercent">Result Percent</span> <fa-icon [icon]="'sort'"></fa-icon></th>&ndash;&gt;
+            <th jhiSortBy="year"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.year">Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="month"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.month">Month</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <!--<th jhiSortBy="reportTime"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.reportTime">Report Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="guid"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.guid">Guid</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let evaluateCriteriaTraining of evaluateCriteriaTrainings ;let i = index">
+                <!--<td><a [routerLink]="['/evaluate-criteria-training-marine-suffix', evaluateCriteriaTraining.id, 'view' ]">{{evaluateCriteriaTraining.id}}</a></td>-->
+                <td>{{i+1}}</td>
+                <!--<td>
+                    <div *ngIf="evaluateCriteriaTraining.organizationChartId">
+                        <a [routerLink]="['../organization-chart-marine-suffix', evaluateCriteriaTraining.organizationChartId , 'view' ]" >{{evaluateCriteriaTraining.organizationChartTitle}}</a>
+                    </div>
+                </td>-->
+                <td>{{evaluateCriteriaTraining.processTitle}}</td>
+                <td>{{evaluateCriteriaTraining.processWeight}}</td>
+                <td>{{evaluateCriteriaTraining.activityDescription}}</td>
+                <td>{{evaluateCriteriaTraining.criteriaWeight}}</td>
+                <td>{{evaluateCriteriaTraining.measureDescription}}</td>
+                <!--<td>{{evaluateCriteriaTraining.firstNumber}}</td>
+                <td>{{evaluateCriteriaTraining.secondNumber}}</td>
+                &lt;!&ndash;<td>{{evaluateCriteriaTraining.thirdNumber}}</td>&ndash;&gt;
+                <td>{{evaluateCriteriaTraining.measureCalc}}</td>
+                <td>{{evaluateCriteriaTraining.measureCalcPercent}}</td>
+                <td>{{evaluateCriteriaTraining.result}}</td>
+                &lt;!&ndash;<td>{{evaluateCriteriaTraining.resultPercent}}</td>&ndash;&gt;
+                <td>{{evaluateCriteriaTraining.year}}</td>
+                <td>{{evaluateCriteriaTraining.month}}</td>-->
+                <!--<td>{{evaluateCriteriaTraining.reportTime}}</td>-->
+                <td>{{evaluateCriteriaTraining.description}}</td>
+                <!--<td>{{evaluateCriteriaTraining.createUserLogin}}</td>
+                <td>{{evaluateCriteriaTraining.createDate | date:'medium'}}</td>
+                <td>{{evaluateCriteriaTraining.modifyUserLogin}}</td>
+                <td>{{evaluateCriteriaTraining.modifyDate | date:'medium'}}</td>
+                <td>{{evaluateCriteriaTraining.guid}}</td>-->
+
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/evaluate-criteria-training-marine-suffix', evaluateCriteriaTraining.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit" title="مدارک"
+                                [routerLink]="['../document-marine-suffix', 'evaluatecriteriatraining',evaluateCriteriaTraining.id]"
+                                class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/evaluate-criteria-training-marine-suffix', evaluateCriteriaTraining.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                                [routerLink]="['/', { outlets: { popup: 'evaluate-criteria-training-marine-suffix/'+ evaluateCriteriaTraining.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="8">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll(criteria)">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="15">
+
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+    <div *ngIf="evaluateCriteriaTrainings && evaluateCriteriaTrainings.length">
+        <!--<div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>-->
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

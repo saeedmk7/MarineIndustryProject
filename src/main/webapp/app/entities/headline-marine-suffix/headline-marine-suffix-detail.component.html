@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="headline">
+            <h2><span jhiTranslate="marineindustryprojApp.headline.detail.title">Headline</span> {{headline.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.headline.title">Title</span></dt>
+                <dd>
+                    <span>{{headline.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.headline.headlineLevel">Headline Level</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.HeadlineLevel.' + headline.headlineLevel}}">{{headline.headlineLevel}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.headline.headlineScope">Headline Scope</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.HeadlineScope.' + headline.headlineScope}}">{{headline.headlineScope}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.headline.totalHour">Total Hour</span></dt>
+                <dd>
+                    <span>{{headline.totalHour}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.headline.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{headline.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.headline.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{headline.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.headline.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{headline.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.headline.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{headline.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.headline.requestEducationalModule">Request Educational Module</span></dt>
+                <dd>
+                    <div *ngIf="headline.requestEducationalModuleId">
+                        <a [routerLink]="['/request-educational-module-marine-suffix', headline.requestEducationalModuleId, 'view']">{{headline.requestEducationalModuleTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.headline.educationalModule">Educational Module</span></dt>
+                <dd>
+                    <div *ngIf="headline.educationalModuleId">
+                        <a [routerLink]="['/educational-module-marine-suffix', headline.educationalModuleId, 'view']">{{headline.educationalModuleTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/headline-marine-suffix', headline.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

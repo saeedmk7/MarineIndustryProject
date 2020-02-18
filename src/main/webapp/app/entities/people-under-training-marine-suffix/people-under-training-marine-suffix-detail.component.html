@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="peopleUnderTraining">
+            <h2><span jhiTranslate="marineindustryprojApp.peopleUnderTraining.detail.title">People Under Training</span> {{peopleUnderTraining.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.peopleUnderTraining.title">Title</span></dt>
+                <dd>
+                    <span>{{peopleUnderTraining.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.peopleUnderTraining.description">Description</span></dt>
+                <dd>
+                    <span>{{peopleUnderTraining.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.peopleUnderTraining.peopleCount">People Count</span></dt>
+                <dd>
+                    <span>{{peopleUnderTraining.peopleCount}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.peopleUnderTraining.code">Code</span></dt>
+                <dd>
+                    <span>{{peopleUnderTraining.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.peopleUnderTraining.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{peopleUnderTraining.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.peopleUnderTraining.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{peopleUnderTraining.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.peopleUnderTraining.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{peopleUnderTraining.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.peopleUnderTraining.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{peopleUnderTraining.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/people-under-training-marine-suffix', peopleUnderTraining.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

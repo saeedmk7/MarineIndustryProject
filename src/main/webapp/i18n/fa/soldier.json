@@ -1,0 +1,57 @@
+{
+    "marineindustryprojApp": {
+        "soldier": {
+            "home": {
+                "title": "اطلاعات سربازان سازمان",
+                "createLabel": "جدید",
+                "createOrEditLabel": "مشخصات {{param}}"
+            },
+            "created": "سربازی با شناسه {{ param }} ایجاد شد.",
+            "updated": "سربازی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "سربازی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف سربازی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات"
+            },
+
+            "name": "نام",
+            "family": "نام خانوادگی",
+            "code": "کد کاربر",
+            "fatherName": "نام پدر",
+            "retired": "بازنشسته شده؟",
+            "certificateNumber": "شماره شناسنامه",
+            "nationalId": "کدملی",
+            "birthDate": "تاریخ تولد",
+            "releaseDate": "تاریخ ترخیص",
+            "personelCode": "کدپرسنلی",
+            "employmentDate": "تاریخ اعزام",
+            "phoneNumber": "شماره تماس",
+            "mobile": "شماره موبایل",
+            "address": "آدرس",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو شدن",
+            "status": "وضعیت",
+            "guid": "Guid",
+            "soldierTrainingReport": "Soldier Training Report",
+            "document": "Document",
+            "lastQualification": "آخرین مدرک تحصیلی",
+            "lastQualificationId": "آخرین مدرک تحصیلی",
+            "lastQualificationTitle": "آخرین مدرک تحصیلی",
+            "lastFieldOfStudy": "آخرین رشته تحصیلی",
+            "lastFieldOfStudyTitle": "آخرین رشته تحصیلی",
+            "job": "شغل سازمانی",
+            "jobTitle": "شغل سازمانی",
+            "organizationChart": "محل خدمت",
+            "organizationChartId": "محل خدمت",
+            "organizationChartTitle": "محل خدمت"
+        }
+    }
+}

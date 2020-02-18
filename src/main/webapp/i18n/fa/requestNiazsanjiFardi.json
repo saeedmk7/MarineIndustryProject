@@ -52,8 +52,9 @@
             "approvedEducationalModule": "پیشنهادی گروه علمی شغلی",
             "approvedEducationalModuleId": "پیشنهادی گروه علمی شغلی",
             "approvedEducationalModuleCode": "پیشنهادی گروه علمی شغلی",
-            "educationalModuleId": "پودمان ها",
-            "educationalModuleCode": "پودمان ها",
+            "educationalModule": "پودمان",
+            "educationalModuleId": "کدپودمان",
+            "educationalModuleCode": "کدپودمان",
             "educationalModuleTitle": "عنوان پودمان آموزشی",
             "allEducationalModule": "مورد نیاز از نظر فرد",
             "allEducationalModuleId": "مورد نیاز از نظر فرد",
@@ -64,7 +65,8 @@
             "jobTitle": "شغل سازمانی",
             "organizationChart": "محل خدمت",
             "organizationChartId": "محل خدمت",
-            "answer": "جواب"
+            "answer": "جواب",
+            "requestStatusFilters": "وضعیت"
         }
     }
 }

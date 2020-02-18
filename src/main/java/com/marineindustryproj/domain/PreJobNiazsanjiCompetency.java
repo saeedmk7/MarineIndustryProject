@@ -32,8 +32,8 @@ public class PreJobNiazsanjiCompetency implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(max = 100)
-    @Column(name = "title", length = 100, nullable = false)
+    @Size(max = 4096)
+    @Column(name = "title", length = 4096, nullable = false)
     private String title;
 
     @NotNull

@@ -457,6 +457,7 @@ li.item:hover {
 
 .k-grid tr.success { background-color: #39a769; color: #fff; }
 .k-grid tr.warning { background-color: #ffdc14; color: #000000; }
+.k-grid tr.pink { background-color: #ff9dbd; color: #ffffff; }
 
 .k-grid tr.danger {
     background-color: #f2dede;
@@ -481,6 +482,10 @@ li.item:hover {
     background-color: #f2dede;
     color: #a94442;
 }
+.k-grid tr.pink:hover {
+    background-color:  #ff9dbd;
+    color: #ffffff;
+}
 
 /*update*/
 
@@ -488,6 +493,7 @@ li.item:hover {
 tr.success { background-color: #dff0d8; color: #3c763d; }
 tr.danger { background-color: #f2dede; color: #a94442; }
 tr.info { background-color: #d9edf7; color: #31708f; }
+tr.pink { background-color: #ff9dbd; color: #ffffff; }
 tr.warning { background-color: #fcf8e3; color: #8a6d3b; }
 
 .project-tab {

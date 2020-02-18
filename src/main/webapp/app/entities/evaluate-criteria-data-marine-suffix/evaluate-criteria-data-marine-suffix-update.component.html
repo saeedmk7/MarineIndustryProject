@@ -1,0 +1,208 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-evaluate-criteria-data-marine-suffix-heading" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.home.createOrEditLabel">Create or edit a Evaluate Criteria Data</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!evaluateCriteriaData.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="evaluateCriteriaData.id" readonly />
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="evaluateCriteriaData.title" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>-->
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اولیه</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.evaluateCriteriaTraining" for="field_evaluateCriteriaTraining">Evaluate Criteria Training</label>
+                    <!--<select class="form-control" id="field_evaluateCriteriaTraining" name="evaluateCriteriaTraining" [(ngModel)]="evaluateCriteriaData.evaluateCriteriaTrainingId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="evaluateCriteriaTrainingOption.id" *ngFor="let evaluateCriteriaTrainingOption of evaluatecriteriatrainings; trackBy: trackEvaluateCriteriaTrainingById">{{evaluateCriteriaTrainingOption.processTitle}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="evaluatecriteriatrainings"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="processTitle"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="evaluateCriteriaTraining"
+                        id="field_evaluateCriteriaTraining"
+                        [(ngModel)]="evaluateCriteriaData.evaluateCriteriaTrainingId">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.organizationChart" for="field_organizationChart">Organization Chart</label>
+                    <ng-select
+                        [items]="recommenedOrgCharts"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="fullTitle"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="organizationChart"
+                        id="field_organizationChart"
+                        [(ngModel)]="evaluateCriteriaData.organizationChartId">
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">محاسبات</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.firstNumber" for="field_firstNumber">First Number</label>
+                    <input type="number" class="form-control" name="firstNumber" id="field_firstNumber"
+                        [(ngModel)]="evaluateCriteriaData.firstNumber" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.secondNumber" for="field_secondNumber">Second Number</label>
+                    <input type="number" class="form-control" name="secondNumber" id="field_secondNumber"
+                        [(ngModel)]="evaluateCriteriaData.secondNumber" (change)="calculateMeasure()" />
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.thirdNumber" for="field_thirdNumber">Third Number</label>
+                    <input type="number" class="form-control" name="thirdNumber" id="field_thirdNumber"
+                        [(ngModel)]="evaluateCriteriaData.thirdNumber" />
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.measureCalc" for="field_measureCalc">Measure Calc</label>
+                    <input type="number" class="form-control" name="measureCalc" id="field_measureCalc"
+                        [(ngModel)]="evaluateCriteriaData.measureCalc" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.measureCalcPercent" for="field_measureCalcPercent">Measure Calc Percent</label>
+                    <input type="number" class="form-control" name="measureCalcPercent" id="field_measureCalcPercent"
+                        [(ngModel)]="evaluateCriteriaData.measureCalcPercent" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.result" for="field_result">Result</label>
+                    <input type="number" class="form-control" name="result" id="field_result"
+                        [(ngModel)]="evaluateCriteriaData.result" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.resultPercent" for="field_resultPercent">Result Percent</label>
+                    <input type="number" class="form-control" name="resultPercent" id="field_resultPercent"
+                        [(ngModel)]="evaluateCriteriaData.resultPercent" />
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات تکمیلی</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.year" for="field_year">Year</label>
+                    <!--<input type="number" class="form-control" name="year" id="field_year"
+                        [(ngModel)]="evaluateCriteriaData.year" required/>-->
+                    <select class="form-control" id="field_year" name="year" [required]="true" [(ngModel)]="evaluateCriteriaData.year" >
+                        <option [ngValue]="year" *ngFor="let year of years">{{year}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.year?.dirty && editForm.controls.year?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.year?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.year?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.month" for="field_month">Month</label>
+                    <!--<input type="number" class="form-control" name="month" id="field_month"
+                        [(ngModel)]="evaluateCriteriaData.month" required/>-->
+                    <select class="form-control" id="field_month" name="month" [required]="true" [(ngModel)]="evaluateCriteriaData.month" >
+                        <option [ngValue]="runMonth.id" *ngFor="let runMonth of runMonths">{{runMonth.persianMonth}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.month?.dirty && editForm.controls.month?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.month?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.month?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">آپلود فایل</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.fileDoc" for="file_fileDoc">File Doc</label>
+                    <div>
+                        <input type="file" id="file_fileDoc" (change)="setFileData($event, evaluateCriteriaData, 'fileDoc', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <!--<input type="hidden" class="form-control" name="fileDoc" id="field_fileDoc"
+                           [(ngModel)]="educationalHistory.fileDoc" required/>-->
+
+                    <div [hidden]="!(editForm.controls.fileDoc?.dirty && editForm.controls.fileDoc?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.fileDoc?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div *ngIf="fileMessage" class="alert" style="display: inline" [ngClass]="{'alert-danger': fileHasError,'alert-success': !fileHasError}">{{fileMessage}}</div>
+                <ng-container *ngIf="evaluateCriteriaData.id != undefined">
+                    <input type="button" [disabled]="fileHasError || uploadingFile" (click)="uploadFile()" class="btn btn-info" style="display: inline" value="ویرایش و آپلود فایل" />
+                    <div class="alert alert-warning">
+                        برای ویرایش فایل ابتدا فایل خود را انتخاب نمائید، سپس روی دکمه ی 'ویرایش و آپلود فایل' کلیک نمائید. سپس برای ثبت نهایی تغییرات روی دکمه ذخیره کلیک نمائید.
+                    </div>
+                </ng-container>
+
+                <div class="alert alert-info">
+                    لطفا قبل از آپلود به موارد زیر دقت فرمائید.
+                    <ol>
+                        <li>
+                            نام فایل انتخابی شما نباید شامل تعداد زیادی نقطه(.) یا کاما (,) و امثالهم باشد.
+                        </li>
+                        <li>
+                            فایل شما حتما باید دارای یکی از پسوندهای معتبر (jpeg,jpg,png,gif,bmp,TIFF,Zip,pdf) باشد.
+                        </li>
+                        <li>
+                            حجم فایل شما نباید بیش از 10 مگابایت باشد.
+                        </li>
+                    </ol>
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.fileDoc" for="field_fileDoc">File Doc</label>
+                    <textarea class="form-control" name="fileDoc" id="field_fileDoc"
+                        [(ngModel)]="evaluateCriteriaData.fileDoc" ></textarea>
+                </div>-->
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.reportTime" for="field_reportTime">Report Time</label>
+                    <input type="text" class="form-control" name="reportTime" id="field_reportTime"
+                        [(ngModel)]="evaluateCriteriaData.reportTime" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.reportTime?.dirty && editForm.controls.reportTime?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.reportTime?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaData.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="evaluateCriteriaData.description" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+{
+    "marineindustryprojApp": {
+        "evaluateCriteriaData": {
+            "home": {
+                "title": "شاخص های ارزیابی آموزش",
+                "createLabel": "جدید",
+                "createOrEditLabel": "شاخص ارزیابی آموزش"
+            },
+            "created": "شاخص ارزیابی آموزش با شناسه {{ param }} ایجاد شد.",
+            "updated": "شاخص ارزیابی آموزش با شناسه {{ param }} ویرایش شد.",
+            "deleted": "شاخص ارزیابی آموزش با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف شاخص ارزیابی آموزش با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات شاخص ارزیابی آموزش"
+            },
+            "title": "Title",
+            "firstNumber": "عدد اول",
+            "secondNumber": "عدد دوم",
+            "thirdNumber": "عدد سوم",
+            "measureCalc": "محاسبه سنجه",
+            "measureCalcPercent": "درصد سنجه",
+            "result": "نتیجه نهایی",
+            "resultPercent": "درصد نتیجه نهایی",
+            "year": "سال",
+            "month": "ماه",
+            "reportTime": "تاریخ گزارش",
+            "fileDoc": "فایل شاخص ارزیابی آموزش",
+            "description": "ملاحضات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "guid": "Guid",
+            "document": "Document",
+            "evaluateCriteriaTraining": "معیار ارزیابی آموزش",
+            "organizationChart": "محل خدمت",
+            "organizationChartId": "محل خدمت",
+            "organizationChartTitle": "محل خدمت"
+        }
+    }
+}

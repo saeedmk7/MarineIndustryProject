@@ -188,13 +188,11 @@ export class JobNiazsanjiMarineSuffixCommentDialogComponent implements OnInit {
         this.isSaving = false;
     }
     knowAboutStatusForContinue(){
-        debugger;
         if(this.jobNiazsanji.status == 21 || this.jobNiazsanji.status == 11 || this.jobNiazsanji.status == 1 || this.jobNiazsanji.status == 30){
             this.clear();
         }
     }
     ngOnInit(): void {
-        debugger;
         switch (this.commentType) {
             case 'ACCEPT':
                 this.commentRequired = false;
@@ -260,11 +258,8 @@ export class JobNiazsanjiMarineSuffixCommentPopupComponent implements OnInit, On
     constructor(protected activatedRoute: ActivatedRoute, protected router: Router, protected modalService: NgbModal) {}
 
     ngOnInit() {
-        debugger;
         this.activatedRoute.data.subscribe(({ jobNiazsanji }) => {
-            debugger;
             this.activatedRoute.params.subscribe((params) => {
-                debugger;
                 let commentType = params['CommentType'] ? params['CommentType'] : "";
                 switch (commentType) {
                     case 'ACCEPT':

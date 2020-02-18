@@ -34,6 +34,10 @@
     import {EducationalHistoryMarineSuffixService} from "app/entities/educational-history-marine-suffix/educational-history-marine-suffix.service";
     import {RequestOtherNiazsanjiMarineSuffixService} from "app/entities/request-other-niazsanji-marine-suffix";
     import {PreJobNiazsanjiMarineSuffixService} from "app/entities/pre-job-niazsanji-marine-suffix";
+    import {PrioritizeRequestNiazsanjiMarineSuffixService} from "app/entities/prioritize-request-niazsanji-marine-suffix";
+    import {NiazsanjiIntegrationMarineSuffixService} from "app/entities/niazsanji-integration-marine-suffix";
+    import {RunPhaseMarineSuffix} from "app/shared/model/run-phase-marine-suffix.model";
+    import {RunPhaseMarineSuffixService} from "app/entities/run-phase-marine-suffix";
 
     @Component({
     selector: 'mi-topbar',
@@ -61,10 +65,13 @@
     educationalModuleRequestCounter: number;
     educationalHistoryCounter: number;
     niazSanjiFardiRequestCounter: number;
+    prioritizeRequestsCounter: number;
     niazsanjiOtherCounter: number;
     niazsanjiJobCounter: number;
     niazSanjiFardiCounter: number;
+    niazsanjiIntegrationCounter: number;
     finalOrganizationNiazsanjiConter: number;
+    runPhaseRequestCounter: number;
     imgUrl: string = "";
     currentUserFullName: string;
     jobTitle: string;
@@ -110,6 +117,9 @@
         private beautySpeechService: BeautySpeechMarineSuffixService,
         private usersRequestMarineSuffixService: UsersRequestMarineSuffixService,
         private requestEducationalModuleMarineSuffixService: RequestEducationalModuleMarineSuffixService,
+        private runPhaseService: RunPhaseMarineSuffixService,
+        private prioritizeRequestNiazsanjiService: PrioritizeRequestNiazsanjiMarineSuffixService,
+        private niazsanjiIntegrationService: NiazsanjiIntegrationMarineSuffixService,
         protected treeUtilities: TreeUtilities,
         private convertObjectDatesService: ConvertObjectDatesService
 
@@ -184,6 +194,18 @@
             else{
                 this.imgUrl = "../../../content/images/home/man.png";
             }
+            if(this.organizationChartService.organizationchartsAll)
+            {
+                this.organizationcharts = this.organizationChartService.organizationchartsAll;
+            }
+            else{
+                this.organizationChartService.query().subscribe(
+                    (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
+                        this.organizationcharts = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            }
             this.intervals = setInterval(() => {         //replaced function() by ()=>
                 this.getNewRequestOrganization();
                 this.countAllRequestNiazSanjiFardi();
@@ -193,8 +215,14 @@
                 //this.getFinalNiazSanjiFardis();
                 this.getFinalorganizationNiazsanji();
                 this.getEducationalHistories();
-                if(this.isTopUsers)
+                if(this.isTopUsers) {
                     this.getEducationalModuleRequests();
+                    this.getPrioritizeRequests();
+                }
+                if(this.isSuperUsers){
+                    this.getIntegrations();
+                    this.getRunPhaseRequestCounter();
+                }
                 //this.checkCurrentFullName();
             }, 20000);
 
@@ -244,6 +272,27 @@
         });
 
     }
+        getRunPhaseRequestCounter(){
+            if(this.isSuperUsers) {
+                let criteria = [];
+                criteria.push({
+                    key: 'status.equals',
+                    value: 5
+                });
+                this.runPhaseService.count({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: null
+                })
+                    .subscribe(
+                        (res: HttpResponse<any>) => {
+                            this.runPhaseRequestCounter = res.body;
+                        },
+                        (res: HttpErrorResponse) => this.onError(res.message)
+                    );
+            }
+        }
     getEducationalModuleRequests(){
         if(this.currentPerson) {
             let orgId = this.currentPerson.organizationChartId;
@@ -284,6 +333,67 @@
                 );
         }
     }
+    getPrioritizeRequests(){
+        if(this.currentPerson && this.organizationcharts) {
+            let criteria = [];
+            const orgIds = this.treeUtilities.getAllOfThisTreeIds(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
+            criteria.push({
+                key: 'organizationChartId.in',
+                value: orgIds
+            });
+            criteria.push({
+                    key: 'requestStatus.equals',
+                    value: 'NEW'
+                });
+            this.prioritizeRequestNiazsanjiService
+                .count({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: null
+                })
+                .subscribe(
+                    (res: HttpResponse<any>) => {
+                        this.prioritizeRequestsCounter = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+    }
+        getIntegrations(){
+            if(this.isKarshenasArshadAmozeshSazman) {
+                let criteria = [{key: 'status.equals', value: '0'}];
+                this.niazsanjiIntegrationService.count({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: null
+                }).subscribe(
+                    (res: HttpResponse<any>) => {
+
+                        //localStorage.setItem('usersRequestCount', res.body);
+                        this.niazsanjiIntegrationCounter = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            }
+            if(this.isModirKolAmozesh) {
+                let criteria = [{key: 'status.equals', value: 10}];
+                this.niazsanjiIntegrationService.count({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: null
+                }).subscribe(
+                    (res: HttpResponse<any>) => {
+
+                        //localStorage.setItem('usersRequestCount', res.body);
+                        this.niazsanjiIntegrationCounter = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            }
+        }
     getEducationalHistories(){
         if(this.currentPerson) {
             let orgId = this.currentPerson.organizationChartId;
@@ -371,7 +481,7 @@
         }
     }
     getNewRequestOrganization() {
-        if(this.isModirAmozesh) {
+        if(this.isTopUsers) {
             if (this.currentPerson) {
                 let orgId = this.currentPerson.organizationChartId;
                 let criteria = [{
@@ -432,8 +542,14 @@
         //this.getFinalNiazSanjiFardis();
         this.getFinalorganizationNiazsanji();
         this.getEducationalHistories();
-        if(this.isTopUsers)
+        if(this.isTopUsers) {
             this.getEducationalModuleRequests();
+            this.getPrioritizeRequests();
+        }
+        if(this.isSuperUsers){
+            this.getIntegrations();
+            this.getRunPhaseRequestCounter();
+        }
     }
 
     onPersonError(body) {

@@ -51,6 +51,7 @@
                 <button *ngIf="editable" type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.saveAndNextStep">Save</span>
                 </button>
+                <span class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</span>
                 <button type="button" id="step-forward" class="btn btn-info pull-left"  (click)="stepForward()">
                     <fa-icon [icon]="'backward'"></fa-icon>&nbsp;گام بعدی (بدون ذخیره)
                 </button>

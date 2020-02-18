@@ -58,6 +58,16 @@ public class EffectivenessLevel implements Serializable {
     @OneToMany(mappedBy = "effectivenessLevel")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<DesignAndPlanning> designAndPlannings = new HashSet<>();
+    @ManyToMany(mappedBy = "effectivenessLevels")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<EducationalModule> educationalModules = new HashSet<>();
+
+    @ManyToMany(mappedBy = "effectivenessLevels")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<RequestEducationalModule> requestEducationalModules = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -181,6 +191,56 @@ public class EffectivenessLevel implements Serializable {
 
     public void setDesignAndPlannings(Set<DesignAndPlanning> designAndPlannings) {
         this.designAndPlannings = designAndPlannings;
+    }
+
+    public Set<EducationalModule> getEducationalModules() {
+        return educationalModules;
+    }
+
+    public EffectivenessLevel educationalModules(Set<EducationalModule> educationalModules) {
+        this.educationalModules = educationalModules;
+        return this;
+    }
+
+    public EffectivenessLevel addEducationalModule(EducationalModule educationalModule) {
+        this.educationalModules.add(educationalModule);
+        educationalModule.getEffectivenessLevels().add(this);
+        return this;
+    }
+
+    public EffectivenessLevel removeEducationalModule(EducationalModule educationalModule) {
+        this.educationalModules.remove(educationalModule);
+        educationalModule.getEffectivenessLevels().remove(this);
+        return this;
+    }
+
+    public void setEducationalModules(Set<EducationalModule> educationalModules) {
+        this.educationalModules = educationalModules;
+    }
+
+    public Set<RequestEducationalModule> getRequestEducationalModules() {
+        return requestEducationalModules;
+    }
+
+    public EffectivenessLevel requestEducationalModules(Set<RequestEducationalModule> requestEducationalModules) {
+        this.requestEducationalModules = requestEducationalModules;
+        return this;
+    }
+
+    public EffectivenessLevel addRequestEducationalModule(RequestEducationalModule requestEducationalModule) {
+        this.requestEducationalModules.add(requestEducationalModule);
+        requestEducationalModule.getEffectivenessLevels().add(this);
+        return this;
+    }
+
+    public EffectivenessLevel removeRequestEducationalModule(RequestEducationalModule requestEducationalModule) {
+        this.requestEducationalModules.remove(requestEducationalModule);
+        requestEducationalModule.getEffectivenessLevels().remove(this);
+        return this;
+    }
+
+    public void setRequestEducationalModules(Set<RequestEducationalModule> requestEducationalModules) {
+        this.requestEducationalModules = requestEducationalModules;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

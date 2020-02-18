@@ -12,6 +12,8 @@ import org.mapstruct.*;
 public interface CompetencyMapper extends EntityMapper<CompetencyDTO, Competency> {
 
 
+    @Mapping(target = "educationalModules", ignore = true)
+    @Mapping(target = "requestEducationalModules", ignore = true)
     @Mapping(target = "preJobNiazsanjiCompetencies", ignore = true)
     Competency toEntity(CompetencyDTO competencyDTO);
 

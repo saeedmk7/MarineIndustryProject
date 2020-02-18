@@ -185,9 +185,28 @@ public class RequestEducationalModuleQueryService extends QueryService<RequestEd
             if (criteria.getRestrictionDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getRestrictionDescription(), RequestEducationalModule_.restrictionDescription));
             }
+            if (criteria.getRecommendDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getRecommendDate(), RequestEducationalModule_.recommendDate));
+            }
+            if (criteria.getGoalsBehavioralText() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getGoalsBehavioralText(), RequestEducationalModule_.goalsBehavioralText));
+            }
+            if (criteria.getNeededSoftwares() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getNeededSoftwares(), RequestEducationalModule_.neededSoftwares));
+            }
+            if (criteria.getNeededHardware() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getNeededHardware(), RequestEducationalModule_.neededHardware));
+            }
+            if (criteria.getCourseContactsTerms() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCourseContactsTerms(), RequestEducationalModule_.courseContactsTerms));
+            }
             if (criteria.getEducationalModuleId() != null) {
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
                     root -> root.join(RequestEducationalModule_.educationalModules, JoinType.LEFT).get(EducationalModule_.id)));
+            }
+            if (criteria.getHeadlineId() != null) {
+                specification = specification.and(buildSpecification(criteria.getHeadlineId(),
+                    root -> root.join(RequestEducationalModule_.headlines, JoinType.LEFT).get(Headline_.id)));
             }
             if (criteria.getScientificWorkGroupId() != null) {
                 specification = specification.and(buildSpecification(criteria.getScientificWorkGroupId(),
@@ -217,6 +236,22 @@ public class RequestEducationalModuleQueryService extends QueryService<RequestEd
                 specification = specification.and(buildSpecification(criteria.getRestrictionId(),
                     root -> root.join(RequestEducationalModule_.restrictions, JoinType.LEFT).get(Restriction_.id)));
             }
+            if (criteria.getPeopleUnderTrainingId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPeopleUnderTrainingId(),
+                    root -> root.join(RequestEducationalModule_.peopleUnderTrainings, JoinType.LEFT).get(PeopleUnderTraining_.id)));
+            }
+            if (criteria.getTeachingApproachId() != null) {
+                specification = specification.and(buildSpecification(criteria.getTeachingApproachId(),
+                    root -> root.join(RequestEducationalModule_.teachingApproaches, JoinType.LEFT).get(TeachingApproach_.id)));
+            }
+            if (criteria.getEffectivenessLevelId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEffectivenessLevelId(),
+                    root -> root.join(RequestEducationalModule_.effectivenessLevels, JoinType.LEFT).get(EffectivenessLevel_.id)));
+            }
+            if (criteria.getEffectivenessIndexId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEffectivenessIndexId(),
+                    root -> root.join(RequestEducationalModule_.effectivenessIndices, JoinType.LEFT).get(EffectivenessIndex_.id)));
+            }
             if (criteria.getSecurityLevelId() != null) {
                 specification = specification.and(buildSpecification(criteria.getSecurityLevelId(),
                     root -> root.join(RequestEducationalModule_.securityLevel, JoinType.LEFT).get(SecurityLevel_.id)));
@@ -232,6 +267,10 @@ public class RequestEducationalModuleQueryService extends QueryService<RequestEd
             if (criteria.getOrganizationId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOrganizationId(),
                     root -> root.join(RequestEducationalModule_.organization, JoinType.LEFT).get(Organization_.id)));
+            }
+            if (criteria.getCompetencyId() != null) {
+                specification = specification.and(buildSpecification(criteria.getCompetencyId(),
+                    root -> root.join(RequestEducationalModule_.competency, JoinType.LEFT).get(Competency_.id)));
             }
         }
         return specification;

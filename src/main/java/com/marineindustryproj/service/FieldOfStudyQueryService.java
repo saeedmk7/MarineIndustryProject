@@ -119,6 +119,10 @@ public class FieldOfStudyQueryService extends QueryService<FieldOfStudy> {
                 specification = specification.and(buildSpecification(criteria.getEducationalRecordId(),
                     root -> root.join(FieldOfStudy_.educationalRecords, JoinType.LEFT).get(EducationalRecord_.id)));
             }
+            if (criteria.getSoldierId() != null) {
+                specification = specification.and(buildSpecification(criteria.getSoldierId(),
+                    root -> root.join(FieldOfStudy_.soldiers, JoinType.LEFT).get(Soldier_.id)));
+            }
         }
         return specification;
     }

@@ -22,6 +22,8 @@ public interface TeachingApproachMapper extends EntityMapper<TeachingApproachDTO
     @Mapping(target = "niazsanjiOthers", ignore = true)
     @Mapping(target = "requestOtherNiazsanjis", ignore = true)
     @Mapping(target = "prioritizeRequestNiazsanjis", ignore = true)
+    @Mapping(target = "educationalModules", ignore = true)
+    @Mapping(target = "requestEducationalModules", ignore = true)
     @Mapping(target = "preJobNiazsanjiCompetencies", ignore = true)
     TeachingApproach toEntity(TeachingApproachDTO teachingApproachDTO);
 

@@ -148,7 +148,7 @@
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button type="submit" *ngIf="isAdmin"
                                 [routerLink]="['/', { outlets: { popup: 'person-marine-suffix/'+ person.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

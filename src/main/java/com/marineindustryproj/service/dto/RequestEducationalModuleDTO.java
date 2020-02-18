@@ -108,6 +108,20 @@ public class RequestEducationalModuleDTO implements Serializable {
     @Size(max = 4096)
     private String restrictionDescription;
 
+    private ZonedDateTime recommendDate;
+
+    @Size(max = 4096)
+    private String goalsBehavioralText;
+
+    @Size(max = 4096)
+    private String neededSoftwares;
+
+    @Size(max = 4096)
+    private String neededHardware;
+
+    @Size(max = 4096)
+    private String courseContactsTerms;
+
     private Set<ScientificWorkGroupDTO> scientificWorkGroups = new HashSet<>();
 
     private Set<DocumentDTO> documents = new HashSet<>();
@@ -121,6 +135,16 @@ public class RequestEducationalModuleDTO implements Serializable {
     private Set<TeacherDTO> teachers = new HashSet<>();
 
     private Set<RestrictionDTO> restrictions = new HashSet<>();
+
+    private Set<PeopleUnderTrainingDTO> peopleUnderTrainings = new HashSet<>();
+
+    private Set<TeachingApproachDTO> teachingApproaches = new HashSet<>();
+
+    private Set<EffectivenessLevelDTO> effectivenessLevels = new HashSet<>();
+
+    private Set<EffectivenessIndexDTO> effectivenessIndices = new HashSet<>();
+
+    private Set<HeadlineDTO> headlines = new HashSet<>();
 
     private Long securityLevelId;
 
@@ -137,6 +161,10 @@ public class RequestEducationalModuleDTO implements Serializable {
     private Long organizationId;
 
     private String organizationTitle;
+
+    private Long competencyId;
+
+    private String competencyTitle;
 
     public Long getId() {
         return id;
@@ -410,6 +438,46 @@ public class RequestEducationalModuleDTO implements Serializable {
         this.restrictionDescription = restrictionDescription;
     }
 
+    public ZonedDateTime getRecommendDate() {
+        return recommendDate;
+    }
+
+    public void setRecommendDate(ZonedDateTime recommendDate) {
+        this.recommendDate = recommendDate;
+    }
+
+    public String getGoalsBehavioralText() {
+        return goalsBehavioralText;
+    }
+
+    public void setGoalsBehavioralText(String goalsBehavioralText) {
+        this.goalsBehavioralText = goalsBehavioralText;
+    }
+
+    public String getNeededSoftwares() {
+        return neededSoftwares;
+    }
+
+    public void setNeededSoftwares(String neededSoftwares) {
+        this.neededSoftwares = neededSoftwares;
+    }
+
+    public String getNeededHardware() {
+        return neededHardware;
+    }
+
+    public void setNeededHardware(String neededHardware) {
+        this.neededHardware = neededHardware;
+    }
+
+    public String getCourseContactsTerms() {
+        return courseContactsTerms;
+    }
+
+    public void setCourseContactsTerms(String courseContactsTerms) {
+        this.courseContactsTerms = courseContactsTerms;
+    }
+
     public Set<ScientificWorkGroupDTO> getScientificWorkGroups() {
         return scientificWorkGroups;
     }
@@ -464,6 +532,38 @@ public class RequestEducationalModuleDTO implements Serializable {
 
     public void setRestrictions(Set<RestrictionDTO> restrictions) {
         this.restrictions = restrictions;
+    }
+
+    public Set<PeopleUnderTrainingDTO> getPeopleUnderTrainings() {
+        return peopleUnderTrainings;
+    }
+
+    public void setPeopleUnderTrainings(Set<PeopleUnderTrainingDTO> peopleUnderTrainings) {
+        this.peopleUnderTrainings = peopleUnderTrainings;
+    }
+
+    public Set<TeachingApproachDTO> getTeachingApproaches() {
+        return teachingApproaches;
+    }
+
+    public void setTeachingApproaches(Set<TeachingApproachDTO> teachingApproaches) {
+        this.teachingApproaches = teachingApproaches;
+    }
+
+    public Set<EffectivenessLevelDTO> getEffectivenessLevels() {
+        return effectivenessLevels;
+    }
+
+    public void setEffectivenessLevels(Set<EffectivenessLevelDTO> effectivenessLevels) {
+        this.effectivenessLevels = effectivenessLevels;
+    }
+
+    public Set<EffectivenessIndexDTO> getEffectivenessIndices() {
+        return effectivenessIndices;
+    }
+
+    public void setEffectivenessIndices(Set<EffectivenessIndexDTO> effectivenessIndices) {
+        this.effectivenessIndices = effectivenessIndices;
     }
 
     public Long getSecurityLevelId() {
@@ -530,6 +630,22 @@ public class RequestEducationalModuleDTO implements Serializable {
         this.organizationTitle = organizationTitle;
     }
 
+    public Long getCompetencyId() {
+        return competencyId;
+    }
+
+    public void setCompetencyId(Long competencyId) {
+        this.competencyId = competencyId;
+    }
+
+    public String getCompetencyTitle() {
+        return competencyTitle;
+    }
+
+    public void setCompetencyTitle(String competencyTitle) {
+        this.competencyTitle = competencyTitle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -588,6 +704,11 @@ public class RequestEducationalModuleDTO implements Serializable {
             ", guid='" + getGuid() + "'" +
             ", hasImportantMessage='" + isHasImportantMessage() + "'" +
             ", restrictionDescription='" + getRestrictionDescription() + "'" +
+            ", recommendDate='" + getRecommendDate() + "'" +
+            ", goalsBehavioralText='" + getGoalsBehavioralText() + "'" +
+            ", neededSoftwares='" + getNeededSoftwares() + "'" +
+            ", neededHardware='" + getNeededHardware() + "'" +
+            ", courseContactsTerms='" + getCourseContactsTerms() + "'" +
             ", securityLevel=" + getSecurityLevelId() +
             ", securityLevel='" + getSecurityLevelTitle() + "'" +
             ", skillableLevelOfSkill=" + getSkillableLevelOfSkillId() +
@@ -596,6 +717,16 @@ public class RequestEducationalModuleDTO implements Serializable {
             ", evaluationMethod='" + getEvaluationMethodTitle() + "'" +
             ", organization=" + getOrganizationId() +
             ", organization='" + getOrganizationTitle() + "'" +
+            ", competency=" + getCompetencyId() +
+            ", competency='" + getCompetencyTitle() + "'" +
             "}";
+    }
+
+    public Set<HeadlineDTO> getHeadlines() {
+        return headlines;
+    }
+
+    public void setHeadlines(Set<HeadlineDTO> headlines) {
+        this.headlines = headlines;
     }
 }

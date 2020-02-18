@@ -1,0 +1,132 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-headline-marine-suffix-heading" jhiTranslate="marineindustryprojApp.headline.home.createOrEditLabel">Create or edit a Headline</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!headline.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="headline.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.headline.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="headline.title" required maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.headline.headlineLevel" for="field_headlineLevel">Headline Level</label>
+                    <select class="form-control" name="headlineLevel" [(ngModel)]="headline.headlineLevel" id="field_headlineLevel"  required>
+                        <option value="FAMILIARITY">{{'marineindustryprojApp.HeadlineLevel.FAMILIARITY' | translate}}</option>
+                        <option value="ABILITY">{{'marineindustryprojApp.HeadlineLevel.ABILITY' | translate}}</option>
+                        <option value="FLUENCY">{{'marineindustryprojApp.HeadlineLevel.FLUENCY' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.headlineLevel?.dirty && editForm.controls.headlineLevel?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.headlineLevel?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.headline.headlineScope" for="field_headlineScope">Headline Scope</label>
+                    <select class="form-control" name="headlineScope" [(ngModel)]="headline.headlineScope" id="field_headlineScope"  required>
+                        <option value="KNOWLEDGE">{{'marineindustryprojApp.HeadlineScope.KNOWLEDGE' | translate}}</option>
+                        <option value="SKILL">{{'marineindustryprojApp.HeadlineScope.SKILL' | translate}}</option>
+                        <option value="ATTITUDE">{{'marineindustryprojApp.HeadlineScope.ATTITUDE' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.headlineScope?.dirty && editForm.controls.headlineScope?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.headlineScope?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.headline.totalHour" for="field_totalHour">Total Hour</label>
+                    <input type="number" class="form-control" name="totalHour" id="field_totalHour"
+                        [(ngModel)]="headline.totalHour" required/>
+                    <div [hidden]="!(editForm.controls.totalHour?.dirty && editForm.controls.totalHour?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.totalHour?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.totalHour?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.headline.createUserLogin" for="field_createUserLogin">Create User Login</label>
+                    <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
+                        [(ngModel)]="headline.createUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.createUserLogin?.dirty && editForm.controls.createUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.headline.createDate" for="field_createDate">Create Date</label>
+                    <div class="d-flex">
+                        <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="createDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.headline.modifyUserLogin" for="field_modifyUserLogin">Modify User Login</label>
+                    <input type="text" class="form-control" name="modifyUserLogin" id="field_modifyUserLogin"
+                        [(ngModel)]="headline.modifyUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.modifyUserLogin?.dirty && editForm.controls.modifyUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.modifyUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.headline.modifyDate" for="field_modifyDate">Modify Date</label>
+                    <div class="d-flex">
+                        <input id="field_modifyDate" type="datetime-local" class="form-control" name="modifyDate" [(ngModel)]="modifyDate"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.headline.requestEducationalModule" for="field_requestEducationalModule">Request Educational Module</label>
+                    <select class="form-control" id="field_requestEducationalModule" name="requestEducationalModule" [(ngModel)]="headline.requestEducationalModuleId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="requestEducationalModuleOption.id" *ngFor="let requestEducationalModuleOption of requesteducationalmodules; trackBy: trackRequestEducationalModuleById">{{requestEducationalModuleOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.headline.educationalModule" for="field_educationalModule">Educational Module</label>
+                    <select class="form-control" id="field_educationalModule" name="educationalModule" [(ngModel)]="headline.educationalModuleId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="educationalModuleOption.id" *ngFor="let educationalModuleOption of educationalmodules; trackBy: trackEducationalModuleById">{{educationalModuleOption.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

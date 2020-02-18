@@ -165,7 +165,8 @@ public class EducationalHistoryResource {
 
         EducationalHistoryDTO educationalHistory = educationalHistoryService.findOne(educationalHistoryDTO.getId()).get();
 
-        educationalHistoryDTO.setFileDoc(educationalHistory.getFileDoc());
+        if(educationalHistoryDTO.getFileDoc() == null)
+            educationalHistoryDTO.setFileDoc(educationalHistory.getFileDoc());
         educationalHistoryDTO.setCreateUserLogin(educationalHistory.getCreateUserLogin());
         educationalHistoryDTO.setCreateDate(educationalHistory.getCreateDate());
         educationalHistoryDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());

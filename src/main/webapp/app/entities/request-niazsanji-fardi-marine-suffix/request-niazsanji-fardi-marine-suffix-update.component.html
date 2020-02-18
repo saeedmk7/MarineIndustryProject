@@ -90,6 +90,14 @@
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.employmentType"></label>
                     <label class="form-control">{{selectedPerson.employmentTypeTitle}}</label>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.jobTitle"></label>
+                    <label class="form-control">{{selectedPerson.jobTitle}}</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.practicaljobTitle"></label>
+                    <label class="form-control">{{selectedPerson.practicaljobTitle}}</label>
+                </div>
                 <education-history-panel [personId]="requestNiazsanjiFardi.personId" [type]="2"></education-history-panel>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات پودمان های درخواستی</div></div>
                 <div>

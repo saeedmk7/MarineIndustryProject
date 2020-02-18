@@ -75,6 +75,8 @@ export class JobMarineSuffixUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ job }) => {
             this.job = job;
+            if(this.job.id === undefined)
+                this.job.jobKey = Math.floor(100000 + Math.random() * 900000).toString();
         });
         /*this.documentService.query().subscribe(
             (res: HttpResponse<IDocumentMarineSuffix[]>) => {

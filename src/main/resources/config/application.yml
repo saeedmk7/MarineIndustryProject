@@ -115,6 +115,8 @@ file:
     image-upload-dir: ./imageuploads
     run-phase-upload-dir: ./runPhaseUploads
     jam-help-upload-dir: ./jamHelpUploads
+    soldier-training-report-upload-dir: ./soldierTrainingReportUploads
+    evaluate-criteria-data-upload-dir: ./evaluateCriteriaDataUploads
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

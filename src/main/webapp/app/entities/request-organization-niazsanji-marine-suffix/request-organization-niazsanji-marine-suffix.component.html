@@ -119,8 +119,8 @@
                         <fa-icon [icon]="'eye'"></fa-icon>
                         <span class="d-none d-md-inline" alt="مشاهده" jhiTranslate="entity.action.view">View</span>
                     </button>
-                    <img src="../../../content/images/bulb-icon.png" title="پیام مهمی در جزئیات وجود دارد" alt="پیام مهمی در جزئیات وجود دارد"  *ngIf="requestOrganizationNiazsanji.hasImportantMessage == true" style="cursor: pointer;width: 12%;margin: 0;" (click)="toggleImportantMessage(requestOrganizationNiazsanji.id, false)"/>
-                    <img src="../../../content/images/light-off-icon.png" *ngIf="requestOrganizationNiazsanji.hasImportantMessage == false" style="cursor: pointer;width: 12%;margin: 0;" (click)="toggleImportantMessage(requestOrganizationNiazsanji.id, true)"/>
+                    <img src="../../../content/images/bulb-icon.png" title="پیام مهمی در جزئیات وجود دارد" alt="پیام مهمی در جزئیات وجود دارد"  *ngIf="requestOrganizationNiazsanji.hasImportantMessage == true" class="lightBulb" (click)="toggleImportantMessage(requestOrganizationNiazsanji.id, false)"/>
+                    <img src="../../../content/images/light-off-icon.png" *ngIf="requestOrganizationNiazsanji.hasImportantMessage == false" class="lightBulb" (click)="toggleImportantMessage(requestOrganizationNiazsanji.id, true)"/>
                     <ng-container *ngIf="!(requestOrganizationNiazsanji.requestStatus == 'ACCEPT'  || requestOrganizationNiazsanji.requestStatus == 'IGNORE')">
                         <ng-container *ngIf="requestOrganizationNiazsanji.status == currentPerson.organizationChartId">
                             <button type="submit" title="ویرایش"

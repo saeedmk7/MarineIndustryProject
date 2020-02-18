@@ -150,6 +150,14 @@ public class TeachingApproachQueryService extends QueryService<TeachingApproach>
                 specification = specification.and(buildSpecification(criteria.getPrioritizeRequestNiazsanjiId(),
                     root -> root.join(TeachingApproach_.prioritizeRequestNiazsanjis, JoinType.LEFT).get(PrioritizeRequestNiazsanji_.id)));
             }
+            if (criteria.getEducationalModuleId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
+                    root -> root.join(TeachingApproach_.educationalModules, JoinType.LEFT).get(EducationalModule_.id)));
+            }
+            if (criteria.getRequestEducationalModuleId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRequestEducationalModuleId(),
+                    root -> root.join(TeachingApproach_.requestEducationalModules, JoinType.LEFT).get(RequestEducationalModule_.id)));
+            }
             if (criteria.getPreJobNiazsanjiCompetencyId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPreJobNiazsanjiCompetencyId(),
                     root -> root.join(TeachingApproach_.preJobNiazsanjiCompetencies, JoinType.LEFT).get(PreJobNiazsanjiCompetency_.id)));

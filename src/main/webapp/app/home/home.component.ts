@@ -37,6 +37,10 @@ import {IJamHelpMarineSuffix} from "app/shared/model/jam-help-marine-suffix.mode
 import {IFinalNiazsanjiReportPersonMarineSuffix} from "app/shared/model/final-niazsanji-report-person-marine-suffix.model";
 import {ForceRunningPercentMarineSuffixService} from "app/entities/force-running-percent-marine-suffix";
 import {IForceRunningPercentMarineSuffix} from "app/shared/model/force-running-percent-marine-suffix.model";
+import {MediaAwarenessReportMarineSuffixService} from "app/entities/media-awareness-report-marine-suffix";
+import {IMediaAwarenessReportMarineSuffix} from "app/shared/model/media-awareness-report-marine-suffix.model";
+import {SoldierTrainingReportMarineSuffixService} from "app/entities/soldier-training-report-marine-suffix";
+import {ISoldierTrainingReportMarineSuffix} from "app/shared/model/soldier-training-report-marine-suffix.model";
 
 
 @Component({
@@ -54,6 +58,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     homePagePersonHourChart: IHomePagePersonHourChart = {};
     investToGroupTransactions: IInvestToGroupTransactionMarineSuffix[] = [];
     investResult: any[] = [];
+    personHourAggregationResult: any[] = [];
     sumHourPersonEducationalModules: number = 0;
     planningAndRunMonthReports: IPlanningAndRunMonthReport[] = [];
     isHomePageCharts: boolean = true;
@@ -123,7 +128,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         private convertObjectDatesService : ConvertObjectDatesService,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private treeUtilities: TreeUtilities
+        private treeUtilities: TreeUtilities,
+        private mediaAwarenessReportService: MediaAwarenessReportMarineSuffixService,
+        private soldierTrainingReportService: SoldierTrainingReportMarineSuffixService
     ) {
         this.isfa = languageManager.currentLang == 'fa';
         this.years = GREGORIAN_START_END_DATE.map(a => a.year);
@@ -140,49 +147,107 @@ export class HomeComponent implements OnInit, OnDestroy {
     showHomePageReport(niazsanjiYear: number){
         this.finalNiazsanjiReportService.getHomePageReport(niazsanjiYear, 1).subscribe((resp: HttpResponse<IHomePageReport>) => {
            this.homePageReport = resp.body;
+           this.showPersonHourAggregationPart(niazsanjiYear);
+
            console.log(this.homePageReport);
         },
             (res: HttpErrorResponse) => this.onError(res.message));
         this.finalNiazsanjiReportService.getHomePageReport(niazsanjiYear, 2).subscribe((resp: HttpResponse<IHomePageReport>) => {
+                this.homePageReportPrice = resp.body;
 
-                const criteria = [{
-                    key: 'investYear.equals',
-                    value: this.selectedNiazsanjiYear
-                }];
-            this.investToGroupTransactionService.query({
-                page: 0,
-                size: 10000,
-                criteria,
-                sort: ["id", "asc"]
-            })
-                .subscribe(
-                    (res: HttpResponse<IInvestToGroupTransactionMarineSuffix[]>) => {
+                this.showInvestPart(niazsanjiYear);
 
-                        this.homePageReportPrice = resp.body;
+                console.log(this.homePageReportPrice);
 
-
-                        console.log(this.homePageReportPrice);
-                        this.investToGroupTransactions = res.body;
-                        const orgs = this.organizationcharts.filter(a => !a.parentId).map(a => a.id).filter(a => this.treeUtilities.onlyUnique); //res.body.map(a => a.organizationChartId).filter(this.treeUtilities.onlyUnique);
-                        this.investResult = [];
-                        this.homePageReportPrice.homePageReportDetails.forEach(a => {
-                            const sumInvest = res.body.filter(w => w.organizationChartId == a.organizationChartId).map(w => w.investAmount).reduce((sum, current) => sum + current, 0 );
-                            this.investResult.push({
-                                orgTitle: a.organizationChartTitle,
-                                sumInvest: sumInvest,
-                                usedAmount: a.totalPassed,
-                                usedAmountPercent: (a.totalPassed / sumInvest) * 100
-                            });
-                        })
-                    },
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
 
             },
             (res: HttpErrorResponse) => this.onError(res.message));
 
     }
+    mediaAwarenessReport : IMediaAwarenessReportMarineSuffix[] = [];
+    soldierTrainingReports : ISoldierTrainingReportMarineSuffix[] = [];
+    showPersonHourAggregationPart(niazsanjiYear: number){
+        debugger;
+        const awarenessCriteria = [{
+            key: 'publishDate.contains',
+            value: niazsanjiYear.toString()
+        }];
 
+        this.mediaAwarenessReportService.query({
+            page: 0,
+            size: 10000,
+            awarenessCriteria,
+            sort: ["id", "asc"]
+        })
+            .subscribe(
+                (res: HttpResponse<IMediaAwarenessReportMarineSuffix[]>) => {
+                    this.mediaAwarenessReport = res.body;
+
+                    const soldierTrainingReportCriteria = [{
+                       key: 'year.equals',
+                       value: niazsanjiYear
+                    }];
+                    this.soldierTrainingReportService.query({
+                        page: 0,
+                        size: 10000,
+                        soldierTrainingReportCriteria,
+                        sort: ["id", "asc"]
+                    }).subscribe(
+                        (res: HttpResponse<IMediaAwarenessReportMarineSuffix[]>) => {
+                            this.soldierTrainingReports = res.body;
+                            this.personHourAggregationResult = [];
+                            debugger;
+                            this.homePageReport.homePageReportDetails.forEach(a => {
+                                debugger;
+                                const subTree = this.treeUtilities.getAllOfThisTreeIds(this.organizationcharts, a.organizationChartId).filter(this.treeUtilities.onlyUnique);
+                                const sumMedia = this.mediaAwarenessReport.filter(w => subTree.includes(w.organizationChartId)).map(w => w.personHour).reduce((sum, current) => sum + current, 0 );
+                                const sumSoldiers = this.soldierTrainingReports.filter(w => subTree.includes(w.soldierOrganizationChartId))
+                                    .map(w => w.personHour).reduce((sum, current) => sum + current, 0 );
+                                this.personHourAggregationResult.push({
+                                    orgTitle: a.organizationChartTitle,
+                                    sumMedia: sumMedia,
+                                    sumSoldier: sumSoldiers,
+                                    totalPassed: a.totalPassed,
+                                    sumTotal: (a.totalPassed ? a.totalPassed : 0) + (sumMedia ? sumMedia : 0) + (sumSoldiers ? sumSoldiers : 0)
+                                });
+                            });
+                        });
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+
+    }
+    showInvestPart(niazsanjiYear: number){
+        const criteria = [{
+            key: 'investYear.equals',
+            value: niazsanjiYear
+        }];
+        this.investToGroupTransactionService.query({
+            page: 0,
+            size: 10000,
+            criteria,
+            sort: ["id", "asc"]
+        })
+            .subscribe(
+                (res: HttpResponse<IInvestToGroupTransactionMarineSuffix[]>) => {
+
+
+                    this.investToGroupTransactions = res.body;
+                    //const orgs = this.organizationcharts.filter(a => !a.parentId).map(a => a.id).filter(a => this.treeUtilities.onlyUnique); //res.body.map(a => a.organizationChartId).filter(this.treeUtilities.onlyUnique);
+                    this.investResult = [];
+                    this.homePageReportPrice.homePageReportDetails.forEach(a => {
+                        const sumInvest = res.body.filter(w => w.organizationChartId == a.organizationChartId).map(w => w.investAmount).reduce((sum, current) => sum + current, 0 );
+                        this.investResult.push({
+                            orgTitle: a.organizationChartTitle,
+                            sumInvest: sumInvest,
+                            usedAmount: a.totalPassed,
+                            usedAmountPercent: (a.totalPassed / sumInvest) * 100
+                        });
+                    })
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
     deleteElement(i)
     {
         $('#' + i).remove();
@@ -296,9 +361,6 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.makeSeries();
         });
         this.showHomePageReport(this.selectedNiazsanjiYear);
-
-
-
     }
 
     makePersonHourPieChart(res: IHomePagePersonHourChart)

@@ -132,6 +132,8 @@ public class JobResource {
         {
             jobDTO.setFirst3JobCode(jobDTO.getJobCode().substring(0,3));
         }
+        if(jobDTO.getFileDoc() == null)
+            jobDTO.setFileDoc(job.getFileDoc());
         jobDTO.setCreateUserLogin(job.getCreateUserLogin());
         jobDTO.setCreateDate(job.getCreateDate());
         jobDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());

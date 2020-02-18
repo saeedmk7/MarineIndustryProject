@@ -1,0 +1,31 @@
+{
+    "marineindustryprojApp": {
+        "headline": {
+            "home": {
+                "title": "سرفصل ها",
+                "createLabel": "جدید",
+                "createOrEditLabel": " سرفصل"
+            },
+            "created": "سرفصل با شناسه {{ param }} ایجاد شد.",
+            "updated": "سرفصل با شناسه {{ param }} ویرایش شد.",
+            "deleted": "سرفصل با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف سرفصل با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات سرفصل"
+            },
+            "row": "ردیف",
+            "title": "عنوان",
+            "headlineLevel": "سطح سرفصل",
+            "headlineScope": "حیطه سرفصل",
+            "totalHour": "ساعت",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "requestEducationalModule": "طراحی پودمان",
+            "educationalModule": "پودمان"
+        }
+    }
+}

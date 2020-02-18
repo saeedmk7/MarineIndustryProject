@@ -114,6 +114,14 @@ public class EffectivenessLevelQueryService extends QueryService<EffectivenessLe
                 specification = specification.and(buildSpecification(criteria.getDesignAndPlanningId(),
                     root -> root.join(EffectivenessLevel_.designAndPlannings, JoinType.LEFT).get(DesignAndPlanning_.id)));
             }
+            if (criteria.getEducationalModuleId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
+                    root -> root.join(EffectivenessLevel_.educationalModules, JoinType.LEFT).get(EducationalModule_.id)));
+            }
+            if (criteria.getRequestEducationalModuleId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRequestEducationalModuleId(),
+                    root -> root.join(EffectivenessLevel_.requestEducationalModules, JoinType.LEFT).get(RequestEducationalModule_.id)));
+            }
         }
         return specification;
     }

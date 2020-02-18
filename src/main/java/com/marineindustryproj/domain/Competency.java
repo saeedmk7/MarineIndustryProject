@@ -59,6 +59,12 @@ public class Competency implements Serializable {
     @Column(name = "modify_date")
     private ZonedDateTime modifyDate;
 
+    @OneToMany(mappedBy = "competency")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<EducationalModule> educationalModules = new HashSet<>();
+    @OneToMany(mappedBy = "competency")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<RequestEducationalModule> requestEducationalModules = new HashSet<>();
     @OneToMany(mappedBy = "competency", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PreJobNiazsanjiCompetency> preJobNiazsanjiCompetencies = new HashSet<>();
@@ -173,6 +179,56 @@ public class Competency implements Serializable {
 
     public void setModifyDate(ZonedDateTime modifyDate) {
         this.modifyDate = modifyDate;
+    }
+
+    public Set<EducationalModule> getEducationalModules() {
+        return educationalModules;
+    }
+
+    public Competency educationalModules(Set<EducationalModule> educationalModules) {
+        this.educationalModules = educationalModules;
+        return this;
+    }
+
+    public Competency addEducationalModule(EducationalModule educationalModule) {
+        this.educationalModules.add(educationalModule);
+        educationalModule.setCompetency(this);
+        return this;
+    }
+
+    public Competency removeEducationalModule(EducationalModule educationalModule) {
+        this.educationalModules.remove(educationalModule);
+        educationalModule.setCompetency(null);
+        return this;
+    }
+
+    public void setEducationalModules(Set<EducationalModule> educationalModules) {
+        this.educationalModules = educationalModules;
+    }
+
+    public Set<RequestEducationalModule> getRequestEducationalModules() {
+        return requestEducationalModules;
+    }
+
+    public Competency requestEducationalModules(Set<RequestEducationalModule> requestEducationalModules) {
+        this.requestEducationalModules = requestEducationalModules;
+        return this;
+    }
+
+    public Competency addRequestEducationalModule(RequestEducationalModule requestEducationalModule) {
+        this.requestEducationalModules.add(requestEducationalModule);
+        requestEducationalModule.setCompetency(this);
+        return this;
+    }
+
+    public Competency removeRequestEducationalModule(RequestEducationalModule requestEducationalModule) {
+        this.requestEducationalModules.remove(requestEducationalModule);
+        requestEducationalModule.setCompetency(null);
+        return this;
+    }
+
+    public void setRequestEducationalModules(Set<RequestEducationalModule> requestEducationalModules) {
+        this.requestEducationalModules = requestEducationalModules;
     }
 
     public Set<PreJobNiazsanjiCompetency> getPreJobNiazsanjiCompetencies() {

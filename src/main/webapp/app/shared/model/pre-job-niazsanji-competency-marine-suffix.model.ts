@@ -4,7 +4,7 @@ import { ITeachingApproachMarineSuffix } from 'app/shared/model//teaching-approa
 
 export interface IPreJobNiazsanjiCompetencyMarineSuffix {
     id?: number;
-    title?: string;
+    title?: any;
     needToImprove?: number;
     needToImproveDescription?: string;
     fixCompetencyDeficiencyDescription?: string;
@@ -32,7 +32,7 @@ export interface IPreJobNiazsanjiCompetencyMarineSuffix {
 export class PreJobNiazsanjiCompetencyMarineSuffix implements IPreJobNiazsanjiCompetencyMarineSuffix {
     constructor(
         public id?: number,
-        public title?: string,
+        public title?: any,
         public needToImprove?: number,
         public needToImproveDescription?: string,
         public fixCompetencyDeficiencyDescription?: string,

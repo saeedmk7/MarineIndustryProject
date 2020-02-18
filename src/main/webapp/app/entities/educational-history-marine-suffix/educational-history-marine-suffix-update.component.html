@@ -30,6 +30,14 @@
                         <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.employmentType"></label>
                         <label class="form-control">{{selectedPerson.employmentTypeTitle}}</label>
                     </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.jobTitle"></label>
+                        <label class="form-control">{{selectedPerson.jobTitle}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.practicaljobTitle"></label>
+                        <label class="form-control">{{selectedPerson.practicaljobTitle}}</label>
+                    </div>
                 </div>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات دوره گذرانده شده</div></div>
                 <div class="form-group half">
@@ -164,7 +172,7 @@
                         </small>
                     </div>
                 </div>
-                <ng-container *ngIf="educationalHistory.id === undefined">
+
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">آپلود گواهینامه</div></div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.fileDoc" for="file_fileDoc">File Doc</label>
@@ -182,6 +190,13 @@
                     </div>
                 </div>
                 <div *ngIf="fileMessage" class="alert" style="display: inline" [ngClass]="{'alert-danger': fileHasError,'alert-success': !fileHasError}">{{fileMessage}}</div>
+                <ng-container *ngIf="educationalHistory.id != undefined">
+                    <input type="button" [disabled]="fileHasError || uploadingFile" (click)="uploadFile()" class="btn btn-info" style="display: inline" value="ویرایش و آپلود فایل گواهینامه" />
+                    <div class="alert alert-warning">
+                        برای ویرایش فایل گواهینامه ابتدا فایل خود را انتخاب نمائید، سپس روی دکمه ی 'ویرایش و آپلود فایل گواهینامه' کلیک نمائید. سپس برای ثبت نهایی تغییرات روی دکمه ذخیره کلیک نمائید.
+                    </div>
+                </ng-container>
+
                 <div class="alert alert-info">
                     لطفا قبل از آپلود به موارد زیر دقت فرمائید.
                     <ol>
@@ -196,7 +211,6 @@
                         </li>
                     </ol>
                 </div>
-                </ng-container>
                 <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.fileDoc" for="field_fileDoc">File Doc</label>
                     <textarea class="form-control" name="fileDoc" id="field_fileDoc"

@@ -3,8 +3,9 @@ package com.marineindustryproj.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.marineindustryproj.domain.enumeration.RequestStatus;
 import com.marineindustryproj.security.SecurityUtils;
+import com.marineindustryproj.service.HeadlineService;
 import com.marineindustryproj.service.RequestEducationalModuleService;
-import com.marineindustryproj.service.dto.EducationalModuleDTO;
+import com.marineindustryproj.service.dto.HeadlineDTO;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -43,10 +44,13 @@ public class RequestEducationalModuleResource {
 
     private final RequestEducationalModuleService requestEducationalModuleService;
 
+    private final HeadlineService headlineService;
+
     private final RequestEducationalModuleQueryService requestEducationalModuleQueryService;
 
-    public RequestEducationalModuleResource(RequestEducationalModuleService requestEducationalModuleService, RequestEducationalModuleQueryService requestEducationalModuleQueryService) {
+    public RequestEducationalModuleResource(RequestEducationalModuleService requestEducationalModuleService, HeadlineService headlineService, RequestEducationalModuleQueryService requestEducationalModuleQueryService) {
         this.requestEducationalModuleService = requestEducationalModuleService;
+        this.headlineService = headlineService;
         this.requestEducationalModuleQueryService = requestEducationalModuleQueryService;
     }
 

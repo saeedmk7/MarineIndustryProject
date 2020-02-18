@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IHeadlineMarineSuffix } from 'app/shared/model//headline-marine-suffix.model';
 import { IEducationalModuleJobMarineSuffix } from 'app/shared/model//educational-module-job-marine-suffix.model';
 import { IRequestOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//request-organization-niazsanji-marine-suffix.model';
 import { IFinalOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//final-organization-niazsanji-marine-suffix.model';
@@ -21,6 +22,10 @@ import { IGoalMarineSuffix } from 'app/shared/model//goal-marine-suffix.model';
 import { IResourceMarineSuffix } from 'app/shared/model//resource-marine-suffix.model';
 import { ITeacherMarineSuffix } from 'app/shared/model//teacher-marine-suffix.model';
 import { IRestrictionMarineSuffix } from 'app/shared/model//restriction-marine-suffix.model';
+import { IPeopleUnderTrainingMarineSuffix } from 'app/shared/model//people-under-training-marine-suffix.model';
+import { ITeachingApproachMarineSuffix } from 'app/shared/model//teaching-approach-marine-suffix.model';
+import { IEffectivenessLevelMarineSuffix } from 'app/shared/model//effectiveness-level-marine-suffix.model';
+import { IEffectivenessIndexMarineSuffix } from 'app/shared/model//effectiveness-index-marine-suffix.model';
 import { INiazsanjiGroupMarineSuffix } from 'app/shared/model//niazsanji-group-marine-suffix.model';
 
 export interface IEducationalModuleMarineSuffix {
@@ -56,6 +61,12 @@ export interface IEducationalModuleMarineSuffix {
     teachersText?: string;
     guid?: string;
     restrictionDescription?: string;
+    recommendDate?: Moment;
+    goalsBehavioralText?: string;
+    neededSoftwares?: string;
+    neededHardware?: string;
+    courseContactsTerms?: string;
+    headlines?: IHeadlineMarineSuffix[];
     educationalModuleJobs?: IEducationalModuleJobMarineSuffix[];
     requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[];
     finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[];
@@ -79,6 +90,10 @@ export interface IEducationalModuleMarineSuffix {
     resources?: IResourceMarineSuffix[];
     teachers?: ITeacherMarineSuffix[];
     restrictions?: IRestrictionMarineSuffix[];
+    peopleUnderTrainings?: IPeopleUnderTrainingMarineSuffix[];
+    teachingApproaches?: ITeachingApproachMarineSuffix[];
+    effectivenessLevels?: IEffectivenessLevelMarineSuffix[];
+    effectivenessIndices?: IEffectivenessIndexMarineSuffix[];
     requestEducationalModuleTitle?: string;
     requestEducationalModuleId?: number;
     securityLevelTitle?: string;
@@ -89,6 +104,8 @@ export interface IEducationalModuleMarineSuffix {
     evaluationMethodId?: number;
     organizationTitle?: string;
     organizationId?: number;
+    competencyTitle?: string;
+    competencyId?: number;
     niazsanjiGroups?: INiazsanjiGroupMarineSuffix[];
 }
 
@@ -126,6 +143,12 @@ export class EducationalModuleMarineSuffix implements IEducationalModuleMarineSu
         public teachersText?: string,
         public guid?: string,
         public restrictionDescription?: string,
+        public recommendDate?: Moment,
+        public goalsBehavioralText?: string,
+        public neededSoftwares?: string,
+        public neededHardware?: string,
+        public courseContactsTerms?: string,
+        public headlines?: IHeadlineMarineSuffix[],
         public educationalModuleJobs?: IEducationalModuleJobMarineSuffix[],
         public requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[],
         public finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[],
@@ -149,6 +172,10 @@ export class EducationalModuleMarineSuffix implements IEducationalModuleMarineSu
         public resources?: IResourceMarineSuffix[],
         public teachers?: ITeacherMarineSuffix[],
         public restrictions?: IRestrictionMarineSuffix[],
+        public peopleUnderTrainings?: IPeopleUnderTrainingMarineSuffix[],
+        public teachingApproaches?: ITeachingApproachMarineSuffix[],
+        public effectivenessLevels?: IEffectivenessLevelMarineSuffix[],
+        public effectivenessIndices?: IEffectivenessIndexMarineSuffix[],
         public requestEducationalModuleTitle?: string,
         public requestEducationalModuleId?: number,
         public securityLevelTitle?: string,
@@ -159,6 +186,8 @@ export class EducationalModuleMarineSuffix implements IEducationalModuleMarineSu
         public evaluationMethodId?: number,
         public organizationTitle?: string,
         public organizationId?: number,
+        public competencyTitle?: string,
+        public competencyId?: number,
         public niazsanjiGroups?: INiazsanjiGroupMarineSuffix[]
     ) {
         this.archived = this.archived || false;

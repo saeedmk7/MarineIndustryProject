@@ -8,6 +8,7 @@ export interface IRunPhaseMarineSuffix {
     id?: number;
     description?: string;
     finalizeCost?: number;
+    priceCost?: number;
     stepNumber?: number;
     done?: boolean;
     doneUserLogin?: string;
@@ -25,6 +26,8 @@ export interface IRunPhaseMarineSuffix {
     guid?: string;
     finishDate?: string;
     hasImportantMessage?: boolean;
+    conversation?: any;
+    comment?: string;
     runRunningSteps?: IRunRunningStepMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     people?: IPersonMarineSuffix[];
@@ -46,6 +49,7 @@ export class RunPhaseMarineSuffix implements IRunPhaseMarineSuffix {
         public id?: number,
         public description?: string,
         public finalizeCost?: number,
+        public priceCost?: number,
         public stepNumber?: number,
         public done?: boolean,
         public doneUserLogin?: string,
@@ -63,6 +67,8 @@ export class RunPhaseMarineSuffix implements IRunPhaseMarineSuffix {
         public guid?: string,
         public finishDate?: string,
         public hasImportantMessage?: boolean,
+        public conversation?: any,
+        public comment?: string,
         public runRunningSteps?: IRunRunningStepMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public people?: IPersonMarineSuffix[],

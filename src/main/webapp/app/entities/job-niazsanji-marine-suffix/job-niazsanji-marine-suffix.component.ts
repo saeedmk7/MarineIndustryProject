@@ -519,10 +519,8 @@ export class JobNiazsanjiMarineSuffixComponent implements OnInit, OnDestroy {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
-        debugger;
         this.jobNiazsanjis = this.convertObjectDatesService.changeArrayDate(data, true);
         this.jobNiazsanjis.forEach(a => {
-            debugger;
             const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
             if(org)
                 a.organizationChartRootTitle = org.fullTitle.split('>')[0];
@@ -533,7 +531,6 @@ export class JobNiazsanjiMarineSuffixComponent implements OnInit, OnDestroy {
             }
         });
         if(this.jobNiazsanjis) {
-            debugger;
             const totalLearningTimes = this.jobNiazsanjis.filter(a => a.totalLearningTime).map(a => a.totalLearningTime);
             if(totalLearningTimes)
                 this.totalHour = totalLearningTimes.reduce((sum, current) => sum + current);

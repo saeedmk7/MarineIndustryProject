@@ -41,6 +41,10 @@ public class EffectivenessLevelCriteria implements Serializable {
 
     private LongFilter designAndPlanningId;
 
+    private LongFilter educationalModuleId;
+
+    private LongFilter requestEducationalModuleId;
+
     public LongFilter getId() {
         return id;
     }
@@ -113,6 +117,22 @@ public class EffectivenessLevelCriteria implements Serializable {
         this.designAndPlanningId = designAndPlanningId;
     }
 
+    public LongFilter getEducationalModuleId() {
+        return educationalModuleId;
+    }
+
+    public void setEducationalModuleId(LongFilter educationalModuleId) {
+        this.educationalModuleId = educationalModuleId;
+    }
+
+    public LongFilter getRequestEducationalModuleId() {
+        return requestEducationalModuleId;
+    }
+
+    public void setRequestEducationalModuleId(LongFilter requestEducationalModuleId) {
+        this.requestEducationalModuleId = requestEducationalModuleId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -132,7 +152,9 @@ public class EffectivenessLevelCriteria implements Serializable {
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
-            Objects.equals(designAndPlanningId, that.designAndPlanningId);
+            Objects.equals(designAndPlanningId, that.designAndPlanningId) &&
+            Objects.equals(educationalModuleId, that.educationalModuleId) &&
+            Objects.equals(requestEducationalModuleId, that.requestEducationalModuleId);
     }
 
     @Override
@@ -146,7 +168,9 @@ public class EffectivenessLevelCriteria implements Serializable {
         createDate,
         modifyUserLogin,
         modifyDate,
-        designAndPlanningId
+        designAndPlanningId,
+        educationalModuleId,
+        requestEducationalModuleId
         );
     }
 
@@ -162,6 +186,8 @@ public class EffectivenessLevelCriteria implements Serializable {
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
                 (designAndPlanningId != null ? "designAndPlanningId=" + designAndPlanningId + ", " : "") +
+                (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (requestEducationalModuleId != null ? "requestEducationalModuleId=" + requestEducationalModuleId + ", " : "") +
             "}";
     }
 

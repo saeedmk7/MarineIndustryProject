@@ -34,6 +34,26 @@ public class FileStorageProperties {
         this.historyUploadDir = historyUploadDir;
     }
 
+    private String soldierTrainingReportUploadDir;
+
+    public String getSoldierTrainingReportUploadDir() {
+        return soldierTrainingReportUploadDir;
+    }
+
+    public void setSoldierTrainingReportUploadDir(String soldierTrainingReportUploadDir) {
+        this.soldierTrainingReportUploadDir = soldierTrainingReportUploadDir;
+    }
+
+    private String evaluateCriteriaDataUploadDir;
+
+    public String getEvaluateCriteriaDataUploadDir() {
+        return evaluateCriteriaDataUploadDir;
+    }
+
+    public void setEvaluateCriteriaDataUploadDir(String evaluateCriteriaDataUploadDir) {
+        this.evaluateCriteriaDataUploadDir = evaluateCriteriaDataUploadDir;
+    }
+
     private String educationUploadDir;
 
     public String getEducationUploadDir() {

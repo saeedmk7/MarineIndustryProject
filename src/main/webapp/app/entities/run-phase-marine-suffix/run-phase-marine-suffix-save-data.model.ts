@@ -5,6 +5,7 @@ export interface IRunPhaseSaveDataModel {
     runPhaseId?: number;
     runMonth?: number;
     description?: string;
+    conversion?: string;
     stepNumber?: number;
     done?: boolean;
     status?: number;
@@ -19,6 +20,7 @@ export class RunPhaseSaveDataModel implements IRunPhaseSaveDataModel {
         public runPhaseId?: number,
         public runMonth?: number,
         public description?: string,
+        public conversion?: string,
         public stepNumber?: number,
         public done?: boolean,
         public status?: number,

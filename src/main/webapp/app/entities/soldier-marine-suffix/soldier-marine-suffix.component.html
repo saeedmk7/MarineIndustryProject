@@ -1,0 +1,176 @@
+<script src="soldier-marine-suffix-update.component.ts"></script>
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.soldier.home.title">Soldiers</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-soldier-marine-suffix" [routerLink]="['/soldier-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.soldier.home.createLabel">
+            Create new Soldier
+            </span>
+        </button>
+        <button class="btn btn-info btn-raised float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <div class="row">
+        <search-panel class="col-md-12" [searchPanelModel]="searchbarModel"></search-panel>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="soldiers">
+        <table class="table  table-striped table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th>ردیف</th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="name"><span jhiTranslate="marineindustryprojApp.soldier.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="family"><span jhiTranslate="marineindustryprojApp.soldier.family">Family</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fatherName"><span jhiTranslate="marineindustryprojApp.soldier.fatherName">Father Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="certificateNumber"><span jhiTranslate="marineindustryprojApp.soldier.certificateNumber">Certificate Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="nationalId"><span jhiTranslate="marineindustryprojApp.soldier.nationalId">National Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="birthDate"><span jhiTranslate="marineindustryprojApp.soldier.birthDate">Birth Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.soldier.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="employmentDate"><span jhiTranslate="marineindustryprojApp.soldier.employmentDate">Employment Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="releaseDate"><span jhiTranslate="marineindustryprojApp.soldier.releaseDate">Release Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
+            <th jhiSortBy="personelCode"><span jhiTranslate="marineindustryprojApp.soldier.personelCode">Personel Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="lastQualificationTitle"><span jhiTranslate="marineindustryprojApp.soldier.lastQualification">Last Qualification</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="lastFieldOfStudyTitle"><span jhiTranslate="marineindustryprojApp.soldier.lastFieldOfStudy">Last Field Of Study</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="phoneNumber"><span jhiTranslate="marineindustryprojApp.soldier.phoneNumber">Phone Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="archived"><span jhiTranslate="marineindustryprojApp.soldier.archived">Archived</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
+            <!--<th jhiSortBy="mobile"><span jhiTranslate="marineindustryprojApp.soldier.mobile">Mobile</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="address"><span jhiTranslate="marineindustryprojApp.soldier.address">Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.soldier.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.soldier.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.soldier.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.soldier.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.soldier.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
+            <th jhiSortBy="archivedUserLogin"><span jhiTranslate="marineindustryprojApp.soldier.archivedUserLogin">Archived User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedDate"><span jhiTranslate="marineindustryprojApp.soldier.archivedDate">Archived Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.soldier.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="guid"><span jhiTranslate="marineindustryprojApp.soldier.guid">Guid</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
+            <th jhiSortBy="jobTitle"><span jhiTranslate="marineindustryprojApp.soldier.job">Job</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let soldier of soldiers;let i = index">
+                <!--<td><a [routerLink]="['/soldier-marine-suffix', soldier.id, 'view' ]">{{soldier.id}}</a></td>-->
+                <td>{{i+1}}</td>
+                <td>{{soldier.name}}</td>
+                <td>{{soldier.family}}</td>
+                <td>{{soldier.fatherName}}</td>
+                <!--<td>{{soldier.certificateNumber}}</td>-->
+                <td>{{soldier.nationalId}}</td>
+                <td>{{soldier.birthDate}}</td>
+                <td>
+                    <div *ngIf="soldier.organizationChartId">
+                        <a [routerLink]="['../organization-chart-marine-suffix', soldier.organizationChartId , 'view' ]" >{{soldier.organizationChartTitle}}</a>
+                    </div>
+                </td>
+                <td>{{soldier.employmentDate}}</td>
+                <td>{{soldier.releaseDate}}</td>
+
+                <td>{{soldier.personelCode}}</td>
+                <td>
+                    <div *ngIf="soldier.lastQualificationId">
+                        <a [routerLink]="['../qualification-marine-suffix', soldier.lastQualificationId , 'view' ]" >{{soldier.lastQualificationTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="soldier.lastFieldOfStudyId">
+                        <a [routerLink]="['../field-of-study-marine-suffix', soldier.lastFieldOfStudyId , 'view' ]" >{{soldier.lastFieldOfStudyTitle}}</a>
+                    </div>
+                </td>
+
+                <td>{{soldier.phoneNumber}}</td>
+                <td>{{soldier.archived}}</td>
+
+                <!--<td>{{soldier.mobile}}</td>
+                <td>{{soldier.address}}</td>
+                <td>{{soldier.description}}</td>
+                <td>{{soldier.createUserLogin}}</td>
+                <td>{{soldier.createDate | date:'medium'}}</td>
+                <td>{{soldier.modifyUserLogin}}</td>
+                <td>{{soldier.modifyDate | date:'medium'}}</td>
+
+                <td>{{soldier.archivedUserLogin}}</td>
+                <td>{{soldier.archivedDate | date:'medium'}}</td>
+                <td>{{soldier.status}}</td>
+                <td>{{soldier.guid}}</td>-->
+
+                <!--<td>
+                    <div *ngIf="soldier.jobId">
+                        <a [routerLink]="['../job-marine-suffix', soldier.jobId , 'view' ]" >{{soldier.jobTitle}}</a>
+                    </div>
+                </td>-->
+
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../document-marine-suffix', 'soldier',soldier.id ]"
+                                class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.documents">Documents</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/soldier-marine-suffix', soldier.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/soldier-marine-suffix', soldier.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" *ngIf="isAdmin"
+                                [routerLink]="['/', { outlets: { popup: 'soldier-marine-suffix/'+ soldier.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="8">
+                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll(criteria)">
+                        <option value="10">۱۰</option>
+                        <option selected="selected" value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="10">
+
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+    <div *ngIf="soldiers && soldiers.length">
+        <!--<div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>-->
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

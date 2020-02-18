@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity SoldierTrainingReport.
+    -->
+    <changeSet id="20200207095829-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="soldier_training_reports_id"
+                                 baseTableName="soldier_training_report_document"
+                                 constraintName="soldier_training_report_docume_soldier_training_reports_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="soldier_training_report"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="soldier_training_report_document"
+                                 constraintName="fk_soldier_training_report_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="soldier_id"
+                                 baseTableName="soldier_training_report"
+                                 constraintName="fk_soldier_training_report_soldier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="soldier"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -65,8 +65,6 @@ export class EducationHistoryPanelComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        debugger;
-
     }
 
     ngOnDestroy(): void {

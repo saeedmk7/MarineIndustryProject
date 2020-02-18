@@ -1,0 +1,48 @@
+{
+    "marineindustryprojApp": {
+        "soldier": {
+            "home": {
+                "title": "Soldiers",
+                "createLabel": "Create a new Soldier",
+                "createOrEditLabel": "Create or edit a Soldier"
+            },
+            "created": "A new Soldier is created with identifier {{ param }}",
+            "updated": "A Soldier is updated with identifier {{ param }}",
+            "deleted": "A Soldier is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Soldier {{ id }}?"
+            },
+            "detail": {
+                "title": "Soldier"
+            },
+            "name": "Name",
+            "family": "Family",
+            "fatherName": "Father Name",
+            "certificateNumber": "Certificate Number",
+            "nationalId": "National Id",
+            "birthDate": "Birth Date",
+            "releaseDate": "Release Date",
+            "personelCode": "Personel Code",
+            "employmentDate": "Employment Date",
+            "phoneNumber": "Phone Number",
+            "mobile": "Mobile",
+            "address": "Address",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "guid": "Guid",
+            "soldierTrainingReport": "Soldier Training Report",
+            "document": "Document",
+            "lastQualification": "Last Qualification",
+            "lastFieldOfStudy": "Last Field Of Study",
+            "job": "Job",
+            "organizationChart": "Organization Chart"
+        }
+    }
+}

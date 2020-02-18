@@ -1,0 +1,141 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="soldier">
+            <h2><span jhiTranslate="marineindustryprojApp.soldier.detail.title">Soldier</span> {{soldier.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.name">Name</span></dt>
+                <dd>
+                    <span>{{soldier.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.family">Family</span></dt>
+                <dd>
+                    <span>{{soldier.family}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.fatherName">Father Name</span></dt>
+                <dd>
+                    <span>{{soldier.fatherName}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.certificateNumber">Certificate Number</span></dt>
+                <dd>
+                    <span>{{soldier.certificateNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.nationalId">National Id</span></dt>
+                <dd>
+                    <span>{{soldier.nationalId}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.birthDate">Birth Date</span></dt>
+                <dd>
+                    <span>{{soldier.birthDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.releaseDate">Release Date</span></dt>
+                <dd>
+                    <span>{{soldier.releaseDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.personelCode">Personel Code</span></dt>
+                <dd>
+                    <span>{{soldier.personelCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.employmentDate">Employment Date</span></dt>
+                <dd>
+                    <span>{{soldier.employmentDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{soldier.phoneNumber}}</span>
+                </dd>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.soldier.mobile">Mobile</span></dt>
+                <dd>
+                    <span>{{soldier.mobile}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.address">Address</span></dt>
+                <dd>
+                    <span>{{soldier.address}}</span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.description">Description</span></dt>
+                <dd>
+                    <span>{{soldier.description}}</span>
+                </dd>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.soldier.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{soldier.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{soldier.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{soldier.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{soldier.modifyDate}}</span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.archived">Archived</span></dt>
+                <dd>
+                    <span>{{soldier.archived}}</span>
+                </dd>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.soldier.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{soldier.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{soldier.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.status">Status</span></dt>
+                <dd>
+                    <span>{{soldier.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.guid">Guid</span></dt>
+                <dd>
+                    <span>{{soldier.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of soldier.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.lastQualification">Last Qualification</span></dt>
+                <dd>
+                    <div *ngIf="soldier.lastQualificationId">
+                        <a [routerLink]="['/qualification-marine-suffix', soldier.lastQualificationId, 'view']">{{soldier.lastQualificationTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.lastFieldOfStudy">Last Field Of Study</span></dt>
+                <dd>
+                    <div *ngIf="soldier.lastFieldOfStudyId">
+                        <a [routerLink]="['/field-of-study-marine-suffix', soldier.lastFieldOfStudyId, 'view']">{{soldier.lastFieldOfStudyTitle}}</a>
+                    </div>
+                </dd>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.soldier.job">Job</span></dt>
+                <dd>
+                    <div *ngIf="soldier.jobId">
+                        <a [routerLink]="['/job-marine-suffix', soldier.jobId, 'view']">{{soldier.jobTitle}}</a>
+                    </div>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.soldier.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="soldier.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', soldier.organizationChartId, 'view']">{{soldier.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/soldier-marine-suffix', soldier.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

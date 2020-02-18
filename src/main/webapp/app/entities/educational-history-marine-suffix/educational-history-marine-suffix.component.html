@@ -60,8 +60,8 @@
                         <fa-icon [icon]="'eye'"></fa-icon>
                         <span class="d-none d-md-inline" alt="مشاهده" jhiTranslate="entity.action.view">View</span>
                     </button>
-                    <img src="../../../content/images/bulb-icon.png" title="پیام مهمی در جزئیات وجود دارد" alt="پیام مهمی در جزئیات وجود دارد" *ngIf="educationalHistory.hasImportantMessage == true" style="cursor: pointer;width: 12%;margin: 0;" (click)="toggleImportantMessage(educationalHistory.id, false)"/>
-                    <img src="../../../content/images/light-off-icon.png" *ngIf="educationalHistory.hasImportantMessage == false" style="cursor: pointer;width: 12%;margin: 0;" (click)="toggleImportantMessage(educationalHistory.id, true)"/>
+                    <img src="../../../content/images/bulb-icon.png" title="پیام مهمی در جزئیات وجود دارد" alt="پیام مهمی در جزئیات وجود دارد" *ngIf="educationalHistory.hasImportantMessage == true" class="lightBulb" (click)="toggleImportantMessage(educationalHistory.id, false)"/>
+                    <img src="../../../content/images/light-off-icon.png" *ngIf="educationalHistory.hasImportantMessage == false" class="lightBulb" (click)="toggleImportantMessage(educationalHistory.id, true)"/>
                     <ng-container *ngIf="!(educationalHistory.requestStatus == 'ACCEPT'  || educationalHistory.requestStatus == 'IGNORE')">
                         <ng-container *ngIf="educationalHistory.status == currentPerson.organizationChartId">
                             <button type="submit" title="ویرایش"

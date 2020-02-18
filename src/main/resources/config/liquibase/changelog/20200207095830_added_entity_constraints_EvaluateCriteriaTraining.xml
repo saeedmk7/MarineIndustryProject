@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity EvaluateCriteriaTraining.
+    -->
+    <changeSet id="20200207095830-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="evaluate_criteria_trainings_id"
+                                 baseTableName="evaluate_criteria_training_document"
+                                 constraintName="evaluate_criteria_training_doc_evaluate_criteria_trainings_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="evaluate_criteria_training"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="evaluate_criteria_training_document"
+                                 constraintName="fk_evaluate_criteria_training_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="organization_chart_id"
+                                 baseTableName="evaluate_criteria_training"
+                                 constraintName="fk_evaluate_criteria_training_organization_chart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+
+    </changeSet>
+</databaseChangeLog>

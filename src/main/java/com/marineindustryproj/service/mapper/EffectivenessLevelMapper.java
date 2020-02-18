@@ -13,6 +13,8 @@ public interface EffectivenessLevelMapper extends EntityMapper<EffectivenessLeve
 
 
     @Mapping(target = "designAndPlannings", ignore = true)
+    @Mapping(target = "educationalModules", ignore = true)
+    @Mapping(target = "requestEducationalModules", ignore = true)
     EffectivenessLevel toEntity(EffectivenessLevelDTO effectivenessLevelDTO);
 
     default EffectivenessLevel fromId(Long id) {

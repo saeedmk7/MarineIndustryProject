@@ -255,7 +255,6 @@ export class PreJobNiazsanjiMarineSuffixUpdateComponent implements OnInit {
     onPersonChange(event: IPersonMarineSuffix) {
         if(event.id) {
             this.personService.find(event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
-                    debugger;
                     this.selectedPerson = resp.body;
                     if (this.organizationcharts.find(a => a.id == this.selectedPerson.organizationChartId)) {
                         this.preJobNiazsanji.organizationChartId = this.selectedPerson.organizationChartId;
@@ -314,11 +313,9 @@ export class PreJobNiazsanjiMarineSuffixUpdateComponent implements OnInit {
                     this.preJobNiazsanji.step = 2;
                     this.preJobNiazsanji.archived = false;
                     this.preJobNiazsanji.preJobNiazsanjiCompetencies = [];
-                    debugger;
                     this.competencies.forEach(a => {
                         if (a.selectedItems) {
                             a.selectedItems.forEach(w => {
-                                debugger;
                                 let newPreJob: IPreJobNiazsanjiCompetencyMarineSuffix = {
                                     title: w,
                                     competencyId: a.id,
@@ -333,7 +330,6 @@ export class PreJobNiazsanjiMarineSuffixUpdateComponent implements OnInit {
                         this.isSaving = false;
                         return;
                     }
-                    debugger;
                     this.preJobNiazsanji.requestStatus = RequestStatus.NEW;
                     this.preJobNiazsanji.changeStatusUserLogin = this.currentAccount.login;
                     this.preJobNiazsanji.conversation = " درخواست توسط " + this.currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " ثبت شد. "

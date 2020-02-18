@@ -43,6 +43,8 @@ public class FieldOfStudyCriteria implements Serializable {
 
     private LongFilter educationalRecordId;
 
+    private LongFilter soldierId;
+
     public LongFilter getId() {
         return id;
     }
@@ -123,6 +125,14 @@ public class FieldOfStudyCriteria implements Serializable {
         this.educationalRecordId = educationalRecordId;
     }
 
+    public LongFilter getSoldierId() {
+        return soldierId;
+    }
+
+    public void setSoldierId(LongFilter soldierId) {
+        this.soldierId = soldierId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -143,7 +153,8 @@ public class FieldOfStudyCriteria implements Serializable {
             Objects.equals(modifyDate, that.modifyDate) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(teacherId, that.teacherId) &&
-            Objects.equals(educationalRecordId, that.educationalRecordId);
+            Objects.equals(educationalRecordId, that.educationalRecordId) &&
+            Objects.equals(soldierId, that.soldierId);
     }
 
     @Override
@@ -158,7 +169,8 @@ public class FieldOfStudyCriteria implements Serializable {
         modifyDate,
         personId,
         teacherId,
-        educationalRecordId
+        educationalRecordId,
+        soldierId
         );
     }
 
@@ -175,6 +187,7 @@ public class FieldOfStudyCriteria implements Serializable {
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
                 (educationalRecordId != null ? "educationalRecordId=" + educationalRecordId + ", " : "") +
+                (soldierId != null ? "soldierId=" + soldierId + ", " : "") +
             "}";
     }
 

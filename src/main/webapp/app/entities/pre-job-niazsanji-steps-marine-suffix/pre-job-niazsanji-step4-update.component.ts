@@ -84,7 +84,6 @@ export class PreJobNiazsanjiStep4UpdateComponent implements OnInit {
         }
     }
     deleteTeach(preJobNiazsanjiCompetencyId ,teachId){
-        debugger;
         let preJobNiazsanjiCompetency = this.preJobNiazsanjiCompetencies.find(a => a.id == preJobNiazsanjiCompetencyId);
         preJobNiazsanjiCompetency.teachingApproaches = preJobNiazsanjiCompetency.teachingApproaches.filter(w => w.id != teachId);
     }

@@ -1,0 +1,37 @@
+{
+    "marineindustryprojApp": {
+        "soldierTrainingReport": {
+            "home": {
+                "title": "Soldier Training Reports",
+                "createLabel": "Create a new Soldier Training Report",
+                "createOrEditLabel": "Create or edit a Soldier Training Report"
+            },
+            "created": "A new Soldier Training Report is created with identifier {{ param }}",
+            "updated": "A Soldier Training Report is updated with identifier {{ param }}",
+            "deleted": "A Soldier Training Report is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Soldier Training Report {{ id }}?"
+            },
+            "detail": {
+                "title": "Soldier Training Report"
+            },
+            "title": "Title",
+            "personHour": "Person Hour",
+            "executiveTrainingCompany": "Executive Training Company",
+            "certificateStatus": "Certificate Status",
+            "certificateNumber": "Certificate Number",
+            "year": "Year",
+            "month": "Month",
+            "reportTime": "Report Time",
+            "fileDoc": "File Doc",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "guid": "Guid",
+            "document": "Document",
+            "soldier": "Soldier"
+        }
+    }
+}

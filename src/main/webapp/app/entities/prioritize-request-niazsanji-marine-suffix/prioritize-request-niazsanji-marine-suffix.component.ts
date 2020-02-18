@@ -21,6 +21,7 @@ import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suf
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
+import {CommonSearchCheckerService} from "app/plugin/utilities/common-search-checkers";
 
 @Component({
     selector: 'mi-prioritize-request-niazsanji-marine-suffix',
@@ -76,7 +77,8 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
         protected treeUtilities: TreeUtilities,
         protected userService: UserService,
         private courseTypeService: CourseTypeMarineSuffixService,
-        private convertObjectDatesService: ConvertObjectDatesService
+        private convertObjectDatesService: ConvertObjectDatesService,
+        private commonSearchCheckerService: CommonSearchCheckerService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -98,24 +100,7 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
     makeCriteria(criteria?,excelExport: boolean = false){
 
         if (criteria) {
-            const year = criteria.find(a => a.key == 'yearId.equals');
-            if(year) {
-                const val = +year.value;
-                //criteria.pop('yearId');
-                criteria = criteria.filter(a => a.key != 'yearId.equals');
-                if (val) {
-                    let yearDetail = this.yearsCollections.find(a => a.year == val);
-                    let beginDate = new Date(yearDetail.beginDate).toISOString();
-                    let endDate = new Date(yearDetail.endDate).toISOString();
-
-                    criteria.push({
-                        key: 'createDate.lessOrEqualThan', value: endDate
-                    });
-                    criteria.push({
-                        key: 'createDate.greaterOrEqualThan', value: beginDate
-                    });
-                }
-            }
+            criteria = this.commonSearchCheckerService.checkYear(criteria);
         }
         else{
             criteria = [];
@@ -123,6 +108,7 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
         if(this.currentPerson){
             if(this.organizationChartService.organizationchartsAll){
                 this.organizationcharts = this.organizationChartService.organizationchartsAll;
+                criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteria(criteria, this.organizationcharts);
                 let wantOrgIds = this.treeUtilities.getAllOfChilderenIdsOfThisIdWithoutItself(this.organizationChartService.organizationchartsAll, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
                 return this.handleAfterChart(wantOrgIds,criteria,excelExport);
             }
@@ -130,6 +116,7 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
                 this.organizationChartService.query().subscribe((resp: HttpResponse<IOrganizationChartMarineSuffix[]>) =>{
 
                     this.organizationcharts = resp.body;
+                    criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteria(criteria, this.organizationcharts);
                     let wantOrgIds = this.treeUtilities.getAllOfChilderenIdsOfThisIdWithoutItself(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
                     this.handleAfterChart(wantOrgIds,criteria,excelExport);
                 });
@@ -147,6 +134,7 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
 
                     if(this.organizationChartService.organizationchartsAll){
                         this.organizationcharts = this.organizationChartService.organizationchartsAll;
+                        criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteria(criteria, this.organizationcharts);
                         let wantOrgIds = this.treeUtilities.getAllOfChilderenIdsOfThisIdWithoutItself(this.organizationChartService.organizationchartsAll, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
                         this.handleAfterChart(wantOrgIds,criteria,excelExport);
                     }
@@ -154,6 +142,7 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
                         this.organizationChartService.query().subscribe((resp: HttpResponse<IOrganizationChartMarineSuffix[]>) =>{
 
                             this.organizationcharts = resp.body;
+                            criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteria(criteria, this.organizationcharts);
                             let wantOrgIds = this.treeUtilities.getAllOfChilderenIdsOfThisIdWithoutItself(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
                             this.handleAfterChart(wantOrgIds,criteria,excelExport);
                         });
@@ -211,21 +200,10 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
     loadAll(criteria?,excelExport: boolean = false) {
         if(!this.isAdmin)
         {
-            let orgs = this.treeUtilities.getParentIds(this.organizationcharts,this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
-            if(orgs.length > 0){
-                orgs.push(0);
-                criteria.push({
-                    key: 'status.in',
-                    value: orgs
-                });
-            }
-            else{
-                orgs = [0];
-                criteria.push({
-                    key: 'status.equals',
-                    value: orgs
-                });
-            }
+            criteria.push({
+                key: 'status.equals',
+                value: 0
+            });
         }
         if(excelExport) {
         }
@@ -285,6 +263,7 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
                 this.currentPerson = resp.body;
                 /*this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleId', 'number', 'equals'));*/
                 this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
+                this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleCode', 'text', 'contains'));
                 this.prepareSearchOrgChart();
                 this.prepareDate();
                 this.prepareSearchEducationalModule();
@@ -470,7 +449,6 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
 
     prepareResult(){
         this.prioritizeRequestNiazsanjis.forEach((a: IPrioritizeRequestNiazsanjiMarineSuffix) => {
-            debugger;
             a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
 
             let education: IEducationalModuleMarineSuffix;
@@ -481,6 +459,9 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
                 a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
                 a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)
             }
+            const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
+            if(org)
+                a.organizationChartRootTitle = org.fullTitle.split('>')[0];
         });1
         this.totalHour = this.prioritizeRequestNiazsanjis.filter(a => a.totalLearningTime).map(a => a.totalLearningTime).reduce((sum, current) => sum + current);
         this.totalPriceCost = this.prioritizeRequestNiazsanjis.filter(a => a.costEducationalModule > 0)

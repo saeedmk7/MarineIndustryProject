@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity RequestEducationalModule and its DTO RequestEducationalModuleDTO.
  */
-@Mapper(componentModel = "spring", uses = {ScientificWorkGroupMapper.class, DocumentMapper.class, EducationalCenterMapper.class, GoalMapper.class, ResourceMapper.class, TeacherMapper.class, RestrictionMapper.class, SecurityLevelMapper.class, SkillableLevelOfSkillMapper.class, EvaluationMethodMapper.class, OrganizationMapper.class})
+@Mapper(componentModel = "spring", uses = {ScientificWorkGroupMapper.class, DocumentMapper.class, EducationalCenterMapper.class, GoalMapper.class, ResourceMapper.class, TeacherMapper.class, RestrictionMapper.class, PeopleUnderTrainingMapper.class, TeachingApproachMapper.class, EffectivenessLevelMapper.class, EffectivenessIndexMapper.class, SecurityLevelMapper.class, SkillableLevelOfSkillMapper.class, EvaluationMethodMapper.class, OrganizationMapper.class, CompetencyMapper.class})
 public interface RequestEducationalModuleMapper extends EntityMapper<RequestEducationalModuleDTO, RequestEducationalModule> {
 
     @Mapping(source = "securityLevel.id", target = "securityLevelId")
@@ -19,13 +19,18 @@ public interface RequestEducationalModuleMapper extends EntityMapper<RequestEduc
     @Mapping(source = "evaluationMethod.title", target = "evaluationMethodTitle")
     @Mapping(source = "organization.id", target = "organizationId")
     @Mapping(source = "organization.title", target = "organizationTitle")
+    @Mapping(source = "competency.id", target = "competencyId")
+    @Mapping(source = "competency.title", target = "competencyTitle")
+    @Mapping(source = "headlines", target = "headlines")
     RequestEducationalModuleDTO toDto(RequestEducationalModule requestEducationalModule);
 
     @Mapping(target = "educationalModules", ignore = true)
+    @Mapping(target = "headlines", ignore = true)
     @Mapping(source = "securityLevelId", target = "securityLevel")
     @Mapping(source = "skillableLevelOfSkillId", target = "skillableLevelOfSkill")
     @Mapping(source = "evaluationMethodId", target = "evaluationMethod")
     @Mapping(source = "organizationId", target = "organization")
+    @Mapping(source = "competencyId", target = "competency")
     RequestEducationalModule toEntity(RequestEducationalModuleDTO requestEducationalModuleDTO);
 
     default RequestEducationalModule fromId(Long id) {

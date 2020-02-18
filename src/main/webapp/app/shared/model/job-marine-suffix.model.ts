@@ -2,6 +2,7 @@ import { Moment } from 'moment';
 import { IPersonMarineSuffix } from 'app/shared/model//person-marine-suffix.model';
 import { IJobMarineSuffix } from 'app/shared/model//job-marine-suffix.model';
 import { IEducationalModuleJobMarineSuffix } from 'app/shared/model//educational-module-job-marine-suffix.model';
+import { ISoldierMarineSuffix } from 'app/shared/model//soldier-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IMainTaskMarineSuffix } from 'app/shared/model//main-task-marine-suffix.model';
 import { INiazsanjiGroupMarineSuffix } from 'app/shared/model//niazsanji-group-marine-suffix.model';
@@ -28,6 +29,7 @@ export interface IJobMarineSuffix {
     practicaljobPeople?: IPersonMarineSuffix[];
     jobs?: IJobMarineSuffix[];
     educationalModuleJobs?: IEducationalModuleJobMarineSuffix[];
+    jobSoldiers?: ISoldierMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     rasteTitle?: string;
     rasteId?: number;
@@ -66,6 +68,7 @@ export class JobMarineSuffix implements IJobMarineSuffix {
         public practicaljobPeople?: IPersonMarineSuffix[],
         public jobs?: IJobMarineSuffix[],
         public educationalModuleJobs?: IEducationalModuleJobMarineSuffix[],
+        public jobSoldiers?: ISoldierMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public rasteTitle?: string,
         public rasteId?: number,

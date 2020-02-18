@@ -55,6 +55,7 @@ export interface IPrioritizeRequestNiazsanjiMarineSuffix {
     personId?: number;
     organizationChartTitle?: string;
     organizationChartId?: number;
+    organizationChartRootTitle?:string;
     teachingApproachTitle?: string;
     teachingApproachId?: number;
 }
@@ -109,6 +110,7 @@ export class PrioritizeRequestNiazsanjiMarineSuffix implements IPrioritizeReques
         public personId?: number,
         public organizationChartTitle?: string,
         public organizationChartId?: number,
+        public organizationChartRootTitle?:string,
         public teachingApproachTitle?: string,
         public teachingApproachId?: number
     ) {

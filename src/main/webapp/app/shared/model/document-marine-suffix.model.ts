@@ -23,6 +23,9 @@ import { IJobNiazsanjiMarineSuffix } from 'app/shared/model//job-niazsanji-marin
 import { INiazsanjiOtherMarineSuffix } from 'app/shared/model//niazsanji-other-marine-suffix.model';
 import { IRequestOtherNiazsanjiMarineSuffix } from 'app/shared/model//request-other-niazsanji-marine-suffix.model';
 import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model//prioritize-request-niazsanji-marine-suffix.model';
+import { ISoldierMarineSuffix } from 'app/shared/model//soldier-marine-suffix.model';
+import { ISoldierTrainingReportMarineSuffix } from 'app/shared/model//soldier-training-report-marine-suffix.model';
+import { IEvaluateCriteriaTrainingMarineSuffix } from 'app/shared/model//evaluate-criteria-training-marine-suffix.model';
 
 export interface IDocumentMarineSuffix {
     id?: number;
@@ -59,6 +62,9 @@ export interface IDocumentMarineSuffix {
     niazsanjiOthers?: INiazsanjiOtherMarineSuffix[];
     requestOtherNiazsanjis?: IRequestOtherNiazsanjiMarineSuffix[];
     prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[];
+    soldiers?: ISoldierMarineSuffix[];
+    soldierTrainingReports?: ISoldierTrainingReportMarineSuffix[];
+    evaluateCriteriaTrainings?: IEvaluateCriteriaTrainingMarineSuffix[];
 }
 
 export class DocumentMarineSuffix implements IDocumentMarineSuffix {
@@ -96,6 +102,9 @@ export class DocumentMarineSuffix implements IDocumentMarineSuffix {
         public jobNiazsanjis?: IJobNiazsanjiMarineSuffix[],
         public niazsanjiOthers?: INiazsanjiOtherMarineSuffix[],
         public requestOtherNiazsanjis?: IRequestOtherNiazsanjiMarineSuffix[],
-        public prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[]
+        public prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[],
+        public soldiers?: ISoldierMarineSuffix[],
+        public soldierTrainingReports?: ISoldierTrainingReportMarineSuffix[],
+        public evaluateCriteriaTrainings?: IEvaluateCriteriaTrainingMarineSuffix[]
     ) {}
 }

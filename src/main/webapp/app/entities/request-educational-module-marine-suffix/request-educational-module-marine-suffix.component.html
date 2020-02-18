@@ -69,10 +69,10 @@
                         <span class="d-none d-md-inline" alt="مشاهده" jhiTranslate="entity.action.view">View</span>
                     </button>
                     <img src="../../../content/images/bulb-icon.png" title="پیام مهمی در جزئیات وجود دارد" alt="پیام مهمی در جزئیات وجود دارد"
-                         *ngIf="requestEducationalModule.hasImportantMessage == true" style="cursor: pointer;width: 12%;margin: 0;"
+                         *ngIf="requestEducationalModule.hasImportantMessage == true" class="lightBulb"
                          (click)="toggleImportantMessage(requestEducationalModule.id, false)"/>
                     <img src="../../../content/images/light-off-icon.png"
-                         *ngIf="requestEducationalModule.hasImportantMessage == false" style="cursor: pointer;width: 12%;margin: 0;"
+                         *ngIf="requestEducationalModule.hasImportantMessage == false" class="lightBulb"
                          (click)="toggleImportantMessage(requestEducationalModule.id, true)"/>
                     <ng-container *ngIf="!(requestEducationalModule.requestStatus == 'ACCEPT'  || requestEducationalModule.requestStatus == 'IGNORE')">
                         <ng-container *ngIf="requestEducationalModule.status == currentPerson.organizationChartId">

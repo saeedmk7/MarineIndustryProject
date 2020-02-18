@@ -47,6 +47,8 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
     fileMessage: string;
     message: string;
     dateValid: number;
+    uploadingFile: boolean = false;
+    selectedPerson: IPersonMarineSuffix = new PersonMarineSuffix();
     constructor(
         protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
@@ -65,6 +67,8 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ educationalHistory }) => {
             this.educationalHistory = educationalHistory;
+            if(this.educationalHistory.id !== undefined)
+                this.onPersonChange({id: this.educationalHistory.personId});
         });
         this.principal.identity().then(account => {
 
@@ -156,7 +160,7 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
         let organization = this.organizationCharts.find(a => a.id == this.currentPerson.organizationChartId);
         if(organization.parentId > 0) {
 
-            this.mustSendOrgChartId = this.treeUtilities.getRootId(this.organizationCharts ,this.currentPerson.organizationChartId); //organization.parentId;
+            this.mustSendOrgChartId = organization.parentId; //this.treeUtilities.getRootId(this.organizationCharts ,this.currentPerson.organizationChartId);
 
             //this.mustSendChartId = neededOrgId;
             let criteria = [{
@@ -183,7 +187,7 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
         else{
             this.mustSendOrgChartId = 0;
             this.targetPeople = [];
-            this.targetPeople.push(new PersonMarineSuffix(0, 'ثبت نهایی', 'ثبت نهایی', 'پرونده/سابقه آموزشی شما شما پس از ثبت برای کارشناس ارشد آموزش سازمان برای بازبینی ارسال می شود.'));
+            this.targetPeople.push(new PersonMarineSuffix(0, 'ثبت نهایی', 'ثبت نهایی', 'پرونده/سابقه آموزشی شما پس از ثبت برای کارشناس ارشد آموزش سازمان برای بازبینی ارسال می شود.'));
         }
     }
     setFileData(event, entity, field, isImage) {
@@ -199,6 +203,29 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
             this.fileHasError = true;
             this.fileMessage = "انتخاب فایل اجباری است.";
         }
+    }
+
+    uploadFile() {
+
+        this.uploadingFile = true;
+        let formdata: FormData = new FormData();
+
+        formdata.append('file', this.file);
+        this.educationalHistoryService.uploadFile(formdata).subscribe(event => {
+                if (event instanceof HttpResponse) {
+                    if (event.body) {
+                        debugger;
+                        this.educationalHistory.fileDoc = event.body.toString();
+                        this.fileMessage = "آپلود فایل با موفقیت انجام شد.";
+                    }
+                }
+            },
+            () => {
+            this.uploadingFile = false;
+            this.fileMessage = "آپلود فایل با خطا روبرو شد. لطفا عملیات را بعدا دوباره تکرار کنید.";
+            this.fileHasError = true;
+            this.onSaveError()
+            });
     }
     validateFile(file){
         //file.name.split('.')[file.name.split('.').length-1] == 'rar'
@@ -220,6 +247,7 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
 
     save() {
 
+        debugger;
         this.isSaving = true;
         this.currentUserFullName = this.currentPerson.fullName;
         this.message = "";
@@ -236,11 +264,11 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
             if(!this.educationalHistory.personId)
                 this.educationalHistory.personId = this.currentPerson.id;
             this.educationalHistory.organizationChartId = this.currentPerson.organizationChartId;
-            /*let org = this.organizationCharts.find(a => a.id == this.currentPerson.organizationChartId);
+            let org = this.organizationCharts.find(a => a.id == this.currentPerson.organizationChartId);
             if(org.parentId > 0)
                 this.educationalHistory.status = org.parentId;
             else
-                this.educationalHistory.status = 0;*/
+                this.educationalHistory.status = 0;
             this.educationalHistory.status = this.mustSendOrgChartId;
             this.educationalHistory.requestStatus = RequestStatus.NEW;
             this.educationalHistory.changeStatusUserLogin = this.currentAccount.login;
@@ -337,7 +365,7 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
             this.dateValid = 2;
         }
     }
-    selectedPerson: IPersonMarineSuffix = new PersonMarineSuffix();
+
     onPersonChange(event: IPersonMarineSuffix){
         if(event.id) {
             this.personService.find(event.id).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {

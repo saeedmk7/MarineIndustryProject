@@ -15,6 +15,7 @@ public interface FieldOfStudyMapper extends EntityMapper<FieldOfStudyDTO, FieldO
     @Mapping(target = "people", ignore = true)
     @Mapping(target = "teachers", ignore = true)
     @Mapping(target = "educationalRecords", ignore = true)
+    @Mapping(target = "soldiers", ignore = true)
     FieldOfStudy toEntity(FieldOfStudyDTO fieldOfStudyDTO);
 
     default FieldOfStudy fromId(Long id) {

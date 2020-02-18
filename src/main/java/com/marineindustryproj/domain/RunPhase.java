@@ -91,9 +91,13 @@ public class RunPhase implements Serializable {
     @Size(max = 50)
     @Column(name = "finish_date", length = 50)
     private String finishDate;
-    
+
     @Column(name = "has_important_message")
     private Boolean hasImportantMessage;
+
+    @Lob
+    @Column(name = "conversation")
+    private String conversation;
 
     @OneToMany(mappedBy = "runPhase", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -367,6 +371,19 @@ public class RunPhase implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public String getConversation() {
+        return conversation;
+    }
+
+    public RunPhase conversation(String conversation) {
+        this.conversation = conversation;
+        return this;
+    }
+
+    public void setConversation(String conversation) {
+        this.conversation = conversation;
+    }
+
     public Set<RunRunningStep> getRunRunningSteps() {
         return runRunningSteps;
     }
@@ -524,6 +541,7 @@ public class RunPhase implements Serializable {
             ", guid='" + getGuid() + "'" +
             ", finishDate='" + getFinishDate() + "'" +
             ", hasImportantMessage='" + isHasImportantMessage() + "'" +
+            ", conversation='" + getConversation() + "'" +
             "}";
     }
 }

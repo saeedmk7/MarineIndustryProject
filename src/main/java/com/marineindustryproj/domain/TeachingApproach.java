@@ -88,6 +88,16 @@ public class TeachingApproach implements Serializable {
     @ManyToMany(mappedBy = "teachingApproaches")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
+    private Set<EducationalModule> educationalModules = new HashSet<>();
+
+    @ManyToMany(mappedBy = "teachingApproaches")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<RequestEducationalModule> requestEducationalModules = new HashSet<>();
+
+    @ManyToMany(mappedBy = "teachingApproaches")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
     private Set<PreJobNiazsanjiCompetency> preJobNiazsanjiCompetencies = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -438,6 +448,56 @@ public class TeachingApproach implements Serializable {
 
     public void setPrioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
         this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
+    }
+
+    public Set<EducationalModule> getEducationalModules() {
+        return educationalModules;
+    }
+
+    public TeachingApproach educationalModules(Set<EducationalModule> educationalModules) {
+        this.educationalModules = educationalModules;
+        return this;
+    }
+
+    public TeachingApproach addEducationalModule(EducationalModule educationalModule) {
+        this.educationalModules.add(educationalModule);
+        educationalModule.getTeachingApproaches().add(this);
+        return this;
+    }
+
+    public TeachingApproach removeEducationalModule(EducationalModule educationalModule) {
+        this.educationalModules.remove(educationalModule);
+        educationalModule.getTeachingApproaches().remove(this);
+        return this;
+    }
+
+    public void setEducationalModules(Set<EducationalModule> educationalModules) {
+        this.educationalModules = educationalModules;
+    }
+
+    public Set<RequestEducationalModule> getRequestEducationalModules() {
+        return requestEducationalModules;
+    }
+
+    public TeachingApproach requestEducationalModules(Set<RequestEducationalModule> requestEducationalModules) {
+        this.requestEducationalModules = requestEducationalModules;
+        return this;
+    }
+
+    public TeachingApproach addRequestEducationalModule(RequestEducationalModule requestEducationalModule) {
+        this.requestEducationalModules.add(requestEducationalModule);
+        requestEducationalModule.getTeachingApproaches().add(this);
+        return this;
+    }
+
+    public TeachingApproach removeRequestEducationalModule(RequestEducationalModule requestEducationalModule) {
+        this.requestEducationalModules.remove(requestEducationalModule);
+        requestEducationalModule.getTeachingApproaches().remove(this);
+        return this;
+    }
+
+    public void setRequestEducationalModules(Set<RequestEducationalModule> requestEducationalModules) {
+        this.requestEducationalModules = requestEducationalModules;
     }
 
     public Set<PreJobNiazsanjiCompetency> getPreJobNiazsanjiCompetencies() {

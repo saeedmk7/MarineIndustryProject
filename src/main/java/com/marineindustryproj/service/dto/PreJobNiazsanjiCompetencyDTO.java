@@ -15,7 +15,7 @@ public class PreJobNiazsanjiCompetencyDTO implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(max = 100)
+    @Size(max = 4096)
     private String title;
 
     @NotNull

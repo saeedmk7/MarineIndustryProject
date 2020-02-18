@@ -168,6 +168,26 @@ public class Document implements Serializable {
     @JsonIgnore
     private Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis = new HashSet<>();
 
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<Soldier> soldiers = new HashSet<>();
+
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<SoldierTrainingReport> soldierTrainingReports = new HashSet<>();
+
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<EvaluateCriteriaTraining> evaluateCriteriaTrainings = new HashSet<>();
+
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<EvaluateCriteriaData> evaluateCriteriaData = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -840,6 +860,106 @@ public class Document implements Serializable {
 
     public void setPrioritizeRequestNiazsanjis(Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis) {
         this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
+    }
+
+    public Set<Soldier> getSoldiers() {
+        return soldiers;
+    }
+
+    public Document soldiers(Set<Soldier> soldiers) {
+        this.soldiers = soldiers;
+        return this;
+    }
+
+    public Document addSoldier(Soldier soldier) {
+        this.soldiers.add(soldier);
+        soldier.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeSoldier(Soldier soldier) {
+        this.soldiers.remove(soldier);
+        soldier.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setSoldiers(Set<Soldier> soldiers) {
+        this.soldiers = soldiers;
+    }
+
+    public Set<SoldierTrainingReport> getSoldierTrainingReports() {
+        return soldierTrainingReports;
+    }
+
+    public Document soldierTrainingReports(Set<SoldierTrainingReport> soldierTrainingReports) {
+        this.soldierTrainingReports = soldierTrainingReports;
+        return this;
+    }
+
+    public Document addSoldierTrainingReport(SoldierTrainingReport soldierTrainingReport) {
+        this.soldierTrainingReports.add(soldierTrainingReport);
+        soldierTrainingReport.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeSoldierTrainingReport(SoldierTrainingReport soldierTrainingReport) {
+        this.soldierTrainingReports.remove(soldierTrainingReport);
+        soldierTrainingReport.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setSoldierTrainingReports(Set<SoldierTrainingReport> soldierTrainingReports) {
+        this.soldierTrainingReports = soldierTrainingReports;
+    }
+
+    public Set<EvaluateCriteriaTraining> getEvaluateCriteriaTrainings() {
+        return evaluateCriteriaTrainings;
+    }
+
+    public Document evaluateCriteriaTrainings(Set<EvaluateCriteriaTraining> evaluateCriteriaTrainings) {
+        this.evaluateCriteriaTrainings = evaluateCriteriaTrainings;
+        return this;
+    }
+
+    public Document addEvaluateCriteriaTraining(EvaluateCriteriaTraining evaluateCriteriaTraining) {
+        this.evaluateCriteriaTrainings.add(evaluateCriteriaTraining);
+        evaluateCriteriaTraining.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeEvaluateCriteriaTraining(EvaluateCriteriaTraining evaluateCriteriaTraining) {
+        this.evaluateCriteriaTrainings.remove(evaluateCriteriaTraining);
+        evaluateCriteriaTraining.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setEvaluateCriteriaTrainings(Set<EvaluateCriteriaTraining> evaluateCriteriaTrainings) {
+        this.evaluateCriteriaTrainings = evaluateCriteriaTrainings;
+    }
+
+    public Set<EvaluateCriteriaData> getEvaluateCriteriaData() {
+        return evaluateCriteriaData;
+    }
+
+    public Document evaluateCriteriaData(Set<EvaluateCriteriaData> evaluateCriteriaData) {
+        this.evaluateCriteriaData = evaluateCriteriaData;
+        return this;
+    }
+
+    public Document addEvaluateCriteriaData(EvaluateCriteriaData evaluateCriteriaData) {
+        this.evaluateCriteriaData.add(evaluateCriteriaData);
+        evaluateCriteriaData.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeEvaluateCriteriaData(EvaluateCriteriaData evaluateCriteriaData) {
+        this.evaluateCriteriaData.remove(evaluateCriteriaData);
+        evaluateCriteriaData.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setEvaluateCriteriaData(Set<EvaluateCriteriaData> evaluateCriteriaData) {
+        this.evaluateCriteriaData = evaluateCriteriaData;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
