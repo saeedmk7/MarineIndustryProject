@@ -5,21 +5,21 @@
             <hr>
             <mi-alert-error></mi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.title">Title</span></dt>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.title">Title</span></dt>
                 <dd>
                     <span>{{preJobNiazsanji.title}}</span>
+                </dd>-->
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">مشخصات متقاضی</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="preJobNiazsanji.personId">
+                        {{selectedPerson.fullName}}
+                    </div>
                 </dd>
-                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات اولیه نیازسنجی</div></div>
                 <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.organizationChart">Organization Chart</span></dt>
                 <dd>
                     <div *ngIf="preJobNiazsanji.organizationChartId">
                         {{preJobNiazsanji.organizationChartTitle}}
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.person">Person</span></dt>
-                <dd>
-                    <div *ngIf="preJobNiazsanji.personId">
-                        {{preJobNiazsanji.personFamily}}
                     </div>
                 </dd>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات شغل</div></div>
@@ -29,14 +29,22 @@
                     <dd>
                         <span>{{job.title}}</span>
                     </dd>
-                    <dt><span jhiTranslate="marineindustryprojApp.job.jobKey">Job Key</span></dt>
+                    <dt>عنوان شغل عملی</dt>
+                    <dd>
+                        <span *ngIf="selectedPerson.practicaljobTitle">{{selectedPerson.practicaljobTitle}}</span>
+                    </dd>
+                    <dt>نوع استخدام</dt>
+                    <dd>
+                        <span *ngIf="selectedPerson.employmentTypeTitle">{{selectedPerson.employmentTypeTitle}}</span>
+                    </dd>
+                    <!--<dt><span jhiTranslate="marineindustryprojApp.job.jobKey">Job Key</span></dt>
                     <dd>
                         <span>{{job.jobKey}}</span>
                     </dd>
                     <dt><span jhiTranslate="marineindustryprojApp.job.jobCode">Job Code</span></dt>
                     <dd>
                         <span>{{job.jobCode}}</span>
-                    </dd>
+                    </dd>-->
                 </dl>
 
                 <div *ngIf="!job.fileDoc" class="alert alert-danger">شناسنامه شغلی برای شغل این فرد تعریف نشده است.</div>

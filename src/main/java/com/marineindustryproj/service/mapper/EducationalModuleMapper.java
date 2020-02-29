@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity EducationalModule and its DTO EducationalModuleDTO.
  */
-@Mapper(componentModel = "spring", uses = {ScientificWorkGroupMapper.class, DocumentMapper.class, EducationalCenterMapper.class, GoalMapper.class, ResourceMapper.class, TeacherMapper.class, RestrictionMapper.class, PeopleUnderTrainingMapper.class, TeachingApproachMapper.class, EffectivenessLevelMapper.class, EffectivenessIndexMapper.class, RequestEducationalModuleMapper.class, SecurityLevelMapper.class, SkillableLevelOfSkillMapper.class, EvaluationMethodMapper.class, OrganizationMapper.class, CompetencyMapper.class})
+@Mapper(componentModel = "spring", uses = {ScientificWorkGroupMapper.class, DocumentMapper.class, EducationalCenterMapper.class, GoalMapper.class, ResourceMapper.class, TeacherMapper.class, RestrictionMapper.class, PeopleUnderTrainingMapper.class, TeachingApproachMapper.class, EffectivenessLevelMapper.class, EffectivenessIndexMapper.class, AssessmentMethodMapper.class, RequestEducationalModuleMapper.class, SecurityLevelMapper.class, SkillableLevelOfSkillMapper.class, EvaluationMethodMapper.class, OrganizationMapper.class, CompetencyMapper.class})
 public interface EducationalModuleMapper extends EntityMapper<EducationalModuleDTO, EducationalModule> {
 
     @Mapping(source = "requestEducationalModule.id", target = "requestEducationalModuleId")

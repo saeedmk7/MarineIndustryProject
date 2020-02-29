@@ -153,6 +153,8 @@ public class RequestEducationalModuleServiceImpl implements RequestEducationalMo
             educationalModuleDTO.setEffectivenessLevels(requestEducationalModuleDTO.getEffectivenessLevels());
             educationalModuleDTO.setEffectivenessIndices(requestEducationalModuleDTO.getEffectivenessIndices());
 
+            educationalModuleDTO.setAssessmentMethods(requestEducationalModuleDTO.getAssessmentMethods());
+
 
             EducationalModuleDTO educationalModule = educationalModuleService.save(educationalModuleDTO);
 

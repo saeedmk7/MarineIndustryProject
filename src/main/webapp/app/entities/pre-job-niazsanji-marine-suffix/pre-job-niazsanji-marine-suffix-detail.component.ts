@@ -31,6 +31,8 @@ export class PreJobNiazsanjiMarineSuffixDetailComponent implements OnInit, OnDes
     competencies: ICompetencyMarineSuffix[] = [];
     preJobNiazsanjiCompetencies: IPreJobNiazsanjiCompetencyMarineSuffix[] = [];
     job: IJobMarineSuffix = new JobMarineSuffix();
+    selectedPerson: IPersonMarineSuffix = new PersonMarineSuffix();
+
     constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute,
                 protected competencyService: CompetencyMarineSuffixService,
                 protected preJobNiazsanjiService: PreJobNiazsanjiMarineSuffixService,
@@ -66,6 +68,7 @@ export class PreJobNiazsanjiMarineSuffixDetailComponent implements OnInit, OnDes
     }
     loadJob(personId: number){
         this.personService.find(personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
+            this.selectedPerson = resp.body;
             this.jobService.find(resp.body.jobId).subscribe((job: HttpResponse<IJobMarineSuffix>) => {
                 this.job = job.body;
             })

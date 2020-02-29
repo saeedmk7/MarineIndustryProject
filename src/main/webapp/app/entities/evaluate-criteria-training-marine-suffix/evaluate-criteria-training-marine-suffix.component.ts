@@ -242,7 +242,7 @@ export class EvaluateCriteriaTrainingMarineSuffixComponent implements OnInit, On
             }
         }
         this.searchbarModel.push(new SearchPanelModel('mediaAwarenessReport','organizationChartId','select', 'equals', this.recommenedOrgCharts.filter(a => a.parentId == null)));
-        this.searchbarModel.push(new SearchPanelModel('mediaAwarenessReport','organizationChartId','select', 'equals', this.recommenedOrgCharts, 'fullTitle', 'bighalf'));
+        /*this.searchbarModel.push(new SearchPanelModel('mediaAwarenessReport','organizationChartId','select', 'equals', this.recommenedOrgCharts, 'fullTitle', 'bighalf'));*/
     }
 
     ngOnDestroy() {

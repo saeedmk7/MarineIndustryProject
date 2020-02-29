@@ -290,6 +290,13 @@ public class EducationalModule implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "effectiveness_indices_id", referencedColumnName = "id"))
     private Set<EffectivenessIndex> effectivenessIndices = new HashSet<>();
 
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "educational_module_assessment_method",
+               joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "assessment_methods_id", referencedColumnName = "id"))
+    private Set<AssessmentMethod> assessmentMethods = new HashSet<>();
+
     @ManyToOne
     @JsonIgnoreProperties("educationalModules")
     private RequestEducationalModule requestEducationalModule;
@@ -1468,6 +1475,31 @@ public class EducationalModule implements Serializable {
 
     public void setEffectivenessIndices(Set<EffectivenessIndex> effectivenessIndices) {
         this.effectivenessIndices = effectivenessIndices;
+    }
+
+    public Set<AssessmentMethod> getAssessmentMethods() {
+        return assessmentMethods;
+    }
+
+    public EducationalModule assessmentMethods(Set<AssessmentMethod> assessmentMethods) {
+        this.assessmentMethods = assessmentMethods;
+        return this;
+    }
+
+    public EducationalModule addAssessmentMethod(AssessmentMethod assessmentMethod) {
+        this.assessmentMethods.add(assessmentMethod);
+        assessmentMethod.getEducationalModules().add(this);
+        return this;
+    }
+
+    public EducationalModule removeAssessmentMethod(AssessmentMethod assessmentMethod) {
+        this.assessmentMethods.remove(assessmentMethod);
+        assessmentMethod.getEducationalModules().remove(this);
+        return this;
+    }
+
+    public void setAssessmentMethods(Set<AssessmentMethod> assessmentMethods) {
+        this.assessmentMethods = assessmentMethods;
     }
 
     public RequestEducationalModule getRequestEducationalModule() {

@@ -104,6 +104,7 @@ import {MarineindustryprojSoldierTrainingReportMarineSuffixModule} from "app/ent
 import {MarineindustryprojPeopleUnderTrainingMarineSuffixModule} from "app/entities/people-under-training-marine-suffix/people-under-training-marine-suffix.module";
 import {MarineindustryprojHeadlineMarineSuffixModule} from "app/entities/headline-marine-suffix/headline-marine-suffix.module";
 import {MarineindustryprojEvaluateCriteriaDataMarineSuffixModule} from "app/entities/evaluate-criteria-data-marine-suffix/evaluate-criteria-data-marine-suffix.module";
+import {MarineindustryprojAssessmentMethodMarineSuffixModule} from "app/entities/assessment-method-marine-suffix/assessment-method-marine-suffix.module";
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -209,7 +210,8 @@ import {MarineindustryprojEvaluateCriteriaDataMarineSuffixModule} from "app/enti
         MarineindustryprojSoldierTrainingReportMarineSuffixModule,
         MarineindustryprojPeopleUnderTrainingMarineSuffixModule,
         MarineindustryprojHeadlineMarineSuffixModule,
-        MarineindustryprojEvaluateCriteriaDataMarineSuffixModule
+        MarineindustryprojEvaluateCriteriaDataMarineSuffixModule,
+        MarineindustryprojAssessmentMethodMarineSuffixModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

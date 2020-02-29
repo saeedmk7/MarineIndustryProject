@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "assessmentMethod": {
+            "home": {
+                "title": "Assessment Methods",
+                "createLabel": "Create a new Assessment Method",
+                "createOrEditLabel": "Create or edit a Assessment Method"
+            },
+            "created": "A new Assessment Method is created with identifier {{ param }}",
+            "updated": "A Assessment Method is updated with identifier {{ param }}",
+            "deleted": "A Assessment Method is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Assessment Method {{ id }}?"
+            },
+            "detail": {
+                "title": "Assessment Method"
+            },
+            "title": "Title",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "educationalModule": "Educational Module",
+            "requestEducationalModule": "Request Educational Module"
+        }
+    }
+}

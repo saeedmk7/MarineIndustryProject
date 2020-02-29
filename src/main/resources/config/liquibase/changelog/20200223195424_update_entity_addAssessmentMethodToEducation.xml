@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20200214175947" author="saeed">
+        <!--job changes-->
+        <createTable tableName="educational_module_assessment_method">
+            <column name="assessment_methods_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="educational_modules_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="educational_modules_id, assessment_methods_id" tableName="educational_module_assessment_method"/>
+
+        <addForeignKeyConstraint baseColumnNames="educational_modules_id"
+                                 baseTableName="educational_module_assessment_method"
+                                 constraintName="fk_educational_module_assessment_method_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="assessment_methods_id"
+                                 baseTableName="educational_module_assessment_method"
+                                 constraintName="fk_educational_module_assessment_method_assessment_methods_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="assessment_method"/>
+
+        <createTable tableName="request_educational_module_assessment_method">
+            <column name="assessment_methods_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="request_educational_modules_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="request_educational_modules_id, assessment_methods_id" tableName="request_educational_module_assessment_method"/>
+
+        <addForeignKeyConstraint baseColumnNames="request_educational_modules_id"
+                                 baseTableName="request_educational_module_assessment_method"
+                                 constraintName="request_educational_module_ass_request_educational_modules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_educational_module"/>
+        <addForeignKeyConstraint baseColumnNames="assessment_methods_id"
+                                 baseTableName="request_educational_module_assessment_method"
+                                 constraintName="request_educational_module_ass_assessment_methods_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="assessment_method"/>
+
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

@@ -259,7 +259,8 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     prepareHomePagePersonEducationalModule(personId: number){
         this.finalNiazsanjiReportService.getHomePagePersonEducationalModule(personId).subscribe((resp: HttpResponse<IHomePagePersonEducationalModule[]>) => {
 
-                this.homePagePersonEducationalModules = resp.body.filter(a => a.status >= 90).sort((a,b) => (a.runDate > b.runDate) ? 1 : (a.runDate < b.runDate) ? -1 : 0);
+            //.filter(a => a.status >= 90)
+                this.homePagePersonEducationalModules = resp.body.sort((a,b) => (a.runDate > b.runDate) ? 1 : (a.runDate < b.runDate) ? -1 : 0);
                 if(this.homePagePersonEducationalModules) {
                     this.homePagePersonEducationalModules.forEach(a => {
                         a.totalLearningTime = (!a.learningTimePractical ? 0 : a.learningTimePractical) + (!a.learningTimeTheorical ? 0 : a.learningTimeTheorical);

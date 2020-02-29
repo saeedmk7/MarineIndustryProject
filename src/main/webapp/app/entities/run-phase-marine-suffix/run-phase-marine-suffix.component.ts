@@ -560,6 +560,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         return {
             success: context.dataItem.status == 10,
             pink: context.dataItem.status == 5,
+            danger: context.dataItem.status == 7,
             warning: context.dataItem.status == 0
         };
     }

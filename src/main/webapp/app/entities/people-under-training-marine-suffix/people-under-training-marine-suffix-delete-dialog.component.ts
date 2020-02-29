@@ -49,7 +49,7 @@ export class PeopleUnderTrainingMarineSuffixDeletePopupComponent implements OnIn
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(PeopleUnderTrainingMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.peopleUnderTraining = peopleUnderTraining;
                 this.ngbModalRef.result.then(

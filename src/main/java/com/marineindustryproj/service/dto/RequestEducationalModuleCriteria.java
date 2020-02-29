@@ -131,6 +131,8 @@ public class RequestEducationalModuleCriteria implements Serializable {
 
     private LongFilter effectivenessIndexId;
 
+    private LongFilter assessmentMethodId;
+
     private LongFilter securityLevelId;
 
     private LongFilter skillableLevelOfSkillId;
@@ -549,6 +551,14 @@ public class RequestEducationalModuleCriteria implements Serializable {
         this.effectivenessIndexId = effectivenessIndexId;
     }
 
+    public LongFilter getAssessmentMethodId() {
+        return assessmentMethodId;
+    }
+
+    public void setAssessmentMethodId(LongFilter assessmentMethodId) {
+        this.assessmentMethodId = assessmentMethodId;
+    }
+
     public LongFilter getSecurityLevelId() {
         return securityLevelId;
     }
@@ -651,6 +661,7 @@ public class RequestEducationalModuleCriteria implements Serializable {
             Objects.equals(teachingApproachId, that.teachingApproachId) &&
             Objects.equals(effectivenessLevelId, that.effectivenessLevelId) &&
             Objects.equals(effectivenessIndexId, that.effectivenessIndexId) &&
+            Objects.equals(assessmentMethodId, that.assessmentMethodId) &&
             Objects.equals(securityLevelId, that.securityLevelId) &&
             Objects.equals(skillableLevelOfSkillId, that.skillableLevelOfSkillId) &&
             Objects.equals(evaluationMethodId, that.evaluationMethodId) &&
@@ -712,6 +723,7 @@ public class RequestEducationalModuleCriteria implements Serializable {
         teachingApproachId,
         effectivenessLevelId,
         effectivenessIndexId,
+        assessmentMethodId,
         securityLevelId,
         skillableLevelOfSkillId,
         evaluationMethodId,
@@ -774,6 +786,7 @@ public class RequestEducationalModuleCriteria implements Serializable {
                 (teachingApproachId != null ? "teachingApproachId=" + teachingApproachId + ", " : "") +
                 (effectivenessLevelId != null ? "effectivenessLevelId=" + effectivenessLevelId + ", " : "") +
                 (effectivenessIndexId != null ? "effectivenessIndexId=" + effectivenessIndexId + ", " : "") +
+                (assessmentMethodId != null ? "assessmentMethodId=" + assessmentMethodId + ", " : "") +
                 (securityLevelId != null ? "securityLevelId=" + securityLevelId + ", " : "") +
                 (skillableLevelOfSkillId != null ? "skillableLevelOfSkillId=" + skillableLevelOfSkillId + ", " : "") +
                 (evaluationMethodId != null ? "evaluationMethodId=" + evaluationMethodId + ", " : "") +

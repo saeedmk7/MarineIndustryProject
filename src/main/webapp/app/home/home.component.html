@@ -55,26 +55,52 @@
                                                 </th>
                                             </tr>
                                             <tr style="background-color: coral;">
-                                                <th colspan="5" style="text-align: center">کل نفر ساعت نیازسنجی شده برای
-                                                    سازمان
+                                                <th colspan="5" style="text-align: center">کل نفر ساعت مصوب شوراء تربیت و آموزش
                                                 </th>
                                                 <td colspan="5" style="text-align: center">{{homePageReport.total |
                                                     number: '1.0-1'}}
                                                 </td>
                                             </tr>
                                             <tr style="background-color: coral;">
-                                                <th colspan="5" style="text-align: center">کل نفر ساعت اجرا شده سازمان
+                                                <th colspan="5" style="text-align: center">نفرساعت اجرا شده در برنامه مصوب شوراء تربیت و آموزش
                                                 </th>
                                                 <td colspan="5" style="text-align: center">{{homePageReport.totalPassed
                                                     | number: '1.0-1'}}
                                                 </td>
                                             </tr>
                                             <tr style="background-color: coral;">
-                                                <th colspan="5" style="text-align: center">درصد کل نفر ساعت اجرا شده
-                                                    سازمان
+                                                <th colspan="5" style="text-align: center">درصد نفرساعت اجرا شده در برنامه مصوب شوراء تربیت و آموزش
                                                 </th>
                                                 <td colspan="5" style="text-align: center">
                                                     {{homePageReport.totalPassedPercent | number: '1.0-1'}} %
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: coral;">
+                                                <th colspan="5" style="text-align: center">نفرساعت آگاه سازی رسانه ای کل سازمان
+                                                </th>
+                                                <td colspan="5" style="text-align: center">
+                                                    {{mediaAwarenessReportSum | number: '1.0-1'}}
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: coral;">
+                                                <th colspan="5" style="text-align: center">نفرساعت مهارت آموزی کارکنان وظیفه کل سازمان
+                                                </th>
+                                                <td colspan="5" style="text-align: center">
+                                                    {{soldierTrainingReportSum | number: '1.0-1'}}
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: coral;">
+                                                <th colspan="5" style="text-align: center">کل نفرساعت اجرا شده سازمان
+                                                </th>
+                                                <td colspan="5" style="text-align: center">
+                                                    {{(homePageReport.totalPassed + mediaAwarenessReportSum + soldierTrainingReportSum) | number: '1.0-1'}}
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: coral;">
+                                                <th colspan="5" style="text-align: center">درصد کل نفرساعت اجرا شده سازمان
+                                                </th>
+                                                <td colspan="5" style="text-align: center">
+                                                    {{(((homePageReport.totalPassed + mediaAwarenessReportSum + soldierTrainingReportSum) / homePageReport.total) * 100) | number: '1.0-1'}} %
                                                 </td>
                                             </tr>
                                             <tr>
@@ -165,7 +191,7 @@
                                                 </td>
                                             </tr>
                                             <tr style="background-color: skyblue;">
-                                                <th colspan="10" style="text-align: center">جمع نفرساعت اجرا شده برای
+                                                <th colspan="10" style="text-align: center">جمع نفرساعت نیازسنجی شده برای
                                                     مدیران به تفکیک نوع دوره
                                                 </th>
                                             </tr>
@@ -183,7 +209,7 @@
                                                 </td>
                                             </tr>
                                             <tr style="background-color: lightgoldenrodyellow;">
-                                                <th style="text-align: center" colspan="10">جمع نفرساعت اجرا شده برای
+                                                <th style="text-align: center" colspan="10">جمع نفرساعت نیازسنجی شده برای
                                                     کارکنان به تفکیک نوع دوره
                                                 </th>
                                             </tr>
@@ -208,7 +234,7 @@
                                 <div class="box-header with-border collapseTitr"
                                      style="text-align: center;cursor: pointer;"
                                      (click)="toggleColappse('collapseHomePage1')">
-                                    <h3 class="box-title center" style="color: limegreen;">ریز نیازسنجی سازمان به تفکیک
+                                    <h3 class="box-title center" style="color: limegreen;"> نیازسنجی سازمان به تفکیک
                                         نوع دوره (براساس نفر ساعت)</h3>
 
                                     <div class="box-tools pull-left">
@@ -676,7 +702,7 @@
                                                 </td>
                                             </tr>
                                             <tr style="background-color: skyblue;">
-                                                <th colspan="10" style="text-align: center">جمع سرمایه گذاری اجرا شده
+                                                <th colspan="10" style="text-align: center">جمع سرمایه گذاری نیازسنجی شده
                                                     برای مدیران به تفکیک نوع دوره
                                                 </th>
                                             </tr>
@@ -694,7 +720,7 @@
                                                 </td>
                                             </tr>
                                             <tr style="background-color: lightgoldenrodyellow;">
-                                                <th style="text-align: center" colspan="10">جمع سرمایه گذاری اجرا شده
+                                                <th style="text-align: center" colspan="10">جمع سرمایه گذاری نیازسنجی شده
                                                     برای کارکنان به تفکیک نوع دوره
                                                 </th>
                                             </tr>
@@ -719,7 +745,7 @@
                                 <div class="box-header with-border collapseTitr"
                                      style="text-align: center;cursor: pointer;"
                                      (click)="toggleColappse('collapseHomePage3')">
-                                    <h3 class="box-title center" style="color: hotpink;">ریز نیازسنجی سازمان به تفکیک
+                                    <h3 class="box-title center" style="color: hotpink;"> نیازسنجی سازمان به تفکیک
                                         نوع دوره (براساس سرمایه گذاری)</h3>
 
                                     <div class="box-tools pull-left">

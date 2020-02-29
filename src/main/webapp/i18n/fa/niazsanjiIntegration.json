@@ -2,7 +2,7 @@
     "marineindustryprojApp": {
         "niazsanjiIntegration": {
             "home": {
-                "title": "فهرست نهایی پودمان های نیازسنجی شده",
+                "title": "فهرست نهایی پودمان های نیازسنجی شده (جمع بندی)",
                 "createLabel": "جدید",
                 "createOrEditLabel": " فهرست نهایی پودمان های نیازسنجی شده",
                 "setYear": "مشخص کردن سال نیازسنجی"

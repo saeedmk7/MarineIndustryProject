@@ -300,6 +300,10 @@ public class EducationalModuleQueryService extends QueryService<EducationalModul
                 specification = specification.and(buildSpecification(criteria.getEffectivenessIndexId(),
                     root -> root.join(EducationalModule_.effectivenessIndices, JoinType.LEFT).get(EffectivenessIndex_.id)));
             }
+            if (criteria.getAssessmentMethodId() != null) {
+                specification = specification.and(buildSpecification(criteria.getAssessmentMethodId(),
+                    root -> root.join(EducationalModule_.assessmentMethods, JoinType.LEFT).get(AssessmentMethod_.id)));
+            }
             if (criteria.getRequestEducationalModuleId() != null) {
                 specification = specification.and(buildSpecification(criteria.getRequestEducationalModuleId(),
                     root -> root.join(EducationalModule_.requestEducationalModule, JoinType.LEFT).get(RequestEducationalModule_.id)));

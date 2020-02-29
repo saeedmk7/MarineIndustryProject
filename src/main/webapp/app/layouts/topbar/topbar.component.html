@@ -25,6 +25,14 @@
                     </span>
                 </a>
             </li>
+            <li class="nav-item seperate-left seperate-right bgGreen" *ngIf="isTopUsers" title="تعداد موارد جهت اصلاح در اجرا">
+                <a class="nav-link excepted-menu" href="#/run-phase-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'glasses'"></fa-icon>
+                    <span *ngIf="forEditRunPhaseRequestCounter != undefined" class="badge badge-danger">{{forEditRunPhaseRequestCounter}}</span>
+                    </span>
+                </a>
+            </li>
             <li class="nav-item seperate-left seperate-right bgBrown" title="پرونده و سوابق آموزشی جدید">
                 <a class="nav-link excepted-menu" href="#/educational-history-marine-suffix">
                     <span class="bell-contain" style="padding: 6px">

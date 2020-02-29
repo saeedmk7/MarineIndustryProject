@@ -26,6 +26,7 @@ import { IPeopleUnderTrainingMarineSuffix } from 'app/shared/model//people-under
 import { ITeachingApproachMarineSuffix } from 'app/shared/model//teaching-approach-marine-suffix.model';
 import { IEffectivenessLevelMarineSuffix } from 'app/shared/model//effectiveness-level-marine-suffix.model';
 import { IEffectivenessIndexMarineSuffix } from 'app/shared/model//effectiveness-index-marine-suffix.model';
+import { IAssessmentMethodMarineSuffix } from 'app/shared/model//assessment-method-marine-suffix.model';
 import { INiazsanjiGroupMarineSuffix } from 'app/shared/model//niazsanji-group-marine-suffix.model';
 
 export interface IEducationalModuleMarineSuffix {
@@ -94,6 +95,7 @@ export interface IEducationalModuleMarineSuffix {
     teachingApproaches?: ITeachingApproachMarineSuffix[];
     effectivenessLevels?: IEffectivenessLevelMarineSuffix[];
     effectivenessIndices?: IEffectivenessIndexMarineSuffix[];
+    assessmentMethods?: IAssessmentMethodMarineSuffix[];
     requestEducationalModuleTitle?: string;
     requestEducationalModuleId?: number;
     securityLevelTitle?: string;
@@ -176,6 +178,7 @@ export class EducationalModuleMarineSuffix implements IEducationalModuleMarineSu
         public teachingApproaches?: ITeachingApproachMarineSuffix[],
         public effectivenessLevels?: IEffectivenessLevelMarineSuffix[],
         public effectivenessIndices?: IEffectivenessIndexMarineSuffix[],
+        public assessmentMethods?: IAssessmentMethodMarineSuffix[],
         public requestEducationalModuleTitle?: string,
         public requestEducationalModuleId?: number,
         public securityLevelTitle?: string,

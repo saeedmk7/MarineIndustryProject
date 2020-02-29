@@ -165,7 +165,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     }
     mediaAwarenessReport : IMediaAwarenessReportMarineSuffix[] = [];
+    mediaAwarenessReportSum : number = 0;
     soldierTrainingReports : ISoldierTrainingReportMarineSuffix[] = [];
+    soldierTrainingReportSum : number = 0;
     showPersonHourAggregationPart(niazsanjiYear: number){
         debugger;
         const awarenessCriteria = [{
@@ -183,6 +185,9 @@ export class HomeComponent implements OnInit, OnDestroy {
                 (res: HttpResponse<IMediaAwarenessReportMarineSuffix[]>) => {
                     this.mediaAwarenessReport = res.body;
 
+                    this.mediaAwarenessReportSum = this.mediaAwarenessReport.map(a => a.personHour).reduce((sum, current) => sum + current);
+
+
                     const soldierTrainingReportCriteria = [{
                        key: 'year.equals',
                        value: niazsanjiYear
@@ -195,6 +200,9 @@ export class HomeComponent implements OnInit, OnDestroy {
                     }).subscribe(
                         (res: HttpResponse<IMediaAwarenessReportMarineSuffix[]>) => {
                             this.soldierTrainingReports = res.body;
+
+                            this.soldierTrainingReportSum = this.soldierTrainingReports.map(a => a.personHour).reduce((sum, current) => sum + current);
+
                             this.personHourAggregationResult = [];
                             debugger;
                             this.homePageReport.homePageReportDetails.forEach(a => {

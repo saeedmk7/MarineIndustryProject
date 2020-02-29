@@ -136,6 +136,8 @@ public class EducationalModuleDTO implements Serializable {
 
     private Set<EffectivenessIndexDTO> effectivenessIndices = new HashSet<>();
 
+    private Set<AssessmentMethodDTO> assessmentMethods = new HashSet<>();
+
     private Long requestEducationalModuleId;
 
     private String requestEducationalModuleTitle;
@@ -526,6 +528,14 @@ public class EducationalModuleDTO implements Serializable {
 
     public void setEffectivenessIndices(Set<EffectivenessIndexDTO> effectivenessIndices) {
         this.effectivenessIndices = effectivenessIndices;
+    }
+
+    public Set<AssessmentMethodDTO> getAssessmentMethods() {
+        return assessmentMethods;
+    }
+
+    public void setAssessmentMethods(Set<AssessmentMethodDTO> assessmentMethods) {
+        this.assessmentMethods = assessmentMethods;
     }
 
     public Long getRequestEducationalModuleId() {

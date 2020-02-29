@@ -157,6 +157,7 @@ export class PreJobNiazsanjiStepsHandlerMarineSuffixUpdateComponent implements O
     activeTabChanged(activeTab) {
         console.log(activeTab);
         this.activeTab = activeTab;
+        this.updatePreJobNiazsanjiStep(this.activeTab);
     }
     updatePreJobNiazsanjiStep($event){
 

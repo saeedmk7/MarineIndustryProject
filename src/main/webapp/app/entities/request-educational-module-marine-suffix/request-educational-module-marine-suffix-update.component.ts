@@ -58,6 +58,9 @@ import * as persianMoment from 'jalali-moment';
 import {TeachingRecordMarineSuffixService} from "app/entities/teaching-record-marine-suffix";
 import {TeachingApproachMarineSuffix} from "app/shared/model/teaching-approach-marine-suffix.model";
 import {TeachingApproachMarineSuffixService} from "app/entities/teaching-approach-marine-suffix";
+import * as $ from 'jquery';
+import {IAssessmentMethodMarineSuffix} from "app/shared/model/assessment-method-marine-suffix.model";
+import {AssessmentMethodMarineSuffixService} from "app/entities/assessment-method-marine-suffix";
 
 @Component({
     selector: 'mi-request-educational-module-marine-suffix-update',
@@ -103,6 +106,8 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
     teachingApproachs: ITeachApproachMarineSuffix[];
 
     effectivenessLevels: IEffectivenessLevelMarineSuffix[];
+
+    assessmentMethods: IAssessmentMethodMarineSuffix[];
 
     effectivenessIndeces: IEffectivenessIndexMarineSuffix[];
 
@@ -151,6 +156,7 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
         private headlineService: HeadlineMarineSuffixService,
         private teachingApproachService: TeachingApproachMarineSuffixService,
         private effectivenessLevelService: EffectivenessLevelMarineSuffixService,
+        private assessmentMethodService: AssessmentMethodMarineSuffixService,
         private effectivenessIndexService: EffectivenessIndexMarineSuffixService
     ) {}
     private setRoles(account: any){
@@ -296,6 +302,12 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        this.assessmentMethodService.query().subscribe(
+            (res: HttpResponse<IAssessmentMethodMarineSuffix[]>) => {
+                this.assessmentMethods = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         this.effectivenessIndexService.query().subscribe(
             (res: HttpResponse<IEffectivenessIndexMarineSuffix[]>) => {
                 this.effectivenessIndeces = res.body;
@@ -305,7 +317,14 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
         this.peopleUnderTrainingService.query().subscribe(
             (res: HttpResponse<IPeopleUnderTrainingMarineSuffix[]>) => {
                 this.peopleUnderTrainings = res.body;
-                this.peopleUnderTrainingDescs = this.peopleUnderTrainings.map(w => w.description).join('-');
+
+                if(this.requestEducationalModule.id !== undefined){
+                    this.requestEducationalModule.peopleUnderTrainings.forEach(w => {
+                        const person = this.peopleUnderTrainings.find(e => e.id == w.id);
+                        w.fullTitle = (person.title ? person.title : "") + " " +
+                            (person.description ? "(" + person.description + ")" : "");
+                    })
+                }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -316,7 +335,9 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
         let newHeadline: HeadlineMarineSuffix = {
             headlineLevel: HeadlineLevel.FAMILIARITY,
             headlineScope: HeadlineScope.KNOWLEDGE,
-            totalHour: 0
+            totalHour: 0,
+            isNew: true,
+            id:this.headlineRows
         };
         this.requestEducationalModule.headlines.push(newHeadline);
     }
@@ -433,6 +454,26 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
         if (this.requestEducationalModule.creditPersian) {
             this.requestEducationalModule.credit = this.convertObjectDatesService.shamsi2miladiMoment(this.requestEducationalModule.creditPersian);
         }
+
+        this.requestEducationalModule.headlines.forEach(a => {
+            debugger;
+            let name = 'headlineLevel_' + a.id;
+            let radio = "input[name=" + name + "]:checked";
+            let headlineValue = $(radio).val();
+            if(headlineValue)
+                a.headlineLevel = headlineValue;
+
+            name = 'headlineScope_' + a.id;
+            radio = "input[name=" + name + "]:checked";
+            headlineValue = $(radio).val();
+            if(headlineValue)
+                a.headlineScope = headlineValue;
+
+            if(a.isNew){
+                a.id = undefined;
+            }
+        });
+
         debugger;
         this.currentUserFullName = this.currentPerson.fullName;
         this.requestEducationalModule.code = this.requestEducationalModule.code ? this.requestEducationalModule.code : "";
@@ -442,7 +483,7 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
         this.message = "";
 
         if(!this.currentPerson.organizationChartId) {
-            this.message = "موقعیت در چارت سازمانی برای شما تنظیم نشده است، لطفا مراتب را با مدیریت سامانه در میان بگذارید."
+            this.message = "موقعیت در چارت سازمانی برای شما تنظیم نشده است، لطفا مراتب را با مدیریت سامانه در میان بگذارید.";
             this.isSaving = false;
             return;
         }

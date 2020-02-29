@@ -252,6 +252,10 @@ public class RequestEducationalModuleQueryService extends QueryService<RequestEd
                 specification = specification.and(buildSpecification(criteria.getEffectivenessIndexId(),
                     root -> root.join(RequestEducationalModule_.effectivenessIndices, JoinType.LEFT).get(EffectivenessIndex_.id)));
             }
+            if (criteria.getAssessmentMethodId() != null) {
+                specification = specification.and(buildSpecification(criteria.getAssessmentMethodId(),
+                    root -> root.join(RequestEducationalModule_.assessmentMethods, JoinType.LEFT).get(AssessmentMethod_.id)));
+            }
             if (criteria.getSecurityLevelId() != null) {
                 specification = specification.and(buildSpecification(criteria.getSecurityLevelId(),
                     root -> root.join(RequestEducationalModule_.securityLevel, JoinType.LEFT).get(SecurityLevel_.id)));

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,6 +11,8 @@ import { UserMgmtDeleteDialogComponent } from 'app/admin';
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
 import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
+import {IAuthority} from "app/shared/model/authority.model";
+import {AuthorityService} from "app/admin/authority";
 
 @Component({
     selector: 'jhi-user-mgmt',
@@ -34,6 +36,8 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
     reverse: any;
     message: string;
     login:string;
+    authority:string;
+    authorities: IAuthority[];
     /*criteriaSubscriber: Subscription;
     searchbarModel: SearchPanelModel[];
     done:boolean = false;
@@ -49,6 +53,7 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private modalService: NgbModal,
         private convertObjectDatesService : ConvertObjectDatesService,
+        private authorityService: AuthorityService,
         private personService: PersonMarineSuffixService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -79,6 +84,12 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
             this.searchbarModel.push(new SearchPanelModel('userManagement','activated','select', 'equals',isActiveOptions));
             if(!this.done)*/
                 this.loadAll();
+            this.authorityService.authorities().subscribe(
+                (res: HttpResponse<IAuthority[]>) => {
+                    this.authorities = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
             this.registerChangeInUsers();
         });
     }
@@ -180,6 +191,16 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
                     user.personFullName = person.fullName;
                 }
                 this.users.push(user);
+            });
+        }
+        else if(this.authority){
+            this.userService.findAllByAuthorityIs(this.authority).subscribe((resp: HttpResponse<IUser[]>) => {
+                this.users = this.convertObjectDatesService.changeArrayDate(resp.body);
+                this.users.forEach(user => {
+                    let person = this.people.find(w => w.id == user.personId);
+                    if(person)
+                        user.personFullName = person.fullName;
+                });
             });
         }
         else{

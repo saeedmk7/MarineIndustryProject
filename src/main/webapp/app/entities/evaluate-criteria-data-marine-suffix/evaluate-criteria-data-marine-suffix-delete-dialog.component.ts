@@ -49,7 +49,7 @@ export class EvaluateCriteriaDataMarineSuffixDeletePopupComponent implements OnI
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(EvaluateCriteriaDataMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.evaluateCriteriaData = evaluateCriteriaData;
                 this.ngbModalRef.result.then(

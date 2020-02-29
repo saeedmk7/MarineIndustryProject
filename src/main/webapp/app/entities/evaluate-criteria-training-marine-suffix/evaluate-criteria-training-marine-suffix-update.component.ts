@@ -33,6 +33,7 @@ export class EvaluateCriteriaTrainingMarineSuffixUpdateComponent implements OnIn
     organizationcharts: IOrganizationChartMarineSuffix[];
 
     recommenedOrgCharts: IOrganizationChartMarineSuffix[];
+    groups: IOrganizationChartMarineSuffix[];
 
     finishDateValidation: number;
 
@@ -81,12 +82,15 @@ export class EvaluateCriteriaTrainingMarineSuffixUpdateComponent implements OnIn
         {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
             this.handleOrgChartView();
+            this.groups = this.recommenedOrgCharts.filter(a => a.parentId == undefined);
+
         }
         else {
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
                     this.organizationcharts = res.body;
                     this.handleOrgChartView();
+                    this.groups = this.recommenedOrgCharts.filter(a => a.parentId == undefined);
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );

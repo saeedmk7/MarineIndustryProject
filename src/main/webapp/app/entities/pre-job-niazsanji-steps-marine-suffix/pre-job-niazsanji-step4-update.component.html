@@ -19,7 +19,7 @@
                     <th>عنوان دوره</th>
                     <th>عنوان دوره (اگر در لیست دوره ها یافت نشد.)</th>
                     <!--<th *ngFor="let teach of teachingapproaches">{{teach.title}}</th>-->
-                    <th>روش های آموزش</th>
+                    <!--<th>روش های آموزش</th>-->
                     <!--<th>توضیحات</th>-->
                 </tr>
                 </thead>
@@ -33,6 +33,7 @@
                                 [items]="educationalmodules"
                                 [multiple]="false"
                                 [closeOnSelect]="true"
+                                [required]="!item.educationalModuleText"
                                 [searchable]="true"
                                 bindLabel="fullTitle"
                                 bindValue="id"
@@ -45,14 +46,14 @@
                             <textarea type="text" [(ngModel)]="item.educationalModuleText" [name]="'educationalModuleText_'+i" class="form-control" ></textarea>
                         </td>
                         <!--<td *ngFor="let teach of teachingapproaches">-->
-                        <td>
+                        <!--<td>
                             <span>انتخاب شده ها:</span>
                             <span class="badge badge-info" *ngFor="let tea of item.teachingApproaches"><input type="button" (click)="deleteTeach(item.id ,tea.id)" value="X" class="btn btn-sm btn-danger" /> {{tea.title}}</span>
                             <checkbox-group [name]="'teachingApproaches_' + i" [(ngModel)]="item.teachingApproaches">
                                 <checkbox *ngFor="let teachingApproach of teachingapproaches" [value]="teachingApproach">{{teachingApproach.title}}</checkbox>
                             </checkbox-group>
-                            <!--{{item.teachingApproaches | json}}-->
-                        </td>
+                            &lt;!&ndash;{{item.teachingApproaches | json}}&ndash;&gt;
+                        </td>-->
                         <!--<td>
                             <textarea [name]="'text_'+item.id" [id]="'text_'+item.id">{{item.fixCompetencyDeficiencyDescription}}</textarea>
                         </td>-->

@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "assessmentMethod": {
+            "home": {
+                "title": "نحوه های ارزیابی",
+                "createLabel": "جدید",
+                "createOrEditLabel": " نحوه ارزیابی"
+            },
+            "created": "نحوه ارزیابی با شناسه {{ param }} ایجاد شد.",
+            "updated": "نحوه ارزیابی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "نحوه ارزیابی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف نحوه ارزیابی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات نحوه ارزیابی"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "educationalModule": "Educational Module",
+            "requestEducationalModule": "Request Educational Module"
+        }
+    }
+}

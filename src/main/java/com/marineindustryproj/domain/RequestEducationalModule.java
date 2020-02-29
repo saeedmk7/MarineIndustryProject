@@ -259,6 +259,13 @@ public class RequestEducationalModule implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "effectiveness_indices_id", referencedColumnName = "id"))
     private Set<EffectivenessIndex> effectivenessIndices = new HashSet<>();
 
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "request_educational_module_assessment_method",
+               joinColumns = @JoinColumn(name = "request_educational_modules_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "assessment_methods_id", referencedColumnName = "id"))
+    private Set<AssessmentMethod> assessmentMethods = new HashSet<>();
+
     @ManyToOne
     @JsonIgnoreProperties("requestEducationalModules")
     private SecurityLevel securityLevel;
@@ -1105,6 +1112,31 @@ public class RequestEducationalModule implements Serializable {
 
     public void setEffectivenessIndices(Set<EffectivenessIndex> effectivenessIndices) {
         this.effectivenessIndices = effectivenessIndices;
+    }
+
+    public Set<AssessmentMethod> getAssessmentMethods() {
+        return assessmentMethods;
+    }
+
+    public RequestEducationalModule assessmentMethods(Set<AssessmentMethod> assessmentMethods) {
+        this.assessmentMethods = assessmentMethods;
+        return this;
+    }
+
+    public RequestEducationalModule addAssessmentMethod(AssessmentMethod assessmentMethod) {
+        this.assessmentMethods.add(assessmentMethod);
+        assessmentMethod.getRequestEducationalModules().add(this);
+        return this;
+    }
+
+    public RequestEducationalModule removeAssessmentMethod(AssessmentMethod assessmentMethod) {
+        this.assessmentMethods.remove(assessmentMethod);
+        assessmentMethod.getRequestEducationalModules().remove(this);
+        return this;
+    }
+
+    public void setAssessmentMethods(Set<AssessmentMethod> assessmentMethods) {
+        this.assessmentMethods = assessmentMethods;
     }
 
     public SecurityLevel getSecurityLevel() {

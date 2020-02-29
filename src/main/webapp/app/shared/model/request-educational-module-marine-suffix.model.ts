@@ -13,6 +13,7 @@ import { IPeopleUnderTrainingMarineSuffix } from 'app/shared/model//people-under
 import { ITeachingApproachMarineSuffix } from 'app/shared/model//teaching-approach-marine-suffix.model';
 import { IEffectivenessLevelMarineSuffix } from 'app/shared/model//effectiveness-level-marine-suffix.model';
 import { IEffectivenessIndexMarineSuffix } from 'app/shared/model//effectiveness-index-marine-suffix.model';
+import { IAssessmentMethodMarineSuffix } from 'app/shared/model//assessment-method-marine-suffix.model';
 
 export interface IRequestEducationalModuleMarineSuffix {
     id?: number;
@@ -74,6 +75,7 @@ export interface IRequestEducationalModuleMarineSuffix {
     teachingApproaches?: ITeachingApproachMarineSuffix[];
     effectivenessLevels?: IEffectivenessLevelMarineSuffix[];
     effectivenessIndices?: IEffectivenessIndexMarineSuffix[];
+    assessmentMethods?: IAssessmentMethodMarineSuffix[];
     securityLevelTitle?: string;
     securityLevelId?: number;
     skillableLevelOfSkillTitle?: string;
@@ -147,6 +149,7 @@ export class RequestEducationalModuleMarineSuffix implements IRequestEducational
         public teachingApproaches?: ITeachingApproachMarineSuffix[],
         public effectivenessLevels?: IEffectivenessLevelMarineSuffix[],
         public effectivenessIndices?: IEffectivenessIndexMarineSuffix[],
+        public assessmentMethods?: IAssessmentMethodMarineSuffix[],
         public securityLevelTitle?: string,
         public securityLevelId?: number,
         public skillableLevelOfSkillTitle?: string,

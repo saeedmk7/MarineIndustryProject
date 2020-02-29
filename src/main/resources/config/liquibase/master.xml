@@ -195,6 +195,8 @@
     <include file="config/liquibase/changelog/20200214081537_added_entity_EvaluateCriteriaData.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200214081537_added_entity_constraints_EvaluateCriteriaData.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200214175947_update_entity_updateEducationalModuleAndRequestAndRunPhase.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200223195424_added_entity_AssessmentMethod.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200223195424_update_entity_addAssessmentMethodToEducation.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

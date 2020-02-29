@@ -304,6 +304,25 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
 
     errorMessage: string;
 
+    sendForEdit(){
+        if(!this.runPhase.comment) {
+            this.errorMessage = "لطفا نظرات خود را نوشته سپس اقدام به ثبت جهت اصلاح نمائید.";
+            return;
+        }
+        if(!this.runPhase.conversation)
+            this.runPhase.conversation = "";
+        this.runPhase.conversation += " ثبت نظر توسط " + this.currentPerson.fullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " ثبت شد. ";
+        this.runPhase.conversation += "\n";
+        this.runPhase.conversation += this.currentPerson.fullName + ": " + this.runPhase.comment;
+        this.runPhase.conversation += "\n ------------------------------------------------------ \n";
+        this.runPhase.status = 7;
+        this.runPhaseService.update(this.runPhase).subscribe(
+            (res: HttpResponse<IRunPhaseMarineSuffix>) => {
+                this.previousState();
+            },
+            (res: HttpErrorResponse) => this.onSaveError()
+        );
+    }
     finalize() {
 
         let isValid: boolean = true;

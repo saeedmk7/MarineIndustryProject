@@ -155,9 +155,15 @@
                             <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
                         </button>
                     </div>
+
                 </td>
                 <td class="text-right">
-
+                    <button type="submit" title="ویرایش"
+                            [routerLink]="['/prioritize-request-niazsanji-marine-suffix', prioritizeRequestNiazsanji.id, 'edit']"
+                            class="btn btn-primary btn-sm">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                    </button>
                     <ng-container *ngIf="!(prioritizeRequestNiazsanji.requestStatus == 'ACCEPT'  || prioritizeRequestNiazsanji.requestStatus == 'IGNORE' || prioritizeRequestNiazsanji.requestStatus == 'READ')">
                         <!--<button type="submit"
                                 [routerLink]="['/prioritize-request-niazsanji-steps-marine-suffix', prioritizeRequestNiazsanji.id, 'edit']"

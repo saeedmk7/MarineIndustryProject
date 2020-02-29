@@ -135,7 +135,6 @@
 
                                 <ng-select
                                     [items]="peopleUnderTrainings"
-                                    appendTo="body"
                                     [multiple]="true"
                                     [closeOnSelect]="false"
                                     [searchable]="true"
@@ -264,18 +263,20 @@
                             <td>
                                 {{i+1}}
                             </td>
-                            <td *ngFor="let headlineLevel of headlineLevelKeys">
-                                <input type="radio" [name]="item.headlineLevel" [(ngModel)]="item.headlineLevel"
-                                       [value]="headlineLevel" [ngModelOptions]="{standalone: true}"/>
+                            <td *ngFor="let headlineLevel of headlineLevelKeys; let count = index">
+                                <!--<input type="radio" [name]="item.headlineLevel" [(ngModel)]="item.headlineLevel"
+                                       [value]="headlineLevel" [ngModelOptions]="{standalone: true}"/>-->
+                                <input type="radio" [name]="'headlineLevel_' + item.id" [id]="'headlineLevel_' + headlineLevel + '_' + count" [value]="headlineLevel" [checked]="item.headlineLevel == headlineLevel">
                                 <!--name="headlineLevel" [value]="headlineLevel" [checked]="headlineLevel == item.headlineLevel"-->
                             </td>
                             <td>
                                 <textarea class="form-control" [name]="item.title" required [(ngModel)]="item.title"
                                           [ngModelOptions]="{standalone: true}"></textarea>
                             </td>
-                            <td *ngFor="let headlineScope of headlineScopeKeys">
-                                <input type="radio" [name]="item.headlineScope" [(ngModel)]="item.headlineScope"
-                                       [value]="headlineScope" [ngModelOptions]="{standalone: true}"/>
+                            <td *ngFor="let headlineScope of headlineScopeKeys; let count = index">
+                                <!--<input type="radio" [name]="item.headlineScope" [(ngModel)]="item.headlineScope"
+                                       [value]="headlineScope" [ngModelOptions]="{standalone: true}"/>-->
+                                <input type="radio" [name]="'headlineScope_' + item.id" [id]="'headlineScope_' + headlineScope + '_' + count" [value]="headlineScope" [checked]="item.headlineScope == headlineScope">
                                 <!-- name="headlineScope" [value]="headlineScope" [checked]="headlineScope == item.headlineScope"-->
                             </td>
                             <td>
@@ -452,6 +453,8 @@
                                     [(ngModel)]="requestEducationalModule.teachingApproaches"></ng-select>
                             </td>
                         </tr>
+                    </table>
+                    <table class="table table-bordered table-sm">
                         <tr>
                             <th>
                                 تجهیزات آموزشی و کمک آموزشی
@@ -461,11 +464,11 @@
                                        jhiTranslate="marineindustryprojApp.requestEducationalModule.neededSoftwares"
                                        for="field_neededSoftwares">neededSoftwares</label>
                             </th>
-                            <td colspan="2">
-                                <input type="text" class="form-control" name="neededSoftwares"
+                            <td>
+                                <textarea type="text" class="form-control" name="neededSoftwares"
                                        id="field_neededSoftwares"
                                        [(ngModel)]="requestEducationalModule.neededSoftwares"
-                                       maxlength="4096">
+                                          maxlength="4096"></textarea>
                                 <div
                                     [hidden]="!(editForm.controls.neededSoftwares?.dirty && editForm.controls.neededSoftwares?.invalid)">
                                     <small class="form-text text-danger"
@@ -480,10 +483,10 @@
                                        jhiTranslate="marineindustryprojApp.requestEducationalModule.neededHardware"
                                        for="field_neededHardware">neededHardware</label>
                             </th>
-                            <td colspan="2">
-                                <input type="text" class="form-control" name="neededHardware" id="field_neededHardware"
+                            <td>
+                                <textarea type="text" class="form-control" name="neededHardware" id="field_neededHardware"
                                        [(ngModel)]="requestEducationalModule.neededHardware"
-                                       maxlength="4096">
+                                          maxlength="4096"></textarea>
                                 <div
                                     [hidden]="!(editForm.controls.neededHardware?.dirty && editForm.controls.neededHardware?.invalid)">
                                     <small class="form-text text-danger"
@@ -504,7 +507,7 @@
                                    jhiTranslate="marineindustryprojApp.requestEducationalModule.restrictions"
                                    for="field_restriction">Restriction</a>
                             </th>
-                            <td colspan="2">
+                            <td>
                                 <ng-select
                                     [items]="restrictions"
                                     [multiple]="true"
@@ -523,7 +526,7 @@
                                        jhiTranslate="marineindustryprojApp.requestEducationalModule.restrictionDescription"
                                        for="field_restrictionDescription">restrictionDescription</label>
                             </th>
-                            <td colspan="2">
+                            <td>
                                 <textarea type="text" class="form-control" name="restrictionDescription"
                                           id="field_restrictionDescription"
                                           [(ngModel)]="requestEducationalModule.restrictionDescription"
@@ -569,7 +572,7 @@
                                    for="field_teacher">Teacher</a>
 
                             </th>
-                            <td colspan="2">
+                            <td>
                                 <ng-select
                                     [items]="teachers"
                                     [multiple]="true"
@@ -588,9 +591,9 @@
                                        jhiTranslate="marineindustryprojApp.requestEducationalModule.teachersText"
                                        for="field_teachersText">Teachers Text</label>
                             </th>
-                            <td colspan="2">
+                            <td>
                                 <textarea class="form-control" name="teachersText" id="field_teachersText"
-                                          [(ngModel)]="requestEducationalModule.teachersText"
+                                          [(ngModel)]="requestEducationalModule.teachersText" [placeholder]="'marineindustryprojApp.requestEducationalModule.teachersTextHelp' | translate"
                                           maxlength="4096"></textarea>
                                 <div
                                     [hidden]="!(editForm.controls.teachersText?.dirty && editForm.controls.teachersText?.invalid)">
@@ -600,8 +603,13 @@
                                         This field cannot be longer than 4096 characters.
                                     </small>
                                 </div>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.teachersTextHelp"
+                                       >teachersTextHelp</label>
                             </td>
                         </tr>
+                    </table>
+                    <table class="table table-bordered table-sm">
                         <tr>
                             <th>
                                 <a (click)="change('effectiveness-level-marine-suffix')" class="form-control-label"
@@ -646,6 +654,29 @@
                         </tr>
                         <tr>
                             <th>
+                                <a (click)="change('assessment-method-marine-suffix')" class="form-control-label"
+                                   [ngClass]="{'enableLink': isSuperUsers}"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.assessmentMethod"
+                                   for="field_assessmentMethod">assessmentMethod</a>
+                            </th>
+                            <td colspan="6">
+
+                                <ng-select
+                                    [items]="assessmentMethods"
+                                    appendTo="body"
+                                    [multiple]="true"
+                                    [closeOnSelect]="false"
+                                    [searchable]="true"
+                                    [required]="isSuperUsers"
+                                    bindLabel="title"
+                                    placeholder="انتخاب تمائید."
+                                    name="assessmentMethod"
+                                    id="field_assessmentMethod"
+                                    [(ngModel)]="requestEducationalModule.assessmentMethods"></ng-select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
                                 <a (click)="change('effectiveness-index-marine-suffix')" class="form-control-label"
                                    [ngClass]="{'enableLink': isSuperUsers}"
                                    jhiTranslate="marineindustryprojApp.requestEducationalModule.effectivenessIndex"
@@ -665,7 +696,7 @@
                                     name="effectivenessIndex"
                                     id="field_effectivenessIndex"
                                     [(ngModel)]="requestEducationalModule.effectivenessIndices"></ng-select>
-                                <label jhiTranslate="marineindustryprojApp.requestEducationalModule.effectivenessIndexHelp"></label>
+                                <!--<label jhiTranslate="marineindustryprojApp.requestEducationalModule.effectivenessIndexHelp"></label>-->
                             </td>
                         </tr>
                         <tr>
