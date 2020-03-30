@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import com.marineindustryproj.domain.enumeration.Grade;
 
 /**
  * A DTO for the EducationalCenter entity.
@@ -56,6 +57,8 @@ public class EducationalCenterDTO implements Serializable {
 
     @NotNull
     private Integer status;
+
+    private Grade grade;
 
     private Set<ActivityAreaDTO> activityAreas = new HashSet<>();
 
@@ -189,6 +192,14 @@ public class EducationalCenterDTO implements Serializable {
         this.status = status;
     }
 
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
     public Set<ActivityAreaDTO> getActivityAreas() {
         return activityAreas;
     }
@@ -245,6 +256,7 @@ public class EducationalCenterDTO implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", grade='" + getGrade() + "'" +
             "}";
     }
 }

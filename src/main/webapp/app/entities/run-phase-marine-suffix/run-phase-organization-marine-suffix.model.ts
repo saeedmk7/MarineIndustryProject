@@ -18,6 +18,8 @@ export interface IRunPhaseOrganizationMarineSuffix {
     people?: IPersonMarineSuffix[];
     status?: number;
     runMonthPersian?: string;
+    peopleCount?: number;
+    peopleFullNames?: string;
 }
 
 export class RunPhaseOrganizationMarineSuffix implements IRunPhaseOrganizationMarineSuffix  {
@@ -38,7 +40,9 @@ export class RunPhaseOrganizationMarineSuffix implements IRunPhaseOrganizationMa
         public people?: IPersonMarineSuffix[],
         public priceCost?: number,
         public runMonthPersian?: string,
-        public status?: number) {
+        public status?: number,
+        public peopleCount?: number,
+        public peopleFullNames?: string) {
 
     }
 }

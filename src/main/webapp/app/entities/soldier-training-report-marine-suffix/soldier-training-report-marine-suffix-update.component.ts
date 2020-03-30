@@ -126,7 +126,6 @@ export class SoldierTrainingReportMarineSuffixUpdateComponent implements OnInit 
         this.soldierTrainingReportService.uploadFile(formdata).subscribe(event => {
                 if (event instanceof HttpResponse) {
                     if (event.body) {
-                        debugger;
                         this.soldierTrainingReport.fileDoc = event.body.toString();
                         this.fileMessage = "آپلود فایل با موفقیت انجام شد.";
                     }

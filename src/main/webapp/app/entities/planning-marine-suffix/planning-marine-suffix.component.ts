@@ -406,6 +406,10 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             if (personReps) {
                 let peopleIds = personReps.map(a => a.personId);
                 let persons = this.people.filter(w => peopleIds.includes(w.id));
+
+                finalNiazsanjiReportsOrganization.peopleCount = persons.length;
+                finalNiazsanjiReportsOrganization.peopleFullNames = persons.map(w => w.fullName).join(' - ');
+
                 finalNiazsanjiReportsOrganization.people = persons;
                 this.finalNiazsanjiReportsOrganizations.push(finalNiazsanjiReportsOrganization);
                 /*personReps.forEach((personRep: IFinalNiazsanjiReportPersonMarineSuffix) => {

@@ -15,6 +15,7 @@
             "detail": {
                 "title": "جزئیات اطلاعات"
             },
+            "index": "ردیف",
             "title": "عنوان",
             "reviewDate": "تاریخ بازنگری",
             "code": "کد",
@@ -39,6 +40,7 @@
             "person": "نام و نام خانوادگی",
             "personId": "نام و نام خانوادگی",
             "agents": "نمایندگان",
+            "jobTitle": "شغل سازمانی",
             "organizationChart": "محل خدمت",
             "organizationChartId": "محل خدمت"
         }

@@ -4,11 +4,14 @@ import com.marineindustryproj.domain.NiazsanjiIntegration;
 import com.marineindustryproj.domain.enumeration.RequestStatus;
 import com.marineindustryproj.repository.NiazsanjiIntegrationRepository;
 import com.marineindustryproj.security.SecurityUtils;
+import com.marineindustryproj.service.NiazsanjiIntegrationQueryService;
 import com.marineindustryproj.service.NiazsanjiIntegrationService;
 import com.marineindustryproj.service.PrioritizeRequestNiazsanjiService;
 import com.marineindustryproj.domain.PrioritizeRequestNiazsanji;
 import com.marineindustryproj.repository.PrioritizeRequestNiazsanjiRepository;
+import com.marineindustryproj.service.dto.NiazsanjiIntegrationDTO;
 import com.marineindustryproj.service.dto.PrioritizeRequestNiazsanjiDTO;
+import com.marineindustryproj.service.mapper.NiazsanjiIntegrationMapper;
 import com.marineindustryproj.service.mapper.PrioritizeRequestNiazsanjiMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,12 +40,16 @@ public class PrioritizeRequestNiazsanjiServiceImpl implements PrioritizeRequestN
 
     private final PrioritizeRequestNiazsanjiMapper prioritizeRequestNiazsanjiMapper;
 
-    //private final NiazsanjiIntegrationService niazsanjiIntegrationService;
+    private final NiazsanjiIntegrationMapper niazsanjiIntegrationMapper;
 
-    public PrioritizeRequestNiazsanjiServiceImpl(PrioritizeRequestNiazsanjiRepository prioritizeRequestNiazsanjiRepository, PrioritizeRequestNiazsanjiMapper prioritizeRequestNiazsanjiMapper, NiazsanjiIntegrationRepository niazsanjiIntegrationRepository) {
+    private final NiazsanjiIntegrationQueryService niazsanjiIntegrationQueryService;
+
+    public PrioritizeRequestNiazsanjiServiceImpl(PrioritizeRequestNiazsanjiRepository prioritizeRequestNiazsanjiRepository, PrioritizeRequestNiazsanjiMapper prioritizeRequestNiazsanjiMapper, NiazsanjiIntegrationRepository niazsanjiIntegrationRepository, NiazsanjiIntegrationQueryService niazsanjiIntegrationQueryService, NiazsanjiIntegrationMapper niazsanjiIntegrationMapper) {
         this.prioritizeRequestNiazsanjiRepository = prioritizeRequestNiazsanjiRepository;
         this.prioritizeRequestNiazsanjiMapper = prioritizeRequestNiazsanjiMapper;
         this.niazsanjiIntegrationRepository = niazsanjiIntegrationRepository;
+        this.niazsanjiIntegrationQueryService = niazsanjiIntegrationQueryService;
+        this.niazsanjiIntegrationMapper = niazsanjiIntegrationMapper;
     }
 
     /**
@@ -54,6 +61,15 @@ public class PrioritizeRequestNiazsanjiServiceImpl implements PrioritizeRequestN
     @Override
     public PrioritizeRequestNiazsanjiDTO save(PrioritizeRequestNiazsanjiDTO prioritizeRequestNiazsanjiDTO) {
         log.debug("Request to save PrioritizeRequestNiazsanji : {}", prioritizeRequestNiazsanjiDTO);
+
+        NiazsanjiIntegrationDTO niazsanjiIntegrationDTO = niazsanjiIntegrationQueryService.findByPrioritizeRequestNiazsanjiId(prioritizeRequestNiazsanjiDTO.getId());
+        if(niazsanjiIntegrationDTO != null)
+        {
+            NiazsanjiIntegration niazsanjiIntegration = niazsanjiIntegrationMapper.toEntity(niazsanjiIntegrationDTO);
+            niazsanjiIntegration.setPriority(prioritizeRequestNiazsanjiDTO.getPriority());
+            niazsanjiIntegration.setRequestNiazsanjiType(prioritizeRequestNiazsanjiDTO.getRequestNiazsanjiType());
+            niazsanjiIntegrationRepository.save(niazsanjiIntegration);
+        }
 
         PrioritizeRequestNiazsanji prioritizeRequestNiazsanji = prioritizeRequestNiazsanjiMapper.toEntity(prioritizeRequestNiazsanjiDTO);
         prioritizeRequestNiazsanji = prioritizeRequestNiazsanjiRepository.save(prioritizeRequestNiazsanji);

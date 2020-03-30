@@ -49,9 +49,8 @@ export class InstructionMarineSuffixComponent implements OnInit, OnDestroy {
         private jhiTranslate: TranslateService,
         private convertObjectDatesService : ConvertObjectDatesService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
@@ -95,7 +94,7 @@ export class InstructionMarineSuffixComponent implements OnInit, OnDestroy {
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });*/
-        this.loadAll(this.criteria);
+        //this.loadAll(this.criteria);
     }
 
     clear() {

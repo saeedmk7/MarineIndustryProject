@@ -105,6 +105,29 @@ import {MarineindustryprojPeopleUnderTrainingMarineSuffixModule} from "app/entit
 import {MarineindustryprojHeadlineMarineSuffixModule} from "app/entities/headline-marine-suffix/headline-marine-suffix.module";
 import {MarineindustryprojEvaluateCriteriaDataMarineSuffixModule} from "app/entities/evaluate-criteria-data-marine-suffix/evaluate-criteria-data-marine-suffix.module";
 import {MarineindustryprojAssessmentMethodMarineSuffixModule} from "app/entities/assessment-method-marine-suffix/assessment-method-marine-suffix.module";
+import {MarineindustryprojEducationalCenterCriteriaMarineSuffixModule} from "app/entities/educational-center-criteria-marine-suffix/educational-center-criteria-marine-suffix.module";
+import {MarineindustryprojEducationalCenterGradeMarineSuffixModule} from "app/entities/educational-center-grade-marine-suffix/educational-center-grade-marine-suffix.module";
+import {MarineindustryprojEducationalCenterGradeScoreMarineSuffixModule} from "app/entities/educational-center-grade-score-marine-suffix/educational-center-grade-score-marine-suffix.module";
+import {MarineindustryprojEducationalCenterServiceMarineSuffixModule} from "app/entities/educational-center-service-marine-suffix/educational-center-service-marine-suffix.module";
+import {MarineindustryprojTeacherCriteriaMarineSuffixModule} from "app/entities/teacher-criteria-marine-suffix/teacher-criteria-marine-suffix.module";
+import {MarineindustryprojTeacherGradeMarineSuffixModule} from "app/entities/teacher-grade-marine-suffix/teacher-grade-marine-suffix.module";
+import {MarineindustryprojTeacherGradeScoreMarineSuffixModule} from "app/entities/teacher-grade-score-marine-suffix/teacher-grade-score-marine-suffix.module";
+import {MarineindustryprojActivationNiazsanjiMarineSuffixModule} from "app/entities/activation-niazsanji-marine-suffix/activation-niazsanji-marine-suffix.module";
+import {MarineindustryprojEvaluatorOpinionMarineSuffixModule} from "app/entities/evaluator-opinion-marine-suffix/evaluator-opinion-marine-suffix.module";
+import {MarineindustryprojNiazsanjiPersonCriteriaMarineSuffixModule} from "app/entities/niazsanji-person-criteria-marine-suffix/niazsanji-person-criteria-marine-suffix.module";
+import {MarineindustryprojNiazsanjiPersonGradeMarineSuffixModule} from "app/entities/niazsanji-person-grade-marine-suffix/niazsanji-person-grade-marine-suffix.module";
+import {MarineindustryprojNiazsanjiPersonGradeScoreMarineSuffixModule} from 'app/entities/niazsanji-person-grade-score-marine-suffix/niazsanji-person-grade-score-marine-suffix.module';
+import {FinalNiazsanjiEffectivenessPhaseMarineSuffixModule} from 'app/entities/final-niazsanji-effectiveness-phase-marine-suffix/final-niazsanji-effectiveness-phase-marine-suffix.module';
+import {MarineindustryprojEffectivenessPhaseLevelMarineSuffixModule} from 'app/entities/effectiveness-phase-level-marine-suffix/effectiveness-phase-level-marine-suffix.module';
+import {MarineindustryprojEffectivenessPhaseMarineSuffixModule} from "app/entities/effectiveness-phase-marine-suffix/effectiveness-phase-marine-suffix.module";
+import {MarineindustryprojLevelFourCriteriaMarineSuffixModule} from "app/entities/level-four-criteria-marine-suffix/level-four-criteria-marine-suffix.module";
+import {MarineindustryprojLevelFourEffectivenessMarineSuffixModule} from "app/entities/level-four-effectiveness-marine-suffix/level-four-effectiveness-marine-suffix.module";
+import {MarineindustryprojLevelFourScoreMarineSuffixModule} from 'app/entities/level-four-score-marine-suffix/level-four-score-marine-suffix.module';
+import {MarineindustryprojLevelThreeCriteriaGroupMarineSuffixModule} from "app/entities/level-three-criteria-group-marine-suffix/level-three-criteria-group-marine-suffix.module";
+import {MarineindustryprojLevelThreeCriteriaMarineSuffixModule} from "app/entities/level-three-criteria-marine-suffix/level-three-criteria-marine-suffix.module";
+import {MarineindustryprojLevelThreeEffectivenessMarineSuffixModule} from "app/entities/level-three-effectiveness-marine-suffix/level-three-effectiveness-marine-suffix.module";
+import {MarineindustryprojLevelThreeScoreMarineSuffixModule} from "app/entities/level-three-score-marine-suffix/level-three-score-marine-suffix.module";
+
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -211,7 +234,29 @@ import {MarineindustryprojAssessmentMethodMarineSuffixModule} from "app/entities
         MarineindustryprojPeopleUnderTrainingMarineSuffixModule,
         MarineindustryprojHeadlineMarineSuffixModule,
         MarineindustryprojEvaluateCriteriaDataMarineSuffixModule,
-        MarineindustryprojAssessmentMethodMarineSuffixModule
+        MarineindustryprojAssessmentMethodMarineSuffixModule,
+        MarineindustryprojEducationalCenterCriteriaMarineSuffixModule,
+        MarineindustryprojEducationalCenterGradeMarineSuffixModule,
+        MarineindustryprojEducationalCenterGradeScoreMarineSuffixModule,
+        MarineindustryprojEducationalCenterServiceMarineSuffixModule,
+        MarineindustryprojTeacherCriteriaMarineSuffixModule,
+        MarineindustryprojTeacherGradeMarineSuffixModule,
+        MarineindustryprojTeacherGradeScoreMarineSuffixModule,
+        MarineindustryprojActivationNiazsanjiMarineSuffixModule,
+        MarineindustryprojEvaluatorOpinionMarineSuffixModule,
+        MarineindustryprojNiazsanjiPersonCriteriaMarineSuffixModule,
+        MarineindustryprojNiazsanjiPersonGradeMarineSuffixModule,
+        MarineindustryprojNiazsanjiPersonGradeScoreMarineSuffixModule,
+        FinalNiazsanjiEffectivenessPhaseMarineSuffixModule,
+        MarineindustryprojEffectivenessPhaseLevelMarineSuffixModule,
+        MarineindustryprojEffectivenessPhaseMarineSuffixModule,
+        MarineindustryprojLevelFourCriteriaMarineSuffixModule,
+        MarineindustryprojLevelFourEffectivenessMarineSuffixModule,
+        MarineindustryprojLevelFourScoreMarineSuffixModule,
+        MarineindustryprojLevelThreeCriteriaGroupMarineSuffixModule,
+        MarineindustryprojLevelThreeCriteriaMarineSuffixModule,
+        MarineindustryprojLevelThreeEffectivenessMarineSuffixModule,
+        MarineindustryprojLevelThreeScoreMarineSuffixModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

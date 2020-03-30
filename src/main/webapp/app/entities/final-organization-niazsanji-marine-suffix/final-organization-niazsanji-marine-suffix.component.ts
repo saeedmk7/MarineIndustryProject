@@ -31,6 +31,9 @@ import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suf
 import {ISkillableLevelOfSkillMarineSuffix} from "app/shared/model/skillable-level-of-skill-marine-suffix.model";
 import {SkillableLevelOfSkillMarineSuffixService} from "app/entities/skillable-level-of-skill-marine-suffix";
 import {IRequestOrganizationNiazsanjiMarineSuffix} from "app/shared/model/request-organization-niazsanji-marine-suffix.model";
+import {REQUEST_STATUS_FILTERS_FOR_INTEGRATION} from "app/shared/constants/RequestStatusFiltersForIntegration";
+import {CommonSearchCheckerService} from "app/plugin/utilities/common-search-checkers";
+import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 
 @Component({
     selector: 'mi-final-organization-niazsanji-marine-suffix',
@@ -90,11 +93,12 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         private treeUtilities: TreeUtilities,
         private courseTypeService: CourseTypeMarineSuffixService,
         private skillableLevelOfSkillService: SkillableLevelOfSkillMarineSuffixService,
-        private convertObjectDatesService : ConvertObjectDatesService
+        private convertObjectDatesService : ConvertObjectDatesService,
+        private commonSearchCheckerService: CommonSearchCheckerService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
+
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
@@ -182,6 +186,51 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             criteria.push({
                 key: 'status.greaterOrEqualThan', value: 10
             });
+            criteria = this.checkRequestStatusFilters(criteria, 10);
+        }
+        else{
+            criteria = this.checkRequestStatusFilters(criteria);
+        }
+        return criteria;
+    }
+    public checkRequestStatusFilters(criteria, status: number = 0) {
+        debugger;
+        const requestStatusFilters = criteria.find(a => a.key == 'requestStatusFilters.equals');
+        if (requestStatusFilters) {
+            const val = requestStatusFilters.value;
+            criteria = criteria.filter(a => a.key != 'requestStatusFilters.equals');
+            if (val) {
+                if (val == RequestStatus.ACCEPT || val == RequestStatus.IGNORE) {
+                    criteria.push({
+                        key: 'requestStatus.equals',
+                        value: val
+                    });
+                }
+                else if (val == RequestStatus.RETURNED) {
+                    criteria.push({
+                        key: 'hasImportantMessage.equals',
+                        value: true
+                    });
+                }
+                else if(val == RequestStatus.READ){
+                    criteria.push({
+                        key: 'status.equals',
+                        value: 20
+                    });
+                }
+                else {
+                    criteria.push({
+                        key: 'requestStatus.equals',
+                        value: RequestStatus.NEW
+                    });
+                    if(status){
+                        criteria.push({
+                            key: 'status.greaterOrEqualThan',
+                            value: status
+                        });
+                    }
+                }
+            }
         }
         return criteria;
     }
@@ -265,7 +314,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });*/
-        this.loadAll(this.criteria);
+        //this.loadAll(this.criteria);
     }
     onChange(id:number, isChecked: boolean) {
         if(isChecked) {
@@ -329,6 +378,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleCode', 'text', 'contains'));
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'priceCost', 'number', 'equals'));
+            this.searchbarModel.push(new SearchPanelModel("requestNiazsanjiFardi", 'requestStatusFilters', 'selectWithStringId', 'equals', REQUEST_STATUS_FILTERS_FOR_INTEGRATION));
             this.prepareSearchOrgChart();
             this.prepareSearchPerson();
             this.prepareSearchEducationalModule();

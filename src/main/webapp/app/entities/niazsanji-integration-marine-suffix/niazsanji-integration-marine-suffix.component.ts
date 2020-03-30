@@ -28,6 +28,11 @@ import {ExcelService} from "app/plugin/export-excel/excel-service";
 import {EducationalModuleType} from "app/shared/model/enums/EducationalModuleType";
 import {INiazsanjiIntegrationMarineSuffix} from "app/shared/model/niazsanji-integration-marine-suffix.model";
 import {INiazsanjiFardiMarineSuffix} from "app/shared/model/niazsanji-fardi-marine-suffix.model";
+import {CommonSearchCheckerService} from "app/plugin/utilities/common-search-checkers";
+import {REQUEST_STATUS_FILTERS} from "app/shared/constants/RequestStatusFilters";
+import {IPrioritizeRequestNiazsanjiMarineSuffix} from "app/shared/model/prioritize-request-niazsanji-marine-suffix.model";
+import {REQUEST_STATUS_FILTERS_FOR_INTEGRATION} from "app/shared/constants/RequestStatusFiltersForIntegration";
+import {IFinalOrganizationNiazsanjiMarineSuffix} from "app/shared/model/final-organization-niazsanji-marine-suffix.model";
 
 @Component({
     selector: 'mi-niazsanji-integration-marine-suffix',
@@ -86,11 +91,11 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
         private treeUtilities: TreeUtilities,
         private courseTypeService: CourseTypeMarineSuffixService,
         private skillableLevelOfSkillService: SkillableLevelOfSkillMarineSuffixService,
-        private jhiTranslate: TranslateService
+        private jhiTranslate: TranslateService,
+        private commonSearchCheckerService: CommonSearchCheckerService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
@@ -140,23 +145,7 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
     createCriteria(criteria?): any {
 
         if (criteria) {
-            const year = criteria.find(a => a.key == 'yearId.equals');
-            if(year) {
-                const val = +year.value;
-                criteria = criteria.filter(a => a.key != 'yearId.equals');
-                if (val) {
-                    let yearDetail = this.yearsCollections.find(a => a.year == val);
-                    let beginDate = new Date(yearDetail.beginDate).toISOString();
-                    let endDate = new Date(yearDetail.endDate).toISOString();
 
-                    criteria.push({
-                        key: 'createDate.lessOrEqualThan', value: endDate
-                    });
-                    criteria.push({
-                        key: 'createDate.greaterOrEqualThan', value: beginDate
-                    });
-                }
-            }
             const org = criteria.find(a => a.key == 'organizationChartId.equals');
             if(org) {
                 const orgId = +org.value;
@@ -176,6 +165,10 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
             criteria.push({
                 key: 'status.greaterOrEqualThan', value: 10
             });
+            criteria = this.commonSearchCheckerService.checkRequestStatusFiltersForIntegration(criteria, 10);
+        }
+        else{
+            criteria = this.commonSearchCheckerService.checkRequestStatusFiltersForIntegration(criteria);
         }
         return criteria;
     }
@@ -183,7 +176,17 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
     loadAll(criteria?, exportExcel: boolean = false) {
         criteria = this.createCriteria(criteria);
         if(exportExcel){
-
+            this.niazsanjiIntegrationService
+                .query({
+                    page: this.page - 1,
+                    size: 20000,
+                    criteria,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<INiazsanjiIntegrationMarineSuffix[]>) => this.finalExportToExcel(res.body),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
         }
         else{
             this.niazsanjiIntegrationService
@@ -216,7 +219,7 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });*/
-        this.loadAll(this.criteria);
+        //this.loadAll(this.criteria);
     }
 
     clear() {
@@ -257,31 +260,41 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
     export() {
         this.loadAll(this.criteria, true);
     }
-    finalExportToExcel(excelNiazSanjiFardis: INiazsanjiFardiMarineSuffix[]){
+    finalExportToExcel(niazsanjiIntegrations: INiazsanjiIntegrationMarineSuffix[]){
         let a = new ExcelService(this.jhiTranslate);
-        excelNiazSanjiFardis = this.convertObjectDatesService.changeArrayDate(excelNiazSanjiFardis);
+        niazsanjiIntegrations = this.convertObjectDatesService.changeArrayDate(niazsanjiIntegrations);
         let report = [];
         let index: number = 0;
-        excelNiazSanjiFardis.forEach(a => {
-            let org = this.organizationcharts.find(w => w.id == a.organizationChartId).fullTitle;
-            let person = this.people.find(w => w.id == a.personId);
+        niazsanjiIntegrations.forEach(a => {
             index++;
-            let approvedEducationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
+            if(org)
+                a.organizationChartTitle = org.fullTitle;
+
+            let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
+
             let obj: Object;
+            let requestNiazsanjiType;
+            this.jhiTranslate.get('marineindustryprojApp.RequestNiazsanjiType.' + a.requestNiazsanjiType).subscribe(w => requestNiazsanjiType = w.toString());
             obj = {'index': index,
-                'organizationChart': org,
-                'personName': person.fullName,
-                'jobTitle': person.jobTitle,
-                'educationalModule': a.educationalModuleTitle,
-                'timeEducationalModule': (approvedEducationalModule.learningTimePractical ? approvedEducationalModule.learningTimePractical : 0) + (approvedEducationalModule.learningTimeTheorical ? approvedEducationalModule.learningTimeTheorical : 0),
-                'levelEducationalModule': approvedEducationalModule.skillableLevelOfSkillTitle,
-                'costEducationalModule': a.priceCost,
+                'id': a.id,
+                'organizationChart': a.organizationChartTitle,
+                'marineindustryprojApp.prioritizeRequestNiazsanji.requestNiazsanjiType': requestNiazsanjiType,
+                'person': a.personFullName,
+                'educationalModuleTitle': educationalModule.title,
+                'educationalModuleId': educationalModule.code,
+                'skillLevelOfSkillTitle': educationalModule.skillableLevelOfSkillTitle,
+                'totalLearningTime': educationalModule.totalLearningTime,
+                'costEducationalModule': a.costEducationalModule,
+                'niazsanjiInput': a.niazsanjiInputTitle,
+                'courseType': a.courseTypeTitle,
+                'priority': a.priority,
                 'createDate': a.createDate,
                 'niazsanjiYear': a.niazsanjiYear
             };
             report.push(obj);
         });
-        a.exportAsExcelFile(report, 'niazsanjiFardis', 'marineindustryprojApp.niazsanjiFardi');
+        a.exportAsExcelFile(report, 'niazsanjiIntegration', 'marineindustryprojApp.niazsanjiIntegration');
     }
     ngOnInit() {
         this.principal.identity().then(account => {
@@ -307,6 +320,8 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
             }];
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleType', 'select', 'equals', educationalModuleType));
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'costEducationalModule', 'number', 'equals'));
+            this.searchbarModel.push(new SearchPanelModel("requestNiazsanjiFardi", 'requestStatusFilters', 'selectWithStringId', 'equals', REQUEST_STATUS_FILTERS_FOR_INTEGRATION));
+            this.searchbarModel.push(new SearchPanelModel("prioritizeRequestNiazsanji", 'priority', 'number', 'equals'));
             this.prepareSearchOrgChart();
             this.prepareSearchPerson();
             this.prepareSearchEducationalModule();
@@ -459,7 +474,65 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
             (res: HttpErrorResponse) => this.onSaveError()
         );
     }*/
+
+    /*export() {
+        this.makeCriteria(this.criteria,true);
+    }
+    prepareForExportExcel(res : IPrioritizeRequestNiazsanjiMarineSuffix[]){
+        let a = new ExcelService(this.jhiTranslate);
+        res = this.convertObjectDatesService.changeArrayDate(res);
+        let report = [];
+        let index: number = 0;
+        res.forEach(a => {
+            index++;
+            debugger;
+            a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
+            const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
+            if(org)
+                a.organizationChartTitle = org.fullTitle;
+
+            let person = this.people.find(w => w.id == a.personId);
+
+            let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
+
+            let obj: Object;
+            let requestNiazsanjiType;
+            this.jhiTranslate.get('marineindustryprojApp.RequestNiazsanjiType.' + a.requestNiazsanjiType).subscribe(w => requestNiazsanjiType = w.toString());
+            obj = {'index': index,
+                'id': a.id,
+                'organizationChart': a.organizationChartTitle,
+                'marineindustryprojApp.prioritizeRequestNiazsanji.requestNiazsanjiType': requestNiazsanjiType,
+                'person': person.fullName,
+                'jobTitle': person.jobTitle,
+                'educationalModuleTitle': educationalModule.title,
+                'educationalModuleId': educationalModule.code,
+                'skillLevelOfSkillTitle': educationalModule.skillableLevelOfSkillTitle,
+                'totalLearningTime': educationalModule.totalLearningTime,
+                'costEducationalModule': a.costEducationalModule,
+                'niazsanjiInput': a.niazsanjiInputTitle,
+                'courseType': a.courseTypeTitle,
+                'restriction': a.restrictions.map(w => w.title).join(' - '),
+                'restrictionDescription': a.restrictionDescription,
+                'teachingApproach': a.teachingApproachTitle,
+                'goalsText': a.goalsText,
+                'prerequisite': a.prerequisite,
+                'description': a.description,
+                'priority': a.priority,
+                'createDate': a.createDate,
+                'status': this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus)
+            };
+            report.push(obj);
+        });
+        a.exportAsExcelFile(report, 'prioritizeRequestNiazsanjis', 'marineindustryprojApp.prioritizeRequestNiazsanji');
+    }*/
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+    toggleImportantMessage(id: number, type: boolean){
+
+        this.niazsanjiIntegrationService.toggleImportantMessage(id, type).subscribe(
+            (res: HttpResponse<IFinalOrganizationNiazsanjiMarineSuffix>) => this.loadAll(this.criteria),
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 }

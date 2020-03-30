@@ -16,6 +16,8 @@ import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 import {ActivityAreaMarineSuffixService} from "app/entities/activity-area-marine-suffix";
 import {IEmploymentTypeMarineSuffix} from "app/shared/model/employment-type-marine-suffix.model";
 import {IActivityAreaMarineSuffix} from "app/shared/model/activity-area-marine-suffix.model";
+import {Grade} from "app/shared/model/enums/Grade";
+import {CommonSearchCheckerService} from "app/plugin/utilities/common-search-checkers";
 
 @Component({
     selector: 'mi-educational-center-marine-suffix',
@@ -43,6 +45,13 @@ export class EducationalCenterMarineSuffixComponent implements OnInit, OnDestroy
     done:boolean = false;
     criteria: any;
 
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
+    isTopUsers: boolean = false;
+
     constructor(
         private educationalCenterService: EducationalCenterMarineSuffixService,
         private activityAreasService: ActivityAreaMarineSuffixService,
@@ -53,11 +62,12 @@ export class EducationalCenterMarineSuffixComponent implements OnInit, OnDestroy
         private router: Router,
         private eventManager: JhiEventManager,
         private location: PlatformLocation,
-        private jhiTranslate: TranslateService
+        private jhiTranslate: TranslateService,
+        private commonSearchCheckerService: CommonSearchCheckerService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
+            //this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
@@ -104,7 +114,7 @@ export class EducationalCenterMarineSuffixComponent implements OnInit, OnDestroy
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });*/
-        this.loadAll(this.criteria);
+        //this.loadAll(this.criteria);
     }
 
     clear() {
@@ -124,6 +134,7 @@ export class EducationalCenterMarineSuffixComponent implements OnInit, OnDestroy
         this.searchbarModel.push(new SearchPanelModel('educationalCenter','name','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('educationalCenter','connectionPerson','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('educationalCenter','telephone','text', 'contains'));
+        this.searchbarModel.push(new SearchPanelModel('educationalCenter','grade','selectWithStringId','equals', this.commonSearchCheckerService.convertEnumToSearchArray(Grade, 'Grade')));
         this.activityAreasService.query().subscribe(
             (res: HttpResponse<IActivityAreaMarineSuffix[]>) => {
 
@@ -137,10 +148,26 @@ export class EducationalCenterMarineSuffixComponent implements OnInit, OnDestroy
         }*/
         this.principal.identity().then(account => {
             this.currentAccount = account;
+            this.setRoles(account);
         });
         //this.registerChangeInEducationalCenters();
     }
 
+    setRoles(account: any){
+        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+            this.isAdmin = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+            this.isModirAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+            this.isModirKolAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+            this.isKarshenasArshadAmozeshSazman = true;
+
+        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isSuperUsers = true;
+        if(this.isModirAmozesh || this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isTopUsers = true;
+    }
     ngOnDestroy() {
         /*this.eventManager.destroy(this.eventSubscriber);*/
         this.eventManager.destroy(this.criteriaSubscriber);

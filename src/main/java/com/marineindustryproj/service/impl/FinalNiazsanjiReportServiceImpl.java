@@ -4,13 +4,12 @@ import com.marineindustryproj.domain.*;
 import com.marineindustryproj.domain.enumeration.EducationalModuleType;
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
 import com.marineindustryproj.domain.enumeration.RequestStatus;
-import com.marineindustryproj.repository.OrganizationChartRepository;
-import com.marineindustryproj.repository.PersonRepository;
+import com.marineindustryproj.repository.*;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.*;
-import com.marineindustryproj.repository.FinalNiazsanjiReportRepository;
 import com.marineindustryproj.service.dto.*;
 import com.marineindustryproj.service.dto.customs.*;
+import com.marineindustryproj.service.mapper.EffectivenessPhaseLevelMapper;
 import com.marineindustryproj.service.mapper.FinalNiazsanjiReportMapper;
 import com.marineindustryproj.service.mapper.OrganizationChartMapper;
 import io.github.jhipster.service.filter.BooleanFilter;
@@ -25,8 +24,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -99,6 +96,13 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
     private final CourseTypeService courseTypeService;
 
+
+    private final EffectivenessPhaseLevelQueryService effectivenessPhaseLevelQueryService;
+
+    private final EffectivenessPhaseLevelMapper effectivenessPhaseLevelMapper;
+
+    private final EffectivenessPhaseRepository effectivenessPhaseRepository;
+
     public FinalNiazsanjiReportServiceImpl(FinalNiazsanjiReportRepository finalNiazsanjiReportRepository,
                                            FinalNiazsanjiReportMapper finalNiazsanjiReportMapper,
                                            NiazsanjiGroupService niazsanjiGroupService,
@@ -126,7 +130,10 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                                            RunPhaseQueryService runPhaseQueryService,
                                            RunPhaseService runPhaseService,
                                            CacheManager cacheManager,
-                                           NiazsanjiFardiService niazsanjiFardiService, CourseTypeService courseTypeService) {
+                                           NiazsanjiFardiService niazsanjiFardiService, CourseTypeService courseTypeService,
+                                           EffectivenessPhaseLevelQueryService effectivenessPhaseLevelQueryService,
+                                           EffectivenessPhaseLevelMapper effectivenessPhaseLevelMapper,
+                                           EffectivenessPhaseRepository effectivenessPhaseRepository) {
         this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
         this.finalNiazsanjiReportMapper = finalNiazsanjiReportMapper;
         this.niazsanjiGroupService = niazsanjiGroupService;
@@ -155,6 +162,9 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         this.cacheManager = cacheManager;
         this.niazsanjiFardiService = niazsanjiFardiService;
         this.courseTypeService = courseTypeService;
+        this.effectivenessPhaseLevelQueryService = effectivenessPhaseLevelQueryService;
+        this.effectivenessPhaseLevelMapper = effectivenessPhaseLevelMapper;
+        this.effectivenessPhaseRepository = effectivenessPhaseRepository;
     }
     /**
      * Save a finalNiazsanjiReport.
@@ -184,6 +194,38 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             designAndPlanning.setCourseTypeId(finalNiazsanjiReport.getCourseType().getId());
             designAndPlanning.setOrganizationChartId(finalNiazsanjiReport.getOrganizationChart().getId());
             designAndPlanningService.save(designAndPlanning);
+        }
+
+        finalNiazsanjiReport = finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
+        clearFinalNiazsanjiReportCaches();
+        return finalNiazsanjiReportMapper.toDto(finalNiazsanjiReport);
+    }
+    @Override
+    public FinalNiazsanjiReportDTO setEffectivenessPhaseLevel(FinalNiazsanjiReportDTO finalNiazsanjiReportDTO) throws Exception {
+        log.debug("Request to save FinalNiazsanjiReport : {}",
+            finalNiazsanjiReportDTO);
+        FinalNiazsanjiReport finalNiazsanjiReport = finalNiazsanjiReportMapper.toEntity(finalNiazsanjiReportDTO);
+
+
+        EffectivenessPhaseLevelCriteria criteria = new EffectivenessPhaseLevelCriteria();
+        IntegerFilter effectivenessLevelUseFilter = new IntegerFilter();
+        effectivenessLevelUseFilter.setEquals(finalNiazsanjiReportDTO.getSelectedEffectivenessPhaseLevel());
+        criteria.setEffectivenessLevelUse(effectivenessLevelUseFilter);
+        List<EffectivenessPhaseLevelDTO>  effectivenessPhaseLevels = effectivenessPhaseLevelQueryService.findByCriteria(criteria);
+        if(effectivenessPhaseLevels.isEmpty()){
+            throw new Exception("لولی برای این سطح تعریف نشده است.");
+        }
+
+        for (EffectivenessPhaseLevelDTO effectivenessPhaseLevelDTO : effectivenessPhaseLevels) {
+            EffectivenessPhaseLevel effectivenessPhaseLevel = effectivenessPhaseLevelMapper.toEntity(effectivenessPhaseLevelDTO);
+            EffectivenessPhase effectivenessPhase = new EffectivenessPhase();
+            effectivenessPhase.setEffectivenessPhaseLevel(effectivenessPhaseLevel);
+            effectivenessPhase.setFinalNiazsanjiReport(finalNiazsanjiReport);
+            effectivenessPhase.setCreateDate(ZonedDateTime.now());
+            effectivenessPhase.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            effectivenessPhase.setModifyDate(ZonedDateTime.now());
+            effectivenessPhase.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            effectivenessPhaseRepository.save(effectivenessPhase);
         }
 
         finalNiazsanjiReport = finalNiazsanjiReportRepository.save(finalNiazsanjiReport);

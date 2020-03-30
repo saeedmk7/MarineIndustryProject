@@ -38,6 +38,14 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
     searchbarModel: SearchPanelModel[];
     done:boolean = false;
     criteria: any;
+
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
+    isTopUsers: boolean = false;
+
     constructor(
         private jobService: JobMarineSuffixService,
         private parseLinks: JhiParseLinks,
@@ -50,10 +58,8 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
         private location: PlatformLocation,
         private convertObjectDatesService : ConvertObjectDatesService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
@@ -112,7 +118,7 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });*/
-        this.loadAll(this.criteria)
+        //this.loadAll(this.criteria)
     }
     clear() {
 
@@ -133,10 +139,30 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
         this.searchbarModel.push(new SearchPanelModel('job','jobCode','text','contains'));
         this.searchbarModel.push(new SearchPanelModel('job','first3JobCode','text','contains'));
 
+        this.principal.identity().then(account => {
+            this.currentAccount = account;
+            this.setRoles(account);
+        });
         /*if(!this.done)
         {
             this.loadAll();
         }*/
+    }
+
+    setRoles(account: any){
+        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+            this.isAdmin = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+            this.isModirAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+            this.isModirKolAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+            this.isKarshenasArshadAmozeshSazman = true;
+
+        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isSuperUsers = true;
+        if(this.isModirAmozesh || this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isTopUsers = true;
     }
 
     ngOnDestroy() {

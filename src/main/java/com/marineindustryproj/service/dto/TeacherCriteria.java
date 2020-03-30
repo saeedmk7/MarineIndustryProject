@@ -2,6 +2,8 @@ package com.marineindustryproj.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+import com.marineindustryproj.domain.enumeration.TeacherType;
+import com.marineindustryproj.domain.enumeration.Grade;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -20,6 +22,16 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  * fix type specific filters.
  */
 public class TeacherCriteria implements Serializable {
+    /**
+     * Class for filtering TeacherType
+     */
+    public static class TeacherTypeFilter extends Filter<TeacherType> {
+    }
+    /**
+     * Class for filtering Grade
+     */
+    public static class GradeFilter extends Filter<Grade> {
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -72,6 +84,12 @@ public class TeacherCriteria implements Serializable {
     private IntegerFilter status;
 
     private StringFilter guid;
+
+    private TeacherTypeFilter teacherType;
+
+    private GradeFilter grade;
+
+    private LongFilter teacherGradeId;
 
     private LongFilter requestOrganizationNiazsanjiId;
 
@@ -293,6 +311,30 @@ public class TeacherCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public TeacherTypeFilter getTeacherType() {
+        return teacherType;
+    }
+
+    public void setTeacherType(TeacherTypeFilter teacherType) {
+        this.teacherType = teacherType;
+    }
+
+    public GradeFilter getGrade() {
+        return grade;
+    }
+
+    public void setGrade(GradeFilter grade) {
+        this.grade = grade;
+    }
+
+    public LongFilter getTeacherGradeId() {
+        return teacherGradeId;
+    }
+
+    public void setTeacherGradeId(LongFilter teacherGradeId) {
+        this.teacherGradeId = teacherGradeId;
+    }
+
     public LongFilter getRequestOrganizationNiazsanjiId() {
         return requestOrganizationNiazsanjiId;
     }
@@ -409,6 +451,9 @@ public class TeacherCriteria implements Serializable {
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(teacherType, that.teacherType) &&
+            Objects.equals(grade, that.grade) &&
+            Objects.equals(teacherGradeId, that.teacherGradeId) &&
             Objects.equals(requestOrganizationNiazsanjiId, that.requestOrganizationNiazsanjiId) &&
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
@@ -449,6 +494,9 @@ public class TeacherCriteria implements Serializable {
         archivedDate,
         status,
         guid,
+        teacherType,
+        grade,
+        teacherGradeId,
         requestOrganizationNiazsanjiId,
         finalOrganizationNiazsanjiId,
         finalNiazsanjiReportId,
@@ -490,6 +538,9 @@ public class TeacherCriteria implements Serializable {
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (teacherType != null ? "teacherType=" + teacherType + ", " : "") +
+                (grade != null ? "grade=" + grade + ", " : "") +
+                (teacherGradeId != null ? "teacherGradeId=" + teacherGradeId + ", " : "") +
                 (requestOrganizationNiazsanjiId != null ? "requestOrganizationNiazsanjiId=" + requestOrganizationNiazsanjiId + ", " : "") +
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +

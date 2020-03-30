@@ -660,3 +660,75 @@ tr.new td {
     width: 2em;
     height: 2em;
 }
+
+
+.form-radio
+{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: inline-block;
+    position: relative;
+    background-color: lightgrey;
+    color: black;
+    top: 10px;
+    height: 30px;
+    width: 30px;
+    border: 0;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-right: 7px;
+    outline: none;
+}
+.form-radio:checked::before
+{
+    position: absolute;
+    font: 13px/1 'Open Sans', sans-serif;
+    left: 11px;
+    top: 7px;
+    content: '✔';
+    /*transform: rotate(40deg);*/
+}
+.form-radio:hover
+{
+    background-color: lightblue;
+}
+.form-radio:checked
+{
+    background-color: lightgreen;
+}
+.form-checkbox
+{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: inline-block;
+    position: relative;
+    background-color: lightgrey;
+    color: black;
+    top: 10px;
+    height: 30px;
+    width: 30px;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 7px;
+    outline: none;
+}
+.form-checkbox:checked::before
+{
+    position: absolute;
+    font: 13px/1 'Open Sans', sans-serif;
+    left: 11px;
+    top: 7px;
+    content: '✔';
+    /*transform: rotate(40deg);*/
+}
+.form-checkbox:hover
+{
+    background-color: lightblue;
+}
+.form-checkbox:checked
+{
+    background-color: lightgreen;
+}

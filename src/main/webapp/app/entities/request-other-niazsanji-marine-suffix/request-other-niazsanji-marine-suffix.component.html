@@ -9,9 +9,14 @@
             Create new Request Other Niazsanji
             </span>
         </button>
+        <button  class="btn btn-info float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
     </h2>
     <mi-alert></mi-alert>
-    <search-panel [searchPanelModel]="searchbarModel"></search-panel>
+    <search-panel [(page)]="page" [(size)]="itemsPerPage" [predicate]="predicate" [reverse]="reverse" [searchPanelModel]="searchbarModel"></search-panel>
+
     <br/>
     <div class="table-responsive" *ngIf="requestOtherNiazsanjis">
         <table class="table table-striped  table-bordered table-hover table-sm">
@@ -87,7 +92,7 @@
                         <a [routerLink]="['../person-marine-suffix', requestOtherNiazsanji.personId , 'view' ]">{{requestOtherNiazsanji.personFullName}}</a>
                     </div>
                 </td>
-                <td>{{requestOtherNiazsanji.costEducationalModule}}</td>
+                <td>{{requestOtherNiazsanji.costEducationalModule | number}}</td>
                 <td>
                     <div *ngIf="requestOtherNiazsanji.niazsanjiInputId">
                         <a [routerLink]="['../niazsanji-input-marine-suffix', requestOtherNiazsanji.niazsanjiInputId , 'view' ]">{{requestOtherNiazsanji.niazsanjiInputTitle}}</a>
@@ -205,9 +210,9 @@
             <tfoot>
             <tr>
                 <td colspan="8">
-                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll(criteria)">
+                    <select [(ngModel)] = "itemsPerPage">
                         <option value="10">۱۰</option>
-                        <option selected="selected" value="20">۲۰</option>
+                        <option value="20">۲۰</option>
                         <option value="50">۵۰</option>
                         <option value="100">۱۰۰</option>
                         <option value="500">۵۰۰</option>

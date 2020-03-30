@@ -21,6 +21,8 @@ import {OrganizationMarineSuffixService} from "app/entities/organization-marine-
 import {IOrganizationMarineSuffix} from "app/shared/model/organization-marine-suffix.model";
 import {IRestrictionMarineSuffix} from "app/shared/model/restriction-marine-suffix.model";
 import {RestrictionMarineSuffixService} from "app/entities/restriction-marine-suffix";
+import {IRequestEducationalModuleMarineSuffix} from "app/shared/model/request-educational-module-marine-suffix.model";
+import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 
 @Component({
     selector: 'mi-educational-module-marine-suffix',
@@ -52,6 +54,13 @@ export class EducationalModuleMarineSuffixComponent implements OnInit, OnDestroy
     skillableLevelOfSkills: ISkillableLevelOfSkillMarineSuffix[];
     organizations: IOrganizationMarineSuffix[];
 
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
+    isTopUsers: boolean = false;
+
 
     constructor(
         private educationalModuleService: EducationalModuleMarineSuffixService,
@@ -65,12 +74,11 @@ export class EducationalModuleMarineSuffixComponent implements OnInit, OnDestroy
         private router: Router,
         private eventManager: JhiEventManager,
         private location: PlatformLocation,
-
+        private convertObjectDatesService: ConvertObjectDatesService,
         private jhiTranslate: TranslateService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
@@ -83,19 +91,34 @@ export class EducationalModuleMarineSuffixComponent implements OnInit, OnDestroy
         });
     }
 
-    loadAll(criteria?) {
+    loadAll(criteria?, exportExcel: boolean = false) {
 
-        this.educationalModuleService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                criteria,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => this.paginateEducationalModules(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        if(exportExcel){
+            this.educationalModuleService
+                .query({
+                    page: this.page - 1,
+                    size: 20000,
+                    criteria,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => this.prepareForExportExcel(res.body),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+        else{
+            this.educationalModuleService
+                .query({
+                    page: this.page - 1,
+                    size: this.itemsPerPage,
+                    criteria,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => this.paginateEducationalModules(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
     }
 
     loadPage(page: number) {
@@ -106,8 +129,54 @@ export class EducationalModuleMarineSuffixComponent implements OnInit, OnDestroy
     }
 
     export() {
+        this.loadAll(this.criteria, true);
+        /*let a = new ExcelService(this.jhiTranslate);
+        a.exportAsExcelFile(this.educationalModules, 'educationalModules', 'marineindustryprojApp.educationalModule');*/
+    }
+
+    prepareForExportExcel(res : IEducationalModuleMarineSuffix[]){
+        debugger;
         let a = new ExcelService(this.jhiTranslate);
-        a.exportAsExcelFile(this.educationalModules, 'educationalModules', 'marineindustryprojApp.educationalModule');
+        res = this.convertObjectDatesService.changeArrayDate(res);
+        let report = [];
+        let index: number = 0;
+        res.forEach(a => {
+            index++;
+
+            let obj: Object;
+            obj = {'index': index,
+                'code': a.code,
+                'title': a.title,
+                'courseContactsTerms': a.courseContactsTerms,
+                'peopleUnderTraining': a.peopleUnderTrainings && a.peopleUnderTrainings.length > 0 ? a.peopleUnderTrainings.map(w => w.title).join(' - ') : "",
+                'competency': a.competencyTitle,
+                'goalsText': a.goalsText,
+                'goalsBehavioralText': a.goalsBehavioralText,
+                'headline': a.headlines && a.headlines.length > 0 ? a.headlines.map(w => w.title).join(' - ') : " ",
+                'totalLearningTime': (a.learningTimeTheorical ? a.learningTimeTheorical : 0) + (a.learningTimePractical ? a.learningTimePractical : 0),
+                'prerequisite': a.prerequisite,
+                'resource': a.resources && a.resources.length > 0 ? a.resources.map(w => w.title).join(' - '): " ",
+                'securityLevel': a.securityLevelTitle,
+                'skillableLevelOfSkill': a.skillableLevelOfSkillTitle,
+                'teachingApproach': a.teachingApproaches && a.teachingApproaches.length > 0 ? a.teachingApproaches.map(w => w.title).join(' - ') : " ",
+                'neededSoftwares': a.neededSoftwares,
+                'neededHardware': a.neededHardware,
+                'restrictions': a.restrictions && a.restrictions.length > 0 ? a.restrictions.map(w => w.title).join(' - ') : " ",
+                'restrictionDescription': a.restrictionDescription,
+                'scientificWorkGroup': a.scientificWorkGroups.map(w => w.title).join(' - '),
+                'educationalCenter': a.educationalCenters && a.educationalCenters.length > 0 ? a.educationalCenters.map(a => a.name).join(' - ') : " ",
+                'teachersText': a.teachersText,
+                'teacher': a.teachers && a.teachers.length ? a.teachers.map(w => w.fullName).join(' - ') : " ",
+                'effectivenessLevel': a.effectivenessLevels && a.effectivenessLevels.length > 0 ? a.effectivenessLevels.map(w => w.title).join(' - ') : " ",
+                'evaluationMethod': a.evaluationMethodTitle,
+                'assessmentMethod': a.assessmentMethods && a.assessmentMethods.length > 0 ? a.assessmentMethods.map(w => w.title).join(' - ') : " ",
+                'effectivenessIndex': a.effectivenessIndices && a.effectivenessIndices.length > 0 ? a.effectivenessIndices.map(w => w.title).join(' - ') : " ",
+                'createDate': a.createDate,
+                'moreDescription': a.moreDescription
+            };
+            report.push(obj);
+        });
+        a.exportAsExcelFile(report, 'educationalModules', 'marineindustryprojApp.educationalModule');
     }
 
     transition() {
@@ -118,7 +187,7 @@ export class EducationalModuleMarineSuffixComponent implements OnInit, OnDestroy
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });*/
-        this.loadAll(this.criteria);
+        //this.loadAll(this.criteria);
     }
 
     clear() {
@@ -136,6 +205,7 @@ export class EducationalModuleMarineSuffixComponent implements OnInit, OnDestroy
     ngOnInit() {
         this.principal.identity().then(account => {
             this.currentAccount = account;
+            this.setRoles(account);
         });
         this.searchbarModel.push(new SearchPanelModel('educationalModule','title','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('educationalModule','code','text', 'contains'));
@@ -144,6 +214,21 @@ export class EducationalModuleMarineSuffixComponent implements OnInit, OnDestroy
         this.prepareSkillableLevelOfSkill();
         /*if(!this.done)
             this.loadAll();*/
+    }
+    setRoles(account: any){
+        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+            this.isAdmin = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+            this.isModirAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+            this.isModirKolAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+            this.isKarshenasArshadAmozeshSazman = true;
+
+        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isSuperUsers = true;
+        if(this.isModirAmozesh || this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isTopUsers = true;
     }
     prepareOrganization(){
         this.organizationService.query().subscribe((res) => {

@@ -3,6 +3,7 @@ package com.marineindustryproj.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
+import com.marineindustryproj.domain.enumeration.Grade;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -42,6 +43,11 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
      * Class for filtering NiazSanjiSource
      */
     public static class NiazSanjiSourceFilter extends Filter<NiazSanjiSource> {
+    }
+    /**
+     * Class for filtering Grade
+     */
+    public static class GradeFilter extends Filter<Grade> {
     }
 
     private static final long serialVersionUID = 1L;
@@ -90,6 +96,16 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
 
     private IntegerFilter priority;
 
+    private FloatFilter effectivenessPhaseAverage;
+
+    private GradeFilter effectivenessPhaseGrade;
+
+    private IntegerFilter selectedEffectivenessPhaseLevel;
+
+    private IntegerFilter currentEffectivenessPhaseLevel;
+
+    private ZonedDateTimeFilter lastEffectivenessPhaseFinish;
+
     private LongFilter finalNiazsanjiReportPersonId;
 
     private LongFilter personId;
@@ -99,6 +115,8 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
     private LongFilter runPhaseId;
 
     private LongFilter pollId;
+
+    private LongFilter effectivenessPhaseId;
 
     private LongFilter documentId;
 
@@ -115,6 +133,8 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
     private LongFilter organizationChartId;
 
     private LongFilter educationalModuleId;
+
+    private LongFilter mahiatCourseId;
 
     private StringFilter educationalModuleCode;
 
@@ -298,6 +318,46 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         this.priority = priority;
     }
 
+    public FloatFilter getEffectivenessPhaseAverage() {
+        return effectivenessPhaseAverage;
+    }
+
+    public void setEffectivenessPhaseAverage(FloatFilter effectivenessPhaseAverage) {
+        this.effectivenessPhaseAverage = effectivenessPhaseAverage;
+    }
+
+    public GradeFilter getEffectivenessPhaseGrade() {
+        return effectivenessPhaseGrade;
+    }
+
+    public void setEffectivenessPhaseGrade(GradeFilter effectivenessPhaseGrade) {
+        this.effectivenessPhaseGrade = effectivenessPhaseGrade;
+    }
+
+    public IntegerFilter getSelectedEffectivenessPhaseLevel() {
+        return selectedEffectivenessPhaseLevel;
+    }
+
+    public void setSelectedEffectivenessPhaseLevel(IntegerFilter selectedEffectivenessPhaseLevel) {
+        this.selectedEffectivenessPhaseLevel = selectedEffectivenessPhaseLevel;
+    }
+
+    public IntegerFilter getCurrentEffectivenessPhaseLevel() {
+        return currentEffectivenessPhaseLevel;
+    }
+
+    public void setCurrentEffectivenessPhaseLevel(IntegerFilter currentEffectivenessPhaseLevel) {
+        this.currentEffectivenessPhaseLevel = currentEffectivenessPhaseLevel;
+    }
+
+    public ZonedDateTimeFilter getLastEffectivenessPhaseFinish() {
+        return lastEffectivenessPhaseFinish;
+    }
+
+    public void setLastEffectivenessPhaseFinish(ZonedDateTimeFilter lastEffectivenessPhaseFinish) {
+        this.lastEffectivenessPhaseFinish = lastEffectivenessPhaseFinish;
+    }
+
     public LongFilter getFinalNiazsanjiReportPersonId() {
         return finalNiazsanjiReportPersonId;
     }
@@ -328,6 +388,14 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
 
     public void setPollId(LongFilter pollId) {
         this.pollId = pollId;
+    }
+
+    public LongFilter getEffectivenessPhaseId() {
+        return effectivenessPhaseId;
+    }
+
+    public void setEffectivenessPhaseId(LongFilter effectivenessPhaseId) {
+        this.effectivenessPhaseId = effectivenessPhaseId;
     }
 
     public LongFilter getDocumentId() {
@@ -402,6 +470,14 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
     }
 
 
+    public LongFilter getMahiatCourseId() {
+        return mahiatCourseId;
+    }
+
+    public void setMahiatCourseId(LongFilter mahiatCourseId) {
+        this.mahiatCourseId = mahiatCourseId;
+    }
+
     public LongFilter getTeachingApproachId() {
         return teachingApproachId;
     }
@@ -443,10 +519,16 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
             Objects.equals(goalsText, that.goalsText) &&
             Objects.equals(prerequisite, that.prerequisite) &&
             Objects.equals(priority, that.priority) &&
+            Objects.equals(effectivenessPhaseAverage, that.effectivenessPhaseAverage) &&
+            Objects.equals(effectivenessPhaseGrade, that.effectivenessPhaseGrade) &&
+            Objects.equals(selectedEffectivenessPhaseLevel, that.selectedEffectivenessPhaseLevel) &&
+            Objects.equals(currentEffectivenessPhaseLevel, that.currentEffectivenessPhaseLevel) &&
+            Objects.equals(lastEffectivenessPhaseFinish, that.lastEffectivenessPhaseFinish) &&
             Objects.equals(finalNiazsanjiReportPersonId, that.finalNiazsanjiReportPersonId) &&
             Objects.equals(designAndPlanningId, that.designAndPlanningId) &&
             Objects.equals(runPhaseId, that.runPhaseId) &&
             Objects.equals(pollId, that.pollId) &&
+            Objects.equals(effectivenessPhaseId, that.effectivenessPhaseId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(restrictionId, that.restrictionId) &&
             Objects.equals(niazsanjiIntegrationId, that.niazsanjiIntegrationId) &&
@@ -455,6 +537,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
             Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(organizationChartId, that.organizationChartId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
+                        Objects.equals(mahiatCourseId, that.mahiatCourseId) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
             Objects.equals(educationalModuleCode, that.educationalModuleCode) &&
@@ -486,10 +569,16 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         goalsText,
         prerequisite,
         priority,
+        effectivenessPhaseAverage,
+        effectivenessPhaseGrade,
+        selectedEffectivenessPhaseLevel,
+        currentEffectivenessPhaseLevel,
+        lastEffectivenessPhaseFinish,
         finalNiazsanjiReportPersonId,
         designAndPlanningId,
         runPhaseId,
         pollId,
+        effectivenessPhaseId,
         documentId,
         restrictionId,
         niazsanjiIntegrationId,
@@ -498,6 +587,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
         courseTypeId,
         organizationChartId,
         educationalModuleId,
+        mahiatCourseId,
         personId,
         educationalModuleTitle,
         educationalModuleCode,
@@ -530,10 +620,16 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
                 (goalsText != null ? "goalsText=" + goalsText + ", " : "") +
                 (prerequisite != null ? "prerequisite=" + prerequisite + ", " : "") +
                 (priority != null ? "priority=" + priority + ", " : "") +
+                (effectivenessPhaseAverage != null ? "effectivenessPhaseAverage=" + effectivenessPhaseAverage + ", " : "") +
+                (effectivenessPhaseGrade != null ? "effectivenessPhaseGrade=" + effectivenessPhaseGrade + ", " : "") +
+                (selectedEffectivenessPhaseLevel != null ? "selectedEffectivenessPhaseLevel=" + selectedEffectivenessPhaseLevel + ", " : "") +
+                (currentEffectivenessPhaseLevel != null ? "currentEffectivenessPhaseLevel=" + currentEffectivenessPhaseLevel + ", " : "") +
+                (lastEffectivenessPhaseFinish != null ? "lastEffectivenessPhaseFinish=" + lastEffectivenessPhaseFinish + ", " : "") +
                 (finalNiazsanjiReportPersonId != null ? "finalNiazsanjiReportPersonId=" + finalNiazsanjiReportPersonId + ", " : "") +
                 (designAndPlanningId != null ? "designAndPlanningId=" + designAndPlanningId + ", " : "") +
                 (runPhaseId != null ? "runPhaseId=" + runPhaseId + ", " : "") +
                 (pollId != null ? "pollId=" + pollId + ", " : "") +
+                (effectivenessPhaseId != null ? "effectivenessPhaseId=" + effectivenessPhaseId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (restrictionId != null ? "restrictionId=" + restrictionId + ", " : "") +
                 (niazsanjiIntegrationId != null ? "niazsanjiIntegrationId=" + niazsanjiIntegrationId + ", " : "") +
@@ -542,6 +638,7 @@ public class FinalNiazsanjiReportCriteria implements Serializable {
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (mahiatCourseId != null ? "mahiatCourseId=" + mahiatCourseId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (educationalModuleCode != null ? "educationalModuleCode=" + educationalModuleCode + ", " : "") +
                 (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +

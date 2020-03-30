@@ -33,7 +33,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let usersRequest of usersRequests ;trackBy: trackId" [ngClass]="{'accept': usersRequest.requestStatus === 'ACCEPT','ignore': usersRequest.requestStatus === 'IGNORE'}">
+            <tr *ngFor="let usersRequest of usersRequests ;trackBy: trackId"
+                [ngClass]="{'accept': usersRequest.requestStatus === 'ACCEPT',
+                'ignore': usersRequest.requestStatus === 'IGNORE',
+                'new': usersRequest.requestStatus === 'NEW', 'read': usersRequest.requestStatus === 'READ',
+                'returned': usersRequest.requestStatus === 'RETURNED'}">
                 <td><a [routerLink]="['/users-request-marine-suffix', usersRequest.id, 'view' ]">{{usersRequest.id}}</a></td>
                 <td>{{usersRequest.orgChartRoot}}</td>
                 <td>{{usersRequest.title}}</td>

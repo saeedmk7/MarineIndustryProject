@@ -357,7 +357,6 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
 
-        debugger;
         let runPhaseSaveData: IRunPhaseSaveDataModel = new RunPhaseSaveDataModel();
         runPhaseSaveData.runPhaseId = this.runPhase.id;
         runPhaseSaveData.runMonth = this.runPhase.runMonth;

@@ -4,15 +4,15 @@ export const REQUEST_STATUS_FILTERS =[{
     id: undefined,
     title: 'همه'
 },{
-    id: RequestStatus.NEW,
-    title: 'جاری'
+    id: 'NEW',
+    title: 'منتظر تایید'
 },{
-    id: RequestStatus.ACCEPT,
+    id: 'ACCEPT',
     title: 'تصویب شده شوراء'
 },{
-    id: RequestStatus.IGNORE,
+    id: 'IGNORE',
     title: 'رد شده'
 },{
-    id: RequestStatus.RETURNED,
+    id: 'RETURNED',
     title: 'پیام های مهم دار'
 }];

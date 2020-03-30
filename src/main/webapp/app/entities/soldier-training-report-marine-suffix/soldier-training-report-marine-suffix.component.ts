@@ -21,6 +21,7 @@ import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dat
 import {ISoldierMarineSuffix} from "app/shared/model/soldier-marine-suffix.model";
 import {SoldierMarineSuffixService} from "app/entities/soldier-marine-suffix";
 import {MONTHS} from "app/shared/constants/months.constants";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'mi-soldier-training-report-marine-suffix',
@@ -72,11 +73,11 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
         protected organizationChartService: OrganizationChartMarineSuffixService,
         private treeUtilities: TreeUtilities,
         private convertObjectDatesService: ConvertObjectDatesService,
-        private soldierService: SoldierMarineSuffixService
+        private soldierService: SoldierMarineSuffixService,
+        protected jhiTranslate: TranslateService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
@@ -87,17 +88,8 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
             this.loadAll(criteria.content);
         });
     }
-    export() {
 
-        /*let a = new ExcelService(this.jhiTranslate);
-        let ee = this.mediaAwarenessReports.map(w => {
-            return { id: w.id, organizationChart: w.organizationChartTitle, mediaProductType: w.mediaProductTypeTitle, designed: w.designed,
-                subject: w.subject, publishDate: w.publishDate, numberOfViewers: w.numberOfViewers, durationOfOperation: w.durationOfOperation,
-                reportTime: w.reportTime, personHour: w.personHour }
-        });
-        a.exportAsExcelFile(ee, 'mediaAwarenessReports', 'marineindustryprojApp.mediaAwarenessReport');*/
-    }
-    loadAll(criteria?) {
+    loadAll(criteria?, excelExport: boolean = false) {
 
         if(!criteria)
             criteria = [];
@@ -126,18 +118,32 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
                 }
             }
         }*/
-
-        this.soldierTrainingReportService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                criteria,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<ISoldierTrainingReportMarineSuffix[]>) => this.paginateSoldierTrainingReports(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        if(excelExport){
+            this.soldierTrainingReportService
+                .query({
+                    page: this.page - 1,
+                    size: this.itemsPerPage,
+                    criteria,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<ISoldierTrainingReportMarineSuffix[]>) => this.prepareForExportExcel(res.body),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+        else {
+            this.soldierTrainingReportService
+                .query({
+                    page: this.page - 1,
+                    size: this.itemsPerPage,
+                    criteria,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<ISoldierTrainingReportMarineSuffix[]>) => this.paginateSoldierTrainingReports(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
     }
 
     setRoles(account: any){
@@ -163,14 +169,14 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
     }
 
     transition() {
-        this.router.navigate(['/soldier-training-report-marine-suffix'], {
+        /*this.router.navigate(['/soldier-training-report-marine-suffix'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });
-        this.loadAll();
+        this.loadAll(this.criteria);*/
     }
 
     clear() {
@@ -182,7 +188,7 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         ]);
-        this.loadAll();
+        this.loadAll(this.criteria);
     }
 
     ngOnInit() {
@@ -274,7 +280,37 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
         this.queryCount = this.totalItems;
         this.soldierTrainingReports = this.convertObjectDatesService.changeArrayDate(data);
     }
+    export() {
+        this.loadAll(this.criteria, true);
+    }
+    prepareForExportExcel(res : ISoldierTrainingReportMarineSuffix[]){
+        let a = new ExcelService(this.jhiTranslate);
+        res = this.convertObjectDatesService.changeArrayDate(res);
+        let report = [];
+        let index: number = 0;
+        res.forEach(a => {
+            index++;
 
+            let obj: Object;
+            obj = {'index': index,
+                'soldierOrganizationChartTitle': a.soldierOrganizationChartTitle,
+                'soldierFullName': a.soldierFullName,
+                'soldierNationalId': a.soldierNationalId,
+                'soldierReleaseDate': a.soldierEmploymentDate,
+                'title': a.title,
+                'personHour': a.personHour,
+                'executiveTrainingCompany': a.executiveTrainingCompany,
+                'certificateStatus': a.certificateStatus,
+                'certificateNumber': a.certificateNumber,
+                'year': a.year,
+                'month': a.month,
+                'description': a.description,
+                'createDate': a.createDate
+            };
+            report.push(obj);
+        });
+        a.exportAsExcelFile(report, 'soldierTrainingReports', 'marineindustryprojApp.soldierTrainingReport');
+    }
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }

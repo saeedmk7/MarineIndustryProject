@@ -72,9 +72,7 @@ export class EvaluateCriteriaTrainingMarineSuffixComponent implements OnInit, On
         private jhiTranslate: TranslateService,
         private convertObjectDatesService: ConvertObjectDatesService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
@@ -148,14 +146,14 @@ export class EvaluateCriteriaTrainingMarineSuffixComponent implements OnInit, On
     }
 
     transition() {
-        this.router.navigate(['/evaluate-criteria-training-marine-suffix'], {
+        /*this.router.navigate(['/evaluate-criteria-training-marine-suffix'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });
-        this.loadAll();
+        this.loadAll();*/
     }
 
     clear() {

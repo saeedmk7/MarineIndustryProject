@@ -91,16 +91,18 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
         private convertObjectDatesService: ConvertObjectDatesService,
         private commonSearchCheckerService: CommonSearchCheckerService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        /*this.itemsPerPage = ITEMS_PER_PAGE;*/
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
+            /*this.itemsPerPage = data.pagingParams.size ? data.pagingParams.size : ITEMS_PER_PAGE;*/
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
         });
-
         //this.setPermission();
         this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) => {
+
+
+
             this.criteria = criteria.content;
             this.done = true;
             this.makeCriteria(criteria.content);
@@ -215,7 +217,6 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
     }
 
     loadAll(criteria?,excelExport: boolean = false) {
-        debugger;
         if(!this.isAdmin)
         {
             let orgs = this.treeUtilities.getParentIds(this.organizationcharts,this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
@@ -285,10 +286,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
     }
 
     export() {
-
         this.makeCriteria(this.criteria,true);
-
-
     }
     prepareForExportExcel(res : IRequestNiazsanjiFardiMarineSuffix[]){
         res = this.convertObjectDatesService.changeArrayDate(res);
@@ -314,6 +312,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
                     'timeEducationalModule': (allEducationalModule.learningTimePractical ? allEducationalModule.learningTimePractical : 0) + (allEducationalModule.learningTimeTheorical ? allEducationalModule.learningTimeTheorical : 0),
                     'levelEducationalModule': allEducationalModule.skillableLevelOfSkillTitle,
                     'costEducationalModule': a.costAllEducationalModule,
+                    'courseType': a.courseTypeTitle,
                     'createDate': a.createDate,
                     'status': this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus)
                 };
@@ -331,6 +330,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
                     'timeEducationalModule': (approvedEducationalModule.learningTimePractical ? approvedEducationalModule.learningTimePractical : 0) + (approvedEducationalModule.learningTimeTheorical ? approvedEducationalModule.learningTimeTheorical : 0),
                     'levelEducationalModule': approvedEducationalModule.skillableLevelOfSkillTitle,
                     'costEducationalModule': a.costApprovedEducationalModule,
+                    'courseType': a.courseTypeTitle,
                     'createDate': a.createDate,
                     'status': this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus)
                 };
@@ -340,12 +340,25 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
         a.exportAsExcelFile(report, 'requestNiazsanjiFardis', 'marineindustryprojApp.requestNiazsanjiFardi');
     }
     transition() {
+        debugger;
+        /*this.router.navigate(['/request-niazsanji-fardi-marine-suffix'], {
+            queryParams: {
+                page: this.page,
+                size: this.itemsPerPage,
+                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+            }
+        });
 
-
-        this.makeCriteria(this.criteria);
+        this.criteria.push({
+            page: this.page,
+            size: this.itemsPerPage,
+            sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+        });*/
+        //this.makeCriteria(this.criteria);
     }
 
     clear() {
+        debugger;
         this.page = 0;
         this.router.navigate([
             '/request-niazsanji-fardi-marine-suffix',
@@ -366,7 +379,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
                 this.currentPerson = resp.body;
                 this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleCode', 'text', 'contains'));
                 this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
-                this.searchbarModel.push(new SearchPanelModel("requestNiazsanjiFardi", 'requestStatusFilters', 'select', 'equals', REQUEST_STATUS_FILTERS))
+                this.searchbarModel.push(new SearchPanelModel("requestNiazsanjiFardi", 'requestStatusFilters', 'selectWithStringId', 'equals', REQUEST_STATUS_FILTERS))
                 this.prepareSearchOrgChart();
                 this.prepareDate();
                 this.prepareSearchEducationalModule();
@@ -522,7 +535,6 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
     }
 
     sort() {
-
         const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
         if (this.predicate !== 'id') {
             result.push('id');

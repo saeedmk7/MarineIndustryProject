@@ -98,6 +98,9 @@ public class CriterionQueryService extends QueryService<Criterion> {
             if (criteria.getCoefficient() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCoefficient(), Criterion_.coefficient));
             }
+            if (criteria.getCriterionType() != null) {
+                specification = specification.and(buildSpecification(criteria.getCriterionType(), Criterion_.criterionType));
+            }
             if (criteria.getDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), Criterion_.description));
             }

@@ -214,7 +214,6 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
         this.educationalHistoryService.uploadFile(formdata).subscribe(event => {
                 if (event instanceof HttpResponse) {
                     if (event.body) {
-                        debugger;
                         this.educationalHistory.fileDoc = event.body.toString();
                         this.fileMessage = "آپلود فایل با موفقیت انجام شد.";
                     }
@@ -247,7 +246,6 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
 
     save() {
 
-        debugger;
         this.isSaving = true;
         this.currentUserFullName = this.currentPerson.fullName;
         this.message = "";

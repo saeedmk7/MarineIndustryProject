@@ -91,6 +91,15 @@ public class FinalNiazsanjiReportPersonServiceImpl implements FinalNiazsanjiRepo
             .map(finalNiazsanjiReportPersonMapper::toDto);
     }
 
+    /**
+     * Get all the FinalNiazsanjiReportPerson with eager load of many-to-many relationships.
+     *
+     * @return the list of entities
+     */
+    public Page<FinalNiazsanjiReportPersonDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return finalNiazsanjiReportPersonRepository.findAllWithEagerRelationships(pageable).map(finalNiazsanjiReportPersonMapper::toDto);
+    }
+    
 
     /**
      * Get one finalNiazsanjiReportPerson by id.

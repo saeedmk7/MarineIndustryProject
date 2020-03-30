@@ -1,4 +1,6 @@
 import { Moment } from 'moment';
+import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model//final-niazsanji-report-marine-suffix.model';
+import { ILevelThreeCriteriaMarineSuffix } from 'app/shared/model//level-three-criteria-marine-suffix.model';
 import { IDesignAndPlanningMarineSuffix } from 'app/shared/model//design-and-planning-marine-suffix.model';
 
 export interface IMahiatCourseMarineSuffix {
@@ -10,6 +12,8 @@ export interface IMahiatCourseMarineSuffix {
     createDate?: Moment;
     modifyUserLogin?: string;
     modifyDate?: Moment;
+    finalNiazsanjiReports?: IFinalNiazsanjiReportMarineSuffix[];
+    levelThreeCriteria?: ILevelThreeCriteriaMarineSuffix[];
     designAndPlannings?: IDesignAndPlanningMarineSuffix[];
 }
 
@@ -23,6 +27,8 @@ export class MahiatCourseMarineSuffix implements IMahiatCourseMarineSuffix {
         public createDate?: Moment,
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
+        public finalNiazsanjiReports?: IFinalNiazsanjiReportMarineSuffix[],
+        public levelThreeCriteria?: ILevelThreeCriteriaMarineSuffix[],
         public designAndPlannings?: IDesignAndPlanningMarineSuffix[]
     ) {}
 }

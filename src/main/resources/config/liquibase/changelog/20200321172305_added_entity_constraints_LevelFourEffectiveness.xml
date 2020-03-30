@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity LevelFourEffectiveness.
+    -->
+    <changeSet id="20200321172305-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="level_four_effectivenesses_id"
+                                 baseTableName="level_four_effectiveness_document"
+                                 constraintName="level_four_effectiveness_docum_level_four_effectivenesses_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="level_four_effectiveness"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="level_four_effectiveness_document"
+                                 constraintName="fk_level_four_effectiveness_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="final_niazsanji_report_person_id"
+                                 baseTableName="level_four_effectiveness"
+                                 constraintName="fk_level_four_effectiveness_final_niazsanji_report_person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="final_niazsanji_report_person"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -12,6 +12,7 @@ import org.mapstruct.*;
 public interface EducationalCenterMapper extends EntityMapper<EducationalCenterDTO, EducationalCenter> {
 
 
+    @Mapping(target = "educationalCenterGrades", ignore = true)
     @Mapping(target = "educationalModules", ignore = true)
     @Mapping(target = "requestEducationalModules", ignore = true)
     EducationalCenter toEntity(EducationalCenterDTO educationalCenterDTO);

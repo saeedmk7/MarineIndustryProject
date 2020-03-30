@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IJamHelpMarineSuffix } from 'app/shared/model/jam-help-marine-suffix.model';
-import {AccountService, Principal} from 'app/core';
+import {Principal} from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { JamHelpMarineSuffixService } from './jam-help-marine-suffix.service';
@@ -56,9 +56,8 @@ export class JamHelpMarineSuffixComponent implements OnInit, OnDestroy {
         private jhiTranslate: TranslateService,
         private convertObjectDatesService : ConvertObjectDatesService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
@@ -129,7 +128,7 @@ export class JamHelpMarineSuffixComponent implements OnInit, OnDestroy {
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });*/
-        this.loadAll();
+        //this.loadAll(this.criteria);
     }
 
     clear() {

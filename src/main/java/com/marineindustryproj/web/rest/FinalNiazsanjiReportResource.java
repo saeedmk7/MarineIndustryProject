@@ -678,4 +678,24 @@ public class FinalNiazsanjiReportResource {
         finalNiazsanjiReportService.delete(id);
         return ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    @PutMapping("/final-niazsanji-reports/setEffectivenessPhaseLevel/{finalNiazsanjiReportId}/{selectedEffectivenessPhaseLevelNumber}")
+    @Timed
+    public ResponseEntity<FinalNiazsanjiReportDTO> setEffectivenessPhaseLevel(@PathVariable Long finalNiazsanjiReportId, @PathVariable Integer selectedEffectivenessPhaseLevelNumber) throws URISyntaxException,Exception {
+        if (finalNiazsanjiReportId == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+
+        FinalNiazsanjiReportDTO finalNiazsanjiReport = finalNiazsanjiReportService.findOne(finalNiazsanjiReportId).get();
+
+        finalNiazsanjiReport.setStatus(30);
+        finalNiazsanjiReport.setSelectedEffectivenessPhaseLevel(selectedEffectivenessPhaseLevelNumber);
+        finalNiazsanjiReport.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        finalNiazsanjiReport.setModifyDate(ZonedDateTime.now());
+
+        FinalNiazsanjiReportDTO result = finalNiazsanjiReportService.setEffectivenessPhaseLevel(finalNiazsanjiReport);
+        return ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
 }

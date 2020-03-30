@@ -12,6 +12,8 @@ export interface IPollMarineSuffix {
     archivedUserLogin?: string;
     archivedDate?: Moment;
     status?: number;
+    strength?: string;
+    improvement?: string;
     pollScores?: IPollScoreMarineSuffix[];
     finalNiazsanjiReportDescription?: string;
     finalNiazsanjiReportId?: number;
@@ -29,6 +31,8 @@ export class PollMarineSuffix implements IPollMarineSuffix {
         public archivedUserLogin?: string,
         public archivedDate?: Moment,
         public status?: number,
+        public strength?: string,
+        public improvement?: string,
         public pollScores?: IPollScoreMarineSuffix[],
         public finalNiazsanjiReportDescription?: string,
         public finalNiazsanjiReportId?: number

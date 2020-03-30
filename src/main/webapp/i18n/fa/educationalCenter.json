@@ -37,6 +37,7 @@
             "activityArea": "حوزه فعالیت",
             "document": "مدارک",
             "educationalModule": "پودمان",
+            "grade": "گرید",
             "requestEducationalModule": "Request Educational Module"
         }
     }

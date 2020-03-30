@@ -169,7 +169,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     soldierTrainingReports : ISoldierTrainingReportMarineSuffix[] = [];
     soldierTrainingReportSum : number = 0;
     showPersonHourAggregationPart(niazsanjiYear: number){
-        debugger;
         const awarenessCriteria = [{
             key: 'publishDate.contains',
             value: niazsanjiYear.toString()
@@ -204,9 +203,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                             this.soldierTrainingReportSum = this.soldierTrainingReports.map(a => a.personHour).reduce((sum, current) => sum + current);
 
                             this.personHourAggregationResult = [];
-                            debugger;
                             this.homePageReport.homePageReportDetails.forEach(a => {
-                                debugger;
                                 const subTree = this.treeUtilities.getAllOfThisTreeIds(this.organizationcharts, a.organizationChartId).filter(this.treeUtilities.onlyUnique);
                                 const sumMedia = this.mediaAwarenessReport.filter(w => subTree.includes(w.organizationChartId)).map(w => w.personHour).reduce((sum, current) => sum + current, 0 );
                                 const sumSoldiers = this.soldierTrainingReports.filter(w => subTree.includes(w.soldierOrganizationChartId))

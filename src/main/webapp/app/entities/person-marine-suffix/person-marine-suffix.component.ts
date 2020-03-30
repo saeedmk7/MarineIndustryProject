@@ -80,9 +80,8 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
         private treeUtilities : TreeUtilities
 
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
@@ -173,14 +172,14 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-       /* this.router.navigate(['/person-marine-suffix'], {
+        /*this.router.navigate(['/person-marine-suffix'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
-        });*/
-       this.loadAll(this.criteria);
+        });
+       this.loadAll(this.criteria);*/
     }
 
     clear() {

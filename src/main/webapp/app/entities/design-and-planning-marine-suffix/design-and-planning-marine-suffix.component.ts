@@ -20,6 +20,9 @@ import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-modul
 import {EducationalModuleMarineSuffixService} from "app/entities/educational-module-marine-suffix";
 import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
+import {IEducationalHistoryMarineSuffix} from "app/shared/model/educational-history-marine-suffix.model";
+import {ExcelService} from "app/plugin/export-excel/excel-service";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'mi-design-and-planning-marine-suffix',
@@ -69,11 +72,11 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         private educationalModuleService: EducationalModuleMarineSuffixService,
         private personService: PersonMarineSuffixService,
         private effectivenessLevelService: EffectivenessLevelMarineSuffixService,
-        private convertObjectDatesService : ConvertObjectDatesService
+        private convertObjectDatesService : ConvertObjectDatesService,
+        protected jhiTranslate: TranslateService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
@@ -85,7 +88,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         });
     }
 
-    loadAll(criteria?) {
+    loadAll(criteria?, exportExcel: boolean = false) {
 
         if(!criteria){
             criteria = [];
@@ -96,17 +99,32 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
                 value: this.currentAccount.personId
             });
         }
-        this.designAndPlanningService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                criteria,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<IDesignAndPlanningMarineSuffix[]>) => this.paginateDesignAndPlannings(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        if(exportExcel){
+            this.designAndPlanningService
+                .query({
+                    page: this.page - 1,
+                    size: 20000,
+                    criteria,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<IDesignAndPlanningMarineSuffix[]>) => this.prepareForExportExcel(res.body),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+        else {
+            this.designAndPlanningService
+                .query({
+                    page: this.page - 1,
+                    size: this.itemsPerPage,
+                    criteria,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<IDesignAndPlanningMarineSuffix[]>) => this.paginateDesignAndPlannings(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
     }
 
     loadPage(page: number) {
@@ -117,14 +135,14 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
     }
 
     transition() {
-        this.router.navigate(['/design-and-planning-marine-suffix'], {
+        /*this.router.navigate(['/design-and-planning-marine-suffix'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });
-        this.loadAll();
+        this.loadAll(this.criteria);*/
     }
 
     clear() {
@@ -136,7 +154,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         ]);
-        this.loadAll();
+        this.loadAll(this.criteria);
     }
     ngOnInit() {
     this.principal.identity().then(account => {
@@ -254,6 +272,42 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         this.totalHour =  this.designAndPlannings.filter(a => a.totalLearningTime).map(a => a.totalLearningTime).reduce((sum, current) => sum + current);
         this.totalDirectCost =  this.designAndPlannings.filter(a => a.directCost).map(a => a.directCost).reduce((sum, current) => sum + current);
         this.totalUnDirectCost =  this.designAndPlannings.filter(a => a.undirectCost).map(a => a.undirectCost).reduce((sum, current) => sum + current);
+    }
+
+    export() {
+        this.loadAll(this.criteria,true);
+    }
+    prepareForExportExcel(res : IDesignAndPlanningMarineSuffix[]){
+        let a = new ExcelService(this.jhiTranslate);
+        res = this.convertObjectDatesService.changeArrayDate(res);
+        let report = [];
+        let index: number = 0;
+        res.forEach(a => {
+            index++;
+            debugger;
+            let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            a.runMonthName = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
+            let obj: Object;
+            obj = {'index': index,
+                'educationalModuleTitle': educationalModule.title,
+                'educationalModuleCode': educationalModule.code,
+                'skillLevelOfSkillTitle': educationalModule.skillableLevelOfSkillTitle,
+                'totalLearningTime': educationalModule.totalLearningTime,
+                'courseType': a.courseTypeTitle,
+                'runMonth': a.runMonthName,
+                'directCost': a.directCost,
+                'directCostDescription': a.directCostDescription,
+                'undirectCost': a.undirectCost,
+                'undirectCostDescription': a.undirectCostDescription,
+                'finished': a.finished,
+                'finishedUserLogin': a.finishedUserLogin,
+                'finishedDate': a.finishedDate,
+                'description': a.description,
+                'createDate': a.createDate
+            };
+            report.push(obj);
+        });
+        a.exportAsExcelFile(report, 'designAndPlannings', 'marineindustryprojApp.designAndPlanning');
     }
 
     private onError(errorMessage: string) {

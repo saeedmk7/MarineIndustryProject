@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity FinalNiazsanjiReportPerson and its DTO FinalNiazsanjiReportPersonDTO.
  */
-@Mapper(componentModel = "spring", uses = {PersonMapper.class, FinalNiazsanjiReportMapper.class})
+@Mapper(componentModel = "spring", uses = {DocumentMapper.class, PersonMapper.class, FinalNiazsanjiReportMapper.class})
 public interface FinalNiazsanjiReportPersonMapper extends EntityMapper<FinalNiazsanjiReportPersonDTO, FinalNiazsanjiReportPerson> {
 
     @Mapping(source = "person.id", target = "personId")
@@ -18,6 +18,9 @@ public interface FinalNiazsanjiReportPersonMapper extends EntityMapper<FinalNiaz
     @Mapping(source = "finalNiazsanjiReport.description", target = "finalNiazsanjiReportDescription")
     FinalNiazsanjiReportPersonDTO toDto(FinalNiazsanjiReportPerson finalNiazsanjiReportPerson);
 
+    @Mapping(target = "niazsanjiPersonGrades", ignore = true)
+    @Mapping(target = "levelThreeEffectivenesses", ignore = true)
+    @Mapping(target = "levelFourEffectivenesses", ignore = true)
     @Mapping(source = "personId", target = "person")
     @Mapping(source = "finalNiazsanjiReportId", target = "finalNiazsanjiReport")
     FinalNiazsanjiReportPerson toEntity(FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPersonDTO);

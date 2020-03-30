@@ -116,6 +116,12 @@ public class PollQueryService extends QueryService<Poll> {
             if (criteria.getStatus() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getStatus(), Poll_.status));
             }
+            if (criteria.getStrength() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStrength(), Poll_.strength));
+            }
+            if (criteria.getImprovement() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getImprovement(), Poll_.improvement));
+            }
             if (criteria.getPollScoreId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPollScoreId(),
                     root -> root.join(Poll_.pollScores, JoinType.LEFT).get(PollScore_.id)));

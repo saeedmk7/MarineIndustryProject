@@ -55,6 +55,20 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
 
     private LongFilter sourceId;
 
+    private FloatFilter scoreBeforeTest;
+
+    private FloatFilter scoreAfterTest;
+
+    private FloatFilter averageScore;
+
+    private LongFilter niazsanjiPersonGradeId;
+
+    private LongFilter levelThreeEffectivenessId;
+
+    private LongFilter levelFourEffectivenessId;
+
+    private LongFilter documentId;
+
     private LongFilter personId;
 
     private LongFilter finalNiazsanjiReportId;
@@ -163,6 +177,62 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
         this.sourceId = sourceId;
     }
 
+    public FloatFilter getScoreBeforeTest() {
+        return scoreBeforeTest;
+    }
+
+    public void setScoreBeforeTest(FloatFilter scoreBeforeTest) {
+        this.scoreBeforeTest = scoreBeforeTest;
+    }
+
+    public FloatFilter getScoreAfterTest() {
+        return scoreAfterTest;
+    }
+
+    public void setScoreAfterTest(FloatFilter scoreAfterTest) {
+        this.scoreAfterTest = scoreAfterTest;
+    }
+
+    public FloatFilter getAverageScore() {
+        return averageScore;
+    }
+
+    public void setAverageScore(FloatFilter averageScore) {
+        this.averageScore = averageScore;
+    }
+
+    public LongFilter getNiazsanjiPersonGradeId() {
+        return niazsanjiPersonGradeId;
+    }
+
+    public void setNiazsanjiPersonGradeId(LongFilter niazsanjiPersonGradeId) {
+        this.niazsanjiPersonGradeId = niazsanjiPersonGradeId;
+    }
+
+    public LongFilter getLevelThreeEffectivenessId() {
+        return levelThreeEffectivenessId;
+    }
+
+    public void setLevelThreeEffectivenessId(LongFilter levelThreeEffectivenessId) {
+        this.levelThreeEffectivenessId = levelThreeEffectivenessId;
+    }
+
+    public LongFilter getLevelFourEffectivenessId() {
+        return levelFourEffectivenessId;
+    }
+
+    public void setLevelFourEffectivenessId(LongFilter levelFourEffectivenessId) {
+        this.levelFourEffectivenessId = levelFourEffectivenessId;
+    }
+
+    public LongFilter getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(LongFilter documentId) {
+        this.documentId = documentId;
+    }
+
     public LongFilter getPersonId() {
         return personId;
     }
@@ -203,6 +273,13 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
             Objects.equals(sourceId, that.sourceId) &&
+            Objects.equals(scoreBeforeTest, that.scoreBeforeTest) &&
+            Objects.equals(scoreAfterTest, that.scoreAfterTest) &&
+            Objects.equals(averageScore, that.averageScore) &&
+            Objects.equals(niazsanjiPersonGradeId, that.niazsanjiPersonGradeId) &&
+            Objects.equals(levelThreeEffectivenessId, that.levelThreeEffectivenessId) &&
+            Objects.equals(levelFourEffectivenessId, that.levelFourEffectivenessId) &&
+            Objects.equals(documentId, that.documentId) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId);
     }
@@ -223,6 +300,13 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
         archivedDate,
         status,
         sourceId,
+        scoreBeforeTest,
+        scoreAfterTest,
+        averageScore,
+        niazsanjiPersonGradeId,
+        levelThreeEffectivenessId,
+        levelFourEffectivenessId,
+        documentId,
         personId,
         finalNiazsanjiReportId
         );
@@ -244,6 +328,13 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
                 (sourceId != null ? "sourceId=" + sourceId + ", " : "") +
+                (scoreBeforeTest != null ? "scoreBeforeTest=" + scoreBeforeTest + ", " : "") +
+                (scoreAfterTest != null ? "scoreAfterTest=" + scoreAfterTest + ", " : "") +
+                (averageScore != null ? "averageScore=" + averageScore + ", " : "") +
+                (niazsanjiPersonGradeId != null ? "niazsanjiPersonGradeId=" + niazsanjiPersonGradeId + ", " : "") +
+                (levelThreeEffectivenessId != null ? "levelThreeEffectivenessId=" + levelThreeEffectivenessId + ", " : "") +
+                (levelFourEffectivenessId != null ? "levelFourEffectivenessId=" + levelFourEffectivenessId + ", " : "") +
+                (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
             "}";

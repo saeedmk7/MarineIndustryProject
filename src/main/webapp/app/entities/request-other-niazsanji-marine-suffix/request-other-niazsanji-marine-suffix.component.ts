@@ -24,6 +24,8 @@ import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 import {IRequestNiazsanjiFardiMarineSuffix} from "app/shared/model/request-niazsanji-fardi-marine-suffix.model";
 import {CommonSearchCheckerService} from "app/plugin/utilities/common-search-checkers";
 import {REQUEST_STATUS_FILTERS} from "app/shared/constants/RequestStatusFilters";
+import {TranslateService} from '@ngx-translate/core';
+import {ExcelService} from "app/plugin/export-excel/excel-service";
 
 @Component({
     selector: 'mi-request-other-niazsanji-marine-suffix',
@@ -52,6 +54,10 @@ export class RequestOtherNiazsanjiMarineSuffixComponent implements OnInit, OnDes
     previousPage: any;
     reverse: any;
     isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
 
     criteriaSubscriber: Subscription;
     searchbarModel: SearchPanelModel[] = new Array<SearchPanelModel>();
@@ -80,11 +86,10 @@ export class RequestOtherNiazsanjiMarineSuffixComponent implements OnInit, OnDes
         protected userService: UserService,
         private courseTypeService: CourseTypeMarineSuffixService,
         private convertObjectDatesService: ConvertObjectDatesService,
-        private commonSearchCheckerService: CommonSearchCheckerService
+        private commonSearchCheckerService: CommonSearchCheckerService,
+        protected jhiTranslate: TranslateService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
@@ -129,8 +134,7 @@ export class RequestOtherNiazsanjiMarineSuffixComponent implements OnInit, OnDes
             this.principal.identity().then(account => {
 
                 this.currentAccount = account;
-                if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-                    this.isAdmin = true;
+                this.setRoles(account);
 
                 this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
                     this.currentPerson = resp.body;
@@ -157,7 +161,7 @@ export class RequestOtherNiazsanjiMarineSuffixComponent implements OnInit, OnDes
     }
     handleAfterChart(wantOrgIds: number[],criteria,excelExport: boolean = false){
         criteria = this.commonSearchCheckerService.checkRequestStatusFilters(criteria, this.currentPerson.organizationChartId);
-        if(this.isAdmin) {
+        if(this.isSuperUsers) {
             this.loadAll(criteria, excelExport);
             return;
         }
@@ -203,7 +207,7 @@ export class RequestOtherNiazsanjiMarineSuffixComponent implements OnInit, OnDes
 
     loadAll(criteria?,excelExport: boolean = false) {
 
-        if(!this.isAdmin)
+        if(!this.isSuperUsers)
         {
             let orgs = this.treeUtilities.getParentIds(this.organizationcharts,this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
             if(orgs.length > 0){
@@ -248,10 +252,50 @@ export class RequestOtherNiazsanjiMarineSuffixComponent implements OnInit, OnDes
                 );
         }
     }
-
+    export() {
+        this.makeCriteria(this.criteria,true);
+    }
     prepareForExportExcel(res : IRequestOtherNiazsanjiMarineSuffix[]){
+        let a = new ExcelService(this.jhiTranslate);
         res = this.convertObjectDatesService.changeArrayDate(res);
-        //this.exportRequestsFinal(res);
+        let report = [];
+        let index: number = 0;
+        res.forEach(a => {
+            index++;
+            debugger;
+            a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
+            const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
+            if(org)
+                a.organizationChartTitle = org.fullTitle;
+
+            let person = this.people.find(w => w.id == a.personId);
+
+            let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
+
+            let obj: Object;
+            obj = {'index': index,
+                'organizationChart': a.organizationChartTitle,
+                'person': person.fullName,
+                'jobTitle': person.jobTitle,
+                'educationalModuleTitle': educationalModule.title,
+                'educationalModuleId': educationalModule.code,
+                'skillLevelOfSkillTitle': educationalModule.skillableLevelOfSkillTitle,
+                'totalLearningTime': educationalModule.totalLearningTime,
+                'costEducationalModule': a.costEducationalModule,
+                'niazsanjiInput': a.niazsanjiInputTitle,
+                'courseType': a.courseTypeTitle,
+                'restriction': a.restrictions.map(w => w.title).join(' - '),
+                'restrictionDescription': a.restrictionDescription,
+                'teachingApproach': a.teachingApproachTitle,
+                'goalsText': a.goalsText,
+                'prerequisite': a.prerequisite,
+                'description': a.description,
+                'createDate': a.createDate,
+                'status': this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus)
+            };
+            report.push(obj);
+        });
+        a.exportAsExcelFile(report, 'requestOtherNiazsanjis', 'marineindustryprojApp.requestOtherNiazsanji');
     }
 
     loadPage(page: number) {
@@ -262,7 +306,14 @@ export class RequestOtherNiazsanjiMarineSuffixComponent implements OnInit, OnDes
     }
 
     transition() {
-        this.makeCriteria(this.criteria);
+        /*this.router.navigate(['/request-other-niazsanji-marine-suffix'], {
+            queryParams: {
+                page: this.page,
+                size: this.itemsPerPage,
+                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+            }
+        });
+        this.makeCriteria(this.criteria);*/
     }
 
     clear() {
@@ -281,20 +332,33 @@ export class RequestOtherNiazsanjiMarineSuffixComponent implements OnInit, OnDes
         this.principal.identity().then(account => {
 
             this.currentAccount = account;
-            if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-                this.isAdmin = true;
+            this.setRoles(account);
             this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
                 this.currentPerson = resp.body;
                 /*this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleId', 'number', 'equals'));*/
                 this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleCode', 'text', 'contains'));
                 this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
-                this.searchbarModel.push(new SearchPanelModel("requestNiazsanjiFardi", 'requestStatusFilters', 'select', 'equals', REQUEST_STATUS_FILTERS))
+                this.searchbarModel.push(new SearchPanelModel("requestNiazsanjiFardi", 'requestStatusFilters', 'selectWithStringId', 'equals', REQUEST_STATUS_FILTERS))
                 this.prepareSearchOrgChart();
                 this.prepareDate();
                 this.prepareSearchEducationalModule();
                 this.prepareSearchCourseType();
             })
         });
+    }
+    setRoles(account: any){
+
+        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+            this.isAdmin = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+            this.isModirAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+            this.isModirKolAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+            this.isKarshenasArshadAmozeshSazman = true;
+
+        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isSuperUsers = true;
     }
     prepareSearchCourseType(){
         this.courseTypeService.query().subscribe(

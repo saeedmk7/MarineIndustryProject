@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { IJamHelpAuthorityMarineSuffix } from 'app/shared/model/jam-help-authority-marine-suffix.model';
-import {AccountService, Principal} from 'app/core';
+import {Principal} from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { JamHelpAuthorityMarineSuffixService } from './jam-help-authority-marine-suffix.service';

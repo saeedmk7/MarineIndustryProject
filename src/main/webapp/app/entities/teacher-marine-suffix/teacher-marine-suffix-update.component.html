@@ -238,8 +238,6 @@
                         [(ngModel)]="teacher.sessionNumber" />
                 </div>
 
-
-
                 <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.createUserLogin" for="field_createUserLogin">Create User Login</label>
                     <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
@@ -402,6 +400,22 @@
                         name="academicRank"
                         id="field_academicRank"
                         [(ngModel)]="teacher.academicRankId">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.teacherType" for="field_teacherType">Teacher Type</label>
+                    <select class="form-control" [required]="true" name="teacherType" [(ngModel)]="teacher.teacherType" id="field_teacherType" >
+                        <option value="INTERNAL">{{'marineindustryprojApp.TeacherType.INTERNAL' | translate}}</option>
+                        <option value="EXTRNAL">{{'marineindustryprojApp.TeacherType.EXTRNAL' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacher.grade" for="field_grade">Grade</label>
+                    <select class="form-control" [required]="true" name="grade" [(ngModel)]="teacher.grade" id="field_grade" >
+                        <option value="A">{{'marineindustryprojApp.Grade.A' | translate}}</option>
+                        <option value="B">{{'marineindustryprojApp.Grade.B' | translate}}</option>
+                        <option value="C">{{'marineindustryprojApp.Grade.C' | translate}}</option>
+                        <option value="D">{{'marineindustryprojApp.Grade.D' | translate}}</option>
+                    </select>
                 </div>
             </div>
             <div>

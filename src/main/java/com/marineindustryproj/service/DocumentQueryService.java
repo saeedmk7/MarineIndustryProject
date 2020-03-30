@@ -198,6 +198,10 @@ public class DocumentQueryService extends QueryService<Document> {
                 specification = specification.and(buildSpecification(criteria.getTeacherId(),
                     root -> root.join(Document_.teachers, JoinType.LEFT).get(Teacher_.id)));
             }
+            if (criteria.getTeacherGradeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getTeacherGradeId(),
+                    root -> root.join(Document_.teacherGrades, JoinType.LEFT).get(TeacherGrade_.id)));
+            }
             if (criteria.getJobId() != null) {
                 specification = specification.and(buildSpecification(criteria.getJobId(),
                     root -> root.join(Document_.jobs, JoinType.LEFT).get(Job_.id)));
@@ -214,6 +218,10 @@ public class DocumentQueryService extends QueryService<Document> {
                 specification = specification.and(buildSpecification(criteria.getEducationalCenterId(),
                     root -> root.join(Document_.educationalCenters, JoinType.LEFT).get(EducationalCenter_.id)));
             }
+            if (criteria.getEducationalCenterGradeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalCenterGradeId(),
+                    root -> root.join(Document_.educationalCenterGrades, JoinType.LEFT).get(EducationalCenterGrade_.id)));
+            }
             if (criteria.getResourceId() != null) {
                 specification = specification.and(buildSpecification(criteria.getResourceId(),
                     root -> root.join(Document_.resources, JoinType.LEFT).get(Resource_.id)));
@@ -229,6 +237,22 @@ public class DocumentQueryService extends QueryService<Document> {
             if (criteria.getFinalNiazsanjiReportId() != null) {
                 specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportId(),
                     root -> root.join(Document_.finalNiazsanjiReports, JoinType.LEFT).get(FinalNiazsanjiReport_.id)));
+            }
+            if (criteria.getFinalNiazsanjiReportPersonId() != null) {
+                specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportPersonId(),
+                    root -> root.join(Document_.finalNiazsanjiReportPeople, JoinType.LEFT).get(FinalNiazsanjiReportPerson_.id)));
+            }
+            if (criteria.getNiazsanjiPersonGradeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getNiazsanjiPersonGradeId(),
+                    root -> root.join(Document_.niazsanjiPersonGrades, JoinType.LEFT).get(NiazsanjiPersonGrade_.id)));
+            }
+            if (criteria.getLevelThreeEffectivenessId() != null) {
+                specification = specification.and(buildSpecification(criteria.getLevelThreeEffectivenessId(),
+                    root -> root.join(Document_.levelThreeEffectivenesses, JoinType.LEFT).get(LevelThreeEffectiveness_.id)));
+            }
+            if (criteria.getLevelFourEffectivenessId() != null) {
+                specification = specification.and(buildSpecification(criteria.getLevelFourEffectivenessId(),
+                    root -> root.join(Document_.levelFourEffectivenesses, JoinType.LEFT).get(LevelFourEffectiveness_.id)));
             }
             if (criteria.getDesignAndPlanningId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDesignAndPlanningId(),
@@ -301,6 +325,10 @@ public class DocumentQueryService extends QueryService<Document> {
             if (criteria.getEvaluateCriteriaDataId() != null) {
                 specification = specification.and(buildSpecification(criteria.getEvaluateCriteriaDataId(),
                     root -> root.join(Document_.evaluateCriteriaData, JoinType.LEFT).get(EvaluateCriteriaData_.id)));
+            }
+            if (criteria.getEffectivenessPhaseId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEffectivenessPhaseId(),
+                    root -> root.join(Document_.effectivenessPhases, JoinType.LEFT).get(EffectivenessPhase_.id)));
             }
         }
         return specification;

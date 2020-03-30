@@ -1,0 +1,69 @@
+
+{
+    "marineindustryprojApp": {
+        "finalNiazsanjiEffectivenessPhase" : {
+            "home": {
+                "title": "اثربخشی",
+                "createLabel": "جدید",
+                "createOrEditLabel": " اثربخشی"
+            },
+            "created": "اثربخشی با شناسه {{ param }} ایجاد شد.",
+            "updated": "اثربخشی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "اثربخشی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف اثربخشی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات اثربخشی"
+            },
+            "id":"شناسه یکتا",
+            "niazsanjiYear": "سال نیازسنجی",
+            "niazSanjiSource": "منبع نیازسنجی",
+            "priceCost": "سرمایه گذاری اولیه",
+            "finalizeCost": "سرمایه گذاری صرف شده",
+            "courseType": "نوع دوره",
+            "courseTypeId": "نوع دوره",
+            "description": "توضیحات بیشتر",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "runMonth": "ماه اجرا",
+            "planningRunMonth": "ماه برنامه ریزی",
+            "effectivenessPhaseAverage": "میانگین اثربخشی",
+            "effectivenessPhaseGrade": "گرید اثربخشی",
+            "selectedEffectivenessPhaseLevel": "سطح انتخابی",
+            "currentEffectivenessPhaseLevel": "سطح جاری",
+            "lastEffectivenessPhaseFinish": "تاریخ تکمیل آخرین سطح",
+            "finalNiazsanjiReportPerson": "افراد (فرد) شرکت کننده در دوره",
+            "designAndPlanning": "طراحی و برنامه ریزی",
+            "runPhase": "فاز اجرا",
+            "poll": "Poll",
+            "effectivenessPhase": "فاز اجرا",
+            "document": "مدارک",
+            "educationalModule": "پودمان آموزشی",
+            "educationalModuleCode": "کد پودمان آموزشی",
+            "educationalModuleTitle": "عنوان پودمان آموزشی",
+            "educationalModuleId": "کد پودمان آموزشی",
+            "educationalModuleLevel": "سطح پودمان آموزشی",
+            "educationalModuleTotalTime": "مدت پودمان",
+            "organizationChart": "محل خدمت",
+            "organizationChartId": "محل خدمت",
+            "mahiatCourse": "ماهیت دوره",
+            "person": "نام و نام خانوادگی",
+            "personId": "نام و نام خانوادگی",
+            "restrictionDescription": "توضیح محدودیت",
+            "goalsText": "اهداف(نتایج مورد انتظار-اهداف کلی، جزئی، رفتاری و یادگیری و ...)",
+            "prerequisite": "پیش نیاز",
+            "restriction": "محدودیت",
+            "teachingApproach": "روش های آموزش",
+            "priority": "اولویت بندی",
+            "niazsanjiInput": "ورودی نیازسنجی",
+            "teacher": "مدرس"
+        }
+    }
+}

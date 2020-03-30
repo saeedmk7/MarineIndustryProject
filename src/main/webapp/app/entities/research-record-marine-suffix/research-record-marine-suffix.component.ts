@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { IResearchRecordMarineSuffix } from 'app/shared/model/research-record-marine-suffix.model';
-import {AccountService, Principal} from 'app/core';
+import {Principal} from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { ResearchRecordMarineSuffixService } from './research-record-marine-suffix.service';

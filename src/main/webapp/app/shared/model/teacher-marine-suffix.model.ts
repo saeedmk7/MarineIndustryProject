@@ -1,10 +1,14 @@
 import { Moment } from 'moment';
+import { ITeacherGradeMarineSuffix } from 'app/shared/model//teacher-grade-marine-suffix.model';
 import { IRequestOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//request-organization-niazsanji-marine-suffix.model';
 import { IFinalOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//final-organization-niazsanji-marine-suffix.model';
 import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model//final-niazsanji-report-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IEducationalModuleMarineSuffix } from 'app/shared/model//educational-module-marine-suffix.model';
 import { IRequestEducationalModuleMarineSuffix } from 'app/shared/model//request-educational-module-marine-suffix.model';
+import {Grade} from "app/shared/model/enums/Grade";
+import {TeacherType} from 'app/shared/model/enums/TeacherType';
+
 
 export interface ITeacherMarineSuffix {
     id?: number;
@@ -33,6 +37,9 @@ export interface ITeacherMarineSuffix {
     archivedDate?: Moment;
     status?: number;
     guid?: string;
+    teacherType?: TeacherType;
+    grade?: Grade;
+    teacherGrades?: ITeacherGradeMarineSuffix[];
     requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[];
     finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[];
     finalNiazsanjiReports?: IFinalNiazsanjiReportMarineSuffix[];

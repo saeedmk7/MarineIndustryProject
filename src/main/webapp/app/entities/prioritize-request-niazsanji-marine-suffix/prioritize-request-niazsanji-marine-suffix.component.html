@@ -10,9 +10,13 @@
             Create new Prioritize Request Niazsanji
             </span>
         </button>-->
+        <button  class="btn btn-info float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
     </h2>
     <mi-alert></mi-alert>
-    <search-panel [searchPanelModel]="searchbarModel"></search-panel>
+    <search-panel [(page)]="page" [(size)]="itemsPerPage" [predicate]="predicate" [reverse]="reverse" [searchPanelModel]="searchbarModel"></search-panel>
     <br/>
     <div class="table-responsive" *ngIf="prioritizeRequestNiazsanjis">
         <table class="table table-striped  table-bordered table-hover table-sm">
@@ -54,10 +58,10 @@
                     jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.createDate">Create Date</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
-                <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.status">Create Date</span>
+                <th jhiSortBy="status"><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.status">status</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
-                <th>منشاء نیازسنجی</th>
+                <th jhiSortBy="requestNiazsanjiType"><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.requestNiazsanjiType">Request Niazsanji Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th>اولویت</th>
                 <th>تاریخچه</th>
 
@@ -69,7 +73,7 @@
                 <th jhiSortBy="changeStatusUserLogin"><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.changeStatusUserLogin">Change Status User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="guid"><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.guid">Guid</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="hasImportantMessage"><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.hasImportantMessage">Has Important Message</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="requestNiazsanjiType"><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.requestNiazsanjiType">Request Niazsanji Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
                 <th jhiSortBy="priority"><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.priority">Priority</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="requestNiazsanjiFardiCode"><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.requestNiazsanjiFardi">Request Niazsanji Fardi</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="prioritizeRequestNiazsanjiTitle"><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.prioritizeRequestNiazsanji">Pre Job Niazsanji</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -128,7 +132,7 @@
                     {{prioritizeRequestNiazsanji.requestNiazsanjiType}}
                 </td>
                 <td>
-                    <input type="number" id="priority" name="priority" [(ngModel)]="prioritizeRequestNiazsanji.priority">
+                    <input type="number" style="width: 50px;" id="priority" name="priority" [(ngModel)]="prioritizeRequestNiazsanji.priority">
                 </td>
                 <td>
                     <div *ngIf="prioritizeRequestNiazsanji.requestNiazsanjiFardiId">
@@ -210,9 +214,9 @@
             <tfoot>
             <tr>
                 <td colspan="20">
-                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll(criteria)">
+                    <select [(ngModel)] = "itemsPerPage">
                         <option value="10">۱۰</option>
-                        <option selected="selected" value="20">۲۰</option>
+                        <option value="20">۲۰</option>
                         <option value="50">۵۰</option>
                         <option value="100">۱۰۰</option>
                         <option value="500">۵۰۰</option>

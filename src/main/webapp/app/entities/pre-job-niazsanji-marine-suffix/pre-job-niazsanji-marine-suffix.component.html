@@ -7,9 +7,13 @@
             Create new Pre Job Niazsanji
             </span>
         </button>
+        <button  class="btn btn-info float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
     </h2>
     <mi-alert></mi-alert>
-    <search-panel [searchPanelModel]="searchbarModel"></search-panel>
+    <search-panel [(page)]="page" [(size)]="itemsPerPage" [predicate]="predicate" [reverse]="reverse" [searchPanelModel]="searchbarModel"></search-panel>
     <br/>
     <div class="table-responsive" *ngIf="preJobNiazsanjis">
         <table class="table  table-striped table-bordered table-hover table-sm">
@@ -150,9 +154,9 @@
             <tfoot>
             <tr>
                 <td colspan="20">
-                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll(criteria)">
+                    <select [(ngModel)] = "itemsPerPage">
                         <option value="10">۱۰</option>
-                        <option selected="selected" value="20">۲۰</option>
+                        <option value="20">۲۰</option>
                         <option value="50">۵۰</option>
                         <option value="100">۱۰۰</option>
                         <option value="500">۵۰۰</option>

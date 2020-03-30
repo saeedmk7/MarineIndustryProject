@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import com.marineindustryproj.domain.enumeration.TeacherType;
+import com.marineindustryproj.domain.enumeration.Grade;
 
 /**
  * A DTO for the Teacher entity.
@@ -80,6 +82,10 @@ public class TeacherDTO implements Serializable {
 
     @Size(max = 50)
     private String guid;
+
+    private TeacherType teacherType;
+
+    private Grade grade;
 
     private Set<DocumentDTO> documents = new HashSet<>();
 
@@ -299,6 +305,22 @@ public class TeacherDTO implements Serializable {
         this.guid = guid;
     }
 
+    public TeacherType getTeacherType() {
+        return teacherType;
+    }
+
+    public void setTeacherType(TeacherType teacherType) {
+        this.teacherType = teacherType;
+    }
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
@@ -420,6 +442,8 @@ public class TeacherDTO implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", guid='" + getGuid() + "'" +
+            ", teacherType='" + getTeacherType() + "'" +
+            ", grade='" + getGrade() + "'" +
             ", lastQualification=" + getLastQualificationId() +
             ", lastQualification='" + getLastQualificationTitle() + "'" +
             ", lastFieldOfStudy=" + getLastFieldOfStudyId() +

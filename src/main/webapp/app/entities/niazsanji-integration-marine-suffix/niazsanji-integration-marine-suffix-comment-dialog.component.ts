@@ -14,10 +14,7 @@ import {OrganizationChartMarineSuffixService} from "app/entities/organization-ch
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
 
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
-import {
-    INiazsanjiIntegrationMarineSuffix,
-    NiazsanjiIntegrationMarineSuffix
-} from "app/shared/model/niazsanji-integration-marine-suffix.model";
+import {INiazsanjiIntegrationMarineSuffix} from "app/shared/model/niazsanji-integration-marine-suffix.model";
 import {NiazsanjiIntegrationMarineSuffixService} from "app/entities/niazsanji-integration-marine-suffix/niazsanji-integration-marine-suffix.service";
 import {PrioritizeRequestNiazsanjiMarineSuffixService} from "app/entities/prioritize-request-niazsanji-marine-suffix";
 import {IPrioritizeRequestNiazsanjiMarineSuffix} from "app/shared/model/prioritize-request-niazsanji-marine-suffix.model";
@@ -116,6 +113,7 @@ export class NiazsanjiIntegrationMarineSuffixCommentDialogComponent implements O
                             this.niazsanjiIntegration.status = 11;
                         if(this.niazsanjiIntegration.status == 20)
                             this.niazsanjiIntegration.status = 21;
+                        this.niazsanjiIntegration.requestStatus = RequestStatus.IGNORE;
                         this.niazsanjiIntegration.changeStatusUserLogin = this.currentAccount.login;
                         this.prioritizeRequestNiazsanjiService.update(prioritizeRequestNiazsanji).subscribe(
                             (res: HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix>) => this.onSaveSuccess(),

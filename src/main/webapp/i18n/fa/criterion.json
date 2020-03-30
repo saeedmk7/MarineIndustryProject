@@ -19,6 +19,7 @@
             "title": "Title",
             "displayOrder": "Display Order",
             "coefficient": "Coefficient",
+            "criterionType": "Criterion Type",
             "description": "Description",
             "createUserLogin": "Create User Login",
             "createDate": "Create Date",

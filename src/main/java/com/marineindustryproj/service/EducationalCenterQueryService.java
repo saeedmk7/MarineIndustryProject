@@ -134,6 +134,13 @@ public class EducationalCenterQueryService extends QueryService<EducationalCente
             if (criteria.getStatus() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getStatus(), EducationalCenter_.status));
             }
+            if (criteria.getGrade() != null) {
+                specification = specification.and(buildSpecification(criteria.getGrade(), EducationalCenter_.grade));
+            }
+            if (criteria.getEducationalCenterGradeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalCenterGradeId(),
+                    root -> root.join(EducationalCenter_.educationalCenterGrades, JoinType.LEFT).get(EducationalCenterGrade_.id)));
+            }
             if (criteria.getActivityAreaId() != null) {
                 specification = specification.and(buildSpecification(criteria.getActivityAreaId(),
                     root -> root.join(EducationalCenter_.activityAreas, JoinType.LEFT).get(ActivityArea_.id)));

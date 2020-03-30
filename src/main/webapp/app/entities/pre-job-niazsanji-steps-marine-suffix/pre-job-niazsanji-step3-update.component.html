@@ -30,7 +30,7 @@
                             <span>{{item.title}}</span>
                         </td>
                         <td *ngFor="let fix of fixcompetencydeficiencies">
-                            <input type="radio" [name]="'radio_'+item.id" [id]="'radio_'+item.id+'_'+fix.id" [value]="fix.id" [checked]="item.fixCompetencyDeficiencyId == fix.id" [alt]="fix.description" [title]="fix.description">
+                            <input class="form-radio" type="radio" [name]="'radio_'+item.id" [id]="'radio_'+item.id+'_'+fix.id" [value]="fix.id" [checked]="item.fixCompetencyDeficiencyId == fix.id" [alt]="fix.description" [title]="fix.description">
                             <label [for]="'radio_'+item.id+'_'+fix.id"> {{fix.title}} </label>
                         </td>
                         <td>

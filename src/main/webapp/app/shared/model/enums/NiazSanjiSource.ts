@@ -1,6 +1,6 @@
 export const enum NiazSanjiSource {
     FARDI = 'FARDI',
-    GROUP = 'GROUP',
+    FARDI2 = 'FARDI2',
     ORGANIZATION = 'ORGANIZATION',
     JOB = 'JOB',
     OTHER = 'OTHER'

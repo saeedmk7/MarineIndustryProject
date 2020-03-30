@@ -3,13 +3,36 @@ import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
 import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
+import {Grade} from "app/shared/model/enums/Grade";
+import {TranslateService} from '@ngx-translate/core';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class CommonSearchCheckerService {
-    constructor(private treeUtilities: TreeUtilities){
+    constructor(private treeUtilities: TreeUtilities, private translate: TranslateService) {
 
     }
-    public addOrganizationFilterToCriteria(criteria, organizationCharts: IOrganizationChartMarineSuffix[]){
+
+    public convertEnumToSearchArray(object, enumName: string) {
+        let keys = Object.keys(object);
+        let title: string = "marineindustryprojApp." + enumName + ".";
+        let resultArray: any[] = [];
+        keys.forEach(w => {
+            let translate = this.translate.get(title + w);
+            translate.subscribe((result) => {
+                resultArray.push({
+                    'id': w,
+                    'title': result.toString()
+                });
+            });
+        });
+        return resultArray;
+    }
+
+    private getVariableName(variableFunction: () => any) {
+        return /\s([^\s;]+);?\s*\}$/.exec(variableFunction.toString())[1];
+    }
+
+    public addOrganizationFilterToCriteria(criteria, organizationCharts: IOrganizationChartMarineSuffix[]) {
         const org = criteria.find(a => a.key == 'organizationChartId.equals');
         if (org) {
             const orgId = +org.value;
@@ -23,9 +46,10 @@ export class CommonSearchCheckerService {
         }
         return criteria;
     }
-    public checkYear(criteria){
+
+    public checkYear(criteria) {
         const year = criteria.find(a => a.key == 'yearId.equals');
-        if(year) {
+        if (year) {
             const val = +year.value;
             //criteria.pop('yearId');
             criteria = criteria.filter(a => a.key != 'yearId.equals');
@@ -44,25 +68,26 @@ export class CommonSearchCheckerService {
         }
         return criteria;
     }
-    public checkRequestStatusFilters(criteria, currentPersonOrgChartId: number){
+
+    public checkRequestStatusFilters(criteria, currentPersonOrgChartId: number) {
         const requestStatusFilters = criteria.find(a => a.key == 'requestStatusFilters.equals');
-        if(requestStatusFilters) {
+        if (requestStatusFilters) {
             const val = requestStatusFilters.value;
             criteria = criteria.filter(a => a.key != 'requestStatusFilters.equals');
             if (val) {
-                if(val == RequestStatus.ACCEPT || val == RequestStatus.IGNORE){
+                if (val == RequestStatus.ACCEPT || val == RequestStatus.IGNORE) {
                     criteria.push({
                         key: 'requestStatus.equals',
                         value: val
                     });
                 }
-                else if (val == RequestStatus.RETURNED){
+                else if (val == RequestStatus.RETURNED) {
                     criteria.push({
                         key: 'hasImportantMessage.equals',
                         value: true
                     });
                 }
-                else{
+                else {
                     criteria.push({
                         key: 'status.equals',
                         value: currentPersonOrgChartId
@@ -70,6 +95,51 @@ export class CommonSearchCheckerService {
                         key: 'requestStatus.equals',
                         value: RequestStatus.NEW
                     });
+                }
+            }
+        }
+        return criteria;
+    }
+    public checkRequestStatusFiltersForIntegration(criteria, status: number = 0) {
+        debugger;
+        const requestStatusFilters = criteria.find(a => a.key == 'requestStatusFilters.equals');
+        if (requestStatusFilters) {
+            const val = requestStatusFilters.value;
+            criteria = criteria.filter(a => a.key != 'requestStatusFilters.equals');
+            if (val) {
+                if (val == RequestStatus.ACCEPT || val == RequestStatus.IGNORE) {
+                    criteria.push({
+                        key: 'requestStatus.equals',
+                        value: val
+                    });
+                }
+                else if (val == RequestStatus.RETURNED) {
+                    criteria.push({
+                        key: 'hasImportantMessage.equals',
+                        value: true
+                    });
+                }
+                else if(val == RequestStatus.READ){
+                    criteria.push({
+                        key: 'requestStatus.equals',
+                        value: RequestStatus.READ
+                    });
+                    criteria.push({
+                        key: 'status.equals',
+                        value: 20
+                    });
+                }
+                else {
+                    criteria.push({
+                        key: 'requestStatus.equals',
+                        value: RequestStatus.READ
+                    });
+                    if(status){
+                        criteria.push({
+                            key: 'status.greaterOrEqualThan',
+                            value: status
+                        });
+                    }
                 }
             }
         }

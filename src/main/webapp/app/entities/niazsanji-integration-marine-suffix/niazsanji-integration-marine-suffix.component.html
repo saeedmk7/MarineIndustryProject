@@ -22,9 +22,8 @@
         </button>
     </h2>
     <mi-alert></mi-alert>
-    <div>
-        <search-panel [searchPanelModel]="searchbarModel"></search-panel>
-    </div>
+        <search-panel [(page)]="page" [(size)]="itemsPerPage" [predicate]="predicate" [reverse]="reverse" [searchPanelModel]="searchbarModel"></search-panel>
+
     <br/>
     <div class="table-responsive" *ngIf="niazsanjiIntegrations">
         <table class="table table-striped  table-bordered table-hover table-sm">
@@ -34,6 +33,7 @@
                 <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th>ردیف</th>
                 <!--<th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.organizationChart">Organization Chart</span></th>
                 <th><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.organizationChart">Organization Chart</span></th>
 
                 <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -71,6 +71,11 @@
                 <td>
                     <div *ngIf="niazsanjiIntegration.organizationChartId">
                         <a [routerLink]="['../organization-chart-marine-suffix', niazsanjiIntegration.organizationChartId , 'view' ]" >{{niazsanjiIntegration.organizationChartRootTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="niazsanjiIntegration.organizationChartId">
+                        <a [routerLink]="['../organization-chart-marine-suffix', niazsanjiIntegration.organizationChartId , 'view' ]" >{{niazsanjiIntegration.organizationChartTitle}}</a>
                     </div>
                 </td>
 
@@ -135,6 +140,10 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>-->
                         </button>
+                        <img src="../../../content/images/bulb-icon.png" alt="پیام مهمی در جزئیات وجود دارد" title="پیام مهمی در جزئیات وجود دارد" *ngIf="niazsanjiIntegration.hasImportantMessage == true" class="lightBulb"
+                             (click)="toggleImportantMessage(niazsanjiIntegration.id, false)"/>
+                        <img src="../../../content/images/light-off-icon.png" *ngIf="niazsanjiIntegration.hasImportantMessage == false" class="lightBulb"
+                             (click)="toggleImportantMessage(niazsanjiIntegration.id, true)"/>
                         <button type="submit" title="ویرایش" *ngIf="(isAdmin || isKarshenasArshadAmozesh || isModirKolAmozesh) && (niazsanjiIntegration.status < 30 && niazsanjiIntegration.status != 1 && niazsanjiIntegration.status != 11 && niazsanjiIntegration.status != 21)"
                                 [routerLink]="['/prioritize-request-niazsanji-marine-suffix', niazsanjiIntegration.prioritizeRequestNiazsanjiId, 'edit']"
                                 class="btn btn-primary btn-sm">
@@ -244,15 +253,15 @@
                 <td>{{niazsanjiIntegrations | sum:'totalLearningTime' | number: '1.0-1'}}</td>
                 <td colspan="2"></td>
                 <td>{{niazsanjiIntegrations | sum:'costEducationalModule' | number: '1.0-1'}}</td>
-                <td colspan="5"></td>
+                <td colspan="10"></td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
                 <td colspan="10">
-                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll(criteria)">
+                    <select [(ngModel)] = "itemsPerPage">
                         <option value="10">۱۰</option>
-                        <option selected="selected" value="20">۲۰</option>
+                        <option value="20">۲۰</option>
                         <option value="50">۵۰</option>
                         <option value="100">۱۰۰</option>
                         <option value="500">۵۰۰</option>
@@ -262,7 +271,7 @@
                     </div>
                 </td>
 
-                <td colspan="5">
+                <td colspan="10">
 
                 </td>
             </tr>

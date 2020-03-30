@@ -7,9 +7,13 @@
             Create new Request Educational Module
             </span>
         </button>
+        <button  class="btn btn-info float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
     </h2>
     <mi-alert></mi-alert>
-    <search-panel [searchPanelModel]="searchbarModel"></search-panel>
+    <search-panel [(page)]="page" [(size)]="itemsPerPage" [predicate]="predicate" [reverse]="reverse" [searchPanelModel]="searchbarModel"></search-panel>
     <br/>
     <div class="table-responsive" *ngIf="requestEducationalModules">
         <table class="table table-striped table-bordered table-hover table-sm">
@@ -19,7 +23,7 @@
             <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="organizationTitle"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.organization">Organization</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="organizationTitle"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.organization">Organization</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th jhiSortBy="learningTimeTheorical"><span>مدت کل پودمان</span><fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="skillableLevelOfSkillTitle"><span jhiTranslate="marineindustryprojApp.requestEducationalModule.skillableLevelOfSkill">Skillable Level Of Skill</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th><span jhiTranslate="marineindustryprojApp.educationalModule.scientificWorkGroup">scientificWorkGroups</span></th>
@@ -35,11 +39,11 @@
                 <!--<td><a [routerLink]="['/request-educational-module-marine-suffix', requestEducationalModule.id, 'view' ]">{{requestEducationalModule.id}}</a></td>-->
                 <td>{{requestEducationalModule.code}}</td>
                 <td>{{requestEducationalModule.title}}</td>
-                <td>
+                <!--<td>
                     <div *ngIf="requestEducationalModule.organizationId">
                         <a [routerLink]="['../organization-marine-suffix', requestEducationalModule.organizationId , 'view' ]" >{{requestEducationalModule.organizationTitle}}</a>
                     </div>
-                </td>
+                </td>-->
                 <td>{{requestEducationalModule.totalLearningTime | number}}</td>
                 <td>
                     <div *ngIf="requestEducationalModule.skillableLevelOfSkillId">
@@ -160,9 +164,9 @@
             <tfoot>
             <tr>
                 <td colspan="4">
-                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll(criteria)">
+                    <select [(ngModel)] = "itemsPerPage">
                         <option value="10">۱۰</option>
-                        <option selected="selected" value="20">۲۰</option>
+                        <option value="20">۲۰</option>
                         <option value="50">۵۰</option>
                         <option value="100">۱۰۰</option>
                         <option value="500">۵۰۰</option>

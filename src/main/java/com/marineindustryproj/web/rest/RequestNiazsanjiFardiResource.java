@@ -1,16 +1,18 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
 import com.marineindustryproj.security.SecurityUtils;
+import com.marineindustryproj.service.ActivationNiazsanjiQueryService;
 import com.marineindustryproj.service.PersonService;
 import com.marineindustryproj.service.RequestNiazsanjiFardiService;
-import com.marineindustryproj.service.dto.PersonDTO;
+import com.marineindustryproj.service.dto.*;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
-import com.marineindustryproj.service.dto.RequestNiazsanjiFardiDTO;
-import com.marineindustryproj.service.dto.RequestNiazsanjiFardiCriteria;
 import com.marineindustryproj.service.RequestNiazsanjiFardiQueryService;
+import io.github.jhipster.service.filter.BooleanFilter;
+import io.github.jhipster.service.filter.StringFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,12 +47,15 @@ public class RequestNiazsanjiFardiResource {
 
     private final PersonService personService;
 
+    private final ActivationNiazsanjiQueryService activationNiazsanjiQueryService;
+
     public RequestNiazsanjiFardiResource(RequestNiazsanjiFardiService requestNiazsanjiFardiService,
                                          RequestNiazsanjiFardiQueryService requestNiazsanjiFardiQueryService,
-                                         PersonService personService) {
+                                         PersonService personService, ActivationNiazsanjiQueryService activationNiazsanjiQueryService) {
         this.requestNiazsanjiFardiService = requestNiazsanjiFardiService;
         this.requestNiazsanjiFardiQueryService = requestNiazsanjiFardiQueryService;
         this.personService = personService;
+        this.activationNiazsanjiQueryService = activationNiazsanjiQueryService;
     }
 
     /**
@@ -67,6 +72,9 @@ public class RequestNiazsanjiFardiResource {
         if (requestNiazsanjiFardiDTO.getId() != null) {
             throw new BadRequestAlertException("A new requestNiazsanjiFardi cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if(!activationNiazsanjiQueryService.niazsanjiIsActive(NiazSanjiSource.FARDI))
+            throw new BadRequestAlertException("زمان ثبت نیازسنجی جدید به اتمام رسیده است", ENTITY_NAME, "finishTime");
 
         PersonDTO personDTO = personService.findOne(requestNiazsanjiFardiDTO.getPersonId()).get();
         requestNiazsanjiFardiDTO.setCreateDate(ZonedDateTime.now());

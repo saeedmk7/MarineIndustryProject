@@ -35,6 +35,8 @@ import {SkillableLevelOfSkillMarineSuffixService} from "app/entities/skillable-l
 import {OrganizationMarineSuffixService} from "app/entities/organization-marine-suffix";
 import {IOrganizationMarineSuffix} from "app/shared/model/organization-marine-suffix.model";
 import {IRequestOrganizationNiazsanjiMarineSuffix} from "app/shared/model/request-organization-niazsanji-marine-suffix.model";
+import {ExcelService} from "app/plugin/export-excel/excel-service";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'mi-request-educational-module-marine-suffix',
@@ -97,10 +99,10 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
         private scientificWorkGroupService: ScientificWorkGroupMarineSuffixService,
         private skillableLevelOfSkillService: SkillableLevelOfSkillMarineSuffixService,
         private organizationService: OrganizationMarineSuffixService,
+        protected jhiTranslate: TranslateService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
@@ -291,9 +293,56 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
     export() {
         this.makeCriteria(this.criteria,true);
     }
-    prepareForExportExcel(res : IEducationalHistoryMarineSuffix[]){
+    prepareForExportExcel(res : IRequestEducationalModuleMarineSuffix[]){
+        let a = new ExcelService(this.jhiTranslate);
         res = this.convertObjectDatesService.changeArrayDate(res);
-        return;
+        let report = [];
+        let index: number = 0;
+        res.forEach(a => {
+            index++;
+            debugger;
+
+            a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
+            const person = this.people.find(w => w.nationalId == a.createUserLogin);
+            if(person)
+                a.createUserLoginName = person.fullName;
+
+            let obj: Object;
+            obj = {'index': index,
+                'code': a.code,
+                'title': a.title,
+                'courseContactsTerms': a.courseContactsTerms,
+                'peopleUnderTraining': a.peopleUnderTrainings && a.peopleUnderTrainings.length > 0 ? a.peopleUnderTrainings.map(w => w.title).join(' - ') : "",
+                'competency': a.competencyTitle,
+                'goalsText': a.goalsText,
+                'goalsBehavioralText': a.goalsBehavioralText,
+                'headline': a.headlines && a.headlines.length > 0 ? a.headlines.map(w => w.title).join(' - ') : " ",
+                'totalLearningTime': (a.learningTimeTheorical ? a.learningTimeTheorical : 0) + (a.learningTimePractical ? a.learningTimePractical : 0),
+                'prerequisite': a.prerequisite,
+                'resource': a.resources && a.resources.length > 0 ? a.resources.map(w => w.title).join(' - '): " ",
+                'securityLevel': a.securityLevelTitle,
+                'skillableLevelOfSkill': a.skillableLevelOfSkillTitle,
+                'teachingApproach': a.teachingApproaches && a.teachingApproaches.length > 0 ? a.teachingApproaches.map(w => w.title).join(' - ') : " ",
+                'neededSoftwares': a.neededSoftwares,
+                'neededHardware': a.neededHardware,
+                'restrictions': a.restrictions && a.restrictions.length > 0 ? a.restrictions.map(w => w.title).join(' - ') : " ",
+                'restrictionDescription': a.restrictionDescription,
+                'scientificWorkGroup': a.scientificWorkGroups.map(w => w.title).join(' - '),
+                'educationalCenter': a.educationalCenters && a.educationalCenters.length > 0 ? a.educationalCenters.map(a => a.name).join(' - ') : " ",
+                'teachersText': a.teachersText,
+                'teacher': a.teachers && a.teachers.length ? a.teachers.map(w => w.fullName).join(' - ') : " ",
+                'effectivenessLevel': a.effectivenessLevels && a.effectivenessLevels.length > 0 ? a.effectivenessLevels.map(w => w.title).join(' - ') : " ",
+                'evaluationMethod': a.evaluationMethodTitle,
+                'assessmentMethod': a.assessmentMethods && a.assessmentMethods.length > 0 ? a.assessmentMethods.map(w => w.title).join(' - ') : " ",
+                'effectivenessIndex': a.effectivenessIndices && a.effectivenessIndices.length > 0 ? a.effectivenessIndices.map(w => w.title).join(' - ') : " ",
+                'createUserLogin': a.createUserLoginName,
+                'createDate': a.createDate,
+                'moreDescription': a.moreDescription,
+                'status': this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus)
+            };
+            report.push(obj);
+        });
+        a.exportAsExcelFile(report, 'requestEducationalModules', 'marineindustryprojApp.requestEducationalModule');
     }
     loadPage(page: number) {
         if (page !== this.previousPage) {
@@ -311,7 +360,7 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
             }
         });
         this.loadAll();*/
-        this.makeCriteria(this.criteria);
+        //this.makeCriteria(this.criteria);
     }
 
     clear() {

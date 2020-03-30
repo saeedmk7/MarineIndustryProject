@@ -2,6 +2,7 @@ package com.marineindustryproj.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.marineindustryproj.domain.enumeration.Grade;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -15,8 +16,6 @@ import java.util.Set;
 import java.util.Objects;
 
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * A FinalNiazsanjiReport.
@@ -107,6 +106,22 @@ public class FinalNiazsanjiReport implements Serializable {
     @Column(name = "priority")
     private Integer priority;
 
+    @Column(name = "effectiveness_phase_average")
+    private Float effectivenessPhaseAverage;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "effectiveness_phase_grade")
+    private Grade effectivenessPhaseGrade;
+
+    @Column(name = "selected_effectiveness_phase_level")
+    private Integer selectedEffectivenessPhaseLevel;
+
+    @Column(name = "current_effectiveness_phase_level")
+    private Integer currentEffectivenessPhaseLevel;
+
+    @Column(name = "last_effectiveness_phase_finish")
+    private ZonedDateTime lastEffectivenessPhaseFinish;
+
     @OneToMany(mappedBy = "finalNiazsanjiReport", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = new HashSet<>();
@@ -119,6 +134,9 @@ public class FinalNiazsanjiReport implements Serializable {
     @OneToMany(mappedBy = "finalNiazsanjiReport", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Poll> polls = new HashSet<>();
+    @OneToMany(mappedBy = "finalNiazsanjiReport")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<EffectivenessPhase> effectivenessPhases = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "final_niazsanji_report_document",
@@ -157,6 +175,10 @@ public class FinalNiazsanjiReport implements Serializable {
     @NotNull
     @JsonIgnoreProperties("finalNiazsanjiReports")
     private EducationalModule educationalModule;
+
+    @ManyToOne
+    @JsonIgnoreProperties("finalNiazsanjiReports")
+    private MahiatCourse mahiatCourse;
 
     @ManyToOne
     @JsonIgnoreProperties("finalNiazsanjiReports")
@@ -444,6 +466,71 @@ public class FinalNiazsanjiReport implements Serializable {
         this.priority = priority;
     }
 
+    public Float getEffectivenessPhaseAverage() {
+        return effectivenessPhaseAverage;
+    }
+
+    public FinalNiazsanjiReport effectivenessPhaseAverage(Float effectivenessPhaseAverage) {
+        this.effectivenessPhaseAverage = effectivenessPhaseAverage;
+        return this;
+    }
+
+    public void setEffectivenessPhaseAverage(Float effectivenessPhaseAverage) {
+        this.effectivenessPhaseAverage = effectivenessPhaseAverage;
+    }
+
+    public Grade getEffectivenessPhaseGrade() {
+        return effectivenessPhaseGrade;
+    }
+
+    public FinalNiazsanjiReport effectivenessPhaseGrade(Grade effectivenessPhaseGrade) {
+        this.effectivenessPhaseGrade = effectivenessPhaseGrade;
+        return this;
+    }
+
+    public void setEffectivenessPhaseGrade(Grade effectivenessPhaseGrade) {
+        this.effectivenessPhaseGrade = effectivenessPhaseGrade;
+    }
+
+    public Integer getSelectedEffectivenessPhaseLevel() {
+        return selectedEffectivenessPhaseLevel;
+    }
+
+    public FinalNiazsanjiReport selectedEffectivenessPhaseLevel(Integer selectedEffectivenessPhaseLevel) {
+        this.selectedEffectivenessPhaseLevel = selectedEffectivenessPhaseLevel;
+        return this;
+    }
+
+    public void setSelectedEffectivenessPhaseLevel(Integer selectedEffectivenessPhaseLevel) {
+        this.selectedEffectivenessPhaseLevel = selectedEffectivenessPhaseLevel;
+    }
+
+    public Integer getCurrentEffectivenessPhaseLevel() {
+        return currentEffectivenessPhaseLevel;
+    }
+
+    public FinalNiazsanjiReport currentEffectivenessPhaseLevel(Integer currentEffectivenessPhaseLevel) {
+        this.currentEffectivenessPhaseLevel = currentEffectivenessPhaseLevel;
+        return this;
+    }
+
+    public void setCurrentEffectivenessPhaseLevel(Integer currentEffectivenessPhaseLevel) {
+        this.currentEffectivenessPhaseLevel = currentEffectivenessPhaseLevel;
+    }
+
+    public ZonedDateTime getLastEffectivenessPhaseFinish() {
+        return lastEffectivenessPhaseFinish;
+    }
+
+    public FinalNiazsanjiReport lastEffectivenessPhaseFinish(ZonedDateTime lastEffectivenessPhaseFinish) {
+        this.lastEffectivenessPhaseFinish = lastEffectivenessPhaseFinish;
+        return this;
+    }
+
+    public void setLastEffectivenessPhaseFinish(ZonedDateTime lastEffectivenessPhaseFinish) {
+        this.lastEffectivenessPhaseFinish = lastEffectivenessPhaseFinish;
+    }
+
     public Set<FinalNiazsanjiReportPerson> getFinalNiazsanjiReportPeople() {
         return finalNiazsanjiReportPeople;
     }
@@ -542,6 +629,31 @@ public class FinalNiazsanjiReport implements Serializable {
 
     public void setPolls(Set<Poll> polls) {
         this.polls = polls;
+    }
+
+    public Set<EffectivenessPhase> getEffectivenessPhases() {
+        return effectivenessPhases;
+    }
+
+    public FinalNiazsanjiReport effectivenessPhases(Set<EffectivenessPhase> effectivenessPhases) {
+        this.effectivenessPhases = effectivenessPhases;
+        return this;
+    }
+
+    public FinalNiazsanjiReport addEffectivenessPhase(EffectivenessPhase effectivenessPhase) {
+        this.effectivenessPhases.add(effectivenessPhase);
+        effectivenessPhase.setFinalNiazsanjiReport(this);
+        return this;
+    }
+
+    public FinalNiazsanjiReport removeEffectivenessPhase(EffectivenessPhase effectivenessPhase) {
+        this.effectivenessPhases.remove(effectivenessPhase);
+        effectivenessPhase.setFinalNiazsanjiReport(null);
+        return this;
+    }
+
+    public void setEffectivenessPhases(Set<EffectivenessPhase> effectivenessPhases) {
+        this.effectivenessPhases = effectivenessPhases;
     }
 
     public Set<Document> getDocuments() {
@@ -672,6 +784,19 @@ public class FinalNiazsanjiReport implements Serializable {
         this.educationalModule = educationalModule;
     }
 
+    public MahiatCourse getMahiatCourse() {
+        return mahiatCourse;
+    }
+
+    public FinalNiazsanjiReport mahiatCourse(MahiatCourse mahiatCourse) {
+        this.mahiatCourse = mahiatCourse;
+        return this;
+    }
+
+    public void setMahiatCourse(MahiatCourse mahiatCourse) {
+        this.mahiatCourse = mahiatCourse;
+    }
+
     public TeachingApproach getTeachingApproach() {
         return teachingApproach;
     }
@@ -731,6 +856,11 @@ public class FinalNiazsanjiReport implements Serializable {
             ", goalsText='" + getGoalsText() + "'" +
             ", prerequisite='" + getPrerequisite() + "'" +
             ", priority=" + getPriority() +
+            ", effectivenessPhaseAverage=" + getEffectivenessPhaseAverage() +
+            ", effectivenessPhaseGrade='" + getEffectivenessPhaseGrade() + "'" +
+            ", selectedEffectivenessPhaseLevel=" + getSelectedEffectivenessPhaseLevel() +
+            ", currentEffectivenessPhaseLevel=" + getCurrentEffectivenessPhaseLevel() +
+            ", lastEffectivenessPhaseFinish='" + getLastEffectivenessPhaseFinish() + "'" +
             "}";
     }
 }

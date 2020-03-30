@@ -70,9 +70,8 @@ export class MediaAwarenessReportMarineSuffixComponent implements OnInit, OnDest
         private jhiTranslate: TranslateService,
         protected mediaProductTypeService: MediaProductTypeMarineSuffixService,
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
@@ -159,14 +158,14 @@ export class MediaAwarenessReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     transition() {
-        this.router.navigate(['/media-awareness-report-marine-suffix'], {
+        /*this.router.navigate(['/media-awareness-report-marine-suffix'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });
-        this.loadAll();
+        this.loadAll(this.criteria);*/
     }
 
     clear() {

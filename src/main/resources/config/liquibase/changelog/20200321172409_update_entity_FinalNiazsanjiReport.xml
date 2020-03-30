@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20200321172409" author="saeed">
+        <!--job changes-->
+        <addColumn schemaName="public"
+                   tableName="final_niazsanji_report">
+            <column name="effectiveness_phase_average" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="effectiveness_phase_grade" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="selected_effectiveness_phase_level" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="current_effectiveness_phase_level" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="last_effectiveness_phase_finish" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="mahiat_course_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="mahiat_course_id"
+                                 baseTableName="final_niazsanji_report"
+                                 constraintName="fk_final_niazsanji_report_mahiat_course_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mahiat_course"/>
+
+        <addColumn schemaName="public"
+                   tableName="final_niazsanji_report_person">
+            <column name="score_before_test" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="score_after_test" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="average_score" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+
+        </addColumn>
+
+        <createTable tableName="final_niazsanji_report_person_document">
+            <column name="documents_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="final_niazsanji_report_people_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="final_niazsanji_report_people_id, documents_id" tableName="final_niazsanji_report_person_document"/>
+
+        <addForeignKeyConstraint baseColumnNames="final_niazsanji_report_people_id"
+                                 baseTableName="final_niazsanji_report_person_document"
+                                 constraintName="final_niazsanji_report_person__final_niazsanji_report_people_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="final_niazsanji_report_person"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="final_niazsanji_report_person_document"
+                                 constraintName="fk_final_niazsanji_report_person_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

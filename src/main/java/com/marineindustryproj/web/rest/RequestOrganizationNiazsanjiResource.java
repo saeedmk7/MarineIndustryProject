@@ -1,7 +1,9 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
 import com.marineindustryproj.security.SecurityUtils;
+import com.marineindustryproj.service.ActivationNiazsanjiQueryService;
 import com.marineindustryproj.service.RequestOrganizationNiazsanjiService;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
@@ -42,9 +44,12 @@ public class RequestOrganizationNiazsanjiResource {
 
     private final RequestOrganizationNiazsanjiQueryService requestOrganizationNiazsanjiQueryService;
 
-    public RequestOrganizationNiazsanjiResource(RequestOrganizationNiazsanjiService requestOrganizationNiazsanjiService, RequestOrganizationNiazsanjiQueryService requestOrganizationNiazsanjiQueryService) {
+    private final ActivationNiazsanjiQueryService activationNiazsanjiQueryService;
+
+    public RequestOrganizationNiazsanjiResource(RequestOrganizationNiazsanjiService requestOrganizationNiazsanjiService, RequestOrganizationNiazsanjiQueryService requestOrganizationNiazsanjiQueryService, ActivationNiazsanjiQueryService activationNiazsanjiQueryService) {
         this.requestOrganizationNiazsanjiService = requestOrganizationNiazsanjiService;
         this.requestOrganizationNiazsanjiQueryService = requestOrganizationNiazsanjiQueryService;
+        this.activationNiazsanjiQueryService = activationNiazsanjiQueryService;
     }
 
     /**
@@ -61,6 +66,9 @@ public class RequestOrganizationNiazsanjiResource {
         if (requestOrganizationNiazsanjiDTO.getId() != null) {
             throw new BadRequestAlertException("A new requestOrganizationNiazsanji cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if(!activationNiazsanjiQueryService.niazsanjiIsActive(NiazSanjiSource.ORGANIZATION))
+            throw new BadRequestAlertException("زمان ثبت نیازسنجی جدید به اتمام رسیده است", ENTITY_NAME, "finishTime");
 
         requestOrganizationNiazsanjiDTO.setCreateDate(ZonedDateTime.now());
         requestOrganizationNiazsanjiDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());

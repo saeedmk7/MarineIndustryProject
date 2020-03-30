@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.JoinType;
 
+import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -152,6 +153,21 @@ public class FinalNiazsanjiReportQueryService extends QueryService<FinalNiazsanj
             if (criteria.getPriority() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPriority(), FinalNiazsanjiReport_.priority));
             }
+            if (criteria.getEffectivenessPhaseAverage() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getEffectivenessPhaseAverage(), FinalNiazsanjiReport_.effectivenessPhaseAverage));
+            }
+            if (criteria.getEffectivenessPhaseGrade() != null) {
+                specification = specification.and(buildSpecification(criteria.getEffectivenessPhaseGrade(), FinalNiazsanjiReport_.effectivenessPhaseGrade));
+            }
+            if (criteria.getSelectedEffectivenessPhaseLevel() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getSelectedEffectivenessPhaseLevel(), FinalNiazsanjiReport_.selectedEffectivenessPhaseLevel));
+            }
+            if (criteria.getCurrentEffectivenessPhaseLevel() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCurrentEffectivenessPhaseLevel(), FinalNiazsanjiReport_.currentEffectivenessPhaseLevel));
+            }
+            if (criteria.getLastEffectivenessPhaseFinish() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastEffectivenessPhaseFinish(), FinalNiazsanjiReport_.lastEffectivenessPhaseFinish));
+            }
             if (criteria.getFinalNiazsanjiReportPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportPersonId(),
                     root -> root.join(FinalNiazsanjiReport_.finalNiazsanjiReportPeople, JoinType.LEFT).get(FinalNiazsanjiReportPerson_.id)));
@@ -171,6 +187,10 @@ public class FinalNiazsanjiReportQueryService extends QueryService<FinalNiazsanj
             if (criteria.getPollId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPollId(),
                     root -> root.join(FinalNiazsanjiReport_.polls, JoinType.LEFT).get(Poll_.id)));
+            }
+            if (criteria.getEffectivenessPhaseId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEffectivenessPhaseId(),
+                    root -> root.join(FinalNiazsanjiReport_.effectivenessPhases, JoinType.LEFT).get(EffectivenessPhase_.id)));
             }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
@@ -203,6 +223,10 @@ public class FinalNiazsanjiReportQueryService extends QueryService<FinalNiazsanj
             if (criteria.getEducationalModuleId() != null) {
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
                     root -> root.join(FinalNiazsanjiReport_.educationalModule, JoinType.LEFT).get(EducationalModule_.id)));
+            }
+            if (criteria.getMahiatCourseId() != null) {
+                specification = specification.and(buildSpecification(criteria.getMahiatCourseId(),
+                    root -> root.join(FinalNiazsanjiReport_.mahiatCourse, JoinType.LEFT).get(MahiatCourse_.id)));
             }
             if (criteria.getEducationalModuleCode() != null) {
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleCode(),

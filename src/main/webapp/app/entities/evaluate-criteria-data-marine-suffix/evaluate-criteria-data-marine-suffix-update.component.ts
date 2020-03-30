@@ -197,7 +197,6 @@ export class EvaluateCriteriaDataMarineSuffixUpdateComponent implements OnInit {
         this.evaluateCriteriaDataService.uploadFile(formdata).subscribe(event => {
                 if (event instanceof HttpResponse) {
                     if (event.body) {
-                        debugger;
                         this.evaluateCriteriaData.fileDoc = event.body.toString();
                         this.fileMessage = "آپلود فایل با موفقیت انجام شد.";
                     }

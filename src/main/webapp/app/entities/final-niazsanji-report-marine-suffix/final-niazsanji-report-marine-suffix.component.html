@@ -246,17 +246,17 @@
             <kendo-grid-column field="modifyDate" title="تاریخ ویرایش" [width]="150"></kendo-grid-column>
             <kendo-grid-column field="id" title="شناسه یکتا" [width]="150"></kendo-grid-column>
             <kendo-grid-column field="organizationChartTitle" title="محل خدمت" [width]="500"></kendo-grid-column>
-            <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
+            <kendo-grid-excel fileName="run-phase-fardi-report.xlsx">
                 <kendo-excelexport-column field="organizationChartTitle" title="محل خدمت" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleCode" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
-                <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="200"></kendo-excelexport-column>
-                <kendo-excelexport-column field="finalizeCost" title="سرمایه گذاری پایانی" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="200"></kendo-excelexport-column>
-                <kendo-excelexport-column field="priceCost" title="سرمایه گذاری" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="finalizeCost" title="سرمایه گذاری صرف شده" [width]="200"></kendo-excelexport-column>
+                <kendo-excelexport-column field="priceCost" title="سرمایه گذاری اولیه" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="modifyPerson" title="ویرایش کننده" [width]="100"></kendo-excelexport-column>
@@ -275,7 +275,8 @@
             [navigable]="true"
             (groupChange)="groupChangeOrgs($event)"
             [rowClass]="rowCallback"
-            (excelExport)="onExcelExport($event)">
+            >
+            <!--(excelExport)="onExcelExport($event)"-->
             <ng-template kendoGridToolbarTemplate>
                 <button type="button" kendoGridExcelCommand icon="file-excel" style="float: left" class="info">خروجی اکسل</button>
             </ng-template>
@@ -340,20 +341,23 @@
             </div>
             <kendo-grid-column field="id" title="شناسه یکتا" [width]="150"></kendo-grid-column>
             <kendo-grid-column field="organizationChartTitle" title="محل خدمت" [width]="500"></kendo-grid-column>
-            <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
+            <kendo-grid-excel fileName="run-phase-organization-report.xlsx">
                 <kendo-excelexport-column field="organizationChartTitle" title="محل خدمت" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleCode" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
-                <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-excelexport-column>
-                <kendo-excelexport-column field="finalizeCost" title="سرمایه گذاری پایانی" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100"></kendo-excelexport-column>
-                <kendo-excelexport-column field="priceCost" title="سرمایه گذاری" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="finalizeCost" title="سرمایه گذاری صرف شده" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="priceCost" format="{0:n0}" title="سرمایه گذاری اولیه" [width]="150"></kendo-excelexport-column>
                 <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="planningRunMonthPersian" title="ماه برنامه ریزی" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="modifyPerson" title="ویرایش کننده" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="modifyDate" title="تاریخ ویرایش" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="id" title="َشناسه یکتا" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="peopleCount" title="تعداد شرکت کنندگان" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="peopleFullNames" title="شرکت کنندگان" [width]="10000"></kendo-excelexport-column>
                <!-- <div *kendoGridDetailTemplate="let dataItem">
                     <mi-final-niazsanji-report-marine-suffix-detail-people [people]="dataItem.people"></mi-final-niazsanji-report-marine-suffix-detail-people>
                 </div>-->

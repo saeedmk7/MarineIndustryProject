@@ -22,6 +22,10 @@ import {IServiceUnitMarineSuffix} from "app/shared/model/service-unit-marine-suf
 import {IAcademicRankMarineSuffix} from "app/shared/model/academic-rank-marine-suffix.model";
 import {ServiceUnitMarineSuffixService} from "app/entities/service-unit-marine-suffix";
 import {AcademicRankMarineSuffixService} from "app/entities/academic-rank-marine-suffix";
+import {CommonSearchCheckerService} from "app/plugin/utilities/common-search-checkers";
+import {TeacherType} from "app/shared/model/enums/TeacherType";
+import {Grade} from "app/shared/model/enums/Grade";
+import {ISoldierTrainingReportMarineSuffix} from "app/shared/model/soldier-training-report-marine-suffix.model";
 
 @Component({
     selector: 'mi-teacher-marine-suffix',
@@ -55,6 +59,13 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
     serviceunits: IServiceUnitMarineSuffix[];
     academicranks: IAcademicRankMarineSuffix[];
 
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
+    isTopUsers: boolean = false;
+
     constructor(
         private teacherService: TeacherMarineSuffixService,
         private parseLinks: JhiParseLinks,
@@ -69,11 +80,12 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
         private fieldOfStudyService: FieldOfStudyMarineSuffixService,
         private serviceUnitService: ServiceUnitMarineSuffixService,
         private academicRankService: AcademicRankMarineSuffixService,
-        private convertObjectDatesService : ConvertObjectDatesService
+        private convertObjectDatesService : ConvertObjectDatesService,
+        private commonSearchCheckerService: CommonSearchCheckerService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
+
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
@@ -88,7 +100,7 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
         });
     }
 
-    loadAll(criteria?) {
+    loadAll(criteria?, exportExcel: boolean = false) {
 
         if(criteria)
         {
@@ -114,24 +126,79 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
             }
 
         }
-        this.teacherService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                criteria,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<ITeacherMarineSuffix[]>) => this.paginateTeachers(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        if(exportExcel){
+            this.teacherService
+                .query({
+                    page: this.page - 1,
+                    size: 20000,
+                    criteria,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<ITeacherMarineSuffix[]>) => this.prepareForExportExcel(res.body),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+        else {
+            this.teacherService
+                .query({
+                    page: this.page - 1,
+                    size: this.itemsPerPage,
+                    criteria,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<ITeacherMarineSuffix[]>) => this.paginateTeachers(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
     }
 
     export() {
-        let a = new ExcelService(this.jhiTranslate);
-        a.exportAsExcelFile(this.teachers, 'teachers', 'marineindustryprojApp.teacher');
+        this.loadAll(this.criteria, true);
     }
+    prepareForExportExcel(res : ITeacherMarineSuffix[]){
+        let a = new ExcelService(this.jhiTranslate);
+        res = this.convertObjectDatesService.changeArrayDate(res);
+        let report = [];
+        let index: number = 0;
+        res.forEach(a => {
+            index++;
 
+            let teacherType;
+            this.jhiTranslate.get('marineindustryprojApp.TeacherType.' + a.teacherType).subscribe(w => teacherType = w.toString());
+
+            let grade;
+            this.jhiTranslate.get('marineindustryprojApp.Grade.' + a.grade).subscribe(w => grade = w.toString());
+
+            let obj: Object;
+            obj = {'index': index,
+                'name': a.name,
+                'family': a.family,
+                'fatherName': a.fatherName,
+                'scientificBasis': a.scientificBasis,
+                'inquiry': a.inquiry,
+                'schoolConfirmation': a.schoolConfirmation,
+                'protectiveApproval': a.protectiveApproval,
+                'teachingSubject': a.teachingSubject,
+                'issueDate': a.issueDate,
+                'expirationDate': a.expirationDate,
+                'licenseNumber': a.licenseNumber,
+                'sessionNumber': a.sessionNumber,
+                'phoneNumber': a.phoneNumber,
+                'licenseRenewalDate': a.licenseRenewalDate,
+                'lastQualification': a.lastQualificationTitle,
+                'lastFieldOfStudy': a.lastFieldOfStudyTitle,
+                'serviceUnitTitle': a.serviceUnitTitle,
+                'academicRankTitle': a.academicRankTitle,
+                'teacherType': teacherType,
+                'grade': grade,
+                'createDate': a.createDate
+            };
+            report.push(obj);
+        });
+        a.exportAsExcelFile(report, 'teachers', 'marineindustryprojApp.teacher');
+    }
     loadPage(page: number) {
 
         if (page !== this.previousPage) {
@@ -148,7 +215,7 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });*/
-        this.loadAll(this.unchangedCriteria);
+        //this.loadAll(this.unchangedCriteria);
     }
 
     clear() {
@@ -166,6 +233,7 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.principal.identity().then(account => {
             this.currentAccount = account;
+            this.setRoles(account);
         });
 
         let expiredOptions = [{id:0,title:'هیچکدام'},{id:1,title:'به پایان رسیده'},{id:2,title:'به پایان نرسیده'}];
@@ -174,6 +242,8 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
         this.searchbarModel.push(new SearchPanelModel('teacher','phoneNumber','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('teacher','teachingSubject','text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('teacher','expired','select','equals', expiredOptions));
+        this.searchbarModel.push(new SearchPanelModel('teacher','teacherType','selectWithStringId','equals', this.commonSearchCheckerService.convertEnumToSearchArray(TeacherType, 'TeacherType')));
+        this.searchbarModel.push(new SearchPanelModel('teacher','grade','selectWithStringId','equals', this.commonSearchCheckerService.convertEnumToSearchArray(Grade, 'Grade')));
         this.qualificationService.query().subscribe(
             (res: HttpResponse<IQualificationMarineSuffix[]>) => {
                 this.qualifications = res.body;
@@ -214,6 +284,21 @@ export class TeacherMarineSuffixComponent implements OnInit, OnDestroy {
             this.loadAll();
         }*/
         //this.registerChangeInTeachers();
+    }
+    setRoles(account: any){
+        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+            this.isAdmin = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+            this.isModirAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+            this.isModirKolAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+            this.isKarshenasArshadAmozeshSazman = true;
+
+        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isSuperUsers = true;
+        if(this.isModirAmozesh || this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isTopUsers = true;
     }
 
     ngOnDestroy() {

@@ -1,9 +1,20 @@
 tr.accept td {
-    color: green;
+    color: #ffffff;
+    background-color: green;
 }
 tr.ignore td {
-  color: red;
+  color: #ffffff;
+  background-color: red;
 }
 tr.new td {
-    color: blue;
+    color: #ffffff;
+    background-color: blue;
+}
+tr.read td {
+    color: #ffffff;
+    background-color: #fbff58;
+}
+tr.returned td {
+    color: #ffffff;
+    background-color: purple;
 }

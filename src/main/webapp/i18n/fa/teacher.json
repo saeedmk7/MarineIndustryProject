@@ -2,7 +2,7 @@
     "marineindustryprojApp": {
         "teacher" : {
             "home": {
-                "title": "مدرسان آموزشی ودجا",
+                "title": "مدرسان آموزشی",
                 "createLabel": "جدید",
                 "createOrEditLabel": " مدرس"
             },
@@ -15,6 +15,7 @@
             "detail": {
                 "title": "جزئیات اطلاعات مدرس"
             },
+            "index": "ردیف",
             "name": "نام",
             "family": "نام خانوادگی",
             "fatherName": "نام پدر",
@@ -54,7 +55,9 @@
             "academicRankId": "مرتبه علمی",
             "academicRankTitle": "مرتبه علمی",
             "educationalModule": "Educational Module",
-            "expired": "تاریخ اتمام اعتبار"
+            "expired": "تاریخ اتمام اعتبار",
+            "teacherType": "نوع مدرس",
+            "grade": "گرید مدرس"
         }
     }
 }

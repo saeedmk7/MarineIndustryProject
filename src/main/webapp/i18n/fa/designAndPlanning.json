@@ -16,6 +16,7 @@
             "detail": {
                 "title": "جزئیات اطلاعات برنامه ریزی"
             },
+            "index": "ردیف",
             "directCost": "سرمایه گذاری های مستقیم",
             "directCostDescription": "تشریح سرمایه گذاری های مستقیم",
             "undirectCost": "سرمایه گذاری های غیرمستقیم",
@@ -54,6 +55,8 @@
             "educationalModuleTitle": "عنوان پودمان آموزشی",
             "educationalModuleId": "پودمان آموزشی",
             "educationalModuleCode": "پودمان آموزشی",
+            "skillLevelOfSkillTitle": "سطح پودمان",
+            "totalLearningTime": "مدت زمان پودمان",
             "personId": "نام و نام خانوادگی",
             "organizationChart": "محل خدمت"
         }

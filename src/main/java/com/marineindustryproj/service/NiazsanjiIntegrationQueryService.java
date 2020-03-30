@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.JoinType;
 
+import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -66,6 +67,19 @@ public class NiazsanjiIntegrationQueryService extends QueryService<NiazsanjiInte
         final Specification<NiazsanjiIntegration> specification = createSpecification(criteria);
         return niazsanjiIntegrationRepository.findAll(specification, page)
             .map(niazsanjiIntegrationMapper::toDto);
+    }
+    @Transactional(readOnly = true)
+    public NiazsanjiIntegrationDTO findByPrioritizeRequestNiazsanjiId(long prioritizeRequestNiazsanjiId) {
+        NiazsanjiIntegrationCriteria criteria = new NiazsanjiIntegrationCriteria();
+
+        LongFilter prioritizeRequestNiazsanjiIdFilter = new LongFilter();
+        prioritizeRequestNiazsanjiIdFilter.setEquals(prioritizeRequestNiazsanjiId);
+
+        criteria.setPrioritizeRequestNiazsanjiId(prioritizeRequestNiazsanjiIdFilter);
+        List<NiazsanjiIntegrationDTO> niazsanjiIntegrationDTOS = findByCriteria(criteria);
+        if(!niazsanjiIntegrationDTOS.isEmpty())
+            return niazsanjiIntegrationDTOS.get(0);
+        return null;
     }
 
     /**
@@ -145,7 +159,7 @@ public class NiazsanjiIntegrationQueryService extends QueryService<NiazsanjiInte
                         .join(PrioritizeRequestNiazsanji_.educationalModule)
                         .get(EducationalModule_.code)));
             }
-            if (criteria.getEducationalModuleCode() != null) {
+            if (criteria.getEducationalModuleTitle() != null) {
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleTitle(),
                     root -> root.join(NiazsanjiIntegration_.prioritizeRequestNiazsanji, JoinType.LEFT)
                         .join(PrioritizeRequestNiazsanji_.educationalModule)

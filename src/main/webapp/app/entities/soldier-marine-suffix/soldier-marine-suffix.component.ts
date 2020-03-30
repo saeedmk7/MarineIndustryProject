@@ -80,9 +80,8 @@ export class SoldierMarineSuffixComponent implements OnInit, OnDestroy {
         private convertObjectDatesService : ConvertObjectDatesService,
         private treeUtilities : TreeUtilities
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
@@ -102,7 +101,6 @@ export class SoldierMarineSuffixComponent implements OnInit, OnDestroy {
 
     loadAll(criteria?) {
         criteria = this.makeCriteria(criteria);
-        debugger;
         this.soldierService
             .query({
                 page: this.page - 1,

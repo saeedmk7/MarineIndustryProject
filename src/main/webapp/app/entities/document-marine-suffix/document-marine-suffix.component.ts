@@ -9,6 +9,8 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { DocumentMarineSuffixService } from './document-marine-suffix.service';
+import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
+import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 
 @Component({
     selector: 'mi-document-marine-suffix',
@@ -16,6 +18,7 @@ import { DocumentMarineSuffixService } from './document-marine-suffix.service';
 })
 export class DocumentMarineSuffixComponent implements OnInit, OnDestroy {
     currentAccount: any;
+    currentPerson: IPersonMarineSuffix;
     documents: IDocumentMarineSuffix[];
     error: any;
     success: any;
@@ -32,6 +35,13 @@ export class DocumentMarineSuffixComponent implements OnInit, OnDestroy {
     entityName: any;
     entityId: any;
 
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
+    isTopUsers: boolean = false;
+
     constructor(
         private documentService: DocumentMarineSuffixService,
         private parseLinks: JhiParseLinks,
@@ -40,7 +50,8 @@ export class DocumentMarineSuffixComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private dataUtils: JhiDataUtils,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private personService: PersonMarineSuffixService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -108,8 +119,28 @@ export class DocumentMarineSuffixComponent implements OnInit, OnDestroy {
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;
+            this.setRoles(account);
+            this.personService.find(this.currentAccount.id)
+                .subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
+                    this.currentPerson = resp.body;
+                })
         });
         this.registerChangeInDocuments();
+    }
+    setRoles(account: any){
+        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
+            this.isAdmin = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
+            this.isModirAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
+            this.isModirKolAmozesh = true;
+        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+            this.isKarshenasArshadAmozeshSazman = true;
+
+        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isSuperUsers = true;
+        if(this.isModirAmozesh || this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
+            this.isTopUsers = true;
     }
 
     ngOnDestroy() {

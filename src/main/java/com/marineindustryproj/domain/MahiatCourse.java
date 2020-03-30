@@ -57,6 +57,12 @@ public class MahiatCourse implements Serializable {
 
     @OneToMany(mappedBy = "mahiatCourse")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<FinalNiazsanjiReport> finalNiazsanjiReports = new HashSet<>();
+    @OneToMany(mappedBy = "mahiatCourse")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<LevelThreeCriteria> levelThreeCriteria = new HashSet<>();
+    @OneToMany(mappedBy = "mahiatCourse")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<DesignAndPlanning> designAndPlannings = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -156,6 +162,56 @@ public class MahiatCourse implements Serializable {
 
     public void setModifyDate(ZonedDateTime modifyDate) {
         this.modifyDate = modifyDate;
+    }
+
+    public Set<FinalNiazsanjiReport> getFinalNiazsanjiReports() {
+        return finalNiazsanjiReports;
+    }
+
+    public MahiatCourse finalNiazsanjiReports(Set<FinalNiazsanjiReport> finalNiazsanjiReports) {
+        this.finalNiazsanjiReports = finalNiazsanjiReports;
+        return this;
+    }
+
+    public MahiatCourse addFinalNiazsanjiReport(FinalNiazsanjiReport finalNiazsanjiReport) {
+        this.finalNiazsanjiReports.add(finalNiazsanjiReport);
+        finalNiazsanjiReport.setMahiatCourse(this);
+        return this;
+    }
+
+    public MahiatCourse removeFinalNiazsanjiReport(FinalNiazsanjiReport finalNiazsanjiReport) {
+        this.finalNiazsanjiReports.remove(finalNiazsanjiReport);
+        finalNiazsanjiReport.setMahiatCourse(null);
+        return this;
+    }
+
+    public void setFinalNiazsanjiReports(Set<FinalNiazsanjiReport> finalNiazsanjiReports) {
+        this.finalNiazsanjiReports = finalNiazsanjiReports;
+    }
+
+    public Set<LevelThreeCriteria> getLevelThreeCriteria() {
+        return levelThreeCriteria;
+    }
+
+    public MahiatCourse levelThreeCriteria(Set<LevelThreeCriteria> levelThreeCriteria) {
+        this.levelThreeCriteria = levelThreeCriteria;
+        return this;
+    }
+
+    public MahiatCourse addLevelThreeCriteria(LevelThreeCriteria levelThreeCriteria) {
+        this.levelThreeCriteria.add(levelThreeCriteria);
+        levelThreeCriteria.setMahiatCourse(this);
+        return this;
+    }
+
+    public MahiatCourse removeLevelThreeCriteria(LevelThreeCriteria levelThreeCriteria) {
+        this.levelThreeCriteria.remove(levelThreeCriteria);
+        levelThreeCriteria.setMahiatCourse(null);
+        return this;
+    }
+
+    public void setLevelThreeCriteria(Set<LevelThreeCriteria> levelThreeCriteria) {
+        this.levelThreeCriteria = levelThreeCriteria;
     }
 
     public Set<DesignAndPlanning> getDesignAndPlannings() {

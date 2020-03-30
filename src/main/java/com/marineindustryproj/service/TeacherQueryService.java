@@ -161,6 +161,16 @@ public class TeacherQueryService extends QueryService<Teacher> {
             if (criteria.getGuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGuid(), Teacher_.guid));
             }
+            if (criteria.getTeacherType() != null) {
+                specification = specification.and(buildSpecification(criteria.getTeacherType(), Teacher_.teacherType));
+            }
+            if (criteria.getGrade() != null) {
+                specification = specification.and(buildSpecification(criteria.getGrade(), Teacher_.grade));
+            }
+            if (criteria.getTeacherGradeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getTeacherGradeId(),
+                    root -> root.join(Teacher_.teacherGrades, JoinType.LEFT).get(TeacherGrade_.id)));
+            }
             if (criteria.getRequestOrganizationNiazsanjiId() != null) {
                 specification = specification.and(buildSpecification(criteria.getRequestOrganizationNiazsanjiId(),
                     root -> root.join(Teacher_.requestOrganizationNiazsanjis, JoinType.LEFT).get(RequestOrganizationNiazsanji_.id)));

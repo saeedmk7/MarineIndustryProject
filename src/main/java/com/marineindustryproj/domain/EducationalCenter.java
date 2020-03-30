@@ -13,6 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+import com.marineindustryproj.domain.enumeration.Grade;
+
 /**
  * A EducationalCenter.
  */
@@ -86,6 +88,13 @@ public class EducationalCenter implements Serializable {
     @Column(name = "status", nullable = false)
     private Integer status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "grade")
+    private Grade grade;
+
+    @OneToMany(mappedBy = "educationalCenter")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<EducationalCenterGrade> educationalCenterGrades = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_center_activity_area",
@@ -314,6 +323,44 @@ public class EducationalCenter implements Serializable {
         this.status = status;
     }
 
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public EducationalCenter grade(Grade grade) {
+        this.grade = grade;
+        return this;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
+    public Set<EducationalCenterGrade> getEducationalCenterGrades() {
+        return educationalCenterGrades;
+    }
+
+    public EducationalCenter educationalCenterGrades(Set<EducationalCenterGrade> educationalCenterGrades) {
+        this.educationalCenterGrades = educationalCenterGrades;
+        return this;
+    }
+
+    public EducationalCenter addEducationalCenterGrade(EducationalCenterGrade educationalCenterGrade) {
+        this.educationalCenterGrades.add(educationalCenterGrade);
+        educationalCenterGrade.setEducationalCenter(this);
+        return this;
+    }
+
+    public EducationalCenter removeEducationalCenterGrade(EducationalCenterGrade educationalCenterGrade) {
+        this.educationalCenterGrades.remove(educationalCenterGrade);
+        educationalCenterGrade.setEducationalCenter(null);
+        return this;
+    }
+
+    public void setEducationalCenterGrades(Set<EducationalCenterGrade> educationalCenterGrades) {
+        this.educationalCenterGrades = educationalCenterGrades;
+    }
+
     public Set<ActivityArea> getActivityAreas() {
         return activityAreas;
     }
@@ -454,6 +501,7 @@ public class EducationalCenter implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", grade='" + getGrade() + "'" +
             "}";
     }
 }

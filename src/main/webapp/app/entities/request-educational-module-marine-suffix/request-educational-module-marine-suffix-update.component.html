@@ -159,7 +159,7 @@
                                     [items]="competencies"
                                     appendTo="body"
                                     [multiple]="false"
-                                    [closeOnSelect]="false"
+                                    [closeOnSelect]="true"
                                     [searchable]="true"
                                     [required]="isSuperUsers"
                                     bindValue="id"
@@ -266,7 +266,7 @@
                             <td *ngFor="let headlineLevel of headlineLevelKeys; let count = index">
                                 <!--<input type="radio" [name]="item.headlineLevel" [(ngModel)]="item.headlineLevel"
                                        [value]="headlineLevel" [ngModelOptions]="{standalone: true}"/>-->
-                                <input type="radio" [name]="'headlineLevel_' + item.id" [id]="'headlineLevel_' + headlineLevel + '_' + count" [value]="headlineLevel" [checked]="item.headlineLevel == headlineLevel">
+                                <input type="radio" class="form-radio" [name]="'headlineLevel_' + item.id" [id]="'headlineLevel_' + headlineLevel + '_' + count" [value]="headlineLevel" [checked]="item.headlineLevel == headlineLevel">
                                 <!--name="headlineLevel" [value]="headlineLevel" [checked]="headlineLevel == item.headlineLevel"-->
                             </td>
                             <td>
@@ -276,7 +276,7 @@
                             <td *ngFor="let headlineScope of headlineScopeKeys; let count = index">
                                 <!--<input type="radio" [name]="item.headlineScope" [(ngModel)]="item.headlineScope"
                                        [value]="headlineScope" [ngModelOptions]="{standalone: true}"/>-->
-                                <input type="radio" [name]="'headlineScope_' + item.id" [id]="'headlineScope_' + headlineScope + '_' + count" [value]="headlineScope" [checked]="item.headlineScope == headlineScope">
+                                <input type="radio" class="form-radio" [name]="'headlineScope_' + item.id" [id]="'headlineScope_' + headlineScope + '_' + count" [value]="headlineScope" [checked]="item.headlineScope == headlineScope">
                                 <!-- name="headlineScope" [value]="headlineScope" [checked]="headlineScope == item.headlineScope"-->
                             </td>
                             <td>

@@ -22,9 +22,7 @@
         </button>
     </h2>
     <mi-alert></mi-alert>
-    <div>
-        <search-panel [searchPanelModel]="searchbarModel"></search-panel>
-    </div>
+        <search-panel [(page)]="page" [(size)]="itemsPerPage" [predicate]="predicate" [reverse]="reverse" [searchPanelModel]="searchbarModel"></search-panel>
     <br/>
     <div class="table-responsive" *ngIf="niazsanjiFardis">
         <table class="table table-striped  table-bordered table-hover table-sm">
@@ -250,9 +248,9 @@
             <tfoot>
             <tr>
                 <td colspan="10">
-                    <select [(ngModel)] = "itemsPerPage" (change)="loadAll(criteria)">
+                    <select [(ngModel)] = "itemsPerPage">
                         <option value="10">۱۰</option>
-                        <option selected="selected" value="20">۲۰</option>
+                        <option value="20">۲۰</option>
                         <option value="50">۵۰</option>
                         <option value="100">۱۰۰</option>
                         <option value="500">۵۰۰</option>

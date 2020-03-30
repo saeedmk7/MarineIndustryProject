@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity LevelThreeCriteria.
+    -->
+    <changeSet id="20200321172303-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="mahiat_course_id"
+                                 baseTableName="level_three_criteria"
+                                 constraintName="fk_level_three_criteria_mahiat_course_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mahiat_course"/>
+
+        <addForeignKeyConstraint baseColumnNames="level_three_criteria_group_id"
+                                 baseTableName="level_three_criteria"
+                                 constraintName="fk_level_three_criteria_level_three_criteria_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="level_three_criteria_group"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -36,6 +36,12 @@ public class PollDTO implements Serializable {
     @NotNull
     private Integer status;
 
+    @Size(max = 1024)
+    private String strength;
+
+    @Size(max = 1024)
+    private String improvement;
+
     private Long finalNiazsanjiReportId;
 
     private String finalNiazsanjiReportDescription;
@@ -120,6 +126,22 @@ public class PollDTO implements Serializable {
         this.status = status;
     }
 
+    public String getStrength() {
+        return strength;
+    }
+
+    public void setStrength(String strength) {
+        this.strength = strength;
+    }
+
+    public String getImprovement() {
+        return improvement;
+    }
+
+    public void setImprovement(String improvement) {
+        this.improvement = improvement;
+    }
+
     public Long getFinalNiazsanjiReportId() {
         return finalNiazsanjiReportId;
     }
@@ -170,6 +192,8 @@ public class PollDTO implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", strength='" + getStrength() + "'" +
+            ", improvement='" + getImprovement() + "'" +
             ", finalNiazsanjiReport=" + getFinalNiazsanjiReportId() +
             ", finalNiazsanjiReport='" + getFinalNiazsanjiReportDescription() + "'" +
             "}";

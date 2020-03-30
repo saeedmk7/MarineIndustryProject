@@ -197,6 +197,42 @@
     <include file="config/liquibase/changelog/20200214175947_update_entity_updateEducationalModuleAndRequestAndRunPhase.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200223195424_added_entity_AssessmentMethod.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200223195424_update_entity_addAssessmentMethodToEducation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200229064917_added_entity_TeacherGrade.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200229064918_added_entity_TeacherGradeScore.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200229064919_added_entity_TeacherCriteria.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200229064928_added_entity_EducationalCenterGrade.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200229064929_added_entity_EducationalCenterGradeScore.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200229064930_added_entity_EducationalCenterCriteria.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200229064931_added_entity_EducationalCenterService.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200229064932_added_entity_EvaluatorOpinion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200229064917_added_entity_constraints_TeacherGrade.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200229064918_added_entity_constraints_TeacherGradeScore.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200229064928_added_entity_constraints_EducationalCenterGrade.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200229064929_added_entity_constraints_EducationalCenterGradeScore.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200229175947_update_entity_updatePolls.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200307065909_added_entity_ActivationNiazsanji.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200313074442_added_entity_NiazsanjiPersonGrade.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200313074443_added_entity_NiazsanjiPersonGradeScore.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200313074444_added_entity_NiazsanjiPersonCriteria.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200313074442_added_entity_constraints_NiazsanjiPersonGrade.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200313074443_added_entity_constraints_NiazsanjiPersonGradeScore.xml" relativeToChangelogFile="false"/>
+
+    <include file="config/liquibase/changelog/20200321172301_added_entity_LevelThreeEffectiveness.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172302_added_entity_LevelThreeScore.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172303_added_entity_LevelThreeCriteria.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172304_added_entity_LevelThreeCriteriaGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172305_added_entity_LevelFourEffectiveness.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172306_added_entity_LevelFourScore.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172307_added_entity_LevelFourCriteria.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172408_added_entity_EffectivenessPhase.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172409_added_entity_EffectivenessPhaseLevel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172301_added_entity_constraints_LevelThreeEffectiveness.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172302_added_entity_constraints_LevelThreeScore.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172303_added_entity_constraints_LevelThreeCriteria.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172305_added_entity_constraints_LevelFourEffectiveness.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172306_added_entity_constraints_LevelFourScore.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172408_added_entity_constraints_EffectivenessPhase.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200321172409_update_entity_FinalNiazsanjiReport.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

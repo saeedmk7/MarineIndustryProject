@@ -296,8 +296,7 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     getForEditRunPhaseRequestCounter() {
-        debugger;
-        if (this.currentPerson.organizationChartId) {
+        if (this.currentPerson.organizationChartId && this.organizationcharts) {
             const orgIds = this.treeUtilities.getAllOfThisTreeIds(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
             let criteria = [];
             criteria.push({

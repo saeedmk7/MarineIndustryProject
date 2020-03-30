@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import com.marineindustryproj.domain.enumeration.CriterionType;
 
 /**
  * A DTO for the Criterion entity.
@@ -21,6 +22,8 @@ public class CriterionDTO implements Serializable {
 
     @NotNull
     private Integer coefficient;
+
+    private CriterionType criterionType;
 
     @Size(max = 1024)
     private String description;
@@ -65,6 +68,14 @@ public class CriterionDTO implements Serializable {
 
     public void setCoefficient(Integer coefficient) {
         this.coefficient = coefficient;
+    }
+
+    public CriterionType getCriterionType() {
+        return criterionType;
+    }
+
+    public void setCriterionType(CriterionType criterionType) {
+        this.criterionType = criterionType;
     }
 
     public String getDescription() {
@@ -135,6 +146,7 @@ public class CriterionDTO implements Serializable {
             ", title='" + getTitle() + "'" +
             ", displayOrder=" + getDisplayOrder() +
             ", coefficient=" + getCoefficient() +
+            ", criterionType='" + getCriterionType() + "'" +
             ", description='" + getDescription() + "'" +
             ", createUserLogin='" + getCreateUserLogin() + "'" +
             ", createDate='" + getCreateDate() + "'" +

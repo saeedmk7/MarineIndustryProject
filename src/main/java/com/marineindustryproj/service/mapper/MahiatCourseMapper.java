@@ -12,6 +12,8 @@ import org.mapstruct.*;
 public interface MahiatCourseMapper extends EntityMapper<MahiatCourseDTO, MahiatCourse> {
 
 
+    @Mapping(target = "finalNiazsanjiReports", ignore = true)
+    @Mapping(target = "levelThreeCriteria", ignore = true)
     @Mapping(target = "designAndPlannings", ignore = true)
     MahiatCourse toEntity(MahiatCourseDTO mahiatCourseDTO);
 

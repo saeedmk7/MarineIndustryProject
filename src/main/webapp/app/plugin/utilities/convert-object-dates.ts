@@ -1,12 +1,18 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as moment from 'jalali-moment';
 import {JhiLanguageService} from "ng-jhipster";
 import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 import {MONTHS} from "app/shared/constants/months.constants";
-import {DATE_FORMAT, PERSIAN_DATE_FORMAT} from "app/shared";
+import {PERSIAN_DATE_FORMAT} from "app/shared";
 import * as gregorainMoment from 'moment';
-import {Moment} from "moment";
+import {Moment} from 'moment';
+import {FINALNIAZSANJISTATUSMEANING} from "app/shared/constants/final-niazsanji-report-status-meaning.constants";
+import {EFFECTIVENESSPHASELEVELS} from "app/shared/constants/effectiveness-phase-levels.constants";
+import {IFinalNiazsanjiReportMarineSuffix} from "app/shared/model/final-niazsanji-report-marine-suffix.model";
+import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
+import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
+import {NiazSanjiSource} from "app/shared/model/enums/NiazSanjiSource";
 
 @Injectable({ providedIn: 'root' })
 export class ConvertObjectDatesService {
@@ -14,6 +20,34 @@ export class ConvertObjectDatesService {
 
     constructor(private translate: JhiLanguageService) {
         this.isfa = translate.currentLang == 'fa';
+    }
+    fillFinalNiazsanjiData(finalNiazsanji: IFinalNiazsanjiReportMarineSuffix, educationalModule: IEducationalModuleMarineSuffix, orgChart: IOrganizationChartMarineSuffix) : IFinalNiazsanjiReportMarineSuffix {
+        debugger;
+        if(finalNiazsanji.niazSanjiSource == NiazSanjiSource.FARDI)
+            finalNiazsanji.niazSanjiSource = NiazSanjiSource.FARDI2;
+        finalNiazsanji.statusMeaning = this.convertFinalNiazsanjiStatus2EqualString(finalNiazsanji.status);
+        finalNiazsanji.selectedEffectivenessPhaseLevelTitle = this.convertEffectivenessPhaseLevel2EqualString(finalNiazsanji.selectedEffectivenessPhaseLevel);
+        finalNiazsanji.currentEffectivenessPhaseLevelTitle = this.convertEffectivenessPhaseLevel2EqualString(finalNiazsanji.currentEffectivenessPhaseLevel);
+        finalNiazsanji.lastEffectivenessPhaseFinishPersian = this.miladi2ShamsiMoment(finalNiazsanji.lastEffectivenessPhaseFinish);
+        finalNiazsanji.runMonthPersian = this.convertMonthsNumber2MonthName(finalNiazsanji.runMonth);
+        finalNiazsanji.planningRunMonthPersian = this.convertMonthsNumber2MonthName(finalNiazsanji.planningRunMonth);
+        if(educationalModule){
+            finalNiazsanji.educationalModuleLevelTitle = educationalModule.skillableLevelOfSkillTitle;
+            finalNiazsanji.educationalModuleTotalTime = educationalModule.totalLearningTime;
+        }
+        if(orgChart){
+            finalNiazsanji.organizationChartFullTitle = orgChart.fullTitle;
+            finalNiazsanji.organizationChartRootTitle = orgChart.fullTitle.split('>')[0];
+        }
+        return finalNiazsanji;
+    }
+    fillFinalNiazsanjiDataArray(finalNiazsanjis: IFinalNiazsanjiReportMarineSuffix[], educationalModules: IEducationalModuleMarineSuffix[], orgCharts: IOrganizationChartMarineSuffix[]) : IFinalNiazsanjiReportMarineSuffix[] {
+        finalNiazsanjis.forEach((a: IFinalNiazsanjiReportMarineSuffix) => {
+            const educationalModule = educationalModules.find(e => e.id == a.educationalModuleId);
+            const orgChart = orgCharts.find(o => o.id == a.organizationChartId);
+            a = this.fillFinalNiazsanjiData(a, educationalModule, orgChart);
+        });
+        return finalNiazsanjis;
     }
     public changeDate(obj,notbool = false){
 
@@ -60,7 +94,9 @@ export class ConvertObjectDatesService {
         return date.getHours() + ":" + date.getMinutes() + "  " + moment(date).format(PERSIAN_DATE_FORMAT);
     }
     public miladi2ShamsiMoment(date: Moment): string {
-        return moment(date.toISOString()).format(PERSIAN_DATE_FORMAT);
+        if(date)
+            return moment(date.toISOString()).format(PERSIAN_DATE_FORMAT);
+        return "";
     }
     public getYearsOfService(date: Moment): number{
 
@@ -70,7 +106,9 @@ export class ConvertObjectDatesService {
     }
     public shamsi2miladi(date: string): string {
         //return date.getHours() + ":" + date.getMinutes() + "  " + moment(date).format('jYYYY/jMM/jDD');
-        return moment(date).toDate().toISOString();
+        if(date)
+            return moment(date).toDate().toISOString();
+        return "";
     }
     public shamsi2miladiMoment(date: string): Moment {
         //return date.getHours() + ":" + date.getMinutes() + "  " + moment(date).format('jYYYY/jMM/jDD');
@@ -80,6 +118,14 @@ export class ConvertObjectDatesService {
     public getNowShamsiYear(): number {
 
         return +moment().format('jYYYY');
+    }
+    public getNowShamsiMonth(): number {
+        debugger;
+        return +moment().format('jMM');
+    }
+    public getNowShamsiDate(): string {
+        debugger;
+        return moment().format('jYYYY/jMM/jDD');
     }
     public get30YearsBeforeNow(): string {
         return moment().add(-30,'years').toISOString();
@@ -135,6 +181,18 @@ export class ConvertObjectDatesService {
         <span *ngSwitchCase="20">
             تایید نهایی درخواست توسط مدیر آموزش
         </span>*/
+    }
+    convertFinalNiazsanjiStatus2EqualString(status: number): string {
+        const st = FINALNIAZSANJISTATUSMEANING.find(a => a.id == status);
+        if(st){
+            return st.mean;
+        }
+    }
+    convertEffectivenessPhaseLevel2EqualString(effectivenessPhaseLevel: number): string {
+        const ef = EFFECTIVENESSPHASELEVELS.find(a => a.id == effectivenessPhaseLevel);
+        if(ef){
+            return ef.title;
+        }
     }
     getYearsArray() : any[]{
         let dates =[];

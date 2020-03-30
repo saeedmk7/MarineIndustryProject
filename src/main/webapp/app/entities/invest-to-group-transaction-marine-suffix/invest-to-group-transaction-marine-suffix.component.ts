@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { IInvestToGroupTransactionMarineSuffix } from 'app/shared/model/invest-to-group-transaction-marine-suffix.model';
-import {AccountService, Principal} from 'app/core';
+import {Principal} from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { InvestToGroupTransactionMarineSuffixService } from './invest-to-group-transaction-marine-suffix.service';
@@ -54,9 +54,8 @@ export class InvestToGroupTransactionMarineSuffixComponent implements OnInit, On
         private organizationChartService: OrganizationChartMarineSuffixService,
         private convertObjectDatesService : ConvertObjectDatesService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
@@ -101,7 +100,7 @@ export class InvestToGroupTransactionMarineSuffixComponent implements OnInit, On
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });*/
-        this.loadAll(this.criteria);
+        //this.loadAll(this.criteria);
     }
 
     clear() {

@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
+import com.marineindustryproj.domain.enumeration.Grade;
 
 /**
  * A DTO for the FinalNiazsanjiReport entity.
@@ -67,6 +68,16 @@ public class FinalNiazsanjiReportDTO implements Serializable {
 
     private Integer priority;
 
+    private Float effectivenessPhaseAverage;
+
+    private Grade effectivenessPhaseGrade;
+
+    private Integer selectedEffectivenessPhaseLevel;
+
+    private Integer currentEffectivenessPhaseLevel;
+
+    private ZonedDateTime lastEffectivenessPhaseFinish;
+
     private Set<DocumentDTO> documents = new HashSet<>();
 
     private Set<RestrictionDTO> restrictions = new HashSet<>();
@@ -78,6 +89,8 @@ public class FinalNiazsanjiReportDTO implements Serializable {
     private Long teacherId;
 
     private String teacherFamily;
+
+    private String teacherName;
 
     private Long niazsanjiInputId;
 
@@ -96,6 +109,10 @@ public class FinalNiazsanjiReportDTO implements Serializable {
     private String educationalModuleCode;
 
     private String educationalModuleTitle;
+
+    private Long mahiatCourseId;
+
+    private String mahiatCourseTitle;
 
     private Long teachingApproachId;
 
@@ -277,6 +294,46 @@ public class FinalNiazsanjiReportDTO implements Serializable {
         this.priority = priority;
     }
 
+    public Float getEffectivenessPhaseAverage() {
+        return effectivenessPhaseAverage;
+    }
+
+    public void setEffectivenessPhaseAverage(Float effectivenessPhaseAverage) {
+        this.effectivenessPhaseAverage = effectivenessPhaseAverage;
+    }
+
+    public Grade getEffectivenessPhaseGrade() {
+        return effectivenessPhaseGrade;
+    }
+
+    public void setEffectivenessPhaseGrade(Grade effectivenessPhaseGrade) {
+        this.effectivenessPhaseGrade = effectivenessPhaseGrade;
+    }
+
+    public Integer getSelectedEffectivenessPhaseLevel() {
+        return selectedEffectivenessPhaseLevel;
+    }
+
+    public void setSelectedEffectivenessPhaseLevel(Integer selectedEffectivenessPhaseLevel) {
+        this.selectedEffectivenessPhaseLevel = selectedEffectivenessPhaseLevel;
+    }
+
+    public Integer getCurrentEffectivenessPhaseLevel() {
+        return currentEffectivenessPhaseLevel;
+    }
+
+    public void setCurrentEffectivenessPhaseLevel(Integer currentEffectivenessPhaseLevel) {
+        this.currentEffectivenessPhaseLevel = currentEffectivenessPhaseLevel;
+    }
+
+    public ZonedDateTime getLastEffectivenessPhaseFinish() {
+        return lastEffectivenessPhaseFinish;
+    }
+
+    public void setLastEffectivenessPhaseFinish(ZonedDateTime lastEffectivenessPhaseFinish) {
+        this.lastEffectivenessPhaseFinish = lastEffectivenessPhaseFinish;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
@@ -389,6 +446,22 @@ public class FinalNiazsanjiReportDTO implements Serializable {
         this.educationalModuleTitle = educationalModuleTitle;
     }
 
+    public Long getMahiatCourseId() {
+        return mahiatCourseId;
+    }
+
+    public void setMahiatCourseId(Long mahiatCourseId) {
+        this.mahiatCourseId = mahiatCourseId;
+    }
+
+    public String getMahiatCourseTitle() {
+        return mahiatCourseTitle;
+    }
+
+    public void setMahiatCourseTitle(String mahiatCourseTitle) {
+        this.mahiatCourseTitle = mahiatCourseTitle;
+    }
+
     public Long getTeachingApproachId() {
         return teachingApproachId;
     }
@@ -451,10 +524,16 @@ public class FinalNiazsanjiReportDTO implements Serializable {
             ", goalsText='" + getGoalsText() + "'" +
             ", prerequisite='" + getPrerequisite() + "'" +
             ", priority=" + getPriority() +
+            ", effectivenessPhaseAverage=" + getEffectivenessPhaseAverage() +
+            ", effectivenessPhaseGrade='" + getEffectivenessPhaseGrade() + "'" +
+            ", selectedEffectivenessPhaseLevel=" + getSelectedEffectivenessPhaseLevel() +
+            ", currentEffectivenessPhaseLevel=" + getCurrentEffectivenessPhaseLevel() +
+            ", lastEffectivenessPhaseFinish='" + getLastEffectivenessPhaseFinish() + "'" +
             ", niazsanjiIntegration=" + getNiazsanjiIntegrationId() +
             ", niazsanjiIntegration='" + getNiazsanjiIntegrationNiazsanjiYear() + "'" +
             ", teacher=" + getTeacherId() +
             ", teacher='" + getTeacherFamily() + "'" +
+            ", teacher='" + getTeacherName() + "'" +
             ", niazsanjiInput=" + getNiazsanjiInputId() +
             ", niazsanjiInput='" + getNiazsanjiInputTitle() + "'" +
             ", courseType=" + getCourseTypeId() +
@@ -464,6 +543,8 @@ public class FinalNiazsanjiReportDTO implements Serializable {
             ", educationalModule=" + getEducationalModuleId() +
             ", educationalModule='" + getEducationalModuleCode() + "'" +
             ", educationalModule='" + getEducationalModuleTitle() + "'" +
+            ", mahiatCourse=" + getMahiatCourseId() +
+            ", mahiatCourse='" + getMahiatCourseTitle() + "'" +
             ", teachingApproach=" + getTeachingApproachId() +
             ", teachingApproach='" + getTeachingApproachTitle() + "'" +
             "}";
@@ -475,5 +556,13 @@ public class FinalNiazsanjiReportDTO implements Serializable {
 
     public void setEducationalModuleCode(String educationalModuleCode) {
         this.educationalModuleCode = educationalModuleCode;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 }

@@ -353,6 +353,10 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             if (personReps) {
                 let peopleIds = personReps.map(a => a.personId);
                 let persons = this.people.filter(w => peopleIds.includes(w.id));
+
+                finalNiazsanjiReportsOrganization.peopleCount = persons.length;
+                finalNiazsanjiReportsOrganization.peopleFullNames = persons.map(w => w.fullName).join(' - ');
+
                 finalNiazsanjiReportsOrganization.people = persons;
                 this.finalNiazsanjiReportsOrganizations.push(finalNiazsanjiReportsOrganization);
                 /*personReps.forEach((personRep: IFinalNiazsanjiReportPersonMarineSuffix) => {
@@ -553,20 +557,6 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','personId','select', 'equals', this.dates, 'title','', this.finalNiazsanjiReport.niazsanjiYear.toString()));
     }
 
-    /*prepareSearchOrgChart() {
-        if (this.organizationChartService.organizationchartsAll) {
-            this.organizationcharts = this.organizationChartService.organizationchartsAll;
-        }
-        else {
-            this.organizationChartService.query().subscribe(
-                (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
-
-                    this.organizationcharts = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message));
-        }
-
-    }*/
     prepareSearchOrgChart(){
         if(this.organizationChartService.organizationchartsAll)
         {
@@ -677,7 +667,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         //this.eventManager.destroy(this.criteriaSubscriber);
     }*/
 
-    public onExcelExport(args: any): void {
+    /*public onExcelExport(args: any): void {
         // Prevent automatically saving the file. We will save it manually after we fetch and add the details
 
         args.preventDefault();
@@ -691,9 +681,9 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         const headerOptions = rows[0].cells[0];
 
         const data: IFinalNiazsanjiReportOrganizationMarineSuffix[] = this.finalNiazsanjiReportsOrganizations;
-        /*for (let idx = 0; idx < data.length; idx++) {
+        /!*for (let idx = 0; idx < data.length; idx++) {
             rows. data[idx];
-        }*/
+        }*!/
         // add the detail data to the generated master sheet rows
         // loop backwards in order to avoid changing the rows index
         for (let idx = data.length - 1; idx >= 0; idx--) {
@@ -726,5 +716,5 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             //this.loading =  false;
         });
 
-    }
+    }*/
 }

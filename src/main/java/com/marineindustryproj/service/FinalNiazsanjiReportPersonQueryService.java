@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.criteria.JoinType;
 
+import io.github.jhipster.service.filter.IntegerFilter;
+import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -80,6 +82,29 @@ public class FinalNiazsanjiReportPersonQueryService extends QueryService<FinalNi
         return finalNiazsanjiReportPersonRepository.count(specification);
     }
 
+    @Transactional(readOnly = true)
+    public boolean allThePeopleVote(long finalNiazsanjiReportId) {
+
+        FinalNiazsanjiReportPersonCriteria finalNiazsanjiReportPersonCriteria = new FinalNiazsanjiReportPersonCriteria();
+
+        LongFilter finalNiazsanjiReportIdFilter = new LongFilter();
+        finalNiazsanjiReportIdFilter.setEquals(finalNiazsanjiReportId);
+
+        finalNiazsanjiReportPersonCriteria.setFinalNiazsanjiReportId(finalNiazsanjiReportIdFilter);
+
+        long totalPeople = countByCriteria(finalNiazsanjiReportPersonCriteria);
+
+        IntegerFilter statusFilter = new IntegerFilter();
+        statusFilter.setGreaterOrEqualThan(20);
+
+        finalNiazsanjiReportPersonCriteria.setStatus(statusFilter);
+
+        long totalPeopleVoted = countByCriteria(finalNiazsanjiReportPersonCriteria);
+
+        if(totalPeople == totalPeopleVoted)
+            return true;
+        return  false;
+    }
     /**
      * Function to convert FinalNiazsanjiReportPersonCriteria to a {@link Specification}
      */
@@ -124,6 +149,31 @@ public class FinalNiazsanjiReportPersonQueryService extends QueryService<FinalNi
             }
             if (criteria.getSourceId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSourceId(), FinalNiazsanjiReportPerson_.sourceId));
+            }
+            if (criteria.getScoreBeforeTest() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getScoreBeforeTest(), FinalNiazsanjiReportPerson_.scoreBeforeTest));
+            }
+            if (criteria.getScoreAfterTest() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getScoreAfterTest(), FinalNiazsanjiReportPerson_.scoreAfterTest));
+            }
+            if (criteria.getAverageScore() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getAverageScore(), FinalNiazsanjiReportPerson_.averageScore));
+            }
+            if (criteria.getNiazsanjiPersonGradeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getNiazsanjiPersonGradeId(),
+                    root -> root.join(FinalNiazsanjiReportPerson_.niazsanjiPersonGrades, JoinType.LEFT).get(NiazsanjiPersonGrade_.id)));
+            }
+            if (criteria.getLevelThreeEffectivenessId() != null) {
+                specification = specification.and(buildSpecification(criteria.getLevelThreeEffectivenessId(),
+                    root -> root.join(FinalNiazsanjiReportPerson_.levelThreeEffectivenesses, JoinType.LEFT).get(LevelThreeEffectiveness_.id)));
+            }
+            if (criteria.getLevelFourEffectivenessId() != null) {
+                specification = specification.and(buildSpecification(criteria.getLevelFourEffectivenessId(),
+                    root -> root.join(FinalNiazsanjiReportPerson_.levelFourEffectivenesses, JoinType.LEFT).get(LevelFourEffectiveness_.id)));
+            }
+            if (criteria.getDocumentId() != null) {
+                specification = specification.and(buildSpecification(criteria.getDocumentId(),
+                    root -> root.join(FinalNiazsanjiReportPerson_.documents, JoinType.LEFT).get(Document_.id)));
             }
             if (criteria.getPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPersonId(),

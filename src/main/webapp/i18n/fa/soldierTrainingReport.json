@@ -15,6 +15,7 @@
             "detail": {
                 "title": "جزئیات مهارت آموزی کارکنان وظیفه"
             },
+            "index": "ردیف",
             "title": "عنوان مهارت",
             "personHour": "نفرساعت(ساعت)",
             "executiveTrainingCompany": "دستگاه اجرایی متولی آموزش",

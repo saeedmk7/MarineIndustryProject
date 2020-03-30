@@ -28,6 +28,13 @@
             "archivedDate": "تاریخ آرشیو",
             "status": "وضعیت",
             "sourceId": "منبع",
+            "scoreBeforeTest": "Score Before Test",
+            "scoreAfterTest": "Score After Test",
+            "averageScore": "Average Score",
+            "niazsanjiPersonGrade": "Niazsanji Person Grade",
+            "levelThreeEffectiveness": "Level Three Effectiveness",
+            "levelFourEffectiveness": "Level Four Effectiveness",
+            "document": "Document",
             "person": "نام و نام خانوادگی",
             "finalNiazsanjiReport": "Final Niazsanji Report"
         }

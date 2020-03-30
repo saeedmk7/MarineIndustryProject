@@ -110,6 +110,14 @@ public class MahiatCourseQueryService extends QueryService<MahiatCourse> {
             if (criteria.getModifyDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getModifyDate(), MahiatCourse_.modifyDate));
             }
+            if (criteria.getFinalNiazsanjiReportId() != null) {
+                specification = specification.and(buildSpecification(criteria.getFinalNiazsanjiReportId(),
+                    root -> root.join(MahiatCourse_.finalNiazsanjiReports, JoinType.LEFT).get(FinalNiazsanjiReport_.id)));
+            }
+            if (criteria.getLevelThreeCriteriaId() != null) {
+                specification = specification.and(buildSpecification(criteria.getLevelThreeCriteriaId(),
+                    root -> root.join(MahiatCourse_.levelThreeCriteria, JoinType.LEFT).get(LevelThreeCriteria_.id)));
+            }
             if (criteria.getDesignAndPlanningId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDesignAndPlanningId(),
                     root -> root.join(MahiatCourse_.designAndPlannings, JoinType.LEFT).get(DesignAndPlanning_.id)));

@@ -1,4 +1,4 @@
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate *ngIf="searchPanelModel">
+<form #f="ngForm" id="ngForm" (ngSubmit)="onSubmit(f)" novalidate *ngIf="searchPanelModel">
     <div class="card border-success ">
         <a data-toggle="collapse" href="#collapseExample" class="card-header center" style="background-color: aliceblue;">
             <span class="panel-title">پنل جستجو</span>
@@ -24,6 +24,19 @@
                                    [id]="item.fieldName"
                                    [ngModel]="+item.selectedValue">
                         </ng-select>
+                        <ng-select *ngSwitchCase="'selectWithStringId'"
+                                   [items]="item.values"
+                                   [multiple]="false"
+                                   [closeOnSelect]="true"
+                                   [searchable]="true"
+                                   [required]="false"
+                                   [bindLabel]="item.bindLabel"
+                                   bindValue="id"
+                                   placeholder="انتخاب نمائید"
+                                   [name] = "item.fieldName"
+                                   [id]="item.fieldName"
+                                   [ngModel]="item.selectedValue">
+                        </ng-select>
                         <div *ngSwitchCase="'radio'">
                             <label class="form-check-label" *ngFor="let radio of item.values; let i = index">
                                 <input type="radio" class="form-check-input" name="{{item.fieldName}}" id="{{radio.id}}" value="{{radio.value}}" checked="{{radio.checked}}" ngModel/> {{radio.text}}
@@ -33,7 +46,7 @@
                 </div>
         </div>
         <div class="card-footer text-muted success-color white-text">
-            <input type="submit" class="btn-primary" value="جستجو">
+            <input id="submitBtn" type="submit" class="btn-primary" value="جستجو">
             <input type="reset" class="btn-warning" value="پاک کردن">
         </div>
     </div>

@@ -61,6 +61,11 @@ public class Document implements Serializable {
     @ManyToMany(mappedBy = "documents")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
+    private Set<TeacherGrade> teacherGrades = new HashSet<>();
+
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
     private Set<Job> jobs = new HashSet<>();
 
     @ManyToMany(mappedBy = "documents")
@@ -81,6 +86,11 @@ public class Document implements Serializable {
     @ManyToMany(mappedBy = "documents")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
+    private Set<EducationalCenterGrade> educationalCenterGrades = new HashSet<>();
+
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
     private Set<Resource> resources = new HashSet<>();
 
     @ManyToMany(mappedBy = "documents")
@@ -97,6 +107,26 @@ public class Document implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
     private Set<FinalNiazsanjiReport> finalNiazsanjiReports = new HashSet<>();
+
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = new HashSet<>();
+
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<NiazsanjiPersonGrade> niazsanjiPersonGrades = new HashSet<>();
+
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<LevelThreeEffectiveness> levelThreeEffectivenesses = new HashSet<>();
+
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<LevelFourEffectiveness> levelFourEffectivenesses = new HashSet<>();
 
     @ManyToMany(mappedBy = "documents")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -187,6 +217,11 @@ public class Document implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
     private Set<EvaluateCriteriaData> evaluateCriteriaData = new HashSet<>();
+
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<EffectivenessPhase> effectivenessPhases = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -312,6 +347,31 @@ public class Document implements Serializable {
         this.teachers = teachers;
     }
 
+    public Set<TeacherGrade> getTeacherGrades() {
+        return teacherGrades;
+    }
+
+    public Document teacherGrades(Set<TeacherGrade> teacherGrades) {
+        this.teacherGrades = teacherGrades;
+        return this;
+    }
+
+    public Document addTeacherGrade(TeacherGrade teacherGrade) {
+        this.teacherGrades.add(teacherGrade);
+        teacherGrade.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeTeacherGrade(TeacherGrade teacherGrade) {
+        this.teacherGrades.remove(teacherGrade);
+        teacherGrade.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setTeacherGrades(Set<TeacherGrade> teacherGrades) {
+        this.teacherGrades = teacherGrades;
+    }
+
     public Set<Job> getJobs() {
         return jobs;
     }
@@ -412,6 +472,31 @@ public class Document implements Serializable {
         this.educationalCenters = educationalCenters;
     }
 
+    public Set<EducationalCenterGrade> getEducationalCenterGrades() {
+        return educationalCenterGrades;
+    }
+
+    public Document educationalCenterGrades(Set<EducationalCenterGrade> educationalCenterGrades) {
+        this.educationalCenterGrades = educationalCenterGrades;
+        return this;
+    }
+
+    public Document addEducationalCenterGrade(EducationalCenterGrade educationalCenterGrade) {
+        this.educationalCenterGrades.add(educationalCenterGrade);
+        educationalCenterGrade.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeEducationalCenterGrade(EducationalCenterGrade educationalCenterGrade) {
+        this.educationalCenterGrades.remove(educationalCenterGrade);
+        educationalCenterGrade.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setEducationalCenterGrades(Set<EducationalCenterGrade> educationalCenterGrades) {
+        this.educationalCenterGrades = educationalCenterGrades;
+    }
+
     public Set<Resource> getResources() {
         return resources;
     }
@@ -510,6 +595,106 @@ public class Document implements Serializable {
 
     public void setFinalNiazsanjiReports(Set<FinalNiazsanjiReport> finalNiazsanjiReports) {
         this.finalNiazsanjiReports = finalNiazsanjiReports;
+    }
+
+    public Set<FinalNiazsanjiReportPerson> getFinalNiazsanjiReportPeople() {
+        return finalNiazsanjiReportPeople;
+    }
+
+    public Document finalNiazsanjiReportPeople(Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople) {
+        this.finalNiazsanjiReportPeople = finalNiazsanjiReportPeople;
+        return this;
+    }
+
+    public Document addFinalNiazsanjiReportPerson(FinalNiazsanjiReportPerson finalNiazsanjiReportPerson) {
+        this.finalNiazsanjiReportPeople.add(finalNiazsanjiReportPerson);
+        finalNiazsanjiReportPerson.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeFinalNiazsanjiReportPerson(FinalNiazsanjiReportPerson finalNiazsanjiReportPerson) {
+        this.finalNiazsanjiReportPeople.remove(finalNiazsanjiReportPerson);
+        finalNiazsanjiReportPerson.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setFinalNiazsanjiReportPeople(Set<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople) {
+        this.finalNiazsanjiReportPeople = finalNiazsanjiReportPeople;
+    }
+
+    public Set<NiazsanjiPersonGrade> getNiazsanjiPersonGrades() {
+        return niazsanjiPersonGrades;
+    }
+
+    public Document niazsanjiPersonGrades(Set<NiazsanjiPersonGrade> niazsanjiPersonGrades) {
+        this.niazsanjiPersonGrades = niazsanjiPersonGrades;
+        return this;
+    }
+
+    public Document addNiazsanjiPersonGrade(NiazsanjiPersonGrade niazsanjiPersonGrade) {
+        this.niazsanjiPersonGrades.add(niazsanjiPersonGrade);
+        niazsanjiPersonGrade.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeNiazsanjiPersonGrade(NiazsanjiPersonGrade niazsanjiPersonGrade) {
+        this.niazsanjiPersonGrades.remove(niazsanjiPersonGrade);
+        niazsanjiPersonGrade.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setNiazsanjiPersonGrades(Set<NiazsanjiPersonGrade> niazsanjiPersonGrades) {
+        this.niazsanjiPersonGrades = niazsanjiPersonGrades;
+    }
+
+    public Set<LevelThreeEffectiveness> getLevelThreeEffectivenesses() {
+        return levelThreeEffectivenesses;
+    }
+
+    public Document levelThreeEffectivenesses(Set<LevelThreeEffectiveness> levelThreeEffectivenesses) {
+        this.levelThreeEffectivenesses = levelThreeEffectivenesses;
+        return this;
+    }
+
+    public Document addLevelThreeEffectiveness(LevelThreeEffectiveness levelThreeEffectiveness) {
+        this.levelThreeEffectivenesses.add(levelThreeEffectiveness);
+        levelThreeEffectiveness.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeLevelThreeEffectiveness(LevelThreeEffectiveness levelThreeEffectiveness) {
+        this.levelThreeEffectivenesses.remove(levelThreeEffectiveness);
+        levelThreeEffectiveness.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setLevelThreeEffectivenesses(Set<LevelThreeEffectiveness> levelThreeEffectivenesses) {
+        this.levelThreeEffectivenesses = levelThreeEffectivenesses;
+    }
+
+    public Set<LevelFourEffectiveness> getLevelFourEffectivenesses() {
+        return levelFourEffectivenesses;
+    }
+
+    public Document levelFourEffectivenesses(Set<LevelFourEffectiveness> levelFourEffectivenesses) {
+        this.levelFourEffectivenesses = levelFourEffectivenesses;
+        return this;
+    }
+
+    public Document addLevelFourEffectiveness(LevelFourEffectiveness levelFourEffectiveness) {
+        this.levelFourEffectivenesses.add(levelFourEffectiveness);
+        levelFourEffectiveness.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeLevelFourEffectiveness(LevelFourEffectiveness levelFourEffectiveness) {
+        this.levelFourEffectivenesses.remove(levelFourEffectiveness);
+        levelFourEffectiveness.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setLevelFourEffectivenesses(Set<LevelFourEffectiveness> levelFourEffectivenesses) {
+        this.levelFourEffectivenesses = levelFourEffectivenesses;
     }
 
     public Set<DesignAndPlanning> getDesignAndPlannings() {
@@ -960,6 +1145,31 @@ public class Document implements Serializable {
 
     public void setEvaluateCriteriaData(Set<EvaluateCriteriaData> evaluateCriteriaData) {
         this.evaluateCriteriaData = evaluateCriteriaData;
+    }
+
+    public Set<EffectivenessPhase> getEffectivenessPhases() {
+        return effectivenessPhases;
+    }
+
+    public Document effectivenessPhases(Set<EffectivenessPhase> effectivenessPhases) {
+        this.effectivenessPhases = effectivenessPhases;
+        return this;
+    }
+
+    public Document addEffectivenessPhase(EffectivenessPhase effectivenessPhase) {
+        this.effectivenessPhases.add(effectivenessPhase);
+        effectivenessPhase.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeEffectivenessPhase(EffectivenessPhase effectivenessPhase) {
+        this.effectivenessPhases.remove(effectivenessPhase);
+        effectivenessPhase.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setEffectivenessPhases(Set<EffectivenessPhase> effectivenessPhases) {
+        this.effectivenessPhases = effectivenessPhases;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

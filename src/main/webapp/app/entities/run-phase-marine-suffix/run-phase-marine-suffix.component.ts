@@ -365,6 +365,10 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             if (a.people) {
                 let peopleIds = a.people.map(a => a.id);
                 let persons = this.people.filter(w => peopleIds.includes(w.id));
+
+                runPhaseOrganization.peopleCount = persons.length;
+                runPhaseOrganization.peopleFullNames = persons.map(w => w.fullName).join(' - ');
+
                 runPhaseOrganization.people = persons;
             }
             this.runPhaseOrganizations.push(runPhaseOrganization);

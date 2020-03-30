@@ -1,0 +1,10 @@
+{
+    "marineindustryprojApp": {
+        "effectivenessLevelNumber": {
+            "1": "یک سطحی",
+            "2": "دوسطحی",
+            "3": "سه سطحی",
+            "4": "چهارسطحی"
+        }
+    }
+}

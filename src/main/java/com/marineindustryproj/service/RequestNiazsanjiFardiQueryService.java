@@ -160,12 +160,12 @@ public class RequestNiazsanjiFardiQueryService extends QueryService<RequestNiazs
             }
             if (criteria.getEducationalModuleTitle() != null) {
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleTitle(),
-                    root -> root.join(RequestNiazsanjiFardi_.allEducationalModule, JoinType.LEFT).get(EducationalModule_.title))).or(buildSpecification(criteria.getEducationalModuleTitle(),
+                    root -> root.join(RequestNiazsanjiFardi_.allEducationalModule, JoinType.LEFT).get(EducationalModule_.title))).and(buildSpecification(criteria.getEducationalModuleTitle(),
                     root -> root.join(RequestNiazsanjiFardi_.approvedEducationalModule, JoinType.LEFT).get(EducationalModule_.title)));
             }
             if (criteria.getEducationalModuleCode() != null) {
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleCode(),
-                    root -> root.join(RequestNiazsanjiFardi_.allEducationalModule, JoinType.LEFT).get(EducationalModule_.code))).or(buildSpecification(criteria.getEducationalModuleCode(),
+                    root -> root.join(RequestNiazsanjiFardi_.allEducationalModule, JoinType.LEFT).get(EducationalModule_.code))).and(buildSpecification(criteria.getEducationalModuleCode(),
                     root -> root.join(RequestNiazsanjiFardi_.approvedEducationalModule, JoinType.LEFT).get(EducationalModule_.code)));
             }
             /*if (criteria.getEducationalModuleTitle() != null) {

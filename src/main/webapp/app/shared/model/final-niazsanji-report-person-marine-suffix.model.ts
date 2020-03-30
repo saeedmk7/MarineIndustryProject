@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import {NiazSanjiSource} from 'app/shared/model/enums/NiazSanjiSource';
+import {INiazsanjiPersonGradeMarineSuffix} from "app/shared/model/niazsanji-person-grade-marine-suffix.model";
 
 export interface IFinalNiazsanjiReportPersonMarineSuffix {
     id?: number;
@@ -15,6 +16,13 @@ export interface IFinalNiazsanjiReportPersonMarineSuffix {
     archivedDate?: Moment;
     status?: number;
     sourceId?: number;
+    scoreBeforeTest?: number;
+    scoreAfterTest?: number;
+    averageScore?: number;
+    niazsanjiPersonGrades?: INiazsanjiPersonGradeMarineSuffix[];
+    levelThreeEffectivenesses?: ILevelThreeEffectivenessMarineSuffix[];
+    levelFourEffectivenesses?: ILevelFourEffectivenessMarineSuffix[];
+    documents?: IDocumentMarineSuffix[];
     personFamily?: string;
     personName?: string;
     personFullName?: string;
@@ -38,6 +46,13 @@ export class FinalNiazsanjiReportPersonMarineSuffix implements IFinalNiazsanjiRe
         public archivedDate?: Moment,
         public status?: number,
         public sourceId?: number,
+        public scoreBeforeTest?: number,
+        public scoreAfterTest?: number,
+        public averageScore?: number,
+        public niazsanjiPersonGrades?: INiazsanjiPersonGradeMarineSuffix[],
+        public levelThreeEffectivenesses?: ILevelThreeEffectivenessMarineSuffix[],
+        public levelFourEffectivenesses?: ILevelFourEffectivenessMarineSuffix[],
+        public documents?: IDocumentMarineSuffix[],
         public personFamily?: string,
         public personName?: string,
         public personFullName?: string,

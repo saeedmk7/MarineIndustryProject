@@ -35,6 +35,8 @@ public class DocumentCriteria implements Serializable {
 
     private LongFilter teacherId;
 
+    private LongFilter teacherGradeId;
+
     private LongFilter jobId;
 
     private LongFilter educationalModuleId;
@@ -43,6 +45,8 @@ public class DocumentCriteria implements Serializable {
 
     private LongFilter educationalCenterId;
 
+    private LongFilter educationalCenterGradeId;
+
     private LongFilter resourceId;
 
     private LongFilter requestOrganizationNiazsanjiId;
@@ -50,6 +54,14 @@ public class DocumentCriteria implements Serializable {
     private LongFilter finalOrganizationNiazsanjiId;
 
     private LongFilter finalNiazsanjiReportId;
+
+    private LongFilter finalNiazsanjiReportPersonId;
+
+    private LongFilter niazsanjiPersonGradeId;
+
+    private LongFilter levelThreeEffectivenessId;
+
+    private LongFilter levelFourEffectivenessId;
 
     private LongFilter designAndPlanningId;
 
@@ -86,6 +98,8 @@ public class DocumentCriteria implements Serializable {
     private LongFilter evaluateCriteriaTrainingId;
 
     private LongFilter evaluateCriteriaDataId;
+
+    private LongFilter effectivenessPhaseId;
 
     public LongFilter getId() {
         return id;
@@ -135,6 +149,14 @@ public class DocumentCriteria implements Serializable {
         this.teacherId = teacherId;
     }
 
+    public LongFilter getTeacherGradeId() {
+        return teacherGradeId;
+    }
+
+    public void setTeacherGradeId(LongFilter teacherGradeId) {
+        this.teacherGradeId = teacherGradeId;
+    }
+
     public LongFilter getJobId() {
         return jobId;
     }
@@ -167,6 +189,14 @@ public class DocumentCriteria implements Serializable {
         this.educationalCenterId = educationalCenterId;
     }
 
+    public LongFilter getEducationalCenterGradeId() {
+        return educationalCenterGradeId;
+    }
+
+    public void setEducationalCenterGradeId(LongFilter educationalCenterGradeId) {
+        this.educationalCenterGradeId = educationalCenterGradeId;
+    }
+
     public LongFilter getResourceId() {
         return resourceId;
     }
@@ -197,6 +227,38 @@ public class DocumentCriteria implements Serializable {
 
     public void setFinalNiazsanjiReportId(LongFilter finalNiazsanjiReportId) {
         this.finalNiazsanjiReportId = finalNiazsanjiReportId;
+    }
+
+    public LongFilter getFinalNiazsanjiReportPersonId() {
+        return finalNiazsanjiReportPersonId;
+    }
+
+    public void setFinalNiazsanjiReportPersonId(LongFilter finalNiazsanjiReportPersonId) {
+        this.finalNiazsanjiReportPersonId = finalNiazsanjiReportPersonId;
+    }
+
+    public LongFilter getNiazsanjiPersonGradeId() {
+        return niazsanjiPersonGradeId;
+    }
+
+    public void setNiazsanjiPersonGradeId(LongFilter niazsanjiPersonGradeId) {
+        this.niazsanjiPersonGradeId = niazsanjiPersonGradeId;
+    }
+
+    public LongFilter getLevelThreeEffectivenessId() {
+        return levelThreeEffectivenessId;
+    }
+
+    public void setLevelThreeEffectivenessId(LongFilter levelThreeEffectivenessId) {
+        this.levelThreeEffectivenessId = levelThreeEffectivenessId;
+    }
+
+    public LongFilter getLevelFourEffectivenessId() {
+        return levelFourEffectivenessId;
+    }
+
+    public void setLevelFourEffectivenessId(LongFilter levelFourEffectivenessId) {
+        this.levelFourEffectivenessId = levelFourEffectivenessId;
     }
 
     public LongFilter getDesignAndPlanningId() {
@@ -343,6 +405,14 @@ public class DocumentCriteria implements Serializable {
         this.evaluateCriteriaDataId = evaluateCriteriaDataId;
     }
 
+    public LongFilter getEffectivenessPhaseId() {
+        return effectivenessPhaseId;
+    }
+
+    public void setEffectivenessPhaseId(LongFilter effectivenessPhaseId) {
+        this.effectivenessPhaseId = effectivenessPhaseId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -360,14 +430,20 @@ public class DocumentCriteria implements Serializable {
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(teacherId, that.teacherId) &&
+            Objects.equals(teacherGradeId, that.teacherGradeId) &&
             Objects.equals(jobId, that.jobId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
             Objects.equals(requestEducationalModuleId, that.requestEducationalModuleId) &&
             Objects.equals(educationalCenterId, that.educationalCenterId) &&
+            Objects.equals(educationalCenterGradeId, that.educationalCenterGradeId) &&
             Objects.equals(resourceId, that.resourceId) &&
             Objects.equals(requestOrganizationNiazsanjiId, that.requestOrganizationNiazsanjiId) &&
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
+            Objects.equals(finalNiazsanjiReportPersonId, that.finalNiazsanjiReportPersonId) &&
+            Objects.equals(niazsanjiPersonGradeId, that.niazsanjiPersonGradeId) &&
+            Objects.equals(levelThreeEffectivenessId, that.levelThreeEffectivenessId) &&
+            Objects.equals(levelFourEffectivenessId, that.levelFourEffectivenessId) &&
             Objects.equals(designAndPlanningId, that.designAndPlanningId) &&
             Objects.equals(runPhaseId, that.runPhaseId) &&
             Objects.equals(announcementId, that.announcementId) &&
@@ -385,7 +461,8 @@ public class DocumentCriteria implements Serializable {
             Objects.equals(soldierId, that.soldierId) &&
             Objects.equals(soldierTrainingReportId, that.soldierTrainingReportId) &&
             Objects.equals(evaluateCriteriaTrainingId, that.evaluateCriteriaTrainingId) &&
-            Objects.equals(evaluateCriteriaDataId, that.evaluateCriteriaDataId);
+            Objects.equals(evaluateCriteriaDataId, that.evaluateCriteriaDataId) &&
+            Objects.equals(effectivenessPhaseId, that.effectivenessPhaseId);
     }
 
     @Override
@@ -397,14 +474,20 @@ public class DocumentCriteria implements Serializable {
         createDate,
         personId,
         teacherId,
+        teacherGradeId,
         jobId,
         educationalModuleId,
         requestEducationalModuleId,
         educationalCenterId,
+        educationalCenterGradeId,
         resourceId,
         requestOrganizationNiazsanjiId,
         finalOrganizationNiazsanjiId,
         finalNiazsanjiReportId,
+        finalNiazsanjiReportPersonId,
+        niazsanjiPersonGradeId,
+        levelThreeEffectivenessId,
+        levelFourEffectivenessId,
         designAndPlanningId,
         runPhaseId,
         announcementId,
@@ -422,7 +505,8 @@ public class DocumentCriteria implements Serializable {
         soldierId,
         soldierTrainingReportId,
         evaluateCriteriaTrainingId,
-        evaluateCriteriaDataId
+        evaluateCriteriaDataId,
+        effectivenessPhaseId
         );
     }
 
@@ -435,14 +519,20 @@ public class DocumentCriteria implements Serializable {
                 (createDate != null ? "createDate=" + createDate + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
+                (teacherGradeId != null ? "teacherGradeId=" + teacherGradeId + ", " : "") +
                 (jobId != null ? "jobId=" + jobId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (requestEducationalModuleId != null ? "requestEducationalModuleId=" + requestEducationalModuleId + ", " : "") +
                 (educationalCenterId != null ? "educationalCenterId=" + educationalCenterId + ", " : "") +
+                (educationalCenterGradeId != null ? "educationalCenterGradeId=" + educationalCenterGradeId + ", " : "") +
                 (resourceId != null ? "resourceId=" + resourceId + ", " : "") +
                 (requestOrganizationNiazsanjiId != null ? "requestOrganizationNiazsanjiId=" + requestOrganizationNiazsanjiId + ", " : "") +
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
+                (finalNiazsanjiReportPersonId != null ? "finalNiazsanjiReportPersonId=" + finalNiazsanjiReportPersonId + ", " : "") +
+                (niazsanjiPersonGradeId != null ? "niazsanjiPersonGradeId=" + niazsanjiPersonGradeId + ", " : "") +
+                (levelThreeEffectivenessId != null ? "levelThreeEffectivenessId=" + levelThreeEffectivenessId + ", " : "") +
+                (levelFourEffectivenessId != null ? "levelFourEffectivenessId=" + levelFourEffectivenessId + ", " : "") +
                 (designAndPlanningId != null ? "designAndPlanningId=" + designAndPlanningId + ", " : "") +
                 (runPhaseId != null ? "runPhaseId=" + runPhaseId + ", " : "") +
                 (announcementId != null ? "announcementId=" + announcementId + ", " : "") +
@@ -461,6 +551,7 @@ public class DocumentCriteria implements Serializable {
                 (soldierTrainingReportId != null ? "soldierTrainingReportId=" + soldierTrainingReportId + ", " : "") +
                 (evaluateCriteriaTrainingId != null ? "evaluateCriteriaTrainingId=" + evaluateCriteriaTrainingId + ", " : "") +
                 (evaluateCriteriaDataId != null ? "evaluateCriteriaDataId=" + evaluateCriteriaDataId + ", " : "") +
+                (effectivenessPhaseId != null ? "effectivenessPhaseId=" + effectivenessPhaseId + ", " : "") +
             "}";
     }
 

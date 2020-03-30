@@ -1,8 +1,11 @@
 import { Moment } from 'moment';
+import { IEducationalCenterGradeMarineSuffix } from 'app/shared/model//educational-center-grade-marine-suffix.model';
 import { IActivityAreaMarineSuffix } from 'app/shared/model//activity-area-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IEducationalModuleMarineSuffix } from 'app/shared/model//educational-module-marine-suffix.model';
 import { IRequestEducationalModuleMarineSuffix } from 'app/shared/model//request-educational-module-marine-suffix.model';
+import {Grade} from 'app/shared/model/enums/Grade';
+
 
 export interface IEducationalCenterMarineSuffix {
     id?: number;
@@ -21,6 +24,8 @@ export interface IEducationalCenterMarineSuffix {
     archivedUserLogin?: string;
     archivedDate?: Moment;
     status?: number;
+    grade?: Grade;
+    educationalCenterGrades?: IEducationalCenterGradeMarineSuffix[];
     activityAreas?: IActivityAreaMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     educationalModules?: IEducationalModuleMarineSuffix[];
@@ -45,6 +50,8 @@ export class EducationalCenterMarineSuffix implements IEducationalCenterMarineSu
         public archivedUserLogin?: string,
         public archivedDate?: Moment,
         public status?: number,
+        public grade?: Grade,
+        public educationalCenterGrades?: IEducationalCenterGradeMarineSuffix[],
         public activityAreas?: IActivityAreaMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public educationalModules?: IEducationalModuleMarineSuffix[],

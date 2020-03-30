@@ -282,11 +282,10 @@
                 <kendo-excelexport-column field="educationalModuleLevel" title="سطح" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="courseTypeTitle" title="نوع دوره" [width]="200"></kendo-excelexport-column>
-                <kendo-excelexport-column field="finalizeCost" title="سرمایه صرف شده" [width]="200"></kendo-excelexport-column>
-                <kendo-excelexport-column field="priceCost" title="سرمایه مصوب شده" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="personFullName" title="نام و نام خانوادگی متقاضی" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="personJobTitle" title="عنوان شغل متقاضی" [width]="200"></kendo-excelexport-column>
-                <!--<kendo-excelexport-column field="priceCost" title="سرمایه گذاری" [width]="100"></kendo-excelexport-column>-->
+                <kendo-excelexport-column field="finalizeCost" title="سرمایه صرف شده" [width]="200"></kendo-excelexport-column>
+                <kendo-excelexport-column field="priceCost" title="سرمایه مصوب شده" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="finishDate" title="تاریخ دقیق برگزاری دوره" [width]="200"></kendo-excelexport-column>
@@ -304,7 +303,8 @@
             [navigable]="true"
             (groupChange)="groupChangeOrgs($event)"
             [rowClass]="rowCallback"
-            (excelExport)="onExcelExport($event)">
+            >
+            <!--(excelExport)="onExcelExport($event)"-->
             <ng-template kendoGridToolbarTemplate>
                 <button type="button" kendoGridExcelCommand icon="file-excel" style="float: left" class="info">خروجی اکسل</button>
             </ng-template>
@@ -386,6 +386,8 @@
                 <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="finishDate" title="تاریخ دقیق برگزاری دوره" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="finalNiazsanjiReportId" title="شناسه یکتا" [width]="150"></kendo-excelexport-column>
+                <kendo-excelexport-column field="peopleCount" title="تعداد شرکت کنندگان" [width]="100"></kendo-excelexport-column>
+                <kendo-excelexport-column field="peopleFullNames" title="شرکت کنندگان" [width]="10000"></kendo-excelexport-column>
                 <!-- <div *kendoGridDetailTemplate="let dataItem">
                      <mi-final-niazsanji-report-marine-suffix-detail-people [people]="dataItem.people"></mi-final-niazsanji-report-marine-suffix-detail-people>
                  </div>-->

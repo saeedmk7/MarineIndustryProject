@@ -13,6 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+import com.marineindustryproj.domain.enumeration.CriterionType;
+
 /**
  * A Criterion.
  */
@@ -40,6 +42,10 @@ public class Criterion implements Serializable {
     @NotNull
     @Column(name = "coefficient", nullable = false)
     private Integer coefficient;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "criterion_type")
+    private CriterionType criterionType;
 
     @Size(max = 1024)
     @Column(name = "description", length = 1024)
@@ -108,6 +114,19 @@ public class Criterion implements Serializable {
 
     public void setCoefficient(Integer coefficient) {
         this.coefficient = coefficient;
+    }
+
+    public CriterionType getCriterionType() {
+        return criterionType;
+    }
+
+    public Criterion criterionType(CriterionType criterionType) {
+        this.criterionType = criterionType;
+        return this;
+    }
+
+    public void setCriterionType(CriterionType criterionType) {
+        this.criterionType = criterionType;
     }
 
     public String getDescription() {
@@ -228,6 +247,7 @@ public class Criterion implements Serializable {
             ", title='" + getTitle() + "'" +
             ", displayOrder=" + getDisplayOrder() +
             ", coefficient=" + getCoefficient() +
+            ", criterionType='" + getCriterionType() + "'" +
             ", description='" + getDescription() + "'" +
             ", createUserLogin='" + getCreateUserLogin() + "'" +
             ", createDate='" + getCreateDate() + "'" +

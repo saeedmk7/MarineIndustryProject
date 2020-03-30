@@ -2,6 +2,7 @@ package com.marineindustryproj.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+import com.marineindustryproj.domain.enumeration.CriterionType;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -20,6 +21,11 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  * fix type specific filters.
  */
 public class CriterionCriteria implements Serializable {
+    /**
+     * Class for filtering CriterionType
+     */
+    public static class CriterionTypeFilter extends Filter<CriterionType> {
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -30,6 +36,8 @@ public class CriterionCriteria implements Serializable {
     private IntegerFilter displayOrder;
 
     private IntegerFilter coefficient;
+
+    private CriterionTypeFilter criterionType;
 
     private StringFilter description;
 
@@ -73,6 +81,14 @@ public class CriterionCriteria implements Serializable {
 
     public void setCoefficient(IntegerFilter coefficient) {
         this.coefficient = coefficient;
+    }
+
+    public CriterionTypeFilter getCriterionType() {
+        return criterionType;
+    }
+
+    public void setCriterionType(CriterionTypeFilter criterionType) {
+        this.criterionType = criterionType;
     }
 
     public StringFilter getDescription() {
@@ -138,6 +154,7 @@ public class CriterionCriteria implements Serializable {
             Objects.equals(title, that.title) &&
             Objects.equals(displayOrder, that.displayOrder) &&
             Objects.equals(coefficient, that.coefficient) &&
+            Objects.equals(criterionType, that.criterionType) &&
             Objects.equals(description, that.description) &&
             Objects.equals(createUserLogin, that.createUserLogin) &&
             Objects.equals(createDate, that.createDate) &&
@@ -153,6 +170,7 @@ public class CriterionCriteria implements Serializable {
         title,
         displayOrder,
         coefficient,
+        criterionType,
         description,
         createUserLogin,
         createDate,
@@ -169,6 +187,7 @@ public class CriterionCriteria implements Serializable {
                 (title != null ? "title=" + title + ", " : "") +
                 (displayOrder != null ? "displayOrder=" + displayOrder + ", " : "") +
                 (coefficient != null ? "coefficient=" + coefficient + ", " : "") +
+                (criterionType != null ? "criterionType=" + criterionType + ", " : "") +
                 (description != null ? "description=" + description + ", " : "") +
                 (createUserLogin != null ? "createUserLogin=" + createUserLogin + ", " : "") +
                 (createDate != null ? "createDate=" + createDate + ", " : "") +

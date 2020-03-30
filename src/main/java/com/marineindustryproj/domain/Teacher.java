@@ -14,6 +14,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+import com.marineindustryproj.domain.enumeration.TeacherType;
+
+import com.marineindustryproj.domain.enumeration.Grade;
+
 /**
  * A Teacher.
  */
@@ -120,6 +124,17 @@ public class Teacher implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "teacher_type")
+    private TeacherType teacherType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "grade")
+    private Grade grade;
+
+    @OneToMany(mappedBy = "teacher")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<TeacherGrade> teacherGrades = new HashSet<>();
     @OneToMany(mappedBy = "teacher")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<RequestOrganizationNiazsanji> requestOrganizationNiazsanjis = new HashSet<>();
@@ -483,6 +498,57 @@ public class Teacher implements Serializable {
         this.guid = guid;
     }
 
+    public TeacherType getTeacherType() {
+        return teacherType;
+    }
+
+    public Teacher teacherType(TeacherType teacherType) {
+        this.teacherType = teacherType;
+        return this;
+    }
+
+    public void setTeacherType(TeacherType teacherType) {
+        this.teacherType = teacherType;
+    }
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public Teacher grade(Grade grade) {
+        this.grade = grade;
+        return this;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
+    public Set<TeacherGrade> getTeacherGrades() {
+        return teacherGrades;
+    }
+
+    public Teacher teacherGrades(Set<TeacherGrade> teacherGrades) {
+        this.teacherGrades = teacherGrades;
+        return this;
+    }
+
+    public Teacher addTeacherGrade(TeacherGrade teacherGrade) {
+        this.teacherGrades.add(teacherGrade);
+        teacherGrade.setTeacher(this);
+        return this;
+    }
+
+    public Teacher removeTeacherGrade(TeacherGrade teacherGrade) {
+        this.teacherGrades.remove(teacherGrade);
+        teacherGrade.setTeacher(null);
+        return this;
+    }
+
+    public void setTeacherGrades(Set<TeacherGrade> teacherGrades) {
+        this.teacherGrades = teacherGrades;
+    }
+
     public Set<RequestOrganizationNiazsanji> getRequestOrganizationNiazsanjis() {
         return requestOrganizationNiazsanjis;
     }
@@ -734,6 +800,8 @@ public class Teacher implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", guid='" + getGuid() + "'" +
+            ", teacherType='" + getTeacherType() + "'" +
+            ", grade='" + getGrade() + "'" +
             "}";
     }
 }

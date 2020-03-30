@@ -43,6 +43,10 @@ public class PollCriteria implements Serializable {
 
     private IntegerFilter status;
 
+    private StringFilter strength;
+
+    private StringFilter improvement;
+
     private LongFilter pollScoreId;
 
     private LongFilter finalNiazsanjiReportId;
@@ -127,6 +131,22 @@ public class PollCriteria implements Serializable {
         this.status = status;
     }
 
+    public StringFilter getStrength() {
+        return strength;
+    }
+
+    public void setStrength(StringFilter strength) {
+        this.strength = strength;
+    }
+
+    public StringFilter getImprovement() {
+        return improvement;
+    }
+
+    public void setImprovement(StringFilter improvement) {
+        this.improvement = improvement;
+    }
+
     public LongFilter getPollScoreId() {
         return pollScoreId;
     }
@@ -164,6 +184,8 @@ public class PollCriteria implements Serializable {
             Objects.equals(archivedUserLogin, that.archivedUserLogin) &&
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
+            Objects.equals(strength, that.strength) &&
+            Objects.equals(improvement, that.improvement) &&
             Objects.equals(pollScoreId, that.pollScoreId) &&
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId);
     }
@@ -181,6 +203,8 @@ public class PollCriteria implements Serializable {
         archivedUserLogin,
         archivedDate,
         status,
+        strength,
+        improvement,
         pollScoreId,
         finalNiazsanjiReportId
         );
@@ -199,6 +223,8 @@ public class PollCriteria implements Serializable {
                 (archivedUserLogin != null ? "archivedUserLogin=" + archivedUserLogin + ", " : "") +
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
+                (strength != null ? "strength=" + strength + ", " : "") +
+                (improvement != null ? "improvement=" + improvement + ", " : "") +
                 (pollScoreId != null ? "pollScoreId=" + pollScoreId + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
             "}";

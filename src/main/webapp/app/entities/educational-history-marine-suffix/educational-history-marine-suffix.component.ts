@@ -22,6 +22,8 @@ import {RequestStatus} from "app/shared/model/enums/RequestStatus";
 import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 import {IRequestOrganizationNiazsanjiMarineSuffix} from "app/shared/model/request-organization-niazsanji-marine-suffix.model";
+import {ExcelService} from "app/plugin/export-excel/excel-service";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'mi-educational-history-marine-suffix',
@@ -73,7 +75,6 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         private personService: PersonMarineSuffixService,
         protected parseLinks: JhiParseLinks,
         protected jhiAlertService: JhiAlertService,
-        /*protected accountService: AccountService,*/
         protected principal: Principal,
         protected activatedRoute: ActivatedRoute,
         protected dataUtils: JhiDataUtils,
@@ -81,11 +82,11 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         protected eventManager: JhiEventManager,
         protected treeUtilities: TreeUtilities,
         private courseTypeService: CourseTypeMarineSuffixService,
-        private convertObjectDatesService: ConvertObjectDatesService
+        private convertObjectDatesService: ConvertObjectDatesService,
+        protected jhiTranslate: TranslateService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
@@ -281,8 +282,39 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         this.makeCriteria(this.unchangedCriteria,true);
     }
     prepareForExportExcel(res : IEducationalHistoryMarineSuffix[]){
+        let a = new ExcelService(this.jhiTranslate);
         res = this.convertObjectDatesService.changeArrayDate(res);
-        return;
+        let report = [];
+        let index: number = 0;
+        res.forEach(a => {
+            index++;
+            debugger;
+            a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
+            const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
+            if(org)
+                a.organizationChartTitle = org.fullTitle;
+
+            //let person = this.people.find(w => w.id == a.personId);
+
+            //let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
+
+            let obj: Object;
+            obj = {'index': index,
+                'organizationChart': a.organizationChartTitle,
+                'person': a.personFullName,
+                'educationalModuleName': a.educationalModuleName,
+                'educationalModuleId': a.educationalModuleCode,
+                'totalLearningTime': a.totalTime,
+                'courseType': a.courseTypeTitle,
+                'educationalCenter': a.educationalCenter,
+                'dateOfStart': a.dateOfStart,
+                'description': a.description,
+                'createDate': a.createDate,
+                'status': this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus)
+            };
+            report.push(obj);
+        });
+        a.exportAsExcelFile(report, 'educationalHistories', 'marineindustryprojApp.educationalHistory');
     }
     loadPage(page: number) {
 
@@ -310,7 +342,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
             }
         });*/
 
-        this.makeCriteria(this.unchangedCriteria);
+        //this.makeCriteria(this.unchangedCriteria);
     }
 
     clear() {

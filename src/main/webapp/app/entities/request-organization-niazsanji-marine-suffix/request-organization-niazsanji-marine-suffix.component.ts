@@ -26,6 +26,8 @@ import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffi
 import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
 import {ISkillableLevelOfSkillMarineSuffix} from "app/shared/model/skillable-level-of-skill-marine-suffix.model";
 import {SkillableLevelOfSkillMarineSuffixService} from "app/entities/skillable-level-of-skill-marine-suffix";
+import {CommonSearchCheckerService} from "app/plugin/utilities/common-search-checkers";
+import {REQUEST_STATUS_FILTERS} from "app/shared/constants/RequestStatusFilters";
 
 @Component({
     selector: 'mi-request-organization-niazsanji-marine-suffix',
@@ -82,12 +84,11 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
         private treeUtilities: TreeUtilities,
         private skillableLevelOfSkillService: SkillableLevelOfSkillMarineSuffixService,
         private personService: PersonMarineSuffixService,
+        private commonSearchCheckerService: CommonSearchCheckerService
     ) {
 
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
@@ -111,24 +112,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
     makeCriteria(criteria?,excelExport: boolean = false){
 
         if (criteria) {
-            const year = criteria.find(a => a.key == 'yearId.equals');
-            if(year) {
-                const val = +year.value;
-                //criteria.pop('yearId');
-                criteria = criteria.filter(a => a.key != 'yearId.equals');
-                if (val) {
-                    let yearDetail = this.yearsCollections.find(a => a.year == val);
-                    let beginDate = new Date(yearDetail.beginDate).toISOString();
-                    let endDate = new Date(yearDetail.endDate).toISOString();
-
-                    criteria.push({
-                        key: 'createDate.lessOrEqualThan', value: endDate
-                    });
-                    criteria.push({
-                        key: 'createDate.greaterOrEqualThan', value: beginDate
-                    });
-                }
-            }
+            criteria = this.commonSearchCheckerService.checkYear(criteria);
         }
         else{
             criteria = [];
@@ -136,6 +120,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
         if(this.currentPerson){
             if(this.organizationChartService.organizationchartsAll){
                 this.organizationcharts = this.organizationChartService.organizationchartsAll;
+                criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteria(criteria, this.organizationcharts);
                 let wantOrgIds = this.treeUtilities.getAllOfChilderenIdsOfThisIdWithoutItself(this.organizationChartService.organizationchartsAll, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
                 return this.handleAfterChart(wantOrgIds,criteria,excelExport);
             }
@@ -143,6 +128,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
                 this.organizationChartService.query().subscribe((resp: HttpResponse<IOrganizationChartMarineSuffix[]>) =>{
 
                     this.organizationcharts = resp.body;
+                    criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteria(criteria, this.organizationcharts);
                     let wantOrgIds = this.treeUtilities.getAllOfChilderenIdsOfThisIdWithoutItself(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
                     this.handleAfterChart(wantOrgIds,criteria,excelExport);
                 });
@@ -160,6 +146,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
 
                     if(this.organizationChartService.organizationchartsAll){
                         this.organizationcharts = this.organizationChartService.organizationchartsAll;
+                        criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteria(criteria, this.organizationcharts);
                         let wantOrgIds = this.treeUtilities.getAllOfChilderenIdsOfThisIdWithoutItself(this.organizationChartService.organizationchartsAll, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
                         this.handleAfterChart(wantOrgIds,criteria,excelExport);
                     }
@@ -167,6 +154,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
                         this.organizationChartService.query().subscribe((resp: HttpResponse<IOrganizationChartMarineSuffix[]>) =>{
 
                             this.organizationcharts = resp.body;
+                            criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteria(criteria, this.organizationcharts);
                             let wantOrgIds = this.treeUtilities.getAllOfChilderenIdsOfThisIdWithoutItself(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
                             this.handleAfterChart(wantOrgIds,criteria,excelExport);
                         });
@@ -177,6 +165,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
 
     }
     handleAfterChart(wantOrgIds: number[],criteria,excelExport: boolean = false){
+        criteria = this.commonSearchCheckerService.checkRequestStatusFilters(criteria, this.currentPerson.organizationChartId);
         if(this.isAdmin) {
             this.loadAll(criteria, excelExport);
             return;
@@ -426,7 +415,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });*/
-        this.makeCriteria(this.criteria);
+        //this.makeCriteria(this.criteria);
     }
 
     clear() {
@@ -450,6 +439,7 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleCode', 'text', 'contains'));
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
             this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'priceCost', 'number', 'equals'));
+            this.searchbarModel.push(new SearchPanelModel("requestNiazsanjiFardi", 'requestStatusFilters', 'selectWithStringId', 'equals', REQUEST_STATUS_FILTERS))
             this.prepareSearchDate();
             this.prepareSearchEducationalModule();
             this.prepareSearchOrgChart();
@@ -551,6 +541,10 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
         this.requestOrganizationNiazsanjis = this.convertObjectDatesService.changeArrayDate(data, true);
         this.requestOrganizationNiazsanjis.forEach((a: IRequestOrganizationNiazsanjiMarineSuffix) => {
             a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
+            const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
+            if(org)
+                a.organizationChartTitle = org.fullTitle;
+
             let education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
             if(education){
                 a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;

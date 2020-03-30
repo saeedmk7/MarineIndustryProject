@@ -1,5 +1,6 @@
 package com.marineindustryproj.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,7 +10,10 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
 
@@ -72,6 +76,31 @@ public class FinalNiazsanjiReportPerson implements Serializable {
     @NotNull
     @Column(name = "source_id", nullable = false)
     private Long sourceId;
+
+    @Column(name = "score_before_test")
+    private Float scoreBeforeTest;
+
+    @Column(name = "score_after_test")
+    private Float scoreAfterTest;
+
+    @Column(name = "average_score")
+    private Float averageScore;
+
+    @OneToMany(mappedBy = "finalNiazsanjiReportPerson")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<NiazsanjiPersonGrade> niazsanjiPersonGrades = new HashSet<>();
+    @OneToMany(mappedBy = "finalNiazsanjiReportPerson")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<LevelThreeEffectiveness> levelThreeEffectivenesses = new HashSet<>();
+    @OneToMany(mappedBy = "finalNiazsanjiReportPerson")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<LevelFourEffectiveness> levelFourEffectivenesses = new HashSet<>();
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "final_niazsanji_report_person_document",
+               joinColumns = @JoinColumn(name = "final_niazsanji_report_people_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "documents_id", referencedColumnName = "id"))
+    private Set<Document> documents = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
@@ -248,6 +277,145 @@ public class FinalNiazsanjiReportPerson implements Serializable {
         this.sourceId = sourceId;
     }
 
+    public Float getScoreBeforeTest() {
+        return scoreBeforeTest;
+    }
+
+    public FinalNiazsanjiReportPerson scoreBeforeTest(Float scoreBeforeTest) {
+        this.scoreBeforeTest = scoreBeforeTest;
+        return this;
+    }
+
+    public void setScoreBeforeTest(Float scoreBeforeTest) {
+        this.scoreBeforeTest = scoreBeforeTest;
+    }
+
+    public Float getScoreAfterTest() {
+        return scoreAfterTest;
+    }
+
+    public FinalNiazsanjiReportPerson scoreAfterTest(Float scoreAfterTest) {
+        this.scoreAfterTest = scoreAfterTest;
+        return this;
+    }
+
+    public void setScoreAfterTest(Float scoreAfterTest) {
+        this.scoreAfterTest = scoreAfterTest;
+    }
+
+    public Float getAverageScore() {
+        return averageScore;
+    }
+
+    public FinalNiazsanjiReportPerson averageScore(Float averageScore) {
+        this.averageScore = averageScore;
+        return this;
+    }
+
+    public void setAverageScore(Float averageScore) {
+        this.averageScore = averageScore;
+    }
+
+    public Set<NiazsanjiPersonGrade> getNiazsanjiPersonGrades() {
+        return niazsanjiPersonGrades;
+    }
+
+    public FinalNiazsanjiReportPerson niazsanjiPersonGrades(Set<NiazsanjiPersonGrade> niazsanjiPersonGrades) {
+        this.niazsanjiPersonGrades = niazsanjiPersonGrades;
+        return this;
+    }
+
+    public FinalNiazsanjiReportPerson addNiazsanjiPersonGrade(NiazsanjiPersonGrade niazsanjiPersonGrade) {
+        this.niazsanjiPersonGrades.add(niazsanjiPersonGrade);
+        niazsanjiPersonGrade.setFinalNiazsanjiReportPerson(this);
+        return this;
+    }
+
+    public FinalNiazsanjiReportPerson removeNiazsanjiPersonGrade(NiazsanjiPersonGrade niazsanjiPersonGrade) {
+        this.niazsanjiPersonGrades.remove(niazsanjiPersonGrade);
+        niazsanjiPersonGrade.setFinalNiazsanjiReportPerson(null);
+        return this;
+    }
+
+    public void setNiazsanjiPersonGrades(Set<NiazsanjiPersonGrade> niazsanjiPersonGrades) {
+        this.niazsanjiPersonGrades = niazsanjiPersonGrades;
+    }
+
+    public Set<LevelThreeEffectiveness> getLevelThreeEffectivenesses() {
+        return levelThreeEffectivenesses;
+    }
+
+    public FinalNiazsanjiReportPerson levelThreeEffectivenesses(Set<LevelThreeEffectiveness> levelThreeEffectivenesses) {
+        this.levelThreeEffectivenesses = levelThreeEffectivenesses;
+        return this;
+    }
+
+    public FinalNiazsanjiReportPerson addLevelThreeEffectiveness(LevelThreeEffectiveness levelThreeEffectiveness) {
+        this.levelThreeEffectivenesses.add(levelThreeEffectiveness);
+        levelThreeEffectiveness.setFinalNiazsanjiReportPerson(this);
+        return this;
+    }
+
+    public FinalNiazsanjiReportPerson removeLevelThreeEffectiveness(LevelThreeEffectiveness levelThreeEffectiveness) {
+        this.levelThreeEffectivenesses.remove(levelThreeEffectiveness);
+        levelThreeEffectiveness.setFinalNiazsanjiReportPerson(null);
+        return this;
+    }
+
+    public void setLevelThreeEffectivenesses(Set<LevelThreeEffectiveness> levelThreeEffectivenesses) {
+        this.levelThreeEffectivenesses = levelThreeEffectivenesses;
+    }
+
+    public Set<LevelFourEffectiveness> getLevelFourEffectivenesses() {
+        return levelFourEffectivenesses;
+    }
+
+    public FinalNiazsanjiReportPerson levelFourEffectivenesses(Set<LevelFourEffectiveness> levelFourEffectivenesses) {
+        this.levelFourEffectivenesses = levelFourEffectivenesses;
+        return this;
+    }
+
+    public FinalNiazsanjiReportPerson addLevelFourEffectiveness(LevelFourEffectiveness levelFourEffectiveness) {
+        this.levelFourEffectivenesses.add(levelFourEffectiveness);
+        levelFourEffectiveness.setFinalNiazsanjiReportPerson(this);
+        return this;
+    }
+
+    public FinalNiazsanjiReportPerson removeLevelFourEffectiveness(LevelFourEffectiveness levelFourEffectiveness) {
+        this.levelFourEffectivenesses.remove(levelFourEffectiveness);
+        levelFourEffectiveness.setFinalNiazsanjiReportPerson(null);
+        return this;
+    }
+
+    public void setLevelFourEffectivenesses(Set<LevelFourEffectiveness> levelFourEffectivenesses) {
+        this.levelFourEffectivenesses = levelFourEffectivenesses;
+    }
+
+    public Set<Document> getDocuments() {
+        return documents;
+    }
+
+    public FinalNiazsanjiReportPerson documents(Set<Document> documents) {
+        this.documents = documents;
+        return this;
+    }
+
+    public FinalNiazsanjiReportPerson addDocument(Document document) {
+        this.documents.add(document);
+        document.getFinalNiazsanjiReportPeople().add(this);
+        return this;
+    }
+
+    public FinalNiazsanjiReportPerson removeDocument(Document document) {
+        this.documents.remove(document);
+        document.getFinalNiazsanjiReportPeople().remove(this);
+        return this;
+    }
+
+    public void setDocuments(Set<Document> documents) {
+        this.documents = documents;
+    }
+
     public Person getPerson() {
         return person;
     }
@@ -311,6 +479,9 @@ public class FinalNiazsanjiReportPerson implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", sourceId=" + getSourceId() +
+            ", scoreBeforeTest=" + getScoreBeforeTest() +
+            ", scoreAfterTest=" + getScoreAfterTest() +
+            ", averageScore=" + getAverageScore() +
             "}";
     }
 }

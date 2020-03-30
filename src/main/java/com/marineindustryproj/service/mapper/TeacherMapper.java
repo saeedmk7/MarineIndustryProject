@@ -21,6 +21,7 @@ public interface TeacherMapper extends EntityMapper<TeacherDTO, Teacher> {
     @Mapping(source = "academicRank.title", target = "academicRankTitle")
     TeacherDTO toDto(Teacher teacher);
 
+    @Mapping(target = "teacherGrades", ignore = true)
     @Mapping(target = "requestOrganizationNiazsanjis", ignore = true)
     @Mapping(target = "finalOrganizationNiazsanjis", ignore = true)
     @Mapping(target = "finalNiazsanjiReports", ignore = true)

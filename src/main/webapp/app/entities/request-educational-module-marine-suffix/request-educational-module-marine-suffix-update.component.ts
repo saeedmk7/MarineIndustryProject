@@ -199,7 +199,6 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
             if(this.requestEducationalModule.teachers)
                 this.requestEducationalModule.teachers.forEach(a => a.fullName = a.name + " " + a.family);
 
-            debugger;
             if(this.requestEducationalModule.id === undefined)
             {
                 this.requestEducationalModule.headlines = [];
@@ -330,7 +329,6 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
         );
     }
     addNewHeadline(){
-        debugger;
         this.headlineRows++;
         let newHeadline: HeadlineMarineSuffix = {
             headlineLevel: HeadlineLevel.FAMILIARITY,
@@ -456,7 +454,6 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
         }
 
         this.requestEducationalModule.headlines.forEach(a => {
-            debugger;
             let name = 'headlineLevel_' + a.id;
             let radio = "input[name=" + name + "]:checked";
             let headlineValue = $(radio).val();
@@ -474,7 +471,6 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
             }
         });
 
-        debugger;
         this.currentUserFullName = this.currentPerson.fullName;
         this.requestEducationalModule.code = this.requestEducationalModule.code ? this.requestEducationalModule.code : "";
         this.requestEducationalModule.title = this.requestEducationalModule.title ? this.requestEducationalModule.title : "";

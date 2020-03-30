@@ -2,6 +2,7 @@ package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.marineindustryproj.domain.NiazsanjiIntegration;
+import com.marineindustryproj.domain.enumeration.RequestStatus;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.NiazsanjiIntegrationService;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
@@ -93,6 +94,7 @@ public class NiazsanjiIntegrationResource {
         niazsanjiIntegrationDTO.setModifyDate(ZonedDateTime.now());
         niazsanjiIntegrationDTO.setChangeStatusUserLogin(SecurityUtils.getCurrentUserLogin().get());
         niazsanjiIntegrationDTO.setStatus(30);
+        niazsanjiIntegrationDTO.setRequestStatus(RequestStatus.ACCEPT);
 
 
         NiazsanjiIntegrationDTO result = niazsanjiIntegrationService.finalize(niazsanjiIntegrationDTO);
@@ -127,6 +129,21 @@ public class NiazsanjiIntegrationResource {
         NiazsanjiIntegrationDTO result = niazsanjiIntegrationService.save(niazsanjiIntegrationDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, niazsanjiIntegrationDTO.getId().toString()))
+            .body(result);
+    }
+
+    @PutMapping("/niazsanji-integrations/toggleImportantMessage/{id}/{type}")
+    @Timed
+    public ResponseEntity<NiazsanjiIntegrationDTO> toggleImportantMessage(@PathVariable long id, @PathVariable boolean type) throws URISyntaxException {
+
+        NiazsanjiIntegrationDTO niazsanjiIntegration = niazsanjiIntegrationService.findOne(id).get();
+
+        niazsanjiIntegration.setModifyDate(ZonedDateTime.now());
+        niazsanjiIntegration.setHasImportantMessage(type);
+
+        NiazsanjiIntegrationDTO result = niazsanjiIntegrationService.save(niazsanjiIntegration);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, niazsanjiIntegration.getId().toString()))
             .body(result);
     }
 

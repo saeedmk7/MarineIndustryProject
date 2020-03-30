@@ -1,9 +1,11 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
 import {NavigationEnd, Router} from "@angular/router";
 import {JhiEventManager} from "ng-jhipster";
 import {Subscription} from "rxjs";
 import {FormGroup} from "@angular/forms";
+import * as $ from 'jquery';
+import {ITEMS_PER_PAGE} from "app/shared";
 @Component({
     selector: 'search-panel',
     templateUrl: './search-panel.component.html'
@@ -11,11 +13,65 @@ import {FormGroup} from "@angular/forms";
 export class SearchPanelComponent implements OnInit, OnDestroy {
     @Input('searchPanelModel') searchPanelModel: SearchPanelModel[];
     @Input('immediatelyLoad') immediatelyLoad: boolean = true;
+    //@Input('size') size: number = 20;
+    @Output() sizeChange = new EventEmitter();
+    private _size: number = ITEMS_PER_PAGE;
+    @Input('size')
+    set size(value: number) {
+        if(value && value != this._size) {
+            this._size = +value;
+            this.triggerSubmitButton();
+        }
+    }
+    get size(){
+        this.sizeChange.emit(this._size);
+        return this._size;
+    }
+    @Output() pageChange = new EventEmitter();
+    private _page: number = 1;
+    @Input('page')
+    set page(value: number) {
+        debugger;
+        if(value && value != this._page) {
+            this._page = +value;
+            this.triggerSubmitButton();
+        }
+    }
+    get page(){
+        this.pageChange.emit(this._page);
+        return this._page;
+    }
+    private _predicate: string = "";
+    @Input('predicate') set predicate(value: string){
+        debugger;
+        if(value && value != this._predicate) {
+            this._predicate = value;
+        }
+    }
+    private _reverse: string = "";
+    @Input('reverse') set reverse(value: string){
+        debugger;
+        if(value && value != this._reverse) {
+            this._reverse = value;
+        }
+    }
     lastUrl: string = '';
     eventSubscriber: Subscription;
+
+    criticalArea: boolean = false;
     constructor(private router: Router, private eventManager: JhiEventManager) {
     }
 
+
+    triggerSubmitButton(){
+        if(!this.criticalArea){
+            this.criticalArea = true;
+            setTimeout(() => {
+                $('#submitBtn').trigger('click');
+                this.criticalArea = false;
+            }, 100)
+        }
+    }
     ngOnInit() {
 
         this.eventSubscriber = this.router.events.subscribe((val: NavigationEnd) => {
@@ -37,9 +93,11 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
         console.log("I got:", this.searchPanelModel);
     }
     search(){
-
+        debugger;
         let url = window.location.href;
         let criteria = [];
+        this.getPagingParameter(url);
+        this.fakeLoad();
         this.searchPanelModel.forEach((a) => {
 
            let value = this.getParameterByName(a.fieldName,url);
@@ -76,8 +134,20 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
             this.immediatelyLoad = true;
         }
     }
+    fakeLoad(){
+        this.size;
+        this.page;
+    }
+    getPagingParameter(url){
+        const size = +this.getParameterByName('size',url);
+        this._size = size ? size : this.size;
+        const page = +this.getParameterByName('page',url);
+        this._page = page ? page : this.page;
+        this.predicate = this.getParameterByName('predicate',url);
+        this.reverse = this.getParameterByName('reverse',url);
+    }
     onSubmit(f: any){
-
+        debugger;
         let url = this.deleteQueryString();
         for (let j = 0; j < this.searchPanelModel.length; j++) {
             let value = f.value[this.searchPanelModel[j].fieldName];
@@ -92,7 +162,19 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
             }
             url = this.appendQueryString(this.searchPanelModel[j].fieldName, this.searchPanelModel[j].selectedValue, url);
         }
+        debugger;
+        url = this.appendPagingQueryString(url);
+
         window.location.href = url; //.slice(0,url.length-1);
+    }
+    appendPagingQueryString(url: string): string {
+        debugger;
+        url = this.appendQueryString('size', this.size, url);
+        url =  this.appendQueryString('page', this.page, url);
+        url =  this.appendQueryString('predicate', this._predicate, url);
+        url =  this.appendQueryString('reverse', this._reverse, url);
+
+        return url;
     }
     getParameterByName(name, url) {
         if (!url) url = window.location.href;

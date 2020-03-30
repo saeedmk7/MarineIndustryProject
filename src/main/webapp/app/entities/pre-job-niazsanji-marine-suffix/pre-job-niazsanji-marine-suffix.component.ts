@@ -23,6 +23,8 @@ import {IRequestOrganizationNiazsanjiMarineSuffix} from "app/shared/model/reques
 import {IRequestNiazsanjiFardiMarineSuffix} from "app/shared/model/request-niazsanji-fardi-marine-suffix.model";
 import {REQUEST_STATUS_FILTERS} from "app/shared/constants/RequestStatusFilters";
 import {CommonSearchCheckerService} from "app/plugin/utilities/common-search-checkers";
+import {ExcelService} from "app/plugin/export-excel/excel-service";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'mi-pre-job-niazsanji-marine-suffix',
@@ -81,7 +83,8 @@ export class PreJobNiazsanjiMarineSuffixComponent implements OnInit, OnDestroy {
         protected eventManager: JhiEventManager,
         protected treeUtilities: TreeUtilities,
         protected userService: UserService,
-        private commonSearchCheckerService: CommonSearchCheckerService
+        private commonSearchCheckerService: CommonSearchCheckerService,
+        protected jhiTranslate: TranslateService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -102,6 +105,11 @@ export class PreJobNiazsanjiMarineSuffixComponent implements OnInit, OnDestroy {
 
         this.yearsCollections = GREGORIAN_START_END_DATE;
     }
+
+    export() {
+        this.makeCriteria(this.criteria,true);
+    }
+
     makeCriteria(criteria?,excelExport: boolean = false){
 
 
@@ -266,8 +274,30 @@ export class PreJobNiazsanjiMarineSuffixComponent implements OnInit, OnDestroy {
         }
     }
     prepareForExportExcel(res : IRequestNiazsanjiFardiMarineSuffix[]) {
+        let a = new ExcelService(this.jhiTranslate);
         res = this.convertObjectDatesService.changeArrayDate(res);
-        //this.exportRequestsFinal(res);
+        let report = [];
+        let index: number = 0;
+        res.forEach(a => {
+            index++;
+            a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
+            const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
+            if(org)
+                a.organizationChartTitle = org.fullTitle;
+
+            let person = this.people.find(w => w.id == a.personId);
+
+            let obj: Object;
+            obj = {'index': index,
+                'organizationChart': a.organizationChartTitle,
+                'person': person.fullName,
+                'jobTitle': person.jobTitle,
+                'createDate': a.createDate,
+                'status': this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus)
+            };
+            report.push(obj);
+        });
+        a.exportAsExcelFile(report, 'preJobNiazsanjis', 'marineindustryprojApp.preJobNiazsanji');
     }
     loadPage(page: number) {
         if (page !== this.previousPage) {
@@ -307,7 +337,7 @@ export class PreJobNiazsanjiMarineSuffixComponent implements OnInit, OnDestroy {
                 this.currentPerson = resp.body;
                 /*this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleId', 'number', 'equals'));*/
                 //this.searchbarModel.push(new SearchPanelModel('preJobNiazsanji', 'title', 'text', 'contains'));
-                this.searchbarModel.push(new SearchPanelModel("requestNiazsanjiFardi", 'requestStatusFilters', 'select', 'equals', REQUEST_STATUS_FILTERS))
+                this.searchbarModel.push(new SearchPanelModel("requestNiazsanjiFardi", 'requestStatusFilters', 'selectWithStringId', 'equals', REQUEST_STATUS_FILTERS))
                 this.prepareSearchOrgChart();
                 this.prepareDate();
             })

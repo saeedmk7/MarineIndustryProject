@@ -1,0 +1,309 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-final-niazsanji-report-marine-suffix-heading" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.home.createOrEditLabel">Create or edit a Final Niazsanji Report</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!finalNiazsanjiReport.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="finalNiazsanjiReport.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazsanjiYear" for="field_niazsanjiYear">Niazsanji Year</label>
+                    <input type="number" class="form-control" name="niazsanjiYear" id="field_niazsanjiYear"
+                        [(ngModel)]="finalNiazsanjiReport.niazsanjiYear" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazSanjiSource" for="field_niazSanjiSource">Niaz Sanji Source</label>
+                    <select class="form-control" name="niazSanjiSource" [(ngModel)]="finalNiazsanjiReport.niazSanjiSource" id="field_niazSanjiSource" >
+                        <option value="FARDI">{{'marineindustryprojApp.NiazSanjiSource.FARDI' | translate}}</option>
+                        <option value="GROUP">{{'marineindustryprojApp.NiazSanjiSource.GROUP' | translate}}</option>
+                        <option value="ORGANIZATION">{{'marineindustryprojApp.NiazSanjiSource.ORGANIZATION' | translate}}</option>
+                        <option value="JOB">{{'marineindustryprojApp.NiazSanjiSource.JOB' | translate}}</option>
+                        <option value="OTHER">{{'marineindustryprojApp.NiazSanjiSource.OTHER' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.priceCost" for="field_priceCost">Price Cost</label>
+                    <input type="number" class="form-control" name="priceCost" id="field_priceCost"
+                        [(ngModel)]="finalNiazsanjiReport.priceCost" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="finalNiazsanjiReport.description" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.createUserLogin" for="field_createUserLogin">Create User Login</label>
+                    <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
+                        [(ngModel)]="finalNiazsanjiReport.createUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.createUserLogin?.dirty && editForm.controls.createUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.createDate" for="field_createDate">Create Date</label>
+                    <div class="d-flex">
+                        <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="createDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.modifyUserLogin" for="field_modifyUserLogin">Modify User Login</label>
+                    <input type="text" class="form-control" name="modifyUserLogin" id="field_modifyUserLogin"
+                        [(ngModel)]="finalNiazsanjiReport.modifyUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.modifyUserLogin?.dirty && editForm.controls.modifyUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.modifyUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.modifyDate" for="field_modifyDate">Modify Date</label>
+                    <div class="d-flex">
+                        <input id="field_modifyDate" type="datetime-local" class="form-control" name="modifyDate" [(ngModel)]="modifyDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.archived" for="field_archived">Archived</label>
+                    <input type="checkbox" class="form-control" name="archived" id="field_archived"
+                        [(ngModel)]="finalNiazsanjiReport.archived" />
+                    <div [hidden]="!(editForm.controls.archived?.dirty && editForm.controls.archived?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.archived?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.archivedUserLogin" for="field_archivedUserLogin">Archived User Login</label>
+                    <input type="text" class="form-control" name="archivedUserLogin" id="field_archivedUserLogin"
+                        [(ngModel)]="finalNiazsanjiReport.archivedUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.archivedUserLogin?.dirty && editForm.controls.archivedUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.archivedUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.archivedDate" for="field_archivedDate">Archived Date</label>
+                    <div class="d-flex">
+                        <input id="field_archivedDate" type="datetime-local" class="form-control" name="archivedDate" [(ngModel)]="archivedDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.status" for="field_status">Status</label>
+                    <input type="number" class="form-control" name="status" id="field_status"
+                        [(ngModel)]="finalNiazsanjiReport.status" required/>
+                    <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.status?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.status?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.runMonth" for="field_runMonth">Run Month</label>
+                    <input type="number" class="form-control" name="runMonth" id="field_runMonth"
+                        [(ngModel)]="finalNiazsanjiReport.runMonth" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.planningRunMonth" for="field_planningRunMonth">Planning Run Month</label>
+                    <input type="number" class="form-control" name="planningRunMonth" id="field_planningRunMonth"
+                        [(ngModel)]="finalNiazsanjiReport.planningRunMonth" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.finalizeCost" for="field_finalizeCost">Finalize Cost</label>
+                    <input type="number" class="form-control" name="finalizeCost" id="field_finalizeCost"
+                        [(ngModel)]="finalNiazsanjiReport.finalizeCost" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.guid" for="field_guid">Guid</label>
+                    <input type="text" class="form-control" name="guid" id="field_guid"
+                        [(ngModel)]="finalNiazsanjiReport.guid" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.guid?.dirty && editForm.controls.guid?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.guid?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.hasImportantMessage" for="field_hasImportantMessage">Has Important Message</label>
+                    <input type="checkbox" class="form-control" name="hasImportantMessage" id="field_hasImportantMessage"
+                        [(ngModel)]="finalNiazsanjiReport.hasImportantMessage" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.restrictionDescription" for="field_restrictionDescription">Restriction Description</label>
+                    <input type="text" class="form-control" name="restrictionDescription" id="field_restrictionDescription"
+                        [(ngModel)]="finalNiazsanjiReport.restrictionDescription" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.restrictionDescription?.dirty && editForm.controls.restrictionDescription?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.restrictionDescription?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.goalsText" for="field_goalsText">Goals Text</label>
+                    <input type="text" class="form-control" name="goalsText" id="field_goalsText"
+                        [(ngModel)]="finalNiazsanjiReport.goalsText" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.goalsText?.dirty && editForm.controls.goalsText?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.goalsText?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.prerequisite" for="field_prerequisite">Prerequisite</label>
+                    <input type="text" class="form-control" name="prerequisite" id="field_prerequisite"
+                        [(ngModel)]="finalNiazsanjiReport.prerequisite" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.prerequisite?.dirty && editForm.controls.prerequisite?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.prerequisite?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.priority" for="field_priority">Priority</label>
+                    <input type="number" class="form-control" name="priority" id="field_priority"
+                        [(ngModel)]="finalNiazsanjiReport.priority" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.effectivenessPhaseAverage" for="field_effectivenessPhaseAverage">Effectiveness Phase Average</label>
+                    <input type="number" class="form-control" name="effectivenessPhaseAverage" id="field_effectivenessPhaseAverage"
+                        [(ngModel)]="finalNiazsanjiReport.effectivenessPhaseAverage" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.effectivenessPhaseGrade" for="field_effectivenessPhaseGrade">Effectiveness Phase Grade</label>
+                    <select class="form-control" name="effectivenessPhaseGrade" [(ngModel)]="finalNiazsanjiReport.effectivenessPhaseGrade" id="field_effectivenessPhaseGrade" >
+                        <option value="A">{{'marineindustryprojApp.Grade.A' | translate}}</option>
+                        <option value="B">{{'marineindustryprojApp.Grade.B' | translate}}</option>
+                        <option value="C">{{'marineindustryprojApp.Grade.C' | translate}}</option>
+                        <option value="D">{{'marineindustryprojApp.Grade.D' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.selectedEffectivenessPhaseLevel" for="field_selectedEffectivenessPhaseLevel">Selected Effectiveness Phase Level</label>
+                    <input type="number" class="form-control" name="selectedEffectivenessPhaseLevel" id="field_selectedEffectivenessPhaseLevel"
+                        [(ngModel)]="finalNiazsanjiReport.selectedEffectivenessPhaseLevel" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.currentEffectivenessPhaseLevel" for="field_currentEffectivenessPhaseLevel">Current Effectiveness Phase Level</label>
+                    <input type="number" class="form-control" name="currentEffectivenessPhaseLevel" id="field_currentEffectivenessPhaseLevel"
+                        [(ngModel)]="finalNiazsanjiReport.currentEffectivenessPhaseLevel" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.lastEffectivenessPhaseFinish" for="field_lastEffectivenessPhaseFinish">Last Effectiveness Phase Finish</label>
+                    <div class="d-flex">
+                        <input id="field_lastEffectivenessPhaseFinish" type="datetime-local" class="form-control" name="lastEffectivenessPhaseFinish" [(ngModel)]="lastEffectivenessPhaseFinish"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.document" for="field_document">Document</label>
+                    <select class="form-control" id="field_document" multiple name="document" [(ngModel)]="finalNiazsanjiReport.documents">
+                        <option [ngValue]="getSelected(finalNiazsanjiReport.documents, documentOption)" *ngFor="let documentOption of documents; trackBy: trackDocumentById">{{documentOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.restriction" for="field_restriction">Restriction</label>
+                    <select class="form-control" id="field_restriction" multiple name="restriction" [(ngModel)]="finalNiazsanjiReport.restrictions">
+                        <option [ngValue]="getSelected(finalNiazsanjiReport.restrictions, restrictionOption)" *ngFor="let restrictionOption of restrictions; trackBy: trackRestrictionById">{{restrictionOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazsanjiIntegration" for="field_niazsanjiIntegration">Niazsanji Integration</label>
+                    <select class="form-control" id="field_niazsanjiIntegration" name="niazsanjiIntegration" [(ngModel)]="finalNiazsanjiReport.niazsanjiIntegrationId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="niazsanjiIntegrationOption.id" *ngFor="let niazsanjiIntegrationOption of niazsanjiintegrations; trackBy: trackNiazsanjiIntegrationById">{{niazsanjiIntegrationOption.niazsanjiYear}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.teacher" for="field_teacher">Teacher</label>
+                    <select class="form-control" id="field_teacher" name="teacher" [(ngModel)]="finalNiazsanjiReport.teacherId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="teacherOption.id" *ngFor="let teacherOption of teachers; trackBy: trackTeacherById">{{teacherOption.family}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazsanjiInput" for="field_niazsanjiInput">Niazsanji Input</label>
+                    <select class="form-control" id="field_niazsanjiInput" name="niazsanjiInput" [(ngModel)]="finalNiazsanjiReport.niazsanjiInputId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="niazsanjiInputOption.id" *ngFor="let niazsanjiInputOption of niazsanjiinputs; trackBy: trackNiazsanjiInputById">{{niazsanjiInputOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.courseType" for="field_courseType">Course Type</label>
+                    <select class="form-control" id="field_courseType" name="courseType" [(ngModel)]="finalNiazsanjiReport.courseTypeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="courseTypeOption.id" *ngFor="let courseTypeOption of coursetypes; trackBy: trackCourseTypeById">{{courseTypeOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.organizationChart" for="field_organizationChart">Organization Chart</label>
+                    <select class="form-control" id="field_organizationChart" name="organizationChart" [(ngModel)]="finalNiazsanjiReport.organizationChartId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="organizationChartOption.id" *ngFor="let organizationChartOption of organizationcharts; trackBy: trackOrganizationChartById">{{organizationChartOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.educationalModule" for="field_educationalModule">Educational Module</label>
+                    <select class="form-control" id="field_educationalModule" name="educationalModule" [(ngModel)]="finalNiazsanjiReport.educationalModuleId"  required>
+                        <option *ngIf="!editForm.value.educationalModule" [ngValue]="null" selected></option>
+                        <option [ngValue]="educationalModuleOption.id" *ngFor="let educationalModuleOption of educationalmodules; trackBy: trackEducationalModuleById">{{educationalModuleOption.title}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.educationalModule?.dirty && editForm.controls.educationalModule?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.educationalModule?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.mahiatCourse" for="field_mahiatCourse">Mahiat Course</label>
+                    <select class="form-control" id="field_mahiatCourse" name="mahiatCourse" [(ngModel)]="finalNiazsanjiReport.mahiatCourseId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="mahiatCourseOption.id" *ngFor="let mahiatCourseOption of mahiatcourses; trackBy: trackMahiatCourseById">{{mahiatCourseOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.teachingApproach" for="field_teachingApproach">Teaching Approach</label>
+                    <select class="form-control" id="field_teachingApproach" name="teachingApproach" [(ngModel)]="finalNiazsanjiReport.teachingApproachId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="teachingApproachOption.id" *ngFor="let teachingApproachOption of teachingapproaches; trackBy: trackTeachingApproachById">{{teachingApproachOption.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -103,7 +103,6 @@ export class PreJobNiazsanjiStep2UpdateComponent implements OnInit {
            }
            /*a.needToImprove = radios.filter(r => r.name == radioName).val(); //$("input[name=`radioName`]:checked").val();*/
         });
-        debugger;
         if(this.preJobNiazsanjiCompetencies.filter(w => w.needToImprove == 1).length == 0)
         {
             this.errorMessage = "لطفا حتما حداقل یک مورد نیاز به ارتقاء انتخاب نمائید.";

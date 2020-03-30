@@ -1,7 +1,9 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
 import com.marineindustryproj.security.SecurityUtils;
+import com.marineindustryproj.service.ActivationNiazsanjiQueryService;
 import com.marineindustryproj.service.PreJobNiazsanjiCompetencyService;
 import com.marineindustryproj.service.PreJobNiazsanjiService;
 import com.marineindustryproj.service.dto.PreJobNiazsanjiCompetencyDTO;
@@ -46,11 +48,13 @@ public class PreJobNiazsanjiResource {
 
     private final PreJobNiazsanjiCompetencyService preJobNiazsanjiCompetencyService;
 
+    private final ActivationNiazsanjiQueryService activationNiazsanjiQueryService;
 
-    public PreJobNiazsanjiResource(PreJobNiazsanjiService preJobNiazsanjiService, PreJobNiazsanjiQueryService preJobNiazsanjiQueryService, PreJobNiazsanjiCompetencyService preJobNiazsanjiCompetencyService) {
+    public PreJobNiazsanjiResource(PreJobNiazsanjiService preJobNiazsanjiService, PreJobNiazsanjiQueryService preJobNiazsanjiQueryService, PreJobNiazsanjiCompetencyService preJobNiazsanjiCompetencyService, ActivationNiazsanjiQueryService activationNiazsanjiQueryService) {
         this.preJobNiazsanjiService = preJobNiazsanjiService;
         this.preJobNiazsanjiQueryService = preJobNiazsanjiQueryService;
         this.preJobNiazsanjiCompetencyService = preJobNiazsanjiCompetencyService;
+        this.activationNiazsanjiQueryService = activationNiazsanjiQueryService;
     }
 
     /**
@@ -67,6 +71,10 @@ public class PreJobNiazsanjiResource {
         if (preJobNiazsanjiDTO.getId() != null) {
             throw new BadRequestAlertException("A new preJobNiazsanji cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if(!activationNiazsanjiQueryService.niazsanjiIsActive(NiazSanjiSource.JOB))
+            throw new BadRequestAlertException("زمان ثبت نیازسنجی جدید به اتمام رسیده است", ENTITY_NAME, "finishTime");
+
         preJobNiazsanjiDTO.setCreateDate(ZonedDateTime.now());
         preJobNiazsanjiDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
         preJobNiazsanjiDTO.setModifyDate(ZonedDateTime.now());

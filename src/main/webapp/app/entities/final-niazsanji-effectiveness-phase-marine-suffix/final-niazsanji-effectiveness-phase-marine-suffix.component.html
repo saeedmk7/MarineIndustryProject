@@ -1,0 +1,267 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.home.title">Final Niazsanji Reports</span>
+        <!--<button id="jh-create-entity"
+                class="btn btn-primary float-right jh-create-entity create-final-niazsanji-report-marine-suffix"
+                [routerLink]="['/final-niazsanji-report-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.home.createLabel">
+            Create new Final Niazsanji Report
+            </span>
+        </button>-->
+    </h2>
+    <mi-alert></mi-alert>
+    <search-panel [(page)]="page" [(size)]="itemsPerPage" [predicate]="predicate" [reverse]="reverse" [searchPanelModel]="searchbarModel"></search-panel>
+    <br/>
+    <div class="table-responsive" *ngIf="finalNiazsanjiReports">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th>ردیف</th>
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="organizationChartTitle"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.organizationChart">Organization Chart</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="educationalModuleTitle"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.educationalModule">Educational Module</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="educationalModuleCode"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.educationalModuleCode">educationalModuleCode</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+               <!-- <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.educationalModuleLevel">educationalModuleLevel</span>
+                </th>
+                <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.educationalModuleTotalTime">educationalModuleTotalTime</span>
+                </th>-->
+                <th jhiSortBy="courseTypeTitle"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.courseType">Course Type</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <!--<th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.priceCost">price Cost</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>-->
+                <th jhiSortBy="finalizeCost"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.finalizeCost">price Cost</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="niazSanjiSource"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.niazSanjiSource">Niaz Sanji Source</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="niazsanjiYear"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.niazsanjiYear">Niazsanji Year</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <!--<th jhiSortBy="planningRunMonth"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.planningRunMonth">Planning Run Month</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>-->
+                <th jhiSortBy="runMonth"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.runMonth">Run Month</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="teacherFamily"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.teacher">Teacher</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <!--<th jhiSortBy="mahiatCourseTitle"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.mahiatCourse">Mahiat Course</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>-->
+                <th jhiSortBy="status"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.status">Status</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="effectivenessPhaseAverage"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.effectivenessPhaseAverage">Effectiveness Phase Average</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="effectivenessPhaseGrade"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.effectivenessPhaseGrade">Effectiveness Phase Grade</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+
+                <th jhiSortBy="currentEffectivenessPhaseLevel"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.currentEffectivenessPhaseLevel">Current Effectiveness Phase Level</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="lastEffectivenessPhaseFinish"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.lastEffectivenessPhaseFinish">Last Effectiveness Phase Finish</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="selectedEffectivenessPhaseLevel"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.selectedEffectivenessPhaseLevel">Selected Effectiveness Phase Level</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let finalNiazsanjiReport of finalNiazsanjiReports ;let i = index">
+                <td>{{i + 1}}</td>
+                <td><a [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReport.id, 'view' ]">{{finalNiazsanjiReport.id}}</a>
+                </td>
+                <td>
+                    <div *ngIf="finalNiazsanjiReport.organizationChartId">
+                        {{finalNiazsanjiReport.organizationChartTitle}}
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="finalNiazsanjiReport.educationalModuleId">
+                        {{finalNiazsanjiReport.educationalModuleTitle}}
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="finalNiazsanjiReport.educationalModuleId">
+                        {{finalNiazsanjiReport.educationalModuleCode}}
+                    </div>
+                </td>
+                <!--<td>
+                    <div *ngIf="finalNiazsanjiReport.educationalModuleId">
+                        {{finalNiazsanjiReport.educationalModuleLevelTitle}}
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="finalNiazsanjiReport.educationalModuleId">
+                        {{finalNiazsanjiReport.educationalModuleTotalTime}}
+                    </div>
+                </td>-->
+                <td>
+                    <div *ngIf="finalNiazsanjiReport.courseTypeId">
+                        <a [routerLink]="['../course-type-marine-suffix', finalNiazsanjiReport.courseTypeId , 'view' ]">{{finalNiazsanjiReport.courseTypeTitle}}</a>
+                    </div>
+                </td>
+                <!--<td>{{finalNiazsanjiReport.priceCost | number}}</td>-->
+                <td>{{finalNiazsanjiReport.finalizeCost | number}}</td>
+                <td jhiTranslate="{{'marineindustryprojApp.NiazSanjiSource.' + finalNiazsanjiReport.niazSanjiSource}}">
+                    {{finalNiazsanjiReport.niazSanjiSource}}
+                </td>
+                <td>{{finalNiazsanjiReport.niazsanjiYear}}</td>
+                <!--<td>{{finalNiazsanjiReport.planningRunMonth}}</td>-->
+                <td>{{finalNiazsanjiReport.runMonthPersian}}</td>
+                <td>
+                    <div *ngIf="finalNiazsanjiReport.teacherId">
+                        <a [routerLink]="['../teacher-marine-suffix', finalNiazsanjiReport.teacherId , 'view' ]">{{finalNiazsanjiReport.teacherFamily}}</a>
+                    </div>
+                </td>
+                <!--<td>
+                    <div *ngIf="finalNiazsanjiReport.mahiatCourseId">
+                        <a [routerLink]="['../mahiat-course-marine-suffix', finalNiazsanjiReport.mahiatCourseId , 'view' ]">{{finalNiazsanjiReport.mahiatCourseTitle}}</a>
+                    </div>
+                </td>-->
+                <td>{{finalNiazsanjiReport.statusMeaning}}</td>
+                <td>{{finalNiazsanjiReport.effectivenessPhaseAverage}}</td>
+                <td jhiTranslate="{{'marineindustryprojApp.Grade.' + finalNiazsanjiReport.effectivenessPhaseGrade}}">
+                    {{finalNiazsanjiReport.effectivenessPhaseGrade}}
+                </td>
+
+                <td>{{finalNiazsanjiReport.currentEffectivenessPhaseLevelTitle}}</td>
+                <td>{{finalNiazsanjiReport.lastEffectivenessPhaseFinishPersian}}</td>
+
+
+                <!--<td>{{finalNiazsanjiReport.guid}}</td>
+                <td>{{finalNiazsanjiReport.hasImportantMessage}}</td>
+                <td>{{finalNiazsanjiReport.restrictionDescription}}</td>
+                <td>{{finalNiazsanjiReport.goalsText}}</td>
+                <td>{{finalNiazsanjiReport.prerequisite}}</td>
+                <td>{{finalNiazsanjiReport.priority}}</td>
+
+                <td>
+                    <div *ngIf="finalNiazsanjiReport.niazsanjiIntegrationId">
+                        <a [routerLink]="['../niazsanji-integration-marine-suffix', finalNiazsanjiReport.niazsanjiIntegrationId , 'view' ]">{{finalNiazsanjiReport.niazsanjiIntegrationNiazsanjiYear}}</a>
+                    </div>
+                </td>
+
+                <td>
+                    <div *ngIf="finalNiazsanjiReport.niazsanjiInputId">
+                        <a [routerLink]="['../niazsanji-input-marine-suffix', finalNiazsanjiReport.niazsanjiInputId , 'view' ]">{{finalNiazsanjiReport.niazsanjiInputTitle}}</a>
+                    </div>
+                </td>
+
+
+
+                <td>
+                    <div *ngIf="finalNiazsanjiReport.teachingApproachId">
+                        <a [routerLink]="['../teaching-approach-marine-suffix', finalNiazsanjiReport.teachingApproachId , 'view' ]">{{finalNiazsanjiReport.teachingApproachTitle}}</a>
+                    </div>
+                </td>-->
+                <td>
+                    {{finalNiazsanjiReport.selectedEffectivenessPhaseLevelTitle}}
+                    <div *ngIf="finalNiazsanjiReport.status == 20" class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            تعیین سطح
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <button *ngFor="let item of effectivenessPhaseLevels" class="dropdown-item"
+                                    (click)="setEffectivenessLevel(finalNiazsanjiReport, item)">{{'marineindustryprojApp.effectivenessLevelNumber.' + item.id | translate}}</button>
+                        </div>
+                    </div>
+                </td>
+                <td class="text-right">
+
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReport.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReport.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit" *ngIf="isSuperUsers"
+                                [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReport.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" *ngIf="isSuperUsers"
+                                [routerLink]="['/', { outlets: { popup: 'final-niazsanji-report-marine-suffix/'+ finalNiazsanjiReport.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    <select [(ngModel)] = "itemsPerPage">
+                        <option value="10">۱۰</option>
+                        <option value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="20">
+
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div *ngIf="finalNiazsanjiReports && finalNiazsanjiReports.length">
+        <!--<div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5"
+                            [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>-->
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                            [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

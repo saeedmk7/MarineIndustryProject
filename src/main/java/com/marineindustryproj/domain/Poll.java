@@ -62,6 +62,14 @@ public class Poll implements Serializable {
     @Column(name = "status", nullable = false)
     private Integer status;
 
+    @Size(max = 1024)
+    @Column(name = "strength", length = 1024)
+    private String strength;
+
+    @Size(max = 1024)
+    @Column(name = "improvement", length = 1024)
+    private String improvement;
+
     @OneToMany(mappedBy = "poll", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PollScore> pollScores = new HashSet<>();
@@ -195,6 +203,32 @@ public class Poll implements Serializable {
         this.status = status;
     }
 
+    public String getStrength() {
+        return strength;
+    }
+
+    public Poll strength(String strength) {
+        this.strength = strength;
+        return this;
+    }
+
+    public void setStrength(String strength) {
+        this.strength = strength;
+    }
+
+    public String getImprovement() {
+        return improvement;
+    }
+
+    public Poll improvement(String improvement) {
+        this.improvement = improvement;
+        return this;
+    }
+
+    public void setImprovement(String improvement) {
+        this.improvement = improvement;
+    }
+
     public Set<PollScore> getPollScores() {
         return pollScores;
     }
@@ -267,6 +301,8 @@ public class Poll implements Serializable {
             ", archivedUserLogin='" + getArchivedUserLogin() + "'" +
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
+            ", strength='" + getStrength() + "'" +
+            ", improvement='" + getImprovement() + "'" +
             "}";
     }
 }

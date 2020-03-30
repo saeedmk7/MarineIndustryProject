@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity EffectivenessPhase.
+    -->
+    <changeSet id="20200321172408-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="effectiveness_phases_id"
+                                 baseTableName="effectiveness_phase_document"
+                                 constraintName="fk_effectiveness_phase_document_effectiveness_phases_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="effectiveness_phase"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="effectiveness_phase_document"
+                                 constraintName="fk_effectiveness_phase_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="final_niazsanji_report_id"
+                                 baseTableName="effectiveness_phase"
+                                 constraintName="fk_effectiveness_phase_final_niazsanji_report_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="final_niazsanji_report"/>
+
+        <addForeignKeyConstraint baseColumnNames="effectiveness_phase_level_id"
+                                 baseTableName="effectiveness_phase"
+                                 constraintName="fk_effectiveness_phase_effectiveness_phase_level_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="effectiveness_phase_level"/>
+
+    </changeSet>
+</databaseChangeLog>

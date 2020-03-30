@@ -21,6 +21,8 @@ public interface FinalNiazsanjiReportService {
      * @return the persisted entity
      */
     FinalNiazsanjiReportDTO save(FinalNiazsanjiReportDTO finalNiazsanjiReportDTO);
+
+    FinalNiazsanjiReportDTO setEffectivenessPhaseLevel(FinalNiazsanjiReportDTO finalNiazsanjiReportDTO) throws Exception;
     /**
      * Save a finalNiazsanjiReport.
      *

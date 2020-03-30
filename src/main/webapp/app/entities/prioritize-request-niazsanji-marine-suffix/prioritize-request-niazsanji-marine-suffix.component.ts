@@ -22,6 +22,10 @@ import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dat
 import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
 import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
 import {CommonSearchCheckerService} from "app/plugin/utilities/common-search-checkers";
+import {REQUEST_STATUS_FILTERS} from "app/shared/constants/RequestStatusFilters";
+import {IRequestNiazsanjiFardiMarineSuffix} from "app/shared/model/request-niazsanji-fardi-marine-suffix.model";
+import {TranslateService} from '@ngx-translate/core';
+import {ExcelService} from 'app/plugin/export-excel/excel-service';
 
 @Component({
     selector: 'mi-prioritize-request-niazsanji-marine-suffix',
@@ -78,11 +82,11 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
         protected userService: UserService,
         private courseTypeService: CourseTypeMarineSuffixService,
         private convertObjectDatesService: ConvertObjectDatesService,
-        private commonSearchCheckerService: CommonSearchCheckerService
+        private commonSearchCheckerService: CommonSearchCheckerService,
+        protected jhiTranslate: TranslateService
     ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
+        //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
@@ -153,6 +157,7 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
 
     }
     handleAfterChart(wantOrgIds: number[],criteria,excelExport: boolean = false){
+        criteria = this.commonSearchCheckerService.checkRequestStatusFilters(criteria, 0);
         if(this.isAdmin) {
             this.loadAll(criteria, excelExport);
             return;
@@ -206,6 +211,18 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
             });
         }
         if(excelExport) {
+            this.prioritizeRequestNiazsanjiService
+                .query({
+                    page: this.page - 1,
+                    size: 20000,
+                    criteria,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix[]>) =>
+                        this.prepareForExportExcel(res.body),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
         }
         else {
             this.prioritizeRequestNiazsanjiService
@@ -231,14 +248,14 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
     }
 
     transition() {
-        this.router.navigate(['/prioritize-request-niazsanji-marine-suffix'], {
+        /*this.router.navigate(['/prioritize-request-niazsanji-marine-suffix'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });
-        this.loadAll();
+        this.makeCriteria(this.criteria);*/
     }
 
     clear() {
@@ -250,7 +267,7 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         ]);
-        this.loadAll();
+        this.makeCriteria(this.criteria);
     }
 
     ngOnInit() {
@@ -264,6 +281,8 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
                 /*this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleId', 'number', 'equals'));*/
                 this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleTitle', 'text', 'contains'));
                 this.searchbarModel.push(new SearchPanelModel('requestNiazsanjiFardi', 'educationalModuleCode', 'text', 'contains'));
+                this.searchbarModel.push(new SearchPanelModel("requestNiazsanjiFardi", 'requestStatusFilters', 'selectWithStringId', 'equals', REQUEST_STATUS_FILTERS));
+                this.searchbarModel.push(new SearchPanelModel("prioritizeRequestNiazsanji", 'priority', 'number', 'equals'));
                 this.prepareSearchOrgChart();
                 this.prepareDate();
                 this.prepareSearchEducationalModule();
@@ -466,6 +485,55 @@ export class PrioritizeRequestNiazsanjiMarineSuffixComponent implements OnInit, 
         this.totalHour = this.prioritizeRequestNiazsanjis.filter(a => a.totalLearningTime).map(a => a.totalLearningTime).reduce((sum, current) => sum + current);
         this.totalPriceCost = this.prioritizeRequestNiazsanjis.filter(a => a.costEducationalModule > 0)
             .map(a => a.costEducationalModule).reduce((sum, current) => sum + current);
+    }
+
+    export() {
+        this.makeCriteria(this.criteria,true);
+    }
+    prepareForExportExcel(res : IPrioritizeRequestNiazsanjiMarineSuffix[]){
+        let a = new ExcelService(this.jhiTranslate);
+        res = this.convertObjectDatesService.changeArrayDate(res);
+        let report = [];
+        let index: number = 0;
+        res.forEach(a => {
+            index++;
+            const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
+            if(org)
+                a.organizationChartTitle = org.fullTitle;
+
+            let person = this.people.find(w => w.id == a.personId);
+
+            let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
+
+            let obj: Object;
+            let requestNiazsanjiType;
+            this.jhiTranslate.get('marineindustryprojApp.RequestNiazsanjiType.' + a.requestNiazsanjiType).subscribe(w => requestNiazsanjiType = w.toString());
+            obj = {'index': index,
+                'id': a.id,
+                'organizationChart': a.organizationChartTitle,
+                'marineindustryprojApp.prioritizeRequestNiazsanji.requestNiazsanjiType': requestNiazsanjiType,
+                'person': person.fullName,
+                'jobTitle': person.jobTitle,
+                'educationalModuleTitle': educationalModule.title,
+                'educationalModuleId': educationalModule.code,
+                'skillLevelOfSkillTitle': educationalModule.skillableLevelOfSkillTitle,
+                'totalLearningTime': educationalModule.totalLearningTime,
+                'costEducationalModule': a.costEducationalModule,
+                'niazsanjiInput': a.niazsanjiInputTitle,
+                'courseType': a.courseTypeTitle,
+                'restriction': a.restrictions.map(w => w.title).join(' - '),
+                'restrictionDescription': a.restrictionDescription,
+                'teachingApproach': a.teachingApproachTitle,
+                'goalsText': a.goalsText,
+                'prerequisite': a.prerequisite,
+                'description': a.description,
+                'priority': a.priority,
+                'createDate': a.createDate,
+                'status': this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus)
+            };
+            report.push(obj);
+        });
+        a.exportAsExcelFile(report, 'prioritizeRequestNiazsanjis', 'marineindustryprojApp.prioritizeRequestNiazsanji');
     }
 
     protected onError(errorMessage: string) {

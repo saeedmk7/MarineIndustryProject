@@ -3,6 +3,8 @@ package com.marineindustryproj.service.dto;
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
 
@@ -44,6 +46,14 @@ public class FinalNiazsanjiReportPersonDTO implements Serializable {
 
     @NotNull
     private Long sourceId;
+
+    private Float scoreBeforeTest;
+
+    private Float scoreAfterTest;
+
+    private Float averageScore;
+
+    private Set<DocumentDTO> documents = new HashSet<>();
 
     private Long personId;
 
@@ -159,6 +169,38 @@ public class FinalNiazsanjiReportPersonDTO implements Serializable {
         this.sourceId = sourceId;
     }
 
+    public Float getScoreBeforeTest() {
+        return scoreBeforeTest;
+    }
+
+    public void setScoreBeforeTest(Float scoreBeforeTest) {
+        this.scoreBeforeTest = scoreBeforeTest;
+    }
+
+    public Float getScoreAfterTest() {
+        return scoreAfterTest;
+    }
+
+    public void setScoreAfterTest(Float scoreAfterTest) {
+        this.scoreAfterTest = scoreAfterTest;
+    }
+
+    public Float getAverageScore() {
+        return averageScore;
+    }
+
+    public void setAverageScore(Float averageScore) {
+        this.averageScore = averageScore;
+    }
+
+    public Set<DocumentDTO> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(Set<DocumentDTO> documents) {
+        this.documents = documents;
+    }
+
     public Long getPersonId() {
         return personId;
     }
@@ -236,6 +278,9 @@ public class FinalNiazsanjiReportPersonDTO implements Serializable {
             ", archivedDate='" + getArchivedDate() + "'" +
             ", status=" + getStatus() +
             ", sourceId=" + getSourceId() +
+            ", scoreBeforeTest=" + getScoreBeforeTest() +
+            ", scoreAfterTest=" + getScoreAfterTest() +
+            ", averageScore=" + getAverageScore() +
             ", person=" + getPersonId() +
             ", personFamily='" + getPersonFamily() + "'" +
             ", personName='" + getPersonFamily() + "'" +

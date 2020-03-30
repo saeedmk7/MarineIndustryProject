@@ -1,8 +1,9 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.marineindustryproj.domain.RequestOtherNiazsanji;
+import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
 import com.marineindustryproj.security.SecurityUtils;
+import com.marineindustryproj.service.ActivationNiazsanjiQueryService;
 import com.marineindustryproj.service.PersonService;
 import com.marineindustryproj.service.RequestOtherNiazsanjiService;
 import com.marineindustryproj.service.dto.PersonDTO;
@@ -46,10 +47,13 @@ public class RequestOtherNiazsanjiResource {
 
     private final PersonService personService;
 
-    public RequestOtherNiazsanjiResource(RequestOtherNiazsanjiService requestOtherNiazsanjiService, RequestOtherNiazsanjiQueryService requestOtherNiazsanjiQueryService, PersonService personService) {
+    private final ActivationNiazsanjiQueryService activationNiazsanjiQueryService;
+
+    public RequestOtherNiazsanjiResource(RequestOtherNiazsanjiService requestOtherNiazsanjiService, RequestOtherNiazsanjiQueryService requestOtherNiazsanjiQueryService, PersonService personService, ActivationNiazsanjiQueryService activationNiazsanjiQueryService) {
         this.requestOtherNiazsanjiService = requestOtherNiazsanjiService;
         this.requestOtherNiazsanjiQueryService = requestOtherNiazsanjiQueryService;
         this.personService = personService;
+        this.activationNiazsanjiQueryService = activationNiazsanjiQueryService;
     }
 
     /**
@@ -66,6 +70,10 @@ public class RequestOtherNiazsanjiResource {
         if (requestOtherNiazsanjiDTO.getId() != null) {
             throw new BadRequestAlertException("A new requestOtherNiazsanji cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if(!activationNiazsanjiQueryService.niazsanjiIsActive(NiazSanjiSource.OTHER))
+            throw new BadRequestAlertException("زمان ثبت نیازسنجی جدید به اتمام رسیده است", ENTITY_NAME, "finishTime");
+
         PersonDTO personDTO = personService.findOne(requestOtherNiazsanjiDTO.getPersonId()).get();
         requestOtherNiazsanjiDTO.setCreateDate(ZonedDateTime.now());
         requestOtherNiazsanjiDTO.setCreateUserLogin(personDTO.getNationalId());

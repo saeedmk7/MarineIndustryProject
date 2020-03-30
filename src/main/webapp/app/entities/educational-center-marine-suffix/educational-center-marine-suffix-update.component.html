@@ -188,6 +188,15 @@
                         id="field_activityArea"
                         [(ngModel)]="educationalCenter.activityAreas">
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalCenter.grade" for="field_grade">Grade</label>
+                    <select class="form-control" [required]="true" name="grade" [(ngModel)]="educationalCenter.grade" id="field_grade" >
+                        <option value="A">{{'marineindustryprojApp.Grade.A' | translate}}</option>
+                        <option value="B">{{'marineindustryprojApp.Grade.B' | translate}}</option>
+                        <option value="C">{{'marineindustryprojApp.Grade.C' | translate}}</option>
+                        <option value="D">{{'marineindustryprojApp.Grade.D' | translate}}</option>
+                    </select>
+                </div>
                 <!--<div class="form-group">
                     <label jhiTranslate="marineindustryprojApp.educationalCenter.document" for="field_document">Document</label>
                     <select class="form-control" id="field_document" multiple name="document" [(ngModel)]="educationalCenter.documents">

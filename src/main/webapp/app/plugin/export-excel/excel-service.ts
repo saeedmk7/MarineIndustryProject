@@ -14,6 +14,7 @@ export class ExcelService {
         this.isfa = translate.currentLang == 'fa';
     }
     public exportAsExcelFile(json: any[], excelFileName: string,jsontype:string): void {
+        debugger;
         var finalJson = this.makeJson(json,jsontype);
         const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(finalJson);
         const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
@@ -27,28 +28,18 @@ export class ExcelService {
             var obj = newJson[i];
             for (var key in obj) {
                 if (obj.hasOwnProperty(key)) {
-                    var name = (key!=='id') ? this.translate.get(jsontype + '.' + key) : this.translate.get('global.field.id');
-                    var e;
-                    var ww = name.subscribe((result) => e = result.toString());
-                    if(!e.startsWith('translation-not-found')) {
-                        var value = obj[key];
-                        /*if(key.toLowerCase().includes('date'))
-                        {
-                            if(this.isfa)
-                                if(value != null)
-                                    value = moment(value).format('jYYYY/jM/jD');
-                                else
-                                    value = "";
-                        }
-                        if (mustChangeList.filter(a => a === key.toLowerCase()).length) {
-                            if (value)
-                                value = moment(value).format('jYYYY/jM/jD');
-                        }*/
-                        if(value === false)
-                            value = 'خیر'
-                        if(value === true)
-                            value = 'بلی'
-                        obj[e] = value;
+                    debugger;
+                    let exactName;
+                    if(key.includes('.')){
+                        exactName = this.translate.get(key);
+                    }
+                    else {
+                        exactName = (key!=='id') ? this.translate.get(jsontype + '.' + key) : this.translate.get('global.field.id');
+                    }
+                    let title = exactName.value;
+                    //exactName.subscribe((result) => title = result.toString());
+                    if(!title.startsWith('translation-not-found')) {
+                        this.assignToObj(obj, title, key);
                     }
 
                     delete obj[key];
@@ -56,6 +47,15 @@ export class ExcelService {
             }
         }
         return newJson;
+    }
+    private assignToObj(obj, title, key){
+        var value = obj[key];
+
+        if(value === false)
+            value = 'خیر'
+        if(value === true)
+            value = 'بلی'
+        obj[title] = value;
     }
     private saveAsExcelFile(buffer: any, fileName: string): void {
         const data: Blob = new Blob([buffer], {

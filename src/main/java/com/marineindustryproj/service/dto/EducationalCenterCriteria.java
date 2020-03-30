@@ -2,6 +2,7 @@ package com.marineindustryproj.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+import com.marineindustryproj.domain.enumeration.Grade;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -20,6 +21,11 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  * fix type specific filters.
  */
 public class EducationalCenterCriteria implements Serializable {
+    /**
+     * Class for filtering Grade
+     */
+    public static class GradeFilter extends Filter<Grade> {
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -54,6 +60,10 @@ public class EducationalCenterCriteria implements Serializable {
     private ZonedDateTimeFilter archivedDate;
 
     private IntegerFilter status;
+
+    private GradeFilter grade;
+
+    private LongFilter educationalCenterGradeId;
 
     private LongFilter activityAreaId;
 
@@ -191,6 +201,22 @@ public class EducationalCenterCriteria implements Serializable {
         this.status = status;
     }
 
+    public GradeFilter getGrade() {
+        return grade;
+    }
+
+    public void setGrade(GradeFilter grade) {
+        this.grade = grade;
+    }
+
+    public LongFilter getEducationalCenterGradeId() {
+        return educationalCenterGradeId;
+    }
+
+    public void setEducationalCenterGradeId(LongFilter educationalCenterGradeId) {
+        this.educationalCenterGradeId = educationalCenterGradeId;
+    }
+
     public LongFilter getActivityAreaId() {
         return activityAreaId;
     }
@@ -250,6 +276,8 @@ public class EducationalCenterCriteria implements Serializable {
             Objects.equals(archivedUserLogin, that.archivedUserLogin) &&
             Objects.equals(archivedDate, that.archivedDate) &&
             Objects.equals(status, that.status) &&
+            Objects.equals(grade, that.grade) &&
+            Objects.equals(educationalCenterGradeId, that.educationalCenterGradeId) &&
             Objects.equals(activityAreaId, that.activityAreaId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
@@ -275,6 +303,8 @@ public class EducationalCenterCriteria implements Serializable {
         archivedUserLogin,
         archivedDate,
         status,
+        grade,
+        educationalCenterGradeId,
         activityAreaId,
         documentId,
         educationalModuleId,
@@ -301,6 +331,8 @@ public class EducationalCenterCriteria implements Serializable {
                 (archivedUserLogin != null ? "archivedUserLogin=" + archivedUserLogin + ", " : "") +
                 (archivedDate != null ? "archivedDate=" + archivedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
+                (grade != null ? "grade=" + grade + ", " : "") +
+                (educationalCenterGradeId != null ? "educationalCenterGradeId=" + educationalCenterGradeId + ", " : "") +
                 (activityAreaId != null ? "activityAreaId=" + activityAreaId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
