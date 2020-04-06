@@ -4,6 +4,10 @@
         "finalNiazsanjiReportPerson" : {
             "home": {
                 "title": "فهرست افراد شرکت کننده در دوره",
+                "level1Title": "ارزیابی اثربخشی در سطح واکنشی",
+                "level2Title": "ارزیابی اثربخشی در سطح یادگیری (نرخ یادگیری)",
+                "level3Title": "ارزیابی اثربخشی در سطح عملکرد",
+                "level4Title": "ارزیابی اثربخشی در سطح نتایج(نرخ بازگشت سرمایه)",
                 "createLabel": "جدید",
                 "createOrEditLabel": "شرکت کننده در دوره"
             },
@@ -28,15 +32,20 @@
             "archivedDate": "تاریخ آرشیو",
             "status": "وضعیت",
             "sourceId": "منبع",
-            "scoreBeforeTest": "Score Before Test",
-            "scoreAfterTest": "Score After Test",
-            "averageScore": "Average Score",
+            "scoreBeforeTest": "نمره قبل از امتحان",
+            "scoreAfterTest": "نمره بعد از امتحان",
+            "averageScore": "میانگین نمره",
+            "levelOneScore": "نتیجه سطح اول",
+            "levelThreeScore": "نتیجه سطح سوم",
+            "levelFourScore": "نتیجه سطح چهارم",
             "niazsanjiPersonGrade": "Niazsanji Person Grade",
             "levelThreeEffectiveness": "Level Three Effectiveness",
             "levelFourEffectiveness": "Level Four Effectiveness",
             "document": "Document",
             "person": "نام و نام خانوادگی",
-            "finalNiazsanjiReport": "Final Niazsanji Report"
+            "finalNiazsanjiReport": "Final Niazsanji Report",
+            "grade": "گرید",
+            "evaluateDate": "تاریخ ارزیابی"
         }
     }
 }

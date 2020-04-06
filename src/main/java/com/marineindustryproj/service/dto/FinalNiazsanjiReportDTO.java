@@ -82,6 +82,10 @@ public class FinalNiazsanjiReportDTO implements Serializable {
 
     private Set<RestrictionDTO> restrictions = new HashSet<>();
 
+    private Set<RunPhaseDTO> runPhases = new HashSet<>();
+
+    private Set<DesignAndPlanningDTO> designAndPlannings = new HashSet<>();
+
     private Long niazsanjiIntegrationId;
 
     private String niazsanjiIntegrationNiazsanjiYear;
@@ -117,6 +121,12 @@ public class FinalNiazsanjiReportDTO implements Serializable {
     private Long teachingApproachId;
 
     private String teachingApproachTitle;
+
+    private String runPhaseFinishDate;
+
+    private Integer educationalModuleLearningTimeTheorical;
+
+    private Integer educationalModuleLearningTimePractical;
 
     public Long getId() {
         return id;
@@ -547,6 +557,7 @@ public class FinalNiazsanjiReportDTO implements Serializable {
             ", mahiatCourse='" + getMahiatCourseTitle() + "'" +
             ", teachingApproach=" + getTeachingApproachId() +
             ", teachingApproach='" + getTeachingApproachTitle() + "'" +
+            ", runPhaseFinishDate='" + getRunPhaseFinishDate() + "'" +
             "}";
     }
 
@@ -564,5 +575,45 @@ public class FinalNiazsanjiReportDTO implements Serializable {
 
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
+    }
+
+    public String getRunPhaseFinishDate() {
+        return runPhaseFinishDate;
+    }
+
+    public void setRunPhaseFinishDate(String runPhaseFinishDate) {
+        this.runPhaseFinishDate = runPhaseFinishDate;
+    }
+
+    public Set<RunPhaseDTO> getRunPhases() {
+        return runPhases;
+    }
+
+    public void setRunPhases(Set<RunPhaseDTO> runPhases) {
+        this.runPhases = runPhases;
+    }
+
+    public Set<DesignAndPlanningDTO> getDesignAndPlannings() {
+        return designAndPlannings;
+    }
+
+    public void setDesignAndPlannings(Set<DesignAndPlanningDTO> designAndPlannings) {
+        this.designAndPlannings = designAndPlannings;
+    }
+
+    public Integer getEducationalModuleLearningTimeTheorical() {
+        return educationalModuleLearningTimeTheorical;
+    }
+
+    public void setEducationalModuleLearningTimeTheorical(Integer educationalModuleLearningTimeTheorical) {
+        this.educationalModuleLearningTimeTheorical = educationalModuleLearningTimeTheorical;
+    }
+
+    public Integer getEducationalModuleLearningTimePractical() {
+        return educationalModuleLearningTimePractical;
+    }
+
+    public void setEducationalModuleLearningTimePractical(Integer educationalModuleLearningTimePractical) {
+        this.educationalModuleLearningTimePractical = educationalModuleLearningTimePractical;
     }
 }

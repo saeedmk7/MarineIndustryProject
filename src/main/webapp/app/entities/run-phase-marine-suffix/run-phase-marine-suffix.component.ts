@@ -507,7 +507,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     }
 
     prepareSearchDate() {
-        this.runPhase.niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
+        //this.runPhase.niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
         this.dates = this.convertObjectDatesService.getYearsArray();
     }
 

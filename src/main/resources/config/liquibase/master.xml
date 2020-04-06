@@ -233,6 +233,9 @@
     <include file="config/liquibase/changelog/20200321172306_added_entity_constraints_LevelFourScore.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200321172408_added_entity_constraints_EffectivenessPhase.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200321172409_update_entity_FinalNiazsanjiReport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200330050811_update_entity_FinalNiazsanjiReportPerson.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200330050911_update_entity_EffectivenessPhase.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200330051011_update_entity_EffectivenessPhase.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

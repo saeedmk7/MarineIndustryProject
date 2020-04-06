@@ -115,6 +115,26 @@
                 </div>
 
                 <div class="form-group">
+                    <a (click)="change('teacher-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.teacher" for="field_teacher">Teacher</a>
+                    <!--<label class="form-control-label" jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.teacher" for="field_teacher">Teacher</label>-->
+                    <!--<select class="form-control" id="field_teacher" name="teacher" [(ngModel)]="finalOrganizationNiazsanji.teacherId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="teacherOption.id" *ngFor="let teacherOption of teachers; trackBy: trackTeacherById">{{teacherOption.family}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="teachers"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="fullName"
+                        bindValue="id"
+                        placeholder="مدرس"
+                        name="teacher"
+                        id="field_teacher"
+                        [(ngModel)]="runPhase.teacherId">
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.runPhase.runMonth" for="field_runMonth">Run Month</label>
                    <!-- <input type="number" class="form-control" name="runMonth" id="field_runMonth"
                            [(ngModel)]="runPhase.runMonth" />-->

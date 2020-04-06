@@ -13,6 +13,7 @@ import {IFinalNiazsanjiReportMarineSuffix} from "app/shared/model/final-niazsanj
 import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
 import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
 import {NiazSanjiSource} from "app/shared/model/enums/NiazSanjiSource";
+import {Grade} from "app/shared/model/enums/Grade";
 
 @Injectable({ providedIn: 'root' })
 export class ConvertObjectDatesService {
@@ -21,8 +22,20 @@ export class ConvertObjectDatesService {
     constructor(private translate: JhiLanguageService) {
         this.isfa = translate.currentLang == 'fa';
     }
+    calculateGrade(totalScorePercent: number): Grade{
+        switch (true) {
+            case totalScorePercent <= 50:
+                return Grade.D;
+            case totalScorePercent <= 60:
+                return Grade.C;
+            case totalScorePercent <= 75:
+                return Grade.B;
+            case totalScorePercent <= 100:
+                return Grade.A;
+        }
+    }
     fillFinalNiazsanjiData(finalNiazsanji: IFinalNiazsanjiReportMarineSuffix, educationalModule: IEducationalModuleMarineSuffix, orgChart: IOrganizationChartMarineSuffix) : IFinalNiazsanjiReportMarineSuffix {
-        debugger;
+
         if(finalNiazsanji.niazSanjiSource == NiazSanjiSource.FARDI)
             finalNiazsanji.niazSanjiSource = NiazSanjiSource.FARDI2;
         finalNiazsanji.statusMeaning = this.convertFinalNiazsanjiStatus2EqualString(finalNiazsanji.status);
@@ -120,11 +133,11 @@ export class ConvertObjectDatesService {
         return +moment().format('jYYYY');
     }
     public getNowShamsiMonth(): number {
-        debugger;
+
         return +moment().format('jMM');
     }
     public getNowShamsiDate(): string {
-        debugger;
+
         return moment().format('jYYYY/jMM/jDD');
     }
     public get30YearsBeforeNow(): string {

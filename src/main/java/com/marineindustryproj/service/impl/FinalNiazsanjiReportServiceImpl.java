@@ -225,6 +225,11 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             effectivenessPhase.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
             effectivenessPhase.setModifyDate(ZonedDateTime.now());
             effectivenessPhase.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            effectivenessPhase.setStatus(0);
+            effectivenessPhase.setFinalScore(0f);
+            effectivenessPhase.setFirstScore(0f);
+            effectivenessPhase.setSecondScore(0f);
+            effectivenessPhase.setWeightedPoints(0f);
             effectivenessPhaseRepository.save(effectivenessPhase);
         }
 

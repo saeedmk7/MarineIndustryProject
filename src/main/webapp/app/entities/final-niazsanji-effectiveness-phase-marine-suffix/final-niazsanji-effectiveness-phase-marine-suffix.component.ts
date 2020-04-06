@@ -217,7 +217,7 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
     }
 
     loadAll(criteria?,excelExport: boolean = false) {
-        debugger;
+
         if(!this.isSuperUsers){
             criteria.push({
                 key: 'status.greaterOrEqualThan',
@@ -261,7 +261,7 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
         let index: number = 0;
         res.forEach(a => {
             index++;
-            debugger;
+
             a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
             const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
             if(org)
@@ -522,6 +522,7 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
+
         if (this.educationalModuleService.educationalModules) {
             this.educationalModules = this.educationalModuleService.educationalModules
             this.loadData(data);

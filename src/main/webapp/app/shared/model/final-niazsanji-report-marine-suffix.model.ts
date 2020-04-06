@@ -66,6 +66,8 @@ export interface IFinalNiazsanjiReportMarineSuffix {
     organizationChartId?: number;
     educationalModuleTitle?: string;
     educationalModuleCode?: string;
+    educationalModuleLearningTimeTheorical?: number;
+    educationalModuleLearningTimePractical?: number;
     educationalModuleTotalTime?: number;
     educationalModuleLevelTitle?: string;
     educationalModuleId?: number;
@@ -133,6 +135,8 @@ export class FinalNiazsanjiReportMarineSuffix implements IFinalNiazsanjiReportMa
         public organizationChartId?: number,
         public educationalModuleTitle?: string,
         public educationalModuleCode?: string,
+        public educationalModuleLearningTimeTheorical?: number,
+        public educationalModuleLearningTimePractical?: number,
         public educationalModuleTotalTime?: number,
         public educationalModuleLevelTitle?: string,
         public educationalModuleId?: number,

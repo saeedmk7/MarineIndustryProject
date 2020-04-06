@@ -2,14 +2,12 @@ package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.marineindustryproj.security.SecurityUtils;
-import com.marineindustryproj.service.FinalNiazsanjiReportPersonService;
-import com.marineindustryproj.service.dto.FieldOfStudyDTO;
+import com.marineindustryproj.service.*;
+import com.marineindustryproj.service.dto.*;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
-import com.marineindustryproj.service.dto.FinalNiazsanjiReportPersonDTO;
-import com.marineindustryproj.service.dto.FinalNiazsanjiReportPersonCriteria;
-import com.marineindustryproj.service.FinalNiazsanjiReportPersonQueryService;
+import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,8 +23,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.time.ZonedDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing FinalNiazsanjiReportPerson.
@@ -43,9 +44,19 @@ public class FinalNiazsanjiReportPersonResource {
 
     private final FinalNiazsanjiReportPersonQueryService finalNiazsanjiReportPersonQueryService;
 
-    public FinalNiazsanjiReportPersonResource(FinalNiazsanjiReportPersonService finalNiazsanjiReportPersonService, FinalNiazsanjiReportPersonQueryService finalNiazsanjiReportPersonQueryService) {
+    private final NiazsanjiPersonGradeQueryService niazsanjiPersonGradeQueryService;
+
+    private final LevelThreeEffectivenessQueryService levelThreeEffectivenessQueryService;
+
+    private final LevelFourEffectivenessQueryService levelFourEffectivenessQueryService;
+
+
+    public FinalNiazsanjiReportPersonResource(FinalNiazsanjiReportPersonService finalNiazsanjiReportPersonService, FinalNiazsanjiReportPersonQueryService finalNiazsanjiReportPersonQueryService, NiazsanjiPersonGradeQueryService niazsanjiPersonGradeQueryService, LevelThreeEffectivenessQueryService levelThreeEffectivenessQueryService, LevelFourEffectivenessQueryService levelFourEffectivenessQueryService) {
         this.finalNiazsanjiReportPersonService = finalNiazsanjiReportPersonService;
         this.finalNiazsanjiReportPersonQueryService = finalNiazsanjiReportPersonQueryService;
+        this.niazsanjiPersonGradeQueryService = niazsanjiPersonGradeQueryService;
+        this.levelThreeEffectivenessQueryService = levelThreeEffectivenessQueryService;
+        this.levelFourEffectivenessQueryService = levelFourEffectivenessQueryService;
     }
 
     /**
@@ -100,6 +111,105 @@ public class FinalNiazsanjiReportPersonResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, finalNiazsanjiReportPersonDTO.getId().toString()))
             .body(result);
+    }
+
+    @GetMapping("/final-niazsanji-report-people/getLevelOneDataByFinalNiazsanjiReportId/{finalNiazsanjiReportId}")
+    @Timed
+    public ResponseEntity<List<FinalNiazsanjiReportPersonDTO>> getLevelOneDataByFinalNiazsanjiReportId(@PathVariable Long finalNiazsanjiReportId) {
+        log.debug("REST request to get FinalNiazsanjiReportPerson by finalNiazsanjiReportId: {}", finalNiazsanjiReportId);
+        //Page<EffectivenessPhaseDTO> page = effectivenessPhaseQueryService.findByCriteria(criteria, pageable);
+        List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPeople = getFinalNiazsanjiReportPeople(finalNiazsanjiReportId);
+
+        LongFilter finalNiazsanjiReportPersonFilter = getFinalNiazsanjiReportPersonLongFilter(finalNiazsanjiReportPeople);
+
+        NiazsanjiPersonGradeCriteria niazsanjiPersonGradeCriteria = new NiazsanjiPersonGradeCriteria();
+        niazsanjiPersonGradeCriteria.setFinalNiazsanjiReportPersonId(finalNiazsanjiReportPersonFilter);
+
+        List<NiazsanjiPersonGradeDTO> niazsanjiPersonGrades = niazsanjiPersonGradeQueryService.findByCriteria(niazsanjiPersonGradeCriteria);
+
+        for (FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPerson : finalNiazsanjiReportPeople) {
+            List<NiazsanjiPersonGradeDTO> niazsanjiPersonGradeDTOS = niazsanjiPersonGrades.stream().filter(w -> w.getFinalNiazsanjiReportPersonId().equals(finalNiazsanjiReportPerson.getId())).collect(Collectors.toList());
+            Set<NiazsanjiPersonGradeDTO> niazsanjiPersonGradeDTOSet = new HashSet<>(niazsanjiPersonGradeDTOS);
+            if(!niazsanjiPersonGradeDTOS.isEmpty())
+            {
+                finalNiazsanjiReportPerson.setNiazsanjiPersonGrades(niazsanjiPersonGradeDTOSet);
+            }
+        }
+
+        //HttpHeaders headers = null;
+        return ResponseEntity.ok().body(finalNiazsanjiReportPeople);
+    }
+    @GetMapping("/final-niazsanji-report-people/getLevelThreeDataByFinalNiazsanjiReportId/{finalNiazsanjiReportId}")
+    @Timed
+    public ResponseEntity<List<FinalNiazsanjiReportPersonDTO>> getLevelThreeDataByFinalNiazsanjiReportId(@PathVariable Long finalNiazsanjiReportId) {
+        log.debug("REST request to get FinalNiazsanjiReportPerson by finalNiazsanjiReportId: {}", finalNiazsanjiReportId);
+
+        List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPeople = getFinalNiazsanjiReportPeople(finalNiazsanjiReportId);
+
+        LongFilter finalNiazsanjiReportPersonFilter = getFinalNiazsanjiReportPersonLongFilter(finalNiazsanjiReportPeople);
+
+        LevelThreeEffectivenessCriteria levelThreeEffectivenessCriteria = new LevelThreeEffectivenessCriteria();
+        levelThreeEffectivenessCriteria.setFinalNiazsanjiReportPersonId(finalNiazsanjiReportPersonFilter);
+
+        List<LevelThreeEffectivenessDTO> levelThreeEffectivenesses = levelThreeEffectivenessQueryService.findByCriteria(levelThreeEffectivenessCriteria);
+
+        for (FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPerson : finalNiazsanjiReportPeople) {
+            List<LevelThreeEffectivenessDTO> levelThreeEffectivenessDTOS = levelThreeEffectivenesses.stream()
+                .filter(w -> w.getFinalNiazsanjiReportPersonId().equals(finalNiazsanjiReportPerson.getId())).collect(Collectors.toList());
+            Set<LevelThreeEffectivenessDTO> levelThreeEffectivenessDTOSet = new HashSet<>(levelThreeEffectivenessDTOS);
+            if(!levelThreeEffectivenessDTOS.isEmpty())
+            {
+                finalNiazsanjiReportPerson.setLevelThreeEffectivenesses(levelThreeEffectivenessDTOSet);
+            }
+        }
+
+        //HttpHeaders headers = null;
+        return ResponseEntity.ok().body(finalNiazsanjiReportPeople);
+    }
+
+    private List<FinalNiazsanjiReportPersonDTO> getFinalNiazsanjiReportPeople(@PathVariable Long finalNiazsanjiReportId) {
+        LongFilter finalNiazsanjiReportFilter = new LongFilter();
+        finalNiazsanjiReportFilter.setEquals(finalNiazsanjiReportId);
+
+        FinalNiazsanjiReportPersonCriteria finalNiazsanjiReportPersonCriteria = new FinalNiazsanjiReportPersonCriteria();
+        finalNiazsanjiReportPersonCriteria.setFinalNiazsanjiReportId(finalNiazsanjiReportFilter);
+
+        return finalNiazsanjiReportPersonQueryService.findByCriteria(finalNiazsanjiReportPersonCriteria);
+    }
+
+    @GetMapping("/final-niazsanji-report-people/getLevelFourDataByFinalNiazsanjiReportId/{finalNiazsanjiReportId}")
+    @Timed
+    public ResponseEntity<List<FinalNiazsanjiReportPersonDTO>> getLevelFourDataByFinalNiazsanjiReportId(@PathVariable Long finalNiazsanjiReportId) {
+        log.debug("REST request to get FinalNiazsanjiReportPerson by finalNiazsanjiReportId: {}", finalNiazsanjiReportId);
+
+        List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPeople = getFinalNiazsanjiReportPeople(finalNiazsanjiReportId);
+
+        LongFilter finalNiazsanjiReportPersonFilter = getFinalNiazsanjiReportPersonLongFilter(finalNiazsanjiReportPeople);
+
+        LevelFourEffectivenessCriteria levelFourEffectivenessCriteria = new LevelFourEffectivenessCriteria();
+        levelFourEffectivenessCriteria.setFinalNiazsanjiReportPersonId(finalNiazsanjiReportPersonFilter);
+
+        List<LevelFourEffectivenessDTO> levelFourEffectivenesses = levelFourEffectivenessQueryService.findByCriteria(levelFourEffectivenessCriteria);
+
+        for (FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPerson : finalNiazsanjiReportPeople) {
+            List<LevelFourEffectivenessDTO> levelFourEffectivenessDTOS = levelFourEffectivenesses.stream()
+                .filter(w -> w.getFinalNiazsanjiReportPersonId().equals(finalNiazsanjiReportPerson.getId())).collect(Collectors.toList());
+            Set<LevelFourEffectivenessDTO> levelFourEffectivenessDTOSet = new HashSet<>(levelFourEffectivenessDTOS);
+            if(!levelFourEffectivenessDTOS.isEmpty())
+            {
+                finalNiazsanjiReportPerson.setLevelFourEffectivenesses(levelFourEffectivenessDTOSet);
+            }
+        }
+
+        //HttpHeaders headers = null;
+        return ResponseEntity.ok().body(finalNiazsanjiReportPeople);
+    }
+
+    private LongFilter getFinalNiazsanjiReportPersonLongFilter(List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPeople) {
+        List<Long> peopleId = finalNiazsanjiReportPeople.stream().map(w -> w.getId()).collect(Collectors.toList());
+        LongFilter finalNiazsanjiReportPersonFilter = new LongFilter();
+        finalNiazsanjiReportPersonFilter.setIn(peopleId);
+        return finalNiazsanjiReportPersonFilter;
     }
 
     /**

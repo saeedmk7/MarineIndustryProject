@@ -173,7 +173,11 @@
                 "accept": "تایید کردن",
                 "reject": "رد کردن",
                 "comment": "ثبت نظر"
-            }
+            },
+            "evaluate": "انجام ارزیابی",
+            "startPhase": "شروع اثربخشی",
+            "continuePhase": "ادامه اثربخشی",
+            "effect": "اثربخشی"
         },
         "detail": {
             "field": "فیلد",

@@ -159,6 +159,15 @@ public class FinalNiazsanjiReportPersonQueryService extends QueryService<FinalNi
             if (criteria.getAverageScore() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getAverageScore(), FinalNiazsanjiReportPerson_.averageScore));
             }
+            if (criteria.getLevelOneScore() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLevelOneScore(), FinalNiazsanjiReportPerson_.levelOneScore));
+            }
+            if (criteria.getLevelThreeScore() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLevelThreeScore(), FinalNiazsanjiReportPerson_.levelThreeScore));
+            }
+            if (criteria.getLevelFourScore() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLevelFourScore(), FinalNiazsanjiReportPerson_.levelFourScore));
+            }
             if (criteria.getNiazsanjiPersonGradeId() != null) {
                 specification = specification.and(buildSpecification(criteria.getNiazsanjiPersonGradeId(),
                     root -> root.join(FinalNiazsanjiReportPerson_.niazsanjiPersonGrades, JoinType.LEFT).get(NiazsanjiPersonGrade_.id)));

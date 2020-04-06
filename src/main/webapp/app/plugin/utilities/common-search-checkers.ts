@@ -101,7 +101,7 @@ export class CommonSearchCheckerService {
         return criteria;
     }
     public checkRequestStatusFiltersForIntegration(criteria, status: number = 0) {
-        debugger;
+
         const requestStatusFilters = criteria.find(a => a.key == 'requestStatusFilters.equals');
         if (requestStatusFilters) {
             const val = requestStatusFilters.value;

@@ -288,7 +288,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         let index: number = 0;
         res.forEach(a => {
             index++;
-            debugger;
+
             a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
             const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
             if(org)

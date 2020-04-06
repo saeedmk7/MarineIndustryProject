@@ -300,7 +300,7 @@ export class RequestEducationalModuleMarineSuffixComponent implements OnInit, On
         let index: number = 0;
         res.forEach(a => {
             index++;
-            debugger;
+
 
             a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
             const person = this.people.find(w => w.nationalId == a.createUserLogin);

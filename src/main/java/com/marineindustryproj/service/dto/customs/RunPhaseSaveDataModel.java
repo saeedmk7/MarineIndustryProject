@@ -26,6 +26,8 @@ public class RunPhaseSaveDataModel implements Serializable {
 
     private Long finalNiazsanjiReportId;
 
+    private Long teacherId;
+
     private Set<RunPhaseSaveDataItemModel> runPhaseSaveDataItemModels = new HashSet<>();
 
     public Long getRunPhaseId() {
@@ -114,5 +116,13 @@ public class RunPhaseSaveDataModel implements Serializable {
 
     public void setConversion(String conversion) {
         this.conversion = conversion;
+    }
+
+    public Long getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
     }
 }

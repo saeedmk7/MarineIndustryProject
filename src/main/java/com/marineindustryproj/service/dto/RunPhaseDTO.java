@@ -96,6 +96,8 @@ public class RunPhaseDTO implements Serializable {
 
     private String courseTypeTitle;
 
+    private Long teacherId;
+
     public Long getId() {
         return id;
     }
@@ -425,5 +427,13 @@ public class RunPhaseDTO implements Serializable {
 
     public void setPriceCost(Integer priceCost) {
         this.priceCost = priceCost;
+    }
+
+    public Long getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
     }
 }

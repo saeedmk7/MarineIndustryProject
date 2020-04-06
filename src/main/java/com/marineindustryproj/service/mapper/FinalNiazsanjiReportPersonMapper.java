@@ -8,14 +8,16 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity FinalNiazsanjiReportPerson and its DTO FinalNiazsanjiReportPersonDTO.
  */
-@Mapper(componentModel = "spring", uses = {DocumentMapper.class, PersonMapper.class, FinalNiazsanjiReportMapper.class})
+@Mapper(componentModel = "spring", uses = {PersonMapper.class, FinalNiazsanjiReportMapper.class})
 public interface FinalNiazsanjiReportPersonMapper extends EntityMapper<FinalNiazsanjiReportPersonDTO, FinalNiazsanjiReportPerson> {
 
     @Mapping(source = "person.id", target = "personId")
     @Mapping(source = "person.family", target = "personFamily")
     @Mapping(source = "person.name", target = "personName")
     @Mapping(source = "finalNiazsanjiReport.id", target = "finalNiazsanjiReportId")
+    @Mapping(source = "finalNiazsanjiReport", target = "finalNiazsanjiReport")
     @Mapping(source = "finalNiazsanjiReport.description", target = "finalNiazsanjiReportDescription")
+
     FinalNiazsanjiReportPersonDTO toDto(FinalNiazsanjiReportPerson finalNiazsanjiReportPerson);
 
     @Mapping(target = "niazsanjiPersonGrades", ignore = true)

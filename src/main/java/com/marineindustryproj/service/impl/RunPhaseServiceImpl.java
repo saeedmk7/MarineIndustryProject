@@ -2,20 +2,12 @@ package com.marineindustryproj.service.impl;
 
 import com.marineindustryproj.domain.FinalNiazsanjiReport;
 import com.marineindustryproj.domain.Person;
-import com.marineindustryproj.repository.FinalNiazsanjiReportRepository;
-import com.marineindustryproj.repository.RunRunningStepRepository;
-import com.marineindustryproj.repository.RunningStepRepository;
+import com.marineindustryproj.domain.Teacher;
+import com.marineindustryproj.repository.*;
 import com.marineindustryproj.security.SecurityUtils;
-import com.marineindustryproj.service.RunPhaseQueryService;
-import com.marineindustryproj.service.RunPhaseService;
+import com.marineindustryproj.service.*;
 import com.marineindustryproj.domain.RunPhase;
-import com.marineindustryproj.repository.RunPhaseRepository;
-import com.marineindustryproj.service.RunRunningStepQueryService;
-import com.marineindustryproj.service.RunRunningStepService;
-import com.marineindustryproj.service.dto.RunPhaseCriteria;
-import com.marineindustryproj.service.dto.RunPhaseDTO;
-import com.marineindustryproj.service.dto.RunRunningStepCriteria;
-import com.marineindustryproj.service.dto.RunRunningStepDTO;
+import com.marineindustryproj.service.dto.*;
 import com.marineindustryproj.service.dto.customs.RunPhaseSaveDataItemModel;
 import com.marineindustryproj.service.dto.customs.RunPhaseSaveDataModel;
 import com.marineindustryproj.service.mapper.RunPhaseMapper;
@@ -60,6 +52,8 @@ public class RunPhaseServiceImpl implements RunPhaseService {
 
     private final RunPhaseQueryService runPhaseQueryService;
 
+    private final TeacherRepository teacherRepository;
+
     public RunPhaseServiceImpl(RunPhaseRepository runPhaseRepository,
                                RunPhaseMapper runPhaseMapper,
                                FinalNiazsanjiReportRepository finalNiazsanjiReportRepository,
@@ -67,7 +61,7 @@ public class RunPhaseServiceImpl implements RunPhaseService {
                                RunRunningStepRepository runRunningStepRepository,
                                RunRunningStepService runRunningStepService,
                                RunRunningStepQueryService runRunningStepQueryService,
-                               RunPhaseQueryService runPhaseQueryService) {
+                               RunPhaseQueryService runPhaseQueryService, TeacherRepository teacherRepository) {
         this.runPhaseRepository = runPhaseRepository;
         this.runPhaseMapper = runPhaseMapper;
         this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
@@ -76,6 +70,7 @@ public class RunPhaseServiceImpl implements RunPhaseService {
         this.runRunningStepService = runRunningStepService;
         this.runRunningStepQueryService = runRunningStepQueryService;
         this.runPhaseQueryService = runPhaseQueryService;
+        this.teacherRepository = teacherRepository;
     }
 
     /**
@@ -120,6 +115,15 @@ public class RunPhaseServiceImpl implements RunPhaseService {
         runPhase.setOrganizationChart(finalNiazsanjiReport.getOrganizationChart());
         finalNiazsanjiReport.setFinalizeCost(runPhase.getFinalizeCost());
         finalNiazsanjiReport.setRunMonth(runPhase.getRunMonth());
+        if((finalNiazsanjiReport.getTeacher() == null) || (finalNiazsanjiReport.getTeacher() != null && finalNiazsanjiReport.getTeacher().getId() != runPhaseSaveDataModel.getTeacherId()))
+        {
+            Optional<Teacher> teacher = teacherRepository.findOneWithEagerRelationships(runPhaseSaveDataModel.getTeacherId());
+            if(teacher.isPresent())
+            {
+                finalNiazsanjiReport.setTeacher(teacher.get());
+            }
+        }
+
         if(runPhaseSaveDataModel.getDone() && runPhase.getStatus() < 10)
         {
             if(SecurityUtils.isCurrentUserInRole("ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") || SecurityUtils.isCurrentUserInRole("ROLE_MODIR_KOL_AMOZESH")) {

@@ -1,0 +1,90 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.home.level2Title">level1Title</span>
+    </h2>
+    <mi-alert></mi-alert>
+    <div style="display: block" *ngIf="errorMessage">
+        <br/>
+        <span class="alert alert-danger block">
+            {{errorMessage}}
+        </span>
+        <br/>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="finalNiazsanjiReportPeople">
+        <table class="table table-striped  table-bordered table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th>ردیف</th>
+                <th jhiSortBy="personFamily"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.person">Person</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.scoreBeforeTest">levelOneScore</span>
+                </th>
+                <th><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.scoreAfterTest">scoreAfterTest</span>
+                </th>
+                <th><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.averageScore">averageScore</span>
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let finalNiazsanjiReportPerson of finalNiazsanjiReportPeople ;let i = index;">
+                <!--<td><a [routerLink]="['/final-niazsanji-report-person-marine-suffix', finalNiazsanjiReportPerson.id, 'view' ]">{{finalNiazsanjiReportPerson.id}}</a></td>-->
+                <td>{{i+1}}</td>
+                <td>
+                    <div *ngIf="finalNiazsanjiReportPerson.personId">
+                        <a [routerLink]="['../person-marine-suffix', finalNiazsanjiReportPerson.personId , 'view' ]">{{finalNiazsanjiReportPerson.personFullName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <input type="number" [(ngModel)]="finalNiazsanjiReportPerson.scoreBeforeTest"
+                           [name]="finalNiazsanjiReportPerson.scoreBeforeTest"
+                           [id]="'scoreBeforeTest_' + finalNiazsanjiReportPerson.id" required/>
+                </td>
+                <td>
+                    <input type="number" [(ngModel)]="finalNiazsanjiReportPerson.scoreAfterTest"
+                           [name]="finalNiazsanjiReportPerson.scoreAfterTest"
+                           [id]="'scoreAfterTest_' + finalNiazsanjiReportPerson.id" required/>
+                </td>
+                <td>
+                    <input type="number" disabled
+                           [value]="((finalNiazsanjiReportPerson.scoreBeforeTest ? finalNiazsanjiReportPerson.scoreBeforeTest : 1)  + (finalNiazsanjiReportPerson.scoreAfterTest ? finalNiazsanjiReportPerson.scoreAfterTest : 1)) / 2"
+                           required/>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="button" (click)="saveScore(finalNiazsanjiReportPerson)"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'stamp'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.save">save</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr style="text-align: center">
+                <td colspan="2">میانگین کل</td>
+                <td>{{firstScoreAverage | number: '1.0-1'}}</td>
+                <td>{{secondScoreAverage | number: '1.0-1'}}</td>
+                <td>{{fullAverage | number: '1.0-1'}}</td>
+                <td colspan="2"></td>
+            </tr>
+            </tfoot>
+        </table>
+
+    </div>
+    <div class="row">
+        <button type="button"
+                (click)="completeLevel(finalNiazsanjiReportId)" [disabled]="!canComplete"
+                class="btn btn-success">
+            <fa-icon [icon]="'check-double'"></fa-icon>
+            <span class="d-none d-md-inline" jhiTranslate="entity.action.complete">complete</span>
+        </button>
+    </div>
+</div>

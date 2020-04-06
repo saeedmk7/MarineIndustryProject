@@ -42,6 +42,7 @@ export interface IRunPhaseMarineSuffix {
     niazSanjiSource?: NiazSanjiSource;
     courseTypeId?: number;
     courseTypeTitle?: string;
+    teacherId?: number;
 }
 
 export class RunPhaseMarineSuffix implements IRunPhaseMarineSuffix {
@@ -82,7 +83,8 @@ export class RunPhaseMarineSuffix implements IRunPhaseMarineSuffix {
         public niazsanjiYear?: number,
         public niazSanjiSource?: NiazSanjiSource,
         public courseTypeId?: number,
-        public courseTypeTitle?: string
+        public courseTypeTitle?: string,
+        public teacherId?: number
     ) {
         this.done = this.done || false;
         this.archived = this.archived || false;

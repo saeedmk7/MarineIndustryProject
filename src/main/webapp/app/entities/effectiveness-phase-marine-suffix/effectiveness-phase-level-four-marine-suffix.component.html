@@ -1,0 +1,79 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.home.level4Title">level1Title</span>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="finalNiazsanjiReportPeople">
+        <table class="table table-striped  table-bordered table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th>ردیف</th>
+                <th jhiSortBy="personFamily"><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.person">Person</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.levelFourScore">levelOneScore</span>
+                </th>
+                <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.grade">grade</span></th>
+                <th><span
+                    jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.evaluateDate">evaluateDate</span>
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let finalNiazsanjiReportPerson of finalNiazsanjiReportPeople ;let i = index;">
+                <!--<td><a [routerLink]="['/final-niazsanji-report-person-marine-suffix', finalNiazsanjiReportPerson.id, 'view' ]">{{finalNiazsanjiReportPerson.id}}</a></td>-->
+                <td>{{i+1}}</td>
+                <td>
+                    <div *ngIf="finalNiazsanjiReportPerson.personId">
+                        <a [routerLink]="['../person-marine-suffix', finalNiazsanjiReportPerson.personId , 'view' ]">{{finalNiazsanjiReportPerson.personFullName}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{finalNiazsanjiReportPerson.levelFourScore | number: '1.0-1'}}
+                </td>
+                <td>
+                    {{finalNiazsanjiReportPerson.levelFourEffectivenesses &&
+                    finalNiazsanjiReportPerson.levelFourEffectivenesses.length > 0 ?
+                    finalNiazsanjiReportPerson.levelFourEffectivenesses[0].grade : ""}}
+                </td>
+                <td>
+                    {{finalNiazsanjiReportPerson.levelFourEffectivenesses &&
+                    finalNiazsanjiReportPerson.levelFourEffectivenesses.length > 0 ?
+                    finalNiazsanjiReportPerson.levelFourEffectivenesses[0].evaluateDate : ""}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/level-four-effectiveness-marine-suffix/new', finalNiazsanjiReportPerson.id ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.evaluate">evaluate</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+                <tr style="text-align: center">
+                    <td colspan="2">میانگین کل</td>
+                    <td>{{fullAverage | number: '1.0-1'}}</td>
+                    <td>{{fullGrade}}</td>
+                    <td colspan="2"></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="row">
+            <button type="button"
+                    (click)="completeLevel(finalNiazsanjiReportId)" [disabled]="!canComplete"
+                    class="btn btn-success">
+                <fa-icon [icon]="'check-double'"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.complete">complete</span>
+            </button>
+        </div>
+    </div>
+</div>
+</div>

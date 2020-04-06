@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IFinalNiazsanjiReportPersonMarineSuffix } from 'app/shared/model/final-niazsanji-report-person-marine-suffix.model';
+import {IEffectivenessPhaseMarineSuffix} from "app/shared/model/effectiveness-phase-marine-suffix.model";
 
 type EntityResponseType = HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>;
@@ -42,6 +43,25 @@ export class FinalNiazsanjiReportPersonMarineSuffixService {
         const options = createRequestOption(req);
         return this.http
             .get<IFinalNiazsanjiReportPersonMarineSuffix[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
+    getLevelOneDataByFinalNiazsanjiReportId(finalNiazsanjiReportId: number): Observable<EntityArrayResponseType> {
+        const url = `${this.resourceUrl}/getLevelOneDataByFinalNiazsanjiReportId/${finalNiazsanjiReportId}`;
+        return this.http
+            .get<IEffectivenessPhaseMarineSuffix[]>(url, { observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+    getLevelThreeDataByFinalNiazsanjiReportId(finalNiazsanjiReportId: number): Observable<EntityArrayResponseType> {
+        const url = `${this.resourceUrl}/getLevelThreeDataByFinalNiazsanjiReportId/${finalNiazsanjiReportId}`;
+        return this.http
+            .get<IEffectivenessPhaseMarineSuffix[]>(url, { observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+    getLevelFourDataByFinalNiazsanjiReportId(finalNiazsanjiReportId: number): Observable<EntityArrayResponseType> {
+        const url = `${this.resourceUrl}/getLevelFourDataByFinalNiazsanjiReportId/${finalNiazsanjiReportId}`;
+        return this.http
+            .get<IEffectivenessPhaseMarineSuffix[]>(url, { observe: 'response' })
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 

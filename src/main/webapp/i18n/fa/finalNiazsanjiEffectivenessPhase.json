@@ -23,6 +23,7 @@
             "finalizeCost": "سرمایه گذاری صرف شده",
             "courseType": "نوع دوره",
             "courseTypeId": "نوع دوره",
+            "effectivenessLevel": "سطح اثربخشی دوره",
             "description": "توضیحات بیشتر",
             "createUserLogin": "کاربر ایجاد کننده",
             "createDate": "تاریخ ایجاد",

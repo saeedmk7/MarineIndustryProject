@@ -1,0 +1,19 @@
+tr.success { background-color: #dff0d8; color: #3c763d; }
+tr.danger { background-color: #f2dede; color: red; }
+tr.info { background-color: #d9edf7; color: #31708f; }
+tr.pink { background-color: #ff9dbd; color: #ffffff; }
+tr.warning { background-color: #fcf8e3; color: #8a6d3b; }
+
+th {
+    background-color: #b4bdd0 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+.ng-select > div {
+    z-index: 2 !important;
+}
+/*input[type="radio"] {
+    -webkit-appearance: checkbox; !* Chrome, Safari, Opera *!
+    -moz-appearance: checkbox;    !* Firefox *!
+    -ms-appearance: checkbox;     !* not currently supported *!
+}*/

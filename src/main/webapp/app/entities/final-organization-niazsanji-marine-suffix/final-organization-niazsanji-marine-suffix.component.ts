@@ -194,7 +194,6 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         return criteria;
     }
     public checkRequestStatusFilters(criteria, status: number = 0) {
-        debugger;
         const requestStatusFilters = criteria.find(a => a.key == 'requestStatusFilters.equals');
         if (requestStatusFilters) {
             const val = requestStatusFilters.value;

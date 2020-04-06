@@ -4,8 +4,13 @@ import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Objects;
+
+import com.marineindustryproj.domain.LevelFourEffectiveness;
+import com.marineindustryproj.domain.LevelThreeEffectiveness;
+import com.marineindustryproj.domain.NiazsanjiPersonGrade;
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
 
 /**
@@ -53,6 +58,12 @@ public class FinalNiazsanjiReportPersonDTO implements Serializable {
 
     private Float averageScore;
 
+    private Float levelOneScore;
+
+    private Float levelThreeScore;
+
+    private Float levelFourScore;
+
     private Set<DocumentDTO> documents = new HashSet<>();
 
     private Long personId;
@@ -64,6 +75,14 @@ public class FinalNiazsanjiReportPersonDTO implements Serializable {
     private Long finalNiazsanjiReportId;
 
     private String finalNiazsanjiReportDescription;
+
+    private Set<NiazsanjiPersonGradeDTO> niazsanjiPersonGrades = new HashSet<>();
+
+    private Set<LevelThreeEffectivenessDTO> levelThreeEffectivenesses = new HashSet<>();
+
+    private Set<LevelFourEffectivenessDTO> levelFourEffectivenesses = new HashSet<>();
+
+    private FinalNiazsanjiReportDTO finalNiazsanjiReport;
 
     public Long getId() {
         return id;
@@ -193,6 +212,30 @@ public class FinalNiazsanjiReportPersonDTO implements Serializable {
         this.averageScore = averageScore;
     }
 
+    public Float getLevelOneScore() {
+        return levelOneScore;
+    }
+
+    public void setLevelOneScore(Float levelOneScore) {
+        this.levelOneScore = levelOneScore;
+    }
+
+    public Float getLevelThreeScore() {
+        return levelThreeScore;
+    }
+
+    public void setLevelThreeScore(Float levelThreeScore) {
+        this.levelThreeScore = levelThreeScore;
+    }
+
+    public Float getLevelFourScore() {
+        return levelFourScore;
+    }
+
+    public void setLevelFourScore(Float levelFourScore) {
+        this.levelFourScore = levelFourScore;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
@@ -281,11 +324,46 @@ public class FinalNiazsanjiReportPersonDTO implements Serializable {
             ", scoreBeforeTest=" + getScoreBeforeTest() +
             ", scoreAfterTest=" + getScoreAfterTest() +
             ", averageScore=" + getAverageScore() +
+            ", levelOneScore=" + getLevelOneScore() +
+            ", levelThreeScore=" + getLevelThreeScore() +
+            ", levelFourScore=" + getLevelFourScore() +
             ", person=" + getPersonId() +
             ", personFamily='" + getPersonFamily() + "'" +
             ", personName='" + getPersonFamily() + "'" +
             ", finalNiazsanjiReport=" + getFinalNiazsanjiReportId() +
             ", finalNiazsanjiReport='" + getFinalNiazsanjiReportDescription() + "'" +
             "}";
+    }
+
+    public Set<NiazsanjiPersonGradeDTO> getNiazsanjiPersonGrades() {
+        return niazsanjiPersonGrades;
+    }
+
+    public void setNiazsanjiPersonGrades(Set<NiazsanjiPersonGradeDTO> niazsanjiPersonGrades) {
+        this.niazsanjiPersonGrades = niazsanjiPersonGrades;
+    }
+
+    public Set<LevelThreeEffectivenessDTO> getLevelThreeEffectivenesses() {
+        return levelThreeEffectivenesses;
+    }
+
+    public void setLevelThreeEffectivenesses(Set<LevelThreeEffectivenessDTO> levelThreeEffectivenesses) {
+        this.levelThreeEffectivenesses = levelThreeEffectivenesses;
+    }
+
+    public Set<LevelFourEffectivenessDTO> getLevelFourEffectivenesses() {
+        return levelFourEffectivenesses;
+    }
+
+    public void setLevelFourEffectivenesses(Set<LevelFourEffectivenessDTO> levelFourEffectivenesses) {
+        this.levelFourEffectivenesses = levelFourEffectivenesses;
+    }
+
+    public FinalNiazsanjiReportDTO getFinalNiazsanjiReport() {
+        return finalNiazsanjiReport;
+    }
+
+    public void setFinalNiazsanjiReport(FinalNiazsanjiReportDTO finalNiazsanjiReport) {
+        this.finalNiazsanjiReport = finalNiazsanjiReport;
     }
 }

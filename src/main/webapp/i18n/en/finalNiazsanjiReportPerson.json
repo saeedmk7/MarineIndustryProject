@@ -1,7 +1,7 @@
 
 {
     "marineindustryprojApp": {
-        "finalNiazsanjiReportPerson" : {
+        "finalNiazsanjiReportPerson": {
             "home": {
                 "title": "Final Niazsanji Report People",
                 "createLabel": "Create a new Final Niazsanji Report Person",
@@ -27,6 +27,17 @@
             "archivedUserLogin": "Archived User Login",
             "archivedDate": "Archived Date",
             "status": "Status",
+            "sourceId": "Source Id",
+            "scoreBeforeTest": "Score Before Test",
+            "scoreAfterTest": "Score After Test",
+            "averageScore": "Average Score",
+            "levelOneScore": "Level One Score",
+            "levelThreeScore": "Level Three Score",
+            "levelFourScore": "Level Four Score",
+            "niazsanjiPersonGrade": "Niazsanji Person Grade",
+            "levelThreeEffectiveness": "Level Three Effectiveness",
+            "levelFourEffectiveness": "Level Four Effectiveness",
+            "document": "Document",
             "person": "Person",
             "finalNiazsanjiReport": "Final Niazsanji Report"
         }

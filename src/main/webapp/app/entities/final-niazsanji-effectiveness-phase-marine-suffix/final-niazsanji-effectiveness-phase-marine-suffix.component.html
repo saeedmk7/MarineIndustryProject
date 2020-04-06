@@ -66,6 +66,8 @@
                 <th jhiSortBy="teacherFamily"><span jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.teacher">Teacher</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
+                <th><span jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.effectivenessLevel">effectivenessLevel</span>
+                </th>
                 <!--<th jhiSortBy="mahiatCourseTitle"><span
                     jhiTranslate="marineindustryprojApp.finalNiazsanjiEffectivenessPhase.mahiatCourse">Mahiat Course</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
@@ -134,7 +136,7 @@
                     </div>
                 </td>
                 <!--<td>{{finalNiazsanjiReport.priceCost | number}}</td>-->
-                <td>{{finalNiazsanjiReport.finalizeCost | number}}</td>
+                <td>{{finalNiazsanjiReport.finalizeCost | number: '1.0-1'}}</td>
                 <td jhiTranslate="{{'marineindustryprojApp.NiazSanjiSource.' + finalNiazsanjiReport.niazSanjiSource}}">
                     {{finalNiazsanjiReport.niazSanjiSource}}
                 </td>
@@ -143,7 +145,12 @@
                 <td>{{finalNiazsanjiReport.runMonthPersian}}</td>
                 <td>
                     <div *ngIf="finalNiazsanjiReport.teacherId">
-                        <a [routerLink]="['../teacher-marine-suffix', finalNiazsanjiReport.teacherId , 'view' ]">{{finalNiazsanjiReport.teacherFamily}}</a>
+                        <a [routerLink]="['../teacher-marine-suffix', finalNiazsanjiReport.teacherId , 'view' ]">{{finalNiazsanjiReport.teacherName}} {{finalNiazsanjiReport.teacherFamily}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="finalNiazsanjiReport.designAndPlannings && finalNiazsanjiReport.designAndPlannings.length > 0">
+                        {{finalNiazsanjiReport.designAndPlannings[0].effectivenessLevelTitle}}
                     </div>
                 </td>
                 <!--<td>
@@ -152,12 +159,12 @@
                     </div>
                 </td>-->
                 <td>{{finalNiazsanjiReport.statusMeaning}}</td>
-                <td>{{finalNiazsanjiReport.effectivenessPhaseAverage}}</td>
+                <td>{{finalNiazsanjiReport.effectivenessPhaseAverage | number: '1.0-1'}}</td>
                 <td jhiTranslate="{{'marineindustryprojApp.Grade.' + finalNiazsanjiReport.effectivenessPhaseGrade}}">
                     {{finalNiazsanjiReport.effectivenessPhaseGrade}}
                 </td>
 
-                <td>{{finalNiazsanjiReport.currentEffectivenessPhaseLevelTitle}}</td>
+                <td>{{finalNiazsanjiReport.currentEffectivenessPhaseLevel}}</td>
                 <td>{{finalNiazsanjiReport.lastEffectivenessPhaseFinishPersian}}</td>
 
 
@@ -202,11 +209,11 @@
                 <td class="text-right">
 
                     <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReport.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        <button type="submit" *ngIf="finalNiazsanjiReport.status >= 20 && finalNiazsanjiReport.selectedEffectivenessPhaseLevel > 0"
+                                [routerLink]="['/effectiveness-phase-marine-suffix', finalNiazsanjiReport.id ]"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'tasks'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.effect">effect</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReport.id, 'view' ]"

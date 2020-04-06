@@ -340,7 +340,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
         a.exportAsExcelFile(report, 'requestNiazsanjiFardis', 'marineindustryprojApp.requestNiazsanjiFardi');
     }
     transition() {
-        debugger;
+
         /*this.router.navigate(['/request-niazsanji-fardi-marine-suffix'], {
             queryParams: {
                 page: this.page,
@@ -358,7 +358,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
     }
 
     clear() {
-        debugger;
+
         this.page = 0;
         this.router.navigate([
             '/request-niazsanji-fardi-marine-suffix',

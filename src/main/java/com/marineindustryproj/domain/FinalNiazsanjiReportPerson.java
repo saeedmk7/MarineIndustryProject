@@ -86,6 +86,15 @@ public class FinalNiazsanjiReportPerson implements Serializable {
     @Column(name = "average_score")
     private Float averageScore;
 
+    @Column(name = "level_one_score")
+    private Float levelOneScore;
+
+    @Column(name = "level_three_score")
+    private Float levelThreeScore;
+
+    @Column(name = "level_four_score")
+    private Float levelFourScore;
+
     @OneToMany(mappedBy = "finalNiazsanjiReportPerson")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<NiazsanjiPersonGrade> niazsanjiPersonGrades = new HashSet<>();
@@ -316,6 +325,45 @@ public class FinalNiazsanjiReportPerson implements Serializable {
         this.averageScore = averageScore;
     }
 
+    public Float getLevelOneScore() {
+        return levelOneScore;
+    }
+
+    public FinalNiazsanjiReportPerson levelOneScore(Float levelOneScore) {
+        this.levelOneScore = levelOneScore;
+        return this;
+    }
+
+    public void setLevelOneScore(Float levelOneScore) {
+        this.levelOneScore = levelOneScore;
+    }
+
+    public Float getLevelThreeScore() {
+        return levelThreeScore;
+    }
+
+    public FinalNiazsanjiReportPerson levelThreeScore(Float levelThreeScore) {
+        this.levelThreeScore = levelThreeScore;
+        return this;
+    }
+
+    public void setLevelThreeScore(Float levelThreeScore) {
+        this.levelThreeScore = levelThreeScore;
+    }
+
+    public Float getLevelFourScore() {
+        return levelFourScore;
+    }
+
+    public FinalNiazsanjiReportPerson levelFourScore(Float levelFourScore) {
+        this.levelFourScore = levelFourScore;
+        return this;
+    }
+
+    public void setLevelFourScore(Float levelFourScore) {
+        this.levelFourScore = levelFourScore;
+    }
+
     public Set<NiazsanjiPersonGrade> getNiazsanjiPersonGrades() {
         return niazsanjiPersonGrades;
     }
@@ -482,6 +530,9 @@ public class FinalNiazsanjiReportPerson implements Serializable {
             ", scoreBeforeTest=" + getScoreBeforeTest() +
             ", scoreAfterTest=" + getScoreAfterTest() +
             ", averageScore=" + getAverageScore() +
+            ", levelOneScore=" + getLevelOneScore() +
+            ", levelThreeScore=" + getLevelThreeScore() +
+            ", levelFourScore=" + getLevelFourScore() +
             "}";
     }
 }

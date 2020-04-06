@@ -41,6 +41,8 @@ import {
 import {IRunRunningStepMarineSuffix} from "app/shared/model/run-running-step-marine-suffix.model";
 import {MONTHS} from "app/shared/constants/months.constants";
 import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+import {ITeacherMarineSuffix} from "app/shared/model/teacher-marine-suffix.model";
+import {TeacherMarineSuffixService} from "app/entities/teacher-marine-suffix";
 
 @Component({
     selector: 'mi-run-phase-marine-suffix-update',
@@ -54,6 +56,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     {
         return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
     });
+    teachers: ITeacherMarineSuffix[];
     educationalModule: IEducationalModuleMarineSuffix = {};
     people: IPersonMarineSuffix[];
     runningSteps: IRunningStepMarineSuffix[];
@@ -87,6 +90,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
         private principal: Principal,
         private treeUtilities: TreeUtilities,
         private router: Router,
+        private teacherService: TeacherMarineSuffixService,
         private convertObjectDatesService: ConvertObjectDatesService
     ) {
     }
@@ -203,7 +207,17 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
         });
-
+        if(this.teacherService.teachers){
+            this.teachers = this.teacherService.teachers;
+        }
+        else {
+            this.teacherService.query().subscribe(
+                (res: HttpResponse<ITeacherMarineSuffix[]>) => {
+                    this.teachers = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
 
         /*this.personService.query().subscribe(
             (res: HttpResponse<IPersonMarineSuffix[]>) => {
@@ -359,6 +373,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
 
         let runPhaseSaveData: IRunPhaseSaveDataModel = new RunPhaseSaveDataModel();
         runPhaseSaveData.runPhaseId = this.runPhase.id;
+        runPhaseSaveData.teacherId = this.runPhase.teacherId;
         runPhaseSaveData.runMonth = this.runPhase.runMonth;
         runPhaseSaveData.finalNiazsanjiReportId = this.runPhase.finalNiazsanjiReportId;
         runPhaseSaveData.description = this.runPhase.description;

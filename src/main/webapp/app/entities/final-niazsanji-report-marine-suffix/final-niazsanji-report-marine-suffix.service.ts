@@ -134,6 +134,9 @@ export class FinalNiazsanjiReportMarineSuffixService {
         res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
         res.body.lastEffectivenessPhaseFinish = res.body.lastEffectivenessPhaseFinish != null ? moment(res.body.lastEffectivenessPhaseFinish) : null;
         res.body.teacherFullName = (res.body.teacherName != null ? res.body.teacherName : '') + " " + (res.body.teacherFamily != null ? res.body.teacherFamily : '');
+        res.body.educationalModuleTotalTime = (res.body.educationalModuleLearningTimeTheorical
+            ? res.body.educationalModuleLearningTimeTheorical : 0) + (res.body.educationalModuleLearningTimePractical
+            ? res.body.educationalModuleLearningTimePractical : 0);
         return res;
     }
 
@@ -147,6 +150,9 @@ export class FinalNiazsanjiReportMarineSuffixService {
                 finalNiazsanjiReport.lastEffectivenessPhaseFinish != null ? moment(finalNiazsanjiReport.lastEffectivenessPhaseFinish) : null;
             finalNiazsanjiReport.teacherFullName =
                 (finalNiazsanjiReport.teacherName != null ? finalNiazsanjiReport.teacherName : '') + " " + (finalNiazsanjiReport.teacherFamily != null ? finalNiazsanjiReport.teacherFamily : '');
+            finalNiazsanjiReport.educationalModuleTotalTime =
+                (finalNiazsanjiReport.educationalModuleLearningTimeTheorical ? finalNiazsanjiReport.educationalModuleLearningTimeTheorical : 0)
+                + (finalNiazsanjiReport.educationalModuleLearningTimePractical ? finalNiazsanjiReport.educationalModuleLearningTimePractical : 0);
         });
         return res;
     }

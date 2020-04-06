@@ -61,6 +61,12 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
 
     private FloatFilter averageScore;
 
+    private FloatFilter levelOneScore;
+
+    private FloatFilter levelThreeScore;
+
+    private FloatFilter levelFourScore;
+
     private LongFilter niazsanjiPersonGradeId;
 
     private LongFilter levelThreeEffectivenessId;
@@ -201,6 +207,30 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
         this.averageScore = averageScore;
     }
 
+    public FloatFilter getLevelOneScore() {
+        return levelOneScore;
+    }
+
+    public void setLevelOneScore(FloatFilter levelOneScore) {
+        this.levelOneScore = levelOneScore;
+    }
+
+    public FloatFilter getLevelThreeScore() {
+        return levelThreeScore;
+    }
+
+    public void setLevelThreeScore(FloatFilter levelThreeScore) {
+        this.levelThreeScore = levelThreeScore;
+    }
+
+    public FloatFilter getLevelFourScore() {
+        return levelFourScore;
+    }
+
+    public void setLevelFourScore(FloatFilter levelFourScore) {
+        this.levelFourScore = levelFourScore;
+    }
+
     public LongFilter getNiazsanjiPersonGradeId() {
         return niazsanjiPersonGradeId;
     }
@@ -276,6 +306,9 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
             Objects.equals(scoreBeforeTest, that.scoreBeforeTest) &&
             Objects.equals(scoreAfterTest, that.scoreAfterTest) &&
             Objects.equals(averageScore, that.averageScore) &&
+            Objects.equals(levelOneScore, that.levelOneScore) &&
+            Objects.equals(levelThreeScore, that.levelThreeScore) &&
+            Objects.equals(levelFourScore, that.levelFourScore) &&
             Objects.equals(niazsanjiPersonGradeId, that.niazsanjiPersonGradeId) &&
             Objects.equals(levelThreeEffectivenessId, that.levelThreeEffectivenessId) &&
             Objects.equals(levelFourEffectivenessId, that.levelFourEffectivenessId) &&
@@ -303,6 +336,9 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
         scoreBeforeTest,
         scoreAfterTest,
         averageScore,
+        levelOneScore,
+        levelThreeScore,
+        levelFourScore,
         niazsanjiPersonGradeId,
         levelThreeEffectivenessId,
         levelFourEffectivenessId,
@@ -331,6 +367,9 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
                 (scoreBeforeTest != null ? "scoreBeforeTest=" + scoreBeforeTest + ", " : "") +
                 (scoreAfterTest != null ? "scoreAfterTest=" + scoreAfterTest + ", " : "") +
                 (averageScore != null ? "averageScore=" + averageScore + ", " : "") +
+                (levelOneScore != null ? "levelOneScore=" + levelOneScore + ", " : "") +
+                (levelThreeScore != null ? "levelThreeScore=" + levelThreeScore + ", " : "") +
+                (levelFourScore != null ? "levelFourScore=" + levelFourScore + ", " : "") +
                 (niazsanjiPersonGradeId != null ? "niazsanjiPersonGradeId=" + niazsanjiPersonGradeId + ", " : "") +
                 (levelThreeEffectivenessId != null ? "levelThreeEffectivenessId=" + levelThreeEffectivenessId + ", " : "") +
                 (levelFourEffectivenessId != null ? "levelFourEffectivenessId=" + levelFourEffectivenessId + ", " : "") +

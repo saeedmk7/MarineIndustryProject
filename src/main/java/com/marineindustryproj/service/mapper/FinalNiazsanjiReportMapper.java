@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity FinalNiazsanjiReport and its DTO FinalNiazsanjiReportDTO.
  */
-@Mapper(componentModel = "spring", uses = {DocumentMapper.class, RestrictionMapper.class, NiazsanjiIntegrationMapper.class, TeacherMapper.class, NiazsanjiInputMapper.class, CourseTypeMapper.class, OrganizationChartMapper.class, EducationalModuleMapper.class, MahiatCourseMapper.class, TeachingApproachMapper.class})
+@Mapper(componentModel = "spring", uses = {RunPhaseMapper.class, DesignAndPlanningMapper.class, DocumentMapper.class, RestrictionMapper.class, NiazsanjiIntegrationMapper.class, TeacherMapper.class, NiazsanjiInputMapper.class, CourseTypeMapper.class, OrganizationChartMapper.class, EducationalModuleMapper.class, MahiatCourseMapper.class, TeachingApproachMapper.class})
 public interface FinalNiazsanjiReportMapper extends EntityMapper<FinalNiazsanjiReportDTO, FinalNiazsanjiReport> {
 
     @Mapping(source = "niazsanjiIntegration.id", target = "niazsanjiIntegrationId")
@@ -25,10 +25,14 @@ public interface FinalNiazsanjiReportMapper extends EntityMapper<FinalNiazsanjiR
     @Mapping(source = "educationalModule.id", target = "educationalModuleId")
     @Mapping(source = "educationalModule.code", target = "educationalModuleCode")
     @Mapping(source = "educationalModule.title", target = "educationalModuleTitle")
+    @Mapping(source = "educationalModule.learningTimePractical", target = "educationalModuleLearningTimePractical")
+    @Mapping(source = "educationalModule.learningTimeTheorical", target = "educationalModuleLearningTimeTheorical")
     @Mapping(source = "mahiatCourse.id", target = "mahiatCourseId")
     @Mapping(source = "mahiatCourse.title", target = "mahiatCourseTitle")
     @Mapping(source = "teachingApproach.id", target = "teachingApproachId")
     @Mapping(source = "teachingApproach.title", target = "teachingApproachTitle")
+    @Mapping(source = "runPhases", target = "runPhases")
+    @Mapping(source = "designAndPlannings", target = "designAndPlannings")
     FinalNiazsanjiReportDTO toDto(FinalNiazsanjiReport finalNiazsanjiReport);
 
     @Mapping(target = "finalNiazsanjiReportPeople", ignore = true)
@@ -53,5 +57,8 @@ public interface FinalNiazsanjiReportMapper extends EntityMapper<FinalNiazsanjiR
         FinalNiazsanjiReport finalNiazsanjiReport = new FinalNiazsanjiReport();
         finalNiazsanjiReport.setId(id);
         return finalNiazsanjiReport;
+    }
+    default String fromRunPhase(RunPhase runPhase) {
+        return runPhase == null ? null : runPhase.getFinishDate();
     }
 }

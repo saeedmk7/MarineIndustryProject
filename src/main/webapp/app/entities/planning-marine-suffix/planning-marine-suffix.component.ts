@@ -572,7 +572,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
 
 
         prepareSearchDate() {
-        this.finalNiazsanjiReport.niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
+        //this.finalNiazsanjiReport.niazsanjiYear = this.convertObjectDatesService.getNowShamsiYear();
         this.dates = this.convertObjectDatesService.getYearsArray();
     }
 

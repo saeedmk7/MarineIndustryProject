@@ -31,7 +31,6 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
     private _page: number = 1;
     @Input('page')
     set page(value: number) {
-        debugger;
         if(value && value != this._page) {
             this._page = +value;
             this.triggerSubmitButton();
@@ -43,14 +42,14 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
     }
     private _predicate: string = "";
     @Input('predicate') set predicate(value: string){
-        debugger;
+
         if(value && value != this._predicate) {
             this._predicate = value;
         }
     }
     private _reverse: string = "";
     @Input('reverse') set reverse(value: string){
-        debugger;
+
         if(value && value != this._reverse) {
             this._reverse = value;
         }
@@ -93,7 +92,7 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
         console.log("I got:", this.searchPanelModel);
     }
     search(){
-        debugger;
+
         let url = window.location.href;
         let criteria = [];
         this.getPagingParameter(url);
@@ -147,7 +146,7 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
         this.reverse = this.getParameterByName('reverse',url);
     }
     onSubmit(f: any){
-        debugger;
+
         let url = this.deleteQueryString();
         for (let j = 0; j < this.searchPanelModel.length; j++) {
             let value = f.value[this.searchPanelModel[j].fieldName];
@@ -162,13 +161,13 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
             }
             url = this.appendQueryString(this.searchPanelModel[j].fieldName, this.searchPanelModel[j].selectedValue, url);
         }
-        debugger;
+
         url = this.appendPagingQueryString(url);
 
         window.location.href = url; //.slice(0,url.length-1);
     }
     appendPagingQueryString(url: string): string {
-        debugger;
+
         url = this.appendQueryString('size', this.size, url);
         url =  this.appendQueryString('page', this.page, url);
         url =  this.appendQueryString('predicate', this._predicate, url);

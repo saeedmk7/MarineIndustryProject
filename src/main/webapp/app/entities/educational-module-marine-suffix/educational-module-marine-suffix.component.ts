@@ -135,7 +135,7 @@ export class EducationalModuleMarineSuffixComponent implements OnInit, OnDestroy
     }
 
     prepareForExportExcel(res : IEducationalModuleMarineSuffix[]){
-        debugger;
+
         let a = new ExcelService(this.jhiTranslate);
         res = this.convertObjectDatesService.changeArrayDate(res);
         let report = [];

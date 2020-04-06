@@ -284,7 +284,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         let index: number = 0;
         res.forEach(a => {
             index++;
-            debugger;
+
             let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
             a.runMonthName = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
             let obj: Object;

@@ -14,7 +14,7 @@ export class ExcelService {
         this.isfa = translate.currentLang == 'fa';
     }
     public exportAsExcelFile(json: any[], excelFileName: string,jsontype:string): void {
-        debugger;
+
         var finalJson = this.makeJson(json,jsontype);
         const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(finalJson);
         const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
@@ -28,7 +28,7 @@ export class ExcelService {
             var obj = newJson[i];
             for (var key in obj) {
                 if (obj.hasOwnProperty(key)) {
-                    debugger;
+
                     let exactName;
                     if(key.includes('.')){
                         exactName = this.translate.get(key);

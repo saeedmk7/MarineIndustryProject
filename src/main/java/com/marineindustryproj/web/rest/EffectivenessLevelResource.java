@@ -87,6 +87,7 @@ public class EffectivenessLevelResource {
             .body(result);
     }
 
+
     /**
      * GET  /effectiveness-levels : get all the effectivenessLevels.
      *

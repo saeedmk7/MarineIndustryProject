@@ -3,6 +3,7 @@ import {IRunPhaseSaveDataItemModel} from "app/entities/run-phase-marine-suffix/r
 export interface IRunPhaseSaveDataModel {
     finalNiazsanjiReportId?: number;
     runPhaseId?: number;
+    teacherId?: number;
     runMonth?: number;
     description?: string;
     conversion?: string;
@@ -18,6 +19,7 @@ export class RunPhaseSaveDataModel implements IRunPhaseSaveDataModel {
     constructor(
         public finalNiazsanjiReportId?: number,
         public runPhaseId?: number,
+        public teacherId?: number,
         public runMonth?: number,
         public description?: string,
         public conversion?: string,
