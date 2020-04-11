@@ -101,13 +101,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let finalNiazsanjiReport of finalNiazsanjiReports ;let i = index">
+            <tr *ngFor="let finalNiazsanjiReport of finalNiazsanjiReports ;let i = index"
+                [ngClass]="{'ignore': finalNiazsanjiReport.status == 20,'new': finalNiazsanjiReport.status === 30,'accept': finalNiazsanjiReport.status === 40}">
                 <td>{{i + 1}}</td>
                 <td><a [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReport.id, 'view' ]">{{finalNiazsanjiReport.id}}</a>
                 </td>
                 <td>
                     <div *ngIf="finalNiazsanjiReport.organizationChartId">
-                        {{finalNiazsanjiReport.organizationChartTitle}}
+                        {{finalNiazsanjiReport.organizationChartRootTitle}}
                     </div>
                 </td>
                 <td>

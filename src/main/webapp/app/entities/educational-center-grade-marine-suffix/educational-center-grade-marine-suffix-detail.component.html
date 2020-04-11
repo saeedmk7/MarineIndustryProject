@@ -1,0 +1,99 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="educationalCenterGrade">
+            <h2><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.detail.title">Educational Center Grade</span> {{educationalCenterGrade.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.title">Title</span></dt>
+                <dd>
+                    <span>{{educationalCenterGrade.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.totalScore">Total Score</span></dt>
+                <dd>
+                    <span>{{educationalCenterGrade.totalScore}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.totalScorePercent">Total Score Percent</span></dt>
+                <dd>
+                    <span>{{educationalCenterGrade.totalScorePercent}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.grade">Grade</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.Grade.' + educationalCenterGrade.grade}}">{{educationalCenterGrade.grade}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.evaluateDate">Evaluate Date</span></dt>
+                <dd>
+                    <span>{{educationalCenterGrade.evaluateDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.year">Year</span></dt>
+                <dd>
+                    <span>{{educationalCenterGrade.year}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.month">Month</span></dt>
+                <dd>
+                    <span>{{educationalCenterGrade.month}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.fileDoc">File Doc</span></dt>
+                <dd>
+                    <span>{{educationalCenterGrade.fileDoc}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.description">Description</span></dt>
+                <dd>
+                    <span>{{educationalCenterGrade.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{educationalCenterGrade.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{educationalCenterGrade.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{educationalCenterGrade.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{educationalCenterGrade.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.evaluatorOpinion">Evaluator Opinion</span></dt>
+                <dd>
+                    <span *ngFor="let evaluatorOpinion of educationalCenterGrade.evaluatorOpinions; let last = last">
+                        <a [routerLink]="['/evaluator-opinion-marine-suffix', evaluatorOpinion?.id, 'view' ]">{{evaluatorOpinion.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of educationalCenterGrade.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.educationalCenterService">Educational Center Service</span></dt>
+                <dd>
+                    <div *ngIf="educationalCenterGrade.educationalCenterServiceId">
+                        <a [routerLink]="['/educational-center-service-marine-suffix', educationalCenterGrade.educationalCenterServiceId, 'view']">{{educationalCenterGrade.educationalCenterServiceTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.educationalCenter">Educational Center</span></dt>
+                <dd>
+                    <div *ngIf="educationalCenterGrade.educationalCenterId">
+                        <a [routerLink]="['/educational-center-marine-suffix', educationalCenterGrade.educationalCenterId, 'view']">{{educationalCenterGrade.educationalCenterName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/educational-center-grade-marine-suffix', educationalCenterGrade.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity EducationalCenterGrade.
+    -->
+    <changeSet id="20200229064928-1" author="jhipster">
+        <createTable tableName="educational_center_grade">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(1024)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="total_score" type="${floatType}">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="total_score_percent" type="${floatType}">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="grade" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="evaluate_date" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="mi_year" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="month" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="file_doc" type="clob">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="description" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="create_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="create_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modify_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modify_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="educational_center_service_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="educational_center_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="educational_center_grade" columnName="create_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="educational_center_grade" columnName="modify_date" columnDataType="datetime"/>
+        
+        <createTable tableName="educational_center_grade_evaluator_opinion">
+            <column name="evaluator_opinions_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="educational_center_grades_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="educational_center_grades_id, evaluator_opinions_id" tableName="educational_center_grade_evaluator_opinion"/>
+        
+        <createTable tableName="educational_center_grade_document">
+            <column name="documents_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="educational_center_grades_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="educational_center_grades_id, documents_id" tableName="educational_center_grade_document"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

@@ -1,0 +1,99 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="niazsanjiPersonGrade">
+            <h2><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.detail.title">Niazsanji Person Grade</span> {{niazsanjiPersonGrade.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.title">Title</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.totalScore">Total Score</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.totalScore}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.totalScorePercent">Total Score Percent</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.totalScorePercent}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.grade">Grade</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.Grade.' + niazsanjiPersonGrade.grade}}">{{niazsanjiPersonGrade.grade}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.evaluateDate">Evaluate Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.evaluateDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.year">Year</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.year}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.month">Month</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.month}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.strength">Strength</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.strength}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.improvement">Improvement</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.improvement}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.whatDoYouDo">What Do You Do</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.whatDoYouDo}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.fileDoc">File Doc</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.fileDoc}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.description">Description</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGrade.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of niazsanjiPersonGrade.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.finalNiazsanjiReportPerson">Final Niazsanji Report Person</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiPersonGrade.finalNiazsanjiReportPersonId">
+                        <a [routerLink]="['/final-niazsanji-report-person-marine-suffix', niazsanjiPersonGrade.finalNiazsanjiReportPersonId, 'view']">{{niazsanjiPersonGrade.finalNiazsanjiReportPersonPerson}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/niazsanji-person-grade-marine-suffix', niazsanjiPersonGrade.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

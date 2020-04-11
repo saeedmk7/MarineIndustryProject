@@ -1,0 +1,9 @@
+{
+    "marineindustryprojApp": {
+        "TeacherType": {
+            "null": "",
+            "INTERNAL": "INTERNAL",
+            "EXTRNAL": "EXTRNAL"
+        }
+    }
+}

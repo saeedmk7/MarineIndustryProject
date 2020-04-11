@@ -1,0 +1,82 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.home.title">Effectiveness Phase Levels</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-effectiveness-phase-level-marine-suffix" [routerLink]="['/effectiveness-phase-level-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.home.createLabel">
+            Create new Effectiveness Phase Level
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="effectivenessPhaseLevels">
+        <table class="table table-striped table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="effectivenessLevel"><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.effectivenessLevel">Effectiveness Level</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="effectivenessLevelUse"><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.effectivenessLevelUse">Effectiveness Level Use</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="weight"><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.weight">Weight</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="goal"><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.goal">Goal</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="unitOfMeasurement"><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.unitOfMeasurement">Unit Of Measurement</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let effectivenessPhaseLevel of effectivenessPhaseLevels ;trackBy: trackId">
+                <td><a [routerLink]="['/effectiveness-phase-level-marine-suffix', effectivenessPhaseLevel.id, 'view' ]">{{effectivenessPhaseLevel.id}}</a></td>
+                <td>{{effectivenessPhaseLevel.title}}</td>
+                <td>{{effectivenessPhaseLevel.effectivenessLevelTitle}}</td>
+                <td>{{effectivenessPhaseLevel.effectivenessLevelUseTitle}}</td>
+                <td>{{effectivenessPhaseLevel.weight}}</td>
+                <td>{{effectivenessPhaseLevel.goal}}</td>
+                <td jhiTranslate="{{'marineindustryprojApp.UnitOfMeasurement.' + effectivenessPhaseLevel.unitOfMeasurement}}">{{effectivenessPhaseLevel.unitOfMeasurement}}</td>
+                <td>{{effectivenessPhaseLevel.description}}</td>
+                <!--<td>{{effectivenessPhaseLevel.createUserLogin}}</td>
+                <td>{{effectivenessPhaseLevel.createDate | date:'medium'}}</td>
+                <td>{{effectivenessPhaseLevel.modifyUserLogin}}</td>
+                <td>{{effectivenessPhaseLevel.modifyDate | date:'medium'}}</td>-->
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/effectiveness-phase-level-marine-suffix', effectivenessPhaseLevel.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/effectiveness-phase-level-marine-suffix', effectivenessPhaseLevel.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                                [routerLink]="['/', { outlets: { popup: 'effectiveness-phase-level-marine-suffix/'+ effectivenessPhaseLevel.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="effectivenessPhaseLevels && effectivenessPhaseLevels.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

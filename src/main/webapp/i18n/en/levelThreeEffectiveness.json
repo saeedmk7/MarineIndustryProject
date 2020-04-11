@@ -1,0 +1,39 @@
+{
+    "marineindustryprojApp": {
+        "levelThreeEffectiveness": {
+            "home": {
+                "title": "Level Three Effectivenesses",
+                "createLabel": "Create a new Level Three Effectiveness",
+                "createOrEditLabel": "Create or edit a Level Three Effectiveness"
+            },
+            "created": "A new Level Three Effectiveness is created with identifier {{ param }}",
+            "updated": "A Level Three Effectiveness is updated with identifier {{ param }}",
+            "deleted": "A Level Three Effectiveness is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Level Three Effectiveness {{ id }}?"
+            },
+            "detail": {
+                "title": "Level Three Effectiveness"
+            },
+            "title": "Title",
+            "totalScore": "Total Score",
+            "totalScorePercent": "Total Score Percent",
+            "grade": "Grade",
+            "evaluateDate": "Evaluate Date",
+            "year": "Year",
+            "month": "Month",
+            "strength": "Strength",
+            "improvement": "Improvement",
+            "whatDoYouDo": "What Do You Do",
+            "fileDoc": "File Doc",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "levelThreeScore": "Level Three Score",
+            "document": "Document",
+            "finalNiazsanjiReportPerson": "Final Niazsanji Report Person"
+        }
+    }
+}

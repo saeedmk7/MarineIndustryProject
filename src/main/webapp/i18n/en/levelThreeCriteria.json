@@ -1,0 +1,32 @@
+{
+    "marineindustryprojApp": {
+        "levelThreeCriteria": {
+            "home": {
+                "title": "Level Three Criteria",
+                "createLabel": "Create a new Level Three Criteria",
+                "createOrEditLabel": "Create or edit a Level Three Criteria"
+            },
+            "created": "A new Level Three Criteria is created with identifier {{ param }}",
+            "updated": "A Level Three Criteria is updated with identifier {{ param }}",
+            "deleted": "A Level Three Criteria is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Level Three Criteria {{ id }}?"
+            },
+            "detail": {
+                "title": "Level Three Criteria"
+            },
+            "title": "Title",
+            "displayOrder": "Display Order",
+            "weight": "Weight",
+            "secondWeight": "Second Weight",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "levelThreeScore": "Level Three Score",
+            "mahiatCourse": "Mahiat Course",
+            "levelThreeCriteriaGroup": "Level Three Criteria Group"
+        }
+    }
+}

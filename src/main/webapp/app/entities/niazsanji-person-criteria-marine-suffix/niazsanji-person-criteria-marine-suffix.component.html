@@ -1,0 +1,86 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.home.title">Niazsanji Person Criteria</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-niazsanji-person-criteria-marine-suffix" [routerLink]="['/niazsanji-person-criteria-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.home.createLabel">
+            Create new Niazsanji Person Criteria
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="niazsanjiPersonCriteria">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="criterionType"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.criterionType">Criterion Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="displayOrder"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.displayOrder">Display Order</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="weight"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.weight">Weight</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="backgroundColor"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.backgroundColor">Background Color</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="colorText"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.colorText">Color Text</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="secondWeight"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.secondWeight">Second Weight</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let niazsanjiPersonCriteria of niazsanjiPersonCriteria ;trackBy: trackId">
+                <td><a [routerLink]="['/niazsanji-person-criteria-marine-suffix', niazsanjiPersonCriteria.id, 'view' ]">{{niazsanjiPersonCriteria.id}}</a></td>
+                <td jhiTranslate="{{'marineindustryprojApp.CriterionType.' + niazsanjiPersonCriteria.criterionType}}">{{niazsanjiPersonCriteria.criterionType}}</td>
+                <td>{{niazsanjiPersonCriteria.title}}</td>
+                <td>{{niazsanjiPersonCriteria.displayOrder}}</td>
+                <td>{{niazsanjiPersonCriteria.weight}}</td>
+                <td>{{niazsanjiPersonCriteria.description}}</td>
+                <td>{{niazsanjiPersonCriteria.backgroundColor}}</td>
+                <td>{{niazsanjiPersonCriteria.colorText}}</td>
+                <!--<td>{{niazsanjiPersonCriteria.secondWeight}}</td>
+
+                <td>{{niazsanjiPersonCriteria.createUserLogin}}</td>
+                <td>{{niazsanjiPersonCriteria.createDate | date:'medium'}}</td>
+                <td>{{niazsanjiPersonCriteria.modifyUserLogin}}</td>
+                <td>{{niazsanjiPersonCriteria.modifyDate | date:'medium'}}</td>-->
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/niazsanji-person-criteria-marine-suffix', niazsanjiPersonCriteria.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/niazsanji-person-criteria-marine-suffix', niazsanjiPersonCriteria.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                                [routerLink]="['/', { outlets: { popup: 'niazsanji-person-criteria-marine-suffix/'+ niazsanjiPersonCriteria.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="niazsanjiPersonCriteria && niazsanjiPersonCriteria.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

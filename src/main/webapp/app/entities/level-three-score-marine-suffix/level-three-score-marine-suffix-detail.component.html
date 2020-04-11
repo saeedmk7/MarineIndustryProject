@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="levelThreeScore">
+            <h2><span jhiTranslate="marineindustryprojApp.levelThreeScore.detail.title">Level Three Score</span> {{levelThreeScore.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeScore.score">Score</span></dt>
+                <dd>
+                    <span>{{levelThreeScore.score}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeScore.description">Description</span></dt>
+                <dd>
+                    <span>{{levelThreeScore.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeScore.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{levelThreeScore.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeScore.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{levelThreeScore.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeScore.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{levelThreeScore.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeScore.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{levelThreeScore.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeScore.levelThreeCriteria">Level Three Criteria</span></dt>
+                <dd>
+                    <div *ngIf="levelThreeScore.levelThreeCriteriaId">
+                        <a [routerLink]="['/level-three-criteria-marine-suffix', levelThreeScore.levelThreeCriteriaId, 'view']">{{levelThreeScore.levelThreeCriteriaTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeScore.levelThreeEffectiveness">Level Three Effectiveness</span></dt>
+                <dd>
+                    <div *ngIf="levelThreeScore.levelThreeEffectivenessId">
+                        <a [routerLink]="['/level-three-effectiveness-marine-suffix', levelThreeScore.levelThreeEffectivenessId, 'view']">{{levelThreeScore.levelThreeEffectivenessTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/level-three-score-marine-suffix', levelThreeScore.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

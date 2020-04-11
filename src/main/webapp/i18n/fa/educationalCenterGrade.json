@@ -1,0 +1,43 @@
+{
+    "marineindustryprojApp": {
+        "educationalCenterGrade": {
+            "home": {
+                "title": "گریدبندی پیمانکاران",
+                "createLabel": "جدید",
+                "createOrEditLabel": " گریدبندی پیمانکار"
+            },
+            "created": "گریدبندی پیمانکار با شناسه {{ param }} ایجاد شد.",
+            "updated": "گریدبندی پیمانکار با شناسه {{ param }} ویرایش شد.",
+            "deleted": "گریدبندی پیمانکار با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف گریدبندی پیمانکار با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات گریدبندی پیمانکار"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "totalScore": "جمع امتیاز",
+            "totalScorePercent": "درصد جمع امتیاز",
+            "grade": "گرید",
+            "evaluateDate": "تاریخ ارزیابی",
+            "year": "سال",
+            "month": "ماه",
+            "fileDoc": "فایل",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "educationalCenterGradeScore": "نمره",
+            "evaluatorOpinion": "نظر ارزیاب",
+            "document": "Document",
+            "educationalCenterService": "خدمت دریافتی",
+            "educationalCenterServiceId": "خدمت دریافتی",
+            "educationalCenter": "پیمانکار",
+            "educationalCenterId": "پیمانکار",
+            "educationalCenterCriteria": "معیارهای ارزیابی",
+            "educationalCenterCriteriaId": "معیارهای ارزیابی"
+        }
+    }
+}

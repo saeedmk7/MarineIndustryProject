@@ -1,0 +1,32 @@
+{
+    "marineindustryprojApp": {
+        "effectivenessPhaseLevel": {
+            "home": {
+                "title": "Effectiveness Phase Levels",
+                "createLabel": "Create a new Effectiveness Phase Level",
+                "createOrEditLabel": "Create or edit a Effectiveness Phase Level"
+            },
+            "created": "A new Effectiveness Phase Level is created with identifier {{ param }}",
+            "updated": "A Effectiveness Phase Level is updated with identifier {{ param }}",
+            "deleted": "A Effectiveness Phase Level is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Effectiveness Phase Level {{ id }}?"
+            },
+            "detail": {
+                "title": "Effectiveness Phase Level"
+            },
+            "title": "Title",
+            "effectivenessLevel": "Effectiveness Level",
+            "effectivenessLevelUse": "Effectiveness Level Use",
+            "weight": "Weight",
+            "goal": "Goal",
+            "unitOfMeasurement": "Unit Of Measurement",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "effectivenessPhase": "Effectiveness Phase"
+        }
+    }
+}

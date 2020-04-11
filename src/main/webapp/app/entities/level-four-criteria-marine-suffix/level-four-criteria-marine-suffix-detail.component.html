@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="levelFourCriteria">
+            <h2><span jhiTranslate="marineindustryprojApp.levelFourCriteria.detail.title">Level Four Criteria</span> {{levelFourCriteria.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourCriteria.title">Title</span></dt>
+                <dd>
+                    <span>{{levelFourCriteria.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourCriteria.displayOrder">Display Order</span></dt>
+                <dd>
+                    <span>{{levelFourCriteria.displayOrder}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourCriteria.weight">Weight</span></dt>
+                <dd>
+                    <span>{{levelFourCriteria.weight}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourCriteria.secondWeight">Second Weight</span></dt>
+                <dd>
+                    <span>{{levelFourCriteria.secondWeight}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourCriteria.description">Description</span></dt>
+                <dd>
+                    <span>{{levelFourCriteria.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourCriteria.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{levelFourCriteria.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourCriteria.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{levelFourCriteria.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourCriteria.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{levelFourCriteria.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourCriteria.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{levelFourCriteria.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/level-four-criteria-marine-suffix', levelFourCriteria.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

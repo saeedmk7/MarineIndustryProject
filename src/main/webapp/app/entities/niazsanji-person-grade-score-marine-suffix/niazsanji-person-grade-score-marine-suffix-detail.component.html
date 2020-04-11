@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="niazsanjiPersonGradeScore">
+            <h2><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGradeScore.detail.title">Niazsanji Person Grade Score</span> {{niazsanjiPersonGradeScore.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGradeScore.score">Score</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGradeScore.score}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGradeScore.description">Description</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGradeScore.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGradeScore.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGradeScore.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGradeScore.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGradeScore.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGradeScore.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGradeScore.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGradeScore.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonGradeScore.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGradeScore.niazsanjiPersonCriteria">Niazsanji Person Criteria</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiPersonGradeScore.niazsanjiPersonCriteriaId">
+                        <a [routerLink]="['/niazsanji-person-criteria-marine-suffix', niazsanjiPersonGradeScore.niazsanjiPersonCriteriaId, 'view']">{{niazsanjiPersonGradeScore.niazsanjiPersonCriteriaTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGradeScore.niazsanjiPersonGrade">Niazsanji Person Grade</span></dt>
+                <dd>
+                    <div *ngIf="niazsanjiPersonGradeScore.niazsanjiPersonGradeId">
+                        <a [routerLink]="['/niazsanji-person-grade-marine-suffix', niazsanjiPersonGradeScore.niazsanjiPersonGradeId, 'view']">{{niazsanjiPersonGradeScore.niazsanjiPersonGradeTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/niazsanji-person-grade-score-marine-suffix', niazsanjiPersonGradeScore.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

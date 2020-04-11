@@ -1,0 +1,84 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.teacherGradeScore.home.title">Teacher Grade Scores</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-teacher-grade-score-marine-suffix" [routerLink]="['/teacher-grade-score-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.teacherGradeScore.home.createLabel">
+            Create new Teacher Grade Score
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="teacherGradeScores">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="score"><span jhiTranslate="marineindustryprojApp.teacherGradeScore.score">Score</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.teacherGradeScore.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.teacherGradeScore.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.teacherGradeScore.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.teacherGradeScore.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.teacherGradeScore.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="teacherCriteriaTitle"><span jhiTranslate="marineindustryprojApp.teacherGradeScore.teacherCriteria">Teacher Criteria</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="teacherGradeTitle"><span jhiTranslate="marineindustryprojApp.teacherGradeScore.teacherGrade">Teacher Grade</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let teacherGradeScore of teacherGradeScores ;trackBy: trackId">
+                <td><a [routerLink]="['/teacher-grade-score-marine-suffix', teacherGradeScore.id, 'view' ]">{{teacherGradeScore.id}}</a></td>
+                <td>{{teacherGradeScore.score}}</td>
+                <td>{{teacherGradeScore.description}}</td>
+                <td>{{teacherGradeScore.createUserLogin}}</td>
+                <td>{{teacherGradeScore.createDate | date:'medium'}}</td>
+                <td>{{teacherGradeScore.modifyUserLogin}}</td>
+                <td>{{teacherGradeScore.modifyDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="teacherGradeScore.teacherCriteriaId">
+                        <a [routerLink]="['../teacher-criteria-marine-suffix', teacherGradeScore.teacherCriteriaId , 'view' ]" >{{teacherGradeScore.teacherCriteriaTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="teacherGradeScore.teacherGradeId">
+                        <a [routerLink]="['../teacher-grade-marine-suffix', teacherGradeScore.teacherGradeId , 'view' ]" >{{teacherGradeScore.teacherGradeTitle}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/teacher-grade-score-marine-suffix', teacherGradeScore.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/teacher-grade-score-marine-suffix', teacherGradeScore.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'teacher-grade-score-marine-suffix/'+ teacherGradeScore.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="teacherGradeScores && teacherGradeScores.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

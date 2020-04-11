@@ -1,0 +1,136 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-level-three-criteria-marine-suffix-heading" jhiTranslate="marineindustryprojApp.levelThreeCriteria.home.createOrEditLabel">Create or edit a Level Three Criteria</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!levelThreeCriteria.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="levelThreeCriteria.id" readonly />
+                </div>
+                <div class="form-group">
+                    <a (click)="change('mahiat-course-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeCriteria.mahiatCourse" for="field_mahiatCourse">Mahiat Course</a>
+                    <select class="form-control" id="field_mahiatCourse" required name="mahiatCourse" [(ngModel)]="levelThreeCriteria.mahiatCourseId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="mahiatCourseOption.id" *ngFor="let mahiatCourseOption of mahiatcourses; trackBy: trackMahiatCourseById">{{mahiatCourseOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('level-three-criteria-group-marine-suffix')" required class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeCriteria.levelThreeCriteriaGroup" for="field_levelThreeCriteriaGroup">Level Three Criteria Group</a>
+                    <select class="form-control" id="field_levelThreeCriteriaGroup" required name="levelThreeCriteriaGroup" [(ngModel)]="levelThreeCriteria.levelThreeCriteriaGroupId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="levelThreeCriteriaGroupOption.id" *ngFor="let levelThreeCriteriaGroupOption of levelthreecriteriagroups; trackBy: trackLevelThreeCriteriaGroupById">{{levelThreeCriteriaGroupOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeCriteria.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="levelThreeCriteria.title" required maxlength="1024"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1024 }">
+                        This field cannot be longer than 1024 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeCriteria.displayOrder" for="field_displayOrder">Display Order</label>
+                    <input type="number" class="form-control" name="displayOrder" id="field_displayOrder"
+                        [(ngModel)]="levelThreeCriteria.displayOrder" required/>
+                    <div [hidden]="!(editForm.controls.displayOrder?.dirty && editForm.controls.displayOrder?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.displayOrder?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.displayOrder?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeCriteria.weight" for="field_weight">Weight</label>
+                    <input type="number" class="form-control" name="weight" id="field_weight" required
+                        [(ngModel)]="levelThreeCriteria.weight" />
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeCriteria.secondWeight" for="field_secondWeight">Second Weight</label>
+                    <input type="number" class="form-control" name="secondWeight" id="field_secondWeight"
+                        [(ngModel)]="levelThreeCriteria.secondWeight" />
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeCriteria.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="levelThreeCriteria.description" maxlength="1024"/>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1024 }">
+                        This field cannot be longer than 1024 characters.
+                        </small>
+                    </div>
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeCriteria.createUserLogin" for="field_createUserLogin">Create User Login</label>
+                    <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
+                        [(ngModel)]="levelThreeCriteria.createUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.createUserLogin?.dirty && editForm.controls.createUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeCriteria.createDate" for="field_createDate">Create Date</label>
+                    <div class="d-flex">
+                        <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="createDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeCriteria.modifyUserLogin" for="field_modifyUserLogin">Modify User Login</label>
+                    <input type="text" class="form-control" name="modifyUserLogin" id="field_modifyUserLogin"
+                        [(ngModel)]="levelThreeCriteria.modifyUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.modifyUserLogin?.dirty && editForm.controls.modifyUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.modifyUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeCriteria.modifyDate" for="field_modifyDate">Modify Date</label>
+                    <div class="d-flex">
+                        <input id="field_modifyDate" type="datetime-local" class="form-control" name="modifyDate" [(ngModel)]="modifyDate"
+                        />
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeCriteria.backgroundColor" for="field_backgroundColor">Background Color</label>
+                    <input type="color" class="form-control" name="backgroundColor" id="field_backgroundColor"
+                        [(ngModel)]="levelThreeCriteria.backgroundColor" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeCriteria.colorText" for="field_colorText">Color Text</label>
+                    <input type="color" class="form-control" name="colorText" id="field_colorText"
+                        [(ngModel)]="levelThreeCriteria.colorText" />
+                </div>
+
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

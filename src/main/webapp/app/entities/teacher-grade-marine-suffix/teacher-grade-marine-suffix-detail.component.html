@@ -1,0 +1,91 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="teacherGrade">
+            <h2><span jhiTranslate="marineindustryprojApp.teacherGrade.detail.title">Teacher Grade</span> {{teacherGrade.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.title">Title</span></dt>
+                <dd>
+                    <span>{{teacherGrade.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.version">Version</span></dt>
+                <dd>
+                    <span>{{teacherGrade.version}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.totalScore">Total Score</span></dt>
+                <dd>
+                    <span>{{teacherGrade.totalScore}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.totalScorePercent">Total Score Percent</span></dt>
+                <dd>
+                    <span>{{teacherGrade.totalScorePercent}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.grade">Grade</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.Grade.' + teacherGrade.grade}}">{{teacherGrade.grade}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.evaluateDate">Evaluate Date</span></dt>
+                <dd>
+                    <span>{{teacherGrade.evaluateDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.year">Year</span></dt>
+                <dd>
+                    <span>{{teacherGrade.year}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.month">Month</span></dt>
+                <dd>
+                    <span>{{teacherGrade.month}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.fileDoc">File Doc</span></dt>
+                <dd>
+                    <span>{{teacherGrade.fileDoc}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.description">Description</span></dt>
+                <dd>
+                    <span>{{teacherGrade.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{teacherGrade.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{teacherGrade.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{teacherGrade.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{teacherGrade.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of teacherGrade.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGrade.teacher">Teacher</span></dt>
+                <dd>
+                    <div *ngIf="teacherGrade.teacherId">
+                        <a [routerLink]="['/teacher-marine-suffix', teacherGrade.teacherId, 'view']">{{teacherGrade.teacherFamily}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/teacher-grade-marine-suffix', teacherGrade.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

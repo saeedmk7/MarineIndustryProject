@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "levelFourScore": {
+            "home": {
+                "title": "Level Four Scores",
+                "createLabel": "Create a new Level Four Score",
+                "createOrEditLabel": "Create or edit a Level Four Score"
+            },
+            "created": "A new Level Four Score is created with identifier {{ param }}",
+            "updated": "A Level Four Score is updated with identifier {{ param }}",
+            "deleted": "A Level Four Score is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Level Four Score {{ id }}?"
+            },
+            "detail": {
+                "title": "Level Four Score"
+            },
+            "score": "Score",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "levelFourCriteria": "Level Four Criteria",
+            "levelFourEffectiveness": "Level Four Effectiveness"
+        }
+    }
+}

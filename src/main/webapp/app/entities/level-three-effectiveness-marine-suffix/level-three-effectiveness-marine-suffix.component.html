@@ -1,0 +1,98 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.home.title">Level Three Effectivenesses</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-level-three-effectiveness-marine-suffix" [routerLink]="['/level-three-effectiveness-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.home.createLabel">
+            Create new Level Three Effectiveness
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="levelThreeEffectivenesses">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="totalScore"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.totalScore">Total Score</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="totalScorePercent"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.totalScorePercent">Total Score Percent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="grade"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.grade">Grade</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="evaluateDate"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.evaluateDate">Evaluate Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="year"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.year">Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="month"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.month">Month</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="strength"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.strength">Strength</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="improvement"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.improvement">Improvement</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="whatDoYouDo"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.whatDoYouDo">What Do You Do</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fileDoc"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.fileDoc">File Doc</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="finalNiazsanjiReportPersonDescription"><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.finalNiazsanjiReportPerson">Final Niazsanji Report Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let levelThreeEffectiveness of levelThreeEffectivenesses ;trackBy: trackId">
+                <td><a [routerLink]="['/level-three-effectiveness-marine-suffix', levelThreeEffectiveness.id, 'view' ]">{{levelThreeEffectiveness.id}}</a></td>
+                <td>{{levelThreeEffectiveness.title}}</td>
+                <td>{{levelThreeEffectiveness.totalScore}}</td>
+                <td>{{levelThreeEffectiveness.totalScorePercent}}</td>
+                <td jhiTranslate="{{'marineindustryprojApp.Grade.' + levelThreeEffectiveness.grade}}">{{levelThreeEffectiveness.grade}}</td>
+                <td>{{levelThreeEffectiveness.evaluateDate}}</td>
+                <td>{{levelThreeEffectiveness.year}}</td>
+                <td>{{levelThreeEffectiveness.month}}</td>
+                <td>{{levelThreeEffectiveness.strength}}</td>
+                <td>{{levelThreeEffectiveness.improvement}}</td>
+                <td>{{levelThreeEffectiveness.whatDoYouDo}}</td>
+                <td>{{levelThreeEffectiveness.fileDoc}}</td>
+                <td>{{levelThreeEffectiveness.description}}</td>
+                <!--<td>{{levelThreeEffectiveness.createUserLogin}}</td>
+                <td>{{levelThreeEffectiveness.createDate | date:'medium'}}</td>
+                <td>{{levelThreeEffectiveness.modifyUserLogin}}</td>
+                <td>{{levelThreeEffectiveness.modifyDate | date:'medium'}}</td>-->
+                <td>
+                    <div *ngIf="levelThreeEffectiveness.finalNiazsanjiReportPersonId">
+                        <a [routerLink]="['../final-niazsanji-report-person-marine-suffix', levelThreeEffectiveness.finalNiazsanjiReportPersonId , 'view' ]" >{{levelThreeEffectiveness.finalNiazsanjiReportPersonDescription}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/level-three-effectiveness-marine-suffix', levelThreeEffectiveness.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/level-three-effectiveness-marine-suffix', levelThreeEffectiveness.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'level-three-effectiveness-marine-suffix/'+ levelThreeEffectiveness.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="levelThreeEffectivenesses && levelThreeEffectivenesses.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

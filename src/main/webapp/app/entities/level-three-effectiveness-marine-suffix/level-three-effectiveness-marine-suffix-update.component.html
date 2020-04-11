@@ -1,0 +1,192 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-level-three-effectiveness-marine-suffix-heading" jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.home.createOrEditLabel">Create or edit a Level Three Effectiveness</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!levelThreeEffectiveness.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="levelThreeEffectiveness.id" readonly />
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th colspan="4" style="text-align: center">
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.formTitle">formTitle</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="text-align: center">
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.recommendTitle">recommendTitle</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center">
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.courseTitle">courseTitle</label>
+                            </th>
+                            <td>
+                                {{finalNiazsanjiReport.educationalModuleTitle}}
+                            </td>
+                            <th style="text-align: center">
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.evaluateDate">evaluateDate</label>
+                            </th>
+                            <td>
+                                {{levelThreeEffectiveness.evaluateDate}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center">
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.finalNiazsanjiReportPerson">finalNiazsanjiReportPerson</label>
+                            </th>
+                            <td>
+                                {{finalNiazsanjiReportPerson.personFullName}}
+                            </td>
+                            <!--<th style="text-align: center">
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.qualificationTitle">qualificationTitle</label>
+                            </th>
+                            <td>
+
+                            </td>-->
+                            <th style="text-align: center">
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.teacherFullName">teacherFullName</label>
+                            </th>
+                            <td>
+                                {{finalNiazsanjiReport.teacherName}} {{finalNiazsanjiReport.teacherFamily}}
+                            </td>
+                        </tr>
+                    </table>
+                    <a *ngIf="isSuperUsers" (click)="change('level-three-criteria-marine-suffix')" class="btn btn-info"
+                       [ngClass]="{'enableLink': isSuperUsers}">تصحیح لیست معیارهای ارزشیابی</a>
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th rowspan="2">ردیف</th>
+                            <th rowspan="2">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.levelThreeCriteriaGroup">levelThreeCriteriaGroup</label>
+                            </th>
+                            <th rowspan="2">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.levelThreeCriteria">niazsanjiPersonCriteria</label>
+                            </th>
+                            <th rowspan="2">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.description">description</label></th>
+                            <th rowspan="2">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.weight">weight</label></th>
+                            <th colspan="5">امتیازات</th>
+                            <th rowspan="2">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.description">description</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th *ngFor="let i of scores">{{i}}</th>
+                        </tr>
+                        <tr *ngFor="let item of levelThreeEffectiveness.levelThreeScores; let i= index"
+                            [style.background-color]="item.levelThreeBackgroundColor"
+                            [style.color]="item.levelThreeColorText">
+                            <td>{{i+1}}</td>
+                            <td>{{ item.levelThreeCriteriaGroupTitle }}</td>
+                            <td>{{item.levelThreeCriteriaTitle}}</td>
+                            <td>{{item.levelThreeCriteriaDescription}}</td>
+                            <td>{{item.levelThreeCriteriaWeight}}</td>
+                            <td *ngFor="let score of scores"><input class="form-radio" type="radio" [name]="item.id"
+                                                                    [id]="item.id + '_' + score" [value]="score"
+                                                                    [checked]="item.score == score"
+                                                                    (change)="checkValue(item.id, score)"></td>
+                            <td><textarea class="form-control" type="textarea" [name]="item.description"
+                                          [id]="item.description + '_' + item.id" [ngModelOptions]="{standalone: true}"
+                                          [(ngModel)]="item.description"></textarea></td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th colspan="2"><label class="form-control-label"
+                                                   jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.totalScore">Total
+                                Score</label></th>
+                            <th colspan="10">{{this.levelThreeEffectiveness.totalScore}}</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th colspan="2"><label class="form-control-label"
+                                                   jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.totalScorePercent">Total
+                                Score Percent</label></th>
+                            <th colspan="10">{{this.levelThreeEffectiveness.totalScorePercent}}</th>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="form-group fullcover">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.description" for="field_description">Description</label>
+                    <textarea type="text" class="form-control" name="description" id="field_description"
+                              [(ngModel)]="levelThreeEffectiveness.description" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.createUserLogin" for="field_createUserLogin">Create User Login</label>
+                    <input type="text" class="form-control" name="createUserLogin" id="field_createUserLogin"
+                        [(ngModel)]="levelThreeEffectiveness.createUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.createUserLogin?.dirty && editForm.controls.createUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.createDate" for="field_createDate">Create Date</label>
+                    <div class="d-flex">
+                        <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="createDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.modifyUserLogin" for="field_modifyUserLogin">Modify User Login</label>
+                    <input type="text" class="form-control" name="modifyUserLogin" id="field_modifyUserLogin"
+                        [(ngModel)]="levelThreeEffectiveness.modifyUserLogin" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.modifyUserLogin?.dirty && editForm.controls.modifyUserLogin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.modifyUserLogin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.modifyDate" for="field_modifyDate">Modify Date</label>
+                    <div class="d-flex">
+                        <input id="field_modifyDate" type="datetime-local" class="form-control" name="modifyDate" [(ngModel)]="modifyDate"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.document" for="field_document">Document</label>
+                    <select class="form-control" id="field_document" multiple name="document" [(ngModel)]="levelThreeEffectiveness.documents">
+                        <option [ngValue]="getSelected(levelThreeEffectiveness.documents, documentOption)" *ngFor="let documentOption of documents; trackBy: trackDocumentById">{{documentOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.finalNiazsanjiReportPerson" for="field_finalNiazsanjiReportPerson">Final Niazsanji Report Person</label>
+                    <select class="form-control" id="field_finalNiazsanjiReportPerson" name="finalNiazsanjiReportPerson" [(ngModel)]="levelThreeEffectiveness.finalNiazsanjiReportPersonId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="finalNiazsanjiReportPersonOption.id" *ngFor="let finalNiazsanjiReportPersonOption of finalniazsanjireportpeople; trackBy: trackFinalNiazsanjiReportPersonById">{{finalNiazsanjiReportPersonOption.description}}</option>
+                    </select>
+                </div>-->
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

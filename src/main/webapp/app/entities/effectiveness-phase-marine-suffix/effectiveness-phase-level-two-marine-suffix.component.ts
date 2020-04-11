@@ -84,7 +84,6 @@ export class EffectivenessPhaseLevelTwoMarineSuffixComponent implements OnInit, 
                 this.fullAverage = this.finalNiazsanjiReportPeople.map(w => w.averageScore).reduce((sum, current) => sum + current) / this.finalNiazsanjiReportPeople.length;
                 this.fullGrade = this.convertObjectDatesService.calculateGrade(this.fullAverage);
 
-                debugger;
                 if(this.finalNiazsanjiReportPeople.filter(w => w.averageScore > 0).length == this.finalNiazsanjiReportPeople.length){
                     this.canComplete = true;
                 }
@@ -94,7 +93,6 @@ export class EffectivenessPhaseLevelTwoMarineSuffixComponent implements OnInit, 
     completeLevel(finalNiazsanjiReportId: number){
         if(confirm("آیا اطلاعات وارد شده همگی صحیح هستند؟ و برای تایید نهایی کردن این سطح مطمئنید؟")) {
             this.effectivenessPhaseService.completeLevelTwo(finalNiazsanjiReportId).subscribe((resp: HttpResponse<boolean>) => {
-                debugger;
                 if (resp.body) {
                     this.change('effectiveness-phase-marine-suffix/' + finalNiazsanjiReportId);
                 }
@@ -182,7 +180,6 @@ export class EffectivenessPhaseLevelTwoMarineSuffixComponent implements OnInit, 
     }
 
     saveScore(finalNiazsanjiReportPerson: IFinalNiazsanjiReportPersonMarineSuffix){
-        debugger;
         this.errorMessage = "";
         if(!(finalNiazsanjiReportPerson.scoreBeforeTest && finalNiazsanjiReportPerson.scoreBeforeTest > 0 && finalNiazsanjiReportPerson.scoreBeforeTest <= 100)){
             this.errorMessage = `لطفا نمره قبل از تست '${finalNiazsanjiReportPerson.personFullName}' را به درستی وارد نمائید.`;

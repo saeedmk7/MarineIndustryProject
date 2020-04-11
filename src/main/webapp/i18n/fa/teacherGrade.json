@@ -1,0 +1,42 @@
+{
+    "marineindustryprojApp": {
+        "teacherGrade": {
+            "home": {
+                "title": "گریدبندی استادان",
+                "createLabel": "جدید",
+                "createOrEditLabel": " گریدبندی استاد"
+            },
+            "created": "گریدبندی استاد با شناسه {{ param }} ایجاد شد.",
+            "updated": "گریدبندی استاد با شناسه {{ param }} ویرایش شد.",
+            "deleted": "گریدبندی استاد با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف گریدبندی استاد با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات گریدبندی استاد"
+            },
+            "formTitle": "عنوان فرم: شناسایی، ارزیابی و انتخاب اساتید (اشخاص حقیقی)",
+            "title": "عنوان",
+            "code": "کد",
+            "totalScore": "جمع امتیاز",
+            "totalScorePercent": "درصد جمع امتیاز",
+            "grade": "گرید",
+            "evaluateDate": "تاریخ ارزیابی",
+            "year": "سال",
+            "month": "ماه",
+            "fileDoc": "فایل",
+            "version": "شماره ویرایش",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "teacherGradeScore": "Teacher Grade Score",
+            "document": "Document",
+            "teacher": "استاد",
+            "teacherId": "استاد",
+            "teacherCriteria": "معیارهای ارزیابی",
+            "teacherCriteriaId": "معیارهای ارزیابی"
+        }
+    }
+}

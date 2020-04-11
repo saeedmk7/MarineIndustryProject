@@ -1,0 +1,30 @@
+{
+    "marineindustryprojApp": {
+        "levelFourCriteria": {
+            "home": {
+                "title": "Level Four Criteria",
+                "createLabel": "Create a new Level Four Criteria",
+                "createOrEditLabel": "Create or edit a Level Four Criteria"
+            },
+            "created": "A new Level Four Criteria is created with identifier {{ param }}",
+            "updated": "A Level Four Criteria is updated with identifier {{ param }}",
+            "deleted": "A Level Four Criteria is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Level Four Criteria {{ id }}?"
+            },
+            "detail": {
+                "title": "Level Four Criteria"
+            },
+            "title": "Title",
+            "displayOrder": "Display Order",
+            "weight": "Weight",
+            "secondWeight": "Second Weight",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "levelFourScore": "Level Four Score"
+        }
+    }
+}

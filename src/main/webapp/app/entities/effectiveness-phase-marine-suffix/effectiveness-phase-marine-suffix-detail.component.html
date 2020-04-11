@@ -1,0 +1,81 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="effectivenessPhase">
+            <h2><span jhiTranslate="marineindustryprojApp.effectivenessPhase.detail.title">Effectiveness Phase</span> {{effectivenessPhase.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhase.finishPhaseDate">Finish Phase Date</span></dt>
+                <dd>
+                    <span>{{effectivenessPhase.finishPhaseDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhase.startPhaseDate">Start Phase Date</span></dt>
+                <dd>
+                    <span>{{effectivenessPhase.startPhaseDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhase.firstScore">First Score</span></dt>
+                <dd>
+                    <span>{{effectivenessPhase.firstScore}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhase.secondScore">Second Score</span></dt>
+                <dd>
+                    <span>{{effectivenessPhase.secondScore}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhase.finalScore">Final Score</span></dt>
+                <dd>
+                    <span>{{effectivenessPhase.finalScore}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhase.description">Description</span></dt>
+                <dd>
+                    <span>{{effectivenessPhase.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhase.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{effectivenessPhase.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhase.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{effectivenessPhase.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhase.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{effectivenessPhase.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhase.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{effectivenessPhase.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhase.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of effectivenessPhase.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhase.finalNiazsanjiReport">Final Niazsanji Report</span></dt>
+                <dd>
+                    <div *ngIf="effectivenessPhase.finalNiazsanjiReportId">
+                        <a [routerLink]="['/final-niazsanji-report-marine-suffix', effectivenessPhase.finalNiazsanjiReportId, 'view']">{{effectivenessPhase.finalNiazsanjiReportDescription}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhase.effectivenessPhaseLevel">Effectiveness Phase Level</span></dt>
+                <dd>
+                    <div *ngIf="effectivenessPhase.effectivenessPhaseLevelId">
+                        <a [routerLink]="['/effectiveness-phase-level-marine-suffix', effectivenessPhase.effectivenessPhaseLevelId, 'view']">{{effectivenessPhase.effectivenessPhaseLevelTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/effectiveness-phase-marine-suffix', effectivenessPhase.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -104,65 +104,104 @@ public class DocumentQueryService extends QueryService<Document> {
     private void getLongFilter(DocumentCriteria criteria,
                                String entityName,
                                LongFilter longFilter) {
-        if(entityName.equals("person")) {
+        if(entityName.toLowerCase().equals("person")) {
             criteria.setPersonId(longFilter);
         }
-        else if(entityName.equals("educationalCenter")) {
+        else if(entityName.toLowerCase().equals("educationalcenter")) {
             criteria.setEducationalCenterId(longFilter);
         }
-        else if(entityName.equals("teacher")) {
+        else if(entityName.toLowerCase().equals("teacher")) {
             criteria.setTeacherId(longFilter);
         }
-        else if(entityName.equals("job")) {
+        else if(entityName.toLowerCase().equals("job")) {
             criteria.setJobId(longFilter);
         }
-        else if(entityName.equals("educationalModule")) {
+        else if(entityName.toLowerCase().equals("educationalmodule")) {
             criteria.setEducationalModuleId(longFilter);
         }
-        else if(entityName.equals("resource")) {
+        else if(entityName.toLowerCase().equals("resource")) {
             criteria.setResourceId(longFilter);
         }
-        else if(entityName.equals("instruction")) {
+        else if(entityName.toLowerCase().equals("instruction")) {
             criteria.setInstructionId(longFilter);
         }
-        else if(entityName.equals("runphase")) {
+        else if(entityName.toLowerCase().equals("runphase")) {
             criteria.setRunPhaseId(longFilter);
         }
-        else if(entityName.equals("finalniazsanjireport")) {
+        else if(entityName.toLowerCase().equals("finalniazsanjireport")) {
             criteria.setFinalNiazsanjiReportId(longFilter);
         }
-        else if(entityName.equals("designandplanning")) {
+        else if(entityName.toLowerCase().equals("designandplanning")) {
             criteria.setDesignAndPlanningId(longFilter);
         }
-        else if(entityName.equals("requestorganizationniazsanji")) {
+        else if(entityName.toLowerCase().equals("requestorganizationniazsanji")) {
             criteria.setRequestOrganizationNiazsanjiId(longFilter);
         }
-        else if(entityName.equals("finalorganizationniazsanji")) {
+        else if(entityName.toLowerCase().equals("finalorganizationniazsanji")) {
             criteria.setFinalOrganizationNiazsanjiId(longFilter);
         }
-        else if(entityName.equals("announcement")) {
+        else if(entityName.toLowerCase().equals("announcement")) {
             criteria.setAnnouncementId(longFilter);
         }
-        else if(entityName.equals("requesteducationalmodule")) {
+        else if(entityName.toLowerCase().equals("requesteducationalmodule")) {
             criteria.setRequestEducationalModuleId(longFilter);
         }
-        else if(entityName.equals("usersrequest")) {
+        else if(entityName.toLowerCase().equals("usersrequest")) {
             criteria.setUsersRequestId(longFilter);
         }
-        else if(entityName.equals("requestniazsanjifardi")) {
+        else if(entityName.toLowerCase().equals("requestniazsanjifardi")) {
             criteria.setRequestNiazsanjiFardiId(longFilter);
         }
-        else if(entityName.equals("niazsanjifardi")) {
+        else if(entityName.toLowerCase().equals("niazsanjifardi")) {
             criteria.setNiazsanjiFardiId(longFilter);
         }
-        else if(entityName.equals("investtogrouptransaction")) {
+        else if(entityName.toLowerCase().equals("investtogrouptransaction")) {
             criteria.setInvestToGroupTransactionId(longFilter);
         }
-        else if(entityName.equals("mediaawarenessreport")) {
+        else if(entityName.toLowerCase().equals("mediaawarenessreport")) {
             criteria.setMediaAwarenessReportId(longFilter);
         }
-        else if(entityName.equals("prejobniazsanji")) {
+        else if(entityName.toLowerCase().equals("prejobniazsanji")) {
             criteria.setPreJobNiazsanjiId(longFilter);
+        }
+        else if(entityName.toLowerCase().equals("evaluatecriteriadata")) {
+            criteria.setEvaluateCriteriaDataId(longFilter);
+        }
+        else if(entityName.toLowerCase().equals("requestotherniazsanji")) {
+            criteria.setRequestOtherNiazsanjiId(longFilter);
+        }
+        else if(entityName.toLowerCase().equals("levelthreeeffectiveness")) {
+            criteria.setLevelThreeEffectivenessId(longFilter);
+        }
+        else if(entityName.toLowerCase().equals("effectivenessphase")) {
+            criteria.setEffectivenessPhaseId(longFilter);
+        }
+        else if(entityName.toLowerCase().equals("finalniazsanjireportperson")) {
+            criteria.setFinalNiazsanjiReportPersonId(longFilter);
+        }
+        else if(entityName.toLowerCase().equals("levelfoureffectiveness")) {
+            criteria.setLevelFourEffectivenessId(longFilter);
+        }
+        else if(entityName.toLowerCase().equals("teachergrade")) {
+            criteria.setTeacherGradeId(longFilter);
+        }
+        else if(entityName.toLowerCase().equals("educationalcentergrade")) {
+            criteria.setEducationalCenterGradeId(longFilter);
+        }
+        else if(entityName.toLowerCase().equals("prioritizerequestniazsanji")) {
+            criteria.setPrioritizeRequestNiazsanjiId(longFilter);
+        }
+        else if(entityName.toLowerCase().equals("soldiertrainingreport")) {
+            criteria.setSoldierTrainingReportId(longFilter);
+        }
+        else if(entityName.toLowerCase().equals("evaluatecriteriatraining")) {
+            criteria.setEvaluateCriteriaTrainingId(longFilter);
+        }
+        else if(entityName.toLowerCase().equals("soldier")) {
+            criteria.setSoldierId(longFilter);
+        }
+        else if(entityName.toLowerCase().equals("niazsanjipersongrade")) {
+            criteria.setNiazsanjiPersonGradeId(longFilter);
         }
         else
         {

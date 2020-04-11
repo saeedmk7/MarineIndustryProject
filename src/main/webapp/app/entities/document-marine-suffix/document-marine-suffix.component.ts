@@ -10,7 +10,7 @@ import { Principal } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { DocumentMarineSuffixService } from './document-marine-suffix.service';
 import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
-import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
+import {IPersonMarineSuffix, PersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 
 @Component({
     selector: 'mi-document-marine-suffix',
@@ -18,7 +18,7 @@ import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
 })
 export class DocumentMarineSuffixComponent implements OnInit, OnDestroy {
     currentAccount: any;
-    currentPerson: IPersonMarineSuffix;
+    currentPerson: IPersonMarineSuffix = new PersonMarineSuffix;
     documents: IDocumentMarineSuffix[];
     error: any;
     success: any;
@@ -120,7 +120,7 @@ export class DocumentMarineSuffixComponent implements OnInit, OnDestroy {
         this.principal.identity().then(account => {
             this.currentAccount = account;
             this.setRoles(account);
-            this.personService.find(this.currentAccount.id)
+            this.personService.find(this.currentAccount.personId)
                 .subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
                     this.currentPerson = resp.body;
                 })

@@ -1,0 +1,29 @@
+{
+    "marineindustryprojApp": {
+        "activationNiazsanji": {
+            "home": {
+                "title": "Activation Niazsanjis",
+                "createLabel": "Create a new Activation Niazsanji",
+                "createOrEditLabel": "Create or edit a Activation Niazsanji"
+            },
+            "created": "A new Activation Niazsanji is created with identifier {{ param }}",
+            "updated": "A Activation Niazsanji is updated with identifier {{ param }}",
+            "deleted": "A Activation Niazsanji is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Activation Niazsanji {{ id }}?"
+            },
+            "detail": {
+                "title": "Activation Niazsanji"
+            },
+            "niazSanjiSource": "Niaz Sanji Source",
+            "isActive": "Is Active",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date"
+        }
+    }
+}

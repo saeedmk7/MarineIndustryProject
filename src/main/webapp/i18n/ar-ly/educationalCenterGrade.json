@@ -1,0 +1,38 @@
+{
+    "marineindustryprojApp": {
+        "educationalCenterGrade": {
+            "home": {
+                "title": "Educational Center Grades",
+                "createLabel": "Create a new Educational Center Grade",
+                "createOrEditLabel": "Create or edit a Educational Center Grade"
+            },
+            "created": "A new Educational Center Grade is created with identifier {{ param }}",
+            "updated": "A Educational Center Grade is updated with identifier {{ param }}",
+            "deleted": "A Educational Center Grade is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Educational Center Grade {{ id }}?"
+            },
+            "detail": {
+                "title": "Educational Center Grade"
+            },
+            "title": "Title",
+            "totalScore": "Total Score",
+            "totalScorePercent": "Total Score Percent",
+            "grade": "Grade",
+            "evaluateDate": "Evaluate Date",
+            "year": "Year",
+            "month": "Month",
+            "fileDoc": "File Doc",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "educationalCenterGradeScore": "Educational Center Grade Score",
+            "evaluatorOpinion": "Evaluator Opinion",
+            "document": "Document",
+            "educationalCenterService": "Educational Center Service",
+            "educationalCenter": "Educational Center"
+        }
+    }
+}

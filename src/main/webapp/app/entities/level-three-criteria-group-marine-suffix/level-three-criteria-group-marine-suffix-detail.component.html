@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="levelThreeCriteriaGroup">
+            <h2><span jhiTranslate="marineindustryprojApp.levelThreeCriteriaGroup.detail.title">Level Three Criteria Group</span> {{levelThreeCriteriaGroup.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteriaGroup.title">Title</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteriaGroup.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteriaGroup.description">Description</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteriaGroup.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteriaGroup.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteriaGroup.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteriaGroup.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteriaGroup.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteriaGroup.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteriaGroup.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteriaGroup.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteriaGroup.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/level-three-criteria-group-marine-suffix', levelThreeCriteriaGroup.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+{
+    "marineindustryprojApp": {
+        "educationalCenterCriteria": {
+            "home": {
+                "title": "Educational Center Criteria",
+                "createLabel": "Create a new Educational Center Criteria",
+                "createOrEditLabel": "Create or edit a Educational Center Criteria"
+            },
+            "created": "A new Educational Center Criteria is created with identifier {{ param }}",
+            "updated": "A Educational Center Criteria is updated with identifier {{ param }}",
+            "deleted": "A Educational Center Criteria is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Educational Center Criteria {{ id }}?"
+            },
+            "detail": {
+                "title": "Educational Center Criteria"
+            },
+            "group": "Group",
+            "title": "Title",
+            "displayOrder": "Display Order",
+            "weight": "Weight",
+            "description": "Description",
+            "peopleCount": "People Count",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "educationalCenterGradeScore": "Educational Center Grade Score"
+        }
+    }
+}

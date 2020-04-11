@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="teacherCriteria">
+            <h2><span jhiTranslate="marineindustryprojApp.teacherCriteria.detail.title">Teacher Criteria</span> {{teacherCriteria.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.teacherCriteria.group">Group</span></dt>
+                <dd>
+                    <span>{{teacherCriteria.group}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherCriteria.title">Title</span></dt>
+                <dd>
+                    <span>{{teacherCriteria.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherCriteria.displayOrder">Display Order</span></dt>
+                <dd>
+                    <span>{{teacherCriteria.displayOrder}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherCriteria.weight">Weight</span></dt>
+                <dd>
+                    <span>{{teacherCriteria.weight}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherCriteria.secondWeight">Second Weight</span></dt>
+                <dd>
+                    <span>{{teacherCriteria.secondWeight}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherCriteria.description">Description</span></dt>
+                <dd>
+                    <span>{{teacherCriteria.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherCriteria.peopleCount">People Count</span></dt>
+                <dd>
+                    <span>{{teacherCriteria.peopleCount}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherCriteria.code">Code</span></dt>
+                <dd>
+                    <span>{{teacherCriteria.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherCriteria.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{teacherCriteria.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherCriteria.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{teacherCriteria.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherCriteria.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{teacherCriteria.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherCriteria.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{teacherCriteria.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/teacher-criteria-marine-suffix', teacherCriteria.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -63,12 +63,17 @@
                             <fa-icon [icon]="'stamp'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.save">save</span>
                         </button>
+                        <a [href]="'#/document-marine-suffix/finalniazsanjireportperson/' + finalNiazsanjiReportPerson.id"
+                           class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                            مدارک
+                        </a>
                     </div>
                 </td>
             </tr>
             </tbody>
             <tfoot>
-            <tr style="text-align: center">
+            <tr class="sum-row">
                 <td colspan="2">میانگین کل</td>
                 <td>{{firstScoreAverage | number: '1.0-1'}}</td>
                 <td>{{secondScoreAverage | number: '1.0-1'}}</td>
@@ -79,7 +84,7 @@
         </table>
 
     </div>
-    <div class="row">
+    <div class="row" style="text-align: center;display: block;">
         <button type="button"
                 (click)="completeLevel(finalNiazsanjiReportId)" [disabled]="!canComplete"
                 class="btn btn-success">

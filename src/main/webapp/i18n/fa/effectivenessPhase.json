@@ -1,0 +1,45 @@
+{
+    "marineindustryprojApp": {
+        "effectivenessPhase": {
+            "home": {
+                "title": "فاز اثربخشی",
+                "createLabel": "جدید",
+                "createOrEditLabel": " فاز اثربخشی"
+            },
+            "created": "فاز اثربخشی با شناسه {{ param }} ایجاد شد.",
+            "updated": "فاز اثربخشی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "فاز اثربخشی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف فاز اثربخشی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات فاز اثربخشی"
+            },
+            "formHeader": "فرم جمع بندی نتایج ارزیابی اثربخشی دوره های آموزشی",
+            "courseTitle": "نام دوره:",
+            "finishDate": "تاریخ برگزاری دوره:",
+            "time": "مدت:",
+            "teacher": "استاد:",
+            "real": "واقعی",
+            "finalAverage": "میانگین ارزیابی اثربخشی",
+            "peopleFinishCount": "افراد اثربخشی شده",
+            "peopleCount": "تعداد کل افراد",
+            "criteria": "معیار ارزیابی اثربخشی",
+            "finishPhaseDate": "تاریخ اتمام سطح",
+            "startPhaseDate": "تاریخ شروع سطح",
+            "firstScore": "نمره اول",
+            "secondScore": "نمره دوم",
+            "finalScore": "نتیجه",
+            "weightedPoints": "امتیاز موزون",
+            "weight": "وزن هر سطح",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "document": "مدرک",
+            "finalNiazsanjiReport": "دوره اجرا شده",
+            "effectivenessPhaseLevel": "معیار ارزیابی اثربخشی"
+        }
+    }
+}

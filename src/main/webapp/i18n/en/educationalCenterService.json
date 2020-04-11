@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "educationalCenterService": {
+            "home": {
+                "title": "Educational Center Services",
+                "createLabel": "Create a new Educational Center Service",
+                "createOrEditLabel": "Create or edit a Educational Center Service"
+            },
+            "created": "A new Educational Center Service is created with identifier {{ param }}",
+            "updated": "A Educational Center Service is updated with identifier {{ param }}",
+            "deleted": "A Educational Center Service is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Educational Center Service {{ id }}?"
+            },
+            "detail": {
+                "title": "Educational Center Service"
+            },
+            "title": "Title",
+            "description": "Description",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "educationalCenterGrade": "Educational Center Grade"
+        }
+    }
+}

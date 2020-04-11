@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="educationalCenterService">
+            <h2><span jhiTranslate="marineindustryprojApp.educationalCenterService.detail.title">Educational Center Service</span> {{educationalCenterService.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterService.title">Title</span></dt>
+                <dd>
+                    <span>{{educationalCenterService.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterService.description">Description</span></dt>
+                <dd>
+                    <span>{{educationalCenterService.description}}</span>
+                </dd>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.educationalCenterService.code">Code</span></dt>
+                <dd>
+                    <span>{{educationalCenterService.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterService.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{educationalCenterService.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterService.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{educationalCenterService.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterService.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{educationalCenterService.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterService.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{educationalCenterService.modifyDate}}</span>
+                </dd>-->
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/educational-center-service-marine-suffix', educationalCenterService.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

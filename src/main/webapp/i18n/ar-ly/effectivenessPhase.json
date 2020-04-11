@@ -1,0 +1,33 @@
+{
+    "marineindustryprojApp": {
+        "effectivenessPhase": {
+            "home": {
+                "title": "Effectiveness Phases",
+                "createLabel": "Create a new Effectiveness Phase",
+                "createOrEditLabel": "Create or edit a Effectiveness Phase"
+            },
+            "created": "A new Effectiveness Phase is created with identifier {{ param }}",
+            "updated": "A Effectiveness Phase is updated with identifier {{ param }}",
+            "deleted": "A Effectiveness Phase is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Effectiveness Phase {{ id }}?"
+            },
+            "detail": {
+                "title": "Effectiveness Phase"
+            },
+            "finishPhaseDate": "Finish Phase Date",
+            "startPhaseDate": "Start Phase Date",
+            "firstScore": "First Score",
+            "secondScore": "Second Score",
+            "finalScore": "Final Score",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "document": "Document",
+            "finalNiazsanjiReport": "Final Niazsanji Report",
+            "effectivenessPhaseLevel": "Effectiveness Phase Level"
+        }
+    }
+}

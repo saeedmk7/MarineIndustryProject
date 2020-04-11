@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="effectivenessPhaseLevel">
+            <h2><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.detail.title">Effectiveness Phase Level</span> {{effectivenessPhaseLevel.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.title">Title</span></dt>
+                <dd>
+                    <span>{{effectivenessPhaseLevel.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.effectivenessLevel">Effectiveness Level</span></dt>
+                <dd>
+                    <span>{{effectivenessPhaseLevel.effectivenessLevel}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.effectivenessLevelUse">Effectiveness Level Use</span></dt>
+                <dd>
+                    <span>{{effectivenessPhaseLevel.effectivenessLevelUse}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.weight">Weight</span></dt>
+                <dd>
+                    <span>{{effectivenessPhaseLevel.weight}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.goal">Goal</span></dt>
+                <dd>
+                    <span>{{effectivenessPhaseLevel.goal}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.unitOfMeasurement">Unit Of Measurement</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.UnitOfMeasurement.' + effectivenessPhaseLevel.unitOfMeasurement}}">{{effectivenessPhaseLevel.unitOfMeasurement}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.description">Description</span></dt>
+                <dd>
+                    <span>{{effectivenessPhaseLevel.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{effectivenessPhaseLevel.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{effectivenessPhaseLevel.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{effectivenessPhaseLevel.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{effectivenessPhaseLevel.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/effectiveness-phase-level-marine-suffix', effectivenessPhaseLevel.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

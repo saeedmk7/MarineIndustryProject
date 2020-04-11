@@ -1,0 +1,33 @@
+{
+    "marineindustryprojApp": {
+        "teacherCriteria": {
+            "home": {
+                "title": "Teacher Criteria",
+                "createLabel": "Create a new Teacher Criteria",
+                "createOrEditLabel": "Create or edit a Teacher Criteria"
+            },
+            "created": "A new Teacher Criteria is created with identifier {{ param }}",
+            "updated": "A Teacher Criteria is updated with identifier {{ param }}",
+            "deleted": "A Teacher Criteria is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Teacher Criteria {{ id }}?"
+            },
+            "detail": {
+                "title": "Teacher Criteria"
+            },
+            "group": "Group",
+            "title": "Title",
+            "displayOrder": "Display Order",
+            "weight": "Weight",
+            "secondWeight": "Second Weight",
+            "description": "Description",
+            "peopleCount": "People Count",
+            "code": "Code",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "teacherGradeScore": "Teacher Grade Score"
+        }
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "marineindustryprojApp": {
+        "educationalCenterCriteria": {
+            "home": {
+                "title": "معیارهای ارزیابی حقوقی",
+                "createLabel": "جدید",
+                "createOrEditLabel": " معیار ارزیابی حقوقی"
+            },
+            "created": "معیار ارزیابی حقوقی با شناسه {{ param }} ایجاد شد.",
+            "updated": "معیار ارزیابی حقوقی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "معیار ارزیابی حقوقی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف معیار ارزیابی حقوقی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات معیار ارزیابی حقوقی"
+            },
+            "title": "عنوان",
+            "group": "'گروه بندی",
+            "displayOrder": "ترتیب نمایش",
+            "weight": "وزن",
+            "description": "توضیحات",
+            "peopleCount": "People Count",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "educationalCenterGradeScore": "Educational Center Grade Score"
+        }
+    }
+}

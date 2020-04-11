@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="evaluatorOpinion">
+            <h2><span jhiTranslate="marineindustryprojApp.evaluatorOpinion.detail.title">Evaluator Opinion</span> {{evaluatorOpinion.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.evaluatorOpinion.title">Title</span></dt>
+                <dd>
+                    <span>{{evaluatorOpinion.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluatorOpinion.description">Description</span></dt>
+                <dd>
+                    <span>{{evaluatorOpinion.description}}</span>
+                </dd>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.evaluatorOpinion.code">Code</span></dt>
+                <dd>
+                    <span>{{evaluatorOpinion.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluatorOpinion.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{evaluatorOpinion.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluatorOpinion.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{evaluatorOpinion.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluatorOpinion.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{evaluatorOpinion.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.evaluatorOpinion.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{evaluatorOpinion.modifyDate}}</span>
+                </dd>-->
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/evaluator-opinion-marine-suffix', evaluatorOpinion.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

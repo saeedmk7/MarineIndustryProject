@@ -120,16 +120,14 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
         if(this.currentPerson){
             if(this.organizationChartService.organizationchartsAll){
                 this.organizationcharts = this.organizationChartService.organizationchartsAll;
-                criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteria(criteria, this.organizationcharts);
-                let wantOrgIds = this.treeUtilities.getAllOfChilderenIdsOfThisIdWithoutItself(this.organizationChartService.organizationchartsAll, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
+                let wantOrgIds = this.treeUtilities.getAllOfThisTreeIds(this.organizationChartService.organizationchartsAll, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
                 return this.handleAfterChart(wantOrgIds,criteria,excelExport);
             }
             else{
                 this.organizationChartService.query().subscribe((resp: HttpResponse<IOrganizationChartMarineSuffix[]>) =>{
 
                     this.organizationcharts = resp.body;
-                    criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteria(criteria, this.organizationcharts);
-                    let wantOrgIds = this.treeUtilities.getAllOfChilderenIdsOfThisIdWithoutItself(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
+                    let wantOrgIds = this.treeUtilities.getAllOfThisTreeIds(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
                     this.handleAfterChart(wantOrgIds,criteria,excelExport);
                 });
             }
@@ -145,16 +143,15 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
 
                     if(this.organizationChartService.organizationchartsAll){
                         this.organizationcharts = this.organizationChartService.organizationchartsAll;
-                        criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteria(criteria, this.organizationcharts);
-                        let wantOrgIds = this.treeUtilities.getAllOfChilderenIdsOfThisIdWithoutItself(this.organizationChartService.organizationchartsAll, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
+                        let wantOrgIds = this.treeUtilities.getAllOfThisTreeIds(this.organizationChartService.organizationchartsAll, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
                         this.handleAfterChart(wantOrgIds,criteria,excelExport);
                     }
                     else{
                         this.organizationChartService.query().subscribe((resp: HttpResponse<IOrganizationChartMarineSuffix[]>) =>{
 
                             this.organizationcharts = resp.body;
-                            criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteria(criteria, this.organizationcharts);
-                            let wantOrgIds = this.treeUtilities.getAllOfChilderenIdsOfThisIdWithoutItself(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
+
+                            let wantOrgIds = this.treeUtilities.getAllOfThisTreeIds(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
                             this.handleAfterChart(wantOrgIds,criteria,excelExport);
                         });
                     }
@@ -177,34 +174,9 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
             return;
         }
         if(wantOrgIds.length > 0) {
-            let criteria1 = [{
+            criteria.push({
                 key: 'organizationChartId.in',
                 value: wantOrgIds
-            }];
-            this.personService.query({
-                page: 0,
-                size: 20000,
-                criteria: criteria1,
-                sort: ["id", "asc"]
-            }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
-
-                let selectedPeople = resp.body;
-                if (selectedPeople.length > 0) {
-                    let logins: string[] = selectedPeople.map(a => a.nationalId);
-                    logins.push(this.currentPerson.nationalId);
-                    criteria.push({
-                        key: 'createUserLogin.in',
-                        value: logins
-                    });
-                }
-                else {
-                    let logins = [this.currentPerson.nationalId];
-                    criteria.push({
-                        key: 'createUserLogin.in',
-                        value: logins
-                    });
-                }
-                this.loadAll(criteria, excelExport);
             });
         }
         else{
@@ -212,12 +184,13 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
                 key: 'createUserLogin.in',
                 value: [this.currentPerson.nationalId]
             });
-            this.loadAll(criteria, excelExport);
         }
+        this.loadAll(criteria, excelExport);
     }
 
     loadAll(criteria?,excelExport: boolean = false) {
-
+        debugger;
+        criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteriaForFinalNiazsanjiReport(criteria, this.organizationcharts);
         if(!this.isSuperUsers){
             criteria.push({
                 key: 'status.greaterOrEqualThan',
@@ -329,19 +302,23 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
 
     ngOnInit() {
         this.principal.identity().then(account => {
+            this.currentAccount = account;
             this.setRoles(account);
 
-            this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','niazSanjiSource','select', 'equals', NIAZSANJI_SOURCE_FILTERS));
-            this.prepareDate();
-            this.prepareSearchOrgChart();
-            this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','educationalModuleCode','text', 'contains'));
-            this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','educationalModuleTitle','text', 'contains'));
-            if(this.isSuperUsers)
-                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','status','select', 'equals', this.statusMeaning, 'mean'));
-            this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport','id','text', 'equals'));
-            this.prepareSearchCourseType();
-            //this.prepareSearchEducationalModule();
-            this.preparePeople();
+            this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
+                this.currentPerson = resp.body;
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'niazSanjiSource', 'selectWithStringId', 'equals', NIAZSANJI_SOURCE_FILTERS));
+                this.prepareDate();
+                this.prepareSearchOrgChart();
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'educationalModuleCode', 'text', 'contains'));
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'educationalModuleTitle', 'text', 'contains'));
+                if (this.isSuperUsers)
+                    this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'status', 'select', 'equals', this.statusMeaning, 'mean'));
+                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'id', 'text', 'equals'));
+                this.prepareSearchCourseType();
+                //this.prepareSearchEducationalModule();
+                //this.preparePeople();
+            });
 
         });
         //this.registerChangeInFinalNiazsanjiReports();

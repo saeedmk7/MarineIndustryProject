@@ -1,0 +1,9 @@
+{
+    "marineindustryprojApp": {
+        "TeacherType": {
+            "null": "",
+            "INTERNAL": "داخل ودجا",
+            "EXTRNAL": "خارج ودجا"
+        }
+    }
+}

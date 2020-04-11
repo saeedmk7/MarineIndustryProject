@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "levelFourScore": {
+            "home": {
+                "title": "امتیاز",
+                "createLabel": "جدید",
+                "createOrEditLabel": " امتیاز"
+            },
+            "created": "امتیاز با شناسه {{ param }} ایجاد شد.",
+            "updated": "امتیاز با شناسه {{ param }} ویرایش شد.",
+            "deleted": "امتیاز با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف امتیاز با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات امتیاز"
+            },
+            "score": "امتیاز",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "levelFourCriteria": "Level Four Criteria",
+            "levelFourEffectiveness": "Level Four Effectiveness"
+        }
+    }
+}

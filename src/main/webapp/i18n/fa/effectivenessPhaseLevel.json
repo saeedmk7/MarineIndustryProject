@@ -1,0 +1,32 @@
+{
+    "marineindustryprojApp": {
+        "effectivenessPhaseLevel": {
+            "home": {
+                "title": "سطوح فاز اثربخشی",
+                "createLabel": "جدید",
+                "createOrEditLabel": " سطح اثربخشی"
+            },
+            "created": "سطح اثربخشی با شناسه {{ param }} ایجاد شد.",
+            "updated": "سطح اثربخشی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "سطح اثربخشی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف سطح اثربخشی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات سطح اثربخشی"
+            },
+            "title": "عنوان",
+            "effectivenessLevel": "سطح اثربخشی",
+            "effectivenessLevelUse": "سطح مورد استفاده",
+            "weight": "وزن",
+            "goal": "هدف",
+            "unitOfMeasurement": "واحد سنجش",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "effectivenessPhase": "اثربخشی"
+        }
+    }
+}

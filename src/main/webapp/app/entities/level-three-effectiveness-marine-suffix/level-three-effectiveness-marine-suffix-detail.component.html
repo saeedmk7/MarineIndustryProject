@@ -1,0 +1,99 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="levelThreeEffectiveness">
+            <h2><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.detail.title">Level Three Effectiveness</span> {{levelThreeEffectiveness.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.title">Title</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.totalScore">Total Score</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.totalScore}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.totalScorePercent">Total Score Percent</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.totalScorePercent}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.grade">Grade</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.Grade.' + levelThreeEffectiveness.grade}}">{{levelThreeEffectiveness.grade}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.evaluateDate">Evaluate Date</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.evaluateDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.year">Year</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.year}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.month">Month</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.month}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.strength">Strength</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.strength}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.improvement">Improvement</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.improvement}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.whatDoYouDo">What Do You Do</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.whatDoYouDo}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.fileDoc">File Doc</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.fileDoc}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.description">Description</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{levelThreeEffectiveness.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of levelThreeEffectiveness.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeEffectiveness.finalNiazsanjiReportPerson">Final Niazsanji Report Person</span></dt>
+                <dd>
+                    <div *ngIf="levelThreeEffectiveness.finalNiazsanjiReportPersonId">
+                        <a [routerLink]="['/final-niazsanji-report-person-marine-suffix', levelThreeEffectiveness.finalNiazsanjiReportPersonId, 'view']">{{levelThreeEffectiveness.finalNiazsanjiReportPersonDescription}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/level-three-effectiveness-marine-suffix', levelThreeEffectiveness.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+{
+    "marineindustryprojApp": {
+        "levelFourEffectiveness": {
+            "home": {
+                "title": "Level Four Effectivenesses",
+                "createLabel": "Create a new Level Four Effectiveness",
+                "createOrEditLabel": "Create or edit a Level Four Effectiveness"
+            },
+            "created": "A new Level Four Effectiveness is created with identifier {{ param }}",
+            "updated": "A Level Four Effectiveness is updated with identifier {{ param }}",
+            "deleted": "A Level Four Effectiveness is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Level Four Effectiveness {{ id }}?"
+            },
+            "detail": {
+                "title": "Level Four Effectiveness"
+            },
+            "title": "Title",
+            "totalScore": "Total Score",
+            "totalScorePercent": "Total Score Percent",
+            "grade": "Grade",
+            "evaluateDate": "Evaluate Date",
+            "year": "Year",
+            "month": "Month",
+            "strength": "Strength",
+            "improvement": "Improvement",
+            "whatDoYouDo": "What Do You Do",
+            "fileDoc": "File Doc",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "levelFourScore": "Level Four Score",
+            "document": "Document",
+            "finalNiazsanjiReportPerson": "Final Niazsanji Report Person"
+        }
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "marineindustryprojApp": {
+        "levelThreeCriteria": {
+            "home": {
+                "title": "معیارهای ارزشیابی دوره",
+                "createLabel": "جدید",
+                "createOrEditLabel": " معیار ارزشیابی"
+            },
+            "created": "معیار ارزشیابی با شناسه {{ param }} ایجاد شد.",
+            "updated": "معیار ارزشیابی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "معیار ارزشیابی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف معیار ارزشیابی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات معیار ارزشیابی"
+            },
+            "title": "عنوان",
+            "group": "'گروه بندی",
+            "criterionType": "موضوع",
+            "displayOrder": "ترتیب نمایش",
+            "weight": "وزن",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "backgroundColor": "رنگ پس زمینه",
+            "colorText": "رنگ متن",
+            "levelThreeScore": "Level Three Score",
+            "mahiatCourse": "ماهیت دوره",
+            "levelThreeCriteriaGroup": "موضوع"
+        }
+    }
+}

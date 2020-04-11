@@ -22,6 +22,8 @@ import {LevelThreeCriteriaMarineSuffix} from "app/shared/model/level-three-crite
 import {LevelThreeCriteriaMarineSuffixService} from "app/entities/level-three-criteria-marine-suffix";
 import {LevelThreeEffectivenessMarineSuffix} from "app/shared/model/level-three-effectiveness-marine-suffix.model";
 import {LevelThreeEffectivenessMarineSuffixService} from "app/entities/level-three-effectiveness-marine-suffix";
+import {IEffectivenessPhasePerCriteriaData} from "app/shared/model/custom/effectiveness-phase-per-criteria-data";
+import {Chart} from "angular-highcharts";
 
 @Component({
     selector: 'mi-effectiveness-phase-level-three-marine-suffix',
@@ -31,6 +33,10 @@ export class EffectivenessPhaseLevelThreeMarineSuffixComponent implements OnInit
     currentAccount: any;
     finalNiazsanjiReportPeople: IFinalNiazsanjiReportPersonMarineSuffix[];
     finalNiazsanjiReport: IFinalNiazsanjiReportMarineSuffix;
+    effectivenessPhasePerCriteriaDatas: IEffectivenessPhasePerCriteriaData[];
+    effectivenessPhasePerCriteriaDataChart: Chart;
+    categories: any[];
+    effectivenessPhasePerCriteriaDataSeries: any;
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -108,7 +114,6 @@ export class EffectivenessPhaseLevelThreeMarineSuffixComponent implements OnInit
     loadData(){
         this.finalNiazsanjiReportPersonService.getLevelThreeDataByFinalNiazsanjiReportId(this.finalNiazsanjiReportId)
             .subscribe((resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>) => {
-                debugger;
                 this.finalNiazsanjiReportPeople = resp.body.sort((a,b) => (a.modifyDate > b.modifyDate) ? 1 : (a.modifyDate < b.modifyDate) ? -1 : 0);
 
                 this.fullAverage = this.finalNiazsanjiReportPeople.map(w => w.levelThreeScore).reduce((sum, current) => sum + current) / this.finalNiazsanjiReportPeople.length;
@@ -117,11 +122,82 @@ export class EffectivenessPhaseLevelThreeMarineSuffixComponent implements OnInit
                     this.canComplete = true;
                 }
             });
+        this.levelThreeEffectivenessService.criteriaChart(this.finalNiazsanjiReportId)
+            .subscribe((res: HttpResponse<IEffectivenessPhasePerCriteriaData[]>) => {
+                this.effectivenessPhasePerCriteriaDatas = res.body.sort((a,b) => (a.criteria.displayOrder > b.criteria.displayOrder) ? 1 : (a.criteria.displayOrder < b.criteria.displayOrder) ? -1 : 0);
+                this.categories = this.effectivenessPhasePerCriteriaDatas.map(a => a.criteria.title);
+                //this.effectivenessPhasePerCriteriaDataSeries = this.effectivenessPhasePerCriteriaDatas.map(a => a.sumValue);
+                this.effectivenessPhasePerCriteriaDataSeries = this.effectivenessPhasePerCriteriaDatas.map(w => {
+                    return {
+                        'name': w.criteria.title,
+                        'data': [w.sumValue],
+                        'color': w.criteria.backgroundColor
+                    };
+                });
+                this.loadChart();
+            },(res: HttpErrorResponse) => this.onSaveError(res))
+    }
+    loadChart() {
+
+        // @ts-ignore
+        this.effectivenessPhasePerCriteriaDataChart = new Chart({
+            chart: {
+                type: 'column',
+                style: {
+                    fontFamily: 'IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman'
+                }
+            },
+            lang: {
+                decimalPoint: ',',
+                thousandsSep: '.'
+            },
+            title: {
+                text: 'نمودار نتایج به تفکیک معیار ارزشیابی'
+            },
+            xAxis: {
+                categories: this.categories,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'جمع مقادیر'
+                },
+                opposite: true
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="direction: ltr; padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                style: {
+                    direction: 'rtl'
+                },
+                useHTML: true,
+                /*formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        this.point.y + ' ' + this.point.name.toLowerCase();
+                }*/
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                },
+                series: {
+                    cursor: 'pointer'
+                }
+            },
+            series: this.effectivenessPhasePerCriteriaDataSeries,
+            credits: {
+                enabled: false
+            }
+        });
     }
     completeLevel(finalNiazsanjiReportId: number){
         if(confirm("آیا اطلاعات وارد شده همگی صحیح هستند؟ و برای تایید نهایی کردن این سطح مطمئنید؟")) {
             this.levelThreeEffectivenessService.completeLevel(finalNiazsanjiReportId).subscribe((resp: HttpResponse<boolean>) => {
-                debugger;
                 if (resp.body) {
                     this.change('effectiveness-phase-marine-suffix/' + finalNiazsanjiReportId);
                 }

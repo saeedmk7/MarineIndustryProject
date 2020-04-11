@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="niazsanjiPersonCriteria">
+            <h2><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.detail.title">Niazsanji Person Criteria</span> {{niazsanjiPersonCriteria.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.criterionType">Criterion Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.CriterionType.' + niazsanjiPersonCriteria.criterionType}}">{{niazsanjiPersonCriteria.criterionType}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.title">Title</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonCriteria.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.displayOrder">Display Order</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonCriteria.displayOrder}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.weight">Weight</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonCriteria.weight}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.secondWeight">Second Weight</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonCriteria.secondWeight}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.description">Description</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonCriteria.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonCriteria.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonCriteria.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonCriteria.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{niazsanjiPersonCriteria.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/niazsanji-person-criteria-marine-suffix', niazsanjiPersonCriteria.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

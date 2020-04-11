@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="levelFourScore">
+            <h2><span jhiTranslate="marineindustryprojApp.levelFourScore.detail.title">Level Four Score</span> {{levelFourScore.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourScore.score">Score</span></dt>
+                <dd>
+                    <span>{{levelFourScore.score}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourScore.description">Description</span></dt>
+                <dd>
+                    <span>{{levelFourScore.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourScore.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{levelFourScore.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourScore.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{levelFourScore.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourScore.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{levelFourScore.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourScore.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{levelFourScore.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourScore.levelFourCriteria">Level Four Criteria</span></dt>
+                <dd>
+                    <div *ngIf="levelFourScore.levelFourCriteriaId">
+                        <a [routerLink]="['/level-four-criteria-marine-suffix', levelFourScore.levelFourCriteriaId, 'view']">{{levelFourScore.levelFourCriteriaTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelFourScore.levelFourEffectiveness">Level Four Effectiveness</span></dt>
+                <dd>
+                    <div *ngIf="levelFourScore.levelFourEffectivenessId">
+                        <a [routerLink]="['/level-four-effectiveness-marine-suffix', levelFourScore.levelFourEffectivenessId, 'view']">{{levelFourScore.levelFourEffectivenessTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/level-four-score-marine-suffix', levelFourScore.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

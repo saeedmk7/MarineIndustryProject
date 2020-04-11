@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="educationalCenterGradeScore">
+            <h2><span jhiTranslate="marineindustryprojApp.educationalCenterGradeScore.detail.title">Educational Center Grade Score</span> {{educationalCenterGradeScore.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGradeScore.score">Score</span></dt>
+                <dd>
+                    <span>{{educationalCenterGradeScore.score}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGradeScore.description">Description</span></dt>
+                <dd>
+                    <span>{{educationalCenterGradeScore.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGradeScore.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{educationalCenterGradeScore.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGradeScore.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{educationalCenterGradeScore.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGradeScore.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{educationalCenterGradeScore.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGradeScore.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{educationalCenterGradeScore.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGradeScore.educationalCenterCriteria">Educational Center Criteria</span></dt>
+                <dd>
+                    <div *ngIf="educationalCenterGradeScore.educationalCenterCriteriaId">
+                        <a [routerLink]="['/educational-center-criteria-marine-suffix', educationalCenterGradeScore.educationalCenterCriteriaId, 'view']">{{educationalCenterGradeScore.educationalCenterCriteriaTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalCenterGradeScore.educationalCenterGrade">Educational Center Grade</span></dt>
+                <dd>
+                    <div *ngIf="educationalCenterGradeScore.educationalCenterGradeId">
+                        <a [routerLink]="['/educational-center-grade-marine-suffix', educationalCenterGradeScore.educationalCenterGradeId, 'view']">{{educationalCenterGradeScore.educationalCenterGradeTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/educational-center-grade-score-marine-suffix', educationalCenterGradeScore.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

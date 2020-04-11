@@ -1,0 +1,29 @@
+{
+    "marineindustryprojApp": {
+        "activationNiazsanji": {
+            "home": {
+                "title": "فعالسازی نیازسنجی ها",
+                "createLabel": "جدید",
+                "createOrEditLabel": " فعالساز نیازسنجی"
+            },
+            "created": "فعالساز نیازسنجی با شناسه {{ param }} ایجاد شد.",
+            "updated": "فعالساز نیازسنجی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "فعالساز نیازسنجی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف فعالساز نیازسنجی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات فعالساز نیازسنجی"
+            },
+            "niazSanjiSource": "نیازسنجی مدنظر",
+            "isActive": "فعال؟",
+            "startDate": "زمان شروع",
+            "endDate": "زمان پایان",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده"
+        }
+    }
+}

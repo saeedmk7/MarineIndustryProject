@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "levelThreeScore": {
+            "home": {
+                "title": "Level Three Scores",
+                "createLabel": "Create a new Level Three Score",
+                "createOrEditLabel": "Create or edit a Level Three Score"
+            },
+            "created": "A new Level Three Score is created with identifier {{ param }}",
+            "updated": "A Level Three Score is updated with identifier {{ param }}",
+            "deleted": "A Level Three Score is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Level Three Score {{ id }}?"
+            },
+            "detail": {
+                "title": "Level Three Score"
+            },
+            "score": "Score",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "levelThreeCriteria": "Level Three Criteria",
+            "levelThreeEffectiveness": "Level Three Effectiveness"
+        }
+    }
+}

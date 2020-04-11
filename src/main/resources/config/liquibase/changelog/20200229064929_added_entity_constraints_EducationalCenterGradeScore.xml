@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity EducationalCenterGradeScore.
+    -->
+    <changeSet id="20200229064929-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="educational_center_criteria_id"
+                                 baseTableName="educational_center_grade_score"
+                                 constraintName="educational_center_grade_score_educational_center_criteria_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_center_criteria"/>
+
+        <addForeignKeyConstraint baseColumnNames="educational_center_grade_id"
+                                 baseTableName="educational_center_grade_score"
+                                 constraintName="fk_educational_center_grade_score_educational_center_grade_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_center_grade"/>
+
+    </changeSet>
+</databaseChangeLog>

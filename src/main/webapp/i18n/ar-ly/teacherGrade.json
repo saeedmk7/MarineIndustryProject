@@ -1,0 +1,37 @@
+{
+    "marineindustryprojApp": {
+        "teacherGrade": {
+            "home": {
+                "title": "Teacher Grades",
+                "createLabel": "Create a new Teacher Grade",
+                "createOrEditLabel": "Create or edit a Teacher Grade"
+            },
+            "created": "A new Teacher Grade is created with identifier {{ param }}",
+            "updated": "A Teacher Grade is updated with identifier {{ param }}",
+            "deleted": "A Teacher Grade is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Teacher Grade {{ id }}?"
+            },
+            "detail": {
+                "title": "Teacher Grade"
+            },
+            "title": "Title",
+            "version": "Version",
+            "totalScore": "Total Score",
+            "totalScorePercent": "Total Score Percent",
+            "grade": "Grade",
+            "evaluateDate": "Evaluate Date",
+            "year": "Year",
+            "month": "Month",
+            "fileDoc": "File Doc",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "teacherGradeScore": "Teacher Grade Score",
+            "document": "Document",
+            "teacher": "Teacher"
+        }
+    }
+}

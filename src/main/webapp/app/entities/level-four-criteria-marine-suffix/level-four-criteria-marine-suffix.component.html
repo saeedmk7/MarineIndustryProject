@@ -1,0 +1,82 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.levelFourCriteria.home.title">Level Four Criteria</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-level-four-criteria-marine-suffix" [routerLink]="['/level-four-criteria-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.levelFourCriteria.home.createLabel">
+            Create new Level Four Criteria
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="levelFourCriteria">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.levelFourCriteria.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="displayOrder"><span jhiTranslate="marineindustryprojApp.levelFourCriteria.displayOrder">Display Order</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="weight"><span jhiTranslate="marineindustryprojApp.levelFourCriteria.weight">Weight</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="backgroundColor"><span jhiTranslate="marineindustryprojApp.levelFourCriteria.backgroundColor">Background Color</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="colorText"><span jhiTranslate="marineindustryprojApp.levelFourCriteria.colorText">Color Text</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="secondWeight"><span jhiTranslate="marineindustryprojApp.levelFourCriteria.secondWeight">Second Weight</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.levelFourCriteria.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.levelFourCriteria.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.levelFourCriteria.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.levelFourCriteria.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.levelFourCriteria.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let levelFourCriteria of levelFourCriteria ;trackBy: trackId">
+                <td><a [routerLink]="['/level-four-criteria-marine-suffix', levelFourCriteria.id, 'view' ]">{{levelFourCriteria.id}}</a></td>
+                <td>{{levelFourCriteria.title}}</td>
+                <td>{{levelFourCriteria.displayOrder}}</td>
+                <td>{{levelFourCriteria.weight}}</td>
+                <td>{{levelFourCriteria.backgroundColor}}</td>
+                <td>{{levelFourCriteria.colorText}}</td>
+                <!--<td>{{levelFourCriteria.secondWeight}}</td>-->
+                <td>{{levelFourCriteria.description}}</td>
+                <!--<td>{{levelFourCriteria.createUserLogin}}</td>
+                <td>{{levelFourCriteria.createDate | date:'medium'}}</td>
+                <td>{{levelFourCriteria.modifyUserLogin}}</td>
+                <td>{{levelFourCriteria.modifyDate | date:'medium'}}</td>-->
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/level-four-criteria-marine-suffix', levelFourCriteria.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                                [routerLink]="['/level-four-criteria-marine-suffix', levelFourCriteria.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"  *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                                [routerLink]="['/', { outlets: { popup: 'level-four-criteria-marine-suffix/'+ levelFourCriteria.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="levelFourCriteria && levelFourCriteria.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

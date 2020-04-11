@@ -1,0 +1,27 @@
+{
+    "marineindustryprojApp": {
+        "levelThreeCriteriaGroup": {
+            "home": {
+                "title": "Level Three Criteria Groups",
+                "createLabel": "Create a new Level Three Criteria Group",
+                "createOrEditLabel": "Create or edit a Level Three Criteria Group"
+            },
+            "created": "A new Level Three Criteria Group is created with identifier {{ param }}",
+            "updated": "A Level Three Criteria Group is updated with identifier {{ param }}",
+            "deleted": "A Level Three Criteria Group is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Level Three Criteria Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Level Three Criteria Group"
+            },
+            "title": "Title",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "levelThreeCriteria": "Level Three Criteria"
+        }
+    }
+}

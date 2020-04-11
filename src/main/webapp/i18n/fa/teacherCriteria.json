@@ -1,0 +1,32 @@
+{
+    "marineindustryprojApp": {
+        "teacherCriteria": {
+            "home": {
+                "title": "معیارهای ارزیابی حقیقی",
+                "createLabel": "جدید",
+                "createOrEditLabel": " معیار ارزیابی حقیقی"
+            },
+            "created": "معیار ارزیابی حقیقی با شناسه {{ param }} ایجاد شد.",
+            "updated": "معیار ارزیابی حقیقی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "معیار ارزیابی حقیقی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف معیار ارزیابی حقیقی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات معیار ارزیابی حقیقی"
+            },
+            "title": "عنوان",
+            "group": "'گروه بندی",
+            "displayOrder": "ترتیب نمایش",
+            "weight": "وزن",
+            "description": "توضیحات",
+            "peopleCount": "People Count",
+            "code": "کد",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "teacherGradeScore": "Teacher Grade Score"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "niazsanjiPersonGradeScore": {
+            "home": {
+                "title": "Niazsanji Person Grade Scores",
+                "createLabel": "Create a new Niazsanji Person Grade Score",
+                "createOrEditLabel": "Create or edit a Niazsanji Person Grade Score"
+            },
+            "created": "A new Niazsanji Person Grade Score is created with identifier {{ param }}",
+            "updated": "A Niazsanji Person Grade Score is updated with identifier {{ param }}",
+            "deleted": "A Niazsanji Person Grade Score is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Niazsanji Person Grade Score {{ id }}?"
+            },
+            "detail": {
+                "title": "Niazsanji Person Grade Score"
+            },
+            "score": "Score",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "niazsanjiPersonCriteria": "Niazsanji Person Criteria",
+            "niazsanjiPersonGrade": "Niazsanji Person Grade"
+        }
+    }
+}

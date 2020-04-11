@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="activationNiazsanji">
+            <h2><span jhiTranslate="marineindustryprojApp.activationNiazsanji.detail.title">Activation Niazsanji</span> {{activationNiazsanji.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.activationNiazsanji.niazSanjiSource">Niaz Sanji Source</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.NiazSanjiSource.' + activationNiazsanji.niazSanjiSource}}">{{activationNiazsanji.niazSanjiSource}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.activationNiazsanji.isActive">Is Active</span></dt>
+                <dd>
+                    <span>{{activationNiazsanji.isActive}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.activationNiazsanji.startDate">Start Date</span></dt>
+                <dd>
+                    <span>{{activationNiazsanji.startDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.activationNiazsanji.endDate">End Date</span></dt>
+                <dd>
+                    <span>{{activationNiazsanji.endDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.activationNiazsanji.description">Description</span></dt>
+                <dd>
+                    <span>{{activationNiazsanji.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.activationNiazsanji.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{activationNiazsanji.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.activationNiazsanji.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{activationNiazsanji.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.activationNiazsanji.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{activationNiazsanji.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.activationNiazsanji.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{activationNiazsanji.modifyDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/activation-niazsanji-marine-suffix', activationNiazsanji.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

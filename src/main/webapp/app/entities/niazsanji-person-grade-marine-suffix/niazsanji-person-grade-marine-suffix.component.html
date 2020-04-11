@@ -1,0 +1,126 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.home.title">Niazsanji Person Grades</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-niazsanji-person-grade-marine-suffix" [routerLink]="['/niazsanji-person-grade-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.home.createLabel">
+            Create new Niazsanji Person Grade
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <search-panel [(page)]="page" [(size)]="itemsPerPage" [predicate]="predicate" [reverse]="reverse" [searchPanelModel]="searchbarModel"></search-panel>
+    <br/>
+    <div class="table-responsive" *ngIf="niazsanjiPersonGrades">
+        <table class="table  table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th>ردیف</th>
+                <th jhiSortBy="finalNiazsanjiReportPersonPerson"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.finalNiazsanjiReportPerson">Final Niazsanji Report Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="totalScore"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.totalScore">Total Score</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="totalScorePercent"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.totalScorePercent">Total Score Percent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="grade"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.grade">Grade</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="evaluateDate"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.evaluateDate">Evaluate Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="year"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.year">Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="month"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.month">Month</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="strength"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.strength">Strength</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="improvement"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.improvement">Improvement</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="whatDoYouDo"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.whatDoYouDo">What Do You Do</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="fileDoc"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.fileDoc">File Doc</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let niazsanjiPersonGrade of niazsanjiPersonGrades ;let i = index"
+                [ngClass]="{'success': niazsanjiPersonGrade.grade == 'A','info': niazsanjiPersonGrade.grade == 'B','warning': niazsanjiPersonGrade.grade === 'C','danger': niazsanjiPersonGrade.grade === 'D'}">
+                <td><a [routerLink]="['/niazsanji-person-grade-marine-suffix', niazsanjiPersonGrade.id, 'view' ]">{{niazsanjiPersonGrade.id}}</a></td>
+                <td>{{i + 1}}</td>
+                <td>
+                    <div *ngIf="niazsanjiPersonGrade.finalNiazsanjiReportPersonId">
+                        <a [routerLink]="['../final-niazsanji-report-person-marine-suffix', niazsanjiPersonGrade.finalNiazsanjiReportPersonId , 'view' ]" >{{niazsanjiPersonGrade.finalNiazsanjiReportPersonPerson.family}}</a>
+                    </div>
+                </td>
+                <!--<td>{{niazsanjiPersonGrade.title}}</td>-->
+                <td>{{niazsanjiPersonGrade.totalScore}}</td>
+                <td>{{niazsanjiPersonGrade.totalScorePercent}}</td>
+                <td jhiTranslate="{{'marineindustryprojApp.Grade.' + niazsanjiPersonGrade.grade}}">{{niazsanjiPersonGrade.grade}}</td>
+                <td>{{niazsanjiPersonGrade.evaluateDate}}</td>
+                <td>{{niazsanjiPersonGrade.year}}</td>
+                <td>{{niazsanjiPersonGrade.month}}</td>
+                <td>{{niazsanjiPersonGrade.strength}}</td>
+                <td>{{niazsanjiPersonGrade.improvement}}</td>
+                <td>{{niazsanjiPersonGrade.whatDoYouDo}}</td>
+                <!--<td>{{niazsanjiPersonGrade.fileDoc}}</td>-->
+                <td>{{niazsanjiPersonGrade.description}}</td>
+                <!--<td>{{niazsanjiPersonGrade.createUserLogin}}</td>
+                <td>{{niazsanjiPersonGrade.createDate | date:'medium'}}</td>
+                <td>{{niazsanjiPersonGrade.modifyUserLogin}}</td>
+                <td>{{niazsanjiPersonGrade.modifyDate | date:'medium'}}</td>-->
+
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit" title="مدارک"
+                                [routerLink]="['../document-marine-suffix', 'niazsanjipersongrade',niazsanjiPersonGrade.id]"
+                                class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/niazsanji-person-grade-marine-suffix', niazsanjiPersonGrade.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/niazsanji-person-grade-marine-suffix', niazsanjiPersonGrade.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                                [routerLink]="['/', { outlets: { popup: 'niazsanji-person-grade-marine-suffix/'+ niazsanjiPersonGrade.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    <select [(ngModel)] = "itemsPerPage">
+                        <option value="10">۱۰</option>
+                        <option value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="3">
+
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div *ngIf="niazsanjiPersonGrades && niazsanjiPersonGrades.length">
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

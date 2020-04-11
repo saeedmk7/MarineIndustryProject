@@ -1,0 +1,49 @@
+{
+    "marineindustryprojApp": {
+        "niazsanjiPersonGrade": {
+            "home": {
+                "title": "ارزیابی اثربخشی دوره ها",
+                "createLabel": "جدید",
+                "createOrEditLabel": " ارزیابی اثربخشی"
+            },
+            "created": "ارزیابی اثربخشی با شناسه {{ param }} ایجاد شد.",
+            "updated": "ارزیابی اثربخشی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "ارزیابی اثربخشی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف ارزیابی اثربخشی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات ارزیابی اثربخشی"
+            },
+            "formTitle": "نام فرم: ارزیابی اثربخشی دوره ها در سطح واکنشی",
+            "recommendTitle": "خواهشمند است با تکمیل این پرسشنامه و ارائه نظرات سازنده خود، ما را در بهبود مستمر برنامه های آموزشی یاری نمایید.",
+            "title": "عنوان",
+            "code": "کد",
+            "totalScore": "جمع امتیاز",
+            "totalScorePercent": "درصد جمع امتیاز",
+            "grade": "گرید",
+            "evaluateDate": "تاریخ ارزشیابی",
+            "year": "سال",
+            "month": "ماه",
+            "whatDoYouDo": "در پایان دوره در محیط کار چه خواهید کرد",
+            "improvement": "زمینه های بهبود",
+            "strength": "نقاط قوت",
+            "fileDoc": "فایل",
+            "version": "شماره ویرایش",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "modifyDate": "Modify Date",
+            "niazsanjiPersonGradeScore": "Niazsanji Person Grade Score",
+            "document": "Document",
+            "finalNiazsanjiReportPerson": "نام و نام خانوادگی شرکت کننده",
+            "qualificationTitle": "سطح تحصیلات شرکت کننده",
+            "teacherFullName": "نام استاد",
+            "courseTitle": "عنوان دوره",
+            "niazsanjiPersonCriteria": "معیارهای ارزشیابی",
+            "niazsanjiPersonCriteriaId": "معیارهای ارزشیابی"
+        }
+    }
+}

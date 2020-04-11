@@ -1,0 +1,127 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.educationalCenterGrade.home.title">Educational Center Grades</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-educational-center-grade-marine-suffix" [routerLink]="['/educational-center-grade-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.educationalCenterGrade.home.createLabel">
+            Create new Educational Center Grade
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <search-panel [(page)]="page" [(size)]="itemsPerPage" [predicate]="predicate" [reverse]="reverse" [searchPanelModel]="searchbarModel"></search-panel>
+    <br/>
+    <div class="table-responsive" *ngIf="educationalCenterGrades">
+        <table class="table table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <!--<th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th>ردیف</th>
+            <th jhiSortBy="educationalCenterTitle"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.educationalCenter">Educational Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalCenterServiceTitle"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.educationalCenterService">Educational Center Service</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="totalScore"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.totalScore">Total Score</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="totalScorePercent"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.totalScorePercent">Total Score Percent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="grade"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.grade">Grade</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="evaluateDate"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.evaluateDate">Evaluate Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="year"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.year">Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="month"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.month">Month</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="fileDoc"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.fileDoc">File Doc</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+
+
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let educationalCenterGrade of educationalCenterGrades ;let i = index"
+                [ngClass]="{'success': educationalCenterGrade.grade == 'A','info': educationalCenterGrade.grade == 'B','warning': educationalCenterGrade.grade === 'C','danger': educationalCenterGrade.grade === 'D'}">
+                <!--<td><a [routerLink]="['/educational-center-grade-marine-suffix', educationalCenterGrade.id, 'view' ]">{{educationalCenterGrade.id}}</a></td>-->
+                <td>{{i + 1}}</td>
+                <td>
+                    <div *ngIf="educationalCenterGrade.educationalCenterId">
+                        <a [routerLink]="['../educational-center-marine-suffix', educationalCenterGrade.educationalCenterId , 'view' ]" >{{educationalCenterGrade.educationalCenterName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="educationalCenterGrade.educationalCenterServiceId">
+                        <a [routerLink]="['../educational-center-service-marine-suffix', educationalCenterGrade.educationalCenterServiceId , 'view' ]" >{{educationalCenterGrade.educationalCenterServiceTitle}}</a>
+                    </div>
+                </td>
+                <!--<td>{{educationalCenterGrade.title}}</td>-->
+                <td>{{educationalCenterGrade.totalScore}}</td>
+                <td>{{educationalCenterGrade.totalScorePercent}}</td>
+                <td jhiTranslate="{{'marineindustryprojApp.Grade.' + educationalCenterGrade.grade}}">{{educationalCenterGrade.grade}}</td>
+                <td>{{educationalCenterGrade.evaluateDate}}</td>
+                <td>{{educationalCenterGrade.year}}</td>
+                <td>{{educationalCenterGrade.monthPersian}}</td>
+                <!--<td>{{educationalCenterGrade.fileDoc}}</td>-->
+                <td>{{educationalCenterGrade.description}}</td>
+                <!--<td>{{educationalCenterGrade.createUserLogin}}</td>
+                <td>{{educationalCenterGrade.createDate | date:'medium'}}</td>
+                <td>{{educationalCenterGrade.modifyUserLogin}}</td>
+                <td>{{educationalCenterGrade.modifyDate | date:'medium'}}</td>-->
+
+
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit" title="مدارک"
+                                [routerLink]="['../document-marine-suffix', 'educationalcentergrade',educationalCenterGrade.id]"
+                                class="btn btn-light btn-sm">
+                            <span class="fa fa-file"></span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/educational-center-grade-marine-suffix', educationalCenterGrade.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/educational-center-grade-marine-suffix', educationalCenterGrade.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                                [routerLink]="['/', { outlets: { popup: 'educational-center-grade-marine-suffix/'+ educationalCenterGrade.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="20">
+                    <select [(ngModel)] = "itemsPerPage">
+                        <option value="10">۱۰</option>
+                        <option value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div *ngIf="educationalCenterGrades && educationalCenterGrades.length">
+        <!--<div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>-->
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

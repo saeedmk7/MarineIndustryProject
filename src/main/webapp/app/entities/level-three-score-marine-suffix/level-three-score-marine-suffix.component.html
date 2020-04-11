@@ -1,0 +1,84 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.levelThreeScore.home.title">Level Three Scores</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-level-three-score-marine-suffix" [routerLink]="['/level-three-score-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.levelThreeScore.home.createLabel">
+            Create new Level Three Score
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="levelThreeScores">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="score"><span jhiTranslate="marineindustryprojApp.levelThreeScore.score">Score</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.levelThreeScore.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.levelThreeScore.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.levelThreeScore.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.levelThreeScore.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.levelThreeScore.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="levelThreeCriteriaTitle"><span jhiTranslate="marineindustryprojApp.levelThreeScore.levelThreeCriteria">Level Three Criteria</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="levelThreeEffectivenessTitle"><span jhiTranslate="marineindustryprojApp.levelThreeScore.levelThreeEffectiveness">Level Three Effectiveness</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let levelThreeScore of levelThreeScores ;trackBy: trackId">
+                <td><a [routerLink]="['/level-three-score-marine-suffix', levelThreeScore.id, 'view' ]">{{levelThreeScore.id}}</a></td>
+                <td>{{levelThreeScore.score}}</td>
+                <td>{{levelThreeScore.description}}</td>
+                <td>{{levelThreeScore.createUserLogin}}</td>
+                <td>{{levelThreeScore.createDate | date:'medium'}}</td>
+                <td>{{levelThreeScore.modifyUserLogin}}</td>
+                <td>{{levelThreeScore.modifyDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="levelThreeScore.levelThreeCriteriaId">
+                        <a [routerLink]="['../level-three-criteria-marine-suffix', levelThreeScore.levelThreeCriteriaId , 'view' ]" >{{levelThreeScore.levelThreeCriteriaTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="levelThreeScore.levelThreeEffectivenessId">
+                        <a [routerLink]="['../level-three-effectiveness-marine-suffix', levelThreeScore.levelThreeEffectivenessId , 'view' ]" >{{levelThreeScore.levelThreeEffectivenessTitle}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/level-three-score-marine-suffix', levelThreeScore.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/level-three-score-marine-suffix', levelThreeScore.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'level-three-score-marine-suffix/'+ levelThreeScore.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="levelThreeScores && levelThreeScores.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

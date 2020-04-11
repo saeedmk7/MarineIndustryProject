@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "educationalCenterService": {
+            "home": {
+                "title": "خدمات پیمانکاران",
+                "createLabel": "جدید",
+                "createOrEditLabel": " خدمت پیمانکار"
+            },
+            "created": "خدمت پیمانکار با شناسه {{ param }} ایجاد شد.",
+            "updated": "خدمت پیمانکار با شناسه {{ param }} ویرایش شد.",
+            "deleted": "خدمت پیمانکار با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف خدمت پیمانکار با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات خدمت پیمانکار"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "educationalCenterGrade": "Educational Center Grade"
+        }
+    }
+}

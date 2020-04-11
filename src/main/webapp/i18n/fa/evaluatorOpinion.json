@@ -1,0 +1,28 @@
+{
+    "marineindustryprojApp": {
+        "evaluatorOpinion": {
+            "home": {
+                "title": "نظرات ارزیاب",
+                "createLabel": "جدید",
+                "createOrEditLabel": " نظر ارزیاب"
+            },
+            "created": "نظر ارزیاب با شناسه {{ param }} ایجاد شد.",
+            "updated": "نظر ارزیاب با شناسه {{ param }} ویرایش شد.",
+            "deleted": "نظر ارزیاب با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف نظر ارزیاب با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات نظر ارزیاب"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "educationalCenterGrade": "Educational Center Grade"
+        }
+    }
+}

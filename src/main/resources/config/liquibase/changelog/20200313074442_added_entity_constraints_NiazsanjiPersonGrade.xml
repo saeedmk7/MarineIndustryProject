@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity NiazsanjiPersonGrade.
+    -->
+    <changeSet id="20200313074442-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="niazsanji_person_grades_id"
+                                 baseTableName="niazsanji_person_grade_document"
+                                 constraintName="fk_niazsanji_person_grade_document_niazsanji_person_grades_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="niazsanji_person_grade"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="niazsanji_person_grade_document"
+                                 constraintName="fk_niazsanji_person_grade_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="final_niazsanji_report_person_id"
+                                 baseTableName="niazsanji_person_grade"
+                                 constraintName="fk_niazsanji_person_grade_final_niazsanji_report_person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="final_niazsanji_report_person"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -236,6 +236,7 @@
     <include file="config/liquibase/changelog/20200330050811_update_entity_FinalNiazsanjiReportPerson.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200330050911_update_entity_EffectivenessPhase.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200330051011_update_entity_EffectivenessPhase.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200409051011_update_entity_criteriaColors.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

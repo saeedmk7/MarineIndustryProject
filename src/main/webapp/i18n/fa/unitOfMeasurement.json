@@ -1,0 +1,9 @@
+{
+    "marineindustryprojApp": {
+        "UnitOfMeasurement": {
+            "null": "",
+            "FIX": "ثابت",
+            "PERCENT": "درصد"
+        }
+    }
+}

@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="levelThreeCriteria">
+            <h2><span jhiTranslate="marineindustryprojApp.levelThreeCriteria.detail.title">Level Three Criteria</span> {{levelThreeCriteria.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteria.title">Title</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteria.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteria.displayOrder">Display Order</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteria.displayOrder}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteria.weight">Weight</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteria.weight}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteria.secondWeight">Second Weight</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteria.secondWeight}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteria.description">Description</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteria.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteria.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteria.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteria.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteria.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteria.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteria.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteria.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{levelThreeCriteria.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteria.mahiatCourse">Mahiat Course</span></dt>
+                <dd>
+                    <div *ngIf="levelThreeCriteria.mahiatCourseId">
+                        <a [routerLink]="['/mahiat-course-marine-suffix', levelThreeCriteria.mahiatCourseId, 'view']">{{levelThreeCriteria.mahiatCourseTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.levelThreeCriteria.levelThreeCriteriaGroup">Level Three Criteria Group</span></dt>
+                <dd>
+                    <div *ngIf="levelThreeCriteria.levelThreeCriteriaGroupId">
+                        <a [routerLink]="['/level-three-criteria-group-marine-suffix', levelThreeCriteria.levelThreeCriteriaGroupId, 'view']">{{levelThreeCriteria.levelThreeCriteriaGroupTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/level-three-criteria-marine-suffix', levelThreeCriteria.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

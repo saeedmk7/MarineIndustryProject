@@ -1,0 +1,10 @@
+{
+    "marineindustryprojApp": {
+        "CriterionType": {
+            "null": "",
+            "CONTENT": "محتوا",
+            "TEACHER": "استاد",
+            "RUN": "اجرا"
+        }
+    }
+}

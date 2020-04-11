@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity EducationalCenterGrade.
+    -->
+    <changeSet id="20200229064928-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="educational_center_grades_id"
+                                 baseTableName="educational_center_grade_evaluator_opinion"
+                                 constraintName="educational_center_grade_evalu_educational_center_grades_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_center_grade"/>
+        <addForeignKeyConstraint baseColumnNames="evaluator_opinions_id"
+                                 baseTableName="educational_center_grade_evaluator_opinion"
+                                 constraintName="educational_center_grade_evalu_evaluator_opinions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="evaluator_opinion"/>
+        
+        <addForeignKeyConstraint baseColumnNames="educational_center_grades_id"
+                                 baseTableName="educational_center_grade_document"
+                                 constraintName="educational_center_grade_docum_educational_center_grades_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_center_grade"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="educational_center_grade_document"
+                                 constraintName="fk_educational_center_grade_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="educational_center_service_id"
+                                 baseTableName="educational_center_grade"
+                                 constraintName="fk_educational_center_grade_educational_center_service_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_center_service"/>
+
+        <addForeignKeyConstraint baseColumnNames="educational_center_id"
+                                 baseTableName="educational_center_grade"
+                                 constraintName="fk_educational_center_grade_educational_center_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_center"/>
+
+    </changeSet>
+</databaseChangeLog>

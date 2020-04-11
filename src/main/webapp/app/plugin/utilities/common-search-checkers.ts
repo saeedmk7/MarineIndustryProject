@@ -46,6 +46,25 @@ export class CommonSearchCheckerService {
         }
         return criteria;
     }
+    public addOrganizationFilterToCriteriaForFinalNiazsanjiReport(criteria, organizationCharts: IOrganizationChartMarineSuffix[]) {
+        const org = criteria.find(a => a.key == 'organizationChartId.equals');
+        debugger;
+        if (org) {
+            const orgId = +org.value;
+            criteria = criteria.filter(a => a.key != 'organizationChartId.equals');
+            if (orgId) {
+
+                criteria = criteria.filter(a => a.key != 'organizationChartId.in');
+
+                const childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(organizationCharts, orgId);
+                criteria.push({
+                    key: 'organizationChartId.in', value: childIds
+                });
+
+            }
+        }
+        return criteria;
+    }
 
     public checkYear(criteria) {
         const year = criteria.find(a => a.key == 'yearId.equals');

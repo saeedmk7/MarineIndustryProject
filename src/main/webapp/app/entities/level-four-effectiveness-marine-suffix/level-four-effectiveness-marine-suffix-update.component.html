@@ -1,0 +1,195 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-level-four-effectiveness-marine-suffix-heading" jhiTranslate="marineindustryprojApp.levelFourEffectiveness.home.createOrEditLabel">Create or edit a Level Four Effectiveness</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!levelFourEffectiveness.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="levelFourEffectiveness.id" readonly />
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th colspan="4" style="text-align: center">
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelFourEffectiveness.formTitle">formTitle</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="text-align: center">
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelFourEffectiveness.recommendTitle">recommendTitle</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center">
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelFourEffectiveness.courseTitle">courseTitle</label>
+                            </th>
+                            <td>
+                                {{finalNiazsanjiReport.educationalModuleTitle}}
+                            </td>
+                            <th style="text-align: center">
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelFourEffectiveness.evaluateDate">evaluateDate</label>
+                            </th>
+                            <td>
+                                {{levelFourEffectiveness.evaluateDate}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center">
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelFourEffectiveness.finalNiazsanjiReportPerson">finalNiazsanjiReportPerson</label>
+                            </th>
+                            <td>
+                                {{finalNiazsanjiReportPerson.personFullName}}
+                            </td>
+                            <!--<th style="text-align: center">
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelFourEffectiveness.qualificationTitle">qualificationTitle</label>
+                            </th>
+                            <td>
+
+                            </td>-->
+                            <th style="text-align: center">
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelFourEffectiveness.teacherFullName">teacherFullName</label>
+                            </th>
+                            <td>
+                                {{finalNiazsanjiReport.teacherName}} {{finalNiazsanjiReport.teacherFamily}}
+                            </td>
+                        </tr>
+                    </table>
+                    <a *ngIf="isSuperUsers" (click)="change('level-four-criteria-marine-suffix')" class="btn btn-info"
+                       [ngClass]="{'enableLink': isSuperUsers}">تصحیح لیست معیارهای ارزشیابی</a>
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th rowspan="2">ردیف</th>
+                            <th rowspan="2">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.levelFourEffectiveness.levelFourCriteriaGroup">levelFourCriteriaGroup</label>
+                            </th>
+                            <th rowspan="2">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.levelFourEffectiveness.levelFourCriteria">niazsanjiPersonCriteria</label>
+                            </th>
+                            <!--<th rowspan="2">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.description">description</label></th>-->
+                            <th rowspan="2">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.weight">weight</label></th>
+                            <th colspan="5">امتیازات</th>
+                            <th rowspan="2">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.levelFourEffectiveness.description">description</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th *ngFor="let i of scores">{{i}}</th>
+                        </tr>
+                        <tr *ngFor="let item of levelFourEffectiveness.levelFourScores; let i= index"
+                            [style.background-color]="item.levelFourBackgroundColor"
+                            [style.color]="item.levelFourColorText">
+                            <td>{{i+1}}</td>
+                            <td>{{ item.levelFourCriteriaGroupTitle }}</td>
+                            <td>{{item.levelFourCriteriaTitle}}</td>
+                            <!--<td>{{item.levelFourCriteriaDescription}}</td>-->
+                            <td>{{item.levelFourCriteriaWeight}}</td>
+                            <td *ngFor="let score of scores"><input class="form-radio" type="radio" [name]="item.id"
+                                                                    [id]="item.id + '_' + score" [value]="score"
+                                                                    [checked]="item.score == score"
+                                                                    (change)="checkValue(item.id, score)"></td>
+                            <td><textarea class="form-control" type="textarea" [name]="item.description"
+                                          [id]="item.description + '_' + item.id" [ngModelOptions]="{standalone: true}"
+                                          [(ngModel)]="item.description"></textarea></td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th colspan="2"><label class="form-control-label"
+                                                   jhiTranslate="marineindustryprojApp.levelFourEffectiveness.totalScore">Total
+                                Score</label></th>
+                            <th colspan="10">{{this.levelFourEffectiveness.totalScore}}</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th colspan="2"><label class="form-control-label"
+                                                   jhiTranslate="marineindustryprojApp.levelFourEffectiveness.totalScorePercent">Total
+                                Score Percent</label></th>
+                            <th colspan="10">{{this.levelFourEffectiveness.totalScorePercent}}</th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card border-success">
+                    <a data-toggle="collapse" href="#collapseExample" class="card-header center"
+                       style="background-color: aliceblue;">
+                        <span class="panel-title">پنل راهنمای مقیاس های اندازه گیری</span>
+                        <span class="pull-right clickable"><i class="glyphicon glyphicon-ok"></i></span>
+                    </a>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card-body">
+                            <div class="table-responsive" *ngIf="levelFourEffectiveness.levelFourScores">
+                                <table class="table table-striped table-bordered">
+                                    <tr *ngFor="let item of levelFourEffectiveness.levelFourScores">
+                                        <th>{{item.levelFourCriteriaTitle}}</th>
+                                        <td>{{item.levelFourCriteriaDescription}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+               <!-- <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelFourEffectiveness.strength" for="field_strength">Strength</label>
+                    <input type="text" class="form-control" name="strength" id="field_strength"
+                        [(ngModel)]="levelFourEffectiveness.strength" maxlength="1024"/>
+                    <div [hidden]="!(editForm.controls.strength?.dirty && editForm.controls.strength?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.strength?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1024 }">
+                        This field cannot be longer than 1024 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelFourEffectiveness.improvement" for="field_improvement">Improvement</label>
+                    <input type="text" class="form-control" name="improvement" id="field_improvement"
+                        [(ngModel)]="levelFourEffectiveness.improvement" maxlength="1024"/>
+                    <div [hidden]="!(editForm.controls.improvement?.dirty && editForm.controls.improvement?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.improvement?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1024 }">
+                        This field cannot be longer than 1024 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelFourEffectiveness.whatDoYouDo" for="field_whatDoYouDo">What Do You Do</label>
+                    <input type="text" class="form-control" name="whatDoYouDo" id="field_whatDoYouDo"
+                        [(ngModel)]="levelFourEffectiveness.whatDoYouDo" maxlength="1024"/>
+                    <div [hidden]="!(editForm.controls.whatDoYouDo?.dirty && editForm.controls.whatDoYouDo?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.whatDoYouDo?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1024 }">
+                        This field cannot be longer than 1024 characters.
+                        </small>
+                    </div>
+                </div>-->
+
+                <div class="form-group fullcover">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.levelFourEffectiveness.description" for="field_description">Description</label>
+                    <textarea type="text" class="form-control" name="description" id="field_description"
+                              [(ngModel)]="levelFourEffectiveness.description" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

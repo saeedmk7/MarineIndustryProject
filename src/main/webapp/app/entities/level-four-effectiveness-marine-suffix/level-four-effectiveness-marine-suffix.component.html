@@ -1,0 +1,98 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.home.title">Level Four Effectivenesses</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-level-four-effectiveness-marine-suffix" [routerLink]="['/level-four-effectiveness-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.levelFourEffectiveness.home.createLabel">
+            Create new Level Four Effectiveness
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="levelFourEffectivenesses">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="totalScore"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.totalScore">Total Score</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="totalScorePercent"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.totalScorePercent">Total Score Percent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="grade"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.grade">Grade</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="evaluateDate"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.evaluateDate">Evaluate Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="year"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.year">Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="month"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.month">Month</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="strength"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.strength">Strength</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="improvement"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.improvement">Improvement</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="whatDoYouDo"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.whatDoYouDo">What Do You Do</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fileDoc"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.fileDoc">File Doc</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="finalNiazsanjiReportPersonDescription"><span jhiTranslate="marineindustryprojApp.levelFourEffectiveness.finalNiazsanjiReportPerson">Final Niazsanji Report Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let levelFourEffectiveness of levelFourEffectivenesses ;trackBy: trackId">
+                <td><a [routerLink]="['/level-four-effectiveness-marine-suffix', levelFourEffectiveness.id, 'view' ]">{{levelFourEffectiveness.id}}</a></td>
+                <td>{{levelFourEffectiveness.title}}</td>
+                <td>{{levelFourEffectiveness.totalScore}}</td>
+                <td>{{levelFourEffectiveness.totalScorePercent}}</td>
+                <td jhiTranslate="{{'marineindustryprojApp.Grade.' + levelFourEffectiveness.grade}}">{{levelFourEffectiveness.grade}}</td>
+                <td>{{levelFourEffectiveness.evaluateDate}}</td>
+                <td>{{levelFourEffectiveness.year}}</td>
+                <td>{{levelFourEffectiveness.month}}</td>
+                <td>{{levelFourEffectiveness.strength}}</td>
+                <td>{{levelFourEffectiveness.improvement}}</td>
+                <td>{{levelFourEffectiveness.whatDoYouDo}}</td>
+                <td>{{levelFourEffectiveness.fileDoc}}</td>
+                <td>{{levelFourEffectiveness.description}}</td>
+                <td>{{levelFourEffectiveness.createUserLogin}}</td>
+                <td>{{levelFourEffectiveness.createDate | date:'medium'}}</td>
+                <td>{{levelFourEffectiveness.modifyUserLogin}}</td>
+                <td>{{levelFourEffectiveness.modifyDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="levelFourEffectiveness.finalNiazsanjiReportPersonId">
+                        <a [routerLink]="['../final-niazsanji-report-person-marine-suffix', levelFourEffectiveness.finalNiazsanjiReportPersonId , 'view' ]" >{{levelFourEffectiveness.finalNiazsanjiReportPersonDescription}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/level-four-effectiveness-marine-suffix', levelFourEffectiveness.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/level-four-effectiveness-marine-suffix', levelFourEffectiveness.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'level-four-effectiveness-marine-suffix/'+ levelFourEffectiveness.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="levelFourEffectivenesses && levelFourEffectivenesses.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

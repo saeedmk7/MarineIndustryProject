@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="teacherGradeScore">
+            <h2><span jhiTranslate="marineindustryprojApp.teacherGradeScore.detail.title">Teacher Grade Score</span> {{teacherGradeScore.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGradeScore.score">Score</span></dt>
+                <dd>
+                    <span>{{teacherGradeScore.score}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGradeScore.description">Description</span></dt>
+                <dd>
+                    <span>{{teacherGradeScore.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGradeScore.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{teacherGradeScore.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGradeScore.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{teacherGradeScore.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGradeScore.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{teacherGradeScore.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGradeScore.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{teacherGradeScore.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGradeScore.teacherCriteria">Teacher Criteria</span></dt>
+                <dd>
+                    <div *ngIf="teacherGradeScore.teacherCriteriaId">
+                        <a [routerLink]="['/teacher-criteria-marine-suffix', teacherGradeScore.teacherCriteriaId, 'view']">{{teacherGradeScore.teacherCriteriaTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.teacherGradeScore.teacherGrade">Teacher Grade</span></dt>
+                <dd>
+                    <div *ngIf="teacherGradeScore.teacherGradeId">
+                        <a [routerLink]="['/teacher-grade-marine-suffix', teacherGradeScore.teacherGradeId, 'view']">{{teacherGradeScore.teacherGradeTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/teacher-grade-score-marine-suffix', teacherGradeScore.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
