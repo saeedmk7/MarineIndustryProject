@@ -1,8 +1,9 @@
 /* after changing this file run 'npm run webpack:build' */
 /* tslint:disable */
 import '../content/scss/vendor.scss';
-import 'jquery/dist/jquery.min'
+import 'jquery/dist/jquery.min';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 // Imports all fontawesome core and solid icons
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -86,8 +87,6 @@ import {
     faForward,
     faBackward
 } from '@fortawesome/free-solid-svg-icons';
-
-
 
 // Adds the SVG icon to the library so you can use it in your page
 library.add(faUser);
