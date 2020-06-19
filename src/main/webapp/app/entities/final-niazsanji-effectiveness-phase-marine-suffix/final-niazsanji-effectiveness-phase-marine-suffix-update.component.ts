@@ -7,7 +7,6 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
-import { FinalNiazsanjiEffectivenessPhaseMarineSuffixService } from './final-niazsanji-effectiveness-phase-marine-suffix.service';
 import { IDocumentMarineSuffix } from 'app/shared/model/document-marine-suffix.model';
 import { DocumentMarineSuffixService } from 'app/entities/document-marine-suffix';
 import { IRestrictionMarineSuffix } from 'app/shared/model/restriction-marine-suffix.model';
@@ -28,6 +27,7 @@ import { IMahiatCourseMarineSuffix } from 'app/shared/model/mahiat-course-marine
 import { MahiatCourseMarineSuffixService } from 'app/entities/mahiat-course-marine-suffix';
 import { ITeachingApproachMarineSuffix } from 'app/shared/model/teaching-approach-marine-suffix.model';
 import { TeachingApproachMarineSuffixService } from 'app/entities/teaching-approach-marine-suffix';
+import { FinalNiazsanjiReportMarineSuffixService } from 'app/entities/final-niazsanji-report-marine-suffix';
 
 @Component({
     selector: 'mi-final-niazsanji-effectiveness-phase-marine-suffix-update',
@@ -63,7 +63,7 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixUpdateComponent impleme
 
     constructor(
         protected jhiAlertService: JhiAlertService,
-        protected finalNiazsanjiReportService: FinalNiazsanjiEffectivenessPhaseMarineSuffixService,
+        protected finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService,
         protected documentService: DocumentMarineSuffixService,
         protected restrictionService: RestrictionMarineSuffixService,
         protected niazsanjiIntegrationService: NiazsanjiIntegrationMarineSuffixService,

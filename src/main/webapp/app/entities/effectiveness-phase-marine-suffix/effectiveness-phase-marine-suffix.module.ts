@@ -13,19 +13,28 @@ import {
     EffectivenessPhaseLevelOneMarineSuffixComponent,
     EffectivenessPhaseLevelTwoMarineSuffixComponent,
     EffectivenessPhaseLevelThreeMarineSuffixComponent,
-    EffectivenessPhaseLevelFourMarineSuffixComponent
+    EffectivenessPhaseLevelFourMarineSuffixComponent,
+    EffectivenessPhaseReportMarineSuffixComponent
 } from './';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FormsModule} from "@angular/forms";
-import {NgSelectModule} from "@ng-select/ng-select";
-import {ChartModule} from "angular-highcharts";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { ChartModule } from 'angular-highcharts';
 
 const ENTITY_STATES = [...effectivenessPhaseRoute, ...effectivenessPhasePopupRoute];
 
 @NgModule({
-    imports: [MarineindustryprojSharedModule, ChartModule, NgSelectModule, FormsModule, BrowserAnimationsModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [
+        MarineindustryprojSharedModule,
+        ChartModule,
+        NgSelectModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        RouterModule.forChild(ENTITY_STATES)
+    ],
     declarations: [
         EffectivenessPhaseMarineSuffixComponent,
+        EffectivenessPhaseReportMarineSuffixComponent,
         EffectivenessPhaseLevelOneMarineSuffixComponent,
         EffectivenessPhaseLevelTwoMarineSuffixComponent,
         EffectivenessPhaseLevelThreeMarineSuffixComponent,
@@ -37,6 +46,7 @@ const ENTITY_STATES = [...effectivenessPhaseRoute, ...effectivenessPhasePopupRou
     ],
     entryComponents: [
         EffectivenessPhaseMarineSuffixComponent,
+        EffectivenessPhaseReportMarineSuffixComponent,
         EffectivenessPhaseLevelOneMarineSuffixComponent,
         EffectivenessPhaseLevelTwoMarineSuffixComponent,
         EffectivenessPhaseLevelThreeMarineSuffixComponent,

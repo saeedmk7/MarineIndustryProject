@@ -9,6 +9,10 @@
             Create new Final Niazsanji Report
             </span>
         </button>-->
+        <button  class="btn btn-info float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
     </h2>
     <mi-alert></mi-alert>
     <search-panel [(page)]="page" [(size)]="itemsPerPage" [predicate]="predicate" [reverse]="reverse" [searchPanelModel]="searchbarModel"></search-panel>
@@ -222,12 +226,12 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit" *ngIf="isSuperUsers"
+                        <!--<button type="submit" *ngIf="isSuperUsers"
                                 [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReport.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
+                        </button>-->
                         <button type="submit" *ngIf="isSuperUsers"
                                 [routerLink]="['/', { outlets: { popup: 'final-niazsanji-report-marine-suffix/'+ finalNiazsanjiReport.id + '/delete'} }]"
                                 replaceUrl="true"

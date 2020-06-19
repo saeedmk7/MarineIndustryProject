@@ -1,8 +1,8 @@
 import { Moment } from 'moment';
 import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model//final-niazsanji-report-marine-suffix.model';
-import {RequestStatus} from "app/shared/model/enums/RequestStatus";
-import {RequestNiazsanjiType} from "app/shared/model/enums/RequestNiazsanjiType";
-import {EducationalModuleType} from "app/shared/model/enums/EducationalModuleType";
+import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
+import { RequestNiazsanjiType } from 'app/shared/model/enums/RequestNiazsanjiType';
+import { EducationalModuleType } from 'app/shared/model/enums/EducationalModuleType';
 
 export interface INiazsanjiIntegrationMarineSuffix {
     id?: number;
@@ -25,18 +25,20 @@ export interface INiazsanjiIntegrationMarineSuffix {
     prioritizeRequestNiazsanjiCode?: string;
     prioritizeRequestNiazsanjiId?: number;
     costEducationalModule?: number;
-    educationalModuleType?:EducationalModuleType;
-    niazsanjiInputTitle?:string;
-    courseTypeTitle?:string;
+    educationalModuleType?: EducationalModuleType;
+    niazsanjiInputTitle?: string;
+    courseTypeTitle?: string;
     educationalModuleId?: number;
-    educationalModuleCode?:string;
-    educationalModuleTitle?:string;
+    educationalModuleCode?: string;
+    educationalModuleTitle?: string;
     personFullName?: string;
-    personFamily?:string;
-    personName?:string;
-    organizationChartId?:number;
-    organizationChartTitle?:string;
-    organizationChartRootTitle?:string;
+    personFamily?: string;
+    personName?: string;
+    personJobTitle?: string;
+    organizationChartId?: number;
+    organizationChartTitle?: string;
+    organizationChartFullTitle?: string;
+    organizationChartRootTitle?: string;
     totalLearningTime?: number;
     skillLevelOfSkillTitle?: string;
 }
@@ -63,18 +65,20 @@ export class NiazsanjiIntegrationMarineSuffix implements INiazsanjiIntegrationMa
         public prioritizeRequestNiazsanjiCode?: string,
         public prioritizeRequestNiazsanjiId?: number,
         public costEducationalModule?: number,
-        public educationalModuleType?:EducationalModuleType,
-        public niazsanjiInputTitle?:string,
-        public courseTypeTitle?:string,
+        public educationalModuleType?: EducationalModuleType,
+        public niazsanjiInputTitle?: string,
+        public courseTypeTitle?: string,
         public educationalModuleId?: number,
-        public educationalModuleCode?:string,
-        public educationalModuleTitle?:string,
+        public educationalModuleCode?: string,
+        public educationalModuleTitle?: string,
         public personFullName?: string,
-        public personFamily?:string,
-        public personName?:string,
-        public organizationChartId?:number,
-        public organizationChartTitle?:string,
-        public organizationChartRootTitle?:string,
+        public personFamily?: string,
+        public personName?: string,
+        public personJobTitle?: string,
+        public organizationChartId?: number,
+        public organizationChartTitle?: string,
+        public organizationChartFullTitle?: string,
+        public organizationChartRootTitle?: string,
         public totalLearningTime?: number,
         public skillLevelOfSkillTitle?: string
     ) {

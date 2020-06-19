@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import {observable, Observable} from 'rxjs';
+import { observable, Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { map } from 'rxjs/operators';
@@ -8,8 +8,7 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
-import {append} from "@progress/kendo-angular-grid/dist/es2015/dragdrop/common";
-
+import { append } from '@progress/kendo-angular-grid/dist/es2015/dragdrop/common';
 
 type EntityResponseType = HttpResponse<IOrganizationChartMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<IOrganizationChartMarineSuffix[]>;
@@ -43,19 +42,17 @@ export class OrganizationChartMarineSuffixService {
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {
-        if(req) {
+        if (req) {
             const options = createRequestOption(req);
             return this.http
-                .get<IOrganizationChartMarineSuffix[]>(this.resourceUrl, {params: options, observe: 'response'})
+                .get<IOrganizationChartMarineSuffix[]>(this.resourceUrl, { params: options, observe: 'response' })
                 .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
-        }
-        else{
-            let url = this.resourceUrl + "/all";
+        } else {
+            let url = this.resourceUrl + '/all';
             return this.http
-                .get<IOrganizationChartMarineSuffix[]>(url, {observe: 'response'})
-                .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res,true)));
+                .get<IOrganizationChartMarineSuffix[]>(url, { observe: 'response' })
+                .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res, true)));
         }
-
     }
 
     /*getAvailable(): Observable<EntityArrayResponseType> {
@@ -94,12 +91,11 @@ export class OrganizationChartMarineSuffixService {
         res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
         return res;
     }
-    appendParent(org: IOrganizationChartMarineSuffix): string{
-
+    appendParent(org: IOrganizationChartMarineSuffix): string {
         let fullTitle = org.title;
-        if(org.parentId){
+        if (org.parentId) {
             let father = this.organizationcharts.find(a => a.id == org.parentId);
-            return this.appendParent(father) + " > " + fullTitle;
+            return this.appendParent(father) + ' > ' + fullTitle;
         }
         return fullTitle;
     }
@@ -113,9 +109,11 @@ export class OrganizationChartMarineSuffixService {
             organizationChart.archivedDate = organizationChart.archivedDate != null ? moment(organizationChart.archivedDate) : null;
             organizationChart.fullTitle = this.appendParent(organizationChart);
         });
-        res.body.sort(function(a,b)
-        {
-            return (a.fullTitle > b.fullTitle) ? 1 : ((b.fullTitle > a.fullTitle) ? -1 : 0);
+        res.body.forEach((organizationChart: IOrganizationChartMarineSuffix) => {
+            organizationChart.rootTitle = organizationChart.fullTitle.split('>')[0];
+        });
+        res.body.sort(function(a, b) {
+            return a.fullTitle > b.fullTitle ? 1 : b.fullTitle > a.fullTitle ? -1 : 0;
         });
         /*this.fs.writeFile('./orgChart', JSON.stringify(res.body), (err) => {
             if (err) {
@@ -125,7 +123,7 @@ export class OrganizationChartMarineSuffixService {
             //console.log("File has been created");
         });
         this.fs.read()*/
-        if(isAll){
+        if (isAll) {
             this.organizationchartsAll = res.body;
         }
         return res;

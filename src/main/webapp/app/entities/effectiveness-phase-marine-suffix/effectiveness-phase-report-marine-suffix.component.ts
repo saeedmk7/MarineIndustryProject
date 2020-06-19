@@ -4,36 +4,44 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
-import { Principal } from 'app/core';
-import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
-import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
+import { IEffectivenessPhaseMarineSuffix } from 'app/shared/model/effectiveness-phase-marine-suffix.model';
+import { AccountService, Principal } from 'app/core';
+
+import { ITEMS_PER_PAGE } from 'app/shared';
+import { EffectivenessPhaseMarineSuffixService } from './effectiveness-phase-marine-suffix.service';
+import { IEffectivenessPhaseLevelMarineSuffix } from 'app/shared/model/effectiveness-phase-level-marine-suffix.model';
+import { EffectivenessPhaseLevelMarineSuffixService } from 'app/entities/effectiveness-phase-level-marine-suffix';
+import { FinalNiazsanjiReportMarineSuffixService } from 'app/entities/final-niazsanji-report-marine-suffix';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
 import { MONTHS } from 'app/shared/constants/months.constants';
 import { FINALNIAZSANJISTATUSMEANING } from 'app/shared/constants/final-niazsanji-report-status-meaning.constants';
+import { EFFECTIVENESSPHASELEVELS } from 'app/shared/constants/effectiveness-phase-levels.constants';
 import { SearchPanelModel } from 'app/shared/model/custom/searchbar.model';
+import { GREGORIAN_START_END_DATE } from 'app/shared/constants/years.constants';
+import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
+import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { ICourseTypeMarineSuffix } from 'app/shared/model/course-type-marine-suffix.model';
+import { IEducationalModuleMarineSuffix } from 'app/shared/model/educational-module-marine-suffix.model';
 import { EducationalModuleMarineSuffixService } from 'app/entities/educational-module-marine-suffix';
-import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
 import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
 import { CourseTypeMarineSuffixService } from 'app/entities/course-type-marine-suffix';
 import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
 import { TreeUtilities } from 'app/plugin/utilities/tree-utilities';
-import { TranslateService } from '@ngx-translate/core';
-import { GREGORIAN_START_END_DATE } from 'app/shared/constants/years.constants';
-import { ExcelService } from 'app/plugin/export-excel/excel-service';
 import { CommonSearchCheckerService } from 'app/plugin/utilities/common-search-checkers';
-import { IEducationalModuleMarineSuffix } from 'app/shared/model/educational-module-marine-suffix.model';
-import { ICourseTypeMarineSuffix } from 'app/shared/model/course-type-marine-suffix.model';
+import { TranslateService } from '@ngx-translate/core';
+import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
+import { ExcelService } from 'app/plugin/export-excel/excel-service';
 import { NIAZSANJI_SOURCE_FILTERS } from 'app/shared/constants/NiazsanjiSourceFilters';
-import { EFFECTIVENESSPHASELEVELS } from 'app/shared/constants/effectiveness-phase-levels.constants';
-import { FinalNiazsanjiReportMarineSuffixService } from 'app/entities/final-niazsanji-report-marine-suffix';
 
 @Component({
-    selector: 'mi-final-niazsanji-effectiveness-phase-marine-suffix',
-    templateUrl: './final-niazsanji-effectiveness-phase-marine-suffix.component.html'
+    selector: 'mi-effectiveness-phase-report-marine-suffix',
+    templateUrl: './effectiveness-phase-report-marine-suffix.component.html',
+    styleUrls: ['./effectiveness-phase-marine-suffix.scss']
 })
-export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements OnInit, OnDestroy {
+export class EffectivenessPhaseReportMarineSuffixComponent implements OnInit, OnDestroy {
     currentAccount: any;
-    finalNiazsanjiReports: IFinalNiazsanjiReportMarineSuffix[];
+    effectivenessPhases: IEffectivenessPhaseMarineSuffix[];
+    effectivenessPhaseLevels: IEffectivenessPhaseLevelMarineSuffix[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -63,20 +71,22 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
     isSuperUsers: boolean = false;
     dates: any[];
     months: any[] = MONTHS;
-    statusMeaning: any[] = FINALNIAZSANJISTATUSMEANING;
-    effectivenessPhaseLevels: any[] = EFFECTIVENESSPHASELEVELS;
+    effectivenessPhaseLevelsStatus: any[] = EFFECTIVENESSPHASELEVELS;
 
     done: boolean = false;
     yearsCollections: any[];
-
-    niazSanjiSource: boolean = true;
 
     searchbarModel: SearchPanelModel[] = [];
     criteriaSubscriber: Subscription;
     criteria: any;
 
+    averageFinalScore: number = 0;
+    averageWeightedPoints: number = 0;
+
     constructor(
         protected finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService,
+        protected effectivenessPhaseService: EffectivenessPhaseMarineSuffixService,
+        protected effectivenessPhaseLevelService: EffectivenessPhaseLevelMarineSuffixService,
         protected parseLinks: JhiParseLinks,
         protected jhiAlertService: JhiAlertService,
         protected principal: Principal,
@@ -159,20 +169,6 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
             });
         }
     }
-    setEffectivenessLevel(finalNiazsanjiReport: IFinalNiazsanjiReportMarineSuffix, item: any) {
-        if (
-            confirm(
-                "آیا از انتخاب سطح: '" + item.title + "' برای دوره مورد نظر مطمئنید؟ در صورت انتخاب این سطح دیگر امکان تغییر آن وجود ندارد."
-            )
-        ) {
-            this.finalNiazsanjiReportService
-                .setEffectivenessPhaseLevel(finalNiazsanjiReport.id, item.id)
-                .subscribe(
-                    (resp: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => this.onSuccess(),
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
-        }
-    }
     handleAfterChart(wantOrgIds: number[], criteria, excelExport: boolean = false) {
         //criteria = this.commonSearchCheckerService.checkRequestStatusFilters(criteria, this.currentPerson.organizationChartId);
         if (this.isSuperUsers) {
@@ -195,28 +191,20 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
 
     loadAll(criteria?, excelExport: boolean = false) {
         debugger;
-        criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteriaForFinalNiazsanjiReport(
-            criteria,
-            this.organizationcharts
-        );
-        criteria.push({
-            key: 'status.greaterOrEqualThan',
-            value: 20
-        });
         if (excelExport) {
-            this.finalNiazsanjiReportService
-                .queryWithPeople({
+            this.effectivenessPhaseService
+                .query({
                     page: this.page - 1,
-                    size: 20000,
+                    size: 2000,
                     criteria,
                     sort: this.sort()
                 })
                 .subscribe(
-                    (res: HttpResponse<IFinalNiazsanjiReportMarineSuffix[]>) => this.prepareForExportExcel(res.body),
+                    (res: HttpResponse<IEffectivenessPhaseMarineSuffix[]>) => this.prepareForExportExcel(res.body),
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
         } else {
-            this.finalNiazsanjiReportService
+            this.effectivenessPhaseService
                 .query({
                     page: this.page - 1,
                     size: this.itemsPerPage,
@@ -224,76 +212,87 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
                     sort: this.sort()
                 })
                 .subscribe(
-                    (res: HttpResponse<IFinalNiazsanjiReportMarineSuffix[]>) => this.paginateFinalNiazsanjiReports(res.body, res.headers),
+                    (res: HttpResponse<IEffectivenessPhaseMarineSuffix[]>) => this.paginateEffectivenessPhases(res.body, res.headers),
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
         }
     }
+
     export() {
+        debugger;
         this.makeCriteria(this.criteria, true);
     }
-    prepareForExportExcel(res: IFinalNiazsanjiReportMarineSuffix[]) {
+    prepareForExportExcel(res: IEffectivenessPhaseMarineSuffix[]) {
         let a = new ExcelService(this.jhiTranslate);
 
-        let finalNiazsanjiReports: IFinalNiazsanjiReportMarineSuffix[] = this.loadData(res);
+        let effectivenessPhases: IEffectivenessPhaseMarineSuffix[] = this.convertObjectDatesService.changeArrayDate(res);
+        effectivenessPhases.forEach(a => {
+            switch (a.status) {
+                case 0:
+                    a.statusMeaning = 'آماده اثربخشی';
+                    break;
+                case 10:
+                    a.statusMeaning = 'شروع به اثربخشی';
+                    break;
+                case 20:
+                    a.statusMeaning = 'تکمیل اثربخشی';
+                    break;
+            }
+            if (a.finalNiazsanjiReport.organizationChartId) {
+                a.finalNiazsanjiReport.organizationChartRootTitle = this.organizationcharts.find(
+                    w => w.id == a.finalNiazsanjiReport.organizationChartId
+                ).rootTitle;
+                a.finalNiazsanjiReport.organizationChartFullTitle = this.organizationcharts.find(
+                    w => w.id == a.finalNiazsanjiReport.organizationChartId
+                ).fullTitle;
+            }
+        });
 
         let report = [];
         let index: number = 0;
-        finalNiazsanjiReports.forEach(a => {
+        effectivenessPhases.forEach(a => {
             index++;
 
+            let unitOfMeasurement = '';
+            this.jhiTranslate.get('marineindustryprojApp.UnitOfMeasurement.' + a.effectivenessPhaseLevel.unitOfMeasurement).subscribe(w => {
+                unitOfMeasurement = w;
+            });
+
             debugger;
-            const peopleText =
-                a.finalNiazsanjiReportPeople && a.finalNiazsanjiReportPeople.length > 0
-                    ? a.finalNiazsanjiReportPeople.map(w => w.personName + ' ' + w.personFamily).join(' - ')
-                    : ' ';
-            let niazsanjiSource = '';
-            this.jhiTranslate.get('marineindustryprojApp.NiazSanjiSource.' + a.niazSanjiSource).subscribe(w => {
-                niazsanjiSource = w;
-            });
-            let effectivenessPhaseGrade = '';
-            this.jhiTranslate.get('marineindustryprojApp.Grade.' + a.effectivenessPhaseGrade).subscribe(w => {
-                effectivenessPhaseGrade = w;
-            });
             let obj: Object;
             obj = {
                 index: index,
-                organizationChartRoot: a.organizationChartRootTitle,
-                organizationChartFullTitle: a.organizationChartFullTitle,
-                people: peopleText,
-                educationalModuleTitle: a.educationalModuleTitle,
-                educationalModuleId: a.educationalModuleCode,
-                educationalModuleLevel: a.educationalModuleLevelTitle,
-                educationalModuleTotalTime: a.educationalModuleTotalTime,
-                courseType: a.courseTypeTitle,
-                priceCost: a.priceCost,
-                finalizeCost: a.finalizeCost,
-                niazSanjiSource: niazsanjiSource,
-                niazsanjiYear: a.niazsanjiYear,
-                planningRunMonth: a.planningRunMonthPersian,
-                runMonth: a.runMonthPersian,
-                teacher: a.teacherFullName,
-                mahiatCourse: a.mahiatCourseTitle,
+                organizationChartGroup: a.finalNiazsanjiReport.organizationChartRootTitle,
+                organizationChart: a.finalNiazsanjiReport.organizationChartFullTitle,
+                courseTitle: a.finalNiazsanjiReport.educationalModuleTitle,
+                courseCode: a.finalNiazsanjiReport.educationalModuleCode,
+                finishDate:
+                    a.finalNiazsanjiReport.runPhases && a.finalNiazsanjiReport.runPhases.length > 0
+                        ? a.finalNiazsanjiReport.runPhases[0].finishDate
+                        : '',
+                criteria: a.effectivenessPhaseLevelTitle,
+                unitOfMeasurement: unitOfMeasurement,
+                goal: a.effectivenessPhaseLevel.goal,
+                firstScore: a.firstScore,
+                secondScore: a.secondScore,
+                finalScore: a.finalScore,
+                weightedPoints: a.weightedPoints,
+                weight: a.effectivenessPhaseLevel.weight,
+                startPhaseDate: a.startPhaseDate,
+                finishPhaseDate: a.finishPhaseDate,
+                niazsanjiYear: a.finalNiazsanjiReport.niazsanjiYear,
+                teacher: a.finalNiazsanjiReport.teacherName
+                    ? a.finalNiazsanjiReport.teacherName
+                    : '' + ' ' + a.finalNiazsanjiReport.teacherFamily ? a.finalNiazsanjiReport.teacherFamily : '',
                 status: a.statusMeaning,
-                effectivenessPhaseAverage: a.effectivenessPhaseAverage,
-                effectivenessPhaseGrade: effectivenessPhaseGrade,
-                selectedEffectivenessPhaseLevel: a.selectedEffectivenessPhaseLevelTitle,
-                currentEffectivenessPhaseLevel: a.currentEffectivenessPhaseLevelTitle,
-                lastEffectivenessPhaseFinish: a.lastEffectivenessPhaseFinishPersian,
+                selectedEffectivenessPhaseLevel: a.finalNiazsanjiReport.selectedEffectivenessPhaseLevelTitle,
                 description: a.description,
                 createDate: a.createDate,
-                modifyDate: a.modifyDate,
-                restriction: a.restrictions ? a.restrictions.map(a => a.title).join(' - ') : ' ',
-                restrictionDescription: a.restrictionDescription,
-                goalsText: a.goalsText,
-                prerequisite: a.prerequisite,
-                priority: a.priority,
-                niazsanjiInput: a.niazsanjiInputTitle,
-                teachingApproach: a.teachingApproachTitle
+                modifyDate: a.modifyDate
             };
             report.push(obj);
         });
-        a.exportAsExcelFile(report, 'finalNiazsanjiReports', 'marineindustryprojApp.finalNiazsanjiReport');
+        a.exportAsExcelFile(report, 'effectivenessPhases', 'marineindustryprojApp.effectivenessPhase');
     }
 
     loadPage(page: number) {
@@ -304,20 +303,20 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
     }
 
     transition() {
-        /*this.router.navigate(['/final-niazsanji-report-marine-suffix'], {
+        /*this.router.navigate(['/effectiveness-phase-marine-suffix'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });
-        this.makeCriteria(this.criteria);*/
+        this.loadAll();*/
     }
 
     clear() {
         this.page = 0;
         this.router.navigate([
-            '/final-niazsanji-report-marine-suffix',
+            '/effectiveness-phase-marine-suffix',
             {
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -333,26 +332,17 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
 
             this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
                 this.currentPerson = resp.body;
-                this.searchbarModel.push(
-                    new SearchPanelModel(
-                        'finalNiazsanjiReport',
-                        'niazSanjiSource',
-                        'selectWithStringId',
-                        'equals',
-                        NIAZSANJI_SOURCE_FILTERS
-                    )
-                );
                 this.prepareDate();
                 this.prepareSearchOrgChart();
                 this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'educationalModuleCode', 'text', 'contains'));
                 this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'educationalModuleTitle', 'text', 'contains'));
                 /*if (this.isSuperUsers)
                     this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'status', 'select', 'equals', this.statusMeaning, 'mean'));*/
-                this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'id', 'text', 'equals'));
+                this.searchbarModel.push(new SearchPanelModel('effectivenessPhase', 'finalNiazsanjiReportId', 'text', 'equals'));
                 this.prepareSearchCourseType();
                 this.searchbarModel.push(
                     new SearchPanelModel(
-                        'finalNiazsanjiReport',
+                        'effectivenessPhase',
                         'selectedEffectivenessPhaseLevel',
                         'select',
                         'equals',
@@ -361,21 +351,39 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
                 );
                 this.searchbarModel.push(
                     new SearchPanelModel(
-                        'finalNiazsanjiReport',
+                        'effectivenessPhase',
                         'currentEffectivenessPhaseLevel',
                         'select',
-                        'equals',
+                        'lessOrEqualThan',
                         EFFECTIVENESSPHASELEVELS
                     )
                 );
-
+                //this.searchbarModel.push(new SearchPanelModel('fieldOfStudy', 'currentEffectivenessPhaseLevel', 'select', 'lessOrEqualThan', EFFECTIVENESSPHASELEVELS));
+                //this.prepareSearchEffectivenessPhaseLevel();
                 //this.prepareSearchEducationalModule();
                 //this.preparePeople();
             });
         });
-        //this.registerChangeInFinalNiazsanjiReports();
+        /*this.loadAll();
+        this.registerChangeInEffectivenessPhases();*/
     }
-
+    prepareSearchEffectivenessPhaseLevel() {
+        this.effectivenessPhaseLevelService.query().subscribe(
+            (res: HttpResponse<IEffectivenessPhaseLevelMarineSuffix[]>) => {
+                this.effectivenessPhaseLevels = res.body;
+                this.searchbarModel.push(
+                    new SearchPanelModel(
+                        'effectivenessPhase',
+                        'effectivenessPhaseLevelId',
+                        'select',
+                        'equals',
+                        this.effectivenessPhaseLevels
+                    )
+                );
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     setRoles(account: any) {
         if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
         if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
@@ -561,17 +569,24 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
             new SearchPanelModel('finalNiazsanjiReport', 'organizationChartId', 'select', 'equals', this.orgsRoot, 'fullTitle')
         );
     }
+
+    protected onSaveError(res) {
+        console.error(res);
+    }
+    change(i) {
+        this.router.navigateByUrl(i);
+    }
     ngOnDestroy() {
         //this.eventManager.destroy(this.eventSubscriber);
         this.eventManager.destroy(this.criteriaSubscriber);
     }
 
-    trackId(index: number, item: IFinalNiazsanjiReportMarineSuffix) {
+    trackId(index: number, item: IEffectivenessPhaseMarineSuffix) {
         return item.id;
     }
 
-    registerChangeInFinalNiazsanjiReports() {
-        this.eventSubscriber = this.eventManager.subscribe('finalNiazsanjiReportListModification', response => this.loadAll());
+    registerChangeInEffectivenessPhases() {
+        this.eventSubscriber = this.eventManager.subscribe('effectivenessPhaseListModification', response => this.loadAll());
     }
 
     sort() {
@@ -582,36 +597,53 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
         return result;
     }
 
-    protected paginateFinalNiazsanjiReports(data: IFinalNiazsanjiReportMarineSuffix[], headers: HttpHeaders) {
+    protected paginateEffectivenessPhases(data: IEffectivenessPhaseMarineSuffix[], headers: HttpHeaders) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
 
-        if (this.educationalModuleService.educationalModules) {
-            this.educationalModules = this.educationalModuleService.educationalModules;
-            this.finalNiazsanjiReports = this.loadData(data);
-        } else {
-            this.educationalModuleService.query().subscribe(
-                (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
-                    this.educationalModules = res.body;
-                    this.finalNiazsanjiReports = this.loadData(data);
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-        }
+        this.effectivenessPhases = this.convertObjectDatesService.changeArrayDate(data);
+        this.effectivenessPhases.forEach(a => {
+            switch (a.status) {
+                case 0:
+                    a.statusMeaning = 'آماده اثربخشی';
+                    break;
+                case 10:
+                    a.statusMeaning = 'شروع به اثربخشی';
+                    break;
+                case 20:
+                    a.statusMeaning = 'تکمیل اثربخشی';
+                    break;
+            }
+            if (a.finalNiazsanjiReport.organizationChartId) {
+                a.finalNiazsanjiReport.organizationChartRootTitle = this.organizationcharts.find(
+                    w => w.id == a.finalNiazsanjiReport.organizationChartId
+                ).rootTitle;
+            }
+        });
+        this.averageFinalScore =
+            this.effectivenessPhases.map(a => a.finalScore).reduce((sum, current) => sum + current) / this.effectivenessPhases.length;
+        this.averageWeightedPoints =
+            this.effectivenessPhases.map(a => a.weightedPoints).reduce((sum, current) => sum + current) / this.effectivenessPhases.length;
+
+        /*const effectivenessPhaseLevelIds = this.effectivenessPhases.map(a => a.effectivenessPhaseLevelId);
+        const criteria = [{
+            key: 'effectivenessPhaseLevelId.in',
+            value: effectivenessPhaseLevelIds
+        }];
+        this.effectivenessPhaseLevelService.query(criteria).subscribe((resp: HttpResponse<IEffectivenessPhaseLevelMarineSuffix[]>) => {
+                this.effectivenessPhaseLevels = resp.body;
+                this.effectivenessPhases.forEach(a => {
+                    a.effectivenessPhaseLevel = this.effectivenessPhaseLevels.find(e => e.id == a.effectivenessPhaseLevelId);
+                });
+            },
+            (res: HttpErrorResponse) => this.onError(res.message))*/
     }
 
-    loadData(data: IFinalNiazsanjiReportMarineSuffix[]): IFinalNiazsanjiReportMarineSuffix[] {
-        let finalNiazsanjiReports: IFinalNiazsanjiReportMarineSuffix[] = this.convertObjectDatesService.fillFinalNiazsanjiDataArray(
-            data,
-            this.educationalModules,
-            this.organizationcharts
-        );
-        return this.convertObjectDatesService.changeArrayDate(finalNiazsanjiReports);
+    previousState() {
+        window.history.back();
     }
-    protected onSuccess() {
-        this.makeCriteria(this.criteria);
-    }
+
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }

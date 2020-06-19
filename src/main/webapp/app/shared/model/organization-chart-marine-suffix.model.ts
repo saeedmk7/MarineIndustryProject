@@ -21,11 +21,13 @@ import { ISoldierMarineSuffix } from 'app/shared/model//soldier-marine-suffix.mo
 import { IEvaluateCriteriaTrainingMarineSuffix } from 'app/shared/model//evaluate-criteria-training-marine-suffix.model';
 import { IEvaluateCriteriaDataMarineSuffix } from 'app/shared/model//evaluate-criteria-data-marine-suffix.model';
 import { IForceRunningPercentMarineSuffix } from 'app/shared/model//force-running-percent-marine-suffix.model';
+import { IReportGeneratorMarineSuffix } from 'app/shared/model//report-generator-marine-suffix.model';
 
 export interface IOrganizationChartMarineSuffix {
     id?: number;
     title?: string;
     fullTitle?: string;
+    rootTitle?: string;
     code?: string;
     createUserLogin?: string;
     createDate?: Moment;
@@ -59,6 +61,7 @@ export interface IOrganizationChartMarineSuffix {
     parentTitle?: string;
     parentId?: number;
     forceRunningPercents?: IForceRunningPercentMarineSuffix[];
+    reportGenerators?: IReportGeneratorMarineSuffix[];
 }
 
 export class OrganizationChartMarineSuffix implements IOrganizationChartMarineSuffix {
@@ -66,6 +69,7 @@ export class OrganizationChartMarineSuffix implements IOrganizationChartMarineSu
         public id?: number,
         public title?: string,
         public fullTitle?: string,
+        public rootTitle?: string,
         public code?: string,
         public createUserLogin?: string,
         public createDate?: Moment,
@@ -98,7 +102,8 @@ export class OrganizationChartMarineSuffix implements IOrganizationChartMarineSu
         public evaluateCriteriaData?: IEvaluateCriteriaDataMarineSuffix[],
         public parentTitle?: string,
         public parentId?: number,
-        public forceRunningPercents?: IForceRunningPercentMarineSuffix[]
+        public forceRunningPercents?: IForceRunningPercentMarineSuffix[],
+        public reportGenerators?: IReportGeneratorMarineSuffix[]
     ) {
         this.archived = this.archived || false;
     }

@@ -31,7 +31,7 @@
             <th jhiSortBy="centralizedCode"><span jhiTranslate="marineindustryprojApp.educationalModule.centralizedCode">Centralized Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <!--<th jhiSortBy="moreDescription"><span jhiTranslate="marineindustryprojApp.educationalModule.moreDescription">More Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <!--<th jhiSortBy="recommendedBy"><span jhiTranslate="marineindustryprojApp.educationalModule.recommendedBy">Recommended By</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-                <th jhiSortBy="organizationTitle"><span jhiTranslate="marineindustryprojApp.educationalModule.organization">Organization</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <!--<th jhiSortBy="organizationTitle"><span jhiTranslate="marineindustryprojApp.educationalModule.organization">Organization</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <!--<th jhiSortBy="educationalModuleHeadlines"><span jhiTranslate="marineindustryprojApp.educationalModule.educationalModuleHeadlines">Educational Module Headlines</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="prerequisite"><span jhiTranslate="marineindustryprojApp.educationalModule.prerequisite">Prerequisite</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="drafters"><span jhiTranslate="marineindustryprojApp.educationalModule.drafters">Drafters</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
@@ -71,11 +71,11 @@
                 <td>{{educationalModule.centralizedCode}}</td>-->
                 <!--<td>{{educationalModule.moreDescription}}</td>-->
                 <!--<td>{{educationalModule.recommendedBy}}</td>-->
-                <td>
+                <!--<td>
                     <div *ngIf="educationalModule.organizationId">
                         <a [routerLink]="['../organization-marine-suffix', educationalModule.organizationId , 'view' ]" >{{educationalModule.organizationTitle}}</a>
                     </div>
-                </td>
+                </td>-->
                 <!--<td>{{educationalModule.educationalModuleHeadlines}}</td>
                 <td>{{educationalModule.prerequisite}}</td>
                 <td>{{educationalModule.drafters}}</td>

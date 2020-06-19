@@ -1,23 +1,23 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import {NgbActiveModal, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
+import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 
-import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
-import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
-import {Principal, UserService} from "app/core";
-import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
-import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
-import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
-import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { Principal, UserService } from 'app/core';
+import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
+import { TreeUtilities } from 'app/plugin/utilities/tree-utilities';
+import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
+import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
 
-import {RequestStatus} from "app/shared/model/enums/RequestStatus";
-import {INiazsanjiIntegrationMarineSuffix} from "app/shared/model/niazsanji-integration-marine-suffix.model";
-import {NiazsanjiIntegrationMarineSuffixService} from "app/entities/niazsanji-integration-marine-suffix/niazsanji-integration-marine-suffix.service";
-import {PrioritizeRequestNiazsanjiMarineSuffixService} from "app/entities/prioritize-request-niazsanji-marine-suffix";
-import {IPrioritizeRequestNiazsanjiMarineSuffix} from "app/shared/model/prioritize-request-niazsanji-marine-suffix.model";
+import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
+import { INiazsanjiIntegrationMarineSuffix } from 'app/shared/model/niazsanji-integration-marine-suffix.model';
+import { NiazsanjiIntegrationMarineSuffixService } from 'app/entities/niazsanji-integration-marine-suffix/niazsanji-integration-marine-suffix.service';
+import { PrioritizeRequestNiazsanjiMarineSuffixService } from 'app/entities/prioritize-request-niazsanji-marine-suffix';
+import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model/prioritize-request-niazsanji-marine-suffix.model';
 
 @Component({
     selector: 'niazsanji-integration-marine-suffix-comment-dialog',
@@ -51,9 +51,7 @@ export class NiazsanjiIntegrationMarineSuffixCommentDialogComponent implements O
         private jhiAlertService: JhiAlertService,
         private userService: UserService,
         private convertObjectDatesService: ConvertObjectDatesService
-    ) {
-
-    }
+    ) {}
 
     clear() {
         this.activeModal.dismiss('cancel');
@@ -69,129 +67,165 @@ export class NiazsanjiIntegrationMarineSuffixCommentDialogComponent implements O
         });
     }*/
     isSaving: boolean = false;
-    save(){
-
-
+    save() {
         this.isSaving = true;
         this.prioritizeRequestNiazsanjiService.find(this.niazsanjiIntegration.prioritizeRequestNiazsanjiId).subscribe(
             (resp: HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix>) => {
+                debugger;
                 let prioritizeRequestNiazsanji = resp.body;
-                this.message = "";
+                this.message = '';
                 let currentUserFullName = this.currentPerson.fullName;
-                prioritizeRequestNiazsanji.conversation += "\n ------------------------------------- \n";
+                prioritizeRequestNiazsanji.conversation += '\n ------------------------------------- \n';
                 switch (this.commentType) {
                     case 'COMMENT':
                         if (!this.comment) {
-                            this.message = "لطفا نظر خود را در کادر بالا وارد نمائید.";
+                            this.message = 'لطفا نظر خود را در کادر بالا وارد نمائید.';
                             this.isSaving = false;
                             return;
                         }
-                        prioritizeRequestNiazsanji.conversation += " ثبت نظر توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " ثبت شد. ";
-                        prioritizeRequestNiazsanji.conversation += "\n";
-                        prioritizeRequestNiazsanji.conversation += currentUserFullName + ": " + this.comment;
-                        this.prioritizeRequestNiazsanjiService.update(prioritizeRequestNiazsanji).subscribe(
-                            (res: HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix>) => this.onSaveSuccess(),
-                            (res: HttpErrorResponse) => this.onSaveError(res)
-                        );
+                        prioritizeRequestNiazsanji.conversation +=
+                            ' ثبت نظر توسط ' +
+                            currentUserFullName +
+                            ' در تاریخ: ' +
+                            this.convertObjectDatesService.miladi2Shamsi(new Date()) +
+                            ' ثبت شد. ';
+                        prioritizeRequestNiazsanji.conversation += '\n';
+                        prioritizeRequestNiazsanji.conversation += currentUserFullName + ': ' + this.comment;
+                        this.prioritizeRequestNiazsanjiService
+                            .update(prioritizeRequestNiazsanji)
+                            .subscribe(
+                                (res: HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix>) => this.onSaveSuccess(),
+                                (res: HttpErrorResponse) => this.onSaveError(res)
+                            );
                         return;
                     case 'REJECT':
-
                         if (!this.comment) {
-                            this.message = "لطفا علت عدم تایید را در کادر بالا وارد نمائید.";
+                            this.message = 'لطفا علت عدم تایید را در کادر بالا وارد نمائید.';
                             this.isSaving = false;
                             return;
                         }
-                        prioritizeRequestNiazsanji.conversation += " رد درخواست توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
-                        prioritizeRequestNiazsanji.conversation += "\n";
-                        prioritizeRequestNiazsanji.conversation += currentUserFullName + ": " + this.comment;
+                        prioritizeRequestNiazsanji.conversation +=
+                            ' رد درخواست توسط ' +
+                            currentUserFullName +
+                            ' در تاریخ: ' +
+                            this.convertObjectDatesService.miladi2Shamsi(new Date()) +
+                            ' انجام شد. ';
+                        prioritizeRequestNiazsanji.conversation += '\n';
+                        prioritizeRequestNiazsanji.conversation += currentUserFullName + ': ' + this.comment;
 
                         prioritizeRequestNiazsanji.requestStatus = RequestStatus.IGNORE;
                         prioritizeRequestNiazsanji.changeStatusUserLogin = this.currentAccount.login;
-                        if(this.isKarshenasArshadAmozesh)
-                            this.niazsanjiIntegration.status = 1;
-                        if(this.isModirKolAmozesh)
-                            this.niazsanjiIntegration.status = 11;
-                        if(this.niazsanjiIntegration.status == 20)
-                            this.niazsanjiIntegration.status = 21;
+                        if (this.isKarshenasArshadAmozesh) this.niazsanjiIntegration.status = 1;
+                        if (this.isModirKolAmozesh) this.niazsanjiIntegration.status = 11;
+                        if (this.niazsanjiIntegration.status == 20) this.niazsanjiIntegration.status = 21;
                         this.niazsanjiIntegration.requestStatus = RequestStatus.IGNORE;
                         this.niazsanjiIntegration.changeStatusUserLogin = this.currentAccount.login;
-                        this.prioritizeRequestNiazsanjiService.update(prioritizeRequestNiazsanji).subscribe(
-                            (res: HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix>) => this.onSaveSuccess(),
-                            (res: HttpErrorResponse) => this.onSaveError(res)
-                        );
+                        this.prioritizeRequestNiazsanjiService
+                            .update(prioritizeRequestNiazsanji)
+                            .subscribe(
+                                (res: HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix>) => this.onSaveSuccess(),
+                                (res: HttpErrorResponse) => this.onSaveError(res)
+                            );
                         break;
                     case 'ACCEPT':
-
-
+                        debugger;
                         if (this.isKarshenasArshadAmozesh && this.niazsanjiIntegration.status == 0) {
-                            prioritizeRequestNiazsanji.conversation += " تایید درخواست توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
+                            prioritizeRequestNiazsanji.conversation +=
+                                ' تایید درخواست توسط ' +
+                                currentUserFullName +
+                                ' در تاریخ: ' +
+                                this.convertObjectDatesService.miladi2Shamsi(new Date()) +
+                                ' انجام شد. ';
                             if (this.comment) {
-                                prioritizeRequestNiazsanji.conversation += "\n";
-                                prioritizeRequestNiazsanji.conversation += currentUserFullName + ": " + this.comment;
+                                prioritizeRequestNiazsanji.conversation += '\n';
+                                prioritizeRequestNiazsanji.conversation += currentUserFullName + ': ' + this.comment;
                             }
                             this.niazsanjiIntegration.status = 10;
                             this.niazsanjiIntegration.changeStatusUserLogin = this.currentAccount.login;
-                            this.prioritizeRequestNiazsanjiService.update(prioritizeRequestNiazsanji).subscribe(
-                                (res: HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix>) => this.onSaveSuccess(),
-                                (res: HttpErrorResponse) => this.onSaveError(res)
-                            );
-                        }
-                        else if(this.isModirKolAmozesh && this.niazsanjiIntegration.status == 10) {
-                            prioritizeRequestNiazsanji.conversation += " تایید درخواست توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
-                            if (this.comment) {
-                                prioritizeRequestNiazsanji.conversation += "\n";
-                                prioritizeRequestNiazsanji.conversation += currentUserFullName + ": " + this.comment;
-                            }
-                            this.niazsanjiIntegration.status = 20;
-                            this.niazsanjiIntegration.changeStatusUserLogin = this.currentAccount.login;
-                            this.prioritizeRequestNiazsanjiService.update(prioritizeRequestNiazsanji).subscribe(
-                                (res: HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix>) => this.onSaveSuccess(),
-                                (res: HttpErrorResponse) => this.onSaveError(res)
-                            );
-                        }
-                        else {
-                            if(this.niazsanjiIntegration.niazsanjiYear) {
-                                prioritizeRequestNiazsanji.conversation += " تایید نهایی و تصویب شوراء تربیت و آموزش سازمان توسط " + currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
-                                if (this.comment) {
-                                    prioritizeRequestNiazsanji.conversation += "\n";
-                                    prioritizeRequestNiazsanji.conversation += currentUserFullName + ": " + this.comment;
-                                }
-                                prioritizeRequestNiazsanji.requestStatus = RequestStatus.ACCEPT;
-                                this.prioritizeRequestNiazsanjiService.update(prioritizeRequestNiazsanji).subscribe(
+                            this.prioritizeRequestNiazsanjiService
+                                .update(prioritizeRequestNiazsanji)
+                                .subscribe(
                                     (res: HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix>) => this.onSaveSuccess(),
                                     (res: HttpErrorResponse) => this.onSaveError(res)
                                 );
-                                this.niazsanjiIntegrationService.finalize(this.niazsanjiIntegration).subscribe(
-                                    (res: HttpResponse<INiazsanjiIntegrationMarineSuffix>) => this.onSaveSuccess(),
+                        } else if (this.isModirKolAmozesh && this.niazsanjiIntegration.status == 10) {
+                            prioritizeRequestNiazsanji.conversation +=
+                                ' تایید درخواست توسط ' +
+                                currentUserFullName +
+                                ' در تاریخ: ' +
+                                this.convertObjectDatesService.miladi2Shamsi(new Date()) +
+                                ' انجام شد. ';
+                            if (this.comment) {
+                                prioritizeRequestNiazsanji.conversation += '\n';
+                                prioritizeRequestNiazsanji.conversation += currentUserFullName + ': ' + this.comment;
+                            }
+                            this.niazsanjiIntegration.status = 20;
+                            this.niazsanjiIntegration.changeStatusUserLogin = this.currentAccount.login;
+                            this.prioritizeRequestNiazsanjiService
+                                .update(prioritizeRequestNiazsanji)
+                                .subscribe(
+                                    (res: HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix>) => this.onSaveSuccess(),
                                     (res: HttpErrorResponse) => this.onSaveError(res)
                                 );
-                            }
-                            else{
-                                alert("لطفا قبل از تصویب کردن درخواست، سال نیازسنجی آن را مشخص نمائید.");
+                        } else if (this.niazsanjiIntegration.status == 20) {
+                            debugger;
+                            if (this.niazsanjiIntegration.niazsanjiYear) {
+                                prioritizeRequestNiazsanji.conversation +=
+                                    ' تایید نهایی و تصویب شوراء تربیت و آموزش سازمان توسط ' +
+                                    currentUserFullName +
+                                    ' در تاریخ: ' +
+                                    this.convertObjectDatesService.miladi2Shamsi(new Date()) +
+                                    ' انجام شد. ';
+                                if (this.comment) {
+                                    prioritizeRequestNiazsanji.conversation += '\n';
+                                    prioritizeRequestNiazsanji.conversation += currentUserFullName + ': ' + this.comment;
+                                }
+                                prioritizeRequestNiazsanji.requestStatus = RequestStatus.ACCEPT;
+                                this.prioritizeRequestNiazsanjiService
+                                    .update(prioritizeRequestNiazsanji)
+                                    .subscribe(
+                                        (res: HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix>) => this.onSaveSuccess(false),
+                                        (res: HttpErrorResponse) => this.onSaveError(res)
+                                    );
+                                this.niazsanjiIntegrationService
+                                    .finalize(this.niazsanjiIntegration)
+                                    .subscribe(
+                                        (res: HttpResponse<INiazsanjiIntegrationMarineSuffix>) => this.onSaveSuccess(),
+                                        (res: HttpErrorResponse) => this.onSaveError(res)
+                                    );
+                            } else {
+                                alert('لطفا قبل از تصویب کردن درخواست، سال نیازسنجی آن را مشخص نمائید.');
                             }
                             return;
                         }
                         break;
                 }
-                this.niazsanjiIntegrationService.update(this.niazsanjiIntegration).subscribe(
-                    (res: HttpResponse<INiazsanjiIntegrationMarineSuffix>) => this.onSaveSuccess(),
-                    (res: HttpErrorResponse) => this.onSaveError(res)
-                );
+                this.niazsanjiIntegrationService
+                    .update(this.niazsanjiIntegration)
+                    .subscribe(
+                        (res: HttpResponse<INiazsanjiIntegrationMarineSuffix>) => this.onSaveSuccess(),
+                        (res: HttpErrorResponse) => this.onSaveError(res)
+                    );
             },
-            (res: HttpErrorResponse) => this.onSaveError(res));
+            (res: HttpErrorResponse) => this.onSaveError(res)
+        );
     }
-    protected onSaveSuccess() {
+    protected onSaveSuccess(close: boolean = true) {
         this.isSaving = false;
-        this.activeModal.dismiss(true);
+        if (close) this.activeModal.dismiss(true);
     }
 
     protected onSaveError(res) {
         this.message = res.message;
         this.isSaving = false;
     }
-    knowAboutStatusForContinue(){
-
-        if(this.niazsanjiIntegration.status == 21 || this.niazsanjiIntegration.status == 11 || this.niazsanjiIntegration.status == 1 || this.niazsanjiIntegration.status == 30){
+    knowAboutStatusForContinue() {
+        if (
+            this.niazsanjiIntegration.status == 21 ||
+            this.niazsanjiIntegration.status == 11 ||
+            this.niazsanjiIntegration.status == 1 ||
+            this.niazsanjiIntegration.status == 30
+        ) {
             this.clear();
         }
     }
@@ -209,12 +243,10 @@ export class NiazsanjiIntegrationMarineSuffixCommentDialogComponent implements O
                 break;
         }
         this.knowAboutStatusForContinue();
-        if(this.organizationChartService.organizationchartsAll)
-        {
+        if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
             this.setPermission();
-        }
-        else{
+        } else {
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
                     this.organizationcharts = res.body;
@@ -223,27 +255,25 @@ export class NiazsanjiIntegrationMarineSuffixCommentDialogComponent implements O
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
         }
-
     }
-    setPermission(){
+    setPermission() {
         this.principal.identity().then(account => {
-
             this.currentAccount = account;
-            if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-                this.isAdmin = true;
+            if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
 
-            if (account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined) {
+            if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) {
                 this.isModirKolAmozesh = true;
             }
-            if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined) {
+            if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined) {
                 this.isKarshenasArshadAmozesh = true;
             }
 
-            this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
-                this.currentPerson = resp.body;
-
-            }, (res: HttpErrorResponse) => this.onError(res.message));
-
+            this.personService.find(this.currentAccount.personId).subscribe(
+                (resp: HttpResponse<IPersonMarineSuffix>) => {
+                    this.currentPerson = resp.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
         });
     }
     protected onError(errorMessage: string) {
@@ -262,9 +292,8 @@ export class NiazsanjiIntegrationMarineSuffixCommentPopupComponent implements On
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ niazsanjiIntegration }) => {
-            this.activatedRoute.params.subscribe((params) => {
-
-                let commentType = params['CommentType'] ? params['CommentType'] : "";
+            this.activatedRoute.params.subscribe(params => {
+                let commentType = params['CommentType'] ? params['CommentType'] : '';
                 switch (commentType) {
                     case 'ACCEPT':
                         break;
@@ -275,26 +304,24 @@ export class NiazsanjiIntegrationMarineSuffixCommentPopupComponent implements On
                         break;
                 }
                 setTimeout(() => {
-
                     this.ngbModalRef = this.modalService.open(NiazsanjiIntegrationMarineSuffixCommentDialogComponent as Component, {
                         size: 'lg',
                         backdrop: false
                     });
                     this.ngbModalRef.componentInstance.niazsanjiIntegration = niazsanjiIntegration;
                     this.ngbModalRef.componentInstance.commentType = commentType;
-                        this.ngbModalRef.result.then(
-                            result => {
-                                this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
-                                this.ngbModalRef = null;
-                            },
-                            reason => {
-                                this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
-                                this.ngbModalRef = null;
-                            }
-                        );
+                    this.ngbModalRef.result.then(
+                        result => {
+                            this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
+                            this.ngbModalRef = null;
+                        },
+                        reason => {
+                            this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
+                            this.ngbModalRef = null;
+                        }
+                    );
                 }, 0);
             });
-
         });
     }
 

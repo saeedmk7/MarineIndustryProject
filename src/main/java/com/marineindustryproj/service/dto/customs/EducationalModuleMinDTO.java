@@ -16,8 +16,7 @@ public class EducationalModuleMinDTO implements Serializable {
                                    String title,
                                    Integer learningTimeTheorical,
                                    Integer learningTimePractical,
-                                   SkillableLevelOfSkill skillableLevelOfSkill,
-                                   Organization organization) {
+                                   SkillableLevelOfSkill skillableLevelOfSkill) {
         this.id = id;
         this.code = code;
         this.title = title;
@@ -25,8 +24,6 @@ public class EducationalModuleMinDTO implements Serializable {
         this.learningTimePractical = learningTimePractical;
         this.skillableLevelOfSkillId = skillableLevelOfSkill.getId();
         this.skillableLevelOfSkillTitle = skillableLevelOfSkill.getTitle();
-        this.organizationId = organization.getId();
-        this.organizationTitle = organization.getTitle();
     }
 
     private Long id;
@@ -42,10 +39,6 @@ public class EducationalModuleMinDTO implements Serializable {
     private Long skillableLevelOfSkillId;
 
     private String skillableLevelOfSkillTitle;
-
-    private Long organizationId;
-
-    private String organizationTitle;
 
     public Long getId() {
         return id;
@@ -111,7 +104,7 @@ public class EducationalModuleMinDTO implements Serializable {
         this.skillableLevelOfSkillTitle = skillableLevelOfSkillTitle;
     }
 
-    public Long getOrganizationId() {
+   /* public Long getOrganizationId() {
         return organizationId;
     }
 
@@ -125,7 +118,7 @@ public class EducationalModuleMinDTO implements Serializable {
 
     public void setOrganizationTitle(String organizationTitle) {
         this.organizationTitle = organizationTitle;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {
@@ -158,8 +151,6 @@ public class EducationalModuleMinDTO implements Serializable {
             ", learningTimePractical=" + getLearningTimePractical() +
             ", skillableLevelOfSkill=" + getSkillableLevelOfSkillId() +
             ", skillableLevelOfSkill='" + getSkillableLevelOfSkillTitle() + "'" +
-            ", organization=" + getOrganizationId() +
-            ", organization='" + getOrganizationTitle() + "'" +
             "}";
     }
 }

@@ -3,3 +3,13 @@ th {
     text-align: center !important;
     vertical-align: middle !important;
 }
+
+tr.accept td {
+    color: green;
+}
+tr.ignore td {
+    color: red;
+}
+tr.new td {
+    color: blue;
+}

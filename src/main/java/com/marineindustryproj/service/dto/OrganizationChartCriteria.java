@@ -91,6 +91,8 @@ public class OrganizationChartCriteria implements Serializable {
 
     private LongFilter forceRunningPercentId;
 
+    private LongFilter reportGeneratorId;
+
     public LongFilter getId() {
         return id;
     }
@@ -363,6 +365,14 @@ public class OrganizationChartCriteria implements Serializable {
         this.forceRunningPercentId = forceRunningPercentId;
     }
 
+    public LongFilter getReportGeneratorId() {
+        return reportGeneratorId;
+    }
+
+    public void setReportGeneratorId(LongFilter reportGeneratorId) {
+        this.reportGeneratorId = reportGeneratorId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -407,7 +417,8 @@ public class OrganizationChartCriteria implements Serializable {
             Objects.equals(evaluateCriteriaTrainingId, that.evaluateCriteriaTrainingId) &&
             Objects.equals(evaluateCriteriaDataId, that.evaluateCriteriaDataId) &&
             Objects.equals(parentId, that.parentId) &&
-            Objects.equals(forceRunningPercentId, that.forceRunningPercentId);
+            Objects.equals(forceRunningPercentId, that.forceRunningPercentId) &&
+            Objects.equals(reportGeneratorId, that.reportGeneratorId);
     }
 
     @Override
@@ -446,7 +457,8 @@ public class OrganizationChartCriteria implements Serializable {
         evaluateCriteriaTrainingId,
         evaluateCriteriaDataId,
         parentId,
-        forceRunningPercentId
+        forceRunningPercentId,
+        reportGeneratorId
         );
     }
 
@@ -487,6 +499,7 @@ public class OrganizationChartCriteria implements Serializable {
                 (evaluateCriteriaDataId != null ? "evaluateCriteriaDataId=" + evaluateCriteriaDataId + ", " : "") +
                 (parentId != null ? "parentId=" + parentId + ", " : "") +
                 (forceRunningPercentId != null ? "forceRunningPercentId=" + forceRunningPercentId + ", " : "") +
+                (reportGeneratorId != null ? "reportGeneratorId=" + reportGeneratorId + ", " : "") +
             "}";
     }
 

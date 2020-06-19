@@ -12,6 +12,7 @@ import com.marineindustryproj.web.rest.util.PaginationUtil;
 import com.marineindustryproj.service.dto.FinalOrganizationNiazsanjiDTO;
 import com.marineindustryproj.service.dto.FinalOrganizationNiazsanjiCriteria;
 import com.marineindustryproj.service.FinalOrganizationNiazsanjiQueryService;
+import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -168,6 +169,11 @@ public class FinalOrganizationNiazsanjiResource {
     @Timed
     public ResponseEntity<List<FinalOrganizationNiazsanjiDTO>> getAllFinalOrganizationNiazsanjis(FinalOrganizationNiazsanjiCriteria criteria, Pageable pageable) {
         log.debug("REST request to get FinalOrganizationNiazsanjis by criteria: {}", criteria);
+        if(criteria.getStatus() != null && criteria.getStatus().getEquals() != null && criteria.getStatus().getEquals() == 5){
+            IntegerFilter filter = new IntegerFilter();
+            filter.setEquals(0);
+            criteria.setStatus(filter);
+        }
         Page<FinalOrganizationNiazsanjiDTO> page = finalOrganizationNiazsanjiQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/final-organization-niazsanjis");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);

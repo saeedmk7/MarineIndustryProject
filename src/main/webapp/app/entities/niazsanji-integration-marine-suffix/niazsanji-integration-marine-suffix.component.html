@@ -33,7 +33,7 @@
                 <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th>ردیف</th>
                 <!--<th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-                <th><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.organizationChart">Organization Chart</span></th>
+                <th><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.organizationChartGroup">Organization Chart</span></th>
                 <th><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.organizationChart">Organization Chart</span></th>
 
                 <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -42,11 +42,12 @@
                 <th>ساعت</th>
                 <!--<th jhiSortBy="educationalModuleType"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.educationalModuleType">Educational Module Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th jhiSortBy="personFullName"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="personFullName"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.personJobTitle">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <!--<th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-                <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <!--<th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <!--<th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="archived"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.archived">Archived</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -61,7 +62,9 @@
             </thead>
             <tbody>
             <tr *ngFor="let niazsanjiIntegration of niazsanjiIntegrations ;let i= index"
-                [ngClass]="{'new': (niazsanjiIntegration.status == 0 || niazsanjiIntegration.status == 10 || niazsanjiIntegration.status == 20),'accept': niazsanjiIntegration.status == 30,'ignore': (niazsanjiIntegration.status == 21 || niazsanjiIntegration.status == 11 || niazsanjiIntegration.status == 1)}">
+                [ngClass]="{'new': (niazsanjiIntegration.status == 0 || niazsanjiIntegration.status == 10 || niazsanjiIntegration.status == 20),
+                'accept': niazsanjiIntegration.status == 30,
+                'ignore': (niazsanjiIntegration.status == 21 || niazsanjiIntegration.status == 11 || niazsanjiIntegration.status == 1)}">
 
                 <td><input *ngIf="(niazsanjiIntegration.status == 0 || niazsanjiIntegration.status == 10 || niazsanjiIntegration.status == 20)" class="mycheckbox" (change)="onChange(niazsanjiIntegration.id, $event.target.checked)" name="{{niazsanjiIntegration.id}}" type="checkbox" id="{{niazsanjiIntegration.id}}"></td>
                 <!--<td><a [routerLink]="['/niazsanji-integration-marine-suffix', niazsanjiIntegration.id, 'view' ]">{{niazsanjiIntegration.id}}</a></td>-->
@@ -74,8 +77,8 @@
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="niazsanjiIntegration.organizationChartId">
-                        <a [routerLink]="['../organization-chart-marine-suffix', niazsanjiIntegration.organizationChartId , 'view' ]" >{{niazsanjiIntegration.organizationChartTitle}}</a>
+                    <div *ngIf="niazsanjiIntegration.organizationChartId" style="font-size: 10px">
+                        <a [routerLink]="['../organization-chart-marine-suffix', niazsanjiIntegration.organizationChartId , 'view' ]" >{{niazsanjiIntegration.organizationChartFullTitle}}</a>
                     </div>
                 </td>
 
@@ -92,12 +95,15 @@
                     {{niazsanjiIntegration.personFullName}}
                 </td>
                 <td>
+                    {{niazsanjiIntegration.personJobTitle}}
+                </td>
+                <td>
                     {{niazsanjiIntegration.courseTypeTitle}}
                 </td>
                 <td>{{niazsanjiIntegration.costEducationalModule | number}}</td>
                 <!--<td>{{niazsanjiIntegration.description}}</td>-->
                 <!--<td>{{niazsanjiIntegration.createUserLogin}}</td>-->
-                <td>{{niazsanjiIntegration.createDate}}</td>
+                <!--<td>{{niazsanjiIntegration.createDate}}</td>-->
 
                 <td jhiTranslate="{{'marineindustryprojApp.RequestNiazsanjiType.' + niazsanjiIntegration.requestNiazsanjiType}}">
                     {{niazsanjiIntegration.requestNiazsanjiType}}
@@ -249,9 +255,9 @@
                 </td>
             </tr>
             <tr class="sum-row">
-                <td colspan="6">مجموع</td>
+                <td colspan="7">مجموع</td>
                 <td>{{niazsanjiIntegrations | sum:'totalLearningTime' | number: '1.0-1'}}</td>
-                <td colspan="2"></td>
+                <td colspan="3"></td>
                 <td>{{niazsanjiIntegrations | sum:'costEducationalModule' | number: '1.0-1'}}</td>
                 <td colspan="10"></td>
             </tr>

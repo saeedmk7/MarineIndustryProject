@@ -47,8 +47,8 @@ public class HomePagePersonEducationalModule {
         this.code = educationalModuleMinDTO.getCode();
         this.learningTimePractical = educationalModuleMinDTO.getLearningTimePractical();
         this.learningTimeTheorical = educationalModuleMinDTO.getLearningTimeTheorical();
-        this.organizationId = educationalModuleMinDTO.getOrganizationId();
-        this.organizationTitle = educationalModuleMinDTO.getOrganizationTitle();
+        /*this.organizationId = educationalModuleMinDTO.getOrganizationId();
+        this.organizationTitle = educationalModuleMinDTO.getOrganizationTitle();*/
         this.skillableLevelOfSkillId = educationalModuleMinDTO.getSkillableLevelOfSkillId();
         this.skillableLevelOfSkillTitle = educationalModuleMinDTO.getSkillableLevelOfSkillTitle();
         this.educationalModuleType = "نیازسنجی از شناسنامه شغلی";
@@ -61,8 +61,8 @@ public class HomePagePersonEducationalModule {
         this.code = educationalModuleDTO.getCode();
         this.learningTimePractical = educationalModuleDTO.getLearningTimePractical();
         this.learningTimeTheorical = educationalModuleDTO.getLearningTimeTheorical();
-        this.organizationId = educationalModuleDTO.getOrganizationId();
-        this.organizationTitle = educationalModuleDTO.getOrganizationTitle();
+        /*this.organizationId = educationalModuleDTO.getOrganizationId();
+        this.organizationTitle = educationalModuleDTO.getOrganizationTitle();*/
         this.skillableLevelOfSkillId = educationalModuleDTO.getSkillableLevelOfSkillId();
         this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
         this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
@@ -78,8 +78,8 @@ public class HomePagePersonEducationalModule {
         this.code = educationalHistoryDTO.getEducationalModuleId().toString();
         this.skillableLevelOfSkillId = educationalModuleDTO.getSkillableLevelOfSkillId();
         this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
-        this.organizationId = educationalModuleDTO.getOrganizationId();
-        this.organizationTitle = educationalModuleDTO.getOrganizationTitle();
+        /*this.organizationId = educationalModuleDTO.getOrganizationId();
+        this.organizationTitle = educationalModuleDTO.getOrganizationTitle();*/
         this.runDate = educationalHistoryDTO.getDateOfStart();
         this.educationalModuleType = "نیازسنجی فردی";
         this.status = status;

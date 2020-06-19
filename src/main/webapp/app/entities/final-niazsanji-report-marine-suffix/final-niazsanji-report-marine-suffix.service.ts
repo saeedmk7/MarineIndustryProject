@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
@@ -8,13 +8,13 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
-import {IReportMarineSuffix} from "app/shared/model/report-marine-suffix.model";
-import {ChartResult, IChartResult} from "app/shared/model/custom/chart-result";
-import {HomePageNiazsanjiReport, IHomePageNiazsanjiReport} from "app/shared/model/custom/niazsanji-chart-result";
-import {IHomePagePersonHourChart} from "app/shared/model/custom/home-page-person-hour-chart";
-import {IHomePagePersonEducationalModule} from "app/shared/model/custom/home-page-person-educational-module";
-import {IPlanningAndRunMonthReport} from "app/shared/model/custom/planning-month-report";
-import {IHomePageReport} from "app/shared/model/custom/home-page-report";
+import { IReportMarineSuffix } from 'app/shared/model/report-marine-suffix.model';
+import { ChartResult, IChartResult } from 'app/shared/model/custom/chart-result';
+import { HomePageNiazsanjiReport, IHomePageNiazsanjiReport } from 'app/shared/model/custom/niazsanji-chart-result';
+import { IHomePagePersonHourChart } from 'app/shared/model/custom/home-page-person-hour-chart';
+import { IHomePagePersonEducationalModule } from 'app/shared/model/custom/home-page-person-educational-module';
+import { IPlanningAndRunMonthReport } from 'app/shared/model/custom/planning-month-report';
+import { IHomePageReport } from 'app/shared/model/custom/home-page-report';
 
 type EntityResponseType = HttpResponse<IFinalNiazsanjiReportMarineSuffix>;
 type EntityResponseTypeReport = HttpResponse<IReportMarineSuffix>;
@@ -49,7 +49,7 @@ export class FinalNiazsanjiReportMarineSuffixService {
             .get<IReportMarineSuffix>(`${this.resourceUrl}/PreReport/${educationalModuleId}`, { observe: 'response' })
             .pipe(map((res: EntityResponseTypeReport) => res));
     }
-    postReport(finalNiazsanjiReportId : number): Observable<EntityResponseTypeReport> {
+    postReport(finalNiazsanjiReportId: number): Observable<EntityResponseTypeReport> {
         return this.http
             .get<IReportMarineSuffix>(`${this.resourceUrl}/PostReport/${finalNiazsanjiReportId}`, { observe: 'response' })
             .pipe(map((res: EntityResponseTypeReport) => res));
@@ -61,18 +61,12 @@ export class FinalNiazsanjiReportMarineSuffixService {
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
     getChartResult(niazsanjiYear: number): Observable<HttpResponse<IChartResult[]>> {
-
         let url = this.resourceUrl + '/getChartData/' + niazsanjiYear;
-        return this.http
-            .get<IChartResult[]>(url, { observe: 'response' })
-            .pipe(map((res: HttpResponse<IChartResult[]>) => res));
+        return this.http.get<IChartResult[]>(url, { observe: 'response' }).pipe(map((res: HttpResponse<IChartResult[]>) => res));
     }
     getHomePageReport(niazsanjiYear: number, reportType: number): Observable<HttpResponse<IHomePageReport>> {
-
         let url = this.resourceUrl + '/getHomePageReport/' + niazsanjiYear + '/' + reportType;
-        return this.http
-            .get<IHomePageReport>(url, { observe: 'response' })
-            .pipe(map((res: HttpResponse<IHomePageReport>) => res));
+        return this.http.get<IHomePageReport>(url, { observe: 'response' }).pipe(map((res: HttpResponse<IHomePageReport>) => res));
     }
     getHomePageNiazsanjiReport(personId: number): Observable<HttpResponse<IHomePageNiazsanjiReport>> {
         let url = this.resourceUrl + '/getHomePageNiazsanjiReport/' + personId;
@@ -92,9 +86,12 @@ export class FinalNiazsanjiReportMarineSuffixService {
             .get<IHomePagePersonEducationalModule[]>(url, { observe: 'response' })
             .pipe(map((res: HttpResponse<IHomePagePersonEducationalModule[]>) => res));
     }
-    getPlanningAndRunMonthReport(niazsanjiYear: number, reportType: number ,orgRootId: number): Observable<HttpResponse<IPlanningAndRunMonthReport[]>> {
-
-        let url = this.resourceUrl + '/getPlanningAndRunMonthReport/' + niazsanjiYear + '/' + reportType + '/'  + orgRootId;
+    getPlanningAndRunMonthReport(
+        niazsanjiYear: number,
+        reportType: number,
+        orgRootId: number
+    ): Observable<HttpResponse<IPlanningAndRunMonthReport[]>> {
+        let url = this.resourceUrl + '/getPlanningAndRunMonthReport/' + niazsanjiYear + '/' + reportType + '/' + orgRootId;
         return this.http
             .get<IPlanningAndRunMonthReport[]>(url, { observe: 'response' })
             .pipe(map((res: HttpResponse<IPlanningAndRunMonthReport[]>) => res));
@@ -104,6 +101,23 @@ export class FinalNiazsanjiReportMarineSuffixService {
         return this.http
             .get<IFinalNiazsanjiReportMarineSuffix[]>(this.resourceUrl, { params: options, observe: 'response' })
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
+    queryWithPeople(req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        const url = this.resourceUrl + '/with-people';
+        return this.http
+            .get<IFinalNiazsanjiReportMarineSuffix[]>(url, { params: options, observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+    setEffectivenessPhaseLevel(
+        finalNiazsanjiReportId: number,
+        selectedEffectivenessPhaseLevelNumber: number
+    ): Observable<EntityResponseType> {
+        let url = this.resourceUrl + '/setEffectivenessPhaseLevel/' + finalNiazsanjiReportId + '/' + selectedEffectivenessPhaseLevelNumber;
+        return this.http
+            .put<IFinalNiazsanjiReportMarineSuffix>(url, null, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
     delete(id: number): Observable<HttpResponse<any>> {
@@ -132,11 +146,16 @@ export class FinalNiazsanjiReportMarineSuffixService {
         res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
         res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
         res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
-        res.body.lastEffectivenessPhaseFinish = res.body.lastEffectivenessPhaseFinish != null ? moment(res.body.lastEffectivenessPhaseFinish) : null;
-        res.body.teacherFullName = (res.body.teacherName != null ? res.body.teacherName : '') + " " + (res.body.teacherFamily != null ? res.body.teacherFamily : '');
-        res.body.educationalModuleTotalTime = (res.body.educationalModuleLearningTimeTheorical
-            ? res.body.educationalModuleLearningTimeTheorical : 0) + (res.body.educationalModuleLearningTimePractical
-            ? res.body.educationalModuleLearningTimePractical : 0);
+        res.body.lastEffectivenessPhaseFinish =
+            res.body.lastEffectivenessPhaseFinish != null ? moment(res.body.lastEffectivenessPhaseFinish) : null;
+        res.body.teacherFullName =
+            (res.body.teacherName != null ? res.body.teacherName : '') +
+            ' ' +
+            (res.body.teacherFamily != null ? res.body.teacherFamily : '');
+        res.body.educationalModuleTotalTime =
+            (res.body.educationalModuleLearningTimeTheorical ? res.body.educationalModuleLearningTimeTheorical : 0) +
+            (res.body.educationalModuleLearningTimePractical ? res.body.educationalModuleLearningTimePractical : 0);
+
         return res;
     }
 
@@ -147,12 +166,20 @@ export class FinalNiazsanjiReportMarineSuffixService {
             finalNiazsanjiReport.archivedDate =
                 finalNiazsanjiReport.archivedDate != null ? moment(finalNiazsanjiReport.archivedDate) : null;
             finalNiazsanjiReport.lastEffectivenessPhaseFinish =
-                finalNiazsanjiReport.lastEffectivenessPhaseFinish != null ? moment(finalNiazsanjiReport.lastEffectivenessPhaseFinish) : null;
+                finalNiazsanjiReport.lastEffectivenessPhaseFinish != null
+                    ? moment(finalNiazsanjiReport.lastEffectivenessPhaseFinish)
+                    : null;
             finalNiazsanjiReport.teacherFullName =
-                (finalNiazsanjiReport.teacherName != null ? finalNiazsanjiReport.teacherName : '') + " " + (finalNiazsanjiReport.teacherFamily != null ? finalNiazsanjiReport.teacherFamily : '');
+                (finalNiazsanjiReport.teacherName != null ? finalNiazsanjiReport.teacherName : '') +
+                ' ' +
+                (finalNiazsanjiReport.teacherFamily != null ? finalNiazsanjiReport.teacherFamily : '');
             finalNiazsanjiReport.educationalModuleTotalTime =
-                (finalNiazsanjiReport.educationalModuleLearningTimeTheorical ? finalNiazsanjiReport.educationalModuleLearningTimeTheorical : 0)
-                + (finalNiazsanjiReport.educationalModuleLearningTimePractical ? finalNiazsanjiReport.educationalModuleLearningTimePractical : 0);
+                (finalNiazsanjiReport.educationalModuleLearningTimeTheorical
+                    ? finalNiazsanjiReport.educationalModuleLearningTimeTheorical
+                    : 0) +
+                (finalNiazsanjiReport.educationalModuleLearningTimePractical
+                    ? finalNiazsanjiReport.educationalModuleLearningTimePractical
+                    : 0);
         });
         return res;
     }

@@ -67,12 +67,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static org.springframework.http.ResponseEntity.ok;
 import static org.springframework.http.ResponseEntity.status;
@@ -566,6 +561,27 @@ public class FinalNiazsanjiReportResource {
     public ResponseEntity<List<FinalNiazsanjiReportDTO>> getAllFinalNiazsanjiReports(FinalNiazsanjiReportCriteria criteria, Pageable pageable) {
         log.debug("REST request to get FinalNiazsanjiReports by criteria: {}", criteria);
         Page<FinalNiazsanjiReportDTO> page = finalNiazsanjiReportQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/final-niazsanji-reports");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    @GetMapping("/final-niazsanji-reports/with-people")
+    @Timed
+    public ResponseEntity<List<FinalNiazsanjiReportDTO>> getAllFinalNiazsanjiReportsWithPeople(FinalNiazsanjiReportCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get FinalNiazsanjiReports by criteria: {}", criteria);
+        Page<FinalNiazsanjiReportDTO> page = finalNiazsanjiReportQueryService.findByCriteria(criteria, pageable);
+
+        /*for (FinalNiazsanjiReportDTO finalNiazsanjiReportDTO : page.getContent()) {
+            FinalNiazsanjiReportPersonCriteria finalNiazsanjiReportPersonCriteria = new FinalNiazsanjiReportPersonCriteria();
+
+            LongFilter finalNiazsanjiReportFilter = new LongFilter();
+            finalNiazsanjiReportFilter.setEquals(finalNiazsanjiReportDTO.getId());
+
+            finalNiazsanjiReportPersonCriteria.setFinalNiazsanjiReportId(finalNiazsanjiReportFilter);
+            Set<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPersonDTOSet = new HashSet<>(finalNiazsanjiReportPersonQueryService
+                .findByCriteria(finalNiazsanjiReportPersonCriteria));
+            finalNiazsanjiReportDTO.setFinalNiazsanjiReportPeople(finalNiazsanjiReportPersonDTOSet);
+        }*/
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/final-niazsanji-reports");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

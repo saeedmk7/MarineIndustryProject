@@ -121,7 +121,7 @@ public class EducationalModuleServiceImpl implements EducationalModuleService {
         clearEducationalModuleCaches();
     }
 
-    private void clearEducationalModuleCaches() {
+    public void clearEducationalModuleCaches() {
         Objects.requireNonNull(cacheManager.getCache(educationalModuleRepository.ALL_EDUCATIONALMODULE_CACHE)).clear();
     }
 }

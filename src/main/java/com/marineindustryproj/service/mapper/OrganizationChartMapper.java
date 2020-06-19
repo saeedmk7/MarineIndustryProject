@@ -38,6 +38,7 @@ public interface OrganizationChartMapper extends EntityMapper<OrganizationChartD
     @Mapping(target = "evaluateCriteriaData", ignore = true)
     @Mapping(source = "parentId", target = "parent")
     @Mapping(target = "forceRunningPercents", ignore = true)
+    @Mapping(target = "reportGenerators", ignore = true)
     OrganizationChart toEntity(OrganizationChartDTO organizationChartDTO);
 
     default OrganizationChart fromId(Long id) {

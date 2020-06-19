@@ -2,9 +2,9 @@ import { Moment } from 'moment';
 import { INiazsanjiIntegrationMarineSuffix } from 'app/shared/model//niazsanji-integration-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IRestrictionMarineSuffix } from 'app/shared/model//restriction-marine-suffix.model';
-import {EducationalModuleType} from "app/shared/model/enums/EducationalModuleType";
-import {RequestStatus} from "app/shared/model/enums/RequestStatus";
-import {RequestNiazsanjiType} from "app/shared/model/enums/RequestNiazsanjiType";
+import { EducationalModuleType } from 'app/shared/model/enums/EducationalModuleType';
+import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
+import { RequestNiazsanjiType } from 'app/shared/model/enums/RequestNiazsanjiType';
 
 export interface IPrioritizeRequestNiazsanjiMarineSuffix {
     id?: number;
@@ -52,10 +52,12 @@ export interface IPrioritizeRequestNiazsanjiMarineSuffix {
     personFamily?: string;
     personName?: string;
     personFullName?: string;
+    personJobTitle?: string;
+    personPracticalJobTitle?: string;
     personId?: number;
     organizationChartTitle?: string;
     organizationChartId?: number;
-    organizationChartRootTitle?:string;
+    organizationChartRootTitle?: string;
     teachingApproachTitle?: string;
     teachingApproachId?: number;
 }
@@ -107,10 +109,12 @@ export class PrioritizeRequestNiazsanjiMarineSuffix implements IPrioritizeReques
         public personFamily?: string,
         public personName?: string,
         public personFullName?: string,
+        public personJobTitle?: string,
+        public personPracticalJobTitle?: string,
         public personId?: number,
         public organizationChartTitle?: string,
         public organizationChartId?: number,
-        public organizationChartRootTitle?:string,
+        public organizationChartRootTitle?: string,
         public teachingApproachTitle?: string,
         public teachingApproachId?: number
     ) {

@@ -22,6 +22,14 @@
                         <a [routerLink]="['/organization-chart-marine-suffix', prioritizeRequestNiazsanji.organizationChartId, 'view']">{{prioritizeRequestNiazsanji.organizationChartTitle}}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.personJobTitle">Person</span></dt>
+                <dd>
+                    {{prioritizeRequestNiazsanji.personJobTitle}}
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.personPracticalJobTitle">Person</span></dt>
+                <dd>
+                    {{prioritizeRequestNiazsanji.personPracticalJobTitle}}
+                </dd>
                 <education-history-panel [personId]="prioritizeRequestNiazsanji.personId"
                                          [type]="2"></education-history-panel>
 

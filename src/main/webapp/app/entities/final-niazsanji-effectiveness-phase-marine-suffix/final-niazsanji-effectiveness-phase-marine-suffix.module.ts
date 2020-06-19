@@ -5,7 +5,8 @@ import { MarineindustryprojSharedModule } from 'app/shared';
 import {
     FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent,
     FinalNiazsanjiReportMarineSuffixDetailComponent,
-    FinalNiazsanjiEffectivenessPhaseMarineSuffixUpdateComponent, finalNiazsanjiEffectivenessPhaseRoute
+    FinalNiazsanjiEffectivenessPhaseMarineSuffixUpdateComponent,
+    finalNiazsanjiEffectivenessPhaseRoute
 } from './';
 
 const ENTITY_STATES = [...finalNiazsanjiEffectivenessPhaseRoute];
@@ -19,6 +20,7 @@ const ENTITY_STATES = [...finalNiazsanjiEffectivenessPhaseRoute];
     ],
     entryComponents: [
         FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent,
+        FinalNiazsanjiReportMarineSuffixDetailComponent,
         FinalNiazsanjiEffectivenessPhaseMarineSuffixUpdateComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

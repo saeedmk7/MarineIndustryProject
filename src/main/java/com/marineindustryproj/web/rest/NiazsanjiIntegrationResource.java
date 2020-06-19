@@ -11,6 +11,7 @@ import com.marineindustryproj.web.rest.util.PaginationUtil;
 import com.marineindustryproj.service.dto.NiazsanjiIntegrationDTO;
 import com.marineindustryproj.service.dto.NiazsanjiIntegrationCriteria;
 import com.marineindustryproj.service.NiazsanjiIntegrationQueryService;
+import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -158,6 +159,11 @@ public class NiazsanjiIntegrationResource {
     @Timed
     public ResponseEntity<List<NiazsanjiIntegrationDTO>> getAllNiazsanjiIntegrations(NiazsanjiIntegrationCriteria criteria, Pageable pageable) {
         log.debug("REST request to get NiazsanjiIntegrations by criteria: {}", criteria);
+        if(criteria.getStatus() != null && criteria.getStatus().getEquals() != null && criteria.getStatus().getEquals() == 5){
+            IntegerFilter filter = new IntegerFilter();
+            filter.setEquals(0);
+            criteria.setStatus(filter);
+        }
         Page<NiazsanjiIntegrationDTO> page = niazsanjiIntegrationQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/niazsanji-integrations");
         return ResponseEntity.ok().headers(headers).body(page.getContent());

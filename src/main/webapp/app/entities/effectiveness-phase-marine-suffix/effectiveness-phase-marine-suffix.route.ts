@@ -14,8 +14,9 @@ import { EffectivenessPhaseMarineSuffixDetailComponent } from './effectiveness-p
 import { EffectivenessPhaseMarineSuffixUpdateComponent } from './effectiveness-phase-marine-suffix-update.component';
 import { EffectivenessPhaseMarineSuffixDeletePopupComponent } from './effectiveness-phase-marine-suffix-delete-dialog.component';
 import { IEffectivenessPhaseMarineSuffix } from 'app/shared/model/effectiveness-phase-marine-suffix.model';
-import {EffectivenessPhaseLevelThreeMarineSuffixComponent} from "./effectiveness-phase-level-three-marine-suffix.component";
-import {EffectivenessPhaseLevelFourMarineSuffixComponent} from "./effectiveness-phase-level-four-marine-suffix.component";
+import { EffectivenessPhaseLevelThreeMarineSuffixComponent } from './effectiveness-phase-level-three-marine-suffix.component';
+import { EffectivenessPhaseLevelFourMarineSuffixComponent } from './effectiveness-phase-level-four-marine-suffix.component';
+import { EffectivenessPhaseReportMarineSuffixComponent } from './effectiveness-phase-report-marine-suffix.component';
 
 @Injectable({ providedIn: 'root' })
 export class EffectivenessPhaseMarineSuffixResolve implements Resolve<IEffectivenessPhaseMarineSuffix> {
@@ -24,13 +25,15 @@ export class EffectivenessPhaseMarineSuffixResolve implements Resolve<IEffective
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<EffectivenessPhaseMarineSuffix> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(
-                filter((response: HttpResponse<EffectivenessPhaseMarineSuffix>) => response.ok),
-                map((effectivenessPhase: HttpResponse<EffectivenessPhaseMarineSuffix>) => effectivenessPhase.body)
-            );
+            return this.service
+                .find(id)
+                .pipe(
+                    filter((response: HttpResponse<EffectivenessPhaseMarineSuffix>) => response.ok),
+                    map((effectivenessPhase: HttpResponse<EffectivenessPhaseMarineSuffix>) => effectivenessPhase.body)
+                );
         }
         const finalNiazsanjiReportId = route.params['finalNiazsanjiReportId'] ? route.params['finalNiazsanjiReportId'] : null;
-        if(finalNiazsanjiReportId){
+        if (finalNiazsanjiReportId) {
             let effectivenessPhase = new EffectivenessPhaseMarineSuffix();
             effectivenessPhase.finalNiazsanjiReportId = finalNiazsanjiReportId;
             return of(effectivenessPhase);
@@ -40,6 +43,20 @@ export class EffectivenessPhaseMarineSuffixResolve implements Resolve<IEffective
 }
 
 export const effectivenessPhaseRoute: Routes = [
+    {
+        path: 'effectiveness-phase-report-marine-suffix',
+        component: EffectivenessPhaseReportMarineSuffixComponent,
+        resolve: {
+            pagingParams: JhiResolvePagingParams,
+            effectivenessPhase: EffectivenessPhaseMarineSuffixResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            defaultSort: 'id,asc',
+            pageTitle: 'marineindustryprojApp.effectivenessPhase.home.titleReport'
+        },
+        canActivate: [UserRouteAccessService]
+    },
     {
         path: 'effectiveness-phase-marine-suffix/:finalNiazsanjiReportId',
         component: EffectivenessPhaseMarineSuffixComponent,

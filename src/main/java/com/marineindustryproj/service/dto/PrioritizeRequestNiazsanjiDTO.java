@@ -112,6 +112,10 @@ public class PrioritizeRequestNiazsanjiDTO implements Serializable {
 
     private String personName;
 
+    private String personJobTitle;
+
+    private String personPracticalJobTitle;
+
     private Long organizationChartId;
 
     private String organizationChartTitle;
@@ -548,5 +552,21 @@ public class PrioritizeRequestNiazsanjiDTO implements Serializable {
 
     public void setEducationalModuleCode(String educationalModuleCode) {
         this.educationalModuleCode = educationalModuleCode;
+    }
+
+    public String getPersonJobTitle() {
+        return personJobTitle;
+    }
+
+    public void setPersonJobTitle(String personJobTitle) {
+        this.personJobTitle = personJobTitle;
+    }
+
+    public String getPersonPracticalJobTitle() {
+        return personPracticalJobTitle;
+    }
+
+    public void setPersonPracticalJobTitle(String personPracticalJobTitle) {
+        this.personPracticalJobTitle = personPracticalJobTitle;
     }
 }

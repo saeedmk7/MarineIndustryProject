@@ -123,7 +123,8 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let educationalModule of homePagePersonEducationalModules; let i = index;"
-                    [ngClass]="{'success': educationalModule.status == 100, 'info': educationalModule.status == 90, 'warning': educationalModule.status == 80, 'light': educationalModule.status == 70, 'danger': educationalModule.status == 0}">
+                    [ngClass]="{'success': educationalModule.status == 100, 'info': educationalModule.status == 90,
+                    'warning': educationalModule.status == 80, 'light': educationalModule.status == 70, 'danger': educationalModule.status == 0}">
                     <td>{{i+1}}</td>
                     <td>{{educationalModule.code}}</td>
                     <td>{{educationalModule.title}}</td>

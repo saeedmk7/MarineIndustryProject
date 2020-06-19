@@ -88,7 +88,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/downloadEducationFile/**")
             .antMatchers("/api/downloadImageFile/**")
             .antMatchers("/api/run-phases/download/**")
-            .antMatchers("/api/jam-helps/download/**");
+            .antMatchers("/api/jam-helps/download/**")
+            .antMatchers("/api/report/**");
     }
 
     @Override
@@ -109,6 +110,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
             .authorizeRequests()
+            .antMatchers("/api/report/**").permitAll()
             .antMatchers("/api/register").permitAll()
             .antMatchers("/api/activate").permitAll()
             .antMatchers("/api/authenticate").permitAll()

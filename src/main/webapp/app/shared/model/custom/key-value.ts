@@ -1,9 +1,9 @@
 export interface IKeyValue {
     key?: string;
-    value?: any
+    value?: any;
 }
 
-export class KeyValue implements IKeyValue{
-    public key: string;
-    public value: number
+export class KeyValue implements IKeyValue {
+    public key?: string;
+    public value?: any;
 }

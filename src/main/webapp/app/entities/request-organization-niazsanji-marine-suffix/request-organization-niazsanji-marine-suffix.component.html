@@ -22,11 +22,13 @@
             <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th>ردیف</th>
             <!--<th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.organizationChartRoot"></span></th>
             <th jhiSortBy="recommendedByOrgchart"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.recommendedByOrgchart">Recommended By Orgchart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th>کدپودمان</th>
-            <th>سطح</th>
-            <th>ساعت</th>
+            <th><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.educationalModuleCode">Educational Module</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.educationalModuleSkillLevelOfSkillTitle">Educational Module</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.peopleCount">people Count</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.educationalModuleTotalLearningTime">educationalModuleTotalLearningTime</span></th>
             <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="studentsType"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.studentsType">Students Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <!--<th>افراد انتخابی</th>-->
@@ -47,11 +49,9 @@
                 <!--<td><a [routerLink]="['/request-organization-niazsanji-marine-suffix', requestOrganizationNiazsanji.id, 'view' ]">{{requestOrganizationNiazsanji.id}}</a></td>-->
                 <td>{{i+1}}</td>
                 <!--<td>{{requestOrganizationNiazsanji.code}}</td>-->
-                <!--<td>{{requestOrganizationNiazsanji.recommendedByOrgchart}}</td>-->
-                <td>
-                    <div *ngIf="requestOrganizationNiazsanji.organizationChartId">
-                        <a [routerLink]="['../organization-chart-marine-suffix', requestOrganizationNiazsanji.organizationChartId , 'view' ]" >{{requestOrganizationNiazsanji.organizationChartTitle}}</a>
-                    </div>
+                <td>{{requestOrganizationNiazsanji.organizationChartRoot}}</td>
+                <td style="font-size: 10px">
+                        {{requestOrganizationNiazsanji.organizationChartTitle}}
                 </td>
                 <td>
                     <div *ngIf="requestOrganizationNiazsanji.educationalModuleId">
@@ -60,6 +60,7 @@
                 </td>
                 <td>{{requestOrganizationNiazsanji.educationalModuleCode}}</td>
                 <td>{{requestOrganizationNiazsanji.skillLevelOfSkillTitle}}</td>
+                <td>{{requestOrganizationNiazsanji.peopleCount}}</td>
                 <td>{{requestOrganizationNiazsanji.totalLearningTime | number}}</td>
                 <!--<td>{{requestOrganizationNiazsanji.studentsType}}</td>-->
                <!-- <td>
@@ -180,9 +181,10 @@
                 </td>
             </tr>
             <tr class="sum-row">
-                <td colspan="5">مجموع</td>
-                <td>{{totalHour | number}}</td>
-                <td>{{totalPriceCost | number}}</td>
+                <td colspan="6">مجموع</td>
+                <td>{{requestOrganizationNiazsanjis | sum:'peopleCount' | number: '1.0-1'}}</td>
+                <td>{{requestOrganizationNiazsanjis | sum:'totalLearningTime' | number: '1.0-1'}}</td>
+                <td>{{requestOrganizationNiazsanjis | sum:'priceCost' | number: '1.0-1'}}</td>
                 <td colspan="7"></td>
             </tr>
             </tbody>

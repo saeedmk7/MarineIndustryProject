@@ -1,48 +1,45 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HttpResponse, HttpErrorResponse, HttpEventType} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpResponse, HttpErrorResponse, HttpEventType } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import {DATE_TIME_FORMAT} from 'app/shared/constants/input.constants';
-import {JhiAlertService} from 'ng-jhipster';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiAlertService } from 'ng-jhipster';
 
-import {IRunPhaseMarineSuffix} from 'app/shared/model/run-phase-marine-suffix.model';
-import {RunPhaseMarineSuffixService} from './run-phase-marine-suffix.service';
-import {IDocumentMarineSuffix} from 'app/shared/model/document-marine-suffix.model';
-import {DocumentMarineSuffixService} from 'app/entities/document-marine-suffix';
-import {IPersonMarineSuffix} from 'app/shared/model/person-marine-suffix.model';
-import {PersonMarineSuffixService} from 'app/entities/person-marine-suffix';
-import {IFinalNiazsanjiReportMarineSuffix} from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
-import {FinalNiazsanjiReportMarineSuffixService} from 'app/entities/final-niazsanji-report-marine-suffix';
-import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
-import {IFinalNiazsanjiReportPersonMarineSuffix} from "app/shared/model/final-niazsanji-report-person-marine-suffix.model";
-import {EducationalModuleMarineSuffixService} from "app/entities/educational-module-marine-suffix";
-import {FinalNiazsanjiReportPersonMarineSuffixService} from "app/entities/final-niazsanji-report-person-marine-suffix";
-import {Principal} from "app/core";
-import {RunningStepMarineSuffixService} from "app/entities/running-step-marine-suffix";
-import {IRunningStepMarineSuffix} from "app/shared/model/running-step-marine-suffix.model";
+import { IRunPhaseMarineSuffix } from 'app/shared/model/run-phase-marine-suffix.model';
+import { RunPhaseMarineSuffixService } from './run-phase-marine-suffix.service';
+import { IDocumentMarineSuffix } from 'app/shared/model/document-marine-suffix.model';
+import { DocumentMarineSuffixService } from 'app/entities/document-marine-suffix';
+import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
+import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
+import { FinalNiazsanjiReportMarineSuffixService } from 'app/entities/final-niazsanji-report-marine-suffix';
+import { IEducationalModuleMarineSuffix } from 'app/shared/model/educational-module-marine-suffix.model';
+import { IFinalNiazsanjiReportPersonMarineSuffix } from 'app/shared/model/final-niazsanji-report-person-marine-suffix.model';
+import { EducationalModuleMarineSuffixService } from 'app/entities/educational-module-marine-suffix';
+import { FinalNiazsanjiReportPersonMarineSuffixService } from 'app/entities/final-niazsanji-report-person-marine-suffix';
+import { Principal } from 'app/core';
+import { RunningStepMarineSuffixService } from 'app/entities/running-step-marine-suffix';
+import { IRunningStepMarineSuffix } from 'app/shared/model/running-step-marine-suffix.model';
 import * as persianMoment from 'jalali-moment';
-import {
-    IRunPhaseTabModel,
-    RunPhaseTabModel
-} from "app/entities/run-phase-marine-suffix/run-phase-marine-suffix-tab.model";
-import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
-import {RunPhaseItemModel} from "app/entities/run-phase-marine-suffix/run-phase-marine-suffix-item.model";
-import {RunRunningStepMarineSuffixService} from "app/entities/run-running-step-marine-suffix";
+import { IRunPhaseTabModel, RunPhaseTabModel } from 'app/entities/run-phase-marine-suffix/run-phase-marine-suffix-tab.model';
+import { TreeUtilities } from 'app/plugin/utilities/tree-utilities';
+import { RunPhaseItemModel } from 'app/entities/run-phase-marine-suffix/run-phase-marine-suffix-item.model';
+import { RunRunningStepMarineSuffixService } from 'app/entities/run-running-step-marine-suffix';
 import * as $ from 'jquery';
 import {
     IRunPhaseSaveDataModel,
     RunPhaseSaveDataModel
-} from "app/entities/run-phase-marine-suffix/run-phase-marine-suffix-save-data.model";
+} from 'app/entities/run-phase-marine-suffix/run-phase-marine-suffix-save-data.model';
 import {
     IRunPhaseSaveDataItemModel,
     RunPhaseSaveDataItemModel
-} from "app/entities/run-phase-marine-suffix/run-phase-marine-suffix-save-data-item.model";
-import {IRunRunningStepMarineSuffix} from "app/shared/model/run-running-step-marine-suffix.model";
-import {MONTHS} from "app/shared/constants/months.constants";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
-import {ITeacherMarineSuffix} from "app/shared/model/teacher-marine-suffix.model";
-import {TeacherMarineSuffixService} from "app/entities/teacher-marine-suffix";
+} from 'app/entities/run-phase-marine-suffix/run-phase-marine-suffix-save-data-item.model';
+import { IRunRunningStepMarineSuffix } from 'app/shared/model/run-running-step-marine-suffix.model';
+import { MONTHS } from 'app/shared/constants/months.constants';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import { ITeacherMarineSuffix } from 'app/shared/model/teacher-marine-suffix.model';
+import { TeacherMarineSuffixService } from 'app/entities/teacher-marine-suffix';
 
 @Component({
     selector: 'mi-run-phase-marine-suffix-update',
@@ -52,9 +49,8 @@ import {TeacherMarineSuffixService} from "app/entities/teacher-marine-suffix";
 export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     private _runPhase: IRunPhaseMarineSuffix;
     isSaving: boolean;
-    runMonths: any = MONTHS.sort(function(a,b)
-    {
-        return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+    runMonths: any = MONTHS.sort(function(a, b) {
+        return a.id > b.id ? 1 : b.id > a.id ? -1 : 0;
     });
     teachers: ITeacherMarineSuffix[];
     educationalModule: IEducationalModuleMarineSuffix = {};
@@ -92,59 +88,52 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
         private router: Router,
         private teacherService: TeacherMarineSuffixService,
         private convertObjectDatesService: ConvertObjectDatesService
-    ) {
-    }
+    ) {}
 
     checkDateValidation(event) {
         try {
             if (persianMoment(event.target.value, 'jYYYY/jMM/jDD').isValid()) {
                 this.finishDateValidation = 1;
-            }
-            else {
+            } else {
                 this.finishDateValidation = 2;
             }
-        }
-        catch (e) {
+        } catch (e) {
             this.finishDateValidation = 2;
         }
     }
-    deleteElement(i)
-    {
+    deleteElement(i) {
         $('#' + i).remove();
     }
-    toggleColappse(i)
-    {
+    toggleColappse(i) {
         $('#' + i).collapse('toggle');
     }
     ngOnInit() {
         this.isSaving = false;
-        this.activatedRoute.data.subscribe(({runPhase}) => {
+        this.activatedRoute.data.subscribe(({ runPhase }) => {
             this.runPhase = runPhase;
             this.documentUrl = 'document-marine-suffix/runphase/' + this.runPhase.id;
             this.runningStepService.query().subscribe(
                 (resp: HttpResponse<IRunningStepMarineSuffix[]>) => {
                     this.runningSteps = resp.body;
 
-                    let stepNumbers = resp.body.filter(a => a.isHeader).sort(function (a, b) {
-                        return (a.stepNumber > b.stepNumber) ? 1 : ((b.stepNumber > a.stepNumber) ? -1 : 0);
+                    let stepNumbers = resp.body.filter(a => a.isHeader).sort(function(a, b) {
+                        return a.stepNumber > b.stepNumber ? 1 : b.stepNumber > a.stepNumber ? -1 : 0;
                     });
                     stepNumbers.forEach(a => {
-
                         let tab: RunPhaseTabModel = new RunPhaseTabModel();
-                        tab.id = "tab" + a.stepNumber;
+                        tab.id = 'tab' + a.stepNumber;
                         tab.title = a.title;
-                        tab.href = "#" + tab.id;
+                        tab.href = '#' + tab.id;
                         tab.active = a.stepNumber == 1;
                         tab.colorText = a.colorText;
                         tab.runPhaseItems = [];
 
                         let runningsForThisStep = this.runningSteps.filter(w => w.stepNumber == a.stepNumber && w.isHeader == false);
                         runningsForThisStep.forEach(e => {
-
                             let runPhaseItem: RunPhaseItemModel = new RunPhaseItemModel();
                             runPhaseItem.id = e.id;
                             runPhaseItem.title = e.title; //+ (e.stepRequired ? "(اجباریست)" : "");
-                            runPhaseItem.description = e.description == null ? "" : e.description;
+                            runPhaseItem.description = e.description == null ? '' : e.description;
                             runPhaseItem.required = e.stepRequired;
                             runPhaseItem.fileDocRequired = e.fileDocRequired;
                             runPhaseItem.stepNumber = a.stepNumber;
@@ -155,45 +144,49 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                     });
 
                     if (this.runPhase.id != undefined) {
-                        const criteria1 = [{
-                            key: 'runPhaseId.equals',
-                            value: this.runPhase.id
-                        }];
-                        this.runRunningStepMarineSuffixService.query({
-                            page: 0,
-                            size: 20000,
-                            criteria: criteria1,
-                            sort: ["id", "asc"]
-                        }).subscribe(
-                            (response: HttpResponse<IRunRunningStepMarineSuffix[]>) => {
-                                response.body.forEach(x => {
-                                    this.runPhaseTabModel.forEach(w => {
-                                        w.runPhaseItems.forEach(r => {
-                                            if (r.id == x.runningStepId) {
-                                                r.descMessage = x.description == null ? "" : x.description;
-                                                r.fileDoc = x.fileDoc;
-                                                r.checked = x.done;
-                                            }
-                                        })
+                        const criteria1 = [
+                            {
+                                key: 'runPhaseId.equals',
+                                value: this.runPhase.id
+                            }
+                        ];
+                        this.runRunningStepMarineSuffixService
+                            .query({
+                                page: 0,
+                                size: 20000,
+                                criteria: criteria1,
+                                sort: ['id', 'asc']
+                            })
+                            .subscribe(
+                                (response: HttpResponse<IRunRunningStepMarineSuffix[]>) => {
+                                    response.body.forEach(x => {
+                                        this.runPhaseTabModel.forEach(w => {
+                                            w.runPhaseItems.forEach(r => {
+                                                if (r.id == x.runningStepId) {
+                                                    r.descMessage = x.description == null ? '' : x.description;
+                                                    r.fileDoc = x.fileDoc;
+                                                    r.checked = x.done;
+                                                }
+                                            });
+                                        });
                                     });
-                                })
-                            },
-                            (res: HttpErrorResponse) => this.onError(res.message));
+                                },
+                                (res: HttpErrorResponse) => this.onError(res.message)
+                            );
                     }
                     //this.runPhaseTabModel = resp.body.map(a => new RunPhaseTabModel(a.id))
                 },
-                (res: HttpErrorResponse) => this.onError(res.message));
-
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
         });
 
         this.principal.identity().then(account => {
             this.currentAccount = account;
-            if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-                this.isAdmin = true;
-            if (account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined) {
+            if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
+            if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) {
                 this.isModirKolAmozesh = true;
             }
-            if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined) {
+            if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined) {
                 this.isKarshenasArshadAmozesh = true;
             }
             if (this.isModirKolAmozesh || this.isKarshenasArshadAmozesh) {
@@ -207,10 +200,9 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
         });
-        if(this.teacherService.teachers){
+        if (this.teacherService.teachers) {
             this.teachers = this.teacherService.teachers;
-        }
-        else {
+        } else {
             this.teacherService.query().subscribe(
                 (res: HttpResponse<ITeacherMarineSuffix[]>) => {
                     this.teachers = res.body;
@@ -234,58 +226,56 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     }
 
     uploadFile(id: number) {
-
-
         let fileToUpload = $('#file-' + id).prop('files')[0];
 
         let formdata: FormData = new FormData();
 
         formdata.append('file', fileToUpload);
-        this.runPhaseService.uploadFile(formdata).subscribe(event => {
+        this.runPhaseService.uploadFile(formdata).subscribe(
+            event => {
                 if (event instanceof HttpResponse) {
                     if (event.body) {
-
                         //$('#fileDoc-'+ id).val(event.body);
-                        this.runPhaseTabModel.filter(a => a.runPhaseItems.forEach(w => {
-                            if (w.id == id)
-                                w.fileDoc = event.body.toString();
-                        }));
+                        this.runPhaseTabModel.filter(a =>
+                            a.runPhaseItems.forEach(w => {
+                                if (w.id == id) w.fileDoc = event.body.toString();
+                            })
+                        );
                         //this.runPhase.fileDoc = event.body;
                         //this.subscribeToSaveResponse(this.runPhaseService.create(this.runPhase));
                     }
                 }
             },
-            () => this.onSaveError());
+            () => this.onSaveError()
+        );
     }
 
     deleteFile(fileDoc: string, id: number) {
-        this.runPhaseTabModel.filter(a => a.runPhaseItems.forEach(w => {
-            if (w.id == id)
-                w.fileDoc = "";
-        }));
+        this.runPhaseTabModel.filter(a =>
+            a.runPhaseItems.forEach(w => {
+                if (w.id == id) w.fileDoc = '';
+            })
+        );
         /*this.runPhaseService.deleteFile(fileDoc).subscribe(response => {
 
         });*/
     }
 
     validateFile(event, id) {
-
         //file.name.split('.')[file.name.split('.').length-1] == 'rar'
         if (event && event.target.files && event.target.files[0]) {
             let file = event.target.files[0];
-            if ((file.size / 1024 / 1024) < 10) {
-                this.successRaised(id, "فایل معتبر است. امکان بارگذاری وجود دارد.");
+            if (file.size / 1024 / 1024 < 10) {
+                this.successRaised(id, 'فایل معتبر است. امکان بارگذاری وجود دارد.');
                 /*this.fileHasError = false;
                 this.fileMessage = "فایل معتبر است.";*/
-            }
-            else {
-                this.errorRaised(id, "حجم فایل بیش از حد مجاز است.");
+            } else {
+                this.errorRaised(id, 'حجم فایل بیش از حد مجاز است.');
                 /*this.fileHasError = true;
                 this.fileMessage = "حجم فایل بیش از حد مجاز است.";*/
             }
-        }
-        else {
-            this.errorRaised(id, "لطفا فایل را انتخاب نمائید.");
+        } else {
+            this.errorRaised(id, 'لطفا فایل را انتخاب نمائید.');
         }
     }
 
@@ -308,7 +298,6 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     }
 
     change(i) {
-
         this.router.navigateByUrl(i);
     }
 
@@ -318,17 +307,22 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
 
     errorMessage: string;
 
-    sendForEdit(){
-        if(!this.runPhase.comment) {
-            this.errorMessage = "لطفا نظرات خود را نوشته سپس اقدام به ثبت جهت اصلاح نمائید.";
+    sendForEdit() {
+        debugger;
+        if (!this.runPhase.comment) {
+            this.errorMessage = 'لطفا نظرات خود را نوشته سپس اقدام به ثبت جهت اصلاح نمائید.';
             return;
         }
-        if(!this.runPhase.conversation)
-            this.runPhase.conversation = "";
-        this.runPhase.conversation += " ثبت نظر توسط " + this.currentPerson.fullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " ثبت شد. ";
-        this.runPhase.conversation += "\n";
-        this.runPhase.conversation += this.currentPerson.fullName + ": " + this.runPhase.comment;
-        this.runPhase.conversation += "\n ------------------------------------------------------ \n";
+        if (!this.runPhase.conversation) this.runPhase.conversation = '';
+        this.runPhase.conversation +=
+            ' ثبت نظر توسط ' +
+            this.currentPerson.fullName +
+            ' در تاریخ: ' +
+            this.convertObjectDatesService.miladi2Shamsi(new Date()) +
+            ' ثبت شد. ';
+        this.runPhase.conversation += '\n';
+        this.runPhase.conversation += this.currentPerson.fullName + ': ' + this.runPhase.comment;
+        this.runPhase.conversation += '\n ------------------------------------------------------ \n';
         this.runPhase.status = 7;
         this.runPhaseService.update(this.runPhase).subscribe(
             (res: HttpResponse<IRunPhaseMarineSuffix>) => {
@@ -338,25 +332,30 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
         );
     }
     finalize() {
-
+        debugger;
         let isValid: boolean = true;
-        this.errorMessage = "";
+        this.errorMessage = '';
         this.runningSteps.forEach(a => {
-
             if (!a.isHeader) {
                 if (a.stepRequired) {
-                    if (!($('#chk-' + a.id).is(":checked"))) {
+                    if (!$('#chk-' + a.id).is(':checked')) {
                         let tab = this.runningSteps.filter(e => e.isHeader && e.stepNumber == a.stepNumber)[0];
                         isValid = false;
-                        this.errorMessage += "*در " + tab.title + " مورد " + a.title + " ،اجباریست لطفا قبل از تایید نهایی آن را انجام دهید." + "<br />";
+                        this.errorMessage +=
+                            '*در ' + tab.title + ' مورد ' + a.title + ' ،اجباریست لطفا قبل از تایید نهایی آن را انجام دهید.' + '<br />';
                     }
-
                 }
                 if (a.fileDocRequired) {
-                    if (!($('#fileDoc-' + a.id).val())) {
+                    if (!$('#fileDoc-' + a.id).val()) {
                         let tab = this.runningSteps.filter(e => e.isHeader && e.stepNumber == a.stepNumber)[0];
                         isValid = false;
-                        this.errorMessage += "*در " + tab.title + " مورد " + a.title + " ،بارگذاری فایل اجباریست لطفا قبل از تایید نهایی فایل مربوطه را بارگذاری نمائید." + "<br />";
+                        this.errorMessage +=
+                            '*در ' +
+                            tab.title +
+                            ' مورد ' +
+                            a.title +
+                            ' ،بارگذاری فایل اجباریست لطفا قبل از تایید نهایی فایل مربوطه را بارگذاری نمائید.' +
+                            '<br />';
                     }
                 }
             }
@@ -365,7 +364,6 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
             this.runPhase.done = true;
             $('#save-entity').trigger('click');
         }
-
     }
 
     save() {
@@ -384,30 +382,33 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
         runPhaseSaveData.status = this.runPhase.status == undefined ? 0 : this.runPhase.status;
         runPhaseSaveData.runPhaseSaveDataItemModels = [];
 
-        if(this.runPhase.conversation)
-            runPhaseSaveData.conversion = this.runPhase.conversation;
+        if (this.runPhase.conversation) runPhaseSaveData.conversion = this.runPhase.conversation;
 
-
-        if(this.runPhase.comment) {
-            if(!runPhaseSaveData.conversion)
-                runPhaseSaveData.conversion = "";
-            runPhaseSaveData.conversion += " ثبت نظر توسط " + this.currentPerson.fullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " ثبت شد. ";
-            runPhaseSaveData.conversion += "\n";
-            runPhaseSaveData.conversion += this.currentPerson.fullName + ": " + this.runPhase.comment;
-            runPhaseSaveData.conversion += "\n ------------------------------------------------------ \n";
+        if (this.runPhase.comment) {
+            if (!runPhaseSaveData.conversion) runPhaseSaveData.conversion = '';
+            runPhaseSaveData.conversion +=
+                ' ثبت نظر توسط ' +
+                this.currentPerson.fullName +
+                ' در تاریخ: ' +
+                this.convertObjectDatesService.miladi2Shamsi(new Date()) +
+                ' ثبت شد. ';
+            runPhaseSaveData.conversion += '\n';
+            runPhaseSaveData.conversion += this.currentPerson.fullName + ': ' + this.runPhase.comment;
+            runPhaseSaveData.conversion += '\n ------------------------------------------------------ \n';
         }
 
         this.runningSteps.forEach(a => {
             if (!a.isHeader) {
-                let runPhaseSaveDataItemModel: IRunPhaseSaveDataItemModel = new RunPhaseSaveDataItemModel;
+                let runPhaseSaveDataItemModel: IRunPhaseSaveDataItemModel = new RunPhaseSaveDataItemModel();
                 runPhaseSaveDataItemModel.runningStepId = a.id;
                 runPhaseSaveDataItemModel.description = $('#txt-' + a.id).val();
-                runPhaseSaveDataItemModel.done = $('#chk-' + a.id).is(":checked");
+                runPhaseSaveDataItemModel.done = $('#chk-' + a.id).is(':checked');
                 runPhaseSaveDataItemModel.fileDoc = $('#fileDoc-' + a.id).val();
                 runPhaseSaveData.runPhaseSaveDataItemModels.push(runPhaseSaveDataItemModel);
             }
         });
 
+        debugger;
         this.subscribeToSaveResponse(this.runPhaseService.saveRunPhaseModel(runPhaseSaveData));
 
         /*if (this.runPhase.id !== undefined) {
@@ -427,8 +428,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     private onSaveSuccess(res: IRunPhaseMarineSuffix) {
         this.isSaving = false;
 
-        if (res.done || res.status == 5)
-            this.previousState();
+        if (res.done || res.status == 5) this.previousState();
         else {
             this.runPhase = res;
             this.documentUrl = 'document-marine-suffix/runphase/' + this.runPhase.id;

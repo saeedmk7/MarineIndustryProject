@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
+import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -54,23 +55,24 @@ public class PriorityCriteriaValueServiceImpl implements PriorityCriteriaValueSe
     public PriorityCriteriaValueDTO saveBulk(PriorityCriteriaValueDTO[] priorityCriteriaValueDTOS) {
         PriorityCriteriaValue priorityCriteriaValue = new PriorityCriteriaValue();
         for (PriorityCriteriaValueDTO priorityCriteriaValueDTO : priorityCriteriaValueDTOS) {
-            if(priorityCriteriaValueDTO.getId() != null && this.findOne(priorityCriteriaValueDTO.getId()).isPresent()){
-                PriorityCriteriaValueDTO priorityCriteriaValueOld = this.findOne(priorityCriteriaValueDTO.getId()).get();
-                priorityCriteriaValueDTO.setCreateDate(priorityCriteriaValueOld.getCreateDate());
-                priorityCriteriaValueDTO.setCreateUserLogin(priorityCriteriaValueOld.getCreateUserLogin());
-                priorityCriteriaValueDTO.setModifyDate(ZonedDateTime.now());
-                priorityCriteriaValueDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            if(priorityCriteriaValueDTO.getScore() != null) {
+                if (priorityCriteriaValueDTO.getId() != null && this.findOne(priorityCriteriaValueDTO.getId()).isPresent()) {
+                    PriorityCriteriaValueDTO priorityCriteriaValueOld = this.findOne(priorityCriteriaValueDTO.getId()).get();
+                    priorityCriteriaValueDTO.setCreateDate(priorityCriteriaValueOld.getCreateDate());
+                    priorityCriteriaValueDTO.setCreateUserLogin(priorityCriteriaValueOld.getCreateUserLogin());
+                    priorityCriteriaValueDTO.setModifyDate(ZonedDateTime.now());
+                    priorityCriteriaValueDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                } else {
+                    priorityCriteriaValueDTO.setCreateDate(ZonedDateTime.now());
+                    priorityCriteriaValueDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                }
+                priorityCriteriaValue = priorityCriteriaValueMapper.toEntity(priorityCriteriaValueDTO);
+                priorityCriteriaValue = priorityCriteriaValueRepository.save(priorityCriteriaValue);
             }
-            else{
-                priorityCriteriaValueDTO.setCreateDate(ZonedDateTime.now());
-                priorityCriteriaValueDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
-            }
-            priorityCriteriaValue = priorityCriteriaValueMapper.toEntity(priorityCriteriaValueDTO);
-            priorityCriteriaValue = priorityCriteriaValueRepository.save(priorityCriteriaValue);
         }
 
 
-        return priorityCriteriaValueMapper.toDto(priorityCriteriaValue);
+        return Arrays.stream(priorityCriteriaValueDTOS).filter(w -> w.getScore() != null).findFirst().get();
     }
 
     /**

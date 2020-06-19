@@ -122,13 +122,13 @@
                     مجموع
                 </td>
                 <td>
-                    {{sumTheorical}}
+                    {{educationalHistories | sum:'learningTimeTheorical' | number: '1.0-1'}}
                 </td>
                 <td>
-                    {{sumPractical}}
+                    {{educationalHistories | sum:'learningTimePractical' | number: '1.0-1'}}
                 </td>
                 <td>
-                    {{sumTotal}}
+                    {{educationalHistories | sum:'totalTime' | number: '1.0-1'}}
                 </td>
                 <td colspan="8"></td>
             </tr>

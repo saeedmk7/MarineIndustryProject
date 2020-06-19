@@ -21,6 +21,7 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  * fix type specific filters.
  */
 public class EffectivenessPhaseLevelCriteria implements Serializable {
+
     /**
      * Class for filtering UnitOfMeasurement
      */

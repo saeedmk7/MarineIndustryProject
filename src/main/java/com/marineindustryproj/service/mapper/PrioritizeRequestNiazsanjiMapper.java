@@ -27,6 +27,8 @@ public interface PrioritizeRequestNiazsanjiMapper extends EntityMapper<Prioritiz
     @Mapping(source = "person.id", target = "personId")
     @Mapping(source = "person.family", target = "personFamily")
     @Mapping(source = "person.name", target = "personName")
+    @Mapping(source = "person.job.title", target = "personJobTitle")
+    @Mapping(source = "person.practicaljob.title", target = "personPracticalJobTitle")
     @Mapping(source = "organizationChart.id", target = "organizationChartId")
     @Mapping(source = "organizationChart.title", target = "organizationChartTitle")
     @Mapping(source = "teachingApproach.id", target = "teachingApproachId")

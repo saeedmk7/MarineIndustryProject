@@ -2,6 +2,7 @@ package com.marineindustryproj.service;
 
 import com.marineindustryproj.service.dto.JobRecordDTO;
 
+import com.marineindustryproj.service.dto.PersonDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

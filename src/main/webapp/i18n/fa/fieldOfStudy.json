@@ -22,7 +22,8 @@
             "modifyUserLogin": "کاربر ویرایش کننده",
             "modifyDate": "تاریخ ویرایش شده",
             "person": "Person",
-            "teacher": "Teacher"
+            "teacher": "Teacher",
+            "currentEffectivenessPhaseLevel": "سطح ارزیابی اثربخشی به پایین"
         }
     }
 }

@@ -1,7 +1,7 @@
 import { Moment } from 'moment';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
-import {IEffectivenessPhaseLevelMarineSuffix} from "app/shared/model/effectiveness-phase-level-marine-suffix.model";
-import {IFinalNiazsanjiReportMarineSuffix} from "app/shared/model/final-niazsanji-report-marine-suffix.model";
+import { IEffectivenessPhaseLevelMarineSuffix } from 'app/shared/model/effectiveness-phase-level-marine-suffix.model';
+import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
 
 export interface IEffectivenessPhaseMarineSuffix {
     id?: number;
@@ -17,6 +17,7 @@ export interface IEffectivenessPhaseMarineSuffix {
     modifyUserLogin?: string;
     modifyDate?: Moment;
     status?: number;
+    statusMeaning?: string;
     startPhaseUserLogin?: string;
     finishPhaseUserLogin?: string;
     documents?: IDocumentMarineSuffix[];
@@ -45,6 +46,7 @@ export class EffectivenessPhaseMarineSuffix implements IEffectivenessPhaseMarine
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
         public status?: number,
+        public statusMeaning?: string,
         public startPhaseUserLogin?: string,
         public finishPhaseUserLogin?: string,
         public documents?: IDocumentMarineSuffix[],

@@ -32,7 +32,7 @@ public interface EducationalModuleRepository extends JpaRepository<EducationalMo
     Optional<EducationalModule> findOneWithEagerRelationships(@Param("id") Long id);
 
     @Cacheable(cacheNames = ALL_EDUCATIONALMODULE_CACHE)
-    @Query(value = "select new com.marineindustryproj.service.dto.customs.EducationalModuleMinDTO(educational_module.id, educational_module.code, educational_module.title, educational_module.learningTimeTheorical, educational_module.learningTimePractical, educational_module.skillableLevelOfSkill, educational_module.organization) from EducationalModule educational_module")
+    @Query(value = "select new com.marineindustryproj.service.dto.customs.EducationalModuleMinDTO(educational_module.id, educational_module.code, educational_module.title, educational_module.learningTimeTheorical, educational_module.learningTimePractical, educational_module.skillableLevelOfSkill) from EducationalModule educational_module")
     List<EducationalModuleMinDTO> findAllFromCache();
 
 }

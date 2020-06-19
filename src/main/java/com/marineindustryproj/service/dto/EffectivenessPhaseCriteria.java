@@ -59,6 +59,20 @@ public class EffectivenessPhaseCriteria implements Serializable {
 
     private LongFilter effectivenessPhaseLevelId;
 
+    private LongFilter organizationChartId;
+
+    private IntegerFilter niazsanjiYear;
+
+    private LongFilter courseTypeId;
+
+    private StringFilter educationalModuleCode;
+
+    private StringFilter educationalModuleTitle;
+
+    private IntegerFilter selectedEffectivenessPhaseLevel;
+
+    private IntegerFilter currentEffectivenessPhaseLevel;
+
     public LongFilter getId() {
         return id;
     }
@@ -231,6 +245,13 @@ public class EffectivenessPhaseCriteria implements Serializable {
             Objects.equals(finishPhaseUserLogin, that.finishPhaseUserLogin) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
+            Objects.equals(organizationChartId, that.organizationChartId) &&
+            Objects.equals(niazsanjiYear, that.niazsanjiYear) &&
+            Objects.equals(courseTypeId, that.courseTypeId) &&
+            Objects.equals(educationalModuleCode, that.educationalModuleCode) &&
+            Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
+            Objects.equals(selectedEffectivenessPhaseLevel, that.selectedEffectivenessPhaseLevel) &&
+            Objects.equals(currentEffectivenessPhaseLevel, that.currentEffectivenessPhaseLevel) &&
             Objects.equals(effectivenessPhaseLevelId, that.effectivenessPhaseLevelId);
     }
 
@@ -254,6 +275,13 @@ public class EffectivenessPhaseCriteria implements Serializable {
         finishPhaseUserLogin,
         documentId,
         finalNiazsanjiReportId,
+        organizationChartId,
+        niazsanjiYear,
+        courseTypeId,
+        educationalModuleCode,
+        educationalModuleTitle,
+        currentEffectivenessPhaseLevel,
+        selectedEffectivenessPhaseLevel,
         effectivenessPhaseLevelId
         );
     }
@@ -279,7 +307,69 @@ public class EffectivenessPhaseCriteria implements Serializable {
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
                 (effectivenessPhaseLevelId != null ? "effectivenessPhaseLevelId=" + effectivenessPhaseLevelId + ", " : "") +
+                (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
+                (niazsanjiYear != null ? "niazsanjiYear=" + niazsanjiYear + ", " : "") +
+                (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
+                (educationalModuleCode != null ? "educationalModuleCode=" + educationalModuleCode + ", " : "") +
+                (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
+                (selectedEffectivenessPhaseLevel != null ? "selectedEffectivenessPhaseLevel=" + selectedEffectivenessPhaseLevel + ", " : "") +
+                (currentEffectivenessPhaseLevel != null ? "currentEffectivenessPhaseLevel=" + currentEffectivenessPhaseLevel + ", " : "") +
             "}";
     }
 
+    public LongFilter getOrganizationChartId() {
+        return organizationChartId;
+    }
+
+    public void setOrganizationChartId(LongFilter organizationChartId) {
+        this.organizationChartId = organizationChartId;
+    }
+
+    public LongFilter getCourseTypeId() {
+        return courseTypeId;
+    }
+
+    public void setCourseTypeId(LongFilter courseTypeId) {
+        this.courseTypeId = courseTypeId;
+    }
+
+    public StringFilter getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
+
+    public void setEducationalModuleCode(StringFilter educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
+    }
+
+    public StringFilter getEducationalModuleTitle() {
+        return educationalModuleTitle;
+    }
+
+    public void setEducationalModuleTitle(StringFilter educationalModuleTitle) {
+        this.educationalModuleTitle = educationalModuleTitle;
+    }
+
+    public IntegerFilter getNiazsanjiYear() {
+        return niazsanjiYear;
+    }
+
+    public void setNiazsanjiYear(IntegerFilter niazsanjiYear) {
+        this.niazsanjiYear = niazsanjiYear;
+    }
+
+    public IntegerFilter getSelectedEffectivenessPhaseLevel() {
+        return selectedEffectivenessPhaseLevel;
+    }
+
+    public void setSelectedEffectivenessPhaseLevel(IntegerFilter selectedEffectivenessPhaseLevel) {
+        this.selectedEffectivenessPhaseLevel = selectedEffectivenessPhaseLevel;
+    }
+
+    public IntegerFilter getCurrentEffectivenessPhaseLevel() {
+        return currentEffectivenessPhaseLevel;
+    }
+
+    public void setCurrentEffectivenessPhaseLevel(IntegerFilter currentEffectivenessPhaseLevel) {
+        this.currentEffectivenessPhaseLevel = currentEffectivenessPhaseLevel;
+    }
 }

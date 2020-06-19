@@ -3,7 +3,7 @@ import { IFinalOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//final
 import { IPersonMarineSuffix } from 'app/shared/model//person-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IRestrictionMarineSuffix } from 'app/shared/model//restriction-marine-suffix.model';
-import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
+import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
 
 export interface IRequestOrganizationNiazsanjiMarineSuffix {
     id?: number;
@@ -38,10 +38,12 @@ export interface IRequestOrganizationNiazsanjiMarineSuffix {
     prerequisite?: string;
     finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[];
     people?: IPersonMarineSuffix[];
+    peopleCount?: number;
     documents?: IDocumentMarineSuffix[];
     restrictions?: IRestrictionMarineSuffix[];
     courseTypeTitle?: string;
     courseTypeId?: number;
+    organizationChartRoot?: string;
     organizationChartTitle?: string;
     organizationChartId?: number;
     teacherFamily?: string;
@@ -90,10 +92,12 @@ export class RequestOrganizationNiazsanjiMarineSuffix implements IRequestOrganiz
         public prerequisite?: string,
         public finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[],
         public people?: IPersonMarineSuffix[],
+        public peopleCount?: number,
         public documents?: IDocumentMarineSuffix[],
         public restrictions?: IRestrictionMarineSuffix[],
         public courseTypeTitle?: string,
         public courseTypeId?: number,
+        public organizationChartRoot?: string,
         public organizationChartTitle?: string,
         public organizationChartId?: number,
         public teacherFamily?: string,

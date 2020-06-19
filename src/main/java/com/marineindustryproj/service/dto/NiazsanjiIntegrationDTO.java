@@ -77,6 +77,8 @@ public class NiazsanjiIntegrationDTO implements Serializable {
 
     private String personName;
 
+    private String personJobTitle;
+
     private Long organizationChartId;
 
     private String organizationChartTitle;
@@ -356,5 +358,13 @@ public class NiazsanjiIntegrationDTO implements Serializable {
 
     public void setEducationalModuleId(String educationalModuleId) {
         this.educationalModuleId = educationalModuleId;
+    }
+
+    public String getPersonJobTitle() {
+        return personJobTitle;
+    }
+
+    public void setPersonJobTitle(String personJobTitle) {
+        this.personJobTitle = personJobTitle;
     }
 }

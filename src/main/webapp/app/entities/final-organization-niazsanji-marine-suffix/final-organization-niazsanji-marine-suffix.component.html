@@ -32,16 +32,19 @@
             <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th><input type="checkbox" title="انتخاب همه" id="selectAll" (change)="selectAll($event.target.checked)"></th>
                 <th>ردیف</th>
-            <th><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.recommendedByOrgchart">Recommended By Orgchart</span></th>
+                <th><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.organizationChartRoot"></span></th>
+                <th jhiSortBy="recommendedByOrgchart"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.recommendedByOrgchart">Recommended By Orgchart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th>کدپودمان</th>
-            <th>سطح</th>
-            <th>ساعت</th>
+                <th><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.educationalModuleCode">Educational Module</span></th>
+                <th><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.educationalModuleSkillLevelOfSkillTitle">Educational Module</span></th>
+                <th><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.peopleCount">people Count</span></th>
+                <th><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.educationalModuleTotalLearningTime">educationalModuleTotalLearningTime</span></th>
+                <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="studentsType"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.studentsType">Students Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <!--<th>افراد انتخابی</th>-->
                 <!--<th jhiSortBy="teacherFamily"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.teacher">Teacher</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
             <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="niazsanjiYear"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.niazsanjiYear">niazsanjiYear</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="requestOrganizationNiazsanjiRecommendedByOrgchart"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.requestOrganizationNiazsanji">Request Organization Niazsanji</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
@@ -52,25 +55,27 @@
             <tbody>
             <tr *ngFor="let finalOrganizationNiazsanji of finalOrganizationNiazsanjis ; let i = index;"
                 [ngClass]="{'new': (finalOrganizationNiazsanji.status == 0 || finalOrganizationNiazsanji.status == 10 || finalOrganizationNiazsanji.status == 20),
-                'accept': finalOrganizationNiazsanji.status == 30,'ignore': (finalOrganizationNiazsanji.status == 21 || finalOrganizationNiazsanji.status == 11 || finalOrganizationNiazsanji.status == 1)}">
+                'accept': finalOrganizationNiazsanji.status == 30,
+                'ignore': (finalOrganizationNiazsanji.status == 21 || finalOrganizationNiazsanji.status == 11 || finalOrganizationNiazsanji.status == 1)}">
                 <!--<td><a [routerLink]="['/final-organization-niazsanji-marine-suffix', finalOrganizationNiazsanji.id, 'view' ]">{{finalOrganizationNiazsanji.id}}</a></td>-->
                 <td><input *ngIf="(finalOrganizationNiazsanji.status == 0 || finalOrganizationNiazsanji.status == 10 || finalOrganizationNiazsanji.status == 20)" class="mycheckbox" (change)="onChange(finalOrganizationNiazsanji.id, $event.target.checked)" name="{{finalOrganizationNiazsanji.id}}" type="checkbox" id="{{finalOrganizationNiazsanji.id}}"></td>
                 <td>{{i+1}}</td>
                 <!--<td>{{finalOrganizationNiazsanji.recommendedByOrgchart}}</td>-->
                 <td>
-                    <div *ngIf="finalOrganizationNiazsanji.organizationChartId">
-                        <a [routerLink]="['../organization-chart-marine-suffix', finalOrganizationNiazsanji.organizationChartId , 'view' ]" >{{finalOrganizationNiazsanji.organizationChartRootTitle}}</a>
-                    </div>
+                    {{finalOrganizationNiazsanji.organizationChartRootTitle}}
+                </td>
+                <td style="font-size: 10px">
+                    {{finalOrganizationNiazsanji.organizationChartTitle}}
                 </td>
                 <td>
-                    <div *ngIf="finalOrganizationNiazsanji.educationalModuleId">
-                        <a [routerLink]="['../educational-module-marine-suffix', finalOrganizationNiazsanji.educationalModuleId , 'view' ]" >{{finalOrganizationNiazsanji.educationalModuleTitle}}</a>
-                    </div>
+                    {{finalOrganizationNiazsanji.educationalModuleTitle}}
                 </td>
 
                 <td>{{finalOrganizationNiazsanji.educationalModuleCode}}</td>
                 <td>{{finalOrganizationNiazsanji.skillLevelOfSkillTitle}}</td>
+                <td>{{finalOrganizationNiazsanji.peopleCount}}</td>
                 <td>{{finalOrganizationNiazsanji.totalLearningTime | number}}</td>
+                <td>{{finalOrganizationNiazsanji.priceCost | number}}</td>
                 <!--<td>{{finalOrganizationNiazsanji.studentsType}}</td>-->
                 <td>
                     <div *ngIf="finalOrganizationNiazsanji.courseTypeId">
@@ -93,7 +98,7 @@
                         <a [routerLink]="['../teacher-marine-suffix', finalOrganizationNiazsanji.teacherId , 'view' ]" >{{finalOrganizationNiazsanji.teacherFamily}}</a>
                     </div>
                 </td>-->
-                <td>{{finalOrganizationNiazsanji.priceCost | number}}</td>
+
                 <td>{{finalOrganizationNiazsanji.createDate}}</td>
                 <td>{{finalOrganizationNiazsanji.niazsanjiYear}}</td>
                 <td>
@@ -223,11 +228,11 @@
                 </td>
             </tr>
             <tr class="sum-row">
-                <td colspan="6">مجموع</td>
-                <td>{{totalHour | number}}</td>
-                <td></td>
-                <td>{{totalPriceCost | number}}</td>
-                <td colspan="5"></td>
+                <td colspan="7">مجموع</td>
+                <td>{{finalOrganizationNiazsanjis | sum:'peopleCount' | number: '1.0-1'}}</td>
+                <td>{{finalOrganizationNiazsanjis | sum:'totalLearningTime' | number: '1.0-1'}}</td>
+                <td>{{finalOrganizationNiazsanjis | sum:'priceCost' | number: '1.0-1'}}</td>
+                <td colspan="7"></td>
             </tr>
             </tbody>
             <tfoot>
@@ -245,7 +250,7 @@
                     </div>
                 </td>
 
-                <td colspan="10">
+                <td colspan="20">
 
                 </td>
             </tr>

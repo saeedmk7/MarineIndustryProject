@@ -63,6 +63,8 @@
             "person": "نام و نام خانوادگی",
             "personId": "نام و نام خانوادگی",
             "personName": "نام و نام خانوادگی",
+            "personJobTitle": "شغل سازمانی",
+            "personPracticalJobTitle": "شغل عملی",
             "organizationChart": "محل خدمت",
             "organizationChartId": "محل خدمت"
         }

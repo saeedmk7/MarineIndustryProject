@@ -23,7 +23,7 @@
             "detail": {
                 "title": "جزئیات اطلاعات درخواست فهرست نهایی پودمان ها"
             },
-            "niazsanjiYear": "سال نیازسنجی",
+            "niazsanjiYear": "سال",
             "priceCost": "سرمایه گذاری(ریال)",
             "index": "ردیف",
             "code": "Code",
@@ -64,9 +64,11 @@
             "educationalModuleId": "کد پودمان",
             "educationalModuleCode": "کد پودمان",
             "person": "نام و نام خانوادگی",
+            "personJobTitle": "شغل سازمانی",
             "personId": "نام و نام خانوادگی",
             "personName": "نام و نام خانوادگی",
             "organizationChart": "محل خدمت",
+            "organizationChartGroup": "گروه",
             "organizationChartId": "محل خدمت",
             "finalNiazsanjiReport": "Final Niazsanji Report",
             "prioritizeRequestNiazsanji": "Prioritize Request Niazsanji"

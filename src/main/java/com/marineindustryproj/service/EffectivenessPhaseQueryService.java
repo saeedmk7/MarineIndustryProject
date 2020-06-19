@@ -143,6 +143,38 @@ public class EffectivenessPhaseQueryService extends QueryService<EffectivenessPh
                 specification = specification.and(buildSpecification(criteria.getEffectivenessPhaseLevelId(),
                     root -> root.join(EffectivenessPhase_.effectivenessPhaseLevel, JoinType.LEFT).get(EffectivenessPhaseLevel_.id)));
             }
+            if (criteria.getOrganizationChartId() != null) {
+                specification = specification.and(buildSpecification(criteria.getOrganizationChartId(),
+                    root -> root.join(EffectivenessPhase_.finalNiazsanjiReport, JoinType.LEFT)
+                        .join(FinalNiazsanjiReport_.organizationChart).get(OrganizationChart_.id)));
+            }
+            if (criteria.getCourseTypeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getCourseTypeId(),
+                    root -> root.join(EffectivenessPhase_.finalNiazsanjiReport, JoinType.LEFT)
+                        .join(FinalNiazsanjiReport_.courseType).get(CourseType_.id)));
+            }
+            if (criteria.getEducationalModuleCode() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleCode(),
+                    root -> root.join(EffectivenessPhase_.finalNiazsanjiReport, JoinType.LEFT)
+                        .join(FinalNiazsanjiReport_.educationalModule).get(EducationalModule_.code)));
+            }
+            if (criteria.getEducationalModuleTitle() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleTitle(),
+                    root -> root.join(EffectivenessPhase_.finalNiazsanjiReport, JoinType.LEFT)
+                        .join(FinalNiazsanjiReport_.educationalModule).get(EducationalModule_.title)));
+            }
+            if (criteria.getNiazsanjiYear() != null) {
+                specification = specification.and(buildSpecification(criteria.getNiazsanjiYear(),
+                    root -> root.join(EffectivenessPhase_.finalNiazsanjiReport, JoinType.LEFT).get(FinalNiazsanjiReport_.niazsanjiYear)));
+            }
+            if (criteria.getCurrentEffectivenessPhaseLevel() != null) {
+                specification = specification.and(buildSpecification(criteria.getCurrentEffectivenessPhaseLevel(),
+                    root -> root.join(EffectivenessPhase_.effectivenessPhaseLevel, JoinType.LEFT).get(EffectivenessPhaseLevel_.effectivenessLevel)));
+            }
+            if (criteria.getSelectedEffectivenessPhaseLevel() != null) {
+                specification = specification.and(buildSpecification(criteria.getSelectedEffectivenessPhaseLevel(),
+                    root -> root.join(EffectivenessPhase_.finalNiazsanjiReport, JoinType.LEFT).get(FinalNiazsanjiReport_.selectedEffectivenessPhaseLevel)));
+            }
         }
         return specification;
     }

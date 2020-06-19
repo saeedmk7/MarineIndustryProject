@@ -4,6 +4,7 @@ import com.marineindustryproj.service.JobRecordService;
 import com.marineindustryproj.domain.JobRecord;
 import com.marineindustryproj.repository.JobRecordRepository;
 import com.marineindustryproj.service.dto.JobRecordDTO;
+import com.marineindustryproj.service.dto.PersonDTO;
 import com.marineindustryproj.service.mapper.JobRecordMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

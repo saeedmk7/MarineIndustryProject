@@ -103,9 +103,12 @@ public class EducationalModuleResource {
         }
 
         EducationalModuleDTO educationalModule = educationalModuleService.findOne(educationalModuleDTO.getId()).get();
-        Optional<OrganizationDTO> organizationDTO = organizationService.findOne(educationalModuleDTO.getOrganizationId());
-        if(organizationDTO.isPresent())
-            educationalModuleDTO.setRecommendedBy(organizationDTO.get().getTitle());
+
+        if(educationalModuleDTO.getOrganizationId() != null) {
+            Optional<OrganizationDTO> organizationDTO = organizationService.findOne(educationalModuleDTO.getOrganizationId());
+            if (organizationDTO.isPresent())
+                educationalModuleDTO.setRecommendedBy(organizationDTO.get().getTitle());
+        }
         //educationalModuleDTO.setId(Long.parseLong(educationalModuleDTO.getCode()));
         educationalModuleDTO.setCreateUserLogin(educationalModule.getCreateUserLogin());
         educationalModuleDTO.setCreateDate(educationalModule.getCreateDate());

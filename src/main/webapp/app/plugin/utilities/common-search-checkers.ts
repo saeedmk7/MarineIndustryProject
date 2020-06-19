@@ -1,27 +1,25 @@
-import {Injectable} from "@angular/core";
-import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
-import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
-import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
-import {RequestStatus} from "app/shared/model/enums/RequestStatus";
-import {Grade} from "app/shared/model/enums/Grade";
-import {TranslateService} from '@ngx-translate/core';
+import { Injectable } from '@angular/core';
+import { TreeUtilities } from 'app/plugin/utilities/tree-utilities';
+import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
+import { GREGORIAN_START_END_DATE } from 'app/shared/constants/years.constants';
+import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
+import { Grade } from 'app/shared/model/enums/Grade';
+import { TranslateService } from '@ngx-translate/core';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class CommonSearchCheckerService {
-    constructor(private treeUtilities: TreeUtilities, private translate: TranslateService) {
-
-    }
+    constructor(private treeUtilities: TreeUtilities, private translate: TranslateService) {}
 
     public convertEnumToSearchArray(object, enumName: string) {
         let keys = Object.keys(object);
-        let title: string = "marineindustryprojApp." + enumName + ".";
+        let title: string = 'marineindustryprojApp.' + enumName + '.';
         let resultArray: any[] = [];
         keys.forEach(w => {
             let translate = this.translate.get(title + w);
-            translate.subscribe((result) => {
+            translate.subscribe(result => {
                 resultArray.push({
-                    'id': w,
-                    'title': result.toString()
+                    id: w,
+                    title: result.toString()
                 });
             });
         });
@@ -40,7 +38,8 @@ export class CommonSearchCheckerService {
             if (orgId) {
                 const childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(organizationCharts, orgId);
                 criteria.push({
-                    key: 'organizationChartId.in', value: childIds
+                    key: 'organizationChartId.in',
+                    value: childIds
                 });
             }
         }
@@ -53,14 +52,13 @@ export class CommonSearchCheckerService {
             const orgId = +org.value;
             criteria = criteria.filter(a => a.key != 'organizationChartId.equals');
             if (orgId) {
-
                 criteria = criteria.filter(a => a.key != 'organizationChartId.in');
 
                 const childIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(organizationCharts, orgId);
                 criteria.push({
-                    key: 'organizationChartId.in', value: childIds
+                    key: 'organizationChartId.in',
+                    value: childIds
                 });
-
             }
         }
         return criteria;
@@ -78,10 +76,12 @@ export class CommonSearchCheckerService {
                 let endDate = new Date(yearDetail.endDate).toISOString();
 
                 criteria.push({
-                    key: 'createDate.lessOrEqualThan', value: endDate
+                    key: 'createDate.lessOrEqualThan',
+                    value: endDate
                 });
                 criteria.push({
-                    key: 'createDate.greaterOrEqualThan', value: beginDate
+                    key: 'createDate.greaterOrEqualThan',
+                    value: beginDate
                 });
             }
         }
@@ -99,28 +99,28 @@ export class CommonSearchCheckerService {
                         key: 'requestStatus.equals',
                         value: val
                     });
-                }
-                else if (val == RequestStatus.RETURNED) {
+                } else if (val == RequestStatus.RETURNED) {
                     criteria.push({
                         key: 'hasImportantMessage.equals',
                         value: true
                     });
-                }
-                else {
-                    criteria.push({
-                        key: 'status.equals',
-                        value: currentPersonOrgChartId
-                    }, {
-                        key: 'requestStatus.equals',
-                        value: RequestStatus.NEW
-                    });
+                } else {
+                    criteria.push(
+                        {
+                            key: 'status.equals',
+                            value: currentPersonOrgChartId
+                        },
+                        {
+                            key: 'requestStatus.equals',
+                            value: RequestStatus.NEW
+                        }
+                    );
                 }
             }
         }
         return criteria;
     }
     public checkRequestStatusFiltersForIntegration(criteria, status: number = 0) {
-
         const requestStatusFilters = criteria.find(a => a.key == 'requestStatusFilters.equals');
         if (requestStatusFilters) {
             const val = requestStatusFilters.value;
@@ -131,14 +131,12 @@ export class CommonSearchCheckerService {
                         key: 'requestStatus.equals',
                         value: val
                     });
-                }
-                else if (val == RequestStatus.RETURNED) {
+                } else if (val == RequestStatus.RETURNED) {
                     criteria.push({
                         key: 'hasImportantMessage.equals',
                         value: true
                     });
-                }
-                else if(val == RequestStatus.READ){
+                } else if (val == RequestStatus.READ) {
                     criteria.push({
                         key: 'requestStatus.equals',
                         value: RequestStatus.READ
@@ -147,13 +145,12 @@ export class CommonSearchCheckerService {
                         key: 'status.equals',
                         value: 20
                     });
-                }
-                else {
+                } else {
                     criteria.push({
                         key: 'requestStatus.equals',
                         value: RequestStatus.READ
                     });
-                    if(status){
+                    if (status) {
                         criteria.push({
                             key: 'status.greaterOrEqualThan',
                             value: status

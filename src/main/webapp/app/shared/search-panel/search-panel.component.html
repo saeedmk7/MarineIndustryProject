@@ -1,10 +1,11 @@
-<form #f="ngForm" id="ngForm" (ngSubmit)="onSubmit(f)" novalidate *ngIf="searchPanelModel">
+<form #f="ngForm" id="ngForm" (ngSubmit)="returnSearchParam ? onSubmitReturnSearchParam(f) : onSubmit(f)" novalidate *ngIf="searchPanelModel">
     <div class="card border-success ">
         <a data-toggle="collapse" href="#collapseExample" class="card-header center" style="background-color: aliceblue;">
-            <span class="panel-title">پنل جستجو</span>
+            <span class="panel-title" *ngIf="!returnSearchParam">پنل جستجو</span>
+            <span class="panel-title" *ngIf="returnSearchParam">پنل پارامترهای جستجو</span>
             <span class="pull-right clickable"><i class="glyphicon glyphicon-ok"></i></span>
         </a>
-        <div class="collapse" id="collapseExample">
+        <div [ngClass]="{'collapse': !returnSearchParam, '':returnSearchParam }" id="collapseExample">
             <div class="card-body">
                 <div class="form-group {{item.className}}" *ngFor="let item of searchPanelModel" >
                     <label class="form-control-label" [for]="item.fieldName" jhiTranslate="{{'marineindustryprojApp.' + item.entityName + '.' + item.fieldName}}"></label>
@@ -46,7 +47,7 @@
                 </div>
         </div>
         <div class="card-footer text-muted success-color white-text">
-            <input id="submitBtn" type="submit" class="btn-primary" value="جستجو">
+            <input id="submitBtn" type="submit" class="btn-primary" [value]="returnSearchParam ? 'ثبت اولیه' : 'جستجو'">
             <input type="reset" class="btn-warning" value="پاک کردن">
         </div>
     </div>

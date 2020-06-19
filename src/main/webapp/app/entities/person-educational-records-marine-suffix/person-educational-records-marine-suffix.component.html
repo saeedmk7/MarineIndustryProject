@@ -1,11 +1,9 @@
 <div>
     <div class="row justify-content-center">
         <div class="myContent">
-            <!--<button type="button" (click)="printPage()">Print</button>-->
-            <a title="چاپ" [href]="urlToPrintFinal" target="_blank"
-               class="btn btn-default btn-lg enableLink">
-                <fa-icon [icon]="'print'"></fa-icon>
-            </a>
+            <button type="button" class="btn btn-default btn-lg enableLink" (click)="printPage()" title="چاپ">
+                <fa-icon [icon]="'print'"></fa-icon> چاپ
+            </button>
             <div *ngIf="isTopUsers" style="text-align: center;">
             <div class=" form-group">
                 <label class="form-control-label">جستجو پرسنل </label>

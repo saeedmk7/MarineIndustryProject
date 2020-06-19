@@ -139,6 +139,11 @@ public class OrganizationChart implements Serializable {
     @JsonIgnore
     private Set<ForceRunningPercent> forceRunningPercents = new HashSet<>();
 
+    @ManyToMany(mappedBy = "organizationCharts")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<ReportGenerator> reportGenerators = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -839,6 +844,31 @@ public class OrganizationChart implements Serializable {
 
     public void setForceRunningPercents(Set<ForceRunningPercent> forceRunningPercents) {
         this.forceRunningPercents = forceRunningPercents;
+    }
+
+    public Set<ReportGenerator> getReportGenerators() {
+        return reportGenerators;
+    }
+
+    public OrganizationChart reportGenerators(Set<ReportGenerator> reportGenerators) {
+        this.reportGenerators = reportGenerators;
+        return this;
+    }
+
+    public OrganizationChart addReportGenerator(ReportGenerator reportGenerator) {
+        this.reportGenerators.add(reportGenerator);
+        reportGenerator.getOrganizationCharts().add(this);
+        return this;
+    }
+
+    public OrganizationChart removeReportGenerator(ReportGenerator reportGenerator) {
+        this.reportGenerators.remove(reportGenerator);
+        reportGenerator.getOrganizationCharts().remove(this);
+        return this;
+    }
+
+    public void setReportGenerators(Set<ReportGenerator> reportGenerators) {
+        this.reportGenerators = reportGenerators;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
