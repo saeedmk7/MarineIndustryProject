@@ -140,6 +140,9 @@ public class EvaluateCriteriaDataQueryService extends QueryService<EvaluateCrite
             if (criteria.getGuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGuid(), EvaluateCriteriaData_.guid));
             }
+            if (criteria.getQualityGoal() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getQualityGoal(), EvaluateCriteriaData_.qualityGoal));
+            }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(EvaluateCriteriaData_.documents, JoinType.LEFT).get(Document_.id)));

@@ -94,7 +94,7 @@ public class LevelFourEffectiveness implements Serializable {
     @Column(name = "modify_date")
     private ZonedDateTime modifyDate;
 
-    @OneToMany(mappedBy = "levelFourEffectiveness")
+    @OneToMany(mappedBy = "levelFourEffectiveness", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<LevelFourScore> levelFourScores = new HashSet<>();
     @ManyToMany

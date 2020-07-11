@@ -1,22 +1,22 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
-import {JhiEventManager, JhiParseLinks, JhiAlertService} from 'ng-jhipster';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import {IEffectivenessPhaseMarineSuffix} from 'app/shared/model/effectiveness-phase-marine-suffix.model';
-import {AccountService, Principal} from 'app/core';
+import { IEffectivenessPhaseMarineSuffix } from 'app/shared/model/effectiveness-phase-marine-suffix.model';
+import { AccountService, Principal } from 'app/core';
 
-import {ITEMS_PER_PAGE} from 'app/shared';
-import {EffectivenessPhaseMarineSuffixService} from './effectiveness-phase-marine-suffix.service';
+import { ITEMS_PER_PAGE } from 'app/shared';
+import { EffectivenessPhaseMarineSuffixService } from './effectiveness-phase-marine-suffix.service';
 import {
     EffectivenessPhaseLevelMarineSuffix,
     IEffectivenessPhaseLevelMarineSuffix
-} from "app/shared/model/effectiveness-phase-level-marine-suffix.model";
-import {EffectivenessPhaseLevelMarineSuffixService} from "app/entities/effectiveness-phase-level-marine-suffix";
-import {IFinalNiazsanjiReportMarineSuffix} from "app/shared/model/final-niazsanji-report-marine-suffix.model";
-import {FinalNiazsanjiReportMarineSuffixService} from "app/entities/final-niazsanji-report-marine-suffix";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+} from 'app/shared/model/effectiveness-phase-level-marine-suffix.model';
+import { EffectivenessPhaseLevelMarineSuffixService } from 'app/entities/effectiveness-phase-level-marine-suffix';
+import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
+import { FinalNiazsanjiReportMarineSuffixService } from 'app/entities/final-niazsanji-report-marine-suffix';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
 
 @Component({
     selector: 'mi-effectiveness-phase-marine-suffix',
@@ -66,7 +66,6 @@ export class EffectivenessPhaseMarineSuffixComponent implements OnInit, OnDestro
     }
 
     loadAll(criteria?) {
-
         this.effectivenessPhaseService
             .query({
                 page: this.page - 1,
@@ -111,36 +110,38 @@ export class EffectivenessPhaseMarineSuffixComponent implements OnInit, OnDestro
     }
 
     ngOnInit() {
-        this.activatedRoute.data.subscribe(({effectivenessPhase}) => {
-
+        this.activatedRoute.data.subscribe(({ effectivenessPhase }) => {
             this.effectivenessPhase = effectivenessPhase;
             if (this.effectivenessPhase.finalNiazsanjiReportId) {
-                this.effectivenessPhaseService.getByFinalNiazsanjiReportId(this.effectivenessPhase.finalNiazsanjiReportId).subscribe((resp: HttpResponse<IEffectivenessPhaseMarineSuffix[]>) => {
-
+                this.effectivenessPhaseService.getByFinalNiazsanjiReportId(this.effectivenessPhase.finalNiazsanjiReportId).subscribe(
+                    (resp: HttpResponse<IEffectivenessPhaseMarineSuffix[]>) => {
                         this.effectivenessPhases = this.convertObjectDatesService.changeArrayDate(resp.body);
                         if (this.effectivenessPhases && this.effectivenessPhases.length > 0) {
                             this.finalNiazsanjiReport = this.effectivenessPhases[0].finalNiazsanjiReport;
-                            this.finalNiazsanjiReport.selectedEffectivenessPhaseLevelTitle = this.convertObjectDatesService.convertEffectivenessPhaseLevel2EqualString(this.finalNiazsanjiReport.selectedEffectivenessPhaseLevel);
+                            this.finalNiazsanjiReport.selectedEffectivenessPhaseLevelTitle = this.convertObjectDatesService.convertEffectivenessPhaseLevel2EqualString(
+                                this.finalNiazsanjiReport.selectedEffectivenessPhaseLevel
+                            );
                         }
-                        this.effectivenessPhases = this.effectivenessPhases.sort((a, b) => (a.effectivenessPhaseLevel.effectivenessLevel > b.effectivenessPhaseLevel.effectivenessLevel) ? 1 :
-                            (a.effectivenessPhaseLevel.effectivenessLevel < b.effectivenessPhaseLevel.effectivenessLevel) ? -1 : 0);
+                        this.effectivenessPhases = this.effectivenessPhases.sort(
+                            (a, b) =>
+                                a.effectivenessPhaseLevel.effectivenessLevel > b.effectivenessPhaseLevel.effectivenessLevel
+                                    ? 1
+                                    : a.effectivenessPhaseLevel.effectivenessLevel < b.effectivenessPhaseLevel.effectivenessLevel ? -1 : 0
+                        );
                         this.effectivenessPhases.forEach(w => {
-                           if(!w.finishPhaseDate){
-                               this.currentEffectivenessPhase = w.effectivenessPhaseLevel.effectivenessLevel;
-                               return;
-                           }
+                            if (!w.finishPhaseDate) {
+                                this.currentEffectivenessPhase = w.effectivenessPhaseLevel.effectivenessLevel;
+                                return;
+                            }
                         });
 
-                        this.canComplete = this.effectivenessPhases.filter(a => a.weightedPoints && a.weightedPoints > 0).length == this.effectivenessPhases.length;
+                        this.canComplete =
+                            this.effectivenessPhases.filter(a => a.weightedPoints && a.weightedPoints > 0).length ==
+                            this.effectivenessPhases.length;
                     },
-                    (res: HttpErrorResponse) => this.onError(res.message));
-                /*const criteria = [{
-                   key: 'finalNiazsanjiReportId.equals',
-                   value: this.effectivenessPhase.finalNiazsanjiReportId
-                }];
-                this.loadAll(criteria);*/
-            }
-            else {
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            } else {
                 this.previousState();
             }
         });
@@ -150,17 +151,23 @@ export class EffectivenessPhaseMarineSuffixComponent implements OnInit, OnDestro
         this.registerChangeInEffectivenessPhases();
     }
 
-    startPhase(id: number){
-        if(confirm("آیا برای شروع انجام این سطح مطمئنید؟")){
-            this.effectivenessPhaseService.startPhase(id).subscribe((resp: HttpResponse<IEffectivenessPhaseMarineSuffix>) => {
-                let effectivenessPhase: IEffectivenessPhaseMarineSuffix = resp.body;
-                if(effectivenessPhase.status == 10){
-                    this.redirectToLevel(effectivenessPhase.effectivenessPhaseLevel.effectivenessLevel, effectivenessPhase.finalNiazsanjiReportId);
-                }
-            },(res: HttpErrorResponse) => this.onSaveError(res))
+    startPhase(id: number) {
+        if (confirm('آیا برای شروع انجام این سطح مطمئنید؟')) {
+            this.effectivenessPhaseService.startPhase(id).subscribe(
+                (resp: HttpResponse<IEffectivenessPhaseMarineSuffix>) => {
+                    let effectivenessPhase: IEffectivenessPhaseMarineSuffix = resp.body;
+                    if (effectivenessPhase.status == 10) {
+                        this.redirectToLevel(
+                            effectivenessPhase.effectivenessPhaseLevel.effectivenessLevel,
+                            effectivenessPhase.finalNiazsanjiReportId
+                        );
+                    }
+                },
+                (res: HttpErrorResponse) => this.onSaveError(res)
+            );
         }
     }
-    redirectToLevel(effectivenessLevel: number, finalNiazsanjiReportId: number){
+    redirectToLevel(effectivenessLevel: number, finalNiazsanjiReportId: number) {
         switch (effectivenessLevel) {
             case 1:
                 this.change('effectiveness-phase-marine-suffix/level-one/' + finalNiazsanjiReportId);
@@ -176,19 +183,22 @@ export class EffectivenessPhaseMarineSuffixComponent implements OnInit, OnDestro
                 break;
         }
     }
-    completeEffectivenessPhase(finalNiazsanjiReportId: number){
-        if(confirm("آیا اطلاعات وارد شده همگی صحیح هستند؟ و برای تایید نهایی کردن این نیازسنجی مطمئنید؟")) {
-            this.effectivenessPhaseService.completeEffectivenessPhase(finalNiazsanjiReportId).subscribe((resp: HttpResponse<boolean>) => {
-                if (resp.body) {
-                    this.change('final-niazsanji-effectiveness-phase-marine-suffix');
-                }
-            },(res: HttpErrorResponse) => this.onSaveError(res))
+    completeEffectivenessPhase(finalNiazsanjiReportId: number) {
+        if (confirm('آیا اطلاعات وارد شده همگی صحیح هستند؟ و برای تایید نهایی کردن این نیازسنجی مطمئنید؟')) {
+            this.effectivenessPhaseService.completeEffectivenessPhase(finalNiazsanjiReportId).subscribe(
+                (resp: HttpResponse<boolean>) => {
+                    if (resp.body) {
+                        this.change('final-niazsanji-effectiveness-phase-marine-suffix');
+                    }
+                },
+                (res: HttpErrorResponse) => this.onSaveError(res)
+            );
         }
     }
     protected onSaveError(res) {
         console.error(res);
     }
-    change(i){
+    change(i) {
         this.router.navigateByUrl(i);
     }
     ngOnDestroy() {
@@ -218,17 +228,21 @@ export class EffectivenessPhaseMarineSuffixComponent implements OnInit, OnDestro
 
         this.effectivenessPhases = data;
         const effectivenessPhaseLevelIds = this.effectivenessPhases.map(a => a.effectivenessPhaseLevelId);
-        const criteria = [{
-            key: 'effectivenessPhaseLevelId.in',
-            value: effectivenessPhaseLevelIds
-        }];
-        this.effectivenessPhaseLevelService.query(criteria).subscribe((resp: HttpResponse<IEffectivenessPhaseLevelMarineSuffix[]>) => {
+        const criteria = [
+            {
+                key: 'effectivenessPhaseLevelId.in',
+                value: effectivenessPhaseLevelIds
+            }
+        ];
+        this.effectivenessPhaseLevelService.query(criteria).subscribe(
+            (resp: HttpResponse<IEffectivenessPhaseLevelMarineSuffix[]>) => {
                 this.effectivenessPhaseLevels = resp.body;
                 this.effectivenessPhases.forEach(a => {
                     a.effectivenessPhaseLevel = this.effectivenessPhaseLevels.find(e => e.id == a.effectivenessPhaseLevelId);
                 });
             },
-            (res: HttpErrorResponse) => this.onError(res.message))
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     previousState() {

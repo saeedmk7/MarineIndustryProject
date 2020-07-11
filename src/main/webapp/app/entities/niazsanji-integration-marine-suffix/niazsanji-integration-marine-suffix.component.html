@@ -237,6 +237,14 @@
                                 <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
                             </button>
                         </ng-container>
+                        <ng-container *ngIf="niazsanjiIntegration.status == 30 && isAdmin">
+                            <button type="button" title="برگرداندن تصویب شوراء"
+                                    (click)="restoreToBeforeFinalize(niazsanjiIntegration.id)"
+                                    class="btn btn-success btn-sm">
+                                <fa-icon [icon]="'recycle'"></fa-icon>
+                                <span class="d-none d-md-inline" >برگرداندن وضعیت تصویب شوراء</span>
+                            </button>
+                        </ng-container>
                         <!--<button  type="submit" title="ردکردن" (click)="reject(niazsanjiIntegration)"
                                  class="btn btn-danger btn-sm">
                             <span class="fa fa-ban" color="f00c"></span>

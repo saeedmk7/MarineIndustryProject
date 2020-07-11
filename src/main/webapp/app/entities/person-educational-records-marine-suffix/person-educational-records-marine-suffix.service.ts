@@ -6,20 +6,43 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { result } from 'app/plugin/upload-file/result.model';
 import { map } from 'rxjs/operators';
 import { ISettingsModel } from 'app/account/settings/settings.model';
+const jsreport = require('jsreport-browser-client-dist/jsreport');
 
 @Injectable({ providedIn: 'root' })
 export class PersonEducationalRecordsMarineSuffixService {
-    constructor(private http: HttpClient) {}
     private resourceUrl = SERVER_API_URL + 'api/saveUserImage';
+
+    constructor(private http: HttpClient) {}
 
     printPage(hostName, personId) {
         debugger;
-        const url = `http://${hostName}:5488/api/report`;
-        const formdata = { template: { name: 'PersonEducationalRecords' }, data: { personId: personId } };
+        jsreport.serverUrl = `http://${hostName}:5488`;
+        //const formdata = { template: { name: 'PersonEducationalRecords' }, data: { personId: personId } };
 
-        return this.http.post(url, formdata).subscribe(resp => {
-            console.log(resp);
+        var request = {
+            template: {
+                name: 'PersonEducationalRecords'
+            },
+            data: { personId: personId }
+        };
+
+        jsreport.renderAsync(request).then(function(res) {
+            //display report in the new tab
+            jsreport.render('_blank', request);
+
+            //display report in placeholder with id reportPlaceholder
+
+            jsreport.render('reportPlaceholder', request);
+
+            //display report in placeholder element
+            jsreport.render(document.getElementById('reportPlaceholder'), request);
+
+            //open download dialog for report
+            jsreport.download('myReport.pdf', request);
         });
+        /*return this.http.post(url, formdata).subscribe(resp => {
+            console.log(resp);
+        });*/
     }
 
     pushFileToStorage(file: File, login: string): Observable<HttpResponse<ISettingsModel>> {

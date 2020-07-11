@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="reportGeneratorAuthority">
+            <h2><span jhiTranslate="marineindustryprojApp.reportGeneratorAuthority.detail.title">Report Generator Authority</span> {{reportGeneratorAuthority.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.reportGeneratorAuthority.authorityName">Authority Name</span></dt>
+                <dd>
+                    <span>{{reportGeneratorAuthority.authorityName}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.reportGeneratorAuthority.hasEditPermission">Has Edit Permission</span></dt>
+                <dd>
+                    <span>{{reportGeneratorAuthority.hasEditPermission}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.reportGeneratorAuthority.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{reportGeneratorAuthority.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.reportGeneratorAuthority.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{reportGeneratorAuthority.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.reportGeneratorAuthority.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{reportGeneratorAuthority.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.reportGeneratorAuthority.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{reportGeneratorAuthority.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.reportGeneratorAuthority.reportGenerator">Report Generator</span></dt>
+                <dd>
+                    <div *ngIf="reportGeneratorAuthority.reportGeneratorId">
+                        <a [routerLink]="['/report-generator-marine-suffix', reportGeneratorAuthority.reportGeneratorId, 'view']">{{reportGeneratorAuthority.reportGeneratorTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/report-generator-authority-marine-suffix', reportGeneratorAuthority.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

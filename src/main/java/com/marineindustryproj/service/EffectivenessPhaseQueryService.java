@@ -143,6 +143,10 @@ public class EffectivenessPhaseQueryService extends QueryService<EffectivenessPh
                 specification = specification.and(buildSpecification(criteria.getEffectivenessPhaseLevelId(),
                     root -> root.join(EffectivenessPhase_.effectivenessPhaseLevel, JoinType.LEFT).get(EffectivenessPhaseLevel_.id)));
             }
+            if (criteria.getEffectivenessPhaseLevelEffectivenessLevel() != null) {
+                specification = specification.and(buildSpecification(criteria.getEffectivenessPhaseLevelEffectivenessLevel(),
+                    root -> root.join(EffectivenessPhase_.effectivenessPhaseLevel, JoinType.LEFT).get(EffectivenessPhaseLevel_.effectivenessLevel)));
+            }
             if (criteria.getOrganizationChartId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOrganizationChartId(),
                     root -> root.join(EffectivenessPhase_.finalNiazsanjiReport, JoinType.LEFT)

@@ -25,6 +25,7 @@ export interface IEvaluateCriteriaTrainingMarineSuffix {
     modifyUserLogin?: string;
     modifyDate?: Moment;
     guid?: string;
+    qualityGoal?: string;
     evaluateCriteriaData?: IEvaluateCriteriaDataMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     organizationChartTitle?: string;
@@ -55,6 +56,7 @@ export class EvaluateCriteriaTrainingMarineSuffix implements IEvaluateCriteriaTr
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
         public guid?: string,
+        public qualityGoal?: string,
         public evaluateCriteriaData?: IEvaluateCriteriaDataMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public organizationChartTitle?: string,

@@ -73,6 +73,8 @@ public class EffectivenessPhaseCriteria implements Serializable {
 
     private IntegerFilter currentEffectivenessPhaseLevel;
 
+    private IntegerFilter effectivenessPhaseLevelEffectivenessLevel;
+
     public LongFilter getId() {
         return id;
     }
@@ -252,6 +254,7 @@ public class EffectivenessPhaseCriteria implements Serializable {
             Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
             Objects.equals(selectedEffectivenessPhaseLevel, that.selectedEffectivenessPhaseLevel) &&
             Objects.equals(currentEffectivenessPhaseLevel, that.currentEffectivenessPhaseLevel) &&
+            Objects.equals(effectivenessPhaseLevelEffectivenessLevel, that.effectivenessPhaseLevelEffectivenessLevel) &&
             Objects.equals(effectivenessPhaseLevelId, that.effectivenessPhaseLevelId);
     }
 
@@ -281,6 +284,7 @@ public class EffectivenessPhaseCriteria implements Serializable {
         educationalModuleCode,
         educationalModuleTitle,
         currentEffectivenessPhaseLevel,
+        effectivenessPhaseLevelEffectivenessLevel,
         selectedEffectivenessPhaseLevel,
         effectivenessPhaseLevelId
         );
@@ -314,6 +318,7 @@ public class EffectivenessPhaseCriteria implements Serializable {
                 (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
                 (selectedEffectivenessPhaseLevel != null ? "selectedEffectivenessPhaseLevel=" + selectedEffectivenessPhaseLevel + ", " : "") +
                 (currentEffectivenessPhaseLevel != null ? "currentEffectivenessPhaseLevel=" + currentEffectivenessPhaseLevel + ", " : "") +
+                (effectivenessPhaseLevelEffectivenessLevel != null ? "effectivenessPhaseLevelEffectivenessLevel=" + effectivenessPhaseLevelEffectivenessLevel + ", " : "") +
             "}";
     }
 
@@ -371,5 +376,13 @@ public class EffectivenessPhaseCriteria implements Serializable {
 
     public void setCurrentEffectivenessPhaseLevel(IntegerFilter currentEffectivenessPhaseLevel) {
         this.currentEffectivenessPhaseLevel = currentEffectivenessPhaseLevel;
+    }
+
+    public IntegerFilter getEffectivenessPhaseLevelEffectivenessLevel() {
+        return effectivenessPhaseLevelEffectivenessLevel;
+    }
+
+    public void setEffectivenessPhaseLevelEffectivenessLevel(IntegerFilter effectivenessPhaseLevelEffectivenessLevel) {
+        this.effectivenessPhaseLevelEffectivenessLevel = effectivenessPhaseLevelEffectivenessLevel;
     }
 }

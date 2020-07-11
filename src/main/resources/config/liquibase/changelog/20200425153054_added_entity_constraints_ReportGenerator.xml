@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity ReportGenerator.
+    -->
+    <changeSet id="20200425153054-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="report_generators_id"
+                                 baseTableName="report_generator_organization_chart"
+                                 constraintName="fk_report_generator_organization_chart_report_generators_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="report_generator"/>
+        <addForeignKeyConstraint baseColumnNames="organization_charts_id"
+                                 baseTableName="report_generator_organization_chart"
+                                 constraintName="fk_report_generator_organization_chart_organization_charts_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+        
+    </changeSet>
+</databaseChangeLog>

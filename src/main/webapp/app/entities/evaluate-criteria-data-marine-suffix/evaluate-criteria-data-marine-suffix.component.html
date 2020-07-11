@@ -19,6 +19,7 @@
                 <th>ردیف</th>
             <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th jhiSortBy="qualityGoal"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.qualityGoal">qualityGoal</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="evaluateCriteriaTrainingProcessTitle"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.evaluateCriteriaTraining">Evaluate Criteria Training</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="firstNumber"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaData.firstNumber">First Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -42,6 +43,9 @@
             <tr *ngFor="let evaluateCriteriaData of evaluateCriteriaDatas ;let i = index">
                 <!--<td><a [routerLink]="['/evaluate-criteria-data-marine-suffix', evaluateCriteriaData.id, 'view' ]">{{evaluateCriteriaData.id}}</a></td>-->
                 <td>{{i+1}}</td>
+                <td>
+                    {{evaluateCriteriaData.qualityGoal}}
+                </td>
                 <td>
                     {{evaluateCriteriaData.organizationChartTitle}}
                 </td>
@@ -100,7 +104,7 @@
                 </td>
             </tr>
             <tr class="sum-row">
-                <td colspan="3">مجموع</td>
+                <td colspan="4">مجموع</td>
                 <td>
                     {{evaluateCriteriaDatas | sum:'firstNumber' | number: '1.0-1'}}
                 </td>

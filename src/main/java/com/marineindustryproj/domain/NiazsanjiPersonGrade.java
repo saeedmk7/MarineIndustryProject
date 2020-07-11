@@ -94,7 +94,7 @@ public class NiazsanjiPersonGrade implements Serializable {
     @Column(name = "modify_date")
     private ZonedDateTime modifyDate;
 
-    @OneToMany(mappedBy = "niazsanjiPersonGrade")
+    @OneToMany(mappedBy = "niazsanjiPersonGrade", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<NiazsanjiPersonGradeScore> niazsanjiPersonGradeScores = new HashSet<>();
     @ManyToMany

@@ -50,8 +50,14 @@
                         <button type="submit"
                                 [routerLink]="['/niazsanji-person-grade-marine-suffix/new', finalNiazsanjiReportPerson.id ]"
                                 class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.evaluate">evaluate</span>
+                            <ng-container *ngIf="effectivenessPhase.status < 20">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.evaluate">evaluate</span>
+                            </ng-container>
+                            <ng-container *ngIf="effectivenessPhase.status >= 20">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">evaluate</span>
+                            </ng-container>
                         </button>
                         <ng-container
                             *ngIf="finalNiazsanjiReportPerson.niazsanjiPersonGrades && finalNiazsanjiReportPerson.niazsanjiPersonGrades.length > 0">
@@ -75,7 +81,7 @@
             </tfoot>
         </table>
         <div class="row" style="text-align: center;display: block;">
-            <button type="button"
+            <button type="button" *ngIf="effectivenessPhase.status < 20"
                     (click)="completeLevel(finalNiazsanjiReportId)" [disabled]="!canComplete"
                     class="btn btn-success">
                 <fa-icon [icon]="'check-double'"></fa-icon>

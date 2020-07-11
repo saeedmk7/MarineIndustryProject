@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.*;
 import com.marineindustryproj.service.dto.*;
+import com.marineindustryproj.service.dto.customs.CountListModel;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -23,10 +24,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -240,7 +238,27 @@ public class FinalNiazsanjiReportPersonResource {
         log.debug("REST request to count FinalNiazsanjiReportPeople by criteria: {}", criteria);
         return ResponseEntity.ok().body(finalNiazsanjiReportPersonQueryService.countByCriteria(criteria));
     }
+    @GetMapping("/final-niazsanji-report-people/count-list/{finalNiazsanjiReportIds}")
+    @Timed
+    public ResponseEntity<List<CountListModel>> countListFinalNiazsanjiReportPeople (@PathVariable long[] finalNiazsanjiReportIds) {
+        log.debug("REST request to count FinalNiazsanjiReportPeople by finalNiazsanjiReportIds: {}", finalNiazsanjiReportIds);
 
+        List<CountListModel> countListModels = new ArrayList<>();
+
+        FinalNiazsanjiReportPersonCriteria criteria = new FinalNiazsanjiReportPersonCriteria();
+        LongFilter finalNiazsanjiReportIdFilter = new LongFilter();
+        for (Long finalNiazsanjiReportId : finalNiazsanjiReportIds) {
+            finalNiazsanjiReportIdFilter.setEquals(finalNiazsanjiReportId);
+            criteria.setFinalNiazsanjiReportId(finalNiazsanjiReportIdFilter);
+            long count = finalNiazsanjiReportPersonQueryService.countByCriteria(criteria);
+
+            countListModels.add(new CountListModel(finalNiazsanjiReportId, count));
+        }
+
+
+
+        return ResponseEntity.ok().body(countListModels);
+    }
     /**
      * GET  /final-niazsanji-report-people/:id : get the "id" finalNiazsanjiReportPerson.
      *

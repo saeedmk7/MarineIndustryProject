@@ -1,0 +1,78 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.reportGenerator.home.title">Report Generators</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-report-generator-marine-suffix" [routerLink]="['/report-generator-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.reportGenerator.home.createLabel">
+            Create new Report Generator
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="reportGenerators">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.reportGenerator.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.reportGenerator.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="searchParams"><span jhiTranslate="marineindustryprojApp.reportGenerator.searchParams">Search Params</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="columnNames"><span jhiTranslate="marineindustryprojApp.reportGenerator.columnNames">Column Names</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.reportGenerator.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.reportGenerator.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.reportGenerator.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.reportGenerator.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="guid"><span jhiTranslate="marineindustryprojApp.reportGenerator.guid">Guid</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let reportGenerator of reportGenerators ;trackBy: trackId">
+                <td><a [routerLink]="['/report-generator-marine-suffix', reportGenerator.id, 'view' ]">{{reportGenerator.id}}</a></td>
+                <td>{{reportGenerator.title}}</td>
+                <td>{{reportGenerator.description}}</td>
+                <!--<td>{{reportGenerator.searchParams}}</td>
+                <td>{{reportGenerator.columnNames}}</td>
+                <td>{{reportGenerator.createUserLogin}}</td>
+                <td>{{reportGenerator.createDate | date:'medium'}}</td>
+                <td>{{reportGenerator.modifyUserLogin}}</td>
+                <td>{{reportGenerator.modifyDate | date:'medium'}}</td>
+                <td>{{reportGenerator.guid}}</td>-->
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/report-generator-marine-suffix', 'view', reportGenerator.guid ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/report-generator-marine-suffix', reportGenerator.guid, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                                [routerLink]="['/', { outlets: { popup: 'report-generator-marine-suffix/'+ reportGenerator.guid + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="reportGenerators && reportGenerators.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

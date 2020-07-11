@@ -28,6 +28,8 @@ import { ILevelThreeScoreMarineSuffix, LevelThreeScoreMarineSuffix } from 'app/s
 import { LevelThreeCriteriaMarineSuffixService } from 'app/entities/level-three-criteria-marine-suffix';
 import { LevelThreeScoreMarineSuffixService } from 'app/entities/level-three-score-marine-suffix';
 import * as persianMoment from 'jalali-moment';
+import { EffectivenessPhaseMarineSuffixService } from 'app/entities/effectiveness-phase-marine-suffix';
+import { IEffectivenessPhaseMarineSuffix } from 'app/shared/model/effectiveness-phase-marine-suffix.model';
 
 @Component({
     selector: 'mi-level-three-effectiveness-marine-suffix-update',
@@ -65,12 +67,15 @@ export class LevelThreeEffectivenessMarineSuffixUpdateComponent implements OnIni
     });
     years: any = GREGORIAN_START_END_DATE.map(a => a.year);
 
+    effectivenessPhase: IEffectivenessPhaseMarineSuffix;
+
     constructor(
         protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected levelThreeEffectivenessService: LevelThreeEffectivenessMarineSuffixService,
         protected documentService: DocumentMarineSuffixService,
         protected finalNiazsanjiReportPersonService: FinalNiazsanjiReportPersonMarineSuffixService,
+        protected effectivenessPhaseService: EffectivenessPhaseMarineSuffixService,
         protected activatedRoute: ActivatedRoute,
         protected levelThreeCriteriaService: LevelThreeCriteriaMarineSuffixService,
         protected levelThreeScoreService: LevelThreeScoreMarineSuffixService,
@@ -112,6 +117,33 @@ export class LevelThreeEffectivenessMarineSuffixUpdateComponent implements OnIni
                                 (res: HttpResponse<ILevelThreeEffectivenessMarineSuffix[]>) => {
                                     if (res.body && res.body.length > 0) this.levelThreeEffectiveness = res.body[0];
                                     this.getScores();
+                                },
+                                (res: HttpErrorResponse) => this.onError(res.message)
+                            );
+
+                        let criteria = [
+                            {
+                                key: 'finalNiazsanjiReportId.equals',
+                                value: this.finalNiazsanjiReport.id
+                            },
+                            {
+                                key: 'effectivenessPhaseLevelEffectivenessLevel.equals',
+                                value: 3
+                            }
+                        ];
+
+                        this.effectivenessPhaseService
+                            .query({
+                                page: 0,
+                                size: 20000,
+                                criteria,
+                                sort: ['id', 'asc']
+                            })
+                            .subscribe(
+                                (resp: HttpResponse<IEffectivenessPhaseMarineSuffix[]>) => {
+                                    if (resp.body && resp.body.length > 0) {
+                                        this.effectivenessPhase = resp.body[0];
+                                    }
                                 },
                                 (res: HttpErrorResponse) => this.onError(res.message)
                             );

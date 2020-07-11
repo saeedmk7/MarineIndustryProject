@@ -1,0 +1,25 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="reportGenerator">
+            <h2>{{reportGenerator.title}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <div class="table-responsive" *ngIf="finalNiazsanjiReports">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th *ngFor="let col of columns">{{col.displayName}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let finalResult of finalResultModel ;let i = index">
+                        <td>{{i + 1}}</td>
+                        <td *ngFor="let item of finalResult">{{item.value}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+    </div>
+</div>
+</div>

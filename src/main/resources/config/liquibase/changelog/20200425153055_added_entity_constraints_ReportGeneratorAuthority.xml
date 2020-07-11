@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity ReportGeneratorAuthority.
+    -->
+    <changeSet id="20200425153055-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="report_generator_id"
+                                 baseTableName="report_generator_authority"
+                                 constraintName="fk_report_generator_authority_report_generator_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="report_generator"/>
+
+    </changeSet>
+</databaseChangeLog>

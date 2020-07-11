@@ -94,7 +94,7 @@ public class LevelThreeEffectiveness implements Serializable {
     @Column(name = "modify_date")
     private ZonedDateTime modifyDate;
 
-    @OneToMany(mappedBy = "levelThreeEffectiveness")
+    @OneToMany(mappedBy = "levelThreeEffectiveness", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<LevelThreeScore> levelThreeScores = new HashSet<>();
     @ManyToMany

@@ -1,0 +1,31 @@
+{
+    "marineindustryprojApp": {
+        "reportGenerator": {
+            "home": {
+                "title": "Report Generators",
+                "createLabel": "Create a new Report Generator",
+                "createOrEditLabel": "Create or edit a Report Generator"
+            },
+            "created": "A new Report Generator is created with identifier {{ param }}",
+            "updated": "A Report Generator is updated with identifier {{ param }}",
+            "deleted": "A Report Generator is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Report Generator {{ id }}?"
+            },
+            "detail": {
+                "title": "Report Generator"
+            },
+            "title": "Title",
+            "description": "Description",
+            "searchParams": "Search Params",
+            "columnNames": "Column Names",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "guid": "Guid",
+            "reportGeneratorAuthority": "Report Generator Authority",
+            "organizationChart": "Organization Chart"
+        }
+    }
+}

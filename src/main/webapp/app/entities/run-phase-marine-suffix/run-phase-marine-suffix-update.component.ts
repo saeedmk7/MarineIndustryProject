@@ -178,6 +178,11 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+            this.finalNiazsanjiReportService
+                .find(this.runPhase.finalNiazsanjiReportId)
+                .subscribe((resp: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => {
+                    this.runPhase.teacherId = resp.body.teacherId;
+                });
         });
 
         this.principal.identity().then(account => {
@@ -361,14 +366,15 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
             }
         });
         if (isValid) {
+            this.thisIsFinalize = true;
             this.runPhase.done = true;
             $('#save-entity').trigger('click');
         }
     }
-
+    thisIsFinalize: boolean = false;
     save() {
         this.isSaving = true;
-
+        debugger;
         let runPhaseSaveData: IRunPhaseSaveDataModel = new RunPhaseSaveDataModel();
         runPhaseSaveData.runPhaseId = this.runPhase.id;
         runPhaseSaveData.teacherId = this.runPhase.teacherId;
@@ -427,8 +433,8 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
 
     private onSaveSuccess(res: IRunPhaseMarineSuffix) {
         this.isSaving = false;
-
-        if (res.done || res.status == 5) this.previousState();
+        debugger;
+        if (this.thisIsFinalize) this.previousState();
         else {
             this.runPhase = res;
             this.documentUrl = 'document-marine-suffix/runphase/' + this.runPhase.id;

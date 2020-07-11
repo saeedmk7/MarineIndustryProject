@@ -339,6 +339,7 @@
             <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="200"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleCode" title="شناسه پودمان" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="peopleCount" title="تعداد" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100">
 
                 <ng-template
@@ -367,9 +368,9 @@
             <kendo-grid-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="finishDate" title="تاریخ دقیق برگزاری دوره" [width]="200"></kendo-grid-column>
-            <div *kendoGridDetailTemplate="let dataItem">
+            <!--<div *kendoGridDetailTemplate="let dataItem">
                 <mi-run-phase-marine-suffix-detail-people [people]="dataItem.people"></mi-run-phase-marine-suffix-detail-people>
-            </div>
+            </div>-->
             <kendo-grid-column field="finalNiazsanjiReportId" title="شناسه یکتا" [width]="150"></kendo-grid-column>
             <kendo-grid-column field="organizationChartTitle" title="محل خدمت" [width]="500"></kendo-grid-column>
             <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
@@ -387,7 +388,7 @@
                 <kendo-excelexport-column field="finishDate" title="تاریخ دقیق برگزاری دوره" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="finalNiazsanjiReportId" title="شناسه یکتا" [width]="150"></kendo-excelexport-column>
                 <kendo-excelexport-column field="peopleCount" title="تعداد شرکت کنندگان" [width]="100"></kendo-excelexport-column>
-                <kendo-excelexport-column field="peopleFullNames" title="شرکت کنندگان" [width]="10000"></kendo-excelexport-column>
+                <!--<kendo-excelexport-column field="peopleFullNames" title="شرکت کنندگان" [width]="10000"></kendo-excelexport-column>-->
                 <!-- <div *kendoGridDetailTemplate="let dataItem">
                      <mi-final-niazsanji-report-marine-suffix-detail-people [people]="dataItem.people"></mi-final-niazsanji-report-marine-suffix-detail-people>
                  </div>-->

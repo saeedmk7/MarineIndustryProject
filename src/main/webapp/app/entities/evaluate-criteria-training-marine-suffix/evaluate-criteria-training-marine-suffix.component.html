@@ -19,6 +19,7 @@
                 <th>ردیف</th>
             <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <!--<th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="qualityGoal"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.qualityGoal">qualityGoal</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="processTitle"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.processTitle">Process Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="processWeight"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.processWeight">Process Weight</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="activityDescription"><span jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.activityDescription">Activity Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -53,6 +54,7 @@
                         <a [routerLink]="['../organization-chart-marine-suffix', evaluateCriteriaTraining.organizationChartId , 'view' ]" >{{evaluateCriteriaTraining.organizationChartTitle}}</a>
                     </div>
                 </td>-->
+                <td>{{evaluateCriteriaTraining.qualityGoal}}</td>
                 <td>{{evaluateCriteriaTraining.processTitle}}</td>
                 <td>{{evaluateCriteriaTraining.processWeight}}</td>
                 <td>{{evaluateCriteriaTraining.activityDescription}}</td>

@@ -179,6 +179,9 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
                 (res: HttpResponse<PersonMarineSuffix>) => {
                     this.person = this.convertObjectDatesService.changeDate(res.body);
                     this.searchPerson = this.person;
+                    this.currentPerson = this.person;
+                    this.currentPerson = this.person;
+                    this.prepareOrgChart(this.person.organizationChartId);
                     this.finalLoad(this.person);
                 },
                 (res: HttpResponse<any>) => this.onPersonError(res.body)

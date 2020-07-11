@@ -91,6 +91,10 @@ public class EvaluateCriteriaData implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Size(max = 4096)
+    @Column(name = "quality_goal", length = 50)
+    private String qualityGoal;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "evaluate_criteria_data_document",
@@ -347,6 +351,19 @@ public class EvaluateCriteriaData implements Serializable {
 
     public void setGuid(String guid) {
         this.guid = guid;
+    }
+
+    public String getQualityGoal() {
+        return qualityGoal;
+    }
+
+    public EvaluateCriteriaData qualityGoal(String qualityGoal) {
+        this.qualityGoal = qualityGoal;
+        return this;
+    }
+
+    public void setQualityGoal(String qualityGoal) {
+        this.qualityGoal = qualityGoal;
     }
 
     public Set<Document> getDocuments() {

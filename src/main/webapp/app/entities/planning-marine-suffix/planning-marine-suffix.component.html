@@ -356,8 +356,8 @@
             <kendo-grid-column field="educationalModuleTitle" title="عنوان پودمان" [width]="200"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleCode" title="شناسه پودمان" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleLevel" title="سطح" [width]="100"></kendo-grid-column>
+            <kendo-grid-column field="peopleCount" title="تعداد" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="educationalModuleTotalLearningTime" title="مدت پودمان" [width]="100">
-
                 <ng-template
                     kendoGridFooterTemplate
                     let-column="column">جمع کل (نفر ساعت): {{total | number}}</ng-template>
@@ -397,7 +397,7 @@
                 <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="id" title="شناسه یکتا" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="peopleCount" title="تعداد شرکت کنندگان" [width]="100"></kendo-excelexport-column>
-                <kendo-excelexport-column field="peopleFullNames" title="شرکت کنندگان" [width]="10000"></kendo-excelexport-column>
+                <!--<kendo-excelexport-column field="peopleFullNames" title="شرکت کنندگان" [width]="10000"></kendo-excelexport-column>-->
                <!-- <div *kendoGridDetailTemplate="let dataItem">
                     <mi-planning-marine-suffix-detail-people [people]="dataItem.people"></mi-planning-marine-suffix-detail-people>
                 </div>-->

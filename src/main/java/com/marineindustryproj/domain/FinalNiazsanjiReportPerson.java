@@ -95,13 +95,13 @@ public class FinalNiazsanjiReportPerson implements Serializable {
     @Column(name = "level_four_score")
     private Float levelFourScore;
 
-    @OneToMany(mappedBy = "finalNiazsanjiReportPerson")
+    @OneToMany(mappedBy = "finalNiazsanjiReportPerson", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<NiazsanjiPersonGrade> niazsanjiPersonGrades = new HashSet<>();
-    @OneToMany(mappedBy = "finalNiazsanjiReportPerson")
+    @OneToMany(mappedBy = "finalNiazsanjiReportPerson", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<LevelThreeEffectiveness> levelThreeEffectivenesses = new HashSet<>();
-    @OneToMany(mappedBy = "finalNiazsanjiReportPerson")
+    @OneToMany(mappedBy = "finalNiazsanjiReportPerson", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<LevelFourEffectiveness> levelFourEffectivenesses = new HashSet<>();
     @ManyToMany

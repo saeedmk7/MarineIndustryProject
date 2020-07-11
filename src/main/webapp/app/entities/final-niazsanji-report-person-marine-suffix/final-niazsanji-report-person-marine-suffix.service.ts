@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
@@ -8,7 +8,8 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IFinalNiazsanjiReportPersonMarineSuffix } from 'app/shared/model/final-niazsanji-report-person-marine-suffix.model';
-import {IEffectivenessPhaseMarineSuffix} from "app/shared/model/effectiveness-phase-marine-suffix.model";
+import { IEffectivenessPhaseMarineSuffix } from 'app/shared/model/effectiveness-phase-marine-suffix.model';
+import { ICountListModel } from 'app/shared/model/custom/count-list-model';
 
 type EntityResponseType = HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>;
@@ -38,7 +39,16 @@ export class FinalNiazsanjiReportPersonMarineSuffixService {
             .get<IFinalNiazsanjiReportPersonMarineSuffix>(`${this.resourceUrl}/${id}`, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
+    countList(finalNiazsanjiReportIds: number[]): Observable<HttpResponse<ICountListModel[]>> {
+        debugger;
+        /*let options: HttpParams = new HttpParams();
 
+        finalNiazsanjiReportIds.forEach(val => {
+            options.append('finalNiazsanjiReportIds', val.toString());
+        });*/
+        const url = `${this.resourceUrl}/count-list/${finalNiazsanjiReportIds}`;
+        return this.http.get<ICountListModel[]>(url, { observe: 'response' }).pipe(map((res: HttpResponse<ICountListModel[]>) => res));
+    }
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http
@@ -49,19 +59,19 @@ export class FinalNiazsanjiReportPersonMarineSuffixService {
     getLevelOneDataByFinalNiazsanjiReportId(finalNiazsanjiReportId: number): Observable<EntityArrayResponseType> {
         const url = `${this.resourceUrl}/getLevelOneDataByFinalNiazsanjiReportId/${finalNiazsanjiReportId}`;
         return this.http
-            .get<IEffectivenessPhaseMarineSuffix[]>(url, { observe: 'response' })
+            .get<IFinalNiazsanjiReportPersonMarineSuffix[]>(url, { observe: 'response' })
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
     getLevelThreeDataByFinalNiazsanjiReportId(finalNiazsanjiReportId: number): Observable<EntityArrayResponseType> {
         const url = `${this.resourceUrl}/getLevelThreeDataByFinalNiazsanjiReportId/${finalNiazsanjiReportId}`;
         return this.http
-            .get<IEffectivenessPhaseMarineSuffix[]>(url, { observe: 'response' })
+            .get<IFinalNiazsanjiReportPersonMarineSuffix[]>(url, { observe: 'response' })
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
     getLevelFourDataByFinalNiazsanjiReportId(finalNiazsanjiReportId: number): Observable<EntityArrayResponseType> {
         const url = `${this.resourceUrl}/getLevelFourDataByFinalNiazsanjiReportId/${finalNiazsanjiReportId}`;
         return this.http
-            .get<IEffectivenessPhaseMarineSuffix[]>(url, { observe: 'response' })
+            .get<IFinalNiazsanjiReportPersonMarineSuffix[]>(url, { observe: 'response' })
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
@@ -93,7 +103,8 @@ export class FinalNiazsanjiReportPersonMarineSuffixService {
         res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
         res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
         res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
-        res.body.personFullName = (res.body.personName ? res.body.personName : '') + ' ' + (res.body.personFamily ? res.body.personFamily : '');
+        res.body.personFullName =
+            (res.body.personName ? res.body.personName : '') + ' ' + (res.body.personFamily ? res.body.personFamily : '');
         return res;
     }
 
@@ -105,8 +116,10 @@ export class FinalNiazsanjiReportPersonMarineSuffixService {
                 finalNiazsanjiReportPerson.modifyDate != null ? moment(finalNiazsanjiReportPerson.modifyDate) : null;
             finalNiazsanjiReportPerson.archivedDate =
                 finalNiazsanjiReportPerson.archivedDate != null ? moment(finalNiazsanjiReportPerson.archivedDate) : null;
-            finalNiazsanjiReportPerson.personFullName = (finalNiazsanjiReportPerson.personName ? finalNiazsanjiReportPerson.personName : '')
-                + ' ' + (finalNiazsanjiReportPerson.personFamily ? finalNiazsanjiReportPerson.personFamily : '');
+            finalNiazsanjiReportPerson.personFullName =
+                (finalNiazsanjiReportPerson.personName ? finalNiazsanjiReportPerson.personName : '') +
+                ' ' +
+                (finalNiazsanjiReportPerson.personFamily ? finalNiazsanjiReportPerson.personFamily : '');
         });
         return res;
     }

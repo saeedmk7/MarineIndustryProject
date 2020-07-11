@@ -1,54 +1,51 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import {JhiEventManager, JhiDateUtils, JhiLanguageService, JhiAlertService} from 'ng-jhipster';
+import { JhiEventManager, JhiDateUtils, JhiLanguageService, JhiAlertService } from 'ng-jhipster';
 
 import { LoginModalService, Principal, Account } from 'app/core';
-import {Chart} from "angular-highcharts";
-import {HomeCalendarModel} from 'app/home/home-calendar.model';
-import {SlideInOutAnimation} from 'app/shared/animations';
+import { Chart } from 'angular-highcharts';
+import { HomeCalendarModel } from 'app/home/home-calendar.model';
+import { SlideInOutAnimation } from 'app/shared/animations';
 
 import * as moment from 'jalali-moment';
-import {AnnouncementMarineSuffixService} from "app/entities/announcement-marine-suffix";
-import {HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
-import {IAnnouncementMarineSuffix} from "app/shared/model/announcement-marine-suffix.model";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
-import {ActivatedRoute, NavigationStart, Router} from "@angular/router";
-import {Subscription} from "rxjs";
+import { AnnouncementMarineSuffixService } from 'app/entities/announcement-marine-suffix';
+import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { IAnnouncementMarineSuffix } from 'app/shared/model/announcement-marine-suffix.model';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import * as $ from 'jquery';
-import {IPersonMarineSuffix, PersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
-import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
-import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
-import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
-import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
-import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
-import {FinalNiazsanjiReportMarineSuffix} from "app/shared/model/final-niazsanji-report-marine-suffix.model";
-import {FinalNiazsanjiReportMarineSuffixService} from "app/entities/final-niazsanji-report-marine-suffix";
-import {IChartResult} from "app/shared/model/custom/chart-result";
-import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
-import {IHomePageNiazsanjiReport} from "app/shared/model/custom/niazsanji-chart-result";
-import {IHomePagePersonHourChart} from "app/shared/model/custom/home-page-person-hour-chart";
-import {IHomePagePersonEducationalModule} from "app/shared/model/custom/home-page-person-educational-module";
-import {IPlanningAndRunMonthReport} from "app/shared/model/custom/planning-month-report";
-import {MONTHS} from "app/shared/constants/months.constants";
-import {IHomePageReport} from "app/shared/model/custom/home-page-report";
-import {InvestToGroupTransactionMarineSuffixService} from "app/entities/invest-to-group-transaction-marine-suffix";
-import {IInvestToGroupTransactionMarineSuffix} from "app/shared/model/invest-to-group-transaction-marine-suffix.model";
-import {IJamHelpMarineSuffix} from "app/shared/model/jam-help-marine-suffix.model";
-import {IFinalNiazsanjiReportPersonMarineSuffix} from "app/shared/model/final-niazsanji-report-person-marine-suffix.model";
-import {ForceRunningPercentMarineSuffixService} from "app/entities/force-running-percent-marine-suffix";
-import {IForceRunningPercentMarineSuffix} from "app/shared/model/force-running-percent-marine-suffix.model";
-import {MediaAwarenessReportMarineSuffixService} from "app/entities/media-awareness-report-marine-suffix";
-import {IMediaAwarenessReportMarineSuffix} from "app/shared/model/media-awareness-report-marine-suffix.model";
-import {SoldierTrainingReportMarineSuffixService} from "app/entities/soldier-training-report-marine-suffix";
-import {ISoldierTrainingReportMarineSuffix} from "app/shared/model/soldier-training-report-marine-suffix.model";
-
+import { IPersonMarineSuffix, PersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
+import { SearchPanelModel } from 'app/shared/model/custom/searchbar.model';
+import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
+import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
+import { TreeUtilities } from 'app/plugin/utilities/tree-utilities';
+import { FinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
+import { FinalNiazsanjiReportMarineSuffixService } from 'app/entities/final-niazsanji-report-marine-suffix';
+import { IChartResult } from 'app/shared/model/custom/chart-result';
+import { GREGORIAN_START_END_DATE } from 'app/shared/constants/years.constants';
+import { IHomePageNiazsanjiReport } from 'app/shared/model/custom/niazsanji-chart-result';
+import { IHomePagePersonHourChart } from 'app/shared/model/custom/home-page-person-hour-chart';
+import { IHomePagePersonEducationalModule } from 'app/shared/model/custom/home-page-person-educational-module';
+import { IPlanningAndRunMonthReport } from 'app/shared/model/custom/planning-month-report';
+import { MONTHS } from 'app/shared/constants/months.constants';
+import { IHomePageReport } from 'app/shared/model/custom/home-page-report';
+import { InvestToGroupTransactionMarineSuffixService } from 'app/entities/invest-to-group-transaction-marine-suffix';
+import { IInvestToGroupTransactionMarineSuffix } from 'app/shared/model/invest-to-group-transaction-marine-suffix.model';
+import { IJamHelpMarineSuffix } from 'app/shared/model/jam-help-marine-suffix.model';
+import { IFinalNiazsanjiReportPersonMarineSuffix } from 'app/shared/model/final-niazsanji-report-person-marine-suffix.model';
+import { ForceRunningPercentMarineSuffixService } from 'app/entities/force-running-percent-marine-suffix';
+import { IForceRunningPercentMarineSuffix } from 'app/shared/model/force-running-percent-marine-suffix.model';
+import { MediaAwarenessReportMarineSuffixService } from 'app/entities/media-awareness-report-marine-suffix';
+import { IMediaAwarenessReportMarineSuffix } from 'app/shared/model/media-awareness-report-marine-suffix.model';
+import { SoldierTrainingReportMarineSuffixService } from 'app/entities/soldier-training-report-marine-suffix';
+import { ISoldierTrainingReportMarineSuffix } from 'app/shared/model/soldier-training-report-marine-suffix.model';
 
 @Component({
     selector: 'mi-home',
     templateUrl: './home.component.html',
-    styleUrls: [
-        'home.scss'
-    ],
+    styleUrls: ['home.scss'],
     animations: [SlideInOutAnimation]
 })
 export class HomeComponent implements OnInit, OnDestroy {
@@ -65,11 +62,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     account: Account;
     currentPerson: IPersonMarineSuffix = new PersonMarineSuffix();
     modalRef: NgbModalRef;
-   /* welcomeState = 'out';
+    /* welcomeState = 'out';
     centerLinksState = 'out';
     state = 'leave';*/
     isfa: boolean;
-    calendars : HomeCalendarModel[] = [];
+    calendars: HomeCalendarModel[] = [];
     announcements: IAnnouncementMarineSuffix[];
     show: boolean = true;
     niazsanjishow: boolean = false;
@@ -108,11 +105,55 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     homePageReport: IHomePageReport;
     homePageReportPrice: IHomePageReport;
-    cyanColors: string[] = ['#D6EAF8','#AED6F1','#85C1E9','#5DADE2','#3498DB', '#5DADE2','#85C1E9','#AED6F1','#D6EAF8','#AED6F1', '#85C1E9','#5DADE2','#3498DB','#2E86C1'];
-    greenColors: string[] = ['#c4f5bc', '#C8E6C9', '#A5D6A7', '#81C784', '#66BB6A', '#81C784', '#A5D6A7', '#C8E6C9', '#c4f5bc', '#C8E6C9', '#A5D6A7', '#81C784', '#66BB6A', '#81C784'];
-    redColors: string[] = ['#FADBD8', '#F5B7B1', '#F1948A', '#EC7063', '#E74C3C', '#EC7063', '#F1948A', '#F5B7B1', '#FADBD8', '#F5B7B1', '#F1948A', '#EC7063', '#E74C3C'];
+    cyanColors: string[] = [
+        '#D6EAF8',
+        '#AED6F1',
+        '#85C1E9',
+        '#5DADE2',
+        '#3498DB',
+        '#5DADE2',
+        '#85C1E9',
+        '#AED6F1',
+        '#D6EAF8',
+        '#AED6F1',
+        '#85C1E9',
+        '#5DADE2',
+        '#3498DB',
+        '#2E86C1'
+    ];
+    greenColors: string[] = [
+        '#c4f5bc',
+        '#C8E6C9',
+        '#A5D6A7',
+        '#81C784',
+        '#66BB6A',
+        '#81C784',
+        '#A5D6A7',
+        '#C8E6C9',
+        '#c4f5bc',
+        '#C8E6C9',
+        '#A5D6A7',
+        '#81C784',
+        '#66BB6A',
+        '#81C784'
+    ];
+    redColors: string[] = [
+        '#FADBD8',
+        '#F5B7B1',
+        '#F1948A',
+        '#EC7063',
+        '#E74C3C',
+        '#EC7063',
+        '#F1948A',
+        '#F5B7B1',
+        '#FADBD8',
+        '#F5B7B1',
+        '#F1948A',
+        '#EC7063',
+        '#E74C3C'
+    ];
 
-    months: any[] = MONTHS.sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0);
+    months: any[] = MONTHS.sort((a, b) => (a.id > b.id ? 1 : a.id < b.id ? -1 : 0));
     constructor(
         private principal: Principal,
         private organizationChartService: OrganizationChartMarineSuffixService,
@@ -125,7 +166,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         private jhiAlertService: JhiAlertService,
         private announcementService: AnnouncementMarineSuffixService,
         private investToGroupTransactionService: InvestToGroupTransactionMarineSuffixService,
-        private convertObjectDatesService : ConvertObjectDatesService,
+        private convertObjectDatesService: ConvertObjectDatesService,
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private treeUtilities: TreeUtilities,
@@ -136,129 +177,145 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.years = GREGORIAN_START_END_DATE.map(a => a.year);
         this.selectedNiazsanjiYear = +moment().format('jYYYY');
 
-        this.eventSubscriber = router.events.subscribe((val : NavigationStart) => {
-                let res = this.getParameterByName("pageName", val.url); //window.location.href;
-                if (res)
-                    this.pageName = res;
-                else
-                    this.pageName = 'home';
+        this.eventSubscriber = router.events.subscribe((val: NavigationStart) => {
+            let res = this.getParameterByName('pageName', val.url); //window.location.href;
+            if (res) this.pageName = res;
+            else this.pageName = 'home';
         });
     }
-    showHomePageReport(niazsanjiYear: number){
-        this.finalNiazsanjiReportService.getHomePageReport(niazsanjiYear, 1).subscribe((resp: HttpResponse<IHomePageReport>) => {
-           this.homePageReport = resp.body;
-           this.showPersonHourAggregationPart(niazsanjiYear);
+    showHomePageReport(niazsanjiYear: number) {
+        this.finalNiazsanjiReportService.getHomePageReport(niazsanjiYear, 1).subscribe(
+            (resp: HttpResponse<IHomePageReport>) => {
+                this.homePageReport = resp.body;
+                this.showPersonHourAggregationPart(niazsanjiYear);
 
-           console.log(this.homePageReport);
-        },
-            (res: HttpErrorResponse) => this.onError(res.message));
-        this.finalNiazsanjiReportService.getHomePageReport(niazsanjiYear, 2).subscribe((resp: HttpResponse<IHomePageReport>) => {
+                console.log(this.homePageReport);
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.finalNiazsanjiReportService.getHomePageReport(niazsanjiYear, 2).subscribe(
+            (resp: HttpResponse<IHomePageReport>) => {
                 this.homePageReportPrice = resp.body;
 
                 this.showInvestPart(niazsanjiYear);
 
                 console.log(this.homePageReportPrice);
-
-
             },
-            (res: HttpErrorResponse) => this.onError(res.message));
-
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
-    mediaAwarenessReport : IMediaAwarenessReportMarineSuffix[] = [];
-    mediaAwarenessReportSum : number = 0;
-    soldierTrainingReports : ISoldierTrainingReportMarineSuffix[] = [];
-    soldierTrainingReportSum : number = 0;
-    showPersonHourAggregationPart(niazsanjiYear: number){
-        const awarenessCriteria = [{
-            key: 'publishDate.contains',
-            value: niazsanjiYear.toString()
-        }];
+    mediaAwarenessReport: IMediaAwarenessReportMarineSuffix[] = [];
+    mediaAwarenessReportSum: number = 0;
+    soldierTrainingReports: ISoldierTrainingReportMarineSuffix[] = [];
+    soldierTrainingReportSum: number = 0;
+    showPersonHourAggregationPart(niazsanjiYear: number) {
+        const awarenessCriteria = [
+            {
+                key: 'publishDate.contains',
+                value: niazsanjiYear.toString()
+            }
+        ];
 
-        this.mediaAwarenessReportService.query({
-            page: 0,
-            size: 10000,
-            awarenessCriteria,
-            sort: ["id", "asc"]
-        })
+        this.mediaAwarenessReportService
+            .query({
+                page: 0,
+                size: 10000,
+                criteria: awarenessCriteria,
+                sort: ['id', 'asc']
+            })
             .subscribe(
                 (res: HttpResponse<IMediaAwarenessReportMarineSuffix[]>) => {
                     this.mediaAwarenessReport = res.body;
 
                     this.mediaAwarenessReportSum = this.mediaAwarenessReport.map(a => a.personHour).reduce((sum, current) => sum + current);
 
-
-                    const soldierTrainingReportCriteria = [{
-                       key: 'year.equals',
-                       value: niazsanjiYear
-                    }];
-                    this.soldierTrainingReportService.query({
-                        page: 0,
-                        size: 10000,
-                        soldierTrainingReportCriteria,
-                        sort: ["id", "asc"]
-                    }).subscribe(
-                        (res: HttpResponse<IMediaAwarenessReportMarineSuffix[]>) => {
+                    debugger;
+                    const soldierTrainingReportCriteria = [
+                        {
+                            key: 'year.equals',
+                            value: niazsanjiYear
+                        }
+                    ];
+                    this.soldierTrainingReportService
+                        .query({
+                            page: 0,
+                            size: 10000,
+                            criteria: soldierTrainingReportCriteria,
+                            sort: ['id', 'asc']
+                        })
+                        .subscribe((res: HttpResponse<IMediaAwarenessReportMarineSuffix[]>) => {
                             this.soldierTrainingReports = res.body;
 
-                            this.soldierTrainingReportSum = this.soldierTrainingReports.map(a => a.personHour).reduce((sum, current) => sum + current);
+                            this.soldierTrainingReportSum = this.soldierTrainingReports
+                                .map(a => a.personHour)
+                                .reduce((sum, current) => sum + current);
 
                             this.personHourAggregationResult = [];
                             this.homePageReport.homePageReportDetails.forEach(a => {
-                                const subTree = this.treeUtilities.getAllOfThisTreeIds(this.organizationcharts, a.organizationChartId).filter(this.treeUtilities.onlyUnique);
-                                const sumMedia = this.mediaAwarenessReport.filter(w => subTree.includes(w.organizationChartId)).map(w => w.personHour).reduce((sum, current) => sum + current, 0 );
-                                const sumSoldiers = this.soldierTrainingReports.filter(w => subTree.includes(w.soldierOrganizationChartId))
-                                    .map(w => w.personHour).reduce((sum, current) => sum + current, 0 );
+                                const subTree = this.treeUtilities
+                                    .getAllOfThisTreeIds(this.organizationcharts, a.organizationChartId)
+                                    .filter(this.treeUtilities.onlyUnique);
+                                const sumMedia = this.mediaAwarenessReport
+                                    .filter(w => subTree.includes(w.organizationChartId))
+                                    .map(w => w.personHour)
+                                    .reduce((sum, current) => sum + current, 0);
+                                const sumSoldiers = this.soldierTrainingReports
+                                    .filter(w => subTree.includes(w.soldierOrganizationChartId))
+                                    .map(w => w.personHour)
+                                    .reduce((sum, current) => sum + current, 0);
                                 this.personHourAggregationResult.push({
                                     orgTitle: a.organizationChartTitle,
                                     sumMedia: sumMedia,
                                     sumSoldier: sumSoldiers,
                                     totalPassed: a.totalPassed,
-                                    sumTotal: (a.totalPassed ? a.totalPassed : 0) + (sumMedia ? sumMedia : 0) + (sumSoldiers ? sumSoldiers : 0)
+                                    sumTotal:
+                                        (a.totalPassed ? a.totalPassed : 0) + (sumMedia ? sumMedia : 0) + (sumSoldiers ? sumSoldiers : 0)
                                 });
                             });
                         });
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
-
     }
-    showInvestPart(niazsanjiYear: number){
-        const criteria = [{
-            key: 'investYear.equals',
-            value: niazsanjiYear
-        }];
-        this.investToGroupTransactionService.query({
-            page: 0,
-            size: 10000,
-            criteria,
-            sort: ["id", "asc"]
-        })
+    showInvestPart(niazsanjiYear: number) {
+        const criteria = [
+            {
+                key: 'investYear.equals',
+                value: niazsanjiYear
+            }
+        ];
+        this.investToGroupTransactionService
+            .query({
+                page: 0,
+                size: 10000,
+                criteria,
+                sort: ['id', 'asc']
+            })
             .subscribe(
                 (res: HttpResponse<IInvestToGroupTransactionMarineSuffix[]>) => {
-
-
                     this.investToGroupTransactions = res.body;
                     //const orgs = this.organizationcharts.filter(a => !a.parentId).map(a => a.id).filter(a => this.treeUtilities.onlyUnique); //res.body.map(a => a.organizationChartId).filter(this.treeUtilities.onlyUnique);
                     this.investResult = [];
                     this.homePageReportPrice.homePageReportDetails.forEach(a => {
-                        const sumInvest = res.body.filter(w => w.organizationChartId == a.organizationChartId).map(w => w.investAmount).reduce((sum, current) => sum + current, 0 );
+                        const sumInvest = res.body
+                            .filter(w => w.organizationChartId == a.organizationChartId)
+                            .map(w => w.investAmount)
+                            .reduce((sum, current) => sum + current, 0);
                         this.investResult.push({
                             orgTitle: a.organizationChartTitle,
                             sumInvest: sumInvest,
                             usedAmount: a.totalPassed,
-                            usedAmountPercent: (a.totalPassed / sumInvest) * 100
+                            usedAmountPercent: a.totalPassed / sumInvest * 100
                         });
-                    })
+                    });
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
-    deleteElement(i)
-    {
+    deleteElement(i) {
         $('#' + i).remove();
     }
-    toggleColappse(i)
-    {
+    toggleColappse(i) {
         $('#' + i).collapse('toggle');
     }
     getParameterByName(name, url) {
@@ -270,8 +327,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
-    changePage(pageName){
-
+    changePage(pageName) {
         var url = window.location.href;
         var indexOf = url.indexOf('?');
         if (indexOf > -1) {
@@ -279,87 +335,80 @@ export class HomeComponent implements OnInit, OnDestroy {
             url = url.replace(extra, '');
         }
         url += '?';
-        url = url + "pageName=" + pageName;
+        url = url + 'pageName=' + pageName;
         window.location.href = url;
     }
     ngOnInit() {
-
-        this.principal.identity().then((account) => {
-
+        this.principal.identity().then(account => {
             this.account = account;
             this.setRoles(account);
-            if(!this.isAuthenticated()){
+            if (!this.isAuthenticated()) {
                 this.login();
             }
-            if(!this.account.personId){
-                this.badError = "برای کاربری شما فردی تخصیص داده نشده لطفا با مدیریت سامانه تماس بگیرید و مراتب را اطلاع دهید.";
-            }
-            else{
+            if (!this.account.personId) {
+                this.badError = 'برای کاربری شما فردی تخصیص داده نشده لطفا با مدیریت سامانه تماس بگیرید و مراتب را اطلاع دهید.';
+            } else {
                 this.personService.find(this.account.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
                     this.currentPerson = resp.body;
-                    if(!resp.body.organizationChartId){
-                        this.badError = "موقعیت در چارت سازمانی برای شما تنظیم نشده است، لطفا مراتب را با مدیریت سامانه در میان بگذارید.";
+                    if (!resp.body.organizationChartId) {
+                        this.badError = 'موقعیت در چارت سازمانی برای شما تنظیم نشده است، لطفا مراتب را با مدیریت سامانه در میان بگذارید.';
                     }
-                })
+                });
             }
-            if(this.isTopUsers) {
+            if (this.isTopUsers) {
                 this.prepareOrgChart();
 
                 this.showHomePageReport(this.selectedNiazsanjiYear);
             }
         });
         this.registerAuthenticationSuccess();
-        let criteria = [
-            {key: 'isActive.equals', value: true}
-        ];
+        let criteria = [{ key: 'isActive.equals', value: true }];
         this.announcementService
             .query({
                 page: 0,
                 size: 5,
                 criteria,
-                sort: ['id','desc']
+                sort: ['id', 'desc']
             })
             .subscribe(
                 (res: HttpResponse<IAnnouncementMarineSuffix[]>) => this.loadNews(res.body),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
-    prepareOrgChart(){
-        if(this.organizationChartService.organizationchartsAll)
-        {
+    prepareOrgChart() {
+        if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
             this.makeChartResult();
-        }
-        else {
+        } else {
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
-
                     this.organizationcharts = res.body;
                     this.makeChartResult();
                 },
-                (res: HttpErrorResponse) => this.onError(res.message));
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
         }
-
     }
-    prepareHomePageNiazsanjiReport(personId: number){
-        this.finalNiazsanjiReportService.getHomePageNiazsanjiReport(personId).subscribe((resp: HttpResponse<IHomePageNiazsanjiReport>) => {
-
-           this.homePageNiazsanjiReport = resp.body;
-        },
-            (res: HttpErrorResponse) => this.onError(res.message));
+    prepareHomePageNiazsanjiReport(personId: number) {
+        this.finalNiazsanjiReportService.getHomePageNiazsanjiReport(personId).subscribe(
+            (resp: HttpResponse<IHomePageNiazsanjiReport>) => {
+                this.homePageNiazsanjiReport = resp.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
-    prepareHomePagePersonHourChart(personId: number){
-        this.finalNiazsanjiReportService.getHomePagePersonHourChart(personId).subscribe((resp: HttpResponse<IHomePagePersonHourChart>) => {
-
+    prepareHomePagePersonHourChart(personId: number) {
+        this.finalNiazsanjiReportService.getHomePagePersonHourChart(personId).subscribe(
+            (resp: HttpResponse<IHomePagePersonHourChart>) => {
                 this.homePagePersonHourChart = resp.body;
                 this.makePersonHourPieChart(resp.body);
             },
-            (res: HttpErrorResponse) => this.onError(res.message));
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
-
-    makeChartResult(){
-        this.groups = this.organizationcharts.filter(a => a.parentId == null).sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0);
+    makeChartResult() {
+        this.groups = this.organizationcharts.filter(a => a.parentId == null).sort((a, b) => (a.id > b.id ? 1 : a.id < b.id ? -1 : 0));
         this.categories = this.groups.map(a => a.title);
         this.finalNiazsanjiReportService.getChartResult(this.selectedNiazsanjiYear).subscribe((resp: HttpResponse<IChartResult[]>) => {
             this.chartResults = resp.body;
@@ -368,8 +417,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.showHomePageReport(this.selectedNiazsanjiYear);
     }
 
-    makePersonHourPieChart(res: IHomePagePersonHourChart)
-    {
+    makePersonHourPieChart(res: IHomePagePersonHourChart) {
         this.homePagePersonHourPieChart = new Chart({
             chart: {
                 plotBackgroundColor: null,
@@ -384,7 +432,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 text: 'نمودار نفر ساعت به درصد'
             },
             tooltip: {
-                pointFormat: '<b>درصد {point.percentage:.0f}</b>',
+                pointFormat: '<b>درصد {point.percentage:.0f}</b>'
             },
             plotOptions: {
                 pie: {
@@ -392,25 +440,31 @@ export class HomeComponent implements OnInit, OnDestroy {
                     cursor: 'pointer'
                 }
             },
-            series: [{
-                name: '',
-                //colorByPoint: true,
-                data: [{
-                    name: ' گذرانده شده شما تاکنون',
-                    y: res.passed,
-                    color: '#71f056'
-                }, {
-                    name: 'در حال برنامه ریزی برای اجرا',
-                    y: res.designAndPlanning,
-                    color: '#fcea63'
-                }, {
-                    name: 'باقیمانده',
-                    y: res.remaining,
-                    sliced: true,
-                    selected: true,
-                    color: '#f23537'
-                }]
-            }],
+            series: [
+                {
+                    name: '',
+                    //colorByPoint: true,
+                    data: [
+                        {
+                            name: ' گذرانده شده شما تاکنون',
+                            y: res.passed,
+                            color: '#71f056'
+                        },
+                        {
+                            name: 'در حال برنامه ریزی برای اجرا',
+                            y: res.designAndPlanning,
+                            color: '#fcea63'
+                        },
+                        {
+                            name: 'باقیمانده',
+                            y: res.remaining,
+                            sliced: true,
+                            selected: true,
+                            color: '#f23537'
+                        }
+                    ]
+                }
+            ],
             credits: {
                 enabled: false
             }
@@ -418,38 +472,45 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     redirect(): boolean {
         return false;
-       //this.router.navigateByUrl(i);
+        //this.router.navigateByUrl(i);
     }
-    makeSeries(){
+    makeSeries() {
+        const sortedChartResults = this.chartResults.sort((a, b) => (a.groupId > b.groupId ? 1 : a.groupId < b.groupId ? -1 : 0));
+        this.priceCostSeries = [
+            {
+                name: 'اجرا شده',
+                data: sortedChartResults.map(a => a.priceCostFinished),
+                color: 'lightgreen'
+            },
+            {
+                name: 'اجرا نشده',
+                data: sortedChartResults.map(a => a.priceCostNew),
+                color: 'red'
+            },
+            {
+                name: 'کل سرمایه گذاری',
+                data: sortedChartResults.map(a => a.totalPriceCost),
+                color: '#5edbff'
+            }
+        ];
 
-        const sortedChartResults = this.chartResults.sort((a,b) => (a.groupId > b.groupId) ? 1 : (a.groupId < b.groupId) ? -1 : 0);
-        this.priceCostSeries = [{
-            name: "اجرا شده",
-            data: sortedChartResults.map(a => a.priceCostFinished),
-            color: "lightgreen"
-        },{
-            name: "اجرا نشده",
-            data: sortedChartResults.map(a => a.priceCostNew),
-            color: "red"
-        },{
-            name: "کل سرمایه گذاری",
-            data: sortedChartResults.map(a => a.totalPriceCost),
-            color: "#5edbff"
-        }];
-
-        this.personHourSeries = [{
-            name: "اجرا شده",
-            data: sortedChartResults.map(a => a.educationalModuleTotalHourFinished),
-            color: "lightgreen",
-        },{
-            name: "اجرا نشده",
-            data: sortedChartResults.map(a => a.educationalModuleTotalHourNew),
-            color: "red"
-        },{
-            name: "کل نفرساعت",
-            data: sortedChartResults.map(a => a.totalPersonHour),
-            color: "#5edbff",
-        }];
+        this.personHourSeries = [
+            {
+                name: 'اجرا شده',
+                data: sortedChartResults.map(a => a.educationalModuleTotalHourFinished),
+                color: 'lightgreen'
+            },
+            {
+                name: 'اجرا نشده',
+                data: sortedChartResults.map(a => a.educationalModuleTotalHourNew),
+                color: 'red'
+            },
+            {
+                name: 'کل نفرساعت',
+                data: sortedChartResults.map(a => a.totalPersonHour),
+                color: '#5edbff'
+            }
+        ];
 
         this.personHourNewPercentSeries = [];
         this.personHourFinishedPercentSeries = [];
@@ -457,17 +518,15 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.priceCostFinishedPercentSeries = [];
         this.groups.forEach(a => {
             sortedChartResults.filter(e => e.groupId == a.id).forEach(w => {
-
-                this.personHourNewPercentSeries.push((w.educationalModuleTotalHourNew / w.totalPersonHour) * 100);
-                this.personHourFinishedPercentSeries.push((w.educationalModuleTotalHourFinished / w.totalPersonHour) * 100);
-                this.priceCostNewPercentSeries.push((w.priceCostNew / w.totalPriceCost) * 100);
-                this.priceCostFinishedPercentSeries.push((w.priceCostFinished / w.totalPriceCost) * 100);
+                this.personHourNewPercentSeries.push(w.educationalModuleTotalHourNew / w.totalPersonHour * 100);
+                this.personHourFinishedPercentSeries.push(w.educationalModuleTotalHourFinished / w.totalPersonHour * 100);
+                this.priceCostNewPercentSeries.push(w.priceCostNew / w.totalPriceCost * 100);
+                this.priceCostFinishedPercentSeries.push(w.priceCostFinished / w.totalPriceCost * 100);
             });
         });
         this.loadChart();
     }
-    loadChart(){
-
+    loadChart() {
         // @ts-ignore
         this.personHourChart = new Chart({
             chart: {
@@ -496,14 +555,15 @@ export class HomeComponent implements OnInit, OnDestroy {
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                pointFormat:
+                    '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
                     '<td style="direction: ltr; padding:0"><b>{point.y}</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
-                style:{
+                style: {
                     direction: 'rtl'
                 },
-                useHTML: true,
+                useHTML: true
                 /*formatter: function () {
                     return '<b>' + this.series.name + '</b><br/>' +
                         this.point.y + ' ' + this.point.name.toLowerCase();
@@ -514,11 +574,11 @@ export class HomeComponent implements OnInit, OnDestroy {
                     pointPadding: 0.2,
                     borderWidth: 0
                 },
-                series:{
+                series: {
                     cursor: 'pointer',
                     /*allowPointSelect: true,*/
                     point: {
-                        events : {
+                        events: {
                             click: event1 => {
                                 this.showDetail(event1);
                             }
@@ -559,11 +619,12 @@ export class HomeComponent implements OnInit, OnDestroy {
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                pointFormat:
+                    '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
                     '<td style="direction: ltr; padding:0"><b>{point.y}</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
-                style:{
+                style: {
                     direction: 'rtl'
                 },
                 useHTML: true
@@ -573,10 +634,10 @@ export class HomeComponent implements OnInit, OnDestroy {
                     pointPadding: 0.2,
                     borderWidth: 0
                 },
-                series:{
+                series: {
                     cursor: 'pointer',
                     point: {
-                        events : {
+                        events: {
                             click: event1 => {
                                 this.showDetail(event1);
                             }
@@ -589,11 +650,9 @@ export class HomeComponent implements OnInit, OnDestroy {
                 enabled: false
             }
         });
-
     }
 
-    changeChartProps(){
-
+    changeChartProps() {
         $('.highcharts-credits').textContent = '';
         $('.highcharts-root').addClass('chartFont');
     }
@@ -609,16 +668,17 @@ export class HomeComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    back2Main(){
+    back2Main() {
         this.niazsanjishow = false;
 
-        setTimeout(() => {         //replaced function() by ()=>
+        setTimeout(() => {
+            //replaced function() by ()=>
             this.show = true;
         }, 500);
     }
     registerAuthenticationSuccess() {
-        this.eventManager.subscribe('authenticationSuccess', (message) => {
-            this.principal.identity().then((account) => {
+        this.eventManager.subscribe('authenticationSuccess', message => {
+            this.principal.identity().then(account => {
                 this.account = account;
             });
         });
@@ -641,115 +701,111 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    private setRoles(account: any){
-        if(account) {
-            if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-                this.isAdmin = true;
-            if (account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
-                this.isModirAmozesh = true;
-            if (account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
-                this.isModirKolAmozesh = true;
-            if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+    private setRoles(account: any) {
+        if (account) {
+            if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
+            if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
+            if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
+            if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
                 this.isKarshenasArshadAmozeshSazman = true;
 
-            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-                this.isSuperUsers = true;
+            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
             if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh)
                 this.isTopUsers = true;
         }
     }
 
-    selectedGroup: string = "";
+    selectedGroup: string = '';
     //home page chart detail
-    showDetail(event){
-
+    showDetail(event) {
         this.selectedGroup = event.point.category;
         const org = this.organizationcharts.find(a => a.title == this.selectedGroup);
 
-        if(org)
-        {
-
+        if (org) {
             const rootId = this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
-            if(this.isSuperUsers || org.id == rootId) {
+            if (this.isSuperUsers || org.id == rootId) {
                 this.changePage('detail');
                 this.showPlanningReport(org);
             }
         }
     }
-    showPlanningReport(org: IOrganizationChartMarineSuffix){
-
+    showPlanningReport(org: IOrganizationChartMarineSuffix) {
         let niazsanjiYear = this.selectedNiazsanjiYear; //this.convertObjectDatesService.getNowShamsiYear();
         let orgRootId = org.id; //this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
-        this.finalNiazsanjiReportService.getPlanningAndRunMonthReport(niazsanjiYear,3, orgRootId)
-            .subscribe(
-                (res: HttpResponse<IPlanningAndRunMonthReport[]>) => {
+        this.finalNiazsanjiReportService.getPlanningAndRunMonthReport(niazsanjiYear, 3, orgRootId).subscribe(
+            (res: HttpResponse<IPlanningAndRunMonthReport[]>) => {
+                this.planningAndRunMonthReports = res.body;
+                this.planningAndRunMonthReports.forEach(a => {
+                    a.persianMonth = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.month);
+                });
+                this.makeDetailSeries();
+                //this.makePiesSeries();
 
-                    this.planningAndRunMonthReports = res.body;
-                    this.planningAndRunMonthReports.forEach(a => {
-                        a.persianMonth = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.month);
-                    });
-                    this.makeDetailSeries();
-                    //this.makePiesSeries();
-
-                    const criteria = [{
+                const criteria = [
+                    {
                         key: 'organizationChart.equals',
                         values: orgRootId
-                    },{
+                    },
+                    {
                         key: 'year.equals',
                         values: niazsanjiYear
-                    }];
-                    this.forceRunningPercentService
-                        .query({
-                            page: 0,
-                            size: 10000,
-                            sort: ["id", "asc"],
-                            criteria: criteria
-                        })
-                        .subscribe(
-                            (res: HttpResponse<IForceRunningPercentMarineSuffix[]>) =>
-                                this.makeWorkPercentPerMonth(res.body, res.headers),
-                            (res: HttpErrorResponse) => this.onError(res.message)
-                        );
-
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+                    }
+                ];
+                this.forceRunningPercentService
+                    .query({
+                        page: 0,
+                        size: 10000,
+                        sort: ['id', 'asc'],
+                        criteria: criteria
+                    })
+                    .subscribe(
+                        (res: HttpResponse<IForceRunningPercentMarineSuffix[]>) => this.makeWorkPercentPerMonth(res.body, res.headers),
+                        (res: HttpErrorResponse) => this.onError(res.message)
+                    );
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
     workPercent: any[] = [];
-    makeWorkPercentPerMonth(data:IForceRunningPercentMarineSuffix[], headers: any){
-        if(data.length){
+    makeWorkPercentPerMonth(data: IForceRunningPercentMarineSuffix[], headers: any) {
+        if (data.length) {
             this.forceRunningPercents = data;
             this.workPercent = [];
 
-            this.months.sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0).forEach(a => {
-
+            this.months.sort((a, b) => (a.id > b.id ? 1 : a.id < b.id ? -1 : 0)).forEach(a => {
                 const force = this.forceRunningPercents.find(w => w.runMonth == a.id);
                 let percent: number = 0;
-                if(force){
+                if (force) {
                     percent = force.percentAmount;
                 }
                 const planning = this.planningAndRunMonthReports.find(w => w.reportType == 1 && w.month == a.id);
-                let planningPersonCost, planningPersonCostPercent, planningPersonHour, planningPersonHourPercent = 0;
+                let planningPersonCost,
+                    planningPersonCostPercent,
+                    planningPersonHour,
+                    planningPersonHourPercent = 0;
                 //let planningPersonHour = 0;
 
-                if(planning)
-                {
+                if (planning) {
                     planningPersonCost = planning.personCost;
-                    planningPersonCostPercent = (planningPersonCost / planning.totalPriceCost) * 100;
+                    planningPersonCostPercent = planningPersonCost / planning.totalPriceCost * 100;
                     planningPersonHour = planning.personHour;
-                    planningPersonHourPercent = (planningPersonHour / planning.totalHour) * 100;
+                    planningPersonHourPercent = planningPersonHour / planning.totalHour * 100;
                 }
                 const running = this.planningAndRunMonthReports.find(w => w.reportType == 2 && w.month == a.id);
-                let runningPersonCost, runningPersonCostPercent, runningPersonHour, runningPersonHourPercent, runningPersonHourPercentPerMonth, runningPersonCostPercentPerMonth = 0;
+                let runningPersonCost,
+                    runningPersonCostPercent,
+                    runningPersonHour,
+                    runningPersonHourPercent,
+                    runningPersonHourPercentPerMonth,
+                    runningPersonCostPercentPerMonth = 0;
                 //let runningPersonHour = 0;
-                if(running)
-                {
+                if (running) {
                     runningPersonCost = running.personCost;
-                    runningPersonCostPercent = (runningPersonCost / running.totalPriceCost) * 100;
-                    runningPersonCostPercentPerMonth = (runningPersonCost / planningPersonCost) * 100;
+                    runningPersonCostPercent = runningPersonCost / running.totalPriceCost * 100;
+                    runningPersonCostPercentPerMonth = runningPersonCost / planningPersonCost * 100;
                     runningPersonHour = running.personHour;
-                    runningPersonHourPercent = (runningPersonHour / running.totalHour) * 100;
-                    runningPersonHourPercentPerMonth = (runningPersonHour / planningPersonHour) * 100;
+                    runningPersonHourPercent = runningPersonHour / running.totalHour * 100;
+                    runningPersonHourPercentPerMonth = runningPersonHour / planningPersonHour * 100;
                 }
                 this.workPercent.push({
                     monthTitle: a.persianMonth,
@@ -768,48 +824,62 @@ export class HomeComponent implements OnInit, OnDestroy {
             });
         }
     }
-    makeDetailSeries(){
-        
-
-        this.detailMonthPriceCostSeries = [{
-                name: "سرمایه گذاری اجرا شده",
-                data: this.planningAndRunMonthReports.filter(a => a.reportType == 2)
-                    .sort((a,b) => (a.month > b.month) ? -1 : (a.month < b.month) ? 1 : 0)
+    makeDetailSeries() {
+        this.detailMonthPriceCostSeries = [
+            {
+                name: 'سرمایه گذاری اجرا شده',
+                data: this.planningAndRunMonthReports
+                    .filter(a => a.reportType == 2)
+                    .sort((a, b) => (a.month > b.month ? -1 : a.month < b.month ? 1 : 0))
                     .map(a => a.personCost),
-                color: "#28a745"
-            },{
-            name: "سرمایه گذاری برنامه ریزی شده",
-            data: this.planningAndRunMonthReports.filter(a => a.reportType == 1)
-                .sort((a,b) => (a.month > b.month) ? -1 : (a.month < b.month) ? 1 : 0)
-                .map(a => a.personCost),
-            color: "#ffc107"
-        }];
-        this.detailMonthPersonHourSeries = [{
-            name: "نفر ساعت اجرا شده",
-            data: this.planningAndRunMonthReports.filter(a => a.reportType == 2)
-                .sort((a,b) => (a.month > b.month) ? -1 : (a.month < b.month) ? 1 : 0)
-                .map(a => a.personHour),
-            color: "#28a745"
-        },{
-            name: "نفر ساعت برنامه ریزی شده",
-            data: this.planningAndRunMonthReports.filter(a => a.reportType == 1)
-                .sort((a,b) => (a.month > b.month) ? -1 : (a.month < b.month) ? 1 : 0)
-                .map(a => a.personHour),
-            color: "#ffc107"
-        }];
+                color: '#28a745'
+            },
+            {
+                name: 'سرمایه گذاری برنامه ریزی شده',
+                data: this.planningAndRunMonthReports
+                    .filter(a => a.reportType == 1)
+                    .sort((a, b) => (a.month > b.month ? -1 : a.month < b.month ? 1 : 0))
+                    .map(a => a.personCost),
+                color: '#ffc107'
+            }
+        ];
+        this.detailMonthPersonHourSeries = [
+            {
+                name: 'نفر ساعت اجرا شده',
+                data: this.planningAndRunMonthReports
+                    .filter(a => a.reportType == 2)
+                    .sort((a, b) => (a.month > b.month ? -1 : a.month < b.month ? 1 : 0))
+                    .map(a => a.personHour),
+                color: '#28a745'
+            },
+            {
+                name: 'نفر ساعت برنامه ریزی شده',
+                data: this.planningAndRunMonthReports
+                    .filter(a => a.reportType == 1)
+                    .sort((a, b) => (a.month > b.month ? -1 : a.month < b.month ? 1 : 0))
+                    .map(a => a.personHour),
+                color: '#ffc107'
+            }
+        ];
         this.loadDetailMonthColumnChart();
     }
-    loadDetailMonthColumnChart(){
-
-        
-        const cats: any = this.months.sort((a,b) => (a.id > b.id) ? -1 : (a.id < b.id) ? 1 : 0).map(a => a.persianMonth);
+    loadDetailMonthColumnChart() {
+        const cats: any = this.months.sort((a, b) => (a.id > b.id ? -1 : a.id < b.id ? 1 : 0)).map(a => a.persianMonth);
         // @ts-ignore
-        this.detailMonthPersonHourChart = this.showColumnChart(' نمودار نفر ساعت به تفکیک ماه برنامه ریزی و اجرا - ' + this.selectedGroup, this.detailMonthPersonHourSeries,
-            'میزان نفر ساعت', cats);
-        this.detailMonthPriceCostChart = this.showColumnChart(' نمودار سرمایه گذاری (ریال) به تفکیک ماه برنامه ریزی و اجرا - ' + this.selectedGroup, this.detailMonthPriceCostSeries,
-            'میزان سرمایه گذاری', cats);
+        this.detailMonthPersonHourChart = this.showColumnChart(
+            ' نمودار نفر ساعت به تفکیک ماه برنامه ریزی و اجرا - ' + this.selectedGroup,
+            this.detailMonthPersonHourSeries,
+            'میزان نفر ساعت',
+            cats
+        );
+        this.detailMonthPriceCostChart = this.showColumnChart(
+            ' نمودار سرمایه گذاری (ریال) به تفکیک ماه برنامه ریزی و اجرا - ' + this.selectedGroup,
+            this.detailMonthPriceCostSeries,
+            'میزان سرمایه گذاری',
+            cats
+        );
     }
-    showColumnChart(headerText: string, series: any, title: string, categories: any): Chart{
+    showColumnChart(headerText: string, series: any, title: string, categories: any): Chart {
         return new Chart({
             chart: {
                 type: 'column',
@@ -837,12 +907,13 @@ export class HomeComponent implements OnInit, OnDestroy {
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                pointFormat:
+                    '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
                     '<td style="direction: ltr ;padding:0"><b>{point.y}</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
-                style:{
-                  direction: 'rtl'
+                style: {
+                    direction: 'rtl'
                 },
                 useHTML: true
             },

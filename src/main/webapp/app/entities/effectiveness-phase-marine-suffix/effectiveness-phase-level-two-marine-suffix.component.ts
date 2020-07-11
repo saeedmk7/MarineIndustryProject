@@ -1,18 +1,19 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
-import {JhiEventManager, JhiParseLinks, JhiAlertService} from 'ng-jhipster';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import {IFinalNiazsanjiReportPersonMarineSuffix} from 'app/shared/model/final-niazsanji-report-person-marine-suffix.model';
-import {Principal} from 'app/core';
+import { IFinalNiazsanjiReportPersonMarineSuffix } from 'app/shared/model/final-niazsanji-report-person-marine-suffix.model';
+import { Principal } from 'app/core';
 
-import {ITEMS_PER_PAGE} from 'app/shared';
-import {FinalNiazsanjiReportPersonMarineSuffixService} from "app/entities/final-niazsanji-report-person-marine-suffix";
-import {EffectivenessPhaseMarineSuffixService} from "app/entities/effectiveness-phase-marine-suffix/effectiveness-phase-marine-suffix.service";
-import {NiazsanjiPersonGradeMarineSuffixService} from "app/entities/niazsanji-person-grade-marine-suffix";
-import {Grade} from "app/shared/model/enums/Grade";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+import { ITEMS_PER_PAGE } from 'app/shared';
+import { FinalNiazsanjiReportPersonMarineSuffixService } from 'app/entities/final-niazsanji-report-person-marine-suffix';
+import { EffectivenessPhaseMarineSuffixService } from 'app/entities/effectiveness-phase-marine-suffix/effectiveness-phase-marine-suffix.service';
+import { NiazsanjiPersonGradeMarineSuffixService } from 'app/entities/niazsanji-person-grade-marine-suffix';
+import { Grade } from 'app/shared/model/enums/Grade';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import { IEffectivenessPhaseMarineSuffix } from 'app/shared/model/effectiveness-phase-marine-suffix.model';
 
 @Component({
     selector: 'mi-effectiveness-phase-level-two-marine-suffix',
@@ -36,13 +37,14 @@ export class EffectivenessPhaseLevelTwoMarineSuffixComponent implements OnInit, 
     finalNiazsanjiReportId: number;
     canComplete: boolean = false;
 
-    errorMessage: string = "";
+    errorMessage: string = '';
 
     firstScoreAverage: number = 0;
     secondScoreAverage: number = 0;
     fullAverage: number = 0;
     fullGrade: Grade = Grade.D;
 
+    effectivenessPhase: IEffectivenessPhaseMarineSuffix;
     constructor(
         private finalNiazsanjiReportPersonService: FinalNiazsanjiReportPersonMarineSuffixService,
         private effectivenessPhaseService: EffectivenessPhaseMarineSuffixService,
@@ -62,47 +64,81 @@ export class EffectivenessPhaseLevelTwoMarineSuffixComponent implements OnInit, 
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
         });
-
     }
 
     loadAll() {
-        this.eventSubscriber = this.activatedRoute.params.subscribe((params) => {
-
+        this.eventSubscriber = this.activatedRoute.params.subscribe(params => {
             this.finalNiazsanjiReportId = params['finalNiazsanjiReportId'];
             this.loadDataByFinalNiazsanjiReportId(this.finalNiazsanjiReportId);
+
+            let criteria = [
+                {
+                    key: 'finalNiazsanjiReportId.equals',
+                    value: this.finalNiazsanjiReportId
+                },
+                {
+                    key: 'effectivenessPhaseLevelEffectivenessLevel.equals',
+                    value: 2
+                }
+            ];
+
+            this.effectivenessPhaseService
+                .query({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: ['id', 'asc']
+                })
+                .subscribe(
+                    (resp: HttpResponse<IEffectivenessPhaseMarineSuffix[]>) => {
+                        if (resp.body && resp.body.length > 0) {
+                            this.effectivenessPhase = resp.body[0];
+                        }
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
         });
     }
 
-    loadDataByFinalNiazsanjiReportId(finalNiazsanjiReportId: number){
-        this.finalNiazsanjiReportPersonService.getLevelOneDataByFinalNiazsanjiReportId(this.finalNiazsanjiReportId)
+    loadDataByFinalNiazsanjiReportId(finalNiazsanjiReportId: number) {
+        this.finalNiazsanjiReportPersonService
+            .getLevelOneDataByFinalNiazsanjiReportId(this.finalNiazsanjiReportId)
             .subscribe((resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>) => {
+                this.finalNiazsanjiReportPeople = resp.body.sort((a, b) => (a.id > b.id ? 1 : a.id < b.id ? -1 : 0));
 
-                this.finalNiazsanjiReportPeople = resp.body.sort((a,b) => (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0);
-
-                this.firstScoreAverage = this.finalNiazsanjiReportPeople.map(w => w.scoreBeforeTest).reduce((sum, current) => sum + current) / this.finalNiazsanjiReportPeople.length;
-                this.secondScoreAverage = this.finalNiazsanjiReportPeople.map(w => w.scoreAfterTest).reduce((sum, current) => sum + current) / this.finalNiazsanjiReportPeople.length;
-                this.fullAverage = this.finalNiazsanjiReportPeople.map(w => w.averageScore).reduce((sum, current) => sum + current) / this.finalNiazsanjiReportPeople.length;
+                this.firstScoreAverage =
+                    this.finalNiazsanjiReportPeople.map(w => w.scoreBeforeTest).reduce((sum, current) => sum + current) /
+                    this.finalNiazsanjiReportPeople.length;
+                this.secondScoreAverage =
+                    this.finalNiazsanjiReportPeople.map(w => w.scoreAfterTest).reduce((sum, current) => sum + current) /
+                    this.finalNiazsanjiReportPeople.length;
+                this.fullAverage =
+                    this.finalNiazsanjiReportPeople.map(w => w.averageScore).reduce((sum, current) => sum + current) /
+                    this.finalNiazsanjiReportPeople.length;
                 this.fullGrade = this.convertObjectDatesService.calculateGrade(this.fullAverage);
 
-                if(this.finalNiazsanjiReportPeople.filter(w => w.averageScore > 0).length == this.finalNiazsanjiReportPeople.length){
+                if (this.finalNiazsanjiReportPeople.filter(w => w.averageScore > 0).length == this.finalNiazsanjiReportPeople.length) {
                     this.canComplete = true;
                 }
             });
     }
 
-    completeLevel(finalNiazsanjiReportId: number){
-        if(confirm("آیا اطلاعات وارد شده همگی صحیح هستند؟ و برای تایید نهایی کردن این سطح مطمئنید؟")) {
-            this.effectivenessPhaseService.completeLevelTwo(finalNiazsanjiReportId).subscribe((resp: HttpResponse<boolean>) => {
-                if (resp.body) {
-                    this.change('effectiveness-phase-marine-suffix/' + finalNiazsanjiReportId);
-                }
-            },(res: HttpErrorResponse) => this.onSaveError(res))
+    completeLevel(finalNiazsanjiReportId: number) {
+        if (confirm('آیا اطلاعات وارد شده همگی صحیح هستند؟ و برای تایید نهایی کردن این سطح مطمئنید؟')) {
+            this.effectivenessPhaseService.completeLevelTwo(finalNiazsanjiReportId).subscribe(
+                (resp: HttpResponse<boolean>) => {
+                    if (resp.body) {
+                        this.change('effectiveness-phase-marine-suffix/' + finalNiazsanjiReportId);
+                    }
+                },
+                (res: HttpErrorResponse) => this.onSaveError(res)
+            );
         }
     }
     protected onSaveError(res) {
         console.error(res);
     }
-    change(i){
+    change(i) {
         this.router.navigateByUrl(i);
     }
     previousState() {
@@ -179,25 +215,41 @@ export class EffectivenessPhaseLevelTwoMarineSuffixComponent implements OnInit, 
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    saveScore(finalNiazsanjiReportPerson: IFinalNiazsanjiReportPersonMarineSuffix){
-        this.errorMessage = "";
-        if(!(finalNiazsanjiReportPerson.scoreBeforeTest && finalNiazsanjiReportPerson.scoreBeforeTest > 0 && finalNiazsanjiReportPerson.scoreBeforeTest <= 100)){
+    saveScore(finalNiazsanjiReportPerson: IFinalNiazsanjiReportPersonMarineSuffix) {
+        this.errorMessage = '';
+        if (
+            !(
+                finalNiazsanjiReportPerson.scoreBeforeTest &&
+                finalNiazsanjiReportPerson.scoreBeforeTest > 0 &&
+                finalNiazsanjiReportPerson.scoreBeforeTest <= 100
+            )
+        ) {
             this.errorMessage = `لطفا نمره قبل از تست '${finalNiazsanjiReportPerson.personFullName}' را به درستی وارد نمائید.`;
             return;
         }
-        if(!(finalNiazsanjiReportPerson.scoreAfterTest && finalNiazsanjiReportPerson.scoreAfterTest > 0 && finalNiazsanjiReportPerson.scoreAfterTest <= 100)){
+        if (
+            !(
+                finalNiazsanjiReportPerson.scoreAfterTest &&
+                finalNiazsanjiReportPerson.scoreAfterTest > 0 &&
+                finalNiazsanjiReportPerson.scoreAfterTest <= 100
+            )
+        ) {
             this.errorMessage = `لطفا نمره بعد از تست '${finalNiazsanjiReportPerson.personFullName}' را به درستی وارد نمائید.`;
             return;
         }
 
-        let average: number = ((finalNiazsanjiReportPerson.scoreBeforeTest ? finalNiazsanjiReportPerson.scoreBeforeTest : 1)  + (finalNiazsanjiReportPerson.scoreAfterTest ? finalNiazsanjiReportPerson.scoreAfterTest : 1)) / 2;
+        let average: number =
+            ((finalNiazsanjiReportPerson.scoreBeforeTest ? finalNiazsanjiReportPerson.scoreBeforeTest : 1) +
+                (finalNiazsanjiReportPerson.scoreAfterTest ? finalNiazsanjiReportPerson.scoreAfterTest : 1)) /
+            2;
 
         finalNiazsanjiReportPerson.averageScore = average;
 
-        this.finalNiazsanjiReportPersonService.update(finalNiazsanjiReportPerson).subscribe((resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix>) => {
+        this.finalNiazsanjiReportPersonService.update(finalNiazsanjiReportPerson).subscribe(
+            (resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix>) => {
                 this.loadDataByFinalNiazsanjiReportId(resp.body.finalNiazsanjiReportId);
-        },(res: HttpErrorResponse) => this.onSaveError(res));
-
+            },
+            (res: HttpErrorResponse) => this.onSaveError(res)
+        );
     }
-
 }

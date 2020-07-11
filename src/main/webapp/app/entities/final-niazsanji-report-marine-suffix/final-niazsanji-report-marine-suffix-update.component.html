@@ -52,6 +52,84 @@
                         <option [ngValue]="courseTypeOption.id" *ngFor="let courseTypeOption of coursetypes">{{courseTypeOption.title}}</option>
                     </select>
                 </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات طراحی دوره</div></div>
+                <div class="form-group">
+                    <label jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.teacher" for="field_teacher">teacher</label>
+                    <ng-select
+                        [items]="teachers"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="fullName"
+                        bindValue="id"
+                        placeholder="مدرسین"
+                        name="teacher"
+                        id="field_teacher"
+                        [(ngModel)]="finalNiazsanjiReport.teacherId" >
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.restriction" for="field_restriction">Restriction</label>
+                    <ng-select
+                        [items]="restrictions"
+                        [multiple]="true"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        placeholder="محدودیت ها"
+                        name="restriction"
+                        id="field_restriction"
+                        [(ngModel)]="finalNiazsanjiReport.restrictions" >
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.restrictionDescription" for="field_restrictionDescription">Restriction Description</label>
+                    <textarea type="text" class="form-control" name="restrictionDescription" id="field_restrictionDescription"
+                              [(ngModel)]="finalNiazsanjiReport.restrictionDescription" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.restrictionDescription?.dirty && editForm.controls.restrictionDescription?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.restrictionDescription?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.teachingApproach" for="field_teachingApproach">Teaching Approach</label>
+                    <ng-select
+                        [items]="teachingapproaches"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="روش آموزش"
+                        name="teachingApproach"
+                        id="field_teachingApproach"
+                        [(ngModel)]="finalNiazsanjiReport.teachingApproachId">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.goalsText" for="field_goalsText">Goals Text</label>
+                    <textarea type="text" class="form-control" name="goalsText" id="field_goalsText"
+                              [(ngModel)]="finalNiazsanjiReport.goalsText" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.goalsText?.dirty && editForm.controls.goalsText?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.goalsText?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.prerequisite" for="field_prerequisite">Prerequisite</label>
+                    <textarea type="text" class="form-control" name="prerequisite" id="field_prerequisite"
+                              [(ngModel)]="finalNiazsanjiReport.prerequisite" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.prerequisite?.dirty && editForm.controls.prerequisite?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.prerequisite?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات افراد شرکت کننده</div></div>
                 <a [href]="editPeopleLink" class="enableLink btn btn-info">تصحیح افراد شرکت کننده</a>
                 <!--<div class="form-group bighalf">

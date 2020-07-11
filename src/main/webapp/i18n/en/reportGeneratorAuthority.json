@@ -1,0 +1,27 @@
+{
+    "marineindustryprojApp": {
+        "reportGeneratorAuthority": {
+            "home": {
+                "title": "Report Generator Authorities",
+                "createLabel": "Create a new Report Generator Authority",
+                "createOrEditLabel": "Create or edit a Report Generator Authority"
+            },
+            "created": "A new Report Generator Authority is created with identifier {{ param }}",
+            "updated": "A Report Generator Authority is updated with identifier {{ param }}",
+            "deleted": "A Report Generator Authority is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Report Generator Authority {{ id }}?"
+            },
+            "detail": {
+                "title": "Report Generator Authority"
+            },
+            "authorityName": "Authority Name",
+            "hasEditPermission": "Has Edit Permission",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "reportGenerator": "Report Generator"
+        }
+    }
+}

@@ -1,7 +1,7 @@
 /* after changing this file run 'npm run webpack:build' */
 /* tslint:disable */
 import '../content/scss/vendor.scss';
-import 'jquery/dist/jquery.min'
+import 'jquery/dist/jquery.min';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 // Imports all fontawesome core and solid icons
 
@@ -84,10 +84,9 @@ import {
     faQuestion,
     faPrint,
     faForward,
-    faBackward
+    faBackward,
+    faRecycle
 } from '@fortawesome/free-solid-svg-icons';
-
-
 
 // Adds the SVG icon to the library so you can use it in your page
 library.add(faUser);
@@ -168,5 +167,6 @@ library.add(faQuestion);
 library.add(faPrint);
 library.add(faBackward);
 library.add(faForward);
+library.add(faRecycle);
 
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

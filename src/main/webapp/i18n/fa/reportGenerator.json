@@ -1,0 +1,31 @@
+{
+    "marineindustryprojApp": {
+        "reportGenerator": {
+            "home": {
+                "title": "گزارشات",
+                "createLabel": "جدید",
+                "createOrEditLabel": " گزارش جدید"
+            },
+            "created": "گزارش با شناسه {{ param }} ایجاد شد.",
+            "updated": "گزارش با شناسه {{ param }} ویرایش شد.",
+            "deleted": "گزارش با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف گزارش با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات گزارش "
+            },
+            "title": "عنوان",
+            "description": "توضیحات",
+            "searchParams": "پارامترهای جستجو را با دقت انتخاب نمائید.",
+            "columnNames": "اسامی ستون ها را به ترتیبی که برای نمایش میخواهید انتخاب نمائید.",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "guid": "کد یکتای گزارش",
+            "reportGeneratorAuthority": "دسترسی به نقش ها",
+            "organizationChart": "دسترسی به چارت سازمانی"
+        }
+    }
+}

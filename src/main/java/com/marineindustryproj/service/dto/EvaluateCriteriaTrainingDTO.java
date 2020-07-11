@@ -67,6 +67,9 @@ public class EvaluateCriteriaTrainingDTO implements Serializable {
     @Size(max = 50)
     private String guid;
 
+    @Size(max = 4096)
+    private String qualityGoal;
+
     private Set<DocumentDTO> documents = new HashSet<>();
 
     private Long organizationChartId;
@@ -322,5 +325,13 @@ public class EvaluateCriteriaTrainingDTO implements Serializable {
             ", organizationChart=" + getOrganizationChartId() +
             ", organizationChart='" + getOrganizationChartTitle() + "'" +
             "}";
+    }
+
+    public String getQualityGoal() {
+        return qualityGoal;
+    }
+
+    public void setQualityGoal(String qualityGoal) {
+        this.qualityGoal = qualityGoal;
     }
 }

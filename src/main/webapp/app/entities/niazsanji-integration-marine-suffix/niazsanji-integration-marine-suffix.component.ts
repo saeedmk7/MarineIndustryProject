@@ -135,7 +135,23 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
             alert('لطفا حداقل یک نیازسنجی را انتخاب نمائید.');
         }
     }
-
+    restoreToBeforeFinalize(niazsanjiIntegrationId: number) {
+        debugger;
+        this.niazsanjiIntegrationService.find(niazsanjiIntegrationId).subscribe(
+            (resp: HttpResponse<INiazsanjiIntegrationMarineSuffix>) => {
+                debugger;
+                let niazsanjiIntegration = resp.body;
+                niazsanjiIntegration.status = 20;
+                this.niazsanjiIntegrationService.update(niazsanjiIntegration).subscribe(
+                    (resp: HttpResponse<INiazsanjiIntegrationMarineSuffix>) => {
+                        this.loadAll(this.criteria);
+                    },
+                    error1 => this.onError(error1.message)
+                );
+            },
+            error1 => this.onError(error1.message)
+        );
+    }
     completeSuccess() {
         this.counter++;
         if (this.selectedNiazSanji.length == this.counter) {

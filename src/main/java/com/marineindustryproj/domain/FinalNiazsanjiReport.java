@@ -134,7 +134,7 @@ public class FinalNiazsanjiReport implements Serializable {
     @OneToMany(mappedBy = "finalNiazsanjiReport", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Poll> polls = new HashSet<>();
-    @OneToMany(mappedBy = "finalNiazsanjiReport")
+    @OneToMany(mappedBy = "finalNiazsanjiReport", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EffectivenessPhase> effectivenessPhases = new HashSet<>();
     @ManyToMany

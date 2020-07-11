@@ -93,6 +93,12 @@
                             <fa-icon [icon]="'forward'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.continuePhase">continue Phase</span>
                         </button>
+                        <button type="submit" *ngIf="effectivenessPhase.status >= 20"
+                                (click)="redirectToLevel(effectivenessPhase.effectivenessPhaseLevel.effectivenessLevel, effectivenessPhase.finalNiazsanjiReportId)"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">view</span>
+                        </button>
                     </div>
                 </td>
             </tr>
@@ -106,7 +112,7 @@
         </table>
     </div>
     <div class="row" style="text-align: center;display: block;">
-        <button type="button"
+        <button type="button" *ngIf="finalNiazsanjiReport.status < 40"
                 (click)="completeEffectivenessPhase(this.effectivenessPhase.finalNiazsanjiReportId)" [disabled]="!canComplete"
                 class="btn btn-success">
             <fa-icon [icon]="'check-double'"></fa-icon>

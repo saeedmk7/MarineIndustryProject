@@ -67,6 +67,8 @@ public class EvaluateCriteriaTrainingCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private StringFilter qualityGoal;
+
     private LongFilter evaluateCriteriaDataId;
 
     private LongFilter documentId;
@@ -308,6 +310,7 @@ public class EvaluateCriteriaTrainingCriteria implements Serializable {
             Objects.equals(guid, that.guid) &&
             Objects.equals(evaluateCriteriaDataId, that.evaluateCriteriaDataId) &&
             Objects.equals(documentId, that.documentId) &&
+            Objects.equals(qualityGoal, that.qualityGoal) &&
             Objects.equals(organizationChartId, that.organizationChartId);
     }
 
@@ -373,4 +376,11 @@ public class EvaluateCriteriaTrainingCriteria implements Serializable {
             "}";
     }
 
+    public StringFilter getQualityGoal() {
+        return qualityGoal;
+    }
+
+    public void setQualityGoal(StringFilter qualityGoal) {
+        this.qualityGoal = qualityGoal;
+    }
 }

@@ -103,6 +103,10 @@ public class EvaluateCriteriaTraining implements Serializable {
     @Column(name = "guid", length = 50)
     private String guid;
 
+    @Size(max = 4096)
+    @Column(name = "quality_goal", length = 50)
+    private String qualityGoal;
+
     @OneToMany(mappedBy = "evaluateCriteriaTraining")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EvaluateCriteriaData> evaluateCriteriaData = new HashSet<>();
@@ -399,6 +403,19 @@ public class EvaluateCriteriaTraining implements Serializable {
         this.guid = guid;
     }
 
+    public String getQualityGoal() {
+        return qualityGoal;
+    }
+
+    public EvaluateCriteriaTraining qualityGoal(String qualityGoal) {
+        this.qualityGoal = qualityGoal;
+        return this;
+    }
+
+    public void setQualityGoal(String qualityGoal) {
+        this.qualityGoal = qualityGoal;
+    }
+
     public Set<EvaluateCriteriaData> getEvaluateCriteriaData() {
         return evaluateCriteriaData;
     }
@@ -508,6 +525,7 @@ public class EvaluateCriteriaTraining implements Serializable {
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +
             ", modifyDate='" + getModifyDate() + "'" +
             ", guid='" + getGuid() + "'" +
+            ", qualityGoal='" + getQualityGoal() + "'" +
             "}";
     }
 }

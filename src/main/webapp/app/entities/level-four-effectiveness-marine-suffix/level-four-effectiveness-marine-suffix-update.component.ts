@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -17,21 +17,20 @@ import { FinalNiazsanjiReportPersonMarineSuffixService } from 'app/entities/fina
 import {
     FinalNiazsanjiReportMarineSuffix,
     IFinalNiazsanjiReportMarineSuffix
-} from "app/shared/model/final-niazsanji-report-marine-suffix.model";
-import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
-import {MONTHS} from "app/shared/constants/months.constants";
-import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
-import {Principal} from "app/core";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
-import {ILevelFourEffectivenessMarineSuffix} from "app/shared/model/level-four-effectiveness-marine-suffix.model";
-import {ILevelFourCriteriaMarineSuffix} from "app/shared/model/level-four-criteria-marine-suffix.model";
-import {
-    ILevelFourScoreMarineSuffix,
-    LevelFourScoreMarineSuffix
-} from "app/shared/model/level-four-score-marine-suffix.model";
-import {LevelFourCriteriaMarineSuffixService} from "app/entities/level-four-criteria-marine-suffix";
-import {LevelFourScoreMarineSuffixService} from "app/entities/level-four-score-marine-suffix";
+} from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
+import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { MONTHS } from 'app/shared/constants/months.constants';
+import { GREGORIAN_START_END_DATE } from 'app/shared/constants/years.constants';
+import { Principal } from 'app/core';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import { ILevelFourEffectivenessMarineSuffix } from 'app/shared/model/level-four-effectiveness-marine-suffix.model';
+import { ILevelFourCriteriaMarineSuffix } from 'app/shared/model/level-four-criteria-marine-suffix.model';
+import { ILevelFourScoreMarineSuffix, LevelFourScoreMarineSuffix } from 'app/shared/model/level-four-score-marine-suffix.model';
+import { LevelFourCriteriaMarineSuffixService } from 'app/entities/level-four-criteria-marine-suffix';
+import { LevelFourScoreMarineSuffixService } from 'app/entities/level-four-score-marine-suffix';
 import * as persianMoment from 'jalali-moment';
+import { IEffectivenessPhaseMarineSuffix } from 'app/shared/model/effectiveness-phase-marine-suffix.model';
+import { EffectivenessPhaseMarineSuffixService } from 'app/entities/effectiveness-phase-marine-suffix';
 
 @Component({
     selector: 'mi-level-four-effectiveness-marine-suffix-update',
@@ -51,7 +50,7 @@ export class LevelFourEffectivenessMarineSuffixUpdateComponent implements OnInit
 
     finishDateValidation: number;
 
-    scores: number[] = [5,4,3,2,1];
+    scores: number[] = [5, 4, 3, 2, 1];
 
     currentAccount: any;
     currentUserFullName: string;
@@ -63,11 +62,12 @@ export class LevelFourEffectivenessMarineSuffixUpdateComponent implements OnInit
     isSuperUsers: boolean = false;
     isTopUsers: boolean = false;
 
-    runMonths: any = MONTHS.sort(function(a,b)
-    {
-        return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+    runMonths: any = MONTHS.sort(function(a, b) {
+        return a.id > b.id ? 1 : b.id > a.id ? -1 : 0;
     });
     years: any = GREGORIAN_START_END_DATE.map(a => a.year);
+
+    effectivenessPhase: IEffectivenessPhaseMarineSuffix;
 
     constructor(
         protected dataUtils: JhiDataUtils,
@@ -75,9 +75,10 @@ export class LevelFourEffectivenessMarineSuffixUpdateComponent implements OnInit
         protected levelFourEffectivenessService: LevelFourEffectivenessMarineSuffixService,
         protected documentService: DocumentMarineSuffixService,
         protected finalNiazsanjiReportPersonService: FinalNiazsanjiReportPersonMarineSuffixService,
+        protected effectivenessPhaseService: EffectivenessPhaseMarineSuffixService,
         protected activatedRoute: ActivatedRoute,
-        protected levelFourCriteriaService : LevelFourCriteriaMarineSuffixService,
-        protected levelFourScoreService : LevelFourScoreMarineSuffixService,
+        protected levelFourCriteriaService: LevelFourCriteriaMarineSuffixService,
+        protected levelFourScoreService: LevelFourScoreMarineSuffixService,
         private principal: Principal,
         private router: Router,
         private convertObjectDatesService: ConvertObjectDatesService
@@ -86,7 +87,6 @@ export class LevelFourEffectivenessMarineSuffixUpdateComponent implements OnInit
     ngOnInit() {
         this.isSaving = false;
         this.principal.identity().then(account => {
-
             this.currentAccount = account;
             this.setRoles(this.currentAccount);
         });
@@ -94,56 +94,86 @@ export class LevelFourEffectivenessMarineSuffixUpdateComponent implements OnInit
         this.activatedRoute.data.subscribe(({ levelFourEffectiveness }) => {
             this.levelFourEffectiveness = levelFourEffectiveness;
 
-            if(this.levelFourEffectiveness.finalNiazsanjiReportPersonId){
-                this.finalNiazsanjiReportPersonService.find(this.levelFourEffectiveness.finalNiazsanjiReportPersonId)
+            if (this.levelFourEffectiveness.finalNiazsanjiReportPersonId) {
+                this.finalNiazsanjiReportPersonService
+                    .find(this.levelFourEffectiveness.finalNiazsanjiReportPersonId)
                     .subscribe((resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix>) => {
                         this.finalNiazsanjiReportPerson = resp.body;
                         this.finalNiazsanjiReport = this.finalNiazsanjiReportPerson.finalNiazsanjiReport;
-                        const personCriteria = [{
-                            key: 'finalNiazsanjiReportPersonId.equals',
-                            value: this.levelFourEffectiveness.finalNiazsanjiReportPersonId
-                        }];
-                        this.levelFourEffectivenessService.query({
-                            page: 0,
-                            size: 20000,
-                            criteria: personCriteria,
-                            sort: ["id", "asc"]
-                        }).subscribe(
-                            (res: HttpResponse<ILevelFourEffectivenessMarineSuffix[]>) => {
-                                if(res.body && res.body.length > 0)
-                                    this.levelFourEffectiveness = res.body[0];
-                                this.getScores();
+                        const personCriteria = [
+                            {
+                                key: 'finalNiazsanjiReportPersonId.equals',
+                                value: this.levelFourEffectiveness.finalNiazsanjiReportPersonId
+                            }
+                        ];
+                        this.levelFourEffectivenessService
+                            .query({
+                                page: 0,
+                                size: 20000,
+                                criteria: personCriteria,
+                                sort: ['id', 'asc']
+                            })
+                            .subscribe(
+                                (res: HttpResponse<ILevelFourEffectivenessMarineSuffix[]>) => {
+                                    if (res.body && res.body.length > 0) this.levelFourEffectiveness = res.body[0];
+                                    this.getScores();
+                                },
+                                (res: HttpErrorResponse) => this.onError(res.message)
+                            );
 
+                        let criteria = [
+                            {
+                                key: 'finalNiazsanjiReportId.equals',
+                                value: this.finalNiazsanjiReport.id
                             },
-                            (res: HttpErrorResponse) => this.onError(res.message)
-                        );
+                            {
+                                key: 'effectivenessPhaseLevelEffectivenessLevel.equals',
+                                value: 4
+                            }
+                        ];
 
+                        this.effectivenessPhaseService
+                            .query({
+                                page: 0,
+                                size: 20000,
+                                criteria,
+                                sort: ['id', 'asc']
+                            })
+                            .subscribe(
+                                (resp: HttpResponse<IEffectivenessPhaseMarineSuffix[]>) => {
+                                    if (resp.body && resp.body.length > 0) {
+                                        this.effectivenessPhase = resp.body[0];
+                                    }
+                                },
+                                (res: HttpErrorResponse) => this.onError(res.message)
+                            );
                     });
             }
-
         });
     }
-    getScores(){
-        if(this.levelFourEffectiveness.id !== undefined){
-            const criteria = [{
-                key: 'levelFourEffectivenessId.equals',
-                value: this.levelFourEffectiveness.id
-            }];
-            this.levelFourScoreService.query({
-                page: 0,
-                size: 20000,
-                criteria,
-                sort: ["id", "asc"]
-            }).subscribe(
-                (res: HttpResponse<ILevelFourScoreMarineSuffix[]>) => {
-
-                    this.levelFourScores = res.body;
-                    this.buildLevelFourEffectivenessScores(this.levelFourScores, this.levelFourEffectiveness.id);
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-        }
-        else{
+    getScores() {
+        if (this.levelFourEffectiveness.id !== undefined) {
+            const criteria = [
+                {
+                    key: 'levelFourEffectivenessId.equals',
+                    value: this.levelFourEffectiveness.id
+                }
+            ];
+            this.levelFourScoreService
+                .query({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: ['id', 'asc']
+                })
+                .subscribe(
+                    (res: HttpResponse<ILevelFourScoreMarineSuffix[]>) => {
+                        this.levelFourScores = res.body;
+                        this.buildLevelFourEffectivenessScores(this.levelFourScores, this.levelFourEffectiveness.id);
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        } else {
             this.levelFourEffectiveness.evaluateDate = this.convertObjectDatesService.getNowShamsiDate();
             this.levelFourEffectiveness.month = this.convertObjectDatesService.getNowShamsiMonth();
             this.levelFourEffectiveness.year = this.convertObjectDatesService.getNowShamsiYear();
@@ -151,21 +181,22 @@ export class LevelFourEffectivenessMarineSuffixUpdateComponent implements OnInit
             this.buildLevelFourEffectivenessScores([], this.levelFourEffectiveness.id);
         }
     }
-    buildLevelFourEffectivenessScores(levelFourScores: ILevelFourScoreMarineSuffix[], gradeId){
+    buildLevelFourEffectivenessScores(levelFourScores: ILevelFourScoreMarineSuffix[], gradeId) {
         this.levelFourCriteriaService.query().subscribe(
             (res: HttpResponse<ILevelFourCriteriaMarineSuffix[]>) => {
-                this.levelFourCriterias = res.body.sort((a,b) => ((a.displayOrder > b.displayOrder) ? 1 : (a.displayOrder < b.displayOrder) ? -1 : 0));
+                this.levelFourCriterias = res.body.sort(
+                    (a, b) => (a.displayOrder > b.displayOrder ? 1 : a.displayOrder < b.displayOrder ? -1 : 0)
+                );
                 this.levelFourEffectiveness.levelFourScores = [];
                 this.levelFourCriterias.forEach(w => {
                     const levelFourScore = levelFourScores.find(a => a.levelFourCriteriaId == w.id);
-                    if(levelFourScore){
+                    if (levelFourScore) {
                         levelFourScore.levelFourCriteriaDescription = w.description;
                         levelFourScore.levelFourBackgroundColor = w.backgroundColor;
                         levelFourScore.levelFourColorText = w.colorText;
                         levelFourScore.levelFourCriteriaWeight = w.weight;
                         this.levelFourEffectiveness.levelFourScores.push(levelFourScore);
-                    }
-                    else{
+                    } else {
                         let levelFourScore: ILevelFourScoreMarineSuffix = new LevelFourScoreMarineSuffix();
                         levelFourScore.isNew = true;
                         levelFourScore.id = Math.floor(Math.random() * 100000000000); //This must change to guid but for now is good //this.commonUtilitiesService.uuidv4();
@@ -185,59 +216,54 @@ export class LevelFourEffectivenessMarineSuffixUpdateComponent implements OnInit
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
-    checkValue(id: number, value: number){
+    checkValue(id: number, value: number) {
         let a = this.levelFourEffectiveness.levelFourScores.find(a => a.id == id);
-        if(a){
+        if (a) {
             a.score = value;
         }
 
         this.sumScores();
     }
-    sumScores(){
+    sumScores() {
         const totalScore = this.levelFourEffectiveness.levelFourScores
-            .map(a => a.score * a.levelFourCriteriaWeight).reduce((sum, current) => sum + current);
+            .map(a => a.score * a.levelFourCriteriaWeight)
+            .reduce((sum, current) => sum + current);
         this.levelFourEffectiveness.totalScore = totalScore;
         const totalWeight = this.levelFourEffectiveness.levelFourScores
-            .map(a => a.levelFourCriteriaWeight).reduce((sum, current) => sum + current);
-        const generalTotalScores =  5 * totalWeight;
-        const totalScorePercent = Math.round(((totalScore / generalTotalScores) * 100));
+            .map(a => a.levelFourCriteriaWeight)
+            .reduce((sum, current) => sum + current);
+        const generalTotalScores = 5 * totalWeight;
+        const totalScorePercent = Math.round(totalScore / generalTotalScores * 100);
         this.levelFourEffectiveness.totalScorePercent = totalScorePercent;
 
         this.levelFourEffectiveness.grade = this.convertObjectDatesService.calculateGrade(totalScorePercent);
-
     }
 
     checkDateValidation(event) {
         try {
             if (persianMoment(event.target.value, 'jYYYY/jMM/jDD').isValid()) {
                 this.finishDateValidation = 1;
-            }
-            else {
+            } else {
                 this.finishDateValidation = 2;
             }
-        }
-        catch (e) {
+        } catch (e) {
             this.finishDateValidation = 2;
         }
     }
-    private setRoles(account: any){
-        if(account) {
-            if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-                this.isAdmin = true;
-            if (account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
-                this.isModirAmozesh = true;
-            if (account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
-                this.isModirKolAmozesh = true;
-            if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+    private setRoles(account: any) {
+        if (account) {
+            if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
+            if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
+            if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
+            if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
                 this.isKarshenasArshadAmozeshSazman = true;
 
-            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-                this.isSuperUsers = true;
+            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
             if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh)
                 this.isTopUsers = true;
         }
     }
-    change(i){
+    change(i) {
         this.router.navigateByUrl(i);
     }
     byteSize(field) {

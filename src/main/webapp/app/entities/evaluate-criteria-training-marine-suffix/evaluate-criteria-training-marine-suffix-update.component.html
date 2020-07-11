@@ -9,6 +9,17 @@
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="evaluateCriteriaTraining.id" readonly />
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.qualityGoal" for="field_qualityGoal">qualityGoal</label>
+                    <textarea type="text" class="form-control" name="qualityGoal" id="field_qualityGoal"
+                              [(ngModel)]="evaluateCriteriaTraining.qualityGoal" maxlength="4096" ></textarea>
+                    <div [hidden]="!(editForm.controls.qualityGoal?.dirty && editForm.controls.qualityGoal?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.qualityGoal?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
                 <div class="form-group bighalf">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.evaluateCriteriaTraining.organizationChart" for="field_organizationChart">Organization Chart</label>
                     <!--<select class="form-control" id="field_organizationChart" name="organizationChart" [(ngModel)]="evaluateCriteriaTraining.organizationChartId" >

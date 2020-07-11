@@ -59,6 +59,8 @@ public class EvaluateCriteriaDataCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private StringFilter qualityGoal;
+
     private LongFilter documentId;
 
     private LongFilter evaluateCriteriaTrainingId;
@@ -321,4 +323,11 @@ public class EvaluateCriteriaDataCriteria implements Serializable {
             "}";
     }
 
+    public StringFilter getQualityGoal() {
+        return qualityGoal;
+    }
+
+    public void setQualityGoal(StringFilter qualityGoal) {
+        this.qualityGoal = qualityGoal;
+    }
 }
