@@ -165,7 +165,6 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         }
         criteria = this.createCriteria(criteria);
 
-        debugger;
         this.finalNiazsanjiReportService
             .query({
                 page: 0,
@@ -180,6 +179,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     createCriteria(criteria): any {
+        debugger;
         const niazsanjiSource = criteria.find(a => a.key == 'niazSanjiSource.equals');
         if (niazsanjiSource) {
             if (niazsanjiSource.value == 'ORGANIZATION') this.niazSanjiSource = false;
@@ -235,7 +235,6 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     private prepareForFinal(data: IFinalNiazsanjiReportMarineSuffix[]) {
-        debugger;
         if (data.length > 0) {
             let reportIds = data.map(a => a.id);
             if (this.niazSanjiSource) {
@@ -356,7 +355,6 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             if (a.modifyDate)
                 finalNiazsanjiReportsOrganization.modifyDate = this.convertObjectDatesService.miladi2Shamsi(a.modifyDate.toDate());
 
-            debugger;
             let personReps = res.find(w => w.entityId == a.id);
             if (personReps) {
                 finalNiazsanjiReportsOrganization.peopleCount = personReps.count;

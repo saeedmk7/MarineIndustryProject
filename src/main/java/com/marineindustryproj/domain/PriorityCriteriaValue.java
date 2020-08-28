@@ -56,7 +56,7 @@ public class PriorityCriteriaValue implements Serializable {
     @JsonIgnoreProperties("priorityCriteriaValues")
     private PreJobNiazsanjiCompetency preJobNiazsanjiCompetency;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -168,7 +168,7 @@ public class PriorityCriteriaValue implements Serializable {
     public void setPreJobNiazsanjiCompetency(PreJobNiazsanjiCompetency preJobNiazsanjiCompetency) {
         this.preJobNiazsanjiCompetency = preJobNiazsanjiCompetency;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

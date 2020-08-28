@@ -9,20 +9,25 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { DesignAndPlanningMarineSuffixService } from './design-and-planning-marine-suffix.service';
-import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
-import {MONTHS} from "app/shared/constants/months.constants";
-import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
-import {EffectivenessLevelMarineSuffixService} from "app/entities/effectiveness-level-marine-suffix";
-import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
-import {IEffectivenessLevelMarineSuffix} from "app/shared/model/effectiveness-level-marine-suffix.model";
-import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
-import {EducationalModuleMarineSuffixService} from "app/entities/educational-module-marine-suffix";
-import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
-import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
-import {IEducationalHistoryMarineSuffix} from "app/shared/model/educational-history-marine-suffix.model";
-import {ExcelService} from "app/plugin/export-excel/excel-service";
-import {TranslateService} from '@ngx-translate/core';
+import { SearchPanelModel } from 'app/shared/model/custom/searchbar.model';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import { MONTHS } from 'app/shared/constants/months.constants';
+import { CourseTypeMarineSuffixService } from 'app/entities/course-type-marine-suffix';
+import { EffectivenessLevelMarineSuffixService } from 'app/entities/effectiveness-level-marine-suffix';
+import { ICourseTypeMarineSuffix } from 'app/shared/model/course-type-marine-suffix.model';
+import { IEffectivenessLevelMarineSuffix } from 'app/shared/model/effectiveness-level-marine-suffix.model';
+import { IEducationalModuleMarineSuffix } from 'app/shared/model/educational-module-marine-suffix.model';
+import { EducationalModuleMarineSuffixService } from 'app/entities/educational-module-marine-suffix';
+import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
+import { IEducationalHistoryMarineSuffix } from 'app/shared/model/educational-history-marine-suffix.model';
+import { ExcelService } from 'app/plugin/export-excel/excel-service';
+import { TranslateService } from '@ngx-translate/core';
+import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
+import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
+import { TreeUtilities } from 'app/plugin/utilities/tree-utilities';
+import { FinalNiazsanjiReportPersonMarineSuffixService } from 'app/entities/final-niazsanji-report-person-marine-suffix';
+import { IFinalNiazsanjiPeopleListModel } from 'app/shared/model/custom/final-niazsanji-report-people-list-model';
 
 @Component({
     selector: 'mi-design-and-planning-marine-suffix',
@@ -32,6 +37,8 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
     currentAccount: any;
     designAndPlannings: IDesignAndPlanningMarineSuffix[];
     educationalModules: IEducationalModuleMarineSuffix[];
+    organizationcharts: IOrganizationChartMarineSuffix[];
+    recommenedOrgCharts: IOrganizationChartMarineSuffix[];
     people: IPersonMarineSuffix[];
     error: any;
     success: any;
@@ -47,7 +54,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
     previousPage: any;
     reverse: any;
     searchbarModel: SearchPanelModel[] = [];
-    done:boolean = false;
+    done: boolean = false;
     criteria: any;
 
     isAdmin: boolean;
@@ -62,6 +69,8 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
 
     constructor(
         private designAndPlanningService: DesignAndPlanningMarineSuffixService,
+        private organizationChartService: OrganizationChartMarineSuffixService,
+        private finalNiazsanjiReportPersonService: FinalNiazsanjiReportPersonMarineSuffixService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
@@ -72,8 +81,9 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         private educationalModuleService: EducationalModuleMarineSuffixService,
         private personService: PersonMarineSuffixService,
         private effectivenessLevelService: EffectivenessLevelMarineSuffixService,
-        private convertObjectDatesService : ConvertObjectDatesService,
-        protected jhiTranslate: TranslateService
+        private convertObjectDatesService: ConvertObjectDatesService,
+        protected jhiTranslate: TranslateService,
+        private treeUtilities: TreeUtilities
     ) {
         //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -81,25 +91,62 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
         });
-        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
+        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', criteria => {
             this.done = true;
             this.criteria = criteria.content;
-            this.loadAll(criteria.content);
+            this.makeCriteria(criteria.content);
         });
     }
 
-    loadAll(criteria?, exportExcel: boolean = false) {
-
-        if(!criteria){
+    makeCriteria(criteria?, excelExport: boolean = false) {
+        if (!criteria) {
             criteria = [];
         }
-        if(!this.isSuperUsers) {
+        if (!this.isSuperUsers) {
             criteria.push({
                 key: 'personId.equals',
                 value: this.currentAccount.personId
             });
         }
-        if(exportExcel){
+        const finalNiazsanjiReportOrganizationChart = criteria.find(a => a.key == 'finalNiazsanjiReportOrganizationChartId.equals');
+        if (finalNiazsanjiReportOrganizationChart) {
+            const finalNiazsanjiReportOrganizationChartId = +finalNiazsanjiReportOrganizationChart.value;
+
+            criteria = criteria.filter(a => a.key != 'finalNiazsanjiReportOrganizationChartId.equals');
+            if (finalNiazsanjiReportOrganizationChartId) {
+                if (this.organizationChartService.organizationchartsAll) {
+                    this.organizationcharts = this.organizationChartService.organizationchartsAll;
+                    const childIds = this.treeUtilities
+                        .getAllOfChilderenIdsOfThisId(this.organizationcharts, finalNiazsanjiReportOrganizationChartId)
+                        .filter(this.treeUtilities.onlyUnique);
+                    criteria.push({
+                        key: 'organizationChartId.in',
+                        value: childIds
+                    });
+                    this.loadAll(criteria, excelExport);
+                } else {
+                    this.organizationChartService.query().subscribe((resp: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
+                        this.organizationcharts = resp.body;
+                        const childIds = this.treeUtilities
+                            .getAllOfChilderenIdsOfThisIdWithoutItself(this.organizationcharts, finalNiazsanjiReportOrganizationChartId)
+                            .filter(this.treeUtilities.onlyUnique);
+                        criteria.push({
+                            key: 'organizationChartId.in',
+                            value: childIds
+                        });
+                        this.loadAll(criteria, excelExport);
+                    });
+                }
+            } else {
+                this.loadAll(criteria, excelExport);
+            }
+        } else {
+            this.loadAll(criteria, excelExport);
+        }
+    }
+
+    loadAll(criteria?, exportExcel: boolean = false) {
+        if (exportExcel) {
             this.designAndPlanningService
                 .query({
                     page: this.page - 1,
@@ -111,8 +158,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
                     (res: HttpResponse<IDesignAndPlanningMarineSuffix[]>) => this.prepareForExportExcel(res.body),
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
-        }
-        else {
+        } else {
             this.designAndPlanningService
                 .query({
                     page: this.page - 1,
@@ -156,48 +202,121 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         ]);
         this.loadAll(this.criteria);
     }
+
     ngOnInit() {
-    this.principal.identity().then(account => {
-        this.currentAccount = account;
-        this.setRoles(account);
-
-        this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'runMonth', 'select', 'equals', MONTHS, 'persianMonth'));
-        this.prepareSearchEducationalModule();
-        if(this.isSuperUsers)
-            this.prepareSearchPerson();
-        this.courseTypeService.query().subscribe(
-            (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
-                this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'courseTypeId', 'select', 'equals', res.body));
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.effectivenessLevelService.query().subscribe(
-            (res: HttpResponse<IEffectivenessLevelMarineSuffix[]>) => {
-                this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'effectivenessLevelId', 'select', 'equals', res.body));
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-
-        /*this.principal.identity().then(account => {
+        this.principal.identity().then(account => {
             this.currentAccount = account;
-        });*/
+            this.setRoles(account);
+            this.prepareDate();
+            this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'runMonth', 'select', 'equals', MONTHS, 'persianMonth'));
+            this.prepareSearchEducationalModule();
+            if (this.isSuperUsers) {
+                this.prepareSearchPerson();
+                this.prepareSearchOrgChart();
+            }
 
-    });
+            this.courseTypeService.query().subscribe(
+                (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                    this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'courseTypeId', 'select', 'equals', res.body));
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+            this.effectivenessLevelService.query().subscribe(
+                (res: HttpResponse<IEffectivenessLevelMarineSuffix[]>) => {
+                    this.searchbarModel.push(
+                        new SearchPanelModel('designAndPlanning', 'effectivenessLevelId', 'select', 'equals', res.body)
+                    );
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+
+            /*this.principal.identity().then(account => {
+                this.currentAccount = account;
+            });*/
+        });
         //this.registerChangeInDesignAndPlannings();
     }
+    prepareDate() {
+        let dates = this.convertObjectDatesService.getYearsArray();
+        this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'finalNiazsanjiReportNiazsanjiYear', 'select', 'equals', dates));
+    }
+    prepareSearchOrgChart() {
+        if (this.organizationChartService.organizationchartsAll) {
+            this.organizationcharts = this.organizationChartService.organizationchartsAll;
+            this.searchbarModel.push(
+                new SearchPanelModel(
+                    'designAndPlanning',
+                    'finalNiazsanjiReportOrganizationChartId',
+                    'select',
+                    'equals',
+                    this.organizationcharts.filter(w => w.parentId == null),
+                    'fullTitle'
+                )
+            );
+            this.searchbarModel.push(
+                new SearchPanelModel(
+                    'designAndPlanning',
+                    'finalNiazsanjiReportOrganizationChartId',
+                    'select',
+                    'equals',
+                    this.organizationcharts,
+                    'fullTitle',
+                    'half'
+                )
+            );
+        } else {
+            this.organizationChartService.query().subscribe(
+                (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
+                    this.organizationcharts = res.body;
+                    this.searchbarModel.push(
+                        new SearchPanelModel(
+                            'designAndPlanning',
+                            'finalNiazsanjiReportOrganizationChartId',
+                            'select',
+                            'equals',
+                            this.organizationcharts.filter(w => w.parentId == null),
+                            'fullTitle'
+                        )
+                    );
+                    this.searchbarModel.push(
+                        new SearchPanelModel(
+                            'designAndPlanning',
+                            'finalNiazsanjiReportOrganizationChartId',
+                            'select',
+                            'equals',
+                            this.organizationcharts,
+                            'fullTitle',
+                            'half'
+                        )
+                    );
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
+    }
+
+    handleOrgChartView(): IOrganizationChartMarineSuffix[] {
+        this.recommenedOrgCharts = this.organizationcharts;
+        return this.recommenedOrgCharts;
+    }
+
     prepareSearchPerson() {
         if (this.personService.people) {
             this.people = this.convertObjectDatesService.goClone(this.personService.people);
-            this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'personId', 'select', 'equals', this.people, "fullName"));
-        }
-        else {
-            this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
+            this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'personId', 'select', 'equals', this.people, 'fullName'));
+        } else {
+            this.personService.query().subscribe(
+                (res: HttpResponse<IPersonMarineSuffix[]>) => {
                     this.people = res.body;
-                    this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'personId', 'select', 'equals', this.people, "fullName"));
+                    this.searchbarModel.push(
+                        new SearchPanelModel('designAndPlanning', 'personId', 'select', 'equals', this.people, 'fullName')
+                    );
                 },
-                (res: HttpErrorResponse) => this.onError(res.message));
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
         }
     }
+
     prepareSearchEducationalModule() {
         this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'educationalModuleTitle', 'text', 'contains'));
         if (this.educationalModuleService.educationalModules) {
@@ -206,8 +325,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
             /*if (!this.done) {
                 this.loadAll();
             }*/
-        }
-        else {
+        } else {
             this.educationalModuleService.query().subscribe(
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                     this.educationalModules = res.body;
@@ -216,22 +334,21 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
                         this.loadAll();
                     }*/
                 },
-                (res: HttpErrorResponse) => this.onError(res.message))
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
         }
     }
-    setRoles(account: any){
-        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-            this.isAdmin = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
-            this.isModirAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
-            this.isModirKolAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+
+    setRoles(account: any) {
+        if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
             this.isKarshenasArshadAmozeshSazman = true;
 
-        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-            this.isSuperUsers = true;
+        if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
     }
+
     ngOnDestroy() {
         //this.eventManager.destroy(this.eventSubscriber);
         this.eventManager.destroy(this.criteriaSubscriber);
@@ -260,56 +377,77 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         data.forEach(a => {
             a.runMonthName = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
             let education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
-            if(education){
+            if (education) {
                 a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
-                a.totalLearningTime = (education.learningTimePractical ? education.learningTimePractical : 0) + (education.learningTimeTheorical ? education.learningTimeTheorical : 0)
+                a.totalLearningTime =
+                    (education.learningTimePractical ? education.learningTimePractical : 0) +
+                    (education.learningTimeTheorical ? education.learningTimeTheorical : 0);
             }
         });
         this.designAndPlannings = data;
 
-
-
-        this.totalHour =  this.designAndPlannings.filter(a => a.totalLearningTime).map(a => a.totalLearningTime).reduce((sum, current) => sum + current);
-        this.totalDirectCost =  this.designAndPlannings.filter(a => a.directCost).map(a => a.directCost).reduce((sum, current) => sum + current);
-        this.totalUnDirectCost =  this.designAndPlannings.filter(a => a.undirectCost).map(a => a.undirectCost).reduce((sum, current) => sum + current);
+        this.totalHour = this.designAndPlannings
+            .filter(a => a.totalLearningTime)
+            .map(a => a.totalLearningTime)
+            .reduce((sum, current) => sum + current);
+        this.totalDirectCost = this.designAndPlannings
+            .filter(a => a.directCost)
+            .map(a => a.directCost)
+            .reduce((sum, current) => sum + current);
+        this.totalUnDirectCost = this.designAndPlannings
+            .filter(a => a.undirectCost)
+            .map(a => a.undirectCost)
+            .reduce((sum, current) => sum + current);
     }
 
     export() {
-        this.loadAll(this.criteria,true);
+        debugger;
+        this.makeCriteria(this.criteria, true);
     }
-    prepareForExportExcel(res : IDesignAndPlanningMarineSuffix[]){
+
+    prepareForExportExcel(res: IDesignAndPlanningMarineSuffix[]) {
+        debugger;
+        const finalNiazsanjiIds = res.map(w => w.finalNiazsanjiReportId);
+        this.finalNiazsanjiReportPersonService
+            .finalNiazsanjiReportPeopleList(finalNiazsanjiIds)
+            .subscribe((resp: HttpResponse<IFinalNiazsanjiPeopleListModel[]>) => {
+                this.finalExport(resp.body, res);
+            });
+    }
+    finalExport(finalNiazsanjiPeopleListModel: IFinalNiazsanjiPeopleListModel[], res: IDesignAndPlanningMarineSuffix[]) {
         let a = new ExcelService(this.jhiTranslate);
         res = this.convertObjectDatesService.changeArrayDate(res);
         let report = [];
         let index: number = 0;
         res.forEach(a => {
             index++;
-
+            let people = finalNiazsanjiPeopleListModel.find(w => w.entityId == a.finalNiazsanjiReportId).peopleFullNames;
             let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
             a.runMonthName = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
             let obj: Object;
-            obj = {'index': index,
-                'educationalModuleTitle': educationalModule.title,
-                'educationalModuleCode': educationalModule.code,
-                'skillLevelOfSkillTitle': educationalModule.skillableLevelOfSkillTitle,
-                'totalLearningTime': educationalModule.totalLearningTime,
-                'courseType': a.courseTypeTitle,
-                'runMonth': a.runMonthName,
-                'directCost': a.directCost,
-                'directCostDescription': a.directCostDescription,
-                'undirectCost': a.undirectCost,
-                'undirectCostDescription': a.undirectCostDescription,
-                'finished': a.finished,
-                'finishedUserLogin': a.finishedUserLogin,
-                'finishedDate': a.finishedDate,
-                'description': a.description,
-                'createDate': a.createDate
+            obj = {
+                index: index,
+                person: people ? people.join(', ') : '',
+                educationalModuleTitle: educationalModule.title,
+                educationalModuleCode: educationalModule.code,
+                skillLevelOfSkillTitle: educationalModule.skillableLevelOfSkillTitle,
+                totalLearningTime: educationalModule.totalLearningTime,
+                courseType: a.courseTypeTitle,
+                finalNiazsanjiReportNiazsanjiYear: a.finalNiazsanjiReportNiazsanjiYear,
+                runMonth: a.runMonthName,
+                directCost: a.directCost,
+                directCostDescription: a.directCostDescription,
+                undirectCost: a.undirectCost,
+                undirectCostDescription: a.undirectCostDescription,
+                finished: a.finished,
+                finishedDate: a.finishedDate,
+                description: a.description,
+                createDate: a.createDate
             };
             report.push(obj);
         });
         a.exportAsExcelFile(report, 'designAndPlannings', 'marineindustryprojApp.designAndPlanning');
     }
-
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }

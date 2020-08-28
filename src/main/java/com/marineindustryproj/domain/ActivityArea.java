@@ -56,7 +56,7 @@ public class ActivityArea implements Serializable {
     @JsonIgnore
     private Set<EducationalCenter> educationalCenters = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -167,7 +167,7 @@ public class ActivityArea implements Serializable {
     public void setEducationalCenters(Set<EducationalCenter> educationalCenters) {
         this.educationalCenters = educationalCenters;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

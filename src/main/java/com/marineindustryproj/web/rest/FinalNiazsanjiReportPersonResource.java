@@ -5,6 +5,7 @@ import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.*;
 import com.marineindustryproj.service.dto.*;
 import com.marineindustryproj.service.dto.customs.CountListModel;
+import com.marineindustryproj.service.dto.customs.FinalNiazsanjiPeopleListModel;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -243,21 +244,20 @@ public class FinalNiazsanjiReportPersonResource {
     public ResponseEntity<List<CountListModel>> countListFinalNiazsanjiReportPeople (@PathVariable long[] finalNiazsanjiReportIds) {
         log.debug("REST request to count FinalNiazsanjiReportPeople by finalNiazsanjiReportIds: {}", finalNiazsanjiReportIds);
 
-        List<CountListModel> countListModels = new ArrayList<>();
-
-        FinalNiazsanjiReportPersonCriteria criteria = new FinalNiazsanjiReportPersonCriteria();
-        LongFilter finalNiazsanjiReportIdFilter = new LongFilter();
-        for (Long finalNiazsanjiReportId : finalNiazsanjiReportIds) {
-            finalNiazsanjiReportIdFilter.setEquals(finalNiazsanjiReportId);
-            criteria.setFinalNiazsanjiReportId(finalNiazsanjiReportIdFilter);
-            long count = finalNiazsanjiReportPersonQueryService.countByCriteria(criteria);
-
-            countListModels.add(new CountListModel(finalNiazsanjiReportId, count));
-        }
-
-
+        List<CountListModel> countListModels =
+            finalNiazsanjiReportPersonService.countListFinalNiazsanjiReportPeople(finalNiazsanjiReportIds);
 
         return ResponseEntity.ok().body(countListModels);
+    }
+    @GetMapping("/final-niazsanji-report-people/get-final-niazsanji-report-people-list/{finalNiazsanjiReportIds}")
+    @Timed
+    public ResponseEntity<List<FinalNiazsanjiPeopleListModel>> finalNiazsanjiReportPeopleList(@PathVariable long[] finalNiazsanjiReportIds) {
+        log.debug("REST request to count FinalNiazsanjiReportPeople by finalNiazsanjiReportIds: {}", finalNiazsanjiReportIds);
+
+        List<FinalNiazsanjiPeopleListModel> finalNiazsanjiPeopleListModels =
+            finalNiazsanjiReportPersonService.getFinalNiazsanjiReportPeopleList(finalNiazsanjiReportIds);
+
+        return ResponseEntity.ok().body(finalNiazsanjiPeopleListModels);
     }
     /**
      * GET  /final-niazsanji-report-people/:id : get the "id" finalNiazsanjiReportPerson.

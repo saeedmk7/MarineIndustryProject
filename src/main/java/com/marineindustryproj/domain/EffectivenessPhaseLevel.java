@@ -74,7 +74,7 @@ public class EffectivenessPhaseLevel implements Serializable {
     @OneToMany(mappedBy = "effectivenessPhaseLevel")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EffectivenessPhase> effectivenessPhases = new HashSet<>();
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -250,7 +250,7 @@ public class EffectivenessPhaseLevel implements Serializable {
     public void setEffectivenessPhases(Set<EffectivenessPhase> effectivenessPhases) {
         this.effectivenessPhases = effectivenessPhases;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

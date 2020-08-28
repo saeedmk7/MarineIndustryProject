@@ -2,9 +2,12 @@ package com.marineindustryproj.service;
 
 import com.marineindustryproj.service.dto.FinalNiazsanjiReportPersonDTO;
 
+import com.marineindustryproj.service.dto.customs.CountListModel;
+import com.marineindustryproj.service.dto.customs.FinalNiazsanjiPeopleListModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -50,4 +53,8 @@ public interface FinalNiazsanjiReportPersonService {
      * @param finalNiazsanjiReportId the id of the entity
      */
     void deleteByFinalNiazsanjiReportId(Long finalNiazsanjiReportId);
+
+    List<CountListModel> countListFinalNiazsanjiReportPeople(long[] finalNiazsanjiReportIds);
+
+    List<FinalNiazsanjiPeopleListModel> getFinalNiazsanjiReportPeopleList(long[] finalNiazsanjiReportIds);
 }

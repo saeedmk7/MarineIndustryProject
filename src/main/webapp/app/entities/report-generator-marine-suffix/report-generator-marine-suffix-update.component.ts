@@ -87,7 +87,6 @@ export class ReportGeneratorMarineSuffixUpdateComponent implements OnInit {
     ) {}
 
     searchCalled(v) {
-        debugger;
         this.reportGenerator.searchParams = v;
     }
 
@@ -280,7 +279,6 @@ export class ReportGeneratorMarineSuffixUpdateComponent implements OnInit {
     }
     loadNeededData() {
         this.activatedRoute.data.subscribe(({ reportGenerator }) => {
-            debugger;
             this.reportGenerator = reportGenerator;
 
             for (let fieldsKey in REPORTGENERATORFIELDS) {
@@ -330,7 +328,7 @@ export class ReportGeneratorMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        debugger;
+
         this.reportGenerator.authorityNames = this.selectedAuthorities.join(',');
         let index = 0;
         const a = this.selectedColumns.map(w => {

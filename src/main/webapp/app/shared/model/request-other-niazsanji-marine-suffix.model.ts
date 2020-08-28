@@ -3,7 +3,7 @@ import { INiazsanjiOtherMarineSuffix } from 'app/shared/model//niazsanji-other-m
 import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model//prioritize-request-niazsanji-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IRestrictionMarineSuffix } from 'app/shared/model//restriction-marine-suffix.model';
-import {RequestStatus} from "app/shared/model/enums/RequestStatus";
+import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
 
 export interface IRequestOtherNiazsanjiMarineSuffix {
     id?: number;
@@ -41,6 +41,7 @@ export interface IRequestOtherNiazsanjiMarineSuffix {
     skillLevelOfSkillTitle?: string;
     totalLearningTime?: number;
     personFamily?: string;
+    personJobTitle?: string;
     personName?: string;
     personFullName?: string;
     personId?: number;
@@ -87,6 +88,7 @@ export class RequestOtherNiazsanjiMarineSuffix implements IRequestOtherNiazsanji
         public skillLevelOfSkillTitle?: string,
         public totalLearningTime?: number,
         public personFamily?: string,
+        public personJobTitle?: string,
         public personName?: string,
         public personFullName?: string,
         public personId?: number,

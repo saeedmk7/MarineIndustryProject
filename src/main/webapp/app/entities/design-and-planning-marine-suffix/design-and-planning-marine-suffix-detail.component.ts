@@ -44,7 +44,6 @@ export class DesignAndPlanningMarineSuffixDetailComponent implements OnInit {
     }
     showData(finalNiazsanjiReportId) {
         this.finalNiazsanjiReportService.find(finalNiazsanjiReportId).subscribe((resp: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => {
-            debugger;
             this.finalNiazsanjiReport = resp.body;
             const criteriaPerson = [
                 {

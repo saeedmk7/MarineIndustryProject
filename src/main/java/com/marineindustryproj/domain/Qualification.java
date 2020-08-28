@@ -63,7 +63,7 @@ public class Qualification implements Serializable {
     @OneToMany(mappedBy = "lastQualification")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Soldier> soldiers = new HashSet<>();
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -249,7 +249,7 @@ public class Qualification implements Serializable {
     public void setSoldiers(Set<Soldier> soldiers) {
         this.soldiers = soldiers;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

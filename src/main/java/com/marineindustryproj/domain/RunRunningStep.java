@@ -67,7 +67,7 @@ public class RunRunningStep implements Serializable {
     @JsonIgnoreProperties("runRunningSteps")
     private RunningStep runningStep;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -218,7 +218,7 @@ public class RunRunningStep implements Serializable {
     public void setRunningStep(RunningStep runningStep) {
         this.runningStep = runningStep;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

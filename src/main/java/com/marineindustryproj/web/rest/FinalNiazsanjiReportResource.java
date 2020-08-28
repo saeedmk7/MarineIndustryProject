@@ -27,6 +27,7 @@ import com.marineindustryproj.service.dto.PersonCriteria;
 import com.marineindustryproj.service.dto.PersonDTO;
 import com.marineindustryproj.service.dto.ReportDTO;
 import com.marineindustryproj.service.dto.customs.*;
+import com.marineindustryproj.service.dto.customs.EffectivenessPhaseModels.FinalEffectivenessPhaseReportModel;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
@@ -136,6 +137,24 @@ public class FinalNiazsanjiReportResource {
         this.finalNiazsanjiReportPersonService = finalNiazsanjiReportPersonService;
         this.finalNiazsanjiReportPersonQueryService = finalNiazsanjiReportPersonQueryService;
     }
+
+    /**
+     * GET  /final-niazsanji-reports : get all the finalNiazsanjiReports.
+     *
+     * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
+     * @return the ResponseEntity with status 200 (OK) and the list of finalNiazsanjiReports in body
+     */
+    @GetMapping("/final-niazsanji-reports")
+    @Timed
+    public ResponseEntity<List<FinalNiazsanjiReportDTO>> getAllFinalNiazsanjiReports(FinalNiazsanjiReportCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get FinalNiazsanjiReports by criteria: {}", criteria);
+        Page<FinalNiazsanjiReportDTO> page = finalNiazsanjiReportQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/final-niazsanji-reports");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+
     @GetMapping("/final-niazsanji-reports/PreReport/{educationalModuleId}")
     @Timed
     public ResponseEntity<ReportDTO> PreReport(@PathVariable Long educationalModuleId) throws JRException, IOException {
@@ -549,20 +568,13 @@ public class FinalNiazsanjiReportResource {
             .body(result);
     }
 
-    /**
-     * GET  /final-niazsanji-reports : get all the finalNiazsanjiReports.
-     *
-     * @param pageable the pagination information
-     * @param criteria the criterias which the requested entities should match
-     * @return the ResponseEntity with status 200 (OK) and the list of finalNiazsanjiReports in body
-     */
-    @GetMapping("/final-niazsanji-reports")
+    @GetMapping("/final-niazsanji-reports/get-final-effectiveness-phase-report/{reportYear}")
     @Timed
-    public ResponseEntity<List<FinalNiazsanjiReportDTO>> getAllFinalNiazsanjiReports(FinalNiazsanjiReportCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get FinalNiazsanjiReports by criteria: {}", criteria);
-        Page<FinalNiazsanjiReportDTO> page = finalNiazsanjiReportQueryService.findByCriteria(criteria, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/final-niazsanji-reports");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    public ResponseEntity<List<FinalEffectivenessPhaseReportModel>> getFinalEffectivenessPhaseReport(@PathVariable Integer reportYear) {
+        log.debug("REST request to get FinalEffectivenessPhaseReport by reportYear: {}", reportYear);
+        List<FinalEffectivenessPhaseReportModel> finalEffectivenessPhaseReportModels =
+            finalNiazsanjiReportService.getFinalEffectivenessPhaseReport(reportYear);
+        return ResponseEntity.ok().body(finalEffectivenessPhaseReportModels);
     }
     @GetMapping("/final-niazsanji-reports/with-people")
     @Timed

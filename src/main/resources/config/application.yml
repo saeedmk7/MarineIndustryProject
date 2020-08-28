@@ -116,6 +116,7 @@ file:
     run-phase-upload-dir: ./runPhaseUploads
     jam-help-upload-dir: ./jamHelpUploads
     soldier-training-report-upload-dir: ./soldierTrainingReportUploads
+    soldier-media-awareness-report-upload-dir: ./soldierMediaAwarenessReportUploads
     evaluate-criteria-data-upload-dir: ./evaluateCriteriaDataUploads
 # ===================================================================
 # Application specific properties

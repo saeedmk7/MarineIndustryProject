@@ -79,7 +79,7 @@ public class LevelThreeCriteria implements Serializable {
     @JsonIgnoreProperties("levelThreeCriteria")
     private LevelThreeCriteriaGroup levelThreeCriteriaGroup;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -281,7 +281,7 @@ public class LevelThreeCriteria implements Serializable {
     public void setLevelThreeCriteriaGroup(LevelThreeCriteriaGroup levelThreeCriteriaGroup) {
         this.levelThreeCriteriaGroup = levelThreeCriteriaGroup;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

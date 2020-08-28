@@ -193,6 +193,13 @@ public class SoldierTrainingReportCriteria implements Serializable {
         this.soldierId = soldierId;
     }
 
+    public LongFilter getSoldierOrganizationChartId() {
+        return soldierOrganizationChartId;
+    }
+
+    public void setSoldierOrganizationChartId(LongFilter soldierOrganizationChartId) {
+        this.soldierOrganizationChartId = soldierOrganizationChartId;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -220,6 +227,7 @@ public class SoldierTrainingReportCriteria implements Serializable {
             Objects.equals(modifyDate, that.modifyDate) &&
             Objects.equals(guid, that.guid) &&
             Objects.equals(documentId, that.documentId) &&
+            Objects.equals(soldierOrganizationChartId, that.soldierOrganizationChartId) &&
             Objects.equals(soldierId, that.soldierId);
     }
 
@@ -242,6 +250,7 @@ public class SoldierTrainingReportCriteria implements Serializable {
         modifyDate,
         guid,
         documentId,
+        soldierOrganizationChartId,
         soldierId
         );
     }
@@ -270,11 +279,5 @@ public class SoldierTrainingReportCriteria implements Serializable {
             "}";
     }
 
-    public LongFilter getSoldierOrganizationChartId() {
-        return soldierOrganizationChartId;
-    }
 
-    public void setSoldierOrganizationChartId(LongFilter soldierOrganizationChartId) {
-        this.soldierOrganizationChartId = soldierOrganizationChartId;
-    }
 }

@@ -1,0 +1,55 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.finalEffectivenessPhaseReportModel.home.title">Employment Types</span>
+        <button class="btn btn-info float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <p style="text-align: center; direction: rtl; font-family: IranSans, SansSerif, IranYekan">
+        سال نیازسنجی (گزارش):
+        <select style="display: inline-block; text-align: center"
+                [(ngModel)]="selectedNiazsanjiYear"
+                id="selectedYear" name="selectedYear" (change)="loadAll(selectedNiazsanjiYear)">
+            <option [ngValue]="year" [selected]="year == selectedNiazsanjiYear"
+                    *ngFor="let year of years">{{year}}
+            </option>
+        </select>
+    </p>
+    <div class="table-responsive" *ngIf="finalEffectivenessPhaseReportModels">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+            <!--<th><span jhiTranslate="marineindustryprojApp.finalEffectivenessPhaseReportModel.levelId">levelId</span> </th>-->
+            <th><span jhiTranslate="marineindustryprojApp.finalEffectivenessPhaseReportModel.levelTitle">levelTitle</span> </th>
+            <th><span jhiTranslate="marineindustryprojApp.finalEffectivenessPhaseReportModel.finishedCount">finishedCount</span> </th>
+            <th><span jhiTranslate="marineindustryprojApp.finalEffectivenessPhaseReportModel.averageEffectiveness">averageEffectiveness</span> </th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let finalEffectivenessPhaseReportModel of finalEffectivenessPhaseReportModels ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{finalEffectivenessPhaseReportModel.levelTitle}}</td>
+                <td>{{finalEffectivenessPhaseReportModel.finishedCount}}</td>
+                <td>{{finalEffectivenessPhaseReportModel.averageEffectiveness}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'final-effectiveness-phase-report-marine-suffix/'+ finalEffectivenessPhaseReportModel.levelId + '/detail'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -53,7 +53,7 @@ public class MediaProductType implements Serializable {
     @OneToMany(mappedBy = "mediaProductType")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<MediaAwarenessReport> mediaAwarenessReports = new HashSet<>();
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -164,7 +164,7 @@ public class MediaProductType implements Serializable {
     public void setMediaAwarenessReports(Set<MediaAwarenessReport> mediaAwarenessReports) {
         this.mediaAwarenessReports = mediaAwarenessReports;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

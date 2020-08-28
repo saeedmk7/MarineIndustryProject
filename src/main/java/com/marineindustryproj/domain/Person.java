@@ -232,7 +232,7 @@ public class Person implements Serializable {
     @JsonIgnore
     private Set<RunPhase> runPhases = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }

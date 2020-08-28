@@ -31,6 +31,7 @@ import { IRequestOtherNiazsanjiMarineSuffix } from 'app/shared/model//request-ot
 import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model//prioritize-request-niazsanji-marine-suffix.model';
 import { ISoldierMarineSuffix } from 'app/shared/model//soldier-marine-suffix.model';
 import { ISoldierTrainingReportMarineSuffix } from 'app/shared/model//soldier-training-report-marine-suffix.model';
+import { ISoldierMediaAwarenessReportMarineSuffix } from 'app/shared/model//soldier-media-awareness-report-marine-suffix.model';
 import { IEvaluateCriteriaTrainingMarineSuffix } from 'app/shared/model//evaluate-criteria-training-marine-suffix.model';
 import { IEvaluateCriteriaDataMarineSuffix } from 'app/shared/model//evaluate-criteria-data-marine-suffix.model';
 import { IEffectivenessPhaseMarineSuffix } from 'app/shared/model//effectiveness-phase-marine-suffix.model';
@@ -44,8 +45,8 @@ export interface IDocumentMarineSuffix {
     createDate?: Moment;
     modifyUserLogin?: string;
     modifyDate?: Moment;
-    entityName?: any,
-    entityId?: any,
+    entityName?: any;
+    entityId?: any;
     people?: IPersonMarineSuffix[];
     teachers?: ITeacherMarineSuffix[];
     teacherGrades?: ITeacherGradeMarineSuffix[];
@@ -78,6 +79,7 @@ export interface IDocumentMarineSuffix {
     prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[];
     soldiers?: ISoldierMarineSuffix[];
     soldierTrainingReports?: ISoldierTrainingReportMarineSuffix[];
+    soldierMediaAwarenessReports?: ISoldierMediaAwarenessReportMarineSuffix[];
     evaluateCriteriaTrainings?: IEvaluateCriteriaTrainingMarineSuffix[];
     evaluateCriteriaData?: IEvaluateCriteriaDataMarineSuffix[];
     effectivenessPhases?: IEffectivenessPhaseMarineSuffix[];
@@ -127,6 +129,7 @@ export class DocumentMarineSuffix implements IDocumentMarineSuffix {
         public prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[],
         public soldiers?: ISoldierMarineSuffix[],
         public soldierTrainingReports?: ISoldierTrainingReportMarineSuffix[],
+        public soldierMediaAwarenessReports?: ISoldierMediaAwarenessReportMarineSuffix[],
         public evaluateCriteriaTrainings?: IEvaluateCriteriaTrainingMarineSuffix[],
         public evaluateCriteriaData?: IEvaluateCriteriaDataMarineSuffix[],
         public effectivenessPhases?: IEffectivenessPhaseMarineSuffix[]

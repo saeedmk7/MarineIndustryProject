@@ -23,6 +23,7 @@
             <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.personJobTitle">Person</span></th>
             <!--<th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <!--<th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.preJobNiazsanji.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -62,6 +63,7 @@
                         <a [routerLink]="['../person-marine-suffix', preJobNiazsanji.personId , 'view' ]" >{{preJobNiazsanji.personFullName}}</a>
                     </div>
                 </td>
+                <td>{{preJobNiazsanji.personJobTitle}}</td>
                 <!--<td>{{preJobNiazsanji.title}}</td>-->
                 <!--<td>{{preJobNiazsanji.reviewDate}}</td>
                 <td>{{preJobNiazsanji.code}}</td>-->

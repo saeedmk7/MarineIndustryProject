@@ -1,0 +1,13 @@
+{
+    "marineindustryprojApp": {
+        "finalEffectivenessPhaseReportModel" : {
+            "home": {
+                "title": "گزارش جامع اثربخشی"
+            },
+            "levelId": "سطح",
+            "levelTitle": "سطح",
+            "finishedCount": "تعداد دوره های ارزیابی شده",
+            "averageEffectiveness": "میانگین اثربخشی"
+        }
+    }
+}

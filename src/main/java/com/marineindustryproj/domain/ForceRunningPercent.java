@@ -69,7 +69,7 @@ public class ForceRunningPercent implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "organization_charts_id", referencedColumnName = "id"))
     private Set<OrganizationChart> organizationCharts = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -232,7 +232,7 @@ public class ForceRunningPercent implements Serializable {
     public void setOrganizationCharts(Set<OrganizationChart> organizationCharts) {
         this.organizationCharts = organizationCharts;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

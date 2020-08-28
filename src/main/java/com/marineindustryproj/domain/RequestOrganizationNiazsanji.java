@@ -182,7 +182,7 @@ public class RequestOrganizationNiazsanji implements Serializable {
     @JsonIgnoreProperties("requestOrganizationNiazsanjis")
     private TeachingApproach teachingApproach;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -719,7 +719,7 @@ public class RequestOrganizationNiazsanji implements Serializable {
     public void setTeachingApproach(TeachingApproach teachingApproach) {
         this.teachingApproach = teachingApproach;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

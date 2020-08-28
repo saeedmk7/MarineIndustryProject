@@ -57,7 +57,7 @@ public class SkillableLevelOfSkill implements Serializable {
     @OneToMany(mappedBy = "skillableLevelOfSkill")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<RequestEducationalModule> requestEducationalModules = new HashSet<>();
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -193,7 +193,7 @@ public class SkillableLevelOfSkill implements Serializable {
     public void setRequestEducationalModules(Set<RequestEducationalModule> requestEducationalModules) {
         this.requestEducationalModules = requestEducationalModules;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

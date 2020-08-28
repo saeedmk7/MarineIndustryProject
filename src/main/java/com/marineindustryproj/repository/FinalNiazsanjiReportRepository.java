@@ -37,4 +37,7 @@ public interface FinalNiazsanjiReportRepository extends JpaRepository<FinalNiazs
     @Query("select final_niazsanji_report from FinalNiazsanjiReport final_niazsanji_report where final_niazsanji_report.niazsanjiYear =:niazsanjiYear")
     List<FinalNiazsanjiReport> findAllByNiazsanjiYear(@Param("niazsanjiYear") Integer niazsanjiYear);
 
+    @Query("select final_niazsanji_report from FinalNiazsanjiReport final_niazsanji_report where final_niazsanji_report.niazsanjiYear =:niazsanjiYear and final_niazsanji_report.status =:status")
+    List<FinalNiazsanjiReport> findAllByNiazsanjiYearAndStatus(@Param("niazsanjiYear") Integer niazsanjiYear, @Param("status") Integer status);
+
 }

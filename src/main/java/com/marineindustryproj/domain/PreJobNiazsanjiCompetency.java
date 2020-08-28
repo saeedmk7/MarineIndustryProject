@@ -102,7 +102,7 @@ public class PreJobNiazsanjiCompetency implements Serializable {
     @JsonIgnoreProperties("preJobNiazsanjiCompetencies")
     private Competency competency;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -368,7 +368,7 @@ public class PreJobNiazsanjiCompetency implements Serializable {
     public void setCompetency(Competency competency) {
         this.competency = competency;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

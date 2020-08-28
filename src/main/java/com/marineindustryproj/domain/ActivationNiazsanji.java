@@ -60,7 +60,7 @@ public class ActivationNiazsanji implements Serializable {
     @Column(name = "modify_date")
     private ZonedDateTime modifyDate;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -185,7 +185,7 @@ public class ActivationNiazsanji implements Serializable {
     public void setModifyDate(ZonedDateTime modifyDate) {
         this.modifyDate = modifyDate;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

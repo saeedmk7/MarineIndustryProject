@@ -211,6 +211,11 @@ public class Document implements Serializable {
     @ManyToMany(mappedBy = "documents")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
+    private Set<SoldierMediaAwarenessReport> soldierMediaAwarenessReports = new HashSet<>();
+
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
     private Set<EvaluateCriteriaTraining> evaluateCriteriaTrainings = new HashSet<>();
 
     @ManyToMany(mappedBy = "documents")
@@ -223,7 +228,7 @@ public class Document implements Serializable {
     @JsonIgnore
     private Set<EffectivenessPhase> effectivenessPhases = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -1097,6 +1102,31 @@ public class Document implements Serializable {
         this.soldierTrainingReports = soldierTrainingReports;
     }
 
+    public Set<SoldierMediaAwarenessReport> getSoldierMediaAwarenessReports() {
+        return soldierMediaAwarenessReports;
+    }
+
+    public Document soldierMediaAwarenessReports(Set<SoldierMediaAwarenessReport> soldierMediaAwarenessReports) {
+        this.soldierMediaAwarenessReports = soldierMediaAwarenessReports;
+        return this;
+    }
+
+    public Document addSoldierMediaAwarenessReport(SoldierMediaAwarenessReport soldierMediaAwarenessReport) {
+        this.soldierMediaAwarenessReports.add(soldierMediaAwarenessReport);
+        soldierMediaAwarenessReport.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeSoldierMediaAwarenessReport(SoldierMediaAwarenessReport soldierMediaAwarenessReport) {
+        this.soldierMediaAwarenessReports.remove(soldierMediaAwarenessReport);
+        soldierMediaAwarenessReport.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setSoldierMediaAwarenessReports(Set<SoldierMediaAwarenessReport> soldierMediaAwarenessReports) {
+        this.soldierMediaAwarenessReports = soldierMediaAwarenessReports;
+    }
+
     public Set<EvaluateCriteriaTraining> getEvaluateCriteriaTrainings() {
         return evaluateCriteriaTrainings;
     }
@@ -1171,7 +1201,7 @@ public class Document implements Serializable {
     public void setEffectivenessPhases(Set<EffectivenessPhase> effectivenessPhases) {
         this.effectivenessPhases = effectivenessPhases;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

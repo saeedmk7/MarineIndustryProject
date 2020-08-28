@@ -52,7 +52,7 @@ public class ReportGeneratorAuthority implements Serializable {
     @JsonIgnoreProperties("reportGeneratorAuthorities")
     private ReportGenerator reportGenerator;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -151,7 +151,7 @@ public class ReportGeneratorAuthority implements Serializable {
     public void setReportGenerator(ReportGenerator reportGenerator) {
         this.reportGenerator = reportGenerator;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

@@ -95,6 +95,8 @@ public class DocumentCriteria implements Serializable {
 
     private LongFilter soldierTrainingReportId;
 
+    private LongFilter soldierMediaAwarenessReportId;
+
     private LongFilter evaluateCriteriaTrainingId;
 
     private LongFilter evaluateCriteriaDataId;
@@ -389,6 +391,14 @@ public class DocumentCriteria implements Serializable {
         this.soldierTrainingReportId = soldierTrainingReportId;
     }
 
+    public LongFilter getSoldierMediaAwarenessReportId() {
+        return soldierMediaAwarenessReportId;
+    }
+
+    public void setSoldierMediaAwarenessReportId(LongFilter soldierMediaAwarenessReportId) {
+        this.soldierMediaAwarenessReportId = soldierMediaAwarenessReportId;
+    }
+
     public LongFilter getEvaluateCriteriaTrainingId() {
         return evaluateCriteriaTrainingId;
     }
@@ -460,6 +470,7 @@ public class DocumentCriteria implements Serializable {
             Objects.equals(prioritizeRequestNiazsanjiId, that.prioritizeRequestNiazsanjiId) &&
             Objects.equals(soldierId, that.soldierId) &&
             Objects.equals(soldierTrainingReportId, that.soldierTrainingReportId) &&
+            Objects.equals(soldierMediaAwarenessReportId, that.soldierMediaAwarenessReportId) &&
             Objects.equals(evaluateCriteriaTrainingId, that.evaluateCriteriaTrainingId) &&
             Objects.equals(evaluateCriteriaDataId, that.evaluateCriteriaDataId) &&
             Objects.equals(effectivenessPhaseId, that.effectivenessPhaseId);
@@ -504,6 +515,7 @@ public class DocumentCriteria implements Serializable {
         prioritizeRequestNiazsanjiId,
         soldierId,
         soldierTrainingReportId,
+        soldierMediaAwarenessReportId,
         evaluateCriteriaTrainingId,
         evaluateCriteriaDataId,
         effectivenessPhaseId
@@ -549,6 +561,7 @@ public class DocumentCriteria implements Serializable {
                 (prioritizeRequestNiazsanjiId != null ? "prioritizeRequestNiazsanjiId=" + prioritizeRequestNiazsanjiId + ", " : "") +
                 (soldierId != null ? "soldierId=" + soldierId + ", " : "") +
                 (soldierTrainingReportId != null ? "soldierTrainingReportId=" + soldierTrainingReportId + ", " : "") +
+                (soldierMediaAwarenessReportId != null ? "soldierMediaAwarenessReportId=" + soldierMediaAwarenessReportId + ", " : "") +
                 (evaluateCriteriaTrainingId != null ? "evaluateCriteriaTrainingId=" + evaluateCriteriaTrainingId + ", " : "") +
                 (evaluateCriteriaDataId != null ? "evaluateCriteriaDataId=" + evaluateCriteriaDataId + ", " : "") +
                 (effectivenessPhaseId != null ? "effectivenessPhaseId=" + effectivenessPhaseId + ", " : "") +

@@ -45,6 +45,8 @@
                 <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.person">Person</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
+                <th><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.personJobTitle">Person</span>
+                </th>
                 <th jhiSortBy="costEducationalModule"><span
                     jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.costEducationalModule">Cost Educational Module</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
@@ -91,6 +93,9 @@
                     <div *ngIf="requestOtherNiazsanji.personId">
                         <a [routerLink]="['../person-marine-suffix', requestOtherNiazsanji.personId , 'view' ]">{{requestOtherNiazsanji.personFullName}}</a>
                     </div>
+                </td>
+                <td>
+                    {{requestOtherNiazsanji.personJobTitle}}
                 </td>
                 <td>{{requestOtherNiazsanji.costEducationalModule | number}}</td>
                 <td>
@@ -202,7 +207,7 @@
             <tr class="sum-row">
                 <td colspan="6">مجموع</td>
                 <td>{{totalHour | number}}</td>
-                <td></td>
+                <td colspan="2"></td>
                 <td>{{totalPriceCost | number}}</td>
                 <td colspan="5"></td>
             </tr>

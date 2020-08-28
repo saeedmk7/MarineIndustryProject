@@ -136,10 +136,8 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
         }
     }
     restoreToBeforeFinalize(niazsanjiIntegrationId: number) {
-        debugger;
         this.niazsanjiIntegrationService.find(niazsanjiIntegrationId).subscribe(
             (resp: HttpResponse<INiazsanjiIntegrationMarineSuffix>) => {
-                debugger;
                 let niazsanjiIntegration = resp.body;
                 niazsanjiIntegration.status = 20;
                 this.niazsanjiIntegrationService.update(niazsanjiIntegration).subscribe(
@@ -294,6 +292,7 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
                 organizationChart: a.organizationChartTitle,
                 'marineindustryprojApp.prioritizeRequestNiazsanji.requestNiazsanjiType': requestNiazsanjiType,
                 person: a.personFullName,
+                personJobTitle: a.personJobTitle,
                 educationalModuleTitle: educationalModule.title,
                 educationalModuleId: educationalModule.code,
                 skillLevelOfSkillTitle: educationalModule.skillableLevelOfSkillTitle,

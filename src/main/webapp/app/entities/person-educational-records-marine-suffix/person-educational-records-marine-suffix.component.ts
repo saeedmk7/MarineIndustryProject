@@ -91,7 +91,7 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
             this.setRoles(account);
             this.settingsAccount = this.copyAccount(account);
             this.myAccount = this.settingsAccount;
-            debugger;
+
             const personId = this.getParameterByName('personId', '');
             if (personId) {
                 let tempPerson: IPersonMarineSuffix = new PersonMarineSuffix();
@@ -171,7 +171,6 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     }
     loadPersonData($event: IPersonMarineSuffix) {
         if ($event) {
-            debugger;
             let url = this.deleteQueryString();
             url = this.appendQueryString('personId', $event.id, url);
             window.location.href = url;
@@ -179,7 +178,6 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
                 (res: HttpResponse<PersonMarineSuffix>) => {
                     this.person = this.convertObjectDatesService.changeDate(res.body);
                     this.searchPerson = this.person;
-                    this.currentPerson = this.person;
                     this.currentPerson = this.person;
                     this.prepareOrgChart(this.person.organizationChartId);
                     this.finalLoad(this.person);

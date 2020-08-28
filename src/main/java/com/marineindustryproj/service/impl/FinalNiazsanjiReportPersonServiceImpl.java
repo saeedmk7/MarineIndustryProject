@@ -13,6 +13,8 @@ import com.marineindustryproj.service.dto.FinalNiazsanjiReportPersonCriteria;
 import com.marineindustryproj.service.dto.FinalNiazsanjiReportPersonDTO;
 import com.marineindustryproj.service.dto.PersonDTO;
 import com.marineindustryproj.service.dto.RunPhaseDTO;
+import com.marineindustryproj.service.dto.customs.CountListModel;
+import com.marineindustryproj.service.dto.customs.FinalNiazsanjiPeopleListModel;
 import com.marineindustryproj.service.mapper.FinalNiazsanjiReportPersonMapper;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
@@ -23,6 +25,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -140,5 +143,39 @@ public class FinalNiazsanjiReportPersonServiceImpl implements FinalNiazsanjiRepo
                 finalNiazsanjiReportPersonRepository.deleteById(finalNiazsanjiReportPerson.getId());
             }
         }
+    }
+
+    @Override
+    public List<CountListModel> countListFinalNiazsanjiReportPeople(long[] finalNiazsanjiReportIds) {
+        List<CountListModel> countListModels = new ArrayList<>();
+        FinalNiazsanjiReportPersonCriteria criteria = new FinalNiazsanjiReportPersonCriteria();
+        LongFilter finalNiazsanjiReportIdFilter = new LongFilter();
+        for (Long finalNiazsanjiReportId : finalNiazsanjiReportIds) {
+            finalNiazsanjiReportIdFilter.setEquals(finalNiazsanjiReportId);
+            criteria.setFinalNiazsanjiReportId(finalNiazsanjiReportIdFilter);
+            long count = finalNiazsanjiReportPersonQueryService.countByCriteria(criteria);
+
+            countListModels.add(new CountListModel(finalNiazsanjiReportId, count));
+        }
+        return countListModels;
+    }
+
+    @Override
+    public List<FinalNiazsanjiPeopleListModel> getFinalNiazsanjiReportPeopleList(long[] finalNiazsanjiReportIds) {
+        List<FinalNiazsanjiPeopleListModel> finalNiazsanjiPeopleListModels = new ArrayList<>();
+        FinalNiazsanjiReportPersonCriteria criteria = new FinalNiazsanjiReportPersonCriteria();
+        LongFilter finalNiazsanjiReportIdFilter = new LongFilter();
+        for (Long finalNiazsanjiReportId : finalNiazsanjiReportIds) {
+            finalNiazsanjiReportIdFilter.setEquals(finalNiazsanjiReportId);
+            criteria.setFinalNiazsanjiReportId(finalNiazsanjiReportIdFilter);
+            List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPeople = finalNiazsanjiReportPersonQueryService.findByCriteria(criteria);
+            List<String> peopleFullNames = new ArrayList<>();
+            for (FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPerson : finalNiazsanjiReportPeople) {
+                    peopleFullNames.add(finalNiazsanjiReportPerson.getPersonName() + " " + finalNiazsanjiReportPerson.getPersonFamily());
+            }
+            finalNiazsanjiPeopleListModels.add(
+                new FinalNiazsanjiPeopleListModel(finalNiazsanjiReportId, peopleFullNames));
+        }
+        return finalNiazsanjiPeopleListModels;
     }
 }

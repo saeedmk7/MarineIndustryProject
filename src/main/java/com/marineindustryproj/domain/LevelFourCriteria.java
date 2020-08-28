@@ -70,7 +70,7 @@ public class LevelFourCriteria implements Serializable {
     @OneToMany(mappedBy = "levelFourCriteria")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<LevelFourScore> levelFourScores = new HashSet<>();
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -246,7 +246,7 @@ public class LevelFourCriteria implements Serializable {
     public void setLevelFourScores(Set<LevelFourScore> levelFourScores) {
         this.levelFourScores = levelFourScores;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

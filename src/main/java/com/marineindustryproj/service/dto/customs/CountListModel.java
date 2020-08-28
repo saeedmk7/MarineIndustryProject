@@ -1,5 +1,7 @@
 package com.marineindustryproj.service.dto.customs;
 
+import java.util.List;
+
 public class CountListModel {
 
     public CountListModel(Long entityId, Long count) {

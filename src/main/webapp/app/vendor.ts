@@ -168,5 +168,3 @@ library.add(faPrint);
 library.add(faBackward);
 library.add(faForward);
 library.add(faRecycle);
-
-// jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

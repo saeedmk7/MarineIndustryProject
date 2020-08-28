@@ -47,7 +47,7 @@ export class CommonSearchCheckerService {
     }
     public addOrganizationFilterToCriteriaForFinalNiazsanjiReport(criteria, organizationCharts: IOrganizationChartMarineSuffix[]) {
         const org = criteria.find(a => a.key == 'organizationChartId.equals');
-        debugger;
+
         if (org) {
             const orgId = +org.value;
             criteria = criteria.filter(a => a.key != 'organizationChartId.equals');

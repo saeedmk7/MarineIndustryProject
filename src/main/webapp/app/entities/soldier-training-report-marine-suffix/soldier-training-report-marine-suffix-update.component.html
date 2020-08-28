@@ -108,8 +108,6 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.soldierTrainingReport.year"
                            for="field_year">Year</label>
-                    <!--<input type="number" class="form-control" name="year" id="field_year"
-                        [(ngModel)]="soldierTrainingReport.year" required/>-->
                     <select class="form-control" id="field_year" name="year" [required]="true"
                             [(ngModel)]="soldierTrainingReport.year">
                         <option [ngValue]="year" *ngFor="let year of years">{{year}}</option>
@@ -130,8 +128,6 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.soldierTrainingReport.month"
                            for="field_month">Month</label>
-                    <!--<input type="number" class="form-control" name="month" id="field_month"
-                        [(ngModel)]="soldierTrainingReport.month" required/>-->
                     <select class="form-control" id="field_month" name="month" [required]="true"
                             [(ngModel)]="soldierTrainingReport.month">
                         <option [ngValue]="runMonth.id" *ngFor="let runMonth of runMonths">{{runMonth.persianMonth}}
@@ -164,29 +160,7 @@
                         </small>
                     </div>
                 </div>
-
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.soldierTrainingReport.reportTime" for="field_reportTime">Report Time</label>
-                    <input type="number" class="form-control" name="reportTime" id="field_reportTime"
-                        [(ngModel)]="soldierTrainingReport.reportTime" required/>
-                    <div [hidden]="!(editForm.controls.reportTime?.dirty && editForm.controls.reportTime?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.reportTime?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.reportTime?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>-->
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.soldierTrainingReport.fileDoc" for="field_fileDoc">File Doc</label>
-                    <textarea class="form-control" name="fileDoc" id="field_fileDoc"
-                        [(ngModel)]="soldierTrainingReport.fileDoc" ></textarea>
-                </div>-->
-
-                <div class="dropdown-divider pt-3 mt-4">
+<div class="dropdown-divider pt-3 mt-4">
                     <div class="divider-title">آپلود گواهینامه</div>
                 </div>
                 <div class="form-group">
@@ -197,10 +171,7 @@
                                (change)="setFileData($event, soldierTrainingReport, 'fileDoc', false)"
                                jhiTranslate="entity.action.addblob"/>
                     </div>
-                    <!--<input type="hidden" class="form-control" name="fileDoc" id="field_fileDoc"
-                           [(ngModel)]="educationalHistory.fileDoc" required/>-->
-
-                    <div [hidden]="!(editForm.controls.fileDoc?.dirty && editForm.controls.fileDoc?.invalid)">
+                   <div [hidden]="!(editForm.controls.fileDoc?.dirty && editForm.controls.fileDoc?.invalid)">
                         <small class="form-text text-danger"
                                [hidden]="!editForm.controls.fileDoc?.errors?.required"
                                jhiTranslate="entity.validation.required">

@@ -194,7 +194,6 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
     }
 
     loadAll(criteria?, excelExport: boolean = false) {
-        debugger;
         criteria = this.commonSearchCheckerService.addOrganizationFilterToCriteriaForFinalNiazsanjiReport(
             criteria,
             this.organizationcharts
@@ -242,7 +241,6 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
         finalNiazsanjiReports.forEach(a => {
             index++;
 
-            debugger;
             const peopleText =
                 a.finalNiazsanjiReportPeople && a.finalNiazsanjiReportPeople.length > 0
                     ? a.finalNiazsanjiReportPeople.map(w => w.personName + ' ' + w.personFamily).join(' - ')

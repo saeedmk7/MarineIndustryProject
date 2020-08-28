@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {HttpResponse, HttpErrorResponse, HttpEventType} from '@angular/common/http';
+import { HttpResponse, HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
@@ -12,15 +12,15 @@ import { IDocumentMarineSuffix } from 'app/shared/model/document-marine-suffix.m
 import { DocumentMarineSuffixService } from 'app/entities/document-marine-suffix';
 import { ISoldierMarineSuffix } from 'app/shared/model/soldier-marine-suffix.model';
 import { SoldierMarineSuffixService } from 'app/entities/soldier-marine-suffix';
-import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
-import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
-import {IEducationalModuleMarineSuffix} from "app/shared/model/educational-module-marine-suffix.model";
-import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
-import {Principal} from "app/core";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
-import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
-import {MONTHS} from "app/shared/constants/months.constants";
-import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
+import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
+import { ICourseTypeMarineSuffix } from 'app/shared/model/course-type-marine-suffix.model';
+import { IEducationalModuleMarineSuffix } from 'app/shared/model/educational-module-marine-suffix.model';
+import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { Principal } from 'app/core';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import { TreeUtilities } from 'app/plugin/utilities/tree-utilities';
+import { MONTHS } from 'app/shared/constants/months.constants';
+import { GREGORIAN_START_END_DATE } from 'app/shared/constants/years.constants';
 
 @Component({
     selector: 'mi-soldier-training-report-marine-suffix-update',
@@ -38,10 +38,19 @@ export class SoldierTrainingReportMarineSuffixUpdateComponent implements OnInit 
     currentPerson: IPersonMarineSuffix;
     isAdmin: boolean = false;
 
-    progress: { percentage: number } = { percentage: 0 }
+    progress: { percentage: number } = { percentage: 0 };
     file: File;
 
-    validFileTypes: string[] = ["image/gif","image/jpeg","image/jpg","image/png","image/TIFF","image/bmp","application/pdf","application/x-zip-compressed"];
+    validFileTypes: string[] = [
+        'image/gif',
+        'image/jpeg',
+        'image/jpg',
+        'image/png',
+        'image/TIFF',
+        'image/bmp',
+        'application/pdf',
+        'application/x-zip-compressed'
+    ];
     fileHasError: boolean = true;
     fileMessage: string;
     message: string;
@@ -49,9 +58,8 @@ export class SoldierTrainingReportMarineSuffixUpdateComponent implements OnInit 
 
     soldiers: ISoldierMarineSuffix[];
 
-    runMonths: any = MONTHS.sort(function(a,b)
-    {
-        return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+    runMonths: any = MONTHS.sort(function(a, b) {
+        return a.id > b.id ? 1 : b.id > a.id ? -1 : 0;
     });
     years: any = GREGORIAN_START_END_DATE.map(a => a.year);
 
@@ -63,7 +71,7 @@ export class SoldierTrainingReportMarineSuffixUpdateComponent implements OnInit 
         protected documentService: DocumentMarineSuffixService,
         protected soldierService: SoldierMarineSuffixService,
         protected activatedRoute: ActivatedRoute,
-        private principal : Principal,
+        private principal: Principal,
         private convertObjectDatesService: ConvertObjectDatesService,
         private treeUtilities: TreeUtilities
     ) {}
@@ -74,10 +82,8 @@ export class SoldierTrainingReportMarineSuffixUpdateComponent implements OnInit 
             this.soldierTrainingReport = soldierTrainingReport;
         });
         this.principal.identity().then(account => {
-
             this.currentAccount = account;
-            if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-                this.isAdmin = true;
+            if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
         });
         this.soldierService.query().subscribe(
             (res: HttpResponse<ISoldierMarineSuffix[]>) => {
@@ -95,96 +101,87 @@ export class SoldierTrainingReportMarineSuffixUpdateComponent implements OnInit 
         return this.dataUtils.openFile(contentType, field);
     }
 
-    /*setFileData(event, entity, field, isImage) {
-        this.dataUtils.setFileData(event, entity, field, isImage);
-    }*/
-
     previousState() {
         window.history.back();
     }
 
     setFileData(event, entity, field, isImage) {
-
-        this.fileMessage = "";
+        this.fileMessage = '';
         this.fileHasError = true;
         //this.dataUtils.setFileData(event, entity, field, isImage);
         if (event && event.target.files && event.target.files[0]) {
             this.file = event.target.files[0];
             this.validateFile(this.file);
-        }
-        else{
+        } else {
             this.fileHasError = true;
-            this.fileMessage = "انتخاب فایل اجباری است.";
+            this.fileMessage = 'انتخاب فایل اجباری است.';
         }
     }
     uploadFile() {
-
         this.uploadingFile = true;
         let formdata: FormData = new FormData();
 
         formdata.append('file', this.file);
-        this.soldierTrainingReportService.uploadFile(formdata).subscribe(event => {
+        this.soldierTrainingReportService.uploadFile(formdata).subscribe(
+            event => {
                 if (event instanceof HttpResponse) {
                     if (event.body) {
                         this.soldierTrainingReport.fileDoc = event.body.toString();
-                        this.fileMessage = "آپلود فایل با موفقیت انجام شد.";
+                        this.fileMessage = 'آپلود فایل با موفقیت انجام شد.';
                     }
                 }
             },
             () => {
                 this.uploadingFile = false;
-                this.fileMessage = "آپلود فایل با خطا روبرو شد. لطفا عملیات را بعدا دوباره تکرار کنید.";
+                this.fileMessage = 'آپلود فایل با خطا روبرو شد. لطفا عملیات را بعدا دوباره تکرار کنید.';
                 this.fileHasError = true;
-                this.onSaveError()
-            });
+                this.onSaveError();
+            }
+        );
     }
-    validateFile(file){
+    validateFile(file) {
         //file.name.split('.')[file.name.split('.').length-1] == 'rar'
-        if(this.validFileTypes.includes(file.type)){
-            if((file.size / 1024 / 1024) < 10) {
+        if (this.validFileTypes.includes(file.type)) {
+            if (file.size / 1024 / 1024 < 10) {
                 this.fileHasError = false;
-                this.fileMessage = "فایل معتبر است.";
-            }
-            else{
+                this.fileMessage = 'فایل معتبر است.';
+            } else {
                 this.fileHasError = true;
-                this.fileMessage = "حجم فایل بیش از حد مجاز است.";
+                this.fileMessage = 'حجم فایل بیش از حد مجاز است.';
             }
-        }
-        else{
+        } else {
             this.fileHasError = true;
-            this.fileMessage = "فرمت فایل غیر مجاز است.";
+            this.fileMessage = 'فرمت فایل غیر مجاز است.';
         }
     }
 
     save() {
         this.isSaving = true;
-        /*this.soldierTrainingReport.createDate = this.createDate != null ? moment(this.createDate, DATE_TIME_FORMAT) : null;
-        this.soldierTrainingReport.modifyDate = this.modifyDate != null ? moment(this.modifyDate, DATE_TIME_FORMAT) : null;*/
+
         this.soldierTrainingReport.reportTime = 0;
         if (this.soldierTrainingReport.id !== undefined) {
             this.subscribeToSaveResponse(this.soldierTrainingReportService.update(this.soldierTrainingReport));
         } else {
-            if(this.file) {
+            if (this.file) {
                 let formdata: FormData = new FormData();
 
                 formdata.append('file', this.file);
-                this.soldierTrainingReportService.uploadFile(formdata).subscribe(event => {
+                this.soldierTrainingReportService.uploadFile(formdata).subscribe(
+                    event => {
                         if (event.type === HttpEventType.UploadProgress) {
                             this.progress.percentage = Math.round(100 * event.loaded / event.total);
-                        }
-                        else if (event instanceof HttpResponse) {
+                        } else if (event instanceof HttpResponse) {
                             if (event.body) {
                                 this.soldierTrainingReport.fileDoc = event.body;
                                 this.subscribeToSaveResponse(this.soldierTrainingReportService.create(this.soldierTrainingReport));
                             }
                         }
                     },
-                    () => this.onSaveError());
-            }
-            else {
+                    () => this.onSaveError()
+                );
+            } else {
                 this.subscribeToSaveResponse(this.soldierTrainingReportService.create(this.soldierTrainingReport));
             }
-            //this.subscribeToSaveResponse(this.soldierTrainingReportService.create(this.soldierTrainingReport));
         }
     }
 

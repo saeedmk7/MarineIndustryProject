@@ -25,6 +25,7 @@ export interface ISoldierTrainingReportMarineSuffix {
     soldierOrganizationChartId?: number;
     soldierOrganizationChartTitle?: string;
     soldierNationalId?: string;
+    soldierReleaseDate?: any;
     soldierEmploymentDate?: any;
     soldierId?: number;
 }
@@ -55,6 +56,7 @@ export class SoldierTrainingReportMarineSuffix implements ISoldierTrainingReport
         public soldierOrganizationChartTitle?: string,
         public soldierNationalId?: string,
         public soldierReleaseDate?: any,
+        public soldierEmploymentDate?: any,
         public soldierId?: number
     ) {}
 }

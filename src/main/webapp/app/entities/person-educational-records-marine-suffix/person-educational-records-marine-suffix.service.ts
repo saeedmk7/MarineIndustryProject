@@ -15,7 +15,6 @@ export class PersonEducationalRecordsMarineSuffixService {
     constructor(private http: HttpClient) {}
 
     printPage(hostName, personId) {
-        debugger;
         jsreport.serverUrl = `http://${hostName}:5488`;
         //const formdata = { template: { name: 'PersonEducationalRecords' }, data: { personId: personId } };
 

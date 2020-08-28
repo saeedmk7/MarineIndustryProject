@@ -92,7 +92,6 @@ export class ReportGeneratorMarineSuffixDetailComponent implements OnInit {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ reportGenerator }) => {
-            debugger;
             this.reportGenerator = reportGenerator;
             this.makeCriteria(JSON.parse(this.reportGenerator.searchParams));
         });
@@ -140,9 +139,7 @@ export class ReportGeneratorMarineSuffixDetailComponent implements OnInit {
             let myObj: object = keyValues;
             this.finalResultModel.push(myObj);
         });
-        this.finalResultModel.forEach(w => {
-            debugger;
-        });
+        this.finalResultModel.forEach(w => {});
     }
 
     makeCriteria(criteria?, excelExport: boolean = false) {
@@ -231,7 +228,7 @@ export class ReportGeneratorMarineSuffixDetailComponent implements OnInit {
             criteria,
             this.organizationcharts
         );
-        debugger;
+
         if (excelExport) {
             this.finalNiazsanjiReportService
                 .queryWithPeople({
@@ -288,7 +285,6 @@ export class ReportGeneratorMarineSuffixDetailComponent implements OnInit {
         finalNiazsanjiReports.forEach(a => {
             index++;
 
-            debugger;
             const peopleText =
                 a.finalNiazsanjiReportPeople && a.finalNiazsanjiReportPeople.length > 0
                     ? a.finalNiazsanjiReportPeople.map(w => w.personName + ' ' + w.personFamily).join(' - ')

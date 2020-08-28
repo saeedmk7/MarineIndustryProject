@@ -71,7 +71,6 @@ export class NiazsanjiIntegrationMarineSuffixCommentDialogComponent implements O
         this.isSaving = true;
         this.prioritizeRequestNiazsanjiService.find(this.niazsanjiIntegration.prioritizeRequestNiazsanjiId).subscribe(
             (resp: HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix>) => {
-                debugger;
                 let prioritizeRequestNiazsanji = resp.body;
                 this.message = '';
                 let currentUserFullName = this.currentPerson.fullName;
@@ -128,7 +127,6 @@ export class NiazsanjiIntegrationMarineSuffixCommentDialogComponent implements O
                             );
                         break;
                     case 'ACCEPT':
-                        debugger;
                         if (this.isKarshenasArshadAmozesh && this.niazsanjiIntegration.status == 0) {
                             prioritizeRequestNiazsanji.conversation +=
                                 ' تایید درخواست توسط ' +
@@ -168,7 +166,6 @@ export class NiazsanjiIntegrationMarineSuffixCommentDialogComponent implements O
                                     (res: HttpErrorResponse) => this.onSaveError(res)
                                 );
                         } else if (this.niazsanjiIntegration.status == 20) {
-                            debugger;
                             if (this.niazsanjiIntegration.niazsanjiYear) {
                                 prioritizeRequestNiazsanji.conversation +=
                                     ' تایید نهایی و تصویب شوراء تربیت و آموزش سازمان توسط ' +

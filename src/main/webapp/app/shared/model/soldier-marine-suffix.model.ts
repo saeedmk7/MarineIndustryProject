@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { ISoldierTrainingReportMarineSuffix } from 'app/shared/model//soldier-training-report-marine-suffix.model';
+import { ISoldierMediaAwarenessReportMarineSuffix } from 'app/shared/model//soldier-media-awareness-report-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 
 export interface ISoldierMarineSuffix {
@@ -12,7 +13,7 @@ export interface ISoldierMarineSuffix {
     certificateNumber?: string;
     nationalId?: string;
     birthDate?: Moment;
-    birthDatePersian?:string;
+    birthDatePersian?: string;
     releaseDate?: Moment;
     releaseDatePersian?: string;
 
@@ -33,6 +34,7 @@ export interface ISoldierMarineSuffix {
     status?: number;
     guid?: string;
     soldierTrainingReports?: ISoldierTrainingReportMarineSuffix[];
+    soldierMediaAwarenessReports?: ISoldierMediaAwarenessReportMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     lastQualificationTitle?: string;
     lastQualificationId?: number;
@@ -74,6 +76,7 @@ export class SoldierMarineSuffix implements ISoldierMarineSuffix {
         public status?: number,
         public guid?: string,
         public soldierTrainingReports?: ISoldierTrainingReportMarineSuffix[],
+        public soldierMediaAwarenessReports?: ISoldierMediaAwarenessReportMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public lastQualificationTitle?: string,
         public lastQualificationId?: number,

@@ -286,7 +286,7 @@ public class RequestEducationalModule implements Serializable {
     @JsonIgnoreProperties("requestEducationalModules")
     private Competency competency;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -1203,7 +1203,7 @@ public class RequestEducationalModule implements Serializable {
     public void setCompetency(Competency competency) {
         this.competency = competency;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

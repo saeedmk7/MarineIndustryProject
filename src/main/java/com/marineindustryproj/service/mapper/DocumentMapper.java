@@ -44,6 +44,7 @@ public interface DocumentMapper extends EntityMapper<DocumentDTO, Document> {
     @Mapping(target = "prioritizeRequestNiazsanjis", ignore = true)
     @Mapping(target = "soldiers", ignore = true)
     @Mapping(target = "soldierTrainingReports", ignore = true)
+    @Mapping(target = "soldierMediaAwarenessReports", ignore = true)
     @Mapping(target = "evaluateCriteriaTrainings", ignore = true)
     @Mapping(target = "evaluateCriteriaData", ignore = true)
     @Mapping(target = "effectivenessPhases", ignore = true)

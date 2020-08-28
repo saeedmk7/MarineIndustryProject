@@ -89,19 +89,15 @@ export class EffectivenessPhaseLevelOneMarineSuffixComponent implements OnInit, 
                 });
             this.niazsanjiPersonGradeMarineSuffixService.criteriaChart(this.finalNiazsanjiReportId).subscribe(
                 (res: HttpResponse<IEffectivenessPhasePerCriteriaData[]>) => {
-                    this.effectivenessPhasePerCriteriaDatas = res.body.sort(
-                        (a, b) =>
-                            a.criteria.displayOrder > b.criteria.displayOrder
-                                ? 1
-                                : a.criteria.displayOrder < b.criteria.displayOrder ? -1 : 0
-                    );
+                    this.effectivenessPhasePerCriteriaDatas = res.body;
                     this.categories = this.effectivenessPhasePerCriteriaDatas.map(a => a.criteria.title);
                     //this.effectivenessPhasePerCriteriaDataSeries = this.effectivenessPhasePerCriteriaDatas.map(a => a.sumValue);
                     this.effectivenessPhasePerCriteriaDataSeries = this.effectivenessPhasePerCriteriaDatas.map(w => {
                         return {
                             name: w.criteria.title,
                             data: [w.sumValue],
-                            color: w.criteria.backgroundColor
+                            color: w.criteria.backgroundColor,
+                            displayOrder: w.criteria.displayOrder
                         };
                     });
                     this.loadChart();
@@ -190,7 +186,9 @@ export class EffectivenessPhaseLevelOneMarineSuffixComponent implements OnInit, 
                     cursor: 'pointer'
                 }
             },
-            series: this.effectivenessPhasePerCriteriaDataSeries,
+            series: this.effectivenessPhasePerCriteriaDataSeries.sort(
+                (a, b) => (a.displayOrder > b.displayOrder ? -1 : a.displayOrder < b.displayOrder ? 1 : 0)
+            ),
             credits: {
                 enabled: false
             }

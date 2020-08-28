@@ -170,7 +170,7 @@ public class DesignAndPlanning implements Serializable {
     @JsonIgnoreProperties("designAndPlannings")
     private EffectivenessIndex effectivenessIndex;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -657,7 +657,7 @@ public class DesignAndPlanning implements Serializable {
     public void setEffectivenessIndex(EffectivenessIndex effectivenessIndex) {
         this.effectivenessIndex = effectivenessIndex;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

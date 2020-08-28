@@ -68,7 +68,7 @@ public class Competency implements Serializable {
     @OneToMany(mappedBy = "competency", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PreJobNiazsanjiCompetency> preJobNiazsanjiCompetencies = new HashSet<>();
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -255,7 +255,7 @@ public class Competency implements Serializable {
     public void setPreJobNiazsanjiCompetencies(Set<PreJobNiazsanjiCompetency> preJobNiazsanjiCompetencies) {
         this.preJobNiazsanjiCompetencies = preJobNiazsanjiCompetencies;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

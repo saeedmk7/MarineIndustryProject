@@ -229,7 +229,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
                     this.mediaAwarenessReportSum = this.mediaAwarenessReport.map(a => a.personHour).reduce((sum, current) => sum + current);
 
-                    debugger;
                     const soldierTrainingReportCriteria = [
                         {
                             key: 'year.equals',

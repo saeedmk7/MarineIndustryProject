@@ -10,6 +10,7 @@ import { createRequestOption } from 'app/shared';
 import { IFinalNiazsanjiReportPersonMarineSuffix } from 'app/shared/model/final-niazsanji-report-person-marine-suffix.model';
 import { IEffectivenessPhaseMarineSuffix } from 'app/shared/model/effectiveness-phase-marine-suffix.model';
 import { ICountListModel } from 'app/shared/model/custom/count-list-model';
+import { IFinalNiazsanjiPeopleListModel } from 'app/shared/model/custom/final-niazsanji-report-people-list-model';
 
 type EntityResponseType = HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>;
@@ -40,7 +41,6 @@ export class FinalNiazsanjiReportPersonMarineSuffixService {
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
     countList(finalNiazsanjiReportIds: number[]): Observable<HttpResponse<ICountListModel[]>> {
-        debugger;
         /*let options: HttpParams = new HttpParams();
 
         finalNiazsanjiReportIds.forEach(val => {
@@ -48,6 +48,12 @@ export class FinalNiazsanjiReportPersonMarineSuffixService {
         });*/
         const url = `${this.resourceUrl}/count-list/${finalNiazsanjiReportIds}`;
         return this.http.get<ICountListModel[]>(url, { observe: 'response' }).pipe(map((res: HttpResponse<ICountListModel[]>) => res));
+    }
+    finalNiazsanjiReportPeopleList(finalNiazsanjiReportIds: number[]): Observable<HttpResponse<IFinalNiazsanjiPeopleListModel[]>> {
+        const url = `${this.resourceUrl}/get-final-niazsanji-report-people-list/${finalNiazsanjiReportIds}`;
+        return this.http
+            .get<IFinalNiazsanjiPeopleListModel[]>(url, { observe: 'response' })
+            .pipe(map((res: HttpResponse<IFinalNiazsanjiPeopleListModel[]>) => res));
     }
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);

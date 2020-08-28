@@ -58,7 +58,7 @@ public class ToolsAndFacility implements Serializable {
     @OneToMany(mappedBy = "toolsAndFacility")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<DesignAndPlanning> designAndPlannings = new HashSet<>();
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -182,7 +182,7 @@ public class ToolsAndFacility implements Serializable {
     public void setDesignAndPlannings(Set<DesignAndPlanning> designAndPlannings) {
         this.designAndPlannings = designAndPlannings;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

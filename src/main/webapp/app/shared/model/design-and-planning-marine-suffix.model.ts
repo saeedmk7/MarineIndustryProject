@@ -32,6 +32,7 @@ export interface IDesignAndPlanningMarineSuffix {
     educationalModuleTitle?: string;
     educationalModuleCode?: string;
     educationalModuleId?: number;
+    finalNiazsanjiReportNiazsanjiYear?: number;
     finalNiazsanjiReportDescription?: string;
     finalNiazsanjiReportId?: number;
     mahiatCourseTitle?: string;
@@ -89,6 +90,7 @@ export class DesignAndPlanningMarineSuffix implements IDesignAndPlanningMarineSu
         public educationalModuleTitle?: string,
         public educationalModuleCode?: string,
         public educationalModuleId?: number,
+        public finalNiazsanjiReportNiazsanjiYear?: number,
         public finalNiazsanjiReportDescription?: string,
         public finalNiazsanjiReportId?: number,
         public mahiatCourseTitle?: string,

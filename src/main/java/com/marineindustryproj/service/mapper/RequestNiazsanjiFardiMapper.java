@@ -22,6 +22,7 @@ public interface RequestNiazsanjiFardiMapper extends EntityMapper<RequestNiazsan
     @Mapping(source = "person.id", target = "personId")
     @Mapping(source = "person.name", target = "personName")
     @Mapping(source = "person.family", target = "personFamily")
+    @Mapping(source = "person.job.title", target = "personJobTitle")
     @Mapping(source = "organizationChart.id", target = "organizationChartId")
     @Mapping(source = "organizationChart.title", target = "organizationChartTitle")
     RequestNiazsanjiFardiDTO toDto(RequestNiazsanjiFardi requestNiazsanjiFardi);

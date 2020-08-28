@@ -87,7 +87,7 @@ public class RunningStep implements Serializable {
     @OneToMany(mappedBy = "runningStep")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<RunRunningStep> runRunningSteps = new HashSet<>();
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -315,7 +315,7 @@ public class RunningStep implements Serializable {
     public void setRunRunningSteps(Set<RunRunningStep> runRunningSteps) {
         this.runRunningSteps = runRunningSteps;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

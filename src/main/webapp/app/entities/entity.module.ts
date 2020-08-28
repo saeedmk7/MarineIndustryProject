@@ -129,6 +129,8 @@ import { MarineindustryprojLevelThreeEffectivenessMarineSuffixModule } from 'app
 import { MarineindustryprojLevelThreeScoreMarineSuffixModule } from 'app/entities/level-three-score-marine-suffix/level-three-score-marine-suffix.module';
 import { MarineindustryprojReportGeneratorMarineSuffixModule } from 'app/entities/report-generator-marine-suffix/report-generator-marine-suffix.module';
 import { MarineindustryprojReportGeneratorAuthorityMarineSuffixModule } from 'app/entities/report-generator-authority-marine-suffix/report-generator-authority-marine-suffix.module';
+import { MarineindustryprojFinalEffectivenessPhaseReportMarineSuffixModule } from 'app/entities/final-effectiveness-phase-report-marine-suffix/final-effectiveness-phase-report-marine-suffix.module';
+import { MarineindustryprojSoldierMediaAwarenessReportMarineSuffixModule } from 'app/entities/soldier-media-awareness-report-marine-suffix/soldier-media-awareness-report-marine-suffix.module';
 
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
@@ -233,6 +235,7 @@ import { MarineindustryprojReportGeneratorAuthorityMarineSuffixModule } from 'ap
         MarineindustryprojEvaluateCriteriaTrainingMarineSuffixModule,
         MarineindustryprojSoldierMarineSuffixModule,
         MarineindustryprojSoldierTrainingReportMarineSuffixModule,
+        MarineindustryprojSoldierMediaAwarenessReportMarineSuffixModule,
         MarineindustryprojPeopleUnderTrainingMarineSuffixModule,
         MarineindustryprojHeadlineMarineSuffixModule,
         MarineindustryprojEvaluateCriteriaDataMarineSuffixModule,
@@ -260,7 +263,8 @@ import { MarineindustryprojReportGeneratorAuthorityMarineSuffixModule } from 'ap
         MarineindustryprojLevelThreeEffectivenessMarineSuffixModule,
         MarineindustryprojLevelThreeScoreMarineSuffixModule,
         MarineindustryprojReportGeneratorMarineSuffixModule,
-        MarineindustryprojReportGeneratorAuthorityMarineSuffixModule
+        MarineindustryprojReportGeneratorAuthorityMarineSuffixModule,
+        MarineindustryprojFinalEffectivenessPhaseReportMarineSuffixModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

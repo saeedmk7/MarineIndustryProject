@@ -6,7 +6,7 @@ import { IJobNiazsanjiMarineSuffix } from 'app/shared/model//job-niazsanji-marin
 import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model//prioritize-request-niazsanji-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IPersonMarineSuffix } from 'app/shared/model//person-marine-suffix.model';
-import {RequestStatus} from "app/shared/model/enums/RequestStatus";
+import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
 
 export interface IPreJobNiazsanjiMarineSuffix {
     id?: number;
@@ -39,6 +39,7 @@ export interface IPreJobNiazsanjiMarineSuffix {
     organizationChartTitle?: string;
     organizationChartId?: number;
     personFamily?: string;
+    personJobTitle?: string;
     personName?: string;
     personFullName?: string;
     personId?: number;
@@ -76,6 +77,7 @@ export class PreJobNiazsanjiMarineSuffix implements IPreJobNiazsanjiMarineSuffix
         public organizationChartTitle?: string,
         public organizationChartId?: number,
         public personFamily?: string,
+        public personJobTitle?: string,
         public personName?: string,
         public personFullName?: string,
         public personId?: number

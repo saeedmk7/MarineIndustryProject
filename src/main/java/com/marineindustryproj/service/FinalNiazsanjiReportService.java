@@ -3,6 +3,7 @@ package com.marineindustryproj.service;
 import com.marineindustryproj.service.dto.FinalNiazsanjiReportDTO;
 
 import com.marineindustryproj.service.dto.customs.*;
+import com.marineindustryproj.service.dto.customs.EffectivenessPhaseModels.FinalEffectivenessPhaseReportModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -70,4 +71,6 @@ public interface FinalNiazsanjiReportService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    List<FinalEffectivenessPhaseReportModel> getFinalEffectivenessPhaseReport(Integer reportYear);
 }

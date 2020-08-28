@@ -1,0 +1,10 @@
+{
+    "marineindustryprojApp": {
+        "detailFinalEffectivenessPhaseReportModel" : {
+            "educationalModuleTitle": "دوره",
+            "effectivenessPhaseFinalResultPercent": "اثربخشی",
+            "peopleCount": "تعداد نفرات دوره",
+            "finalAverage": "میانگین وزنی"
+        }
+    }
+}

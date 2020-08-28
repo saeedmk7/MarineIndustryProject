@@ -108,7 +108,7 @@ public class LevelThreeEffectiveness implements Serializable {
     @JsonIgnoreProperties("levelThreeEffectivenesses")
     private FinalNiazsanjiReportPerson finalNiazsanjiReportPerson;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -387,7 +387,7 @@ public class LevelThreeEffectiveness implements Serializable {
     public void setFinalNiazsanjiReportPerson(FinalNiazsanjiReportPerson finalNiazsanjiReportPerson) {
         this.finalNiazsanjiReportPerson = finalNiazsanjiReportPerson;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

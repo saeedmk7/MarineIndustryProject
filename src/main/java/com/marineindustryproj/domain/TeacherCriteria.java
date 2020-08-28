@@ -75,7 +75,7 @@ public class TeacherCriteria implements Serializable {
     @OneToMany(mappedBy = "teacherCriteria")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<TeacherGradeScore> teacherGradeScores = new HashSet<>();
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -264,7 +264,7 @@ public class TeacherCriteria implements Serializable {
     public void setTeacherGradeScores(Set<TeacherGradeScore> teacherGradeScores) {
         this.teacherGradeScores = teacherGradeScores;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

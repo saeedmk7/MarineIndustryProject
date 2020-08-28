@@ -44,6 +44,16 @@ public class FileStorageProperties {
         this.soldierTrainingReportUploadDir = soldierTrainingReportUploadDir;
     }
 
+    private String soldierMediaAwarenessReportUploadDir;
+
+    public String getSoldierMediaAwarenessReportUploadDir() {
+        return soldierMediaAwarenessReportUploadDir;
+    }
+
+    public void setSoldierMediaAwarenessReportUploadDir(String soldierMediaAwarenessReportUploadDir) {
+        this.soldierMediaAwarenessReportUploadDir = soldierMediaAwarenessReportUploadDir;
+    }
+
     private String evaluateCriteriaDataUploadDir;
 
     public String getEvaluateCriteriaDataUploadDir() {

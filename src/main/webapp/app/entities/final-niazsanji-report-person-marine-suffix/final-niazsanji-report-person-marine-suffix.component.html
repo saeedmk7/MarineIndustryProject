@@ -39,7 +39,7 @@
                 <td>{{i+1}}</td>
                 <td>
                     <div *ngIf="finalNiazsanjiReportPerson.personId">
-                        <a [routerLink]="['../person-marine-suffix', finalNiazsanjiReportPerson.personId , 'view' ]" >{{finalNiazsanjiReportPerson.personFamily}}</a>
+                        <a [routerLink]="['../person-marine-suffix', finalNiazsanjiReportPerson.personId , 'view' ]" >{{finalNiazsanjiReportPerson.personFullName}}</a>
                     </div>
                 </td>
                 <td jhiTranslate="{{'marineindustryprojApp.NiazSanjiSource.' + finalNiazsanjiReportPerson.niazSanjiSource}}">{{finalNiazsanjiReportPerson.niazSanjiSource}}</td>

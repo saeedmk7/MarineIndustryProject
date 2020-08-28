@@ -52,7 +52,7 @@ public class InstructionAuthority implements Serializable {
     @JsonIgnoreProperties("instructionAuthorities")
     private Instruction instruction;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -151,7 +151,7 @@ public class InstructionAuthority implements Serializable {
     public void setInstruction(Instruction instruction) {
         this.instruction = instruction;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

@@ -84,6 +84,8 @@ public class RequestNiazsanjiFardiDTO implements Serializable {
 
     private String personFamily;
 
+    private String personJobTitle;
+
     private Long organizationChartId;
 
     private String organizationChartTitle;
@@ -400,5 +402,13 @@ public class RequestNiazsanjiFardiDTO implements Serializable {
 
     public void setAllEducationalModuleCode(String allEducationalModuleCode) {
         this.allEducationalModuleCode = allEducationalModuleCode;
+    }
+
+    public String getPersonJobTitle() {
+        return personJobTitle;
+    }
+
+    public void setPersonJobTitle(String personJobTitle) {
+        this.personJobTitle = personJobTitle;
     }
 }

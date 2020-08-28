@@ -91,7 +91,7 @@ public class EducationalRecord implements Serializable {
     @JsonIgnoreProperties("educationalRecords")
     private Person person;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -320,7 +320,7 @@ public class EducationalRecord implements Serializable {
     public void setPerson(Person person) {
         this.person = person;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

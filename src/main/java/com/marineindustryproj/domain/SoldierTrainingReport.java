@@ -98,7 +98,7 @@ public class SoldierTrainingReport implements Serializable {
     @JsonIgnoreProperties("soldierTrainingReports")
     private Soldier soldier;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -339,7 +339,7 @@ public class SoldierTrainingReport implements Serializable {
     public void setSoldier(Soldier soldier) {
         this.soldier = soldier;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

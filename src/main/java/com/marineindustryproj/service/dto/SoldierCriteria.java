@@ -71,6 +71,8 @@ public class SoldierCriteria implements Serializable {
 
     private LongFilter soldierTrainingReportId;
 
+    private LongFilter soldierMediaAwarenessReportId;
+
     private LongFilter documentId;
 
     private LongFilter lastQualificationId;
@@ -273,6 +275,14 @@ public class SoldierCriteria implements Serializable {
         this.soldierTrainingReportId = soldierTrainingReportId;
     }
 
+    public LongFilter getSoldierMediaAwarenessReportId() {
+        return soldierMediaAwarenessReportId;
+    }
+
+    public void setSoldierMediaAwarenessReportId(LongFilter soldierMediaAwarenessReportId) {
+        this.soldierMediaAwarenessReportId = soldierMediaAwarenessReportId;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -348,6 +358,7 @@ public class SoldierCriteria implements Serializable {
             Objects.equals(status, that.status) &&
             Objects.equals(guid, that.guid) &&
             Objects.equals(soldierTrainingReportId, that.soldierTrainingReportId) &&
+            Objects.equals(soldierMediaAwarenessReportId, that.soldierMediaAwarenessReportId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(lastQualificationId, that.lastQualificationId) &&
             Objects.equals(lastFieldOfStudyId, that.lastFieldOfStudyId) &&
@@ -382,6 +393,7 @@ public class SoldierCriteria implements Serializable {
         status,
         guid,
         soldierTrainingReportId,
+        soldierMediaAwarenessReportId,
         documentId,
         lastQualificationId,
         lastFieldOfStudyId,
@@ -417,6 +429,7 @@ public class SoldierCriteria implements Serializable {
                 (status != null ? "status=" + status + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
                 (soldierTrainingReportId != null ? "soldierTrainingReportId=" + soldierTrainingReportId + ", " : "") +
+                (soldierMediaAwarenessReportId != null ? "soldierMediaAwarenessReportId=" + soldierMediaAwarenessReportId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (lastQualificationId != null ? "lastQualificationId=" + lastQualificationId + ", " : "") +
                 (lastFieldOfStudyId != null ? "lastFieldOfStudyId=" + lastFieldOfStudyId + ", " : "") +

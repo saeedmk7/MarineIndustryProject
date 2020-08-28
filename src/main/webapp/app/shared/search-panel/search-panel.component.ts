@@ -158,7 +158,6 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
         window.location.href = url; //.slice(0,url.length-1);
     }
     onSubmitReturnSearchParam(f: any) {
-        debugger;
         let url = '';
         for (let j = 0; j < this.searchPanelModel.length; j++) {
             let value = f.value[this.searchPanelModel[j].fieldName];
@@ -192,7 +191,6 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
         this.searchParamResult.emit(JSON.stringify(criteria));
     }
     appendPagingQueryString(url: string, resetPage: boolean = false): string {
-        debugger;
         url = this.appendQueryString('size', this.size, url);
         url = this.appendQueryString('page', resetPage ? 1 : this.page, url);
         url = this.appendQueryString('predicate', this._predicate, url);

@@ -72,7 +72,7 @@ public class JamHelp implements Serializable {
     @OneToMany(mappedBy = "jamHelp", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<JamHelpAuthority> jamHelpAuthorities = new HashSet<>();
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -235,7 +235,7 @@ public class JamHelp implements Serializable {
     public void setJamHelpAuthorities(Set<JamHelpAuthority> jamHelpAuthorities) {
         this.jamHelpAuthorities = jamHelpAuthorities;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

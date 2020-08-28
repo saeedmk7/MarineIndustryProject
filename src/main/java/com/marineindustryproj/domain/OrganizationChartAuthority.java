@@ -67,7 +67,7 @@ public class OrganizationChartAuthority implements Serializable {
     @JsonIgnoreProperties("organizationChartAuthorities")
     private OrganizationChart organizationChart;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -218,7 +218,7 @@ public class OrganizationChartAuthority implements Serializable {
     public void setOrganizationChart(OrganizationChart organizationChart) {
         this.organizationChart = organizationChart;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

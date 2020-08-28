@@ -18,9 +18,17 @@ import { MarineindustryprojHomeModule } from './home/home.module';
 import { MarineindustryprojAccountModule } from './account/account.module';
 import { MarineindustryprojEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
-// jhipster-needle-angular-add-module-import JHipster will add new module here
-import { JhiMainComponent, NavbarComponent,TopbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
-import {HttpClientModule} from '@angular/common/http';
+
+import {
+    JhiMainComponent,
+    NavbarComponent,
+    TopbarComponent,
+    FooterComponent,
+    PageRibbonComponent,
+    ActiveMenuDirective,
+    ErrorComponent
+} from './layouts';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -33,12 +41,17 @@ import {HttpClientModule} from '@angular/common/http';
         MarineindustryprojHomeModule,
         MarineindustryprojAccountModule,
         MarineindustryprojEntityModule,
-        HttpClientModule,
-
-
-        // jhipster-needle-angular-add-module JHipster will add new module here
+        HttpClientModule
     ],
-    declarations: [JhiMainComponent, NavbarComponent,TopbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+    declarations: [
+        JhiMainComponent,
+        NavbarComponent,
+        TopbarComponent,
+        ErrorComponent,
+        PageRibbonComponent,
+        ActiveMenuDirective,
+        FooterComponent
+    ],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

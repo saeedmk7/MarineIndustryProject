@@ -121,7 +121,7 @@ public class FinalNiazsanjiReportPerson implements Serializable {
     @JsonIgnoreProperties("finalNiazsanjiReportPeople")
     private FinalNiazsanjiReport finalNiazsanjiReport;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -489,7 +489,7 @@ public class FinalNiazsanjiReportPerson implements Serializable {
     public void setFinalNiazsanjiReport(FinalNiazsanjiReport finalNiazsanjiReport) {
         this.finalNiazsanjiReport = finalNiazsanjiReport;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

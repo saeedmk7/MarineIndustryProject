@@ -86,6 +86,8 @@ public class DesignAndPlanningDTO implements Serializable {
 
     private String finalNiazsanjiReportDescription;
 
+    private Integer finalNiazsanjiReportNiazsanjiYear;
+
     private Long mahiatCourseId;
 
     private String mahiatCourseTitle;
@@ -610,5 +612,13 @@ public class DesignAndPlanningDTO implements Serializable {
 
     public void setEducationalModuleCode(String educationalModuleCode) {
         this.educationalModuleCode = educationalModuleCode;
+    }
+
+    public Integer getFinalNiazsanjiReportNiazsanjiYear() {
+        return finalNiazsanjiReportNiazsanjiYear;
+    }
+
+    public void setFinalNiazsanjiReportNiazsanjiYear(Integer finalNiazsanjiReportNiazsanjiYear) {
+        this.finalNiazsanjiReportNiazsanjiYear = finalNiazsanjiReportNiazsanjiYear;
     }
 }

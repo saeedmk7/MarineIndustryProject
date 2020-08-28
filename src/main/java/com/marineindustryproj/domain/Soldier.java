@@ -118,6 +118,9 @@ public class Soldier implements Serializable {
     @OneToMany(mappedBy = "soldier")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<SoldierTrainingReport> soldierTrainingReports = new HashSet<>();
+    @OneToMany(mappedBy = "soldier")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<SoldierMediaAwarenessReport> soldierMediaAwarenessReports = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "soldier_document",
@@ -141,7 +144,7 @@ public class Soldier implements Serializable {
     @JsonIgnoreProperties("soldiers")
     private OrganizationChart organizationChart;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -461,6 +464,31 @@ public class Soldier implements Serializable {
         this.soldierTrainingReports = soldierTrainingReports;
     }
 
+    public Set<SoldierMediaAwarenessReport> getSoldierMediaAwarenessReports() {
+        return soldierMediaAwarenessReports;
+    }
+
+    public Soldier soldierMediaAwarenessReports(Set<SoldierMediaAwarenessReport> soldierMediaAwarenessReports) {
+        this.soldierMediaAwarenessReports = soldierMediaAwarenessReports;
+        return this;
+    }
+
+    public Soldier addSoldierMediaAwarenessReport(SoldierMediaAwarenessReport soldierMediaAwarenessReport) {
+        this.soldierMediaAwarenessReports.add(soldierMediaAwarenessReport);
+        soldierMediaAwarenessReport.setSoldier(this);
+        return this;
+    }
+
+    public Soldier removeSoldierMediaAwarenessReport(SoldierMediaAwarenessReport soldierMediaAwarenessReport) {
+        this.soldierMediaAwarenessReports.remove(soldierMediaAwarenessReport);
+        soldierMediaAwarenessReport.setSoldier(null);
+        return this;
+    }
+
+    public void setSoldierMediaAwarenessReports(Set<SoldierMediaAwarenessReport> soldierMediaAwarenessReports) {
+        this.soldierMediaAwarenessReports = soldierMediaAwarenessReports;
+    }
+
     public Set<Document> getDocuments() {
         return documents;
     }
@@ -537,7 +565,7 @@ public class Soldier implements Serializable {
     public void setOrganizationChart(OrganizationChart organizationChart) {
         this.organizationChart = organizationChart;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

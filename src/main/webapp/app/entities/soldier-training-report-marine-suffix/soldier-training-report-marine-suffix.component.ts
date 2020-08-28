@@ -5,23 +5,23 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { ISoldierTrainingReportMarineSuffix } from 'app/shared/model/soldier-training-report-marine-suffix.model';
-import {AccountService, Principal} from 'app/core';
+import { AccountService, Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { SoldierTrainingReportMarineSuffixService } from './soldier-training-report-marine-suffix.service';
-import {IMediaProductTypeMarineSuffix} from "app/shared/model/media-product-type-marine-suffix.model";
-import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
-import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
-import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
-import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
-import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
-import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
-import {ExcelService} from "app/plugin/export-excel/excel-service";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
-import {ISoldierMarineSuffix} from "app/shared/model/soldier-marine-suffix.model";
-import {SoldierMarineSuffixService} from "app/entities/soldier-marine-suffix";
-import {MONTHS} from "app/shared/constants/months.constants";
-import {TranslateService} from '@ngx-translate/core';
+import { IMediaProductTypeMarineSuffix } from 'app/shared/model/media-product-type-marine-suffix.model';
+import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
+import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { SearchPanelModel } from 'app/shared/model/custom/searchbar.model';
+import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
+import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
+import { TreeUtilities } from 'app/plugin/utilities/tree-utilities';
+import { ExcelService } from 'app/plugin/export-excel/excel-service';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import { ISoldierMarineSuffix } from 'app/shared/model/soldier-marine-suffix.model';
+import { SoldierMarineSuffixService } from 'app/entities/soldier-marine-suffix';
+import { MONTHS } from 'app/shared/constants/months.constants';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'mi-soldier-training-report-marine-suffix',
@@ -49,7 +49,7 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
     currentPerson: IPersonMarineSuffix;
 
     searchbarModel: SearchPanelModel[] = [];
-    done:boolean = false;
+    done: boolean = false;
     criteria: any;
 
     isAdmin: boolean;
@@ -82,7 +82,7 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
         });
-        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
+        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', criteria => {
             this.done = true;
             this.criteria = criteria.content;
             this.loadAll(criteria.content);
@@ -90,9 +90,7 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
     }
 
     loadAll(criteria?, excelExport: boolean = false) {
-
-        if(!criteria)
-            criteria = [];
+        if (!criteria) criteria = [];
 
         /*if(criteria){
             const org = criteria.find(a => a.key == 'organizationChartId.equals');
@@ -118,11 +116,11 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
                 }
             }
         }*/
-        if(excelExport){
+        if (excelExport) {
             this.soldierTrainingReportService
                 .query({
                     page: this.page - 1,
-                    size: this.itemsPerPage,
+                    size: 2000,
                     criteria,
                     sort: this.sort()
                 })
@@ -130,8 +128,7 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
                     (res: HttpResponse<ISoldierTrainingReportMarineSuffix[]>) => this.prepareForExportExcel(res.body),
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
-        }
-        else {
+        } else {
             this.soldierTrainingReportService
                 .query({
                     page: this.page - 1,
@@ -146,19 +143,14 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
         }
     }
 
-    setRoles(account: any){
-
-        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-            this.isAdmin = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
-            this.isModirAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
-            this.isModirKolAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+    setRoles(account: any) {
+        if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
             this.isKarshenasArshadAmozeshSazman = true;
 
-        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-            this.isSuperUsers = true;
+        if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
     }
 
     loadPage(page: number) {
@@ -197,15 +189,16 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
 
             this.setRoles(account);
 
-            this.searchbarModel.push(new SearchPanelModel('soldierTrainingReport','title','text', 'contains'));
-            this.searchbarModel.push(new SearchPanelModel('soldierTrainingReport','executiveTrainingCompany','text', 'contains'));
+            this.searchbarModel.push(new SearchPanelModel('soldierTrainingReport', 'title', 'text', 'contains'));
+            this.searchbarModel.push(new SearchPanelModel('soldierTrainingReport', 'executiveTrainingCompany', 'text', 'contains'));
             this.prepareSearchDate();
             this.prepareSearchMonth();
             this.soldierService.query().subscribe(
                 (res: HttpResponse<ISoldierMarineSuffix[]>) => {
                     //this.soldiers = res.body;
-                    this.searchbarModel.push(new SearchPanelModel('soldierTrainingReport','soldierId','select', 'equals', res.body, 'fullNameAndNationalId'));
-
+                    this.searchbarModel.push(
+                        new SearchPanelModel('soldierTrainingReport', 'soldierId', 'select', 'equals', res.body, 'fullNameAndNationalId')
+                    );
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
@@ -218,30 +211,31 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
         });
         //this.registerChangeInSoldierTrainingReports();
     }
-    prepareSearchOrgChart(){
-        if(this.organizationChartService.organizationchartsAll)
-        {
+    prepareSearchOrgChart() {
+        if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
             const groups = this.organizationcharts.filter(a => a.parentId == null);
-            this.searchbarModel.push(new SearchPanelModel('soldierTrainingReport', 'soldierOrganizationChartId', 'select', 'equals', groups, 'title'));
-        }
-        else {
+            this.searchbarModel.push(
+                new SearchPanelModel('soldierTrainingReport', 'soldierOrganizationChartId', 'select', 'equals', groups, 'title')
+            );
+        } else {
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
-
                     this.organizationcharts = res.body;
                     const groups = this.organizationcharts.filter(a => a.parentId == null);
-                    this.searchbarModel.push(new SearchPanelModel('soldierTrainingReport', 'soldierOrganizationChartId', 'select', 'equals', groups, 'title'));
+                    this.searchbarModel.push(
+                        new SearchPanelModel('soldierTrainingReport', 'soldierOrganizationChartId', 'select', 'equals', groups, 'title')
+                    );
                 },
-                (res: HttpErrorResponse) => this.onError(res.message));
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
         }
-
     }
-    prepareSearchDate(){
+    prepareSearchDate() {
         const dates = this.convertObjectDatesService.getYearsArray();
         this.searchbarModel.push(new SearchPanelModel('soldierTrainingReport', 'year', 'select', 'equals', dates, 'title'));
     }
-    prepareSearchMonth(){
+    prepareSearchMonth() {
         this.searchbarModel.push(new SearchPanelModel('soldierTrainingReport', 'month', 'select', 'equals', MONTHS, 'persianMonth'));
     }
 
@@ -283,7 +277,7 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
     export() {
         this.loadAll(this.criteria, true);
     }
-    prepareForExportExcel(res : ISoldierTrainingReportMarineSuffix[]){
+    prepareForExportExcel(res: ISoldierTrainingReportMarineSuffix[]) {
         let a = new ExcelService(this.jhiTranslate);
         res = this.convertObjectDatesService.changeArrayDate(res);
         let report = [];
@@ -292,20 +286,21 @@ export class SoldierTrainingReportMarineSuffixComponent implements OnInit, OnDes
             index++;
 
             let obj: Object;
-            obj = {'index': index,
-                'soldierOrganizationChartTitle': a.soldierOrganizationChartTitle,
-                'soldierFullName': a.soldierFullName,
-                'soldierNationalId': a.soldierNationalId,
-                'soldierReleaseDate': a.soldierEmploymentDate,
-                'title': a.title,
-                'personHour': a.personHour,
-                'executiveTrainingCompany': a.executiveTrainingCompany,
-                'certificateStatus': a.certificateStatus,
-                'certificateNumber': a.certificateNumber,
-                'year': a.year,
-                'month': a.month,
-                'description': a.description,
-                'createDate': a.createDate
+            obj = {
+                index: index,
+                soldierOrganizationChartTitle: a.soldierOrganizationChartTitle,
+                soldierFullName: a.soldierFullName,
+                soldierNationalId: a.soldierNationalId,
+                soldierReleaseDate: a.soldierEmploymentDate,
+                title: a.title,
+                personHour: a.personHour,
+                executiveTrainingCompany: a.executiveTrainingCompany,
+                certificateStatus: a.certificateStatus,
+                certificateNumber: a.certificateNumber,
+                year: a.year,
+                month: a.month,
+                description: a.description,
+                createDate: a.createDate
             };
             report.push(obj);
         });

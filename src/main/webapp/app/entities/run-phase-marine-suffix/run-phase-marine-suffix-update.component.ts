@@ -313,7 +313,6 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     errorMessage: string;
 
     sendForEdit() {
-        debugger;
         if (!this.runPhase.comment) {
             this.errorMessage = 'لطفا نظرات خود را نوشته سپس اقدام به ثبت جهت اصلاح نمائید.';
             return;
@@ -337,7 +336,6 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
         );
     }
     finalize() {
-        debugger;
         let isValid: boolean = true;
         this.errorMessage = '';
         this.runningSteps.forEach(a => {
@@ -374,7 +372,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
     thisIsFinalize: boolean = false;
     save() {
         this.isSaving = true;
-        debugger;
+
         let runPhaseSaveData: IRunPhaseSaveDataModel = new RunPhaseSaveDataModel();
         runPhaseSaveData.runPhaseId = this.runPhase.id;
         runPhaseSaveData.teacherId = this.runPhase.teacherId;
@@ -414,7 +412,6 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
             }
         });
 
-        debugger;
         this.subscribeToSaveResponse(this.runPhaseService.saveRunPhaseModel(runPhaseSaveData));
 
         /*if (this.runPhase.id !== undefined) {
@@ -433,7 +430,7 @@ export class RunPhaseMarineSuffixUpdateComponent implements OnInit {
 
     private onSaveSuccess(res: IRunPhaseMarineSuffix) {
         this.isSaving = false;
-        debugger;
+
         if (this.thisIsFinalize) this.previousState();
         else {
             this.runPhase = res;

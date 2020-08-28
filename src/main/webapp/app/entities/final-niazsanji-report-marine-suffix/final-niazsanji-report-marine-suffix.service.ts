@@ -15,6 +15,7 @@ import { IHomePagePersonHourChart } from 'app/shared/model/custom/home-page-pers
 import { IHomePagePersonEducationalModule } from 'app/shared/model/custom/home-page-person-educational-module';
 import { IPlanningAndRunMonthReport } from 'app/shared/model/custom/planning-month-report';
 import { IHomePageReport } from 'app/shared/model/custom/home-page-report';
+import { IFinalEffectivenessPhaseReportModel } from 'app/shared/model/custom/effectivenessPhaseModels/final-effectiveness-phase-report-model';
 
 type EntityResponseType = HttpResponse<IFinalNiazsanjiReportMarineSuffix>;
 type EntityResponseTypeReport = HttpResponse<IReportMarineSuffix>;
@@ -120,10 +121,23 @@ export class FinalNiazsanjiReportMarineSuffixService {
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
+    getFinalEffectivenessPhaseReport(reportYear: number): Observable<HttpResponse<IFinalEffectivenessPhaseReportModel[]>> {
+        let url = this.resourceUrl + '/get-final-effectiveness-phase-report/' + reportYear;
+        return this.http
+            .get<IFinalEffectivenessPhaseReportModel[]>(url, { observe: 'response' })
+            .pipe(map((res: HttpResponse<IFinalEffectivenessPhaseReportModel[]>) => this.correctNumbers(res)));
+    }
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
+    correctNumbers(results: HttpResponse<IFinalEffectivenessPhaseReportModel[]>): HttpResponse<IFinalEffectivenessPhaseReportModel[]> {
+        results.body.forEach(w => {
+            w.averageEffectiveness = w.averageEffectiveness.toString() === 'NaN' ? 0 : w.averageEffectiveness;
+            w.finishedCount = w.finishedCount.toString() === 'NaN' ? 0 : w.finishedCount;
+        });
+        return results;
+    }
     private convertDateFromClient(finalNiazsanjiReport: IFinalNiazsanjiReportMarineSuffix): IFinalNiazsanjiReportMarineSuffix {
         const copy: IFinalNiazsanjiReportMarineSuffix = Object.assign({}, finalNiazsanjiReport, {
             createDate:

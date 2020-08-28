@@ -54,7 +54,7 @@ public class JobType implements Serializable {
     @OneToMany(mappedBy = "jobType")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Job> jobs = new HashSet<>();
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -165,7 +165,7 @@ public class JobType implements Serializable {
     public void setJobs(Set<Job> jobs) {
         this.jobs = jobs;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

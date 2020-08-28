@@ -77,6 +77,10 @@ public class DesignAndPlanningCriteria implements Serializable {
 
     private LongFilter finalNiazsanjiReportId;
 
+    private LongFilter finalNiazsanjiReportOrganizationChartId;
+
+    private IntegerFilter finalNiazsanjiReportNiazsanjiYear;
+
     private LongFilter mahiatCourseId;
 
     private LongFilter courseTypeId;
@@ -440,6 +444,8 @@ public class DesignAndPlanningCriteria implements Serializable {
             Objects.equals(teachingApproachId, that.teachingApproachId) &&
             Objects.equals(teachTechniqueId, that.teachTechniqueId) &&
             Objects.equals(niazsanjiYear, that.niazsanjiYear) &&
+            Objects.equals(finalNiazsanjiReportOrganizationChartId, that.finalNiazsanjiReportOrganizationChartId) &&
+            Objects.equals(finalNiazsanjiReportNiazsanjiYear, that.finalNiazsanjiReportNiazsanjiYear) &&
             Objects.equals(effectivenessIndexId, that.effectivenessIndexId);
     }
 
@@ -472,6 +478,8 @@ public class DesignAndPlanningCriteria implements Serializable {
         organizationChartId,
         educationalModuleId,
         finalNiazsanjiReportId,
+        finalNiazsanjiReportOrganizationChartId,
+        finalNiazsanjiReportNiazsanjiYear,
         mahiatCourseId,
         courseTypeId,
         teachTypeId,
@@ -515,6 +523,8 @@ public class DesignAndPlanningCriteria implements Serializable {
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
+                (finalNiazsanjiReportOrganizationChartId != null ? "finalNiazsanjiReportOrganizationChartId=" + finalNiazsanjiReportOrganizationChartId + ", " : "") +
+                (finalNiazsanjiReportNiazsanjiYear != null ? "finalNiazsanjiReportNiazsanjiYear=" + finalNiazsanjiReportNiazsanjiYear + ", " : "") +
                 (mahiatCourseId != null ? "mahiatCourseId=" + mahiatCourseId + ", " : "") +
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (teachTypeId != null ? "teachTypeId=" + teachTypeId + ", " : "") +
@@ -535,5 +545,21 @@ public class DesignAndPlanningCriteria implements Serializable {
 
     public void setEducationalModuleTitle(StringFilter educationalModuleTitle) {
         this.educationalModuleTitle = educationalModuleTitle;
+    }
+
+    public LongFilter getFinalNiazsanjiReportOrganizationChartId() {
+        return finalNiazsanjiReportOrganizationChartId;
+    }
+
+    public void setFinalNiazsanjiReportOrganizationChartId(LongFilter finalNiazsanjiReportOrganizationChartId) {
+        this.finalNiazsanjiReportOrganizationChartId = finalNiazsanjiReportOrganizationChartId;
+    }
+
+    public IntegerFilter getFinalNiazsanjiReportNiazsanjiYear() {
+        return finalNiazsanjiReportNiazsanjiYear;
+    }
+
+    public void setFinalNiazsanjiReportNiazsanjiYear(IntegerFilter finalNiazsanjiReportNiazsanjiYear) {
+        this.finalNiazsanjiReportNiazsanjiYear = finalNiazsanjiReportNiazsanjiYear;
     }
 }

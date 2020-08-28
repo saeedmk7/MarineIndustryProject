@@ -2,7 +2,7 @@ import { Moment } from 'moment';
 import { INiazsanjiFardiMarineSuffix } from 'app/shared/model//niazsanji-fardi-marine-suffix.model';
 import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model//prioritize-request-niazsanji-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
-import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
+import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
 
 export interface IRequestNiazsanjiFardiMarineSuffix {
     id?: number;
@@ -40,6 +40,7 @@ export interface IRequestNiazsanjiFardiMarineSuffix {
     personFullName?: string;
     personName?: string;
     personFamily?: string;
+    personJobTitle?: string;
     personId?: number;
     organizationChartTitle?: string;
     organizationChartId?: number;
@@ -82,6 +83,7 @@ export class RequestNiazsanjiFardiMarineSuffix implements IRequestNiazsanjiFardi
         public personFullName?: string,
         public personName?: string,
         public personFamily?: string,
+        public personJobTitle?: string,
         public personId?: number,
         public organizationChartTitle?: string,
         public organizationChartId?: number,

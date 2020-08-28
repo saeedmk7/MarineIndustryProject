@@ -22,6 +22,7 @@ public interface SoldierMapper extends EntityMapper<SoldierDTO, Soldier> {
     SoldierDTO toDto(Soldier soldier);
 
     @Mapping(target = "soldierTrainingReports", ignore = true)
+    @Mapping(target = "soldierMediaAwarenessReports", ignore = true)
     @Mapping(source = "lastQualificationId", target = "lastQualification")
     @Mapping(source = "lastFieldOfStudyId", target = "lastFieldOfStudy")
     @Mapping(source = "jobId", target = "job")

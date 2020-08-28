@@ -39,18 +39,16 @@ export class PersonMarineSuffixService {
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {
-
-        if(req) {
+        if (req) {
             const options = createRequestOption(req);
             return this.http
-                .get<IPersonMarineSuffix[]>(this.resourceUrl, {params: options, observe: 'response'})
+                .get<IPersonMarineSuffix[]>(this.resourceUrl, { params: options, observe: 'response' })
                 .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
-        }
-        else{
+        } else {
             let url = this.resourceUrl + '/all';
             return this.http
-                .get<IPersonMarineSuffix[]>(url, {observe: 'response'})
-                .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res,true)));
+                .get<IPersonMarineSuffix[]>(url, { observe: 'response' })
+                .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res, true)));
         }
     }
 
@@ -64,8 +62,7 @@ export class PersonMarineSuffixService {
             employmentDate: person.employmentDate != null && person.employmentDate.isValid() ? person.employmentDate.toJSON() : null,
             createDate: person.createDate != null && person.createDate.isValid() ? person.createDate.toJSON() : null,
             modifyDate: person.modifyDate != null && person.modifyDate.isValid() ? person.modifyDate.toJSON() : null,
-            archivedDate: person.archivedDate != null && person.archivedDate.isValid() ? person.archivedDate.toJSON() : null,
-
+            archivedDate: person.archivedDate != null && person.archivedDate.isValid() ? person.archivedDate.toJSON() : null
         });
         return copy;
     }
@@ -76,7 +73,12 @@ export class PersonMarineSuffixService {
         res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
         res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
         res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
-        res.body.fullName = (res.body.name ? res.body.name : '') + ' ' + (res.body.family ? res.body.family : '');
+        res.body.fullName =
+            (res.body.name ? res.body.name : '') +
+            ' ' +
+            (res.body.family ? res.body.family : '') +
+            (res.body.nationalId ? ' ( ' + res.body.nationalId + ' ) ' : '') +
+            (res.body.jobTitle ? ' ( ' + res.body.jobTitle + ' ) ' : '');
         return res;
     }
 
@@ -87,10 +89,14 @@ export class PersonMarineSuffixService {
             person.createDate = person.createDate != null ? moment(person.createDate) : null;
             person.modifyDate = person.modifyDate != null ? moment(person.modifyDate) : null;
             person.archivedDate = person.archivedDate != null ? moment(person.archivedDate) : null;
-            person.fullName = (person.name ? person.name : '') + ' ' + (person.family ? person.family : '');
+            person.fullName =
+                (person.name ? person.name : '') +
+                ' ' +
+                (person.family ? person.family : '') +
+                (person.nationalId ? ' ( ' + person.nationalId + ' ) ' : '') +
+                (person.jobTitle ? ' ( ' + person.jobTitle + ' ) ' : '');
         });
-        if(isAll)
-            this.people = res.body;
+        if (isAll) this.people = res.body;
         return res;
     }
 }

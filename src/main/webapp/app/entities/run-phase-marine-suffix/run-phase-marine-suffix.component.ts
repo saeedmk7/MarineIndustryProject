@@ -292,7 +292,6 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
                 let reportIds = data.map(w => w.finalNiazsanjiReportId);
                 this.finalNiazsanjiReportPersonService.countList(reportIds).subscribe(
                     (res: HttpResponse<ICountListModel[]>) => {
-                        debugger;
                         this.countList = res.body;
                         //this.prepareForOrganizationFinal(this.countList, data);
                         this.prepareForOrganizationFinal(data);
@@ -378,7 +377,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             runPhaseOrganization.runMonthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
             runPhaseOrganization.courseTypeTitle = a.courseTypeTitle;
             let peopleCount = this.countList.find(w => w.entityId == a.finalNiazsanjiReportId);
-            debugger;
+
             if (peopleCount) runPhaseOrganization.peopleCount = peopleCount.count;
             this.runPhaseOrganizations.push(runPhaseOrganization);
         });

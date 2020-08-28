@@ -52,7 +52,7 @@ public class WorkUnit implements Serializable {
     @JsonIgnoreProperties("workUnits")
     private WorkGroup workGroup;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -151,7 +151,7 @@ public class WorkUnit implements Serializable {
     public void setWorkGroup(WorkGroup workGroup) {
         this.workGroup = workGroup;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

@@ -190,7 +190,6 @@ export class EffectivenessPhaseReportMarineSuffixComponent implements OnInit, On
     }
 
     loadAll(criteria?, excelExport: boolean = false) {
-        debugger;
         if (excelExport) {
             this.effectivenessPhaseService
                 .query({
@@ -219,7 +218,6 @@ export class EffectivenessPhaseReportMarineSuffixComponent implements OnInit, On
     }
 
     export() {
-        debugger;
         this.makeCriteria(this.criteria, true);
     }
     prepareForExportExcel(res: IEffectivenessPhaseMarineSuffix[]) {
@@ -258,7 +256,6 @@ export class EffectivenessPhaseReportMarineSuffixComponent implements OnInit, On
                 unitOfMeasurement = w;
             });
 
-            debugger;
             let obj: Object;
             obj = {
                 index: index,

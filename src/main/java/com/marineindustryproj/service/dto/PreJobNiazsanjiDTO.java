@@ -82,6 +82,8 @@ public class PreJobNiazsanjiDTO implements Serializable {
 
     private String personFamily;
 
+    private String personJobTitle;
+
     public Long getId() {
         return id;
     }
@@ -282,6 +284,14 @@ public class PreJobNiazsanjiDTO implements Serializable {
         this.personFamily = personFamily;
     }
 
+    public String getPersonJobTitle() {
+        return personJobTitle;
+    }
+
+    public void setPersonJobTitle(String personJobTitle) {
+        this.personJobTitle = personJobTitle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -330,6 +340,7 @@ public class PreJobNiazsanjiDTO implements Serializable {
             ", person=" + getPersonId() +
             ", person='" + getPersonName() + "'" +
             ", person='" + getPersonFamily() + "'" +
+            ", personJobTitle='" + getPersonJobTitle() + "'" +
             "}";
     }
 

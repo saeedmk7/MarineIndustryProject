@@ -61,7 +61,7 @@ public class BeautySpeech implements Serializable {
     @OneToMany(mappedBy = "beautySpeech")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<BeautySpeechAuthority> beautySpeechAuthorities = new HashSet<>();
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -198,7 +198,7 @@ public class BeautySpeech implements Serializable {
     public void setBeautySpeechAuthorities(Set<BeautySpeechAuthority> beautySpeechAuthorities) {
         this.beautySpeechAuthorities = beautySpeechAuthorities;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

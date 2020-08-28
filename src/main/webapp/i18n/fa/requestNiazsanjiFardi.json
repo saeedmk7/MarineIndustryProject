@@ -63,6 +63,7 @@
             "personId": "نام و نام خانوادگی",
             "personName": "نام و نام خانوادگی",
             "jobTitle": "شغل سازمانی",
+            "personJobTitle": "شغل سازمانی",
             "organizationChart": "محل خدمت",
             "organizationChartId": "محل خدمت",
             "answer": "جواب",

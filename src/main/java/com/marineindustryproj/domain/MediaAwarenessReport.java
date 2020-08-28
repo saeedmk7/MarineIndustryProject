@@ -96,7 +96,7 @@ public class MediaAwarenessReport implements Serializable {
     @JsonIgnoreProperties("mediaAwarenessReports")
     private MediaProductType mediaProductType;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -337,7 +337,7 @@ public class MediaAwarenessReport implements Serializable {
     public void setMediaProductType(MediaProductType mediaProductType) {
         this.mediaProductType = mediaProductType;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

@@ -1,0 +1,46 @@
+<form name="deleteForm">
+    <div class="modal-header">
+        <h4 class="modal-title">جزئیات</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <button class="btn btn-info float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
+        <mi-alert-error></mi-alert-error>
+        <div class="table-responsive" *ngIf="detailFinalEffectivenessPhaseReportModels">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th><span jhiTranslate="marineindustryprojApp.detailFinalEffectivenessPhaseReportModel.educationalModuleTitle">educationalModuleTitle</span> </th>
+                    <th><span jhiTranslate="marineindustryprojApp.detailFinalEffectivenessPhaseReportModel.effectivenessPhaseFinalResultPercent">effectivenessPhaseFinalResultPercent</span> </th>
+                    <th><span jhiTranslate="marineindustryprojApp.detailFinalEffectivenessPhaseReportModel.peopleCount">peopleCount</span> </th>
+                    <th><span jhiTranslate="marineindustryprojApp.detailFinalEffectivenessPhaseReportModel.finalAverage">finalAverage</span> </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let detailFinalEffectivenessPhaseReportModel of detailFinalEffectivenessPhaseReportModels; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{detailFinalEffectivenessPhaseReportModel.educationalModuleTitle}}</td>
+                    <td>{{detailFinalEffectivenessPhaseReportModel.effectivenessPhaseFinalResultPercent ? detailFinalEffectivenessPhaseReportModel.effectivenessPhaseFinalResultPercent : 0}}</td>
+                    <td>{{detailFinalEffectivenessPhaseReportModel.peopleCount ? detailFinalEffectivenessPhaseReportModel.peopleCount : 0}}</td>
+                    <td>{{detailFinalEffectivenessPhaseReportModel.finalAverage ? detailFinalEffectivenessPhaseReportModel.finalAverage : 0}}</td>
+                </tr>
+                <tr style="background-color: #63bacd">
+                    <td colspan="3">مجموع</td>
+                    <td>{{detailFinalEffectivenessPhaseReportModels | sum:'peopleCount' | number: '1.0-1'}}</td>
+                    <td>{{detailFinalEffectivenessPhaseReportModels | sum:'finalAverage' | number: '1.0-1'}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+    </div>
+</form>

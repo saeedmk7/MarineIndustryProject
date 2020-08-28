@@ -97,7 +97,7 @@ public class NiazsanjiGroup implements Serializable {
     @JsonIgnoreProperties("niazsanjiGroups")
     private ScientificWorkGroup scientificWorkGroup;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -350,7 +350,7 @@ public class NiazsanjiGroup implements Serializable {
     public void setScientificWorkGroup(ScientificWorkGroup scientificWorkGroup) {
         this.scientificWorkGroup = scientificWorkGroup;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

@@ -9,6 +9,8 @@ import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.*;
 import com.marineindustryproj.service.dto.*;
 import com.marineindustryproj.service.dto.customs.*;
+import com.marineindustryproj.service.dto.customs.EffectivenessPhaseModels.DetailFinalEffectivenessPhaseReportModel;
+import com.marineindustryproj.service.dto.customs.EffectivenessPhaseModels.FinalEffectivenessPhaseReportModel;
 import com.marineindustryproj.service.mapper.EffectivenessPhaseLevelMapper;
 import com.marineindustryproj.service.mapper.FinalNiazsanjiReportMapper;
 import com.marineindustryproj.service.mapper.OrganizationChartMapper;
@@ -24,6 +26,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.*;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -103,6 +106,8 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
 
     private final EffectivenessPhaseRepository effectivenessPhaseRepository;
 
+    private final EffectivenessPhaseQueryService effectivenessPhaseQueryService;
+
     public FinalNiazsanjiReportServiceImpl(FinalNiazsanjiReportRepository finalNiazsanjiReportRepository,
                                            FinalNiazsanjiReportMapper finalNiazsanjiReportMapper,
                                            NiazsanjiGroupService niazsanjiGroupService,
@@ -133,7 +138,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                                            NiazsanjiFardiService niazsanjiFardiService, CourseTypeService courseTypeService,
                                            EffectivenessPhaseLevelQueryService effectivenessPhaseLevelQueryService,
                                            EffectivenessPhaseLevelMapper effectivenessPhaseLevelMapper,
-                                           EffectivenessPhaseRepository effectivenessPhaseRepository) {
+                                           EffectivenessPhaseRepository effectivenessPhaseRepository, EffectivenessPhaseQueryService effectivenessPhaseQueryService) {
         this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
         this.finalNiazsanjiReportMapper = finalNiazsanjiReportMapper;
         this.niazsanjiGroupService = niazsanjiGroupService;
@@ -165,6 +170,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         this.effectivenessPhaseLevelQueryService = effectivenessPhaseLevelQueryService;
         this.effectivenessPhaseLevelMapper = effectivenessPhaseLevelMapper;
         this.effectivenessPhaseRepository = effectivenessPhaseRepository;
+        this.effectivenessPhaseQueryService = effectivenessPhaseQueryService;
     }
     /**
      * Save a finalNiazsanjiReport.
@@ -1199,6 +1205,101 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
         finalNiazsanjiReportPersonService.deleteByFinalNiazsanjiReportId(id);*/
         finalNiazsanjiReportRepository.deleteById(id);
         clearFinalNiazsanjiReportCaches();
+    }
+
+    @Override
+    public List<FinalEffectivenessPhaseReportModel> getFinalEffectivenessPhaseReport(Integer reportYear) {
+
+        List<FinalNiazsanjiReport> finalNiazsanjiReports = finalNiazsanjiReportRepository.findAllByNiazsanjiYearAndStatus(reportYear, 40);
+
+        long[] finalNiazsanjiReportPeople = finalNiazsanjiReports.stream().mapToLong(w -> w.getId()).toArray();
+
+        List<CountListModel> countListModels = finalNiazsanjiReportPersonService.countListFinalNiazsanjiReportPeople(finalNiazsanjiReportPeople);
+
+        List<FinalEffectivenessPhaseReportModel> finalEffectivenessPhaseReportModels = new ArrayList<>();
+
+        List<DetailFinalEffectivenessPhaseReportModel> levelOneDetail = new ArrayList<>();
+        List<DetailFinalEffectivenessPhaseReportModel> levelTwoDetail = new ArrayList<>();
+        List<DetailFinalEffectivenessPhaseReportModel> levelThreeDetail = new ArrayList<>();
+        List<DetailFinalEffectivenessPhaseReportModel> levelFourDetail = new ArrayList<>();
+
+        for (FinalNiazsanjiReport finalNiazsanjiReport : finalNiazsanjiReports) {
+
+            EffectivenessPhaseCriteria effectivenessPhaseCriteria = new EffectivenessPhaseCriteria();
+
+            LongFilter finalNiazsanjiReportIdFilter = new LongFilter();
+            finalNiazsanjiReportIdFilter.setEquals(finalNiazsanjiReport.getId());
+            effectivenessPhaseCriteria.setFinalNiazsanjiReportId(finalNiazsanjiReportIdFilter);
+
+            List<EffectivenessPhaseDTO> effectivenessPhases = effectivenessPhaseQueryService.findByCriteria(effectivenessPhaseCriteria);
+
+            List<CountListModel> countListModels1 = countListModels.stream().filter(w -> w.getEntityId().equals(finalNiazsanjiReport.getId())).collect(Collectors.toList());
+            CountListModel countListModel = countListModels1.get(0);
+
+
+            for (EffectivenessPhaseDTO effectivenessPhase : effectivenessPhases) {
+                DetailFinalEffectivenessPhaseReportModel detailFinalEffectivenessPhaseReportModel = new DetailFinalEffectivenessPhaseReportModel(finalNiazsanjiReport.getId(),
+                    finalNiazsanjiReport.getEducationalModule().getTitle(),
+                    finalNiazsanjiReport.getEffectivenessPhaseAverage(),
+                    countListModel.getCount());
+
+                switch (effectivenessPhase.getEffectivenessPhaseLevel().getEffectivenessLevel()){
+                    case 1:
+                        detailFinalEffectivenessPhaseReportModel.setEffectivenessLevel(1);
+                        levelOneDetail.add(detailFinalEffectivenessPhaseReportModel);
+                        break;
+                    case 2:
+                        detailFinalEffectivenessPhaseReportModel.setEffectivenessLevel(2);
+                        levelTwoDetail.add(detailFinalEffectivenessPhaseReportModel);
+                        break;
+                    case 3:
+                        detailFinalEffectivenessPhaseReportModel.setEffectivenessLevel(3);
+                        levelThreeDetail.add(detailFinalEffectivenessPhaseReportModel);
+                        break;
+                    case 4:
+                        detailFinalEffectivenessPhaseReportModel.setEffectivenessLevel(4);
+                        levelFourDetail.add(detailFinalEffectivenessPhaseReportModel);
+                        break;
+                }
+            }
+        }
+        // level one calculation
+        finalEffectivenessPhaseReportModels.add(calculateFinalResult(levelOneDetail, 1));
+        finalEffectivenessPhaseReportModels.add(calculateFinalResult(levelTwoDetail, 2));
+        finalEffectivenessPhaseReportModels.add(calculateFinalResult(levelThreeDetail, 3));
+        finalEffectivenessPhaseReportModels.add(calculateFinalResult(levelFourDetail, 4));
+
+        return finalEffectivenessPhaseReportModels;
+    }
+
+    private FinalEffectivenessPhaseReportModel calculateFinalResult(List<DetailFinalEffectivenessPhaseReportModel> levelDetail, Integer levelId){
+        long sumPeopleCount = levelDetail.stream().mapToLong(w -> w.getPeopleCount()).sum();
+
+        float levelOneDetailSum = 0;
+        for (DetailFinalEffectivenessPhaseReportModel levelOne : levelDetail) {
+            levelOne.setFinalAverage((levelOne.getPeopleCount() * levelOne.getEffectivenessPhaseFinalResultPercent()) /
+                sumPeopleCount);
+            levelOneDetailSum += levelOne.getPeopleCount() * levelOne.getEffectivenessPhaseFinalResultPercent();
+        }
+        String levelTitle = getEffectivenessLevelTitle(levelId);
+        Float averageEffectiveness = levelOneDetailSum / sumPeopleCount;
+        return new FinalEffectivenessPhaseReportModel(
+            levelId,
+            levelTitle,
+            (long) levelDetail.size(),
+            averageEffectiveness,
+            levelDetail
+        );
+    }
+
+    private String getEffectivenessLevelTitle(int levelId) {
+        EffectivenessPhaseLevelCriteria criteria = new EffectivenessPhaseLevelCriteria();
+        IntegerFilter effectivenessLevelFilter = new IntegerFilter();
+        effectivenessLevelFilter.setEquals(levelId);
+        criteria.setEffectivenessLevel(effectivenessLevelFilter);
+        List<EffectivenessPhaseLevelDTO>  effectivenessPhaseLevels = effectivenessPhaseLevelQueryService.findByCriteria(criteria);
+
+        return effectivenessPhaseLevels.get(0).getTitle();
     }
 
     private void clearFinalNiazsanjiReportCaches() {

@@ -41,6 +41,7 @@
             "personId": "نام و نام خانوادگی",
             "agents": "نمایندگان",
             "jobTitle": "شغل سازمانی",
+            "personJobTitle": "شغل سازمانی",
             "organizationChart": "محل خدمت",
             "organizationChartId": "محل خدمت"
         }

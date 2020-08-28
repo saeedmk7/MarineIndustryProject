@@ -37,6 +37,8 @@
             "runMonth": "ماه اجرا",
             "person": "افراد دوره",
             "document": "مدارک",
+            "finalNiazsanjiReportOrganizationChartId": "محل خدمت",
+            "finalNiazsanjiReportNiazsanjiYear": "سال نیازسنجی",
             "finalNiazsanjiReport": "نیازسنجی مربوطه",
             "finalNiazsanjiReportId": "شناسه یکتا",
             "mahiatCourse": "ماهیت دوره",

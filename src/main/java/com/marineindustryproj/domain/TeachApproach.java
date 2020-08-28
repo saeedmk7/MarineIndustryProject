@@ -57,7 +57,7 @@ public class TeachApproach implements Serializable {
     @OneToMany(mappedBy = "teachApproach")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<FinalOrganizationNiazsanji> finalOrganizationNiazsanjis = new HashSet<>();
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -193,7 +193,7 @@ public class TeachApproach implements Serializable {
     public void setFinalOrganizationNiazsanjis(Set<FinalOrganizationNiazsanji> finalOrganizationNiazsanjis) {
         this.finalOrganizationNiazsanjis = finalOrganizationNiazsanjis;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

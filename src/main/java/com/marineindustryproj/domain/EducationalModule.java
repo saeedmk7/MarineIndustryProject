@@ -326,7 +326,7 @@ public class EducationalModule implements Serializable {
     @JsonIgnore
     private Set<NiazsanjiGroup> niazsanjiGroups = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     public Long getId() {
         return id;
     }
@@ -1604,7 +1604,7 @@ public class EducationalModule implements Serializable {
     public void setNiazsanjiGroups(Set<NiazsanjiGroup> niazsanjiGroups) {
         this.niazsanjiGroups = niazsanjiGroups;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {
