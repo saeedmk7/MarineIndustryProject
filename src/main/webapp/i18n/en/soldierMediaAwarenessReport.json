@@ -1,0 +1,37 @@
+{
+    "marineindustryprojApp": {
+        "soldierMediaAwarenessReport": {
+            "home": {
+                "title": "Soldier Media Awareness Reports",
+                "createLabel": "Create a new Soldier Media Awareness Report",
+                "createOrEditLabel": "Create or edit a Soldier Media Awareness Report"
+            },
+            "created": "A new Soldier Media Awareness Report is created with identifier {{ param }}",
+            "updated": "A Soldier Media Awareness Report is updated with identifier {{ param }}",
+            "deleted": "A Soldier Media Awareness Report is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Soldier Media Awareness Report {{ id }}?"
+            },
+            "detail": {
+                "title": "Soldier Media Awareness Report"
+            },
+            "title": "Title",
+            "personHour": "Person Hour",
+            "executiveTrainingCompany": "Executive Training Company",
+            "certificateStatus": "Certificate Status",
+            "certificateNumber": "Certificate Number",
+            "year": "Year",
+            "month": "Month",
+            "reportTime": "Report Time",
+            "fileDoc": "File Doc",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "guid": "Guid",
+            "document": "Document",
+            "soldier": "Soldier"
+        }
+    }
+}

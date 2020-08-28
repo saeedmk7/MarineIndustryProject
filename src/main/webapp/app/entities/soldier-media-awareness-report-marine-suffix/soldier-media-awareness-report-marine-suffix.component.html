@@ -1,0 +1,145 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.home.title">Soldier Media Awareness Reports</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-soldier-media-awareness-report-marine-suffix" [routerLink]="['/soldier-media-awareness-report-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.home.createLabel">
+            Create new Soldier Media Awareness Report
+            </span>
+        </button>
+        <button class="btn btn-info btn-raised float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+
+        <search-panel [(page)]="page" [(size)]="itemsPerPage" [predicate]="predicate" [reverse]="reverse" [searchPanelModel]="searchbarModel"></search-panel>
+
+    <br/>
+    <div class="table-responsive" *ngIf="soldierMediaAwarenessReports">
+        <table class="table  table-striped table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th>ردیف</th>
+            <th><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.soldierFullName">Soldier</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.soldierNationalId">Soldier</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.soldierReleaseDate">Soldier</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="personHour"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.personHour">Person Hour</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="executiveTrainingCompany"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.executiveTrainingCompany">Executive Training Company</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.soldierOrganizationChartTitle">Soldier</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="certificateStatus"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.certificateStatus">Certificate Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="certificateNumber"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.certificateNumber">Certificate Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="year"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.year">Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="month"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.month">Month</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="reportTime"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.reportTime">Report Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fileDoc"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.fileDoc">File Doc</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="guid"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.guid">Guid</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="soldierFamily"><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.soldier">Soldier</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let soldierMediaAwarenessReport of soldierMediaAwarenessReports ;let i = index">
+                <!--<td><a [routerLink]="['/soldier-media-awareness-report-marine-suffix', soldierMediaAwarenessReport.id, 'view' ]">{{soldierMediaAwarenessReport.id}}</a></td>-->
+                <td>{{i+1}}</td>
+                <td>{{soldierMediaAwarenessReport.soldierFullName}}</td>
+                <td>{{soldierMediaAwarenessReport.soldierNationalId}}</td>
+                <td>{{soldierMediaAwarenessReport.soldierEmploymentDate}}</td>
+                <td>{{soldierMediaAwarenessReport.title}}</td>
+                <td>{{soldierMediaAwarenessReport.personHour}}</td>
+                <td>{{soldierMediaAwarenessReport.executiveTrainingCompany}}</td>
+                <td>{{soldierMediaAwarenessReport.soldierOrganizationChartTitle}}</td>
+                <td>{{soldierMediaAwarenessReport.certificateStatus}}</td>
+                <td>{{soldierMediaAwarenessReport.certificateNumber}}</td>
+                <td>{{soldierMediaAwarenessReport.year}}</td>
+                <td>{{soldierMediaAwarenessReport.month}}</td>
+                <!--<td>{{soldierMediaAwarenessReport.reportTime}}</td>
+                <td>{{soldierMediaAwarenessReport.fileDoc}}</td>
+                <td>{{soldierMediaAwarenessReport.description}}</td>
+                <td>{{soldierMediaAwarenessReport.createUserLogin}}</td>
+                <td>{{soldierMediaAwarenessReport.createDate | date:'medium'}}</td>
+                <td>{{soldierMediaAwarenessReport.modifyUserLogin}}</td>
+                <td>{{soldierMediaAwarenessReport.modifyDate | date:'medium'}}</td>
+                <td>{{soldierMediaAwarenessReport.guid}}</td>
+                <td>
+                    <div *ngIf="soldierMediaAwarenessReport.soldierId">
+                        <a [routerLink]="['../soldier-marine-suffix', soldierMediaAwarenessReport.soldierId , 'view' ]" >{{soldierMediaAwarenessReport.soldierFamily}}</a>
+                    </div>
+                </td>-->
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <a *ngIf="soldierMediaAwarenessReport.fileDoc" title="دریافت گواهینامه" [href]="soldierMediaAwarenessReport.fileDoc | safe" target="_blank"
+                           class="btn btn-default btn-sm enableLink">
+                            <fa-icon [icon]="'download'"></fa-icon>
+                        </a>
+                        <button type="submit"
+                                [routerLink]="['/soldier-media-awareness-report-marine-suffix', soldierMediaAwarenessReport.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/soldier-media-awareness-report-marine-suffix', soldierMediaAwarenessReport.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                                [routerLink]="['/', { outlets: { popup: 'soldier-media-awareness-report-marine-suffix/'+ soldierMediaAwarenessReport.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <tr class="sum-row">
+                <td colspan="5">مجموع</td>
+                <td>
+                    {{soldierMediaAwarenessReports | sum:'personHour' | number: '1.0-1'}}
+                </td>
+                <td colspan="10"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <select [(ngModel)] = "itemsPerPage">
+                        <option value="10">۱۰</option>
+                        <option value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="10">
+
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+    <div *ngIf="soldierMediaAwarenessReports && soldierMediaAwarenessReports.length">
+        <!--<div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>-->
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,192 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-soldier-media-awareness-report-marine-suffix-heading" jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.home.createOrEditLabel">Create or edit a Soldier Media Awareness Report</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!soldierMediaAwarenessReport.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="soldierMediaAwarenessReport.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.soldier"
+                           for="field_soldier">Person</label>
+                    <ng-select
+                        [items]="soldiers"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindValue="id"
+                        bindLabel="fullName"
+                        placeholder="نام و نام خانوادگی"
+                        name="soldier"
+                        id="field_soldier"
+                        [(ngModel)]="soldierMediaAwarenessReport.soldierId">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="soldierMediaAwarenessReport.title" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.personHour" for="field_personHour">Person Hour</label>
+                    <input type="number" class="form-control" name="personHour" id="field_personHour"
+                        [(ngModel)]="soldierMediaAwarenessReport.personHour" required/>
+                    <div [hidden]="!(editForm.controls.personHour?.dirty && editForm.controls.personHour?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.personHour?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.personHour?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.executiveTrainingCompany" for="field_executiveTrainingCompany">Executive Training Company</label>
+                    <input type="text" class="form-control" name="executiveTrainingCompany" id="field_executiveTrainingCompany"
+                        [(ngModel)]="soldierMediaAwarenessReport.executiveTrainingCompany" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.executiveTrainingCompany?.dirty && editForm.controls.executiveTrainingCompany?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.executiveTrainingCompany?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.certificateStatus" for="field_certificateStatus">Certificate Status</label>
+                    <input type="text" class="form-control" name="certificateStatus" id="field_certificateStatus"
+                        [(ngModel)]="soldierMediaAwarenessReport.certificateStatus" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.certificateStatus?.dirty && editForm.controls.certificateStatus?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.certificateStatus?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.certificateNumber" for="field_certificateNumber">Certificate Number</label>
+                    <input type="text" class="form-control" name="certificateNumber" id="field_certificateNumber"
+                        [(ngModel)]="soldierMediaAwarenessReport.certificateNumber" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.certificateNumber?.dirty && editForm.controls.certificateNumber?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.certificateNumber?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.year"
+                    for="field_year">Year</label>
+                    <select class="form-control" id="field_year" name="year" [required]="true"
+                            [(ngModel)]="soldierMediaAwarenessReport.year">
+                        <option [ngValue]="year" *ngFor="let year of years">{{year}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.year?.dirty && editForm.controls.year?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.year?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.year?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.month" for="field_month">Month</label>
+                    <select class="form-control" id="field_month" name="month" [required]="true"
+                            [(ngModel)]="soldierMediaAwarenessReport.month">
+                        <option [ngValue]="runMonth.id" *ngFor="let runMonth of runMonths">{{runMonth.persianMonth}}
+                        </option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.month?.dirty && editForm.controls.month?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.month?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.month?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label"
+                    jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.description"
+                    for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="soldierMediaAwarenessReport.description" maxlength="4096"/>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.maxlength"
+                        jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+               <div class="dropdown-divider pt-3 mt-4">
+                    <div class="divider-title">آپلود گواهینامه</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.fileDoc"
+                           for="file_fileDoc">File Doc</label>
+                    <div>
+                        <input type="file" id="file_fileDoc"
+                               (change)="setFileData($event, soldierMediaAwarenessReport, 'fileDoc', false)"
+                               jhiTranslate="entity.action.addblob"/>
+                    </div>
+                       <div [hidden]="!(editForm.controls.fileDoc?.dirty && editForm.controls.fileDoc?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.fileDoc?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div *ngIf="fileMessage" class="alert" style="display: inline"
+                     [ngClass]="{'alert-danger': fileHasError,'alert-success': !fileHasError}">{{fileMessage}}
+                </div>
+                <ng-container *ngIf="soldierMediaAwarenessReport.id != undefined">
+                    <input type="button" [disabled]="fileHasError || uploadingFile" (click)="uploadFile()"
+                           class="btn btn-info" style="display: inline" value="ویرایش و آپلود فایل گواهینامه"/>
+                    <div class="alert alert-warning">
+                        برای ویرایش فایل گواهینامه ابتدا فایل خود را انتخاب نمائید، سپس روی دکمه ی 'ویرایش و آپلود فایل
+                        گواهینامه' کلیک نمائید. سپس برای ثبت نهایی تغییرات روی دکمه ذخیره کلیک نمائید.
+                    </div>
+                </ng-container>
+                <div class="alert alert-info">
+                    لطفا قبل از آپلود به موارد زیر دقت فرمائید.
+                    <ol>
+                        <li>
+                            نام فایل انتخابی شما نباید شامل تعداد زیادی نقطه(.) یا کاما (,) و امثالهم باشد.
+                        </li>
+                        <li>
+                            فایل شما حتما باید دارای یکی از پسوندهای معتبر (jpeg,jpg,png,gif,bmp,TIFF,Zip,pdf) باشد.
+                        </li>
+                        <li>
+                            حجم فایل شما نباید بیش از 10 مگابایت باشد.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

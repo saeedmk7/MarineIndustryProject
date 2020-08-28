@@ -1,0 +1,95 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="soldierMediaAwarenessReport">
+            <h2><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.detail.title">Soldier Media Awareness Report</span> {{soldierMediaAwarenessReport.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.title">Title</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.personHour">Person Hour</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.personHour}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.executiveTrainingCompany">Executive Training Company</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.executiveTrainingCompany}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.certificateStatus">Certificate Status</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.certificateStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.certificateNumber">Certificate Number</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.certificateNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.year">Year</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.year}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.month">Month</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.month}}</span>
+                </dd>
+               <!--<dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.reportTime">Report Time</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.reportTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.fileDoc">File Doc</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.fileDoc}}</span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.description">Description</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.description}}</span>
+                </dd>
+                <!--<dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.guid">Guid</span></dt>
+                <dd>
+                    <span>{{soldierMediaAwarenessReport.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of soldierMediaAwarenessReport.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>-->
+                <dt><span jhiTranslate="marineindustryprojApp.soldierMediaAwarenessReport.soldier">Soldier</span></dt>
+                <dd>
+                    <div *ngIf="soldierMediaAwarenessReport.soldierId">
+                        <a [routerLink]="['/soldier-marine-suffix', soldierMediaAwarenessReport.soldierId, 'view']">{{soldierMediaAwarenessReport.soldierFamily}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/soldier-media-awareness-report-marine-suffix', soldierMediaAwarenessReport.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

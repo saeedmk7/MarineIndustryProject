@@ -11,6 +11,9 @@ upload-dir/*
 uploads/*
 runPhaseUploads/*
 jamHelpUploads/*
+soldierTrainingReportUploads/*
+soldierMediaAwarenessReportUploads/*
+evaluateCriteriaDataUploads/*
 
 ######################
 # Node
