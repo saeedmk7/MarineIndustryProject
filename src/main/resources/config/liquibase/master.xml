@@ -244,6 +244,15 @@
     <include file="config/liquibase/changelog/20200509051011_update_entity_evaluate_criteria_training.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200824182715_added_entity_SoldierMediaAwarenessReport.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200824182715_added_entity_constraints_SoldierMediaAwarenessReport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201009112555_added_entity_TeacherCriteriaGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201009112607_added_entity_EducationalCenterGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201009112754_added_entity_MonitorLearningProcess.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201009112755_added_entity_MonitorLearningProcessGrade.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201009112756_added_entity_MonitorLearningProcessLevel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201009112757_added_entity_MonitorProcessDuration.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201009112754_added_entity_constraints_MonitorLearningProcess.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201009112755_added_entity_constraints_MonitorLearningProcessGrade.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201009121011_update_entity_grades.xml" relativeToChangelogFile="false"/>
 
 
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->

@@ -11,11 +11,13 @@ import {
     educationalCenterCriteriaRoute,
     educationalCenterCriteriaPopupRoute
 } from './';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 const ENTITY_STATES = [...educationalCenterCriteriaRoute, ...educationalCenterCriteriaPopupRoute];
 
 @NgModule({
-    imports: [MarineindustryprojSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [MarineindustryprojSharedModule, NgSelectModule, FormsModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         EducationalCenterCriteriaMarineSuffixComponent,
         EducationalCenterCriteriaMarineSuffixDetailComponent,

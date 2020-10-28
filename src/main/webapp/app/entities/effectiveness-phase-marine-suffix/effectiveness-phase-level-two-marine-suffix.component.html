@@ -1,6 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="marineindustryprojApp.finalNiazsanjiReportPerson.home.level2Title">level1Title</span>
+        (<input value="{{'marineindustryprojApp.finalNiazsanjiReportPerson.home.level2Code' | translate}}" disabled  class="form-code-input"/>)
     </h2>
     <mi-alert></mi-alert>
     <div style="display: block" *ngIf="errorMessage">
@@ -53,7 +54,7 @@
                 </td>
                 <td>
                     <input type="number" disabled
-                           [value]="((finalNiazsanjiReportPerson.scoreBeforeTest ? finalNiazsanjiReportPerson.scoreBeforeTest : 1)  + (finalNiazsanjiReportPerson.scoreAfterTest ? finalNiazsanjiReportPerson.scoreAfterTest : 1)) / 2"
+                           [value]="finalNiazsanjiReportPerson.averageScore"
                            required/>
                 </td>
                 <td class="text-right">

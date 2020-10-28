@@ -101,7 +101,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.numberOfViewers" for="field_numberOfViewers">Number Of Viewers</label>
-                    <input type="number" class="form-control" name="numberOfViewers" id="field_numberOfViewers"
+                    <input type="number" class="form-control" name="numberOfViewers" id="field_numberOfViewers" (change)="loadPersonHour()"
                         [(ngModel)]="mediaAwarenessReport.numberOfViewers" required/>
                     <div [hidden]="!(editForm.controls.numberOfViewers?.dirty && editForm.controls.numberOfViewers?.invalid)">
                         <small class="form-text text-danger"
@@ -116,7 +116,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.durationOfOperation" for="field_durationOfOperation">Duration Of Operation</label>
-                    <input type="number" class="form-control" name="durationOfOperation" id="field_durationOfOperation"
+                    <input type="number" class="form-control" name="durationOfOperation" id="field_durationOfOperation" (change)="loadPersonHour()"
                         [(ngModel)]="mediaAwarenessReport.durationOfOperation" required/>
                     <div [hidden]="!(editForm.controls.durationOfOperation?.dirty && editForm.controls.durationOfOperation?.invalid)">
                         <small class="form-text text-danger"
@@ -131,7 +131,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.reportTime" for="field_reportTime">Report Time</label>
-                    <input type="number" class="form-control" name="reportTime" id="field_reportTime"
+                    <input type="number" class="form-control" name="reportTime" id="field_reportTime" (change)="loadPersonHour()"
                         [(ngModel)]="mediaAwarenessReport.reportTime" required/>
                     <div [hidden]="!(editForm.controls.reportTime?.dirty && editForm.controls.reportTime?.invalid)">
                         <small class="form-text text-danger"
@@ -146,7 +146,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.mediaAwarenessReport.personHour" for="field_personHour">Person Hour</label>
-                    <input type="number" class="form-control" name="personHour" id="field_personHour"
+                    <input type="number" class="form-control" name="personHour" id="field_personHour" disabled="disabled"
                         [(ngModel)]="mediaAwarenessReport.personHour" required/>
                     <div [hidden]="!(editForm.controls.personHour?.dirty && editForm.controls.personHour?.invalid)">
                         <small class="form-text text-danger"
@@ -182,5 +182,7 @@
                 </button>
             </div>
         </form>
+        <br/>
+        <h3 class="alert alert-info">نحوه محاسبه نفرساعت = (تعداد رویت کنندگان * روز * زمان (دقیقه)) ÷ 60</h3>
     </div>
 </div>

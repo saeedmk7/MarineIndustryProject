@@ -1,7 +1,7 @@
 import { Moment } from 'moment';
 import { ITeacherGradeScoreMarineSuffix } from 'app/shared/model//teacher-grade-score-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
-import {Grade} from "app/shared/model/enums/Grade";
+import { Grade } from 'app/shared/model/enums/Grade';
 
 export interface ITeacherGradeMarineSuffix {
     id?: number;
@@ -25,6 +25,8 @@ export interface ITeacherGradeMarineSuffix {
     teacherName?: string;
     teacherFamily?: string;
     teacherId?: number;
+    teacherCriteriaGroupTitle?: string;
+    teacherCriteriaGroupId?: number;
 }
 
 export class TeacherGradeMarineSuffix implements ITeacherGradeMarineSuffix {
@@ -49,6 +51,8 @@ export class TeacherGradeMarineSuffix implements ITeacherGradeMarineSuffix {
         public documents?: IDocumentMarineSuffix[],
         public teacherName?: string,
         public teacherFamily?: string,
-        public teacherId?: number
+        public teacherId?: number,
+        public teacherCriteriaGroupTitle?: string,
+        public teacherCriteriaGroupId?: number
     ) {}
 }

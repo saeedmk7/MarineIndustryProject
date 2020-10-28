@@ -67,6 +67,10 @@ public class EducationalCenterGradeDTO implements Serializable {
 
     private String educationalCenterName;
 
+    private Long educationalCenterGroupId;
+
+    private String educationalCenterGroupTitle;
+
     public Long getId() {
         return id;
     }
@@ -227,6 +231,22 @@ public class EducationalCenterGradeDTO implements Serializable {
         this.educationalCenterName = educationalCenterName;
     }
 
+    public Long getEducationalCenterGroupId() {
+        return educationalCenterGroupId;
+    }
+
+    public void setEducationalCenterGroupId(Long educationalCenterGroupId) {
+        this.educationalCenterGroupId = educationalCenterGroupId;
+    }
+
+    public String getEducationalCenterGroupTitle() {
+        return educationalCenterGroupTitle;
+    }
+
+    public void setEducationalCenterGroupTitle(String educationalCenterGroupTitle) {
+        this.educationalCenterGroupTitle = educationalCenterGroupTitle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -269,9 +289,10 @@ public class EducationalCenterGradeDTO implements Serializable {
             ", educationalCenterService='" + getEducationalCenterServiceTitle() + "'" +
             ", educationalCenter=" + getEducationalCenterId() +
             ", educationalCenter='" + getEducationalCenterName() + "'" +
+            ", educationalCenterGroup=" + getEducationalCenterGroupId() +
+            ", educationalCenterGroup='" + getEducationalCenterGroupTitle() + "'" +
             "}";
     }
-
     public Set<EducationalCenterGradeScoreDTO> getEducationalCenterGradeScores() {
         return educationalCenterGradeScores;
     }

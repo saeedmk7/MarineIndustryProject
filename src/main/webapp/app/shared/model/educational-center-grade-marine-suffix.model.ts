@@ -2,10 +2,8 @@ import { Moment } from 'moment';
 import { IEducationalCenterGradeScoreMarineSuffix } from 'app/shared/model//educational-center-grade-score-marine-suffix.model';
 import { IEvaluatorOpinionMarineSuffix } from 'app/shared/model//evaluator-opinion-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
-import {Grade} from "app/shared/model/enums/Grade";
-import {IKeyValue} from "app/shared/model/custom/key-value";
-
-
+import { Grade } from 'app/shared/model/enums/Grade';
+import { IKeyValue } from 'app/shared/model/custom/key-value';
 
 export interface IEducationalCenterGradeMarineSuffix {
     id?: number;
@@ -31,6 +29,8 @@ export interface IEducationalCenterGradeMarineSuffix {
     educationalCenterName?: string;
     educationalCenterId?: number;
     keyValues?: IKeyValue[];
+    educationalCenterGroupTitle?: string;
+    educationalCenterGroupId?: number;
 }
 
 export class EducationalCenterGradeMarineSuffix implements IEducationalCenterGradeMarineSuffix {
@@ -57,6 +57,8 @@ export class EducationalCenterGradeMarineSuffix implements IEducationalCenterGra
         public educationalCenterServiceId?: number,
         public educationalCenterName?: string,
         public educationalCenterId?: number,
-        public keyValues?: IKeyValue[]
+        public keyValues?: IKeyValue[],
+        public educationalCenterGroupTitle?: string,
+        public educationalCenterGroupId?: number
     ) {}
 }

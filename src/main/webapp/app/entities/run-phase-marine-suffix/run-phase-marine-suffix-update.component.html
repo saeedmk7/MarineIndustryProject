@@ -21,7 +21,10 @@
         </div>
 
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="mi-run-phase-marine-suffix-heading" jhiTranslate="marineindustryprojApp.runPhase.home.createOrEditLabel">Create or edit a Run Phase</h2>
+            <h2 id="mi-run-phase-marine-suffix-heading">
+                <span jhiTranslate="marineindustryprojApp.runPhase.home.createOrEditLabel"></span>
+                (<input value="{{'marineindustryprojApp.runPhase.home.code' | translate}}" disabled  class="form-code-input" />)
+            </h2>
             <!--<section id="tabs" class="project-tab">
                 <div class="container">-->
             <div *ngIf="isAdmin">

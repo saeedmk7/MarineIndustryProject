@@ -228,6 +228,10 @@ public class Document implements Serializable {
     @JsonIgnore
     private Set<EffectivenessPhase> effectivenessPhases = new HashSet<>();
 
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<MonitorLearningProcess> monitorLearningProcesses = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -1202,6 +1206,31 @@ public class Document implements Serializable {
         this.effectivenessPhases = effectivenessPhases;
     }
 
+    public Set<MonitorLearningProcess> getMonitorLearningProcesses() {
+        return monitorLearningProcesses;
+    }
+
+    public Document monitorLearningProcesses(Set<MonitorLearningProcess> monitorLearningProcesses) {
+        this.monitorLearningProcesses = monitorLearningProcesses;
+        return this;
+    }
+
+    public Document addMonitorLearningProcess(MonitorLearningProcess monitorLearningProcess) {
+        this.monitorLearningProcesses.add(monitorLearningProcess);
+        monitorLearningProcess.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeMonitorLearningProcess(MonitorLearningProcess monitorLearningProcess) {
+        this.monitorLearningProcesses.remove(monitorLearningProcess);
+        monitorLearningProcess.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setMonitorLearningProcesses(Set<MonitorLearningProcess> monitorLearningProcesses) {
+        this.monitorLearningProcesses = monitorLearningProcesses;
+    }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

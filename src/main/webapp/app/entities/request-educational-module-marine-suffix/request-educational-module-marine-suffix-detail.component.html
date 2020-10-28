@@ -1,166 +1,701 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <div *ngIf="requestEducationalModule" class="detail-page">
-            <h2><span jhiTranslate="marineindustryprojApp.requestEducationalModule.detail.title">Request Educational Module</span> <!--{{requestEducationalModule.id}}--></h2>
-            <mi-alert-error></mi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <div class="dropdown-divider pt-3 mt-4">
-                    <div class="divider-title">اطلاعات اولیه پودمان {{requestEducationalModule.title}}</div>
-                </div>
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.code">Code</span></dt>
-                <dd>
-                    <span>{{requestEducationalModule.code}}</span>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.title">Title</span></dt>
-                <dd>
-                    <span>{{requestEducationalModule.title}}</span>
-                </dd>
-                <dt>
-                    <span jhiTranslate="marineindustryprojApp.requestEducationalModule.learningTimeTheorical">Learning Time Theorical</span>
-                </dt>
-                <dd>
-                    <span>{{requestEducationalModule.learningTimeTheorical}}</span>
-                </dd>
-                <dt>
-                    <span jhiTranslate="marineindustryprojApp.requestEducationalModule.learningTimePractical">Learning Time Practical</span>
-                </dt>
-                <dd>
-                    <span>{{requestEducationalModule.learningTimePractical}}</span>
-                </dd>
-                <dt><span>مجموع</span></dt>
-                <dd>
-                    <span>{{requestEducationalModule.totalLearningTime}}</span>
-                </dd>
-                <dt>
-                    <span jhiTranslate="marineindustryprojApp.requestEducationalModule.skillableLevelOfSkill">Skillable Level Of Skill</span>
-                </dt>
-                <dd>
-                    <div *ngIf="requestEducationalModule.skillableLevelOfSkillId">
-                        <a [routerLink]="['/skillable-level-of-skill-marine-suffix', requestEducationalModule.skillableLevelOfSkillId, 'view']">{{requestEducationalModule.skillableLevelOfSkillTitle}}</a>
-                    </div>
-                </dd>
-                <dt>
-                    <span jhiTranslate="marineindustryprojApp.requestEducationalModule.scientificWorkGroup">Scientific Work Group</span>
-                </dt>
-                <dd>
-                    <span *ngFor="let scientificWorkGroup of requestEducationalModule.scientificWorkGroups; let last = last">
-                        <a [routerLink]="['/scientific-work-group-marine-suffix', scientificWorkGroup?.id, 'view' ]">{{scientificWorkGroup.title}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-                <div class="dropdown-divider pt-3 mt-4">
-                    <div class="divider-title">اطلاعات تکمیلی پودمان {{requestEducationalModule.title}}</div>
-                </div>
-                <dt>اهداف</dt>
-                <dd>{{requestEducationalModule.goalsText}}</dd>
-                <dt>
-                    <span jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalModuleHeadlines">Educational Module Headlines</span>
-                </dt>
-                <dd>
-                    <span>{{requestEducationalModule.educationalModuleHeadlines}}</span>
-                </dd>
-                <dt>
-                    <span jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalCenter">Educational Center</span>
-                </dt>
-                <dd>
-                    <span *ngFor="let educationalCenter of requestEducationalModule.educationalCenters; let last = last">
-                        <a [routerLink]="['/educational-center-marine-suffix', educationalCenter?.id, 'view' ]">{{educationalCenter.name}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.resource">Resource</span></dt>
-                <dd>
-                    <span *ngFor="let resource of requestEducationalModule.resources; let last = last">
-                        <a [routerLink]="['/resource-marine-suffix', resource?.id, 'view' ]">{{resource.title}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.teacher">Teacher</span></dt>
-                <dd>
-                    <span *ngFor="let teacher of requestEducationalModule.teachers; let last = last">
-                        <a [routerLink]="['/teacher-marine-suffix', teacher?.id, 'view' ]">{{teacher.name}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.goalsText">Teacher</span></dt>
-                <dd>
-                    <span>{{requestEducationalModule.teachersText}}</span>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.prerequisite">Prerequisite</span></dt>
-                <dd>
-                    <span>{{requestEducationalModule.prerequisite}}</span>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.securityLevel">Security Level</span>
-                </dt>
-                <dd>
-                    <div *ngIf="requestEducationalModule.securityLevelId">
-                        <a [routerLink]="['/security-level-marine-suffix', requestEducationalModule.securityLevelId, 'view']">{{requestEducationalModule.securityLevelTitle}}</a>
-                    </div>
-                </dd>
-
-                <dt>
-                    <span jhiTranslate="marineindustryprojApp.requestEducationalModule.evaluationMethod">Evaluation Method</span>
-                </dt>
-                <dd>
-                    <div *ngIf="requestEducationalModule.evaluationMethodId">
-                        <a [routerLink]="['/evaluation-method-marine-suffix', requestEducationalModule.evaluationMethodId, 'view']">{{requestEducationalModule.evaluationMethodTitle}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.drafters">Drafters</span></dt>
-                <dd>
-                    <span>{{requestEducationalModule.drafters}}</span>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.organization">Organization</span></dt>
-                <dd>
-                    <div *ngIf="requestEducationalModule.organizationId">
-                        <a [routerLink]="['/organization-marine-suffix', requestEducationalModule.organizationId, 'view']">{{requestEducationalModule.organizationTitle}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.centralizedCode">Centralized Code</span>
-                </dt>
-                <dd>
-                    <span>{{requestEducationalModule.centralizedCode}}</span>
-                </dd>
-
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.version">Version</span></dt>
-                <dd>
-                    <span>{{requestEducationalModule.version}}</span>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.innerCode">Inner Code</span></dt>
-                <dd>
-                    <span>{{requestEducationalModule.innerCode}}</span>
-                </dd>
-
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.moreDescription">More Description</span>
-                </dt>
-                <dd>
-                    <span>{{requestEducationalModule.moreDescription}}</span>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.createUserLogin">Create User Login</span></dt>
-                <dd>
-                    <span>{{requestEducationalModule.createUserLoginName}}</span>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.requestEducationalModule.createDate">Create Date</span></dt>
-                <dd>
-                    <span>{{requestEducationalModule.createDate}}</span>
-                </dd>
-                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">گردش درخواست و نظرات</div></div>
-                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.status">Status</span></dt>
-                <dd>
-                    <strong>{{requestEducationalModule.statusMeaning}}</strong>
-                </dd>
-                <!--<dt><span jhiTranslate="marineindustryprojApp.educationalHistory.conversation">Conversation</span></dt>-->
-                <textarea [disabled]="true" [rows]="rows" class="form-control">{{requestEducationalModule.conversation}}</textarea>
-            </dl>
+        <div *ngIf="requestEducationalModule">
+            <h2><span jhiTranslate="marineindustryprojApp.requestEducationalModule.detail.title">Request Educational Module</span>
+                <!--{{requestEducationalModule.id}}--></h2>
+            <h2 class="mi-educational-module-marine-suffix-heading">اطلاعات پودمان
+                {{requestEducationalModule.title}}</h2>
             <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th rowspan="2">طراحی پودمان های آموزشی</th>
+                            <td>سازمان صنایع دریایی</td>
+                            <td>کدفرم:</td>
+                        </tr>
+                        <tr>
+                            <td>مدیریت آموزش منابع انسانی</td>
+                            <td>
+                                <label class="form-control-label" for="field_version"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.version"></label>
+                                <input class="form-control"
+                                       style="display: inline-block !important; width: auto !important;"
+                                       [(ngModel)]="requestEducationalModule.version" name="version" id="field_version"
+                                       maxlength="50"/>
+
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.title"
+                                       for="field_title">Title</label>
+                            </th>
+                            <td>
+                                <input type="text" class="form-control" name="title" id="field_title"
+                                       [(ngModel)]="requestEducationalModule.title" [required]="isSuperUsers"
+                                       maxlength="1000"/>
+
+                            </td>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.code"
+                                       for="field_code">Code</label>
+                            </th>
+                            <td>
+                                <input type="number" class="form-control" name="code" id="field_code"
+                                       [(ngModel)]="requestEducationalModule.code" maxlength="18"
+                                       jhiMax="9999999999999999" [required]="isSuperUsers"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.courseContactsTerms"
+                                       for="field_courseContactsTerms">courseContactsTerms</label>
+                            </th>
+                            <td colspan="3">
+                                <textarea type="text" class="form-control" name="courseContactsTerms"
+                                          id="field_courseContactsTerms"
+                                          [(ngModel)]="requestEducationalModule.courseContactsTerms"
+                                          maxlength="4096"></textarea>
+
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.courseContactsTermsHelp">courseContactsTermsHelp</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <a (click)="change('people-under-training-marine-suffix')" class="form-control-label"
+                                   [ngClass]="{'enableLink': isSuperUsers}"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.peopleUnderTraining"
+                                   for="field_peopleUnderTraining">Skillable Level Of Skill</a>
+                            </th>
+                            <td colspan="3">
+
+                                <ng-select
+                                    [items]="peopleUnderTrainings"
+                                    [multiple]="true"
+                                    [closeOnSelect]="false"
+                                    [searchable]="true"
+                                    [required]="isSuperUsers"
+                                    bindLabel="fullTitle"
+                                    placeholder="انتخاب تمائید."
+                                    name="peopleUnderTraining"
+                                    id="field_peopleUnderTraining"
+                                    [(ngModel)]="requestEducationalModule.peopleUnderTrainings"></ng-select>
+                                <!--<label>{{peopleUnderTrainingDescs}}</label>-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <a (click)="change('competency-marine-suffix')" class="form-control-label"
+                                   [ngClass]="{'enableLink': isSuperUsers}"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.competency"
+                                   for="field_competency">competency</a>
+                            </th>
+                            <td colspan="3">
+                                <ng-select
+                                    [items]="competencies"
+                                    appendTo="body"
+                                    [multiple]="false"
+                                    [closeOnSelect]="true"
+                                    [searchable]="true"
+                                    [required]="isSuperUsers"
+                                    bindValue="id"
+                                    bindLabel="title"
+                                    placeholder="انتخاب تمائید."
+                                    name="competency"
+                                    id="field_competency"
+                                    [(ngModel)]="requestEducationalModule.competencyId"></ng-select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th rowspan="2">
+                                اهداف آموزشی
+                            </th>
+                            <th colspan="2">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.goalsText"
+                                       for="field_goalsText">Goals Text</label>
+                            </th>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.goalsBehavioralText"
+                                       for="field_goalsBehavioralText">goalsBehavioralText</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                    <textarea type="text" class="form-control" name="goalsText" id="field_goalsText"
+                                              [(ngModel)]="requestEducationalModule.goalsText"
+                                              rows="6"
+                                              maxlength="4096"></textarea>
+
+                            </td>
+                            <td>
+                                    <textarea type="text" class="form-control" name="goalsBehavioralText"
+                                              id="field_goalsBehavioralText"
+                                              rows="6"
+                                              [(ngModel)]="requestEducationalModule.goalsBehavioralText"
+                                              maxlength="4096"></textarea>
+
+                            </td>
+
+                        </tr>
+
+                    </table>
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th [attr.rowspan]="headlineRowSpan">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.headline"
+                                >headline</label>
+                            </th>
+                            <th rowspan="2">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.headline.row"
+                                >row</label>
+                            </th>
+                            <th [attr.colspan]="headlineLevelKeys.length">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.headline.headlineLevel"
+                                >headlineLevel</label>
+                            </th>
+                            <th rowspan="2">
+                                سرفصل
+                            </th>
+                            <th [attr.colspan]="headlineScopeKeys.length">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.headline.headlineScope"
+                                >headlineScope</label>
+                            </th>
+                            <th rowspan="2">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.headline.totalHour"
+                                >totalHour</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th *ngFor="let headlineLevel of headlineLevelKeys"
+                                jhiTranslate="{{'marineindustryprojApp.HeadlineLevel.' + headlineLevel}}"></th>
+                            <th *ngFor="let headlineScope of headlineScopeKeys"
+                                jhiTranslate="{{'marineindustryprojApp.HeadlineScope.' + headlineScope}}"></th>
+                        </tr>
+                        <tr *ngFor="let item of requestEducationalModule.headlines; let i = index">
+                            <td>
+                                {{i+1}}
+                            </td>
+                            <td *ngFor="let headlineLevel of headlineLevelKeys; let count = index">
+                                <!--<input type="radio" [name]="item.headlineLevel" [(ngModel)]="item.headlineLevel"
+                                       [value]="headlineLevel" [ngModelOptions]="{standalone: true}"/>-->
+                                <input type="radio" class="form-radio" [name]="'headlineLevel_' + item.id"
+                                       [id]="'headlineLevel_' + headlineLevel + '_' + count" [value]="headlineLevel"
+                                       [checked]="item.headlineLevel == headlineLevel">
+                                <!--name="headlineLevel" [value]="headlineLevel" [checked]="headlineLevel == item.headlineLevel"-->
+                            </td>
+                            <td>
+                                <textarea class="form-control" [name]="item.title" required [(ngModel)]="item.title"
+                                          [ngModelOptions]="{standalone: true}"></textarea>
+                            </td>
+                            <td *ngFor="let headlineScope of headlineScopeKeys; let count = index">
+                                <!--<input type="radio" [name]="item.headlineScope" [(ngModel)]="item.headlineScope"
+                                       [value]="headlineScope" [ngModelOptions]="{standalone: true}"/>-->
+                                <input type="radio" class="form-radio" [name]="'headlineScope_' + item.id"
+                                       [id]="'headlineScope_' + headlineScope + '_' + count" [value]="headlineScope"
+                                       [checked]="item.headlineScope == headlineScope">
+                                <!-- name="headlineScope" [value]="headlineScope" [checked]="headlineScope == item.headlineScope"-->
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" [name]="item.totalHour"
+                                       [(ngModel)]="item.totalHour" [ngModelOptions]="{standalone: true}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td [attr.colspan]="headlineScopeKeys.length + headlineScopeKeys.length + 3">
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.headlineHelp">headlineHelp</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th>مدت پودمان</th>
+                            <th>مدت کل دوره</th>
+                            <td>
+                                <input type="number" class="form-control" [disabled]="true"
+                                       [value]="(requestEducationalModule.learningTimePractical ? requestEducationalModule.learningTimePractical : 0) + (requestEducationalModule.learningTimeTheorical ? requestEducationalModule.learningTimeTheorical : 0)"/>
+                            </td>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.learningTimeTheorical"
+                                       for="field_learningTimeTheorical">Learning Time Theorical</label>
+                            </th>
+                            <td>
+                                <input type="number" class="form-control" name="learningTimeTheorical"
+                                       id="field_learningTimeTheorical"
+                                       [(ngModel)]="requestEducationalModule.learningTimeTheorical"
+                                       [required]="isSuperUsers"/>
+
+                            </td>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.learningTimePractical"
+                                       for="field_learningTimePractical">Learning Time Practical</label>
+                            </th>
+                            <td>
+                                <input type="number" class="form-control" name="learningTimePractical"
+                                       id="field_learningTimePractical"
+                                       [(ngModel)]="requestEducationalModule.learningTimePractical"
+                                       [required]="isSuperUsers"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.prerequisite"
+                                       for="field_prerequisite">Prerequisite</label>
+                            </th>
+                            <td colspan="6">
+                                <input type="text" class="form-control" name="prerequisite" id="field_prerequisite"
+                                       [(ngModel)]="requestEducationalModule.prerequisite"
+                                       maxlength="4096"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <a (click)="change('resource-marine-suffix')"
+                                   [ngClass]="{'enableLink': isSuperUsers}"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.resource"
+                                   for="field_resource">Resource</a>
+                            </th>
+                            <td colspan="6">
+                                <ng-select
+                                    [items]="resources"
+                                    [multiple]="true"
+                                    [closeOnSelect]="true"
+                                    [searchable]="true"
+                                    [required]="false"
+                                    bindLabel="title"
+                                    placeholder="انتخاب نمائید."
+                                    name="resource"
+                                    id="field_resource"
+                                    [(ngModel)]="requestEducationalModule.resources">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <a (click)="change('security-level-marine-suffix')" class="form-control-label"
+                                   [ngClass]="{'enableLink': isSuperUsers}"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.securityLevel"
+                                   for="field_securityLevel">Security Level</a>
+
+                            </th>
+                            <td colspan="6">
+                                <select class="form-control" id="field_securityLevel" name="securityLevel"
+                                        [(ngModel)]="requestEducationalModule.securityLevelId">
+                                    <option [ngValue]="securityLevelOption.id"
+                                            *ngFor="let securityLevelOption of securitylevels;">
+                                        {{securityLevelOption.title}}
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <a (click)="change('skillable-level-of-skill-marine-suffix')" class="form-control-label"
+                                   [ngClass]="{'enableLink': isSuperUsers}"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.skillableLevelOfSkill"
+                                   for="field_skillableLevelOfSkill">Skillable Level Of Skill</a>
+
+                            </th>
+                            <td colspan="6">
+                                <ng-select
+                                    [items]="skillablelevelofskills"
+                                    [multiple]="false"
+                                    [closeOnSelect]="false"
+                                    [searchable]="true"
+                                    [required]="isSuperUsers"
+                                    bindValue="id"
+                                    bindLabel="title"
+                                    placeholder="انتخاب تمائید."
+                                    name="skillableLevelOfSkill"
+                                    id="field_skillableLevelOfSkill"
+                                    [(ngModel)]="requestEducationalModule.skillableLevelOfSkillId">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <a (click)="change('teaching-approach-marine-suffix')" class="form-control-label"
+                                   [ngClass]="{'enableLink': isSuperUsers}"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.teachingApproach"
+                                   for="field_teachingApproach">Skillable Level Of Skill</a>
+                            </th>
+                            <td colspan="6">
+
+                                <ng-select
+                                    [items]="teachingApproachs"
+                                    appendTo="body"
+                                    [multiple]="true"
+                                    [closeOnSelect]="false"
+                                    [searchable]="true"
+                                    [required]="isSuperUsers"
+                                    bindLabel="title"
+                                    placeholder="انتخاب تمائید."
+                                    name="teachingApproach"
+                                    id="field_teachingApproach"
+                                    [(ngModel)]="requestEducationalModule.teachingApproaches"></ng-select>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th>
+                                تجهیزات آموزشی و کمک آموزشی
+                            </th>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.neededSoftwares"
+                                       for="field_neededSoftwares">neededSoftwares</label>
+                            </th>
+                            <td>
+                                <textarea type="text" class="form-control" name="neededSoftwares"
+                                          id="field_neededSoftwares"
+                                          [(ngModel)]="requestEducationalModule.neededSoftwares"
+                                          maxlength="4096"></textarea>
+
+                            </td>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.neededHardware"
+                                       for="field_neededHardware">neededHardware</label>
+                            </th>
+                            <td>
+                                <textarea type="text" class="form-control" name="neededHardware"
+                                          id="field_neededHardware"
+                                          [(ngModel)]="requestEducationalModule.neededHardware"
+                                          maxlength="4096"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.restriction">restriction</label>
+                            </th>
+                            <th>
+                                <a (click)="change('restriction-marine-suffix')"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.restrictions"
+                                   for="field_restriction">Restriction</a>
+                            </th>
+                            <td>
+                                <ng-select
+                                    [items]="restrictions"
+                                    [multiple]="true"
+                                    [closeOnSelect]="true"
+                                    [searchable]="true"
+                                    [required]="false"
+                                    bindLabel="title"
+                                    placeholder="محدودیت ها"
+                                    name="restriction"
+                                    id="field_restriction"
+                                    [(ngModel)]="requestEducationalModule.restrictions"></ng-select>
+                                <!--<label jhiTranslate="marineindustryprojApp.requestEducationalModule.restrictionHelp"></label>-->
+                            </td>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.restrictionDescription"
+                                       for="field_restrictionDescription">restrictionDescription</label>
+                            </th>
+                            <td>
+                                <textarea type="text" class="form-control" name="restrictionDescription"
+                                          id="field_restrictionDescription"
+                                          [(ngModel)]="requestEducationalModule.restrictionDescription"
+                                          maxlength="4096"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <a (click)="change('educational-center-marine-suffix')"
+                                   [ngClass]="{'enableLink': isSuperUsers}"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalCenter"
+                                   for="field_educationalCenter">Educational Center</a>
+                            </th>
+                            <td colspan="6">
+                                <ng-select
+                                    [items]="educationalcenters"
+                                    [multiple]="true"
+                                    [closeOnSelect]="true"
+                                    [searchable]="true"
+                                    [required]="false"
+                                    bindLabel="name"
+                                    placeholder="انتخاب نمائید."
+                                    name="educationalcenter"
+                                    id="field_educationalCenter"
+                                    [(ngModel)]="requestEducationalModule.educationalCenters"></ng-select>
+                                <label
+                                    jhiTranslate="marineindustryprojApp.requestEducationalModule.educationalCenterHelp"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                مشخصات مدرس
+                            </th>
+                            <th>
+                                <a (click)="change('teacher-marine-suffix')" [ngClass]="{'enableLink': isSuperUsers}"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.teacher"
+                                   for="field_teacher">Teacher</a>
+
+                            </th>
+                            <td>
+                                <ng-select
+                                    [items]="teachers"
+                                    [multiple]="true"
+                                    [closeOnSelect]="true"
+                                    [searchable]="true"
+                                    [required]="false"
+                                    bindLabel="fullName"
+                                    placeholder="مدرسین"
+                                    name="teacher"
+                                    id="field_teacher"
+                                    [(ngModel)]="requestEducationalModule.teachers">
+
+                            </td>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.teachersText"
+                                       for="field_teachersText">Teachers Text</label>
+                            </th>
+                            <td>
+                                <textarea class="form-control" name="teachersText" id="field_teachersText"
+                                          [(ngModel)]="requestEducationalModule.teachersText"
+                                          [placeholder]="'marineindustryprojApp.requestEducationalModule.teachersTextHelp' | translate"
+                                          maxlength="4096"></textarea>
+
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.teachersTextHelp"
+                                >teachersTextHelp</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th>
+                                <a (click)="change('effectiveness-level-marine-suffix')" class="form-control-label"
+                                   [ngClass]="{'enableLink': isSuperUsers}"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.effectivenessLevel"
+                                   for="field_effectivenessLevel">effectivenessLevel</a>
+                            </th>
+                            <td colspan="6">
+
+                                <ng-select
+                                    [items]="effectivenessLevels"
+                                    appendTo="body"
+                                    [multiple]="true"
+                                    [closeOnSelect]="false"
+                                    [searchable]="true"
+                                    [required]="isSuperUsers"
+                                    bindLabel="title"
+                                    placeholder="انتخاب تمائید."
+                                    name="effectivenessLevel"
+                                    id="field_effectivenessLevel"
+                                    [(ngModel)]="requestEducationalModule.effectivenessLevels"></ng-select>
+                                <label
+                                    jhiTranslate="marineindustryprojApp.requestEducationalModule.effectivenessLevelHelp"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <a (click)="change('evaluation-method-marine-suffix')" class="form-control-label"
+                                   [ngClass]="{'enableLink': isSuperUsers}"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.evaluationMethod"
+                                   for="field_evaluationMethod">Evaluation Method</a>
+
+                            </th>
+                            <td colspan="6">
+                                <select class="form-control" id="field_evaluationMethod" name="evaluationMethod"
+                                        [(ngModel)]="requestEducationalModule.evaluationMethodId">
+                                    <option [ngValue]="evaluationMethodOption.id"
+                                            *ngFor="let evaluationMethodOption of evaluationmethods;">
+                                        {{evaluationMethodOption.title}}
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <a (click)="change('assessment-method-marine-suffix')" class="form-control-label"
+                                   [ngClass]="{'enableLink': isSuperUsers}"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.assessmentMethod"
+                                   for="field_assessmentMethod">assessmentMethod</a>
+                            </th>
+                            <td colspan="6">
+
+                                <ng-select
+                                    [items]="assessmentMethods"
+                                    appendTo="body"
+                                    [multiple]="true"
+                                    [closeOnSelect]="false"
+                                    [searchable]="true"
+                                    [required]="isSuperUsers"
+                                    bindLabel="title"
+                                    placeholder="انتخاب تمائید."
+                                    name="assessmentMethod"
+                                    id="field_assessmentMethod"
+                                    [(ngModel)]="requestEducationalModule.assessmentMethods"></ng-select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <a (click)="change('effectiveness-index-marine-suffix')" class="form-control-label"
+                                   [ngClass]="{'enableLink': isSuperUsers}"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.effectivenessIndex"
+                                   for="field_effectivenessIndex">effectivenessIndex</a>
+                            </th>
+                            <td colspan="6">
+
+                                <ng-select
+                                    [items]="effectivenessIndeces"
+                                    appendTo="body"
+                                    [multiple]="true"
+                                    [closeOnSelect]="false"
+                                    [searchable]="true"
+                                    [required]="isSuperUsers"
+                                    bindLabel="title"
+                                    placeholder="انتخاب تمائید."
+                                    name="effectivenessIndex"
+                                    id="field_effectivenessIndex"
+                                    [(ngModel)]="requestEducationalModule.effectivenessIndices"></ng-select>
+                                <!--<label jhiTranslate="marineindustryprojApp.requestEducationalModule.effectivenessIndexHelp"></label>-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <a (click)="change('scientific-work-group-marine-suffix')"
+                                   [ngClass]="{'enableLink': isSuperUsers}"
+                                   jhiTranslate="marineindustryprojApp.requestEducationalModule.scientificWorkGroup"
+                                   for="field_scientificWorkGroup">Scientific Work Group</a>
+                            </th>
+                            <td colspan="6">
+                                <ng-select
+                                    [items]="scientificworkgroups"
+                                    [multiple]="true"
+                                    [closeOnSelect]="true"
+                                    [searchable]="true"
+                                    [required]="isSuperUsers"
+                                    bindLabel="title"
+                                    placeholder="'گروه های علمی شغلی"
+                                    name="scientificWorkGroup"
+                                    id="field_scientificworkgroup"
+                                    [(ngModel)]="requestEducationalModule.scientificWorkGroups">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.recommendDate"
+                                       for="field_recommendDate">recommendDate</label>
+                            </th>
+                            <td colspan="2">
+                                <kendo-maskedtextbox
+                                    [includeLiterals]="true"
+                                    [(ngModel)]="requestEducationalModule.recommendDatePersian"
+                                    name="recommendDate"
+                                    class="form-control"
+                                    id="field_recommendDate"
+                                    mask="0000/00/00">
+                                </kendo-maskedtextbox>
+                                <span *ngIf="dateRecommendDateValid == 1" class="alert-success">تاریخ معتبر است</span>
+                                <span *ngIf="dateRecommendDateValid == 2" class="alert-danger">تاریخ نامعتبر است</span>
+                            </td>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.timePassed"
+                                       for="field_timePassed">timePassed</label>
+                            </th>
+                            <td>
+                                <kendo-maskedtextbox
+                                    [includeLiterals]="true"
+                                    [(ngModel)]="requestEducationalModule.timePassedPersian"
+                                    name="timePassed"
+                                    class="form-control"
+                                    id="field_timePassed"
+                                    mask="0000/00/00">
+                                </kendo-maskedtextbox>
+                                <span *ngIf="dateTimePassedValid == 1" class="alert-success">تاریخ معتبر است</span>
+                                <span *ngIf="dateTimePassedValid == 2" class="alert-danger">تاریخ نامعتبر است</span>
+                            </td>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.credit"
+                                       for="field_credit">credit</label>
+                            </th>
+                            <td>
+                                <kendo-maskedtextbox
+                                    [includeLiterals]="true"
+                                    [(ngModel)]="requestEducationalModule.creditPersian"
+                                    name="timePassed"
+                                    class="form-control"
+                                    id="field_credit"
+                                    mask="0000/00/00">
+                                </kendo-maskedtextbox>
+                                <span *ngIf="dateCreditValid == 1" class="alert-success">تاریخ معتبر است</span>
+                                <span *ngIf="dateCreditValid == 2" class="alert-danger">تاریخ نامعتبر است</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.moreDescription"
+                                       for="field_moreDescription">More Description</label>
+
+                            </th>
+                            <td colspan="6">
+                                    <textarea class="form-control" name="moreDescription" id="field_moreDescription"
+                                              [(ngModel)]="requestEducationalModule.moreDescription"
+                                              maxlength="4096"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.requestEducationalModule.drafters"
+                                       for="field_drafters">Drafters</label>
+
+                            </th>
+                            <td colspan="6">
+                                <input type="text" class="form-control" name="drafters" id="field_drafters"
+                                       [(ngModel)]="requestEducationalModule.drafters" maxlength="100"/>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div>
+                    <div class="dropdown-divider pt-3 mt-4">
+                        <div class="divider-title">گردش درخواست و نظرات</div>
+                    </div>
+                    <span jhiTranslate="marineindustryprojApp.educationalHistory.status">Status</span>
+                    <strong>{{requestEducationalModule.statusMeaning}}</strong>
+                    <!--<dt><span jhiTranslate="marineindustryprojApp.educationalHistory.conversation">Conversation</span></dt>-->
+                    <textarea [disabled]="true" [rows]="rows" class="form-control">{{requestEducationalModule.conversation}}</textarea>
+                </div>
+            </div>
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-           <!-- <button type="button"
-                    [routerLink]="['/request-educational-module-marine-suffix', requestEducationalModule.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>-->
-        </div>
         </div>
     </div>
 </div>

@@ -100,6 +100,9 @@ public class TeacherGrade implements Serializable {
     @JsonIgnoreProperties("teacherGrades")
     private Teacher teacher;
 
+    @ManyToOne
+    @JsonIgnoreProperties("teacherGrades")
+    private TeacherCriteriaGroup teacherCriteriaGroup;
 
     public Long getId() {
         return id;
@@ -354,6 +357,19 @@ public class TeacherGrade implements Serializable {
         this.teacher = teacher;
     }
 
+    public TeacherCriteriaGroup getTeacherCriteriaGroup() {
+        return teacherCriteriaGroup;
+    }
+
+    public TeacherGrade teacherCriteriaGroup(TeacherCriteriaGroup teacherCriteriaGroup) {
+        this.teacherCriteriaGroup = teacherCriteriaGroup;
+        return this;
+    }
+
+    public void setTeacherCriteriaGroup(TeacherCriteriaGroup teacherCriteriaGroup) {
+        this.teacherCriteriaGroup = teacherCriteriaGroup;
+    }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

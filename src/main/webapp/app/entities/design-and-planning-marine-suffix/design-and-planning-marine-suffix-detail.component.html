@@ -7,7 +7,14 @@
             <dl class="row-md jh-entity-details">
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات دوره</div></div>
                 <dt>عنوان دوره</dt>
-                <dd>{{finalNiazsanjiReport.educationalModuleTitle}}</dd>
+                <dd>
+                    {{finalNiazsanjiReport.educationalModuleTitle}}
+                    (<strong>
+                    برای مشاهده جزئیات پودمان
+                    <a class="enableLink" [href]="'#/educational-module-marine-suffix/' + finalNiazsanjiReport.educationalModuleId + '/view'">اینجا</a>
+                       کلیک کنید.
+                    </strong>)
+                </dd>
                 <dt>شناسه دوره</dt>
                 <dd>{{finalNiazsanjiReport.educationalModuleCode}}</dd>
                 <dt>ماه اجرا</dt>

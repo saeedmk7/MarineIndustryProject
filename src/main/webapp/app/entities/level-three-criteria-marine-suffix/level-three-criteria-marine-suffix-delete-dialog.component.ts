@@ -49,7 +49,7 @@ export class LevelThreeCriteriaMarineSuffixDeletePopupComponent implements OnIni
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(LevelThreeCriteriaMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.levelThreeCriteria = levelThreeCriteria;
                 this.ngbModalRef.result.then(

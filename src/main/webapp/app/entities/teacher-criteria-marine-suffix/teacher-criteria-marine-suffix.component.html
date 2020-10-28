@@ -16,6 +16,7 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="group"><span jhiTranslate="marineindustryprojApp.teacherCriteria.group">Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="teacherCriteriaGroupTitle"><span jhiTranslate="marineindustryprojApp.teacherCriteria.teacherCriteriaGroup">Teacher Criteria Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.teacherCriteria.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="displayOrder"><span jhiTranslate="marineindustryprojApp.teacherCriteria.displayOrder">Display Order</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="weight"><span jhiTranslate="marineindustryprojApp.teacherCriteria.weight">Weight</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -34,6 +35,11 @@
             <tr *ngFor="let teacherCriteria of teacherCriteria ;trackBy: trackId">
                 <td><a [routerLink]="['/teacher-criteria-marine-suffix', teacherCriteria.id, 'view' ]">{{teacherCriteria.id}}</a></td>
                 <!--<td>{{teacherCriteria.group}}</td>-->
+                <td>
+                    <div *ngIf="teacherCriteria.teacherCriteriaGroupId">
+                        <a [routerLink]="['../teacher-criteria-group-marine-suffix', teacherCriteria.teacherCriteriaGroupId , 'view' ]" >{{teacherCriteria.teacherCriteriaGroupTitle}}</a>
+                    </div>
+                </td>
                 <td>{{teacherCriteria.title}}</td>
                 <td>{{teacherCriteria.displayOrder}}</td>
                 <td>{{teacherCriteria.weight}}</td>

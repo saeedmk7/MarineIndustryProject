@@ -63,6 +63,8 @@ public class TeacherGradeCriteria implements Serializable {
 
     private LongFilter teacherId;
 
+    private LongFilter teacherCriteriaGroupId;
+
     public LongFilter getId() {
         return id;
     }
@@ -199,6 +201,14 @@ public class TeacherGradeCriteria implements Serializable {
         this.teacherId = teacherId;
     }
 
+    public LongFilter getTeacherCriteriaGroupId() {
+        return teacherCriteriaGroupId;
+    }
+
+    public void setTeacherCriteriaGroupId(LongFilter teacherCriteriaGroupId) {
+        this.teacherCriteriaGroupId = teacherCriteriaGroupId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -226,7 +236,8 @@ public class TeacherGradeCriteria implements Serializable {
             Objects.equals(modifyDate, that.modifyDate) &&
             Objects.equals(teacherGradeScoreId, that.teacherGradeScoreId) &&
             Objects.equals(documentId, that.documentId) &&
-            Objects.equals(teacherId, that.teacherId);
+            Objects.equals(teacherId, that.teacherId) &&
+            Objects.equals(teacherCriteriaGroupId, that.teacherCriteriaGroupId);
     }
 
     @Override
@@ -248,7 +259,8 @@ public class TeacherGradeCriteria implements Serializable {
         modifyDate,
         teacherGradeScoreId,
         documentId,
-        teacherId
+        teacherId,
+        teacherCriteriaGroupId
         );
     }
 
@@ -272,6 +284,7 @@ public class TeacherGradeCriteria implements Serializable {
                 (teacherGradeScoreId != null ? "teacherGradeScoreId=" + teacherGradeScoreId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
+                (teacherCriteriaGroupId != null ? "teacherCriteriaGroupId=" + teacherCriteriaGroupId + ", " : "") +
             "}";
     }
 

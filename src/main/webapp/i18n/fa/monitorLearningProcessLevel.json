@@ -1,0 +1,31 @@
+{
+    "marineindustryprojApp": {
+        "monitorLearningProcessLevel": {
+            "home": {
+                "title": "مراحل پایش",
+                "createLabel": "جدید",
+                "createOrEditLabel": " مراحل پایش"
+            },
+            "created": "مراحل پایش با شناسه {{ param }} ایجاد شد.",
+            "updated": "مراحل پایش با شناسه {{ param }} ویرایش شد.",
+            "deleted": "مراحل پایش با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف مراحل پایش با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات مراحل پایش"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "goal": "هدف",
+            "formula": "شاخص ها",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "guid": "Guid",
+            "monitorLearningProcessGrade": "Monitor Learning Process Grade"
+        }
+    }
+}

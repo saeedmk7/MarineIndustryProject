@@ -131,6 +131,12 @@ import { MarineindustryprojReportGeneratorMarineSuffixModule } from 'app/entitie
 import { MarineindustryprojReportGeneratorAuthorityMarineSuffixModule } from 'app/entities/report-generator-authority-marine-suffix/report-generator-authority-marine-suffix.module';
 import { MarineindustryprojFinalEffectivenessPhaseReportMarineSuffixModule } from 'app/entities/final-effectiveness-phase-report-marine-suffix/final-effectiveness-phase-report-marine-suffix.module';
 import { MarineindustryprojSoldierMediaAwarenessReportMarineSuffixModule } from 'app/entities/soldier-media-awareness-report-marine-suffix/soldier-media-awareness-report-marine-suffix.module';
+import { MarineindustryprojEducationalCenterGroupMarineSuffixModule } from 'app/entities/educational-center-group-marine-suffix/educational-center-group-marine-suffix.module';
+import { MarineindustryprojTeacherCriteriaGroupMarineSuffixModule } from 'app/entities/teacher-criteria-group-marine-suffix/teacher-criteria-group-marine-suffix.module';
+import { MarineindustryprojMonitorLearningProcessGradeMarineSuffixModule } from 'app/entities/monitor-learning-process-grade-marine-suffix/monitor-learning-process-grade-marine-suffix.module';
+import { MarineindustryprojMonitorLearningProcessLevelMarineSuffixModule } from 'app/entities/monitor-learning-process-level-marine-suffix/monitor-learning-process-level-marine-suffix.module';
+import { MarineindustryprojMonitorLearningProcessMarineSuffixModule } from 'app/entities/monitor-learning-process-marine-suffix/monitor-learning-process-marine-suffix.module';
+import { MarineindustryprojMonitorProcessDurationMarineSuffixModule } from 'app/entities/monitor-process-duration-marine-suffix/monitor-process-duration-marine-suffix.module';
 
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
@@ -264,7 +270,14 @@ import { MarineindustryprojSoldierMediaAwarenessReportMarineSuffixModule } from 
         MarineindustryprojLevelThreeScoreMarineSuffixModule,
         MarineindustryprojReportGeneratorMarineSuffixModule,
         MarineindustryprojReportGeneratorAuthorityMarineSuffixModule,
-        MarineindustryprojFinalEffectivenessPhaseReportMarineSuffixModule
+        MarineindustryprojFinalEffectivenessPhaseReportMarineSuffixModule,
+        MarineindustryprojEducationalCenterGroupMarineSuffixModule,
+        MarineindustryprojTeacherCriteriaGroupMarineSuffixModule,
+        MarineindustryprojMonitorLearningProcessGradeMarineSuffixModule,
+        MarineindustryprojMonitorLearningProcessLevelMarineSuffixModule,
+        MarineindustryprojMonitorLearningProcessMarineSuffixModule,
+        MarineindustryprojMonitorProcessDurationMarineSuffixModule,
+
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

@@ -3,8 +3,9 @@
         "evaluateCriteriaData": {
             "home": {
                 "title": "شاخص های ارزیابی آموزش",
+                "code": "68-PR-10-5-05-00/FO-35-00",
                 "createLabel": "جدید",
-                "createOrEditLabel": "شاخص ارزیابی آموزش"
+                "createOrEditLabel": "فرم تعریف شاخص ارزیابی آموزش"
             },
             "created": "شاخص ارزیابی آموزش با شناسه {{ param }} ایجاد شد.",
             "updated": "شاخص ارزیابی آموزش با شناسه {{ param }} ویرایش شد.",
@@ -16,7 +17,7 @@
                 "title": "جزئیات شاخص ارزیابی آموزش"
             },
             "title": "Title",
-            "qualityGoal": "اهداف کیفی(کلام مرتبط با خط مشی)",
+            "qualityGoal": "اهداف کیفی(کلان مرتبط با خط مشی)",
             "firstNumber": "عدد اول",
             "secondNumber": "عدد دوم",
             "thirdNumber": "عدد سوم",

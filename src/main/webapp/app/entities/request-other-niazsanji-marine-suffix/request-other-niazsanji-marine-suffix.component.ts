@@ -270,16 +270,13 @@ export class RequestOtherNiazsanjiMarineSuffixComponent implements OnInit, OnDes
             const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
             if (org) a.organizationChartTitle = org.fullTitle;
 
-            let person = this.people.find(w => w.id == a.personId);
-
             let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
-
             let obj: Object;
             obj = {
                 index: index,
                 organizationChart: a.organizationChartTitle,
-                person: person.fullName,
-                jobTitle: person.jobTitle,
+                person: a.personFullName,
+                jobTitle: a.personJobTitle,
                 educationalModuleTitle: educationalModule.title,
                 educationalModuleId: educationalModule.code,
                 skillLevelOfSkillTitle: educationalModule.skillableLevelOfSkillTitle,

@@ -49,7 +49,7 @@ export class EffectivenessPhaseLevelMarineSuffixDeletePopupComponent implements 
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(EffectivenessPhaseLevelMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.effectivenessPhaseLevel = effectivenessPhaseLevel;
                 this.ngbModalRef.result.then(

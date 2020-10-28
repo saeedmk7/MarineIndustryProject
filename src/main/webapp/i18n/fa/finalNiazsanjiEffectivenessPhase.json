@@ -3,9 +3,10 @@
     "marineindustryprojApp": {
         "finalNiazsanjiEffectivenessPhase" : {
             "home": {
-                "title": "اثربخشی",
+                "title": "فرم تعیین سطح اثربخشی دوره های اجرا شده",
+                "code": "68-PR-10-5-05-00/FO-29-00",
                 "createLabel": "جدید",
-                "createOrEditLabel": " اثربخشی"
+                "createOrEditLabel": " فرم تعیین سطح اثربخشی دوره های اجرا شده"
             },
             "created": "اثربخشی با شناسه {{ param }} ایجاد شد.",
             "updated": "اثربخشی با شناسه {{ param }} ویرایش شد.",

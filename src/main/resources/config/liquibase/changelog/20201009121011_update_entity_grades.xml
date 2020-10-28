@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20200509051011" author="saeed">
+        <!--job changes-->
+        <addColumn schemaName="public"
+                   tableName="educational_center_criteria">
+            <column name="educational_center_group_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="educational_center_group_id"
+                                 baseTableName="educational_center_criteria"
+                                 constraintName="fk_educational_center_criteria_educational_center_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_center_group"/>
+        <!--educational_center_criteria-->
+
+        <addColumn schemaName="public"
+                   tableName="educational_center_grade">
+            <column name="educational_center_group_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+
+        <addForeignKeyConstraint baseColumnNames="educational_center_group_id"
+                                 baseTableName="educational_center_grade"
+                                 constraintName="fk_educational_center_grade_educational_center_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_center_group"/>
+
+        <!--educational_center_grade-->
+
+        <addColumn schemaName="public"
+                   tableName="teacher_grade">
+            <column name="teacher_criteria_group_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+
+        <addForeignKeyConstraint baseColumnNames="teacher_criteria_group_id"
+                                 baseTableName="teacher_grade"
+                                 constraintName="fk_teacher_grade_teacher_criteria_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teacher_criteria_group"/>
+
+        <!--teacher_grade-->
+
+        <addColumn schemaName="public"
+                   tableName="teacher_criteria">
+            <column name="teacher_criteria_group_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+
+        <addForeignKeyConstraint baseColumnNames="teacher_criteria_group_id"
+                                 baseTableName="teacher_criteria"
+                                 constraintName="fk_teacher_criteria_teacher_criteria_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teacher_criteria_group"/>
+
+        <!--teacher_grade-->
+
+
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

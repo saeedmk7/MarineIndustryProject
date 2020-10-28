@@ -115,6 +115,7 @@ export class EffectivenessPhaseMarineSuffixComponent implements OnInit, OnDestro
             if (this.effectivenessPhase.finalNiazsanjiReportId) {
                 this.effectivenessPhaseService.getByFinalNiazsanjiReportId(this.effectivenessPhase.finalNiazsanjiReportId).subscribe(
                     (resp: HttpResponse<IEffectivenessPhaseMarineSuffix[]>) => {
+                        debugger;
                         this.effectivenessPhases = this.convertObjectDatesService.changeArrayDate(resp.body);
                         if (this.effectivenessPhases && this.effectivenessPhases.length > 0) {
                             this.finalNiazsanjiReport = this.effectivenessPhases[0].finalNiazsanjiReport;
@@ -148,14 +149,14 @@ export class EffectivenessPhaseMarineSuffixComponent implements OnInit, OnDestro
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
-        this.registerChangeInEffectivenessPhases();
+        //this.registerChangeInEffectivenessPhases();
     }
 
     startPhase(id: number) {
         if (confirm('آیا برای شروع انجام این سطح مطمئنید؟')) {
             this.effectivenessPhaseService.startPhase(id).subscribe(
                 (resp: HttpResponse<IEffectivenessPhaseMarineSuffix>) => {
-                    let effectivenessPhase: IEffectivenessPhaseMarineSuffix = resp.body;
+                    const effectivenessPhase: IEffectivenessPhaseMarineSuffix = resp.body;
                     if (effectivenessPhase.status == 10) {
                         this.redirectToLevel(
                             effectivenessPhase.effectivenessPhaseLevel.effectivenessLevel,
@@ -202,15 +203,11 @@ export class EffectivenessPhaseMarineSuffixComponent implements OnInit, OnDestro
         this.router.navigateByUrl(i);
     }
     ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
+        //this.eventManager.destroy(this.eventSubscriber);
     }
 
     trackId(index: number, item: IEffectivenessPhaseMarineSuffix) {
         return item.id;
-    }
-
-    registerChangeInEffectivenessPhases() {
-        this.eventSubscriber = this.eventManager.subscribe('effectivenessPhaseListModification', response => this.loadAll());
     }
 
     sort() {

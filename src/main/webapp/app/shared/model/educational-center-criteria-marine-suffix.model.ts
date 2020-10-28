@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 import { IEducationalCenterGradeScoreMarineSuffix } from 'app/shared/model//educational-center-grade-score-marine-suffix.model';
-import {IKeyValue} from "app/shared/model/custom/key-value";
+import { IKeyValue } from 'app/shared/model/custom/key-value';
 
 export interface IEducationalCenterCriteriaMarineSuffix {
     id?: number;
@@ -17,6 +17,8 @@ export interface IEducationalCenterCriteriaMarineSuffix {
     modifyDate?: Moment;
     educationalCenterGradeScores?: IEducationalCenterGradeScoreMarineSuffix[];
     score?: IKeyValue;
+    educationalCenterGroupTitle?: string;
+    educationalCenterGroupId?: number;
 }
 
 export class EducationalCenterCriteriaMarineSuffix implements IEducationalCenterCriteriaMarineSuffix {
@@ -34,10 +36,8 @@ export class EducationalCenterCriteriaMarineSuffix implements IEducationalCenter
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
         public educationalCenterGradeScores?: IEducationalCenterGradeScoreMarineSuffix[],
-        public score?: IKeyValue
-    ) {
-
-    }
+        public score?: IKeyValue,
+        public educationalCenterGroupTitle?: string,
+        public educationalCenterGroupId?: number
+    ) {}
 }
-
-

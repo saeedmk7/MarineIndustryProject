@@ -2,9 +2,11 @@
     "marineindustryprojApp": {
         "educationalCenter" : {
             "home": {
-                "title": "مراکز و موسسات آموزشی",
+                "title": "فرم مراکز و موسسات آموزشی",
+                "titleCode": "68-PR-10-5-05-00/FO-25-00",
                 "createLabel": "جدید",
-                "createOrEditLabel": " مرکز آموزشی"
+                "createOrEditLabel": "فرم مشخصات مرکز آموزشی",
+                "createOrEditCode": "68-PR-10-5-05-00/FO-26-00"
             },
             "created": "مرکز آموزشی با شناسه {{ param }} ایجاد شد.",
             "updated": "مرکز آموزشی با شناسه {{ param }} ویرایش شد.",

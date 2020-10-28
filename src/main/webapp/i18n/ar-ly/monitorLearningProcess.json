@@ -1,0 +1,33 @@
+{
+    "marineindustryprojApp": {
+        "monitorLearningProcess": {
+            "home": {
+                "title": "Monitor Learning Processes",
+                "createLabel": "Create a new Monitor Learning Process",
+                "createOrEditLabel": "Create or edit a Monitor Learning Process"
+            },
+            "created": "A new Monitor Learning Process is created with identifier {{ param }}",
+            "updated": "A Monitor Learning Process is updated with identifier {{ param }}",
+            "deleted": "A Monitor Learning Process is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Monitor Learning Process {{ id }}?"
+            },
+            "detail": {
+                "title": "Monitor Learning Process"
+            },
+            "title": "Title",
+            "code": "Code",
+            "processDate": "Process Date",
+            "classification": "Classification",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "guid": "Guid",
+            "monitorLearningProcessGrade": "Monitor Learning Process Grade",
+            "document": "Document",
+            "monitorProcessDuration": "Monitor Process Duration"
+        }
+    }
+}

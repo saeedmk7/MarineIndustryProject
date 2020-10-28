@@ -106,15 +106,27 @@ export class EffectivenessPhaseLevelTwoMarineSuffixComponent implements OnInit, 
             .subscribe((resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>) => {
                 this.finalNiazsanjiReportPeople = resp.body.sort((a, b) => (a.id > b.id ? 1 : a.id < b.id ? -1 : 0));
 
-                this.firstScoreAverage =
-                    this.finalNiazsanjiReportPeople.map(w => w.scoreBeforeTest).reduce((sum, current) => sum + current) /
-                    this.finalNiazsanjiReportPeople.length;
-                this.secondScoreAverage =
-                    this.finalNiazsanjiReportPeople.map(w => w.scoreAfterTest).reduce((sum, current) => sum + current) /
-                    this.finalNiazsanjiReportPeople.length;
-                this.fullAverage =
-                    this.finalNiazsanjiReportPeople.map(w => w.averageScore).reduce((sum, current) => sum + current) /
-                    this.finalNiazsanjiReportPeople.length;
+                this.firstScoreAverage = this.finalNiazsanjiReportPeople
+                    .map(w => w.scoreBeforeTest)
+                    .reduce((sum, current) => sum + current);
+                this.secondScoreAverage = this.finalNiazsanjiReportPeople
+                    .map(w => w.scoreAfterTest)
+                    .reduce((sum, current) => sum + current);
+                this.fullAverage = this.finalNiazsanjiReportPeople.map(w => w.averageScore).reduce((sum, current) => sum + current);
+
+                if (this.firstScoreAverage > 0) this.firstScoreAverage = this.firstScoreAverage / this.finalNiazsanjiReportPeople.length;
+
+                if (this.secondScoreAverage > 0) this.secondScoreAverage = this.secondScoreAverage / this.finalNiazsanjiReportPeople.length;
+
+                const goal = this.effectivenessPhase.effectivenessPhaseLevel.goal;
+
+                let minus = this.secondScoreAverage - this.firstScoreAverage;
+
+                if (minus >= goal) this.fullAverage = 100;
+                else {
+                    this.fullAverage = Number((minus / goal * 100).toFixed(1));
+                }
+
                 this.fullGrade = this.convertObjectDatesService.calculateGrade(this.fullAverage);
 
                 if (this.finalNiazsanjiReportPeople.filter(w => w.averageScore > 0).length == this.finalNiazsanjiReportPeople.length) {
@@ -237,13 +249,27 @@ export class EffectivenessPhaseLevelTwoMarineSuffixComponent implements OnInit, 
             this.errorMessage = `لطفا نمره بعد از تست '${finalNiazsanjiReportPerson.personFullName}' را به درستی وارد نمائید.`;
             return;
         }
+        if (finalNiazsanjiReportPerson.scoreAfterTest < finalNiazsanjiReportPerson.scoreBeforeTest) {
+            this.errorMessage = `لطفا نمره بعد از تست '${finalNiazsanjiReportPerson.personFullName}' را به درستی وارد نمائید.`;
+            return;
+        }
 
-        let average: number =
+        /*let average: number =
             ((finalNiazsanjiReportPerson.scoreBeforeTest ? finalNiazsanjiReportPerson.scoreBeforeTest : 1) +
                 (finalNiazsanjiReportPerson.scoreAfterTest ? finalNiazsanjiReportPerson.scoreAfterTest : 1)) /
-            2;
+            2;*/
+        let minus =
+            (finalNiazsanjiReportPerson.scoreAfterTest ? finalNiazsanjiReportPerson.scoreAfterTest : 1) -
+            (finalNiazsanjiReportPerson.scoreBeforeTest ? finalNiazsanjiReportPerson.scoreBeforeTest : 1);
 
-        finalNiazsanjiReportPerson.averageScore = average;
+        const goal = this.effectivenessPhase.effectivenessPhaseLevel.goal;
+        if (minus >= goal) finalNiazsanjiReportPerson.averageScore = 100;
+        else if (minus <= 0) {
+            this.errorMessage = `لطفا نمره بعد از تست '${finalNiazsanjiReportPerson.personFullName}' را به درستی وارد نمائید.`;
+            return;
+        } else {
+            finalNiazsanjiReportPerson.averageScore = Number((minus / goal * 100).toFixed(1));
+        }
 
         this.finalNiazsanjiReportPersonService.update(finalNiazsanjiReportPerson).subscribe(
             (resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix>) => {

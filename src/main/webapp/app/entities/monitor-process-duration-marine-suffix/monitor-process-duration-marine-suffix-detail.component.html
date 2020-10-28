@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="monitorProcessDuration">
+            <h2><span jhiTranslate="marineindustryprojApp.monitorProcessDuration.detail.title">Monitor Process Duration</span> {{monitorProcessDuration.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.monitorProcessDuration.title">Title</span></dt>
+                <dd>
+                    <span>{{monitorProcessDuration.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorProcessDuration.code">Code</span></dt>
+                <dd>
+                    <span>{{monitorProcessDuration.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorProcessDuration.description">Description</span></dt>
+                <dd>
+                    <span>{{monitorProcessDuration.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorProcessDuration.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{monitorProcessDuration.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorProcessDuration.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{monitorProcessDuration.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorProcessDuration.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{monitorProcessDuration.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorProcessDuration.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{monitorProcessDuration.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorProcessDuration.guid">Guid</span></dt>
+                <dd>
+                    <span>{{monitorProcessDuration.guid}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/monitor-process-duration-marine-suffix', monitorProcessDuration.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

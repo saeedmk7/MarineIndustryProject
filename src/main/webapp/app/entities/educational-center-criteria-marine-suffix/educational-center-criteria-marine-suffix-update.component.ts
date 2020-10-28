@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiAlertService } from 'ng-jhipster';
 
 import { IEducationalCenterCriteriaMarineSuffix } from 'app/shared/model/educational-center-criteria-marine-suffix.model';
 import { EducationalCenterCriteriaMarineSuffixService } from './educational-center-criteria-marine-suffix.service';
+import { IEducationalCenterGroupMarineSuffix } from 'app/shared/model/educational-center-group-marine-suffix.model';
+import { EducationalCenterGroupMarineSuffixService } from 'app/entities/educational-center-group-marine-suffix';
 
 @Component({
     selector: 'mi-educational-center-criteria-marine-suffix-update',
@@ -15,12 +18,17 @@ import { EducationalCenterCriteriaMarineSuffixService } from './educational-cent
 export class EducationalCenterCriteriaMarineSuffixUpdateComponent implements OnInit {
     educationalCenterCriteria: IEducationalCenterCriteriaMarineSuffix;
     isSaving: boolean;
+
+    educationalcentergroups: IEducationalCenterGroupMarineSuffix[];
     createDate: string;
     modifyDate: string;
 
     constructor(
+        protected jhiAlertService: JhiAlertService,
         protected educationalCenterCriteriaService: EducationalCenterCriteriaMarineSuffixService,
-        protected activatedRoute: ActivatedRoute
+        protected educationalCenterGroupService: EducationalCenterGroupMarineSuffixService,
+        protected activatedRoute: ActivatedRoute,
+        public router: Router
     ) {}
 
     ngOnInit() {
@@ -36,8 +44,16 @@ export class EducationalCenterCriteriaMarineSuffixUpdateComponent implements OnI
                     ? this.educationalCenterCriteria.modifyDate.format(DATE_TIME_FORMAT)
                     : null;
         });
+        this.educationalCenterGroupService.query().subscribe(
+            (res: HttpResponse<IEducationalCenterGroupMarineSuffix[]>) => {
+                this.educationalcentergroups = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
-
+    change(i) {
+        this.router.navigateByUrl(i);
+    }
     previousState() {
         window.history.back();
     }
@@ -67,5 +83,13 @@ export class EducationalCenterCriteriaMarineSuffixUpdateComponent implements OnI
 
     protected onSaveError() {
         this.isSaving = false;
+    }
+
+    protected onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackEducationalCenterGroupById(index: number, item: IEducationalCenterGroupMarineSuffix) {
+        return item.id;
     }
 }

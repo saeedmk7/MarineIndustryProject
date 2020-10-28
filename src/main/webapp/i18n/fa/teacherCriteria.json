@@ -17,6 +17,7 @@
             },
             "title": "عنوان",
             "group": "'گروه بندی",
+            "teacherCriteriaGroup": "مرحله ارزیابی",
             "displayOrder": "ترتیب نمایش",
             "weight": "وزن",
             "description": "توضیحات",

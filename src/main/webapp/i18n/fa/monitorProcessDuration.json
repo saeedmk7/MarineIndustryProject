@@ -1,0 +1,30 @@
+{
+    "marineindustryprojApp": {
+        "monitorProcessDuration": {
+            "home": {
+                "title": "دوره پایش",
+                "createLabel": "جدید",
+                "createOrEditLabel": " دوره پایش"
+            },
+            "created": "دوره پایش با شناسه {{ param }} ایجاد شد.",
+            "updated": "دوره پایش با شناسه {{ param }} ویرایش شد.",
+            "deleted": "دوره پایش با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف دوره پایش با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات دوره پایش"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "guid": "Guid",
+            "monitorLearningProcess": "Monitor Learning Process",
+            "monitorLearningProcessGrade": "Monitor Learning Process Grade"
+        }
+    }
+}

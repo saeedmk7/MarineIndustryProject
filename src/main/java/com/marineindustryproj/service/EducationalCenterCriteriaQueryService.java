@@ -126,6 +126,10 @@ public class EducationalCenterCriteriaQueryService extends QueryService<Educatio
                 specification = specification.and(buildSpecification(criteria.getEducationalCenterGradeScoreId(),
                     root -> root.join(EducationalCenterCriteria_.educationalCenterGradeScores, JoinType.LEFT).get(EducationalCenterGradeScore_.id)));
             }
+            if (criteria.getEducationalCenterGroupId() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalCenterGroupId(),
+                    root -> root.join(EducationalCenterCriteria_.educationalCenterGroup, JoinType.LEFT).get(EducationalCenterGroup_.id)));
+            }
         }
         return specification;
     }

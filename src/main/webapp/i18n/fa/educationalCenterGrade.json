@@ -3,8 +3,9 @@
         "educationalCenterGrade": {
             "home": {
                 "title": "گریدبندی پیمانکاران",
+                "code": "68-PR-10-5-05-00/FO-27-00",
                 "createLabel": "جدید",
-                "createOrEditLabel": " گریدبندی پیمانکار"
+                "createOrEditLabel": "فرم گریدبندی پیمانکار"
             },
             "created": "گریدبندی پیمانکار با شناسه {{ param }} ایجاد شد.",
             "updated": "گریدبندی پیمانکار با شناسه {{ param }} ویرایش شد.",
@@ -17,6 +18,7 @@
             },
             "title": "عنوان",
             "code": "کد",
+            "educationalCenterGroup": "مرحله ارزیابی",
             "totalScore": "جمع امتیاز",
             "totalScorePercent": "درصد جمع امتیاز",
             "grade": "گرید",

@@ -8,11 +8,15 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity EducationalCenterCriteria and its DTO EducationalCenterCriteriaDTO.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {EducationalCenterGroupMapper.class})
 public interface EducationalCenterCriteriaMapper extends EntityMapper<EducationalCenterCriteriaDTO, EducationalCenterCriteria> {
 
+    @Mapping(source = "educationalCenterGroup.id", target = "educationalCenterGroupId")
+    @Mapping(source = "educationalCenterGroup.title", target = "educationalCenterGroupTitle")
+    EducationalCenterCriteriaDTO toDto(EducationalCenterCriteria educationalCenterCriteria);
 
     @Mapping(target = "educationalCenterGradeScores", ignore = true)
+    @Mapping(source = "educationalCenterGroupId", target = "educationalCenterGroup")
     EducationalCenterCriteria toEntity(EducationalCenterCriteriaDTO educationalCenterCriteriaDTO);
 
     default EducationalCenterCriteria fromId(Long id) {

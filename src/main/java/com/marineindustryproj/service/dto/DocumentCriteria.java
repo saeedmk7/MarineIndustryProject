@@ -103,6 +103,8 @@ public class DocumentCriteria implements Serializable {
 
     private LongFilter effectivenessPhaseId;
 
+    private LongFilter monitorLearningProcessId;
+
     public LongFilter getId() {
         return id;
     }
@@ -423,6 +425,14 @@ public class DocumentCriteria implements Serializable {
         this.effectivenessPhaseId = effectivenessPhaseId;
     }
 
+    public LongFilter getMonitorLearningProcessId() {
+        return monitorLearningProcessId;
+    }
+
+    public void setMonitorLearningProcessId(LongFilter monitorLearningProcessId) {
+        this.monitorLearningProcessId = monitorLearningProcessId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -473,7 +483,8 @@ public class DocumentCriteria implements Serializable {
             Objects.equals(soldierMediaAwarenessReportId, that.soldierMediaAwarenessReportId) &&
             Objects.equals(evaluateCriteriaTrainingId, that.evaluateCriteriaTrainingId) &&
             Objects.equals(evaluateCriteriaDataId, that.evaluateCriteriaDataId) &&
-            Objects.equals(effectivenessPhaseId, that.effectivenessPhaseId);
+            Objects.equals(effectivenessPhaseId, that.effectivenessPhaseId) &&
+            Objects.equals(monitorLearningProcessId, that.monitorLearningProcessId);
     }
 
     @Override
@@ -518,7 +529,8 @@ public class DocumentCriteria implements Serializable {
         soldierMediaAwarenessReportId,
         evaluateCriteriaTrainingId,
         evaluateCriteriaDataId,
-        effectivenessPhaseId
+        effectivenessPhaseId,
+        monitorLearningProcessId
         );
     }
 
@@ -565,6 +577,7 @@ public class DocumentCriteria implements Serializable {
                 (evaluateCriteriaTrainingId != null ? "evaluateCriteriaTrainingId=" + evaluateCriteriaTrainingId + ", " : "") +
                 (evaluateCriteriaDataId != null ? "evaluateCriteriaDataId=" + evaluateCriteriaDataId + ", " : "") +
                 (effectivenessPhaseId != null ? "effectivenessPhaseId=" + effectivenessPhaseId + ", " : "") +
+                (monitorLearningProcessId != null ? "monitorLearningProcessId=" + monitorLearningProcessId + ", " : "") +
             "}";
     }
 

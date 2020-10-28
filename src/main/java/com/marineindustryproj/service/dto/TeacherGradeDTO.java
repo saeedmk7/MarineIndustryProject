@@ -68,6 +68,10 @@ public class TeacherGradeDTO implements Serializable {
 
     private String teacherName;
 
+    private Long teacherCriteriaGroupId;
+
+    private String teacherCriteriaGroupTitle;
+
     public Long getId() {
         return id;
     }
@@ -212,6 +216,22 @@ public class TeacherGradeDTO implements Serializable {
         this.teacherFamily = teacherFamily;
     }
 
+    public Long getTeacherCriteriaGroupId() {
+        return teacherCriteriaGroupId;
+    }
+
+    public void setTeacherCriteriaGroupId(Long teacherCriteriaGroupId) {
+        this.teacherCriteriaGroupId = teacherCriteriaGroupId;
+    }
+
+    public String getTeacherCriteriaGroupTitle() {
+        return teacherCriteriaGroupTitle;
+    }
+
+    public void setTeacherCriteriaGroupTitle(String teacherCriteriaGroupTitle) {
+        this.teacherCriteriaGroupTitle = teacherCriteriaGroupTitle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -254,6 +274,8 @@ public class TeacherGradeDTO implements Serializable {
             ", teacher=" + getTeacherId() +
             ", teacher='" + getTeacherFamily() + "'" +
             ", teacher='" + getTeacherName() + "'" +
+            ", teacherCriteriaGroup=" + getTeacherCriteriaGroupId() +
+            ", teacherCriteriaGroup='" + getTeacherCriteriaGroupTitle() + "'" +
             "}";
     }
 

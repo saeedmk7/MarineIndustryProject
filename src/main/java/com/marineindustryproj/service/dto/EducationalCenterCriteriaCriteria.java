@@ -49,6 +49,8 @@ public class EducationalCenterCriteriaCriteria implements Serializable {
 
     private LongFilter educationalCenterGradeScoreId;
 
+    private LongFilter educationalCenterGroupId;
+
     public LongFilter getId() {
         return id;
     }
@@ -153,6 +155,14 @@ public class EducationalCenterCriteriaCriteria implements Serializable {
         this.educationalCenterGradeScoreId = educationalCenterGradeScoreId;
     }
 
+    public LongFilter getEducationalCenterGroupId() {
+        return educationalCenterGroupId;
+    }
+
+    public void setEducationalCenterGroupId(LongFilter educationalCenterGroupId) {
+        this.educationalCenterGroupId = educationalCenterGroupId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -176,7 +186,8 @@ public class EducationalCenterCriteriaCriteria implements Serializable {
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
-            Objects.equals(educationalCenterGradeScoreId, that.educationalCenterGradeScoreId);
+            Objects.equals(educationalCenterGradeScoreId, that.educationalCenterGradeScoreId) &&
+            Objects.equals(educationalCenterGroupId, that.educationalCenterGroupId);
     }
 
     @Override
@@ -194,7 +205,8 @@ public class EducationalCenterCriteriaCriteria implements Serializable {
         createDate,
         modifyUserLogin,
         modifyDate,
-        educationalCenterGradeScoreId
+        educationalCenterGradeScoreId,
+        educationalCenterGroupId
         );
     }
 
@@ -214,6 +226,7 @@ public class EducationalCenterCriteriaCriteria implements Serializable {
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
                 (educationalCenterGradeScoreId != null ? "educationalCenterGradeScoreId=" + educationalCenterGradeScoreId + ", " : "") +
+                (educationalCenterGroupId != null ? "educationalCenterGroupId=" + educationalCenterGroupId + ", " : "") +
             "}";
     }
 

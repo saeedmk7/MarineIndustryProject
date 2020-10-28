@@ -35,6 +35,7 @@ import { ISoldierMediaAwarenessReportMarineSuffix } from 'app/shared/model//sold
 import { IEvaluateCriteriaTrainingMarineSuffix } from 'app/shared/model//evaluate-criteria-training-marine-suffix.model';
 import { IEvaluateCriteriaDataMarineSuffix } from 'app/shared/model//evaluate-criteria-data-marine-suffix.model';
 import { IEffectivenessPhaseMarineSuffix } from 'app/shared/model//effectiveness-phase-marine-suffix.model';
+import { IMonitorLearningProcessMarineSuffix } from 'app/shared/model//monitor-learning-process-marine-suffix.model';
 
 export interface IDocumentMarineSuffix {
     id?: number;
@@ -83,6 +84,7 @@ export interface IDocumentMarineSuffix {
     evaluateCriteriaTrainings?: IEvaluateCriteriaTrainingMarineSuffix[];
     evaluateCriteriaData?: IEvaluateCriteriaDataMarineSuffix[];
     effectivenessPhases?: IEffectivenessPhaseMarineSuffix[];
+    monitorLearningProcesses?: IMonitorLearningProcessMarineSuffix[];
 }
 
 export class DocumentMarineSuffix implements IDocumentMarineSuffix {
@@ -132,6 +134,7 @@ export class DocumentMarineSuffix implements IDocumentMarineSuffix {
         public soldierMediaAwarenessReports?: ISoldierMediaAwarenessReportMarineSuffix[],
         public evaluateCriteriaTrainings?: IEvaluateCriteriaTrainingMarineSuffix[],
         public evaluateCriteriaData?: IEvaluateCriteriaDataMarineSuffix[],
-        public effectivenessPhases?: IEffectivenessPhaseMarineSuffix[]
+        public effectivenessPhases?: IEffectivenessPhaseMarineSuffix[],
+        public monitorLearningProcesses?: IMonitorLearningProcessMarineSuffix[]
     ) {}
 }

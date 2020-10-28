@@ -8,18 +8,21 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity EducationalCenterGrade and its DTO EducationalCenterGradeDTO.
  */
-@Mapper(componentModel = "spring", uses = {EvaluatorOpinionMapper.class, DocumentMapper.class, EducationalCenterServiceMapper.class, EducationalCenterMapper.class})
+@Mapper(componentModel = "spring", uses = {EvaluatorOpinionMapper.class, DocumentMapper.class, EducationalCenterServiceMapper.class, EducationalCenterMapper.class, EducationalCenterGroupMapper.class})
 public interface EducationalCenterGradeMapper extends EntityMapper<EducationalCenterGradeDTO, EducationalCenterGrade> {
 
     @Mapping(source = "educationalCenterService.id", target = "educationalCenterServiceId")
     @Mapping(source = "educationalCenterService.title", target = "educationalCenterServiceTitle")
     @Mapping(source = "educationalCenter.id", target = "educationalCenterId")
     @Mapping(source = "educationalCenter.name", target = "educationalCenterName")
+    @Mapping(source = "educationalCenterGroup.id", target = "educationalCenterGroupId")
+    @Mapping(source = "educationalCenterGroup.title", target = "educationalCenterGroupTitle")
     EducationalCenterGradeDTO toDto(EducationalCenterGrade educationalCenterGrade);
 
     @Mapping(target = "educationalCenterGradeScores", ignore = true)
     @Mapping(source = "educationalCenterServiceId", target = "educationalCenterService")
     @Mapping(source = "educationalCenterId", target = "educationalCenter")
+    @Mapping(source = "educationalCenterGroupId", target = "educationalCenterGroup")
     EducationalCenterGrade toEntity(EducationalCenterGradeDTO educationalCenterGradeDTO);
 
     default EducationalCenterGrade fromId(Long id) {

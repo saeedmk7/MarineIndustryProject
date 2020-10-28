@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiAlertService } from 'ng-jhipster';
 
 import { ITeacherCriteriaMarineSuffix } from 'app/shared/model/teacher-criteria-marine-suffix.model';
 import { TeacherCriteriaMarineSuffixService } from './teacher-criteria-marine-suffix.service';
+import { ITeacherCriteriaGroupMarineSuffix } from 'app/shared/model/teacher-criteria-group-marine-suffix.model';
+import { TeacherCriteriaGroupMarineSuffixService } from 'app/entities/teacher-criteria-group-marine-suffix';
 
 @Component({
     selector: 'mi-teacher-criteria-marine-suffix-update',
@@ -15,10 +18,18 @@ import { TeacherCriteriaMarineSuffixService } from './teacher-criteria-marine-su
 export class TeacherCriteriaMarineSuffixUpdateComponent implements OnInit {
     teacherCriteria: ITeacherCriteriaMarineSuffix;
     isSaving: boolean;
+
+    teachercriteriagroups: ITeacherCriteriaGroupMarineSuffix[];
     createDate: string;
     modifyDate: string;
 
-    constructor(protected teacherCriteriaService: TeacherCriteriaMarineSuffixService, protected activatedRoute: ActivatedRoute) {}
+    constructor(
+        protected teacherCriteriaGroupService: TeacherCriteriaGroupMarineSuffixService,
+        public router: Router,
+        protected jhiAlertService: JhiAlertService,
+        protected teacherCriteriaService: TeacherCriteriaMarineSuffixService,
+        protected activatedRoute: ActivatedRoute
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -27,6 +38,16 @@ export class TeacherCriteriaMarineSuffixUpdateComponent implements OnInit {
             this.createDate = this.teacherCriteria.createDate != null ? this.teacherCriteria.createDate.format(DATE_TIME_FORMAT) : null;
             this.modifyDate = this.teacherCriteria.modifyDate != null ? this.teacherCriteria.modifyDate.format(DATE_TIME_FORMAT) : null;
         });
+        this.teacherCriteriaGroupService.query().subscribe(
+            (res: HttpResponse<ITeacherCriteriaGroupMarineSuffix[]>) => {
+                this.teachercriteriagroups = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    change(i) {
+        this.router.navigateByUrl(i);
     }
 
     previousState() {
@@ -58,5 +79,13 @@ export class TeacherCriteriaMarineSuffixUpdateComponent implements OnInit {
 
     protected onSaveError() {
         this.isSaving = false;
+    }
+
+    protected onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackTeacherCriteriaGroupById(index: number, item: ITeacherCriteriaGroupMarineSuffix) {
+        return item.id;
     }
 }

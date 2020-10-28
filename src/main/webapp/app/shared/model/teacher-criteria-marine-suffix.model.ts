@@ -16,6 +16,8 @@ export interface ITeacherCriteriaMarineSuffix {
     modifyUserLogin?: string;
     modifyDate?: Moment;
     teacherGradeScores?: ITeacherGradeScoreMarineSuffix[];
+    teacherCriteriaGroupTitle?: string;
+    teacherCriteriaGroupId?: number;
 }
 
 export class TeacherCriteriaMarineSuffix implements ITeacherCriteriaMarineSuffix {
@@ -33,6 +35,8 @@ export class TeacherCriteriaMarineSuffix implements ITeacherCriteriaMarineSuffix
         public createDate?: Moment,
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
-        public teacherGradeScores?: ITeacherGradeScoreMarineSuffix[]
+        public teacherGradeScores?: ITeacherGradeScoreMarineSuffix[],
+        public teacherCriteriaGroupTitle?: string,
+        public teacherCriteriaGroupId?: number
     ) {}
 }

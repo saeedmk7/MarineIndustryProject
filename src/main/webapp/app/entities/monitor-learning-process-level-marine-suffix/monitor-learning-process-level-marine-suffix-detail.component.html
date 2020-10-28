@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="monitorLearningProcessLevel">
+            <h2><span jhiTranslate="marineindustryprojApp.monitorLearningProcessLevel.detail.title">Monitor Learning Process Level</span> {{monitorLearningProcessLevel.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessLevel.title">Title</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessLevel.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessLevel.code">Code</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessLevel.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessLevel.description">Description</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessLevel.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessLevel.goal">Goal</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessLevel.goal}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessLevel.formula">Formula</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessLevel.formula}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessLevel.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessLevel.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessLevel.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessLevel.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessLevel.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessLevel.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessLevel.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessLevel.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessLevel.guid">Guid</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessLevel.guid}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/monitor-learning-process-level-marine-suffix', monitorLearningProcessLevel.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

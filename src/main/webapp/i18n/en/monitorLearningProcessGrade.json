@@ -1,0 +1,33 @@
+{
+    "marineindustryprojApp": {
+        "monitorLearningProcessGrade": {
+            "home": {
+                "title": "Monitor Learning Process Grades",
+                "createLabel": "Create a new Monitor Learning Process Grade",
+                "createOrEditLabel": "Create or edit a Monitor Learning Process Grade"
+            },
+            "created": "A new Monitor Learning Process Grade is created with identifier {{ param }}",
+            "updated": "A Monitor Learning Process Grade is updated with identifier {{ param }}",
+            "deleted": "A Monitor Learning Process Grade is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Monitor Learning Process Grade {{ id }}?"
+            },
+            "detail": {
+                "title": "Monitor Learning Process Grade"
+            },
+            "firstNumber": "First Number",
+            "secondNumber": "Second Number",
+            "thirdNumber": "Third Number",
+            "result": "Result",
+            "goal": "Goal",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "guid": "Guid",
+            "monitorLearningProcessLevel": "Monitor Learning Process Level",
+            "monitorLearningProcess": "Monitor Learning Process",
+            "monitorProcessDuration": "Monitor Process Duration"
+        }
+    }
+}

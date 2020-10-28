@@ -99,6 +99,12 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">view</span>
                         </button>
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                                [routerLink]="['/effectiveness-phase-marine-suffix', effectivenessPhase.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
                     </div>
                 </td>
             </tr>
@@ -112,11 +118,18 @@
         </table>
     </div>
     <div class="row" style="text-align: center;display: block;">
-        <button type="button" *ngIf="finalNiazsanjiReport.status < 40"
-                (click)="completeEffectivenessPhase(this.effectivenessPhase.finalNiazsanjiReportId)" [disabled]="!canComplete"
+        <ng-container *ngIf="finalNiazsanjiReport && finalNiazsanjiReport.status < 40">
+        <button type="button" *ngIf="canComplete"
+                (click)="completeEffectivenessPhase(this.effectivenessPhase.finalNiazsanjiReportId)"
                 class="btn btn-success">
             <fa-icon [icon]="'check-double'"></fa-icon>
             <span class="d-none d-md-inline" jhiTranslate="entity.action.complete">complete</span>
         </button>
+        </ng-container>
+    </div>
+
+    <div class="row" style="text-align: center;display: block;">
+        <img src="../../../content/images/effectiveness-phase/KerkPatrick-Second.PNG" style="width: 45%" />
+        <img src="../../../content/images/effectiveness-phase/KerkPatrick-First.PNG" style="width: 45%" />
     </div>
 </div>

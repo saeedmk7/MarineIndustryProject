@@ -1,0 +1,42 @@
+{
+    "marineindustryprojApp": {
+        "monitorLearningProcess": {
+            "home": {
+                "title": "پایش فرآیند آموزش",
+                "code": "68-PR-10-5-05-01/FO-36-00",
+                "createLabel": "جدید",
+                "createOrEditLabel": "فرم پایش فرآیند آموزش"
+            },
+            "created": "پایش فرآیند آموزش با شناسه {{ param }} ایجاد شد.",
+            "updated": "پایش فرآیند آموزش با شناسه {{ param }} ویرایش شد.",
+            "deleted": "پایش فرآیند آموزش با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف پایش فرآیند آموزش با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات پایش فرآیند آموزش"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "level": "مرحله",
+            "goal": "هدف",
+            "formula": "شاخص ها",
+            "firstNumber": "عدد اول",
+            "secondNumber": "عدد دوم",
+            "thirdNumber": "عدد سوم",
+            "result": "عدد اندازه گیری شده",
+            "processDate": "تاریخ",
+            "processLevelLink": "تعریف مراحل",
+            "classification": "طبقه بندی",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "guid": "Guid",
+            "monitorLearningProcessGrade": "Monitor Learning Process Grade",
+            "document": "Document",
+            "monitorProcessDuration": "دوره پایش"
+        }
+    }
+}

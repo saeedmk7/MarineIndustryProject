@@ -49,7 +49,7 @@ export class ReportGeneratorAuthorityMarineSuffixDeletePopupComponent implements
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(ReportGeneratorAuthorityMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.reportGeneratorAuthority = reportGeneratorAuthority;
                 this.ngbModalRef.result.then(

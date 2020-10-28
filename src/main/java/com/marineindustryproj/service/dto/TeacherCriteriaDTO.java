@@ -44,6 +44,10 @@ public class TeacherCriteriaDTO implements Serializable {
 
     private ZonedDateTime modifyDate;
 
+    private Long teacherCriteriaGroupId;
+
+    private String teacherCriteriaGroupTitle;
+
     public Long getId() {
         return id;
     }
@@ -148,6 +152,22 @@ public class TeacherCriteriaDTO implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public Long getTeacherCriteriaGroupId() {
+        return teacherCriteriaGroupId;
+    }
+
+    public void setTeacherCriteriaGroupId(Long teacherCriteriaGroupId) {
+        this.teacherCriteriaGroupId = teacherCriteriaGroupId;
+    }
+
+    public String getTeacherCriteriaGroupTitle() {
+        return teacherCriteriaGroupTitle;
+    }
+
+    public void setTeacherCriteriaGroupTitle(String teacherCriteriaGroupTitle) {
+        this.teacherCriteriaGroupTitle = teacherCriteriaGroupTitle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -185,6 +205,8 @@ public class TeacherCriteriaDTO implements Serializable {
             ", createDate='" + getCreateDate() + "'" +
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +
             ", modifyDate='" + getModifyDate() + "'" +
+            ", teacherCriteriaGroup=" + getTeacherCriteriaGroupId() +
+            ", teacherCriteriaGroup='" + getTeacherCriteriaGroupTitle() + "'" +
             "}";
     }
 }

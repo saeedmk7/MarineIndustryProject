@@ -49,7 +49,7 @@ export class LevelThreeScoreMarineSuffixDeletePopupComponent implements OnInit, 
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(LevelThreeScoreMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.levelThreeScore = levelThreeScore;
                 this.ngbModalRef.result.then(

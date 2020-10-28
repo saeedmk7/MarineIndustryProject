@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="monitorLearningProcess">
+            <h2><span jhiTranslate="marineindustryprojApp.monitorLearningProcess.detail.title">Monitor Learning Process</span> {{monitorLearningProcess.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcess.title">Title</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcess.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcess.code">Code</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcess.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcess.processDate">Process Date</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcess.processDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcess.classification">Classification</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcess.classification}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcess.description">Description</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcess.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcess.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcess.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcess.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcess.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcess.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcess.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcess.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcess.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcess.guid">Guid</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcess.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcess.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of monitorLearningProcess.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcess.monitorProcessDuration">Monitor Process Duration</span></dt>
+                <dd>
+                    <div *ngIf="monitorLearningProcess.monitorProcessDurationId">
+                        <a [routerLink]="['/monitor-process-duration-marine-suffix', monitorLearningProcess.monitorProcessDurationId, 'view']">{{monitorLearningProcess.monitorProcessDurationTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/monitor-learning-process-marine-suffix', monitorLearningProcess.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

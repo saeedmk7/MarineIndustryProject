@@ -2,8 +2,10 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <h2 id="mi-educational-center-grade-marine-suffix-heading"
-                jhiTranslate="marineindustryprojApp.educationalCenterGrade.home.createOrEditLabel">Create or edit a
-                Educational Center Grade</h2>
+                >
+                <span jhiTranslate="marineindustryprojApp.educationalCenterGrade.home.createOrEditLabel"></span>
+                (<input value="{{'marineindustryprojApp.educationalCenterGrade.home.code' | translate}}" disabled  class="form-code-input" />)
+            </h2>
             <div>
                 <mi-alert-error></mi-alert-error>
                 <div class="form-group" [hidden]="!educationalCenterGrade.id">
@@ -66,6 +68,19 @@
                                     id="field_educationalCenterService"
                                     [(ngModel)]="educationalCenterGrade.educationalCenterServiceId"></ng-select>
                             </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalCenterGrade.educationalCenterGroup" for="field_educationalCenterGroup">Educational Center Group</label>
+                            </th>
+                            <td>
+                                <select class="form-control" required id="field_educationalCenterGroup" name="educationalCenterGroup" [(ngModel)]="educationalCenterGrade.educationalCenterGroupId" >
+                                    <option [ngValue]="educationalCenterGroupOption.id" *ngFor="let educationalCenterGroupOption of educationalcentergroups; trackBy: trackEducationalCenterGroupById">{{educationalCenterGroupOption.title}}</option>
+                                </select>
+                            </td>
+                            <th>
+                                <input type="button" class="btn btn-primary" *ngIf="educationalCenterGrade.id === undefined" (click)="loadCriterias(educationalCenterGrade.id, educationalCenterGrade.educationalCenterGroupId)" value="بارگزاری معیارهای ارزیابی">
+                            </th>
                         </tr>
                     </table>
                     <a (click)="change('educational-center-criteria-marine-suffix')" class="btn btn-info"

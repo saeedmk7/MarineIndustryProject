@@ -9,9 +9,19 @@
                 <div class="dropdown-divider pt-3 mt-4">
                     <div class="divider-title">اطلاعات اولیه پودمان {{educationalModule.title}}</div>
                 </div>
-                <dt><span jhiTranslate="marineindustryprojApp.educationalModule.code">Code</span></dt>
+                <dt>
+                    <span jhiTranslate="marineindustryprojApp.educationalModule.code">Code</span></dt>
                 <dd>
-                    <span>{{educationalModule.code}}</span>
+                    <span>
+                        {{educationalModule.code}}
+                        <ng-container *ngIf="educationalModule.requestEducationalModuleId">
+                        (<strong>
+                    برای مشاهده جزئیات طراحی پودمان
+                    <a class="enableLink" [href]="'#/request-educational-module-marine-suffix/' + educationalModule.requestEducationalModuleId + '/view'">اینجا</a>
+                       کلیک کنید.
+                    </strong>)
+                            </ng-container>
+                    </span>
                 </dd>
                 <dt><span jhiTranslate="marineindustryprojApp.educationalModule.title">Title</span></dt>
                 <dd>

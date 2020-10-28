@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -12,10 +12,10 @@ import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-ch
 import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
 import { IMediaProductTypeMarineSuffix } from 'app/shared/model/media-product-type-marine-suffix.model';
 import { MediaProductTypeMarineSuffixService } from 'app/entities/media-product-type-marine-suffix';
-import {Principal} from "app/core";
-import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
-import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
-import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
+import { Principal } from 'app/core';
+import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { TreeUtilities } from 'app/plugin/utilities/tree-utilities';
+import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
 import * as persianMoment from 'jalali-moment';
 
 @Component({
@@ -46,7 +46,7 @@ export class MediaAwarenessReportMarineSuffixUpdateComponent implements OnInit {
         protected mediaAwarenessReportService: MediaAwarenessReportMarineSuffixService,
         private personService: PersonMarineSuffixService,
         protected organizationChartService: OrganizationChartMarineSuffixService,
-        private principal : Principal,
+        private principal: Principal,
         protected mediaProductTypeService: MediaProductTypeMarineSuffixService,
         private treeUtilities: TreeUtilities,
         protected activatedRoute: ActivatedRoute,
@@ -61,14 +61,16 @@ export class MediaAwarenessReportMarineSuffixUpdateComponent implements OnInit {
         this.principal.identity().then(account => {
             this.currentAccount = account;
             this.setRoles(this.currentAccount);
-            this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
+            this.personService.find(this.currentAccount.personId).subscribe(
+                (resp: HttpResponse<IPersonMarineSuffix>) => {
                     this.currentPerson = resp.body;
                     this.loadOrgCharts();
                 },
-                (res: HttpErrorResponse) => this.onError(res.message));
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
         });
 
-       /* this.organizationChartService.query().subscribe(
+        /* this.organizationChartService.query().subscribe(
             (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
                 this.organizationcharts = res.body;
             },
@@ -81,13 +83,11 @@ export class MediaAwarenessReportMarineSuffixUpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
-    loadOrgCharts(){
-        if(this.organizationChartService.organizationchartsAll)
-        {
+    loadOrgCharts() {
+        if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
             this.handleOrgChartView();
-        }
-        else {
+        } else {
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
                     this.organizationcharts = res.body;
@@ -101,47 +101,40 @@ export class MediaAwarenessReportMarineSuffixUpdateComponent implements OnInit {
         try {
             if (persianMoment(event.target.value, 'jYYYY/jMM/jDD').isValid()) {
                 this.finishDateValidation = 1;
-            }
-            else {
+            } else {
                 this.finishDateValidation = 2;
             }
-        }
-        catch (e) {
+        } catch (e) {
             this.finishDateValidation = 2;
         }
     }
-    change(i){
+    change(i) {
         //this.router.navigateByUrl(i);
         this.router.navigateByUrl(i);
     }
-    handleOrgChartView(){
-        if(this.isSuperUsers) {
+    handleOrgChartView() {
+        if (this.isSuperUsers) {
             this.recommenedOrgCharts = this.organizationcharts;
             return;
         }
-        if(this.treeUtilities.hasChild(this.organizationcharts, this.currentPerson.organizationChartId))
-        {
-            let orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationcharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
+        if (this.treeUtilities.hasChild(this.organizationcharts, this.currentPerson.organizationChartId)) {
+            let orgIds = this.treeUtilities
+                .getAllOfChilderenIdsOfThisId(this.organizationcharts, this.currentPerson.organizationChartId)
+                .filter(this.treeUtilities.onlyUnique);
             this.recommenedOrgCharts = this.organizationcharts.filter(a => orgIds.includes(a.id));
-        }
-        else{
+        } else {
             this.recommenedOrgCharts = [];
             this.recommenedOrgCharts.push(this.organizationcharts.find(a => a.id == this.currentPerson.organizationChartId));
         }
     }
-    setRoles(account: any){
-
-        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-            this.isAdmin = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
-            this.isModirAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
-            this.isModirKolAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+    setRoles(account: any) {
+        if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
             this.isKarshenasArshadAmozeshSazman = true;
 
-        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-            this.isSuperUsers = true;
+        if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
     }
 
     previousState() {
@@ -150,6 +143,7 @@ export class MediaAwarenessReportMarineSuffixUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.loadPersonHour();
         if (this.mediaAwarenessReport.id !== undefined) {
             this.subscribeToSaveResponse(this.mediaAwarenessReportService.update(this.mediaAwarenessReport));
         } else {
@@ -183,5 +177,16 @@ export class MediaAwarenessReportMarineSuffixUpdateComponent implements OnInit {
 
     trackMediaProductTypeById(index: number, item: IMediaProductTypeMarineSuffix) {
         return item.id;
+    }
+
+    loadPersonHour() {
+        this.mediaAwarenessReport.personHour = Number(
+            (
+                (this.mediaAwarenessReport.reportTime ? this.mediaAwarenessReport.reportTime : 1) *
+                (this.mediaAwarenessReport.numberOfViewers ? this.mediaAwarenessReport.numberOfViewers : 1) *
+                (this.mediaAwarenessReport.durationOfOperation ? this.mediaAwarenessReport.durationOfOperation : 1) /
+                60
+            ).toFixed(1)
+        );
     }
 }

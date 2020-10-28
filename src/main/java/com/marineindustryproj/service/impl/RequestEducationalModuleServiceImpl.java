@@ -12,7 +12,9 @@ import com.marineindustryproj.domain.RequestEducationalModule;
 import com.marineindustryproj.repository.RequestEducationalModuleRepository;
 import com.marineindustryproj.service.dto.EducationalModuleCriteria;
 import com.marineindustryproj.service.dto.EducationalModuleDTO;
+import com.marineindustryproj.service.dto.HeadlineDTO;
 import com.marineindustryproj.service.dto.RequestEducationalModuleDTO;
+import com.marineindustryproj.service.mapper.HeadlineMapper;
 import com.marineindustryproj.service.mapper.RequestEducationalModuleMapper;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
@@ -46,16 +48,19 @@ public class RequestEducationalModuleServiceImpl implements RequestEducationalMo
 
     private final HeadlineRepository headlineRepository;
 
+    private final HeadlineMapper headlineMapper;
+
     private final EducationalModuleQueryService educationalModuleQueryService;
 
     public RequestEducationalModuleServiceImpl(RequestEducationalModuleRepository requestEducationalModuleRepository,
                                                RequestEducationalModuleMapper requestEducationalModuleMapper,
-                                               EducationalModuleRepository educationalModuleRepository, EducationalModuleService educationalModuleService, HeadlineRepository headlineRepository, EducationalModuleQueryService educationalModuleQueryService) {
+                                               EducationalModuleRepository educationalModuleRepository, EducationalModuleService educationalModuleService, HeadlineRepository headlineRepository, HeadlineMapper headlineMapper, EducationalModuleQueryService educationalModuleQueryService) {
         this.requestEducationalModuleRepository = requestEducationalModuleRepository;
         this.requestEducationalModuleMapper = requestEducationalModuleMapper;
         this.educationalModuleRepository = educationalModuleRepository;
         this.educationalModuleService = educationalModuleService;
         this.headlineRepository = headlineRepository;
+        this.headlineMapper = headlineMapper;
         this.educationalModuleQueryService = educationalModuleQueryService;
     }
 
@@ -72,13 +77,14 @@ public class RequestEducationalModuleServiceImpl implements RequestEducationalMo
         RequestEducationalModule requestEducationalModule = requestEducationalModuleMapper.toEntity(requestEducationalModuleDTO);
         requestEducationalModule = requestEducationalModuleRepository.save(requestEducationalModule);
 
-        if (!requestEducationalModule.getHeadlines().isEmpty()) {
-            for (Headline headline : requestEducationalModule.getHeadlines()) {
-                headline.setRequestEducationalModule(requestEducationalModule);
-                headline.setCreateDate(requestEducationalModule.getCreateDate());
-                headline.setCreateUserLogin(requestEducationalModule.getCreateUserLogin());
-                headline.setModifyDate(ZonedDateTime.now());
-                headline.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        if (!requestEducationalModuleDTO.getHeadlines().isEmpty()) {
+            for (HeadlineDTO headlineDTO : requestEducationalModuleDTO.getHeadlines()) {
+                headlineDTO.setRequestEducationalModuleId(requestEducationalModule.getId());
+                headlineDTO.setCreateDate(requestEducationalModule.getCreateDate());
+                headlineDTO.setCreateUserLogin(requestEducationalModule.getCreateUserLogin());
+                headlineDTO.setModifyDate(ZonedDateTime.now());
+                headlineDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                Headline headline = headlineMapper.toEntity(headlineDTO);
                 headlineRepository.save(headline);
             }
         }

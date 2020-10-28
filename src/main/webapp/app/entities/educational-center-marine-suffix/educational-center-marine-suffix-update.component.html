@@ -1,7 +1,10 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="mi-educational-center-marine-suffix-heading" jhiTranslate="marineindustryprojApp.educationalCenter.home.createOrEditLabel">Create or edit a Educational Center</h2>
+            <h2 id="mi-educational-center-marine-suffix-heading">
+                <span jhiTranslate="marineindustryprojApp.educationalCenter.home.createOrEditLabel"></span>
+                (<input value="{{'marineindustryprojApp.educationalCenter.home.createOrEditCode' | translate}}" disabled  class="form-code-input" />)
+            </h2>
             <div>
                 <mi-alert-error></mi-alert-error>
                 <div class="form-group" [hidden]="!educationalCenter.id">

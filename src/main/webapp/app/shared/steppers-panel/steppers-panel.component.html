@@ -1,6 +1,7 @@
 <div class="md-stepper-horizontal orange">
     <div *ngFor="let item of stepsList" class="md-step"
-         [ngClass]="{'active editable': item.stepIndex == item.activeStep, 'done': item.stepIndex < item.activeStep}" (click)="returnActiveTab(item.stepIndex)">
+         [ngClass]="{'active editable': item.stepIndex == item.activeStep, 'done': item.stepIndex < item.activeStep}"
+         (click)="returnActiveTab(item.stepIndex)">
         <div class="md-step-circle"><span>{{item.stepIndex}}</span></div>
         <div class="md-step-title">{{item.stepTitle}}</div>
         <div *ngIf="item.description" class="md-step-optional">{{item.description}}</div>

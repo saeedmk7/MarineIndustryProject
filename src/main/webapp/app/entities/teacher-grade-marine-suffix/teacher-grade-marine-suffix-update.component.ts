@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -12,19 +12,18 @@ import { IDocumentMarineSuffix } from 'app/shared/model/document-marine-suffix.m
 import { DocumentMarineSuffixService } from 'app/entities/document-marine-suffix';
 import { ITeacherMarineSuffix } from 'app/shared/model/teacher-marine-suffix.model';
 import { TeacherMarineSuffixService } from 'app/entities/teacher-marine-suffix';
-import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
-import {MONTHS} from "app/shared/constants/months.constants";
-import {GREGORIAN_START_END_DATE} from "app/shared/constants/years.constants";
-import {ITeacherCriteriaMarineSuffix} from "app/shared/model/teacher-criteria-marine-suffix.model";
-import {
-    ITeacherGradeScoreMarineSuffix,
-    TeacherGradeScoreMarineSuffix
-} from "app/shared/model/teacher-grade-score-marine-suffix.model";
-import {TeacherCriteriaMarineSuffixService} from "app/entities/teacher-criteria-marine-suffix";
-import {TeacherGradeScoreMarineSuffixService} from "app/entities/teacher-grade-score-marine-suffix";
-import {Principal} from "app/core";
-import {Grade} from "app/shared/model/enums/Grade";
+import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { MONTHS } from 'app/shared/constants/months.constants';
+import { GREGORIAN_START_END_DATE } from 'app/shared/constants/years.constants';
+import { ITeacherCriteriaMarineSuffix } from 'app/shared/model/teacher-criteria-marine-suffix.model';
+import { ITeacherGradeScoreMarineSuffix, TeacherGradeScoreMarineSuffix } from 'app/shared/model/teacher-grade-score-marine-suffix.model';
+import { TeacherCriteriaMarineSuffixService } from 'app/entities/teacher-criteria-marine-suffix';
+import { TeacherGradeScoreMarineSuffixService } from 'app/entities/teacher-grade-score-marine-suffix';
+import { Principal } from 'app/core';
+import { Grade } from 'app/shared/model/enums/Grade';
 import * as persianMoment from 'jalali-moment';
+import { ITeacherCriteriaGroupMarineSuffix } from 'app/shared/model/teacher-criteria-group-marine-suffix.model';
+import { TeacherCriteriaGroupMarineSuffixService } from 'app/entities/teacher-criteria-group-marine-suffix';
 
 @Component({
     selector: 'mi-teacher-grade-marine-suffix-update',
@@ -45,8 +44,7 @@ export class TeacherGradeMarineSuffixUpdateComponent implements OnInit {
 
     finishDateValidation: number;
 
-    scores: number[] = [5,4,3,2,1];
-
+    scores: number[] = [5, 4, 3, 2, 1];
 
     currentAccount: any;
     currentUserFullName: string;
@@ -58,12 +56,12 @@ export class TeacherGradeMarineSuffixUpdateComponent implements OnInit {
     isSuperUsers: boolean = false;
     isTopUsers: boolean = false;
 
-    runMonths: any = MONTHS.sort(function(a,b)
-    {
-        return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+    runMonths: any = MONTHS.sort(function(a, b) {
+        return a.id > b.id ? 1 : b.id > a.id ? -1 : 0;
     });
     years: any = GREGORIAN_START_END_DATE.map(a => a.year);
 
+    teachercriteriagroups: ITeacherCriteriaGroupMarineSuffix[];
     constructor(
         protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
@@ -71,8 +69,9 @@ export class TeacherGradeMarineSuffixUpdateComponent implements OnInit {
         protected documentService: DocumentMarineSuffixService,
         protected teacherService: TeacherMarineSuffixService,
         protected activatedRoute: ActivatedRoute,
-        protected teacherCriteriaService : TeacherCriteriaMarineSuffixService,
-        protected teacherGradeScoreService : TeacherGradeScoreMarineSuffixService,
+        protected teacherCriteriaService: TeacherCriteriaMarineSuffixService,
+        protected teacherGradeScoreService: TeacherGradeScoreMarineSuffixService,
+        protected teacherCriteriaGroupService: TeacherCriteriaGroupMarineSuffixService,
         private principal: Principal,
         private router: Router
     ) {}
@@ -80,7 +79,6 @@ export class TeacherGradeMarineSuffixUpdateComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.principal.identity().then(account => {
-
             this.currentAccount = account;
             this.setRoles(this.currentAccount);
         });
@@ -88,30 +86,42 @@ export class TeacherGradeMarineSuffixUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ teacherGrade }) => {
             this.teacherGrade = teacherGrade;
 
-
-            if(this.teacherGrade.id !== undefined){
-                const criteria = [{
-                    key: 'teacherGradeId.equals',
-                    value: this.teacherGrade.id
-                }];
-                this.teacherGradeScoreService.query({
-                    page: 0,
-                    size: 20000,
-                    criteria,
-                    sort: ["id", "asc"]
-                }).subscribe(
-                    (res: HttpResponse<ITeacherGradeScoreMarineSuffix[]>) => {
-
-                        this.teacherGradeScores = res.body;
-                        this.buildTeacherGradeScores(this.teacherGradeScores, this.teacherGrade.id);
-                    },
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
+            if (this.teacherGrade.id !== undefined) {
+                const criteria = [
+                    {
+                        key: 'teacherGradeId.equals',
+                        value: this.teacherGrade.id
+                    }
+                ];
+                this.teacherGradeScoreService
+                    .query({
+                        page: 0,
+                        size: 20000,
+                        criteria,
+                        sort: ['id', 'asc']
+                    })
+                    .subscribe(
+                        (res: HttpResponse<ITeacherGradeScoreMarineSuffix[]>) => {
+                            this.teacherGradeScores = res.body;
+                            this.buildTeacherGradeScores(
+                                this.teacherGradeScores,
+                                this.teacherGrade.id,
+                                this.teacherGrade.teacherCriteriaGroupId
+                            );
+                        },
+                        (res: HttpErrorResponse) => this.onError(res.message)
+                    );
             }
-            else{
+            /*else{
                 this.buildTeacherGradeScores([], this.teacherGrade.id);
-            }
+            }*/
         });
+        this.teacherCriteriaGroupService.query().subscribe(
+            (res: HttpResponse<ITeacherCriteriaGroupMarineSuffix[]>) => {
+                this.teachercriteriagroups = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         this.teacherService.query().subscribe(
             (res: HttpResponse<ITeacherMarineSuffix[]>) => {
                 this.teachers = res.body;
@@ -119,53 +129,69 @@ export class TeacherGradeMarineSuffixUpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
-
-    buildTeacherGradeScores(teacherGradeScores: ITeacherGradeScoreMarineSuffix[], gradeId){
-        this.teacherCriteriaService.query().subscribe(
-            (res: HttpResponse<ITeacherCriteriaMarineSuffix[]>) => {
-
-                this.teacherCriterias = res.body.sort((a,b) => (a.displayOrder > b.displayOrder) ? 1 : (a.displayOrder < b.displayOrder) ? -1 : 0);
-                this.teacherGrade.teacherGradeScores = [];
-                this.teacherCriterias.forEach(w => {
-
-                    const teacherGradeScore = teacherGradeScores.find(a => a.teacherCriteriaId == w.id);
-                    if(teacherGradeScore){
-                        teacherGradeScore.teacherCriteriaDescription = w.description;
-                        teacherGradeScore.teacherCriteriaWeight = w.weight;
-                        this.teacherGrade.teacherGradeScores.push(teacherGradeScore);
-                    }
-                    else{
-                        let teacherGradeScore: ITeacherGradeScoreMarineSuffix = new TeacherGradeScoreMarineSuffix();
-                        teacherGradeScore.isNew = true;
-                        teacherGradeScore.id = Math.floor(Math.random() * 100000000000); //This must change to guid but for now is good //this.commonUtilitiesService.uuidv4();
-                        teacherGradeScore.teacherGradeId = gradeId;
-                        teacherGradeScore.teacherCriteriaId = w.id;
-                        teacherGradeScore.teacherCriteriaTitle = w.title;
-                        teacherGradeScore.teacherCriteriaDescription = w.description;
-                        teacherGradeScore.teacherCriteriaWeight = w.weight;
-                        teacherGradeScore.score = 1;
-                        this.teacherGrade.teacherGradeScores.push(teacherGradeScore);
-                    }
-                });
-                this.sumScores();
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+    loadCriterias(teacherGradeId, teacherCriteriaGroupId) {
+        this.buildTeacherGradeScores([], teacherGradeId, teacherCriteriaGroupId);
     }
-    checkValue(id: number, value: number){
+    buildTeacherGradeScores(teacherGradeScores: ITeacherGradeScoreMarineSuffix[], gradeId, teacherCriteriaGroupId) {
+        const criteria = [
+            {
+                key: 'teacherCriteriaGroupId.equals',
+                value: teacherCriteriaGroupId
+            }
+        ];
+        this.teacherCriteriaService
+            .query({
+                page: 0,
+                size: 20000,
+                criteria,
+                sort: ['id', 'asc']
+            })
+            .subscribe(
+                (res: HttpResponse<ITeacherCriteriaMarineSuffix[]>) => {
+                    this.teacherCriterias = res.body.sort(
+                        (a, b) => (a.displayOrder > b.displayOrder ? 1 : a.displayOrder < b.displayOrder ? -1 : 0)
+                    );
+                    this.teacherGrade.teacherGradeScores = [];
+                    this.teacherCriterias.forEach(w => {
+                        const teacherGradeScore = teacherGradeScores.find(a => a.teacherCriteriaId == w.id);
+                        if (teacherGradeScore) {
+                            teacherGradeScore.teacherCriteriaDescription = w.description;
+                            teacherGradeScore.teacherCriteriaWeight = w.weight;
+                            this.teacherGrade.teacherGradeScores.push(teacherGradeScore);
+                        } else {
+                            let teacherGradeScore: ITeacherGradeScoreMarineSuffix = new TeacherGradeScoreMarineSuffix();
+                            teacherGradeScore.isNew = true;
+                            teacherGradeScore.id = Math.floor(Math.random() * 100000000000); //This must change to guid but for now is good //this.commonUtilitiesService.uuidv4();
+                            teacherGradeScore.teacherGradeId = gradeId;
+                            teacherGradeScore.teacherCriteriaId = w.id;
+                            teacherGradeScore.teacherCriteriaTitle = w.title;
+                            teacherGradeScore.teacherCriteriaDescription = w.description;
+                            teacherGradeScore.teacherCriteriaWeight = w.weight;
+                            teacherGradeScore.score = 1;
+                            this.teacherGrade.teacherGradeScores.push(teacherGradeScore);
+                        }
+                    });
+                    this.sumScores();
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+    checkValue(id: number, value: number) {
         let a = this.teacherGrade.teacherGradeScores.find(a => a.id == id);
-        if(a){
+        if (a) {
             a.score = value;
         }
 
         this.sumScores();
     }
-    sumScores(){
-        const totalScore = this.teacherGrade.teacherGradeScores.map(a => a.score * a.teacherCriteriaWeight).reduce((sum, current) => sum + current);
+    sumScores() {
+        const totalScore = this.teacherGrade.teacherGradeScores
+            .map(a => a.score * a.teacherCriteriaWeight)
+            .reduce((sum, current) => sum + current);
         this.teacherGrade.totalScore = totalScore;
         const totalWeight = this.teacherGrade.teacherGradeScores.map(a => a.teacherCriteriaWeight).reduce((sum, current) => sum + current);
-        const generalTotalScores =  5 * totalWeight;
-        const totalScorePercent = Math.round(((totalScore / generalTotalScores) * 100));
+        const generalTotalScores = 5 * totalWeight;
+        const totalScorePercent = Math.round(totalScore / generalTotalScores * 100);
         this.teacherGrade.totalScorePercent = totalScorePercent;
 
         switch (true) {
@@ -188,34 +214,28 @@ export class TeacherGradeMarineSuffixUpdateComponent implements OnInit {
         try {
             if (persianMoment(event.target.value, 'jYYYY/jMM/jDD').isValid()) {
                 this.finishDateValidation = 1;
-            }
-            else {
+            } else {
                 this.finishDateValidation = 2;
             }
-        }
-        catch (e) {
+        } catch (e) {
             this.finishDateValidation = 2;
         }
     }
 
-    private setRoles(account: any){
-        if(account) {
-            if (account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-                this.isAdmin = true;
-            if (account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
-                this.isModirAmozesh = true;
-            if (account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
-                this.isModirKolAmozesh = true;
-            if (account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+    private setRoles(account: any) {
+        if (account) {
+            if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
+            if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
+            if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
+            if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
                 this.isKarshenasArshadAmozeshSazman = true;
 
-            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-                this.isSuperUsers = true;
+            if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
             if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh)
                 this.isTopUsers = true;
         }
     }
-    change(i){
+    change(i) {
         this.router.navigateByUrl(i);
     }
 
@@ -276,6 +296,10 @@ export class TeacherGradeMarineSuffixUpdateComponent implements OnInit {
     }
 
     trackTeacherById(index: number, item: ITeacherMarineSuffix) {
+        return item.id;
+    }
+
+    trackTeacherCriteriaGroupById(index: number, item: ITeacherCriteriaGroupMarineSuffix) {
         return item.id;
     }
 

@@ -1,7 +1,10 @@
 <div class="row justify-content-center">
     <div class="col-12">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="mi-pre-job-niazsanji-competency-marine-suffix-heading" jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.home.step5Title">Create or edit a Pre Job Niazsanji Competency</h2>
+            <h2 id="mi-pre-job-niazsanji-competency-marine-suffix-heading">
+                <span jhiTranslate="marineindustryprojApp.preJobNiazsanjiCompetency.home.step5Title"></span>
+                (<input value="{{'marineindustryprojApp.preJobNiazsanjiCompetency.home.step5Code' | translate}}" disabled  class="form-code-input" />)
+            </h2>
             <div *jhiHasAnyAuthority="['ROLE_ADMIN']">
                 <a href="#/priority-criteria-marine-suffix" [ngClass]="{'enableLink': isAdmin}" class="btn btn-warning">
                     <span class="fa fa-file"></span>

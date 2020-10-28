@@ -2,9 +2,11 @@
     "marineindustryprojApp": {
         "teacher" : {
             "home": {
-                "title": "مدرسان آموزشی",
+                "title": "فرم فهرست مدرسان دوره های آموزشی",
+                "titleCode": "68-PR-10-5-05-00/FO-23-00",
                 "createLabel": "جدید",
-                "createOrEditLabel": " مدرس"
+                "createOrEditLabel":"فرم مشخصات مدرسین",
+                "createOrEditCode": "68-PR-10-5-05-00/FO-24-00"
             },
             "created": "مدرس با شناسه {{ param }} ایجاد شد.",
             "updated": "مدرس با شناسه {{ param }} ویرایش شد.",

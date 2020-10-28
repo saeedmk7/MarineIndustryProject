@@ -20,6 +20,7 @@
             <th>ردیف</th>
             <th jhiSortBy="educationalCenterTitle"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.educationalCenter">Educational Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="educationalCenterServiceTitle"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.educationalCenterService">Educational Center Service</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalCenterGroupTitle"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.educationalCenterGroup">Educational Center Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="totalScore"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.totalScore">Total Score</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="totalScorePercent"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.totalScorePercent">Total Score Percent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="grade"><span jhiTranslate="marineindustryprojApp.educationalCenterGrade.grade">Grade</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -50,6 +51,11 @@
                 <td>
                     <div *ngIf="educationalCenterGrade.educationalCenterServiceId">
                         <a [routerLink]="['../educational-center-service-marine-suffix', educationalCenterGrade.educationalCenterServiceId , 'view' ]" >{{educationalCenterGrade.educationalCenterServiceTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="educationalCenterGrade.educationalCenterGroupId">
+                        <a [routerLink]="['../educational-center-group-marine-suffix', educationalCenterGrade.educationalCenterGroupId , 'view' ]" >{{educationalCenterGrade.educationalCenterGroupTitle}}</a>
                     </div>
                 </td>
                 <!--<td>{{educationalCenterGrade.title}}</td>-->

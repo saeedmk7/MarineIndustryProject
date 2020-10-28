@@ -1,0 +1,81 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="monitorLearningProcessGrade">
+            <h2><span jhiTranslate="marineindustryprojApp.monitorLearningProcessGrade.detail.title">Monitor Learning Process Grade</span> {{monitorLearningProcessGrade.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessGrade.firstNumber">First Number</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessGrade.firstNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessGrade.secondNumber">Second Number</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessGrade.secondNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessGrade.thirdNumber">Third Number</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessGrade.thirdNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessGrade.result">Result</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessGrade.result}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessGrade.goal">Goal</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessGrade.goal}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessGrade.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessGrade.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessGrade.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessGrade.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessGrade.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessGrade.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessGrade.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessGrade.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessGrade.guid">Guid</span></dt>
+                <dd>
+                    <span>{{monitorLearningProcessGrade.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessGrade.monitorLearningProcessLevel">Monitor Learning Process Level</span></dt>
+                <dd>
+                    <div *ngIf="monitorLearningProcessGrade.monitorLearningProcessLevelId">
+                        <a [routerLink]="['/monitor-learning-process-level-marine-suffix', monitorLearningProcessGrade.monitorLearningProcessLevelId, 'view']">{{monitorLearningProcessGrade.monitorLearningProcessLevelTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessGrade.monitorLearningProcess">Monitor Learning Process</span></dt>
+                <dd>
+                    <div *ngIf="monitorLearningProcessGrade.monitorLearningProcessId">
+                        <a [routerLink]="['/monitor-learning-process-marine-suffix', monitorLearningProcessGrade.monitorLearningProcessId, 'view']">{{monitorLearningProcessGrade.monitorLearningProcessTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.monitorLearningProcessGrade.monitorProcessDuration">Monitor Process Duration</span></dt>
+                <dd>
+                    <div *ngIf="monitorLearningProcessGrade.monitorProcessDurationId">
+                        <a [routerLink]="['/monitor-process-duration-marine-suffix', monitorLearningProcessGrade.monitorProcessDurationId, 'view']">{{monitorLearningProcessGrade.monitorProcessDurationTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/monitor-learning-process-grade-marine-suffix', monitorLearningProcessGrade.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

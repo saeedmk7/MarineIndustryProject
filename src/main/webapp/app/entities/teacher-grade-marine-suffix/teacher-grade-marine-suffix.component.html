@@ -20,6 +20,7 @@
                 <th>ردیف</th>
             <!--<th jhiSortBy="version"><span jhiTranslate="marineindustryprojApp.teacherGrade.version">Version</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th jhiSortBy="teacherFamily"><span jhiTranslate="marineindustryprojApp.teacherGrade.teacher">Teacher</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="teacherCriteriaGroupTitle"><span jhiTranslate="marineindustryprojApp.teacherGrade.teacherCriteriaGroup">Teacher Criteria Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="totalScore"><span jhiTranslate="marineindustryprojApp.teacherGrade.totalScore">Total Score</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="totalScorePercent"><span jhiTranslate="marineindustryprojApp.teacherGrade.totalScorePercent">Total Score Percent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="grade"><span jhiTranslate="marineindustryprojApp.teacherGrade.grade">Grade</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -46,6 +47,11 @@
                 <td>
                     <div *ngIf="teacherGrade.teacherId">
                         <a [routerLink]="['../teacher-marine-suffix', teacherGrade.teacherId , 'view' ]" >{{teacherGrade.teacherName + " " + teacherGrade.teacherFamily}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="teacherGrade.teacherCriteriaGroupId">
+                        <a [routerLink]="['../teacher-criteria-group-marine-suffix', teacherGrade.teacherCriteriaGroupId , 'view' ]" >{{teacherGrade.teacherCriteriaGroupTitle}}</a>
                     </div>
                 </td>
                 <td>{{teacherGrade.totalScore}}</td>

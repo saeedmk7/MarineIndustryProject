@@ -41,6 +41,8 @@ import { MediaAwarenessReportMarineSuffixService } from 'app/entities/media-awar
 import { IMediaAwarenessReportMarineSuffix } from 'app/shared/model/media-awareness-report-marine-suffix.model';
 import { SoldierTrainingReportMarineSuffixService } from 'app/entities/soldier-training-report-marine-suffix';
 import { ISoldierTrainingReportMarineSuffix } from 'app/shared/model/soldier-training-report-marine-suffix.model';
+import { SoldierMediaAwarenessReportMarineSuffixService } from 'app/entities/soldier-media-awareness-report-marine-suffix';
+import { ISoldierMediaAwarenessReportMarineSuffix } from 'app/shared/model/soldier-media-awareness-report-marine-suffix.model';
 
 @Component({
     selector: 'mi-home',
@@ -154,6 +156,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     ];
 
     months: any[] = MONTHS.sort((a, b) => (a.id > b.id ? 1 : a.id < b.id ? -1 : 0));
+
     constructor(
         private principal: Principal,
         private organizationChartService: OrganizationChartMarineSuffixService,
@@ -171,7 +174,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         private router: Router,
         private treeUtilities: TreeUtilities,
         private mediaAwarenessReportService: MediaAwarenessReportMarineSuffixService,
-        private soldierTrainingReportService: SoldierTrainingReportMarineSuffixService
+        private soldierTrainingReportService: SoldierTrainingReportMarineSuffixService,
+        private soldierMediaAwarenessReportService: SoldierMediaAwarenessReportMarineSuffixService
     ) {
         this.isfa = languageManager.currentLang == 'fa';
         this.years = GREGORIAN_START_END_DATE.map(a => a.year);
@@ -183,6 +187,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             else this.pageName = 'home';
         });
     }
+
     showHomePageReport(niazsanjiYear: number) {
         this.finalNiazsanjiReportService.getHomePageReport(niazsanjiYear, 1).subscribe(
             (resp: HttpResponse<IHomePageReport>) => {
@@ -204,10 +209,15 @@ export class HomeComponent implements OnInit, OnDestroy {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     mediaAwarenessReport: IMediaAwarenessReportMarineSuffix[] = [];
     mediaAwarenessReportSum: number = 0;
     soldierTrainingReports: ISoldierTrainingReportMarineSuffix[] = [];
     soldierTrainingReportSum: number = 0;
+    soldierMediaAwarenessReports: ISoldierMediaAwarenessReportMarineSuffix[] = [];
+    soldierMediaAwarenessReportSum: number = 0;
+
+    //This method must refactor completely
     showPersonHourAggregationPart(niazsanjiYear: number) {
         const awarenessCriteria = [
             {
@@ -242,40 +252,74 @@ export class HomeComponent implements OnInit, OnDestroy {
                             criteria: soldierTrainingReportCriteria,
                             sort: ['id', 'asc']
                         })
-                        .subscribe((res: HttpResponse<IMediaAwarenessReportMarineSuffix[]>) => {
-                            this.soldierTrainingReports = res.body;
+                        .subscribe(
+                            (res: HttpResponse<ISoldierTrainingReportMarineSuffix[]>) => {
+                                this.soldierTrainingReports = res.body;
 
-                            this.soldierTrainingReportSum = this.soldierTrainingReports
-                                .map(a => a.personHour)
-                                .reduce((sum, current) => sum + current);
+                                this.soldierTrainingReportSum = this.soldierTrainingReports
+                                    .map(a => a.personHour)
+                                    .reduce((sum, current) => sum + current);
 
-                            this.personHourAggregationResult = [];
-                            this.homePageReport.homePageReportDetails.forEach(a => {
-                                const subTree = this.treeUtilities
-                                    .getAllOfThisTreeIds(this.organizationcharts, a.organizationChartId)
-                                    .filter(this.treeUtilities.onlyUnique);
-                                const sumMedia = this.mediaAwarenessReport
-                                    .filter(w => subTree.includes(w.organizationChartId))
-                                    .map(w => w.personHour)
-                                    .reduce((sum, current) => sum + current, 0);
-                                const sumSoldiers = this.soldierTrainingReports
-                                    .filter(w => subTree.includes(w.soldierOrganizationChartId))
-                                    .map(w => w.personHour)
-                                    .reduce((sum, current) => sum + current, 0);
-                                this.personHourAggregationResult.push({
-                                    orgTitle: a.organizationChartTitle,
-                                    sumMedia: sumMedia,
-                                    sumSoldier: sumSoldiers,
-                                    totalPassed: a.totalPassed,
-                                    sumTotal:
-                                        (a.totalPassed ? a.totalPassed : 0) + (sumMedia ? sumMedia : 0) + (sumSoldiers ? sumSoldiers : 0)
-                                });
-                            });
-                        });
+                                const soldierMediaAwarenessReportCriteria = [
+                                    {
+                                        key: 'year.equals',
+                                        value: niazsanjiYear
+                                    }
+                                ];
+
+                                this.soldierMediaAwarenessReportService
+                                    .query({
+                                        page: 0,
+                                        size: 10000,
+                                        criteria: soldierMediaAwarenessReportCriteria,
+                                        sort: ['id', 'asc']
+                                    })
+                                    .subscribe((res: HttpResponse<ISoldierMediaAwarenessReportMarineSuffix[]>) => {
+                                        this.soldierMediaAwarenessReports = res.body;
+
+                                        this.soldierMediaAwarenessReportSum = this.soldierMediaAwarenessReports
+                                            .map(a => a.personHour)
+                                            .reduce((sum, current) => sum + current);
+
+                                        this.personHourAggregationResult = [];
+                                        this.homePageReport.homePageReportDetails.forEach(a => {
+                                            const subTree = this.treeUtilities
+                                                .getAllOfThisTreeIds(this.organizationcharts, a.organizationChartId)
+                                                .filter(this.treeUtilities.onlyUnique);
+                                            const sumMedia = this.mediaAwarenessReport
+                                                .filter(w => subTree.includes(w.organizationChartId))
+                                                .map(w => w.personHour)
+                                                .reduce((sum, current) => sum + current, 0);
+                                            const sumSoldiers = this.soldierTrainingReports
+                                                .filter(w => subTree.includes(w.soldierOrganizationChartId))
+                                                .map(w => w.personHour)
+                                                .reduce((sum, current) => sum + current, 0);
+                                            const sumSoldiersMediaAwareness = this.soldierMediaAwarenessReports
+                                                .filter(w => subTree.includes(w.soldierOrganizationChartId))
+                                                .map(w => w.personHour)
+                                                .reduce((sum, current) => sum + current, 0);
+                                            this.personHourAggregationResult.push({
+                                                orgTitle: a.organizationChartTitle,
+                                                sumMedia: sumMedia,
+                                                sumSoldier: sumSoldiers,
+                                                sumSoldierMediaAwareness: sumSoldiersMediaAwareness,
+                                                totalPassed: a.totalPassed,
+                                                sumTotal:
+                                                    (a.totalPassed ? a.totalPassed : 0) +
+                                                    (sumMedia ? sumMedia : 0) +
+                                                    (sumSoldiers ? sumSoldiers : 0) +
+                                                    (sumSoldiersMediaAwareness ? sumSoldiersMediaAwareness : 0)
+                                            });
+                                        });
+                                    });
+                            },
+                            (res: HttpErrorResponse) => this.onError(res.message)
+                        );
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
+
     showInvestPart(niazsanjiYear: number) {
         const criteria = [
             {
@@ -311,12 +355,15 @@ export class HomeComponent implements OnInit, OnDestroy {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
+
     deleteElement(i) {
         $('#' + i).remove();
     }
+
     toggleColappse(i) {
         $('#' + i).collapse('toggle');
     }
+
     getParameterByName(name, url) {
         if (!url) url = window.location.href;
         name = name.replace(/[\[\]]/g, '\\$&');
@@ -326,6 +373,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
+
     changePage(pageName) {
         var url = window.location.href;
         var indexOf = url.indexOf('?');
@@ -337,6 +385,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         url = url + 'pageName=' + pageName;
         window.location.href = url;
     }
+
     ngOnInit() {
         this.principal.identity().then(account => {
             this.account = account;
@@ -374,6 +423,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
+
     prepareOrgChart() {
         if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
@@ -388,6 +438,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             );
         }
     }
+
     prepareHomePageNiazsanjiReport(personId: number) {
         this.finalNiazsanjiReportService.getHomePageNiazsanjiReport(personId).subscribe(
             (resp: HttpResponse<IHomePageNiazsanjiReport>) => {
@@ -396,6 +447,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     prepareHomePagePersonHourChart(personId: number) {
         this.finalNiazsanjiReportService.getHomePagePersonHourChart(personId).subscribe(
             (resp: HttpResponse<IHomePagePersonHourChart>) => {
@@ -469,10 +521,12 @@ export class HomeComponent implements OnInit, OnDestroy {
             }
         });
     }
+
     redirect(): boolean {
         return false;
         //this.router.navigateByUrl(i);
     }
+
     makeSeries() {
         const sortedChartResults = this.chartResults.sort((a, b) => (a.groupId > b.groupId ? 1 : a.groupId < b.groupId ? -1 : 0));
         this.priceCostSeries = [
@@ -525,6 +579,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
         this.loadChart();
     }
+
     loadChart() {
         // @ts-ignore
         this.personHourChart = new Chart({
@@ -655,12 +710,15 @@ export class HomeComponent implements OnInit, OnDestroy {
         $('.highcharts-credits').textContent = '';
         $('.highcharts-root').addClass('chartFont');
     }
+
     private loadNews(data: IAnnouncementMarineSuffix[]) {
         this.announcements = this.convertObjectDatesService.changeArrayDate(data);
     }
+
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
+
     addDays(date, days) {
         var result = new Date(date);
         result.setDate(result.getDate() + days);
@@ -675,6 +733,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.show = true;
         }, 500);
     }
+
     registerAuthenticationSuccess() {
         this.eventManager.subscribe('authenticationSuccess', message => {
             this.principal.identity().then(account => {
@@ -715,6 +774,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     selectedGroup: string = '';
+
     //home page chart detail
     showDetail(event) {
         this.selectedGroup = event.point.category;
@@ -728,6 +788,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             }
         }
     }
+
     showPlanningReport(org: IOrganizationChartMarineSuffix) {
         let niazsanjiYear = this.selectedNiazsanjiYear; //this.convertObjectDatesService.getNowShamsiYear();
         let orgRootId = org.id; //this.treeUtilities.getRootId(this.organizationcharts, this.currentPerson.organizationChartId);
@@ -765,7 +826,9 @@ export class HomeComponent implements OnInit, OnDestroy {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     workPercent: any[] = [];
+
     makeWorkPercentPerMonth(data: IForceRunningPercentMarineSuffix[], headers: any) {
         if (data.length) {
             this.forceRunningPercents = data;
@@ -823,6 +886,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             });
         }
     }
+
     makeDetailSeries() {
         this.detailMonthPriceCostSeries = [
             {
@@ -862,6 +926,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         ];
         this.loadDetailMonthColumnChart();
     }
+
     loadDetailMonthColumnChart() {
         const cats: any = this.months.sort((a, b) => (a.id > b.id ? -1 : a.id < b.id ? 1 : 0)).map(a => a.persianMonth);
         // @ts-ignore
@@ -878,6 +943,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             cats
         );
     }
+
     showColumnChart(headerText: string, series: any, title: string, categories: any): Chart {
         return new Chart({
             chart: {

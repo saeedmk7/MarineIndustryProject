@@ -21,6 +21,13 @@
                     </div>
                 </div>-->
                 <div class="form-group">
+                    <a (click)="change('educational-center-group-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.educationalCenterCriteria.educationalCenterGroup" for="field_educationalCenterGroup">Educational Center Group</a>
+                    <select class="form-control" required id="field_educationalCenterGroup" name="educationalCenterGroup" [(ngModel)]="educationalCenterCriteria.educationalCenterGroupId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="educationalCenterGroupOption.id" *ngFor="let educationalCenterGroupOption of educationalcentergroups; trackBy: trackEducationalCenterGroupById">{{educationalCenterGroupOption.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalCenterCriteria.title" for="field_title">Title</label>
                     <input type="text" class="form-control" name="title" id="field_title"
                         [(ngModel)]="educationalCenterCriteria.title" required maxlength="1024"/>

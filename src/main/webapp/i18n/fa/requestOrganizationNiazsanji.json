@@ -3,9 +3,10 @@
     "marineindustryprojApp": {
         "requestOrganizationNiazsanji" : {
             "home": {
-                "title": "نیازسنجی پودمانی سازمانی",
+                "title": "فرم نیازسنجی پودمانی های سازمانی",
+                "code": "68-PR-10-5-05-00/FO-16-00",
                 "createLabel": "جدید",
-                "createOrEditLabel": " نیازسنجی پودمانی سازمانی"
+                "createOrEditLabel": " فرم نیازسنجی پودمانی های سازمانی"
             },
             "created": "نیازسنجی پودمانی سازمانی با شناسه {{ param }} ایجاد شد.",
             "updated": "نیازسنجی پودمانی سازمانی با شناسه {{ param }} ویرایش شد.",

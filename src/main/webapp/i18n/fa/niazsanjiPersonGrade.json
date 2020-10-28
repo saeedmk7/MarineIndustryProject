@@ -3,8 +3,9 @@
         "niazsanjiPersonGrade": {
             "home": {
                 "title": "ارزیابی اثربخشی دوره ها",
+                "code": "68-PR-10-5-05-00/FO-30-00",
                 "createLabel": "جدید",
-                "createOrEditLabel": " ارزیابی اثربخشی"
+                "createOrEditLabel": "فرم ارزیابی اثربخشی دوره ها در سطح واکنشی"
             },
             "created": "ارزیابی اثربخشی با شناسه {{ param }} ایجاد شد.",
             "updated": "ارزیابی اثربخشی با شناسه {{ param }} ویرایش شد.",

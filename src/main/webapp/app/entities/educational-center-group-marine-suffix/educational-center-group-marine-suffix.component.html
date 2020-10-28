@@ -1,0 +1,78 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.educationalCenterGroup.home.title">Educational Center Groups</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-educational-center-group-marine-suffix" [routerLink]="['/educational-center-group-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.educationalCenterGroup.home.createLabel">
+            Create new Educational Center Group
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="educationalCenterGroups">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.educationalCenterGroup.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="displayOrder"><span jhiTranslate="marineindustryprojApp.educationalCenterGroup.displayOrder">Display Order</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="weight"><span jhiTranslate="marineindustryprojApp.educationalCenterGroup.weight">Weight</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.educationalCenterGroup.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.educationalCenterGroup.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.educationalCenterGroup.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.educationalCenterGroup.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.educationalCenterGroup.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.educationalCenterGroup.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let educationalCenterGroup of educationalCenterGroups ;trackBy: trackId">
+                <td><a [routerLink]="['/educational-center-group-marine-suffix', educationalCenterGroup.id, 'view' ]">{{educationalCenterGroup.id}}</a></td>
+                <td>{{educationalCenterGroup.title}}</td>
+                <td>{{educationalCenterGroup.displayOrder}}</td>
+                <!--<td>{{educationalCenterGroup.weight}}</td>-->
+                <td>{{educationalCenterGroup.description}}</td>
+                <!--<td>{{educationalCenterGroup.code}}</td>
+                <td>{{educationalCenterGroup.createUserLogin}}</td>
+                <td>{{educationalCenterGroup.createDate | date:'medium'}}</td>
+                <td>{{educationalCenterGroup.modifyUserLogin}}</td>
+                <td>{{educationalCenterGroup.modifyDate | date:'medium'}}</td>-->
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/educational-center-group-marine-suffix', educationalCenterGroup.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/educational-center-group-marine-suffix', educationalCenterGroup.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'educational-center-group-marine-suffix/'+ educationalCenterGroup.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="educationalCenterGroups && educationalCenterGroups.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

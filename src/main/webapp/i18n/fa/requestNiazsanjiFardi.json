@@ -2,9 +2,10 @@
     "marineindustryprojApp": {
         "requestNiazsanjiFardi": {
             "home": {
-                "title": "نیازسنجی فردی",
+                "title": "فرم نیازسنجی فردی",
+                "code": "68-PR-10-5-05-00/FO-17-00",
                 "createLabel": "جدید",
-                "createOrEditLabel": " نیازسنجی فردی"
+                "createOrEditLabel": "فرم نیازسنجی فردی"
             },
             "created": "نیازسنجی فردی با شناسه {{ param }} ایجاد شد.",
             "updated": "نیازسنجی فردی با شناسه {{ param }} ویرایش شد.",

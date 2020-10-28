@@ -1,9 +1,10 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="mi-teacher-grade-marine-suffix-heading"
-                jhiTranslate="marineindustryprojApp.teacherGrade.home.createOrEditLabel">Create or edit a Teacher
-                Grade</h2>
+            <h2 id="mi-teacher-grade-marine-suffix-heading">
+                <span jhiTranslate="marineindustryprojApp.teacherGrade.home.createOrEditLabel"></span>
+                (<input value="{{'marineindustryprojApp.teacherGrade.home.code' | translate}}" disabled  class="form-code-input" />)
+                </h2>
             <div>
                 <mi-alert-error></mi-alert-error>
                 <div class="form-group" [hidden]="!teacherGrade.id">
@@ -65,6 +66,19 @@
                                     [(ngModel)]="teacherGrade.teacherId"></ng-select>
                             </td>
                             <th colspan="2"></th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.teacherGrade.teacherCriteriaGroup" for="field_teacherCriteriaGroup">Teacher Criteria Group</label>
+                            </th>
+                            <td>
+                                <select class="form-control" id="field_teacherCriteriaGroup" name="teacherCriteriaGroup" [(ngModel)]="teacherGrade.teacherCriteriaGroupId" required>
+                                    <option [ngValue]="teacherCriteriaGroupOption.id" *ngFor="let teacherCriteriaGroupOption of teachercriteriagroups; trackBy: trackTeacherCriteriaGroupById">{{teacherCriteriaGroupOption.title}}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="button" class="btn btn-primary" *ngIf="teacherGrade.id === undefined" (click)="loadCriterias(teacherGrade.id, teacherGrade.teacherCriteriaGroupId)" value="بارگزاری معیارهای ارزیابی">
+                            </td>
                         </tr>
                     </table>
                     <a (click)="change('teacher-criteria-marine-suffix')" class="btn btn-info"

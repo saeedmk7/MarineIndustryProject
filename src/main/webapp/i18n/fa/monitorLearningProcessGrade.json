@@ -1,0 +1,33 @@
+{
+    "marineindustryprojApp": {
+        "monitorLearningProcessGrade": {
+            "home": {
+                "title": "Monitor Learning Process Grades",
+                "createLabel": "Create a new Monitor Learning Process Grade",
+                "createOrEditLabel": "Create or edit a Monitor Learning Process Grade"
+            },
+            "created": "A new Monitor Learning Process Grade is created with identifier {{ param }}",
+            "updated": "A Monitor Learning Process Grade is updated with identifier {{ param }}",
+            "deleted": "A Monitor Learning Process Grade is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Monitor Learning Process Grade {{ id }}?"
+            },
+            "detail": {
+                "title": "Monitor Learning Process Grade"
+            },
+            "firstNumber": "عدد اول",
+            "secondNumber": "عدد دوم",
+            "thirdNumber": "عدد سوم",
+            "result": "عدد اندازه گیری شده",
+            "goal": "هدف",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "guid": "Guid",
+            "monitorLearningProcessLevel": "Monitor Learning Process Level",
+            "monitorLearningProcess": "Monitor Learning Process",
+            "monitorProcessDuration": "Monitor Process Duration"
+        }
+    }
+}

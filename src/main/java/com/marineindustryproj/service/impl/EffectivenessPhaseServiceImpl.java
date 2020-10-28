@@ -90,7 +90,7 @@ public class EffectivenessPhaseServiceImpl implements EffectivenessPhaseService 
         finalNiazsanjiReport.setModifyDate(ZonedDateTime.now());
         finalNiazsanjiReport.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
 
-        finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
+        finalNiazsanjiReport = finalNiazsanjiReportRepository.save(finalNiazsanjiReport);
 
         return true;
 
@@ -136,13 +136,24 @@ public class EffectivenessPhaseServiceImpl implements EffectivenessPhaseService 
 
         float firstScore = (float) (finalNiazsanjiReportPeople.stream()
             .mapToDouble(a -> a.getScoreBeforeTest()).sum() / finalNiazsanjiReportPeople.size());
+
         float secondScore = (float) (finalNiazsanjiReportPeople.stream()
             .mapToDouble(a -> a.getScoreAfterTest()).sum() / finalNiazsanjiReportPeople.size());
-        float finalScore = (float) (finalNiazsanjiReportPeople.stream()
-            .mapToDouble(a -> a.getAverageScore()).sum() / finalNiazsanjiReportPeople.size());
-        float weightedScore = (float) ((finalNiazsanjiReportPeople.stream()
+
+        float goal = effectivenessPhaseOptional.get().getEffectivenessPhaseLevel().getGoal();
+        float minus  = (secondScore - firstScore);
+        float finalScore = 0;
+        if(minus >= goal)
+            finalScore = 100;
+        else{
+            finalScore = Math.abs((minus / goal) * 100);
+        }
+
+        /*float weightedScore = (float) ((finalNiazsanjiReportPeople.stream()
             .mapToDouble(a -> a.getAverageScore() * effectivenessPhase.getEffectivenessPhaseLevel().getWeight()).sum()
-            / finalNiazsanjiReportPeople.size())) / 100;
+            / finalNiazsanjiReportPeople.size())) / 100;*/
+
+        float weightedScore = (finalScore * effectivenessPhase.getEffectivenessPhaseLevel().getWeight()) / 100;
 
         effectivenessPhase.setFirstScore(firstScore);
         effectivenessPhase.setSecondScore(secondScore);

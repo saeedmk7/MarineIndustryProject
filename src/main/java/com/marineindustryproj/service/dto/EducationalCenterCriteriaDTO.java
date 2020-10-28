@@ -42,6 +42,10 @@ public class EducationalCenterCriteriaDTO implements Serializable {
 
     private ZonedDateTime modifyDate;
 
+    private Long educationalCenterGroupId;
+
+    private String educationalCenterGroupTitle;
+
     public Long getId() {
         return id;
     }
@@ -138,6 +142,22 @@ public class EducationalCenterCriteriaDTO implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public Long getEducationalCenterGroupId() {
+        return educationalCenterGroupId;
+    }
+
+    public void setEducationalCenterGroupId(Long educationalCenterGroupId) {
+        this.educationalCenterGroupId = educationalCenterGroupId;
+    }
+
+    public String getEducationalCenterGroupTitle() {
+        return educationalCenterGroupTitle;
+    }
+
+    public void setEducationalCenterGroupTitle(String educationalCenterGroupTitle) {
+        this.educationalCenterGroupTitle = educationalCenterGroupTitle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -174,6 +194,8 @@ public class EducationalCenterCriteriaDTO implements Serializable {
             ", createDate='" + getCreateDate() + "'" +
             ", modifyUserLogin='" + getModifyUserLogin() + "'" +
             ", modifyDate='" + getModifyDate() + "'" +
+            ", educationalCenterGroup=" + getEducationalCenterGroupId() +
+            ", educationalCenterGroup='" + getEducationalCenterGroupTitle() + "'" +
             "}";
     }
 }

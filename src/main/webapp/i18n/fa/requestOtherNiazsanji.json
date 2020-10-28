@@ -2,10 +2,12 @@
     "marineindustryprojApp": {
         "requestOtherNiazsanji": {
             "home": {
-                "title": "سایر نیازسنجی ها",
+                "title": "فرم سایر نیازسنجی ها",
+                "code": "68-PR-10-5-05-00/FO-18-00",
                 "createLabel": "جدید",
-                "createOrEditLabel": " سایر نیازسنجی ها"
+                "createOrEditLabel": "فرم سایر نیازسنجی ها"
             },
+
             "created": "سایر نیازسنجی ها با شناسه {{ param }} ایجاد شد.",
             "updated": "سایر نیازسنجی ها با شناسه {{ param }} ویرایش شد.",
             "deleted": "سایر نیازسنجی ها با شناسه {{ param }} حذف شد.",
@@ -20,7 +22,7 @@
                 "comment": "لطفا نظر خود را درج نمائید."
             },
             "detail": {
-                "title": "جزئیات اطلاعات درخواست سایر نیازسنجی ها"
+                "title": "جزئیات اطلاعات فرم سایر نیازسنجی ها"
             },
             "index": "ردیف",
             "code": "Code",

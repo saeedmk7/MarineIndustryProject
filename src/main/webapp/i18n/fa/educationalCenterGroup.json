@@ -1,0 +1,33 @@
+{
+    "marineindustryprojApp": {
+        "educationalCenterGroup": {
+            "home": {
+                "title": "مرحله ارزیابی",
+                "code": "68-PR-10-5-05-01/FO-16-00",
+                "createLabel": "جدید",
+                "createOrEditLabel": "فرم مرحله ارزیابی"
+            },
+            "created": "مرحله ارزیابی با شناسه {{ param }} ایجاد شد.",
+            "updated": "مرحله ارزیابی با شناسه {{ param }} ویرایش شد.",
+            "deleted": "مرحله ارزیابی با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف مرحله ارزیابی با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات مرحله ارزیابی"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "displayOrder": "ترتیب نمایش",
+            "weight": "Weight",
+            "description": "توضیحات",
+            "code": "Code",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "educationalCenterGrade": "Educational Center Grade",
+            "educationalCenterCriteria": "Educational Center Criteria"
+        }
+    }
+}

@@ -3,8 +3,9 @@
         "teacherGrade": {
             "home": {
                 "title": "گریدبندی استادان",
+                "code": "68-PR-10-5-05-00/FO-28-00",
                 "createLabel": "جدید",
-                "createOrEditLabel": " گریدبندی استاد"
+                "createOrEditLabel": "فرم گریدبندی استاد"
             },
             "created": "گریدبندی استاد با شناسه {{ param }} ایجاد شد.",
             "updated": "گریدبندی استاد با شناسه {{ param }} ویرایش شد.",
@@ -18,6 +19,7 @@
             "formTitle": "عنوان فرم: شناسایی، ارزیابی و انتخاب اساتید (اشخاص حقیقی)",
             "title": "عنوان",
             "code": "کد",
+            "teacherCriteriaGroup": "مرحله ارزیابی",
             "totalScore": "جمع امتیاز",
             "totalScorePercent": "درصد جمع امتیاز",
             "grade": "گرید",

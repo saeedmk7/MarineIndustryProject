@@ -3,9 +3,10 @@
     "marineindustryprojApp": {
         "designAndPlanning" : {
             "home": {
-                "title": "فهرست دوره های برنامه ریزی شده",
+                "title": "برنامه ریزی آموزشی دوره ها",
+                "code": "68-PR-10-5-05-00/FO-20-00",
                 "createLabel": "جدید",
-                "createOrEditLabel": "طراحی و برنامه ریزی آموزشی دوره ها"
+                "createOrEditLabel": "فرم برنامه ریزی آموزشی دوره ها"
             },
             "created": "برنامه ریزی با شناسه {{ param }} ایجاد شد.",
             "updated": "برنامه ریزی با شناسه {{ param }} ویرایش شد.",

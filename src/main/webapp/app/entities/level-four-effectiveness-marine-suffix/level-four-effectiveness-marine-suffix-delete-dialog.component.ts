@@ -49,7 +49,7 @@ export class LevelFourEffectivenessMarineSuffixDeletePopupComponent implements O
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(LevelFourEffectivenessMarineSuffixDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: false
                 });
                 this.ngbModalRef.componentInstance.levelFourEffectiveness = levelFourEffectiveness;
                 this.ngbModalRef.result.then(
