@@ -28,6 +28,8 @@ public interface JobMapper extends EntityMapper<JobDTO, Job> {
     @Mapping(target = "jobs", ignore = true)
     @Mapping(target = "educationalModuleJobs", ignore = true)
     @Mapping(target = "jobSoldiers", ignore = true)
+    @Mapping(target = "oldJobChanges", ignore = true)
+    @Mapping(target = "newJobChanges", ignore = true)
     @Mapping(source = "rasteId", target = "raste")
     @Mapping(source = "radehId", target = "radeh")
     @Mapping(source = "jobTypeId", target = "jobType")

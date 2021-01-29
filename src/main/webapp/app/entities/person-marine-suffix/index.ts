@@ -4,3 +4,4 @@ export * from './person-marine-suffix-delete-dialog.component';
 export * from './person-marine-suffix-detail.component';
 export * from './person-marine-suffix.component';
 export * from './person-marine-suffix.route';
+export * from './person-unchart-marine-suffix.component';

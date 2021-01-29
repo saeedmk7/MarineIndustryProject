@@ -187,7 +187,8 @@
 
                 <button type="submit" title="مدارک" *ngIf="jobNiazsanji.id"
                         [routerLink]="['../document-marine-suffix', 'preJobNiazsanji', jobNiazsanji.id ]"
-                        class="btn btn-warning pull-left">
+                        [ngClass]="(jobNiazsanji.documents && jobNiazsanji.documents.length > 0) ? 'btn-warning' : 'btn-light'"
+                        class="btn pull-left">
                     <span>مدارک</span>
                     <span class="fa fa-file"></span>
                 </button>

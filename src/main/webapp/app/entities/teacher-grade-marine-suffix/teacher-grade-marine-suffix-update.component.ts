@@ -167,7 +167,7 @@ export class TeacherGradeMarineSuffixUpdateComponent implements OnInit {
                             teacherGradeScore.teacherCriteriaTitle = w.title;
                             teacherGradeScore.teacherCriteriaDescription = w.description;
                             teacherGradeScore.teacherCriteriaWeight = w.weight;
-                            teacherGradeScore.score = 1;
+                            teacherGradeScore.score = 5;
                             this.teacherGrade.teacherGradeScores.push(teacherGradeScore);
                         }
                     });

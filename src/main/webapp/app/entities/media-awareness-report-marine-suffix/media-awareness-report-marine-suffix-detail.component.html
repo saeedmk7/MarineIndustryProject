@@ -82,7 +82,7 @@
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
+            <button type="button" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_EDIT']"
                     [routerLink]="['/media-awareness-report-marine-suffix', mediaAwarenessReport.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>

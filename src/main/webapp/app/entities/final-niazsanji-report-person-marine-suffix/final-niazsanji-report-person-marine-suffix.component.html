@@ -79,7 +79,7 @@
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>-->
-                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
                                 [routerLink]="['/', { outlets: { popup: 'final-niazsanji-report-person-marine-suffix/'+ finalNiazsanjiReportPerson.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

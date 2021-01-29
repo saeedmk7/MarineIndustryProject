@@ -401,12 +401,10 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
     }
 
     export() {
-        debugger;
         this.makeCriteria(this.criteria, true);
     }
 
     prepareForExportExcel(res: IDesignAndPlanningMarineSuffix[]) {
-        debugger;
         const finalNiazsanjiIds = res.map(w => w.finalNiazsanjiReportId);
         this.finalNiazsanjiReportPersonService
             .finalNiazsanjiReportPeopleList(finalNiazsanjiIds)

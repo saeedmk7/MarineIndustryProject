@@ -22,159 +22,37 @@
     <search-panel [searchPanelModel]="searchbarModel" [immediatelyLoad]="false"></search-panel>
     <div style="display: inline" class="alert alert-info">برای دیدن کلیه نیازسنجی های فردی و نیازسنجی های سازمانی پس از انتخاب سال نیازسنجی دکمه جستجو را کلیک کنید.</div>
     <div style="display: inline" class="alert alert-danger" *ngIf="message">{{message}}</div>
-    <!--<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-        <div class="card border-success ">
-            <a data-toggle="collapse" href="#collapseExample" class="card-header center" style="background-color: aliceblue;">
-                <span class="panel-title">پنل جستجو</span>
-                <span class="pull-right clickable"><i class="glyphicon glyphicon-ok"></i></span>
-            </a>
-            <div id="collapseExample">
-                <div class="card-body">
-                    <div class="form-group half">
-                        <label class="form-control-label">منبع نیازسنجی</label>
-                        <div class="form-control">
-                            <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="true" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان فردی
-                            </label>
-                            <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="niazSanjiSource" [value]="false" [(ngModel)]="niazSanjiSource">نیازسنجی پودمان سازمانی (متمرکز و گروهی)
-                            </label>
-                        </div>
-
-                    </div>
-                    <div class="form-group">
-                        <label class="form-control-label" for="field_niazsanjiYear">سال نیازسنجی</label>
-                        <ng-select
-                            [items]="dates"
-                            [multiple]="false"
-                            [closeOnSelect]="true"
-                            [searchable]="true"
-                            [required]="true"
-                            bindLabel="title"
-                            bindValue="id"
-                            placeholder="انتخاب نمائید."
-                            name="niazsanjiYear"
-                            id="field_niazsanjiYear"
-                            [(ngModel)]="finalNiazsanjiReport.niazsanjiYear">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-control-label" for="field_planningRunMonth">ماه برنامه ریزی</label>
-                        <ng-select
-                            [items]="months"
-                            [multiple]="false"
-                            [closeOnSelect]="true"
-                            [searchable]="true"
-                            [required]="false"
-                            bindLabel="persianMonth"
-                            bindValue="id"
-                            placeholder="انتخاب نمائید."
-                            name="planningRunMonth"
-                            id="field_planningRunMonth"
-                            [(ngModel)]="finalNiazsanjiReport.planningRunMonth">
-                    </div>
-                  &lt;!&ndash;  <div class="form-group">
-                    </div>&ndash;&gt;
-                    <div class="form-group" *ngIf="isSuperUsers">
-                        <label class="form-control-label" for="field_organizationChart">گروه</label>
-                        <ng-select
-                            [items]="orgsRoot"
-                            [multiple]="false"
-                            [closeOnSelect]="true"
-                            [searchable]="true"
-                            bindLabel="fullTitle"
-                            bindValue="id"
-                            placeholder="انتخاب نمائید."
-                            name="organizationChartId"
-                            id="field_organizationChartsRoot"
-                            [(ngModel)]="finalNiazsanjiReport.organizationChartId">
-                    </div>
-                    <div class="form-group half">
-                        <label class="form-control-label" for="field_organizationChart">محل خدمت</label>
-                        <ng-select
-                            [items]="recommenedOrgCharts"
-                            [multiple]="false"
-                            [closeOnSelect]="true"
-                            [searchable]="true"
-                            bindLabel="fullTitle"
-                            bindValue="id"
-                            placeholder="انتخاب نمائید."
-                            name="organizationChartId"
-                            id="field_organizationChart"
-                            [(ngModel)]="finalNiazsanjiReport.organizationChartId">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-control-label" for="field_educationalModule">پودمان آموزشی</label>
-                        <input type="text" name="educationalModuleTitle" id="field_educationalModule" class="form-control"
-                               [(ngModel)]="finalNiazsanjiReport.educationalModuleTitle">
-                    </div>
-                    <div class="form-group half">
-                        <label class="form-control-label" for="field_educationalModule">افراد</label>
-                        <ng-select
-                            [items]="recommendedPeople"
-                            [multiple]="false"
-                            [closeOnSelect]="true"
-                            [searchable]="true"
-                            bindLabel="fullName"
-                            bindValue="id"
-                            placeholder="انتخاب نمائید."
-                            name="personId"
-                            id="field_personId"
-                            [(ngModel)]="personId">
-                    </div>
-                    &lt;!&ndash;<div class="form-group half">
-                        <label class="form-control-label" for="field_educationalModule">پودمان آموزشی</label>
-                        <ng-select
-                            [items]="educationalModules"
-                            [multiple]="false"
-                            [closeOnSelect]="true"
-                            [searchable]="true"
-                            bindLabel="fullTitle"
-                            bindValue="id"
-                            placeholder="انتخاب نمائید."
-                            name="educationalModuleId"
-                            id="field_educationalModule"
-                            [(ngModel)]="finalNiazsanjiReport.educationalModuleId">
-                    </div>&ndash;&gt;
-
-                    <div class="form-group">
-                        <label class="form-control-label" for="field_status">وضعیت برنامه ریزی</label>
-                        <ng-select
-                            [items]="statusMeaning"
-                            [multiple]="false"
-                            [closeOnSelect]="true"
-                            [searchable]="true"
-                            [required]="false"
-                            bindLabel="mean"
-                            bindValue="id"
-                            placeholder="انتخاب نمائید."
-                            name="status"
-                            id="field_status"
-                            [(ngModel)]="finalNiazsanjiReport.status">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-control-label" for="field_courseType">نوع دوره</label>
-                        <ng-select
-                            [items]="coursetypes"
-                            [multiple]="false"
-                            [closeOnSelect]="true"
-                            [searchable]="true"
-                            bindLabel="title"
-                            bindValue="id"
-                            placeholder="انتخاب نمائید."
-                            name="courseTypeId"
-                            id="field_courseType"
-                            [(ngModel)]="finalNiazsanjiReport.courseTypeId">
-                    </div>
+    <br/>
+    <br/>
+    <div class="card border-success">
+        <a data-toggle="collapse" href="#collapseExample1" class="card-header center" style="background-color: antiquewhite;">
+            <span class="panel-title">پنل تغییر گروهی به سال نیازسنجی جدید</span>
+            <span class="pull-right clickable"><i class="glyphicon glyphicon-ok"></i></span>
+        </a>
+        <div class="collapse" id="collapseExample1">
+            <div class="card-body">
+                <div class="form-group fullcover">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.selectedNiazsanjis"></label>
+                    <span class="badge badge-info" *ngFor="let item of selectedFinalNiazsanjis">
+                        {{item.educationalModuleTitle}} ({{item.educationalModuleCode}}) - {{item.niazsanjiYear}}
+                    </span>
                 </div>
-                <div class="card-footer text-muted success-color white-text">
-                    <input type="submit" class="btn btn-primary btn-lg" id="searchButton" value="جستجو">
-                    <div style="display: inline" class="alert alert-info">برای دیدن کلیه نیازسنجی های فردی و نیازسنجی های متمرکز پس از انتخاب سال نیازسنجی دکمه جستجو را کلیک کنید.</div>
-                    <div style="display: inline" class="alert alert-danger" *ngIf="message">{{message}}</div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazsanjiYear"></label>
+                    <select [(ngModel)] = "selectedYear" style="font-family: IranSansLight; font-size: 65%;" id="selectedYear" class="form-control float-right" name="selectedYear" *ngIf="selectedFinalNiazsanjis">
+                        <option [ngValue]="year"  *ngFor="let year of years">{{year}}</option>
+                    </select>
                 </div>
             </div>
+            <div class="card-footer text-muted success-color white-text">
+                <input id="save" type="button" [disabled]="!isSaving && (!(selectedFinalNiazsanjis.length > 0) || !selectedYear)"
+                       (click)="save()" class="btn-primary" value="ثبت">
+            </div>
         </div>
-    </form>-->
-    <br/>
+    </div>
+    <!--<div *ngIf="finalNiazsanjiReportsFardis.length == 0 && finalNiazsanjiReportsOrganizations == 0" class="row justify-content-center">
+        <img src="../../../content/images/loading.gif" height="64" width="64"/>
+    </div>-->
     <div class="table-responsive" *ngIf="finalNiazsanjiReportsFardis.length > 0">
         <kendo-grid
             [groupable]="true"
@@ -189,22 +67,24 @@
             </ng-template>
             <!--<kendo-grid-column field="id" title="شناسه" [width]="100"></kendo-grid-column>-->
             <!--<kendo-grid-column field="jobTitle" title="عنوان شغل" [width]="300"></kendo-grid-column>-->
+            <!--<kendo-grid-checkbox-column title="  " field="id">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <input type="checkbox" [id]="'selectedRow_'+ dataItem.id" />
+                </ng-template>
+            </kendo-grid-checkbox-column>-->
             <kendo-grid-column field="id" title=" " [width]="200">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    <!--<kendo-buttongroup type="button" class="btn btn-warning btn-sm"
-                    >
-                        <fa-icon [icon]="'sticky-note'"></fa-icon>
-                        <span class="d-none d-md-inline">برنامه ریزی</span>
-                    </kendo-buttongroup>-->
                     <kendo-buttongroup>
-                        <button kendoButton type="submit"
+                        <input type="checkbox" [id]="'selectedFinalNiazsanjis_'+ dataItem.id" *ngIf="dataItem.status <= 10"
+                               name="selectedFinalNiazsanjis" (click)="change($event, dataItem)" />
+                        <button kendoButton type="submit" *ngIf="isAdmin"
                                 [routerLink]="['/final-niazsanji-report-marine-suffix', dataItem.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                     </kendo-buttongroup>
-                    <kendo-buttongroup type="submit" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                    <kendo-buttongroup type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
                                        [routerLink]="['/', { outlets: { popup: 'final-niazsanji-report-marine-suffix/'+ dataItem.id + '/delete'} }]"
                                        replaceUrl="true"
                                        queryParamsHandling="merge" style="background-color: #aa0000;color: white"
@@ -284,20 +164,17 @@
             <!--<kendo-grid-column field="jobTitle" title="عنوان شغل" [width]="300"></kendo-grid-column>-->
             <kendo-grid-column field="id" title=" " [width]="200">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    <!--<kendo-buttongroup type="button" class="btn btn-warning btn-sm"
-                    >
-                        <fa-icon [icon]="'sticky-note'"></fa-icon>
-                        <span class="d-none d-md-inline">برنامه ریزی</span>
-                    </kendo-buttongroup>-->
+                    <input type="checkbox" [id]="'selectedFinalNiazsanjis_'+ dataItem.id" *ngIf="dataItem.status <= 10"
+                           name="selectedFinalNiazsanjis" (click)="change($event, dataItem)" />
                     <kendo-buttongroup>
-                        <button kendoButton type="submit"
+                        <button kendoButton type="submit" *ngIf="isAdmin"
                                 [routerLink]="['/final-niazsanji-report-marine-suffix', dataItem.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                     </kendo-buttongroup>
-                    <kendo-buttongroup type="submit" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                    <kendo-buttongroup type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
                                        [routerLink]="['/', { outlets: { popup: 'final-niazsanji-report-marine-suffix/'+ dataItem.id + '/delete'} }]"
                                        replaceUrl="true"
                                        queryParamsHandling="merge" style="background-color: #aa0000;color: white"

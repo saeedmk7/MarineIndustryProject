@@ -29,6 +29,7 @@
             <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.educationalHistory.courseTypeTitle">courseTypeTitle</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="educationalCenter"><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalCenter">Educational Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dateOfStart"><span jhiTranslate="marineindustryprojApp.educationalHistory.dateOfStart">Date Of Start</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dateOfEnd"><span jhiTranslate="marineindustryprojApp.educationalHistory.dateOfEnd">Date Of End</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th><span jhiTranslate="marineindustryprojApp.educationalHistory.status">Status</span></th>
 
@@ -47,6 +48,7 @@
                 <td>{{educationalHistory.courseTypeTitle}}</td>
                 <td>{{educationalHistory.educationalCenter}}</td>
                 <td>{{educationalHistory.dateOfStart}}</td>
+                <td>{{educationalHistory.dateOfEnd}}</td>
                 <!--<td>
                     <div *ngIf="educationalHistory.educationalModuleId">
                         <a [routerLink]="['../educational-module-marine-suffix', educationalHistory.educationalModuleId , 'view' ]" >{{educationalHistory.educationalModuleTitle}}</a>
@@ -100,13 +102,13 @@
                             </button>
                         </ng-container>
                     </ng-container>
-                    <button type="submit" title="ویرایش" *ngIf="educationalHistory.requestStatus != 'IGNORE' && isSuperUsers"
+                    <button type="submit" title="ویرایش" *ngIf="(educationalHistory.requestStatus != 'IGNORE') && (isSuperUsers || isRoleEdit)"
                             [routerLink]="['/educational-history-marine-suffix', educationalHistory.id, 'edit']"
                             class="btn btn-primary btn-sm">
                         <fa-icon [icon]="'pencil-alt'"></fa-icon>
                         <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                     </button>
-                    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                    <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']" type="submit"
                             [routerLink]="['/', { outlets: { popup: 'educational-history-marine-suffix/'+ educationalHistory.id + '/delete'} }]"
                             replaceUrl="true"
                             queryParamsHandling="merge"

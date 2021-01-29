@@ -13,6 +13,7 @@ import { IJobNiazsanjiMarineSuffix } from 'app/shared/model//job-niazsanji-marin
 import { INiazsanjiOtherMarineSuffix } from 'app/shared/model//niazsanji-other-marine-suffix.model';
 import { IRequestOtherNiazsanjiMarineSuffix } from 'app/shared/model//request-other-niazsanji-marine-suffix.model';
 import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model//prioritize-request-niazsanji-marine-suffix.model';
+import { IJobChangeMarineSuffix } from 'app/shared/model//job-change-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IScientificWorkGroupMarineSuffix } from 'app/shared/model//scientific-work-group-marine-suffix.model';
 import { IMainTaskMarineSuffix } from 'app/shared/model//main-task-marine-suffix.model';
@@ -20,6 +21,7 @@ import { IRequestOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//req
 import { IFinalOrganizationNiazsanjiMarineSuffix } from 'app/shared/model//final-organization-niazsanji-marine-suffix.model';
 import { IDesignAndPlanningMarineSuffix } from 'app/shared/model//design-and-planning-marine-suffix.model';
 import { IRunPhaseMarineSuffix } from 'app/shared/model//run-phase-marine-suffix.model';
+import { IUsersRequestMarineSuffix } from 'app/shared/model//users-request-marine-suffix.model';
 
 export interface IPersonMarineSuffix {
     id?: number;
@@ -62,6 +64,7 @@ export interface IPersonMarineSuffix {
     niazsanjiOthers?: INiazsanjiOtherMarineSuffix[];
     requestOtherNiazsanjis?: IRequestOtherNiazsanjiMarineSuffix[];
     prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[];
+    jobChanges?: IJobChangeMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     scientificWorkGroups?: IScientificWorkGroupMarineSuffix[];
     lastQualificationTitle?: string;
@@ -87,6 +90,7 @@ export interface IPersonMarineSuffix {
     finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[];
     designAndPlannings?: IDesignAndPlanningMarineSuffix[];
     runPhases?: IRunPhaseMarineSuffix[];
+    usersRequests?: IUsersRequestMarineSuffix[];
 }
 
 export class PersonMarineSuffix implements IPersonMarineSuffix {
@@ -129,6 +133,7 @@ export class PersonMarineSuffix implements IPersonMarineSuffix {
         public niazsanjiOthers?: INiazsanjiOtherMarineSuffix[],
         public requestOtherNiazsanjis?: IRequestOtherNiazsanjiMarineSuffix[],
         public prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[],
+        public jobChanges?: IJobChangeMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public scientificWorkGroups?: IScientificWorkGroupMarineSuffix[],
         public lastQualificationTitle?: string,
@@ -151,9 +156,9 @@ export class PersonMarineSuffix implements IPersonMarineSuffix {
         public requestOrganizationNiazsanjis?: IRequestOrganizationNiazsanjiMarineSuffix[],
         public finalOrganizationNiazsanjis?: IFinalOrganizationNiazsanjiMarineSuffix[],
         public designAndPlannings?: IDesignAndPlanningMarineSuffix[],
-        public runPhases?: IRunPhaseMarineSuffix[]
+        public runPhases?: IRunPhaseMarineSuffix[],
+        public usersRequests?: IUsersRequestMarineSuffix[]
     ) {
-
         this.archived = this.archived || false;
     }
 }

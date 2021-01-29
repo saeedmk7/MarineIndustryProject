@@ -1,19 +1,19 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
-import {JhiEventManager, JhiParseLinks, JhiAlertService} from 'ng-jhipster';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import {IJobMarineSuffix} from 'app/shared/model/job-marine-suffix.model';
-import {Principal} from 'app/core';
+import { IJobMarineSuffix } from 'app/shared/model/job-marine-suffix.model';
+import { Principal } from 'app/core';
 
-import {ITEMS_PER_PAGE} from 'app/shared';
-import {JobMarineSuffixService} from './job-marine-suffix.service';
-import {PlatformLocation} from "@angular/common";
-import {TranslateService} from '@ngx-translate/core';
-import {ExcelService} from "app/plugin/export-excel/excel-service";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
-import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
+import { ITEMS_PER_PAGE } from 'app/shared';
+import { JobMarineSuffixService } from './job-marine-suffix.service';
+import { PlatformLocation } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
+import { ExcelService } from 'app/plugin/export-excel/excel-service';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import { SearchPanelModel } from 'app/shared/model/custom/searchbar.model';
 
 @Component({
     selector: 'mi-job-marine-suffix',
@@ -36,7 +36,7 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     searchbarModel: SearchPanelModel[];
-    done:boolean = false;
+    done: boolean = false;
     criteria: any;
 
     isAdmin: boolean;
@@ -45,6 +45,8 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
     isModirAmozesh: boolean = false;
     isSuperUsers: boolean = false;
     isTopUsers: boolean = false;
+    isRoleEdit: boolean = false;
+    isRoleDelete: boolean = false;
 
     constructor(
         private jobService: JobMarineSuffixService,
@@ -56,7 +58,7 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private jhiTranslate: TranslateService,
         private location: PlatformLocation,
-        private convertObjectDatesService : ConvertObjectDatesService
+        private convertObjectDatesService: ConvertObjectDatesService
     ) {
         //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -64,7 +66,7 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
         });
-        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
+        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', criteria => {
             this.done = true;
             this.criteria = criteria.content;
             this.loadAll(criteria.content);
@@ -77,7 +79,6 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     loadAll(criteria?) {
-
         this.jobService
             .query({
                 page: this.page - 1,
@@ -92,25 +93,21 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     loadPage(page: number) {
-
         if (page !== this.previousPage) {
             this.previousPage = page;
             this.transition();
         }
     }
-    aggregateJob(job: IJobMarineSuffix){
-        if(job){
+    aggregateJob(job: IJobMarineSuffix) {
+        if (job) {
             this.jobService.find(job.id).subscribe((resp: HttpResponse<IJobMarineSuffix>) => {
-
                 this.jobService.aggregateJob(resp.body).subscribe((res: HttpResponse<IJobMarineSuffix>) => {
                     this.loadAll(this.criteria);
                 });
             });
-
         }
     }
     transition() {
-
         /*this.router.navigate(['/job-marine-suffix'], {
             queryParams: {
                 page: this.page,
@@ -121,7 +118,6 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
         //this.loadAll(this.criteria)
     }
     clear() {
-
         this.page = 0;
         this.router.navigate([
             '/job-marine-suffix',
@@ -134,10 +130,10 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.searchbarModel = new Array<SearchPanelModel>();
-        this.searchbarModel.push(new SearchPanelModel('job','title','text', 'contains'));
-        this.searchbarModel.push(new SearchPanelModel('job','jobKey','text','contains'));
-        this.searchbarModel.push(new SearchPanelModel('job','jobCode','text','contains'));
-        this.searchbarModel.push(new SearchPanelModel('job','first3JobCode','text','contains'));
+        this.searchbarModel.push(new SearchPanelModel('job', 'title', 'text', 'contains'));
+        this.searchbarModel.push(new SearchPanelModel('job', 'jobKey', 'text', 'contains'));
+        this.searchbarModel.push(new SearchPanelModel('job', 'jobCode', 'text', 'contains'));
+        this.searchbarModel.push(new SearchPanelModel('job', 'first3JobCode', 'text', 'contains'));
 
         this.principal.identity().then(account => {
             this.currentAccount = account;
@@ -149,20 +145,17 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
         }*/
     }
 
-    setRoles(account: any){
-        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-            this.isAdmin = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
-            this.isModirAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
-            this.isModirKolAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+    setRoles(account: any) {
+        if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
             this.isKarshenasArshadAmozeshSazman = true;
+        if (account.authorities.find(a => a == 'ROLE_EDIT') !== undefined) this.isRoleEdit = true;
+        if (account.authorities.find(a => a == 'ROLE_DELETE') !== undefined) this.isRoleDelete = true;
 
-        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-            this.isSuperUsers = true;
-        if(this.isModirAmozesh || this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-            this.isTopUsers = true;
+        if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
+        if (this.isModirAmozesh || this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isTopUsers = true;
     }
 
     ngOnDestroy() {
@@ -179,7 +172,6 @@ export class JobMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     sort() {
-
         const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
         if (this.predicate !== 'id') {
             result.push('id');

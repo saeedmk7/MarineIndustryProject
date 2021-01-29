@@ -111,13 +111,19 @@ public class LevelThreeEffectivenessServiceImpl implements LevelThreeEffectivene
             throw new Exception("هنوز یکی از افراد اثربخشی نشده است");
         }
 
-        Optional<EffectivenessPhase> effectivenessPhaseOptional = finalNiazsanjiReport.getEffectivenessPhases().stream()
-            .filter(a -> a.getEffectivenessPhaseLevel().getEffectivenessLevel() == 3).findFirst();
-        if(!effectivenessPhaseOptional.isPresent()){
+        EffectivenessPhase effectivenessPhase;
+        List<EffectivenessPhase> effectivenessPhasesList = effectivenessPhaseRepository.findAllByFinalNiazsanjiReport(finalNiazsanjiReportId);
+        if((!effectivenessPhasesList.isEmpty()) && effectivenessPhasesList.size() > 0)
+        {
+            Optional<EffectivenessPhase> effectivenessPhaseOptional = effectivenessPhasesList.stream().filter(a -> a.getEffectivenessPhaseLevel().getEffectivenessLevel() == 3).findFirst();
+            if(!effectivenessPhaseOptional.isPresent()){
+                throw new Exception("finalNiazsanjiReportId is not valid");
+            }
+            effectivenessPhase = effectivenessPhaseOptional.get();
+        }
+        else {
             throw new Exception("finalNiazsanjiReportId is not valid");
         }
-
-        EffectivenessPhase effectivenessPhase = effectivenessPhaseOptional.get();
 
         List<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = finalNiazsanjiReport.getFinalNiazsanjiReportPeople()
             .stream().collect(Collectors.toList());

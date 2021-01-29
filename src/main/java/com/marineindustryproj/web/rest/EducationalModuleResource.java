@@ -132,6 +132,10 @@ public class EducationalModuleResource {
     @Timed
     public ResponseEntity<List<EducationalModuleDTO>> getAllEducationalModules(EducationalModuleCriteria criteria, Pageable pageable) throws Exception{
         log.debug("REST request to get EducationalModules by criteria: {}", criteria);
+        if(pageable.getPageSize() == 2000){
+            List<EducationalModuleDTO> educationalModuleDTOS = educationalModuleQueryService.findByCriteria(criteria);
+            return ResponseEntity.ok().headers(null).body(educationalModuleDTOS);
+        }
         Page<EducationalModuleDTO> page = educationalModuleQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/educational-modules");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);

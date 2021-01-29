@@ -27,4 +27,7 @@ public interface EffectivenessPhaseRepository extends JpaRepository<Effectivenes
     @Query("select effectiveness_phase from EffectivenessPhase effectiveness_phase left join fetch effectiveness_phase.documents where effectiveness_phase.id =:id")
     Optional<EffectivenessPhase> findOneWithEagerRelationships(@Param("id") Long id);
 
+    @Query("select effectiveness_phase from EffectivenessPhase effectiveness_phase left join fetch effectiveness_phase.documents where effectiveness_phase.finalNiazsanjiReport.id =:finalNiazsanjiReportId")
+    List<EffectivenessPhase> findAllByFinalNiazsanjiReport(@Param("finalNiazsanjiReportId") Long finalNiazsanjiReportId);
+
 }

@@ -39,6 +39,7 @@
                 <th><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.educationalModuleSkillLevelOfSkillTitle">Educational Module</span></th>
                 <th><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.peopleCount">people Count</span></th>
                 <th><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.educationalModuleTotalLearningTime">educationalModuleTotalLearningTime</span></th>
+                <th><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.fullPeopleTime">fullPeopleTime</span></th>
                 <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="studentsType"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.studentsType">Students Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.finalOrganizationNiazsanji.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -75,6 +76,7 @@
                 <td>{{finalOrganizationNiazsanji.skillLevelOfSkillTitle}}</td>
                 <td>{{finalOrganizationNiazsanji.peopleCount}}</td>
                 <td>{{finalOrganizationNiazsanji.totalLearningTime | number}}</td>
+                <td>{{finalOrganizationNiazsanji.totalLearningTime * finalOrganizationNiazsanji.peopleCount | number}}</td>
                 <td>{{finalOrganizationNiazsanji.priceCost | number}}</td>
                 <!--<td>{{finalOrganizationNiazsanji.studentsType}}</td>-->
                 <td>
@@ -121,7 +123,8 @@
                         <!--*ngIf="(isAdmin || isKarshenasArshadAmozesh || isModirKolAmozesh) && (finalOrganizationNiazsanji.status < 30 && finalOrganizationNiazsanji.status != 1 && finalOrganizationNiazsanji.status != 11 && finalOrganizationNiazsanji.status != 21)"-->
                         <button type="submit" title="مدارک"
                                 [routerLink]="['../document-marine-suffix', 'finalorganizationniazsanji', finalOrganizationNiazsanji.id ]"
-                                class="btn btn-light btn-sm">
+                                [ngClass]="(finalOrganizationNiazsanji.documents && finalOrganizationNiazsanji.documents.length > 0) ? 'btn-success' : 'btn-light'"
+                                class="btn btn-sm">
                             <span class="fa fa-file"></span>
                         </button>
                         <button type="submit" title="ویرایش" *ngIf="(isAdmin || isKarshenasArshadAmozesh || isModirKolAmozesh) && (finalOrganizationNiazsanji.status < 30 && finalOrganizationNiazsanji.status != 1 && finalOrganizationNiazsanji.status != 11 && finalOrganizationNiazsanji.status != 21)"
@@ -215,7 +218,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.reject">reject</span>
                         </button>-->
 
-                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                        <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']" type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'final-organization-niazsanji-marine-suffix/'+ finalOrganizationNiazsanji.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

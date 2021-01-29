@@ -38,6 +38,14 @@ public interface ScientificWorkGroupService {
     Optional<ScientificWorkGroupDTO> findOne(Long id);
 
     /**
+     * Get the "title" scientificWorkGroup.
+     *
+     * @param title the title of the entity
+     * @return the entity
+     */
+    Optional<ScientificWorkGroupDTO> findByTitle(String title);
+
+    /**
      * Delete the "id" scientificWorkGroup.
      *
      * @param id the id of the entity

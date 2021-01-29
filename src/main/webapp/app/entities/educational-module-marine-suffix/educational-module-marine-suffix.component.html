@@ -121,7 +121,8 @@
                     <div class="btn-group flex-btn-group-container">
                      <button type="submit"
                                 [routerLink]="['../document-marine-suffix', 'educationalModule',educationalModule.id ]"
-                                class="btn btn-light btn-sm">
+                                [ngClass]="(educationalModule.documents && educationalModule.documents.length > 0) ? 'btn-success' : 'btn-light'"
+                                class="btn btn-sm">
                             <span class="fa fa-file"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.documents">Documents</span>
                         </button>
@@ -131,13 +132,13 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"  *ngIf="isSuperUsers"
+                        <button type="submit"  *ngIf="isTopUsers"
                                 [routerLink]="['/educational-module-marine-suffix', educationalModule.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"  *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                        <button type="submit"  *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
                                 [routerLink]="['/', { outlets: { popup: 'educational-module-marine-suffix/'+ educationalModule.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

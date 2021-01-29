@@ -41,7 +41,8 @@
                     <div class="btn-group flex-btn-group-container">
                         <button *jhiHasAnyAuthority="['ROLE_ADMIN']" type="submit"
                                 [routerLink]="['../document-marine-suffix', 'announcement',announcement.id ]"
-                                class="btn btn-light btn-sm">
+                                class="btn btn-sm"
+                                [ngClass]="(announcement.documents && announcement.documents.length > 0) ? 'btn-success' : 'btn-light'">
                             <span class="fa fa-file"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.documents">Documents</span>
                         </button>
@@ -51,13 +52,13 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button *jhiHasAnyAuthority="['ROLE_ADMIN']" type="submit"
+                        <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_EDIT']" type="submit"
                                 [routerLink]="['/announcement-marine-suffix', announcement.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button *jhiHasAnyAuthority="['ROLE_ADMIN']" type="submit"
+                        <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']" type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'announcement-marine-suffix/'+ announcement.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

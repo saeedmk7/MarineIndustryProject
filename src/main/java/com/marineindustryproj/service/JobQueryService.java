@@ -151,6 +151,14 @@ public class JobQueryService extends QueryService<Job> {
                 specification = specification.and(buildSpecification(criteria.getJobSoldierId(),
                     root -> root.join(Job_.jobSoldiers, JoinType.LEFT).get(Soldier_.id)));
             }
+            if (criteria.getOldJobChangeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getOldJobChangeId(),
+                    root -> root.join(Job_.oldJobChanges, JoinType.LEFT).get(JobChange_.id)));
+            }
+            if (criteria.getNewJobChangeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getNewJobChangeId(),
+                    root -> root.join(Job_.newJobChanges, JoinType.LEFT).get(JobChange_.id)));
+            }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(Job_.documents, JoinType.LEFT).get(Document_.id)));

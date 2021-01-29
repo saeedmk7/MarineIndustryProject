@@ -155,7 +155,8 @@
                 <td class="text-right">
                     <button type="submit" title="مدارک"
                             [routerLink]="['../document-marine-suffix', 'requestniazsanjifardi',requestNiazsanjiFardi.id]"
-                            class="btn btn-light btn-sm">
+                            [ngClass]="(requestNiazsanjiFardi.documents && requestNiazsanjiFardi.documents.length > 0) ? 'btn-success' : 'btn-light'"
+                            class="btn btn-sm">
                         <span class="fa fa-file"></span>
                     </button>
                     <button type="submit" title="جزئیات"
@@ -204,7 +205,7 @@
                             </button>
                         </ng-container>
                     </ng-container>
-                    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                    <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']" type="submit"
                             [routerLink]="['/', { outlets: { popup: 'request-niazsanji-fardi-marine-suffix/'+ requestNiazsanjiFardi.id + '/delete'} }]"
                             replaceUrl="true"
                             queryParamsHandling="merge"

@@ -50,6 +50,10 @@ public class EducationalHistory implements Serializable {
     @Column(name = "date_of_start", length = 50)
     private String dateOfStart;
 
+    @Size(max = 50)
+    @Column(name = "date_of_end", length = 50)
+    private String dateOfEnd;
+
     
     @Lob
     @Column(name = "file_doc", nullable = false)
@@ -209,6 +213,19 @@ public class EducationalHistory implements Serializable {
 
     public void setDateOfStart(String dateOfStart) {
         this.dateOfStart = dateOfStart;
+    }
+
+    public String getDateOfEnd() {
+        return dateOfEnd;
+    }
+
+    public EducationalHistory dateOfEnd(String dateOfEnd) {
+        this.dateOfEnd = dateOfEnd;
+        return this;
+    }
+
+    public void setDateOfEnd(String dateOfEnd) {
+        this.dateOfEnd = dateOfEnd;
     }
 
     public String getFileDoc() {
@@ -489,6 +506,7 @@ public class EducationalHistory implements Serializable {
             ", totalTime=" + getTotalTime() +
             ", educationalCenter='" + getEducationalCenter() + "'" +
             ", dateOfStart='" + getDateOfStart() + "'" +
+            ", dateOfEnd='" + getDateOfEnd() + "'" +
             ", fileDoc='" + getFileDoc() + "'" +
             ", description='" + getDescription() + "'" +
             ", createUserLogin='" + getCreateUserLogin() + "'" +

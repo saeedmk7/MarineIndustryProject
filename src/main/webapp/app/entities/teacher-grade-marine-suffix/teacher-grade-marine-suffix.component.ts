@@ -5,19 +5,21 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { ITeacherGradeMarineSuffix } from 'app/shared/model/teacher-grade-marine-suffix.model';
-import {AccountService, Principal} from 'app/core';
+import { AccountService, Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { TeacherGradeMarineSuffixService } from './teacher-grade-marine-suffix.service';
-import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
-import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
-import {Grade} from "app/shared/model/enums/Grade";
-import {IEducationalCenterMarineSuffix} from "app/shared/model/educational-center-marine-suffix.model";
-import {TeacherMarineSuffixService} from "app/entities/teacher-marine-suffix";
-import {ITeacherMarineSuffix} from "app/shared/model/teacher-marine-suffix.model";
-import {MONTHS} from "app/shared/constants/months.constants";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
-import {CommonSearchCheckerService} from "app/plugin/utilities/common-search-checkers";
+import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { SearchPanelModel } from 'app/shared/model/custom/searchbar.model';
+import { Grade } from 'app/shared/model/enums/Grade';
+import { IEducationalCenterMarineSuffix } from 'app/shared/model/educational-center-marine-suffix.model';
+import { TeacherMarineSuffixService } from 'app/entities/teacher-marine-suffix';
+import { ITeacherMarineSuffix } from 'app/shared/model/teacher-marine-suffix.model';
+import { MONTHS } from 'app/shared/constants/months.constants';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import { CommonSearchCheckerService } from 'app/plugin/utilities/common-search-checkers';
+import { ITeacherCriteriaGroupMarineSuffix } from 'app/shared/model/teacher-criteria-group-marine-suffix.model';
+import { TeacherCriteriaGroupMarineSuffixService } from 'app/entities/teacher-criteria-group-marine-suffix';
 
 @Component({
     selector: 'mi-teacher-grade-marine-suffix',
@@ -41,11 +43,12 @@ export class TeacherGradeMarineSuffixComponent implements OnInit, OnDestroy {
     reverse: any;
 
     teachers: ITeacherMarineSuffix[];
+    teacherCriteriaGroups: ITeacherCriteriaGroupMarineSuffix[];
     currentPerson: IPersonMarineSuffix;
 
     criteriaSubscriber: Subscription;
     searchbarModel: SearchPanelModel[] = [];
-    done:boolean = false;
+    done: boolean = false;
     criteria: any;
 
     isAdmin: boolean;
@@ -58,6 +61,7 @@ export class TeacherGradeMarineSuffixComponent implements OnInit, OnDestroy {
 
     constructor(
         protected teacherGradeService: TeacherGradeMarineSuffixService,
+        protected teacherCriteriaGroupService: TeacherCriteriaGroupMarineSuffixService,
         protected parseLinks: JhiParseLinks,
         protected jhiAlertService: JhiAlertService,
         protected accountService: Principal,
@@ -75,7 +79,7 @@ export class TeacherGradeMarineSuffixComponent implements OnInit, OnDestroy {
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
         });
-        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
+        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', criteria => {
             this.done = true;
             this.criteria = criteria.content;
             this.loadAll(criteria.content);
@@ -83,8 +87,7 @@ export class TeacherGradeMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     loadAll(criteria?) {
-        if(!criteria)
-            criteria = [];
+        if (!criteria) criteria = [];
         this.teacherGradeService
             .query({
                 page: this.page - 1,
@@ -97,19 +100,14 @@ export class TeacherGradeMarineSuffixComponent implements OnInit, OnDestroy {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
-    setRoles(account: any){
-
-        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-            this.isAdmin = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
-            this.isModirAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
-            this.isModirKolAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+    setRoles(account: any) {
+        if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
             this.isKarshenasArshadAmozeshSazman = true;
 
-        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-            this.isSuperUsers = true;
+        if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
     }
     loadPage(page: number) {
         if (page !== this.previousPage) {
@@ -149,13 +147,31 @@ export class TeacherGradeMarineSuffixComponent implements OnInit, OnDestroy {
 
             this.grades = Object.keys(Grade);
 
-            this.searchbarModel.push(new SearchPanelModel('teacherGrade','grade','selectWithStringId', 'equals', this.commonSearchCheckerService.convertEnumToSearchArray(Grade, 'Grade')));
+            this.searchbarModel.push(
+                new SearchPanelModel(
+                    'teacherGrade',
+                    'grade',
+                    'selectWithStringId',
+                    'equals',
+                    this.commonSearchCheckerService.convertEnumToSearchArray(Grade, 'Grade')
+                )
+            );
             /*this.searchbarModel.push(new SearchPanelModel('mediaAwarenessReport','publishDate','text', 'contains'));*/
             this.teacherService.query().subscribe(
                 (res: HttpResponse<ITeacherMarineSuffix[]>) => {
                     this.teachers = res.body;
-                    this.searchbarModel.push(new SearchPanelModel('teacherGrade',
-                        'teacherId','select', 'equals', this.teachers, 'fullName'));
+                    this.searchbarModel.push(
+                        new SearchPanelModel('teacherGrade', 'teacherId', 'select', 'equals', this.teachers, 'fullName')
+                    );
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+            this.teacherCriteriaGroupService.query().subscribe(
+                (res: HttpResponse<ITeacherCriteriaGroupMarineSuffix[]>) => {
+                    this.teacherCriteriaGroups = res.body;
+                    this.searchbarModel.push(
+                        new SearchPanelModel('teacherGrade', 'teacherCriteriaGroupId', 'select', 'equals', this.teacherCriteriaGroups)
+                    );
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
@@ -165,11 +181,11 @@ export class TeacherGradeMarineSuffixComponent implements OnInit, OnDestroy {
         //this.registerChangeInTeacherGrades();
     }
 
-    prepareSearchDate(){
+    prepareSearchDate() {
         const dates = this.convertObjectDatesService.getYearsArray();
         this.searchbarModel.push(new SearchPanelModel('teacherGrade', 'year', 'select', 'equals', dates, 'title'));
     }
-    prepareSearchMonth(){
+    prepareSearchMonth() {
         this.searchbarModel.push(new SearchPanelModel('teacherGrade', 'month', 'select', 'equals', MONTHS, 'persianMonth'));
     }
 
@@ -207,7 +223,7 @@ export class TeacherGradeMarineSuffixComponent implements OnInit, OnDestroy {
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.teacherGrades = data;
-        this.teacherGrades.forEach(w => w.monthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(w.month));
+        this.teacherGrades.forEach(w => (w.monthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(w.month)));
     }
 
     protected onError(errorMessage: string) {

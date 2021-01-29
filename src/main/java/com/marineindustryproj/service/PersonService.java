@@ -36,6 +36,12 @@ public interface PersonService {
      * @return the list of entities
      */
     List<PersonMinDTO> findAllFromCache();
+    /**
+     * Get all uchart people.
+     *
+     * @return the list of entities
+     */
+    List<PersonDTO> findAllUnChart();
 
     /**
      * Get all the Person with eager load of many-to-many relationships.

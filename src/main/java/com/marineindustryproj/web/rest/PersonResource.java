@@ -169,6 +169,18 @@ public class PersonResource {
         return new ResponseEntity<>(personList, null, HttpStatus.OK);
     }
     /**
+     * GET  /people : get all the un chart people.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of people in body
+     */
+    @GetMapping("/people/allUnChart")
+    @Timed
+    public ResponseEntity<List<PersonDTO>> getUnChartPeople() {
+        log.debug("REST request to get People All");
+        List<PersonDTO> personList = personService.findAllUnChart();
+        return new ResponseEntity<>(personList, null, HttpStatus.OK);
+    }
+    /**
     * GET  /people/count : count all the people.
     *
     * @param criteria the criterias which the requested entities should match

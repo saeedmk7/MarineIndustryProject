@@ -82,7 +82,7 @@
             <kendo-grid-column field="educationalModuleTitle" title="پودمان آموزشی" [width]="300"></kendo-grid-column>
             <kendo-grid-column field="id" title=" " [width]="100">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    <kendo-buttongroup type="submit"  *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                    <kendo-buttongroup type="submit"  *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
                             [routerLink]="['/', { outlets: { popup: 'educational-module-job-marine-suffix/'+ dataItem.id + '/delete'} }]"
                             replaceUrl="true"
                             queryParamsHandling="merge" style="background-color: #aa0000;color: white"

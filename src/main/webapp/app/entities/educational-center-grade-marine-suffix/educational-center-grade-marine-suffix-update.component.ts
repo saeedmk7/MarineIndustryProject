@@ -193,7 +193,7 @@ export class EducationalCenterGradeMarineSuffixUpdateComponent implements OnInit
                             educationalCenterGradeScore.educationalCenterCriteriaId = w.id;
                             educationalCenterGradeScore.educationalCenterCriteriaTitle = w.title;
                             educationalCenterGradeScore.educationalCenterCriteriaDescription = w.description;
-                            educationalCenterGradeScore.score = 1;
+                            educationalCenterGradeScore.score = 5;
                             this.educationalCenterGrade.educationalCenterGradeScores.push(educationalCenterGradeScore);
                         }
                     });

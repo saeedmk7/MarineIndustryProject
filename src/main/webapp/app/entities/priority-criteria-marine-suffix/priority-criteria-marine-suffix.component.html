@@ -43,13 +43,13 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_EDIT']"
                                 [routerLink]="['/priority-criteria-marine-suffix', priorityCriteria.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
                                 [routerLink]="['/', { outlets: { popup: 'priority-criteria-marine-suffix/'+ priorityCriteria.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

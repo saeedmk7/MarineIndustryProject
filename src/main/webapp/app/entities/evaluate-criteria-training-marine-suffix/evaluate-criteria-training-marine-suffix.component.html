@@ -88,16 +88,17 @@
                         </button>
                         <button type="submit" title="مدارک"
                                 [routerLink]="['../document-marine-suffix', 'evaluatecriteriatraining',evaluateCriteriaTraining.id]"
-                                class="btn btn-light btn-sm">
+                                [ngClass]="(evaluateCriteriaTraining.documents && evaluateCriteriaTraining.documents.length > 0) ? 'btn-success' : 'btn-light'"
+                                class="btn btn-sm">
                             <span class="fa fa-file"></span>
                         </button>
-                        <button type="submit"
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_EDIT']"
                                 [routerLink]="['/evaluate-criteria-training-marine-suffix', evaluateCriteriaTraining.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
                                 [routerLink]="['/', { outlets: { popup: 'evaluate-criteria-training-marine-suffix/'+ evaluateCriteriaTraining.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

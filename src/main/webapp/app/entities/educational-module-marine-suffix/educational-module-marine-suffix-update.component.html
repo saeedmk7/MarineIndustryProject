@@ -189,6 +189,17 @@
                     </div>
                 </div>
                 <div class="form-group half">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.goalsBehavioralText" for="field_goalsBehavioralText">Goals Text</label>
+                    <textarea type="text" class="form-control" name="goalsBehavioralText" id="field_goalsBehavioralText"
+                              [(ngModel)]="educationalModule.goalsBehavioralText" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.goalsBehavioralText?.dirty && editForm.controls.goalsBehavioralText?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.goalsBehavioralText?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group half">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.educationalModuleHeadlines" for="field_educationalModuleHeadlines">Educational Module Headlines</label>
                     <textarea type="text" class="form-control" name="educationalModuleHeadlines" id="field_educationalModuleHeadlines"
                               [(ngModel)]="educationalModule.educationalModuleHeadlines" maxlength="4096"></textarea>
@@ -233,6 +244,25 @@
                         name="resource"
                         id="field_resource"
                         [(ngModel)]="educationalModule.resources">
+                </div>
+                <div class="form-group half">
+                    <a (click)="change('teaching-approach-marine-suffix')" jhiTranslate="marineindustryprojApp.educationalModule.teachingApproach" for="field_teachingApproach">teachingApproach</a>
+                    <!--<select class="form-control" id="field_teachingApproach" multiple name="teachingApproach" [(ngModel)]="educationalModule.teachingApproachs">
+                        <option [ngValue]="getSelected(educationalModule.teachingApproachs, teachingApproachOption)" *ngFor="let teachingApproachOption of teachingApproachs; trackBy: trackResourceById">{{teachingApproachOption.title}}</option>
+                    </select>-->
+
+                    <ng-select
+                        [items]="teachingApproachs"
+                        appendTo="body"
+                        [multiple]="true"
+                        [closeOnSelect]="false"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        placeholder="انتخاب تمائید."
+                        name="teachingApproach"
+                        id="field_teachingApproach"
+                        [(ngModel)]="educationalModule.teachingApproaches"></ng-select>
                 </div>
                 <div class="form-group half">
                     <a (click)="change('teacher-marine-suffix')" jhiTranslate="marineindustryprojApp.educationalModule.teacher" for="field_teacher">Teacher</a>
@@ -316,6 +346,132 @@
                         name="organization"
                         id="field_organization"
                         [(ngModel)]="educationalModule.organizationId">
+                </div>
+                <div class="form-group bighalf">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.courseContactsTerms" for="field_courseContactsTerms">Centralized Code</label>
+                    <input type="text" class="form-control" name="courseContactsTerms" id="field_courseContactsTerms"
+                           [(ngModel)]="educationalModule.courseContactsTerms" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.courseContactsTerms?.dirty && editForm.controls.courseContactsTerms?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.courseContactsTerms?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('people-under-training-marine-suffix')" class="form-control-label"
+                       jhiTranslate="marineindustryprojApp.educationalModule.peopleUnderTraining" for="field_peopleUnderTraining">peopleUnderTraining</a>
+                    <ng-select
+                        [items]="peopleUnderTrainings"
+                        [multiple]="true"
+                        [closeOnSelect]="false"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="fullTitle"
+                        placeholder="انتخاب تمائید."
+                        name="peopleUnderTraining"
+                        id="field_peopleUnderTraining"
+                        [(ngModel)]="educationalModule.peopleUnderTrainings"></ng-select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('competency-marine-suffix')" class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.competency" for="field_competency">competency</a>
+                    <ng-select
+                        [items]="competencies"
+                        appendTo="body"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="false"
+                        bindValue="id"
+                        bindLabel="title"
+                        placeholder="انتخاب تمائید."
+                        name="competency"
+                        id="field_competency"
+                        [(ngModel)]="educationalModule.competencyId"></ng-select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="marineindustryprojApp.requestEducationalModule.neededHardware"
+                           for="field_neededHardware">neededHardware</label>
+                    <textarea type="text" class="form-control" name="neededHardware" id="field_neededHardware"
+                              [(ngModel)]="educationalModule.neededHardware"
+                              maxlength="4096"></textarea>
+                    <div
+                        [hidden]="!(editForm.controls.neededHardware?.dirty && editForm.controls.neededHardware?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.neededHardware?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="marineindustryprojApp.requestEducationalModule.neededSoftwares"
+                           for="field_neededSoftwares">neededSoftwares</label>
+                    <textarea type="text" class="form-control" name="neededSoftwares"
+                              id="field_neededSoftwares"
+                              [(ngModel)]="educationalModule.neededSoftwares"
+                              maxlength="4096"></textarea>
+                    <div
+                        [hidden]="!(editForm.controls.neededSoftwares?.dirty && editForm.controls.neededSoftwares?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.neededSoftwares?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('effectiveness-index-marine-suffix')" class="form-control-label"
+                       jhiTranslate="marineindustryprojApp.requestEducationalModule.effectivenessIndex"
+                       for="field_effectivenessIndex">effectivenessIndex</a>
+                    <ng-select
+                        [items]="effectivenessIndeces"
+                        appendTo="body"
+                        [multiple]="true"
+                        [closeOnSelect]="false"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        placeholder="انتخاب تمائید."
+                        name="effectivenessIndex"
+                        id="field_effectivenessIndex"
+                        [(ngModel)]="educationalModule.effectivenessIndices"></ng-select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('effectiveness-level-marine-suffix')" class="form-control-label"
+                       jhiTranslate="marineindustryprojApp.requestEducationalModule.effectivenessLevel"
+                       for="field_effectivenessLevel">effectivenessLevel</a>
+                    <ng-select
+                        [items]="effectivenessLevels"
+                        appendTo="body"
+                        [multiple]="true"
+                        [closeOnSelect]="false"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        placeholder="انتخاب تمائید."
+                        name="effectivenessLevel"
+                        id="field_effectivenessLevel"
+                        [(ngModel)]="educationalModule.effectivenessLevels"></ng-select>
+                </div>
+                <div class="form-group">
+                    <a (click)="change('assessment-method-marine-suffix')" class="form-control-label"
+                       jhiTranslate="marineindustryprojApp.requestEducationalModule.assessmentMethod"
+                       for="field_assessmentMethod">assessmentMethod</a>
+                    <ng-select
+                        [items]="assessmentMethods"
+                        appendTo="body"
+                        [multiple]="true"
+                        [closeOnSelect]="false"
+                        [searchable]="true"
+                        [required]="false"
+                        bindLabel="title"
+                        placeholder="انتخاب تمائید."
+                        name="assessmentMethod"
+                        id="field_assessmentMethod"
+                        [(ngModel)]="educationalModule.assessmentMethods"></ng-select>
                 </div>
                 <div class="form-group bighalf">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.centralizedCode" for="field_centralizedCode">Centralized Code</label>

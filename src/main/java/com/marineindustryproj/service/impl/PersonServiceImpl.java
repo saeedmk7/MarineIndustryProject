@@ -16,15 +16,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 /**
  * Service Implementation for managing Person.
@@ -125,6 +123,16 @@ public class PersonServiceImpl implements PersonService {
     public List<PersonMinDTO> findAllFromCache() {
         return personRepository.findAllFromCache();
     }
+    @Override
+    public List<PersonDTO> findAllUnChart() {
+        List<PersonDTO> personDTOS = new ArrayList<>();
+
+        List<Person> people = personRepository.findAllByOrganizationChartNull();
+        for (Person person : people) {
+            personDTOS.add(personMapper.toDto(person));
+        }
+        return personDTOS;
+    }
 
     /**
      * Get all the Person with eager load of many-to-many relationships.
@@ -159,6 +167,15 @@ public class PersonServiceImpl implements PersonService {
     public void delete(Long id) {
         log.debug("Request to delete Person : {}", id);
         personRepository.deleteById(id);
+        clearPersonCaches();
+    }
+    /**
+     * People cache should remove automatically
+     * <p>
+     * This is scheduled to get fired everyday, at 05:00 (am).
+     */
+    @Scheduled(cron = "0 0 7 * * ?")
+    public void clearPersonCachesBySchedule() {
         clearPersonCaches();
     }
     private void clearPersonCaches() {

@@ -77,8 +77,7 @@ public class EffectivenessPhaseServiceImpl implements EffectivenessPhaseService 
             throw new Exception("هنوز یکی از سطوح تکمیل نشده است");
         }
 
-        List<EffectivenessPhase> effectivenessPhases = finalNiazsanjiReport.getEffectivenessPhases()
-            .stream().collect(Collectors.toList());
+        List<EffectivenessPhase> effectivenessPhases = effectivenessPhaseRepository.findAllByFinalNiazsanjiReport(finalNiazsanjiReportId);
 
         float finalScore = (float) effectivenessPhases.stream().mapToDouble(a -> a.getWeightedPoints()).sum();
 
@@ -121,15 +120,19 @@ public class EffectivenessPhaseServiceImpl implements EffectivenessPhaseService 
             throw new Exception("هنوز یکی از افراد اثربخشی نشده است");
         }
 
-
-
-        Optional<EffectivenessPhase> effectivenessPhaseOptional = finalNiazsanjiReport.getEffectivenessPhases()
-            .stream().filter(a -> a.getEffectivenessPhaseLevel().getEffectivenessLevel() == 2).findFirst();
-        if(!effectivenessPhaseOptional.isPresent()){
+        EffectivenessPhase effectivenessPhase;
+        List<EffectivenessPhase> effectivenessPhasesList = effectivenessPhaseRepository.findAllByFinalNiazsanjiReport(finalNiazsanjiReportId);
+        if((!effectivenessPhasesList.isEmpty()) && effectivenessPhasesList.size() > 0)
+        {
+            Optional<EffectivenessPhase> effectivenessPhaseOptional = effectivenessPhasesList.stream().filter(a -> a.getEffectivenessPhaseLevel().getEffectivenessLevel() == 2).findFirst();
+            if(!effectivenessPhaseOptional.isPresent()){
+                throw new Exception("finalNiazsanjiReportId is not valid");
+            }
+            effectivenessPhase = effectivenessPhaseOptional.get();
+        }
+        else {
             throw new Exception("finalNiazsanjiReportId is not valid");
         }
-
-        EffectivenessPhase effectivenessPhase = effectivenessPhaseOptional.get();
 
         List<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = finalNiazsanjiReport
             .getFinalNiazsanjiReportPeople().stream().collect(Collectors.toList());
@@ -140,7 +143,7 @@ public class EffectivenessPhaseServiceImpl implements EffectivenessPhaseService 
         float secondScore = (float) (finalNiazsanjiReportPeople.stream()
             .mapToDouble(a -> a.getScoreAfterTest()).sum() / finalNiazsanjiReportPeople.size());
 
-        float goal = effectivenessPhaseOptional.get().getEffectivenessPhaseLevel().getGoal();
+        float goal = effectivenessPhase.getEffectivenessPhaseLevel().getGoal();
         float minus  = (secondScore - firstScore);
         float finalScore = 0;
         if(minus >= goal)

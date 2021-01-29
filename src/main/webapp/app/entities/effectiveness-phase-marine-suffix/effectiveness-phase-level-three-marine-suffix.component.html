@@ -97,7 +97,8 @@
                             <ng-container
                                 *ngIf="finalNiazsanjiReportPerson.levelThreeEffectivenesses && finalNiazsanjiReportPerson.levelThreeEffectivenesses.length > 0">
                                 <a [href]="'#/document-marine-suffix/levelthreeeffectiveness/' + finalNiazsanjiReportPerson.levelThreeEffectivenesses[0].id"
-                                   class="btn btn-light btn-sm">
+                                   [ngClass]="(finalNiazsanjiReportPerson.levelThreeEffectivenesses[0].documents && finalNiazsanjiReportPerson.levelThreeEffectivenesses[0].documents.length > 0) ? 'btn-success' : 'btn-light'"
+                                   class="btn btn-sm">
                                     <span class="fa fa-file"></span>
                                     مدارک
                                 </a>

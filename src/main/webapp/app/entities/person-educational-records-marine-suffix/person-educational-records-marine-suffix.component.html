@@ -1,9 +1,12 @@
 <div>
     <div class="row justify-content-center">
         <div class="myContent">
-            <button type="button" class="btn btn-default btn-lg enableLink" (click)="printPage()" title="چاپ">
+            <!--<button type="button" class="btn btn-default btn-lg enableLink" (click)="printPage()" title="چاپ">
                 <fa-icon [icon]="'print'"></fa-icon> چاپ
-            </button>
+            </button>-->
+            <a [href]="printUrl" target="_blank" class="btn btn-default btn-lg enableLink">
+                <fa-icon [icon]="'print'"></fa-icon> چاپ
+            </a>
             <div *ngIf="isTopUsers" style="text-align: center;">
             <div class=" form-group">
                 <label class="form-control-label">جستجو پرسنل </label>
@@ -61,6 +64,7 @@
             <div class="table-responsive" *ngIf="educationalRecords">
                 <table class="table table-striped table-bordered table-hover table-sm">
                     <thead>
+                    <tr>
                         <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> </th>-->
                         <th>ردیف</th>
                         <th><span jhiTranslate="marineindustryprojApp.educationalRecord.qualificationText">Qualification Text</span> </th>
@@ -89,13 +93,13 @@
                                    class="btn btn-default btn-sm enableLink">
                                     <fa-icon [icon]="'download'"></fa-icon>
                                 </a>
-                                <button type="submit" *ngIf="isTopUsers"
+                                <button type="submit" *ngIf="isTopUsers || isRoleEdit"
                                         [routerLink]="['/educational-record-marine-suffix', 'edit', educationalRecord.id]"
                                         class="btn btn-primary btn-sm">
                                     <fa-icon [icon]="'pencil-alt'"></fa-icon>
                                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                                 </button>
-                                <button type="submit" *ngIf="isTopUsers"
+                                <button type="submit" *ngIf="isTopUsers || isRoleDelete"
                                         [routerLink]="['/', { outlets: { popup: 'educational-record-marine-suffix/' + 'delete/'+ educationalRecord.id} }]"
                                         replaceUrl="true"
                                         queryParamsHandling="merge"

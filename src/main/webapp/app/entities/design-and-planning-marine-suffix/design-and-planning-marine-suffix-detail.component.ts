@@ -13,7 +13,8 @@ import { IFinalNiazsanjiReportPersonMarineSuffix } from 'app/shared/model/final-
 
 @Component({
     selector: 'mi-design-and-planning-marine-suffix-detail',
-    templateUrl: './design-and-planning-marine-suffix-detail.component.html'
+    templateUrl: './design-and-planning-marine-suffix-detail.component.html',
+    styleUrls: ['./design-and-planning-marine-suffix.scss']
 })
 export class DesignAndPlanningMarineSuffixDetailComponent implements OnInit {
     @Input() finalNiazsanjiReportId: number;

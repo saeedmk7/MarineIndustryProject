@@ -1,0 +1,166 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.person.home.unChartTitle">People</span>
+        <button id="jh-create-entity" *ngIf="isSuperUsers" class="btn btn-success float-right jh-create-entity create-person-marine-suffix" [routerLink]="['/person-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.person.home.createLabel">
+            Create new Person
+            </span>
+        </button>
+        <button class="btn btn-info btn-raised float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+    excel
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <search-panel [(page)]="page" [(size)]="itemsPerPage" [predicate]="predicate" [reverse]="reverse" [searchPanelModel]="searchbarModel"></search-panel>
+    <br/>
+    <div class="card border-success">
+        <a data-toggle="collapse" href="#collapseExample1" class="card-header center" style="background-color: antiquewhite;">
+            <span class="panel-title">پنل تخصیص افراد به چارت سازمانی</span>
+            <span class="pull-right clickable"><i class="glyphicon glyphicon-ok"></i></span>
+        </a>
+        <div class="collapse" id="collapseExample1">
+            <div class="card-body">
+                <div class="form-group fullcover">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.selectedPeople"></label>
+                    <span class="badge badge-info" *ngFor="let item of selectedPeople">{{item.fullName}}</span>
+                </div>
+                <div class="form-group fullcover">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.organizationChartTitle"></label>
+                    <ng-select
+                        [items]="organizationcharts"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        bindLabel="fullTitle"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="organizationChart"
+                        id="field_organizationChart"
+                        [(ngModel)]="selectedOrganizationChartId">
+                </div>
+            </div>
+            <div class="card-footer text-muted success-color white-text">
+                <input id="save" type="button" [disabled]="!isSaving && (!(selectedPeople.length > 0) || !selectedOrganizationChartId)"
+                       (click)="save()" class="btn-primary" value="ثبت">
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div *ngIf="!people" class="row justify-content-center">
+        <img src="../../../content/images/loading.gif" height="64" width="64"/>
+    </div>
+    <div class="table-responsive" *ngIf="people">
+        <table class="table  table-striped table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th></th>
+                <th>ردیف</th>
+                <th jhiSortBy="nationalId"><span jhiTranslate="marineindustryprojApp.person.nationalId">National Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span jhiTranslate="marineindustryprojApp.person.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="family"><span jhiTranslate="marineindustryprojApp.person.family">Family</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fatherName"><span jhiTranslate="marineindustryprojApp.person.fatherName">Father Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="certificateNumber"><span jhiTranslate="marineindustryprojApp.person.certificateNumber">Certificate Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+
+                <th jhiSortBy="personelCode"><span jhiTranslate="marineindustryprojApp.person.personelCode">Personel Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+
+            <th jhiSortBy="jobTitle"><span jhiTranslate="marineindustryprojApp.person.job">Job</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="practicaljobTitle"><span jhiTranslate="marineindustryprojApp.person.practicaljob">Practicaljob</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="employmentTypeTitle"><span jhiTranslate="marineindustryprojApp.person.employmentType">Employment Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let person of people;let i = index">
+                <!--<td><a [routerLink]="['/person-marine-suffix', person.id, 'view' ]">{{person.id}}</a></td>-->
+                <td><input type="checkbox" name="selectedPeople" [id]="'selectedPeople_' + person.id" (click)="change($event, person)" /></td>
+                <td>{{i+1}}</td>
+                <td>{{person.nationalId}}</td>
+
+                <!--<td>{{person.name}} {{person.family}}</td>-->
+                <td>{{person.name}}</td>
+                <td>{{person.family}}</td>
+                <td>{{person.fatherName}}</td>
+                <!--<td>{{person.certificateNumber}}</td>-->
+                <td>{{person.personelCode}}</td>
+                <td>
+                    <div *ngIf="person.jobId">
+                        <a [routerLink]="['../job-marine-suffix', person.jobId , 'view' ]" class="enableLink">{{person.jobTitle}} - {{person.jobCode}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="person.practicaljobId">
+                        <a [routerLink]="['../job-marine-suffix', person.practicaljobId , 'view' ]" class="enableLink">{{person.practicaljobTitle}} - {{person.practicaljobCode}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="person.employmentTypeId">
+                        <a [routerLink]="['../employment-type-marine-suffix', person.employmentTypeId , 'view' ]" >{{person.employmentTypeTitle}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                      <!--<button type="submit"
+                                [routerLink]="['../document-marine-suffix', 'person',person.id ]"
+                                [ngClass]="(person.documents && person.documents.length > 0) ? 'btn-success' : 'btn-light'"
+                                class="btn btn-sm">
+                            <span class="fa fa-file"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.documents">Documents</span>
+                        </button>-->
+                        <button type="submit"
+                                [routerLink]="['/person-marine-suffix', person.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit" *ngIf="isTopUsers"
+                                [routerLink]="['/person-marine-suffix', person.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
+                                [routerLink]="['/', { outlets: { popup: 'person-marine-suffix/'+ person.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <!--<td colspan="8">
+                    <select [(ngModel)] = "itemsPerPage">
+                        <option value="10">۱۰</option>
+                        <option value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="5">
+
+                </td>-->
+            </tr>
+
+            </tfoot>
+        </table>
+        <!--<div *ngIf="people && people.length">
+
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>-->
+    </div>
+</div>

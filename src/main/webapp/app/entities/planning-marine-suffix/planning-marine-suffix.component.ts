@@ -37,6 +37,7 @@ import { FinalNiazsanjiReportMarineSuffixService } from 'app/entities/final-niaz
 import { ICourseTypeMarineSuffix } from 'app/shared/model/course-type-marine-suffix.model';
 import { CourseTypeMarineSuffixService } from 'app/entities/course-type-marine-suffix';
 import { ICountListModel } from 'app/shared/model/custom/count-list-model';
+import { IFinalNiazsanjiPeopleListModel } from 'app/shared/model/custom/final-niazsanji-report-people-list-model';
 
 @Component({
     selector: 'mi-planning-marine-suffix',
@@ -104,7 +105,7 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
     public message: string;
 
     countList: ICountListModel[] = [];
-
+    loading: boolean = false;
     constructor(
         private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService,
         private finalNiazsanjiReportPersonService: FinalNiazsanjiReportPersonMarineSuffixService,
@@ -677,60 +678,22 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    /*ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
-        //this.eventManager.destroy(this.criteriaSubscriber);
-    }*/
-
-    public onExcelExport(args: any): void {
-        // Prevent automatically saving the file. We will save it manually after we fetch and add the details
-
-        args.preventDefault();
-
-        const workbook = args.workbook;
-        const rows = workbook.sheets[0].rows;
-
-        // Get the default header styles.
-        // Aternatively set custom styles for the details
-        // https://www.telerik.com/kendo-angular-ui/components/excelexport/api/WorkbookSheetRowCell/
-        const headerOptions = rows[0].cells[0];
-
-        const data: IFinalNiazsanjiReportOrganizationMarineSuffix[] = this.finalNiazsanjiReportsOrganizations;
-        /*for (let idx = 0; idx < data.length; idx++) {
-            rows. data[idx];
-        }*/
-        // add the detail data to the generated master sheet rows
-        // loop backwards in order to avoid changing the rows index
-        for (let idx = data.length - 1; idx >= 0; idx--) {
-            const people = data[idx].people; //(<GridDataResult>result[idx]).data;
-
-            // add the detail data
-            for (let productIdx = people.length - 1; productIdx >= 0; productIdx--) {
-                const person = people[productIdx];
-                rows.splice(idx + 2, 0, {
-                    cells: [{}, {}, { value: person.nationalId }, { value: person.fullName }, { value: person.jobTitle }]
+    public exportToExcel(grid: GridComponent): void {
+        this.loading = true;
+        const finalNiazsanjiReportIds = this.finalNiazsanjiReportsOrganizations.map(w => w.id);
+        this.finalNiazsanjiReportPersonService.finalNiazsanjiReportPeopleList(finalNiazsanjiReportIds).subscribe(
+            (resp: HttpResponse<IFinalNiazsanjiPeopleListModel[]>) => {
+                const finalNiazsanjiPeople = resp.body;
+                this.finalNiazsanjiReportsOrganizations.forEach(w => {
+                    const entity = finalNiazsanjiPeople.find(e => e.entityId == w.id);
+                    if (entity) w.peopleFullNames = entity.peopleFullNames.join(' , ');
                 });
-            }
 
-            // add the detail header
-            rows.splice(idx + 2, 0, {
-                cells: [
-                    {},
-                    {},
-                    Object.assign({}, headerOptions, { value: 'کدملی' }),
-                    Object.assign({}, headerOptions, { value: 'نام و نام خانوادگی' }),
-                    Object.assign({}, headerOptions, { value: 'شغل سازمانی' })
-                ]
-            });
-        }
-
-        // create a Workbook and save the generated data URL
-        // https://www.telerik.com/kendo-angular-ui/components/excelexport/api/Workbook/
-        new Workbook(workbook).toDataURL().then((dataUrl: string) => {
-            // https://www.telerik.com/kendo-angular-ui/components/filesaver/
-            saveAs(dataUrl, 'planning.xlsx');
-            //saveAs(dataUrl, 'Categories.xlsx');
-            //this.loading =  false;
-        });
+                this.loadOrgs();
+                grid.saveAsExcel();
+                this.loading = false;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 }

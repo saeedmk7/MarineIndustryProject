@@ -57,6 +57,9 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
     isKarshenasArshadAmozeshSazman: boolean = false;
     isModirAmozesh: boolean = false;
     isSuperUsers: boolean = false;
+    isRoleEdit: boolean = false;
+    isRoleDelete: boolean = false;
+
     criteriaSubscriber: Subscription;
     searchbarModel: SearchPanelModel[] = new Array<SearchPanelModel>();
     done: boolean = false;
@@ -297,38 +300,50 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
     }
     prepareForExportExcel(res: IEducationalHistoryMarineSuffix[]) {
         let a = new ExcelService(this.jhiTranslate);
-        res = this.convertObjectDatesService.changeArrayDate(res);
-        let report = [];
-        let index: number = 0;
-        res.forEach(a => {
-            index++;
+        this.personService.query().subscribe(
+            (resp: HttpResponse<IPersonMarineSuffix[]>) => {
+                const people = resp.body;
+                res = this.convertObjectDatesService.changeArrayDate(res);
+                let report = [];
+                let index: number = 0;
+                res.forEach(a => {
+                    index++;
 
-            a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
-            const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
-            if (org) a.organizationChartTitle = org.fullTitle;
+                    a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
+                    const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
+                    if (org) a.organizationChartTitle = org.fullTitle;
+                    let person = people.find(w => w.id == a.personId);
+                    //let person = this.people.find(w => w.id == a.personId);
 
-            //let person = this.people.find(w => w.id == a.personId);
+                    //let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
 
-            //let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
-
-            let obj: Object;
-            obj = {
-                index: index,
-                organizationChart: a.organizationChartTitle,
-                person: a.personFullName,
-                educationalModuleName: a.educationalModuleName,
-                educationalModuleId: a.educationalModuleCode,
-                totalLearningTime: a.totalTime,
-                courseType: a.courseTypeTitle,
-                educationalCenter: a.educationalCenter,
-                dateOfStart: a.dateOfStart,
-                description: a.description,
-                createDate: a.createDate,
-                status: this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus)
-            };
-            report.push(obj);
-        });
-        a.exportAsExcelFile(report, 'educationalHistories', 'marineindustryprojApp.educationalHistory');
+                    let obj: Object;
+                    obj = {
+                        index: index,
+                        organizationChart: a.organizationChartTitle,
+                        person: a.personFullName,
+                        personelCode: person.personelCode,
+                        job: person.jobTitle,
+                        practicaljob: person.practicaljobTitle,
+                        educationalModuleName: a.educationalModuleName,
+                        educationalModuleCode: a.educationalModuleCode,
+                        totalLearningTime: a.totalTime,
+                        courseType: a.courseTypeTitle,
+                        educationalCenter: a.educationalCenter,
+                        dateOfStart: a.dateOfStart,
+                        dateOfStartWithoutSlash: a.dateOfStart && a.dateOfStart.length > 0 ? a.dateOfStart.split('/').join('') : '',
+                        dateOfEnd: a.dateOfEnd,
+                        dateOfEndWithoutSlash: a.dateOfEnd && a.dateOfEnd.length > 0 ? a.dateOfEnd.split('/').join('') : '',
+                        description: a.description,
+                        createDate: a.createDate,
+                        status: this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus)
+                    };
+                    report.push(obj);
+                });
+                a.exportAsExcelFile(report, 'educationalHistories', 'marineindustryprojApp.educationalHistory');
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
     loadPage(page: number) {
         if (page !== this.previousPage) {
@@ -377,6 +392,9 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
                 this.currentPerson = resp.body;
                 //this.prepareSearchOrgChart();
                 //this.prepareDate();
+                this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'personName', 'text', 'contains'));
+                this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'personFamily', 'text', 'contains'));
+                this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'educationalModuleTitle', 'text', 'contains'));
                 this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'educationalModuleName', 'text', 'contains'));
                 this.searchbarModel.push(new SearchPanelModel('educationalHistory', 'educationalCenter', 'text', 'contains'));
                 this.prepareSearchOrgChart();
@@ -430,6 +448,8 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
         if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
         if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
             this.isKarshenasArshadAmozeshSazman = true;
+        if (account.authorities.find(a => a == 'ROLE_EDIT') !== undefined) this.isRoleEdit = true;
+        if (account.authorities.find(a => a == 'ROLE_DELETE') !== undefined) this.isRoleDelete = true;
 
         if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
     }
@@ -453,7 +473,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
             this.searchbarModel.push(
                 new SearchPanelModel('educationalHistory', 'organizationChartId', 'select', 'equals', orgs, 'fullTitle', 'half')
             );
-            this.prepareSearchPerson(orgs);
+            //this.prepareSearchPerson(orgs);
         } else {
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
@@ -478,7 +498,7 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
                     this.searchbarModel.push(
                         new SearchPanelModel('educationalHistory', 'organizationChartId', 'select', 'equals', orgs, 'fullTitle', 'half')
                     );
-                    this.prepareSearchPerson(orgs);
+                    //this.prepareSearchPerson(orgs);
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );

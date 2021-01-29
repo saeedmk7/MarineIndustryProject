@@ -19,6 +19,7 @@
             "title": "عنوان",
             "code": "کد",
             "educationalCenterGroup": "مرحله ارزیابی",
+            "educationalCenterGroupId": "مرحله ارزیابی",
             "totalScore": "جمع امتیاز",
             "totalScorePercent": "درصد جمع امتیاز",
             "grade": "گرید",

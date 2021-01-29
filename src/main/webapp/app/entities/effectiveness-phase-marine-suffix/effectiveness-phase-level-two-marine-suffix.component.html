@@ -65,7 +65,9 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.save">save</span>
                         </button>
                         <a [href]="'#/document-marine-suffix/finalniazsanjireportperson/' + finalNiazsanjiReportPerson.id"
-                           class="btn btn-light btn-sm">
+                           class="btn btn-sm"
+                           [ngClass]="(finalNiazsanjiReportPerson.documents && finalNiazsanjiReportPerson.documents.length > 0) ? 'btn-success' : 'btn-light'">
+
                             <span class="fa fa-file"></span>
                             مدارک
                         </a>

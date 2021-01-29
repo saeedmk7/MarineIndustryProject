@@ -1,9 +1,14 @@
 package com.marineindustryproj.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.criteria.JoinType;
 
+import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -211,6 +216,10 @@ public class PersonQueryService extends QueryService<Person> {
                 specification = specification.and(buildSpecification(criteria.getPrioritizeRequestNiazsanjiId(),
                     root -> root.join(Person_.prioritizeRequestNiazsanjis, JoinType.LEFT).get(PrioritizeRequestNiazsanji_.id)));
             }
+            if (criteria.getJobChangeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getJobChangeId(),
+                    root -> root.join(Person_.jobChanges, JoinType.LEFT).get(JobChange_.id)));
+            }
             if (criteria.getDocumentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDocumentId(),
                     root -> root.join(Person_.documents, JoinType.LEFT).get(Document_.id)));
@@ -250,6 +259,18 @@ public class PersonQueryService extends QueryService<Person> {
             if (criteria.getOrganizationChartId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOrganizationChartId(),
                     root -> root.join(Person_.organizationChart, JoinType.LEFT).get(OrganizationChart_.id)));
+
+                /*if(criteria.getOrganizationChartId().getIn().isEmpty() == false) {
+                    if(criteria.getOrganizationChartId().getIn().stream().anyMatch(w -> w == null)) {
+                        *//*ArrayList<Long> longArray = new ArrayList<>(Arrays.asList(null));
+                        LongFilter nullFilter = new LongFilter();
+                        nullFilter.setIn(longArray);*//*
+                        criteria.getOrganizationChartId().setIn(criteria.getOrganizationChartId().getIn().stream().filter(w -> w == null).collect(Collectors.toList()));
+                        specification = specification.or(buildSpecification(criteria.getOrganizationChartId(),
+                            root -> root.join(Person_.organizationChart, JoinType.INNER).get(OrganizationChart_.id)));
+                    }
+                }*/
+                //builder.isNull((Expression)metaclassFunction.apply(root))
             }
             if (criteria.getMainTaskId() != null) {
                 specification = specification.and(buildSpecification(criteria.getMainTaskId(),
@@ -270,6 +291,10 @@ public class PersonQueryService extends QueryService<Person> {
             if (criteria.getRunPhaseId() != null) {
                 specification = specification.and(buildSpecification(criteria.getRunPhaseId(),
                     root -> root.join(Person_.runPhases, JoinType.LEFT).get(RunPhase_.id)));
+            }
+            if (criteria.getUsersRequestId() != null) {
+                specification = specification.and(buildSpecification(criteria.getUsersRequestId(),
+                    root -> root.join(Person_.usersRequests, JoinType.LEFT).get(UsersRequest_.id)));
             }
             if (criteria.getPreJobNiazsanjiId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPreJobNiazsanjiId(),

@@ -6,7 +6,6 @@ import { JhiAlertService, JhiDataUtils, JhiEventManager, JhiParseLinks } from 'n
 
 import { Principal } from 'app/core';
 
-import { ITEMS_PER_PAGE } from 'app/shared';
 import { NiazsanjiIntegrationMarineSuffixService } from './niazsanji-integration-marine-suffix.service';
 import { IEducationalModuleMarineSuffix } from 'app/shared/model/educational-module-marine-suffix.model';
 import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
@@ -27,10 +26,7 @@ import * as $ from 'jquery';
 import { ExcelService } from 'app/plugin/export-excel/excel-service';
 import { EducationalModuleType } from 'app/shared/model/enums/EducationalModuleType';
 import { INiazsanjiIntegrationMarineSuffix } from 'app/shared/model/niazsanji-integration-marine-suffix.model';
-import { INiazsanjiFardiMarineSuffix } from 'app/shared/model/niazsanji-fardi-marine-suffix.model';
 import { CommonSearchCheckerService } from 'app/plugin/utilities/common-search-checkers';
-import { REQUEST_STATUS_FILTERS } from 'app/shared/constants/RequestStatusFilters';
-import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model/prioritize-request-niazsanji-marine-suffix.model';
 import { REQUEST_STATUS_FILTERS_FOR_INTEGRATION } from 'app/shared/constants/RequestStatusFiltersForIntegration';
 import { IFinalOrganizationNiazsanjiMarineSuffix } from 'app/shared/model/final-organization-niazsanji-marine-suffix.model';
 import { RequestNiazsanjiType } from 'app/shared/model/enums/RequestNiazsanjiType';

@@ -42,6 +42,7 @@
             "status": "وضعیت",
             "person": "افراد",
             "peopleCount": "تعداد نفرات",
+            "fullPeopleTime": "کل نفرساعت",
             "document": "مدارک",
             "educationalModule": "پودمان آموزشی",
             "educationalModuleId": "پودمان آموزشی",

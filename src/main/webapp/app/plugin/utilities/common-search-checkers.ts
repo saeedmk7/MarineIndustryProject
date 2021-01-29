@@ -161,4 +161,55 @@ export class CommonSearchCheckerService {
         }
         return criteria;
     }
+    public checkRequestStatusFiltersForOrganizationChart(criteria, status: number = 0) {
+        debugger;
+        const requestStatusFilters = criteria.find(a => a.key == 'requestStatusFilters.equals');
+        if (requestStatusFilters) {
+            const val = requestStatusFilters.value;
+            criteria = criteria.filter(a => a.key != 'requestStatusFilters.equals');
+            if (val) {
+                if (val == RequestStatus.ACCEPT || val == RequestStatus.IGNORE) {
+                    criteria.push({
+                        key: 'requestStatus.equals',
+                        value: val
+                    });
+                } else if (val == RequestStatus.RETURNED) {
+                    criteria.push({
+                        key: 'hasImportantMessage.equals',
+                        value: true
+                    });
+                } else if (val == RequestStatus.READ) {
+                    criteria = criteria.filter(w => w.key != 'status.greaterOrEqualThan');
+                    criteria.push({
+                        key: 'requestStatus.equals',
+                        value: RequestStatus.NEW
+                    });
+                    criteria.push({
+                        key: 'status.equals',
+                        value: 20
+                    });
+                } else {
+                    criteria.push({
+                        key: 'requestStatus.equals',
+                        value: RequestStatus.NEW
+                    });
+                    if (status) {
+                        criteria = criteria.filter(w => w.key != 'status.greaterOrEqualThan');
+                        criteria.push({
+                            key: 'status.equals',
+                            value: status
+                        });
+                    }
+                    if (status == 0) {
+                        criteria = criteria.filter(w => w.key != 'status.greaterOrEqualThan');
+                        criteria.push({
+                            key: 'status.equals',
+                            value: '' + status
+                        });
+                    }
+                }
+            }
+        }
+        return criteria;
+    }
 }

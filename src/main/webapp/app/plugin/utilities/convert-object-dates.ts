@@ -75,7 +75,7 @@ export class ConvertObjectDatesService {
     public changeDate(obj, notbool = false) {
         if (this.isfa) {
             const mustChangeList: string[] = ['timepassed'];
-            const exceptionFields: string[] = ['dateOfStart', 'investDate'];
+            const exceptionFields: string[] = ['dateOfStart', 'dateOfEnd', 'investDate'];
             for (let key in obj) {
                 if (obj.hasOwnProperty(key)) {
                     let value = obj[key];
@@ -145,6 +145,11 @@ export class ConvertObjectDatesService {
     public get30YearsBeforeNow(): string {
         return moment()
             .add(-30, 'years')
+            .toISOString();
+    }
+    public getDaysBefore(days: number): string {
+        return moment()
+            .add(-1 * days, 'days')
             .toISOString();
     }
     convertString2RequestStatus(newStatus: string): RequestStatus {

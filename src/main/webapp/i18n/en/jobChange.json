@@ -1,0 +1,29 @@
+{
+    "marineindustryprojApp": {
+        "jobChange": {
+            "home": {
+                "title": "Job Changes",
+                "createLabel": "Create a new Job Change",
+                "createOrEditLabel": "Create or edit a Job Change"
+            },
+            "created": "A new Job Change is created with identifier {{ param }}",
+            "updated": "A Job Change is updated with identifier {{ param }}",
+            "deleted": "A Job Change is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Job Change {{ id }}?"
+            },
+            "detail": {
+                "title": "Job Change"
+            },
+            "title": "Title",
+            "status": "Status",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "person": "Person",
+            "oldJob": "Old Job",
+            "newJob": "New Job"
+        }
+    }
+}

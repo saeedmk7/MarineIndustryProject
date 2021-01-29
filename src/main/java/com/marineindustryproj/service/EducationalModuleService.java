@@ -53,6 +53,14 @@ public interface EducationalModuleService {
     Optional<EducationalModuleDTO> findOne(Long id);
 
     /**
+     * Get the "code" educationalModule.
+     *
+     * @param code the code of the entity
+     * @return the entity
+     */
+    Optional<EducationalModuleDTO> findByCode(String code);
+
+    /**
      * Delete the "id" educationalModule.
      *
      * @param id the id of the entity

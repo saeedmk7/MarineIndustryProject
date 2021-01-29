@@ -1,37 +1,35 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {JhiAlertService} from 'ng-jhipster';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { JhiAlertService } from 'ng-jhipster';
 
-import {
-    IRequestOrganizationNiazsanjiMarineSuffix
-} from 'app/shared/model/request-organization-niazsanji-marine-suffix.model';
-import {RequestOrganizationNiazsanjiMarineSuffixService} from './request-organization-niazsanji-marine-suffix.service';
-import {IPersonMarineSuffix, PersonMarineSuffix} from 'app/shared/model/person-marine-suffix.model';
-import {PersonMarineSuffixService} from 'app/entities/person-marine-suffix';
-import {IEducationalModuleMarineSuffix} from 'app/shared/model/educational-module-marine-suffix.model';
-import {EducationalModuleMarineSuffixService} from 'app/entities/educational-module-marine-suffix';
-import {ITeachApproachMarineSuffix} from 'app/shared/model/teach-approach-marine-suffix.model';
-import {TeachApproachMarineSuffixService} from 'app/entities/teach-approach-marine-suffix';
-import {Principal} from "app/core";
-import {RequestStatus} from "app/shared/model/enums/RequestStatus";
-import {ITeacherMarineSuffix} from "app/shared/model/teacher-marine-suffix.model";
-import {TeacherMarineSuffixService} from "app/entities/teacher-marine-suffix/teacher-marine-suffix.service";
-import {IJobMarineSuffix} from "app/shared/model/job-marine-suffix.model";
-import {JobMarineSuffixService} from "app/entities/job-marine-suffix";
-import {IOrganizationChartMarineSuffix} from "app/shared/model/organization-chart-marine-suffix.model";
-import {OrganizationChartMarineSuffixService} from "app/entities/organization-chart-marine-suffix";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
-import {TreeUtilities} from "app/plugin/utilities/tree-utilities";
+import { IRequestOrganizationNiazsanjiMarineSuffix } from 'app/shared/model/request-organization-niazsanji-marine-suffix.model';
+import { RequestOrganizationNiazsanjiMarineSuffixService } from './request-organization-niazsanji-marine-suffix.service';
+import { IPersonMarineSuffix, PersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
+import { IEducationalModuleMarineSuffix } from 'app/shared/model/educational-module-marine-suffix.model';
+import { EducationalModuleMarineSuffixService } from 'app/entities/educational-module-marine-suffix';
+import { ITeachApproachMarineSuffix } from 'app/shared/model/teach-approach-marine-suffix.model';
+import { TeachApproachMarineSuffixService } from 'app/entities/teach-approach-marine-suffix';
+import { Principal } from 'app/core';
+import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
+import { ITeacherMarineSuffix } from 'app/shared/model/teacher-marine-suffix.model';
+import { TeacherMarineSuffixService } from 'app/entities/teacher-marine-suffix/teacher-marine-suffix.service';
+import { IJobMarineSuffix } from 'app/shared/model/job-marine-suffix.model';
+import { JobMarineSuffixService } from 'app/entities/job-marine-suffix';
+import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
+import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import { TreeUtilities } from 'app/plugin/utilities/tree-utilities';
 import * as $ from 'jquery';
-import {ICourseTypeMarineSuffix} from "app/shared/model/course-type-marine-suffix.model";
-import {CourseTypeMarineSuffixService} from "app/entities/course-type-marine-suffix";
-import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
-import {ITeachingApproachMarineSuffix} from "app/shared/model/teaching-approach-marine-suffix.model";
-import {IRestrictionMarineSuffix} from "app/shared/model/restriction-marine-suffix.model";
-import {RestrictionMarineSuffixService} from "app/entities/restriction-marine-suffix";
-import {TeachingApproachMarineSuffixService} from "app/entities/teaching-approach-marine-suffix";
+import { ICourseTypeMarineSuffix } from 'app/shared/model/course-type-marine-suffix.model';
+import { CourseTypeMarineSuffixService } from 'app/entities/course-type-marine-suffix';
+import { SearchPanelModel } from 'app/shared/model/custom/searchbar.model';
+import { ITeachingApproachMarineSuffix } from 'app/shared/model/teaching-approach-marine-suffix.model';
+import { IRestrictionMarineSuffix } from 'app/shared/model/restriction-marine-suffix.model';
+import { RestrictionMarineSuffixService } from 'app/entities/restriction-marine-suffix';
+import { TeachingApproachMarineSuffixService } from 'app/entities/teaching-approach-marine-suffix';
 
 @Component({
     selector: 'mi-request-organization-niazsanji-marine-suffix-update',
@@ -57,7 +55,9 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
     isModirKolAmozesh: boolean = false;
     isKarshenasArshadAmozeshSazman: boolean = false;
     isModirAmozesh: boolean = false;
+    isKarshenasAmozesh: boolean = false;
     isSuperUsers: boolean = false;
+    isTopUsers: boolean = false;
 
     targetPeople: IPersonMarineSuffix[];
 
@@ -82,17 +82,16 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         private teachApproachService: TeachApproachMarineSuffixService,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private principal : Principal,
+        private principal: Principal,
         protected restrictionService: RestrictionMarineSuffixService,
         private teacherService: TeacherMarineSuffixService,
         protected teachingApproachService: TeachingApproachMarineSuffixService,
         private convertObjectDatesService: ConvertObjectDatesService,
         private treeUtilities: TreeUtilities
     ) {}
-    cleanUp(){
-
-        if(!this.selectionType){
-            this.firstThreeJobCode = "";
+    cleanUp() {
+        if (!this.selectionType) {
+            this.firstThreeJobCode = '';
             this.selectedJob = {};
             this.onChange(undefined);
         }
@@ -101,19 +100,20 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ requestOrganizationNiazsanji }) => {
             this.requestOrganizationNiazsanji = requestOrganizationNiazsanji;
-            if(this.requestOrganizationNiazsanji.people)
-                this.requestOrganizationNiazsanji.people.forEach(a => a.fullName = a.name + " " + a.family);
+            if (this.requestOrganizationNiazsanji.people)
+                this.requestOrganizationNiazsanji.people.forEach(a => (a.fullName = a.name + ' ' + a.family));
         });
         this.principal.identity().then(account => {
-
             this.currentAccount = account;
             this.setRoles(this.currentAccount);
-            this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) =>{
-                 this.currentPerson = resp.body;
-                 this.currentUserFullName = this.currentPerson.fullName;
-                 this.loadOrgCharts();
-            },
-                (res: HttpErrorResponse) => this.onError(res.message));
+            this.personService.find(this.currentAccount.personId).subscribe(
+                (resp: HttpResponse<IPersonMarineSuffix>) => {
+                    this.currentPerson = resp.body;
+                    this.currentUserFullName = this.currentPerson.fullName;
+                    this.loadOrgCharts();
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
         });
         this.restrictionService.query().subscribe(
             (res: HttpResponse<IRestrictionMarineSuffix[]>) => {
@@ -134,10 +134,9 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if(this.teacherService.teachers){
+        if (this.teacherService.teachers) {
             this.teachers = this.teacherService.teachers;
-        }
-        else {
+        } else {
             this.teacherService.query().subscribe(
                 (res: HttpResponse<ITeacherMarineSuffix[]>) => {
                     this.teachers = res.body;
@@ -145,10 +144,9 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
         }
-        if(this.educationalModuleService.educationalModules){
+        if (this.educationalModuleService.educationalModules) {
             this.educationalmodules = this.educationalModuleService.educationalModules;
-        }
-        else {
+        } else {
             this.educationalModuleService.query().subscribe(
                 (res: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                     this.educationalmodules = res.body;
@@ -162,31 +160,26 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-
     }
-    setRoles(account: any){
-
-        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-            this.isAdmin = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
-            this.isModirAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
-            this.isModirKolAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+    setRoles(account: any) {
+        if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_KARSHENAS_AMOZESH') !== undefined) this.isKarshenasAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
             this.isKarshenasArshadAmozeshSazman = true;
 
-        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-            this.isSuperUsers = true;
+        if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
+        if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isKarshenasAmozesh)
+            this.isTopUsers = true;
     }
-    loadOrgCharts(){
-        if(this.organizationChartService.organizationchartsAll)
-        {
+    loadOrgCharts() {
+        if (this.organizationChartService.organizationchartsAll) {
             this.organizationCharts = this.organizationChartService.organizationchartsAll;
             this.handleOrgChartView();
             this.handlePeopleList();
             this.findTargetPeople();
-        }
-        else {
+        } else {
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
                     this.organizationCharts = res.body;
@@ -198,207 +191,234 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
             );
         }
     }
-    handleOrgChartView(){
-        if(this.treeUtilities.hasChild(this.organizationCharts, this.currentPerson.organizationChartId))
-        {
-            let orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationCharts, this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
+    handleOrgChartView() {
+        if (this.treeUtilities.hasChild(this.organizationCharts, this.currentPerson.organizationChartId)) {
+            let orgIds = this.treeUtilities
+                .getAllOfChilderenIdsOfThisId(this.organizationCharts, this.currentPerson.organizationChartId)
+                .filter(this.treeUtilities.onlyUnique);
             this.recommenedOrgCharts = this.organizationCharts.filter(a => orgIds.includes(a.id));
             this.orgChartDisabled = false;
-        }
-        else{
+        } else {
             this.recommenedOrgCharts = [];
             this.recommenedOrgCharts.push(this.organizationCharts.find(a => a.id == this.currentPerson.organizationChartId));
             this.orgChartDisabled = true;
         }
     }
-    handlePeopleList(){
-        const rootId = this.treeUtilities.getRootId(this.organizationCharts ,this.currentPerson.organizationChartId);
-        const orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationCharts ,rootId).filter(this.treeUtilities.onlyUnique);
+    handlePeopleList() {
+        const rootId = this.treeUtilities.getRootId(this.organizationCharts, this.currentPerson.organizationChartId);
+        const orgIds = this.treeUtilities
+            .getAllOfChilderenIdsOfThisId(this.organizationCharts, rootId)
+            .filter(this.treeUtilities.onlyUnique);
 
-        let criteria = [{
-            key: 'organizationChartId.in',
-            value: orgIds
-        }];
+        let criteria = [
+            {
+                key: 'organizationChartId.in',
+                value: orgIds
+            }
+        ];
 
-        this.personService.query({
-            page: 0,
-            size: 20000,
-            criteria,
-            sort: ["id", "asc"]
-        }).subscribe(
-            (res: HttpResponse<IPersonMarineSuffix[]>) => {
-
-                this.people = res.body;
-                this.fullPeople = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-    }
-    addAllPeopleOfThisUser(){
-        let orgIds = [];
-
-        if(this.requestOrganizationNiazsanji.organizationChartId)
-        {
-            orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationCharts , this.requestOrganizationNiazsanji.organizationChartId).filter(this.treeUtilities.onlyUnique);
-        }
-        else
-        {
-            orgIds = this.treeUtilities.getAllOfChilderenIdsOfThisId(this.organizationCharts , this.currentPerson.organizationChartId).filter(this.treeUtilities.onlyUnique);
-        }
-        this.requestOrganizationNiazsanji.people = this.people.filter(a => orgIds.includes(a.organizationChartId)).filter(this.treeUtilities.onlyUnique);
-    }
-    addAllPeople(){
-        if(this.personService.people){
-            this.people = this.personService.people;
-            //this.requestOrganizationNiazsanji.people = this.people;
-        }
-        else{
-            this.personService.query().subscribe((res: HttpResponse<IPersonMarineSuffix[]>) => {
-                    this.people = res.body;
-                    //this.requestOrganizationNiazsanji.people = this.people;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message));
-        }
-    }
-    addToListAllPeople(){
-        this.requestOrganizationNiazsanji.people = this.people;
-    }
-    findTargetPeople(){
-        let organization = this.organizationCharts.find(a => a.id == this.currentPerson.organizationChartId);
-        if(organization.parentId > 0) {
-            let neededOrgId: number = organization.parentId;
-
-            let criteria = [{
-                key: 'organizationChartId.equals',
-                value: neededOrgId
-            }];
-            this.personService.query({
+        this.personService
+            .query({
                 page: 0,
                 size: 20000,
                 criteria,
-                sort: ["id", "asc"]
-            }).subscribe((resp: HttpResponse<IPersonMarineSuffix[]>) => {
-                    let orgPeople = resp.body;
-                    if (orgPeople.length > 0) {
-                        this.targetPeople = orgPeople;
-                    }
-                    else {
-                        this.targetPeople = [];
-                        this.targetPeople = [new PersonMarineSuffix(0, 'خطا', 'خطا', 'خطا: نفر دریافت کننده ای در چارت سازمانی برای شما تعریف نشده است. لطفا با مدیریت سامانه تماس بگیرید. ')]
-                    }
+                sort: ['id', 'asc']
+            })
+            .subscribe(
+                (res: HttpResponse<IPersonMarineSuffix[]>) => {
+                    this.people = res.body;
+                    this.fullPeople = res.body;
                 },
-                (error) => this.onError("فردی یافت نشد."));
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+    addAllPeopleOfThisUser() {
+        let orgIds = [];
+
+        if (this.requestOrganizationNiazsanji.organizationChartId) {
+            orgIds = this.treeUtilities
+                .getAllOfChilderenIdsOfThisId(this.organizationCharts, this.requestOrganizationNiazsanji.organizationChartId)
+                .filter(this.treeUtilities.onlyUnique);
+        } else {
+            orgIds = this.treeUtilities
+                .getAllOfChilderenIdsOfThisId(this.organizationCharts, this.currentPerson.organizationChartId)
+                .filter(this.treeUtilities.onlyUnique);
         }
-        else{
-            this.targetPeople = [];
-            //this.targetPeople.push(new PersonMarineSuffix(0, 'ثبت نهایی', 'ثبت نهایی', 'درخواست شما پس از ثبت تایید نهایی می شود و برای کارشناس ارشد آموزش سازمان برای بازبینی ارسال می شود.'));
-            this.targetPeople.push(new PersonMarineSuffix(0, 'ثبت نهایی', 'ثبت نهایی','درخواست شما پس از ثبت تایید در لیست اولویت بندی قرار میگیرد. برای ارسال نیازسنجی به کارشناس ارشد آموزش جهت بازبینی از لیست اولویت بندی استفاده نمائید.'));
+        this.requestOrganizationNiazsanji.people = this.people
+            .filter(a => orgIds.includes(a.organizationChartId))
+            .filter(this.treeUtilities.onlyUnique);
+    }
+    addAllPeople() {
+        if (this.personService.people) {
+            this.people = this.personService.people;
+            //this.requestOrganizationNiazsanji.people = this.people;
+        } else {
+            this.personService.query().subscribe(
+                (res: HttpResponse<IPersonMarineSuffix[]>) => {
+                    this.people = res.body;
+                    //this.requestOrganizationNiazsanji.people = this.people;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
         }
     }
-    showRelatedJobs(input){
+    addToListAllPeople() {
+        this.requestOrganizationNiazsanji.people = this.people;
+    }
+    findTargetPeople() {
+        let organization = this.organizationCharts.find(a => a.id == this.currentPerson.organizationChartId);
+        if (organization.parentId > 0) {
+            let neededOrgId: number = organization.parentId;
+
+            let criteria = [
+                {
+                    key: 'organizationChartId.equals',
+                    value: neededOrgId
+                }
+            ];
+            this.personService
+                .query({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: ['id', 'asc']
+                })
+                .subscribe(
+                    (resp: HttpResponse<IPersonMarineSuffix[]>) => {
+                        let orgPeople = resp.body;
+                        if (orgPeople.length > 0) {
+                            this.targetPeople = orgPeople;
+                        } else {
+                            this.targetPeople = [];
+                            this.targetPeople = [
+                                new PersonMarineSuffix(
+                                    0,
+                                    'خطا',
+                                    'خطا',
+                                    'خطا: نفر دریافت کننده ای در چارت سازمانی برای شما تعریف نشده است. لطفا با مدیریت سامانه تماس بگیرید. '
+                                )
+                            ];
+                        }
+                    },
+                    error => this.onError('فردی یافت نشد.')
+                );
+        } else {
+            this.targetPeople = [];
+            //this.targetPeople.push(new PersonMarineSuffix(0, 'ثبت نهایی', 'ثبت نهایی', 'درخواست شما پس از ثبت تایید نهایی می شود و برای کارشناس ارشد آموزش سازمان برای بازبینی ارسال می شود.'));
+            this.targetPeople.push(
+                new PersonMarineSuffix(
+                    0,
+                    'ثبت نهایی',
+                    'ثبت نهایی',
+                    'درخواست شما پس از ثبت تایید در لیست اولویت بندی قرار میگیرد. برای ارسال نیازسنجی به کارشناس ارشد آموزش جهت بازبینی از لیست اولویت بندی استفاده نمائید.'
+                )
+            );
+        }
+    }
+    showRelatedJobs(input) {
         this.disable = true;
         let jobCode = input.firstThreeJobCode;
-        if(!isNaN(jobCode)) {
+        if (!isNaN(jobCode)) {
             if (jobCode) {
                 if (jobCode.length === 3) {
                     this.jobs = this.fullJobs.filter(entity => entity.jobCode.startsWith(jobCode));
 
-                    $("#jobHighlight").trigger('click');
+                    $('#jobHighlight').trigger('click');
                 }
-            }
-            else {
+            } else {
                 this.jobs = this.fullJobs;
             }
-        }
-        else{
-            input.firstThreeJobCode = "";
+        } else {
+            input.firstThreeJobCode = '';
         }
     }
-    onChange(event){
-
-        if(event === undefined) {
+    onChange(event) {
+        if (event === undefined) {
             this.people = this.fullPeople;
-            $("#personHighlight").trigger('click');
-        }
-        else {
+            $('#personHighlight').trigger('click');
+        } else {
             this.people = this.fullPeople.filter(a => a.jobId == event.id);
-            $("#personHighlight").trigger('click');
+            $('#personHighlight').trigger('click');
         }
     }
     previousState() {
         window.history.back();
     }
 
-    change(i){
+    change(i) {
         this.router.navigateByUrl(i);
     }
-    currentUserFullName: string = "";
+    currentUserFullName: string = '';
 
     save() {
-
         this.isSaving = true;
-        this.message = "";
+        this.message = '';
 
         if (this.requestOrganizationNiazsanji.organizationChartId == undefined) {
-            this.message = "لطفا قسمت محل خدمت را انتخاب نمائید.";
+            this.message = 'لطفا قسمت محل خدمت را انتخاب نمائید.';
             this.isSaving = false;
             return;
         }
         if (!this.requestOrganizationNiazsanji.people) {
-            this.message = "لطفا فرد مورد نظر را انتخاب نمائید.";
+            this.message = 'لطفا فرد مورد نظر را انتخاب نمائید.';
             this.isSaving = false;
             return;
         }
-        if(this.requestOrganizationNiazsanji.priceCost && isNaN(this.requestOrganizationNiazsanji.priceCost))
-        {
-            this.message = "لطفا در باکس سرمایه گذاری فقط عدد وارد نمائید.";
+        if (this.requestOrganizationNiazsanji.priceCost && isNaN(this.requestOrganizationNiazsanji.priceCost)) {
+            this.message = 'لطفا در باکس سرمایه گذاری فقط عدد وارد نمائید.';
             this.isSaving = false;
             return;
         }
-        if(this.requestOrganizationNiazsanji.organizationChartId)
-        {
-            this.requestOrganizationNiazsanji.recommendedByOrgchart = this.organizationCharts.find(a => a.id == this.requestOrganizationNiazsanji.organizationChartId).fullTitle;
+        if (this.requestOrganizationNiazsanji.organizationChartId) {
+            this.requestOrganizationNiazsanji.recommendedByOrgchart = this.organizationCharts.find(
+                a => a.id == this.requestOrganizationNiazsanji.organizationChartId
+            ).fullTitle;
         }
         this.currentUserFullName = this.currentPerson.fullName;
 
-
         if (this.requestOrganizationNiazsanji.id !== undefined) {
-            this.subscribeToSaveResponse(this.requestOrganizationNiazsanjiService.update(this.requestOrganizationNiazsanji),true);
-
+            this.subscribeToSaveResponse(this.requestOrganizationNiazsanjiService.update(this.requestOrganizationNiazsanji), true);
         } else {
             let org = this.organizationCharts.find(a => a.id == this.currentPerson.organizationChartId);
-            if(org.parentId > 0)
-                this.requestOrganizationNiazsanji.status = org.parentId;
-            else
-                this.requestOrganizationNiazsanji.status = 0;
+            if (org.parentId > 0) this.requestOrganizationNiazsanji.status = org.parentId;
+            else this.requestOrganizationNiazsanji.status = 0;
             this.requestOrganizationNiazsanji.requestStatus = RequestStatus.NEW;
             this.requestOrganizationNiazsanji.changeStatusUserLogin = this.currentAccount.login;
-            this.requestOrganizationNiazsanji.conversation = " درخواست توسط " + this.currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " ثبت شد. "
+            this.requestOrganizationNiazsanji.conversation =
+                ' درخواست توسط ' +
+                this.currentUserFullName +
+                ' در تاریخ: ' +
+                this.convertObjectDatesService.miladi2Shamsi(new Date()) +
+                ' ثبت شد. ';
             if (this.requestOrganizationNiazsanji.description) {
-                this.requestOrganizationNiazsanji.conversation += "\n";
-                this.requestOrganizationNiazsanji.conversation += this.currentUserFullName + ": " + this.requestOrganizationNiazsanji.description;
+                this.requestOrganizationNiazsanji.conversation += '\n';
+                this.requestOrganizationNiazsanji.conversation +=
+                    this.currentUserFullName + ': ' + this.requestOrganizationNiazsanji.description;
             }
             this.subscribeToSaveResponse(this.requestOrganizationNiazsanjiService.create(this.requestOrganizationNiazsanji));
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<IRequestOrganizationNiazsanjiMarineSuffix>>, isEdit:boolean = false) {
+    private subscribeToSaveResponse(result: Observable<HttpResponse<IRequestOrganizationNiazsanjiMarineSuffix>>, isEdit: boolean = false) {
         result.subscribe(
             (res: HttpResponse<IRequestOrganizationNiazsanjiMarineSuffix>) => this.onSaveSuccess(res.body, isEdit),
             (res: HttpErrorResponse) => this.onSaveError()
         );
     }
 
-    private onSaveSuccess(res: IRequestOrganizationNiazsanjiMarineSuffix, isEdit:boolean = false) {
-
-        if(!isEdit) {
-            if(res.status == 0){
-                res.conversation += "\n ------------------------------------- \n";
-                res.conversation += " تایید درخواست توسط " + this.currentUserFullName + " در تاریخ: " + this.convertObjectDatesService.miladi2Shamsi(new Date()) + " انجام شد. ";
-                this.requestOrganizationNiazsanjiService.finalize(res).subscribe(
-                    (res: HttpResponse<IRequestOrganizationNiazsanjiMarineSuffix>) => res,
-                    (res: HttpErrorResponse) => res
-                );
+    private onSaveSuccess(res: IRequestOrganizationNiazsanjiMarineSuffix, isEdit: boolean = false) {
+        if (!isEdit) {
+            if (res.status == 0) {
+                res.conversation += '\n ------------------------------------- \n';
+                res.conversation +=
+                    ' تایید درخواست توسط ' +
+                    this.currentUserFullName +
+                    ' در تاریخ: ' +
+                    this.convertObjectDatesService.miladi2Shamsi(new Date()) +
+                    ' انجام شد. ';
+                this.requestOrganizationNiazsanjiService
+                    .finalize(res)
+                    .subscribe((res: HttpResponse<IRequestOrganizationNiazsanjiMarineSuffix>) => res, (res: HttpErrorResponse) => res);
             }
         }
         this.isSaving = false;
@@ -406,7 +426,6 @@ export class RequestOrganizationNiazsanjiMarineSuffixUpdateComponent implements 
     }
 
     private onSaveError() {
-
         this.isSaving = false;
     }
 

@@ -30,6 +30,9 @@ public class EducationalHistoryDTO implements Serializable {
     @Size(max = 50)
     private String dateOfStart;
 
+    @Size(max = 50)
+    private String dateOfEnd;
+
     
     @Lob
     private String fileDoc;
@@ -145,6 +148,14 @@ public class EducationalHistoryDTO implements Serializable {
 
     public void setDateOfStart(String dateOfStart) {
         this.dateOfStart = dateOfStart;
+    }
+
+    public String getDateOfEnd() {
+        return dateOfEnd;
+    }
+
+    public void setDateOfEnd(String dateOfEnd) {
+        this.dateOfEnd = dateOfEnd;
     }
 
     public String getFileDoc() {
@@ -370,6 +381,7 @@ public class EducationalHistoryDTO implements Serializable {
             ", totalTime=" + getTotalTime() +
             ", educationalCenter='" + getEducationalCenter() + "'" +
             ", dateOfStart='" + getDateOfStart() + "'" +
+            ", dateOfEnd='" + getDateOfEnd() + "'" +
             ", fileDoc='" + getFileDoc() + "'" +
             ", description='" + getDescription() + "'" +
             ", createUserLogin='" + getCreateUserLogin() + "'" +

@@ -87,7 +87,7 @@ public class ReportResource {
             String ipAddress = InetAddress.getLocalHost().getHostAddress();
             String port = environment.getProperty("server.port");
             String imageUrl = userOptional.get().getImageUrl();
-            String finalUrl = "http://" + ipAddress + ":" + port + "/" + imageUrl;
+            String finalUrl = imageUrl;
             personEducationalRecordDTO.setImage(finalUrl);
         }
 

@@ -20,6 +20,7 @@
             "title": "عنوان",
             "code": "کد",
             "teacherCriteriaGroup": "مرحله ارزیابی",
+            "teacherCriteriaGroupId": "مرحله ارزیابی",
             "totalScore": "جمع امتیاز",
             "totalScorePercent": "درصد جمع امتیاز",
             "grade": "گرید",

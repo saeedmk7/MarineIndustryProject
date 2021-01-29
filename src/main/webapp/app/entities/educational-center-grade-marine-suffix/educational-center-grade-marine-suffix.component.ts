@@ -5,26 +5,31 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IEducationalCenterGradeMarineSuffix } from 'app/shared/model/educational-center-grade-marine-suffix.model';
-import {AccountService, Principal} from 'app/core';
+import { AccountService, Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { EducationalCenterGradeMarineSuffixService } from './educational-center-grade-marine-suffix.service';
-import {IPersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
-import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
-import {IEvaluatorOpinionMarineSuffix} from "app/shared/model/evaluator-opinion-marine-suffix.model";
-import {IEducationalCenterServiceMarineSuffix} from "app/shared/model/educational-center-service-marine-suffix.model";
-import {IEducationalCenterMarineSuffix} from "app/shared/model/educational-center-marine-suffix.model";
-import {EvaluatorOpinionMarineSuffixService} from "app/entities/evaluator-opinion-marine-suffix";
-import {DocumentMarineSuffixService} from "app/entities/document-marine-suffix";
-import {EducationalCenterServiceMarineSuffixService} from "app/entities/educational-center-service-marine-suffix";
-import {EducationalCenterMarineSuffixService} from "app/entities/educational-center-marine-suffix";
-import {IDocumentMarineSuffix} from "app/shared/model/document-marine-suffix.model";
-import {MONTHS} from "app/shared/constants/months.constants";
-import {GradientStop} from "@progress/kendo-drawing";
-import {HeadlineLevel} from "app/shared/model/enums/HeadlineLevel";
-import {Grade} from "app/shared/model/enums/Grade";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
-import {CommonSearchCheckerService} from "app/plugin/utilities/common-search-checkers";
+import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { SearchPanelModel } from 'app/shared/model/custom/searchbar.model';
+import { IEvaluatorOpinionMarineSuffix } from 'app/shared/model/evaluator-opinion-marine-suffix.model';
+import { IEducationalCenterServiceMarineSuffix } from 'app/shared/model/educational-center-service-marine-suffix.model';
+import { IEducationalCenterMarineSuffix } from 'app/shared/model/educational-center-marine-suffix.model';
+import { EvaluatorOpinionMarineSuffixService } from 'app/entities/evaluator-opinion-marine-suffix';
+import { DocumentMarineSuffixService } from 'app/entities/document-marine-suffix';
+import { EducationalCenterServiceMarineSuffixService } from 'app/entities/educational-center-service-marine-suffix';
+import { EducationalCenterMarineSuffixService } from 'app/entities/educational-center-marine-suffix';
+import { IDocumentMarineSuffix } from 'app/shared/model/document-marine-suffix.model';
+import { MONTHS } from 'app/shared/constants/months.constants';
+import { GradientStop } from '@progress/kendo-drawing';
+import { HeadlineLevel } from 'app/shared/model/enums/HeadlineLevel';
+import { Grade } from 'app/shared/model/enums/Grade';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import { CommonSearchCheckerService } from 'app/plugin/utilities/common-search-checkers';
+import {
+    EducationalCenterGroupMarineSuffix,
+    IEducationalCenterGroupMarineSuffix
+} from 'app/shared/model/educational-center-group-marine-suffix.model';
+import { EducationalCenterGroupMarineSuffixService } from 'app/entities/educational-center-group-marine-suffix';
 
 @Component({
     selector: 'mi-educational-center-grade-marine-suffix',
@@ -53,11 +58,13 @@ export class EducationalCenterGradeMarineSuffixComponent implements OnInit, OnDe
 
     educationalcenters: IEducationalCenterMarineSuffix[];
 
+    educationalCenterGroups: IEducationalCenterGroupMarineSuffix[];
+
     currentPerson: IPersonMarineSuffix;
 
     criteriaSubscriber: Subscription;
     searchbarModel: SearchPanelModel[] = [];
-    done:boolean = false;
+    done: boolean = false;
     criteria: any;
 
     isAdmin: boolean;
@@ -70,6 +77,7 @@ export class EducationalCenterGradeMarineSuffixComponent implements OnInit, OnDe
 
     constructor(
         protected educationalCenterGradeService: EducationalCenterGradeMarineSuffixService,
+        protected educationalCenterGroupService: EducationalCenterGroupMarineSuffixService,
         protected parseLinks: JhiParseLinks,
         protected jhiAlertService: JhiAlertService,
         protected accountService: Principal,
@@ -89,7 +97,7 @@ export class EducationalCenterGradeMarineSuffixComponent implements OnInit, OnDe
             this.reverse = data.pagingParams.descending;
             this.predicate = data.pagingParams.predicate;
         });
-        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
+        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', criteria => {
             this.done = true;
             this.criteria = criteria.content;
             this.loadAll(criteria.content);
@@ -97,8 +105,7 @@ export class EducationalCenterGradeMarineSuffixComponent implements OnInit, OnDe
     }
 
     loadAll(criteria?) {
-        if(!criteria)
-            criteria = [];
+        if (!criteria) criteria = [];
         this.educationalCenterGradeService
             .query({
                 page: this.page - 1,
@@ -112,19 +119,14 @@ export class EducationalCenterGradeMarineSuffixComponent implements OnInit, OnDe
             );
     }
 
-    setRoles(account: any){
-
-        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-            this.isAdmin = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
-            this.isModirAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
-            this.isModirKolAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+    setRoles(account: any) {
+        if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
             this.isKarshenasArshadAmozeshSazman = true;
 
-        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-            this.isSuperUsers = true;
+        if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
     }
 
     loadPage(page: number) {
@@ -166,7 +168,15 @@ export class EducationalCenterGradeMarineSuffixComponent implements OnInit, OnDe
 
             this.grades = Object.keys(Grade);
 
-            this.searchbarModel.push(new SearchPanelModel('educationalCenterGrade','grade','selectWithStringId', 'equals', this.commonSearchCheckerService.convertEnumToSearchArray(Grade, 'Grade')));
+            this.searchbarModel.push(
+                new SearchPanelModel(
+                    'educationalCenterGrade',
+                    'grade',
+                    'selectWithStringId',
+                    'equals',
+                    this.commonSearchCheckerService.convertEnumToSearchArray(Grade, 'Grade')
+                )
+            );
             /*this.searchbarModel.push(new SearchPanelModel('mediaAwarenessReport','publishDate','text', 'contains'));*/
             this.prepareSearchDate();
             this.prepareSearchMonth();
@@ -181,16 +191,46 @@ export class EducationalCenterGradeMarineSuffixComponent implements OnInit, OnDe
             this.educationalCenterServiceService.query().subscribe(
                 (res: HttpResponse<IEducationalCenterServiceMarineSuffix[]>) => {
                     this.educationalcenterservices = res.body;
-                    this.searchbarModel.push(new SearchPanelModel('educationalCenterGrade',
-                        'educationalCenterServiceId','select', 'equals', this.educationalcenterservices));
+                    this.searchbarModel.push(
+                        new SearchPanelModel(
+                            'educationalCenterGrade',
+                            'educationalCenterServiceId',
+                            'select',
+                            'equals',
+                            this.educationalcenterservices
+                        )
+                    );
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
             this.educationalCenterService.query().subscribe(
                 (res: HttpResponse<IEducationalCenterMarineSuffix[]>) => {
                     this.educationalcenters = res.body;
-                    this.searchbarModel.push(new SearchPanelModel('educationalCenterGrade',
-                        'educationalCenterId','select', 'equals', this.educationalcenters, 'name'));
+                    this.searchbarModel.push(
+                        new SearchPanelModel(
+                            'educationalCenterGrade',
+                            'educationalCenterId',
+                            'select',
+                            'equals',
+                            this.educationalcenters,
+                            'name'
+                        )
+                    );
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+            this.educationalCenterGroupService.query().subscribe(
+                (res: HttpResponse<IEducationalCenterGroupMarineSuffix[]>) => {
+                    this.educationalCenterGroups = res.body;
+                    this.searchbarModel.push(
+                        new SearchPanelModel(
+                            'educationalCenterGrade',
+                            'educationalCenterGroupId',
+                            'select',
+                            'equals',
+                            this.educationalCenterGroups
+                        )
+                    );
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
@@ -198,11 +238,11 @@ export class EducationalCenterGradeMarineSuffixComponent implements OnInit, OnDe
         //this.registerChangeInEducationalCenterGrades();
     }
 
-    prepareSearchDate(){
+    prepareSearchDate() {
         const dates = this.convertObjectDatesService.getYearsArray();
         this.searchbarModel.push(new SearchPanelModel('educationalCenterGrade', 'year', 'select', 'equals', dates, 'title'));
     }
-    prepareSearchMonth(){
+    prepareSearchMonth() {
         this.searchbarModel.push(new SearchPanelModel('educationalCenterGrade', 'month', 'select', 'equals', MONTHS, 'persianMonth'));
     }
 
@@ -240,7 +280,7 @@ export class EducationalCenterGradeMarineSuffixComponent implements OnInit, OnDe
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.educationalCenterGrades = data;
-        this.educationalCenterGrades.forEach(w => w.monthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(w.month));
+        this.educationalCenterGrades.forEach(w => (w.monthPersian = this.convertObjectDatesService.convertMonthsNumber2MonthName(w.month)));
     }
 
     protected onError(errorMessage: string) {

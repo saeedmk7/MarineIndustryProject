@@ -225,7 +225,7 @@
                                 <span class="fa fa-ban" color="f00c"></span>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.reject">reject</span>
                             </button>-->
-                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                        <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']" type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'niazsanji-fardi-marine-suffix/'+ niazsanjiFardi.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

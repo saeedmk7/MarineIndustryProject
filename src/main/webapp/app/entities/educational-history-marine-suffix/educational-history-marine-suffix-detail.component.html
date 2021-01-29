@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <div *ngIf="educationalHistory" class="detail-page">
+        <div *ngIf="educationalHistory" id="target" class="detail-page">
             <h2><span jhiTranslate="marineindustryprojApp.educationalHistory.detail.title">Educational History</span> <!--{{educationalHistory.id}}--></h2>
             <mi-alert-error></mi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -49,6 +49,10 @@
                 <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.dateOfStart">Date Of Start</span></dt>
                 <dd>
                     <span>{{educationalHistory.dateOfStart}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.dateOfEnd">Date Of End</span></dt>
+                <dd>
+                    <span>{{educationalHistory.dateOfEnd}}</span>
                 </dd>
                 <dt><span jhiTranslate="marineindustryprojApp.educationalHistory.createDate">Create Date</span></dt>
                 <dd>

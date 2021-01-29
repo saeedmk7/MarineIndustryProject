@@ -49,6 +49,8 @@ public class UsersRequestDTO implements Serializable {
 
     private Boolean hasImportantMessage;
 
+    private Set<PersonDTO> people = new HashSet<>();
+
     private Set<DocumentDTO> documents = new HashSet<>();
 
     public Long getId() {
@@ -153,6 +155,14 @@ public class UsersRequestDTO implements Serializable {
 
     public void setHasImportantMessage(Boolean hasImportantMessage) {
         this.hasImportantMessage = hasImportantMessage;
+    }
+
+    public Set<PersonDTO> getPeople() {
+        return people;
+    }
+
+    public void setPeople(Set<PersonDTO> people) {
+        this.people = people;
     }
 
     public Set<DocumentDTO> getDocuments() {

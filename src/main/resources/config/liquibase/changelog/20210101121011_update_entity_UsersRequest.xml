@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20210101051011" author="saeed">
+
+        <createTable tableName="users_request_person">
+            <column name="people_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="users_requests_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="users_requests_id, people_id" tableName="users_request_person"/>
+
+        <addForeignKeyConstraint baseColumnNames="users_requests_id"
+                                 baseTableName="users_request_person"
+                                 constraintName="fk_users_request_person_users_requests_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users_request"/>
+        <addForeignKeyConstraint baseColumnNames="people_id"
+                                 baseTableName="users_request_person"
+                                 constraintName="fk_users_request_person_people_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

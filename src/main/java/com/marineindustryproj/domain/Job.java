@@ -103,6 +103,12 @@ public class Job implements Serializable {
     @OneToMany(mappedBy = "job")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Soldier> jobSoldiers = new HashSet<>();
+    @OneToMany(mappedBy = "oldJob")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<JobChange> oldJobChanges = new HashSet<>();
+    @OneToMany(mappedBy = "newJob")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<JobChange> newJobChanges = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "job_document",
@@ -467,6 +473,56 @@ public class Job implements Serializable {
 
     public void setJobSoldiers(Set<Soldier> soldiers) {
         this.jobSoldiers = soldiers;
+    }
+
+    public Set<JobChange> getOldJobChanges() {
+        return oldJobChanges;
+    }
+
+    public Job oldJobChanges(Set<JobChange> jobChanges) {
+        this.oldJobChanges = jobChanges;
+        return this;
+    }
+
+    public Job addOldJobChange(JobChange jobChange) {
+        this.oldJobChanges.add(jobChange);
+        jobChange.setOldJob(this);
+        return this;
+    }
+
+    public Job removeOldJobChange(JobChange jobChange) {
+        this.oldJobChanges.remove(jobChange);
+        jobChange.setOldJob(null);
+        return this;
+    }
+
+    public void setOldJobChanges(Set<JobChange> jobChanges) {
+        this.oldJobChanges = jobChanges;
+    }
+
+    public Set<JobChange> getNewJobChanges() {
+        return newJobChanges;
+    }
+
+    public Job newJobChanges(Set<JobChange> jobChanges) {
+        this.newJobChanges = jobChanges;
+        return this;
+    }
+
+    public Job addNewJobChange(JobChange jobChange) {
+        this.newJobChanges.add(jobChange);
+        jobChange.setNewJob(this);
+        return this;
+    }
+
+    public Job removeNewJobChange(JobChange jobChange) {
+        this.newJobChanges.remove(jobChange);
+        jobChange.setNewJob(null);
+        return this;
+    }
+
+    public void setNewJobChanges(Set<JobChange> jobChanges) {
+        this.newJobChanges = jobChanges;
     }
 
     public Set<Document> getDocuments() {

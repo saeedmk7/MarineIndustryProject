@@ -200,7 +200,7 @@
                             <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
                         </button>
                     </ng-container>
-                    <button type="submit" *ngIf="isAdmin"
+                    <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
                             [routerLink]="['/', { outlets: { popup: 'prioritize-request-niazsanji-marine-suffix/'+ prioritizeRequestNiazsanji.id + '/delete'} }]"
                             replaceUrl="true"
                             queryParamsHandling="merge"

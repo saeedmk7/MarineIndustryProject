@@ -216,7 +216,7 @@ export class NiazsanjiPersonGradeMarineSuffixUpdateComponent implements OnInit {
                         niazsanjiPersonGradeScore.niazsanjiPersonColorText = w.colorText;
                         niazsanjiPersonGradeScore.niazsanjiPersonCriteriaWeight = w.weight;
                         niazsanjiPersonGradeScore.niazsanjiPersonCriterionType = w.criterionType;
-                        niazsanjiPersonGradeScore.score = 1;
+                        niazsanjiPersonGradeScore.score = 5;
                         this.niazsanjiPersonGrade.niazsanjiPersonGradeScores.push(niazsanjiPersonGradeScore);
                     }
                 });

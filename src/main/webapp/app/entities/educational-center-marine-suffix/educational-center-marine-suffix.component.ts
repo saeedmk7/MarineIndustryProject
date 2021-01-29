@@ -1,23 +1,23 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
-import {JhiEventManager, JhiParseLinks, JhiAlertService} from 'ng-jhipster';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import {IEducationalCenterMarineSuffix} from 'app/shared/model/educational-center-marine-suffix.model';
-import {Principal} from 'app/core';
+import { IEducationalCenterMarineSuffix } from 'app/shared/model/educational-center-marine-suffix.model';
+import { Principal } from 'app/core';
 
-import {ITEMS_PER_PAGE} from 'app/shared';
-import {EducationalCenterMarineSuffixService} from './educational-center-marine-suffix.service';
-import {PlatformLocation} from "@angular/common";
-import {ExcelService} from "app/plugin/export-excel/excel-service";
-import {TranslateService} from '@ngx-translate/core';
-import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
-import {ActivityAreaMarineSuffixService} from "app/entities/activity-area-marine-suffix";
-import {IEmploymentTypeMarineSuffix} from "app/shared/model/employment-type-marine-suffix.model";
-import {IActivityAreaMarineSuffix} from "app/shared/model/activity-area-marine-suffix.model";
-import {Grade} from "app/shared/model/enums/Grade";
-import {CommonSearchCheckerService} from "app/plugin/utilities/common-search-checkers";
+import { ITEMS_PER_PAGE } from 'app/shared';
+import { EducationalCenterMarineSuffixService } from './educational-center-marine-suffix.service';
+import { PlatformLocation } from '@angular/common';
+import { ExcelService } from 'app/plugin/export-excel/excel-service';
+import { TranslateService } from '@ngx-translate/core';
+import { SearchPanelModel } from 'app/shared/model/custom/searchbar.model';
+import { ActivityAreaMarineSuffixService } from 'app/entities/activity-area-marine-suffix';
+import { IEmploymentTypeMarineSuffix } from 'app/shared/model/employment-type-marine-suffix.model';
+import { IActivityAreaMarineSuffix } from 'app/shared/model/activity-area-marine-suffix.model';
+import { Grade } from 'app/shared/model/enums/Grade';
+import { CommonSearchCheckerService } from 'app/plugin/utilities/common-search-checkers';
 
 @Component({
     selector: 'mi-educational-center-marine-suffix',
@@ -42,7 +42,7 @@ export class EducationalCenterMarineSuffixComponent implements OnInit, OnDestroy
 
     criteriaSubscriber: Subscription;
     searchbarModel: SearchPanelModel[];
-    done:boolean = false;
+    done: boolean = false;
     criteria: any;
 
     isAdmin: boolean;
@@ -51,6 +51,8 @@ export class EducationalCenterMarineSuffixComponent implements OnInit, OnDestroy
     isModirAmozesh: boolean = false;
     isSuperUsers: boolean = false;
     isTopUsers: boolean = false;
+    isRoleEdit: boolean = false;
+    isRoleDelete: boolean = false;
 
     constructor(
         private educationalCenterService: EducationalCenterMarineSuffixService,
@@ -72,11 +74,10 @@ export class EducationalCenterMarineSuffixComponent implements OnInit, OnDestroy
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
         });
-        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
+        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', criteria => {
             this.criteria = criteria.content;
             this.done = true;
             this.loadAll(criteria.content);
-
         });
     }
 
@@ -131,15 +132,22 @@ export class EducationalCenterMarineSuffixComponent implements OnInit, OnDestroy
 
     ngOnInit() {
         this.searchbarModel = new Array<SearchPanelModel>();
-        this.searchbarModel.push(new SearchPanelModel('educationalCenter','name','text', 'contains'));
-        this.searchbarModel.push(new SearchPanelModel('educationalCenter','connectionPerson','text', 'contains'));
-        this.searchbarModel.push(new SearchPanelModel('educationalCenter','telephone','text', 'contains'));
-        this.searchbarModel.push(new SearchPanelModel('educationalCenter','grade','selectWithStringId','equals', this.commonSearchCheckerService.convertEnumToSearchArray(Grade, 'Grade')));
+        this.searchbarModel.push(new SearchPanelModel('educationalCenter', 'name', 'text', 'contains'));
+        this.searchbarModel.push(new SearchPanelModel('educationalCenter', 'connectionPerson', 'text', 'contains'));
+        this.searchbarModel.push(new SearchPanelModel('educationalCenter', 'telephone', 'text', 'contains'));
+        this.searchbarModel.push(
+            new SearchPanelModel(
+                'educationalCenter',
+                'grade',
+                'selectWithStringId',
+                'equals',
+                this.commonSearchCheckerService.convertEnumToSearchArray(Grade, 'Grade')
+            )
+        );
         this.activityAreasService.query().subscribe(
             (res: HttpResponse<IActivityAreaMarineSuffix[]>) => {
-
                 this.activityAreas = res.body;
-                this.searchbarModel.push(new SearchPanelModel('educationalCenter','activityAreaId','select', 'equals', res.body));
+                this.searchbarModel.push(new SearchPanelModel('educationalCenter', 'activityAreaId', 'select', 'equals', res.body));
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -153,20 +161,17 @@ export class EducationalCenterMarineSuffixComponent implements OnInit, OnDestroy
         //this.registerChangeInEducationalCenters();
     }
 
-    setRoles(account: any){
-        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-            this.isAdmin = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
-            this.isModirAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
-            this.isModirKolAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+    setRoles(account: any) {
+        if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
             this.isKarshenasArshadAmozeshSazman = true;
+        if (account.authorities.find(a => a == 'ROLE_EDIT') !== undefined) this.isRoleEdit = true;
+        if (account.authorities.find(a => a == 'ROLE_DELETE') !== undefined) this.isRoleDelete = true;
 
-        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-            this.isSuperUsers = true;
-        if(this.isModirAmozesh || this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-            this.isTopUsers = true;
+        if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
+        if (this.isModirAmozesh || this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isTopUsers = true;
     }
     ngOnDestroy() {
         /*this.eventManager.destroy(this.eventSubscriber);*/

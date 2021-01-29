@@ -78,6 +78,20 @@ public class SkillableLevelOfSkillServiceImpl implements SkillableLevelOfSkillSe
     }
 
     /**
+     * Get one skillableLevelOfSkill by title.
+     *
+     * @param title the title of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<SkillableLevelOfSkillDTO> findByTitle(String title) {
+        log.debug("Request to get SkillableLevelOfSkill : {}", title);
+        return skillableLevelOfSkillRepository.findByTitle(title)
+            .map(skillableLevelOfSkillMapper::toDto);
+    }
+
+    /**
      * Delete the skillableLevelOfSkill by id.
      *
      * @param id the id of the entity

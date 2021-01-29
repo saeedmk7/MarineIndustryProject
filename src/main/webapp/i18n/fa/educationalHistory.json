@@ -23,14 +23,19 @@
                 "title": "جزئیات اطلاعات پرونده"
             },
             "index": "ردیف",
-            "educationalModuleName": "عنوان پودمان آموزشی",
+            "educationalModuleName": "عنوان دقیق پودمان آموزشی",
+            "educationalModuleEditName": "عنوان دقیق پودمان آموزشی درج شده در گواهینامه آموزشی",
             "educationalModuleCode": "کد پودمان آموزشی",
+            "educationalModuleId": "کد پودمان آموزشی",
             "learningTimeTheorical": "مدت زمان نظری",
             "learningTimePractical": "مدت زمان عملی",
             "totalLearningTime": "مجموع زمان (ساعت)",
             "totalTime": "مجموع",
             "educationalCenter": "مرکز آموزشی",
             "dateOfStart": "تاریخ برگزاری دوره",
+            "dateOfEnd": "تاریخ اتمام دوره",
+            "dateOfEndWithoutSlash": "تاریخ اتمام دوره",
+            "dateOfStartWithoutSlash": "تاریخ برگزاری دوره ",
             "fileDoc": "فایل گواهینامه",
             "description": "توضیحات",
             "createUserLogin": "کاربر درخواست کننده",
@@ -46,16 +51,19 @@
             "changeStatusUserLogin": "فرد تغییر دهنده وضعیت درخواست",
             "person": "نام و نام خانوادگی",
             "personId": "نام و نام خانوادگی",
-            "personName": "نام و نام خانوادگی",
-            "personFamily": "نام و نام خانوادگی",
+            "personName": "نام",
+            "personFamily": "نام خانوادگی",
             "job": "شغل سازمانی",
+            "personelCode": "کد پرسنلی",
             "practicaljob": "شغل عملی",
             "organizationChart": "موقعیت در سازمان",
             "organizationChartId": "موقعیت در سازمان",
             "courseType": "نوع دوره",
             "courseTypeId": "نوع دوره",
             "courseTypeTitle": "نوع دوره",
-            "educationalModule": "پودمان آموزشی"
+            "educationalModule": "پودمان آموزشی",
+            "educationalModuleEditTitle": "انتخاب عنوان پودمان آموزشی از فهرست کلیه پودمان ها",
+            "educationalModuleTitle": "عنوان پودمان آموزشی انتخاب شده از فهرست کلیه پودمان ها"
         }
     }
 }

@@ -38,4 +38,7 @@ public interface PersonRepository extends JpaRepository<Person, Long>, JpaSpecif
     @Query(value = "select new com.marineindustryproj.service.dto.customs.PersonMinDTO(person.id, person.name, person.family, person.nationalId, person.personelCode, person.job) from Person person where person.archived = false")
     List<PersonMinDTO> findAllFromCache();
 
+    @Query(value = "select person from Person person where person.organizationChart = null and person.archived = false")
+    List<Person> findAllByOrganizationChartNull();
+
 }

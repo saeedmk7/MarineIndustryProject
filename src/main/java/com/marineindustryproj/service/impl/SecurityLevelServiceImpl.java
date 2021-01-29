@@ -78,6 +78,20 @@ public class SecurityLevelServiceImpl implements SecurityLevelService {
     }
 
     /**
+     * Get one securityLevel by title.
+     *
+     * @param title the title of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<SecurityLevelDTO> findByTitle(String title) {
+        log.debug("Request to get SecurityLevel : {}", title);
+        return securityLevelRepository.findByTitle(title)
+            .map(securityLevelMapper::toDto);
+    }
+
+    /**
      * Delete the securityLevel by id.
      *
      * @param id the id of the entity

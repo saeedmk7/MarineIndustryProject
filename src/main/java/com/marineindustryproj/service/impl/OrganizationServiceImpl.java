@@ -78,6 +78,20 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     /**
+     * Get one organization by title.
+     *
+     * @param title the title of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<OrganizationDTO> findByTitle(String title) {
+        log.debug("Request to get Organization : {}", title);
+        return organizationRepository.findByTitle(title)
+            .map(organizationMapper::toDto);
+    }
+
+    /**
      * Delete the organization by id.
      *
      * @param id the id of the entity

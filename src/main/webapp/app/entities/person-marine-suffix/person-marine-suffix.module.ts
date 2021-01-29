@@ -9,33 +9,42 @@ import {
     PersonMarineSuffixDeletePopupComponent,
     PersonMarineSuffixDeleteDialogComponent,
     personRoute,
-    personPopupRoute
+    personPopupRoute,
+    PersonUnchartMarineSuffixComponent
 } from './';
-import {DpDatePickerModule} from 'ng2-jalali-date-picker';
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
-import {NgSelectModule} from "@ng-select/ng-select";
-import {FormsModule} from "@angular/forms";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {InputsModule} from "@progress/kendo-angular-inputs";
+import { DpDatePickerModule } from 'ng2-jalali-date-picker';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputsModule } from '@progress/kendo-angular-inputs';
 
 const ENTITY_STATES = [...personRoute, ...personPopupRoute];
 
 @NgModule({
-    imports: [MarineindustryprojSharedModule, NgSelectModule, FormsModule, BrowserAnimationsModule, InputsModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [
+        MarineindustryprojSharedModule,
+        NgSelectModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        InputsModule,
+        RouterModule.forChild(ENTITY_STATES)
+    ],
     declarations: [
         PersonMarineSuffixComponent,
         PersonMarineSuffixDetailComponent,
         PersonMarineSuffixUpdateComponent,
         PersonMarineSuffixDeleteDialogComponent,
-        PersonMarineSuffixDeletePopupComponent
+        PersonMarineSuffixDeletePopupComponent,
+        PersonUnchartMarineSuffixComponent
     ],
-    providers: [ ConvertObjectDatesService ],
+    providers: [ConvertObjectDatesService],
     entryComponents: [
         PersonMarineSuffixComponent,
         PersonMarineSuffixUpdateComponent,
         PersonMarineSuffixDeleteDialogComponent,
-        PersonMarineSuffixDeletePopupComponent
-
+        PersonMarineSuffixDeletePopupComponent,
+        PersonUnchartMarineSuffixComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

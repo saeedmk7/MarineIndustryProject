@@ -51,7 +51,12 @@ export class PersonMarineSuffixService {
                 .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res, true)));
         }
     }
-
+    getUnChartPeople(): Observable<EntityArrayResponseType> {
+        let url = this.resourceUrl + '/allUnChart';
+        return this.http
+            .get<IPersonMarineSuffix[]>(url, { observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res, true)));
+    }
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }

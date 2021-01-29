@@ -83,16 +83,17 @@
                         </button>
                         <button type="submit" title="مدارک"
                                 [routerLink]="['../document-marine-suffix', 'mediaawarenessreport',mediaAwarenessReport.id]"
-                                class="btn btn-light btn-sm">
+                                [ngClass]="(mediaAwarenessReport.documents && mediaAwarenessReport.documents.length > 0) ? 'btn-success' : 'btn-light'"
+                                class="btn btn-sm">
                             <span class="fa fa-file"></span>
                         </button>
-                        <button type="submit"
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_EDIT']"
                                 [routerLink]="['/media-awareness-report-marine-suffix', mediaAwarenessReport.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
                                 [routerLink]="['/', { outlets: { popup: 'media-awareness-report-marine-suffix/'+ mediaAwarenessReport.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

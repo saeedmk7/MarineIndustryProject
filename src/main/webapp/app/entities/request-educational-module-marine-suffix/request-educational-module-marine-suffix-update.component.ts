@@ -471,7 +471,6 @@ export class RequestEducationalModuleMarineSuffixUpdateComponent implements OnIn
             );
         }
 
-        debugger;
         this.requestEducationalModule.headlines.forEach(a => {
             let name = 'headlineLevel_' + a.id;
             let radio = 'input[name=' + name + ']:checked';

@@ -9,10 +9,10 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { ResourceMarineSuffixService } from './resource-marine-suffix.service';
-import {SearchPanelModel} from "app/shared/model/custom/searchbar.model";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
-import {ExcelService} from "app/plugin/export-excel/excel-service";
-import {TranslateService} from '@ngx-translate/core';
+import { SearchPanelModel } from 'app/shared/model/custom/searchbar.model';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import { ExcelService } from 'app/plugin/export-excel/excel-service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'mi-resource-marine-suffix',
@@ -35,7 +35,7 @@ export class ResourceMarineSuffixComponent implements OnInit, OnDestroy {
     reverse: any;
     criteriaSubscriber: Subscription;
     searchbarModel: SearchPanelModel[];
-    done:boolean = false;
+    done: boolean = false;
     criteria: any;
 
     isAdmin: boolean;
@@ -44,6 +44,8 @@ export class ResourceMarineSuffixComponent implements OnInit, OnDestroy {
     isModirAmozesh: boolean = false;
     isSuperUsers: boolean = false;
     isTopUsers: boolean = false;
+    isRoleEdit: boolean = false;
+    isRoleDelete: boolean = false;
 
     constructor(
         private resourceService: ResourceMarineSuffixService,
@@ -54,7 +56,7 @@ export class ResourceMarineSuffixComponent implements OnInit, OnDestroy {
         private router: Router,
         private jhiTranslate: TranslateService,
         private eventManager: JhiEventManager,
-        private convertObjectDatesService : ConvertObjectDatesService
+        private convertObjectDatesService: ConvertObjectDatesService
     ) {
         //this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -62,7 +64,7 @@ export class ResourceMarineSuffixComponent implements OnInit, OnDestroy {
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
         });
-        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', (criteria) =>{
+        this.criteriaSubscriber = this.eventManager.subscribe('marineindustryprojApp.criteria', criteria => {
             this.done = true;
             this.criteria = criteria.content;
             this.loadAll(criteria.content);
@@ -84,7 +86,6 @@ export class ResourceMarineSuffixComponent implements OnInit, OnDestroy {
                 (res: HttpResponse<IResourceMarineSuffix[]>) => this.paginateResources(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
-
     }
 
     loadPage(page: number) {
@@ -95,7 +96,7 @@ export class ResourceMarineSuffixComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-       /* this.router.navigate(['/resource-marine-suffix'], {
+        /* this.router.navigate(['/resource-marine-suffix'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -119,8 +120,8 @@ export class ResourceMarineSuffixComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.searchbarModel = new Array<SearchPanelModel>();
-        this.searchbarModel.push(new SearchPanelModel('resource','title','text', 'contains'));
-        this.searchbarModel.push(new SearchPanelModel('resource','code','text','contains'));
+        this.searchbarModel.push(new SearchPanelModel('resource', 'title', 'text', 'contains'));
+        this.searchbarModel.push(new SearchPanelModel('resource', 'code', 'text', 'contains'));
 
         /*if(!this.done)
         {
@@ -133,20 +134,17 @@ export class ResourceMarineSuffixComponent implements OnInit, OnDestroy {
         //this.registerChangeInResources();
     }
 
-    setRoles(account: any){
-        if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-            this.isAdmin = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_AMOZESH") !== undefined)
-            this.isModirAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_MODIR_KOL_AMOZESH") !== undefined)
-            this.isModirKolAmozesh = true;
-        if(account.authorities.find(a => a == "ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN") !== undefined)
+    setRoles(account: any) {
+        if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
             this.isKarshenasArshadAmozeshSazman = true;
+        if (account.authorities.find(a => a == 'ROLE_EDIT') !== undefined) this.isRoleEdit = true;
+        if (account.authorities.find(a => a == 'ROLE_DELETE') !== undefined) this.isRoleDelete = true;
 
-        if(this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-            this.isSuperUsers = true;
-        if(this.isModirAmozesh || this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin)
-            this.isTopUsers = true;
+        if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isRoleEdit) this.isSuperUsers = true;
+        if (this.isModirAmozesh || this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isTopUsers = true;
     }
     ngOnDestroy() {
         //this.eventManager.destroy(this.eventSubscriber);

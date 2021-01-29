@@ -63,6 +63,8 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     isModirAmozesh: boolean = false;
     isSuperUsers: boolean = false;
     isTopUsers: boolean = false;
+    isRoleEdit: boolean = false;
+    isRoleDelete: boolean = false;
 
     constructor(
         private dataUtils: JhiDataUtils,
@@ -85,6 +87,9 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
     ) {}
     printPage() {
         this.settingService.printPage(window.location.hostname, this.person.id);
+    }
+    get printUrl() {
+        return `http://${window.location.hostname}:3000/person-educational-record-report/${this.person.id}`;
     }
     ngOnInit() {
         this.principal.identity().then(account => {
@@ -503,6 +508,8 @@ export class PersonEducationalRecordsMarineSuffixComponent implements OnInit {
             if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
             if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
                 this.isKarshenasArshadAmozeshSazman = true;
+            if (account.authorities.find(a => a == 'ROLE_EDIT') !== undefined) this.isRoleEdit = true;
+            if (account.authorities.find(a => a == 'ROLE_DELETE') !== undefined) this.isRoleDelete = true;
 
             if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
             if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh)

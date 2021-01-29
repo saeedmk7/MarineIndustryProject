@@ -110,6 +110,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         this.yearsCollections = GREGORIAN_START_END_DATE;
         this.years = this.yearsCollections.map(a => a.year);
     }
+
     selectYear() {
         if (this.selectedNiazSanji.length > 0) {
             if (this.selectedYear) {
@@ -145,6 +146,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             this.selectedNiazSanji = [];
         }
     }
+
     createCriteria(criteria?): any {
         if (criteria) {
             const year = criteria.find(a => a.key == 'yearId.equals');
@@ -181,15 +183,28 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         } else {
             criteria = [];
         }
+
+        debugger;
         if (this.isModirKolAmozesh) {
             criteria.push({
                 key: 'status.greaterOrEqualThan',
                 value: 10
             });
-            criteria = this.commonSearchCheckerService.checkRequestStatusFiltersForIntegration(criteria, 10);
+            criteria = this.commonSearchCheckerService.checkRequestStatusFiltersForOrganizationChart(criteria, 10);
         } else {
-            criteria = this.commonSearchCheckerService.checkRequestStatusFiltersForIntegration(criteria);
+            criteria = this.commonSearchCheckerService.checkRequestStatusFiltersForOrganizationChart(criteria);
         }
+
+        return this.removeDuplicates(criteria);
+    }
+    removeDuplicates(criteria) {
+        var obj = {};
+
+        for (var i = 0, len = criteria.length; i < len; i++) obj[criteria[i]['key']] = criteria[i];
+
+        criteria = new Array();
+        for (var key in obj) criteria.push(obj[key]);
+
         return criteria;
     }
     loadAll(criteria?, exportExcel: boolean = false) {
@@ -221,48 +236,35 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
                 );
         }
     }
+
     export() {
         this.loadAll(this.criteria, true);
         /*let a = new ExcelService(this.jhiTranslate);
         a.exportAsExcelFile(this.finalOrganizationNiazsanjis, 'finalOrganizationNiazsanjis', 'marineindustryprojApp.finalOrganizationNiazsanji');*/
     }
+
     prepareForExportExcel(res: IFinalOrganizationNiazsanjiMarineSuffix[]) {
         res = this.convertObjectDatesService.changeArrayDate(res);
-        if (this.personService.people) {
-            this.people = this.personService.people;
-            if (this.educationalModuleService.educationalModules) {
-                this.educationalModules = this.educationalModuleService.educationalModules;
-                this.finalExportToExcel(res);
-            } else {
-                this.educationalModuleService.query().subscribe(
-                    (resp: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
-                        this.educationalModules = resp.body;
-                        this.finalExportToExcel(res);
-                    },
-                    error => this.onError('پودمانی یافت نشد.')
-                );
-            }
-        } else {
-            this.personService.query().subscribe(
-                (resp: HttpResponse<IPersonMarineSuffix[]>) => {
-                    this.people = resp.body;
-                    if (this.educationalModuleService.educationalModules) {
-                        this.educationalModules = this.educationalModuleService.educationalModules;
-                        this.finalExportToExcel(res);
-                    } else {
-                        this.educationalModuleService.query().subscribe(
-                            (resp: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
-                                this.educationalModules = resp.body;
-                                this.finalExportToExcel(res);
-                            },
-                            error => this.onError('پودمانی یافت نشد.')
-                        );
-                    }
-                },
-                error => this.onError('فردی یافت نشد.')
-            );
-        }
+        this.personService.query().subscribe(
+            (resp: HttpResponse<IPersonMarineSuffix[]>) => {
+                this.people = resp.body;
+                if (this.educationalModuleService.educationalModules) {
+                    this.educationalModules = this.educationalModuleService.educationalModules;
+                    this.finalExportToExcel(res);
+                } else {
+                    this.educationalModuleService.query().subscribe(
+                        (resp: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
+                            this.educationalModules = resp.body;
+                            this.finalExportToExcel(res);
+                        },
+                        error => this.onError('پودمانی یافت نشد.')
+                    );
+                }
+            },
+            error => this.onError('فردی یافت نشد.')
+        );
     }
+
     finalExportToExcel(excelFinalOrganizationNiazsanjis: IFinalOrganizationNiazsanjiMarineSuffix[]) {
         let a = new ExcelService(this.jhiTranslate);
         let report = [];
@@ -284,6 +286,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
                 educationalModuleSkillLevelOfSkillTitle: a.skillLevelOfSkillTitle,
                 peopleCount: a.peopleCount,
                 educationalModuleTotalLearningTime: a.totalLearningTime,
+                fullPeopleTime: a.peopleCount * a.totalLearningTime,
                 priceCost: a.priceCost,
                 courseType: a.courseTypeTitle,
                 person: peopleNames.join('،'),
@@ -306,6 +309,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         });
         a.exportAsExcelFile(report, 'finalOrganizationNiazsanjis', 'marineindustryprojApp.finalOrganizationNiazsanji');
     }
+
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
@@ -323,6 +327,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         });*/
         //this.loadAll(this.criteria);
     }
+
     onChange(id: number, isChecked: boolean) {
         if (isChecked) {
             if (!this.selectedNiazSanji.includes(id)) this.selectedNiazSanji.push(id);
@@ -330,6 +335,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             this.selectedNiazSanji = this.selectedNiazSanji.filter(a => a != id);
         }
     }
+
     selectAll(isChecked: boolean) {
         if (isChecked) {
             $('.mycheckbox').each((a, item) => {
@@ -343,6 +349,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             });
         }
     }
+
     clear() {
         this.page = 0;
         this.router.navigate([
@@ -352,8 +359,10 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         ]);
+
         this.loadAll();
     }
+
     complete(mymodel) {
         this.finalOrganizationNiazsanjiService.find(mymodel.id).subscribe(resp => {
             let model = resp.body;
@@ -369,8 +378,10 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             }
         });
     }
+
     ngOnInit() {
         //this.loadAll();
+
         this.principal.identity().then(account => {
             this.currentAccount = account;
             if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
@@ -402,6 +413,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         });
         //this.registerChangeInFinalOrganizationNiazsanjis();
     }
+
     prepareSkillLevelOfSkill() {
         this.skillableLevelOfSkillService.query().subscribe(
             (res: HttpResponse<ISkillableLevelOfSkillMarineSuffix[]>) => {
@@ -413,6 +425,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     prepareSearchCourseType() {
         this.courseTypeService.query().subscribe(
             (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
@@ -422,6 +435,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     prepareSearchEducationalModule() {
         if (this.educationalModuleService.educationalModules) {
             this.educationalModules = this.educationalModuleService.educationalModules;
@@ -442,6 +456,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             );
         }
     }
+
     prepareSearchPerson() {
         if (this.personService.people) {
             this.people = this.convertObjectDatesService.goClone(this.personService.people);
@@ -459,13 +474,13 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             );
         }
     }
+
     prepareSearchDate() {
         const dates = this.convertObjectDatesService.getYearsArray();
         const thisYear = this.convertObjectDatesService.getNowShamsiYear();
-        this.searchbarModel.push(
-            new SearchPanelModel('requestOrganizationNiazsanji', 'yearId', 'select', 'equals', dates, 'title', '', thisYear + '')
-        );
+        this.searchbarModel.push(new SearchPanelModel('niazsanjiFardi', 'niazsanjiYear', 'select', 'equals', dates, 'title'));
     }
+
     prepareSearchOrgChart() {
         if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
@@ -540,6 +555,7 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             this.prepareFinalOrganizationNiazsanji(a);
         });
     }
+
     prepareFinalOrganizationNiazsanji(a: IFinalOrganizationNiazsanjiMarineSuffix) {
         const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
         if (org) {
@@ -547,6 +563,27 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             a.organizationChartRootTitle = org.rootTitle;
         }
         a.peopleCount = a.people.length;
+        if (this.educationalModules && this.educationalModules.length > 0) {
+            const education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            if (education) {
+                this.loadExtraEducationalModuleData(a);
+            }
+        } else {
+            if (this.educationalModuleService.educationalModules) {
+                this.educationalModules = this.educationalModuleService.educationalModules;
+                this.loadExtraEducationalModuleData(a);
+            } else {
+                this.educationalModuleService.query().subscribe(
+                    (resp: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
+                        this.educationalModules = resp.body;
+                        this.loadExtraEducationalModuleData(a);
+                    },
+                    error => this.onError('پودمانی یافت نشد.')
+                );
+            }
+        }
+    }
+    loadExtraEducationalModuleData(a: IFinalOrganizationNiazsanjiMarineSuffix) {
         const education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
         if (education) {
             a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
@@ -559,10 +596,12 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
         this.jhiAlertService.success(errorMessage, null, null);
         this.loadAll(this.criteria);
     }
+
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
         this.loadAll(this.criteria);
     }
+
     toggleImportantMessage(id: number, type: boolean) {
         this.finalOrganizationNiazsanjiService
             .toggleImportantMessage(id, type)
@@ -571,5 +610,6 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
                 (res: HttpErrorResponse) => this.onSaveError()
             );
     }
+
     private onSaveError() {}
 }

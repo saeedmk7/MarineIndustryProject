@@ -30,6 +30,7 @@
             <th><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.educationalModuleSkillLevelOfSkillTitle">Educational Module</span></th>
             <th><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.peopleCount">people Count</span></th>
             <th><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.educationalModuleTotalLearningTime">educationalModuleTotalLearningTime</span></th>
+            <th><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.fullPeopleTime">educationalModuleTotalLearningTime</span></th>
             <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="studentsType"><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.studentsType">Students Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <!--<th>افراد انتخابی</th>-->
@@ -63,6 +64,7 @@
                 <td>{{requestOrganizationNiazsanji.skillLevelOfSkillTitle}}</td>
                 <td>{{requestOrganizationNiazsanji.peopleCount}}</td>
                 <td>{{requestOrganizationNiazsanji.totalLearningTime | number}}</td>
+                <td>{{requestOrganizationNiazsanji.totalLearningTime * requestOrganizationNiazsanji.peopleCount | number}}</td>
                 <!--<td>{{requestOrganizationNiazsanji.studentsType}}</td>-->
                <!-- <td>
                     <div *ngFor="let person of requestOrganizationNiazsanji.people">
@@ -110,7 +112,8 @@
                 <td class="text-right">
                     <button type="submit" title="مدارک"
                             [routerLink]="['../document-marine-suffix', 'requestOrganizationNiazsanji',requestOrganizationNiazsanji.id]"
-                            class="btn btn-light btn-sm">
+                            class="btn btn-sm"
+                            [ngClass]="(requestOrganizationNiazsanji.documents && requestOrganizationNiazsanji.documents.length > 0) ? 'btn-success' : 'btn-light'">
                         <span class="fa fa-file"></span>
                     </button>
                     <button type="submit" title="جزئیات"
@@ -155,7 +158,7 @@
                             </button>
                         </ng-container>
                     </ng-container>
-                    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                    <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']" type="submit"
                             [routerLink]="['/', { outlets: { popup: 'request-organization-niazsanji-marine-suffix/'+ requestOrganizationNiazsanji.id + '/delete'} }]"
                             replaceUrl="true"
                             queryParamsHandling="merge"

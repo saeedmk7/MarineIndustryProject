@@ -38,6 +38,14 @@ public interface OrganizationService {
     Optional<OrganizationDTO> findOne(Long id);
 
     /**
+     * Get the "title" organization.
+     *
+     * @param title the title of the entity
+     * @return the entity
+     */
+    Optional<OrganizationDTO> findByTitle(String title);
+
+    /**
      * Delete the "id" organization.
      *
      * @param id the id of the entity

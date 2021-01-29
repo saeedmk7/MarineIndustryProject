@@ -120,7 +120,8 @@
                         <!--*ngIf="(isAdmin || isKarshenasArshadAmozesh || isModirKolAmozesh) && (jobNiazsanji.status < 30 && jobNiazsanji.status != 1 && jobNiazsanji.status != 11 && jobNiazsanji.status != 21)"-->
                         <button type="submit" title="مدارک"
                                 [routerLink]="['../document-marine-suffix', 'niazsanjifardi', jobNiazsanji.id ]"
-                                class="btn btn-light btn-sm">
+                                [ngClass]="(jobNiazsanji.documents && jobNiazsanji.documents.length > 0) ? 'btn-success' : 'btn-light'"
+                                class="btn btn-sm">
                             <span class="fa fa-file"></span>
                         </button>
                         <button type="submit" title="ویرایش" *ngIf="(isAdmin || isKarshenasArshadAmozesh || isModirKolAmozesh) && (jobNiazsanji.status < 30 && jobNiazsanji.status != 1 && jobNiazsanji.status != 11 && jobNiazsanji.status != 21)"
@@ -215,7 +216,7 @@
                             <span class="fa fa-ban" color="f00c"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.reject">reject</span>
                         </button>-->
-                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                        <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']" type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'job-niazsanji-marine-suffix/'+ jobNiazsanji.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

@@ -1,0 +1,29 @@
+{
+    "marineindustryprojApp": {
+        "jobChange": {
+            "home": {
+                "title": "تغییرات شغل افراد سازمان",
+                "createLabel": "جدید",
+                "createOrEditLabel": " تغییرات شغل "
+            },
+            "created": "تغییرات شغل  با شناسه {{ param }} ایجاد شد.",
+            "updated": "تغییرات شغل  با شناسه {{ param }} ویرایش شد.",
+            "deleted": "تغییرات شغل  با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف تغییرات شغل  با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات تغییرات شغل "
+            },
+            "title": "عنوان شغل",
+            "status": "وضعیت",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "person": "کاربر ویرایش شده",
+            "oldJob": "شغل قبلی",
+            "newJob": "شغل جدید"
+        }
+    }
+}

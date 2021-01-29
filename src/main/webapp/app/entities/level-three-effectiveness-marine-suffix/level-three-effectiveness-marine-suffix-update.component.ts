@@ -224,7 +224,7 @@ export class LevelThreeEffectivenessMarineSuffixUpdateComponent implements OnIni
                             levelThreeScore.levelThreeCriteriaWeight = w.weight;
                             levelThreeScore.levelThreeCriteriaGroupId = w.levelThreeCriteriaGroupId;
                             levelThreeScore.levelThreeCriteriaGroupTitle = w.levelThreeCriteriaGroupTitle;
-                            levelThreeScore.score = 1;
+                            levelThreeScore.score = 5;
                             this.levelThreeEffectiveness.levelThreeScores.push(levelThreeScore);
                         }
                     });

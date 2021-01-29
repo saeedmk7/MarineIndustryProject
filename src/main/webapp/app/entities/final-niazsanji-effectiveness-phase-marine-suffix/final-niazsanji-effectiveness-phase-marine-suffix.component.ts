@@ -26,6 +26,9 @@ import { ICourseTypeMarineSuffix } from 'app/shared/model/course-type-marine-suf
 import { NIAZSANJI_SOURCE_FILTERS } from 'app/shared/constants/NiazsanjiSourceFilters';
 import { EFFECTIVENESSPHASELEVELS } from 'app/shared/constants/effectiveness-phase-levels.constants';
 import { FinalNiazsanjiReportMarineSuffixService } from 'app/entities/final-niazsanji-report-marine-suffix';
+import { EFFECTIVENESSPHASESTATUSMEANING } from 'app/shared/constants/effectiveness-phase-status-meaning.constants';
+import { Grade } from 'app/shared/model/enums/Grade';
+import { GRADES } from 'app/shared/constants/grades.constants';
 
 @Component({
     selector: 'mi-final-niazsanji-effectiveness-phase-marine-suffix',
@@ -366,7 +369,13 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
                         EFFECTIVENESSPHASELEVELS
                     )
                 );
+                this.searchbarModel.push(
+                    new SearchPanelModel('finalNiazsanjiReport', 'status', 'select', 'equals', EFFECTIVENESSPHASESTATUSMEANING, 'mean')
+                );
 
+                this.searchbarModel.push(
+                    new SearchPanelModel('finalNiazsanjiReport', 'effectivenessPhaseGrade', 'selectWithStringId', 'equals', GRADES)
+                );
                 //this.prepareSearchEducationalModule();
                 //this.preparePeople();
             });

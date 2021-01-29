@@ -77,6 +77,13 @@ public class UsersRequest implements Serializable {
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "users_request_person",
+               joinColumns = @JoinColumn(name = "users_requests_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "people_id", referencedColumnName = "id"))
+    private Set<Person> people = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "users_request_document",
                joinColumns = @JoinColumn(name = "users_requests_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "documents_id", referencedColumnName = "id"))
@@ -245,6 +252,31 @@ public class UsersRequest implements Serializable {
 
     public void setHasImportantMessage(Boolean hasImportantMessage) {
         this.hasImportantMessage = hasImportantMessage;
+    }
+
+    public Set<Person> getPeople() {
+        return people;
+    }
+
+    public UsersRequest people(Set<Person> people) {
+        this.people = people;
+        return this;
+    }
+
+    public UsersRequest addPerson(Person person) {
+        this.people.add(person);
+        person.getUsersRequests().add(this);
+        return this;
+    }
+
+    public UsersRequest removePerson(Person person) {
+        this.people.remove(person);
+        person.getUsersRequests().remove(this);
+        return this;
+    }
+
+    public void setPeople(Set<Person> people) {
+        this.people = people;
     }
 
     public Set<Document> getDocuments() {

@@ -51,6 +51,8 @@ public class UsersRequestCriteria implements Serializable {
 
     private BooleanFilter hasImportantMessage;
 
+    private LongFilter personId;
+
     private LongFilter documentId;
 
     public LongFilter getId() {
@@ -141,6 +143,14 @@ public class UsersRequestCriteria implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public LongFilter getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(LongFilter personId) {
+        this.personId = personId;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -171,6 +181,7 @@ public class UsersRequestCriteria implements Serializable {
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
             Objects.equals(guid, that.guid) &&
             Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
+            Objects.equals(personId, that.personId) &&
             Objects.equals(documentId, that.documentId);
     }
 
@@ -188,6 +199,7 @@ public class UsersRequestCriteria implements Serializable {
         changeStatusUserLogin,
         guid,
         hasImportantMessage,
+        personId,
         documentId
         );
     }
@@ -206,6 +218,7 @@ public class UsersRequestCriteria implements Serializable {
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
                 (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
+                (personId != null ? "personId=" + personId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
             "}";
     }

@@ -3,7 +3,9 @@ package com.marineindustryproj.service.parseExcel;
 import java.text.MessageFormat;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import com.ghasemkiani.util.icu.PersianCalendar;
 import com.ibm.icu.util.Calendar;
@@ -46,8 +48,24 @@ public class ImportUtilities {
             return false;
         }
     }
+    public static String[] SpecialChars = {"&nbsp","(NULL)",".","'","/","//",".","|","\\","`","~","!","@","#","$","%","^","&","*","(",")","-","_","+","=",",","<",">","?","؟"};
+
     public String correctString(String str){
-        return str.trim().replace('ي', 'ی').replace('ك','ک').replace('ة','ه');
+        if (str.isEmpty())
+            return "";
+
+        str = str.trim().replace("ﮎ", "ک").replace("ﮏ", "ک").replace("ﮐ", "ک").replace("ﮑ", "ک").replace("ك", "ک").replace("ي", "ی");
+        return str;
+    }
+    public String correctAndRemoveExtraCharsString(String str){
+        if (str.isEmpty())
+            return "";
+
+        str = str.trim().replace("ﮎ", "ک").replace("ﮏ", "ک").replace("ﮐ", "ک").replace("ﮑ", "ک").replace("ك", "ک").replace("ي", "ی");
+        for (String specialChar : SpecialChars) {
+            str = str.replace(specialChar, "");
+        }
+        return str;
     }
     public ZonedDateTime getZonedDateTime(int year,
                                            int month,

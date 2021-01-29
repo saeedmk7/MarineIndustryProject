@@ -3,6 +3,8 @@
         "person" : {
             "home": {
                 "title": "اطلاعات کارکنان سازمان",
+                "unChartTitle": "اطلاعات کارکنان سازمان قرار نگرفته در چارت سازمانی",
+                "unChartTitle": "اطلاعات کارکنان سازمان قرار نگرفته در چارت سازمانی",
                 "createLabel": "جدید",
                 "createOrEditLabel": "مشخصات {{param}}"
             },
@@ -31,6 +33,7 @@
             "createDate": "تاریخ ایجاد",
             "modifyUserLogin": "کاربر ویرایش کننده",
             "modifyDate": "تاریخ ویرایش شده",
+            "modifyDatePerDay": "چند روز قبل ویرایش شده",
             "archived": "بازنشستگی، انتقال و ...",
             "archivedUserLogin": "آرشیو شده توسط",
             "archivedDate": "تاریخ آرشیو شدن",
@@ -64,7 +67,8 @@
             "requestOrganizationNiazsanji": "Request Organization Niazsanji",
             "finalOrganizationNiazsanji": "Final Organization Niazsanji",
             "designAndPlanning": "Design And Planning",
-            "runPhase": "Run Phase"
+            "runPhase": "Run Phase",
+            "selectedPeople": "افراد انتخاب شده"
         }
     }
 }

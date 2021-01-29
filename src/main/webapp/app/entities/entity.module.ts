@@ -137,6 +137,7 @@ import { MarineindustryprojMonitorLearningProcessGradeMarineSuffixModule } from 
 import { MarineindustryprojMonitorLearningProcessLevelMarineSuffixModule } from 'app/entities/monitor-learning-process-level-marine-suffix/monitor-learning-process-level-marine-suffix.module';
 import { MarineindustryprojMonitorLearningProcessMarineSuffixModule } from 'app/entities/monitor-learning-process-marine-suffix/monitor-learning-process-marine-suffix.module';
 import { MarineindustryprojMonitorProcessDurationMarineSuffixModule } from 'app/entities/monitor-process-duration-marine-suffix/monitor-process-duration-marine-suffix.module';
+import { MarineindustryprojJobChangeMarineSuffixModule } from 'app/entities/job-change-marine-suffix/job-change-marine-suffix.module';
 
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
@@ -277,7 +278,7 @@ import { MarineindustryprojMonitorProcessDurationMarineSuffixModule } from 'app/
         MarineindustryprojMonitorLearningProcessLevelMarineSuffixModule,
         MarineindustryprojMonitorLearningProcessMarineSuffixModule,
         MarineindustryprojMonitorProcessDurationMarineSuffixModule,
-
+        MarineindustryprojJobChangeMarineSuffixModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

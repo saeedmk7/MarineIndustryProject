@@ -97,6 +97,8 @@ public class PersonCriteria implements Serializable {
 
     private LongFilter prioritizeRequestNiazsanjiId;
 
+    private LongFilter jobChangeId;
+
     private LongFilter documentId;
 
     private LongFilter scientificWorkGroupId;
@@ -126,6 +128,8 @@ public class PersonCriteria implements Serializable {
     private LongFilter designAndPlanningId;
 
     private LongFilter runPhaseId;
+
+    private LongFilter usersRequestId;
 
     public LongFilter getId() {
         return id;
@@ -415,6 +419,14 @@ public class PersonCriteria implements Serializable {
         this.prioritizeRequestNiazsanjiId = prioritizeRequestNiazsanjiId;
     }
 
+    public LongFilter getJobChangeId() {
+        return jobChangeId;
+    }
+
+    public void setJobChangeId(LongFilter jobChangeId) {
+        this.jobChangeId = jobChangeId;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -535,6 +547,14 @@ public class PersonCriteria implements Serializable {
         this.runPhaseId = runPhaseId;
     }
 
+    public LongFilter getUsersRequestId() {
+        return usersRequestId;
+    }
+
+    public void setUsersRequestId(LongFilter usersRequestId) {
+        this.usersRequestId = usersRequestId;
+    }
+
     public LongFilter getPreJobNiazsanjiId() {
         return preJobNiazsanjiId;
     }
@@ -591,6 +611,7 @@ public class PersonCriteria implements Serializable {
             Objects.equals(niazsanjiOtherId, that.niazsanjiOtherId) &&
             Objects.equals(requestOtherNiazsanjiId, that.requestOtherNiazsanjiId) &&
             Objects.equals(prioritizeRequestNiazsanjiId, that.prioritizeRequestNiazsanjiId) &&
+            Objects.equals(jobChangeId, that.jobChangeId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(scientificWorkGroupId, that.scientificWorkGroupId) &&
             Objects.equals(lastQualificationId, that.lastQualificationId) &&
@@ -606,6 +627,7 @@ public class PersonCriteria implements Serializable {
             Objects.equals(finalOrganizationNiazsanjiId, that.finalOrganizationNiazsanjiId) &&
             Objects.equals(designAndPlanningId, that.designAndPlanningId) &&
             Objects.equals(runPhaseId, that.runPhaseId) &&
+            Objects.equals(usersRequestId, that.usersRequestId) &&
             Objects.equals(preJobNiazsanjiId, that.preJobNiazsanjiId);
     }
 
@@ -649,6 +671,7 @@ public class PersonCriteria implements Serializable {
         niazsanjiOtherId,
         requestOtherNiazsanjiId,
         prioritizeRequestNiazsanjiId,
+        jobChangeId,
         documentId,
         scientificWorkGroupId,
         lastQualificationId,
@@ -664,6 +687,7 @@ public class PersonCriteria implements Serializable {
         finalOrganizationNiazsanjiId,
         designAndPlanningId,
         runPhaseId,
+        usersRequestId,
         preJobNiazsanjiId
         );
     }
@@ -708,6 +732,7 @@ public class PersonCriteria implements Serializable {
                 (niazsanjiOtherId != null ? "niazsanjiOtherId=" + niazsanjiOtherId + ", " : "") +
                 (requestOtherNiazsanjiId != null ? "requestOtherNiazsanjiId=" + requestOtherNiazsanjiId + ", " : "") +
                 (prioritizeRequestNiazsanjiId != null ? "prioritizeRequestNiazsanjiId=" + prioritizeRequestNiazsanjiId + ", " : "") +
+                (jobChangeId != null ? "jobChangeId=" + jobChangeId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (scientificWorkGroupId != null ? "scientificWorkGroupId=" + scientificWorkGroupId + ", " : "") +
                 (lastQualificationId != null ? "lastQualificationId=" + lastQualificationId + ", " : "") +
@@ -723,6 +748,7 @@ public class PersonCriteria implements Serializable {
                 (finalOrganizationNiazsanjiId != null ? "finalOrganizationNiazsanjiId=" + finalOrganizationNiazsanjiId + ", " : "") +
                 (designAndPlanningId != null ? "designAndPlanningId=" + designAndPlanningId + ", " : "") +
                 (runPhaseId != null ? "runPhaseId=" + runPhaseId + ", " : "") +
+                (usersRequestId != null ? "usersRequestId=" + usersRequestId + ", " : "") +
                 (preJobNiazsanjiId != null ? "preJobNiazsanjiId=" + preJobNiazsanjiId + ", " : "") +
             "}";
     }

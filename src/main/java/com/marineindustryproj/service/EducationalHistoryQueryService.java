@@ -107,6 +107,9 @@ public class EducationalHistoryQueryService extends QueryService<EducationalHist
             if (criteria.getDateOfStart() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDateOfStart(), EducationalHistory_.dateOfStart));
             }
+            if (criteria.getDateOfEnd() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getDateOfEnd(), EducationalHistory_.dateOfEnd));
+            }
             if (criteria.getCreateUserLogin() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCreateUserLogin(), EducationalHistory_.createUserLogin));
             }
@@ -151,6 +154,14 @@ public class EducationalHistoryQueryService extends QueryService<EducationalHist
                 specification = specification.and(buildSpecification(criteria.getPersonId(),
                     root -> root.join(EducationalHistory_.person, JoinType.LEFT).get(Person_.id)));
             }
+            if (criteria.getPersonName() != null) {
+                specification = specification.and(buildSpecification(criteria.getPersonName(),
+                    root -> root.join(EducationalHistory_.person, JoinType.LEFT).get(Person_.name)));
+            }
+            if (criteria.getPersonFamily() != null) {
+                specification = specification.and(buildSpecification(criteria.getPersonFamily(),
+                    root -> root.join(EducationalHistory_.person, JoinType.LEFT).get(Person_.family)));
+            }
             if (criteria.getEducationalModuleId() != null) {
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleId(),
                     root -> root.join(EducationalHistory_.educationalModule, JoinType.LEFT).get(EducationalModule_.id)));
@@ -158,6 +169,10 @@ public class EducationalHistoryQueryService extends QueryService<EducationalHist
             if (criteria.getEducationalModuleCode() != null) {
                 specification = specification.and(buildSpecification(criteria.getEducationalModuleCode(),
                     root -> root.join(EducationalHistory_.educationalModule, JoinType.LEFT).get(EducationalModule_.code)));
+            }
+            if (criteria.getEducationalModuleTitle() != null) {
+                specification = specification.and(buildSpecification(criteria.getEducationalModuleTitle(),
+                    root -> root.join(EducationalHistory_.educationalModule, JoinType.LEFT).get(EducationalModule_.title)));
             }
             if (criteria.getCourseTypeId() != null) {
                 specification = specification.and(buildSpecification(criteria.getCourseTypeId(),

@@ -12,6 +12,7 @@ import { UsersRequestMarineSuffixDetailComponent } from './users-request-marine-
 import { UsersRequestMarineSuffixUpdateComponent } from './users-request-marine-suffix-update.component';
 import { UsersRequestMarineSuffixDeletePopupComponent } from './users-request-marine-suffix-delete-dialog.component';
 import { IUsersRequestMarineSuffix } from 'app/shared/model/users-request-marine-suffix.model';
+import { UsersRequestMarineSuffixReferPopupComponent } from 'app/entities/users-request-marine-suffix/users-request-marine-suffix-refer-dialog.component';
 
 @Injectable({ providedIn: 'root' })
 export class UsersRequestMarineSuffixResolve implements Resolve<IUsersRequestMarineSuffix> {
@@ -82,6 +83,19 @@ export const usersRequestPopupRoute: Routes = [
     {
         path: 'users-request-marine-suffix/:id/delete',
         component: UsersRequestMarineSuffixDeletePopupComponent,
+        resolve: {
+            usersRequest: UsersRequestMarineSuffixResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'marineindustryprojApp.usersRequest.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'users-request-marine-suffix/:id/refer',
+        component: UsersRequestMarineSuffixReferPopupComponent,
         resolve: {
             usersRequest: UsersRequestMarineSuffixResolve
         },

@@ -11,7 +11,13 @@
             <span class="fa fa-file-excel-o"></span>
             excel
         </button>-->
+        <button (click)="exportToExcel(grid)" class="btn btn-info btn-raised float-left"
+                *ngIf="finalNiazsanjiReportsOrganizations.length > 0" jhiTranslate="entity.action.getexcel">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
     </h2>
+
     <!--<div *ngIf="_report.fileDoc">
         <hr/>
         <h2>
@@ -247,7 +253,7 @@
                             <span class="d-none d-md-inline">برنامه ریزی</span>
                         </button>
                     </kendo-buttongroup>
-                    <kendo-buttongroup type="submit" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                    <kendo-buttongroup type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
                                        [routerLink]="['/', { outlets: { popup: 'planning-marine-suffix/'+ dataItem.id + '/delete'} }]"
                                        replaceUrl="true"
                                        queryParamsHandling="merge" style="background-color: #aa0000;color: white"
@@ -305,7 +311,8 @@
         </kendo-grid>
     </div>
     <div class="table-responsive" *ngIf="finalNiazsanjiReportsOrganizations.length > 0">
-        <kendo-grid
+        <kendo-grid #grid="kendoGrid"
+            [loading]="loading"
             [groupable]="true"
             [data]="gridViewOrg"
             [height]="700"
@@ -316,9 +323,9 @@
             [rowClass]="rowCallback"
             >
             <!--(excelExport)="onExcelExport($event)"-->
-            <ng-template kendoGridToolbarTemplate>
+            <!--<ng-template kendoGridToolbarTemplate>
                 <button type="button" kendoGridExcelCommand icon="file-excel" style="float: left" class="info">خروجی اکسل</button>
-            </ng-template>
+            </ng-template>-->
             <!--<kendo-grid-column field="id" title="شناسه" [width]="100"></kendo-grid-column>-->
             <!--<kendo-grid-column field="jobTitle" title="عنوان شغل" [width]="300"></kendo-grid-column>-->
             <kendo-grid-column field="id" title=" " [width]="200">
@@ -342,7 +349,7 @@
                             <span class="d-none d-md-inline">اجرا</span>
                         </button>-->
                     </kendo-buttongroup>
-                    <kendo-buttongroup type="submit" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                    <kendo-buttongroup type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
                                        [routerLink]="['/', { outlets: { popup: 'planning-marine-suffix/'+ dataItem.id + '/delete'} }]"
                                        replaceUrl="true"
                                        queryParamsHandling="merge" style="background-color: #aa0000;color: white"
@@ -378,9 +385,9 @@
             <kendo-grid-column field="niazsanjiYear" title="سال نیازسنجی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="planningRunMonthPersian" title="ماه برنامه ریزی" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-grid-column>
-            <div *kendoGridDetailTemplate="let dataItem">
+            <!--<div *kendoGridDetailTemplate="let dataItem">
                 <mi-planning-marine-suffix-detail-people [people]="dataItem.people"></mi-planning-marine-suffix-detail-people>
-            </div>
+            </div>-->
             <kendo-grid-column field="id" title="شناسه یکتا" [width]="100"></kendo-grid-column>
             <kendo-grid-column field="organizationChartTitle" title="محل خدمت" [width]="500"></kendo-grid-column>
             <kendo-grid-excel fileName="planning-organization.xlsx">
@@ -397,7 +404,7 @@
                 <kendo-excelexport-column field="runMonthPersian" title="ماه اجرا" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="id" title="شناسه یکتا" [width]="100"></kendo-excelexport-column>
                 <kendo-excelexport-column field="peopleCount" title="تعداد شرکت کنندگان" [width]="100"></kendo-excelexport-column>
-                <!--<kendo-excelexport-column field="peopleFullNames" title="شرکت کنندگان" [width]="10000"></kendo-excelexport-column>-->
+                <kendo-excelexport-column field="peopleFullNames" title="شرکت کنندگان" [width]="10000"></kendo-excelexport-column>
                <!-- <div *kendoGridDetailTemplate="let dataItem">
                     <mi-planning-marine-suffix-detail-people [people]="dataItem.people"></mi-planning-marine-suffix-detail-people>
                 </div>-->

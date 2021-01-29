@@ -7,6 +7,11 @@
             Create new Run Phase
             </span>
         </button>-->
+        <button (click)="exportToExcel(grid)" class="btn btn-info btn-raised float-left"
+                *ngIf="runPhaseOrganizations.length > 0" jhiTranslate="entity.action.getexcel">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
     </h2>
     <mi-alert></mi-alert>
     <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
@@ -294,7 +299,7 @@
         </kendo-grid>
     </div>
     <div class="table-responsive" *ngIf="runPhaseOrganizations.length > 0">
-        <kendo-grid
+        <kendo-grid #grid="kendoGrid"
             [groupable]="true"
             [data]="gridViewOrg"
             [height]="700"
@@ -305,9 +310,9 @@
             [rowClass]="rowCallback"
             >
             <!--(excelExport)="onExcelExport($event)"-->
-            <ng-template kendoGridToolbarTemplate>
+            <!--<ng-template kendoGridToolbarTemplate>
                 <button type="button" kendoGridExcelCommand icon="file-excel" style="float: left" class="info">خروجی اکسل</button>
-            </ng-template>
+            </ng-template>-->
             <!--<kendo-grid-column field="id" title="شناسه" [width]="100"></kendo-grid-column>-->
             <!--<kendo-grid-column field="jobTitle" title="عنوان شغل" [width]="300"></kendo-grid-column>-->
             <kendo-grid-column field="id" title=" " [width]="200">
@@ -373,7 +378,7 @@
             </div>-->
             <kendo-grid-column field="finalNiazsanjiReportId" title="شناسه یکتا" [width]="150"></kendo-grid-column>
             <kendo-grid-column field="organizationChartTitle" title="محل خدمت" [width]="500"></kendo-grid-column>
-            <kendo-grid-excel fileName="final-niazsanji-report.xlsx">
+            <kendo-grid-excel fileName="run-phase-report.xlsx">
                 <kendo-excelexport-column field="organizationChartTitle" title="محل خدمت" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleTitle" title="عنوان پودمان" [width]="300"></kendo-excelexport-column>
                 <kendo-excelexport-column field="educationalModuleCode" title="شناسه پودمان" [width]="100"></kendo-excelexport-column>
@@ -388,7 +393,7 @@
                 <kendo-excelexport-column field="finishDate" title="تاریخ دقیق برگزاری دوره" [width]="200"></kendo-excelexport-column>
                 <kendo-excelexport-column field="finalNiazsanjiReportId" title="شناسه یکتا" [width]="150"></kendo-excelexport-column>
                 <kendo-excelexport-column field="peopleCount" title="تعداد شرکت کنندگان" [width]="100"></kendo-excelexport-column>
-                <!--<kendo-excelexport-column field="peopleFullNames" title="شرکت کنندگان" [width]="10000"></kendo-excelexport-column>-->
+                <kendo-excelexport-column field="peopleFullNames" title="شرکت کنندگان" [width]="10000"></kendo-excelexport-column>
                 <!-- <div *kendoGridDetailTemplate="let dataItem">
                      <mi-final-niazsanji-report-marine-suffix-detail-people [people]="dataItem.people"></mi-final-niazsanji-report-marine-suffix-detail-people>
                  </div>-->

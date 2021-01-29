@@ -161,6 +161,9 @@ public class Person implements Serializable {
     @OneToMany(mappedBy = "person")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis = new HashSet<>();
+    @OneToMany(mappedBy = "person")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<JobChange> jobChanges = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "person_document",
@@ -232,6 +235,10 @@ public class Person implements Serializable {
     @JsonIgnore
     private Set<RunPhase> runPhases = new HashSet<>();
 
+    @ManyToMany(mappedBy = "people")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<UsersRequest> usersRequests = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -877,6 +884,31 @@ public class Person implements Serializable {
         this.prioritizeRequestNiazsanjis = prioritizeRequestNiazsanjis;
     }
 
+    public Set<JobChange> getJobChanges() {
+        return jobChanges;
+    }
+
+    public Person jobChanges(Set<JobChange> jobChanges) {
+        this.jobChanges = jobChanges;
+        return this;
+    }
+
+    public Person addJobChange(JobChange jobChange) {
+        this.jobChanges.add(jobChange);
+        jobChange.setPerson(this);
+        return this;
+    }
+
+    public Person removeJobChange(JobChange jobChange) {
+        this.jobChanges.remove(jobChange);
+        jobChange.setPerson(null);
+        return this;
+    }
+
+    public void setJobChanges(Set<JobChange> jobChanges) {
+        this.jobChanges = jobChanges;
+    }
+
     public Set<Document> getDocuments() {
         return documents;
     }
@@ -1156,6 +1188,30 @@ public class Person implements Serializable {
         this.runPhases = runPhases;
     }
 
+    public Set<UsersRequest> getUsersRequests() {
+        return usersRequests;
+    }
+
+    public Person usersRequests(Set<UsersRequest> usersRequests) {
+        this.usersRequests = usersRequests;
+        return this;
+    }
+
+    public Person addUsersRequest(UsersRequest usersRequest) {
+        this.usersRequests.add(usersRequest);
+        usersRequest.getPeople().add(this);
+        return this;
+    }
+
+    public Person removeUsersRequest(UsersRequest usersRequest) {
+        this.usersRequests.remove(usersRequest);
+        usersRequest.getPeople().remove(this);
+        return this;
+    }
+
+    public void setUsersRequests(Set<UsersRequest> usersRequests) {
+        this.usersRequests = usersRequests;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {

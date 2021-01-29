@@ -30,6 +30,14 @@ public interface SkillableLevelOfSkillService {
 
 
     /**
+     * Get the "title" skillableLevelOfSkill.
+     *
+     * @param title the title of the entity
+     * @return the entity
+     */
+    Optional<SkillableLevelOfSkillDTO> findByTitle(String title);
+
+    /**
      * Get the "id" skillableLevelOfSkill.
      *
      * @param id the id of the entity

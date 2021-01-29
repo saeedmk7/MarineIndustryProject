@@ -47,7 +47,6 @@ export class MonitorLearningProcessMarineSuffixUpdateComponent implements OnInit
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ monitorLearningProcess }) => {
-            debugger;
             this.monitorLearningProcess = monitorLearningProcess;
             if (this.monitorLearningProcess.id === undefined) {
                 this.buildMonitorLearningProcessGrades();
@@ -81,10 +80,8 @@ export class MonitorLearningProcessMarineSuffixUpdateComponent implements OnInit
         );
     }
     buildMonitorLearningProcessGrades() {
-        debugger;
         this.monitorLearningProcessLevelService.query().subscribe(
             (res: HttpResponse<IMonitorLearningProcessLevelMarineSuffix[]>) => {
-                debugger;
                 this.monitorLearningProcessLevels = res.body.sort((a, b) => (a.id > b.id ? 1 : a.id < b.id ? -1 : 0));
 
                 this.monitorLearningProcess.monitorLearningProcessGrades = [];
@@ -101,7 +98,6 @@ export class MonitorLearningProcessMarineSuffixUpdateComponent implements OnInit
         );
     }
     changeDurations(monitorProcessDurationId) {
-        debugger;
         this.monitorLearningProcess.monitorLearningProcessGrades.forEach(w => {
             w.monitorProcessDurationId = monitorProcessDurationId;
         });
@@ -112,7 +108,7 @@ export class MonitorLearningProcessMarineSuffixUpdateComponent implements OnInit
 
     save() {
         this.isSaving = true;
-        debugger;
+
         this.monitorLearningProcess.title = 'فرم پایش';
         if (this.monitorLearningProcess.id !== undefined) {
             this.subscribeToSaveResponse(this.monitorLearningProcessService.update(this.monitorLearningProcess));

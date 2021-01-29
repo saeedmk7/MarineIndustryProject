@@ -21,14 +21,6 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  * fix type specific filters.
  */
 public class EducationalHistoryCriteria implements Serializable {
-    public StringFilter getEducationalModuleCode() {
-        return educationalModuleCode;
-    }
-
-    public void setEducationalModuleCode(StringFilter educationalModuleCode) {
-        this.educationalModuleCode = educationalModuleCode;
-    }
-
     /**
      * Class for filtering RequestStatus
      */
@@ -39,9 +31,15 @@ public class EducationalHistoryCriteria implements Serializable {
 
     private LongFilter id;
 
+    private StringFilter personName;
+
+    private StringFilter personFamily;
+
     private StringFilter educationalModuleName;
 
     private StringFilter educationalModuleCode;
+
+    private StringFilter educationalModuleTitle;
 
     private IntegerFilter learningTimeTheorical;
 
@@ -52,6 +50,8 @@ public class EducationalHistoryCriteria implements Serializable {
     private StringFilter educationalCenter;
 
     private StringFilter dateOfStart;
+
+    private StringFilter dateOfEnd;
 
     private StringFilter createUserLogin;
 
@@ -101,6 +101,22 @@ public class EducationalHistoryCriteria implements Serializable {
         this.educationalModuleName = educationalModuleName;
     }
 
+    public StringFilter getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(StringFilter personName) {
+        this.personName = personName;
+    }
+
+    public StringFilter getPersonFamily() {
+        return personFamily;
+    }
+
+    public void setPersonFamily(StringFilter personFamily) {
+        this.personFamily = personFamily;
+    }
+
     public IntegerFilter getLearningTimeTheorical() {
         return learningTimeTheorical;
     }
@@ -139,6 +155,14 @@ public class EducationalHistoryCriteria implements Serializable {
 
     public void setDateOfStart(StringFilter dateOfStart) {
         this.dateOfStart = dateOfStart;
+    }
+
+    public StringFilter getDateOfEnd() {
+        return dateOfEnd;
+    }
+
+    public void setDateOfEnd(StringFilter dateOfEnd) {
+        this.dateOfEnd = dateOfEnd;
     }
 
     public StringFilter getCreateUserLogin() {
@@ -268,7 +292,21 @@ public class EducationalHistoryCriteria implements Serializable {
     public void setOrganizationChartId(LongFilter organizationChartId) {
         this.organizationChartId = organizationChartId;
     }
+    public StringFilter getEducationalModuleCode() {
+        return educationalModuleCode;
+    }
 
+    public void setEducationalModuleCode(StringFilter educationalModuleCode) {
+        this.educationalModuleCode = educationalModuleCode;
+    }
+
+    public StringFilter getEducationalModuleTitle() {
+        return educationalModuleTitle;
+    }
+
+    public void setEducationalModuleTitle(StringFilter educationalModuleTitle) {
+        this.educationalModuleTitle = educationalModuleTitle;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -282,12 +320,15 @@ public class EducationalHistoryCriteria implements Serializable {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(educationalModuleName, that.educationalModuleName) &&
+            Objects.equals(personName, that.personName) &&
+            Objects.equals(personFamily, that.personFamily) &&
             Objects.equals(educationalModuleCode, that.educationalModuleCode) &&
             Objects.equals(learningTimeTheorical, that.learningTimeTheorical) &&
             Objects.equals(learningTimePractical, that.learningTimePractical) &&
             Objects.equals(totalTime, that.totalTime) &&
             Objects.equals(educationalCenter, that.educationalCenter) &&
             Objects.equals(dateOfStart, that.dateOfStart) &&
+            Objects.equals(dateOfEnd, that.dateOfEnd) &&
             Objects.equals(createUserLogin, that.createUserLogin) &&
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
@@ -303,6 +344,7 @@ public class EducationalHistoryCriteria implements Serializable {
             Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
+            Objects.equals(educationalModuleTitle, that.educationalModuleTitle) &&
             Objects.equals(organizationChartId, that.organizationChartId);
     }
 
@@ -311,12 +353,15 @@ public class EducationalHistoryCriteria implements Serializable {
         return Objects.hash(
         id,
         educationalModuleName,
+        personName,
+        personFamily,
         educationalModuleCode,
         learningTimeTheorical,
         learningTimePractical,
         totalTime,
         educationalCenter,
         dateOfStart,
+        dateOfEnd,
         createUserLogin,
         createDate,
         modifyUserLogin,
@@ -332,6 +377,7 @@ public class EducationalHistoryCriteria implements Serializable {
         courseTypeId,
         personId,
         educationalModuleId,
+        educationalModuleTitle,
         organizationChartId
         );
     }
@@ -341,12 +387,15 @@ public class EducationalHistoryCriteria implements Serializable {
         return "EducationalHistoryCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (educationalModuleName != null ? "educationalModuleName=" + educationalModuleName + ", " : "") +
+                (personName != null ? "personName=" + personName + ", " : "") +
+                (personFamily != null ? "personFamily=" + personFamily + ", " : "") +
                 (educationalModuleCode != null ? "educationalModuleCode=" + educationalModuleCode + ", " : "") +
                 (learningTimeTheorical != null ? "learningTimeTheorical=" + learningTimeTheorical + ", " : "") +
                 (learningTimePractical != null ? "learningTimePractical=" + learningTimePractical + ", " : "") +
                 (totalTime != null ? "totalTime=" + totalTime + ", " : "") +
                 (educationalCenter != null ? "educationalCenter=" + educationalCenter + ", " : "") +
                 (dateOfStart != null ? "dateOfStart=" + dateOfStart + ", " : "") +
+                (dateOfEnd != null ? "dateOfEnd=" + dateOfEnd + ", " : "") +
                 (createUserLogin != null ? "createUserLogin=" + createUserLogin + ", " : "") +
                 (createDate != null ? "createDate=" + createDate + ", " : "") +
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
@@ -362,6 +411,7 @@ public class EducationalHistoryCriteria implements Serializable {
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
+                (educationalModuleTitle != null ? "educationalModuleTitle=" + educationalModuleTitle + ", " : "") +
                 (organizationChartId != null ? "organizationChartId=" + organizationChartId + ", " : "") +
             "}";
     }

@@ -87,7 +87,8 @@
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit" title="مدارک"
                                 [routerLink]="['../document-marine-suffix', 'prejobniazsanji',preJobNiazsanji.id]"
-                                class="btn btn-light btn-sm">
+                                [ngClass]="(preJobNiazsanji.documents && preJobNiazsanji.documents.length > 0) ? 'btn-success' : 'btn-light'"
+                                class="btn btn-sm">
                             <span class="fa fa-file"></span>
                         </button>
                         <button type="submit"
@@ -141,7 +142,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>-->
 
-                        <button type="submit" *ngIf="isAdmin"
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
                                 [routerLink]="['/', { outlets: { popup: 'pre-job-niazsanji-marine-suffix/'+ preJobNiazsanji.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

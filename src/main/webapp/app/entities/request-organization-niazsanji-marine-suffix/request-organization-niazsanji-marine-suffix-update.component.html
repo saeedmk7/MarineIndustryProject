@@ -278,8 +278,8 @@
                 </div>
                 <div class="form-group">
                     <button type="button" (click)="addAllPeopleOfThisUser()" class="btn btn-primary">اضافه کردن تمامی افراد زیر مجموعه</button>
-                    <button type="button" style="margin: 5%" *ngIf="isSuperUsers" (click)="addAllPeople()" class="btn btn-warning">امکان انتخاب از کلیه افراد سازمان</button>
-                    <button type="button" style="margin: 5%" *ngIf="isSuperUsers" (click)="addToListAllPeople()" class="btn btn-info">اضافه کردن کلیه افراد سازمان</button>
+                    <button type="button" style="margin: 5%" *ngIf="isTopUsers" (click)="addAllPeople()" class="btn btn-warning">امکان انتخاب از کلیه افراد سازمان</button>
+                    <button type="button" style="margin: 5%" *ngIf="isTopUsers" (click)="addToListAllPeople()" class="btn btn-info">اضافه کردن کلیه افراد سازمان</button>
                 </div>
                 <ng-container *ngIf="selectionType">
                 <div class="form-group">

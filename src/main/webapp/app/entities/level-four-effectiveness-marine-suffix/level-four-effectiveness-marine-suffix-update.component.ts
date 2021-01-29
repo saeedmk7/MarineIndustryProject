@@ -207,7 +207,7 @@ export class LevelFourEffectivenessMarineSuffixUpdateComponent implements OnInit
                         levelFourScore.levelFourBackgroundColor = w.backgroundColor;
                         levelFourScore.levelFourColorText = w.colorText;
                         levelFourScore.levelFourCriteriaWeight = w.weight;
-                        levelFourScore.score = 1;
+                        levelFourScore.score = 5;
                         this.levelFourEffectiveness.levelFourScores.push(levelFourScore);
                     }
                 });

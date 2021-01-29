@@ -85,7 +85,8 @@ import {
     faPrint,
     faForward,
     faBackward,
-    faRecycle
+    faRecycle,
+    faLocationArrow
 } from '@fortawesome/free-solid-svg-icons';
 
 // Adds the SVG icon to the library so you can use it in your page
@@ -168,3 +169,4 @@ library.add(faPrint);
 library.add(faBackward);
 library.add(faForward);
 library.add(faRecycle);
+library.add(faLocationArrow);

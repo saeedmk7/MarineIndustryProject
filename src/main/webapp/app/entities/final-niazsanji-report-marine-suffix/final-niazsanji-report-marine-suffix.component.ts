@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
@@ -106,6 +106,10 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     criteria: any;
 
     countList: ICountListModel[] = [];
+    selectedFinalNiazsanjis: IFinalNiazsanjiReportMarineSuffix[] = [];
+    selectedYear: number = 0;
+    years: any[];
+    isSaving: boolean = false;
 
     constructor(
         private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService,
@@ -141,6 +145,53 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             this.done = true;
         });
         this.yearsCollections = GREGORIAN_START_END_DATE;
+        this.years = this.yearsCollections.map(a => a.year);
+    }
+    change(val, finalNiazsanji: IFinalNiazsanjiReportMarineSuffix) {
+        debugger;
+        if (val.target.checked) {
+            this.selectedFinalNiazsanjis.push(finalNiazsanji);
+        } else {
+            this.selectedFinalNiazsanjis = this.selectedFinalNiazsanjis.filter(w => w.id != finalNiazsanji.id);
+        }
+    }
+    save() {
+        debugger;
+        if (this.selectedFinalNiazsanjis.length > 0 && this.selectedYear) {
+            this.isSaving = true;
+            this.selectedFinalNiazsanjis.forEach(finalNiaz => {
+                finalNiaz.niazsanjiYear = this.selectedYear;
+                debugger;
+                this.finalNiazsanjiReportService
+                    .find(finalNiaz.id)
+                    .subscribe((finalNiazResp: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => {
+                        debugger;
+                        let newFinalNiaz = finalNiazResp.body;
+                        newFinalNiaz.niazsanjiYear = this.selectedYear;
+                        this.subscribeToSaveResponse(this.finalNiazsanjiReportService.update(newFinalNiaz));
+                    });
+            });
+        }
+    }
+    private subscribeToSaveResponse(result: Observable<HttpResponse<IFinalNiazsanjiReportMarineSuffix>>) {
+        result.subscribe(
+            (res: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => this.onSaveSuccess(res.body),
+            (res: HttpErrorResponse) => this.onSaveError()
+        );
+    }
+    counter: number = 0;
+    private onSaveSuccess(res: IFinalNiazsanjiReportMarineSuffix) {
+        debugger;
+        this.counter++;
+        if (this.counter == this.selectedFinalNiazsanjis.length) {
+            this.counter = 0;
+            this.selectedFinalNiazsanjis = [];
+            this.loadAll(this.criteria);
+        }
+    }
+
+    private onSaveError() {
+        this.isSaving = false;
     }
     public ngAfterViewInit(): void {
         // Expand the first row initially
@@ -179,7 +230,6 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     }
 
     createCriteria(criteria): any {
-        debugger;
         const niazsanjiSource = criteria.find(a => a.key == 'niazSanjiSource.equals');
         if (niazsanjiSource) {
             if (niazsanjiSource.value == 'ORGANIZATION') this.niazSanjiSource = false;

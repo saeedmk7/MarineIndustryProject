@@ -1,6 +1,5 @@
 import { Moment } from 'moment';
-import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
-
+import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
 
 export interface IEducationalHistoryMarineSuffix {
     id?: number;
@@ -10,6 +9,7 @@ export interface IEducationalHistoryMarineSuffix {
     totalTime?: number;
     educationalCenter?: string;
     dateOfStart?: string;
+    dateOfEnd?: string;
     fileDoc?: any;
     description?: any;
     createUserLogin?: string;
@@ -48,6 +48,7 @@ export class EducationalHistoryMarineSuffix implements IEducationalHistoryMarine
         public totalTime?: number,
         public educationalCenter?: string,
         public dateOfStart?: string,
+        public dateOfEnd?: string,
         public fileDoc?: any,
         public description?: any,
         public createUserLogin?: string,

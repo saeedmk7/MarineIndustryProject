@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import {DATE_FORMAT, DATE_TIME_FORMAT} from 'app/shared/constants/input.constants';
-import {JhiAlertService, JhiLanguageService} from 'ng-jhipster';
+import { DATE_FORMAT, DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiAlertService, JhiLanguageService } from 'ng-jhipster';
 
 import { IEducationalModuleMarineSuffix } from 'app/shared/model/educational-module-marine-suffix.model';
 import { EducationalModuleMarineSuffixService } from './educational-module-marine-suffix.service';
@@ -30,11 +30,22 @@ import { IOrganizationMarineSuffix } from 'app/shared/model/organization-marine-
 import { OrganizationMarineSuffixService } from 'app/entities/organization-marine-suffix';
 import { INiazsanjiGroupMarineSuffix } from 'app/shared/model/niazsanji-group-marine-suffix.model';
 import { NiazsanjiGroupMarineSuffixService } from 'app/entities/niazsanji-group-marine-suffix';
-import {IRequestEducationalModuleMarineSuffix} from "app/shared/model/request-educational-module-marine-suffix.model";
-import {RequestEducationalModuleMarineSuffixService} from "app/entities/request-educational-module-marine-suffix";
-import {IRestrictionMarineSuffix} from "app/shared/model/restriction-marine-suffix.model";
-import {RestrictionMarineSuffixService} from "app/entities/restriction-marine-suffix";
-
+import { IRequestEducationalModuleMarineSuffix } from 'app/shared/model/request-educational-module-marine-suffix.model';
+import { RequestEducationalModuleMarineSuffixService } from 'app/entities/request-educational-module-marine-suffix';
+import { IRestrictionMarineSuffix } from 'app/shared/model/restriction-marine-suffix.model';
+import { RestrictionMarineSuffixService } from 'app/entities/restriction-marine-suffix';
+import { ITeachApproachMarineSuffix } from 'app/shared/model/teach-approach-marine-suffix.model';
+import { TeachingApproachMarineSuffixService } from 'app/entities/teaching-approach-marine-suffix';
+import { ICompetencyMarineSuffix } from 'app/shared/model/competency-marine-suffix.model';
+import { IPeopleUnderTrainingMarineSuffix } from 'app/shared/model/people-under-training-marine-suffix.model';
+import { PeopleUnderTrainingMarineSuffixService } from 'app/entities/people-under-training-marine-suffix';
+import { CompetencyMarineSuffixService } from 'app/entities/competency-marine-suffix';
+import { IEffectivenessIndexMarineSuffix } from 'app/shared/model/effectiveness-index-marine-suffix.model';
+import { EffectivenessIndexMarineSuffixService } from 'app/entities/effectiveness-index-marine-suffix';
+import { IEffectivenessLevelMarineSuffix } from 'app/shared/model/effectiveness-level-marine-suffix.model';
+import { EffectivenessLevelMarineSuffixService } from 'app/entities/effectiveness-level-marine-suffix';
+import { IAssessmentMethodMarineSuffix } from 'app/shared/model/assessment-method-marine-suffix.model';
+import { AssessmentMethodMarineSuffixService } from 'app/entities/assessment-method-marine-suffix';
 
 @Component({
     selector: 'mi-educational-module-marine-suffix-update',
@@ -68,11 +79,29 @@ export class EducationalModuleMarineSuffixUpdateComponent implements OnInit {
 
     restrictions: IRestrictionMarineSuffix[];
 
+    teachingApproachs: ITeachApproachMarineSuffix[];
+
+    peopleUnderTrainings: IPeopleUnderTrainingMarineSuffix[];
+
+    competencies: ICompetencyMarineSuffix[];
+
+    effectivenessIndeces: IEffectivenessIndexMarineSuffix[];
+
+    effectivenessLevels: IEffectivenessLevelMarineSuffix[];
+
+    assessmentMethods: IAssessmentMethodMarineSuffix[];
+
     isfa: boolean;
 
     constructor(
         private jhiAlertService: JhiAlertService,
+        private peopleUnderTrainingService: PeopleUnderTrainingMarineSuffixService,
+        private effectivenessLevelService: EffectivenessLevelMarineSuffixService,
+        private competencyService: CompetencyMarineSuffixService,
+        private effectivenessIndexService: EffectivenessIndexMarineSuffixService,
+        private assessmentMethodService: AssessmentMethodMarineSuffixService,
         private educationalModuleService: EducationalModuleMarineSuffixService,
+        private teachingApproachService: TeachingApproachMarineSuffixService,
         private requestEducationalModuleService: RequestEducationalModuleMarineSuffixService,
         private scientificWorkGroupService: ScientificWorkGroupMarineSuffixService,
         private documentService: DocumentMarineSuffixService,
@@ -97,9 +126,51 @@ export class EducationalModuleMarineSuffixUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ educationalModule }) => {
             this.educationalModule = educationalModule;
-            if(this.educationalModule.teachers)
-                this.educationalModule.teachers.forEach(a => a.fullName = a.name + " " + a.family);
+            if (this.educationalModule.teachers) this.educationalModule.teachers.forEach(a => (a.fullName = a.name + ' ' + a.family));
         });
+        this.effectivenessLevelService.query().subscribe(
+            (res: HttpResponse<IEffectivenessLevelMarineSuffix[]>) => {
+                this.effectivenessLevels = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.assessmentMethodService.query().subscribe(
+            (res: HttpResponse<IAssessmentMethodMarineSuffix[]>) => {
+                this.assessmentMethods = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.effectivenessIndexService.query().subscribe(
+            (res: HttpResponse<IEffectivenessIndexMarineSuffix[]>) => {
+                this.effectivenessIndeces = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.competencyService.query().subscribe(
+            (res: HttpResponse<ICompetencyMarineSuffix[]>) => {
+                this.competencies = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.peopleUnderTrainingService.query().subscribe(
+            (res: HttpResponse<IPeopleUnderTrainingMarineSuffix[]>) => {
+                this.peopleUnderTrainings = res.body;
+
+                if (this.educationalModule.id !== undefined) {
+                    this.educationalModule.peopleUnderTrainings.forEach(w => {
+                        const person = this.peopleUnderTrainings.find(e => e.id == w.id);
+                        w.fullTitle = (person.title ? person.title : '') + ' ' + (person.description ? '(' + person.description + ')' : '');
+                    });
+                }
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.teachingApproachService.query().subscribe(
+            (res: HttpResponse<ITeachApproachMarineSuffix[]>) => {
+                this.teachingApproachs = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         this.requestEducationalModuleService.query().subscribe(
             (res: HttpResponse<IRequestEducationalModuleMarineSuffix[]>) => {
                 this.requestEducationalModules = res.body;
@@ -171,7 +242,7 @@ export class EducationalModuleMarineSuffixUpdateComponent implements OnInit {
     previousState() {
         window.history.back();
     }
-    change(i){
+    change(i) {
         this.router.navigateByUrl(i);
     }
     save() {

@@ -12,13 +12,13 @@ import { PersonMarineSuffixDetailComponent } from './person-marine-suffix-detail
 import { PersonMarineSuffixUpdateComponent } from './person-marine-suffix-update.component';
 import { PersonMarineSuffixDeletePopupComponent } from './person-marine-suffix-delete-dialog.component';
 import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { PersonUnchartMarineSuffixComponent } from './person-unchart-marine-suffix.component';
 
 @Injectable({ providedIn: 'root' })
 export class PersonMarineSuffixResolve implements Resolve<IPersonMarineSuffix> {
     constructor(private service: PersonMarineSuffixService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
             return this.service.find(id).pipe(map((person: HttpResponse<PersonMarineSuffix>) => person.body));
@@ -38,6 +38,19 @@ export const personRoute: Routes = [
             authorities: ['ROLE_USER'],
             defaultSort: 'id,asc',
             pageTitle: 'marineindustryprojApp.person.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'person-unchart-marine-suffix',
+        component: PersonUnchartMarineSuffixComponent,
+        resolve: {
+            pagingParams: JhiResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            defaultSort: 'id,asc',
+            pageTitle: 'marineindustryprojApp.person.home.unChartTitle'
         },
         canActivate: [UserRouteAccessService]
     },

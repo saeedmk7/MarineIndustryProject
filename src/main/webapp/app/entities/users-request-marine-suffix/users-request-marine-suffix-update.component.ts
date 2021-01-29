@@ -1,17 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {JhiAlertService, JhiDataUtils} from 'ng-jhipster';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
-import {IUsersRequestMarineSuffix} from 'app/shared/model/users-request-marine-suffix.model';
-import {UsersRequestMarineSuffixService} from './users-request-marine-suffix.service';
-import {IDocumentMarineSuffix} from 'app/shared/model/document-marine-suffix.model';
-import {DocumentMarineSuffixService} from 'app/entities/document-marine-suffix';
-import {Principal, User, UserService} from "app/core";
-import {RequestStatus} from "app/shared/model/enums/RequestStatus";
-import {PersonMarineSuffix} from "app/shared/model/person-marine-suffix.model";
-import {PersonMarineSuffixService} from "app/entities/person-marine-suffix";
+import { IUsersRequestMarineSuffix } from 'app/shared/model/users-request-marine-suffix.model';
+import { UsersRequestMarineSuffixService } from './users-request-marine-suffix.service';
+import { IDocumentMarineSuffix } from 'app/shared/model/document-marine-suffix.model';
+import { DocumentMarineSuffixService } from 'app/entities/document-marine-suffix';
+import { Principal, User, UserService } from 'app/core';
+import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
+import { PersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
 
 @Component({
     selector: 'mi-users-request-marine-suffix-update',
@@ -25,7 +25,7 @@ export class UsersRequestMarineSuffixUpdateComponent implements OnInit {
     createDate: string;
     modifyDate: string;
     currentAccount: any;
-    currentUserFullName: string = "";
+    currentUserFullName: string = '';
     answer: string;
     currentRequestStatus: RequestStatus;
     isAdmin: boolean = false;
@@ -39,7 +39,6 @@ export class UsersRequestMarineSuffixUpdateComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ usersRequest }) => {
             this.usersRequest = usersRequest;
@@ -47,27 +46,26 @@ export class UsersRequestMarineSuffixUpdateComponent implements OnInit {
         });
         this.principal.identity().then(account => {
             this.currentAccount = account;
-            if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined)
-                this.isAdmin = true;
+            if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
             this.currentUserFullName = document.getElementById('currenUserFullNameTopBar').textContent;
         });
     }
 
     save() {
-
-        if(!this.currentUserFullName)
-            this.currentUserFullName = document.getElementById('currenUserFullNameTopBar').textContent;
+        if (!this.currentUserFullName) this.currentUserFullName = document.getElementById('currenUserFullNameTopBar').textContent;
         this.isSaving = true;
         if (this.usersRequest.id !== undefined) {
-            if(this.usersRequest.requestStatus != this.currentRequestStatus)
+            if (this.usersRequest.requestStatus != this.currentRequestStatus)
                 this.usersRequest.changeStatusUserLogin = this.currentAccount.login;
 
-            this.usersRequest.conversation += "\r\n" + this.currentUserFullName + ": " + this.answer;
+            this.usersRequest.conversation += '\n ------------------------------------- \n';
+            this.usersRequest.conversation += '\r\n' + this.currentUserFullName + ': ' + this.answer;
             this.subscribeToSaveResponse(this.usersRequestService.update(this.usersRequest));
         } else {
             this.usersRequest.requestStatus = RequestStatus.NEW;
             this.usersRequest.changeStatusUserLogin = this.currentAccount.login;
-            this.usersRequest.conversation = this.currentUserFullName + ": " + this.usersRequest.description;
+            this.usersRequest.conversation += '\n ------------------------------------- \n';
+            this.usersRequest.conversation = this.currentUserFullName + ': ' + this.usersRequest.description;
             this.subscribeToSaveResponse(this.usersRequestService.create(this.usersRequest));
         }
     }

@@ -118,7 +118,9 @@
                 </td>
                 <td>
                     <div *ngIf="finalNiazsanjiReport.educationalModuleId">
+                        <a [routerLink]="['/final-niazsanji-report-marine-suffix', finalNiazsanjiReport.id, 'view' ]">
                         {{finalNiazsanjiReport.educationalModuleTitle}}
+                        </a>
                     </div>
                 </td>
                 <td>

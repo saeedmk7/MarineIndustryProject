@@ -110,6 +110,20 @@ public class EducationalModuleServiceImpl implements EducationalModuleService {
     }
 
     /**
+     * Get one educationalModule by code.
+     *
+     * @param code the code of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<EducationalModuleDTO> findByCode(String code) {
+        log.debug("Request to get EducationalModule : {}", code);
+        return educationalModuleRepository.findByCode(code)
+            .map(educationalModuleMapper::toDto);
+    }
+
+    /**
      * Delete the educationalModule by id.
      *
      * @param id the id of the entity

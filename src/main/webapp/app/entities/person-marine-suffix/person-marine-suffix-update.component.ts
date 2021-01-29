@@ -1,29 +1,30 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HttpResponse, HttpErrorResponse} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {JhiAlertService} from 'ng-jhipster';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { JhiAlertService } from 'ng-jhipster';
 
-import {IPersonMarineSuffix} from 'app/shared/model/person-marine-suffix.model';
-import {PersonMarineSuffixService} from './person-marine-suffix.service';
-import {IQualificationMarineSuffix} from 'app/shared/model/qualification-marine-suffix.model';
-import {QualificationMarineSuffixService} from 'app/entities/qualification-marine-suffix';
-import {IFieldOfStudyMarineSuffix} from 'app/shared/model/field-of-study-marine-suffix.model';
-import {FieldOfStudyMarineSuffixService} from 'app/entities/field-of-study-marine-suffix';
-import {IEmploymentTypeMarineSuffix} from 'app/shared/model/employment-type-marine-suffix.model';
-import {EmploymentTypeMarineSuffixService} from 'app/entities/employment-type-marine-suffix';
-import {IWorkGroupMarineSuffix} from 'app/shared/model/work-group-marine-suffix.model';
-import {WorkGroupMarineSuffixService} from 'app/entities/work-group-marine-suffix';
-import {IWorkIndustryMarineSuffix} from 'app/shared/model/work-industry-marine-suffix.model';
-import {WorkIndustryMarineSuffixService} from 'app/entities/work-industry-marine-suffix';
-import {IJobMarineSuffix} from 'app/shared/model/job-marine-suffix.model';
-import {JobMarineSuffixService} from 'app/entities/job-marine-suffix';
-import {IOrganizationChartMarineSuffix} from 'app/shared/model/organization-chart-marine-suffix.model';
-import {OrganizationChartMarineSuffixService} from 'app/entities/organization-chart-marine-suffix';
+import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model';
+import { PersonMarineSuffixService } from './person-marine-suffix.service';
+import { IQualificationMarineSuffix } from 'app/shared/model/qualification-marine-suffix.model';
+import { QualificationMarineSuffixService } from 'app/entities/qualification-marine-suffix';
+import { IFieldOfStudyMarineSuffix } from 'app/shared/model/field-of-study-marine-suffix.model';
+import { FieldOfStudyMarineSuffixService } from 'app/entities/field-of-study-marine-suffix';
+import { IEmploymentTypeMarineSuffix } from 'app/shared/model/employment-type-marine-suffix.model';
+import { EmploymentTypeMarineSuffixService } from 'app/entities/employment-type-marine-suffix';
+import { IWorkGroupMarineSuffix } from 'app/shared/model/work-group-marine-suffix.model';
+import { WorkGroupMarineSuffixService } from 'app/entities/work-group-marine-suffix';
+import { IWorkIndustryMarineSuffix } from 'app/shared/model/work-industry-marine-suffix.model';
+import { WorkIndustryMarineSuffixService } from 'app/entities/work-industry-marine-suffix';
+import { IJobMarineSuffix } from 'app/shared/model/job-marine-suffix.model';
+import { JobMarineSuffixService } from 'app/entities/job-marine-suffix';
+import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
+import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
 import * as persianMoment from 'jalali-moment';
-import {JhiLanguageService} from "ng-jhipster/src/language/language.service";
-import {PERSONELCODE_ALREADY_USED_TYPE} from "app/shared";
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+import { JhiLanguageService } from 'ng-jhipster/src/language/language.service';
+import { PERSONELCODE_ALREADY_USED_TYPE } from 'app/shared';
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import * as moment from 'moment';
 
 @Component({
     selector: 'mi-person-marine-suffix-update',
@@ -74,19 +75,16 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
         private router: Router
     ) {
         this.isfa = languageManager.currentLang == 'fa';
-
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.activatedRoute.data.subscribe(({person}) => {
+        this.activatedRoute.data.subscribe(({ person }) => {
             this.person = person;
-            if(this.person.employmentDate && this.person.employmentDate.isValid()) {
+            if (this.person.employmentDate && this.person.employmentDate.isValid()) {
                 this.person.yearOfService = this.convertObjectDatesService.getYearsOfService(this.person.employmentDate);
                 this.retiredDate = this.convertObjectDatesService.miladi2ShamsiMoment(this.person.employmentDate.add(30, 'years'));
-            }
-            else
-                this.retiredDate = "";
+            } else this.retiredDate = '';
         });
         this.qualificationService.query().subscribe(
             (res: HttpResponse<IQualificationMarineSuffix[]>) => {
@@ -94,11 +92,9 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if(this.fieldOfStudyService.fieldOfStudies)
-        {
+        if (this.fieldOfStudyService.fieldOfStudies) {
             this.fieldofstudies = this.fieldOfStudyService.fieldOfStudies;
-        }
-        else {
+        } else {
             this.fieldOfStudyService.query().subscribe(
                 (res: HttpResponse<IFieldOfStudyMarineSuffix[]>) => {
                     this.fieldofstudies = res.body;
@@ -132,8 +128,7 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
         );
         if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
-        }
-        else {
+        } else {
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
                     this.organizationcharts = res.body;
@@ -155,16 +150,14 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
                 } else {
                     this.dateEmploymentDateValid = 1;
                 }
-            }
-            else {
+            } else {
                 if (dateType == 1) {
                     this.dateBirthDateValid = 2;
                 } else {
                     this.dateEmploymentDateValid = 2;
                 }
             }
-        }
-        catch (e) {
+        } catch (e) {
             if (dateType == 1) {
                 this.dateBirthDateValid = 2;
             } else {
@@ -174,7 +167,6 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
     }
 
     save() {
-
         this.isSaving = true;
         this.person.status = 0;
 
@@ -200,7 +192,10 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<IPersonMarineSuffix>>) {
-        result.subscribe((res: HttpResponse<IPersonMarineSuffix>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError(res));
+        result.subscribe(
+            (res: HttpResponse<IPersonMarineSuffix>) => this.onSaveSuccess(),
+            (res: HttpErrorResponse) => this.onSaveError(res)
+        );
     }
 
     private onSaveSuccess() {
@@ -212,8 +207,7 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
         this.isSaving = false;
         if (response.status === 400 && response.error.type === PERSONELCODE_ALREADY_USED_TYPE) {
             this.message = 'این کدملی برای فرد دیگری استفاده شده است لطفا کدی دیگر انتخاب نمائید.';
-        }
-        else {
+        } else {
             this.message = 'این کدملی برای فرد دیگری استفاده شده است لطفا کدی دیگر انتخاب نمائید.';
         }
     }
@@ -265,14 +259,11 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
         return this._person;
     }
 
-
-
     get fullName() {
-        return (this.person.name ? this.person.name : "") + " " + (this.person.family ? this.person.family : "")
+        return (this.person.name ? this.person.name : '') + ' ' + (this.person.family ? this.person.family : '');
     }
 
     set person(person: IPersonMarineSuffix) {
-
         if (person.birthDate && person.birthDate.isValid()) {
             person.birthDatePersian = this.convertObjectDatesService.miladi2ShamsiMoment(person.birthDate);
         }
@@ -280,7 +271,50 @@ export class PersonMarineSuffixUpdateComponent implements OnInit {
         if (person.employmentDate && person.employmentDate.isValid()) {
             person.employmentDatePersian = this.convertObjectDatesService.miladi2ShamsiMoment(person.employmentDate);
         }
-        this._person = person;
 
+        this._person = person;
+    }
+    get yearsOfService(): string {
+        if (this.person && this.person.employmentDate) {
+            const result = this.getAge(new Date(this.person.employmentDate.toDate()), new Date());
+            return result;
+        }
+        return 'تاریخ استخدام شما در سیستم ثبت نشده است.';
+    }
+    getAge(date_1, date_2) {
+        let date2_UTC = new Date(Date.UTC(date_2.getUTCFullYear(), date_2.getUTCMonth(), date_2.getUTCDate()));
+        let date1_UTC = new Date(Date.UTC(date_1.getUTCFullYear(), date_1.getUTCMonth(), date_1.getUTCDate()));
+
+        let yAppendix, mAppendix, dAppendix;
+
+        let days = date2_UTC.getDate() - date1_UTC.getDate();
+        if (days < 0) {
+            date2_UTC.setMonth(date2_UTC.getMonth() - 1);
+            days += this.daysInMonth(date2_UTC);
+        }
+
+        let months = date2_UTC.getMonth() - date1_UTC.getMonth();
+        if (months < 0) {
+            date2_UTC.setFullYear(date2_UTC.getFullYear() - 1);
+            months += 12;
+        }
+
+        let years = date2_UTC.getFullYear() - date1_UTC.getFullYear();
+
+        if (years > 1) yAppendix = ' سال';
+        else yAppendix = ' سال';
+        if (months > 1) mAppendix = ' ماه';
+        else mAppendix = ' ماه';
+        if (days > 1) dAppendix = ' روز';
+        else dAppendix = ' روز';
+
+        return years + yAppendix + ' و ' + months + mAppendix + ' و ' + days + dAppendix + '';
+    }
+
+    daysInMonth(date2_UTC) {
+        const monthStart = new Date(date2_UTC.getFullYear(), date2_UTC.getMonth(), 1);
+        const monthEnd = new Date(date2_UTC.getFullYear(), date2_UTC.getMonth() + 1, 1);
+        const monthLength = (monthEnd.getDate() - monthStart.getDate()) / (1000 * 60 * 60 * 24);
+        return monthLength;
     }
 }

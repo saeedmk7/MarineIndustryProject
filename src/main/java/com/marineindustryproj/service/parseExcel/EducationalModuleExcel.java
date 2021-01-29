@@ -16,15 +16,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.marineindustryproj.domain.SkillableLevelOfSkill;
 import com.marineindustryproj.security.SecurityUtils;
-import com.marineindustryproj.service.EducationalModuleService;
-import com.marineindustryproj.service.OrganizationService;
-import com.marineindustryproj.service.ScientificWorkGroupService;
-import com.marineindustryproj.service.SkillableLevelOfSkillService;
-import com.marineindustryproj.service.dto.EducationalModuleDTO;
-import com.marineindustryproj.service.dto.OrganizationDTO;
-import com.marineindustryproj.service.dto.ScientificWorkGroupDTO;
-import com.marineindustryproj.service.dto.SkillableLevelOfSkillDTO;
+import com.marineindustryproj.service.*;
+import com.marineindustryproj.service.dto.*;
+import io.github.jhipster.service.filter.StringFilter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -43,6 +39,7 @@ public class EducationalModuleExcel {
     private static SkillableLevelOfSkillService skillableLevelOfSkillService = null;
     private static ScientificWorkGroupService scientificWorkGroupService = null;
     private static OrganizationService organizationService = null;
+    private static SecurityLevelService securityLevelService = null;
     private static ImportUtilities importUtilities = null;
 
     private final Path rootLocation = Paths.get("upload-dir");
@@ -52,7 +49,9 @@ public class EducationalModuleExcel {
                                   SkillableLevelOfSkillService skillableLevelOfSkillService,
                                   ScientificWorkGroupService scientificWorkGroupService,
                                   OrganizationService organizationService,
+                                  SecurityLevelService securityLevelService,
                                   ImportUtilities importUtilities) {
+        this.securityLevelService = securityLevelService;
         this.organizationService = organizationService;
         this.educationalModuleService = educationalModuleService;
         this.importUtilities = importUtilities;
@@ -70,12 +69,13 @@ public class EducationalModuleExcel {
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheet("Sheet1");
 
-            List<Long> ids = educationalModuleService.findAllFromCache().stream().map(a -> a.getId()).collect(Collectors.toList());
+            List<Long> ids = educationalModuleService.findAllFromCache().stream().map(a -> Long.parseLong(a.getCode())).collect(Collectors.toList());
 
             Iterator<Row> iterator = datatypeSheet.iterator();
             while (iterator.hasNext()) {
                 Row currentRow = iterator.next();
                 int rowNum = currentRow.getRowNum();
+                boolean isInsertRow = true;
                 if (rowNum == 0)
                     continue;
                 try {
@@ -85,208 +85,328 @@ public class EducationalModuleExcel {
                     while (cellIterator.hasNext()) {
                         if (hasError)
                             break;
+
                         Cell currentCell = cellIterator.next();
                         int columnNum = currentCell.getColumnIndex();
-
-                        switch (columnNum) {
-                            case 0: //code
-                                Double code = Double.valueOf(0);
-                                //noinspection deprecation
-                                if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
-                                    code = currentCell.getNumericCellValue();
-                                else
-                                    code = Double.valueOf(currentCell.getStringCellValue());
-                                if (code == 0) {
-                                    importUtilities.addError(rowNum,
-                                             columnNum,
-                                             "code",
-                                             1,
-                                             "",
-                                             sb);
-                                    hasError = true;
-                                    continue;
-                                }
-                                if(ids.contains(code.longValue())){
-                                    hasError = true;
-                                    continue;
-                                }
-                                /*if (!isNumeric(jobKey)) {
-                                    addError(rowNum,
-                                             columnNum,
-                                             "JobKey",
-                                             2,
-                                             sb);
-                                    hasError = true;
-                                    continue;
-                                }*/
-                                educationalModuleDTO.setCode(String.valueOf(code.longValue()));
-                                educationalModuleDTO.setId(code.longValue());
-                                break;
-                            case 1: //Title
-                                String title = "";
-                                if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
-                                   title = String.valueOf(currentCell.getNumericCellValue());
-                                else
-                                    title = currentCell.getStringCellValue();
-                                if (title.isEmpty()) {
-                                    importUtilities.addError(rowNum,
-                                             columnNum,
-                                             "title",
-                                             1,
-                                             "",
-                                             sb);
-                                    hasError = true;
-                                    continue;
-                                }
-                                educationalModuleDTO.setTitle(importUtilities.correctString(title));
-                                break;
-                            case 2: //learningTimeTheorical
-                                Double learningTimeTheorical = Double.valueOf(0);
-                                if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
-                                    learningTimeTheorical = currentCell.getNumericCellValue();
-                                else
-                                    learningTimeTheorical = Double.valueOf(currentCell.getStringCellValue());
-                                /*if (learningTimeTheorical == 0) {
-                                    importUtilities.addError(rowNum,
-                                             columnNum,
-                                             "learningTimeTheorical",
-                                             1,
-                                             sb);
-                                    hasError = true;
-                                    continue;
-                                }*/
-                                /*if (!isNumeric(jobCode)) {
-                                    addError(rowNum,
-                                             columnNum,
-                                             "jobCode",
-                                             2,
-                                             sb);
-                                    hasError = true;
-                                    continue;
-                                }*/
-                                educationalModuleDTO.setLearningTimeTheorical(learningTimeTheorical.intValue());
-                                break;
-                            /*case 3: //learningTimePractical
-                                Double learningTimePractical = Double.valueOf(0);
-                                if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
-                                    learningTimePractical = currentCell.getNumericCellValue();
-                                else
-                                    learningTimePractical = Double.valueOf(currentCell.getStringCellValue());
-                                *//*if (learningTimePractical == 0) {
-                                    importUtilities.addError(rowNum,
-                                             columnNum,
-                                             "learningTimePractical",
-                                             1,
-                                             sb);
-                                    hasError = true;
-                                    continue;
-                                }*//*
-                                *//*if (!isNumeric(jobCode)) {
-                                    addError(rowNum,
-                                             columnNum,
-                                             "jobCode",
-                                             2,
-                                             sb);
-                                    hasError = true;
-                                    continue;
-                                }*//*
-                                educationalModuleDTO.setLearningTimePractical(learningTimePractical.intValue());
-                                break;*/
-                            case 3: //skillableLevelOfSkillId
-                                Double skillableLevelOfSkillId = Double.valueOf(0);
-                                if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
-                                    skillableLevelOfSkillId = currentCell.getNumericCellValue();
-                                else
-                                    skillableLevelOfSkillId = Double.valueOf(currentCell.getStringCellValue());
-                                if (skillableLevelOfSkillId != 0) {
-                                    Optional<SkillableLevelOfSkillDTO> skillableLevelOfSkillDTO =
-                                        skillableLevelOfSkillService.findOne(skillableLevelOfSkillId.longValue());
-                                    if(skillableLevelOfSkillDTO.isPresent())
-                                        educationalModuleDTO.setSkillableLevelOfSkillId(skillableLevelOfSkillId.longValue());
-                                    else {
+                        try {
+                            switch (columnNum) {
+                                case 0: //code
+                                    Double code = Double.valueOf(0);
+                                    //noinspection deprecation
+                                    if (currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                        code = currentCell.getNumericCellValue();
+                                    else
+                                        code = Double.valueOf(currentCell.getStringCellValue());
+                                    if (code == 0) {
                                         importUtilities.addError(rowNum,
-                                                                 columnNum,
-                                                                 "skillableLevelOfSkillId",
-                                                                 4,
-                                                                 "",
-                                                                 sb);
+                                            columnNum,
+                                            "code",
+                                            1,
+                                            "",
+                                            sb);
                                         hasError = true;
                                         continue;
                                     }
-                                }
-                                else{
-                                    importUtilities.addError(rowNum,
-                                                             columnNum,
-                                                             "skillableLevelOfSkillId",
-                                                             1,
-                                                             "",
-                                                             sb);
-                                    hasError = true;
-                                    continue;
-                                }
-                                break;
-                            case 4: //scientificWorkGroupId
-                                Double scientificWorkGroupId = Double.valueOf(0);
-                                if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
-                                    scientificWorkGroupId = currentCell.getNumericCellValue();
-                                else
-                                    scientificWorkGroupId = Double.valueOf(currentCell.getStringCellValue());
-                                if (scientificWorkGroupId != 0) {
-                                    Optional<ScientificWorkGroupDTO> scientificWorkGroupDTO =
-                                        scientificWorkGroupService.findOne(scientificWorkGroupId.longValue());
-                                    if(scientificWorkGroupDTO.isPresent()) {
-                                        Set<ScientificWorkGroupDTO> scientificWorkGroupDTOList = new HashSet<>();
-                                        scientificWorkGroupDTOList.add(scientificWorkGroupDTO.get());
-                                        educationalModuleDTO.setScientificWorkGroups(scientificWorkGroupDTOList);
+                                    if (ids.contains(code.longValue())) {
+                                        Optional<EducationalModuleDTO> educationalModuleDTOOptional = educationalModuleService.findByCode(String.valueOf(code.longValue()));
+                                        if (educationalModuleDTOOptional.isPresent()) {
+                                            educationalModuleDTO = educationalModuleDTOOptional.get();
+                                            isInsertRow = false;
+                                            break;
+                                        }
                                     }
+                                    educationalModuleDTO.setCode(String.valueOf(code.longValue()));
+                                    educationalModuleDTO.setId(code.longValue());
+                                    break;
+                                case 1: //Title
+                                    String title = "";
+                                    if (currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                        title = String.valueOf(currentCell.getNumericCellValue());
                                     else
-                                        importUtilities.addError(rowNum,columnNum,"scientificWorkGroupId",4, "", sb);
-                                }
-                                break;
-                            case 5: //organizationId
-                                Double organizationId = Double.valueOf(0);
-                                if(currentCell.getCellTypeEnum() == CellType.NUMERIC)
-                                    organizationId = currentCell.getNumericCellValue();
-                                else
-                                    organizationId = Double.valueOf(currentCell.getStringCellValue());
-                                if (organizationId != 0) {
-                                    Optional<OrganizationDTO> organizationDTO =
-                                        organizationService.findOne(organizationId.longValue());
-                                    if(organizationDTO.isPresent()) {
-                                        educationalModuleDTO.setOrganizationId(organizationId.longValue());
-                                        educationalModuleDTO.setRecommendedBy(organizationDTO.get().getTitle());
+                                        title = currentCell.getStringCellValue();
+                                    if (title.isEmpty()) {
+                                        importUtilities.addError(rowNum,
+                                            columnNum,
+                                            "title",
+                                            1,
+                                            "",
+                                            sb);
+                                        hasError = true;
+                                        continue;
                                     }
-                                    else {
+                                    educationalModuleDTO.setTitle(importUtilities.correctString(title));
+                                    break;
+                                case 2: //learningTimeTheorical
+                                    Double learningTimeTheorical = Double.valueOf(0);
+                                    try {
+                                        if (currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                            learningTimeTheorical = currentCell.getNumericCellValue();
+                                        else
+                                            learningTimeTheorical = Double.valueOf(currentCell.getStringCellValue());
+                                    } catch (Exception ex) {
+                                        importUtilities.addError(rowNum,
+                                            columnNum,
+                                            "learningTimeTheorical",
+                                            3,
+                                            ex.getMessage(),
+                                            sb);
+                                    }
+                                    educationalModuleDTO.setLearningTimeTheorical(learningTimeTheorical.intValue());
+                                    break;
+                                case 3: //learningTimePractical
+                                    Double learningTimePractical = Double.valueOf(0);
+                                    try {
+                                        if (currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                            learningTimePractical = currentCell.getNumericCellValue();
+                                        else
+                                            learningTimePractical = Double.valueOf(currentCell.getStringCellValue());
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        importUtilities.addError(rowNum,
+                                            columnNum,
+                                            "learningTimePractical",
+                                            3,
+                                            ex.getMessage(),
+                                            sb);
+                                    }
+                                    educationalModuleDTO.setLearningTimePractical(learningTimePractical.intValue());
+                                    break;
+                                case 4: //skillableLevelOfSkillTitle
+                                    String skillableLevelOfSkillTitle = "";
+                                    try {
+                                        if (currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                            skillableLevelOfSkillTitle = String.valueOf(currentCell.getNumericCellValue());
+                                        else
+                                            skillableLevelOfSkillTitle = currentCell.getStringCellValue();
+                                        if (skillableLevelOfSkillTitle.isEmpty()) {
+                                            importUtilities.addError(rowNum,
+                                                columnNum,
+                                                "skillableLevelOfSkillTitle",
+                                                1,
+                                                "",
+                                                sb);
+                                            hasError = true;
+                                            continue;
+                                        }
+                                        skillableLevelOfSkillTitle = importUtilities.correctAndRemoveExtraCharsString(skillableLevelOfSkillTitle);
+                                        Optional<SkillableLevelOfSkillDTO> skillableLevelOfSkillDTO =
+                                            skillableLevelOfSkillService.findByTitle(skillableLevelOfSkillTitle);
+
+                                        if (skillableLevelOfSkillDTO.isPresent()) {
+                                            educationalModuleDTO.setSkillableLevelOfSkillId(skillableLevelOfSkillDTO.get().getId());
+                                        } else {
+                                            SkillableLevelOfSkillDTO newSkillDTO = new SkillableLevelOfSkillDTO();
+                                            newSkillDTO.setTitle(skillableLevelOfSkillTitle);
+                                            newSkillDTO.setCreateDate(ZonedDateTime.now());
+                                            newSkillDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                                            newSkillDTO = skillableLevelOfSkillService.save(newSkillDTO);
+                                            educationalModuleDTO.setSkillableLevelOfSkillId(newSkillDTO.getId());
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        importUtilities.addError(rowNum,
+                                            columnNum,
+                                            "skillableLevelOfSkillId",
+                                            3,
+                                            ex.getMessage(),
+                                            sb);
+                                        hasError = true;
+                                        continue;
+                                    }
+                                    break;
+                                case 5: //scientificWorkGroupTitle
+                                    String scientificWorkGroupTitle = "";
+                                    try {
+                                        if (currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                            scientificWorkGroupTitle = String.valueOf(currentCell.getNumericCellValue());
+                                        else
+                                            scientificWorkGroupTitle = currentCell.getStringCellValue();
+                                        if (scientificWorkGroupTitle.isEmpty()) {
+                                            break;
+                                        }
+                                        scientificWorkGroupTitle = importUtilities.correctAndRemoveExtraCharsString(scientificWorkGroupTitle);
+                                        Optional<ScientificWorkGroupDTO> scientificWorkGroupDTO =
+                                            scientificWorkGroupService.findByTitle(scientificWorkGroupTitle);
+                                        ScientificWorkGroupDTO scientificWorkGroup;
+                                        if (!scientificWorkGroupDTO.isPresent()) {
+                                            ScientificWorkGroupDTO newScientific = new ScientificWorkGroupDTO();
+                                            newScientific.setTitle(scientificWorkGroupTitle);
+                                            newScientific.setCreateDate(ZonedDateTime.now());
+                                            newScientific.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                                            scientificWorkGroup = scientificWorkGroupService.save(newScientific);
+                                        }
+                                        else
+                                            scientificWorkGroup = scientificWorkGroupDTO.get();
+                                        Set<ScientificWorkGroupDTO> groupDTOSet = educationalModuleDTO.getScientificWorkGroups();
+                                        groupDTOSet.add(scientificWorkGroup);
+                                        educationalModuleDTO.setScientificWorkGroups(groupDTOSet);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        importUtilities.addError(rowNum,
+                                            columnNum,
+                                            "scientificWorkGroupId",
+                                            3,
+                                            ex.getMessage(),
+                                            sb);
+                                        continue;
+                                    }
+                                    break;
+                                case 6: //organizationTitle
+                                    String organizationTitle = "";
+                                    try {
+                                        if (currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                            organizationTitle = String.valueOf(currentCell.getNumericCellValue());
+                                        else
+                                            organizationTitle = currentCell.getStringCellValue();
+                                        if (organizationTitle.isEmpty()) {
+                                            break;
+                                        }
+                                        organizationTitle = importUtilities.correctAndRemoveExtraCharsString(organizationTitle);
+                                        Optional<OrganizationDTO> organizationDTO =
+                                            organizationService.findByTitle(organizationTitle);
+
+                                        if (organizationDTO.isPresent()) {
+                                            educationalModuleDTO.setOrganizationId(organizationDTO.get().getId());
+                                        } else {
+                                            OrganizationDTO newScientific = new OrganizationDTO();
+                                            newScientific.setTitle(organizationTitle);
+                                            newScientific.setCreateDate(ZonedDateTime.now());
+                                            newScientific.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                                            newScientific = organizationService.save(newScientific);
+                                            educationalModuleDTO.setOrganizationId(newScientific.getId());
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
                                         importUtilities.addError(rowNum,
                                             columnNum,
                                             "organizationId",
-                                            4,
-                                            "",
+                                            3,
+                                            ex.getMessage(),
                                             sb);
-                                        /*hasError = true;
-                                        continue;*/
+                                        continue;
                                     }
-                                }
-                                else{
-                                    importUtilities.addError(rowNum,
-                                        columnNum,
-                                        "organizationId",
-                                        1,
-                                        "",
-                                        sb);
-                                    /*hasError = true;
-                                    continue;*/
-                                }
-                                break;
+                                    break;
+                                case 7: //securityLevelTitle
+                                    String securityLevelTitle = "";
+                                    try {
+                                        if (currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                            securityLevelTitle = String.valueOf(currentCell.getNumericCellValue());
+                                        else
+                                            securityLevelTitle = currentCell.getStringCellValue();
+                                        if (securityLevelTitle.isEmpty()) {
+                                            break;
+                                        }
+                                        securityLevelTitle = importUtilities.correctAndRemoveExtraCharsString(securityLevelTitle);
+                                        Optional<SecurityLevelDTO> securityLevelDTO =
+                                            securityLevelService.findByTitle(securityLevelTitle);
+
+                                        if (securityLevelDTO.isPresent()) {
+                                            educationalModuleDTO.setSecurityLevelId(securityLevelDTO.get().getId());
+                                        } else {
+                                            SecurityLevelDTO newScientific = new SecurityLevelDTO();
+                                            newScientific.setTitle(securityLevelTitle);
+                                            newScientific.setCreateDate(ZonedDateTime.now());
+                                            newScientific.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                                            newScientific = securityLevelService.save(newScientific);
+                                            educationalModuleDTO.setSecurityLevelId(newScientific.getId());
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        importUtilities.addError(rowNum,
+                                            columnNum,
+                                            "securityLevelId",
+                                            3,
+                                            ex.getMessage(),
+                                            sb);
+                                        continue;
+                                    }
+                                    break;
+                                case 8: //goalsText
+                                    String goalsText = "";
+                                    try {
+                                        if (currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                            goalsText = String.valueOf(currentCell.getNumericCellValue());
+                                        else
+                                            goalsText = currentCell.getStringCellValue();
+                                        if (goalsText.isEmpty()) {
+                                            importUtilities.addError(rowNum,
+                                                columnNum,
+                                                "goalsText",
+                                                1,
+                                                "",
+                                                sb);
+                                        }
+                                        educationalModuleDTO.setGoalsText(importUtilities.correctString(goalsText));
+                                    }
+                                    catch (Exception ex){
+                                        if (goalsText.isEmpty()) {
+                                            importUtilities.addError(rowNum,
+                                                columnNum,
+                                                "goalsText",
+                                                3,
+                                                "",
+                                                sb);
+                                        }
+                                    }
+                                    break;
+                                case 9: //headlines
+                                    String headlines = "";
+                                    try {
+                                        if (currentCell.getCellTypeEnum() == CellType.NUMERIC)
+                                            headlines = String.valueOf(currentCell.getNumericCellValue());
+                                        else
+                                            headlines = currentCell.getStringCellValue();
+                                        if (headlines.isEmpty()) {
+                                            importUtilities.addError(rowNum,
+                                                columnNum,
+                                                "headlines",
+                                                1,
+                                                "",
+                                                sb);
+                                        }
+                                        educationalModuleDTO.setEducationalModuleHeadlines(importUtilities.correctString(headlines));
+                                    }
+                                    catch (Exception ex){
+                                        if (headlines.isEmpty()) {
+                                            importUtilities.addError(rowNum,
+                                                columnNum,
+                                                "headlines",
+                                                3,
+                                                "",
+                                                sb);
+                                        }
+                                    }
+                                    break;
+                            }
+                        }
+                        catch (Exception ex){
+                            hasError = true;
+                            importUtilities.addError(rowNum,
+                                columnNum,
+                                "code",
+                                3,
+                                ex.getMessage(),
+                                sb);
                         }
                     }
                     if(hasError)
                         continue;
-                    educationalModuleDTO.setCreateDate(ZonedDateTime.now());
-                    educationalModuleDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
-                    educationalModuleDTO.setArchived(false);
-                    educationalModuleDTO.setStatus(0);
-                    educationalModuleDTO.setLearningTimePractical(0);
+
+                    if(isInsertRow) {
+                        educationalModuleDTO.setCreateDate(ZonedDateTime.now());
+                        educationalModuleDTO.setCreateUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                        educationalModuleDTO.setArchived(false);
+                        educationalModuleDTO.setStatus(0);
+                    }
+                    else{
+                        educationalModuleDTO.setModifyDate(ZonedDateTime.now());
+                        educationalModuleDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
+                    }
                     educationalModuleService.save(educationalModuleDTO);
                 }
                 catch (Exception ex){

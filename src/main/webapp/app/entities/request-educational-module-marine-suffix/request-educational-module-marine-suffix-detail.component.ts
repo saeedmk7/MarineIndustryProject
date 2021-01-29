@@ -52,6 +52,7 @@ import { SkillableLevelOfSkillMarineSuffixService } from 'app/entities/skillable
 import { EvaluationMethodMarineSuffixService } from 'app/entities/evaluation-method-marine-suffix';
 import { OrganizationMarineSuffixService } from 'app/entities/organization-marine-suffix';
 import { RestrictionMarineSuffixService } from 'app/entities/restriction-marine-suffix';
+import * as $ from 'jquery';
 
 @Component({
     selector: 'mi-request-educational-module-marine-suffix-detail',
@@ -207,6 +208,7 @@ export class RequestEducationalModuleMarineSuffixDetailComponent implements OnIn
                     this.requestEducationalModule.recommendDate
                 );
             }
+            $('#target :input').prop('disabled', true);
         });
         this.scientificWorkGroupService.query().subscribe(
             (res: HttpResponse<IScientificWorkGroupMarineSuffix[]>) => {

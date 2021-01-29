@@ -137,7 +137,8 @@
                         <!--*ngIf="(isAdmin || isKarshenasArshadAmozesh || isModirKolAmozesh) && (niazsanjiIntegration.status < 30 && niazsanjiIntegration.status != 1 && niazsanjiIntegration.status != 11 && niazsanjiIntegration.status != 21)"-->
                         <button type="submit" title="مدارک"
                                 [routerLink]="['../document-marine-suffix', 'niazsanjiintegration', niazsanjiIntegration.id ]"
-                                class="btn btn-light btn-sm">
+                                [ngClass]="(niazsanjiIntegration.documents && niazsanjiIntegration.documents.length > 0) ? 'btn-success' : 'btn-light'"
+                                class="btn btn-sm">
                             <span class="fa fa-file"></span>
                         </button>
                         <button type="submit" title="مشاهده"
@@ -250,7 +251,7 @@
                             <span class="fa fa-ban" color="f00c"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.reject">reject</span>
                         </button>-->
-                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                        <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']" type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'niazsanji-integration-marine-suffix/'+ niazsanjiIntegration.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

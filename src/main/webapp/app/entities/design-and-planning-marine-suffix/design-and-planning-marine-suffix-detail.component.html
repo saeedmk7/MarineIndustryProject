@@ -6,44 +6,74 @@
             <mi-alert-error></mi-alert-error>
             <dl class="row-md jh-entity-details">
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات دوره</div></div>
-                <dt>عنوان دوره</dt>
-                <dd>
-                    {{finalNiazsanjiReport.educationalModuleTitle}}
-                    (<strong>
-                    برای مشاهده جزئیات پودمان
-                    <a class="enableLink" [href]="'#/educational-module-marine-suffix/' + finalNiazsanjiReport.educationalModuleId + '/view'">اینجا</a>
-                       کلیک کنید.
-                    </strong>)
-                </dd>
-                <dt>شناسه دوره</dt>
-                <dd>{{finalNiazsanjiReport.educationalModuleCode}}</dd>
-                <dt>ماه اجرا</dt>
-                <dd>{{designAndPlanning.runMonthName}}</dd>
-                <!--<div class="form-group">
-                    <label class="form-control-label">پیش نیاز دوره</label>
-                    <label class="form-control">{{educationalModule.prerequisite}}</label>
-                </div>-->
-                <!--<dt><span jhiTranslate="marineindustryprojApp.designAndPlanning.person">Person</span></dt>
-                <dd>
-                    <span class="badge badge-info" *ngFor="let person of finalNiazsanjiReportPeople; let last = last">
-                        <a [routerLink]="['/person-marine-suffix', person?.id, 'view' ]">{{person.personFullName}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>-->
+                <table class="table table-bordered table-sm">
+                    <tr>
+                        <th>
+                            <label class="form-control-label"
+                                   >عنوان دوره</label>
+                        </th>
+                        <td>
+                            {{finalNiazsanjiReport.educationalModuleTitle}}
+                            (<strong>
+                            برای مشاهده جزئیات پودمان
+                            <a class="enableLink" [href]="'#/educational-module-marine-suffix/' + finalNiazsanjiReport.educationalModuleId + '/view'">اینجا</a>
+                            کلیک کنید.
+                        </strong>)
 
-                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazsanjiYear">niazsanjiYear</span></dt>
-                <dd>{{finalNiazsanjiReport.niazsanjiYear}}</dd>
-                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.restriction">restrictions</span></dt>
-                <dd>
-                    <span class="badge badge-info" *ngFor="let restriction of finalNiazsanjiReport.restrictions; let last = last">
+                        </td>
+                        <th>
+                            شناسه دوره
+                        </th>
+                        <td>
+                            {{finalNiazsanjiReport.educationalModuleCode}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            ماه اجرا
+                        </th>
+                        <td>
+                            {{designAndPlanning.runMonthName}}
+                        </td>
+                        <th>
+                            <span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazsanjiYear">niazsanjiYear</span>
+                        </th>
+                        <td>
+                            {{finalNiazsanjiReport.niazsanjiYear}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.restriction">restrictions</span>
+                        </th>
+                        <td>
+                            <span class="badge badge-info" *ngFor="let restriction of finalNiazsanjiReport.restrictions; let last = last">
                         <a [routerLink]="['/person-marine-suffix', restriction?.id, 'view' ]">{{restriction.title}}</a>{{last ? '' : ', '}}
                     </span>
-                </dd>
-                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.restrictionDescription">restrictionDescription</span></dt>
-                <dd>{{finalNiazsanjiReport.restrictionDescription}}</dd>
-                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.goalsText">goalsText</span></dt>
-                <dd>{{finalNiazsanjiReport.goalsText}}</dd>
-                <dt><span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.prerequisite">prerequisite</span></dt>
-                <dd>{{finalNiazsanjiReport.prerequisite}}</dd>
+                        </td>
+                        <th>
+                            <span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.restrictionDescription">restrictionDescription</span>
+                        </th>
+                        <td>
+                            {{finalNiazsanjiReport.restrictionDescription}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.goalsText">goalsText</span>
+                        </th>
+                        <td>
+                            {{finalNiazsanjiReport.goalsText}}
+                        </td>
+                        <th>
+                            <span jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.prerequisite">prerequisite</span>
+                        </th>
+                        <td>
+                            {{finalNiazsanjiReport.prerequisite}}
+                        </td>
+                    </tr>
+                </table>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">افراد دوره</div></div>
                 <div class="table-responsive" *ngIf="finalNiazsanjiReportPeople">
                     <table class="table table-striped  table-bordered table-hover table-sm">
                         <thead>
@@ -52,7 +82,6 @@
                             <th>فرد</th>
                             <th>منبع نیازسنجی</th>
                             <th>سرمایه گذاری</th>
-
                         </tr>
                         </thead>
                         <tbody>

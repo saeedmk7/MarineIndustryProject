@@ -140,7 +140,8 @@
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit" title="مدارک"
                                 [routerLink]="['../document-marine-suffix', 'requestotherniazsanji',requestOtherNiazsanji.id]"
-                                class="btn btn-light btn-sm">
+                                [ngClass]="(requestOtherNiazsanji.documents && requestOtherNiazsanji.documents.length > 0) ? 'btn-success' : 'btn-light'"
+                                class="btn btn-sm">
                             <span class="fa fa-file"></span>
                         </button>
                         <button type="submit"
@@ -194,7 +195,7 @@
                                 </button>
                             </ng-container>
                         </ng-container>
-                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                        <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']" type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'request-other-niazsanji-marine-suffix/'+ requestOtherNiazsanji.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

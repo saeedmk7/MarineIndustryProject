@@ -41,13 +41,13 @@
                 </div>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات دوره گذرانده شده</div></div>
                 <div class="form-group half">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.educationalModule" for="field_educationalModule">Educational Module</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.educationalModuleEditTitle" for="field_educationalModule">Educational Module</label>
                     <ng-select
                         [items]="educationalmodules"
                         [multiple]="false"
                         [closeOnSelect]="true"
                         [searchable]="true"
-                        [required]="false"
+                        [required]="true"
                         (change)="onEducationalModuleChange($event)"
                         bindLabel="fullTitle"
                         bindValue="id"
@@ -57,7 +57,7 @@
                         [(ngModel)]="educationalHistory.educationalModuleId">
                 </div>
                 <div class="form-group half">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.educationalModuleName" for="field_educationalModuleName">Educational Module Name</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.educationalModuleEditName" for="field_educationalModuleName">Educational Module Name</label>
                     <input type="text" class="form-control" name="educationalModuleName" id="field_educationalModuleName"
                         [(ngModel)]="educationalHistory.educationalModuleName" required maxlength="4096"/>
                     <div [hidden]="!(editForm.controls.educationalModuleName?.dirty && editForm.controls.educationalModuleName?.invalid)">
@@ -160,6 +160,21 @@
                     </kendo-maskedtextbox>
                     <span *ngIf="dateValid == 1" class="alert-success">تاریخ معتبر است</span>
                     <span *ngIf="dateValid == 2" class="alert-danger">تاریخ نامعتبر است</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.dateOfEnd" for="field_dateOfEnd">dateOfEnd</label>
+                    <kendo-maskedtextbox
+                        [includeLiterals]="true"
+                        required="false"
+                        [(ngModel)]="educationalHistory.dateOfEnd"
+                        name="dateOfEnd"
+                        class="form-control"
+                        id="field_dateOfEnd"
+                        (blur)="checkDateOfEndValidation($event)"
+                        mask="0000/00/00">
+                    </kendo-maskedtextbox>
+                    <span *ngIf="dateOfEndValid == 1" class="alert-success">تاریخ معتبر است</span>
+                    <span *ngIf="dateOfEndValid == 2" class="alert-danger">تاریخ نامعتبر است</span>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.educationalCenter" for="field_educationalCenter">Educational Center</label>

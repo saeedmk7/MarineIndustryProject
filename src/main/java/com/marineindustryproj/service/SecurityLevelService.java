@@ -38,6 +38,14 @@ public interface SecurityLevelService {
     Optional<SecurityLevelDTO> findOne(Long id);
 
     /**
+     * Get the "title" securityLevel.
+     *
+     * @param title the title of the entity
+     * @return the entity
+     */
+    Optional<SecurityLevelDTO> findByTitle(String title);
+
+    /**
      * Delete the "id" securityLevel.
      *
      * @param id the id of the entity

@@ -47,7 +47,7 @@
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"  *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                        <button type="submit"  *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
                                 [routerLink]="['/', { outlets: { popup: 'level-three-criteria-group-marine-suffix/'+ levelThreeCriteriaGroup.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

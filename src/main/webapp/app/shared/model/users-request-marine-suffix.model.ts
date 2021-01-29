@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
+import { IPersonMarineSuffix } from 'app/shared/model//person-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
-import {RequestStatus} from 'app/shared/model/enums/RequestStatus';
+import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
 
 export interface IUsersRequestMarineSuffix {
     id?: number;
@@ -16,9 +17,9 @@ export interface IUsersRequestMarineSuffix {
     changeStatusUserLogin?: string;
     guid?: string;
     hasImportantMessage?: boolean;
+    people?: IPersonMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     orgChartRoot?: string;
-
 }
 
 export class UsersRequestMarineSuffix implements IUsersRequestMarineSuffix {
@@ -36,6 +37,7 @@ export class UsersRequestMarineSuffix implements IUsersRequestMarineSuffix {
         public changeStatusUserLogin?: string,
         public guid?: string,
         public hasImportantMessage?: boolean,
+        public people?: IPersonMarineSuffix[],
         public documents?: IDocumentMarineSuffix[]
     ) {
         this.hasImportantMessage = this.hasImportantMessage || false;

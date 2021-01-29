@@ -63,6 +63,10 @@ public class JobCriteria implements Serializable {
 
     private LongFilter jobSoldierId;
 
+    private LongFilter oldJobChangeId;
+
+    private LongFilter newJobChangeId;
+
     private LongFilter documentId;
 
     private LongFilter rasteId;
@@ -239,6 +243,22 @@ public class JobCriteria implements Serializable {
         this.jobSoldierId = jobSoldierId;
     }
 
+    public LongFilter getOldJobChangeId() {
+        return oldJobChangeId;
+    }
+
+    public void setOldJobChangeId(LongFilter oldJobChangeId) {
+        this.oldJobChangeId = oldJobChangeId;
+    }
+
+    public LongFilter getNewJobChangeId() {
+        return newJobChangeId;
+    }
+
+    public void setNewJobChangeId(LongFilter newJobChangeId) {
+        this.newJobChangeId = newJobChangeId;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -334,6 +354,8 @@ public class JobCriteria implements Serializable {
             Objects.equals(jobId, that.jobId) &&
             Objects.equals(educationalModuleJobId, that.educationalModuleJobId) &&
             Objects.equals(jobSoldierId, that.jobSoldierId) &&
+            Objects.equals(oldJobChangeId, that.oldJobChangeId) &&
+            Objects.equals(newJobChangeId, that.newJobChangeId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(rasteId, that.rasteId) &&
             Objects.equals(radehId, that.radehId) &&
@@ -367,6 +389,8 @@ public class JobCriteria implements Serializable {
         jobId,
         educationalModuleJobId,
         jobSoldierId,
+        oldJobChangeId,
+        newJobChangeId,
         documentId,
         rasteId,
         radehId,
@@ -401,6 +425,8 @@ public class JobCriteria implements Serializable {
                 (jobId != null ? "jobId=" + jobId + ", " : "") +
                 (educationalModuleJobId != null ? "educationalModuleJobId=" + educationalModuleJobId + ", " : "") +
                 (jobSoldierId != null ? "jobSoldierId=" + jobSoldierId + ", " : "") +
+                (oldJobChangeId != null ? "oldJobChangeId=" + oldJobChangeId + ", " : "") +
+                (newJobChangeId != null ? "newJobChangeId=" + newJobChangeId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (rasteId != null ? "rasteId=" + rasteId + ", " : "") +
                 (radehId != null ? "radehId=" + radehId + ", " : "") +

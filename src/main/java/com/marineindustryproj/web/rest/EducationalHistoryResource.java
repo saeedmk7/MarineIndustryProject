@@ -203,10 +203,30 @@ public class EducationalHistoryResource {
     @Timed
     public ResponseEntity<List<EducationalHistoryDTO>> getAllEducationalHistories(EducationalHistoryCriteria criteria, Pageable pageable) {
         log.debug("REST request to get EducationalHistories by criteria: {}", criteria);
+        if(pageable.getPageSize() == 2000){
+            List<EducationalHistoryDTO> educationalHistoryDTOS = educationalHistoryQueryService.findByCriteria(criteria);
+            return ResponseEntity.ok().headers(null).body(educationalHistoryDTOS);
+        }
         Page<EducationalHistoryDTO> page = educationalHistoryQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/educational-histories");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
+
+    /**
+     * GET  /educational-histories : get all the educationalHistories.
+     *
+     * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
+     * @return the ResponseEntity with status 200 (OK) and the list of educationalHistories in body
+     */
+    /*@GetMapping("/educational-histories/all")
+    @Timed
+    public ResponseEntity<List<EducationalHistoryDTO>> getAllEducationalHistories(EducationalHistoryCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get EducationalHistories by criteria: {}", criteria);
+        Page<EducationalHistoryDTO> page = educationalHistoryQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/educational-histories");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }*/
 
     /**
     * GET  /educational-histories/count : count all the educationalHistories.

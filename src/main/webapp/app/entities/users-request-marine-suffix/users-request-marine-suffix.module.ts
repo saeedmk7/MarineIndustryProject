@@ -9,27 +9,35 @@ import {
     UsersRequestMarineSuffixDeletePopupComponent,
     UsersRequestMarineSuffixDeleteDialogComponent,
     usersRequestRoute,
-    usersRequestPopupRoute
+    usersRequestPopupRoute,
+    UsersRequestMarineSuffixReferDialogComponent,
+    UsersRequestMarineSuffixReferPopupComponent
 } from './';
-import {ConvertObjectDatesService} from "app/plugin/utilities/convert-object-dates";
+import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 const ENTITY_STATES = [...usersRequestRoute, ...usersRequestPopupRoute];
 
 @NgModule({
-    imports: [MarineindustryprojSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [MarineindustryprojSharedModule, NgSelectModule, FormsModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         UsersRequestMarineSuffixComponent,
         UsersRequestMarineSuffixDetailComponent,
         UsersRequestMarineSuffixUpdateComponent,
         UsersRequestMarineSuffixDeleteDialogComponent,
-        UsersRequestMarineSuffixDeletePopupComponent
+        UsersRequestMarineSuffixDeletePopupComponent,
+        UsersRequestMarineSuffixReferDialogComponent,
+        UsersRequestMarineSuffixReferPopupComponent
     ],
-    providers: [ ConvertObjectDatesService ],
+    providers: [ConvertObjectDatesService],
     entryComponents: [
         UsersRequestMarineSuffixComponent,
         UsersRequestMarineSuffixUpdateComponent,
         UsersRequestMarineSuffixDeleteDialogComponent,
-        UsersRequestMarineSuffixDeletePopupComponent
+        UsersRequestMarineSuffixDeletePopupComponent,
+        UsersRequestMarineSuffixReferDialogComponent,
+        UsersRequestMarineSuffixReferPopupComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

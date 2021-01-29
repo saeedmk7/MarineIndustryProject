@@ -2,6 +2,7 @@ package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
+import com.marineindustryproj.domain.enumeration.RequestStatus;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.ActivationNiazsanjiQueryService;
 import com.marineindustryproj.service.RequestOrganizationNiazsanjiService;
@@ -105,6 +106,7 @@ public class RequestOrganizationNiazsanjiResource {
         requestOrganizationNiazsanjiDTO.setModifyDate(ZonedDateTime.now());
         requestOrganizationNiazsanjiDTO.setChangeStatusUserLogin(SecurityUtils.getCurrentUserLogin().get());
         requestOrganizationNiazsanjiDTO.setStatus(0);
+        requestOrganizationNiazsanjiDTO.setRequestStatus(RequestStatus.READ);
 
 
         RequestOrganizationNiazsanjiDTO result = requestOrganizationNiazsanjiService.finalize(requestOrganizationNiazsanjiDTO);

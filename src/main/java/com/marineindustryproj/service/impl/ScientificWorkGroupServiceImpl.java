@@ -78,6 +78,20 @@ public class ScientificWorkGroupServiceImpl implements ScientificWorkGroupServic
     }
 
     /**
+     * Get one scientificWorkGroup by title.
+     *
+     * @param title the title of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<ScientificWorkGroupDTO> findByTitle(String title) {
+        log.debug("Request to get ScientificWorkGroup : {}", title);
+        return scientificWorkGroupRepository.findByTitle(title)
+            .map(scientificWorkGroupMapper::toDto);
+    }
+
+    /**
      * Delete the scientificWorkGroup by id.
      *
      * @param id the id of the entity

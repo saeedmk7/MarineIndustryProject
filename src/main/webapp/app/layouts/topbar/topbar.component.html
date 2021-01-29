@@ -17,6 +17,14 @@
                     </span>
                 </a>
             </li>
+            <li class="nav-item seperate-left seperate-right bgCyan" title="تعداد انتقادات و پیشنهادات کاربران ارجاء شده به شما">
+                <a class="nav-link excepted-menu" href="#/users-request-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'location-arrow'"></fa-icon>
+                    <span *ngIf="referUsersRequestCounter != undefined" class="badge badge-success ">{{referUsersRequestCounter}}</span>
+                    </span>
+                </a>
+            </li>
             <li class="nav-item seperate-left seperate-right bgGreen" *ngIf="isSuperUsers" title="تعداد بررسی های تایید نهایی های اجرا">
                 <a class="nav-link excepted-menu" href="#/run-phase-marine-suffix">
                     <span class="bell-contain" style="padding: 6px">
