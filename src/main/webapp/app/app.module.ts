@@ -24,6 +24,7 @@ import {
     NavbarComponent,
     TopbarComponent,
     FooterComponent,
+    CountdownComponent,
     PageRibbonComponent,
     ActiveMenuDirective,
     ErrorComponent
@@ -50,7 +51,8 @@ import { HttpClientModule } from '@angular/common/http';
         ErrorComponent,
         PageRibbonComponent,
         ActiveMenuDirective,
-        FooterComponent
+        FooterComponent,
+        CountdownComponent
     ],
     providers: [
         {

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { Principal } from 'app/core';
@@ -106,6 +106,12 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
 
     countList: ICountListModel[] = [];
     loading: boolean = false;
+
+    selectedFinalNiazsanjis: IFinalNiazsanjiReportMarineSuffix[] = [];
+    selectedYear: number = 0;
+    years: any[];
+    isSaving: boolean = false;
+
     constructor(
         private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService,
         private finalNiazsanjiReportPersonService: FinalNiazsanjiReportPersonMarineSuffixService,
@@ -138,7 +144,56 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
 
         });*/
         this.yearsCollections = GREGORIAN_START_END_DATE;
+        this.years = this.yearsCollections.map(a => a.year);
     }
+    change(val, finalNiazsanji: IFinalNiazsanjiReportMarineSuffix) {
+        if (val.target.checked) {
+            this.selectedFinalNiazsanjis.push(finalNiazsanji);
+        } else {
+            this.selectedFinalNiazsanjis = this.selectedFinalNiazsanjis.filter(w => w.id != finalNiazsanji.id);
+        }
+    }
+
+    save() {
+        if (this.selectedFinalNiazsanjis.length > 0 && this.selectedYear) {
+            this.isSaving = true;
+            this.selectedFinalNiazsanjis.forEach(finalNiaz => {
+                finalNiaz.niazsanjiYear = this.selectedYear;
+
+                this.finalNiazsanjiReportService
+                    .find(finalNiaz.id)
+                    .subscribe((finalNiazResp: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => {
+                        let newFinalNiaz = finalNiazResp.body;
+                        newFinalNiaz.niazsanjiYear = this.selectedYear;
+                        this.subscribeToSaveResponse(this.finalNiazsanjiReportService.update(newFinalNiaz));
+                    });
+            });
+        }
+    }
+
+    private subscribeToSaveResponse(result: Observable<HttpResponse<IFinalNiazsanjiReportMarineSuffix>>) {
+        result.subscribe(
+            (res: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => this.onSaveSuccess(res.body),
+            (res: HttpErrorResponse) => this.onSaveError()
+        );
+    }
+
+    counter: number = 0;
+
+    private onSaveSuccess(res: IFinalNiazsanjiReportMarineSuffix) {
+        this.counter++;
+        if (this.counter == this.selectedFinalNiazsanjis.length) {
+            this.counter = 0;
+            this.selectedFinalNiazsanjis = [];
+            //this.loadAll(this.criteria);
+            $('#searchButton').trigger('click');
+        }
+    }
+
+    private onSaveError() {
+        this.isSaving = false;
+    }
+
     /*finalize(dataItem){
 
         this.finalNiazsanjiReportService.find(dataItem.id).subscribe((resp: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) =>{

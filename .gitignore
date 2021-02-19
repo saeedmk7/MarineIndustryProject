@@ -4,16 +4,16 @@
 /src/main/webapp/content/css/main.css
 /target/www/**
 /src/test/javascript/coverage/
-historyUploads/*
 educationUploads/*
+evaluateCriteriaDataUploads/*
+historyUploads/*
 imageuploads/*
+jamHelpUploads/*
+runPhaseUploads/*
+soldierMediaAwarenessReportUploads/*
+soldierTrainingReportUploads/*
 upload-dir/*
 uploads/*
-runPhaseUploads/*
-jamHelpUploads/*
-soldierTrainingReportUploads/*
-soldierMediaAwarenessReportUploads/*
-evaluateCriteriaDataUploads/*
 
 ######################
 # Node

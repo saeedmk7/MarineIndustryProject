@@ -147,25 +147,24 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         this.yearsCollections = GREGORIAN_START_END_DATE;
         this.years = this.yearsCollections.map(a => a.year);
     }
+
     change(val, finalNiazsanji: IFinalNiazsanjiReportMarineSuffix) {
-        debugger;
         if (val.target.checked) {
             this.selectedFinalNiazsanjis.push(finalNiazsanji);
         } else {
             this.selectedFinalNiazsanjis = this.selectedFinalNiazsanjis.filter(w => w.id != finalNiazsanji.id);
         }
     }
+
     save() {
-        debugger;
         if (this.selectedFinalNiazsanjis.length > 0 && this.selectedYear) {
             this.isSaving = true;
             this.selectedFinalNiazsanjis.forEach(finalNiaz => {
                 finalNiaz.niazsanjiYear = this.selectedYear;
-                debugger;
+
                 this.finalNiazsanjiReportService
                     .find(finalNiaz.id)
                     .subscribe((finalNiazResp: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => {
-                        debugger;
                         let newFinalNiaz = finalNiazResp.body;
                         newFinalNiaz.niazsanjiYear = this.selectedYear;
                         this.subscribeToSaveResponse(this.finalNiazsanjiReportService.update(newFinalNiaz));
@@ -173,15 +172,17 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             });
         }
     }
+
     private subscribeToSaveResponse(result: Observable<HttpResponse<IFinalNiazsanjiReportMarineSuffix>>) {
         result.subscribe(
             (res: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => this.onSaveSuccess(res.body),
             (res: HttpErrorResponse) => this.onSaveError()
         );
     }
+
     counter: number = 0;
+
     private onSaveSuccess(res: IFinalNiazsanjiReportMarineSuffix) {
-        debugger;
         this.counter++;
         if (this.counter == this.selectedFinalNiazsanjis.length) {
             this.counter = 0;
@@ -193,6 +194,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
     private onSaveError() {
         this.isSaving = false;
     }
+
     public ngAfterViewInit(): void {
         // Expand the first row initially
         //this.grid.expandRow(0);
@@ -235,14 +237,12 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             if (niazsanjiSource.value == 'ORGANIZATION') this.niazSanjiSource = false;
             else {
                 this.niazSanjiSource = true;
-                if (niazsanjiSource.value != 'FARDI') {
-                    criteria = criteria.filter(a => a.key != 'niazSanjiSource.equals');
-                    const array = ['FARDI', 'OTHER', 'JOB'];
-                    criteria.push({
-                        key: 'niazSanjiSource.in',
-                        value: array
-                    });
-                }
+                criteria = criteria.filter(a => a.key != 'niazSanjiSource.equals');
+                const array = ['FARDI', 'OTHER', 'JOB'];
+                criteria.push({
+                    key: 'niazSanjiSource.in',
+                    value: array
+                });
             }
         }
 
@@ -514,6 +514,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         });
         //this.registerChangeInFinalNiazsanjiReports();
     }
+
     setRoles(account: any) {
         if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
         if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
@@ -523,6 +524,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
 
         if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
     }
+
     prepareSearchCourseType() {
         this.courseTypeService.query().subscribe(
             (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
@@ -534,6 +536,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     prepareSearchEducationalModule() {
         if (this.educationalModuleService.educationalModules) {
             this.educationalModules = this.educationalModuleService.educationalModules;
@@ -548,6 +551,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             );
         }
     }
+
     prepareSearchPerson(orgs: IOrganizationChartMarineSuffix[]) {
         if (this.isSuperUsers) {
             if (!this.people) {
@@ -625,6 +629,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
+
     preparePeople() {
         if (this.personService.people) {
             this.people = this.convertObjectDatesService.goClone(this.personService.people);
@@ -685,6 +690,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             );
         }
     }
+
     handleOrgChartView(): IOrganizationChartMarineSuffix[] {
         if (this.isSuperUsers) {
             this.recommenedOrgCharts = this.organizationcharts;
@@ -708,6 +714,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
             new SearchPanelModel('finalNiazsanjiReport', 'organizationChartId', 'select', 'equals', this.orgsRoot, 'fullTitle')
         );
     }
+
     byteSize(field) {
         return this.dataUtils.byteSize(field);
     }

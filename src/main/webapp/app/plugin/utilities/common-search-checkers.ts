@@ -137,6 +137,7 @@ export class CommonSearchCheckerService {
                         value: true
                     });
                 } else if (val == RequestStatus.READ) {
+                    criteria = criteria.filter(w => w.key != 'status.greaterOrEqualThan');
                     criteria.push({
                         key: 'requestStatus.equals',
                         value: RequestStatus.READ
@@ -151,9 +152,17 @@ export class CommonSearchCheckerService {
                         value: RequestStatus.READ
                     });
                     if (status) {
+                        criteria = criteria.filter(w => w.key != 'status.greaterOrEqualThan');
                         criteria.push({
-                            key: 'status.greaterOrEqualThan',
+                            key: 'status.equals',
                             value: status
+                        });
+                    }
+                    if (status == 0) {
+                        criteria = criteria.filter(w => w.key != 'status.greaterOrEqualThan');
+                        criteria.push({
+                            key: 'status.equals',
+                            value: '' + status
                         });
                     }
                 }

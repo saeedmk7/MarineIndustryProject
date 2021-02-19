@@ -3,13 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IDesignAndPlanningMarineSuffix } from 'app/shared/model/design-and-planning-marine-suffix.model';
 import { ConvertObjectDatesService } from 'app/plugin/utilities/convert-object-dates';
-import { HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { DesignAndPlanningMarineSuffixService } from 'app/entities/design-and-planning-marine-suffix/design-and-planning-marine-suffix.service';
 import set = Reflect.set;
 import { FinalNiazsanjiReportMarineSuffixService } from 'app/entities/final-niazsanji-report-marine-suffix';
 import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
 import { FinalNiazsanjiReportPersonMarineSuffixService } from 'app/entities/final-niazsanji-report-person-marine-suffix';
 import { IFinalNiazsanjiReportPersonMarineSuffix } from 'app/shared/model/final-niazsanji-report-person-marine-suffix.model';
+import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
+import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
 
 @Component({
     selector: 'mi-design-and-planning-marine-suffix-detail',
@@ -29,7 +31,8 @@ export class DesignAndPlanningMarineSuffixDetailComponent implements OnInit {
         private convertObjectDatesService: ConvertObjectDatesService,
         private designAndPlanningService: DesignAndPlanningMarineSuffixService,
         private finalNiazsanjiReportPersonService: FinalNiazsanjiReportPersonMarineSuffixService,
-        private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService
+        private finalNiazsanjiReportService: FinalNiazsanjiReportMarineSuffixService,
+        private organizationChartService: OrganizationChartMarineSuffixService
     ) {}
 
     ngOnInit() {
@@ -46,6 +49,25 @@ export class DesignAndPlanningMarineSuffixDetailComponent implements OnInit {
     showData(finalNiazsanjiReportId) {
         this.finalNiazsanjiReportService.find(finalNiazsanjiReportId).subscribe((resp: HttpResponse<IFinalNiazsanjiReportMarineSuffix>) => {
             this.finalNiazsanjiReport = resp.body;
+            this.finalNiazsanjiReport.organizationChartFullTitle = ' ';
+            if (this.organizationChartService.organizationchartsAll) {
+                const org = this.organizationChartService.organizationcharts.find(
+                    w => w.id == this.finalNiazsanjiReport.organizationChartId
+                );
+                if (org) {
+                    this.finalNiazsanjiReport.organizationChartFullTitle = org.fullTitle;
+                }
+            } else {
+                this.organizationChartService.query().subscribe(
+                    (organizations: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
+                        const org = organizations.body.find(w => w.id == this.finalNiazsanjiReport.organizationChartId);
+                        if (org) {
+                            this.finalNiazsanjiReport.organizationChartFullTitle = org.fullTitle;
+                        }
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            }
             const criteriaPerson = [
                 {
                     key: 'finalNiazsanjiReportId.equals',
@@ -87,7 +109,7 @@ export class DesignAndPlanningMarineSuffixDetailComponent implements OnInit {
                 }
             });
     }
-
+    protected onError(errorMessage: string) {}
     previousState() {
         window.history.back();
     }

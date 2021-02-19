@@ -3,6 +3,7 @@ package com.marineindustryproj.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
 import com.marineindustryproj.domain.enumeration.RequestStatus;
+import com.marineindustryproj.domain.enumeration.ReferStatus;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -25,6 +26,11 @@ public class UsersRequestCriteria implements Serializable {
      * Class for filtering RequestStatus
      */
     public static class RequestStatusFilter extends Filter<RequestStatus> {
+    }
+    /**
+     * Class for filtering ReferStatus
+     */
+    public static class ReferStatusFilter extends Filter<ReferStatus> {
     }
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +56,8 @@ public class UsersRequestCriteria implements Serializable {
     private StringFilter guid;
 
     private BooleanFilter hasImportantMessage;
+
+    private ReferStatusFilter referStatus;
 
     private LongFilter personId;
 
@@ -143,6 +151,14 @@ public class UsersRequestCriteria implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public ReferStatusFilter getReferStatus() {
+        return referStatus;
+    }
+
+    public void setReferStatus(ReferStatusFilter referStatus) {
+        this.referStatus = referStatus;
+    }
+
     public LongFilter getPersonId() {
         return personId;
     }
@@ -181,6 +197,7 @@ public class UsersRequestCriteria implements Serializable {
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
             Objects.equals(guid, that.guid) &&
             Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
+            Objects.equals(referStatus, that.referStatus) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(documentId, that.documentId);
     }
@@ -199,6 +216,7 @@ public class UsersRequestCriteria implements Serializable {
         changeStatusUserLogin,
         guid,
         hasImportantMessage,
+        referStatus,
         personId,
         documentId
         );
@@ -218,6 +236,7 @@ public class UsersRequestCriteria implements Serializable {
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
                 (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
+                (referStatus != null ? "referStatus=" + referStatus + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
             "}";

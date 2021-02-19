@@ -119,6 +119,9 @@ public class UsersRequestQueryService extends QueryService<UsersRequest> {
             if (criteria.getHasImportantMessage() != null) {
                 specification = specification.and(buildSpecification(criteria.getHasImportantMessage(), UsersRequest_.hasImportantMessage));
             }
+            if (criteria.getReferStatus() != null) {
+                specification = specification.and(buildSpecification(criteria.getReferStatus(), UsersRequest_.referStatus));
+            }
             if (criteria.getPersonId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPersonId(),
                     root -> root.join(UsersRequest_.people, JoinType.LEFT).get(Person_.id)));

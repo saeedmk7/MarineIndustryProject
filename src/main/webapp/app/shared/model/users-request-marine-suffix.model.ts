@@ -2,6 +2,7 @@ import { Moment } from 'moment';
 import { IPersonMarineSuffix } from 'app/shared/model//person-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
+import { ReferStatus } from 'app/shared/model/enums/ReferStatus';
 
 export interface IUsersRequestMarineSuffix {
     id?: number;
@@ -17,6 +18,7 @@ export interface IUsersRequestMarineSuffix {
     changeStatusUserLogin?: string;
     guid?: string;
     hasImportantMessage?: boolean;
+    referStatus?: ReferStatus;
     people?: IPersonMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     orgChartRoot?: string;
@@ -37,6 +39,7 @@ export class UsersRequestMarineSuffix implements IUsersRequestMarineSuffix {
         public changeStatusUserLogin?: string,
         public guid?: string,
         public hasImportantMessage?: boolean,
+        public referStatus?: ReferStatus,
         public people?: IPersonMarineSuffix[],
         public documents?: IDocumentMarineSuffix[]
     ) {

@@ -81,6 +81,7 @@ public class HomePagePersonEducationalModule {
         /*this.organizationId = educationalModuleDTO.getOrganizationId();
         this.organizationTitle = educationalModuleDTO.getOrganizationTitle();*/
         this.runDate = educationalHistoryDTO.getDateOfStart();
+        this.endDate = educationalHistoryDTO.getDateOfEnd();
         this.educationalModuleType = "نیازسنجی فردی";
         this.status = status;
         this.educationalHistoryId = educationalHistoryDTO.getId();
@@ -110,6 +111,8 @@ public class HomePagePersonEducationalModule {
     private Integer status;
 
     private String runDate;
+
+    private String endDate;
 
     private Long educationalHistoryId;
 
@@ -215,6 +218,14 @@ public class HomePagePersonEducationalModule {
 
     public void setRunDate(String runDate) {
         this.runDate = runDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public Long getEducationalHistoryId() {

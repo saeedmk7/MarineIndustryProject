@@ -39,16 +39,15 @@ export class EducationalModuleMarineSuffixService {
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {
-        if(req) {
+        if (req) {
             const options = createRequestOption(req);
             return this.http
-                .get<IEducationalModuleMarineSuffix[]>(this.resourceUrl, {params: options, observe: 'response'})
+                .get<IEducationalModuleMarineSuffix[]>(this.resourceUrl, { params: options, observe: 'response' })
                 .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
-        }
-        else{
-            let url = this.resourceUrl + "/all";
+        } else {
+            let url = this.resourceUrl + '/all';
             return this.http
-                .get<IEducationalModuleMarineSuffix[]>(url, {observe: 'response'})
+                .get<IEducationalModuleMarineSuffix[]>(url, { observe: 'response' })
                 .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res, true)));
         }
     }
@@ -86,25 +85,30 @@ export class EducationalModuleMarineSuffixService {
         res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
         res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
         res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
-        res.body.fullTitle = (res.body.code ? res.body.code : "") + " - " + (res.body.title ? res.body.title : "");
-        res.body.totalLearningTime = (res.body.learningTimeTheorical ? res.body.learningTimeTheorical : 0) + (res.body.learningTimePractical ? res.body.learningTimePractical : 0);
+        res.body.code = res.body.code ? res.body.code + '(' + res.body.code.length + ')' : '';
+        res.body.fullTitle = (res.body.code ? res.body.code : '') + ' - ' + (res.body.title ? res.body.title : '');
+        res.body.totalLearningTime =
+            (res.body.learningTimeTheorical ? res.body.learningTimeTheorical : 0) +
+            (res.body.learningTimePractical ? res.body.learningTimePractical : 0);
         return res;
     }
 
-    private convertDateArrayFromServer(res: EntityArrayResponseType, isAll:boolean = false): EntityArrayResponseType {
+    private convertDateArrayFromServer(res: EntityArrayResponseType, isAll: boolean = false): EntityArrayResponseType {
         res.body.forEach((educationalModule: IEducationalModuleMarineSuffix) => {
             educationalModule.timePassed = educationalModule.timePassed != null ? moment(educationalModule.timePassed) : null;
             educationalModule.credit = educationalModule.credit != null ? moment(educationalModule.credit) : null;
             educationalModule.createDate = educationalModule.createDate != null ? moment(educationalModule.createDate) : null;
             educationalModule.modifyDate = educationalModule.modifyDate != null ? moment(educationalModule.modifyDate) : null;
             educationalModule.archivedDate = educationalModule.archivedDate != null ? moment(educationalModule.archivedDate) : null;
-            educationalModule.fullTitle = (educationalModule.code ? educationalModule.code : "") + " - " + (educationalModule.title ? educationalModule.title : "");
-            educationalModule.totalLearningTime = (educationalModule.learningTimePractical ? educationalModule.learningTimePractical : 0)
-                + (educationalModule.learningTimeTheorical ? educationalModule.learningTimeTheorical : 0);
+            educationalModule.code = educationalModule.code ? educationalModule.code + '(' + educationalModule.code.length + ')' : '';
+            educationalModule.fullTitle =
+                (educationalModule.code ? educationalModule.code : '') + ' - ' + (educationalModule.title ? educationalModule.title : '');
+            educationalModule.totalLearningTime =
+                (educationalModule.learningTimePractical ? educationalModule.learningTimePractical : 0) +
+                (educationalModule.learningTimeTheorical ? educationalModule.learningTimeTheorical : 0);
         });
 
-        if(isAll)
-            this.educationalModules = res.body;
+        if (isAll) this.educationalModules = res.body;
         return res;
     }
 }

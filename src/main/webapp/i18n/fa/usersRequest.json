@@ -32,6 +32,7 @@
             "orgChartRoot": "گروه درخواست کننده",
             "document": "مدارک",
             "person": "افراد ارجاع داده شده",
+            "referStatus": "Refer Status",
             "answer": "جواب"
         }
     }

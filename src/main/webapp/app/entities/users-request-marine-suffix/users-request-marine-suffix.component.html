@@ -162,6 +162,7 @@
                 <th *ngIf="isAdmin"></th>
                 <th jhiSortBy="changeStatusUserLogin"><span jhiTranslate="marineindustryprojApp.usersRequest.changeStatusUserLogin">Change Status User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th></th>
+                <th></th>
 
             </tr>
             </thead>
@@ -184,6 +185,20 @@
                 <td>{{usersRequest.conversation}}</td>-->
                 <td jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + usersRequest.requestStatus}}">{{usersRequest.requestStatus}}</td>
                 <td>{{usersRequest.changeStatusUserLogin}}</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop2" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <fa-icon [icon]="'lightbulb'"></fa-icon>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
+                            <button class="dropdown-item" (click)="changeReferStatus(usersRequest, 'NEW')">{{'marineindustryprojApp.ReferStatus.NEW' | translate}}</button>
+                            <button class="dropdown-item" (click)="changeReferStatus(usersRequest,'READ')">{{'marineindustryprojApp.ReferStatus.READ' | translate}}</button>
+                            <!--<button class="dropdown-item" (click)="changeReferStatus(usersRequest,'RETURNED')">{{'marineindustryprojApp.ReferStatus.RETURNED' | translate}}</button>
+                            <button class="dropdown-item" (click)="changeReferStatus(usersRequest,'IGNORE')">{{'marineindustryprojApp.ReferStatus.IGNORE' | translate}}</button>
+                            <button class="dropdown-item" (click)="changeReferStatus(usersRequest,'ACCEPT')">{{'marineindustryprojApp.ReferStatus.ACCEPT' | translate}}</button>-->
+                        </div>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
@@ -203,7 +218,6 @@
 
                         <button type="submit"
                                 [routerLink]="['/users-request-marine-suffix', usersRequest.id, 'edit']"
-                                *ngIf="isAdmin || usersRequest.requestStatus == 'NEW' || usersRequest.requestStatus == 'READ'"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
@@ -216,14 +230,7 @@
                             <fa-icon [icon]="'times'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
-                        <button type="submit" *ngIf="isAdmin"
-                                [routerLink]="['/', { outlets: { popup: 'users-request-marine-suffix/'+ usersRequest.id + '/refer'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'location-arrow'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.refer">Refer</span>
-                        </button>
+
                     </div>
                 </td>
 

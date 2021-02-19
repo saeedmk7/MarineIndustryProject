@@ -126,6 +126,10 @@ export class EducationalModuleMarineSuffixUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ educationalModule }) => {
             this.educationalModule = educationalModule;
+
+            if (this.educationalModule.code && this.educationalModule.code.includes('(')) {
+                this.educationalModule.code = this.educationalModule.code.substring(0, this.educationalModule.code.indexOf('('));
+            }
             if (this.educationalModule.teachers) this.educationalModule.teachers.forEach(a => (a.fullName = a.name + ' ' + a.family));
         });
         this.effectivenessLevelService.query().subscribe(

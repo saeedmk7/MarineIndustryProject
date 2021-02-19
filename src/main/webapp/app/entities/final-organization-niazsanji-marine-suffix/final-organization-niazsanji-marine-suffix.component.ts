@@ -184,7 +184,6 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             criteria = [];
         }
 
-        debugger;
         if (this.isModirKolAmozesh) {
             criteria.push({
                 key: 'status.greaterOrEqualThan',

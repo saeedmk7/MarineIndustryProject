@@ -84,6 +84,20 @@ export class UsersRequestMarineSuffixComponent implements OnInit, OnDestroy {
             });
         }
     }
+    changeReferStatus(usersRequest: IUsersRequestMarineSuffix, newStatus: string) {
+        if (confirm('آیا از تغییر وضعیت مطمئنید؟')) {
+            this.usersRequestService.find(usersRequest.id).subscribe(resp => {
+                let model = resp.body;
+                model.referStatus = this.convertObjectDatesService.convertString2ReferStatus(newStatus);
+                this.usersRequestService
+                    .update(model)
+                    .subscribe(
+                        (res: HttpResponse<IRequestNiazsanjiFardiMarineSuffix>) => this.onSaveSuccess(),
+                        (res: HttpErrorResponse) => this.onSaveError()
+                    );
+            });
+        }
+    }
     private onSaveSuccess() {
         this.loadAll();
     }
@@ -213,7 +227,7 @@ export class UsersRequestMarineSuffixComponent implements OnInit, OnDestroy {
     private paginateReferUsersRequests(data: IUsersRequestMarineSuffix[], headers: HttpHeaders) {
         this.referalUsersRequests = this.convertObjectDatesService.changeArrayDate(data);
         let personNationalIds = this.referalUsersRequests.map(a => a.createUserLogin);
-        debugger;
+
         this.referalUsersRequests.map(a => a.changeStatusUserLogin).forEach(a => {
             personNationalIds.push(a);
         });
@@ -221,8 +235,6 @@ export class UsersRequestMarineSuffixComponent implements OnInit, OnDestroy {
     }
     loadPeople(personNationalIds: string[]) {
         if (personNationalIds && personNationalIds.length > 0) {
-            debugger;
-
             let criteria = [
                 {
                     key: 'nationalId.in',
@@ -238,7 +250,6 @@ export class UsersRequestMarineSuffixComponent implements OnInit, OnDestroy {
                 })
                 .subscribe(
                     (resp: HttpResponse<IPersonMarineSuffix[]>) => {
-                        debugger;
                         this.people = resp.body;
                         this.loadChart();
                     },

@@ -26,7 +26,7 @@
     </div>-->
     <mi-alert></mi-alert>
     <!--<search-panel [searchPanelModel]="searchbarModel"></search-panel>-->
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" id="searchForm" novalidate>
         <div class="card border-success ">
             <a data-toggle="collapse" href="#collapseExample" class="card-header center" style="background-color: aliceblue;">
                 <span class="panel-title">پنل جستجو</span>
@@ -198,6 +198,32 @@
         </div>
     </form>
     <br/>
+    <div class="card border-success">
+        <a data-toggle="collapse" href="#collapseExample1" class="card-header center" style="background-color: antiquewhite;">
+            <span class="panel-title">پنل تغییر گروهی به سال نیازسنجی جدید</span>
+            <span class="pull-right clickable"><i class="glyphicon glyphicon-ok"></i></span>
+        </a>
+        <div class="collapse" id="collapseExample1">
+            <div class="card-body">
+                <div class="form-group fullcover">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.selectedNiazsanjis"></label>
+                    <span class="badge badge-info" *ngFor="let item of selectedFinalNiazsanjis">
+                        {{item.educationalModuleTitle}} ({{item.educationalModuleCode}}) - {{item.niazsanjiYear}}
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazsanjiYear"></label>
+                    <select [(ngModel)] = "selectedYear" style="font-family: IranSansLight; " id="selectedYear" class="form-control float-right" name="selectedYear" *ngIf="selectedFinalNiazsanjis">
+                        <option [ngValue]="year"  *ngFor="let year of years">{{year}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-footer text-muted success-color white-text">
+                <input id="save" type="button" [disabled]="!isSaving && (!(selectedFinalNiazsanjis.length > 0) || !selectedYear)"
+                       (click)="save()" class="btn-primary" value="ثبت">
+            </div>
+        </div>
+    </div>
     <!--<div class="table-responsive" *ngIf="planningAndRunMonthReports">
         <table class="table table-striped  table-bordered table-hover table-sm">
             <thead>
@@ -238,7 +264,7 @@
             </ng-template>
             <!--<kendo-grid-column field="id" title="شناسه" [width]="100"></kendo-grid-column>-->
             <!--<kendo-grid-column field="jobTitle" title="عنوان شغل" [width]="300"></kendo-grid-column>-->
-            <kendo-grid-column field="id" title=" " [width]="200">
+            <kendo-grid-column field="id" title=" " [width]="220">
                 <ng-template kendoGridCellTemplate let-dataItem>
                     <!--<kendo-buttongroup type="button" class="btn btn-warning btn-sm"
                     >
@@ -246,6 +272,8 @@
                         <span class="d-none d-md-inline">برنامه ریزی</span>
                     </kendo-buttongroup>-->
                     <kendo-buttongroup>
+                        <input type="checkbox" [id]="'selectedFinalNiazsanjis_'+ dataItem.id" *ngIf="dataItem.status <= 10"
+                               name="selectedFinalNiazsanjis" (click)="change($event, dataItem)" />
                         <button kendoButton type="submit" class="btn btn-warning btn-sm"
                                            [routerLink]="['/design-and-planning-marine-suffix', dataItem.id, 'edit']"
                         >
@@ -328,7 +356,7 @@
             </ng-template>-->
             <!--<kendo-grid-column field="id" title="شناسه" [width]="100"></kendo-grid-column>-->
             <!--<kendo-grid-column field="jobTitle" title="عنوان شغل" [width]="300"></kendo-grid-column>-->
-            <kendo-grid-column field="id" title=" " [width]="200">
+            <kendo-grid-column field="id" title=" " [width]="220">
                 <ng-template kendoGridCellTemplate let-dataItem>
                     <!--<kendo-buttongroup type="button" class="btn btn-warning btn-sm"
                     >
@@ -336,6 +364,8 @@
                         <span class="d-none d-md-inline">برنامه ریزی</span>
                     </kendo-buttongroup>-->
                     <kendo-buttongroup>
+                        <input type="checkbox" [id]="'selectedFinalNiazsanjis_'+ dataItem.id" *ngIf="dataItem.status <= 10"
+                               name="selectedFinalNiazsanjis" (click)="change($event, dataItem)" />
                         <button kendoButton type="submit" class="btn btn-warning btn-sm"
                                 [routerLink]="['/design-and-planning-marine-suffix', dataItem.id, 'edit']"
                         >

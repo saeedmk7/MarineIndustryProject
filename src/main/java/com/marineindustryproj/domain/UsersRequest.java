@@ -14,6 +14,8 @@ import java.util.Objects;
 
 import com.marineindustryproj.domain.enumeration.RequestStatus;
 
+import com.marineindustryproj.domain.enumeration.ReferStatus;
+
 /**
  * A UsersRequest.
  */
@@ -74,6 +76,10 @@ public class UsersRequest implements Serializable {
 
     @Column(name = "has_important_message")
     private Boolean hasImportantMessage;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "refer_status")
+    private ReferStatus referStatus;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -254,6 +260,19 @@ public class UsersRequest implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public ReferStatus getReferStatus() {
+        return referStatus;
+    }
+
+    public UsersRequest referStatus(ReferStatus referStatus) {
+        this.referStatus = referStatus;
+        return this;
+    }
+
+    public void setReferStatus(ReferStatus referStatus) {
+        this.referStatus = referStatus;
+    }
+
     public Set<Person> getPeople() {
         return people;
     }
@@ -341,6 +360,7 @@ public class UsersRequest implements Serializable {
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
             ", guid='" + getGuid() + "'" +
             ", hasImportantMessage='" + isHasImportantMessage() + "'" +
+            ", referStatus='" + getReferStatus() + "'" +
             "}";
     }
 }

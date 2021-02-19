@@ -230,39 +230,8 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.eventManager.destroy(this.eventSubscriber);
     }
-    /* getParameterByName(key, query) {
-        if (!query)
-            query = window.location.search;
-        let re = new RegExp("[?|&]" + key + "=(.*?)&");
-        let matches = re.exec(query + "&");
-        if (!matches || matches.length < 2)
-            return "";
-        return decodeURIComponent(matches[1].replace("+", " "));
+    reset() {
+        const url = this.deleteQueryString();
+        window.location.href = url;
     }
-    setUrlEncodedKey(key, value, query) {
-
-        query = query || window.location.search;
-        let q = query + "&";
-        let re = new RegExp("[?|&]" + key + "=.*?&");
-        if (!re.test(q))
-            q += key + "=" + encodeURI(value);
-        else
-            q = q.replace(re, "&" + key + "=" + encodeURIComponent(value) + "&");
-        q = q.trimStart("&").trimEnd("&");
-        return q[0]=="?" ? q : q = "?" + q;
-    }
-    trimEnd(c: string) {
-        if (c)
-            return this.replace(new RegExp(c.escapeRegExp() + "*$"), '');
-        return this.replace(/\s+$/, '');
-    }
-    trimStart(c: string) {
-        if (c)
-            return c.replace(new RegExp("^" + c.escapeRegExp() + "*"), '');
-        return this.replace(/^\s+/, '');
-    }
-
-    escapeRegExp() {
-        return this.replace(/[.*+?^${}()|[\]\/\\]/g, "\\$0");
-    };*/
 }

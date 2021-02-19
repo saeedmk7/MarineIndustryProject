@@ -215,7 +215,8 @@
                     </th>
                     <th><span>نوع پودمان</span></th>
                     <th><span>نوع دوره</span></th>
-                    <th><span>تاریخ برگزاری</span></th>
+                    <th><span>تاریخ شروع دوره</span></th>
+                    <th><span>تاریخ اتمام دوره</span></th>
                     <th>وضعیت</th>
                 </tr>
                 </thead>
@@ -244,6 +245,9 @@
                     </td>
                     <td>
                         {{educationalModule.runDate}}
+                    </td>
+                    <td>
+                        {{educationalModule.endDate}}
                     </td>
                     <td>
                         <a class="enableLink" [href]="'#/educational-history-marine-suffix/' + educationalModule.educationalHistoryId + '/view'"

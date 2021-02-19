@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.Objects;
 import javax.persistence.Lob;
 import com.marineindustryproj.domain.enumeration.RequestStatus;
+import com.marineindustryproj.domain.enumeration.ReferStatus;
 
 /**
  * A DTO for the UsersRequest entity.
@@ -48,6 +49,8 @@ public class UsersRequestDTO implements Serializable {
     private String guid;
 
     private Boolean hasImportantMessage;
+
+    private ReferStatus referStatus;
 
     private Set<PersonDTO> people = new HashSet<>();
 
@@ -157,6 +160,14 @@ public class UsersRequestDTO implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public ReferStatus getReferStatus() {
+        return referStatus;
+    }
+
+    public void setReferStatus(ReferStatus referStatus) {
+        this.referStatus = referStatus;
+    }
+
     public Set<PersonDTO> getPeople() {
         return people;
     }
@@ -210,6 +221,7 @@ public class UsersRequestDTO implements Serializable {
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
             ", guid='" + getGuid() + "'" +
             ", hasImportantMessage='" + isHasImportantMessage() + "'" +
+            ", referStatus='" + getReferStatus() + "'" +
             "}";
     }
 }

@@ -193,24 +193,25 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
                 );
             }
             this.intervals = setInterval(() => {
-                //replaced function() by ()=>
-                this.getNewRequestOrganization();
-                this.countAllRequestNiazSanjiFardi();
-                this.countRequestNiazsanjiOther();
-                this.countPreJob();
-                this.getNewUsersRequest();
-                this.getNewReferalUsersRequest();
-                //this.getFinalNiazSanjiFardis();
-                this.getFinalorganizationNiazsanji();
-                this.getEducationalHistories();
-                if (this.isTopUsers) {
-                    this.getEducationalModuleRequests();
-                    this.getPrioritizeRequests();
-                    this.getForEditRunPhaseRequestCounter();
-                }
-                if (this.isSuperUsers) {
-                    this.getIntegrations();
-                    this.getRunPhaseRequestCounter();
+                if (this.isAuthenticated()) {
+                    this.getNewRequestOrganization();
+                    this.countAllRequestNiazSanjiFardi();
+                    this.countRequestNiazsanjiOther();
+                    this.countPreJob();
+                    this.getNewUsersRequest();
+                    this.getNewReferalUsersRequest();
+                    //this.getFinalNiazSanjiFardis();
+                    this.getFinalorganizationNiazsanji();
+                    this.getEducationalHistories();
+                    if (this.isTopUsers) {
+                        this.getEducationalModuleRequests();
+                        this.getPrioritizeRequests();
+                        this.getForEditRunPhaseRequestCounter();
+                    }
+                    if (this.isSuperUsers) {
+                        this.getIntegrations();
+                        this.getRunPhaseRequestCounter();
+                    }
                 }
                 //this.checkCurrentFullName();
             }, 20000);
@@ -769,7 +770,7 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
-    ngOnDestroy(): void {
+    ngOnDestroy() {
         clearInterval(this.intervals);
         clearInterval(this.dailyIntervals);
         clearInterval(this.speechIntervals);
@@ -819,7 +820,16 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private getNewReferalUsersRequest() {
         if (this.currentPerson) {
-            let criteria = [{ key: 'personId.equals', value: this.currentPerson.id }];
+            let criteria = [
+                {
+                    key: 'personId.equals',
+                    value: this.currentPerson.id
+                },
+                {
+                    key: 'referStatus.equals',
+                    value: 'NEW'
+                }
+            ];
             this.usersRequestMarineSuffixService
                 .count({
                     page: 0,

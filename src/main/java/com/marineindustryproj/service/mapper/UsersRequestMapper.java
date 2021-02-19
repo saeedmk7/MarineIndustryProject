@@ -11,8 +11,6 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {PersonMapper.class, DocumentMapper.class})
 public interface UsersRequestMapper extends EntityMapper<UsersRequestDTO, UsersRequest> {
 
-
-
     default UsersRequest fromId(Long id) {
         if (id == null) {
             return null;

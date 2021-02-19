@@ -102,7 +102,7 @@
                     </div>-->
                     <kendo-numerictextbox
                         [(ngModel)]="educationalHistory.learningTimeTheorical" [min]="0" [max]="2000000000" [format]="'n0'"
-                        name="learningTimeTheorical" id="field_learningTimeTheorical" (blur)="updateTotal()"
+                        name="learningTimeTheorical" id="field_learningTimeTheorical" (blur)="updateTotal()" [required]="true"
                         class="form-control">
                     </kendo-numerictextbox>
                 </div>
@@ -122,7 +122,7 @@
                     </div>-->
                     <kendo-numerictextbox
                         [(ngModel)]="educationalHistory.learningTimePractical" [min]="0" [max]="2000000000" [format]="'n0'"
-                        name="learningTimePractical" id="field_learningTimePractical" (blur)="updateTotal()"
+                        name="learningTimePractical" id="field_learningTimePractical" (blur)="updateTotal()" [required]="true"
                         class="form-control">
                     </kendo-numerictextbox>
                 </div>
@@ -142,7 +142,7 @@
                         </small>
                     </div>-->
                     <kendo-numerictextbox
-                        [(ngModel)]="educationalHistory.totalTime" [min]="0" [max]="2000000000"
+                        [(ngModel)]="educationalHistory.totalTime" [min]="0" [max]="2000000000" [required]="true"
                         name="totalTime" id="field_totalTime" [format]="'n0'" class="form-control">
                     </kendo-numerictextbox>
                 </div>
@@ -165,7 +165,7 @@
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.dateOfEnd" for="field_dateOfEnd">dateOfEnd</label>
                     <kendo-maskedtextbox
                         [includeLiterals]="true"
-                        required="false"
+                        required="true"
                         [(ngModel)]="educationalHistory.dateOfEnd"
                         name="dateOfEnd"
                         class="form-control"
@@ -179,7 +179,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.educationalCenter" for="field_educationalCenter">Educational Center</label>
                     <input type="text" class="form-control" name="educationalCenter" id="field_educationalCenter"
-                        [(ngModel)]="educationalHistory.educationalCenter" maxlength="4096"/>
+                        [(ngModel)]="educationalHistory.educationalCenter" maxlength="4096" [required]="true"/>
                     <div [hidden]="!(editForm.controls.educationalCenter?.dirty && editForm.controls.educationalCenter?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.educationalCenter?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">

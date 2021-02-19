@@ -1,0 +1,12 @@
+{
+    "marineindustryprojApp": {
+        "ReferStatus": {
+            "null": "",
+            "NEW": "جدید",
+            "READ": "خوانده شده",
+            "IGNORE": "رد شده",
+            "ACCEPT": "تایید شده",
+            "RETURNED": "برگشت خورده"
+        }
+    }
+}

@@ -14,6 +14,7 @@ import { IEducationalModuleMarineSuffix } from 'app/shared/model/educational-mod
 import { IOrganizationChartMarineSuffix } from 'app/shared/model/organization-chart-marine-suffix.model';
 import { NiazSanjiSource } from 'app/shared/model/enums/NiazSanjiSource';
 import { Grade } from 'app/shared/model/enums/Grade';
+import { ReferStatus } from 'app/shared/model/enums/ReferStatus';
 
 @Injectable({ providedIn: 'root' })
 export class ConvertObjectDatesService {
@@ -164,6 +165,20 @@ export class ConvertObjectDatesService {
                 return RequestStatus.IGNORE;
             case 'ACCEPT':
                 return RequestStatus.ACCEPT;
+        }
+    }
+    convertString2ReferStatus(newStatus: string): ReferStatus {
+        switch (newStatus) {
+            case 'NEW':
+                return ReferStatus.NEW;
+            case 'READ':
+                return ReferStatus.READ;
+            case 'RETURNED':
+                return ReferStatus.RETURNED;
+            case 'IGNORE':
+                return ReferStatus.IGNORE;
+            case 'ACCEPT':
+                return ReferStatus.ACCEPT;
         }
     }
     convertMonthsNumber2MonthName(month: number): string {

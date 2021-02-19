@@ -48,7 +48,7 @@
         </div>
         <div class="card-footer text-muted success-color white-text">
             <input id="submitBtn" type="submit" class="btn-primary" [value]="returnSearchParam ? 'ثبت اولیه' : 'جستجو'">
-            <input type="reset" class="btn-warning" value="پاک کردن">
+            <input type="reset" (click)="reset()" class="btn-warning" value="پاک کردن">
         </div>
     </div>
     </div>

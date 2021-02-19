@@ -213,84 +213,84 @@ public class EducationalModule implements Serializable {
     @OneToMany(mappedBy = "educationalModule")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PrioritizeRequestNiazsanji> prioritizeRequestNiazsanjis = new HashSet<>();
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_module_scientific_work_group",
                joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "scientific_work_groups_id", referencedColumnName = "id"))
     private Set<ScientificWorkGroup> scientificWorkGroups = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_module_document",
                joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "documents_id", referencedColumnName = "id"))
     private Set<Document> documents = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_module_educational_center",
                joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "educational_centers_id", referencedColumnName = "id"))
     private Set<EducationalCenter> educationalCenters = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_module_goal",
                joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "goals_id", referencedColumnName = "id"))
     private Set<Goal> goals = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_module_resource",
                joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "resources_id", referencedColumnName = "id"))
     private Set<Resource> resources = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_module_teacher",
                joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "teachers_id", referencedColumnName = "id"))
     private Set<Teacher> teachers = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "restriction_educational_module",
         joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "restrictions_id", referencedColumnName = "id"))
     private Set<Restriction> restrictions = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_module_people_under_training",
                joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "people_under_trainings_id", referencedColumnName = "id"))
     private Set<PeopleUnderTraining> peopleUnderTrainings = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_module_teaching_approach",
                joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "teaching_approaches_id", referencedColumnName = "id"))
     private Set<TeachingApproach> teachingApproaches = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_module_effectiveness_level",
                joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "effectiveness_levels_id", referencedColumnName = "id"))
     private Set<EffectivenessLevel> effectivenessLevels = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_module_effectiveness_index",
                joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "effectiveness_indices_id", referencedColumnName = "id"))
     private Set<EffectivenessIndex> effectivenessIndices = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "educational_module_assessment_method",
                joinColumns = @JoinColumn(name = "educational_modules_id", referencedColumnName = "id"),

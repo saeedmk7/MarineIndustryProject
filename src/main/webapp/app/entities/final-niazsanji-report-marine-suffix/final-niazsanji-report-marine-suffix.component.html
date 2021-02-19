@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.finalNiazsanjiReport.niazsanjiYear"></label>
-                    <select [(ngModel)] = "selectedYear" style="font-family: IranSansLight; font-size: 65%;" id="selectedYear" class="form-control float-right" name="selectedYear" *ngIf="selectedFinalNiazsanjis">
+                    <select [(ngModel)] = "selectedYear" style="font-family: IranSansLight;" id="selectedYear" class="form-control float-right" name="selectedYear" *ngIf="selectedFinalNiazsanjis">
                         <option [ngValue]="year"  *ngFor="let year of years">{{year}}</option>
                     </select>
                 </div>
