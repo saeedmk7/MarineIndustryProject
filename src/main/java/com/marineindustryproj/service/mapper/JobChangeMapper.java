@@ -13,6 +13,7 @@ public interface JobChangeMapper extends EntityMapper<JobChangeDTO, JobChange> {
 
     @Mapping(source = "person.id", target = "personId")
     @Mapping(source = "person.family", target = "personFamily")
+    @Mapping(source = "person.name", target = "personName")
     @Mapping(source = "oldJob.id", target = "oldJobId")
     @Mapping(source = "oldJob.title", target = "oldJobTitle")
     @Mapping(source = "newJob.id", target = "newJobId")

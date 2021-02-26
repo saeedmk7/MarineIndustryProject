@@ -10,6 +10,17 @@ tr.accept td {
 tr.ignore td {
     color: red;
 }
+tr.absent td {
+    color: white;
+    background-color: red;
+}
 tr.new td {
     color: blue;
+}
+
+.formula-color {
+    color: #127ccd;
+}
+.formula-description {
+    color: blueviolet;
 }

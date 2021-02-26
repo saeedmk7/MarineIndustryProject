@@ -309,6 +309,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                                 finalNiazsanjiReportPersonDTO.setNiazSanjiSource(NiazSanjiSource.GROUP);
                                 finalNiazsanjiReportPersonDTO.setPriceCost(niazsanjiGroupDTO.getPriceCost());
                                 finalNiazsanjiReportPersonDTO.setStatus(0);
+                                finalNiazsanjiReportPersonDTO.setAbsented(false);
                                 finalNiazsanjiReportPersonDTOS.add(finalNiazsanjiReportPersonDTO);
                             }
                         }
@@ -353,7 +354,7 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                         finalNiazsanjiReportPersonDTO.setNiazSanjiSource(NiazSanjiSource.ORGANIZATION);
                         finalNiazsanjiReportPersonDTO.setPriceCost(finalOrganizationNiazsanjiDTO.getPriceCost());
                         finalNiazsanjiReportPersonDTO.setStatus(0);
-
+                        finalNiazsanjiReportPersonDTO.setAbsented(false);
                         finalNiazsanjiReportPersonDTOS.add(finalNiazsanjiReportPersonDTO);
                     }
                     finalOrganizationNiazsanjiDTO.setStatus(1);
@@ -1208,13 +1209,24 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
     }
 
     @Override
-    public List<FinalEffectivenessPhaseReportModel> getFinalEffectivenessPhaseReport(Integer reportYear) {
+    public List<FinalEffectivenessPhaseReportModel> getFinalEffectivenessPhaseReport(Integer reportYear, List<Long> organizationChartIds) {
 
-        List<FinalNiazsanjiReport> finalNiazsanjiReports = finalNiazsanjiReportRepository.findAllByNiazsanjiYearAndStatus(reportYear, 40);
+        List<FinalNiazsanjiReport> finalNiazsanjiReports;
+
+        if(organizationChartIds.isEmpty())
+        {
+            finalNiazsanjiReports = finalNiazsanjiReportRepository
+                .findAllByNiazsanjiYearAndStatus(reportYear, 40);
+        }
+        else{
+            finalNiazsanjiReports = finalNiazsanjiReportRepository
+                .findAllByNiazsanjiYearAndStatusAndOrganizationChart(reportYear, 40, organizationChartIds);
+        }
 
         long[] finalNiazsanjiReportPeople = finalNiazsanjiReports.stream().mapToLong(w -> w.getId()).toArray();
 
-        List<CountListModel> countListModels = finalNiazsanjiReportPersonService.countListFinalNiazsanjiReportPeople(finalNiazsanjiReportPeople);
+        List<CountListModel> countListModels = finalNiazsanjiReportPersonService
+            .countListFinalNiazsanjiReportPeople(finalNiazsanjiReportPeople, true);
 
         List<FinalEffectivenessPhaseReportModel> finalEffectivenessPhaseReportModels = new ArrayList<>();
 

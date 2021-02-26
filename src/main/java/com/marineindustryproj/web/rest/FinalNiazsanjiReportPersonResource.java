@@ -117,7 +117,8 @@ public class FinalNiazsanjiReportPersonResource {
     public ResponseEntity<List<FinalNiazsanjiReportPersonDTO>> getLevelOneDataByFinalNiazsanjiReportId(@PathVariable Long finalNiazsanjiReportId) {
         log.debug("REST request to get FinalNiazsanjiReportPerson by finalNiazsanjiReportId: {}", finalNiazsanjiReportId);
         //Page<EffectivenessPhaseDTO> page = effectivenessPhaseQueryService.findByCriteria(criteria, pageable);
-        List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPeople = getFinalNiazsanjiReportPeople(finalNiazsanjiReportId);
+        List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPeople =
+            getFinalNiazsanjiReportPeople(finalNiazsanjiReportId);
 
         LongFilter finalNiazsanjiReportPersonFilter = getFinalNiazsanjiReportPersonLongFilter(finalNiazsanjiReportPeople);
 
@@ -127,7 +128,9 @@ public class FinalNiazsanjiReportPersonResource {
         List<NiazsanjiPersonGradeDTO> niazsanjiPersonGrades = niazsanjiPersonGradeQueryService.findByCriteria(niazsanjiPersonGradeCriteria);
 
         for (FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPerson : finalNiazsanjiReportPeople) {
-            List<NiazsanjiPersonGradeDTO> niazsanjiPersonGradeDTOS = niazsanjiPersonGrades.stream().filter(w -> w.getFinalNiazsanjiReportPersonId().equals(finalNiazsanjiReportPerson.getId())).collect(Collectors.toList());
+            List<NiazsanjiPersonGradeDTO> niazsanjiPersonGradeDTOS = niazsanjiPersonGrades.stream()
+                .filter(w -> w.getFinalNiazsanjiReportPersonId().equals(finalNiazsanjiReportPerson.getId()))
+                .collect(Collectors.toList());
             Set<NiazsanjiPersonGradeDTO> niazsanjiPersonGradeDTOSet = new HashSet<>(niazsanjiPersonGradeDTOS);
             if(!niazsanjiPersonGradeDTOS.isEmpty())
             {
@@ -245,7 +248,7 @@ public class FinalNiazsanjiReportPersonResource {
         log.debug("REST request to count FinalNiazsanjiReportPeople by finalNiazsanjiReportIds: {}", finalNiazsanjiReportIds);
 
         List<CountListModel> countListModels =
-            finalNiazsanjiReportPersonService.countListFinalNiazsanjiReportPeople(finalNiazsanjiReportIds);
+            finalNiazsanjiReportPersonService.countListFinalNiazsanjiReportPeople(finalNiazsanjiReportIds, false);
 
         return ResponseEntity.ok().body(countListModels);
     }

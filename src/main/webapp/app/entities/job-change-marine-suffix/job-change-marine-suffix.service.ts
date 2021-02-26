@@ -61,6 +61,8 @@ export class JobChangeMarineSuffixService {
         if (res.body) {
             res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
             res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
+            res.body.personFullName =
+                (res.body.personName ? res.body.personName : '') + ' ' + (res.body.personFamily ? res.body.personFamily : '');
         }
         return res;
     }
@@ -69,7 +71,10 @@ export class JobChangeMarineSuffixService {
         if (res.body) {
             res.body.forEach((jobChange: IJobChangeMarineSuffix) => {
                 jobChange.createDate = jobChange.createDate != null ? moment(jobChange.createDate) : null;
+                jobChange.createDate = jobChange.createDate != null ? moment(jobChange.createDate) : null;
                 jobChange.modifyDate = jobChange.modifyDate != null ? moment(jobChange.modifyDate) : null;
+                jobChange.personFullName =
+                    (jobChange.personName ? jobChange.personName : '') + ' ' + (jobChange.personFamily ? jobChange.personFamily : '');
             });
         }
         return res;

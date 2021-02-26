@@ -147,7 +147,7 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
         this.message = '';
         this.runPhaseFardis = [];
         this.runPhaseOrganizations = [];
-        if (f.value['niazsanjiYear'] == null) return;
+        if (!this.isSuperUsers && f.value['niazsanjiYear'] == null) return;
         let niazSanjiSource = f.value['niazSanjiSource'];
         let criteria = [];
         criteria = this.createCriteria(criteria, f);

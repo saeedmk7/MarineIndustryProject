@@ -8,7 +8,9 @@ export interface IJobChangeMarineSuffix {
     createDate?: Moment;
     modifyUserLogin?: string;
     modifyDate?: Moment;
+    personName?: string;
     personFamily?: string;
+    personFullName?: string;
     personId?: number;
     oldJobTitle?: string;
     oldJobId?: number;
@@ -25,7 +27,9 @@ export class JobChangeMarineSuffix implements IJobChangeMarineSuffix {
         public createDate?: Moment,
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
+        public personName?: string,
         public personFamily?: string,
+        public personFullName?: string,
         public personId?: number,
         public oldJobTitle?: string,
         public oldJobId?: number,

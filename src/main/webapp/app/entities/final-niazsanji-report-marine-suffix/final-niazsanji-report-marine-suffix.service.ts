@@ -121,8 +121,11 @@ export class FinalNiazsanjiReportMarineSuffixService {
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
-    getFinalEffectivenessPhaseReport(reportYear: number): Observable<HttpResponse<IFinalEffectivenessPhaseReportModel[]>> {
-        let url = this.resourceUrl + '/get-final-effectiveness-phase-report/' + reportYear;
+    getFinalEffectivenessPhaseReport(
+        reportYear: number,
+        organizationChartIds: number[]
+    ): Observable<HttpResponse<IFinalEffectivenessPhaseReportModel[]>> {
+        let url = this.resourceUrl + '/get-final-effectiveness-phase-report/' + reportYear + '/' + organizationChartIds;
         return this.http
             .get<IFinalEffectivenessPhaseReportModel[]>(url, { observe: 'response' })
             .pipe(map((res: HttpResponse<IFinalEffectivenessPhaseReportModel[]>) => this.correctNumbers(res)));

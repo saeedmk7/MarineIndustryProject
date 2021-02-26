@@ -72,5 +72,5 @@ public interface FinalNiazsanjiReportService {
      */
     void delete(Long id);
 
-    List<FinalEffectivenessPhaseReportModel> getFinalEffectivenessPhaseReport(Integer reportYear);
+    List<FinalEffectivenessPhaseReportModel> getFinalEffectivenessPhaseReport(Integer reportYear, List<Long> organizationChartIds);
 }

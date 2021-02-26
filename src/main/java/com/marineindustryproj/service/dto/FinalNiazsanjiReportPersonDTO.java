@@ -64,6 +64,8 @@ public class FinalNiazsanjiReportPersonDTO implements Serializable {
 
     private Float levelFourScore;
 
+    private Boolean absented;
+
     private Set<DocumentDTO> documents = new HashSet<>();
 
     private Long personId;
@@ -236,6 +238,14 @@ public class FinalNiazsanjiReportPersonDTO implements Serializable {
         this.levelFourScore = levelFourScore;
     }
 
+    public Boolean isAbsented() {
+        return absented;
+    }
+
+    public void setAbsented(Boolean absented) {
+        this.absented = absented;
+    }
+
     public Set<DocumentDTO> getDocuments() {
         return documents;
     }
@@ -327,6 +337,7 @@ public class FinalNiazsanjiReportPersonDTO implements Serializable {
             ", levelOneScore=" + getLevelOneScore() +
             ", levelThreeScore=" + getLevelThreeScore() +
             ", levelFourScore=" + getLevelFourScore() +
+            ", absented='" + isAbsented() + "'" +
             ", person=" + getPersonId() +
             ", personFamily='" + getPersonFamily() + "'" +
             ", personName='" + getPersonFamily() + "'" +

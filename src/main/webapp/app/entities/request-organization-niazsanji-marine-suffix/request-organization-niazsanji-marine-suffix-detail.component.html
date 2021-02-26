@@ -93,6 +93,29 @@
                 <dd>
                     <span>{{requestOrganizationNiazsanji.changeStatusUserLogin}}</span>
                 </dd>-->
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات طراحی دوره</div></div>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.restriction">Restriction</span></dt>
+                <dd>
+                    <span *ngFor="let item of requestOrganizationNiazsanji.restrictions" class="badge badge-info">
+                        {{item.title}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.restrictionDescription">Restriction Description</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.restrictionDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.teachingApproach">Teaching Approach</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.teachingApproachTitle}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.goalsText">Goals Text</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.goalsText}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.prerequisite">Prerequisite</span></dt>
+                <dd>
+                    <span>{{requestOrganizationNiazsanji.prerequisite}}</span>
+                </dd>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">اطلاعات تکمیلی نیازسنجی</div></div>
                 <dt><span jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.studentsType">Students Type</span></dt>
                 <dd>

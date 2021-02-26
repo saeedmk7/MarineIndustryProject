@@ -38,7 +38,7 @@
                 <td>{{jobChange.modifyDate | date:'medium'}}</td>-->
                 <td>
                     <div *ngIf="jobChange.personId">
-                        <a [routerLink]="['../person-marine-suffix', jobChange.personId , 'view' ]" class="enableLink">{{jobChange.personFamily}}</a>
+                        <a [routerLink]="['../person-marine-suffix', jobChange.personId , 'view' ]" class="enableLink">{{jobChange.personFullName}}</a>
                     </div>
                 </td>
                 <td>

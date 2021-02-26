@@ -115,7 +115,10 @@ public class EffectivenessPhaseServiceImpl implements EffectivenessPhaseService 
         }
 
         List<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeopleNotFinished = finalNiazsanjiReport.
-            getFinalNiazsanjiReportPeople().stream().filter(a -> a.getAverageScore() == null || a.getAverageScore() == 0).collect(Collectors.toList());
+            getFinalNiazsanjiReportPeople().stream()
+            .filter(a -> (!a.isAbsented()) && (a.getAverageScore() == null || a.getAverageScore() == 0))
+            .collect(Collectors.toList());
+
         if(!finalNiazsanjiReportPeopleNotFinished.isEmpty()){
             throw new Exception("هنوز یکی از افراد اثربخشی نشده است");
         }
@@ -135,7 +138,9 @@ public class EffectivenessPhaseServiceImpl implements EffectivenessPhaseService 
         }
 
         List<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = finalNiazsanjiReport
-            .getFinalNiazsanjiReportPeople().stream().collect(Collectors.toList());
+            .getFinalNiazsanjiReportPeople().stream()
+            .filter(w -> !w.isAbsented())
+            .collect(Collectors.toList());
 
         float firstScore = (float) (finalNiazsanjiReportPeople.stream()
             .mapToDouble(a -> a.getScoreBeforeTest()).sum() / finalNiazsanjiReportPeople.size());

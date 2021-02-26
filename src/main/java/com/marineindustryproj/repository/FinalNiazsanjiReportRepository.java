@@ -40,4 +40,9 @@ public interface FinalNiazsanjiReportRepository extends JpaRepository<FinalNiazs
     @Query("select final_niazsanji_report from FinalNiazsanjiReport final_niazsanji_report where final_niazsanji_report.niazsanjiYear =:niazsanjiYear and final_niazsanji_report.status =:status")
     List<FinalNiazsanjiReport> findAllByNiazsanjiYearAndStatus(@Param("niazsanjiYear") Integer niazsanjiYear, @Param("status") Integer status);
 
+    @Query("select final_niazsanji_report from FinalNiazsanjiReport final_niazsanji_report " +
+        "where final_niazsanji_report.niazsanjiYear =:niazsanjiYear and final_niazsanji_report.status =:status " +
+        "and final_niazsanji_report.organizationChart.id in :organizationChartIds")
+    List<FinalNiazsanjiReport> findAllByNiazsanjiYearAndStatusAndOrganizationChart(@Param("niazsanjiYear") Integer niazsanjiYear, @Param("status") Integer status, @Param("organizationChartIds") List<Long> organizationChartIds);
+
 }

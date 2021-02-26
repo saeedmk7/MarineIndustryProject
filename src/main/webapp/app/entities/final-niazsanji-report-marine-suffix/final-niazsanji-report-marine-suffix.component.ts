@@ -206,15 +206,17 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
         this.finalNiazsanjiReportsOrganizations = [];
         if (!criteria) return;
 
-        const niazsanjiYear = criteria.find(a => a.key == 'niazsanjiYear.equals');
-        if (niazsanjiYear) {
-            if (!niazsanjiYear.value) {
+        if (!this.isSuperUsers) {
+            const niazsanjiYear = criteria.find(a => a.key == 'niazsanjiYear.equals');
+            if (niazsanjiYear) {
+                if (!niazsanjiYear.value) {
+                    this.message = 'لطفا سال نیازسنجی را انتخاب نمائید.';
+                    return;
+                }
+            } else {
                 this.message = 'لطفا سال نیازسنجی را انتخاب نمائید.';
                 return;
             }
-        } else {
-            this.message = 'لطفا سال نیازسنجی را انتخاب نمائید.';
-            return;
         }
         criteria = this.createCriteria(criteria);
 

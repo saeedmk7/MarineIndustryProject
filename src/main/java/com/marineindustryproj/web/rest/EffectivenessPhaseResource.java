@@ -1,13 +1,16 @@
 package com.marineindustryproj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.marineindustryproj.domain.EffectivenessPhaseLevel;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.*;
 import com.marineindustryproj.service.dto.*;
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
+import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.FloatFilter;
+import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -41,15 +44,18 @@ public class EffectivenessPhaseResource {
 
     private final EffectivenessPhaseQueryService effectivenessPhaseQueryService;
 
+    private final EffectivenessPhaseLevelQueryService effectivenessPhaseLevelQueryService;
+
     private final FinalNiazsanjiReportPersonQueryService finalNiazsanjiReportPersonQueryService;
 
     private final NiazsanjiPersonGradeQueryService niazsanjiPersonGradeQueryService;
 
     private final FinalNiazsanjiReportService finalNiazsanjiReportService;
 
-    public EffectivenessPhaseResource(EffectivenessPhaseService effectivenessPhaseService, EffectivenessPhaseQueryService effectivenessPhaseQueryService, FinalNiazsanjiReportPersonQueryService finalNiazsanjiReportPersonQueryService, NiazsanjiPersonGradeQueryService niazsanjiPersonGradeQueryService, FinalNiazsanjiReportService finalNiazsanjiReportService) {
+    public EffectivenessPhaseResource(EffectivenessPhaseService effectivenessPhaseService, EffectivenessPhaseQueryService effectivenessPhaseQueryService, EffectivenessPhaseLevelQueryService effectivenessPhaseLevelQueryService, FinalNiazsanjiReportPersonQueryService finalNiazsanjiReportPersonQueryService, NiazsanjiPersonGradeQueryService niazsanjiPersonGradeQueryService, FinalNiazsanjiReportService finalNiazsanjiReportService) {
         this.effectivenessPhaseService = effectivenessPhaseService;
         this.effectivenessPhaseQueryService = effectivenessPhaseQueryService;
+        this.effectivenessPhaseLevelQueryService = effectivenessPhaseLevelQueryService;
         this.finalNiazsanjiReportPersonQueryService = finalNiazsanjiReportPersonQueryService;
         this.niazsanjiPersonGradeQueryService = niazsanjiPersonGradeQueryService;
         this.finalNiazsanjiReportService = finalNiazsanjiReportService;
@@ -176,7 +182,13 @@ public class EffectivenessPhaseResource {
     @Timed
     public ResponseEntity<List<EffectivenessPhaseDTO>> getAllEffectivenessPhasesByFinalNiazsanjiReportId(@PathVariable Long finalNiazsanjiReportId) {
         log.debug("REST request to get EffectivenessPhases by finalNiazsanjiReportId: {}", finalNiazsanjiReportId);
-        //Page<EffectivenessPhaseDTO> page = effectivenessPhaseQueryService.findByCriteria(criteria, pageable);
+
+        Optional<FinalNiazsanjiReportDTO> finalNiazsanjiReportDTO = finalNiazsanjiReportService.findOne(finalNiazsanjiReportId);
+        if(!finalNiazsanjiReportDTO.isPresent())
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+
+        FinalNiazsanjiReportDTO finalNiazsanjiReport = finalNiazsanjiReportDTO.get();
+
         LongFilter finalNiazsanjiReportFilter = new LongFilter();
         finalNiazsanjiReportFilter.setEquals(finalNiazsanjiReportId);
 
@@ -186,7 +198,12 @@ public class EffectivenessPhaseResource {
         List<EffectivenessPhaseDTO> effectivenessPhaseDTOS = effectivenessPhaseQueryService.findByCriteria(criteria);
 
         FinalNiazsanjiReportPersonCriteria finalNiazsanjiReportPersonCriteria = new FinalNiazsanjiReportPersonCriteria();
+
+        BooleanFilter finalNiazsanjiReportPersonAbsentFilter = new BooleanFilter();
+        finalNiazsanjiReportPersonAbsentFilter.setEquals(false);
+
         finalNiazsanjiReportPersonCriteria.setFinalNiazsanjiReportId(finalNiazsanjiReportFilter);
+        finalNiazsanjiReportPersonCriteria.setAbsented(finalNiazsanjiReportPersonAbsentFilter);
 
          long allPeopleCount = finalNiazsanjiReportPersonQueryService.countByCriteria(finalNiazsanjiReportPersonCriteria);
 
@@ -194,6 +211,7 @@ public class EffectivenessPhaseResource {
             effectivenessPhaseDTO.setPeopleCount(allPeopleCount);
             FloatFilter floatFilter = new FloatFilter();
             floatFilter.setGreaterThan(0f);
+
             if(effectivenessPhaseDTO.getEffectivenessPhaseLevel().getEffectivenessLevel() == 1){
                 finalNiazsanjiReportPersonCriteria.setLevelOneScore(floatFilter);
                 List<FinalNiazsanjiReportPersonDTO> finishPeople = finalNiazsanjiReportPersonQueryService.findByCriteria(finalNiazsanjiReportPersonCriteria);
@@ -202,13 +220,13 @@ public class EffectivenessPhaseResource {
 
                 double sumValue = finishPeople.stream().mapToDouble(w -> w.getLevelOneScore()).sum();
 
-                float secondScore = (float) sumValue / allPeopleCount;
-                float finalScore = (float) ((sumValue * effectivenessPhaseDTO.getEffectivenessPhaseLevel().getWeight()) / allPeopleCount) / 100;
+                float finalScore = (float) sumValue / allPeopleCount;
+                float weightedPoints = (finalScore * effectivenessPhaseDTO.getEffectivenessPhaseLevel().getWeight()) / 100;
 
                 effectivenessPhaseDTO.setFirstScore(0f);
-                effectivenessPhaseDTO.setSecondScore(secondScore);
-                effectivenessPhaseDTO.setFinalScore(secondScore);
-                effectivenessPhaseDTO.setWeightedPoints(finalScore);
+                effectivenessPhaseDTO.setSecondScore(finalScore);
+                effectivenessPhaseDTO.setFinalScore(finalScore);
+                effectivenessPhaseDTO.setWeightedPoints(weightedPoints);
                 finalNiazsanjiReportPersonCriteria.setLevelOneScore(null);
             }
             if(effectivenessPhaseDTO.getEffectivenessPhaseLevel().getEffectivenessLevel() == 2){
@@ -220,17 +238,25 @@ public class EffectivenessPhaseResource {
 
                 double beforeTestScore = finishPeople.stream().mapToDouble(w -> w.getScoreBeforeTest()).sum();
                 double afterTestScore = finishPeople.stream().mapToDouble(w -> w.getScoreAfterTest()).sum();
-                double sumAverageScore = finishPeople.stream().mapToDouble(w -> w.getAverageScore()).sum();
+                //double sumAverageScore = finishPeople.stream().mapToDouble(w -> w.getAverageScore()).sum();
 
                 float beforeTestScoreFinal = (float) beforeTestScore / allPeopleCount;
                 float afterTestScoreFinal = (float) afterTestScore / allPeopleCount;
-                float sumAverageScoreFinal = (float) sumAverageScore / allPeopleCount;
-                float finalScore = (float) ((sumAverageScore * effectivenessPhaseDTO.getEffectivenessPhaseLevel().getWeight()) / allPeopleCount) / 100;
+
+                float averageScoreFinal = 0f;
+                float diff = afterTestScoreFinal - beforeTestScoreFinal;
+                if(diff >= effectivenessPhaseDTO.getEffectivenessPhaseLevel().getGoal())
+                    averageScoreFinal = 100;
+                else
+                    averageScoreFinal = (diff / effectivenessPhaseDTO.getEffectivenessPhaseLevel().getGoal()) * 100;
+
+                //float sumAverageScoreFinal = (float) sumAverageScore / allPeopleCount;
+                float weightedPoints = (averageScoreFinal * effectivenessPhaseDTO.getEffectivenessPhaseLevel().getWeight()) / 100;
 
                 effectivenessPhaseDTO.setFinalScore(beforeTestScoreFinal);
                 effectivenessPhaseDTO.setSecondScore(afterTestScoreFinal);
-                effectivenessPhaseDTO.setFinalScore(sumAverageScoreFinal);
-                effectivenessPhaseDTO.setWeightedPoints(finalScore);
+                effectivenessPhaseDTO.setFinalScore(averageScoreFinal);
+                effectivenessPhaseDTO.setWeightedPoints(weightedPoints);
 
                 finalNiazsanjiReportPersonCriteria.setAverageScore(null);
             }
@@ -243,7 +269,7 @@ public class EffectivenessPhaseResource {
                 double sumValue = finishPeople.stream().mapToDouble(w -> w.getLevelThreeScore()).sum();
 
                 float secondScore = (float) sumValue / allPeopleCount;
-                float finalScore = (float) ((sumValue * effectivenessPhaseDTO.getEffectivenessPhaseLevel().getWeight()) / allPeopleCount) / 100;
+                float finalScore = (secondScore * effectivenessPhaseDTO.getEffectivenessPhaseLevel().getWeight()) / 100;
 
                 effectivenessPhaseDTO.setFirstScore(0f);
                 effectivenessPhaseDTO.setSecondScore(secondScore);
@@ -260,7 +286,7 @@ public class EffectivenessPhaseResource {
                 double sumValue = finishPeople.stream().mapToDouble(w -> w.getLevelFourScore()).sum();
 
                 float secondScore = (float) sumValue / allPeopleCount;
-                float finalScore = (float) ((sumValue * effectivenessPhaseDTO.getEffectivenessPhaseLevel().getWeight()) / allPeopleCount) / 100;
+                float finalScore = (secondScore * effectivenessPhaseDTO.getEffectivenessPhaseLevel().getWeight()) / 100;
 
                 effectivenessPhaseDTO.setFirstScore(0f);
                 effectivenessPhaseDTO.setSecondScore(secondScore);
@@ -271,6 +297,46 @@ public class EffectivenessPhaseResource {
             }
         }
 
+        if(finalNiazsanjiReport.getCurrentEffectivenessPhaseLevel() <= finalNiazsanjiReport.getSelectedEffectivenessPhaseLevel())
+        {
+            EffectivenessPhaseLevelCriteria effectivenessPhaseLevelCriteria = new EffectivenessPhaseLevelCriteria();
+            IntegerFilter currentEffectivenessPhaseLevelFilter = new IntegerFilter();
+            currentEffectivenessPhaseLevelFilter.setEquals(finalNiazsanjiReport.getCurrentEffectivenessPhaseLevel());
+            effectivenessPhaseLevelCriteria.setEffectivenessLevelUse(currentEffectivenessPhaseLevelFilter);
+
+            List<EffectivenessPhaseLevelDTO> effectivenessPhaseLevelDTOList = effectivenessPhaseLevelQueryService.findByCriteria(effectivenessPhaseLevelCriteria);
+
+            if(!effectivenessPhaseLevelDTOList.isEmpty())
+            {
+                for (EffectivenessPhaseDTO effectivenessPhaseDTO : effectivenessPhaseDTOS) {
+                    if(effectivenessPhaseDTO.getEffectivenessPhaseLevel().getEffectivenessLevel() == 1){
+                        EffectivenessPhaseLevelDTO effectivenessPhaseLevelDTO = effectivenessPhaseLevelDTOList.stream()
+                            .filter(w -> w.getEffectivenessLevel() == 1).findFirst().get();
+                        effectivenessPhaseDTO.setCurrentWeightedPoints(
+                            (effectivenessPhaseDTO.getFinalScore() * effectivenessPhaseLevelDTO.getWeight()) / 100);
+                    }
+                    if(effectivenessPhaseDTO.getEffectivenessPhaseLevel().getEffectivenessLevel() == 2){
+                        EffectivenessPhaseLevelDTO effectivenessPhaseLevelDTO = effectivenessPhaseLevelDTOList.stream()
+                            .filter(w -> w.getEffectivenessLevel() == 2).findFirst().get();
+                        effectivenessPhaseDTO.setCurrentWeightedPoints(
+                            (effectivenessPhaseDTO.getFinalScore() * effectivenessPhaseLevelDTO.getWeight()) / 100);
+                    }
+                    if(effectivenessPhaseDTO.getEffectivenessPhaseLevel().getEffectivenessLevel() == 3){
+                        EffectivenessPhaseLevelDTO effectivenessPhaseLevelDTO = effectivenessPhaseLevelDTOList.stream()
+                            .filter(w -> w.getEffectivenessLevel() == 3).findFirst().get();
+                        effectivenessPhaseDTO.setCurrentWeightedPoints(
+                            (effectivenessPhaseDTO.getFinalScore() * effectivenessPhaseLevelDTO.getWeight()) / 100);
+                    }
+                    if(effectivenessPhaseDTO.getEffectivenessPhaseLevel().getEffectivenessLevel() == 4){
+                        EffectivenessPhaseLevelDTO effectivenessPhaseLevelDTO = effectivenessPhaseLevelDTOList.stream()
+                            .filter(w -> w.getEffectivenessLevel() == 4).findFirst().get();
+                        effectivenessPhaseDTO.setCurrentWeightedPoints(
+                            (effectivenessPhaseDTO.getFinalScore() * effectivenessPhaseLevelDTO.getWeight()) / 100);
+                    }
+                }
+            }
+
+        }
 
         //HttpHeaders headers = null;
         return ResponseEntity.ok().body(effectivenessPhaseDTOS);

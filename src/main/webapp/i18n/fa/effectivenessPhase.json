@@ -35,6 +35,7 @@
             "finalScore": "نتیجه",
             "weightedPoints": "امتیاز موزون",
             "weight": "وزن هر سطح",
+            "currentWeightedPoints": "امتیاز موزون تا به این سطح اثربخشی",
             "description": "توضیحات",
             "createUserLogin": "کاربر ایجاد کننده",
             "createDate": "تاریخ ایجاد",

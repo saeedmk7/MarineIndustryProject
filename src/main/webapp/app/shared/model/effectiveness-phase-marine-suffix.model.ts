@@ -11,6 +11,7 @@ export interface IEffectivenessPhaseMarineSuffix {
     secondScore?: number;
     finalScore?: number;
     weightedPoints?: number;
+    currentWeightedPoints?: number;
     description?: string;
     createUserLogin?: string;
     createDate?: Moment;
@@ -40,6 +41,7 @@ export class EffectivenessPhaseMarineSuffix implements IEffectivenessPhaseMarine
         public secondScore?: number,
         public finalScore?: number,
         public weightedPoints?: number,
+        public currentWeightedPoints?: number,
         public description?: string,
         public createUserLogin?: string,
         public createDate?: Moment,

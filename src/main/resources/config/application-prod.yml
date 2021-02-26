@@ -106,7 +106,7 @@ jhipster:
                 base64-secret: YmI5ZjJiZGU1ZmY4YjYyYjhmOWVmMzFmZGM5MTkxODg1MmJiYzE3MTEzNjA0NzQxYWZlYzU0ZmFkOGUwZDc0ZTE0ZDI5MTg5MDMyOWYyMDQ0MzBlNzY3NDQyOGNmNDFhNTllNDZkODk2ZTJlZGI0ZDY4N2VmMDcxMTA3YTYyYWQ=
                 # Token is valid 24 hours
                 token-validity-in-seconds: 54000
-                token-validity-in-seconds-for-remember-me: 60
+                token-validity-in-seconds-for-remember-me: 54000
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: marineindustryproj@localhost
         base-url: http://my-server-url-to-change # Modify according to your server's URL

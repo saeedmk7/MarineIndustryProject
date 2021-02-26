@@ -95,6 +95,9 @@ public class FinalNiazsanjiReportPerson implements Serializable {
     @Column(name = "level_four_score")
     private Float levelFourScore;
 
+    @Column(name = "absented")
+    private Boolean absented;
+
     @OneToMany(mappedBy = "finalNiazsanjiReportPerson", orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<NiazsanjiPersonGrade> niazsanjiPersonGrades = new HashSet<>();
@@ -364,6 +367,19 @@ public class FinalNiazsanjiReportPerson implements Serializable {
         this.levelFourScore = levelFourScore;
     }
 
+    public Boolean isAbsented() {
+        return absented;
+    }
+
+    public FinalNiazsanjiReportPerson absented(Boolean absented) {
+        this.absented = absented;
+        return this;
+    }
+
+    public void setAbsented(Boolean absented) {
+        this.absented = absented;
+    }
+
     public Set<NiazsanjiPersonGrade> getNiazsanjiPersonGrades() {
         return niazsanjiPersonGrades;
     }
@@ -533,6 +549,7 @@ public class FinalNiazsanjiReportPerson implements Serializable {
             ", levelOneScore=" + getLevelOneScore() +
             ", levelThreeScore=" + getLevelThreeScore() +
             ", levelFourScore=" + getLevelFourScore() +
+            ", absented='" + isAbsented() + "'" +
             "}";
     }
 }

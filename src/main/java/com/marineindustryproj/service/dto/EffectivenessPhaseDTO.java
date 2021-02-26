@@ -65,6 +65,8 @@ public class EffectivenessPhaseDTO implements Serializable {
 
     private Long peopleCount;
 
+    private Float currentWeightedPoints;
+
     public Long getId() {
         return id;
     }
@@ -256,6 +258,7 @@ public class EffectivenessPhaseDTO implements Serializable {
             ", secondScore=" + getSecondScore() +
             ", finalScore=" + getFinalScore() +
             ", weightedPoints=" + getWeightedPoints() +
+            ", currentWeightedPoints=" + getCurrentWeightedPoints() +
             ", description='" + getDescription() + "'" +
             ", createUserLogin='" + getCreateUserLogin() + "'" +
             ", createDate='" + getCreateDate() + "'" +
@@ -301,5 +304,13 @@ public class EffectivenessPhaseDTO implements Serializable {
 
     public void setPeopleFinishCount(Long peopleFinishCount) {
         this.peopleFinishCount = peopleFinishCount;
+    }
+
+    public Float getCurrentWeightedPoints() {
+        return currentWeightedPoints;
+    }
+
+    public void setCurrentWeightedPoints(Float currentWeightedPoints) {
+        this.currentWeightedPoints = currentWeightedPoints;
     }
 }

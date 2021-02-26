@@ -69,6 +69,7 @@ import java.net.URISyntaxException;
 
 import java.time.ZonedDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.ResponseEntity.ok;
 import static org.springframework.http.ResponseEntity.status;
@@ -568,12 +569,13 @@ public class FinalNiazsanjiReportResource {
             .body(result);
     }
 
-    @GetMapping("/final-niazsanji-reports/get-final-effectiveness-phase-report/{reportYear}")
+    @GetMapping("/final-niazsanji-reports/get-final-effectiveness-phase-report/{reportYear}/{organizationChartIds}")
     @Timed
-    public ResponseEntity<List<FinalEffectivenessPhaseReportModel>> getFinalEffectivenessPhaseReport(@PathVariable Integer reportYear) {
+    public ResponseEntity<List<FinalEffectivenessPhaseReportModel>> getFinalEffectivenessPhaseReport(@PathVariable Integer reportYear, @PathVariable List<Long> organizationChartIds) {
         log.debug("REST request to get FinalEffectivenessPhaseReport by reportYear: {}", reportYear);
+        organizationChartIds = organizationChartIds.stream().filter(w -> w != 0).collect(Collectors.toList());
         List<FinalEffectivenessPhaseReportModel> finalEffectivenessPhaseReportModels =
-            finalNiazsanjiReportService.getFinalEffectivenessPhaseReport(reportYear);
+            finalNiazsanjiReportService.getFinalEffectivenessPhaseReport(reportYear, organizationChartIds);
         return ResponseEntity.ok().body(finalEffectivenessPhaseReportModels);
     }
     @GetMapping("/final-niazsanji-reports/with-people")

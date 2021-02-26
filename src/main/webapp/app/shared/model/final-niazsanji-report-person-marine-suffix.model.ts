@@ -1,10 +1,10 @@
 import { Moment } from 'moment';
-import {NiazSanjiSource} from 'app/shared/model/enums/NiazSanjiSource';
-import {INiazsanjiPersonGradeMarineSuffix} from "app/shared/model/niazsanji-person-grade-marine-suffix.model";
-import {IFinalNiazsanjiReportMarineSuffix} from "app/shared/model/final-niazsanji-report-marine-suffix.model";
-import {IDocumentMarineSuffix} from "app/shared/model/document-marine-suffix.model";
-import {ILevelFourEffectivenessMarineSuffix} from "app/shared/model/level-four-effectiveness-marine-suffix.model";
-import {ILevelThreeEffectivenessMarineSuffix} from 'app/shared/model/level-three-effectiveness-marine-suffix.model';
+import { NiazSanjiSource } from 'app/shared/model/enums/NiazSanjiSource';
+import { INiazsanjiPersonGradeMarineSuffix } from 'app/shared/model/niazsanji-person-grade-marine-suffix.model';
+import { IFinalNiazsanjiReportMarineSuffix } from 'app/shared/model/final-niazsanji-report-marine-suffix.model';
+import { IDocumentMarineSuffix } from 'app/shared/model/document-marine-suffix.model';
+import { ILevelFourEffectivenessMarineSuffix } from 'app/shared/model/level-four-effectiveness-marine-suffix.model';
+import { ILevelThreeEffectivenessMarineSuffix } from 'app/shared/model/level-three-effectiveness-marine-suffix.model';
 
 export interface IFinalNiazsanjiReportPersonMarineSuffix {
     id?: number;
@@ -26,6 +26,7 @@ export interface IFinalNiazsanjiReportPersonMarineSuffix {
     levelOneScore?: number;
     levelThreeScore?: number;
     levelFourScore?: number;
+    absented?: boolean;
     niazsanjiPersonGrades?: INiazsanjiPersonGradeMarineSuffix[];
     levelThreeEffectivenesses?: ILevelThreeEffectivenessMarineSuffix[];
     levelFourEffectivenesses?: ILevelFourEffectivenessMarineSuffix[];
@@ -60,6 +61,7 @@ export class FinalNiazsanjiReportPersonMarineSuffix implements IFinalNiazsanjiRe
         public levelOneScore?: number,
         public levelThreeScore?: number,
         public levelFourScore?: number,
+        public absented?: boolean,
         public niazsanjiPersonGrades?: INiazsanjiPersonGradeMarineSuffix[],
         public levelThreeEffectivenesses?: ILevelThreeEffectivenessMarineSuffix[],
         public levelFourEffectivenesses?: ILevelFourEffectivenessMarineSuffix[],
@@ -73,5 +75,6 @@ export class FinalNiazsanjiReportPersonMarineSuffix implements IFinalNiazsanjiRe
         public finalNiazsanjiReport?: IFinalNiazsanjiReportMarineSuffix
     ) {
         this.archived = this.archived || false;
+        this.absented = this.absented || false;
     }
 }

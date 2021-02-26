@@ -121,8 +121,10 @@ export class EducationalModuleMarineSuffixDetailComponent implements OnInit {
             this.educationalModule = educationalModule;
             if (this.educationalModule.teachers) this.educationalModule.teachers.forEach(a => (a.fullName = a.name + ' ' + a.family));
             this.educationalModule = this.convertObjectDatesService.changeDate(educationalModule);
-
-            $('#target :input').attr('disabled', 'disabled');
+            if (this.educationalModule.code && this.educationalModule.code.includes('(')) {
+                this.educationalModule.code = this.educationalModule.code.substring(0, this.educationalModule.code.indexOf('('));
+            }
+            $('#target:input').attr('disabled', 'disabled');
         });
         this.effectivenessLevelService.query().subscribe(
             (res: HttpResponse<IEffectivenessLevelMarineSuffix[]>) => {

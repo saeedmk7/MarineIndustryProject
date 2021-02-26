@@ -9,6 +9,7 @@ import com.marineindustryproj.service.dto.customs.EffectivenessPhasePerCriteriaD
 import com.marineindustryproj.web.rest.errors.BadRequestAlertException;
 import com.marineindustryproj.web.rest.util.HeaderUtil;
 import com.marineindustryproj.web.rest.util.PaginationUtil;
+import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -150,7 +151,11 @@ public class NiazsanjiPersonGradeResource {
         LongFilter finalNiazsanjiReportFilter = new LongFilter();
         finalNiazsanjiReportFilter.setEquals(finalNiazsanjiReportId);
 
+        BooleanFilter finalNiazsanjiReportPersonAbsentFilter = new BooleanFilter();
+        finalNiazsanjiReportPersonAbsentFilter.setEquals(false);
+
         finalNiazsanjiReportPersonCriteria.setFinalNiazsanjiReportId(finalNiazsanjiReportFilter);
+        finalNiazsanjiReportPersonCriteria.setAbsented(finalNiazsanjiReportPersonAbsentFilter);
 
         List<FinalNiazsanjiReportPersonDTO> finalNiazsanjiReportPersonDTOS = finalNiazsanjiReportPersonQueryService.findByCriteria(finalNiazsanjiReportPersonCriteria);
 

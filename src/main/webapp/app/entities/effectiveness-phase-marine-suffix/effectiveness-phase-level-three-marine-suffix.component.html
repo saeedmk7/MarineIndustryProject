@@ -31,16 +31,38 @@
                 <div class="card-footer text-muted success-color white-text">
                     <button (click)="selectMahiatCourseById(finalNiazsanjiReport.mahiatCourseId)"
                             [disabled]="!finalNiazsanjiReport.mahiatCourseId || mahiatCourseDisable"
-                            class="btn btn-primary">ذخیره ماهیت دوره
+                            class="btn btn-primary">ذخیره ماهیت دوره و ادامه فرآیند اثربخشی در سطح عملکرد
                     </button>
                 </div>
             </div>
 
         </div>
     </div>
-
+    <div class="alert alert-info">
+        <span style="display: inline-block">
+            <img src="/content/images/info.png" style="max-width: 25px; vertical-align: super;"/>
+        </span>
+        <span style="display: inline-block">
+            <p>
+                <span style="color: #127ccd">
+                    فرمول محاسبه میانگین کل :
+                </span>
+                <span style="color: blueviolet">
+                    مجموع ستون "نتیجه سطح سوم" تقسیم بر تعداد افراد حاضر در اثربخشی
+                </span>
+            </p>
+            <p>
+                <span style="color: #127ccd">
+                    نحوه محاسبه گرید:
+                </span>
+                <span style="color: blueviolet">
+                    میانگین کوچکتر مساوی 50 گرید D ، از 51 تا 60 گرید C، از 61 تا 75 گرید B، از 76 تا 100 گرید A
+                </span>
+            </p>
+        </span>
+    </div>
         <div class="table-responsive" *ngIf="finalNiazsanjiReportPeople">
-            <table class="table table-striped  table-bordered table-sm">
+            <table class="table table-bordered table-sm">
                 <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
                     <th>ردیف</th>
@@ -59,7 +81,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let finalNiazsanjiReportPerson of finalNiazsanjiReportPeople ;let i = index;">
+                <tr *ngFor="let finalNiazsanjiReportPerson of finalNiazsanjiReportPeople ;let i = index;"
+                    [ngClass]="{'accept': !finalNiazsanjiReportPerson.absented,
+                    'absent': finalNiazsanjiReportPerson.absented === true}">
                     <!--<td><a [routerLink]="['/final-niazsanji-report-person-marine-suffix', finalNiazsanjiReportPerson.id, 'view' ]">{{finalNiazsanjiReportPerson.id}}</a></td>-->
                     <td>{{i+1}}</td>
                     <td>
@@ -82,7 +106,7 @@
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
+                            <button type="submit" *ngIf="!finalNiazsanjiReportPerson.absented"
                                     [routerLink]="['/level-three-effectiveness-marine-suffix/new', finalNiazsanjiReportPerson.id ]"
                                     class="btn btn-info btn-sm">
                                 <ng-container *ngIf="effectivenessPhase.status < 20">

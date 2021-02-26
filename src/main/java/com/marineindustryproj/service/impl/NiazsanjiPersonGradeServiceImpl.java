@@ -126,7 +126,10 @@ public class NiazsanjiPersonGradeServiceImpl implements NiazsanjiPersonGradeServ
             throw new Exception("finalNiazsanjiReportId is not valid");
         }
 
-        List<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeopleNotFinished = finalNiazsanjiReport.getFinalNiazsanjiReportPeople().stream().filter(a -> a.getLevelOneScore() == null || a.getLevelOneScore() == 0).collect(Collectors.toList());
+        List<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeopleNotFinished = finalNiazsanjiReport
+            .getFinalNiazsanjiReportPeople().stream()
+            .filter(a -> (a.isAbsented() == false) && (a.getLevelOneScore() == null || a.getLevelOneScore() == 0))
+            .collect(Collectors.toList());
         if(!finalNiazsanjiReportPeopleNotFinished.isEmpty()){
             throw new Exception("هنوز یکی از افراد اثربخشی نشده است");
         }
@@ -135,7 +138,8 @@ public class NiazsanjiPersonGradeServiceImpl implements NiazsanjiPersonGradeServ
         List<EffectivenessPhase> effectivenessPhasesList = effectivenessPhaseRepository.findAllByFinalNiazsanjiReport(finalNiazsanjiReportId);
         if((!effectivenessPhasesList.isEmpty()) && effectivenessPhasesList.size() > 0)
         {
-            Optional<EffectivenessPhase> effectivenessPhaseOptional = effectivenessPhasesList.stream().filter(a -> a.getEffectivenessPhaseLevel().getEffectivenessLevel() == 1).findFirst();
+            Optional<EffectivenessPhase> effectivenessPhaseOptional = effectivenessPhasesList.stream()
+                .filter(a -> a.getEffectivenessPhaseLevel().getEffectivenessLevel() == 1).findFirst();
             if(!effectivenessPhaseOptional.isPresent()){
                 throw new Exception("finalNiazsanjiReportId is not valid");
             }
@@ -145,10 +149,14 @@ public class NiazsanjiPersonGradeServiceImpl implements NiazsanjiPersonGradeServ
             throw new Exception("finalNiazsanjiReportId is not valid");
         }
 
-        List<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = finalNiazsanjiReport.getFinalNiazsanjiReportPeople().stream().collect(Collectors.toList());
+        List<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = finalNiazsanjiReport
+            .getFinalNiazsanjiReportPeople().stream()
+            .filter(w -> w.isAbsented() == false)
+            .collect(Collectors.toList());
 
         float finalScore = (float) (finalNiazsanjiReportPeople.stream().mapToDouble(a -> a.getLevelOneScore()).sum() / finalNiazsanjiReportPeople.size());
-        float weightedScore = (float) ((finalNiazsanjiReportPeople.stream().mapToDouble(a -> a.getLevelOneScore() * effectivenessPhase.getEffectivenessPhaseLevel().getWeight()).sum() / finalNiazsanjiReportPeople.size())) / 100;
+        float weightedScore = (float) ((finalNiazsanjiReportPeople.stream().mapToDouble(a -> a.getLevelOneScore() * effectivenessPhase.getEffectivenessPhaseLevel().getWeight()).sum()
+            / finalNiazsanjiReportPeople.size())) / 100;
 
         effectivenessPhase.setSecondScore(finalScore);
         effectivenessPhase.setFinalScore(finalScore);

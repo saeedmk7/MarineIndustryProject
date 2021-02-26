@@ -27,7 +27,8 @@ import { IEffectivenessPhasePerCriteriaData } from 'app/shared/model/custom/effe
 
 @Component({
     selector: 'mi-effectiveness-phase-level-four-marine-suffix',
-    templateUrl: './effectiveness-phase-level-four-marine-suffix.component.html'
+    templateUrl: './effectiveness-phase-level-four-marine-suffix.component.html',
+    styleUrls: ['./effectiveness-phase-marine-suffix.scss']
 })
 export class EffectivenessPhaseLevelFourMarineSuffixComponent implements OnInit, OnDestroy {
     currentAccount: any;
@@ -125,12 +126,15 @@ export class EffectivenessPhaseLevelFourMarineSuffixComponent implements OnInit,
                 this.finalNiazsanjiReportPeople = resp.body.sort(
                     (a, b) => (a.modifyDate > b.modifyDate ? 1 : a.modifyDate < b.modifyDate ? -1 : 0)
                 );
+                this.finalNiazsanjiReportPeople = this.finalNiazsanjiReportPeople.sort(
+                    (a, b) => (a.absented > b.absented ? 1 : a.absented < b.absented ? -1 : 0)
+                );
 
-                this.fullAverage =
-                    this.finalNiazsanjiReportPeople.map(w => w.levelFourScore).reduce((sum, current) => sum + current) /
-                    this.finalNiazsanjiReportPeople.length;
+                const presentPeople = this.finalNiazsanjiReportPeople.filter(w => !w.absented);
+
+                this.fullAverage = presentPeople.map(w => w.levelFourScore).reduce((sum, current) => sum + current) / presentPeople.length;
                 this.fullGrade = this.convertObjectDatesService.calculateGrade(this.fullAverage);
-                if (this.finalNiazsanjiReportPeople.filter(w => w.levelFourScore > 0).length == this.finalNiazsanjiReportPeople.length) {
+                if (presentPeople.filter(w => w.levelFourScore > 0).length == presentPeople.length) {
                     this.canComplete = true;
                 }
             });

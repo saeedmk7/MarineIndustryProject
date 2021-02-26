@@ -16,6 +16,7 @@ import com.marineindustryproj.service.dto.RunPhaseDTO;
 import com.marineindustryproj.service.dto.customs.CountListModel;
 import com.marineindustryproj.service.dto.customs.FinalNiazsanjiPeopleListModel;
 import com.marineindustryproj.service.mapper.FinalNiazsanjiReportPersonMapper;
+import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,6 +75,9 @@ public class FinalNiazsanjiReportPersonServiceImpl implements FinalNiazsanjiRepo
     @Override
     public FinalNiazsanjiReportPersonDTO save(FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPersonDTO) {
         log.debug("Request to save FinalNiazsanjiReportPerson : {}", finalNiazsanjiReportPersonDTO);
+
+        if(finalNiazsanjiReportPersonDTO.isAbsented() == null)
+            finalNiazsanjiReportPersonDTO.setAbsented(false);
 
         FinalNiazsanjiReportPerson finalNiazsanjiReportPerson = finalNiazsanjiReportPersonMapper.toEntity(finalNiazsanjiReportPersonDTO);
         finalNiazsanjiReportPerson = finalNiazsanjiReportPersonRepository.save(finalNiazsanjiReportPerson);
@@ -146,9 +150,17 @@ public class FinalNiazsanjiReportPersonServiceImpl implements FinalNiazsanjiRepo
     }
 
     @Override
-    public List<CountListModel> countListFinalNiazsanjiReportPeople(long[] finalNiazsanjiReportIds) {
+    public List<CountListModel> countListFinalNiazsanjiReportPeople(long[] finalNiazsanjiReportIds, boolean justPresented) {
         List<CountListModel> countListModels = new ArrayList<>();
         FinalNiazsanjiReportPersonCriteria criteria = new FinalNiazsanjiReportPersonCriteria();
+
+        if(justPresented)
+        {
+            BooleanFilter finalNiazsanjiReportPersonAbsentFilter = new BooleanFilter();
+            finalNiazsanjiReportPersonAbsentFilter.setEquals(false);
+            criteria.setAbsented(finalNiazsanjiReportPersonAbsentFilter);
+        }
+
         LongFilter finalNiazsanjiReportIdFilter = new LongFilter();
         for (Long finalNiazsanjiReportId : finalNiazsanjiReportIds) {
             finalNiazsanjiReportIdFilter.setEquals(finalNiazsanjiReportId);

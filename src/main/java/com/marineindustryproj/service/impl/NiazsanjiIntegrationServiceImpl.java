@@ -123,6 +123,7 @@ public class NiazsanjiIntegrationServiceImpl implements NiazsanjiIntegrationServ
         finalNiazsanjiReportPerson.setPriceCost(prioritizeRequestNiazsanji.getCostEducationalModule().intValue());
         finalNiazsanjiReportPerson.setSourceId(niazsanjiIntegration.getId());
         finalNiazsanjiReportPerson.setStatus(0);
+        finalNiazsanjiReportPerson.setAbsented(false);
         finalNiazsanjiReportPersonService.save(finalNiazsanjiReportPerson);
 
         //NiazsanjiIntegration niazsanjiIntegration = niazsanjiIntegrationMapper.toEntity(niazsanjiIntegrationDTO);

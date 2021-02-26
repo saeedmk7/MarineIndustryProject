@@ -3,14 +3,15 @@
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <h2 id="mi-niazsanji-person-grade-marine-suffix-heading">
                 <span jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.home.createOrEditLabel"></span>
-                (<input value="{{'marineindustryprojApp.niazsanjiPersonGrade.home.code' | translate}}" disabled  class="form-code-input" />)
+                (<input value="{{'marineindustryprojApp.niazsanjiPersonGrade.home.code' | translate}}" disabled
+                        class="form-code-input"/>)
             </h2>
             <div>
                 <mi-alert-error></mi-alert-error>
                 <div class="form-group" [hidden]="!niazsanjiPersonGrade.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="niazsanjiPersonGrade.id" readonly />
+                           [(ngModel)]="niazsanjiPersonGrade.id" readonly/>
                 </div>
                 <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.title" for="field_title">Title</label>
@@ -27,23 +28,27 @@
                     <table class="table table-bordered table-sm">
                         <tr>
                             <th colspan="4" style="text-align: center">
-                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.formTitle">formTitle</label>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.formTitle">formTitle</label>
                             </th>
                         </tr>
                         <tr>
                             <th colspan="4" style="text-align: center">
-                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.recommendTitle">recommendTitle</label>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.recommendTitle">recommendTitle</label>
                             </th>
                         </tr>
                         <tr>
                             <th style="text-align: center">
-                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.courseTitle">courseTitle</label>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.courseTitle">courseTitle</label>
                             </th>
                             <td>
                                 {{finalNiazsanjiReport.educationalModuleTitle}}
                             </td>
                             <th style="text-align: center">
-                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.evaluateDate">evaluateDate</label>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.evaluateDate">evaluateDate</label>
                             </th>
                             <td>
                                 {{niazsanjiPersonGrade.evaluateDate}}
@@ -51,7 +56,8 @@
                         </tr>
                         <tr>
                             <th style="text-align: center">
-                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.finalNiazsanjiReportPerson">finalNiazsanjiReportPerson</label>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.finalNiazsanjiReportPerson">finalNiazsanjiReportPerson</label>
                             </th>
                             <td>
                                 {{finalNiazsanjiReportPerson.personFullName}}
@@ -63,14 +69,16 @@
 
                             </td>-->
                             <th style="text-align: center">
-                                <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.teacherFullName">teacherFullName</label>
+                                <label class="form-control-label"
+                                       jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.teacherFullName">teacherFullName</label>
                             </th>
                             <td>
                                 {{finalNiazsanjiReport.teacherName}} {{finalNiazsanjiReport.teacherFamily}}
                             </td>
                         </tr>
                     </table>
-                    <a *ngIf="isSuperUsers" (click)="change('niazsanji-person-criteria-marine-suffix')" class="btn btn-info"
+                    <a *ngIf="isSuperUsers" (click)="change('niazsanji-person-criteria-marine-suffix')"
+                       class="btn btn-info"
                        [ngClass]="{'enableLink': isSuperUsers}">تصحیح لیست معیارهای ارزشیابی</a>
                     <table class="table table-bordered table-sm">
                         <tr>
@@ -85,10 +93,12 @@
                             </th>
                             <th rowspan="2">
                                 <label class="form-control-label"
-                                       jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.description">description</label></th>
+                                       jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.description">description</label>
+                            </th>
                             <th rowspan="2">
                                 <label class="form-control-label"
-                                       jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.weight">weight</label></th>
+                                       jhiTranslate="marineindustryprojApp.niazsanjiPersonCriteria.weight">weight</label>
+                            </th>
                             <th colspan="5">امتیازات</th>
                             <th rowspan="2">
                                 <label class="form-control-label"
@@ -102,7 +112,9 @@
                             [style.background-color]="item.niazsanjiPersonBackgroundColor"
                             [style.color]="item.niazsanjiPersonColorText">
                             <td>{{i+1}}</td>
-                            <td>{{'marineindustryprojApp.CriterionType.' + item.niazsanjiPersonCriterionType | translate }}</td>
+                            <td>{{'marineindustryprojApp.CriterionType.' + item.niazsanjiPersonCriterionType | translate
+                                }}
+                            </td>
                             <td>{{item.niazsanjiPersonCriteriaTitle}}</td>
                             <td>{{item.niazsanjiPersonCriteriaDescription}}</td>
                             <td>{{item.niazsanjiPersonCriteriaWeight}}</td>
@@ -130,122 +142,67 @@
                         </tr>
                     </table>
                 </div>
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.totalScore" for="field_totalScore">Total Score</label>
-                    <input type="number" class="form-control" name="totalScore" id="field_totalScore"
-                        [(ngModel)]="niazsanjiPersonGrade.totalScore" required/>
-                    <div [hidden]="!(editForm.controls.totalScore?.dirty && editForm.controls.totalScore?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.totalScore?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.totalScore?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
+                <div class="alert alert-info">
+                    <span style="display: inline-block">
+                        <img src="/content/images/info.png" style="max-width: 25px; vertical-align: super;"/>
+                    </span>
+                    <span style="display: inline-block">
+                        <p>
+                            <span style="color: #127ccd">
+                                فرمول محاسبه جمع امتیاز :
+                            </span>
+                            <span style="color: blueviolet">
+                                مجموع امتیازات ضربدر وزن معیار ارزشیابی متناظرشان
+                            </span>
+                        </p>
+                        <p>
+                            <span style="color: #127ccd">
+                                فرمول محاسبه درصد جمع امتیاز :
+                            </span>
+                            <span style="color: blueviolet">
+                                 (جمع امتیاز(فرمول بالا) تقسیم بر مجموع حداکثر امتیاز(5) ضربدر وزن معیار ارزشیابی متناظر) ضربدر 100
+                            </span>
+                        </p>
+                    </span>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.totalScorePercent" for="field_totalScorePercent">Total Score Percent</label>
-                    <input type="number" class="form-control" name="totalScorePercent" id="field_totalScorePercent"
-                        [(ngModel)]="niazsanjiPersonGrade.totalScorePercent" required/>
-                    <div [hidden]="!(editForm.controls.totalScorePercent?.dirty && editForm.controls.totalScorePercent?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.totalScorePercent?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.totalScorePercent?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>-->
-               <!-- <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.grade" for="field_grade">Grade</label>
-                    <select class="form-control" name="grade" [(ngModel)]="niazsanjiPersonGrade.grade" id="field_grade"  required>
-                        <option value="A">{{'marineindustryprojApp.Grade.A' | translate}}</option>
-                        <option value="B">{{'marineindustryprojApp.Grade.B' | translate}}</option>
-                        <option value="C">{{'marineindustryprojApp.Grade.C' | translate}}</option>
-                        <option value="D">{{'marineindustryprojApp.Grade.D' | translate}}</option>
-                    </select>
-                    <div [hidden]="!(editForm.controls.grade?.dirty && editForm.controls.grade?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.grade?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>-->
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.evaluateDate" for="field_evaluateDate">Evaluate Date</label>
-                    <input type="text" class="form-control" name="evaluateDate" id="field_evaluateDate"
-                        [(ngModel)]="niazsanjiPersonGrade.evaluateDate" maxlength="50"/>
-                    <div [hidden]="!(editForm.controls.evaluateDate?.dirty && editForm.controls.evaluateDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.evaluateDate?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                        This field cannot be longer than 50 characters.
-                        </small>
-                    </div>
-                </div>-->
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.year" for="field_year">Year</label>
-                    <input type="number" class="form-control" name="year" id="field_year"
-                        [(ngModel)]="niazsanjiPersonGrade.year" required/>
-                    <div [hidden]="!(editForm.controls.year?.dirty && editForm.controls.year?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.year?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.year?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.month" for="field_month">Month</label>
-                    <input type="number" class="form-control" name="month" id="field_month"
-                        [(ngModel)]="niazsanjiPersonGrade.month" required/>
-                    <div [hidden]="!(editForm.controls.month?.dirty && editForm.controls.month?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.month?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.month?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>-->
                 <div class="form-group fullcover">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.strength" for="field_strength">Strength</label>
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.strength"
+                           for="field_strength">Strength</label>
                     <textarea type="text" class="form-control" name="strength" id="field_strength"
                               [(ngModel)]="niazsanjiPersonGrade.strength" maxlength="1024"></textarea>
                     <div [hidden]="!(editForm.controls.strength?.dirty && editForm.controls.strength?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.strength?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1024 }">
-                        This field cannot be longer than 1024 characters.
+                               [hidden]="!editForm.controls.strength?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1024 }">
+                            This field cannot be longer than 1024 characters.
                         </small>
                     </div>
                 </div>
                 <div class="form-group fullcover">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.improvement" for="field_improvement">Improvement</label>
+                    <label class="form-control-label"
+                           jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.improvement"
+                           for="field_improvement">Improvement</label>
                     <textarea type="text" class="form-control" name="improvement" id="field_improvement"
                               [(ngModel)]="niazsanjiPersonGrade.improvement" maxlength="1024"></textarea>
                     <div [hidden]="!(editForm.controls.improvement?.dirty && editForm.controls.improvement?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.improvement?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1024 }">
-                        This field cannot be longer than 1024 characters.
+                               [hidden]="!editForm.controls.improvement?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1024 }">
+                            This field cannot be longer than 1024 characters.
                         </small>
                     </div>
                 </div>
                 <div class="form-group fullcover">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.whatDoYouDo" for="field_whatDoYouDo">What Do You Do</label>
+                    <label class="form-control-label"
+                           jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.whatDoYouDo"
+                           for="field_whatDoYouDo">What Do You Do</label>
                     <textarea type="text" class="form-control" name="whatDoYouDo" id="field_whatDoYouDo"
                               [(ngModel)]="niazsanjiPersonGrade.whatDoYouDo" maxlength="1024"></textarea>
                     <div [hidden]="!(editForm.controls.whatDoYouDo?.dirty && editForm.controls.whatDoYouDo?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.whatDoYouDo?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1024 }">
-                        This field cannot be longer than 1024 characters.
+                               [hidden]="!editForm.controls.whatDoYouDo?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1024 }">
+                            This field cannot be longer than 1024 characters.
                         </small>
                     </div>
                 </div>
@@ -255,13 +212,16 @@
                         [(ngModel)]="niazsanjiPersonGrade.fileDoc" ></textarea>
                 </div>-->
                 <div class="form-group fullcover">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.description" for="field_description">Description</label>
+                    <label class="form-control-label"
+                           jhiTranslate="marineindustryprojApp.niazsanjiPersonGrade.description"
+                           for="field_description">Description</label>
                     <textarea type="text" class="form-control" name="description" id="field_description"
                               [(ngModel)]="niazsanjiPersonGrade.description" maxlength="4096"></textarea>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
-                        This field cannot be longer than 4096 characters.
+                               [hidden]="!editForm.controls.description?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                            This field cannot be longer than 4096 characters.
                         </small>
                     </div>
                 </div>
@@ -317,10 +277,11 @@
                 </div>-->
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary" *ngIf="effectivenessPhase.status < 20">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving"
+                        class="btn btn-primary" *ngIf="effectivenessPhase.status < 20">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

@@ -115,6 +115,7 @@ export class EffectivenessPhaseMarineSuffixComponent implements OnInit, OnDestro
             if (this.effectivenessPhase.finalNiazsanjiReportId) {
                 this.effectivenessPhaseService.getByFinalNiazsanjiReportId(this.effectivenessPhase.finalNiazsanjiReportId).subscribe(
                     (resp: HttpResponse<IEffectivenessPhaseMarineSuffix[]>) => {
+                        debugger;
                         this.effectivenessPhases = this.convertObjectDatesService.changeArrayDate(resp.body);
                         if (this.effectivenessPhases && this.effectivenessPhases.length > 0) {
                             this.finalNiazsanjiReport = this.effectivenessPhases[0].finalNiazsanjiReport;

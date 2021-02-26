@@ -178,7 +178,9 @@
             "evaluate": "انجام ارزیابی",
             "startPhase": "شروع اثربخشی",
             "continuePhase": "ادامه اثربخشی",
-            "effect": "اثربخشی"
+            "effect": "اثربخشی",
+            "absent": "ثبت غیبت",
+            "present": "ثبت حاضری"
         },
         "detail": {
             "field": "فیلد",

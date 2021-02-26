@@ -17,7 +17,8 @@ import { IEffectivenessPhaseMarineSuffix } from 'app/shared/model/effectiveness-
 
 @Component({
     selector: 'mi-effectiveness-phase-level-two-marine-suffix',
-    templateUrl: './effectiveness-phase-level-two-marine-suffix.component.html'
+    templateUrl: './effectiveness-phase-level-two-marine-suffix.component.html',
+    styleUrls: ['./effectiveness-phase-marine-suffix.scss']
 })
 export class EffectivenessPhaseLevelTwoMarineSuffixComponent implements OnInit, OnDestroy {
     currentAccount: any;
@@ -105,18 +106,17 @@ export class EffectivenessPhaseLevelTwoMarineSuffixComponent implements OnInit, 
             .getLevelOneDataByFinalNiazsanjiReportId(this.finalNiazsanjiReportId)
             .subscribe((resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix[]>) => {
                 this.finalNiazsanjiReportPeople = resp.body.sort((a, b) => (a.id > b.id ? 1 : a.id < b.id ? -1 : 0));
+                this.finalNiazsanjiReportPeople = this.finalNiazsanjiReportPeople.sort(
+                    (a, b) => (a.absented > b.absented ? 1 : a.absented < b.absented ? -1 : 0)
+                );
 
-                this.firstScoreAverage = this.finalNiazsanjiReportPeople
-                    .map(w => w.scoreBeforeTest)
-                    .reduce((sum, current) => sum + current);
-                this.secondScoreAverage = this.finalNiazsanjiReportPeople
-                    .map(w => w.scoreAfterTest)
-                    .reduce((sum, current) => sum + current);
-                this.fullAverage = this.finalNiazsanjiReportPeople.map(w => w.averageScore).reduce((sum, current) => sum + current);
+                const presentPeople = this.finalNiazsanjiReportPeople.filter(w => !w.absented);
+                this.firstScoreAverage = presentPeople.map(w => w.scoreBeforeTest).reduce((sum, current) => sum + current);
+                this.secondScoreAverage = presentPeople.map(w => w.scoreAfterTest).reduce((sum, current) => sum + current);
 
-                if (this.firstScoreAverage > 0) this.firstScoreAverage = this.firstScoreAverage / this.finalNiazsanjiReportPeople.length;
+                if (this.firstScoreAverage > 0) this.firstScoreAverage = this.firstScoreAverage / presentPeople.length;
 
-                if (this.secondScoreAverage > 0) this.secondScoreAverage = this.secondScoreAverage / this.finalNiazsanjiReportPeople.length;
+                if (this.secondScoreAverage > 0) this.secondScoreAverage = this.secondScoreAverage / presentPeople.length;
 
                 const goal = this.effectivenessPhase.effectivenessPhaseLevel.goal;
 
@@ -129,7 +129,7 @@ export class EffectivenessPhaseLevelTwoMarineSuffixComponent implements OnInit, 
 
                 this.fullGrade = this.convertObjectDatesService.calculateGrade(this.fullAverage);
 
-                if (this.finalNiazsanjiReportPeople.filter(w => w.averageScore > 0).length == this.finalNiazsanjiReportPeople.length) {
+                if (presentPeople.filter(w => w.averageScore > 0).length == presentPeople.length) {
                     this.canComplete = true;
                 }
             });

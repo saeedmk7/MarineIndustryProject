@@ -67,6 +67,8 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
 
     private FloatFilter levelFourScore;
 
+    private BooleanFilter absented;
+
     private LongFilter niazsanjiPersonGradeId;
 
     private LongFilter levelThreeEffectivenessId;
@@ -231,6 +233,14 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
         this.levelFourScore = levelFourScore;
     }
 
+    public BooleanFilter getAbsented() {
+        return absented;
+    }
+
+    public void setAbsented(BooleanFilter absented) {
+        this.absented = absented;
+    }
+
     public LongFilter getNiazsanjiPersonGradeId() {
         return niazsanjiPersonGradeId;
     }
@@ -309,6 +319,7 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
             Objects.equals(levelOneScore, that.levelOneScore) &&
             Objects.equals(levelThreeScore, that.levelThreeScore) &&
             Objects.equals(levelFourScore, that.levelFourScore) &&
+            Objects.equals(absented, that.absented) &&
             Objects.equals(niazsanjiPersonGradeId, that.niazsanjiPersonGradeId) &&
             Objects.equals(levelThreeEffectivenessId, that.levelThreeEffectivenessId) &&
             Objects.equals(levelFourEffectivenessId, that.levelFourEffectivenessId) &&
@@ -339,6 +350,7 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
         levelOneScore,
         levelThreeScore,
         levelFourScore,
+        absented,
         niazsanjiPersonGradeId,
         levelThreeEffectivenessId,
         levelFourEffectivenessId,
@@ -370,6 +382,7 @@ public class FinalNiazsanjiReportPersonCriteria implements Serializable {
                 (levelOneScore != null ? "levelOneScore=" + levelOneScore + ", " : "") +
                 (levelThreeScore != null ? "levelThreeScore=" + levelThreeScore + ", " : "") +
                 (levelFourScore != null ? "levelFourScore=" + levelFourScore + ", " : "") +
+                (absented != null ? "absented=" + absented + ", " : "") +
                 (niazsanjiPersonGradeId != null ? "niazsanjiPersonGradeId=" + niazsanjiPersonGradeId + ", " : "") +
                 (levelThreeEffectivenessId != null ? "levelThreeEffectivenessId=" + levelThreeEffectivenessId + ", " : "") +
                 (levelFourEffectivenessId != null ? "levelFourEffectivenessId=" + levelFourEffectivenessId + ", " : "") +

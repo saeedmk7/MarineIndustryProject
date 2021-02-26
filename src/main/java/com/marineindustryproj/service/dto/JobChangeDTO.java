@@ -33,6 +33,8 @@ public class JobChangeDTO implements Serializable {
 
     private String personFamily;
 
+    private String personName;
+
     private Long oldJobId;
 
     private String oldJobTitle;
@@ -113,6 +115,14 @@ public class JobChangeDTO implements Serializable {
         this.personFamily = personFamily;
     }
 
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
     public Long getOldJobId() {
         return oldJobId;
     }
@@ -178,6 +188,7 @@ public class JobChangeDTO implements Serializable {
             ", modifyDate='" + getModifyDate() + "'" +
             ", person=" + getPersonId() +
             ", person='" + getPersonFamily() + "'" +
+            ", person='" + getPersonName() + "'" +
             ", oldJob=" + getOldJobId() +
             ", oldJob='" + getOldJobTitle() + "'" +
             ", newJob=" + getNewJobId() +

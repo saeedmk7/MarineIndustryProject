@@ -138,6 +138,9 @@ public class FinalNiazsanjiReportPersonQueryService extends QueryService<FinalNi
             if (criteria.getArchived() != null) {
                 specification = specification.and(buildSpecification(criteria.getArchived(), FinalNiazsanjiReportPerson_.archived));
             }
+            if (criteria.getAbsented() != null) {
+                specification = specification.and(buildSpecification(criteria.getAbsented(), FinalNiazsanjiReportPerson_.absented));
+            }
             if (criteria.getArchivedUserLogin() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getArchivedUserLogin(), FinalNiazsanjiReportPerson_.archivedUserLogin));
             }

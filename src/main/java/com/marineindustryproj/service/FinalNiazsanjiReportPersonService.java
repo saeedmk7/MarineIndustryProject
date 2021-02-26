@@ -54,7 +54,7 @@ public interface FinalNiazsanjiReportPersonService {
      */
     void deleteByFinalNiazsanjiReportId(Long finalNiazsanjiReportId);
 
-    List<CountListModel> countListFinalNiazsanjiReportPeople(long[] finalNiazsanjiReportIds);
+    List<CountListModel> countListFinalNiazsanjiReportPeople(long[] finalNiazsanjiReportIds, boolean justPresented);
 
     List<FinalNiazsanjiPeopleListModel> getFinalNiazsanjiReportPeopleList(long[] finalNiazsanjiReportIds);
 }

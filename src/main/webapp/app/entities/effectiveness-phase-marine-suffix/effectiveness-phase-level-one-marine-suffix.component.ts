@@ -20,7 +20,8 @@ import { IJamHelpMarineSuffix } from 'app/shared/model/jam-help-marine-suffix.mo
 
 @Component({
     selector: 'mi-effectiveness-phase-level-one-marine-suffix',
-    templateUrl: './effectiveness-phase-level-one-marine-suffix.component.html'
+    templateUrl: './effectiveness-phase-level-one-marine-suffix.component.html',
+    styleUrls: ['./effectiveness-phase-marine-suffix.scss']
 })
 export class EffectivenessPhaseLevelOneMarineSuffixComponent implements OnInit, OnDestroy {
     currentAccount: any;
@@ -70,7 +71,9 @@ export class EffectivenessPhaseLevelOneMarineSuffixComponent implements OnInit, 
     }
 
     loadAll() {
+        debugger;
         this.eventSubscriber = this.activatedRoute.params.subscribe(params => {
+            debugger;
             this.finalNiazsanjiReportId = params['finalNiazsanjiReportId'];
             this.finalNiazsanjiReportPersonService
                 .getLevelOneDataByFinalNiazsanjiReportId(this.finalNiazsanjiReportId)
@@ -78,12 +81,20 @@ export class EffectivenessPhaseLevelOneMarineSuffixComponent implements OnInit, 
                     this.finalNiazsanjiReportPeople = resp.body.sort(
                         (a, b) => (a.modifyDate > b.modifyDate ? 1 : a.modifyDate < b.modifyDate ? -1 : 0)
                     );
+                    this.finalNiazsanjiReportPeople = resp.body.sort(
+                        (a, b) => (a.absented > b.absented ? 1 : a.absented < b.absented ? -1 : 0)
+                    );
 
                     this.fullAverage =
-                        this.finalNiazsanjiReportPeople.map(w => w.levelOneScore).reduce((sum, current) => sum + current) /
-                        this.finalNiazsanjiReportPeople.length;
+                        this.finalNiazsanjiReportPeople
+                            .filter(w => !w.absented)
+                            .map(w => w.levelOneScore)
+                            .reduce((sum, current) => sum + current) / this.finalNiazsanjiReportPeople.filter(w => !w.absented).length;
                     this.fullGrade = this.convertObjectDatesService.calculateGrade(this.fullAverage);
-                    if (this.finalNiazsanjiReportPeople.filter(w => w.levelOneScore > 0).length == this.finalNiazsanjiReportPeople.length) {
+                    if (
+                        this.finalNiazsanjiReportPeople.filter(w => w.levelOneScore > 0 && !w.absented).length ==
+                        this.finalNiazsanjiReportPeople.filter(w => !w.absented).length
+                    ) {
                         this.canComplete = true;
                     }
                 });
@@ -194,6 +205,7 @@ export class EffectivenessPhaseLevelOneMarineSuffixComponent implements OnInit, 
             }
         });
     }
+
     completeLevel(finalNiazsanjiReportId: number) {
         if (confirm('آیا اطلاعات وارد شده همگی صحیح هستند؟ و برای تایید نهایی کردن این سطح مطمئنید؟')) {
             this.niazsanjiPersonGradeMarineSuffixService.completeLevel(finalNiazsanjiReportId).subscribe(
@@ -206,15 +218,19 @@ export class EffectivenessPhaseLevelOneMarineSuffixComponent implements OnInit, 
             );
         }
     }
+
     protected onSaveError(res) {
         console.error(res);
     }
+
     change(i) {
         this.router.navigateByUrl(i);
     }
+
     previousState() {
         window.history.back();
     }
+
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
@@ -284,5 +300,27 @@ export class EffectivenessPhaseLevelOneMarineSuffixComponent implements OnInit, 
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    reverseAbsent(finalNiazsanjiPersonId: number) {
+        debugger;
+        if (confirm('آیا مطمئنید؟')) {
+            this.finalNiazsanjiReportPersonService.find(finalNiazsanjiPersonId).subscribe(
+                (resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix>) => {
+                    debugger;
+                    let finalPerson = resp.body;
+                    if (finalPerson.absented) finalPerson.absented = false;
+                    else finalPerson.absented = true;
+                    this.finalNiazsanjiReportPersonService.update(finalPerson).subscribe(
+                        (resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix>) => {
+                            debugger;
+                            this.loadAll();
+                        },
+                        (res: HttpErrorResponse) => this.onSaveError(res)
+                    );
+                },
+                (res: HttpErrorResponse) => this.onSaveError(res)
+            );
+        }
     }
 }

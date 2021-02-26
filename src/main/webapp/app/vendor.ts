@@ -57,6 +57,7 @@ import {
     faReceipt,
     faListAlt,
     faCheckDouble,
+    faCheck,
     faPaintRoller,
     faUserEdit,
     faChartArea,
@@ -140,6 +141,7 @@ library.add(faGlasses);
 library.add(faReceipt);
 library.add(faListAlt);
 library.add(faCheckDouble);
+library.add(faCheck);
 library.add(faPaintRoller);
 library.add(faUserEdit);
 library.add(faChartArea);

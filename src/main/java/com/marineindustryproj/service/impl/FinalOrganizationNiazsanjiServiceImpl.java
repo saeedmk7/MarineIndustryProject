@@ -101,6 +101,7 @@ public class FinalOrganizationNiazsanjiServiceImpl implements FinalOrganizationN
             finalNiazsanjiReportPerson.setPriceCost(finalOrganizationNiazsanji.getPriceCost() / peopleCount);
             finalNiazsanjiReportPerson.setSourceId(finalOrganizationNiazsanjiDTO.getId());
             finalNiazsanjiReportPerson.setStatus(0);
+            finalNiazsanjiReportPerson.setAbsented(false);
             finalNiazsanjiReportPersonRepository.save(finalNiazsanjiReportPerson);
         }
 

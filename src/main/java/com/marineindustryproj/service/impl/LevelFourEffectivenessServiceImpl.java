@@ -104,7 +104,8 @@ public class LevelFourEffectivenessServiceImpl implements LevelFourEffectiveness
         }
 
         List<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeopleNotFinished = finalNiazsanjiReport
-            .getFinalNiazsanjiReportPeople().stream().filter(a -> a.getLevelFourScore() == null || a.getLevelFourScore() == 0)
+            .getFinalNiazsanjiReportPeople().stream()
+            .filter(a -> (!a.isAbsented()) && (a.getLevelFourScore() == null || a.getLevelFourScore() == 0))
             .collect(Collectors.toList());
         if(!finalNiazsanjiReportPeopleNotFinished.isEmpty()){
             throw new Exception("هنوز یکی از افراد اثربخشی نشده است");
@@ -125,12 +126,14 @@ public class LevelFourEffectivenessServiceImpl implements LevelFourEffectiveness
         }
 
         List<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = finalNiazsanjiReport.getFinalNiazsanjiReportPeople()
-            .stream().collect(Collectors.toList());
+            .stream()
+            .filter(w -> !w.isAbsented())
+            .collect(Collectors.toList());
 
         float finalScore = (float) (finalNiazsanjiReportPeople.stream().mapToDouble(a -> a.getLevelFourScore()).sum()
             / finalNiazsanjiReportPeople.size());
-        float weightedScore = (float) ((finalNiazsanjiReportPeople.stream().mapToDouble(a -> a.getLevelFourScore() *
-            effectivenessPhase.getEffectivenessPhaseLevel().getWeight()).sum() / finalNiazsanjiReportPeople.size())) / 100;
+        float weightedScore = (finalScore *
+            effectivenessPhase.getEffectivenessPhaseLevel().getWeight()) / 100;
 
         effectivenessPhase.setSecondScore(finalScore);
         effectivenessPhase.setFinalScore(finalScore);

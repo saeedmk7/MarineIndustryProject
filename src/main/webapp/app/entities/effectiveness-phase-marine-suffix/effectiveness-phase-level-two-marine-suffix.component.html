@@ -11,9 +11,43 @@
         </span>
         <br/>
     </div>
+    <div class="alert alert-info">
+        <span style="display: inline-block">
+            <img src="/content/images/info.png" style="max-width: 25px; vertical-align: super;"/>
+        </span>
+        <span style="display: inline-block">
+            <p>
+                <span style="color: #127ccd">
+                    فرمول محاسبه میانگین نمره هر فرد:
+                </span>
+                <span style="color: blueviolet">
+                    اگر نمره بعد از امتحان منهای نمره قبل از امتحان بزرگتر از 35 بود میانگین نمره می شود 100. در غیر اینصورت حاصل تفریق تقسیم بر 35 و ضربدر 100 میشود.
+                </span>
+            </p>
+            <p>
+                <span style="color: #127ccd">
+                    نحوه محاسبه میانگین کل نمره قبل و بعد از امتحان:
+                </span>
+                <span style="color: blueviolet">
+                    مجموع نمرات افراد حاضر تقسیم بر تعداد افراد حاضر
+                </span>
+            </p>
+            <p>
+                <span style="color: #127ccd">
+                    نحوه محاسبه میانگین کل :
+                </span>
+                <span style="color: blueviolet">
+                    اگر نمره میانگین کل بعد از امتحان منهای میانگین کل نمره قبل از امتحان بزرگتر از 35 بود میانگین نمره می شود 100. در غیر اینصورت حاصل تفریق تقسیم بر 35 و ضربدر 100 میشود.
+                </span>
+            </p>
+        </span>
+    </div>
+    <div class="alert alert-warning">
+        اخطار: نمرات همگی بر پایه 100 می باشند و نمره بعد از امتحان به هیچ وجه نباید کمتر از نمره قبل از امتحان باشد.
+    </div>
     <br/>
     <div class="table-responsive" *ngIf="finalNiazsanjiReportPeople">
-        <table class="table table-striped  table-bordered table-sm">
+        <table class="table table-bordered table-sm">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
                 <th>ردیف</th>
@@ -34,7 +68,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let finalNiazsanjiReportPerson of finalNiazsanjiReportPeople ;let i = index;">
+            <tr *ngFor="let finalNiazsanjiReportPerson of finalNiazsanjiReportPeople ;let i = index;"
+                [ngClass]="{'accept': !finalNiazsanjiReportPerson.absented,
+                'absent': finalNiazsanjiReportPerson.absented === true}">
                 <!--<td><a [routerLink]="['/final-niazsanji-report-person-marine-suffix', finalNiazsanjiReportPerson.id, 'view' ]">{{finalNiazsanjiReportPerson.id}}</a></td>-->
                 <td>{{i+1}}</td>
                 <td>
@@ -43,23 +79,24 @@
                     </div>
                 </td>
                 <td>
-                    <input type="number" [(ngModel)]="finalNiazsanjiReportPerson.scoreBeforeTest"
+                    <input type="number" *ngIf="!finalNiazsanjiReportPerson.absented" [(ngModel)]="finalNiazsanjiReportPerson.scoreBeforeTest"
                            [name]="finalNiazsanjiReportPerson.scoreBeforeTest"
                            [id]="'scoreBeforeTest_' + finalNiazsanjiReportPerson.id" required/>
                 </td>
                 <td>
-                    <input type="number" [(ngModel)]="finalNiazsanjiReportPerson.scoreAfterTest"
+                    <input type="number"  *ngIf="!finalNiazsanjiReportPerson.absented" [(ngModel)]="finalNiazsanjiReportPerson.scoreAfterTest"
                            [name]="finalNiazsanjiReportPerson.scoreAfterTest"
                            [id]="'scoreAfterTest_' + finalNiazsanjiReportPerson.id" required/>
                 </td>
                 <td>
-                    <input type="number" disabled
+                    <input type="number" disabled  *ngIf="!finalNiazsanjiReportPerson.absented"
                            [value]="finalNiazsanjiReportPerson.averageScore"
                            required/>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
-                        <button type="button" (click)="saveScore(finalNiazsanjiReportPerson)" *ngIf="effectivenessPhase.status < 20"
+                        <button type="button" (click)="saveScore(finalNiazsanjiReportPerson)"
+                                *ngIf="effectivenessPhase.status < 20 && !finalNiazsanjiReportPerson.absented"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'stamp'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.save">save</span>

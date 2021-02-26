@@ -105,7 +105,8 @@ public class LevelThreeEffectivenessServiceImpl implements LevelThreeEffectivene
         }
 
         List<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeopleNotFinished = finalNiazsanjiReport
-            .getFinalNiazsanjiReportPeople().stream().filter(a -> a.getLevelThreeScore() == null || a.getLevelThreeScore() == 0)
+            .getFinalNiazsanjiReportPeople().stream()
+            .filter(a -> (!a.isAbsented()) && (a.getLevelThreeScore() == null || a.getLevelThreeScore() == 0))
             .collect(Collectors.toList());
         if(!finalNiazsanjiReportPeopleNotFinished.isEmpty()){
             throw new Exception("هنوز یکی از افراد اثربخشی نشده است");
@@ -126,12 +127,15 @@ public class LevelThreeEffectivenessServiceImpl implements LevelThreeEffectivene
         }
 
         List<FinalNiazsanjiReportPerson> finalNiazsanjiReportPeople = finalNiazsanjiReport.getFinalNiazsanjiReportPeople()
-            .stream().collect(Collectors.toList());
+            .stream()
+            .filter(w -> !w.isAbsented())
+            .collect(Collectors.toList());
 
         float finalScore = (float) (finalNiazsanjiReportPeople.stream().mapToDouble(a -> a.getLevelThreeScore()).sum()
             / finalNiazsanjiReportPeople.size());
-        float weightedScore = (float) ((finalNiazsanjiReportPeople.stream().mapToDouble(a -> a.getLevelThreeScore() *
-            effectivenessPhase.getEffectivenessPhaseLevel().getWeight()).sum() / finalNiazsanjiReportPeople.size())) / 100;
+
+        float weightedScore = (finalScore *
+            effectivenessPhase.getEffectivenessPhaseLevel().getWeight()) / 100;
 
         effectivenessPhase.setSecondScore(finalScore);
         effectivenessPhase.setFinalScore(finalScore);

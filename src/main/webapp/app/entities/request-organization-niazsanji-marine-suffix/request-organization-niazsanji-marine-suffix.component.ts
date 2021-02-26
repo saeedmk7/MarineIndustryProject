@@ -520,6 +520,10 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
     prepareSearchOrgChart() {
         if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
+            const groups = this.organizationcharts.filter(w => w.parentId == null);
+            this.searchbarModel.push(
+                new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select', 'equals', groups, 'fullTitle')
+            );
             this.searchbarModel.push(
                 new SearchPanelModel(
                     'requestNiazsanjiFardi',
@@ -535,6 +539,10 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
                     this.organizationcharts = res.body;
+                    const groups = this.organizationcharts.filter(w => w.parentId == null);
+                    this.searchbarModel.push(
+                        new SearchPanelModel('requestNiazsanjiFardi', 'organizationChartId', 'select', 'equals', groups, 'fullTitle')
+                    );
                     this.searchbarModel.push(
                         new SearchPanelModel(
                             'requestNiazsanjiFardi',
