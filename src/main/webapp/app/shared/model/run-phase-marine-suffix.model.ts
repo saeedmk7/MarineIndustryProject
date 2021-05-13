@@ -2,7 +2,7 @@ import { Moment } from 'moment';
 import { IRunRunningStepMarineSuffix } from 'app/shared/model//run-running-step-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IPersonMarineSuffix } from 'app/shared/model//person-marine-suffix.model';
-import {NiazSanjiSource} from "app/shared/model/enums/NiazSanjiSource";
+import { NiazSanjiSource } from 'app/shared/model/enums/NiazSanjiSource';
 
 export interface IRunPhaseMarineSuffix {
     id?: number;
@@ -36,6 +36,10 @@ export interface IRunPhaseMarineSuffix {
     educationalModuleTitle?: string;
     educationalModuleCode?: string;
     educationalModuleId?: number;
+    learningTimePractical?: number;
+    learningTimeTheorical?: number;
+    educationalModuleTotalTime?: number;
+    skillLevelOfSkillTitle?: string;
     finalNiazsanjiReportDescription?: string;
     finalNiazsanjiReportId?: number;
     niazsanjiYear?: number;
@@ -78,6 +82,10 @@ export class RunPhaseMarineSuffix implements IRunPhaseMarineSuffix {
         public educationalModuleTitle?: string,
         public educationalModuleCode?: string,
         public educationalModuleId?: number,
+        public learningTimePractical?: number,
+        public learningTimeTheorical?: number,
+        public educationalModuleTotalTime?: number,
+        public skillLevelOfSkillTitle?: string,
         public finalNiazsanjiReportDescription?: string,
         public finalNiazsanjiReportId?: number,
         public niazsanjiYear?: number,

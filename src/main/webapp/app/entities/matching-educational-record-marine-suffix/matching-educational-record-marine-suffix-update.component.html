@@ -1,0 +1,245 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-matching-educational-record-marine-suffix-heading" jhiTranslate="marineindustryprojApp.matchingEducationalRecord.home.createOrEditLabel">Create or edit a Matching Educational Record</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!matchingEducationalRecord.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="matchingEducationalRecord.id" readonly />
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">مشخصات متقاضی</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.matchingEducationalRecord.person" for="field_person">Person</label>
+                    <ng-select
+                        [items]="allPeople"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        [disabled]="orgChartDisabled"
+                        (change)="onPersonChange($event)"
+                        bindLabel="fullName"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="person"
+                        id="field_person"
+                        [(ngModel)]="matchingEducationalRecord.personId" >
+                </div>
+                <div [hidden]="!(editForm.controls.person?.dirty && editForm.controls.person?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.person?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.employmentType"></label>
+                    <label class="form-control">{{selectedPerson.employmentTypeTitle}}</label>
+                </div>
+                <div class="form-group">
+                    <img *ngIf="!isNewImage" [src]="oldPicUrl | safe" style="width: 150px;height: 150px; float: left" />
+                    <img *ngIf="isNewImage" [src]="picUrl | safe" style="width: 150px;height: 150px; float: left" />
+                </div>
+                <div class="form-group bighalf">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.matchingEducationalRecord.organizationChart" for="field_organizationChart">Organization Chart</label>
+
+                    <ng-select
+                        [items]="organizationcharts"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        [disabled]="true"
+                        bindLabel="fullTitle"
+                        bindValue="id"
+                        placeholder="انتخاب نمائید."
+                        name="organizationChart"
+                        id="field_organizationChart"
+                        [(ngModel)]="matchingEducationalRecord.organizationChartId">
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.jobTitle"></label>
+                    <label class="form-control">{{selectedPerson.jobTitle}}</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.person.practicaljobTitle"></label>
+                    <label class="form-control">{{selectedPerson.practicaljobTitle}}</label>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">سوابق</div></div>
+                <button class="btn btn-info" *ngIf="matchingEducationalRecord.personId"
+                    (click)="change('person-educational-records-marine-suffix?personId=' + matchingEducationalRecord.personId)">
+                    مشاهده شناسنامه آموزشی
+                </button>
+                <education-history-panel [personId]="matchingEducationalRecord.personId" [type]="isTopUsers ? 3 : 1"
+                                         (homePagePersonEducationalModulesOutput)="homePagePersonEducationalModulesChanged($event)"
+                                         [(selectedItemIds)]="selectedItemIds" (selectedItemIdsChange)="selectedItemIdsChanged($event)"
+                ></education-history-panel>
+
+                <table class="table table-striped  table-bordered table-hover table-sm"
+                       *ngIf="homePagePersonEducationalModules">
+                    <thead>
+                    <th>ردیف</th>
+                    <th>نوع دوره</th>
+                    <th>جمع</th>
+                    <th>تایید شده</th>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of aggregateTable; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>
+                            {{item.title}}
+                        </td>
+                        <td>
+                            {{item.sum | number}}
+                        </td>
+                        <td>
+                            {{item.acceptedSum | number}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">سطح پودمان درخواستی</div></div>
+                <div class="form-group">
+                    <label jhiTranslate="marineindustryprojApp.matchingEducationalRecord.skillableLevelOfSkill" for="field_skillableLevelOfSkill">Skillable Level Of Skill</label>
+                   <!-- <select class="form-control" id="field_skillableLevelOfSkill" multiple name="skillableLevelOfSkill" [(ngModel)]="matchingEducationalRecord.skillableLevelOfSkills">
+                        <option [ngValue]="getSelected(matchingEducationalRecord.skillableLevelOfSkills, skillableLevelOfSkillOption)" *ngFor="let skillableLevelOfSkillOption of skillablelevelofskills; trackBy: trackSkillableLevelOfSkillById">{{skillableLevelOfSkillOption.title}}</option>
+                    </select>-->
+                    <ng-select
+                        [items]="skillablelevelofskills"
+                        [multiple]="false"
+                        [closeOnSelect]="true"
+                        [searchable]="true"
+                        [required]="true"
+                        [disabled]="false"
+                        bindLabel="title"
+                        placeholder="انتخاب نمائید."
+                        name="skillableLevelOfSkill"
+                        id="field_skillableLevelOfSkill"
+                        [(ngModel)]="matchingEducationalRecord.skillableLevelOfSkill">
+                </div>
+
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">گام های تطبیق سوابق آموزشی کارکنان</div></div>
+                <div *ngIf="isAdmin">
+                    <a href="#/matching-running-step-marine-suffix" [ngClass]="{'enableLink': isAdmin}" class="btn btn-warning">
+                        <span class="fa fa-file"></span>
+                        <span class="d-none d-md-inline">ثبت مراحل  تطبیق سوابق آموزشی کارکنان</span>
+                    </a>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav>
+                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                <a *ngFor="let item of runPhaseTabModel" class="nav-item nav-link" style="color: white" [ngClass]="{'active': item.active}" [ngStyle]="{'background-color': item.colorText}" [id]="'nav-' + item.id" data-toggle="tab" [href]="item.href"  role="tab" >{{item.title}}</a>
+                                <!--<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Project Tab 1</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Project Tab 2</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Project Tab 3</a>-->
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div *ngFor="let tab of runPhaseTabModel" class="tab-pane fade" [ngClass]="{'active show': tab.active}"  [id]="tab.id" role="tabpanel">
+                                <table class="table" cellspacing="0" border="0">
+                                    <thead>
+                                    <tr>
+                                        <th>ردیف</th>
+                                        <th style="width:30%">عنوان</th>
+                                        <th style="width:3%">فایل نمونه</th>
+                                        <th>انجام شده؟</th>
+                                        <th>بارگذاری فایل</th>
+                                        <th>توضیحات انجام کار</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let item of tab.runPhaseItems; let i = index" [ngClass]="{'success': item.checked && item.fileDoc, 'warning': item.checked && !item.fileDoc, 'danger': !item.checked}">
+                                        <td>
+                                            {{i+1}}
+                                        </td>
+                                        <td style="font-size: 15px;">
+                                            <label>{{item.title}}</label>
+                                            <span class="badge badge-danger" *ngIf="item.required"> انجام اجباری</span>
+                                            <span class="badge badge-danger" *ngIf="item.fileDocRequired"> بارگذاری فایل اجباری</span>
+                                            <button type="button" *ngIf="item.description" class="small btn-success" [title]="item.description">
+                                                <fa-icon [icon]="'question'"></fa-icon>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <label>
+                                                <a *ngIf="item.sampleFileDoc" title="دریافت فایل نمونه" [href]="item.sampleFileDoc | safe" target="_blank"
+                                                   class="btn btn-default btn-sm enableLink">
+                                                    <fa-icon [icon]="'download'"></fa-icon>
+                                                </a>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" [id]="'chk-' + item.id" [name]="'chk-' + item.id" [checked]="item.checked" [alt]="item.description" [title]="item.description" [(ngModel)]="item.checked" />
+
+                                        </td>
+                                        <td>
+                                            <input *ngIf="!item.fileDoc" type="file" [disabled]="!item.checked" [id]="'file-' + item.id" (change)="validateFile($event, item.id)" jhiTranslate="entity.action.addblob"/>
+                                            <button type="button" *ngIf="!item.fileDoc" disabled="disabled" [id]="'uploadBtn-' + item.id" (click)="uploadFile(item.id)" class="btn btn-info btn-sm">
+                                                <span>بارگذاری فایل</span>
+                                                <fa-icon [icon]="'cloud-upload-alt'"></fa-icon>
+                                            </button>
+                                            <div *ngIf="!item.fileDoc" style="display: none" [id]="'message-' + item.id"></div>
+                                            <a *ngIf="item.fileDoc" title="دریافت فایل" [href]="item.fileDoc | safe" target="_blank"
+                                               class="btn btn-default btn-sm enableLink">
+                                                <fa-icon [icon]="'download'"></fa-icon>
+                                            </a>
+                                            <button type="button" *ngIf="item.fileDoc" (click)="deleteFile(item.fileDoc, item.id)" class="btn btn-danger btn-sm">
+                                                <fa-icon [icon]="'times'"></fa-icon>
+                                            </button>
+                                            <input type="hidden" [id]="'fileDoc-' + item.id" [name]="'fileDoc-' + item.id" [(ngModel)]="item.fileDoc">
+                                        </td>
+
+                                        <td>
+                                            <textarea class="form-control" rows="1" [id]="'txt-' + item.id" [name]="'txt-' + item.id">{{item.descMessage}}</textarea>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">توضیحات تکمیلی</div></div>
+               <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.matchingEducationalRecord.description" for="field_description">Description</label>
+                    <textarea class="form-control" name="description" id="field_description"
+                        [(ngModel)]="matchingEducationalRecord.description" ></textarea>
+                </div>
+
+                <div class="form-group" *ngIf="matchingEducationalRecord.id === undefined">
+                    <span *ngIf="targetPeople">درخواست شما برای افراد زیر ارسال می شود.</span>
+                    <ul>
+                        <li *ngFor="let item of targetPeople">
+                            {{item.fullName}}
+                        </li>
+                    </ul>
+                </div>
+
+                <ng-container *ngIf="matchingEducationalRecord.id !== undefined">
+                    <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">گردش درخواست و نظرات</div></div>
+                <div class="form-group fullcover">
+                    <textarea class="form-control" [disabled]="true" [rows]="rows">{{matchingEducationalRecord.conversation}}</textarea>
+                </div>
+                </ng-container>
+                <span class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</span>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+                <span class="alert alert-warning" *ngIf="matchingEducationalRecord.id === undefined">بعد از ذخیره اطلاعات امکان ویرایش برای شما وجود ندارد، لطفا در زمان ثبت اطلاعات نهایت دقت را بفرمائید.</span>
+                <span class="alert alert-danger" *ngIf="message">{{message}}</span>
+
+            </div>
+        </form>
+    </div>
+</div>

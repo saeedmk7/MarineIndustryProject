@@ -163,6 +163,7 @@ export class FinalNiazsanjiReportMarineSuffixService {
         res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
         res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
         res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
+        res.body.educationalModuleLevelTitle = res.body.skillLevelOfSkillTitle != null ? res.body.skillLevelOfSkillTitle : null;
         res.body.lastEffectivenessPhaseFinish =
             res.body.lastEffectivenessPhaseFinish != null ? moment(res.body.lastEffectivenessPhaseFinish) : null;
         res.body.teacherFullName =

@@ -72,11 +72,23 @@ public class RequestNiazsanjiFardiDTO implements Serializable {
 
     private String approvedEducationalModuleCode;
 
+    private String approvedSkillLevelOfSkillTitle;
+
+    private Integer approvedLearningTimeTheorical;
+
+    private Integer approvedLearningTimePractical;
+
     private Long allEducationalModuleId;
 
     private String allEducationalModuleTitle;
 
     private String allEducationalModuleCode;
+
+    private String allSkillLevelOfSkillTitle;
+
+    private Integer allLearningTimeTheorical;
+
+    private Integer allLearningTimePractical;
 
     private Long personId;
 
@@ -410,5 +422,53 @@ public class RequestNiazsanjiFardiDTO implements Serializable {
 
     public void setPersonJobTitle(String personJobTitle) {
         this.personJobTitle = personJobTitle;
+    }
+
+    public String getApprovedSkillLevelOfSkillTitle() {
+        return approvedSkillLevelOfSkillTitle;
+    }
+
+    public void setApprovedSkillLevelOfSkillTitle(String approvedSkillLevelOfSkillTitle) {
+        this.approvedSkillLevelOfSkillTitle = approvedSkillLevelOfSkillTitle;
+    }
+
+    public Integer getApprovedLearningTimeTheorical() {
+        return approvedLearningTimeTheorical;
+    }
+
+    public void setApprovedLearningTimeTheorical(Integer approvedLearningTimeTheorical) {
+        this.approvedLearningTimeTheorical = approvedLearningTimeTheorical;
+    }
+
+    public Integer getApprovedLearningTimePractical() {
+        return approvedLearningTimePractical;
+    }
+
+    public void setApprovedLearningTimePractical(Integer approvedLearningTimePractical) {
+        this.approvedLearningTimePractical = approvedLearningTimePractical;
+    }
+
+    public String getAllSkillLevelOfSkillTitle() {
+        return allSkillLevelOfSkillTitle;
+    }
+
+    public void setAllSkillLevelOfSkillTitle(String allSkillLevelOfSkillTitle) {
+        this.allSkillLevelOfSkillTitle = allSkillLevelOfSkillTitle;
+    }
+
+    public Integer getAllLearningTimeTheorical() {
+        return allLearningTimeTheorical;
+    }
+
+    public void setAllLearningTimeTheorical(Integer allLearningTimeTheorical) {
+        this.allLearningTimeTheorical = allLearningTimeTheorical;
+    }
+
+    public Integer getAllLearningTimePractical() {
+        return allLearningTimePractical;
+    }
+
+    public void setAllLearningTimePractical(Integer allLearningTimePractical) {
+        this.allLearningTimePractical = allLearningTimePractical;
     }
 }

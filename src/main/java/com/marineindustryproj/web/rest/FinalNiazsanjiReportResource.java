@@ -150,6 +150,9 @@ public class FinalNiazsanjiReportResource {
     @Timed
     public ResponseEntity<List<FinalNiazsanjiReportDTO>> getAllFinalNiazsanjiReports(FinalNiazsanjiReportCriteria criteria, Pageable pageable) {
         log.debug("REST request to get FinalNiazsanjiReports by criteria: {}", criteria);
+        if(criteria.getStatus() != null &&  criteria.getStatus().getEquals() == 1) {
+            criteria.getStatus().setEquals(0);
+        }
         Page<FinalNiazsanjiReportDTO> page = finalNiazsanjiReportQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/final-niazsanji-reports");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);

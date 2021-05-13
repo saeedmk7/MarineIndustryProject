@@ -164,6 +164,12 @@ public class Person implements Serializable {
     @OneToMany(mappedBy = "person")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<JobChange> jobChanges = new HashSet<>();
+    @OneToMany(mappedBy = "person")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<MatchingEducationalRecord> matchingEducationalRecords = new HashSet<>();
+    @OneToMany(mappedBy = "person")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<ApplicationProcess> applicationProcesses = new HashSet<>();
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "person_document",
@@ -240,6 +246,7 @@ public class Person implements Serializable {
     @JsonIgnore
     private Set<UsersRequest> usersRequests = new HashSet<>();
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -907,6 +914,56 @@ public class Person implements Serializable {
 
     public void setJobChanges(Set<JobChange> jobChanges) {
         this.jobChanges = jobChanges;
+    }
+
+    public Set<MatchingEducationalRecord> getMatchingEducationalRecords() {
+        return matchingEducationalRecords;
+    }
+
+    public Person matchingEducationalRecords(Set<MatchingEducationalRecord> matchingEducationalRecords) {
+        this.matchingEducationalRecords = matchingEducationalRecords;
+        return this;
+    }
+
+    public Person addMatchingEducationalRecord(MatchingEducationalRecord matchingEducationalRecord) {
+        this.matchingEducationalRecords.add(matchingEducationalRecord);
+        matchingEducationalRecord.setPerson(this);
+        return this;
+    }
+
+    public Person removeMatchingEducationalRecord(MatchingEducationalRecord matchingEducationalRecord) {
+        this.matchingEducationalRecords.remove(matchingEducationalRecord);
+        matchingEducationalRecord.setPerson(null);
+        return this;
+    }
+
+    public void setMatchingEducationalRecords(Set<MatchingEducationalRecord> matchingEducationalRecords) {
+        this.matchingEducationalRecords = matchingEducationalRecords;
+    }
+
+    public Set<ApplicationProcess> getApplicationProcesses() {
+        return applicationProcesses;
+    }
+
+    public Person applicationProcesses(Set<ApplicationProcess> applicationProcesses) {
+        this.applicationProcesses = applicationProcesses;
+        return this;
+    }
+
+    public Person addApplicationProcess(ApplicationProcess applicationProcess) {
+        this.applicationProcesses.add(applicationProcess);
+        applicationProcess.setPerson(this);
+        return this;
+    }
+
+    public Person removeApplicationProcess(ApplicationProcess applicationProcess) {
+        this.applicationProcesses.remove(applicationProcess);
+        applicationProcess.setPerson(null);
+        return this;
+    }
+
+    public void setApplicationProcesses(Set<ApplicationProcess> applicationProcesses) {
+        this.applicationProcesses = applicationProcesses;
     }
 
     public Set<Document> getDocuments() {

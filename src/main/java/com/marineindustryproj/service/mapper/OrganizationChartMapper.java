@@ -36,6 +36,8 @@ public interface OrganizationChartMapper extends EntityMapper<OrganizationChartD
     @Mapping(target = "soldiers", ignore = true)
     @Mapping(target = "evaluateCriteriaTrainings", ignore = true)
     @Mapping(target = "evaluateCriteriaData", ignore = true)
+    @Mapping(target = "matchingEducationalRecords", ignore = true)
+    @Mapping(target = "applicationProcesses", ignore = true)
     @Mapping(source = "parentId", target = "parent")
     @Mapping(target = "forceRunningPercents", ignore = true)
     @Mapping(target = "reportGenerators", ignore = true)

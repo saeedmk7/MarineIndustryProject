@@ -106,11 +106,19 @@ public class PrioritizeRequestNiazsanjiDTO implements Serializable {
 
     private String educationalModuleTitle;
 
+    private String skillLevelOfSkillTitle;
+
+    private Integer learningTimeTheorical;
+
+    private Integer learningTimePractical;
+
     private Long personId;
 
     private String personFamily;
 
     private String personName;
+
+    private String personEmploymentTypeTitle;
 
     private String personJobTitle;
 
@@ -568,5 +576,37 @@ public class PrioritizeRequestNiazsanjiDTO implements Serializable {
 
     public void setPersonPracticalJobTitle(String personPracticalJobTitle) {
         this.personPracticalJobTitle = personPracticalJobTitle;
+    }
+
+    public String getSkillLevelOfSkillTitle() {
+        return skillLevelOfSkillTitle;
+    }
+
+    public void setSkillLevelOfSkillTitle(String skillLevelOfSkillTitle) {
+        this.skillLevelOfSkillTitle = skillLevelOfSkillTitle;
+    }
+
+    public Integer getLearningTimeTheorical() {
+        return learningTimeTheorical;
+    }
+
+    public void setLearningTimeTheorical(Integer learningTimeTheorical) {
+        this.learningTimeTheorical = learningTimeTheorical;
+    }
+
+    public Integer getLearningTimePractical() {
+        return learningTimePractical;
+    }
+
+    public void setLearningTimePractical(Integer learningTimePractical) {
+        this.learningTimePractical = learningTimePractical;
+    }
+
+    public String getPersonEmploymentTypeTitle() {
+        return personEmploymentTypeTitle;
+    }
+
+    public void setPersonEmploymentTypeTitle(String personEmploymentTypeTitle) {
+        this.personEmploymentTypeTitle = personEmploymentTypeTitle;
     }
 }

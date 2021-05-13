@@ -1,0 +1,177 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="applicationProcess">
+            <h2><span jhiTranslate="marineindustryprojApp.applicationProcess.detail.title">Application Process</span> {{applicationProcess.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.code">Code</span></dt>
+                <dd>
+                    <span>{{applicationProcess.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.description">Description</span></dt>
+                <dd>
+                    <span>{{applicationProcess.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.jobAfterProcess">Job After Process</span></dt>
+                <dd>
+                    <span>{{applicationProcess.jobAfterProcess}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.acceptedUniversityAndDegree">Accepted University And Degree</span></dt>
+                <dd>
+                    <span>{{applicationProcess.acceptedUniversityAndDegree}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.startStudyDate">Start Study Date</span></dt>
+                <dd>
+                    <span>{{applicationProcess.startStudyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.graduateDateOfNewCourse">Graduate Date Of New Course</span></dt>
+                <dd>
+                    <span>{{applicationProcess.graduateDateOfNewCourse}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.averagePointOfNewCourse">Average Point Of New Course</span></dt>
+                <dd>
+                    <span>{{applicationProcess.averagePointOfNewCourse}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.acceptedMajorAndField">Accepted Major And Field</span></dt>
+                <dd>
+                    <span>{{applicationProcess.acceptedMajorAndField}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.haveUsedEducationalFacilities">Have Used Educational Facilities</span></dt>
+                <dd>
+                    <span>{{applicationProcess.haveUsedEducationalFacilities}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.haveUsedEducationalFacilitiesDescription">Have Used Educational Facilities Description</span></dt>
+                <dd>
+                    <span>{{applicationProcess.haveUsedEducationalFacilitiesDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.dateOfAcceptanceOfDegree">Date Of Acceptance Of Degree</span></dt>
+                <dd>
+                    <span>{{applicationProcess.dateOfAcceptanceOfDegree}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.typeAndAmountOfFacilities">Type And Amount Of Facilities</span></dt>
+                <dd>
+                    <span>{{applicationProcess.typeAndAmountOfFacilities}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.academicCommitmentsFulfilled">Academic Commitments Fulfilled</span></dt>
+                <dd>
+                    <span>{{applicationProcess.academicCommitmentsFulfilled}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.remainingAcademicCommitments">Remaining Academic Commitments</span></dt>
+                <dd>
+                    <span>{{applicationProcess.remainingAcademicCommitments}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.requestedFacilitiesText">Requested Facilities Text</span></dt>
+                <dd>
+                    <span>{{applicationProcess.requestedFacilitiesText}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.requestedFacilitiesDescription">Requested Facilities Description</span></dt>
+                <dd>
+                    <span>{{applicationProcess.requestedFacilitiesDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{applicationProcess.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{applicationProcess.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{applicationProcess.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{applicationProcess.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.archived">Archived</span></dt>
+                <dd>
+                    <span>{{applicationProcess.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{applicationProcess.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{applicationProcess.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.chartStatus">Chart Status</span></dt>
+                <dd>
+                    <span>{{applicationProcess.chartStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.bossStatus">Boss Status</span></dt>
+                <dd>
+                    <span>{{applicationProcess.bossStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.conversation">Conversation</span></dt>
+                <dd>
+                    <span>{{applicationProcess.conversation}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.requestStatus">Request Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + applicationProcess.requestStatus}}">{{applicationProcess.requestStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.changeStatusUserLogin">Change Status User Login</span></dt>
+                <dd>
+                    <span>{{applicationProcess.changeStatusUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.guid">Guid</span></dt>
+                <dd>
+                    <span>{{applicationProcess.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.hasImportantMessage">Has Important Message</span></dt>
+                <dd>
+                    <span>{{applicationProcess.hasImportantMessage}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.selectedModuleIds">Selected Module Ids</span></dt>
+                <dd>
+                    <span>{{applicationProcess.selectedModuleIds}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of applicationProcess.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.educationalRecord">Educational Record</span></dt>
+                <dd>
+                    <div *ngIf="applicationProcess.educationalRecordId">
+                        <a [routerLink]="['/educational-record-marine-suffix', applicationProcess.educationalRecordId, 'view']">{{applicationProcess.educationalRecordQualificationText}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="applicationProcess.personId">
+                        <a [routerLink]="['/person-marine-suffix', applicationProcess.personId, 'view']">{{applicationProcess.personFamily}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="applicationProcess.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', applicationProcess.organizationChartId, 'view']">{{applicationProcess.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcess.qualification">Qualification</span></dt>
+                <dd>
+                    <div *ngIf="applicationProcess.qualificationId">
+                        <a [routerLink]="['/qualification-marine-suffix', applicationProcess.qualificationId, 'view']">{{applicationProcess.qualificationTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/application-process-marine-suffix', applicationProcess.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

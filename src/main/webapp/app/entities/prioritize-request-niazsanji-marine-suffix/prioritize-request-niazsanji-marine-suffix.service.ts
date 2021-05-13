@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model/prioritize-request-niazsanji-marine-suffix.model';
-import {IPreJobNiazsanjiMarineSuffix} from "app/shared/model/pre-job-niazsanji-marine-suffix.model";
+import { IPreJobNiazsanjiMarineSuffix } from 'app/shared/model/pre-job-niazsanji-marine-suffix.model';
 
 type EntityResponseType = HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<IPrioritizeRequestNiazsanjiMarineSuffix[]>;
@@ -59,7 +59,7 @@ export class PrioritizeRequestNiazsanjiMarineSuffixService {
 
     finalize(prioritizeRequestNiazsanji: IPrioritizeRequestNiazsanjiMarineSuffix): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(prioritizeRequestNiazsanji);
-        let url = this.resourceUrl + "/finalize";
+        let url = this.resourceUrl + '/finalize';
         return this.http
             .post<IPrioritizeRequestNiazsanjiMarineSuffix>(url, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
@@ -90,7 +90,13 @@ export class PrioritizeRequestNiazsanjiMarineSuffixService {
             res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
             res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
             res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
-            res.body.personFullName = (res.body.personName != null ? res.body.personName : '') + " " + (res.body.personFamily != null ? res.body.personFamily : '');
+            res.body.personFullName =
+                (res.body.personName != null ? res.body.personName : '') +
+                ' ' +
+                (res.body.personFamily != null ? res.body.personFamily : '');
+            res.body.totalLearningTime =
+                (res.body.learningTimePractical ? res.body.learningTimePractical : 0) +
+                (res.body.learningTimeTheorical ? res.body.learningTimeTheorical : 0);
         }
         return res;
     }
@@ -104,7 +110,13 @@ export class PrioritizeRequestNiazsanjiMarineSuffixService {
                     prioritizeRequestNiazsanji.modifyDate != null ? moment(prioritizeRequestNiazsanji.modifyDate) : null;
                 prioritizeRequestNiazsanji.archivedDate =
                     prioritizeRequestNiazsanji.archivedDate != null ? moment(prioritizeRequestNiazsanji.archivedDate) : null;
-                prioritizeRequestNiazsanji.personFullName = (prioritizeRequestNiazsanji.personName != null ? prioritizeRequestNiazsanji.personName : '') + " " + (prioritizeRequestNiazsanji.personFamily != null ? prioritizeRequestNiazsanji.personFamily : '');
+                prioritizeRequestNiazsanji.personFullName =
+                    (prioritizeRequestNiazsanji.personName != null ? prioritizeRequestNiazsanji.personName : '') +
+                    ' ' +
+                    (prioritizeRequestNiazsanji.personFamily != null ? prioritizeRequestNiazsanji.personFamily : '');
+                prioritizeRequestNiazsanji.totalLearningTime =
+                    (prioritizeRequestNiazsanji.learningTimePractical ? prioritizeRequestNiazsanji.learningTimePractical : 0) +
+                    (prioritizeRequestNiazsanji.learningTimeTheorical ? prioritizeRequestNiazsanji.learningTimeTheorical : 0);
             });
         }
         return res;

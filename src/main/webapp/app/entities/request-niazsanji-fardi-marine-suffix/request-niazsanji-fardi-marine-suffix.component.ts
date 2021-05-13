@@ -294,7 +294,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
 
             if (a.allEducationalModuleId) {
                 index++;
-                let allEducationalModule = this.educationalModules.find(w => w.id == a.allEducationalModuleId);
+                //let allEducationalModule = this.educationalModules.find(w => w.id == a.allEducationalModuleId);
                 let obj: Object;
                 obj = {
                     index: index,
@@ -303,9 +303,9 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
                     jobTitle: a.personJobTitle,
                     educationalModule: a.allEducationalModuleTitle,
                     timeEducationalModule:
-                        (allEducationalModule.learningTimePractical ? allEducationalModule.learningTimePractical : 0) +
-                        (allEducationalModule.learningTimeTheorical ? allEducationalModule.learningTimeTheorical : 0),
-                    levelEducationalModule: allEducationalModule.skillableLevelOfSkillTitle,
+                        (a.allLearningTimePractical ? a.allLearningTimePractical : 0) +
+                        (a.allLearningTimeTheorical ? a.allLearningTimeTheorical : 0),
+                    levelEducationalModule: a.allSkillLevelOfSkillTitle,
                     costEducationalModule: a.costAllEducationalModule,
                     courseType: a.courseTypeTitle,
                     createDate: a.createDate,
@@ -315,7 +315,7 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
             }
             if (a.approvedEducationalModuleId) {
                 index++;
-                let approvedEducationalModule = this.educationalModules.find(w => w.id == a.approvedEducationalModuleId);
+                //let approvedEducationalModule = this.educationalModules.find(w => w.id == a.approvedEducationalModuleId);
                 let obj: Object;
                 obj = {
                     index: index,
@@ -324,9 +324,9 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
                     jobTitle: a.personJobTitle,
                     educationalModule: a.approvedEducationalModuleTitle,
                     timeEducationalModule:
-                        (approvedEducationalModule.learningTimePractical ? approvedEducationalModule.learningTimePractical : 0) +
-                        (approvedEducationalModule.learningTimeTheorical ? approvedEducationalModule.learningTimeTheorical : 0),
-                    levelEducationalModule: approvedEducationalModule.skillableLevelOfSkillTitle,
+                        (a.approvedLearningTimePractical ? a.approvedLearningTimePractical : 0) +
+                        (a.approvedLearningTimeTheorical ? a.approvedLearningTimeTheorical : 0),
+                    levelEducationalModule: a.approvedSkillLevelOfSkillTitle,
                     costEducationalModule: a.costApprovedEducationalModule,
                     courseType: a.courseTypeTitle,
                     createDate: a.createDate,
@@ -487,6 +487,17 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
     prepareSearchOrgChart() {
         if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
+            if (this.isSuperUsers) {
+                this.searchbarModel.push(
+                    new SearchPanelModel(
+                        'requestNiazsanjiFardi',
+                        'organizationChartId',
+                        'select',
+                        'equals',
+                        this.organizationcharts.filter(w => w.parentId == null)
+                    )
+                );
+            }
             this.searchbarModel.push(
                 new SearchPanelModel(
                     'requestNiazsanjiFardi',
@@ -503,6 +514,17 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
                     this.organizationcharts = res.body;
+                    if (this.isSuperUsers) {
+                        this.searchbarModel.push(
+                            new SearchPanelModel(
+                                'requestNiazsanjiFardi',
+                                'organizationChartId',
+                                'select',
+                                'equals',
+                                this.organizationcharts.filter(w => w.parentId == null)
+                            )
+                        );
+                    }
                     this.searchbarModel.push(
                         new SearchPanelModel(
                             'requestNiazsanjiFardi',
@@ -609,22 +631,24 @@ export class RequestNiazsanjiFardiMarineSuffixComponent implements OnInit, OnDes
 
             let education: IEducationalModuleMarineSuffix;
             if (a.allEducationalModuleId) {
-                education = this.educationalModules.find(w => w.id == a.allEducationalModuleId);
+                //education = this.educationalModules.find(w => w.id == a.allEducationalModuleId);
+                a.skillLevelOfSkillTitle = a.allSkillLevelOfSkillTitle;
+                a.totalLearningTime =
+                    (a.allLearningTimePractical ? a.allLearningTimePractical : 0) +
+                    (a.allLearningTimeTheorical ? a.allLearningTimeTheorical : 0);
             }
             if (a.approvedEducationalModuleId) {
-                education = this.educationalModules.find(w => w.id == a.approvedEducationalModuleId);
-            }
-            if (education) {
-                a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
+                //education = this.educationalModules.find(w => w.id == a.approvedEducationalModuleId);
+                a.skillLevelOfSkillTitle = a.approvedSkillLevelOfSkillTitle;
                 a.totalLearningTime =
-                    (education.learningTimePractical ? education.learningTimePractical : 0) +
-                    (education.learningTimeTheorical ? education.learningTimeTheorical : 0);
+                    (a.approvedLearningTimePractical ? a.approvedLearningTimePractical : 0) +
+                    (a.approvedLearningTimeTheorical ? a.approvedLearningTimeTheorical : 0);
             }
         });
-        this.totalHour = this.requestNiazsanjiFardis
+        /*this.totalHour = this.requestNiazsanjiFardis
             .filter(a => a.totalLearningTime)
             .map(a => a.totalLearningTime)
-            .reduce((sum, current) => sum + current);
+            .reduce((sum, current) => sum + current);*/
         this.totalPriceCost = this.requestNiazsanjiFardis
             .filter(a => a.costApprovedEducationalModule || a.costAllEducationalModule)
             .map(

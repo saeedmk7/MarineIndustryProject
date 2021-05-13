@@ -5,6 +5,7 @@ import { GREGORIAN_START_END_DATE } from 'app/shared/constants/years.constants';
 import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
 import { Grade } from 'app/shared/model/enums/Grade';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class CommonSearchCheckerService {
@@ -171,7 +172,6 @@ export class CommonSearchCheckerService {
         return criteria;
     }
     public checkRequestStatusFiltersForOrganizationChart(criteria, status: number = 0) {
-        debugger;
         const requestStatusFilters = criteria.find(a => a.key == 'requestStatusFilters.equals');
         if (requestStatusFilters) {
             const val = requestStatusFilters.value;

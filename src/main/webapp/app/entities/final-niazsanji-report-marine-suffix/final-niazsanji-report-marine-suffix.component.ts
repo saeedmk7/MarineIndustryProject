@@ -35,6 +35,7 @@ import { IPlanningAndRunMonthReport } from 'app/shared/model/custom/planning-mon
 import { ICourseTypeMarineSuffix } from 'app/shared/model/course-type-marine-suffix.model';
 import { CourseTypeMarineSuffixService } from 'app/entities/course-type-marine-suffix';
 import { ICountListModel } from 'app/shared/model/custom/count-list-model';
+import { FINALNIAZSANJISTATUSMEANINGFORSEARCH } from 'app/shared/constants/final-niazsanji-report-status-meaning-for-search.constants';
 
 @Component({
     selector: 'mi-final-niazsanji-report-marine-suffix',
@@ -338,13 +339,10 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
 
             finalNiazsanjiReportsFardi.educationalModuleId = a.educationalModuleId;
             finalNiazsanjiReportsFardi.educationalModuleCode = a.educationalModuleCode;
+            finalNiazsanjiReportsFardi.educationalModuleTitle = a.educationalModuleTitle;
+            finalNiazsanjiReportsFardi.educationalModuleLevel = a.skillLevelOfSkillTitle;
+            finalNiazsanjiReportsFardi.educationalModuleTotalLearningTime = a.educationalModuleTotalTime;
 
-            let education = this.educationalModules.find(w => w.id == a.educationalModuleId);
-            if (education) {
-                finalNiazsanjiReportsFardi.educationalModuleTitle = education.title;
-                finalNiazsanjiReportsFardi.educationalModuleLevel = education.skillableLevelOfSkillTitle;
-                finalNiazsanjiReportsFardi.educationalModuleTotalLearningTime = education.totalLearningTime;
-            }
             finalNiazsanjiReportsFardi.niazsanjiYear = a.niazsanjiYear;
             let org = this.organizationcharts.find(w => w.id == a.organizationChartId);
             if (org) finalNiazsanjiReportsFardi.organizationChartTitle = org.fullTitle; //a.organizationChartTitle;
@@ -382,13 +380,9 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
 
             finalNiazsanjiReportsOrganization.educationalModuleId = a.educationalModuleId;
             finalNiazsanjiReportsOrganization.educationalModuleCode = a.educationalModuleCode;
-
-            let education = this.educationalModules.find(w => w.id == a.educationalModuleId);
-            if (education) {
-                finalNiazsanjiReportsOrganization.educationalModuleTitle = education.title;
-                finalNiazsanjiReportsOrganization.educationalModuleLevel = education.skillableLevelOfSkillTitle;
-                finalNiazsanjiReportsOrganization.educationalModuleTotalLearningTime = education.totalLearningTime;
-            }
+            finalNiazsanjiReportsOrganization.educationalModuleTitle = a.educationalModuleTitle;
+            finalNiazsanjiReportsOrganization.educationalModuleLevel = a.educationalModuleLevelTitle;
+            finalNiazsanjiReportsOrganization.educationalModuleTotalLearningTime = a.educationalModuleTotalTime;
 
             finalNiazsanjiReportsOrganization.niazsanjiYear = a.niazsanjiYear;
             let org = this.organizationcharts.find(w => w.id == a.organizationChartId);
@@ -503,7 +497,7 @@ export class FinalNiazsanjiReportMarineSuffixComponent implements OnInit, OnDest
                 this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'educationalModuleCode', 'text', 'contains'));
                 this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'educationalModuleTitle', 'text', 'contains'));
                 this.searchbarModel.push(
-                    new SearchPanelModel('finalNiazsanjiReport', 'status', 'select', 'equals', this.statusMeaning, 'mean')
+                    new SearchPanelModel('finalNiazsanjiReport', 'status', 'select', 'equals', FINALNIAZSANJISTATUSMEANINGFORSEARCH, 'mean')
                 );
                 this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'id', 'text', 'equals'));
                 this.prepareSearchCourseType();

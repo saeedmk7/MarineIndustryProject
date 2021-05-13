@@ -8,7 +8,22 @@
     </div>
     <div class="col-xs-12 bgWhite lightShadow topMenu">
         <ul class="nav justify-content-end" style="padding-inline-start: 0px; font-size: larger">
-
+            <li class="nav-item seperate-left seperate-right bgSalmon" title="تعداد فرآیند درخواست ادامه تحصیل">
+                <a class="nav-link excepted-menu" href="#/application-process-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'user-graduate'"></fa-icon>
+                    <span *ngIf="applicationProcessCounter != undefined" class="badge badge-success ">{{applicationProcessCounter}}</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item seperate-left seperate-right bgSalmon" title="تعداد فرم های تطبیق سوابق آموزشی کارکنان">
+                <a class="nav-link excepted-menu" href="#/matching-educational-record-marine-suffix">
+                    <span class="bell-contain" style="padding: 6px">
+                    <fa-icon [icon]="'sync-alt'"></fa-icon>
+                    <span *ngIf="matchingEducationalRecordCounter != undefined" class="badge badge-success ">{{matchingEducationalRecordCounter}}</span>
+                    </span>
+                </a>
+            </li>
             <li class="nav-item seperate-left seperate-right bgCyan" *ngIf="isAdmin" title="تعداد انتقادات و پیشنهادات کاربران به مدیریت سیستم">
                 <a class="nav-link excepted-menu" href="#/users-request-marine-suffix">
                     <span class="bell-contain" style="padding: 6px">
@@ -126,6 +141,11 @@
                     <fa-icon [icon]="'toolbox'"></fa-icon>
                     <span *ngIf="niazsanjiJobCounter != undefined" class="badge badge-info">{{niazsanjiJobCounter}}</span>
                     </span>
+                </a>
+            </li>
+            <li class="nav-item seperate-left seperate-right bgRed" style="width: 175px; margin-right:60px" title=" خروج از سامانه">
+                <a class="nav-link excepted-menu " href="#" (click)="logout();" id="logoutBtn">
+                    خروج از سامانه<span class="badge badge-danger date-logout">{{todayDate}}</span>
                 </a>
             </li>
 

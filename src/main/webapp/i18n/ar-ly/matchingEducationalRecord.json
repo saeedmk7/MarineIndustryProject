@@ -1,0 +1,41 @@
+{
+    "marineindustryprojApp": {
+        "matchingEducationalRecord": {
+            "home": {
+                "title": "Matching Educational Records",
+                "createLabel": "Create a new Matching Educational Record",
+                "createOrEditLabel": "Create or edit a Matching Educational Record"
+            },
+            "created": "A new Matching Educational Record is created with identifier {{ param }}",
+            "updated": "A Matching Educational Record is updated with identifier {{ param }}",
+            "deleted": "A Matching Educational Record is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Matching Educational Record {{ id }}?"
+            },
+            "detail": {
+                "title": "Matching Educational Record"
+            },
+            "code": "Code",
+            "description": "Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "chartStatus": "Chart Status",
+            "bossStatus": "Boss Status",
+            "conversation": "Conversation",
+            "requestStatus": "Request Status",
+            "changeStatusUserLogin": "Change Status User Login",
+            "guid": "Guid",
+            "hasImportantMessage": "Has Important Message",
+            "matchingRunRunningStep": "Matching Run Running Step",
+            "skillableLevelOfSkill": "Skillable Level Of Skill",
+            "document": "Document",
+            "person": "Person",
+            "organizationChart": "Organization Chart"
+        }
+    }
+}

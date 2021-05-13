@@ -19,6 +19,7 @@
                 <th>ردیف</th>
                 <th><span jhiTranslate="marineindustryprojApp.educationalModule.code">Code</span></th>
                 <th><span jhiTranslate="marineindustryprojApp.educationalModule.title">Title</span></th>
+                <th>نوع دوره</th>
                 <th><span>مدت کل پودمان</span></th>
                 <!--<th><span jhiTranslate="marineindustryprojApp.educationalModule.organization">Organization</span> </th>-->
                 <th><span jhiTranslate="marineindustryprojApp.educationalModule.skillableLevelOfSkill">Skillable Level Of Skill</span>
@@ -26,6 +27,7 @@
                 <th><span>نوع پودمان</span></th>
                 <th><span>تاریخ برگزاری</span></th>
                 <th>وضعیت</th>
+                <th *ngIf="type == 3">تایید شده</th>
             </tr>
             </thead>
             <tbody>
@@ -34,6 +36,7 @@
                 <td>{{i+1}}</td>
                 <td>{{educationalModule.code}}</td>
                 <td>{{educationalModule.title}}</td>
+                <td>{{educationalModule.courseType}}</td>
                 <td>{{educationalModule.totalLearningTime | number}}</td>
                 <!--<td>
                     <div *ngIf="educationalModule.organizationId">
@@ -55,6 +58,12 @@
                     <a class="enableLink" [href]="'#/educational-history-marine-suffix/' + educationalModule.educationalHistoryId + '/view'"
                        *ngIf="educationalModule.status == 100">{{educationalModule.statusMeaning}}</a>
                     <span *ngIf="educationalModule.status != 100">{{educationalModule.statusMeaning}}</span>
+                </td>
+                <td *ngIf="type == 3">
+                    <input type="checkbox" (click)="change($event)" [id]="'selectedItemIds_'+educationalModule.id"
+                           *ngIf="educationalModule.status== 100" name="selectedItemIds" [value]="educationalModule.id"
+                           [checked]="selectedItemIds.includes(educationalModule.id)"
+                    />
                 </td>
             </tr>
             <tr *ngIf="!homePagePersonEducationalModules">

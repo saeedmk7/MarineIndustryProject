@@ -1,0 +1,37 @@
+{
+    "marineindustryprojApp": {
+        "matchingRunningStep": {
+            "home": {
+                "title": "Matching Running Steps",
+                "createLabel": "Create a new Matching Running Step",
+                "createOrEditLabel": "Create or edit a Matching Running Step"
+            },
+            "created": "A new Matching Running Step is created with identifier {{ param }}",
+            "updated": "A Matching Running Step is updated with identifier {{ param }}",
+            "deleted": "A Matching Running Step is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Matching Running Step {{ id }}?"
+            },
+            "detail": {
+                "title": "Matching Running Step"
+            },
+            "title": "Title",
+            "description": "Description",
+            "stepNumber": "Step Number",
+            "stepRequired": "Step Required",
+            "fileDocRequired": "File Doc Required",
+            "colorText": "Color Text",
+            "isHeader": "Is Header",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "status": "Status",
+            "fileDoc": "File Doc",
+            "matchingRunRunningStep": "Matching Run Running Step"
+        }
+    }
+}

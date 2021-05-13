@@ -1,0 +1,142 @@
+<script src="matching-running-step-marine-suffix-update.component.ts"></script>
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="mi-matching-running-step-marine-suffix-heading" jhiTranslate="marineindustryprojApp.matchingRunningStep.home.createOrEditLabel">Create or edit a Matching Running Step</h2>
+            <div>
+                <mi-alert-error></mi-alert-error>
+                <div class="form-group" [hidden]="!matchingRunningStep.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="matchingRunningStep.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.matchingRunningStep.title" for="field_title">Title</label>
+                    <textarea type="text" class="form-control" name="title" id="field_title"
+                              [(ngModel)]="matchingRunningStep.title" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.matchingRunningStep.stepNumber" for="field_stepNumber">Step Number</label>
+                    <input type="number" class="form-control" name="stepNumber" id="field_stepNumber"
+                           [(ngModel)]="matchingRunningStep.stepNumber" required/>
+                    <div [hidden]="!(editForm.controls.stepNumber?.dirty && editForm.controls.stepNumber?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.stepNumber?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.stepNumber?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.matchingRunningStep.isHeader" for="field_isHeader">Is Header</label>
+                    <input type="checkbox" class="form-control" name="isHeader" id="field_isHeader"
+                           [(ngModel)]="matchingRunningStep.isHeader" />
+                    <div [hidden]="!(editForm.controls.isHeader?.dirty && editForm.controls.isHeader?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.isHeader?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.matchingRunningStep.colorText" for="field_colorText">Color Text</label>
+                    <input type="color" class="form-control" name="colorText" id="field_colorText" [disabled]="!matchingRunningStep.isHeader"
+                           [(ngModel)]="matchingRunningStep.colorText" />
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.matchingRunningStep.stepRequired" for="field_stepRequired">Step Required</label>
+                    <input type="checkbox" class="form-control" name="stepRequired" id="field_stepRequired"
+                           [(ngModel)]="matchingRunningStep.stepRequired" />
+                    <div [hidden]="!(editForm.controls.stepRequired?.dirty && editForm.controls.stepRequired?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.stepRequired?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.matchingRunningStep.fileDocRequired" for="field_fileDocRequired">File Doc Required</label>
+                    <input type="checkbox" class="form-control" name="fileDocRequired" id="field_fileDocRequired"
+                           [disabled]="!matchingRunningStep.stepRequired" [(ngModel)]="matchingRunningStep.fileDocRequired" />
+                    <div [hidden]="!(editForm.controls.fileDocRequired?.dirty && editForm.controls.fileDocRequired?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.fileDocRequired?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <br/>
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">آپلود فایل نمونه</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.matchingRunningStep.fileDoc" for="file_fileDoc">File Doc</label>
+                    <div>
+                        <input type="file" id="file_fileDoc" (change)="setFileData($event, matchingRunningStep, 'fileDoc', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <!--<input type="hidden" class="form-control" name="fileDoc" id="field_fileDoc"
+                           [(ngModel)]="educationalHistory.fileDoc" required/>-->
+
+                    <div [hidden]="!(editForm.controls.fileDoc?.dirty && editForm.controls.fileDoc?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.fileDoc?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div *ngIf="fileMessage" class="alert" style="display: inline" [ngClass]="{'alert-danger': fileHasError,'alert-success': !fileHasError}">{{fileMessage}}</div>
+                <ng-container *ngIf="matchingRunningStep.id != undefined">
+                    <input type="button" [disabled]="fileHasError || uploadingFile" (click)="uploadFile()" class="btn btn-info" style="display: inline" value="ویرایش و آپلود فایل نمونه" />
+                    <div class="alert alert-warning">
+                        برای ویرایش فایل نمونه ابتدا فایل خود را انتخاب نمائید، سپس روی دکمه ی 'ویرایش و آپلود فایل نمونه' کلیک نمائید. سپس برای ثبت نهایی تغییرات روی دکمه ذخیره کلیک نمائید.
+                    </div>
+                </ng-container>
+
+                <div class="alert alert-info">
+                    لطفا قبل از آپلود به موارد زیر دقت فرمائید.
+                    <ol>
+                        <li>
+                            نام فایل انتخابی شما نباید شامل تعداد زیادی نقطه(.) یا کاما (,) و امثالهم باشد.
+                        </li>
+                        <li>
+                            حجم فایل شما نباید بیش از 10 مگابایت باشد.
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">توضیحات بیشتر</div></div>
+                <div class="form-group fullcover">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.matchingRunningStep.description" for="field_description">Description</label>
+                    <textarea type="text" class="form-control" name="description" id="field_description"
+                              [(ngModel)]="matchingRunningStep.description" maxlength="4096"></textarea>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4096 }">
+                        This field cannot be longer than 4096 characters.
+                        </small>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

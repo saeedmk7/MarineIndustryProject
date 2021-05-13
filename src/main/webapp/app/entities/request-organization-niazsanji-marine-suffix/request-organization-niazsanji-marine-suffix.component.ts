@@ -303,13 +303,13 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
             let peopleNames: string[] = filteredPeople.map(a => a.fullName);
 
             index++;
-            let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            //let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
             let obj: Object;
             obj = {
                 index: index,
                 organizationChartRoot: a.organizationChartRoot,
                 recommendedByOrgchart: a.organizationChartTitle,
-                educationalModule: educationalModule.title,
+                educationalModule: a.educationalModuleTitle,
                 educationalModuleCode: a.educationalModuleCode,
                 educationalModuleSkillLevelOfSkillTitle: a.skillLevelOfSkillTitle,
                 peopleCount: a.peopleCount,
@@ -599,13 +599,14 @@ export class RequestOrganizationNiazsanjiMarineSuffixComponent implements OnInit
             a.organizationChartRoot = org.rootTitle;
         }
         a.peopleCount = a.people.length;
-        let education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
+        a.fullLearningTime = a.totalLearningTime * a.peopleCount;
+        /*let education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
         if (education) {
             a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
             a.totalLearningTime =
                 a.peopleCount * (education.learningTimePractical ? education.learningTimePractical : 0) +
                 (education.learningTimeTheorical ? education.learningTimeTheorical : 0);
-        }
+        }*/
     }
 
     private onError(errorMessage: string) {

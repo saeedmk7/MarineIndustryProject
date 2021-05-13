@@ -29,6 +29,7 @@ import { FinalNiazsanjiReportMarineSuffixService } from 'app/entities/final-niaz
 import { EFFECTIVENESSPHASESTATUSMEANING } from 'app/shared/constants/effectiveness-phase-status-meaning.constants';
 import { Grade } from 'app/shared/model/enums/Grade';
 import { GRADES } from 'app/shared/constants/grades.constants';
+import { FINALNIAZSANJISTATUSMEANINGFORSEARCH } from 'app/shared/constants/final-niazsanji-report-status-meaning-for-search.constants';
 
 @Component({
     selector: 'mi-final-niazsanji-effectiveness-phase-marine-suffix',
@@ -370,7 +371,7 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
                     )
                 );
                 this.searchbarModel.push(
-                    new SearchPanelModel('finalNiazsanjiReport', 'status', 'select', 'equals', EFFECTIVENESSPHASESTATUSMEANING, 'mean')
+                    new SearchPanelModel('finalNiazsanjiReport', 'status', 'select', 'equals', FINALNIAZSANJISTATUSMEANINGFORSEARCH, 'mean')
                 );
 
                 this.searchbarModel.push(
@@ -611,7 +612,6 @@ export class FinalNiazsanjiEffectivenessPhaseMarineSuffixComponent implements On
     loadData(data: IFinalNiazsanjiReportMarineSuffix[]): IFinalNiazsanjiReportMarineSuffix[] {
         let finalNiazsanjiReports: IFinalNiazsanjiReportMarineSuffix[] = this.convertObjectDatesService.fillFinalNiazsanjiDataArray(
             data,
-            this.educationalModules,
             this.organizationcharts
         );
         return this.convertObjectDatesService.changeArrayDate(finalNiazsanjiReports);

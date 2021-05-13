@@ -37,7 +37,6 @@ export class ConvertObjectDatesService {
     }
     fillFinalNiazsanjiData(
         finalNiazsanji: IFinalNiazsanjiReportMarineSuffix,
-        educationalModule: IEducationalModuleMarineSuffix,
         orgChart: IOrganizationChartMarineSuffix
     ): IFinalNiazsanjiReportMarineSuffix {
         if (finalNiazsanji.niazSanjiSource == NiazSanjiSource.FARDI) finalNiazsanji.niazSanjiSource = NiazSanjiSource.FARDI2;
@@ -51,10 +50,6 @@ export class ConvertObjectDatesService {
         finalNiazsanji.lastEffectivenessPhaseFinishPersian = this.miladi2ShamsiMoment(finalNiazsanji.lastEffectivenessPhaseFinish);
         finalNiazsanji.runMonthPersian = this.convertMonthsNumber2MonthName(finalNiazsanji.runMonth);
         finalNiazsanji.planningRunMonthPersian = this.convertMonthsNumber2MonthName(finalNiazsanji.planningRunMonth);
-        if (educationalModule) {
-            finalNiazsanji.educationalModuleLevelTitle = educationalModule.skillableLevelOfSkillTitle;
-            finalNiazsanji.educationalModuleTotalTime = educationalModule.totalLearningTime;
-        }
         if (orgChart) {
             finalNiazsanji.organizationChartFullTitle = orgChart.fullTitle;
             finalNiazsanji.organizationChartRootTitle = orgChart.rootTitle;
@@ -63,20 +58,19 @@ export class ConvertObjectDatesService {
     }
     fillFinalNiazsanjiDataArray(
         finalNiazsanjis: IFinalNiazsanjiReportMarineSuffix[],
-        educationalModules: IEducationalModuleMarineSuffix[],
         orgCharts: IOrganizationChartMarineSuffix[]
     ): IFinalNiazsanjiReportMarineSuffix[] {
         finalNiazsanjis.forEach((a: IFinalNiazsanjiReportMarineSuffix) => {
-            const educationalModule = educationalModules.find(e => e.id == a.educationalModuleId);
+            //const educationalModule = educationalModules.find(e => e.id == a.educationalModuleId);
             const orgChart = orgCharts.find(o => o.id == a.organizationChartId);
-            a = this.fillFinalNiazsanjiData(a, educationalModule, orgChart);
+            a = this.fillFinalNiazsanjiData(a, orgChart);
         });
         return finalNiazsanjis;
     }
     public changeDate(obj, notbool = false) {
         if (this.isfa) {
             const mustChangeList: string[] = ['timepassed'];
-            const exceptionFields: string[] = ['dateOfStart', 'dateOfEnd', 'investDate'];
+            const exceptionFields: string[] = ['dateOfStart', 'dateOfEnd', 'investDate', 'startStudyDate', 'graduateDateOfNewCourse'];
             for (let key in obj) {
                 if (obj.hasOwnProperty(key)) {
                     let value = obj[key];

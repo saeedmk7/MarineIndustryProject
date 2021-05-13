@@ -57,7 +57,12 @@ public class SkillableLevelOfSkill implements Serializable {
     @OneToMany(mappedBy = "skillableLevelOfSkill")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<RequestEducationalModule> requestEducationalModules = new HashSet<>();
+    @ManyToMany(mappedBy = "skillableLevelOfSkills")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<MatchingEducationalRecord> matchingEducationalRecords = new HashSet<>();
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -194,6 +199,31 @@ public class SkillableLevelOfSkill implements Serializable {
         this.requestEducationalModules = requestEducationalModules;
     }
 
+    public Set<MatchingEducationalRecord> getMatchingEducationalRecords() {
+        return matchingEducationalRecords;
+    }
+
+    public SkillableLevelOfSkill matchingEducationalRecords(Set<MatchingEducationalRecord> matchingEducationalRecords) {
+        this.matchingEducationalRecords = matchingEducationalRecords;
+        return this;
+    }
+
+    public SkillableLevelOfSkill addMatchingEducationalRecord(MatchingEducationalRecord matchingEducationalRecord) {
+        this.matchingEducationalRecords.add(matchingEducationalRecord);
+        matchingEducationalRecord.getSkillableLevelOfSkills().add(this);
+        return this;
+    }
+
+    public SkillableLevelOfSkill removeMatchingEducationalRecord(MatchingEducationalRecord matchingEducationalRecord) {
+        this.matchingEducationalRecords.remove(matchingEducationalRecord);
+        matchingEducationalRecord.getSkillableLevelOfSkills().remove(this);
+        return this;
+    }
+
+    public void setMatchingEducationalRecords(Set<MatchingEducationalRecord> matchingEducationalRecords) {
+        this.matchingEducationalRecords = matchingEducationalRecords;
+    }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

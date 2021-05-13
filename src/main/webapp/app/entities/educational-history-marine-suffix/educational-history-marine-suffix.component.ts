@@ -313,9 +313,6 @@ export class EducationalHistoryMarineSuffixComponent implements OnInit, OnDestro
                     const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
                     if (org) a.organizationChartTitle = org.fullTitle;
                     let person = people.find(w => w.id == a.personId);
-                    //let person = this.people.find(w => w.id == a.personId);
-
-                    //let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
 
                     let obj: Object;
                     obj = {

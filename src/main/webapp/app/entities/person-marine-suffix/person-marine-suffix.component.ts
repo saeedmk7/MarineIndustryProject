@@ -301,7 +301,7 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
     prepareQualification() {
         this.qualificationService.query().subscribe(
             (res: HttpResponse<IQualificationMarineSuffix[]>) => {
-                this.employmenttypes = res.body;
+                this.qualifications = res.body;
 
                 this.searchbarModel.push(new SearchPanelModel('person', 'lastQualificationId', 'select', 'equals', res.body));
             },
@@ -311,7 +311,7 @@ export class PersonMarineSuffixComponent implements OnInit, OnDestroy {
     prepareEmploymentType() {
         this.employmentTypeService.query().subscribe(
             (res: HttpResponse<IEmploymentTypeMarineSuffix[]>) => {
-                this.qualifications = res.body;
+                this.employmenttypes = res.body;
 
                 this.searchbarModel.push(new SearchPanelModel('person', 'employmentTypeId', 'select', 'equals', res.body));
             },

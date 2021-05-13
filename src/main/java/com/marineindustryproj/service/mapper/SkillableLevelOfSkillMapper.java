@@ -14,6 +14,7 @@ public interface SkillableLevelOfSkillMapper extends EntityMapper<SkillableLevel
 
     @Mapping(target = "educationalModules", ignore = true)
     @Mapping(target = "requestEducationalModules", ignore = true)
+    @Mapping(target = "matchingEducationalRecords", ignore = true)
     SkillableLevelOfSkill toEntity(SkillableLevelOfSkillDTO skillableLevelOfSkillDTO);
 
     default SkillableLevelOfSkill fromId(Long id) {

@@ -517,6 +517,20 @@
                         </small>
                     </div>
                 </div>
+                <div class="form-group bighalf">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalModule.archived" for="field_archived">Archived</label>
+                    <input type="checkbox" class="form-control" name="archived" id="field_archived"
+                           [(ngModel)]="educationalModule.archived" />
+                    <span class="alert alert-warning">
+                        لطفا برای نمایش یا عدم نمایش پودمان در لیست ها از فعال و غیرفعال کردن آرشیو استفاده نمائید.
+                    </span>
+                    <div [hidden]="!(editForm.controls.archived?.dirty && editForm.controls.archived?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.archived?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
             </div>
 
             <div>

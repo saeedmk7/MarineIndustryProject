@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="matchingRunRunningStep">
+            <h2><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.detail.title">Matching Run Running Step</span> {{matchingRunRunningStep.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.fileDoc">File Doc</span></dt>
+                <dd>
+                    <span>{{matchingRunRunningStep.fileDoc}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.description">Description</span></dt>
+                <dd>
+                    <span>{{matchingRunRunningStep.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.done">Done</span></dt>
+                <dd>
+                    <span>{{matchingRunRunningStep.done}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.doneUserLogin">Done User Login</span></dt>
+                <dd>
+                    <span>{{matchingRunRunningStep.doneUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.doneDate">Done Date</span></dt>
+                <dd>
+                    <span>{{matchingRunRunningStep.doneDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{matchingRunRunningStep.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{matchingRunRunningStep.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{matchingRunRunningStep.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{matchingRunRunningStep.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.matchingEducationalRecord">Matching Educational Record</span></dt>
+                <dd>
+                    <div *ngIf="matchingRunRunningStep.matchingEducationalRecordId">
+                        <a [routerLink]="['/matching-educational-record-marine-suffix', matchingRunRunningStep.matchingEducationalRecordId, 'view']">{{matchingRunRunningStep.matchingEducationalRecordCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.matchingRunningStep">Matching Running Step</span></dt>
+                <dd>
+                    <div *ngIf="matchingRunRunningStep.matchingRunningStepId">
+                        <a [routerLink]="['/matching-running-step-marine-suffix', matchingRunRunningStep.matchingRunningStepId, 'view']">{{matchingRunRunningStep.matchingRunningStepTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/matching-run-running-step-marine-suffix', matchingRunRunningStep.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

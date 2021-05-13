@@ -134,7 +134,7 @@ public class PreJobNiazsanjiResource {
         preJobNiazsanjiDTO.setCreateUserLogin(preJobNiazsanji.getCreateUserLogin());
         preJobNiazsanjiDTO.setCreateDate(preJobNiazsanji.getCreateDate());
         preJobNiazsanjiDTO.setModifyUserLogin(SecurityUtils.getCurrentUserLogin().get());
-        preJobNiazsanjiDTO.setModifyDate(ZonedDateTime.now());
+        //preJobNiazsanjiDTO.setModifyDate(ZonedDateTime.now());
         preJobNiazsanjiDTO.setGuid(preJobNiazsanji.getGuid());
         PreJobNiazsanjiDTO result = preJobNiazsanjiService.save(preJobNiazsanjiDTO);
         return ResponseEntity.ok()

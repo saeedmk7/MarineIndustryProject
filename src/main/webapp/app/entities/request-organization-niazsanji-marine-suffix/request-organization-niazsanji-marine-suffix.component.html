@@ -64,7 +64,7 @@
                 <td>{{requestOrganizationNiazsanji.skillLevelOfSkillTitle}}</td>
                 <td>{{requestOrganizationNiazsanji.peopleCount}}</td>
                 <td>{{requestOrganizationNiazsanji.totalLearningTime | number}}</td>
-                <td>{{requestOrganizationNiazsanji.totalLearningTime * requestOrganizationNiazsanji.peopleCount | number}}</td>
+                <td>{{requestOrganizationNiazsanji.fullLearningTime | number}}</td>
                 <!--<td>{{requestOrganizationNiazsanji.studentsType}}</td>-->
                <!-- <td>
                     <div *ngFor="let person of requestOrganizationNiazsanji.people">
@@ -188,6 +188,7 @@
                 <td colspan="6">مجموع</td>
                 <td>{{requestOrganizationNiazsanjis | sum:'peopleCount' | number: '1.0-1'}}</td>
                 <td>{{requestOrganizationNiazsanjis | sum:'totalLearningTime' | number: '1.0-1'}}</td>
+                <td>{{requestOrganizationNiazsanjis | sum:'fullLearningTime' | number: '1.0-1'}}</td>
                 <td>{{requestOrganizationNiazsanjis | sum:'priceCost' | number: '1.0-1'}}</td>
                 <td colspan="7"></td>
             </tr>

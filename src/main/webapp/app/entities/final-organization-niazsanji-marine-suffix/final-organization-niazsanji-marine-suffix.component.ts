@@ -274,13 +274,13 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             let filteredPeople = this.people.filter(w => personIds.includes(w.id));
             let peopleNames: string[] = filteredPeople.map(a => a.fullName);
             index++;
-            let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            //let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
             let obj: Object;
             obj = {
                 index: index,
                 organizationChartRoot: a.organizationChartRootTitle,
                 recommendedByOrgchart: a.organizationChartTitle,
-                educationalModule: educationalModule.title,
+                educationalModule: a.educationalModuleTitle,
                 educationalModuleCode: a.educationalModuleCode,
                 educationalModuleSkillLevelOfSkillTitle: a.skillLevelOfSkillTitle,
                 peopleCount: a.peopleCount,
@@ -562,35 +562,36 @@ export class FinalOrganizationNiazsanjiMarineSuffixComponent implements OnInit, 
             a.organizationChartRootTitle = org.rootTitle;
         }
         a.peopleCount = a.people.length;
+        a.fullLearningTime = a.totalLearningTime * a.peopleCount;
+        /*a.totalLearningTime =
+            a.totalLearningTime;*/
         if (this.educationalModules && this.educationalModules.length > 0) {
-            const education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            /*const education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
             if (education) {
                 this.loadExtraEducationalModuleData(a);
-            }
+            }*/
         } else {
             if (this.educationalModuleService.educationalModules) {
                 this.educationalModules = this.educationalModuleService.educationalModules;
-                this.loadExtraEducationalModuleData(a);
+                //this.loadExtraEducationalModuleData(a);
             } else {
                 this.educationalModuleService.query().subscribe(
                     (resp: HttpResponse<IEducationalModuleMarineSuffix[]>) => {
                         this.educationalModules = resp.body;
-                        this.loadExtraEducationalModuleData(a);
+                        //this.loadExtraEducationalModuleData(a);
                     },
                     error => this.onError('پودمانی یافت نشد.')
                 );
             }
         }
     }
-    loadExtraEducationalModuleData(a: IFinalOrganizationNiazsanjiMarineSuffix) {
+    /*loadExtraEducationalModuleData(a: IFinalOrganizationNiazsanjiMarineSuffix) {
+
         const education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
         if (education) {
-            a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
-            a.totalLearningTime =
-                a.peopleCount * (education.learningTimePractical ? education.learningTimePractical : 0) +
-                (education.learningTimeTheorical ? education.learningTimeTheorical : 0);
+
         }
-    }
+    }*/
     private onSuccess(errorMessage: string) {
         this.jhiAlertService.success(errorMessage, null, null);
         this.loadAll(this.criteria);

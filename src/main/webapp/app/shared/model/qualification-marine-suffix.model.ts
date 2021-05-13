@@ -3,6 +3,7 @@ import { IPersonMarineSuffix } from 'app/shared/model//person-marine-suffix.mode
 import { ITeacherMarineSuffix } from 'app/shared/model//teacher-marine-suffix.model';
 import { IEducationalRecordMarineSuffix } from 'app/shared/model//educational-record-marine-suffix.model';
 import { ISoldierMarineSuffix } from 'app/shared/model//soldier-marine-suffix.model';
+import { IApplicationProcessMarineSuffix } from 'app/shared/model//application-process-marine-suffix.model';
 
 export interface IQualificationMarineSuffix {
     id?: number;
@@ -16,6 +17,7 @@ export interface IQualificationMarineSuffix {
     teachers?: ITeacherMarineSuffix[];
     educationalRecords?: IEducationalRecordMarineSuffix[];
     soldiers?: ISoldierMarineSuffix[];
+    applicationProcesses?: IApplicationProcessMarineSuffix[];
 }
 
 export class QualificationMarineSuffix implements IQualificationMarineSuffix {
@@ -30,6 +32,7 @@ export class QualificationMarineSuffix implements IQualificationMarineSuffix {
         public people?: IPersonMarineSuffix[],
         public teachers?: ITeacherMarineSuffix[],
         public educationalRecords?: IEducationalRecordMarineSuffix[],
-        public soldiers?: ISoldierMarineSuffix[]
+        public soldiers?: ISoldierMarineSuffix[],
+        public applicationProcesses?: IApplicationProcessMarineSuffix[]
     ) {}
 }

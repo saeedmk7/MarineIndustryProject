@@ -49,6 +49,8 @@ public interface DocumentMapper extends EntityMapper<DocumentDTO, Document> {
     @Mapping(target = "evaluateCriteriaData", ignore = true)
     @Mapping(target = "effectivenessPhases", ignore = true)
     @Mapping(target = "monitorLearningProcesses", ignore = true)
+    @Mapping(target = "matchingEducationalRecords", ignore = true)
+    @Mapping(target = "applicationProcesses", ignore = true)
     Document toEntity(DocumentDTO documentDTO);
 
     default Document fromId(Long id) {

@@ -1,0 +1,74 @@
+{
+    "marineindustryprojApp": {
+        "applicationProcess": {
+            "home": {
+                "title": "فرآیند درخواست ادامه تحصیل",
+                "code": "68-PR-10-5-05-00/FO-18-00",
+                "createLabel": "جدید",
+                "createOrEditLabel": "فرآیند درخواست ادامه تحصیل"
+            },
+            "created": "فرآیند درخواست ادامه تحصیل با شناسه {{ param }} ایجاد شد.",
+            "updated": "فرآیند درخواست ادامه تحصیل با شناسه {{ param }} ویرایش شد.",
+            "deleted": "فرآیند درخواست ادامه تحصیل با شناسه {{ param }} حذف شد.",
+            "completed": "فرآیند درخواست ادامه تحصیل مورد نظر با موفقیت نهایی شد.",
+            "rejected": "فرآیند درخواست ادامه تحصیل مورد نظر با موفقیت رد شد.",
+            "delete": {
+                "question": "آیا از حذف درخواست فرآیند درخواست ادامه تحصیل با شناسه {{ id }} مطمئنید؟"
+            },
+            "comment": {
+                "accept": "لطفا نظر خود را درج نمائید.",
+                "reject": "لطفا علت عدم تایید را ثبت نمائید.",
+                "comment": "لطفا نظر خود را درج نمائید."
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات فرم فرآیند درخواست ادامه تحصیل"
+            },
+            "index": "ردیف",
+            "code": "Code",
+            "description": "توضیحات",
+            "jobAfterProcess": "شغل سازمانی پس از تحصیل",
+            "acceptedUniversityAndDegree": "دانشگاه و مقطع پذیرفته شده",
+            "startStudyDate": "تاریخ شروع تحصیل",
+            "graduateDateOfNewCourse": "تاریخ فراغت از مقطع جدید",
+            "averagePointOfNewCourse": "معدل مقطع جدید",
+            "acceptedMajorAndField": "رشته و گرایش تحصیلی پذیرفته شده",
+            "haveUsedEducationalFacilities": "آیا قبلا از تسهیلات آموزشی استفاده نموده است؟",
+            "haveUsedEducationalFacilitiesDescription": "توضیحات بیشتر",
+            "dateOfAcceptanceOfDegree": "زمان پذیرش مدرک",
+            "typeAndAmountOfFacilities": "نوع و میزان تسهیلات",
+            "academicCommitmentsFulfilled": "تعهدات تحصیلی انجام شده",
+            "remainingAcademicCommitments": "تعهدات تحصیلی باقیمانده",
+            "requestedFacilitiesText": "تسهیلات درخواستی",
+            "requestedFacilitiesDescription": "توضیحات بیشتر در خصوص تسهیلات درخواستی",
+            "createUserLogin": "کاربر درخواست کننده",
+            "createDate": "تاریخ درخواست",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "chartStatus": "وضعیت چارت",
+            "bossStatus": "وضعیت روسا",
+            "conversation": "مکالمات",
+            "requestStatus": "وضعیت درخواست",
+            "changeStatusUserLogin": "فرد تغییر دهنده وضعیت درخواست",
+            "guid": "Guid",
+            "hasImportantMessage": "Has Important Message",
+            "selectedModuleIds": "Selected Module Ids",
+            "applicationProcessRunStep": "Application Process Run Step",
+            "document": "Document",
+            "educationalRecord": "سابقه تحصیل",
+            "person": "نام و نام خانوادگی",
+            "personId": "نام و نام خانوادگی",
+            "personName": "نام و نام خانوادگی",
+            "personEmploymentTypeId": "نوع استخدام",
+            "jobTitle": "شغل سازمانی",
+            "personJobTitle": "شغل سازمانی",
+            "organizationChart": "محل خدمت",
+            "organizationChartId": "محل خدمت",
+            "qualification": "مقطع تحصیلی مورد درخواست",
+            "qualificationId": "مقطع تحصیلی مورد درخواست"
+        }
+    }
+}

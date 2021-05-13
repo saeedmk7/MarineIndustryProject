@@ -115,6 +115,10 @@ public class SkillableLevelOfSkillQueryService extends QueryService<SkillableLev
                 specification = specification.and(buildSpecification(criteria.getRequestEducationalModuleId(),
                     root -> root.join(SkillableLevelOfSkill_.requestEducationalModules, JoinType.LEFT).get(RequestEducationalModule_.id)));
             }
+            if (criteria.getMatchingEducationalRecordId() != null) {
+                specification = specification.and(buildSpecification(criteria.getMatchingEducationalRecordId(),
+                    root -> root.join(SkillableLevelOfSkill_.matchingEducationalRecords, JoinType.LEFT).get(MatchingEducationalRecord_.id)));
+            }
         }
         return specification;
     }

@@ -36,8 +36,10 @@ import { RequestOtherNiazsanjiMarineSuffixService } from 'app/entities/request-o
 import { PreJobNiazsanjiMarineSuffixService } from 'app/entities/pre-job-niazsanji-marine-suffix';
 import { PrioritizeRequestNiazsanjiMarineSuffixService } from 'app/entities/prioritize-request-niazsanji-marine-suffix';
 import { NiazsanjiIntegrationMarineSuffixService } from 'app/entities/niazsanji-integration-marine-suffix';
-import { RunPhaseMarineSuffix } from 'app/shared/model/run-phase-marine-suffix.model';
 import { RunPhaseMarineSuffixService } from 'app/entities/run-phase-marine-suffix';
+import { MatchingEducationalRecordMarineSuffixService } from 'app/entities/matching-educational-record-marine-suffix';
+import { ApplicationProcessMarineSuffixService } from 'app/entities/application-process-marine-suffix';
+import * as moment from 'jalali-moment';
 
 @Component({
     selector: 'mi-topbar',
@@ -59,6 +61,8 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+    applicationProcessCounter: number;
+    matchingEducationalRecordCounter: number;
     requestOrganizationNiazsanjiCounter: number;
     usersRequestCounter: number;
     referUsersRequestCounter: number;
@@ -93,6 +97,7 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
     badError: string;
     currentAccount: any;
+    todayDate: string;
 
     constructor(
         private userService: UserService,
@@ -113,6 +118,8 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
         private profileService: ProfileService,
         private router: Router,
         private requestOrganizationNiazsanjiMarineSuffixService: RequestOrganizationNiazsanjiMarineSuffixService,
+        private matchingEducationalRecordMarineSuffixService: MatchingEducationalRecordMarineSuffixService,
+        private applicationProcessMarineSuffixService: ApplicationProcessMarineSuffixService,
         private jhiAlertService: JhiAlertService,
         private beautySpeechService: BeautySpeechMarineSuffixService,
         private usersRequestMarineSuffixService: UsersRequestMarineSuffixService,
@@ -150,7 +157,10 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
         this.languageHelper.getAll().then(languages => {
             this.languages = languages;
         });
-
+        const now: any = new Date();
+        this.todayDate = moment(now)
+            .locale('fa')
+            .format('YYYY/MM/DD');
         this.profileService.getProfileInfo().then(profileInfo => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
@@ -195,6 +205,8 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
             this.intervals = setInterval(() => {
                 if (this.isAuthenticated()) {
                     this.getNewRequestOrganization();
+                    this.getNewMatchingEducationalRecord();
+                    this.getNewApplicationProcess();
                     this.countAllRequestNiazSanjiFardi();
                     this.countRequestNiazsanjiOther();
                     this.countPreJob();
@@ -545,6 +557,168 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
             }
         }
     }
+    getNewMatchingEducationalRecord() {
+        if (this.currentPerson) {
+            let orgId = this.currentPerson.organizationChartId;
+            let criteria = [
+                {
+                    key: 'chartStatus.equals',
+                    value: orgId
+                },
+                {
+                    key: 'requestStatus.equals',
+                    value: 'NEW'
+                }
+            ];
+            this.matchingEducationalRecordMarineSuffixService
+                .count({
+                    page: 0,
+                    size: 2000,
+                    criteria,
+                    sort: null
+                })
+                .subscribe(
+                    (res: HttpResponse<any>) => {
+                        //localStorage.setItem('requestOrganizationNiazsanjiCount', res.body);
+                        this.matchingEducationalRecordCounter = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+        if (this.isKarshenasArshadAmozeshSazman) {
+            let criteria = [
+                {
+                    key: 'bossStatus.in',
+                    value: [10, 30]
+                },
+                {
+                    key: 'requestStatus.equals',
+                    value: 'NEW'
+                }
+            ];
+            this.matchingEducationalRecordMarineSuffixService
+                .count({
+                    page: 0,
+                    size: 2000,
+                    criteria,
+                    sort: null
+                })
+                .subscribe(
+                    (res: HttpResponse<any>) => {
+                        //localStorage.setItem('requestOrganizationNiazsanjiCount', res.body);
+                        this.matchingEducationalRecordCounter += res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+        if (this.isModirKolAmozesh) {
+            let criteria = [
+                {
+                    key: 'bossStatus.in',
+                    value: [20, 30]
+                },
+                {
+                    key: 'requestStatus.equals',
+                    value: 'NEW'
+                }
+            ];
+            this.matchingEducationalRecordMarineSuffixService
+                .count({
+                    page: 0,
+                    size: 2000,
+                    criteria,
+                    sort: null
+                })
+                .subscribe(
+                    (res: HttpResponse<any>) => {
+                        //localStorage.setItem('requestOrganizationNiazsanjiCount', res.body);
+                        this.matchingEducationalRecordCounter += res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+    }
+    getNewApplicationProcess() {
+        if (this.currentPerson) {
+            let orgId = this.currentPerson.organizationChartId;
+            let criteria = [
+                {
+                    key: 'chartStatus.equals',
+                    value: orgId
+                },
+                {
+                    key: 'requestStatus.equals',
+                    value: 'NEW'
+                }
+            ];
+            this.applicationProcessMarineSuffixService
+                .count({
+                    page: 0,
+                    size: 2000,
+                    criteria,
+                    sort: null
+                })
+                .subscribe(
+                    (res: HttpResponse<any>) => {
+                        //localStorage.setItem('requestOrganizationNiazsanjiCount', res.body);
+                        this.applicationProcessCounter = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+        if (this.isKarshenasArshadAmozeshSazman) {
+            let criteria = [
+                {
+                    key: 'bossStatus.in',
+                    value: [10, 30]
+                },
+                {
+                    key: 'requestStatus.equals',
+                    value: 'NEW'
+                }
+            ];
+            this.applicationProcessMarineSuffixService
+                .count({
+                    page: 0,
+                    size: 2000,
+                    criteria,
+                    sort: null
+                })
+                .subscribe(
+                    (res: HttpResponse<any>) => {
+                        //localStorage.setItem('requestOrganizationNiazsanjiCount', res.body);
+                        this.applicationProcessCounter += res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+        if (this.isModirKolAmozesh) {
+            let criteria = [
+                {
+                    key: 'bossStatus.in',
+                    value: [20, 30]
+                },
+                {
+                    key: 'requestStatus.equals',
+                    value: 'NEW'
+                }
+            ];
+            this.applicationProcessMarineSuffixService
+                .count({
+                    page: 0,
+                    size: 2000,
+                    criteria,
+                    sort: null
+                })
+                .subscribe(
+                    (res: HttpResponse<any>) => {
+                        //localStorage.setItem('requestOrganizationNiazsanjiCount', res.body);
+                        this.applicationProcessCounter += res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+    }
 
     fillPerson(account) {
         if (account.personId) {
@@ -579,6 +753,8 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
         this.countPreJob();
         this.countRequestNiazsanjiOther();
         this.getNewRequestOrganization();
+        this.getNewMatchingEducationalRecord();
+        this.getNewApplicationProcess();
         this.getNewReferalUsersRequest();
         //this.getFinalNiazSanjiFardis();
         this.getFinalorganizationNiazsanji();

@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpEvent, HttpRequest, HttpResponse} from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { map } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IRunPhaseMarineSuffix } from 'app/shared/model/run-phase-marine-suffix.model';
-import {IRunPhaseSaveDataModel} from "app/entities/run-phase-marine-suffix/run-phase-marine-suffix-save-data.model";
-import {add} from "@progress/kendo-angular-inputs/dist/es2015/common/math";
+import { IRunPhaseSaveDataModel } from 'app/entities/run-phase-marine-suffix/run-phase-marine-suffix-save-data.model';
 
 type EntityResponseType = HttpResponse<IRunPhaseMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<IRunPhaseMarineSuffix[]>;
@@ -21,10 +19,9 @@ export class RunPhaseMarineSuffixService {
     constructor(private http: HttpClient) {}
 
     uploadFile(formdata: FormData): Observable<HttpEvent<{}>> {
-
         /*return this.http
             .post<any>(this.resourceUrl, formdata, { observe: 'response', reportProgress:true });*/
-        const url = this.resourceUrl + "/upload-file";
+        const url = this.resourceUrl + '/upload-file';
         const req = new HttpRequest('POST', url, formdata, {
             reportProgress: true,
             responseType: 'text'
@@ -33,8 +30,7 @@ export class RunPhaseMarineSuffixService {
         return this.http.request(req);
     }
     deleteFile(address: string): Observable<HttpResponse<any>> {
-
-        let fileName = address.split('/')[address.split('/').length-1];
+        let fileName = address.split('/')[address.split('/').length - 1];
         return this.http.delete<any>(`${this.resourceUrl}/delete/${fileName}`, { observe: 'response' });
     }
     create(runPhase: IRunPhaseMarineSuffix): Observable<EntityResponseType> {
@@ -95,6 +91,9 @@ export class RunPhaseMarineSuffixService {
         res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
         res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
         res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
+        res.body.educationalModuleTotalTime =
+            (res.body.learningTimePractical ? res.body.learningTimePractical : 0) +
+            (res.body.learningTimeTheorical ? res.body.learningTimeTheorical : 0);
         return res;
     }
 
@@ -104,6 +103,9 @@ export class RunPhaseMarineSuffixService {
             runPhase.createDate = runPhase.createDate != null ? moment(runPhase.createDate) : null;
             runPhase.modifyDate = runPhase.modifyDate != null ? moment(runPhase.modifyDate) : null;
             runPhase.archivedDate = runPhase.archivedDate != null ? moment(runPhase.archivedDate) : null;
+            runPhase.educationalModuleTotalTime =
+                (runPhase.learningTimeTheorical ? runPhase.learningTimeTheorical : 0) +
+                (runPhase.learningTimePractical ? runPhase.learningTimePractical : 0);
         });
         return res;
     }

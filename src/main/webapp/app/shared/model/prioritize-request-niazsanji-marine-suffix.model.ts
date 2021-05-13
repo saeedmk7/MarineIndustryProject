@@ -49,11 +49,14 @@ export interface IPrioritizeRequestNiazsanjiMarineSuffix {
     educationalModuleId?: number;
     skillLevelOfSkillTitle?: string;
     totalLearningTime?: number;
+    learningTimePractical?: number;
+    learningTimeTheorical?: number;
     personFamily?: string;
     personName?: string;
     personFullName?: string;
     personJobTitle?: string;
     personPracticalJobTitle?: string;
+    personEmploymentTypeTitle?: string;
     personId?: number;
     organizationChartTitle?: string;
     organizationChartId?: number;
@@ -106,10 +109,13 @@ export class PrioritizeRequestNiazsanjiMarineSuffix implements IPrioritizeReques
         public educationalModuleId?: number,
         public skillLevelOfSkillTitle?: string,
         public totalLearningTime?: number,
+        public learningTimeTheorical?: number,
+        public learningTimePractical?: number,
         public personFamily?: string,
         public personName?: string,
         public personFullName?: string,
         public personJobTitle?: string,
+        public personEmploymentTypeTitle?: string,
         public personPracticalJobTitle?: string,
         public personId?: number,
         public organizationChartTitle?: string,

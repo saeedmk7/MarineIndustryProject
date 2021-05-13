@@ -87,6 +87,10 @@ public class OrganizationChartCriteria implements Serializable {
 
     private LongFilter evaluateCriteriaDataId;
 
+    private LongFilter matchingEducationalRecordId;
+
+    private LongFilter applicationProcessId;
+
     private LongFilter parentId;
 
     private LongFilter forceRunningPercentId;
@@ -349,6 +353,22 @@ public class OrganizationChartCriteria implements Serializable {
         this.evaluateCriteriaDataId = evaluateCriteriaDataId;
     }
 
+    public LongFilter getMatchingEducationalRecordId() {
+        return matchingEducationalRecordId;
+    }
+
+    public void setMatchingEducationalRecordId(LongFilter matchingEducationalRecordId) {
+        this.matchingEducationalRecordId = matchingEducationalRecordId;
+    }
+
+    public LongFilter getApplicationProcessId() {
+        return applicationProcessId;
+    }
+
+    public void setApplicationProcessId(LongFilter applicationProcessId) {
+        this.applicationProcessId = applicationProcessId;
+    }
+
     public LongFilter getParentId() {
         return parentId;
     }
@@ -416,6 +436,8 @@ public class OrganizationChartCriteria implements Serializable {
             Objects.equals(soldierId, that.soldierId) &&
             Objects.equals(evaluateCriteriaTrainingId, that.evaluateCriteriaTrainingId) &&
             Objects.equals(evaluateCriteriaDataId, that.evaluateCriteriaDataId) &&
+            Objects.equals(matchingEducationalRecordId, that.matchingEducationalRecordId) &&
+            Objects.equals(applicationProcessId, that.applicationProcessId) &&
             Objects.equals(parentId, that.parentId) &&
             Objects.equals(forceRunningPercentId, that.forceRunningPercentId) &&
             Objects.equals(reportGeneratorId, that.reportGeneratorId);
@@ -456,6 +478,8 @@ public class OrganizationChartCriteria implements Serializable {
         soldierId,
         evaluateCriteriaTrainingId,
         evaluateCriteriaDataId,
+        matchingEducationalRecordId,
+        applicationProcessId,
         parentId,
         forceRunningPercentId,
         reportGeneratorId
@@ -497,6 +521,8 @@ public class OrganizationChartCriteria implements Serializable {
                 (soldierId != null ? "soldierId=" + soldierId + ", " : "") +
                 (evaluateCriteriaTrainingId != null ? "evaluateCriteriaTrainingId=" + evaluateCriteriaTrainingId + ", " : "") +
                 (evaluateCriteriaDataId != null ? "evaluateCriteriaDataId=" + evaluateCriteriaDataId + ", " : "") +
+                (matchingEducationalRecordId != null ? "matchingEducationalRecordId=" + matchingEducationalRecordId + ", " : "") +
+                (applicationProcessId != null ? "applicationProcessId=" + applicationProcessId + ", " : "") +
                 (parentId != null ? "parentId=" + parentId + ", " : "") +
                 (forceRunningPercentId != null ? "forceRunningPercentId=" + forceRunningPercentId + ", " : "") +
                 (reportGeneratorId != null ? "reportGeneratorId=" + reportGeneratorId + ", " : "") +

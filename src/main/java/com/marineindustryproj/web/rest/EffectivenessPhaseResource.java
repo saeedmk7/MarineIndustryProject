@@ -253,7 +253,7 @@ public class EffectivenessPhaseResource {
                 //float sumAverageScoreFinal = (float) sumAverageScore / allPeopleCount;
                 float weightedPoints = (averageScoreFinal * effectivenessPhaseDTO.getEffectivenessPhaseLevel().getWeight()) / 100;
 
-                effectivenessPhaseDTO.setFinalScore(beforeTestScoreFinal);
+                effectivenessPhaseDTO.setFirstScore(beforeTestScoreFinal);
                 effectivenessPhaseDTO.setSecondScore(afterTestScoreFinal);
                 effectivenessPhaseDTO.setFinalScore(averageScoreFinal);
                 effectivenessPhaseDTO.setWeightedPoints(weightedPoints);

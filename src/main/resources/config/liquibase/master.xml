@@ -260,6 +260,20 @@
     <include file="config/liquibase/changelog/20210212121011_update_entity_user_request.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210226121011_update_entity_final_niazsanji_report_person.xml" relativeToChangelogFile="false"/>
 
+    <include file="config/liquibase/changelog/20210226182455_added_entity_MatchingEducationalRecord.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210226182456_added_entity_MatchingRunningStep.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210226182457_added_entity_MatchingRunRunningStep.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210226182455_added_entity_constraints_MatchingEducationalRecord.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210226182457_added_entity_constraints_MatchingRunRunningStep.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210228121011_update_entity_matching_educational_record.xml" relativeToChangelogFile="false"/>
+
+    <include file="config/liquibase/changelog/20210310063541_added_entity_ApplicationProcess.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210310063542_added_entity_ApplicationProcessStep.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210310063543_added_entity_ApplicationProcessRunStep.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210310063541_added_entity_constraints_ApplicationProcess.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210310063543_added_entity_constraints_ApplicationProcessRunStep.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210513072922_added_entity_Capitation.xml" relativeToChangelogFile="false"/>
+
 
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

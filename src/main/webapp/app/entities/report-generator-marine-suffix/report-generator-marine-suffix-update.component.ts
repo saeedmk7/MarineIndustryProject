@@ -28,6 +28,7 @@ import { IPersonMarineSuffix } from 'app/shared/model/person-marine-suffix.model
 import { MONTHS } from 'app/shared/constants/months.constants';
 import { FINALNIAZSANJISTATUSMEANING } from 'app/shared/constants/final-niazsanji-report-status-meaning.constants';
 import { REPORTGENERATORFIELDS } from 'app/shared/constants/report-generator-fields';
+import { FINALNIAZSANJISTATUSMEANINGFORSEARCH } from 'app/shared/constants/final-niazsanji-report-status-meaning-for-search.constants';
 
 @Component({
     selector: 'mi-report-generator-marine-suffix-update',
@@ -107,7 +108,9 @@ export class ReportGeneratorMarineSuffixUpdateComponent implements OnInit {
         this.prepareSearchOrgChart();
         this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'educationalModuleCode', 'text', 'contains'));
         this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'educationalModuleTitle', 'text', 'contains'));
-        this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'status', 'select', 'equals', this.statusMeaning, 'mean'));
+        this.searchbarModel.push(
+            new SearchPanelModel('finalNiazsanjiReport', 'status', 'select', 'equals', FINALNIAZSANJISTATUSMEANINGFORSEARCH, 'mean')
+        );
         this.searchbarModel.push(new SearchPanelModel('finalNiazsanjiReport', 'id', 'text', 'equals'));
         this.prepareSearchCourseType();
         this.searchbarModel.push(

@@ -1,0 +1,260 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.applicationProcess.home.title">Application Processes</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-application-process-marine-suffix" [routerLink]="['/application-process-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.applicationProcess.home.createLabel">
+            Create new Application Process
+            </span>
+        </button>
+        <button  class="btn btn-info float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <search-panel [(page)]="page" [(size)]="itemsPerPage" [predicate]="predicate" [reverse]="reverse" [searchPanelModel]="searchbarModel"></search-panel>
+    <br/>
+    <div class="table-responsive" *ngIf="applicationProcesses">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th>ردیف</th>
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.applicationProcess.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.applicationProcess.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.personJobTitle">Person</span>
+                <th><span jhiTranslate="marineindustryprojApp.person.employmentTypeTitle">Person</span>
+                </th>
+                <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.applicationProcess.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="status"><span
+                    jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.status">Status</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="qualificationTitle"><span jhiTranslate="marineindustryprojApp.applicationProcess.qualification">Qualification</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="acceptedMajorAndField"><span jhiTranslate="marineindustryprojApp.applicationProcess.acceptedMajorAndField">acceptedMajorAndField</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="startStudyDate"><span jhiTranslate="marineindustryprojApp.applicationProcess.startStudyDate">startStudyDate</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="graduateDateOfNewCourse"><span jhiTranslate="marineindustryprojApp.applicationProcess.graduateDateOfNewCourse">graduateDateOfNewCourse</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.applicationProcess.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.applicationProcess.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="jobAfterProcess"><span jhiTranslate="marineindustryprojApp.applicationProcess.jobAfterProcess">Job After Process</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="acceptedUniversityAndDegree"><span jhiTranslate="marineindustryprojApp.applicationProcess.acceptedUniversityAndDegree">Accepted University And Degree</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="startStudyDate"><span jhiTranslate="marineindustryprojApp.applicationProcess.startStudyDate">Start Study Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="graduateDateOfNewCourse"><span jhiTranslate="marineindustryprojApp.applicationProcess.graduateDateOfNewCourse">Graduate Date Of New Course</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="averagePointOfNewCourse"><span jhiTranslate="marineindustryprojApp.applicationProcess.averagePointOfNewCourse">Average Point Of New Course</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="acceptedMajorAndField"><span jhiTranslate="marineindustryprojApp.applicationProcess.acceptedMajorAndField">Accepted Major And Field</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="haveUsedEducationalFacilities"><span jhiTranslate="marineindustryprojApp.applicationProcess.haveUsedEducationalFacilities">Have Used Educational Facilities</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="haveUsedEducationalFacilitiesDescription"><span jhiTranslate="marineindustryprojApp.applicationProcess.haveUsedEducationalFacilitiesDescription">Have Used Educational Facilities Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dateOfAcceptanceOfDegree"><span jhiTranslate="marineindustryprojApp.applicationProcess.dateOfAcceptanceOfDegree">Date Of Acceptance Of Degree</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="typeAndAmountOfFacilities"><span jhiTranslate="marineindustryprojApp.applicationProcess.typeAndAmountOfFacilities">Type And Amount Of Facilities</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="academicCommitmentsFulfilled"><span jhiTranslate="marineindustryprojApp.applicationProcess.academicCommitmentsFulfilled">Academic Commitments Fulfilled</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="remainingAcademicCommitments"><span jhiTranslate="marineindustryprojApp.applicationProcess.remainingAcademicCommitments">Remaining Academic Commitments</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="requestedFacilitiesText"><span jhiTranslate="marineindustryprojApp.applicationProcess.requestedFacilitiesText">Requested Facilities Text</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="requestedFacilitiesDescription"><span jhiTranslate="marineindustryprojApp.applicationProcess.requestedFacilitiesDescription">Requested Facilities Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.applicationProcess.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+
+            <!--<th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.applicationProcess.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.applicationProcess.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archived"><span jhiTranslate="marineindustryprojApp.applicationProcess.archived">Archived</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedUserLogin"><span jhiTranslate="marineindustryprojApp.applicationProcess.archivedUserLogin">Archived User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="archivedDate"><span jhiTranslate="marineindustryprojApp.applicationProcess.archivedDate">Archived Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="chartStatus"><span jhiTranslate="marineindustryprojApp.applicationProcess.chartStatus">Chart Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bossStatus"><span jhiTranslate="marineindustryprojApp.applicationProcess.bossStatus">Boss Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="conversation"><span jhiTranslate="marineindustryprojApp.applicationProcess.conversation">Conversation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="requestStatus"><span jhiTranslate="marineindustryprojApp.applicationProcess.requestStatus">Request Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="changeStatusUserLogin"><span jhiTranslate="marineindustryprojApp.applicationProcess.changeStatusUserLogin">Change Status User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="guid"><span jhiTranslate="marineindustryprojApp.applicationProcess.guid">Guid</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hasImportantMessage"><span jhiTranslate="marineindustryprojApp.applicationProcess.hasImportantMessage">Has Important Message</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="selectedModuleIds"><span jhiTranslate="marineindustryprojApp.applicationProcess.selectedModuleIds">Selected Module Ids</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="educationalRecordQualificationText"><span jhiTranslate="marineindustryprojApp.applicationProcess.educationalRecord">Educational Record</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+
+
+
+            <th width="300"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let applicationProcess of applicationProcesses ;let i = index"
+                [ngClass]="{'new': applicationProcess.requestStatus == 'NEW','read': applicationProcess.requestStatus == 'READ','accept': applicationProcess.requestStatus === 'ACCEPT','ignore': applicationProcess.requestStatus === 'IGNORE'}">
+                <td>{{i+1}}</td>
+                <td><a>{{applicationProcess.id}}</a></td>
+                <td>
+                    <div *ngIf="applicationProcess.organizationChartId">
+                        <a [routerLink]="['../organization-chart-marine-suffix', applicationProcess.organizationChartId , 'view' ]" >{{applicationProcess.organizationChartTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="applicationProcess.personId">
+                        <a [routerLink]="['../person-marine-suffix', applicationProcess.personId , 'view' ]" >{{applicationProcess.personFullName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="applicationProcess.personId">
+                        {{applicationProcess.personJobTitle}}
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="applicationProcess.personId">
+                        {{applicationProcess.personEmploymentTypeTitle}}
+                    </div>
+                </td>
+                <td>{{applicationProcess.createDate}}</td>
+                <td>{{applicationProcess.statusMeaning}}</td>
+                <td>
+                    <div *ngIf="applicationProcess.qualificationId">
+                        <a [routerLink]="['../qualification-marine-suffix', applicationProcess.qualificationId , 'view' ]" >{{applicationProcess.qualificationTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{applicationProcess.acceptedMajorAndField}}
+                </td>
+                <td>
+                    {{applicationProcess.startStudyDate}}
+                </td>
+                <td>
+                    {{applicationProcess.graduateDateOfNewCourse}}
+                </td>
+                <!--<td>{{applicationProcess.code}}</td>
+                <td>{{applicationProcess.description}}</td>
+                <td>{{applicationProcess.jobAfterProcess}}</td>
+                <td>{{applicationProcess.acceptedUniversityAndDegree}}</td>
+                <td>{{applicationProcess.startStudyDate}}</td>
+                <td>{{applicationProcess.graduateDateOfNewCourse}}</td>
+                <td>{{applicationProcess.averagePointOfNewCourse}}</td>
+                <td>{{applicationProcess.acceptedMajorAndField}}</td>
+                <td>{{applicationProcess.haveUsedEducationalFacilities}}</td>
+                <td>{{applicationProcess.haveUsedEducationalFacilitiesDescription}}</td>
+                <td>{{applicationProcess.dateOfAcceptanceOfDegree}}</td>
+                <td>{{applicationProcess.typeAndAmountOfFacilities}}</td>
+                <td>{{applicationProcess.academicCommitmentsFulfilled}}</td>
+                <td>{{applicationProcess.remainingAcademicCommitments}}</td>
+                <td>{{applicationProcess.requestedFacilitiesText}}</td>
+                <td>{{applicationProcess.requestedFacilitiesDescription}}</td>
+                <td>{{applicationProcess.createUserLogin}}</td>
+
+                <td>{{applicationProcess.modifyUserLogin}}</td>
+                <td>{{applicationProcess.modifyDate | date:'medium'}}</td>
+                <td>{{applicationProcess.archived}}</td>
+                <td>{{applicationProcess.archivedUserLogin}}</td>
+                <td>{{applicationProcess.archivedDate | date:'medium'}}</td>
+                <td>{{applicationProcess.chartStatus}}</td>
+                <td>{{applicationProcess.bossStatus}}</td>
+                <td>{{applicationProcess.conversation}}</td>
+                <td jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + applicationProcess.requestStatus}}">{{applicationProcess.requestStatus}}</td>
+                <td>{{applicationProcess.changeStatusUserLogin}}</td>
+                <td>{{applicationProcess.guid}}</td>
+                <td>{{applicationProcess.hasImportantMessage}}</td>
+                <td>{{applicationProcess.selectedModuleIds}}</td>
+                <td>
+                    <div *ngIf="applicationProcess.educationalRecordId">
+                        <a [routerLink]="['../educational-record-marine-suffix', applicationProcess.educationalRecordId , 'view' ]" >{{applicationProcess.educationalRecordQualificationText}}</a>
+                    </div>
+                </td>-->
+
+
+
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/application-process-marine-suffix', applicationProcess.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <img src="../../../content/images/bulb-icon.png" title="پیام مهمی در جزئیات وجود دارد"
+                             alt="پیام مهمی در جزئیات وجود دارد"
+                             *ngIf="applicationProcess.hasImportantMessage == true"
+                             class="lightBulb"
+                             (click)="toggleImportantMessage(applicationProcess.id, false)"/>
+                        <img src="../../../content/images/light-off-icon.png"
+                             *ngIf="applicationProcess.hasImportantMessage == false"
+                             class="lightBulb"
+                             (click)="toggleImportantMessage(applicationProcess.id, true)"/>
+
+                        <ng-container
+                            *ngIf="!(applicationProcess.requestStatus == 'ACCEPT'  || applicationProcess.requestStatus == 'IGNORE')">
+                            <ng-container *ngIf="(applicationProcess.chartStatus == currentPerson.organizationChartId) ||
+                                ([10,30].includes(applicationProcess.bossStatus) && isKarshenasArshadAmozeshSazman) ||
+                                ([20,30].includes(applicationProcess.bossStatus) && isModirKolAmozesh)">
+                                <button type="submit"
+                                        [routerLink]="['/application-process-marine-suffix', applicationProcess.id, 'edit']"
+                                        class="btn btn-primary btn-sm">
+                                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>
+                                <button type="submit" title="ثبت نظر"
+                                        [routerLink]="['/', { outlets: { popup: 'application-process-marine-suffix/'+ applicationProcess.id + '/' + 'COMMENT' + '/comment'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-info btn-sm">
+                                    <fa-icon [icon]="'comments'"></fa-icon>
+                                    <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.comment">comment</span>-->
+                                </button>
+                                <button type="submit" title="تایید کردن" *ngIf="applicationProcess.bossStatus != 30"
+                                        [routerLink]="['/', { outlets: { popup: 'application-process-marine-suffix/'+ applicationProcess.id + '/' + 'ACCEPT' + '/comment'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-success btn-sm">
+                                    <fa-icon [icon]="'check-double'"></fa-icon>
+                                    <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.accept">comment</span>-->
+                                </button>
+                                <button type="button" title="تایید نهایی" *ngIf="applicationProcess.bossStatus == 30 && isSuperUsers"
+                                        class="btn btn-success btn-sm" (click)="complete(applicationProcess.id)">
+                                    <fa-icon [icon]="'check-double'"></fa-icon>
+                                    تایید نهایی
+                                    <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.accept">comment</span>-->
+                                </button>
+                                <button type="submit" title="رد کردن"
+                                        [routerLink]="['/', { outlets: { popup: 'application-process-marine-suffix/'+ applicationProcess.id + '/' + 'REJECT' + '/comment'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-danger btn-sm">
+                                    <fa-icon [icon]="'ban'"></fa-icon>
+                                    <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
+                                </button>
+                            </ng-container>
+                        </ng-container>
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
+                                [routerLink]="['/', { outlets: { popup: 'application-process-marine-suffix/'+ applicationProcess.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="8">
+                    <select [(ngModel)] = "itemsPerPage">
+                        <option value="10">۱۰</option>
+                        <option value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="5">
+
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+    <div *ngIf="applicationProcesses && applicationProcesses.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Capitation.
+    -->
+    <changeSet id="20210513072922-1" author="jhipster">
+        <createTable tableName="capitation">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="code" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="description" type="varchar(4096)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="employee_maximum_allowable_person_hours" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="boss_maximum_allowable_person_hours" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="employee_maximum_allowable_person_costs" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="boss_maximum_allowable_person_costs" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="capitation_year" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="create_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="create_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modify_user_login" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modify_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="capitation" columnName="create_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="capitation" columnName="modify_date" columnDataType="datetime"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

@@ -82,6 +82,12 @@ public class DesignAndPlanningDTO implements Serializable {
 
     private String educationalModuleTitle;
 
+    private String skillLevelOfSkillTitle;
+
+    private Integer learningTimeTheorical;
+
+    private Integer learningTimePractical;
+
     private Long finalNiazsanjiReportId;
 
     private String finalNiazsanjiReportDescription;
@@ -620,5 +626,29 @@ public class DesignAndPlanningDTO implements Serializable {
 
     public void setFinalNiazsanjiReportNiazsanjiYear(Integer finalNiazsanjiReportNiazsanjiYear) {
         this.finalNiazsanjiReportNiazsanjiYear = finalNiazsanjiReportNiazsanjiYear;
+    }
+
+    public String getSkillLevelOfSkillTitle() {
+        return skillLevelOfSkillTitle;
+    }
+
+    public void setSkillLevelOfSkillTitle(String skillLevelOfSkillTitle) {
+        this.skillLevelOfSkillTitle = skillLevelOfSkillTitle;
+    }
+
+    public Integer getLearningTimeTheorical() {
+        return learningTimeTheorical;
+    }
+
+    public void setLearningTimeTheorical(Integer learningTimeTheorical) {
+        this.learningTimeTheorical = learningTimeTheorical;
+    }
+
+    public Integer getLearningTimePractical() {
+        return learningTimePractical;
+    }
+
+    public void setLearningTimePractical(Integer learningTimePractical) {
+        this.learningTimePractical = learningTimePractical;
     }
 }

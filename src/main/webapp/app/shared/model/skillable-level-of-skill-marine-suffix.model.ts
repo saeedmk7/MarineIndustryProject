@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { IEducationalModuleMarineSuffix } from 'app/shared/model//educational-module-marine-suffix.model';
 import { IRequestEducationalModuleMarineSuffix } from 'app/shared/model//request-educational-module-marine-suffix.model';
+import { IMatchingEducationalRecordMarineSuffix } from 'app/shared/model//matching-educational-record-marine-suffix.model';
 
 export interface ISkillableLevelOfSkillMarineSuffix {
     id?: number;
@@ -12,6 +13,7 @@ export interface ISkillableLevelOfSkillMarineSuffix {
     modifyDate?: Moment;
     educationalModules?: IEducationalModuleMarineSuffix[];
     requestEducationalModules?: IRequestEducationalModuleMarineSuffix[];
+    matchingEducationalRecords?: IMatchingEducationalRecordMarineSuffix[];
 }
 
 export class SkillableLevelOfSkillMarineSuffix implements ISkillableLevelOfSkillMarineSuffix {
@@ -24,6 +26,7 @@ export class SkillableLevelOfSkillMarineSuffix implements ISkillableLevelOfSkill
         public modifyUserLogin?: string,
         public modifyDate?: Moment,
         public educationalModules?: IEducationalModuleMarineSuffix[],
-        public requestEducationalModules?: IRequestEducationalModuleMarineSuffix[]
+        public requestEducationalModules?: IRequestEducationalModuleMarineSuffix[],
+        public matchingEducationalRecords?: IMatchingEducationalRecordMarineSuffix[]
     ) {}
 }

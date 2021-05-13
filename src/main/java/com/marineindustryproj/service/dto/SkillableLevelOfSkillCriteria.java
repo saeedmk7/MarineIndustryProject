@@ -41,6 +41,8 @@ public class SkillableLevelOfSkillCriteria implements Serializable {
 
     private LongFilter requestEducationalModuleId;
 
+    private LongFilter matchingEducationalRecordId;
+
     public LongFilter getId() {
         return id;
     }
@@ -113,6 +115,14 @@ public class SkillableLevelOfSkillCriteria implements Serializable {
         this.requestEducationalModuleId = requestEducationalModuleId;
     }
 
+    public LongFilter getMatchingEducationalRecordId() {
+        return matchingEducationalRecordId;
+    }
+
+    public void setMatchingEducationalRecordId(LongFilter matchingEducationalRecordId) {
+        this.matchingEducationalRecordId = matchingEducationalRecordId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -132,7 +142,8 @@ public class SkillableLevelOfSkillCriteria implements Serializable {
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
-            Objects.equals(requestEducationalModuleId, that.requestEducationalModuleId);
+            Objects.equals(requestEducationalModuleId, that.requestEducationalModuleId) &&
+            Objects.equals(matchingEducationalRecordId, that.matchingEducationalRecordId);
     }
 
     @Override
@@ -146,7 +157,8 @@ public class SkillableLevelOfSkillCriteria implements Serializable {
         modifyUserLogin,
         modifyDate,
         educationalModuleId,
-        requestEducationalModuleId
+        requestEducationalModuleId,
+        matchingEducationalRecordId
         );
     }
 
@@ -162,6 +174,7 @@ public class SkillableLevelOfSkillCriteria implements Serializable {
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +
                 (requestEducationalModuleId != null ? "requestEducationalModuleId=" + requestEducationalModuleId + ", " : "") +
+                (matchingEducationalRecordId != null ? "matchingEducationalRecordId=" + matchingEducationalRecordId + ", " : "") +
             "}";
     }
 

@@ -42,7 +42,8 @@
                 <th>ساعت</th>
                 <!--<th jhiSortBy="educationalModuleType"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.educationalModuleType">Educational Module Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                 <th jhiSortBy="personFullName"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="personFullName"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.personJobTitle">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="personJobTitle"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.personJobTitle">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="personEmploymentTypeTitle"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.personEmploymentTypeTitle">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="courseTypeTitle"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.courseType">Course Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="priceCost"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.priceCost">Price Cost</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <!--<th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.niazsanjiIntegration.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
@@ -96,6 +97,9 @@
                 </td>
                 <td>
                     {{niazsanjiIntegration.personJobTitle}}
+                </td>
+                <td>
+                    {{niazsanjiIntegration.personEmploymentTypeTitle}}
                 </td>
                 <td>
                     {{niazsanjiIntegration.courseTypeTitle}}

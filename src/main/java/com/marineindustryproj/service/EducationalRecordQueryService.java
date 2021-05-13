@@ -128,6 +128,10 @@ public class EducationalRecordQueryService extends QueryService<EducationalRecor
             if (criteria.getGuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGuid(), EducationalRecord_.guid));
             }
+            if (criteria.getApplicationProcessId() != null) {
+                specification = specification.and(buildSpecification(criteria.getApplicationProcessId(),
+                    root -> root.join(EducationalRecord_.applicationProcesses, JoinType.LEFT).get(ApplicationProcess_.id)));
+            }
             if (criteria.getQualificationId() != null) {
                 specification = specification.and(buildSpecification(criteria.getQualificationId(),
                     root -> root.join(EducationalRecord_.qualification, JoinType.LEFT).get(Qualification_.id)));

@@ -5,9 +5,9 @@ import { IRunPhaseMarineSuffix } from 'app/shared/model//run-phase-marine-suffix
 import { IPollMarineSuffix } from 'app/shared/model//poll-marine-suffix.model';
 import { IEffectivenessPhaseMarineSuffix } from 'app/shared/model//effectiveness-phase-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
-import {NiazSanjiSource} from 'app/shared/model/enums/NiazSanjiSource';
+import { NiazSanjiSource } from 'app/shared/model/enums/NiazSanjiSource';
 import { IRestrictionMarineSuffix } from 'app/shared/model//restriction-marine-suffix.model';
-import {Grade} from "app/shared/model/enums/Grade";
+import { Grade } from 'app/shared/model/enums/Grade';
 
 export interface IFinalNiazsanjiReportMarineSuffix {
     id?: number;
@@ -70,6 +70,7 @@ export interface IFinalNiazsanjiReportMarineSuffix {
     educationalModuleLearningTimePractical?: number;
     educationalModuleTotalTime?: number;
     educationalModuleLevelTitle?: string;
+    skillLevelOfSkillTitle?: string;
     educationalModuleId?: number;
     mahiatCourseTitle?: string;
     mahiatCourseId?: number;
@@ -139,6 +140,7 @@ export class FinalNiazsanjiReportMarineSuffix implements IFinalNiazsanjiReportMa
         public educationalModuleLearningTimePractical?: number,
         public educationalModuleTotalTime?: number,
         public educationalModuleLevelTitle?: string,
+        public skillLevelOfSkillTitle?: string,
         public educationalModuleId?: number,
         public mahiatCourseTitle?: string,
         public mahiatCourseId?: number,

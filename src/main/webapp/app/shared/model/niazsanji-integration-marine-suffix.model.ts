@@ -35,11 +35,14 @@ export interface INiazsanjiIntegrationMarineSuffix {
     personFamily?: string;
     personName?: string;
     personJobTitle?: string;
+    personEmploymentTypeTitle?: string;
     organizationChartId?: number;
     organizationChartTitle?: string;
     organizationChartFullTitle?: string;
     organizationChartRootTitle?: string;
     totalLearningTime?: number;
+    learningTimePractical?: number;
+    learningTimeTheorical?: number;
     skillLevelOfSkillTitle?: string;
 }
 
@@ -75,11 +78,14 @@ export class NiazsanjiIntegrationMarineSuffix implements INiazsanjiIntegrationMa
         public personFamily?: string,
         public personName?: string,
         public personJobTitle?: string,
+        public personEmploymentTypeTitle?: string,
         public organizationChartId?: number,
         public organizationChartTitle?: string,
         public organizationChartFullTitle?: string,
         public organizationChartRootTitle?: string,
         public totalLearningTime?: number,
+        public learningTimePractical?: number,
+        public learningTimeTheorical?: number,
         public skillLevelOfSkillTitle?: string
     ) {
         this.archived = this.archived || false;

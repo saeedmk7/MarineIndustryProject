@@ -1,0 +1,87 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="matchingRunningStep">
+            <h2><span jhiTranslate="marineindustryprojApp.matchingRunningStep.detail.title">Matching Running Step</span> {{matchingRunningStep.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.title">Title</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.description">Description</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.stepNumber">Step Number</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.stepNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.stepRequired">Step Required</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.stepRequired}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.fileDocRequired">File Doc Required</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.fileDocRequired}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.colorText">Color Text</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.colorText}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.isHeader">Is Header</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.isHeader}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.archived">Archived</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.status">Status</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingRunningStep.fileDoc">File Doc</span></dt>
+                <dd>
+                    <span>{{matchingRunningStep.fileDoc}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/matching-running-step-marine-suffix', matchingRunningStep.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

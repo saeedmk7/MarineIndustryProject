@@ -71,9 +71,7 @@ export class EffectivenessPhaseLevelOneMarineSuffixComponent implements OnInit, 
     }
 
     loadAll() {
-        debugger;
         this.eventSubscriber = this.activatedRoute.params.subscribe(params => {
-            debugger;
             this.finalNiazsanjiReportId = params['finalNiazsanjiReportId'];
             this.finalNiazsanjiReportPersonService
                 .getLevelOneDataByFinalNiazsanjiReportId(this.finalNiazsanjiReportId)
@@ -303,17 +301,14 @@ export class EffectivenessPhaseLevelOneMarineSuffixComponent implements OnInit, 
     }
 
     reverseAbsent(finalNiazsanjiPersonId: number) {
-        debugger;
         if (confirm('آیا مطمئنید؟')) {
             this.finalNiazsanjiReportPersonService.find(finalNiazsanjiPersonId).subscribe(
                 (resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix>) => {
-                    debugger;
                     let finalPerson = resp.body;
                     if (finalPerson.absented) finalPerson.absented = false;
                     else finalPerson.absented = true;
                     this.finalNiazsanjiReportPersonService.update(finalPerson).subscribe(
                         (resp: HttpResponse<IFinalNiazsanjiReportPersonMarineSuffix>) => {
-                            debugger;
                             this.loadAll();
                         },
                         (res: HttpErrorResponse) => this.onSaveError(res)

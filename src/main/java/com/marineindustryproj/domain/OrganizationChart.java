@@ -130,6 +130,12 @@ public class OrganizationChart implements Serializable {
     @OneToMany(mappedBy = "organizationChart")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EvaluateCriteriaData> evaluateCriteriaData = new HashSet<>();
+    @OneToMany(mappedBy = "organizationChart")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<MatchingEducationalRecord> matchingEducationalRecords = new HashSet<>();
+    @OneToMany(mappedBy = "organizationChart")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<ApplicationProcess> applicationProcesses = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("organizationCharts")
     private OrganizationChart parent;
@@ -144,7 +150,7 @@ public class OrganizationChart implements Serializable {
     @JsonIgnore
     private Set<ReportGenerator> reportGenerators = new HashSet<>();
 
-
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -806,6 +812,56 @@ public class OrganizationChart implements Serializable {
 
     public void setEvaluateCriteriaData(Set<EvaluateCriteriaData> evaluateCriteriaData) {
         this.evaluateCriteriaData = evaluateCriteriaData;
+    }
+
+    public Set<MatchingEducationalRecord> getMatchingEducationalRecords() {
+        return matchingEducationalRecords;
+    }
+
+    public OrganizationChart matchingEducationalRecords(Set<MatchingEducationalRecord> matchingEducationalRecords) {
+        this.matchingEducationalRecords = matchingEducationalRecords;
+        return this;
+    }
+
+    public OrganizationChart addMatchingEducationalRecord(MatchingEducationalRecord matchingEducationalRecord) {
+        this.matchingEducationalRecords.add(matchingEducationalRecord);
+        matchingEducationalRecord.setOrganizationChart(this);
+        return this;
+    }
+
+    public OrganizationChart removeMatchingEducationalRecord(MatchingEducationalRecord matchingEducationalRecord) {
+        this.matchingEducationalRecords.remove(matchingEducationalRecord);
+        matchingEducationalRecord.setOrganizationChart(null);
+        return this;
+    }
+
+    public void setMatchingEducationalRecords(Set<MatchingEducationalRecord> matchingEducationalRecords) {
+        this.matchingEducationalRecords = matchingEducationalRecords;
+    }
+
+    public Set<ApplicationProcess> getApplicationProcesses() {
+        return applicationProcesses;
+    }
+
+    public OrganizationChart applicationProcesses(Set<ApplicationProcess> applicationProcesses) {
+        this.applicationProcesses = applicationProcesses;
+        return this;
+    }
+
+    public OrganizationChart addApplicationProcess(ApplicationProcess applicationProcess) {
+        this.applicationProcesses.add(applicationProcess);
+        applicationProcess.setOrganizationChart(this);
+        return this;
+    }
+
+    public OrganizationChart removeApplicationProcess(ApplicationProcess applicationProcess) {
+        this.applicationProcesses.remove(applicationProcess);
+        applicationProcess.setOrganizationChart(null);
+        return this;
+    }
+
+    public void setApplicationProcesses(Set<ApplicationProcess> applicationProcesses) {
+        this.applicationProcesses = applicationProcesses;
     }
 
     public OrganizationChart getParent() {

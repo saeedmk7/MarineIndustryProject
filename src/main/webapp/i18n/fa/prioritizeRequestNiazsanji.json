@@ -65,6 +65,7 @@
             "personName": "نام و نام خانوادگی",
             "personJobTitle": "شغل سازمانی",
             "personPracticalJobTitle": "شغل عملی",
+            "personEmploymentTypeTitle": "نوع استخدام",
             "organizationChart": "محل خدمت",
             "organizationChartId": "محل خدمت"
         }

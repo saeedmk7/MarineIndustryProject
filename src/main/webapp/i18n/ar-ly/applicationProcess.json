@@ -1,0 +1,57 @@
+{
+    "marineindustryprojApp": {
+        "applicationProcess": {
+            "home": {
+                "title": "Application Processes",
+                "createLabel": "Create a new Application Process",
+                "createOrEditLabel": "Create or edit a Application Process"
+            },
+            "created": "A new Application Process is created with identifier {{ param }}",
+            "updated": "A Application Process is updated with identifier {{ param }}",
+            "deleted": "A Application Process is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Application Process {{ id }}?"
+            },
+            "detail": {
+                "title": "Application Process"
+            },
+            "code": "Code",
+            "description": "Description",
+            "jobAfterProcess": "Job After Process",
+            "acceptedUniversityAndDegree": "Accepted University And Degree",
+            "startStudyDate": "Start Study Date",
+            "graduateDateOfNewCourse": "Graduate Date Of New Course",
+            "averagePointOfNewCourse": "Average Point Of New Course",
+            "acceptedMajorAndField": "Accepted Major And Field",
+            "haveUsedEducationalFacilities": "Have Used Educational Facilities",
+            "haveUsedEducationalFacilitiesDescription": "Have Used Educational Facilities Description",
+            "dateOfAcceptanceOfDegree": "Date Of Acceptance Of Degree",
+            "typeAndAmountOfFacilities": "Type And Amount Of Facilities",
+            "academicCommitmentsFulfilled": "Academic Commitments Fulfilled",
+            "remainingAcademicCommitments": "Remaining Academic Commitments",
+            "requestedFacilitiesText": "Requested Facilities Text",
+            "requestedFacilitiesDescription": "Requested Facilities Description",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "archived": "Archived",
+            "archivedUserLogin": "Archived User Login",
+            "archivedDate": "Archived Date",
+            "chartStatus": "Chart Status",
+            "bossStatus": "Boss Status",
+            "conversation": "Conversation",
+            "requestStatus": "Request Status",
+            "changeStatusUserLogin": "Change Status User Login",
+            "guid": "Guid",
+            "hasImportantMessage": "Has Important Message",
+            "selectedModuleIds": "Selected Module Ids",
+            "applicationProcessRunStep": "Application Process Run Step",
+            "document": "Document",
+            "educationalRecord": "Educational Record",
+            "person": "Person",
+            "organizationChart": "Organization Chart",
+            "qualification": "Qualification"
+        }
+    }
+}

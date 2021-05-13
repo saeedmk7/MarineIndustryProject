@@ -40,9 +40,9 @@
                 <th><span jhiTranslate="marineindustryprojApp.effectivenessPhaseLevel.goal">goal</span></th>
                 <th colspan="2"><span jhiTranslate="marineindustryprojApp.effectivenessPhase.real">real</span></th>
                 <th><span jhiTranslate="marineindustryprojApp.effectivenessPhase.finalScore">finalScore</span></th>
-                <th><span jhiTranslate="marineindustryprojApp.effectivenessPhase.weightedPoints">weightedPoints</span></th>
                 <th><span jhiTranslate="marineindustryprojApp.effectivenessPhase.weight">weight</span></th>
-                <th><span jhiTranslate="marineindustryprojApp.effectivenessPhase.currentWeightedPoints">currentWeightedPoints</span></th>
+                <th><span jhiTranslate="marineindustryprojApp.effectivenessPhase.weightedPoints">weightedPoints</span></th>
+                <!--<th><span jhiTranslate="marineindustryprojApp.effectivenessPhase.currentWeightedPoints">currentWeightedPoints</span></th>-->
                 <th><span jhiTranslate="marineindustryprojApp.effectivenessPhase.startPhaseDate">Start Phase Date</span>
                 </th>
                 <th><span
@@ -75,9 +75,9 @@
                 <td>{{effectivenessPhase.firstScore | number: '1.0-1'}}</td>
                 <td>{{effectivenessPhase.secondScore | number: '1.0-1'}}</td>
                 <td>{{effectivenessPhase.finalScore | number: '1.0-1'}}</td>
-                <td>{{effectivenessPhase.weightedPoints | number: '1.0-1'}}</td>
                 <td>{{effectivenessPhase.effectivenessPhaseLevel.weight}}</td>
-                <td>{{effectivenessPhase.currentWeightedPoints | number: '1.0-1'}}</td>
+                <td>{{effectivenessPhase.weightedPoints | number: '1.0-1'}}</td>
+                <!--<td>{{effectivenessPhase.currentWeightedPoints | number: '1.0-1'}}</td>-->
                 <td>{{effectivenessPhase.startPhaseDate}}</td>
                 <td>{{effectivenessPhase.finishPhaseDate}}</td>
                 <td>{{effectivenessPhase.peopleFinishCount}}</td>
@@ -148,7 +148,7 @@
                     ستون نتیجه :
                 </span>
                 <span style="color: blueviolet">
-                    ستون میانگین کل می باشد که با توجه به مقادیری که تکمیل کرده اید به دست آمده اند. برای سطح یادگیری (اگر نمره میانگین کل بعد از امتحان منهای میانگین کل نمره قبل از امتحان بزرگتر از 35 بود میانگین نمره می شود 100. در غیر اینصورت حاصل تفریق تقسیم بر 35 و ضربدر 100 میشود.)
+                    ستون میانگین کل می باشد که با توجه به مقادیری که تکمیل کرده اید به دست آمده اند. برای سطح یادگیری (اگر نمره میانگین کل بعد از امتحان منهای میانگین کل نمره قبل از امتحان بزرگتر از 25 بود میانگین نمره می شود 100. در غیر اینصورت حاصل تفریق تقسیم بر 25 و ضربدر 100 میشود.)
                 </span>
             </p>
             <p>

@@ -275,7 +275,7 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
             const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
             if (org) a.organizationChartTitle = org.fullTitle;
 
-            let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            //let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
 
             let obj: Object;
             let requestNiazsanjiType;
@@ -289,10 +289,11 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
                 'marineindustryprojApp.prioritizeRequestNiazsanji.requestNiazsanjiType': requestNiazsanjiType,
                 person: a.personFullName,
                 personJobTitle: a.personJobTitle,
-                educationalModuleTitle: educationalModule.title,
-                educationalModuleId: educationalModule.code,
-                skillLevelOfSkillTitle: educationalModule.skillableLevelOfSkillTitle,
-                totalLearningTime: educationalModule.totalLearningTime,
+                personEmploymentTypeTitle: a.personEmploymentTypeTitle,
+                educationalModuleTitle: a.educationalModuleTitle,
+                educationalModuleId: a.educationalModuleCode,
+                skillLevelOfSkillTitle: a.skillLevelOfSkillTitle,
+                totalLearningTime: a.totalLearningTime,
                 costEducationalModule: a.costEducationalModule,
                 niazsanjiInput: a.niazsanjiInputTitle,
                 courseType: a.courseTypeTitle,
@@ -520,13 +521,6 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
                 a.organizationChartRootTitle = org.fullTitle.split('>')[0];
                 a.organizationChartFullTitle = org.fullTitle;
             }
-            const education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
-            if (education) {
-                a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
-                a.totalLearningTime =
-                    (education.learningTimePractical ? education.learningTimePractical : 0) +
-                    (education.learningTimeTheorical ? education.learningTimeTheorical : 0);
-            }
         });
         /*if(this.niazsanjiIntegrations) {
             const totalLearningTimes = this.niazsanjiIntegrations.filter(a => a.totalLearningTime).map(a => a.totalLearningTime);
@@ -538,64 +532,6 @@ export class NiazsanjiIntegrationMarineSuffixComponent implements OnInit, OnDest
                 this.totalPriceCost = priceCosts.reduce((sum, current) => sum + current);
         }*/
     }
-    /*toggleImportantMessage(id: number, type: boolean){
-
-        this.niazsanjiIntegrationService.toggleImportantMessage(id, type).subscribe(
-            (res: HttpResponse<INiazsanjiFardiMarineSuffix>) => this.loadAll(this.criteria),
-            (res: HttpErrorResponse) => this.onSaveError()
-        );
-    }*/
-
-    /*export() {
-        this.makeCriteria(this.criteria,true);
-    }
-    prepareForExportExcel(res : IPrioritizeRequestNiazsanjiMarineSuffix[]){
-        let a = new ExcelService(this.jhiTranslate);
-        res = this.convertObjectDatesService.changeArrayDate(res);
-        let report = [];
-        let index: number = 0;
-        res.forEach(a => {
-            index++;
-
-            a.statusMeaning = this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus);
-            const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
-            if(org)
-                a.organizationChartTitle = org.fullTitle;
-
-            let person = this.people.find(w => w.id == a.personId);
-
-            let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
-
-            let obj: Object;
-            let requestNiazsanjiType;
-            this.jhiTranslate.get('marineindustryprojApp.RequestNiazsanjiType.' + a.requestNiazsanjiType).subscribe(w => requestNiazsanjiType = w.toString());
-            obj = {'index': index,
-                'id': a.id,
-                'organizationChart': a.organizationChartTitle,
-                'marineindustryprojApp.prioritizeRequestNiazsanji.requestNiazsanjiType': requestNiazsanjiType,
-                'person': person.fullName,
-                'jobTitle': person.jobTitle,
-                'educationalModuleTitle': educationalModule.title,
-                'educationalModuleId': educationalModule.code,
-                'skillLevelOfSkillTitle': educationalModule.skillableLevelOfSkillTitle,
-                'totalLearningTime': educationalModule.totalLearningTime,
-                'costEducationalModule': a.costEducationalModule,
-                'niazsanjiInput': a.niazsanjiInputTitle,
-                'courseType': a.courseTypeTitle,
-                'restriction': a.restrictions.map(w => w.title).join(' - '),
-                'restrictionDescription': a.restrictionDescription,
-                'teachingApproach': a.teachingApproachTitle,
-                'goalsText': a.goalsText,
-                'prerequisite': a.prerequisite,
-                'description': a.description,
-                'priority': a.priority,
-                'createDate': a.createDate,
-                'status': this.treeUtilities.getStatusMeaning(this.organizationcharts, a.status, a.requestStatus)
-            };
-            report.push(obj);
-        });
-        a.exportAsExcelFile(report, 'prioritizeRequestNiazsanjis', 'marineindustryprojApp.prioritizeRequestNiazsanji');
-    }*/
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }

@@ -53,7 +53,10 @@ export interface IFinalOrganizationNiazsanjiMarineSuffix {
     requestOrganizationNiazsanjiId?: number;
     teachingApproachTitle?: string;
     teachingApproachId?: number;
+    learningTimePractical?: number;
+    learningTimeTheorical?: number;
     totalLearningTime?: number;
+    fullLearningTime?: number;
     skillLevelOfSkillTitle?: string;
 }
 
@@ -106,6 +109,8 @@ export class FinalOrganizationNiazsanjiMarineSuffix implements IFinalOrganizatio
         public requestOrganizationNiazsanjiId?: number,
         public teachingApproachTitle?: string,
         public teachingApproachId?: number,
+        public learningTimeTheorical?: number,
+        public learningTimePractical?: number,
         public totalLearningTime?: number,
         public skillLevelOfSkillTitle?: string
     ) {

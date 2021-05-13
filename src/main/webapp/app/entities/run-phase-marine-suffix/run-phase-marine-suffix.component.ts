@@ -318,13 +318,10 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             runPhaseFardi.status = a.status;
             runPhaseFardi.educationalModuleId = a.educationalModuleId;
             runPhaseFardi.educationalModuleCode = a.educationalModuleCode;
+            runPhaseFardi.educationalModuleTitle = a.educationalModuleTitle;
+            runPhaseFardi.educationalModuleLevel = a.skillLevelOfSkillTitle;
+            runPhaseFardi.educationalModuleTotalLearningTime = a.educationalModuleTotalTime;
 
-            let education = this.educationalModules.find(w => w.id == a.educationalModuleId);
-            if (education) {
-                runPhaseFardi.educationalModuleTitle = education.title;
-                runPhaseFardi.educationalModuleLevel = education.skillableLevelOfSkillTitle;
-                runPhaseFardi.educationalModuleTotalLearningTime = education.totalLearningTime;
-            }
             runPhaseFardi.niazsanjiYear = a.niazsanjiYear;
             let org = this.organizationcharts.find(w => w.id == a.organizationChartId);
             if (org) {
@@ -360,12 +357,9 @@ export class RunPhaseMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
             runPhaseOrganization.educationalModuleId = a.educationalModuleId;
             runPhaseOrganization.educationalModuleCode = a.educationalModuleCode;
 
-            let education = this.educationalModules.find(w => w.id == a.educationalModuleId);
-            if (education) {
-                runPhaseOrganization.educationalModuleTitle = education.title;
-                runPhaseOrganization.educationalModuleLevel = education.skillableLevelOfSkillTitle;
-                runPhaseOrganization.educationalModuleTotalLearningTime = education.totalLearningTime;
-            }
+            runPhaseOrganization.educationalModuleTitle = a.educationalModuleTitle;
+            runPhaseOrganization.educationalModuleLevel = a.skillLevelOfSkillTitle;
+            runPhaseOrganization.educationalModuleTotalLearningTime = a.educationalModuleTotalTime;
 
             runPhaseOrganization.niazsanjiYear = a.niazsanjiYear;
             let org = this.organizationcharts.find(w => w.id == a.organizationChartId);

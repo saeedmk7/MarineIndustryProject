@@ -376,13 +376,6 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         this.queryCount = this.totalItems;
         data.forEach(a => {
             a.runMonthName = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
-            let education: IEducationalModuleMarineSuffix = this.educationalModules.find(w => w.id == a.educationalModuleId);
-            if (education) {
-                a.skillLevelOfSkillTitle = education.skillableLevelOfSkillTitle;
-                a.totalLearningTime =
-                    (education.learningTimePractical ? education.learningTimePractical : 0) +
-                    (education.learningTimeTheorical ? education.learningTimeTheorical : 0);
-            }
         });
         this.designAndPlannings = data;
 
@@ -420,16 +413,16 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         res.forEach(a => {
             index++;
             let people = finalNiazsanjiPeopleListModel.find(w => w.entityId == a.finalNiazsanjiReportId).peopleFullNames;
-            let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            //let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
             a.runMonthName = this.convertObjectDatesService.convertMonthsNumber2MonthName(a.runMonth);
             let obj: Object;
             obj = {
                 index: index,
                 person: people ? people.join(', ') : '',
-                educationalModuleTitle: educationalModule.title,
-                educationalModuleCode: educationalModule.code,
-                skillLevelOfSkillTitle: educationalModule.skillableLevelOfSkillTitle,
-                totalLearningTime: educationalModule.totalLearningTime,
+                educationalModuleTitle: a.educationalModuleTitle,
+                educationalModuleCode: a.educationalModuleCode,
+                skillLevelOfSkillTitle: a.skillLevelOfSkillTitle,
+                totalLearningTime: a.totalLearningTime,
                 courseType: a.courseTypeTitle,
                 finalNiazsanjiReportNiazsanjiYear: a.finalNiazsanjiReportNiazsanjiYear,
                 runMonth: a.runMonthName,

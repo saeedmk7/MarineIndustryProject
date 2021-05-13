@@ -233,6 +233,17 @@ public class Document implements Serializable {
     @JsonIgnore
     private Set<MonitorLearningProcess> monitorLearningProcesses = new HashSet<>();
 
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<MatchingEducationalRecord> matchingEducationalRecords = new HashSet<>();
+
+    @ManyToMany(mappedBy = "documents")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<ApplicationProcess> applicationProcesses = new HashSet<>();
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -1229,6 +1240,56 @@ public class Document implements Serializable {
 
     public void setMonitorLearningProcesses(Set<MonitorLearningProcess> monitorLearningProcesses) {
         this.monitorLearningProcesses = monitorLearningProcesses;
+    }
+
+    public Set<MatchingEducationalRecord> getMatchingEducationalRecords() {
+        return matchingEducationalRecords;
+    }
+
+    public Document matchingEducationalRecords(Set<MatchingEducationalRecord> matchingEducationalRecords) {
+        this.matchingEducationalRecords = matchingEducationalRecords;
+        return this;
+    }
+
+    public Document addMatchingEducationalRecord(MatchingEducationalRecord matchingEducationalRecord) {
+        this.matchingEducationalRecords.add(matchingEducationalRecord);
+        matchingEducationalRecord.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeMatchingEducationalRecord(MatchingEducationalRecord matchingEducationalRecord) {
+        this.matchingEducationalRecords.remove(matchingEducationalRecord);
+        matchingEducationalRecord.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setMatchingEducationalRecords(Set<MatchingEducationalRecord> matchingEducationalRecords) {
+        this.matchingEducationalRecords = matchingEducationalRecords;
+    }
+
+    public Set<ApplicationProcess> getApplicationProcesses() {
+        return applicationProcesses;
+    }
+
+    public Document applicationProcesses(Set<ApplicationProcess> applicationProcesses) {
+        this.applicationProcesses = applicationProcesses;
+        return this;
+    }
+
+    public Document addApplicationProcess(ApplicationProcess applicationProcess) {
+        this.applicationProcesses.add(applicationProcess);
+        applicationProcess.getDocuments().add(this);
+        return this;
+    }
+
+    public Document removeApplicationProcess(ApplicationProcess applicationProcess) {
+        this.applicationProcesses.remove(applicationProcess);
+        applicationProcess.getDocuments().remove(this);
+        return this;
+    }
+
+    public void setApplicationProcesses(Set<ApplicationProcess> applicationProcesses) {
+        this.applicationProcesses = applicationProcesses;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -124,6 +124,8 @@ public class FinalNiazsanjiReportDTO implements Serializable {
 
     private String runPhaseFinishDate;
 
+    private String skillLevelOfSkillTitle;
+
     private Integer educationalModuleLearningTimeTheorical;
 
     private Integer educationalModuleLearningTimePractical;
@@ -615,5 +617,13 @@ public class FinalNiazsanjiReportDTO implements Serializable {
 
     public void setEducationalModuleLearningTimePractical(Integer educationalModuleLearningTimePractical) {
         this.educationalModuleLearningTimePractical = educationalModuleLearningTimePractical;
+    }
+
+    public String getSkillLevelOfSkillTitle() {
+        return skillLevelOfSkillTitle;
+    }
+
+    public void setSkillLevelOfSkillTitle(String skillLevelOfSkillTitle) {
+        this.skillLevelOfSkillTitle = skillLevelOfSkillTitle;
     }
 }

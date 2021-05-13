@@ -87,7 +87,10 @@ import {
     faForward,
     faBackward,
     faRecycle,
-    faLocationArrow
+    faLocationArrow,
+    faProcedures,
+    faGraduationCap,
+    faUserGraduate
 } from '@fortawesome/free-solid-svg-icons';
 
 // Adds the SVG icon to the library so you can use it in your page
@@ -172,3 +175,6 @@ library.add(faBackward);
 library.add(faForward);
 library.add(faRecycle);
 library.add(faLocationArrow);
+library.add(faProcedures);
+library.add(faGraduationCap);
+library.add(faUserGraduate);

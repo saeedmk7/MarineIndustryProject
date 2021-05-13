@@ -115,6 +115,12 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
 
     private String educationalModuleTitle;
 
+    private String skillLevelOfSkillTitle;
+
+    private Integer learningTimeTheorical;
+
+    private Integer learningTimePractical;
+
     private Long teachApproachId;
 
     private String teachApproachTitle;
@@ -563,5 +569,29 @@ public class FinalOrganizationNiazsanjiDTO implements Serializable {
 
     public void setEducationalModuleCode(String educationalModuleCode) {
         this.educationalModuleCode = educationalModuleCode;
+    }
+
+    public String getSkillLevelOfSkillTitle() {
+        return skillLevelOfSkillTitle;
+    }
+
+    public void setSkillLevelOfSkillTitle(String skillLevelOfSkillTitle) {
+        this.skillLevelOfSkillTitle = skillLevelOfSkillTitle;
+    }
+
+    public Integer getLearningTimeTheorical() {
+        return learningTimeTheorical;
+    }
+
+    public void setLearningTimeTheorical(Integer learningTimeTheorical) {
+        this.learningTimeTheorical = learningTimeTheorical;
+    }
+
+    public Integer getLearningTimePractical() {
+        return learningTimePractical;
+    }
+
+    public void setLearningTimePractical(Integer learningTimePractical) {
+        this.learningTimePractical = learningTimePractical;
     }
 }

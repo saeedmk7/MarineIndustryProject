@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity MatchingRunRunningStep.
+    -->
+    <changeSet id="20210226182457-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="matching_educational_record_id"
+                                 baseTableName="matching_run_running_step"
+                                 constraintName="fk_matching_run_running_step_matching_educational_record_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="matching_educational_record"/>
+
+        <addForeignKeyConstraint baseColumnNames="matching_running_step_id"
+                                 baseTableName="matching_run_running_step"
+                                 constraintName="fk_matching_run_running_step_matching_running_step_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="matching_running_step"/>
+
+    </changeSet>
+</databaseChangeLog>

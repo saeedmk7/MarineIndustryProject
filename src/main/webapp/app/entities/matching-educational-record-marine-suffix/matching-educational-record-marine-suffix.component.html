@@ -1,0 +1,187 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.home.title">Matching Educational Records</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-matching-educational-record-marine-suffix" [routerLink]="['/matching-educational-record-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.matchingEducationalRecord.home.createLabel">
+            Create new Matching Educational Record
+            </span>
+        </button>
+        <button  class="btn btn-info float-left" jhiTranslate="entity.action.getexcel" (click)="export()">
+            <span class="fa fa-file-excel-o"></span>
+            excel
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <search-panel [(page)]="page" [(size)]="itemsPerPage" [predicate]="predicate" [reverse]="reverse" [searchPanelModel]="searchbarModel"></search-panel>
+
+    <br/>
+    <div class="table-responsive" *ngIf="matchingEducationalRecords">
+        <table class="table table-striped  table-bordered table-hover table-sm">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th>ردیف</th>
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="organizationChartTitle"><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.organizationChart">Organization Chart</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="personFamily"><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.personJobTitle">Person</span>
+                <th><span jhiTranslate="marineindustryprojApp.person.employmentTypeTitle">Person</span>
+                </th>
+                <th jhiSortBy="skillableLevelOfSkillTitle"><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.skillableLevelOfSkill">skillableLevelOfSkill</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.createDate">Create Date</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="status"><span
+                    jhiTranslate="marineindustryprojApp.requestOtherNiazsanji.status">Status</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+
+                <th width="300"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let matchingEducationalRecord of matchingEducationalRecords ;let i = index"
+                [ngClass]="{'new': matchingEducationalRecord.requestStatus == 'NEW','read': matchingEducationalRecord.requestStatus == 'READ','accept': matchingEducationalRecord.requestStatus === 'ACCEPT','ignore': matchingEducationalRecord.requestStatus === 'IGNORE'}">
+                <td>{{i+1}}</td>
+                <td>{{matchingEducationalRecord.id}}</td>
+                <td>
+                    <div *ngIf="matchingEducationalRecord.organizationChartId">
+                        <a [routerLink]="['../organization-chart-marine-suffix', matchingEducationalRecord.organizationChartId , 'view' ]" >{{matchingEducationalRecord.organizationChartTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="matchingEducationalRecord.personId">
+                        <a [routerLink]="['../person-marine-suffix', matchingEducationalRecord.personId , 'view' ]" >{{matchingEducationalRecord.personFullName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="matchingEducationalRecord.personId">
+                        {{matchingEducationalRecord.personJobTitle}}
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="matchingEducationalRecord.personId">
+                        {{matchingEducationalRecord.personEmploymentTypeTitle}}
+                    </div>
+                </td>
+                <td>
+                     {{matchingEducationalRecord.skillableLevelOfSkills[0]?.title}}
+                </td>
+                <td>{{matchingEducationalRecord.createDate}}</td>
+                <td>{{matchingEducationalRecord.statusMeaning}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <!--<button type="submit" title="مدارک"
+                                [routerLink]="['../document-marine-suffix', 'matchingeducationalrecord',matchingEducationalRecord.id]"
+                                [ngClass]="(matchingEducationalRecord.documents && matchingEducationalRecord.documents.length > 0) ? 'btn-success' : 'btn-light'"
+                                class="btn btn-sm">
+                            <span class="fa fa-file"></span>
+                        </button>-->
+                        <button type="submit"
+                                [routerLink]="['/matching-educational-record-marine-suffix', matchingEducationalRecord.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <img src="../../../content/images/bulb-icon.png" title="پیام مهمی در جزئیات وجود دارد"
+                             alt="پیام مهمی در جزئیات وجود دارد"
+                             *ngIf="matchingEducationalRecord.hasImportantMessage == true"
+                             class="lightBulb"
+                             (click)="toggleImportantMessage(matchingEducationalRecord.id, false)"/>
+                        <img src="../../../content/images/light-off-icon.png"
+                             *ngIf="matchingEducationalRecord.hasImportantMessage == false"
+                             class="lightBulb"
+                             (click)="toggleImportantMessage(matchingEducationalRecord.id, true)"/>
+                        <!--<button type="submit"
+                                [routerLink]="['/matching-educational-record-marine-suffix', matchingEducationalRecord.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>-->
+                        <ng-container
+                            *ngIf="!(matchingEducationalRecord.requestStatus == 'ACCEPT'  || matchingEducationalRecord.requestStatus == 'IGNORE')">
+                            <ng-container *ngIf="(matchingEducationalRecord.chartStatus == currentPerson.organizationChartId) ||
+                                ([10,30].includes(matchingEducationalRecord.bossStatus) && isKarshenasArshadAmozeshSazman) ||
+                                ([20,30].includes(matchingEducationalRecord.bossStatus) && isModirKolAmozesh)">
+                                <button type="submit"
+                                        [routerLink]="['/matching-educational-record-marine-suffix', matchingEducationalRecord.id, 'edit']"
+                                        class="btn btn-primary btn-sm">
+                                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>
+                                <button type="submit" title="ثبت نظر"
+                                        [routerLink]="['/', { outlets: { popup: 'matching-educational-record-marine-suffix/'+ matchingEducationalRecord.id + '/' + 'COMMENT' + '/comment'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-info btn-sm">
+                                    <fa-icon [icon]="'comments'"></fa-icon>
+                                    <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.comment">comment</span>-->
+                                </button>
+                                <button type="submit" title="تایید کردن" *ngIf="matchingEducationalRecord.bossStatus != 30"
+                                        [routerLink]="['/', { outlets: { popup: 'matching-educational-record-marine-suffix/'+ matchingEducationalRecord.id + '/' + 'ACCEPT' + '/comment'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-success btn-sm">
+                                    <fa-icon [icon]="'check-double'"></fa-icon>
+                                    <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.accept">comment</span>-->
+                                </button>
+                                <button type="button" title="تایید نهایی" *ngIf="matchingEducationalRecord.bossStatus == 30 && isSuperUsers"
+                                        class="btn btn-success btn-sm" (click)="complete(matchingEducationalRecord.id)">
+                                    <fa-icon [icon]="'check-double'"></fa-icon>
+                                    تایید نهایی
+                                    <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.accept">comment</span>-->
+                                </button>
+                                <button type="submit" title="رد کردن"
+                                        [routerLink]="['/', { outlets: { popup: 'matching-educational-record-marine-suffix/'+ matchingEducationalRecord.id + '/' + 'REJECT' + '/comment'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-danger btn-sm">
+                                    <fa-icon [icon]="'ban'"></fa-icon>
+                                    <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.comment.reject">comment</span>-->
+                                </button>
+                            </ng-container>
+                        </ng-container>
+                        <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"  type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'matching-educational-record-marine-suffix/'+ matchingEducationalRecord.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="8">
+                    <select [(ngModel)] = "itemsPerPage">
+                        <option value="10">۱۰</option>
+                        <option value="20">۲۰</option>
+                        <option value="50">۵۰</option>
+                        <option value="100">۱۰۰</option>
+                        <option value="500">۵۰۰</option>
+                    </select>
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </td>
+
+                <td colspan="5">
+
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+    <div *ngIf="matchingEducationalRecords && matchingEducationalRecords.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

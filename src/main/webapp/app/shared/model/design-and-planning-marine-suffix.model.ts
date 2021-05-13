@@ -55,6 +55,8 @@ export interface IDesignAndPlanningMarineSuffix {
     teachTechniqueId?: number;
     effectivenessIndexTitle?: string;
     effectivenessIndexId?: number;
+    learningTimePractical?: number;
+    learningTimeTheorical?: number;
     totalLearningTime?: number;
     skillLevelOfSkillTitle?: string;
 }
@@ -113,6 +115,8 @@ export class DesignAndPlanningMarineSuffix implements IDesignAndPlanningMarineSu
         public teachTechniqueId?: number,
         public effectivenessIndexTitle?: string,
         public effectivenessIndexId?: number,
+        public learningTimeTheorical?: number,
+        public learningTimePractical?: number,
         public totalLearningTime?: number,
         public skillLevelOfSkillTitle?: string
     ) {

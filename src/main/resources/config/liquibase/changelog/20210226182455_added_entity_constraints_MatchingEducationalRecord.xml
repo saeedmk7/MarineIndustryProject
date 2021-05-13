@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity MatchingEducationalRecord.
+    -->
+    <changeSet id="20210226182455-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="matching_educational_records_id"
+                                 baseTableName="matching_educational_record_skillable_level_of_skill"
+                                 constraintName="matching_educational_record_sk_matching_educational_records_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="matching_educational_record"/>
+        <addForeignKeyConstraint baseColumnNames="skillable_level_of_skills_id"
+                                 baseTableName="matching_educational_record_skillable_level_of_skill"
+                                 constraintName="matching_educational_record_sk_skillable_level_of_skills_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="skillable_level_of_skill"/>
+        
+        <addForeignKeyConstraint baseColumnNames="matching_educational_records_id"
+                                 baseTableName="matching_educational_record_document"
+                                 constraintName="matching_educational_record_do_matching_educational_records_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="matching_educational_record"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="matching_educational_record_document"
+                                 constraintName="fk_matching_educational_record_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="matching_educational_record"
+                                 constraintName="fk_matching_educational_record_person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+        <addForeignKeyConstraint baseColumnNames="organization_chart_id"
+                                 baseTableName="matching_educational_record"
+                                 constraintName="fk_matching_educational_record_organization_chart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+
+    </changeSet>
+</databaseChangeLog>

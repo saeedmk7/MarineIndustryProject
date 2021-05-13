@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IRequestOtherNiazsanjiMarineSuffix } from 'app/shared/model/request-other-niazsanji-marine-suffix.model';
-import {IRequestNiazsanjiFardiMarineSuffix} from "app/shared/model/request-niazsanji-fardi-marine-suffix.model";
+import { IRequestNiazsanjiFardiMarineSuffix } from 'app/shared/model/request-niazsanji-fardi-marine-suffix.model';
 
 type EntityResponseType = HttpResponse<IRequestOtherNiazsanjiMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<IRequestOtherNiazsanjiMarineSuffix[]>;
@@ -72,8 +72,6 @@ export class RequestOtherNiazsanjiMarineSuffixService {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
-
-
     protected convertDateFromClient(requestOtherNiazsanji: IRequestOtherNiazsanjiMarineSuffix): IRequestOtherNiazsanjiMarineSuffix {
         const copy: IRequestOtherNiazsanjiMarineSuffix = Object.assign({}, requestOtherNiazsanji, {
             createDate:
@@ -97,7 +95,13 @@ export class RequestOtherNiazsanjiMarineSuffixService {
             res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
             res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
             res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
-            res.body.personFullName = (res.body.personName != null ? res.body.personName : '') + " " + (res.body.personFamily != null ? res.body.personFamily : '');
+            res.body.personFullName =
+                (res.body.personName != null ? res.body.personName : '') +
+                ' ' +
+                (res.body.personFamily != null ? res.body.personFamily : '');
+            res.body.totalLearningTime =
+                (res.body.learningTimePractical ? res.body.learningTimePractical : 0) +
+                (res.body.learningTimeTheorical ? res.body.learningTimeTheorical : 0);
         }
         return res;
     }
@@ -111,7 +115,13 @@ export class RequestOtherNiazsanjiMarineSuffixService {
                     requestOtherNiazsanji.modifyDate != null ? moment(requestOtherNiazsanji.modifyDate) : null;
                 requestOtherNiazsanji.archivedDate =
                     requestOtherNiazsanji.archivedDate != null ? moment(requestOtherNiazsanji.archivedDate) : null;
-                requestOtherNiazsanji.personFullName = (requestOtherNiazsanji.personName != null ? requestOtherNiazsanji.personName : '') + " " + (requestOtherNiazsanji.personFamily != null ? requestOtherNiazsanji.personFamily : '');
+                requestOtherNiazsanji.personFullName =
+                    (requestOtherNiazsanji.personName != null ? requestOtherNiazsanji.personName : '') +
+                    ' ' +
+                    (requestOtherNiazsanji.personFamily != null ? requestOtherNiazsanji.personFamily : '');
+                requestOtherNiazsanji.totalLearningTime =
+                    (requestOtherNiazsanji.learningTimeTheorical ? requestOtherNiazsanji.learningTimeTheorical : 0) +
+                    (requestOtherNiazsanji.learningTimePractical ? requestOtherNiazsanji.learningTimePractical : 0);
             });
         }
         return res;

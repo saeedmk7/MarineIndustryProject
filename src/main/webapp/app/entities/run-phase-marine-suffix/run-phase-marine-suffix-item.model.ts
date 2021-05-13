@@ -8,6 +8,7 @@ export interface IRunPhaseItemModel {
     stepNumber?: number;
     checked?: boolean;
     descMessage?: string;
+    sampleFileDoc?: string;
 }
 
 export class RunPhaseItemModel implements IRunPhaseItemModel {
@@ -20,6 +21,7 @@ export class RunPhaseItemModel implements IRunPhaseItemModel {
         public fileDocRequired?: boolean,
         public stepNumber?: number,
         public checked?: boolean,
-        public descMessage?: string
+        public descMessage?: string,
+        public sampleFileDoc?: string
     ) {}
 }

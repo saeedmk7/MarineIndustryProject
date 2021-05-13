@@ -89,6 +89,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/downloadEducationFile/**")
             .antMatchers("/api/downloadImageFile/**")
             .antMatchers("/api/run-phases/download/**")
+            .antMatchers("/api/matching-educational-records/download/**")
+            .antMatchers("/api/application-processes/download/**")
             .antMatchers("/api/jam-helps/download/**")
             .antMatchers("/api/report/**");
     }

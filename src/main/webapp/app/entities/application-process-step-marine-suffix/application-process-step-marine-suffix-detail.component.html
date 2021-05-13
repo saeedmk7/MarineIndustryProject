@@ -1,0 +1,87 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="applicationProcessStep">
+            <h2><span jhiTranslate="marineindustryprojApp.applicationProcessStep.detail.title">Application Process Step</span> {{applicationProcessStep.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.title">Title</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.description">Description</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.stepNumber">Step Number</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.stepNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.stepRequired">Step Required</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.stepRequired}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.fileDocRequired">File Doc Required</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.fileDocRequired}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.colorText">Color Text</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.colorText}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.isHeader">Is Header</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.isHeader}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.archived">Archived</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.status">Status</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessStep.fileDoc">File Doc</span></dt>
+                <dd>
+                    <span>{{applicationProcessStep.fileDoc}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/application-process-step-marine-suffix', applicationProcessStep.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

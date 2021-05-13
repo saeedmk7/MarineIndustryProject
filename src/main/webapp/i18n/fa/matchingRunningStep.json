@@ -1,0 +1,39 @@
+{
+    "marineindustryprojApp": {
+        "matchingRunningStep": {
+            "home": {
+                "title": "گام های تطبیق سوابق آموزشی کارکنان",
+                "createLabel": "جدید",
+                "createOrEditLabel": " گام تطبیق سوابق آموزشی کارکنان"
+            },
+            "created": "گام تطبیق سوابق آموزشی کارکنان با شناسه {{ param }} ایجاد شد.",
+            "updated": "گام تطبیق سوابق آموزشی کارکنان با شناسه {{ param }} ویرایش شد.",
+            "deleted": "گام تطبیق سوابق آموزشی کارکنان با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف گام تطبیق سوابق آموزشی کارکنان با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات گام تطبیق سوابق آموزشی کارکنان"
+            },
+            "title": "عنوان",
+            "description": "توضیحات",
+            "stepNumber": "شماره گام",
+            "stepRequired": "گام اجباریست؟",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "fileDocRequired": "بارگذاری فایل اجباریست؟",
+            "colorText": "رنگ متن",
+            "isHeader": "سرتیتره؟",
+            "fileDocRequired": "آپلود فایل اجباریست؟",
+            "colorText": "رنگ متن",
+            "fileDoc": "فایل نمونه",
+            "matchingRunRunningStep": "Matching Run Running Step"
+        }
+    }
+}

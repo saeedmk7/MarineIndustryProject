@@ -1,0 +1,90 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.home.title">Matching Run Running Steps</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-matching-run-running-step-marine-suffix" [routerLink]="['/matching-run-running-step-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.matchingRunRunningStep.home.createLabel">
+            Create new Matching Run Running Step
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="matchingRunRunningSteps">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fileDoc"><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.fileDoc">File Doc</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="done"><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.done">Done</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="doneUserLogin"><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.doneUserLogin">Done User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="doneDate"><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.doneDate">Done Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="matchingEducationalRecordCode"><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.matchingEducationalRecord">Matching Educational Record</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="matchingRunningStepTitle"><span jhiTranslate="marineindustryprojApp.matchingRunRunningStep.matchingRunningStep">Matching Running Step</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let matchingRunRunningStep of matchingRunRunningSteps ;trackBy: trackId">
+                <td><a [routerLink]="['/matching-run-running-step-marine-suffix', matchingRunRunningStep.id, 'view' ]">{{matchingRunRunningStep.id}}</a></td>
+                <td>{{matchingRunRunningStep.fileDoc}}</td>
+                <td>{{matchingRunRunningStep.description}}</td>
+                <td>{{matchingRunRunningStep.done}}</td>
+                <td>{{matchingRunRunningStep.doneUserLogin}}</td>
+                <td>{{matchingRunRunningStep.doneDate | date:'medium'}}</td>
+                <td>{{matchingRunRunningStep.createUserLogin}}</td>
+                <td>{{matchingRunRunningStep.createDate | date:'medium'}}</td>
+                <td>{{matchingRunRunningStep.modifyUserLogin}}</td>
+                <td>{{matchingRunRunningStep.modifyDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="matchingRunRunningStep.matchingEducationalRecordId">
+                        <a [routerLink]="['../matching-educational-record-marine-suffix', matchingRunRunningStep.matchingEducationalRecordId , 'view' ]" >{{matchingRunRunningStep.matchingEducationalRecordCode}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="matchingRunRunningStep.matchingRunningStepId">
+                        <a [routerLink]="['../matching-running-step-marine-suffix', matchingRunRunningStep.matchingRunningStepId , 'view' ]" >{{matchingRunRunningStep.matchingRunningStepTitle}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/matching-run-running-step-marine-suffix', matchingRunRunningStep.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/matching-run-running-step-marine-suffix', matchingRunRunningStep.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'matching-run-running-step-marine-suffix/'+ matchingRunRunningStep.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="matchingRunRunningSteps && matchingRunRunningSteps.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

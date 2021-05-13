@@ -51,6 +51,8 @@ public class EducationalRecordCriteria implements Serializable {
 
     private StringFilter guid;
 
+    private LongFilter applicationProcessId;
+
     private LongFilter qualificationId;
 
     private LongFilter fieldOfStudyId;
@@ -169,6 +171,14 @@ public class EducationalRecordCriteria implements Serializable {
         this.guid = guid;
     }
 
+    public LongFilter getApplicationProcessId() {
+        return applicationProcessId;
+    }
+
+    public void setApplicationProcessId(LongFilter applicationProcessId) {
+        this.applicationProcessId = applicationProcessId;
+    }
+
     public LongFilter getQualificationId() {
         return qualificationId;
     }
@@ -218,6 +228,7 @@ public class EducationalRecordCriteria implements Serializable {
             Objects.equals(modifyUserLogin, that.modifyUserLogin) &&
             Objects.equals(modifyDate, that.modifyDate) &&
             Objects.equals(guid, that.guid) &&
+            Objects.equals(applicationProcessId, that.applicationProcessId) &&
             Objects.equals(qualificationId, that.qualificationId) &&
             Objects.equals(fieldOfStudyId, that.fieldOfStudyId) &&
             Objects.equals(personId, that.personId);
@@ -240,6 +251,7 @@ public class EducationalRecordCriteria implements Serializable {
         modifyUserLogin,
         modifyDate,
         guid,
+        applicationProcessId,
         qualificationId,
         fieldOfStudyId,
         personId
@@ -263,6 +275,7 @@ public class EducationalRecordCriteria implements Serializable {
                 (modifyUserLogin != null ? "modifyUserLogin=" + modifyUserLogin + ", " : "") +
                 (modifyDate != null ? "modifyDate=" + modifyDate + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
+                (applicationProcessId != null ? "applicationProcessId=" + applicationProcessId + ", " : "") +
                 (qualificationId != null ? "qualificationId=" + qualificationId + ", " : "") +
                 (fieldOfStudyId != null ? "fieldOfStudyId=" + fieldOfStudyId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +

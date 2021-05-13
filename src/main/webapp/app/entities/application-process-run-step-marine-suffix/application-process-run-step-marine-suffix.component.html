@@ -1,0 +1,90 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.home.title">Application Process Run Steps</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-application-process-run-step-marine-suffix" [routerLink]="['/application-process-run-step-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.applicationProcessRunStep.home.createLabel">
+            Create new Application Process Run Step
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="applicationProcessRunSteps">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fileDoc"><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.fileDoc">File Doc</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="done"><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.done">Done</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="doneUserLogin"><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.doneUserLogin">Done User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="doneDate"><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.doneDate">Done Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="applicationProcessCode"><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.applicationProcess">Application Process</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="applicationProcessStepTitle"><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.applicationProcessStep">Application Process Step</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let applicationProcessRunStep of applicationProcessRunSteps ;trackBy: trackId">
+                <td><a [routerLink]="['/application-process-run-step-marine-suffix', applicationProcessRunStep.id, 'view' ]">{{applicationProcessRunStep.id}}</a></td>
+                <td>{{applicationProcessRunStep.fileDoc}}</td>
+                <td>{{applicationProcessRunStep.description}}</td>
+                <td>{{applicationProcessRunStep.done}}</td>
+                <td>{{applicationProcessRunStep.doneUserLogin}}</td>
+                <td>{{applicationProcessRunStep.doneDate | date:'medium'}}</td>
+                <td>{{applicationProcessRunStep.createUserLogin}}</td>
+                <td>{{applicationProcessRunStep.createDate | date:'medium'}}</td>
+                <td>{{applicationProcessRunStep.modifyUserLogin}}</td>
+                <td>{{applicationProcessRunStep.modifyDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="applicationProcessRunStep.applicationProcessId">
+                        <a [routerLink]="['../application-process-marine-suffix', applicationProcessRunStep.applicationProcessId , 'view' ]" >{{applicationProcessRunStep.applicationProcessCode}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="applicationProcessRunStep.applicationProcessStepId">
+                        <a [routerLink]="['../application-process-step-marine-suffix', applicationProcessRunStep.applicationProcessStepId , 'view' ]" >{{applicationProcessRunStep.applicationProcessStepTitle}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/application-process-run-step-marine-suffix', applicationProcessRunStep.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/application-process-run-step-marine-suffix', applicationProcessRunStep.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'application-process-run-step-marine-suffix/'+ applicationProcessRunStep.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="applicationProcessRunSteps && applicationProcessRunSteps.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -38,6 +38,8 @@ public class StorageService {
     private final Path jobRootLocation = Paths.get("job-upload-dir");
     private final Path imagesRootLocation = Paths.get("images-dir");
     private final Path runPhaseRootLocation = Paths.get("run-phase-dir");
+    private final Path matchingEducationalRecordRootLocation = Paths.get("matching-educational-record-dir");
+    private final Path applicationProcessRootLocation = Paths.get("application-process-dir");
     private final Path jamHelpRootLocation = Paths.get("jam-help-dir");
     private final Path fileStorageLocation;
     private final Path historyFileStorageLocation;
@@ -48,6 +50,8 @@ public class StorageService {
     private final Path jobFileStorageLocation;
     private final Path imageFileStorageLocation;
     private final Path runPhaseStorageLocation;
+    private final Path matchingEducationalRecordStorageLocation;
+    private final Path applicationProcessStorageLocation;
     private final Path jamHelpStorageLocation;
 
     @Autowired
@@ -70,6 +74,10 @@ public class StorageService {
             .toAbsolutePath().normalize();
         this.runPhaseStorageLocation = Paths.get(fileStorageProperties.getRunPhaseUploadDir())
             .toAbsolutePath().normalize();
+        this.matchingEducationalRecordStorageLocation = Paths.get(fileStorageProperties.getMatchingEducationalRecordUploadDir())
+            .toAbsolutePath().normalize();
+        this.applicationProcessStorageLocation = Paths.get(fileStorageProperties.getApplicationProcessUploadDir())
+            .toAbsolutePath().normalize();
         this.jamHelpStorageLocation = Paths.get(fileStorageProperties.getJamHelpUploadDir())
             .toAbsolutePath().normalize();
 
@@ -83,6 +91,8 @@ public class StorageService {
             Files.createDirectories(this.educationFileStorageLocation);
             Files.createDirectories(this.jobFileStorageLocation);
             Files.createDirectories(this.runPhaseStorageLocation);
+            Files.createDirectories(this.matchingEducationalRecordStorageLocation);
+            Files.createDirectories(this.applicationProcessStorageLocation);
             Files.createDirectories(this.jamHelpStorageLocation);
         } catch (Exception ex) {
             throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
@@ -125,6 +135,8 @@ public class StorageService {
             Files.createDirectory(rootLocation);
             Files.createDirectory(imagesRootLocation);
             Files.createDirectory(runPhaseRootLocation);
+            Files.createDirectory(matchingEducationalRecordRootLocation);
+            Files.createDirectory(applicationProcessRootLocation);
             Files.createDirectory(jamHelpRootLocation);
             Files.createDirectory(historyRootLocation);
             Files.createDirectory(soldierTrainingReportRootLocation);
@@ -580,6 +592,106 @@ public class StorageService {
             String[] fileNameSplit = fileName.split("/");
             fileName = fileNameSplit[fileNameSplit.length - 1];
             Path filePath = this.runPhaseStorageLocation.resolve(fileName).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+            if(resource.exists()) {
+                Files.delete(filePath);
+            } else {
+
+            }
+        } catch (IOException ex) {
+
+        }
+    }
+    public String storeMatchingEducationalRecordFile(MultipartFile file) {
+        // Normalize file name
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        try {
+            // Check if the file's name contains invalid characters
+            if(fileName.contains("..")) {
+                throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+            }
+            String[] fileNameSplit = fileName.split("\\.");
+            String extension = fileNameSplit[fileNameSplit.length - 1];
+            fileName = UUIDGenerate();
+            fileName += "." + extension;
+            // Copy file to the target location (Replacing existing file with the same name)
+            Path targetLocation = this.matchingEducationalRecordStorageLocation.resolve(fileName);
+            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+
+            return fileName;
+        } catch (IOException ex) {
+            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+        }
+    }
+    public Resource loadMatchingEducationalRecordFileAsResource(String fileName) {
+        try {
+            Path filePath = this.matchingEducationalRecordStorageLocation.resolve(fileName).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+            if(resource.exists()) {
+                return resource;
+            } else {
+                throw new MyFileNotFoundException("File not found " + fileName);
+            }
+        } catch (MalformedURLException ex) {
+            throw new MyFileNotFoundException("File not found " + fileName, ex);
+        }
+    }
+    public void deleteMatchingEducationalRecordFile(String fileName) {
+        try {
+            String[] fileNameSplit = fileName.split("/");
+            fileName = fileNameSplit[fileNameSplit.length - 1];
+            Path filePath = this.matchingEducationalRecordStorageLocation.resolve(fileName).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+            if(resource.exists()) {
+                Files.delete(filePath);
+            } else {
+
+            }
+        } catch (IOException ex) {
+
+        }
+    }
+    public String storeApplicationProcessFile(MultipartFile file) {
+        // Normalize file name
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        try {
+            // Check if the file's name contains invalid characters
+            if(fileName.contains("..")) {
+                throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+            }
+            String[] fileNameSplit = fileName.split("\\.");
+            String extension = fileNameSplit[fileNameSplit.length - 1];
+            fileName = UUIDGenerate();
+            fileName += "." + extension;
+            // Copy file to the target location (Replacing existing file with the same name)
+            Path targetLocation = this.matchingEducationalRecordStorageLocation.resolve(fileName);
+            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+
+            return fileName;
+        } catch (IOException ex) {
+            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+        }
+    }
+    public Resource loadApplicationProcessFileAsResource(String fileName) {
+        try {
+            Path filePath = this.matchingEducationalRecordStorageLocation.resolve(fileName).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+            if(resource.exists()) {
+                return resource;
+            } else {
+                throw new MyFileNotFoundException("File not found " + fileName);
+            }
+        } catch (MalformedURLException ex) {
+            throw new MyFileNotFoundException("File not found " + fileName, ex);
+        }
+    }
+    public void deleteApplicationProcessFile(String fileName) {
+        try {
+            String[] fileNameSplit = fileName.split("/");
+            fileName = fileNameSplit[fileNameSplit.length - 1];
+            Path filePath = this.matchingEducationalRecordStorageLocation.resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
             if(resource.exists()) {
                 Files.delete(filePath);

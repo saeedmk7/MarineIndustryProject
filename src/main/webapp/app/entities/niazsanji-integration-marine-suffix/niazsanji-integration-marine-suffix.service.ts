@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import {INiazsanjiIntegrationMarineSuffix} from "app/shared/model/niazsanji-integration-marine-suffix.model";
+import { INiazsanjiIntegrationMarineSuffix } from 'app/shared/model/niazsanji-integration-marine-suffix.model';
 
 type EntityResponseType = HttpResponse<INiazsanjiIntegrationMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<INiazsanjiIntegrationMarineSuffix[]>;
@@ -93,7 +93,13 @@ export class NiazsanjiIntegrationMarineSuffixService {
             res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
             res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
             res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
-            res.body.personFullName = (res.body.personName != null ? res.body.personName : '') + " " + (res.body.personFamily != null ? res.body.personFamily : '');
+            res.body.personFullName =
+                (res.body.personName != null ? res.body.personName : '') +
+                ' ' +
+                (res.body.personFamily != null ? res.body.personFamily : '');
+            res.body.totalLearningTime =
+                (res.body.learningTimeTheorical ? res.body.learningTimeTheorical : 0) +
+                (res.body.learningTimePractical ? res.body.learningTimePractical : 0);
         }
         return res;
     }
@@ -105,7 +111,13 @@ export class NiazsanjiIntegrationMarineSuffixService {
                 niazsanjiIntegration.modifyDate = niazsanjiIntegration.modifyDate != null ? moment(niazsanjiIntegration.modifyDate) : null;
                 niazsanjiIntegration.archivedDate =
                     niazsanjiIntegration.archivedDate != null ? moment(niazsanjiIntegration.archivedDate) : null;
-                niazsanjiIntegration.personFullName = (niazsanjiIntegration.personName != null ? niazsanjiIntegration.personName : '') + " " + (niazsanjiIntegration.personFamily != null ? niazsanjiIntegration.personFamily : '');
+                niazsanjiIntegration.personFullName =
+                    (niazsanjiIntegration.personName != null ? niazsanjiIntegration.personName : '') +
+                    ' ' +
+                    (niazsanjiIntegration.personFamily != null ? niazsanjiIntegration.personFamily : '');
+                niazsanjiIntegration.totalLearningTime =
+                    (niazsanjiIntegration.learningTimeTheorical ? niazsanjiIntegration.learningTimeTheorical : 0) +
+                    (niazsanjiIntegration.learningTimePractical ? niazsanjiIntegration.learningTimePractical : 0);
             });
         }
         return res;

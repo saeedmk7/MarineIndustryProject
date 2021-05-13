@@ -377,6 +377,14 @@ public class DocumentQueryService extends QueryService<Document> {
                 specification = specification.and(buildSpecification(criteria.getMonitorLearningProcessId(),
                     root -> root.join(Document_.monitorLearningProcesses, JoinType.LEFT).get(MonitorLearningProcess_.id)));
             }
+            if (criteria.getMatchingEducationalRecordId() != null) {
+                specification = specification.and(buildSpecification(criteria.getMatchingEducationalRecordId(),
+                    root -> root.join(Document_.matchingEducationalRecords, JoinType.LEFT).get(MatchingEducationalRecord_.id)));
+            }
+            if (criteria.getApplicationProcessId() != null) {
+                specification = specification.and(buildSpecification(criteria.getApplicationProcessId(),
+                    root -> root.join(Document_.applicationProcesses, JoinType.LEFT).get(ApplicationProcess_.id)));
+            }
         }
         return specification;
     }

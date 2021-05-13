@@ -84,6 +84,12 @@ public class RunPhaseDTO implements Serializable {
 
     private String educationalModuleTitle;
 
+    private Integer learningTimePractical;
+
+    private Integer learningTimeTheorical;
+
+    private String skillLevelOfSkillTitle;
+
     private Long finalNiazsanjiReportId;
 
     private String finalNiazsanjiReportDescription;
@@ -435,5 +441,29 @@ public class RunPhaseDTO implements Serializable {
 
     public void setTeacherId(Long teacherId) {
         this.teacherId = teacherId;
+    }
+
+    public Integer getLearningTimePractical() {
+        return learningTimePractical;
+    }
+
+    public void setLearningTimePractical(Integer learningTimePractical) {
+        this.learningTimePractical = learningTimePractical;
+    }
+
+    public Integer getLearningTimeTheorical() {
+        return learningTimeTheorical;
+    }
+
+    public void setLearningTimeTheorical(Integer learningTimeTheorical) {
+        this.learningTimeTheorical = learningTimeTheorical;
+    }
+
+    public String getSkillLevelOfSkillTitle() {
+        return skillLevelOfSkillTitle;
+    }
+
+    public void setSkillLevelOfSkillTitle(String skillLevelOfSkillTitle) {
+        this.skillLevelOfSkillTitle = skillLevelOfSkillTitle;
     }
 }

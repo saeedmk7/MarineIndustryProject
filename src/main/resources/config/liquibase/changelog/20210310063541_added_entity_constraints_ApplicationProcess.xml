@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity ApplicationProcess.
+    -->
+    <changeSet id="20210310063541-2" author="saeed">
+        
+        <addForeignKeyConstraint baseColumnNames="application_processes_id"
+                                 baseTableName="application_process_document"
+                                 constraintName="fk_application_process_document_application_processes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application_process"/>
+        <addForeignKeyConstraint baseColumnNames="documents_id"
+                                 baseTableName="application_process_document"
+                                 constraintName="fk_application_process_document_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+        
+        <addForeignKeyConstraint baseColumnNames="educational_record_id"
+                                 baseTableName="application_process"
+                                 constraintName="fk_application_process_educational_record_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_record"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="application_process"
+                                 constraintName="fk_application_process_person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+        <addForeignKeyConstraint baseColumnNames="organization_chart_id"
+                                 baseTableName="application_process"
+                                 constraintName="fk_application_process_organization_chart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization_chart"/>
+
+        <addForeignKeyConstraint baseColumnNames="qualification_id"
+                                 baseTableName="application_process"
+                                 constraintName="fk_application_process_qualification_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="qualification"/>
+
+    </changeSet>
+</databaseChangeLog>

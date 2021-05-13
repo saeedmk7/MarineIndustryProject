@@ -23,6 +23,7 @@ public class HomePagePersonEducationalModule {
         else
             this.educationalModuleType = "نیازسنجی از شناسنامه شغلی";
 
+        this.courseTypeId = finalNiazsanjiReportDTO.getCourseTypeId();
         this.courseType = finalNiazsanjiReportDTO.getCourseTypeTitle();
         if(finalNiazsanjiReportDTO.getNiazsanjiYear() != null)
             this.runDate = finalNiazsanjiReportDTO.getNiazsanjiYear().toString();
@@ -39,6 +40,7 @@ public class HomePagePersonEducationalModule {
                 break;
         }
         this.status = status;
+
     }
 
     public HomePagePersonEducationalModule(EducationalModuleMinDTO educationalModuleMinDTO, Integer status) {
@@ -74,6 +76,7 @@ public class HomePagePersonEducationalModule {
         this.title = educationalHistoryDTO.getEducationalModuleName();
         this.learningTimePractical = educationalHistoryDTO.getLearningTimePractical();
         this.learningTimeTheorical = educationalHistoryDTO.getLearningTimeTheorical();
+        this.courseTypeId = educationalHistoryDTO.getCourseTypeId();
         this.courseType = educationalHistoryDTO.getCourseTypeTitle();
         this.code = educationalHistoryDTO.getEducationalModuleId().toString();
         this.skillableLevelOfSkillId = educationalModuleDTO.getSkillableLevelOfSkillId();
@@ -115,6 +118,8 @@ public class HomePagePersonEducationalModule {
     private String endDate;
 
     private Long educationalHistoryId;
+
+    private Long courseTypeId;
 
     public Long getId() {
         return id;
@@ -242,5 +247,13 @@ public class HomePagePersonEducationalModule {
 
     public void setCourseType(String courseType) {
         this.courseType = courseType;
+    }
+
+    public Long getCourseTypeId() {
+        return courseTypeId;
+    }
+
+    public void setCourseTypeId(Long courseTypeId) {
+        this.courseTypeId = courseTypeId;
     }
 }

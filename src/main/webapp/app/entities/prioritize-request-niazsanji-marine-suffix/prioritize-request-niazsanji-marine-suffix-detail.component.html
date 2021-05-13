@@ -12,7 +12,7 @@
                 <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.person">Person</span></dt>
                 <dd>
                     <div *ngIf="prioritizeRequestNiazsanji.personId">
-                        <a [routerLink]="['/person-marine-suffix', prioritizeRequestNiazsanji.personId, 'view']">{{prioritizeRequestNiazsanji.personFamily}}</a>
+                        <a [routerLink]="['/person-marine-suffix', prioritizeRequestNiazsanji.personId, 'view']">{{prioritizeRequestNiazsanji.personFullName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.organizationChart">Organization Chart</span>
@@ -29,6 +29,13 @@
                 <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.personPracticalJobTitle">Person</span></dt>
                 <dd>
                     {{prioritizeRequestNiazsanji.personPracticalJobTitle}}
+                </dd>
+
+                <dt><span jhiTranslate="marineindustryprojApp.prioritizeRequestNiazsanji.personEmploymentTypeTitle">Person</span></dt>
+                <dd>
+                    <div *ngIf="prioritizeRequestNiazsanji.personId">
+                        {{prioritizeRequestNiazsanji.personEmploymentTypeTitle}}
+                    </div>
                 </dd>
                 <education-history-panel [personId]="prioritizeRequestNiazsanji.personId"
                                          [type]="2"></education-history-panel>

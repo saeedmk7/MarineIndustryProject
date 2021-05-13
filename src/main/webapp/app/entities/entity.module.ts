@@ -138,6 +138,12 @@ import { MarineindustryprojMonitorLearningProcessLevelMarineSuffixModule } from 
 import { MarineindustryprojMonitorLearningProcessMarineSuffixModule } from 'app/entities/monitor-learning-process-marine-suffix/monitor-learning-process-marine-suffix.module';
 import { MarineindustryprojMonitorProcessDurationMarineSuffixModule } from 'app/entities/monitor-process-duration-marine-suffix/monitor-process-duration-marine-suffix.module';
 import { MarineindustryprojJobChangeMarineSuffixModule } from 'app/entities/job-change-marine-suffix/job-change-marine-suffix.module';
+import { MarineindustryprojMatchingEducationalRecordMarineSuffixModule } from 'app/entities/matching-educational-record-marine-suffix/matching-educational-record-marine-suffix.module';
+import { MarineindustryprojMatchingRunningStepMarineSuffixModule } from 'app/entities/matching-running-step-marine-suffix/matching-running-step-marine-suffix.module';
+import { MarineindustryprojMatchingRunRunningStepMarineSuffixModule } from 'app/entities/matching-run-running-step-marine-suffix/matching-run-running-step-marine-suffix.module';
+import { MarineindustryprojApplicationProcessMarineSuffixModule } from 'app/entities/application-process-marine-suffix/application-process-marine-suffix.module';
+import { MarineindustryprojApplicationProcessRunStepMarineSuffixModule } from 'app/entities/application-process-run-step-marine-suffix/application-process-run-step-marine-suffix.module';
+import { MarineindustryprojApplicationProcessStepMarineSuffixModule } from 'app/entities/application-process-step-marine-suffix/application-process-step-marine-suffix.module';
 
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
@@ -278,7 +284,13 @@ import { MarineindustryprojJobChangeMarineSuffixModule } from 'app/entities/job-
         MarineindustryprojMonitorLearningProcessLevelMarineSuffixModule,
         MarineindustryprojMonitorLearningProcessMarineSuffixModule,
         MarineindustryprojMonitorProcessDurationMarineSuffixModule,
-        MarineindustryprojJobChangeMarineSuffixModule
+        MarineindustryprojJobChangeMarineSuffixModule,
+        MarineindustryprojMatchingEducationalRecordMarineSuffixModule,
+        MarineindustryprojMatchingRunRunningStepMarineSuffixModule,
+        MarineindustryprojMatchingRunningStepMarineSuffixModule,
+        MarineindustryprojApplicationProcessMarineSuffixModule,
+        MarineindustryprojApplicationProcessRunStepMarineSuffixModule,
+        MarineindustryprojApplicationProcessStepMarineSuffixModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

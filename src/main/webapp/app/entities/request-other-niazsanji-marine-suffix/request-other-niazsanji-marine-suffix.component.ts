@@ -270,17 +270,17 @@ export class RequestOtherNiazsanjiMarineSuffixComponent implements OnInit, OnDes
             const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
             if (org) a.organizationChartTitle = org.fullTitle;
 
-            let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
+            //let educationalModule = this.educationalModules.find(w => w.id == a.educationalModuleId);
             let obj: Object;
             obj = {
                 index: index,
                 organizationChart: a.organizationChartTitle,
                 person: a.personFullName,
                 jobTitle: a.personJobTitle,
-                educationalModuleTitle: educationalModule.title,
-                educationalModuleId: educationalModule.code,
-                skillLevelOfSkillTitle: educationalModule.skillableLevelOfSkillTitle,
-                totalLearningTime: educationalModule.totalLearningTime,
+                educationalModuleTitle: a.educationalModuleTitle,
+                educationalModuleId: a.educationalModuleCode,
+                skillLevelOfSkillTitle: a.skillLevelOfSkillTitle,
+                totalLearningTime: a.totalLearningTime,
                 costEducationalModule: a.costEducationalModule,
                 niazsanjiInput: a.niazsanjiInputTitle,
                 courseType: a.courseTypeTitle,
@@ -457,6 +457,17 @@ export class RequestOtherNiazsanjiMarineSuffixComponent implements OnInit, OnDes
     prepareSearchOrgChart() {
         if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
+            if (this.isSuperUsers) {
+                this.searchbarModel.push(
+                    new SearchPanelModel(
+                        'requestNiazsanjiFardi',
+                        'organizationChartId',
+                        'select',
+                        'equals',
+                        this.organizationcharts.filter(w => w.parentId == null)
+                    )
+                );
+            }
             this.searchbarModel.push(
                 new SearchPanelModel(
                     'requestNiazsanjiFardi',
@@ -473,6 +484,17 @@ export class RequestOtherNiazsanjiMarineSuffixComponent implements OnInit, OnDes
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
                     this.organizationcharts = res.body;
+                    if (this.isSuperUsers) {
+                        this.searchbarModel.push(
+                            new SearchPanelModel(
+                                'requestNiazsanjiFardi',
+                                'organizationChartId',
+                                'select',
+                                'equals',
+                                this.organizationcharts.filter(w => w.parentId == null)
+                            )
+                        );
+                    }
                     this.searchbarModel.push(
                         new SearchPanelModel(
                             'requestNiazsanjiFardi',
@@ -572,7 +594,7 @@ export class RequestOtherNiazsanjiMarineSuffixComponent implements OnInit, OnDes
             const org = this.organizationcharts.find(w => w.id == a.organizationChartId);
             if (org) a.organizationChartTitle = org.fullTitle;
 
-            let education: IEducationalModuleMarineSuffix;
+            /*let education: IEducationalModuleMarineSuffix;
             if (a.educationalModuleId) {
                 education = this.educationalModules.find(w => w.id == a.educationalModuleId);
             }
@@ -581,16 +603,16 @@ export class RequestOtherNiazsanjiMarineSuffixComponent implements OnInit, OnDes
                 a.totalLearningTime =
                     (education.learningTimePractical ? education.learningTimePractical : 0) +
                     (education.learningTimeTheorical ? education.learningTimeTheorical : 0);
-            }
+            }*/
         });
-        this.totalHour = this.requestOtherNiazsanjis
+        /*this.totalHour = this.requestOtherNiazsanjis
             .filter(a => a.totalLearningTime)
             .map(a => a.totalLearningTime)
             .reduce((sum, current) => sum + current);
         this.totalPriceCost = this.requestOtherNiazsanjis
             .filter(a => a.costEducationalModule > 0)
             .map(a => a.costEducationalModule)
-            .reduce((sum, current) => sum + current);
+            .reduce((sum, current) => sum + current);*/
     }
 
     protected onError(errorMessage: string) {

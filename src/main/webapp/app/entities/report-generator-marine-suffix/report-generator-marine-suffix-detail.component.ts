@@ -340,7 +340,6 @@ export class ReportGeneratorMarineSuffixDetailComponent implements OnInit {
     loadData(data: IFinalNiazsanjiReportMarineSuffix[]): IFinalNiazsanjiReportMarineSuffix[] {
         let finalNiazsanjiReports: IFinalNiazsanjiReportMarineSuffix[] = this.convertObjectDatesService.fillFinalNiazsanjiDataArray(
             data,
-            this.educationalModules,
             this.organizationcharts
         );
         return this.convertObjectDatesService.changeArrayDate(finalNiazsanjiReports);

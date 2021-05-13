@@ -25,8 +25,6 @@ export class RequestOrganizationNiazsanjiMarineSuffixService {
     }
 
     finalize(requestOrganizationNiazsanji: IRequestOrganizationNiazsanjiMarineSuffix): Observable<EntityResponseType> {
-
-
         const copy = this.convertDateFromClient(requestOrganizationNiazsanji);
         let url = SERVER_API_URL + 'api/finalize-request-organization-niazsanji';
         return this.http
@@ -47,7 +45,6 @@ export class RequestOrganizationNiazsanjiMarineSuffixService {
             .pipe(map((res: EntityResponseType) => res));
     }
     find(id: number): Observable<EntityResponseType> {
-
         return this.http
             .get<IRequestOrganizationNiazsanjiMarineSuffix>(`${this.resourceUrl}/${id}`, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
@@ -95,7 +92,15 @@ export class RequestOrganizationNiazsanjiMarineSuffixService {
         res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
         res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
         res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
-        res.body.fullTitle = (res.body.id ? res.body.id : "") + "-" + (res.body.code ? res.body.code : "") +"-" + (res.body.recommendedByOrgchart ? res.body.recommendedByOrgchart : "");
+        res.body.fullTitle =
+            (res.body.id ? res.body.id : '') +
+            '-' +
+            (res.body.code ? res.body.code : '') +
+            '-' +
+            (res.body.recommendedByOrgchart ? res.body.recommendedByOrgchart : '');
+        res.body.totalLearningTime =
+            (res.body.learningTimePractical ? res.body.learningTimePractical : 0) +
+            (res.body.learningTimeTheorical ? res.body.learningTimeTheorical : 0);
         return res;
     }
 
@@ -108,7 +113,14 @@ export class RequestOrganizationNiazsanjiMarineSuffixService {
             requestOrganizationNiazsanji.archivedDate =
                 requestOrganizationNiazsanji.archivedDate != null ? moment(requestOrganizationNiazsanji.archivedDate) : null;
             requestOrganizationNiazsanji.fullTitle =
-                (requestOrganizationNiazsanji.id ? requestOrganizationNiazsanji.id : "") + " - " + (requestOrganizationNiazsanji.code ? requestOrganizationNiazsanji.code : "") + " - " + (requestOrganizationNiazsanji.recommendedByOrgchart ? requestOrganizationNiazsanji.recommendedByOrgchart : "");
+                (requestOrganizationNiazsanji.id ? requestOrganizationNiazsanji.id : '') +
+                ' - ' +
+                (requestOrganizationNiazsanji.code ? requestOrganizationNiazsanji.code : '') +
+                ' - ' +
+                (requestOrganizationNiazsanji.recommendedByOrgchart ? requestOrganizationNiazsanji.recommendedByOrgchart : '');
+            requestOrganizationNiazsanji.totalLearningTime =
+                (requestOrganizationNiazsanji.learningTimeTheorical ? requestOrganizationNiazsanji.learningTimeTheorical : 0) +
+                (requestOrganizationNiazsanji.learningTimePractical ? requestOrganizationNiazsanji.learningTimePractical : 0);
         });
         return res;
     }

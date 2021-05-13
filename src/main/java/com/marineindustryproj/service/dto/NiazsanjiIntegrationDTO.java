@@ -73,11 +73,19 @@ public class NiazsanjiIntegrationDTO implements Serializable {
 
     private String educationalModuleTitle;
 
+    private String skillLevelOfSkillTitle;
+
+    private Integer learningTimeTheorical;
+
+    private Integer learningTimePractical;
+
     private String personFamily;
 
     private String personName;
 
     private String personJobTitle;
+
+    private String personEmploymentTypeTitle;
 
     private Long organizationChartId;
 
@@ -366,5 +374,37 @@ public class NiazsanjiIntegrationDTO implements Serializable {
 
     public void setPersonJobTitle(String personJobTitle) {
         this.personJobTitle = personJobTitle;
+    }
+
+    public Integer getLearningTimeTheorical() {
+        return learningTimeTheorical;
+    }
+
+    public void setLearningTimeTheorical(Integer learningTimeTheorical) {
+        this.learningTimeTheorical = learningTimeTheorical;
+    }
+
+    public String getSkillLevelOfSkillTitle() {
+        return skillLevelOfSkillTitle;
+    }
+
+    public void setSkillLevelOfSkillTitle(String skillLevelOfSkillTitle) {
+        this.skillLevelOfSkillTitle = skillLevelOfSkillTitle;
+    }
+
+    public Integer getLearningTimePractical() {
+        return learningTimePractical;
+    }
+
+    public void setLearningTimePractical(Integer learningTimePractical) {
+        this.learningTimePractical = learningTimePractical;
+    }
+
+    public String getPersonEmploymentTypeTitle() {
+        return personEmploymentTypeTitle;
+    }
+
+    public void setPersonEmploymentTypeTitle(String personEmploymentTypeTitle) {
+        this.personEmploymentTypeTitle = personEmploymentTypeTitle;
     }
 }

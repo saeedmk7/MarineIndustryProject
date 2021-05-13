@@ -63,7 +63,10 @@ public class Qualification implements Serializable {
     @OneToMany(mappedBy = "lastQualification")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Soldier> soldiers = new HashSet<>();
-
+    @OneToMany(mappedBy = "qualification")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<ApplicationProcess> applicationProcesses = new HashSet<>();
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }

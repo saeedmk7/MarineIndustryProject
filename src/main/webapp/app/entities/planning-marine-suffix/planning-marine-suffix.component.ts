@@ -412,13 +412,10 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
 
             finalNiazsanjiReportsFardi.educationalModuleId = a.educationalModuleId;
             finalNiazsanjiReportsFardi.educationalModuleCode = a.educationalModuleCode;
+            finalNiazsanjiReportsFardi.educationalModuleTitle = a.educationalModuleTitle;
+            finalNiazsanjiReportsFardi.educationalModuleLevel = a.educationalModuleLevelTitle;
+            finalNiazsanjiReportsFardi.educationalModuleTotalLearningTime = a.educationalModuleTotalTime;
 
-            let education = this.educationalModules.find(w => w.id == a.educationalModuleId);
-            if (education) {
-                finalNiazsanjiReportsFardi.educationalModuleTitle = education.title;
-                finalNiazsanjiReportsFardi.educationalModuleLevel = education.skillableLevelOfSkillTitle;
-                finalNiazsanjiReportsFardi.educationalModuleTotalLearningTime = education.totalLearningTime;
-            }
             finalNiazsanjiReportsFardi.niazsanjiYear = a.niazsanjiYear;
             let org = this.organizationcharts.find(w => w.id == a.organizationChartId);
             if (org) finalNiazsanjiReportsFardi.organizationChartTitle = org.fullTitle; //a.organizationChartTitle;
@@ -453,13 +450,9 @@ export class PlanningMarineSuffixComponent implements OnInit, OnDestroy, AfterVi
 
             finalNiazsanjiReportsOrganization.educationalModuleId = a.educationalModuleId;
             finalNiazsanjiReportsOrganization.educationalModuleCode = a.educationalModuleCode;
-
-            let education = this.educationalModules.find(w => w.id == a.educationalModuleId);
-            if (education) {
-                finalNiazsanjiReportsOrganization.educationalModuleTitle = education.title;
-                finalNiazsanjiReportsOrganization.educationalModuleLevel = education.skillableLevelOfSkillTitle;
-                finalNiazsanjiReportsOrganization.educationalModuleTotalLearningTime = education.totalLearningTime;
-            }
+            finalNiazsanjiReportsOrganization.educationalModuleTitle = a.educationalModuleTitle;
+            finalNiazsanjiReportsOrganization.educationalModuleLevel = a.skillLevelOfSkillTitle;
+            finalNiazsanjiReportsOrganization.educationalModuleTotalLearningTime = a.educationalModuleTotalTime;
 
             finalNiazsanjiReportsOrganization.niazsanjiYear = a.niazsanjiYear;
             let org = this.organizationcharts.find(w => w.id == a.organizationChartId);

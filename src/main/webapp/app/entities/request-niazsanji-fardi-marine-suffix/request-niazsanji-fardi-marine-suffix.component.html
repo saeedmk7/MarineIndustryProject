@@ -233,9 +233,9 @@
             </tr>
             <tr class="sum-row">
                 <td colspan="6">مجموع</td>
-                <td>{{totalHour | number}}</td>
+                <td>{{requestNiazsanjiFardis | sum:'totalLearningTime' | number: '1.0-1'}}</td>
                 <td colspan="2"></td>
-                <td>{{totalPriceCost | number}}</td>
+                <td>{{totalPriceCost | number: '1.0-1'}}</td>
                 <td colspan="5"></td>
             </tr>
             </tbody>

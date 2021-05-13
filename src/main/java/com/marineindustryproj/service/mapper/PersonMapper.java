@@ -46,6 +46,8 @@ public interface PersonMapper extends EntityMapper<PersonDTO, Person> {
     @Mapping(target = "requestOtherNiazsanjis", ignore = true)
     @Mapping(target = "prioritizeRequestNiazsanjis", ignore = true)
     @Mapping(target = "jobChanges", ignore = true)
+    @Mapping(target = "matchingEducationalRecords", ignore = true)
+    @Mapping(target = "applicationProcesses", ignore = true)
     @Mapping(source = "lastQualificationId", target = "lastQualification")
     @Mapping(source = "lastFieldOfStudyId", target = "lastFieldOfStudy")
     @Mapping(source = "employmentTypeId", target = "employmentType")

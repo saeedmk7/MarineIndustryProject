@@ -19,6 +19,7 @@ public interface EducationalRecordMapper extends EntityMapper<EducationalRecordD
     @Mapping(source = "person.family", target = "personFamily")
     EducationalRecordDTO toDto(EducationalRecord educationalRecord);
 
+    @Mapping(target = "applicationProcesses", ignore = true)
     @Mapping(source = "qualificationId", target = "qualification")
     @Mapping(source = "fieldOfStudyId", target = "fieldOfStudy")
     @Mapping(source = "personId", target = "person")

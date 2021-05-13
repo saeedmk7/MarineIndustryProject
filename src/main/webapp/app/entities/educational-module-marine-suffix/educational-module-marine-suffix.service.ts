@@ -85,7 +85,7 @@ export class EducationalModuleMarineSuffixService {
         res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
         res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
         res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
-        res.body.code = res.body.code ? res.body.code + '(' + res.body.code.length + ')' : '';
+        res.body.code = res.body.code ? res.body.code : ''; //+ '(' + res.body.code.length + ')'
         res.body.fullTitle = (res.body.code ? res.body.code : '') + ' - ' + (res.body.title ? res.body.title : '');
         res.body.totalLearningTime =
             (res.body.learningTimeTheorical ? res.body.learningTimeTheorical : 0) +
@@ -100,7 +100,7 @@ export class EducationalModuleMarineSuffixService {
             educationalModule.createDate = educationalModule.createDate != null ? moment(educationalModule.createDate) : null;
             educationalModule.modifyDate = educationalModule.modifyDate != null ? moment(educationalModule.modifyDate) : null;
             educationalModule.archivedDate = educationalModule.archivedDate != null ? moment(educationalModule.archivedDate) : null;
-            educationalModule.code = educationalModule.code ? educationalModule.code + '(' + educationalModule.code.length + ')' : '';
+            educationalModule.code = educationalModule.code ? educationalModule.code : ''; //+ '(' + educationalModule.code.length + ')'
             educationalModule.fullTitle =
                 (educationalModule.code ? educationalModule.code : '') + ' - ' + (educationalModule.title ? educationalModule.title : '');
             educationalModule.totalLearningTime =

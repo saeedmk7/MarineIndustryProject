@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IFinalOrganizationNiazsanjiMarineSuffix } from 'app/shared/model/final-organization-niazsanji-marine-suffix.model';
-import {IRequestOrganizationNiazsanjiMarineSuffix} from "app/shared/model/request-organization-niazsanji-marine-suffix.model";
+import { IRequestOrganizationNiazsanjiMarineSuffix } from 'app/shared/model/request-organization-niazsanji-marine-suffix.model';
 
 type EntityResponseType = HttpResponse<IFinalOrganizationNiazsanjiMarineSuffix>;
 type EntityArrayResponseType = HttpResponse<IFinalOrganizationNiazsanjiMarineSuffix[]>;
@@ -94,6 +94,9 @@ export class FinalOrganizationNiazsanjiMarineSuffixService {
         res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
         res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
         res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
+        res.body.totalLearningTime =
+            (res.body.learningTimeTheorical ? res.body.learningTimeTheorical : 0) +
+            (res.body.learningTimePractical ? res.body.learningTimePractical : 0);
         return res;
     }
 
@@ -105,6 +108,9 @@ export class FinalOrganizationNiazsanjiMarineSuffixService {
                 finalOrganizationNiazsanji.modifyDate != null ? moment(finalOrganizationNiazsanji.modifyDate) : null;
             finalOrganizationNiazsanji.archivedDate =
                 finalOrganizationNiazsanji.archivedDate != null ? moment(finalOrganizationNiazsanji.archivedDate) : null;
+            finalOrganizationNiazsanji.totalLearningTime =
+                (finalOrganizationNiazsanji.learningTimePractical ? finalOrganizationNiazsanji.learningTimePractical : 0) +
+                (finalOrganizationNiazsanji.learningTimeTheorical ? finalOrganizationNiazsanji.learningTimeTheorical : 0);
         });
         return res;
     }

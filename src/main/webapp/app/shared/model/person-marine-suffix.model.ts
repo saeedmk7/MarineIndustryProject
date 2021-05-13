@@ -14,6 +14,8 @@ import { INiazsanjiOtherMarineSuffix } from 'app/shared/model//niazsanji-other-m
 import { IRequestOtherNiazsanjiMarineSuffix } from 'app/shared/model//request-other-niazsanji-marine-suffix.model';
 import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model//prioritize-request-niazsanji-marine-suffix.model';
 import { IJobChangeMarineSuffix } from 'app/shared/model//job-change-marine-suffix.model';
+import { IMatchingEducationalRecordMarineSuffix } from 'app/shared/model//matching-educational-record-marine-suffix.model';
+import { IApplicationProcessMarineSuffix } from 'app/shared/model//application-process-marine-suffix.model';
 import { IDocumentMarineSuffix } from 'app/shared/model//document-marine-suffix.model';
 import { IScientificWorkGroupMarineSuffix } from 'app/shared/model//scientific-work-group-marine-suffix.model';
 import { IMainTaskMarineSuffix } from 'app/shared/model//main-task-marine-suffix.model';
@@ -59,12 +61,13 @@ export interface IPersonMarineSuffix {
     jobRecords?: IJobRecordMarineSuffix[];
     researchRecords?: IResearchRecordMarineSuffix[];
     teachingRecords?: ITeachingRecordMarineSuffix[];
-    preJobNiazsanjis?: IPreJobNiazsanjiMarineSuffix[];
     jobNiazsanjis?: IJobNiazsanjiMarineSuffix[];
     niazsanjiOthers?: INiazsanjiOtherMarineSuffix[];
     requestOtherNiazsanjis?: IRequestOtherNiazsanjiMarineSuffix[];
     prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[];
     jobChanges?: IJobChangeMarineSuffix[];
+    matchingEducationalRecords?: IMatchingEducationalRecordMarineSuffix[];
+    applicationProcesses?: IApplicationProcessMarineSuffix[];
     documents?: IDocumentMarineSuffix[];
     scientificWorkGroups?: IScientificWorkGroupMarineSuffix[];
     lastQualificationTitle?: string;
@@ -91,6 +94,7 @@ export interface IPersonMarineSuffix {
     designAndPlannings?: IDesignAndPlanningMarineSuffix[];
     runPhases?: IRunPhaseMarineSuffix[];
     usersRequests?: IUsersRequestMarineSuffix[];
+    preJobNiazsanjis?: IPreJobNiazsanjiMarineSuffix[];
 }
 
 export class PersonMarineSuffix implements IPersonMarineSuffix {
@@ -134,6 +138,8 @@ export class PersonMarineSuffix implements IPersonMarineSuffix {
         public requestOtherNiazsanjis?: IRequestOtherNiazsanjiMarineSuffix[],
         public prioritizeRequestNiazsanjis?: IPrioritizeRequestNiazsanjiMarineSuffix[],
         public jobChanges?: IJobChangeMarineSuffix[],
+        public matchingEducationalRecords?: IMatchingEducationalRecordMarineSuffix[],
+        public applicationProcesses?: IApplicationProcessMarineSuffix[],
         public documents?: IDocumentMarineSuffix[],
         public scientificWorkGroups?: IScientificWorkGroupMarineSuffix[],
         public lastQualificationTitle?: string,

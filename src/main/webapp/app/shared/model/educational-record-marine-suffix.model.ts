@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IApplicationProcessMarineSuffix } from 'app/shared/model//application-process-marine-suffix.model';
 
 export interface IEducationalRecordMarineSuffix {
     id?: number;
@@ -16,6 +17,7 @@ export interface IEducationalRecordMarineSuffix {
     modifyDate?: Moment;
     guid?: string;
     fileDoc?: any;
+    applicationProcesses?: IApplicationProcessMarineSuffix[];
     qualificationTitle?: string;
     qualificationId?: number;
     fieldOfStudyTitle?: string;
@@ -42,6 +44,7 @@ export class EducationalRecordMarineSuffix implements IEducationalRecordMarineSu
         public modifyDate?: Moment,
         public guid?: string,
         public fileDoc?: any,
+        public applicationProcesses?: IApplicationProcessMarineSuffix[],
         public qualificationTitle?: string,
         public qualificationId?: number,
         public fieldOfStudyTitle?: string,

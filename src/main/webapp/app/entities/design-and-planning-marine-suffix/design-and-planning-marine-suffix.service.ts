@@ -76,6 +76,9 @@ export class DesignAndPlanningMarineSuffixService {
         res.body.createDate = res.body.createDate != null ? moment(res.body.createDate) : null;
         res.body.modifyDate = res.body.modifyDate != null ? moment(res.body.modifyDate) : null;
         res.body.archivedDate = res.body.archivedDate != null ? moment(res.body.archivedDate) : null;
+        res.body.totalLearningTime =
+            (res.body.learningTimePractical ? res.body.learningTimePractical : 0) +
+            (res.body.learningTimeTheorical ? res.body.learningTimeTheorical : 0);
         return res;
     }
 
@@ -85,6 +88,9 @@ export class DesignAndPlanningMarineSuffixService {
             designAndPlanning.createDate = designAndPlanning.createDate != null ? moment(designAndPlanning.createDate) : null;
             designAndPlanning.modifyDate = designAndPlanning.modifyDate != null ? moment(designAndPlanning.modifyDate) : null;
             designAndPlanning.archivedDate = designAndPlanning.archivedDate != null ? moment(designAndPlanning.archivedDate) : null;
+            designAndPlanning.totalLearningTime =
+                (designAndPlanning.learningTimePractical ? designAndPlanning.learningTimePractical : 0) +
+                (designAndPlanning.learningTimeTheorical ? designAndPlanning.learningTimeTheorical : 0);
         });
         return res;
     }

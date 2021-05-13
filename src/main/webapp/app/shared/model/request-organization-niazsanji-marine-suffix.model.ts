@@ -51,7 +51,10 @@ export interface IRequestOrganizationNiazsanjiMarineSuffix {
     educationalModuleTitle?: string;
     educationalModuleCode?: string;
     educationalModuleId?: number;
+    learningTimePractical?: number;
+    learningTimeTheorical?: number;
     totalLearningTime?: number;
+    fullLearningTime?: number;
     skillLevelOfSkillTitle?: string;
     teachApproachTitle?: string;
     teachApproachId?: number;
@@ -105,7 +108,10 @@ export class RequestOrganizationNiazsanjiMarineSuffix implements IRequestOrganiz
         public educationalModuleTitle?: string,
         public educationalModuleCode?: string,
         public educationalModuleId?: number,
+        public learningTimePractical?: number,
+        public learningTimeTheorical?: number,
         public totalLearningTime?: number,
+        public fullLearningTime?: number,
         public skillLevelOfSkillTitle?: string,
         public teachApproachTitle?: string,
         public teachApproachId?: number,

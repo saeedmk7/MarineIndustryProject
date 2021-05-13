@@ -99,6 +99,10 @@ public class PersonCriteria implements Serializable {
 
     private LongFilter jobChangeId;
 
+    private LongFilter matchingEducationalRecordId;
+
+    private LongFilter applicationProcessId;
+
     private LongFilter documentId;
 
     private LongFilter scientificWorkGroupId;
@@ -427,6 +431,22 @@ public class PersonCriteria implements Serializable {
         this.jobChangeId = jobChangeId;
     }
 
+    public LongFilter getMatchingEducationalRecordId() {
+        return matchingEducationalRecordId;
+    }
+
+    public void setMatchingEducationalRecordId(LongFilter matchingEducationalRecordId) {
+        this.matchingEducationalRecordId = matchingEducationalRecordId;
+    }
+
+    public LongFilter getApplicationProcessId() {
+        return applicationProcessId;
+    }
+
+    public void setApplicationProcessId(LongFilter applicationProcessId) {
+        this.applicationProcessId = applicationProcessId;
+    }
+
     public LongFilter getDocumentId() {
         return documentId;
     }
@@ -612,6 +632,8 @@ public class PersonCriteria implements Serializable {
             Objects.equals(requestOtherNiazsanjiId, that.requestOtherNiazsanjiId) &&
             Objects.equals(prioritizeRequestNiazsanjiId, that.prioritizeRequestNiazsanjiId) &&
             Objects.equals(jobChangeId, that.jobChangeId) &&
+            Objects.equals(matchingEducationalRecordId, that.matchingEducationalRecordId) &&
+            Objects.equals(applicationProcessId, that.applicationProcessId) &&
             Objects.equals(documentId, that.documentId) &&
             Objects.equals(scientificWorkGroupId, that.scientificWorkGroupId) &&
             Objects.equals(lastQualificationId, that.lastQualificationId) &&
@@ -672,6 +694,8 @@ public class PersonCriteria implements Serializable {
         requestOtherNiazsanjiId,
         prioritizeRequestNiazsanjiId,
         jobChangeId,
+        matchingEducationalRecordId,
+        applicationProcessId,
         documentId,
         scientificWorkGroupId,
         lastQualificationId,
@@ -733,6 +757,8 @@ public class PersonCriteria implements Serializable {
                 (requestOtherNiazsanjiId != null ? "requestOtherNiazsanjiId=" + requestOtherNiazsanjiId + ", " : "") +
                 (prioritizeRequestNiazsanjiId != null ? "prioritizeRequestNiazsanjiId=" + prioritizeRequestNiazsanjiId + ", " : "") +
                 (jobChangeId != null ? "jobChangeId=" + jobChangeId + ", " : "") +
+                (matchingEducationalRecordId != null ? "matchingEducationalRecordId=" + matchingEducationalRecordId + ", " : "") +
+                (applicationProcessId != null ? "applicationProcessId=" + applicationProcessId + ", " : "") +
                 (documentId != null ? "documentId=" + documentId + ", " : "") +
                 (scientificWorkGroupId != null ? "scientificWorkGroupId=" + scientificWorkGroupId + ", " : "") +
                 (lastQualificationId != null ? "lastQualificationId=" + lastQualificationId + ", " : "") +

@@ -1,0 +1,31 @@
+{
+    "marineindustryprojApp": {
+        "applicationProcessRunStep": {
+            "home": {
+                "title": "Application Process Run Steps",
+                "createLabel": "Create a new Application Process Run Step",
+                "createOrEditLabel": "Create or edit a Application Process Run Step"
+            },
+            "created": "A new Application Process Run Step is created with identifier {{ param }}",
+            "updated": "A Application Process Run Step is updated with identifier {{ param }}",
+            "deleted": "A Application Process Run Step is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Application Process Run Step {{ id }}?"
+            },
+            "detail": {
+                "title": "Application Process Run Step"
+            },
+            "fileDoc": "File Doc",
+            "description": "Description",
+            "done": "Done",
+            "doneUserLogin": "Done User Login",
+            "doneDate": "Done Date",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date",
+            "applicationProcess": "Application Process",
+            "applicationProcessStep": "Application Process Step"
+        }
+    }
+}

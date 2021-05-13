@@ -35,7 +35,7 @@ public interface EducationalModuleRepository extends JpaRepository<EducationalMo
     Optional<EducationalModule> findByCode(@Param("code") String code);
 
     @Cacheable(cacheNames = ALL_EDUCATIONALMODULE_CACHE)
-    @Query(value = "select new com.marineindustryproj.service.dto.customs.EducationalModuleMinDTO(educational_module.id, educational_module.code, educational_module.title, educational_module.learningTimeTheorical, educational_module.learningTimePractical, educational_module.skillableLevelOfSkill) from EducationalModule educational_module")
+    @Query(value = "select new com.marineindustryproj.service.dto.customs.EducationalModuleMinDTO(educational_module.id, educational_module.code, educational_module.title, educational_module.learningTimeTheorical, educational_module.learningTimePractical, educational_module.skillableLevelOfSkill) from EducationalModule educational_module where educational_module.archived = false")
     List<EducationalModuleMinDTO> findAllFromCache();
 
 }

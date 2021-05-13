@@ -114,6 +114,8 @@ file:
     job-upload-dir: ./educationUploads
     image-upload-dir: ./imageuploads
     run-phase-upload-dir: ./runPhaseUploads
+    matching-educational-record-upload-dir: ./matchingEducationalRecord
+    application-process-upload-dir: ./applicationProcess
     jam-help-upload-dir: ./jamHelpUploads
     soldier-training-report-upload-dir: ./soldierTrainingReportUploads
     soldier-media-awareness-report-upload-dir: ./soldierMediaAwarenessReportUploads

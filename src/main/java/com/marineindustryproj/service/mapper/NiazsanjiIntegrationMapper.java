@@ -20,9 +20,13 @@ public interface NiazsanjiIntegrationMapper extends EntityMapper<NiazsanjiIntegr
     @Mapping(source = "prioritizeRequestNiazsanji.educationalModule.id", target = "educationalModuleId")
     @Mapping(source = "prioritizeRequestNiazsanji.educationalModule.code", target = "educationalModuleCode")
     @Mapping(source = "prioritizeRequestNiazsanji.educationalModule.title", target = "educationalModuleTitle")
+    @Mapping(source = "prioritizeRequestNiazsanji.educationalModule.skillableLevelOfSkill.title", target = "skillLevelOfSkillTitle")
+    @Mapping(source = "prioritizeRequestNiazsanji.educationalModule.learningTimeTheorical", target = "learningTimeTheorical")
+    @Mapping(source = "prioritizeRequestNiazsanji.educationalModule.learningTimePractical", target = "learningTimePractical")
     @Mapping(source = "prioritizeRequestNiazsanji.person.family", target = "personFamily")
     @Mapping(source = "prioritizeRequestNiazsanji.person.name", target = "personName")
     @Mapping(source = "prioritizeRequestNiazsanji.person.job.title", target = "personJobTitle")
+    @Mapping(source = "prioritizeRequestNiazsanji.person.employmentType.title", target = "personEmploymentTypeTitle")
     @Mapping(source = "prioritizeRequestNiazsanji.organizationChart.id", target = "organizationChartId")
     @Mapping(source = "prioritizeRequestNiazsanji.organizationChart.title", target = "organizationChartTitle")
     NiazsanjiIntegrationDTO toDto(NiazsanjiIntegration niazsanjiIntegration);

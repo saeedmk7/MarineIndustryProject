@@ -1,0 +1,111 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="matchingEducationalRecord">
+            <h2><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.detail.title">Matching Educational Record</span> {{matchingEducationalRecord.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.code">Code</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.description">Description</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.archived">Archived</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.archived}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.archivedUserLogin">Archived User Login</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.archivedUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.archivedDate">Archived Date</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.archivedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.chartStatus">Chart Status</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.chartStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.bossStatus">Boss Status</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.bossStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.conversation">Conversation</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.conversation}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.requestStatus">Request Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + matchingEducationalRecord.requestStatus}}">{{matchingEducationalRecord.requestStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.changeStatusUserLogin">Change Status User Login</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.changeStatusUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.guid">Guid</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.guid}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.hasImportantMessage">Has Important Message</span></dt>
+                <dd>
+                    <span>{{matchingEducationalRecord.hasImportantMessage}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.skillableLevelOfSkill">Skillable Level Of Skill</span></dt>
+                <dd>
+                    <span *ngFor="let skillableLevelOfSkill of matchingEducationalRecord.skillableLevelOfSkills; let last = last">
+                        <a [routerLink]="['/skillable-level-of-skill-marine-suffix', skillableLevelOfSkill?.id, 'view' ]">{{skillableLevelOfSkill.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.document">Document</span></dt>
+                <dd>
+                    <span *ngFor="let document of matchingEducationalRecord.documents; let last = last">
+                        <a [routerLink]="['/document-marine-suffix', document?.id, 'view' ]">{{document.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="matchingEducationalRecord.personId">
+                        <a [routerLink]="['/person-marine-suffix', matchingEducationalRecord.personId, 'view']">{{matchingEducationalRecord.personFamily}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.matchingEducationalRecord.organizationChart">Organization Chart</span></dt>
+                <dd>
+                    <div *ngIf="matchingEducationalRecord.organizationChartId">
+                        <a [routerLink]="['/organization-chart-marine-suffix', matchingEducationalRecord.organizationChartId, 'view']">{{matchingEducationalRecord.organizationChartTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/matching-educational-record-marine-suffix', matchingEducationalRecord.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

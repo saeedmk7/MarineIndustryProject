@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="applicationProcessRunStep">
+            <h2><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.detail.title">Application Process Run Step</span> {{applicationProcessRunStep.id}}</h2>
+            <hr>
+            <mi-alert-error></mi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.fileDoc">File Doc</span></dt>
+                <dd>
+                    <span>{{applicationProcessRunStep.fileDoc}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.description">Description</span></dt>
+                <dd>
+                    <span>{{applicationProcessRunStep.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.done">Done</span></dt>
+                <dd>
+                    <span>{{applicationProcessRunStep.done}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.doneUserLogin">Done User Login</span></dt>
+                <dd>
+                    <span>{{applicationProcessRunStep.doneUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.doneDate">Done Date</span></dt>
+                <dd>
+                    <span>{{applicationProcessRunStep.doneDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.createUserLogin">Create User Login</span></dt>
+                <dd>
+                    <span>{{applicationProcessRunStep.createUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.createDate">Create Date</span></dt>
+                <dd>
+                    <span>{{applicationProcessRunStep.createDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.modifyUserLogin">Modify User Login</span></dt>
+                <dd>
+                    <span>{{applicationProcessRunStep.modifyUserLogin}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.modifyDate">Modify Date</span></dt>
+                <dd>
+                    <span>{{applicationProcessRunStep.modifyDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.applicationProcess">Application Process</span></dt>
+                <dd>
+                    <div *ngIf="applicationProcessRunStep.applicationProcessId">
+                        <a [routerLink]="['/application-process-marine-suffix', applicationProcessRunStep.applicationProcessId, 'view']">{{applicationProcessRunStep.applicationProcessCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="marineindustryprojApp.applicationProcessRunStep.applicationProcessStep">Application Process Step</span></dt>
+                <dd>
+                    <div *ngIf="applicationProcessRunStep.applicationProcessStepId">
+                        <a [routerLink]="['/application-process-step-marine-suffix', applicationProcessRunStep.applicationProcessStepId, 'view']">{{applicationProcessRunStep.applicationProcessStepTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/application-process-run-step-marine-suffix', applicationProcessRunStep.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

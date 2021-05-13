@@ -67,6 +67,7 @@
             "personJobTitle": "شغل سازمانی",
             "personId": "نام و نام خانوادگی",
             "personName": "نام و نام خانوادگی",
+            "personEmploymentTypeTitle": "نوع استخدام",
             "organizationChart": "محل خدمت",
             "organizationChartGroup": "گروه",
             "organizationChartId": "محل خدمت",

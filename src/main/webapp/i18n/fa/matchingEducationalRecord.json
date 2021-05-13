@@ -1,0 +1,59 @@
+{
+    "marineindustryprojApp": {
+        "matchingEducationalRecord": {
+            "home": {
+                "title": "فرم تطبیق سوابق آموزشی کارکنان",
+                "code": "68-PR-10-5-05-00/FO-18-00",
+                "createLabel": "جدید",
+                "createOrEditLabel": "فرم تطبیق سوابق آموزشی کارکنان"
+            },
+
+            "created": "تطبیق سوابق آموزشی کارکنان با شناسه {{ param }} ایجاد شد.",
+            "updated": "تطبیق سوابق آموزشی کارکنان با شناسه {{ param }} ویرایش شد.",
+            "deleted": "تطبیق سوابق آموزشی کارکنان با شناسه {{ param }} حذف شد.",
+            "completed": "تطبیق سوابق آموزشی کارکنان مورد نظر با موفقیت نهایی شد.",
+            "rejected": "تطبیق سوابق آموزشی کارکنان مورد نظر با موفقیت رد شد.",
+            "delete": {
+                "question": "آیا از حذف درخواست تطبیق سوابق آموزشی کارکنان با شناسه {{ id }} مطمئنید؟"
+            },
+            "comment": {
+                "accept": "لطفا نظر خود را درج نمائید.",
+                "reject": "لطفا علت عدم تایید را ثبت نمائید.",
+                "comment": "لطفا نظر خود را درج نمائید."
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات فرم تطبیق سوابق آموزشی کارکنان"
+            },
+            "index": "ردیف",
+            "code": "Code",
+            "description": "توضیحات",
+            "createUserLogin": "کاربر درخواست کننده",
+            "createDate": "تاریخ درخواست",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "chartStatus": "وضعیت چارت",
+            "bossStatus": "وضعیت روسا",
+            "conversation": "مکالمات",
+            "requestStatus": "وضعیت درخواست",
+            "changeStatusUserLogin": "فرد تغییر دهنده وضعیت درخواست",
+            "guid": "Guid",
+            "hasImportantMessage": "Has Important Message",
+            "matchingRunRunningStep": "Matching Run Running Step",
+            "skillableLevelOfSkill": "سطح مهارت پودمان درخواستی",
+            "skillableLevelOfSkillId": "سطح مهارت پودمان درخواستی",
+            "document": "Document",
+            "person": "نام و نام خانوادگی",
+            "personId": "نام و نام خانوادگی",
+            "personName": "نام و نام خانوادگی",
+            "personEmploymentTypeId": "نوع استخدام",
+            "jobTitle": "شغل سازمانی",
+            "personJobTitle": "شغل سازمانی",
+            "organizationChart": "محل خدمت",
+            "organizationChartId": "محل خدمت"
+        }
+    }
+}

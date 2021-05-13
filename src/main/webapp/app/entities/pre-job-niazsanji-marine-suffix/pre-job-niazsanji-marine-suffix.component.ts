@@ -18,8 +18,6 @@ import { EducationalModuleMarineSuffixService } from 'app/entities/educational-m
 import { OrganizationChartMarineSuffixService } from 'app/entities/organization-chart-marine-suffix';
 import { PersonMarineSuffixService } from 'app/entities/person-marine-suffix';
 import { TreeUtilities } from 'app/plugin/utilities/tree-utilities';
-import { RequestStatus } from 'app/shared/model/enums/RequestStatus';
-import { IRequestOrganizationNiazsanjiMarineSuffix } from 'app/shared/model/request-organization-niazsanji-marine-suffix.model';
 import { IRequestNiazsanjiFardiMarineSuffix } from 'app/shared/model/request-niazsanji-fardi-marine-suffix.model';
 import { REQUEST_STATUS_FILTERS } from 'app/shared/constants/RequestStatusFilters';
 import { CommonSearchCheckerService } from 'app/plugin/utilities/common-search-checkers';
@@ -352,6 +350,17 @@ export class PreJobNiazsanjiMarineSuffixComponent implements OnInit, OnDestroy {
     prepareSearchOrgChart() {
         if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
+            if (this.isSuperUsers) {
+                this.searchbarModel.push(
+                    new SearchPanelModel(
+                        'preJobNiazsanji',
+                        'organizationChartId',
+                        'select',
+                        'equals',
+                        this.organizationcharts.filter(w => w.parentId == null)
+                    )
+                );
+            }
             this.searchbarModel.push(
                 new SearchPanelModel(
                     'preJobNiazsanji',
@@ -363,11 +372,23 @@ export class PreJobNiazsanjiMarineSuffixComponent implements OnInit, OnDestroy {
                     'half'
                 )
             );
+
             this.prepareSearchPerson();
         } else {
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
                     this.organizationcharts = res.body;
+                    if (this.isSuperUsers) {
+                        this.searchbarModel.push(
+                            new SearchPanelModel(
+                                'preJobNiazsanji',
+                                'organizationChartId',
+                                'select',
+                                'equals',
+                                this.organizationcharts.filter(w => w.parentId == null)
+                            )
+                        );
+                    }
                     this.searchbarModel.push(
                         new SearchPanelModel(
                             'preJobNiazsanji',
@@ -379,6 +400,7 @@ export class PreJobNiazsanjiMarineSuffixComponent implements OnInit, OnDestroy {
                             'half'
                         )
                     );
+
                     this.prepareSearchPerson();
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)

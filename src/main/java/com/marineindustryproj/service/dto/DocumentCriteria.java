@@ -105,6 +105,10 @@ public class DocumentCriteria implements Serializable {
 
     private LongFilter monitorLearningProcessId;
 
+    private LongFilter matchingEducationalRecordId;
+
+    private LongFilter applicationProcessId;
+
     public LongFilter getId() {
         return id;
     }
@@ -433,6 +437,22 @@ public class DocumentCriteria implements Serializable {
         this.monitorLearningProcessId = monitorLearningProcessId;
     }
 
+    public LongFilter getMatchingEducationalRecordId() {
+        return matchingEducationalRecordId;
+    }
+
+    public void setMatchingEducationalRecordId(LongFilter matchingEducationalRecordId) {
+        this.matchingEducationalRecordId = matchingEducationalRecordId;
+    }
+
+    public LongFilter getApplicationProcessId() {
+        return applicationProcessId;
+    }
+
+    public void setApplicationProcessId(LongFilter applicationProcessId) {
+        this.applicationProcessId = applicationProcessId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -484,7 +504,9 @@ public class DocumentCriteria implements Serializable {
             Objects.equals(evaluateCriteriaTrainingId, that.evaluateCriteriaTrainingId) &&
             Objects.equals(evaluateCriteriaDataId, that.evaluateCriteriaDataId) &&
             Objects.equals(effectivenessPhaseId, that.effectivenessPhaseId) &&
-            Objects.equals(monitorLearningProcessId, that.monitorLearningProcessId);
+            Objects.equals(monitorLearningProcessId, that.monitorLearningProcessId) &&
+            Objects.equals(matchingEducationalRecordId, that.matchingEducationalRecordId) &&
+            Objects.equals(applicationProcessId, that.applicationProcessId);
     }
 
     @Override
@@ -530,7 +552,9 @@ public class DocumentCriteria implements Serializable {
         evaluateCriteriaTrainingId,
         evaluateCriteriaDataId,
         effectivenessPhaseId,
-        monitorLearningProcessId
+        monitorLearningProcessId,
+        matchingEducationalRecordId,
+        applicationProcessId
         );
     }
 
@@ -578,6 +602,8 @@ public class DocumentCriteria implements Serializable {
                 (evaluateCriteriaDataId != null ? "evaluateCriteriaDataId=" + evaluateCriteriaDataId + ", " : "") +
                 (effectivenessPhaseId != null ? "effectivenessPhaseId=" + effectivenessPhaseId + ", " : "") +
                 (monitorLearningProcessId != null ? "monitorLearningProcessId=" + monitorLearningProcessId + ", " : "") +
+                (matchingEducationalRecordId != null ? "matchingEducationalRecordId=" + matchingEducationalRecordId + ", " : "") +
+                (applicationProcessId != null ? "applicationProcessId=" + applicationProcessId + ", " : "") +
             "}";
     }
 

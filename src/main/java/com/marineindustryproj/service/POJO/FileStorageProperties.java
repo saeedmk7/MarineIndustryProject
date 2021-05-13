@@ -95,7 +95,27 @@ public class FileStorageProperties {
     public void setRunPhaseUploadDir(String runPhaseUploadDir) {
         this.runPhaseUploadDir = runPhaseUploadDir;
     }
-    
+
+    private String matchingEducationalRecordUploadDir;
+
+    public String getMatchingEducationalRecordUploadDir() {
+        return matchingEducationalRecordUploadDir;
+    }
+
+    public void setMatchingEducationalRecordUploadDir(String matchingEducationalRecordUploadDir) {
+        this.matchingEducationalRecordUploadDir = matchingEducationalRecordUploadDir;
+    }
+
+    private String applicationProcessUploadDir;
+
+    public String getApplicationProcessUploadDir() {
+        return applicationProcessUploadDir;
+    }
+
+    public void setApplicationProcessUploadDir(String applicationProcessUploadDir) {
+        this.applicationProcessUploadDir = applicationProcessUploadDir;
+    }
+
     private String jamHelpUploadDir;
 
     public String getJamHelpUploadDir() {

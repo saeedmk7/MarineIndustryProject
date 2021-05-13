@@ -4,8 +4,8 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 import { Principal } from '../';
 import { LoginModalService } from '../login/login-modal.service';
 import { StateStorageService } from './state-storage.service';
-import {CURRENT_ALLOWED_URL_KEY} from "app/shared/constants/storage-keys.constants";
-import {LocalStorageService} from 'ngx-webstorage';
+import { CURRENT_ALLOWED_URL_KEY } from 'app/shared/constants/storage-keys.constants';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Injectable({ providedIn: 'root' })
 export class UserRouteAccessService implements CanActivate {
@@ -28,22 +28,17 @@ export class UserRouteAccessService implements CanActivate {
         const principal = this.principal;
         return Promise.resolve(
             principal.identity().then(account => {
-
                 if (account) {
-
-                    if(account.authorities.find(a => a == "ROLE_ADMIN") !== undefined) {
+                    if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) {
                         return true;
                     }
                     let urls: string[] = this.$localStorage.retrieve(CURRENT_ALLOWED_URL_KEY);
-                    let splitUrl = url.split("/");
-                    if(splitUrl.length > 0) {
-                        let searchWord = "";
-                        if(splitUrl[1].includes('('))
-                            searchWord = splitUrl[1].substring(0, splitUrl[1].indexOf("("));
-                        else if(splitUrl[1].includes('?'))
-                            searchWord = splitUrl[1].substring(0, splitUrl[1].indexOf("?"));
-                        else
-                            searchWord = splitUrl[1];
+                    let splitUrl = url.split('/');
+                    if (splitUrl.length > 0) {
+                        let searchWord = '';
+                        if (splitUrl[1].includes('(')) searchWord = splitUrl[1].substring(0, splitUrl[1].indexOf('('));
+                        else if (splitUrl[1].includes('?')) searchWord = splitUrl[1].substring(0, splitUrl[1].indexOf('?'));
+                        else searchWord = splitUrl[1];
 
                         if (urls.filter(a => a.includes(searchWord)).length > 0) {
                             return true;
@@ -53,10 +48,10 @@ export class UserRouteAccessService implements CanActivate {
                     }
                     return true;
                 }
-            }));
+            })
+        );
     }
     checkLogin(authorities: string[], url: string): Promise<boolean> {
-        
         const principal = this.principal;
         return Promise.resolve(
             principal.identity().then(account => {

@@ -1,0 +1,40 @@
+{
+    "marineindustryprojApp": {
+        "applicationProcessRunStep": {
+            "home": {
+                "createLabel": "جدید",
+                "title": "گام های فرآیند درخواست ادامه تحصیل",
+                "createOrEditLabel": " گام فرآیند درخواست ادامه تحصیل"
+            },
+            "created": "گام فرآیند درخواست ادامه تحصیل با شناسه {{ param }} ایجاد شد.",
+            "updated": "گام فرآیند درخواست ادامه تحصیل با شناسه {{ param }} ویرایش شد.",
+            "deleted": "گام فرآیند درخواست ادامه تحصیل با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا از حذف گام فرآیند درخواست ادامه تحصیل با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات گام فرآیند درخواست ادامه تحصیل"
+            },
+            "title": "عنوان",
+            "description": "توضیحات",
+            "stepNumber": "شماره گام",
+            "stepRequired": "گام اجباریست؟",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده",
+            "archived": "آرشیو شده؟",
+            "archivedUserLogin": "آرشیو شده توسط",
+            "archivedDate": "تاریخ آرشیو",
+            "status": "وضعیت",
+            "fileDocRequired": "بارگذاری فایل اجباریست؟",
+            "colorText": "رنگ متن",
+            "isHeader": "سرتیتره؟",
+            "fileDocRequired": "آپلود فایل اجباریست؟",
+            "colorText": "رنگ متن",
+            "fileDoc": "فایل نمونه",
+            "applicationProcess": "Application Process",
+            "applicationProcessStep": "Application Process Step"
+        }
+    }
+}

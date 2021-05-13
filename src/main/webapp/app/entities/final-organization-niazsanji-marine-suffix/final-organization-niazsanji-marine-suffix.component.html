@@ -76,7 +76,7 @@
                 <td>{{finalOrganizationNiazsanji.skillLevelOfSkillTitle}}</td>
                 <td>{{finalOrganizationNiazsanji.peopleCount}}</td>
                 <td>{{finalOrganizationNiazsanji.totalLearningTime | number}}</td>
-                <td>{{finalOrganizationNiazsanji.totalLearningTime * finalOrganizationNiazsanji.peopleCount | number}}</td>
+                <td>{{finalOrganizationNiazsanji.fullLearningTime | number}}</td>
                 <td>{{finalOrganizationNiazsanji.priceCost | number}}</td>
                 <!--<td>{{finalOrganizationNiazsanji.studentsType}}</td>-->
                 <td>
@@ -234,6 +234,7 @@
                 <td colspan="7">مجموع</td>
                 <td>{{finalOrganizationNiazsanjis | sum:'peopleCount' | number: '1.0-1'}}</td>
                 <td>{{finalOrganizationNiazsanjis | sum:'totalLearningTime' | number: '1.0-1'}}</td>
+                <td>{{finalOrganizationNiazsanjis | sum:'fullLearningTime' | number: '1.0-1'}}</td>
                 <td>{{finalOrganizationNiazsanjis | sum:'priceCost' | number: '1.0-1'}}</td>
                 <td colspan="7"></td>
             </tr>

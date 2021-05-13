@@ -111,31 +111,6 @@
                 </td>
                 <td>{{requestOtherNiazsanji.createDate}}</td>
                 <td>{{requestOtherNiazsanji.statusMeaning}}</td>
-
-                <!--<td>{{requestOtherNiazsanji.code}}</td>
-
-                <td>{{requestOtherNiazsanji.description}}</td>
-                <td>{{requestOtherNiazsanji.restrictionDescription}}</td>
-                <td>{{requestOtherNiazsanji.goalsText}}</td>
-                <td>{{requestOtherNiazsanji.prerequisite}}</td>
-                <td>{{requestOtherNiazsanji.createUserLogin}}</td>
-
-                <td>{{requestOtherNiazsanji.modifyUserLogin}}</td>
-                <td>{{requestOtherNiazsanji.modifyDate | date:'medium'}}</td>
-                <td>{{requestOtherNiazsanji.archived}}</td>
-                <td>{{requestOtherNiazsanji.archivedUserLogin}}</td>
-                <td>{{requestOtherNiazsanji.archivedDate | date:'medium'}}</td>
-
-                <td>{{requestOtherNiazsanji.conversation}}</td>
-                <td jhiTranslate="{{'marineindustryprojApp.RequestStatus.' + requestOtherNiazsanji.requestStatus}}">{{requestOtherNiazsanji.requestStatus}}</td>
-                <td>{{requestOtherNiazsanji.changeStatusUserLogin}}</td>
-                <td>{{requestOtherNiazsanji.guid}}</td>
-                <td>{{requestOtherNiazsanji.hasImportantMessage}}</td>
-                <td>
-                    <div *ngIf="requestOtherNiazsanji.teachingApproachId">
-                        <a [routerLink]="['../teaching-approach-marine-suffix', requestOtherNiazsanji.teachingApproachId , 'view' ]" >{{requestOtherNiazsanji.teachingApproachTitle}}</a>
-                    </div>
-                </td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit" title="مدارک"
@@ -208,9 +183,9 @@
             </tr>
             <tr class="sum-row">
                 <td colspan="6">مجموع</td>
-                <td>{{totalHour | number}}</td>
+                <td>{{requestOtherNiazsanjis | sum:'totalLearningTime' | number: '1.0-1'}}</td>
                 <td colspan="2"></td>
-                <td>{{totalPriceCost | number}}</td>
+                <td>{{requestOtherNiazsanjis | sum:'costEducationalModule' | number: '1.0-1'}}</td>
                 <td colspan="5"></td>
             </tr>
             </tbody>

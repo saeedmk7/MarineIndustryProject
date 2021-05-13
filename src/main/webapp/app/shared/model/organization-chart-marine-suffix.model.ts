@@ -20,6 +20,8 @@ import { IPrioritizeRequestNiazsanjiMarineSuffix } from 'app/shared/model//prior
 import { ISoldierMarineSuffix } from 'app/shared/model//soldier-marine-suffix.model';
 import { IEvaluateCriteriaTrainingMarineSuffix } from 'app/shared/model//evaluate-criteria-training-marine-suffix.model';
 import { IEvaluateCriteriaDataMarineSuffix } from 'app/shared/model//evaluate-criteria-data-marine-suffix.model';
+import { IMatchingEducationalRecordMarineSuffix } from 'app/shared/model//matching-educational-record-marine-suffix.model';
+import { IApplicationProcessMarineSuffix } from 'app/shared/model//application-process-marine-suffix.model';
 import { IForceRunningPercentMarineSuffix } from 'app/shared/model//force-running-percent-marine-suffix.model';
 import { IReportGeneratorMarineSuffix } from 'app/shared/model//report-generator-marine-suffix.model';
 
@@ -58,6 +60,8 @@ export interface IOrganizationChartMarineSuffix {
     soldiers?: ISoldierMarineSuffix[];
     evaluateCriteriaTrainings?: IEvaluateCriteriaTrainingMarineSuffix[];
     evaluateCriteriaData?: IEvaluateCriteriaDataMarineSuffix[];
+    matchingEducationalRecords?: IMatchingEducationalRecordMarineSuffix[];
+    applicationProcesses?: IApplicationProcessMarineSuffix[];
     parentTitle?: string;
     parentId?: number;
     forceRunningPercents?: IForceRunningPercentMarineSuffix[];
@@ -100,6 +104,8 @@ export class OrganizationChartMarineSuffix implements IOrganizationChartMarineSu
         public soldiers?: ISoldierMarineSuffix[],
         public evaluateCriteriaTrainings?: IEvaluateCriteriaTrainingMarineSuffix[],
         public evaluateCriteriaData?: IEvaluateCriteriaDataMarineSuffix[],
+        public matchingEducationalRecords?: IMatchingEducationalRecordMarineSuffix[],
+        public applicationProcesses?: IApplicationProcessMarineSuffix[],
         public parentTitle?: string,
         public parentId?: number,
         public forceRunningPercents?: IForceRunningPercentMarineSuffix[],
