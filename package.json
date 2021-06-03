@@ -55,7 +55,7 @@
     "reflect-metadata": "0.1.12",
     "rxjs": "6.1.0",
     "rxjs-compat": "^6.3.3",
-    "swagger-ui": "2.2.10",
+    "swagger-ui": "3.23.11",
     "tslib": "1.9.3",
     "xlsx": "^0.14.0",
     "zone.js": "0.8.26"
