@@ -94,7 +94,6 @@ export class CapitationReportDetailItem implements ICapitationReportDetailItem {
         public informingCost?: number,
         //Security
         public securityPersonHour?: number,
-        public securityCost?: number
-    ) //capitationReportDetails?: CapitationReportDetailItemDetail[]
-    {}
+        public securityCost?: number //capitationReportDetails?: CapitationReportDetailItemDetail[]
+    ) {}
 }
