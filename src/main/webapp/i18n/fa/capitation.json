@@ -1,0 +1,31 @@
+{
+    "marineindustryprojApp": {
+        "capitation": {
+            "home": {
+                "title": "پنل تعریف سرانه برنامه",
+                "createLabel": "جدید",
+                "createOrEditLabel": " سرانه"
+            },
+            "created": "سرانه با شناسه {{ param }} ایجاد شد.",
+            "updated": "سرانه با شناسه {{ param }} ویرایش شد.",
+            "deleted": "سرانه با شناسه {{ param }} حذف شد.",
+            "delete": {
+                "question": "آیا برای حذف سرانه با شناسه {{ id }} مطمئنید؟"
+            },
+            "detail": {
+                "title": "جزئیات اطلاعات سرانه"
+            },
+            "title": "عنوان",
+            "description": "توضیحات",
+            "employeeMaximumAllowablePersonHours": "سقف مجاز نفرساعت کارکنان",
+            "bossMaximumAllowablePersonHours": "سقف مجاز نفرساعت مدیران",
+            "employeeMaximumAllowablePersonCosts": "سقف مجاز هزینه کارکنان",
+            "bossMaximumAllowablePersonCosts": "سقف مجاز هزینه مدیران",
+            "capitationYear": "سال",
+            "createUserLogin": "کاربر ایجاد کننده",
+            "createDate": "تاریخ ایجاد",
+            "modifyUserLogin": "کاربر ویرایش کننده",
+            "modifyDate": "تاریخ ویرایش شده"
+        }
+    }
+}

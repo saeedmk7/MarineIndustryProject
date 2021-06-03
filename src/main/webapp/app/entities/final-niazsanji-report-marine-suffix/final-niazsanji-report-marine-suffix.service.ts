@@ -16,6 +16,7 @@ import { IHomePagePersonEducationalModule } from 'app/shared/model/custom/home-p
 import { IPlanningAndRunMonthReport } from 'app/shared/model/custom/planning-month-report';
 import { IHomePageReport } from 'app/shared/model/custom/home-page-report';
 import { IFinalEffectivenessPhaseReportModel } from 'app/shared/model/custom/effectivenessPhaseModels/final-effectiveness-phase-report-model';
+import { IChartResultDetail } from 'app/shared/model/custom/chart-result-detail';
 
 type EntityResponseType = HttpResponse<IFinalNiazsanjiReportMarineSuffix>;
 type EntityResponseTypeReport = HttpResponse<IReportMarineSuffix>;
@@ -64,6 +65,12 @@ export class FinalNiazsanjiReportMarineSuffixService {
     getChartResult(niazsanjiYear: number): Observable<HttpResponse<IChartResult[]>> {
         let url = this.resourceUrl + '/getChartData/' + niazsanjiYear;
         return this.http.get<IChartResult[]>(url, { observe: 'response' }).pipe(map((res: HttpResponse<IChartResult[]>) => res));
+    }
+    getChartResultDetail(niazsanjiYear: number, orgRootId: number): Observable<HttpResponse<IChartResultDetail[]>> {
+        let url = this.resourceUrl + '/getChartResultDetail/' + niazsanjiYear + '/' + orgRootId;
+        return this.http
+            .get<IChartResultDetail[]>(url, { observe: 'response' })
+            .pipe(map((res: HttpResponse<IChartResultDetail[]>) => res));
     }
     getHomePageReport(niazsanjiYear: number, reportType: number): Observable<HttpResponse<IHomePageReport>> {
         let url = this.resourceUrl + '/getHomePageReport/' + niazsanjiYear + '/' + reportType;

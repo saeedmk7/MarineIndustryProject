@@ -43,6 +43,7 @@ import { SoldierTrainingReportMarineSuffixService } from 'app/entities/soldier-t
 import { ISoldierTrainingReportMarineSuffix } from 'app/shared/model/soldier-training-report-marine-suffix.model';
 import { SoldierMediaAwarenessReportMarineSuffixService } from 'app/entities/soldier-media-awareness-report-marine-suffix';
 import { ISoldierMediaAwarenessReportMarineSuffix } from 'app/shared/model/soldier-media-awareness-report-marine-suffix.model';
+import { IChartResultDetail } from 'app/shared/model/custom/chart-result-detail';
 
 @Component({
     selector: 'mi-home',
@@ -85,6 +86,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     personHourChart: Chart;
     priceCostChart: Chart;
 
+    personHourChartDetail: Chart;
+    priceCostChartDetail: Chart;
+
     chart: Chart;
     chartResults: IChartResult[] = [];
     priceCostSeries: any;
@@ -96,6 +100,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     categories: any[];
     groups: any[];
+    industries: any[];
     niazsanjiYear: number;
     years: any[];
     selectedNiazsanjiYear: number;
@@ -156,6 +161,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     ];
 
     months: any[] = MONTHS.sort((a, b) => (a.id > b.id ? 1 : a.id < b.id ? -1 : 0));
+
+    chartResultDetails: IChartResultDetail[] = [];
+    priceCostSeriesDetail: any;
+    personHourSeriesDetail: any;
 
     constructor(
         private principal: Principal,
@@ -580,6 +589,62 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.loadChart();
     }
 
+    makeChartResultDetailSeries() {
+        const sortedChartResults = this.chartResultDetails.sort(
+            (a, b) => (a.industryTitle > b.industryTitle ? 1 : a.industryTitle < b.industryTitle ? -1 : 0)
+        );
+        this.priceCostSeriesDetail = [
+            {
+                name: 'اجرا شده',
+                data: sortedChartResults.map(a => a.priceCostFinished),
+                color: 'lightgreen'
+            },
+            {
+                name: 'اجرا نشده',
+                data: sortedChartResults.map(a => a.priceCostNew),
+                color: 'red'
+            },
+            {
+                name: 'کل سرمایه گذاری',
+                data: sortedChartResults.map(a => a.totalPriceCost),
+                color: '#5edbff'
+            }
+        ];
+
+        this.personHourSeriesDetail = [
+            {
+                name: 'اجرا شده',
+                data: sortedChartResults.map(a => a.educationalModuleTotalHourFinished),
+                color: 'lightgreen'
+            },
+            {
+                name: 'اجرا نشده',
+                data: sortedChartResults.map(a => a.educationalModuleTotalHourNew),
+                color: 'red'
+            },
+            {
+                name: 'کل نفرساعت',
+                data: sortedChartResults.map(a => a.totalPersonHour),
+                color: '#5edbff'
+            }
+        ];
+
+        /*this.personHourNewPercentSeries = [];
+        this.personHourFinishedPercentSeries = [];
+        this.priceCostNewPercentSeries = [];
+        this.priceCostFinishedPercentSeries = [];
+        this.industries = this.chartResultDetails.map(w => w.industryTitle);
+        this.industries.forEach(a => {
+            sortedChartResults.filter(e => e.industryTitle == a).forEach(w => {
+                this.personHourNewPercentSeries.push(w.educationalModuleTotalHourNew / w.totalPersonHour * 100);
+                this.personHourFinishedPercentSeries.push(w.educationalModuleTotalHourFinished / w.totalPersonHour * 100);
+                this.priceCostNewPercentSeries.push(w.priceCostNew / w.totalPriceCost * 100);
+                this.priceCostFinishedPercentSeries.push(w.priceCostFinished / w.totalPriceCost * 100);
+            });
+        });*/
+        this.loadChartDetails();
+    }
+
     loadChart() {
         // @ts-ignore
         this.personHourChart = new Chart({
@@ -705,6 +770,116 @@ export class HomeComponent implements OnInit, OnDestroy {
             }
         });
     }
+    loadChartDetails() {
+        // @ts-ignore
+        this.personHourChartDetail = new Chart({
+            chart: {
+                type: 'column',
+                style: {
+                    fontFamily: 'IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman'
+                }
+            },
+            lang: {
+                decimalPoint: ',',
+                thousandsSep: '.'
+            },
+            title: {
+                text: 'نمودار نفر ساعت صنعت ها'
+            },
+            xAxis: {
+                categories: this.categories,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'نفر ساعت'
+                },
+                opposite: true
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat:
+                    '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="direction: ltr; padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                style: {
+                    direction: 'rtl'
+                },
+                useHTML: true
+                /*formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        this.point.y + ' ' + this.point.name.toLowerCase();
+                }*/
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                },
+                series: {
+                    cursor: 'pointer'
+                }
+            },
+            series: this.personHourSeriesDetail,
+            credits: {
+                enabled: false
+            }
+        });
+        // @ts-ignore
+        this.priceCostChartDetail = new Chart({
+            chart: {
+                type: 'column',
+                style: {
+                    fontFamily: 'IranSans, SansSerif, IranYekan, B Nazanin, B Badr, Tahoma, Times New Roman'
+                }
+            },
+            lang: {
+                decimalPoint: ',',
+                thousandsSep: '.'
+            },
+            title: {
+                text: 'نمودار سرمایه گذاری (ریال) صنعت ها'
+            },
+            xAxis: {
+                categories: this.categories,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'میزان سرمایه گذاری'
+                },
+                opposite: true
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat:
+                    '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="direction: ltr; padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                style: {
+                    direction: 'rtl'
+                },
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                },
+                series: {
+                    cursor: 'pointer'
+                }
+            },
+            series: this.priceCostSeriesDetail,
+            credits: {
+                enabled: false
+            }
+        });
+    }
 
     changeChartProps() {
         $('.highcharts-credits').textContent = '';
@@ -785,8 +960,21 @@ export class HomeComponent implements OnInit, OnDestroy {
             if (this.isSuperUsers || org.id == rootId) {
                 this.changePage('detail');
                 this.showPlanningReport(org);
+                this.makeChartResultDetail(org);
             }
         }
+    }
+    makeChartResultDetail(org: IOrganizationChartMarineSuffix) {
+        let niazsanjiYear = this.selectedNiazsanjiYear; //this.convertObjectDatesService.getNowShamsiYear();
+        let orgRootId = org.id;
+        this.finalNiazsanjiReportService.getChartResultDetail(niazsanjiYear, orgRootId).subscribe(
+            (res: HttpResponse<IChartResultDetail[]>) => {
+                this.chartResultDetails = res.body;
+                this.categories = res.body.map(a => a.industryTitle);
+                this.makeChartResultDetailSeries();
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     showPlanningReport(org: IOrganizationChartMarineSuffix) {

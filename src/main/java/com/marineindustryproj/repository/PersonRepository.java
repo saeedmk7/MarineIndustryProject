@@ -41,4 +41,7 @@ public interface PersonRepository extends JpaRepository<Person, Long>, JpaSpecif
     @Query(value = "select person from Person person where person.organizationChart = null and person.archived = false")
     List<Person> findAllByOrganizationChartNull();
 
+    @Query(value = "select person from Person person where person.organizationChart <> null and person.archived = false")
+    List<Person> findAllByOrganizationChartNotNull();
+
 }

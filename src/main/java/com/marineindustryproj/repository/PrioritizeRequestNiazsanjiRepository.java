@@ -1,6 +1,7 @@
 package com.marineindustryproj.repository;
 
 import com.marineindustryproj.domain.PrioritizeRequestNiazsanji;
+import com.marineindustryproj.service.dto.customs.CapitationReportModels.NiazsanjiFardiSummaryDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;

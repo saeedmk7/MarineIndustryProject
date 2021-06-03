@@ -169,10 +169,8 @@
                     </div>
                 </div>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">سوابق</div></div>
-                <button class="btn btn-info" *ngIf="applicationProcess.personId"
-                        (click)="change('person-educational-records-marine-suffix?personId=' + applicationProcess.personId)">
-                    مشاهده شناسنامه آموزشی
-                </button>
+                <a class="btn btn-info" [href]="'#/person-educational-records-marine-suffix?personId=' + applicationProcess.personId"
+                   *ngIf="applicationProcess.personId"> مشاهده شناسنامه آموزشی</a>
                 <education-history-panel [personId]="applicationProcess.personId" [type]="isTopUsers ? 3 : 1"
                                          (homePagePersonEducationalModulesOutput)="homePagePersonEducationalModulesChanged($event)"
                                          [(selectedItemIds)]="selectedItemIds" (selectedItemIdsChange)="selectedItemIdsChanged($event)"

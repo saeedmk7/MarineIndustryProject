@@ -1032,6 +1032,7 @@
 
                         </div>
                         <div *ngSwitchCase="'detail'" [@updownAnimation]>
+                            <div [chart]="personHourChartDetail"></div>
                             <div [chart]="detailMonthPersonHourChart"></div>
                             <table class="table table-bordered table-hover table-sm">
                                 <thead>
@@ -1079,6 +1080,7 @@
                             </table>
                             <!--<div class="adjustPosition" [chart]="piePlanningPersonHourChart"></div>
                             <div class="adjustPosition" [chart]="pieRunnningPersonHourChart"></div>-->
+                            <div [chart]="priceCostChartDetail"></div>
                             <div [chart]="detailMonthPriceCostChart"></div>
                             <!--<div class="adjustPosition" [chart]="piePlanningPriceCostChart"></div>
                             <div class="adjustPosition" [chart]="pieRunnningPriceCostChart"></div>-->

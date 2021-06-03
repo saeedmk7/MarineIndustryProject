@@ -35,6 +35,7 @@ import { IFinalNiazsanjiPeopleListModel } from 'app/shared/model/custom/final-ni
 })
 export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy {
     currentAccount: any;
+    currentPerson: IPersonMarineSuffix;
     designAndPlannings: IDesignAndPlanningMarineSuffix[];
     educationalModules: IEducationalModuleMarineSuffix[];
     organizationcharts: IOrganizationChartMarineSuffix[];
@@ -62,6 +63,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
     isKarshenasArshadAmozeshSazman: boolean = false;
     isModirAmozesh: boolean = false;
     isSuperUsers: boolean = false;
+    isTopUsers: boolean = false;
 
     totalHour: number;
     totalDirectCost: number;
@@ -102,7 +104,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         if (!criteria) {
             criteria = [];
         }
-        if (!this.isSuperUsers) {
+        if (!this.isTopUsers) {
             criteria.push({
                 key: 'personId.equals',
                 value: this.currentAccount.personId
@@ -207,29 +209,32 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
         this.principal.identity().then(account => {
             this.currentAccount = account;
             this.setRoles(account);
-            this.prepareDate();
-            this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'runMonth', 'select', 'equals', MONTHS, 'persianMonth'));
-            this.prepareSearchEducationalModule();
-            if (this.isSuperUsers) {
-                this.prepareSearchPerson();
-                this.prepareSearchOrgChart();
-            }
+            this.personService.find(this.currentAccount.personId).subscribe((resp: HttpResponse<IPersonMarineSuffix>) => {
+                this.currentPerson = resp.body;
 
-            this.courseTypeService.query().subscribe(
-                (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
-                    this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'courseTypeId', 'select', 'equals', res.body));
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-            this.effectivenessLevelService.query().subscribe(
-                (res: HttpResponse<IEffectivenessLevelMarineSuffix[]>) => {
-                    this.searchbarModel.push(
-                        new SearchPanelModel('designAndPlanning', 'effectivenessLevelId', 'select', 'equals', res.body)
-                    );
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+                this.prepareDate();
+                this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'runMonth', 'select', 'equals', MONTHS, 'persianMonth'));
+                this.prepareSearchEducationalModule();
+                if (this.isTopUsers) {
+                    this.prepareSearchPerson();
+                    this.prepareSearchOrgChart();
+                }
 
+                this.courseTypeService.query().subscribe(
+                    (res: HttpResponse<ICourseTypeMarineSuffix[]>) => {
+                        this.searchbarModel.push(new SearchPanelModel('designAndPlanning', 'courseTypeId', 'select', 'equals', res.body));
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+                this.effectivenessLevelService.query().subscribe(
+                    (res: HttpResponse<IEffectivenessLevelMarineSuffix[]>) => {
+                        this.searchbarModel.push(
+                            new SearchPanelModel('designAndPlanning', 'effectivenessLevelId', 'select', 'equals', res.body)
+                        );
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            });
             /*this.principal.identity().then(account => {
                 this.currentAccount = account;
             });*/
@@ -243,6 +248,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
     prepareSearchOrgChart() {
         if (this.organizationChartService.organizationchartsAll) {
             this.organizationcharts = this.organizationChartService.organizationchartsAll;
+
             this.searchbarModel.push(
                 new SearchPanelModel(
                     'designAndPlanning',
@@ -268,6 +274,12 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
             this.organizationChartService.query().subscribe(
                 (res: HttpResponse<IOrganizationChartMarineSuffix[]>) => {
                     this.organizationcharts = res.body;
+                    if (this.isModirAmozesh) {
+                        let orgChartIds = this.treeUtilities
+                            .getAllOfThisTreeIds(this.organizationcharts, this.currentPerson.organizationChartId)
+                            .filter(this.treeUtilities.onlyUnique);
+                        this.organizationcharts = this.organizationcharts.filter(w => orgChartIds.includes(w.id));
+                    }
                     this.searchbarModel.push(
                         new SearchPanelModel(
                             'designAndPlanning',
@@ -347,6 +359,7 @@ export class DesignAndPlanningMarineSuffixComponent implements OnInit, OnDestroy
             this.isKarshenasArshadAmozeshSazman = true;
 
         if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
+        if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin || this.isModirAmozesh) this.isTopUsers = true;
     }
 
     ngOnDestroy() {

@@ -26,5 +26,4 @@ public interface RequestOrganizationNiazsanjiRepository extends JpaRepository<Re
 
     @Query("select request_organization_niazsanji from RequestOrganizationNiazsanji request_organization_niazsanji left join fetch request_organization_niazsanji.people left join fetch request_organization_niazsanji.documents left join fetch request_organization_niazsanji.restrictions where request_organization_niazsanji.id =:id")
     Optional<RequestOrganizationNiazsanji> findOneWithEagerRelationships(@Param("id") Long id);
-
 }

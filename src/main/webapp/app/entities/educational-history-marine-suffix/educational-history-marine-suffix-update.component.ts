@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
@@ -70,7 +70,8 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
         private convertObjectDatesService: ConvertObjectDatesService,
         private treeUtilities: TreeUtilities,
         private educationalModuleService: EducationalModuleMarineSuffixService,
-        private courseTypeService: CourseTypeMarineSuffixService
+        private courseTypeService: CourseTypeMarineSuffixService,
+        public router: Router
     ) {}
 
     ngOnInit() {
@@ -109,6 +110,9 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+    }
+    change(i) {
+        this.router.navigateByUrl(i);
     }
     loadOrgCharts() {
         if (this.organizationChartService.organizationchartsAll) {

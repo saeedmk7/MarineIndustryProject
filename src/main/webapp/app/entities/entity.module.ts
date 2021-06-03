@@ -144,6 +144,7 @@ import { MarineindustryprojMatchingRunRunningStepMarineSuffixModule } from 'app/
 import { MarineindustryprojApplicationProcessMarineSuffixModule } from 'app/entities/application-process-marine-suffix/application-process-marine-suffix.module';
 import { MarineindustryprojApplicationProcessRunStepMarineSuffixModule } from 'app/entities/application-process-run-step-marine-suffix/application-process-run-step-marine-suffix.module';
 import { MarineindustryprojApplicationProcessStepMarineSuffixModule } from 'app/entities/application-process-step-marine-suffix/application-process-step-marine-suffix.module';
+import { MarineindustryprojCapitationMarineSuffixModule } from 'app/entities/capitation-marine-suffix/capitation-marine-suffix.module';
 
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
@@ -290,7 +291,8 @@ import { MarineindustryprojApplicationProcessStepMarineSuffixModule } from 'app/
         MarineindustryprojMatchingRunningStepMarineSuffixModule,
         MarineindustryprojApplicationProcessMarineSuffixModule,
         MarineindustryprojApplicationProcessRunStepMarineSuffixModule,
-        MarineindustryprojApplicationProcessStepMarineSuffixModule
+        MarineindustryprojApplicationProcessStepMarineSuffixModule,
+        MarineindustryprojCapitationMarineSuffixModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

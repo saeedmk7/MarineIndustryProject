@@ -1,0 +1,84 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="marineindustryprojApp.capitation.home.title">Capitations</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-capitation-marine-suffix" [routerLink]="['/capitation-marine-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="marineindustryprojApp.capitation.home.createLabel">
+            Create new Capitation
+            </span>
+        </button>
+    </h2>
+    <mi-alert></mi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="capitations">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="marineindustryprojApp.capitation.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="code"><span jhiTranslate="marineindustryprojApp.capitation.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="description"><span jhiTranslate="marineindustryprojApp.capitation.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="employeeMaximumAllowablePersonHours"><span jhiTranslate="marineindustryprojApp.capitation.employeeMaximumAllowablePersonHours">Employee Maximum Allowable Person Hours</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bossMaximumAllowablePersonHours"><span jhiTranslate="marineindustryprojApp.capitation.bossMaximumAllowablePersonHours">Boss Maximum Allowable Person Hours</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="employeeMaximumAllowablePersonCosts"><span jhiTranslate="marineindustryprojApp.capitation.employeeMaximumAllowablePersonCosts">Employee Maximum Allowable Person Costs</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bossMaximumAllowablePersonCosts"><span jhiTranslate="marineindustryprojApp.capitation.bossMaximumAllowablePersonCosts">Boss Maximum Allowable Person Costs</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="capitationYear"><span jhiTranslate="marineindustryprojApp.capitation.capitationYear">Capitation Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="createUserLogin"><span jhiTranslate="marineindustryprojApp.capitation.createUserLogin">Create User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createDate"><span jhiTranslate="marineindustryprojApp.capitation.createDate">Create Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyUserLogin"><span jhiTranslate="marineindustryprojApp.capitation.modifyUserLogin">Modify User Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modifyDate"><span jhiTranslate="marineindustryprojApp.capitation.modifyDate">Modify Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let capitation of capitations ;trackBy: trackId">
+                <td><a [routerLink]="['/capitation-marine-suffix', capitation.id, 'view' ]">{{capitation.id}}</a></td>
+                <td>{{capitation.title}}</td>
+                <!--<td>{{capitation.code}}</td>-->
+                <td>{{capitation.description}}</td>
+                <td>{{capitation.employeeMaximumAllowablePersonHours}}</td>
+                <td>{{capitation.bossMaximumAllowablePersonHours}}</td>
+                <td>{{capitation.employeeMaximumAllowablePersonCosts}}</td>
+                <td>{{capitation.bossMaximumAllowablePersonCosts}}</td>
+                <td>{{capitation.capitationYear}}</td>
+                <!--<td>{{capitation.createUserLogin}}</td>
+                <td>{{capitation.createDate | date:'medium'}}</td>
+                <td>{{capitation.modifyUserLogin}}</td>
+                <td>{{capitation.modifyDate | date:'medium'}}</td>-->
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/capitation-marine-suffix', capitation.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_EDIT']"
+                                [routerLink]="['/capitation-marine-suffix', capitation.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DELETE']"
+                                [routerLink]="['/', { outlets: { popup: 'capitation-marine-suffix/'+ capitation.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="capitations && capitations.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -150,7 +150,7 @@ public class FinalNiazsanjiReportResource {
     @Timed
     public ResponseEntity<List<FinalNiazsanjiReportDTO>> getAllFinalNiazsanjiReports(FinalNiazsanjiReportCriteria criteria, Pageable pageable) {
         log.debug("REST request to get FinalNiazsanjiReports by criteria: {}", criteria);
-        if(criteria.getStatus() != null &&  criteria.getStatus().getEquals() == 1) {
+        if(criteria.getStatus() != null &&  criteria.getStatus().getEquals() != null && criteria.getStatus().getEquals() == 1) {
             criteria.getStatus().setEquals(0);
         }
         Page<FinalNiazsanjiReportDTO> page = finalNiazsanjiReportQueryService.findByCriteria(criteria, pageable);
@@ -642,6 +642,14 @@ public class FinalNiazsanjiReportResource {
         log.debug("REST request to get FinalNiazsanjiReport : {}", niazsanjiYear);
 
         List<ChartResult> chartResults = finalNiazsanjiReportService.getChartResult(niazsanjiYear);
+        return ResponseEntity.ok().body(chartResults);
+    }
+    @GetMapping("/final-niazsanji-reports/getChartResultDetail/{niazsanjiYear}/{rootOrgId}")
+    @Timed
+    public ResponseEntity<List<ChartResultDetail>> getFinalNiazsanjiReportChartResultDetail(@PathVariable Integer niazsanjiYear, @PathVariable Long rootOrgId) {
+        log.debug("REST request to get FinalNiazsanjiReport : {}", niazsanjiYear);
+
+        List<ChartResultDetail> chartResults = finalNiazsanjiReportService.getChartResultDetail(niazsanjiYear, rootOrgId);
         return ResponseEntity.ok().body(chartResults);
     }
 

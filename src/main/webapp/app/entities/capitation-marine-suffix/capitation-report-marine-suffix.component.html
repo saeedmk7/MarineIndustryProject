@@ -1,0 +1,432 @@
+<div>
+    <h2 id="page-heading">
+        <span>برنامه نیازسنجی</span>
+    </h2>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+    <div style="width: 100%; text-align: center">
+        <div style="display: inline-block">
+            <h4 class="label">سال</h4>
+            <select [(ngModel)] = "selectedYear" style="font-family: IranSansLight;" id="field_year" class="form-control" name="year" >
+                <option [ngValue]="year"  *ngFor="let year of years">{{year}}</option>
+            </select>
+        </div>
+        <div style="width: 30%; display: inline-block">
+            <h4 class="label">گروه</h4>
+            <select [(ngModel)] = "selectedGroupId" style="font-family: IranSansLight;" id="field_group" class="form-control" name="group" >
+                <option [ngValue]="0" >انتخاب نمائید</option>
+                <option [ngValue]="group.id"  *ngFor="let group of groups">{{group.title}}</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search()">جستجو</button>
+    </div>
+    <br/>
+    <div style="width: 300%" *ngIf="capitationReport">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th colspan="2">
+                    <img src="../../../content/images/Sanaye192.png" height="30" width="30" />
+                    سازمان صنایع دریایی
+                </th>
+                <th colspan="3">
+                    تعداد کل مدیران و کارمندان
+                </th>
+                <th colspan="4">
+                    سرانه برنامه
+                </th>
+                <th [attr.rowspan]="2">
+                    تعداد متقاضیان آموزش های HSE در سال {{selectedYear}}
+                </th>
+                <th [attr.rowspan]="2">
+                    نفرساعت دوره های ایمنی در سال {{selectedYear}}
+                </th>
+                <th [attr.rowspan]="2">
+                    هزینه دوره های ایمنی در سال {{selectedYear}}
+                </th>
+                <th colspan="10">
+                    برنامه ریزی دوره های کوتاه مدت سازمان در سال {{selectedYear}}
+                </th>
+                <th colspan="2">
+                    دوره های متمرکز درخواستی {{selectedYear}}
+                </th>
+                <th colspan="3">
+                    آموزش های پودمانی حفاظتی و آگاه سازی {{selectedYear}}
+                </th>
+                <th colspan="2">
+                    دوره های آگاه حفاظتی
+                </th>
+                <th colspan="2">
+                    دوره های پودمانی حفاظتی
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    گروه ها و صنایع تابعه
+                </th>
+                <th>
+                    صنعت/واحد
+                </th>
+                <th>
+                    تعداد کل کارکنان
+                </th>
+                <th>
+                    تعداد مدیران
+                </th>
+                <th>
+                    تعداد کارشناسان
+                </th>
+                <th>
+                    متوسط آموزش کارشناسان ({{capitation.employeeMaximumAllowablePersonHours}} ساعت)
+                </th>
+                <th>
+                    متوسط آموزش مدیران ({{capitation.bossMaximumAllowablePersonHours}} ساعت)
+                </th>
+                <th>
+                    سقف مجاز نفرساعت کل آموزش های کوتاه مدت {{selectedYear}}
+                </th>
+                <th>
+                    سقف مجاز هزینه کل آموزش های کوتاه مدت ({{(capitation.bossMaximumAllowablePersonCosts + capitation.employeeMaximumAllowablePersonCosts) | number}} ریال)
+                </th>
+                <th>
+                    سهم مدیران
+                </th>
+                <th>
+                    سهم کارشناسان
+                </th>
+                <th>
+                    پیش بینی نیازسنجی {{selectedYear}} (نفرساعت) قبل از تصویب
+                </th>
+                <th>
+                    پیش بینی نیازسنجی {{selectedYear}} (نفرساعت) بعد از تصویب
+                </th>
+                <th>
+                    جمع پیش بینی نیازسنجی (نفرساعت) {{selectedYear}}
+                </th>
+                <th>
+                    هزینه پیش بینی نیازسنجی سال {{selectedYear}} قبل از تصویب(ريال)
+                </th>
+                <th>
+                    هزینه پیش بینی نیازسنجی سال {{selectedYear}} بعد از تصویب(ريال)
+                </th>
+                <th>
+                    جمع نیازسنجی سال {{selectedYear}} (ريال)
+                </th>
+                <th>
+                    درصد برنامه نیازسنجی شده به سقف مجاز نفرساعت
+                </th>
+                <th>
+                    درصد هزینه آموزشهای کوتاه مدت  سال {{selectedYear}} به سقف هزینه
+                </th>
+                <th>
+                    مدت کل نفرساعت پیش بینی شده
+                </th>
+                <th>
+                    هزینه کل پیش بینی شده
+                </th>
+                <th>
+                    تعداد فراگیران آموزش های حفاظتی در سال {{selectedYear}}
+                </th>
+                <th>
+                    نیازسنجی حفاظتی  سال {{selectedYear}} (نفرساعت)
+                </th>
+                <th>
+                    هزینه پیش بینی شده نیازسنجی حفاظتی در سال {{selectedYear}}
+                </th>
+                <th>
+                    مدت کل نفرساعت پیش بینی شده
+                </th>
+                <th>
+                    هزینه کل پیش بینی شده
+                </th>
+                <th>
+                    مدت کل نفرساعت پیش بینی شده
+                </th>
+                <th>
+                    هزینه کل پیش بینی شده
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let capitationReportDetail of capitationReport.capitationReportDetails">
+                <tr style="background-color: #00c4e6" *ngFor="let capitationReportDetailItem of capitationReportDetail.capitationReportDetailItems">
+                    <td style="background-color: #8c6daf" [attr.rowspan]="capitationReportDetail.capitationReportDetailItems.length+1">{{capitationReportDetail.organizationChartTitle}}</td>
+                    <td>
+                        {{capitationReportDetailItem.industryTitle}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.totalEmployee | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.totalBoss | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.totalExpert | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.avgLearningTimeExpert | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.avgLearningTimeBoss | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.maximumAllowablePersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.maximumAllowableCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.hseNumberOfLearner | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.hseCourseTypePersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.hseCourseTypeCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.shortTimeBossShare | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.shortTimeExpertShare | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.predicateBeforeAcceptPersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.predicateAfterAcceptPersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.predicatePersonHourTotal | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.predicateBeforeAcceptCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.predicateAfterAcceptCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.predicateCostTotal | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.percentNiazsanjiProgramToMaximumPersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.percentNiazsanjiProgramToMaximumCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.organizationPredicatePersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.organizationPredicateCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.securityAndInformingNumberOfLearner | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.securityAndInformingPersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.securityAndInformingCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.informingPersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.informingCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.securityPersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetailItem.securityCost | number}}
+                    </td>
+                </tr>
+                <tr  style="background-color: #8a6d3b">
+                    <td>
+                        کل گروه(جمع)
+                    </td>
+                    <td>
+                        {{capitationReportDetail.totalEmployee | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.totalBoss | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.totalExpert | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.avgLearningTimeExpert | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.avgLearningTimeBoss | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.maximumAllowablePersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.maximumAllowableCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.hseNumberOfLearner | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.hseCourseTypePersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.hseCourseTypeCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.shortTimeBossShare | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.shortTimeExpertShare | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.predicateBeforeAcceptPersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.predicateAfterAcceptPersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.predicatePersonHourTotal | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.predicateBeforeAcceptCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.predicateAfterAcceptCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.predicateCostTotal | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.percentNiazsanjiProgramToMaximumPersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.percentNiazsanjiProgramToMaximumCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.organizationPredicatePersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.organizationPredicateCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.securityAndInformingNumberOfLearner | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.securityAndInformingPersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.securityAndInformingCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.informingPersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.informingCost | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.securityPersonHour | number}}
+                    </td>
+                    <td>
+                        {{capitationReportDetail.securityCost | number}}
+                    </td>
+                </tr>
+            </ng-container>
+            <tr style="background-color: #7fb4c7">
+                <td colspan="2">
+                    کل سازمان
+                </td>
+                <td>
+                    {{capitationReport.totalEmployee | number}}
+                </td>
+                <td>
+                    {{capitationReport.totalBoss | number}}
+                </td>
+                <td>
+                    {{capitationReport.totalExpert | number}}
+                </td>
+                <td>
+                    {{capitationReport.avgLearningTimeExpert | number}}
+                </td>
+                <td>
+                    {{capitationReport.avgLearningTimeBoss | number}}
+                </td>
+                <td>
+                    {{capitationReport.maximumAllowablePersonHour | number}}
+                </td>
+                <td>
+                    {{capitationReport.maximumAllowableCost | number}}
+                </td>
+                <td>
+                    {{capitationReport.hseNumberOfLearner | number}}
+                </td>
+                <td>
+                    {{capitationReport.hseCourseTypePersonHour | number}}
+                </td>
+                <td>
+                    {{capitationReport.hseCourseTypeCost | number}}
+                </td>
+                <td>
+                    {{capitationReport.shortTimeBossShare | number}}
+                </td>
+                <td>
+                    {{capitationReport.shortTimeExpertShare | number}}
+                </td>
+                <td>
+                    {{capitationReport.predicateBeforeAcceptPersonHour | number}}
+                </td>
+                <td>
+                    {{capitationReport.predicateAfterAcceptPersonHour | number}}
+                </td>
+                <td>
+                    {{capitationReport.predicatePersonHourTotal | number}}
+                </td>
+                <td>
+                    {{capitationReport.predicateBeforeAcceptCost | number}}
+                </td>
+                <td>
+                    {{capitationReport.predicateAfterAcceptCost | number}}
+                </td>
+                <td>
+                    {{capitationReport.predicateCostTotal | number}}
+                </td>
+                <td>
+                    {{capitationReport.percentNiazsanjiProgramToMaximumPersonHour | number}}
+                </td>
+                <td>
+                    {{capitationReport.percentNiazsanjiProgramToMaximumCost | number}}
+                </td>
+                <td>
+                    {{capitationReport.organizationPredicatePersonHour | number}}
+                </td>
+                <td>
+                    {{capitationReport.organizationPredicateCost | number}}
+                </td>
+                <td>
+                    {{capitationReport.securityAndInformingNumberOfLearner | number}}
+                </td>
+                <td>
+                    {{capitationReport.securityAndInformingPersonHour | number}}
+                </td>
+                <td>
+                    {{capitationReport.securityAndInformingCost | number}}
+                </td>
+                <td>
+                    {{capitationReport.informingPersonHour | number}}
+                </td>
+                <td>
+                    {{capitationReport.informingCost | number}}
+                </td>
+                <td>
+                    {{capitationReport.securityPersonHour | number}}
+                </td>
+                <td>
+                    {{capitationReport.securityCost | number}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

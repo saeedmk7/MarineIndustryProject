@@ -19,4 +19,7 @@ public interface OrganizationChartRepository extends JpaRepository<OrganizationC
 
     @Cacheable(cacheNames = ALL_ORGANIZATIONCHART_CACHE)
     List<OrganizationChart> findAll();
+
+    @Query(value = "select org from OrganizationChart org")
+    List<OrganizationChart> findAllWithoutCache();
 }

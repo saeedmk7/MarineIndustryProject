@@ -1,0 +1,32 @@
+{
+    "marineindustryprojApp": {
+        "capitation": {
+            "home": {
+                "title": "Capitations",
+                "createLabel": "Create a new Capitation",
+                "createOrEditLabel": "Create or edit a Capitation"
+            },
+            "created": "A new Capitation is created with identifier {{ param }}",
+            "updated": "A Capitation is updated with identifier {{ param }}",
+            "deleted": "A Capitation is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Capitation {{ id }}?"
+            },
+            "detail": {
+                "title": "Capitation"
+            },
+            "title": "Title",
+            "code": "Code",
+            "description": "Description",
+            "employeeMaximumAllowablePersonHours": "Employee Maximum Allowable Person Hours",
+            "bossMaximumAllowablePersonHours": "Boss Maximum Allowable Person Hours",
+            "employeeMaximumAllowablePersonCosts": "Employee Maximum Allowable Person Costs",
+            "bossMaximumAllowablePersonCosts": "Boss Maximum Allowable Person Costs",
+            "capitationYear": "Capitation Year",
+            "createUserLogin": "Create User Login",
+            "createDate": "Create Date",
+            "modifyUserLogin": "Modify User Login",
+            "modifyDate": "Modify Date"
+        }
+    }
+}

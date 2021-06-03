@@ -43,6 +43,8 @@ public interface PersonService {
      */
     List<PersonDTO> findAllUnChart();
 
+    List<PersonDTO> findAllWithChart();
+
     /**
      * Get all the Person with eager load of many-to-many relationships.
      *

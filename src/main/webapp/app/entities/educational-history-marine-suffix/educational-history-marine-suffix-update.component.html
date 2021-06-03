@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.courseType" for="field_courseType">Course Type</label>
+                    <a (click)="change('course-type-marine-suffix')" [ngClass]="{'enableLink': isAdmin}" class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.courseType" for="field_courseType">Course Type</a>
                     <ng-select
                         [items]="courseTypes"
                         [multiple]="false"

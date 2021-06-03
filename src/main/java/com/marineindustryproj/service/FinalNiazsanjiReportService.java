@@ -15,6 +15,8 @@ import java.util.Optional;
  */
 public interface FinalNiazsanjiReportService {
 
+    List<ChartResultDetail> getChartResultDetail(Integer niazsanjiYear, Long rootOrgId);
+
     /**
      * Save a finalNiazsanjiReport.
      *

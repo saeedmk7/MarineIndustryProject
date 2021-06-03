@@ -372,7 +372,9 @@
                     </div>
                 </div>
                  <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.courseType" for="field_courseType">Course Type</label>
+                     <a (click)="change('course-type-marine-suffix')" [ngClass]="{'enableLink': isAdmin}"
+                        class="form-control-label" jhiTranslate="marineindustryprojApp.requestOrganizationNiazsanji.courseType"
+                        for="field_courseType">Course Type</a>
                     <select class="form-control" id="field_courseType" required name="courseType" [(ngModel)]="requestOrganizationNiazsanji.courseTypeId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="courseTypeOption.id" *ngFor="let courseTypeOption of coursetypes">{{courseTypeOption.title}}</option>

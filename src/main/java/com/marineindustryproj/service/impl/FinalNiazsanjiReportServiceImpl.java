@@ -9,6 +9,7 @@ import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.*;
 import com.marineindustryproj.service.dto.*;
 import com.marineindustryproj.service.dto.customs.*;
+import com.marineindustryproj.service.dto.customs.CapitationReportModels.IndustryChildModel;
 import com.marineindustryproj.service.dto.customs.EffectivenessPhaseModels.DetailFinalEffectivenessPhaseReportModel;
 import com.marineindustryproj.service.dto.customs.EffectivenessPhaseModels.FinalEffectivenessPhaseReportModel;
 import com.marineindustryproj.service.mapper.EffectivenessPhaseLevelMapper;
@@ -438,6 +439,90 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
             List<FinalNiazsanjiReportCustomDTO> finalNiazsanjiReportCustomDTOS = finalNiazsanjiReportRepository.findAllFromCache(orgIds, niazsanjiYear);
             ChartResult chartResult = new ChartResult();
             chartResult.setGroupId(groupId);
+
+            Long totalCost = finalNiazsanjiReportCustomDTOS.stream().mapToLong(o -> o.getPriceCost()).sum();
+            chartResult.setTotalPriceCost(totalCost);
+
+            Long priceCostNew = finalNiazsanjiReportCustomDTOS.stream().filter(a -> a.getStatus() < 20).mapToLong(o -> o.getPriceCost()).sum();
+            chartResult.setPriceCostNew(priceCostNew);
+
+            Long priceCostFinished = finalNiazsanjiReportCustomDTOS.stream().filter(a -> a.getStatus() >= 20).mapToLong(o -> o.getFinalizeCost()).sum();
+            chartResult.setPriceCostFinished(priceCostFinished);
+
+            List<Long> idsTotal = finalNiazsanjiReportCustomDTOS.stream().map(o -> o.getId()).collect(Collectors.toList());
+
+            Long totalHour = Long.valueOf(0);
+            totalHour = getEducationHours(finalNiazsanjiReportCustomDTOS,
+                idsTotal,
+                totalHour);
+            chartResult.setTotalPersonHour(totalHour);
+
+            List<Long> idsNew = finalNiazsanjiReportCustomDTOS.stream().filter(a -> a.getStatus() < 20).map(o -> o.getId()).collect(Collectors.toList());
+
+            Long educationalModuleTotalHourNew = Long.valueOf(0);
+            educationalModuleTotalHourNew = getEducationHours(finalNiazsanjiReportCustomDTOS,
+                idsNew,
+                educationalModuleTotalHourNew);
+            chartResult.setEducationalModuleTotalHourNew(educationalModuleTotalHourNew);
+
+            List<Long> idsFinished = finalNiazsanjiReportCustomDTOS.stream().filter(a -> a.getStatus() >= 20).map(o -> o.getId()).collect(Collectors.toList());
+            Long educationalModuleTotalHourFinished = Long.valueOf(0);
+            educationalModuleTotalHourFinished = getEducationHours(finalNiazsanjiReportCustomDTOS,
+                idsFinished,
+                educationalModuleTotalHourFinished);
+            chartResult.setEducationalModuleTotalHourFinished(educationalModuleTotalHourFinished);
+            chartResults.add(chartResult);
+        }
+        return chartResults;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ChartResultDetail> getChartResultDetail(Integer niazsanjiYear, Long rootOrgId) {
+        log.debug("Request to get FinalNiazsanjiReport by niazSanjiYear : {}", niazsanjiYear);
+        List<OrganizationChart> organizationCharts = organizationChartRepository.findAllWithoutCache();
+        List<OrganizationChart> groups = organizationCharts.stream().filter(a -> a.getParent() == null).collect(Collectors.toList());
+
+        if(rootOrgId > 0)
+        {
+            groups = groups.stream().filter(w -> w.getId() == rootOrgId.longValue()).collect(Collectors.toList());
+        }
+
+        List<IndustryChildModel> industryChildModels = new ArrayList<>();
+        for (OrganizationChart group : groups) {
+            List<OrganizationChart> industries = new ArrayList<>();
+            List<String> industriesCodes = new ArrayList<>();
+            for (OrganizationChart organizationChart : organizationCharts) {
+                if(organizationChart.getParent() != null && organizationChart.getParent().getId() == group.getId()) {
+                    if(!industriesCodes.stream().anyMatch(w -> w.equals(organizationChart.getCode())))
+                        industriesCodes.add(organizationChart.getCode());
+                    industries.add(organizationChart);
+                }
+            }
+
+            for (String industriesCode : industriesCodes) {
+                List<OrganizationChart> selectedIndustries = industries.stream().filter(w -> w.getCode() == industriesCode).collect(Collectors.toList());
+                List<Long> orgLongList = new ArrayList<>();
+                for (OrganizationChart selectedIndustry : selectedIndustries) {
+                    orgLongList.addAll(getAllOfChilderenIdsOfThisId(organizationCharts, selectedIndustry.getId(), true));
+                }
+                if(group.getCode() == industriesCode)
+                    orgLongList.add(group.getId());
+
+                industryChildModels.add(new IndustryChildModel(
+                    group.getId(), group.getTitle(), industriesCode, industriesCode, orgLongList
+                ));
+            }
+        }
+
+        List<ChartResultDetail> chartResults = new ArrayList<>();
+        for (IndustryChildModel industryChildModel : industryChildModels) {
+            //List<Long> orgIds = getAllOfChilderenIdsOfThisId(organizationCharts, groupId,true).stream().distinct().collect(Collectors.toList());
+            List<FinalNiazsanjiReportCustomDTO> finalNiazsanjiReportCustomDTOS = finalNiazsanjiReportRepository.findAllFromCache(industryChildModel.getIndustryOrganizationChartIds(), niazsanjiYear);
+            ChartResultDetail chartResult = new ChartResultDetail();
+            chartResult.setGroupId(industryChildModel.getGroupId());
+            chartResult.setIndustryTitle(industryChildModel.getIndustryTitle());
+            chartResult.setOrgChartIds(industryChildModel.getIndustryOrganizationChartIds());
 
             Long totalCost = finalNiazsanjiReportCustomDTOS.stream().mapToLong(o -> o.getPriceCost()).sum();
             chartResult.setTotalPriceCost(totalCost);

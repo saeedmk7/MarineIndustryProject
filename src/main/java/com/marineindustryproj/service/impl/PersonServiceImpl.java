@@ -133,6 +133,16 @@ public class PersonServiceImpl implements PersonService {
         }
         return personDTOS;
     }
+    @Override
+    public List<PersonDTO> findAllWithChart() {
+        List<PersonDTO> personDTOS = new ArrayList<>();
+
+        List<Person> people = personRepository.findAllByOrganizationChartNotNull();
+        for (Person person : people) {
+            personDTOS.add(personMapper.toDto(person));
+        }
+        return personDTOS;
+    }
 
     /**
      * Get all the Person with eager load of many-to-many relationships.

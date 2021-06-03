@@ -297,7 +297,8 @@ public class EffectivenessPhaseResource {
             }
         }
 
-        if(finalNiazsanjiReport.getCurrentEffectivenessPhaseLevel() <= finalNiazsanjiReport.getSelectedEffectivenessPhaseLevel())
+        if(finalNiazsanjiReport.getCurrentEffectivenessPhaseLevel() != null &&
+            finalNiazsanjiReport.getCurrentEffectivenessPhaseLevel() <= finalNiazsanjiReport.getSelectedEffectivenessPhaseLevel())
         {
             EffectivenessPhaseLevelCriteria effectivenessPhaseLevelCriteria = new EffectivenessPhaseLevelCriteria();
             IntegerFilter currentEffectivenessPhaseLevelFilter = new IntegerFilter();
@@ -310,28 +311,43 @@ public class EffectivenessPhaseResource {
             {
                 for (EffectivenessPhaseDTO effectivenessPhaseDTO : effectivenessPhaseDTOS) {
                     if(effectivenessPhaseDTO.getEffectivenessPhaseLevel().getEffectivenessLevel() == 1){
-                        EffectivenessPhaseLevelDTO effectivenessPhaseLevelDTO = effectivenessPhaseLevelDTOList.stream()
-                            .filter(w -> w.getEffectivenessLevel() == 1).findFirst().get();
-                        effectivenessPhaseDTO.setCurrentWeightedPoints(
-                            (effectivenessPhaseDTO.getFinalScore() * effectivenessPhaseLevelDTO.getWeight()) / 100);
+                        Optional<EffectivenessPhaseLevelDTO> effectivenessPhaseLevelDTOOptional = effectivenessPhaseLevelDTOList.stream()
+                            .filter(w -> w.getEffectivenessLevel() == 1).findFirst();
+                        if(effectivenessPhaseLevelDTOOptional.isPresent())
+                        {
+                            EffectivenessPhaseLevelDTO effectivenessPhaseLevelDTO = effectivenessPhaseLevelDTOOptional.get();
+                            effectivenessPhaseDTO.setCurrentWeightedPoints(
+                                (effectivenessPhaseDTO.getFinalScore() * effectivenessPhaseLevelDTO.getWeight()) / 100);
+                        }
                     }
                     if(effectivenessPhaseDTO.getEffectivenessPhaseLevel().getEffectivenessLevel() == 2){
-                        EffectivenessPhaseLevelDTO effectivenessPhaseLevelDTO = effectivenessPhaseLevelDTOList.stream()
-                            .filter(w -> w.getEffectivenessLevel() == 2).findFirst().get();
-                        effectivenessPhaseDTO.setCurrentWeightedPoints(
-                            (effectivenessPhaseDTO.getFinalScore() * effectivenessPhaseLevelDTO.getWeight()) / 100);
+                        Optional<EffectivenessPhaseLevelDTO> effectivenessPhaseLevelDTOOptional = effectivenessPhaseLevelDTOList.stream()
+                            .filter(w -> w.getEffectivenessLevel() == 2).findFirst();
+                        if(effectivenessPhaseLevelDTOOptional.isPresent()) {
+                            EffectivenessPhaseLevelDTO effectivenessPhaseLevelDTO = effectivenessPhaseLevelDTOOptional.get();
+                            effectivenessPhaseDTO.setCurrentWeightedPoints(
+                                (effectivenessPhaseDTO.getFinalScore() * effectivenessPhaseLevelDTO.getWeight()) / 100);
+                        }
                     }
                     if(effectivenessPhaseDTO.getEffectivenessPhaseLevel().getEffectivenessLevel() == 3){
-                        EffectivenessPhaseLevelDTO effectivenessPhaseLevelDTO = effectivenessPhaseLevelDTOList.stream()
-                            .filter(w -> w.getEffectivenessLevel() == 3).findFirst().get();
-                        effectivenessPhaseDTO.setCurrentWeightedPoints(
-                            (effectivenessPhaseDTO.getFinalScore() * effectivenessPhaseLevelDTO.getWeight()) / 100);
+                        Optional<EffectivenessPhaseLevelDTO> effectivenessPhaseLevelDTOOptional = effectivenessPhaseLevelDTOList.stream()
+                            .filter(w -> w.getEffectivenessLevel() == 3).findFirst();
+                        if(effectivenessPhaseLevelDTOOptional.isPresent()) {
+                            EffectivenessPhaseLevelDTO effectivenessPhaseLevelDTO = effectivenessPhaseLevelDTOOptional.get();
+                            effectivenessPhaseDTO.setCurrentWeightedPoints(
+                                (effectivenessPhaseDTO.getFinalScore() * effectivenessPhaseLevelDTO.getWeight()) / 100);
+                        }
                     }
                     if(effectivenessPhaseDTO.getEffectivenessPhaseLevel().getEffectivenessLevel() == 4){
-                        EffectivenessPhaseLevelDTO effectivenessPhaseLevelDTO = effectivenessPhaseLevelDTOList.stream()
-                            .filter(w -> w.getEffectivenessLevel() == 4).findFirst().get();
-                        effectivenessPhaseDTO.setCurrentWeightedPoints(
-                            (effectivenessPhaseDTO.getFinalScore() * effectivenessPhaseLevelDTO.getWeight()) / 100);
+                        Optional<EffectivenessPhaseLevelDTO> effectivenessPhaseLevelDTOOptional = effectivenessPhaseLevelDTOList.stream()
+                            .filter(w -> w.getEffectivenessLevel() == 4).findFirst();
+                        if(effectivenessPhaseLevelDTOOptional.isPresent())
+                        {
+                            EffectivenessPhaseLevelDTO effectivenessPhaseLevelDTO = effectivenessPhaseLevelDTOOptional.get();
+                            effectivenessPhaseDTO.setCurrentWeightedPoints(
+                                (effectivenessPhaseDTO.getFinalScore() * effectivenessPhaseLevelDTO.getWeight()) / 100);
+                        }
+
                     }
                 }
             }
