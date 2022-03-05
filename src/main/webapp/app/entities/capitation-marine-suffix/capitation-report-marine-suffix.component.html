@@ -148,8 +148,9 @@
             </thead>
             <tbody>
             <ng-container *ngFor="let capitationReportDetail of capitationReport.capitationReportDetails">
-                <tr style="background-color: #00c4e6" *ngFor="let capitationReportDetailItem of capitationReportDetail.capitationReportDetailItems">
-                    <td style="background-color: #8c6daf" [attr.rowspan]="capitationReportDetail.capitationReportDetailItems.length+1">{{capitationReportDetail.organizationChartTitle}}</td>
+                <tr style="background-color: #00c4e6" *ngFor="let capitationReportDetailItem of capitationReportDetail.capitationReportDetailItems; let i = index">
+                    <td style="background-color: #8c6daf" *ngIf="i === 0"
+                        [attr.rowspan]="capitationReportDetail.capitationReportDetailItems.length+1">{{capitationReportDetail.organizationChartTitle}}</td>
                     <td>
                         {{capitationReportDetailItem.industryTitle}}
                     </td>

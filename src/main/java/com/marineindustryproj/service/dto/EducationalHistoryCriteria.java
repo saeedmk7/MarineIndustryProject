@@ -77,6 +77,8 @@ public class EducationalHistoryCriteria implements Serializable {
 
     private BooleanFilter hasImportantMessage;
 
+    private LongFilter finalNiazsanjiReportId;
+
     private LongFilter courseTypeId;
 
     private LongFilter personId;
@@ -261,6 +263,14 @@ public class EducationalHistoryCriteria implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public LongFilter getFinalNiazsanjiReportId() {
+        return finalNiazsanjiReportId;
+    }
+
+    public void setFinalNiazsanjiReportId(LongFilter finalNiazsanjiReportId) {
+        this.finalNiazsanjiReportId = finalNiazsanjiReportId;
+    }
+
     public LongFilter getCourseTypeId() {
         return courseTypeId;
     }
@@ -341,6 +351,7 @@ public class EducationalHistoryCriteria implements Serializable {
             Objects.equals(changeStatusUserLogin, that.changeStatusUserLogin) &&
             Objects.equals(guid, that.guid) &&
             Objects.equals(hasImportantMessage, that.hasImportantMessage) &&
+            Objects.equals(finalNiazsanjiReportId, that.finalNiazsanjiReportId) &&
             Objects.equals(courseTypeId, that.courseTypeId) &&
             Objects.equals(personId, that.personId) &&
             Objects.equals(educationalModuleId, that.educationalModuleId) &&
@@ -374,6 +385,7 @@ public class EducationalHistoryCriteria implements Serializable {
         changeStatusUserLogin,
         guid,
         hasImportantMessage,
+        finalNiazsanjiReportId,
         courseTypeId,
         personId,
         educationalModuleId,
@@ -408,6 +420,7 @@ public class EducationalHistoryCriteria implements Serializable {
                 (changeStatusUserLogin != null ? "changeStatusUserLogin=" + changeStatusUserLogin + ", " : "") +
                 (guid != null ? "guid=" + guid + ", " : "") +
                 (hasImportantMessage != null ? "hasImportantMessage=" + hasImportantMessage + ", " : "") +
+                (finalNiazsanjiReportId != null ? "finalNiazsanjiReportId=" + finalNiazsanjiReportId + ", " : "") +
                 (courseTypeId != null ? "courseTypeId=" + courseTypeId + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
                 (educationalModuleId != null ? "educationalModuleId=" + educationalModuleId + ", " : "") +

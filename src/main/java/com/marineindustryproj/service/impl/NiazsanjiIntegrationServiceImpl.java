@@ -1,18 +1,20 @@
 package com.marineindustryproj.service.impl;
 
+import com.marineindustryproj.domain.FinalNiazsanjiReport;
 import com.marineindustryproj.domain.NiazsanjiIntegration;
 import com.marineindustryproj.domain.enumeration.NiazSanjiSource;
 import com.marineindustryproj.domain.enumeration.RequestStatus;
+import com.marineindustryproj.repository.FinalNiazsanjiReportRepository;
 import com.marineindustryproj.repository.NiazsanjiIntegrationRepository;
 import com.marineindustryproj.security.SecurityUtils;
 import com.marineindustryproj.service.FinalNiazsanjiReportPersonService;
-import com.marineindustryproj.service.FinalNiazsanjiReportService;
 import com.marineindustryproj.service.NiazsanjiIntegrationService;
 import com.marineindustryproj.service.PrioritizeRequestNiazsanjiService;
 import com.marineindustryproj.service.dto.FinalNiazsanjiReportDTO;
 import com.marineindustryproj.service.dto.FinalNiazsanjiReportPersonDTO;
 import com.marineindustryproj.service.dto.NiazsanjiIntegrationDTO;
 import com.marineindustryproj.service.dto.PrioritizeRequestNiazsanjiDTO;
+import com.marineindustryproj.service.mapper.FinalNiazsanjiReportMapper;
 import com.marineindustryproj.service.mapper.NiazsanjiIntegrationMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,18 +39,21 @@ public class NiazsanjiIntegrationServiceImpl implements NiazsanjiIntegrationServ
 
     private final PrioritizeRequestNiazsanjiService prioritizeRequestNiazsanjiService;
 
-    private final FinalNiazsanjiReportService finalNiazsanjiReportService;
+    private final FinalNiazsanjiReportMapper finalNiazsanjiReportMapper;
 
     private final FinalNiazsanjiReportPersonService finalNiazsanjiReportPersonService;
 
     private final NiazsanjiIntegrationMapper niazsanjiIntegrationMapper;
 
-    public NiazsanjiIntegrationServiceImpl(NiazsanjiIntegrationRepository niazsanjiIntegrationRepository, PrioritizeRequestNiazsanjiService prioritizeRequestNiazsanjiService, FinalNiazsanjiReportService finalNiazsanjiReportService, FinalNiazsanjiReportPersonService finalNiazsanjiReportPersonService, NiazsanjiIntegrationMapper niazsanjiIntegrationMapper) {
+    private final FinalNiazsanjiReportRepository finalNiazsanjiReportRepository;
+
+    public NiazsanjiIntegrationServiceImpl(NiazsanjiIntegrationRepository niazsanjiIntegrationRepository, PrioritizeRequestNiazsanjiService prioritizeRequestNiazsanjiService, FinalNiazsanjiReportMapper finalNiazsanjiReportMapper, FinalNiazsanjiReportPersonService finalNiazsanjiReportPersonService, NiazsanjiIntegrationMapper niazsanjiIntegrationMapper, FinalNiazsanjiReportRepository finalNiazsanjiReportRepository) {
         this.niazsanjiIntegrationRepository = niazsanjiIntegrationRepository;
         this.prioritizeRequestNiazsanjiService = prioritizeRequestNiazsanjiService;
-        this.finalNiazsanjiReportService = finalNiazsanjiReportService;
+        this.finalNiazsanjiReportMapper = finalNiazsanjiReportMapper;
         this.finalNiazsanjiReportPersonService = finalNiazsanjiReportPersonService;
         this.niazsanjiIntegrationMapper = niazsanjiIntegrationMapper;
+        this.finalNiazsanjiReportRepository = finalNiazsanjiReportRepository;
     }
 
     /**
@@ -108,11 +113,12 @@ public class NiazsanjiIntegrationServiceImpl implements NiazsanjiIntegrationServ
         finalNiazsanjiReport.setRestrictionDescription(prioritizeRequestNiazsanji.getRestrictionDescription());
         finalNiazsanjiReport.setRestrictions(prioritizeRequestNiazsanji.getRestrictions());
         finalNiazsanjiReport.setPriority(prioritizeRequestNiazsanji.getPriority());
-        finalNiazsanjiReport = finalNiazsanjiReportService.save(finalNiazsanjiReport);
+        FinalNiazsanjiReport finalNiaz = finalNiazsanjiReportMapper.toEntity(finalNiazsanjiReport);
+        finalNiazsanjiReportRepository.save(finalNiaz);
 
         //Person item = prioritizeRequestNiazsanji.getPerson();
         FinalNiazsanjiReportPersonDTO finalNiazsanjiReportPerson = new FinalNiazsanjiReportPersonDTO();
-        finalNiazsanjiReportPerson.setFinalNiazsanjiReportId(finalNiazsanjiReport.getId());
+        finalNiazsanjiReportPerson.setFinalNiazsanjiReportId(finalNiaz.getId());
         finalNiazsanjiReportPerson.setPersonId(prioritizeRequestNiazsanji.getPersonId());
         finalNiazsanjiReportPerson.setArchived(false);
         finalNiazsanjiReportPerson.setCreateDate(ZonedDateTime.now());

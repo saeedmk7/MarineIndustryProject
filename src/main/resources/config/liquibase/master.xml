@@ -273,6 +273,7 @@
     <include file="config/liquibase/changelog/20210310063541_added_entity_constraints_ApplicationProcess.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210310063543_added_entity_constraints_ApplicationProcessRunStep.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210513072922_added_entity_Capitation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210907121011_update_entity_educational_history.xml" relativeToChangelogFile="false"/>
 
 
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->

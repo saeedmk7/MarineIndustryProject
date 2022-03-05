@@ -1195,7 +1195,9 @@ public class FinalNiazsanjiReportServiceImpl implements FinalNiazsanjiReportServ
                             HomePagePersonEducationalModule homePagePersonEducationalModule = new HomePagePersonEducationalModule(finalNiazsanjiReportDTO,
                                 educationalModuleType,
                                 educationalModuleDTO.get());
-                            report.add(homePagePersonEducationalModule);
+                            if(!(homePagePersonEducationalModule.getFinalNiazsanjiReportId() != null &&
+                                homePagePersonEducationalModule.getFinalNiazsanjiReportId() == finalNiazsanjiReportDTO.getId()))
+                                report.add(homePagePersonEducationalModule);
                         }
                     }
                 }

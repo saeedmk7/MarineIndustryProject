@@ -74,6 +74,8 @@ public class EducationalHistoryDTO implements Serializable {
 
     private Boolean hasImportantMessage;
 
+    private Long finalNiazsanjiReportId;
+
     private Long courseTypeId;
 
     private String courseTypeTitle;
@@ -278,6 +280,14 @@ public class EducationalHistoryDTO implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public Long getFinalNiazsanjiReportId() {
+        return finalNiazsanjiReportId;
+    }
+
+    public void setFinalNiazsanjiReportId(Long finalNiazsanjiReportId) {
+        this.finalNiazsanjiReportId = finalNiazsanjiReportId;
+    }
+
     public Long getCourseTypeId() {
         return courseTypeId;
     }
@@ -397,6 +407,7 @@ public class EducationalHistoryDTO implements Serializable {
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
             ", guid='" + getGuid() + "'" +
             ", hasImportantMessage='" + isHasImportantMessage() + "'" +
+            ", finalNiazsanjiReportId=" + getFinalNiazsanjiReportId() +
             ", courseType=" + getCourseTypeId() +
             ", courseType='" + getCourseTypeTitle() + "'" +
             ", person=" + getPersonId() +

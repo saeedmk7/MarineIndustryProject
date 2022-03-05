@@ -30,7 +30,7 @@
             <th jhiSortBy="educationalCenter"><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalCenter">Educational Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dateOfStart"><span jhiTranslate="marineindustryprojApp.educationalHistory.dateOfStart">Date Of Start</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dateOfEnd"><span jhiTranslate="marineindustryprojApp.educationalHistory.dateOfEnd">Date Of End</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="educationalModuleTitle"><span jhiTranslate="marineindustryprojApp.educationalHistory.educationalModule">Educational Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="finalNiazsanjiReportId"><span jhiTranslate="marineindustryprojApp.educationalHistory.finalNiazsanjiReportId">Final Niazsanji ReportId</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th><span jhiTranslate="marineindustryprojApp.educationalHistory.status">Status</span></th>
 
             <th  width="300"></th>
@@ -49,6 +49,7 @@
                 <td>{{educationalHistory.educationalCenter}}</td>
                 <td>{{educationalHistory.dateOfStart}}</td>
                 <td>{{educationalHistory.dateOfEnd}}</td>
+                <td>{{educationalHistory.finalNiazsanjiReportId}}</td>
                 <!--<td>
                     <div *ngIf="educationalHistory.educationalModuleId">
                         <a [routerLink]="['../educational-module-marine-suffix', educationalHistory.educationalModuleId , 'view' ]" >{{educationalHistory.educationalModuleTitle}}</a>

@@ -111,6 +111,9 @@ public class EducationalHistory implements Serializable {
     @Column(name = "has_important_message")
     private Boolean hasImportantMessage;
 
+    @Column(name = "final_niazsanji_report_id")
+    private Long finalNiazsanjiReportId;
+
     @ManyToOne
     @JsonIgnoreProperties("educationalHistories")
     private CourseType courseType;
@@ -423,6 +426,19 @@ public class EducationalHistory implements Serializable {
         this.hasImportantMessage = hasImportantMessage;
     }
 
+    public Long getFinalNiazsanjiReportId() {
+        return finalNiazsanjiReportId;
+    }
+
+    public EducationalHistory finalNiazsanjiReportId(Long finalNiazsanjiReportId) {
+        this.finalNiazsanjiReportId = finalNiazsanjiReportId;
+        return this;
+    }
+
+    public void setFinalNiazsanjiReportId(Long finalNiazsanjiReportId) {
+        this.finalNiazsanjiReportId = finalNiazsanjiReportId;
+    }
+
     public CourseType getCourseType() {
         return courseType;
     }
@@ -522,6 +538,7 @@ public class EducationalHistory implements Serializable {
             ", changeStatusUserLogin='" + getChangeStatusUserLogin() + "'" +
             ", guid='" + getGuid() + "'" +
             ", hasImportantMessage='" + isHasImportantMessage() + "'" +
+            ", finalNiazsanjiReportId=" + getFinalNiazsanjiReportId() +
             "}";
     }
 }

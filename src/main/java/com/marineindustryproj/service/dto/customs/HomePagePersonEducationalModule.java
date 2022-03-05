@@ -9,6 +9,7 @@ public class HomePagePersonEducationalModule {
 
     public HomePagePersonEducationalModule(FinalNiazsanjiReportDTO finalNiazsanjiReportDTO,
                                            EducationalModuleType educationalModuleType, EducationalModuleDTO educationalModuleDTO) {
+        this.finalNiazsanjiReportId = finalNiazsanjiReportDTO.getId();
         this.id = educationalModuleDTO.getId();
         this.title = educationalModuleDTO.getTitle();
         this.code = educationalModuleDTO.getCode();
@@ -72,13 +73,14 @@ public class HomePagePersonEducationalModule {
         this.status = status;
     }
     public HomePagePersonEducationalModule(EducationalHistoryDTO educationalHistoryDTO, EducationalModuleDTO educationalModuleDTO, Integer status) {
+        this.finalNiazsanjiReportId = educationalHistoryDTO.getFinalNiazsanjiReportId();
         this.id = educationalHistoryDTO.getId();
         this.title = educationalHistoryDTO.getEducationalModuleName();
         this.learningTimePractical = educationalHistoryDTO.getLearningTimePractical();
         this.learningTimeTheorical = educationalHistoryDTO.getLearningTimeTheorical();
         this.courseTypeId = educationalHistoryDTO.getCourseTypeId();
         this.courseType = educationalHistoryDTO.getCourseTypeTitle();
-        this.code = educationalHistoryDTO.getEducationalModuleId().toString();
+        this.code = educationalHistoryDTO.getEducationalModuleCode();
         this.skillableLevelOfSkillId = educationalModuleDTO.getSkillableLevelOfSkillId();
         this.skillableLevelOfSkillTitle = educationalModuleDTO.getSkillableLevelOfSkillTitle();
         /*this.organizationId = educationalModuleDTO.getOrganizationId();
@@ -120,6 +122,8 @@ public class HomePagePersonEducationalModule {
     private Long educationalHistoryId;
 
     private Long courseTypeId;
+
+    private Long finalNiazsanjiReportId;
 
     public Long getId() {
         return id;
@@ -255,5 +259,13 @@ public class HomePagePersonEducationalModule {
 
     public void setCourseTypeId(Long courseTypeId) {
         this.courseTypeId = courseTypeId;
+    }
+
+    public Long getFinalNiazsanjiReportId() {
+        return finalNiazsanjiReportId;
+    }
+
+    public void setFinalNiazsanjiReportId(Long finalNiazsanjiReportId) {
+        this.finalNiazsanjiReportId = finalNiazsanjiReportId;
     }
 }

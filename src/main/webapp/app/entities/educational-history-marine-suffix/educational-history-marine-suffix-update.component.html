@@ -187,7 +187,15 @@
                         </small>
                     </div>
                 </div>
-
+                <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">شناسه یکتای نیازسنجی</div></div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.finalNiazsanjiReportId" for="field_finalNiazsanjiReportId">finalNiazsanjiReportId</label>
+                    <input type="number"
+                        [(ngModel)]="educationalHistory.finalNiazsanjiReportId"
+                        name="finalNiazsanjiReportId" id="field_finalNiazsanjiReportId" [required]="false"
+                        class="form-control" />
+                </div>
+                <p class="alert alert-info">برای ثبت و خاتمه دوره هایی که قبلا نیازسنجی و اجرا شده، می بایست شناسه یکتای آن دوره را کپی و در این باکس paste نمائید.</p>
                 <div class="dropdown-divider pt-3 mt-4"><div class="divider-title">آپلود گواهینامه</div></div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="marineindustryprojApp.educationalHistory.fileDoc" for="file_fileDoc">File Doc</label>

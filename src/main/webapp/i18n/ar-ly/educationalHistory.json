@@ -35,6 +35,7 @@
             "requestStatus": "Request Status",
             "changeStatusUserLogin": "Change Status User Login",
             "person": "Person",
+            "finalNiazsanjiReportId": "Final Niazsanji Report Id",
             "organizationChart": "Organization Chart"
         }
     }

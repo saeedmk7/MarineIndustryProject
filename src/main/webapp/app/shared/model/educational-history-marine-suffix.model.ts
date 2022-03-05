@@ -28,6 +28,7 @@ export interface IEducationalHistoryMarineSuffix {
     personName?: string;
     guid?: string;
     hasImportantMessage?: boolean;
+    finalNiazsanjiReportId?: number;
     personFamily?: string;
     personId?: number;
     courseTypeTitle?: string;
@@ -66,6 +67,7 @@ export class EducationalHistoryMarineSuffix implements IEducationalHistoryMarine
         public personFullName?: string,
         public personName?: string,
         public hasImportantMessage?: boolean,
+        public finalNiazsanjiReportId?: number,
         public guid?: string,
         public personFamily?: string,
         public personId?: number,

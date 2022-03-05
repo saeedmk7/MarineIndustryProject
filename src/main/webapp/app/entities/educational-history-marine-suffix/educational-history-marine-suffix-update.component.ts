@@ -37,7 +37,11 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
     currentUserFullName: string;
     currentAccount: any;
     currentPerson: IPersonMarineSuffix;
-    isAdmin: boolean = false;
+    isAdmin: boolean;
+    isModirKolAmozesh: boolean = false;
+    isKarshenasArshadAmozeshSazman: boolean = false;
+    isModirAmozesh: boolean = false;
+    isSuperUsers: boolean = false;
 
     progress: { percentage: number } = { percentage: 0 };
     file: File;
@@ -82,6 +86,7 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
         });
         this.principal.identity().then(account => {
             this.currentAccount = account;
+            this.setRoles(account);
             if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
 
             this.personService.find(this.currentAccount.personId).subscribe(
@@ -111,6 +116,15 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+    setRoles(account: any) {
+        if (account.authorities.find(a => a == 'ROLE_ADMIN') !== undefined) this.isAdmin = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_AMOZESH') !== undefined) this.isModirAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_MODIR_KOL_AMOZESH') !== undefined) this.isModirKolAmozesh = true;
+        if (account.authorities.find(a => a == 'ROLE_KARSHENAS_ARSHAD_AMOZESH_SAZMAN') !== undefined)
+            this.isKarshenasArshadAmozeshSazman = true;
+
+        if (this.isKarshenasArshadAmozeshSazman || this.isModirKolAmozesh || this.isAdmin) this.isSuperUsers = true;
+    }
     change(i) {
         this.router.navigateByUrl(i);
     }
@@ -131,32 +145,44 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
         }
     }
     handlePeopleList() {
-        const rootId = this.treeUtilities.getRootId(this.organizationCharts, this.currentPerson.organizationChartId);
-        const orgIds = this.treeUtilities
-            .getAllOfChilderenIdsOfThisId(this.organizationCharts, rootId)
-            .filter(this.treeUtilities.onlyUnique);
-
-        let criteria = [
-            {
-                key: 'organizationChartId.in',
-                value: orgIds
+        if (this.isSuperUsers) {
+            if (this.personService.people) this.people = this.personService.people;
+            else {
+                this.personService.query().subscribe(
+                    (res: HttpResponse<IPersonMarineSuffix[]>) => {
+                        this.people = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
             }
-        ];
+        } else {
+            const rootId = this.treeUtilities.getRootId(this.organizationCharts, this.currentPerson.organizationChartId);
+            const orgIds = this.treeUtilities
+                .getAllOfChilderenIdsOfThisId(this.organizationCharts, rootId)
+                .filter(this.treeUtilities.onlyUnique);
 
-        this.personService
-            .query({
-                page: 0,
-                size: 20000,
-                criteria,
-                sort: ['id', 'asc']
-            })
-            .subscribe(
-                (res: HttpResponse<IPersonMarineSuffix[]>) => {
-                    this.people = res.body;
-                    //this.fullPeople = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+            let criteria = [
+                {
+                    key: 'organizationChartId.in',
+                    value: orgIds
+                }
+            ];
+
+            this.personService
+                .query({
+                    page: 0,
+                    size: 20000,
+                    criteria,
+                    sort: ['id', 'asc']
+                })
+                .subscribe(
+                    (res: HttpResponse<IPersonMarineSuffix[]>) => {
+                        this.people = res.body;
+                        //this.fullPeople = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
     }
     onEducationalModuleChange($event: IEducationalModuleMarineSuffix) {
         this.educationalHistory.learningTimeTheorical = $event.learningTimeTheorical;
@@ -272,6 +298,7 @@ export class EducationalHistoryMarineSuffixUpdateComponent implements OnInit {
     }
 
     save() {
+        debugger;
         this.isSaving = true;
         this.currentUserFullName = this.currentPerson.fullName;
         this.message = '';

@@ -62,6 +62,7 @@
             "courseTypeId": "نوع دوره",
             "courseTypeTitle": "نوع دوره",
             "educationalModule": "پودمان آموزشی",
+            "finalNiazsanjiReportId": "شناسه یکتای نیازسنجی",
             "educationalModuleEditTitle": "انتخاب عنوان پودمان آموزشی از فهرست کلیه پودمان ها",
             "educationalModuleTitle": "عنوان پودمان آموزشی انتخاب شده از فهرست کلیه پودمان ها"
         }
