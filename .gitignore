@@ -16,6 +16,9 @@ soldierTrainingReportUploads/*
 upload-dir/*
 uploads/*
 
+*.rar
+*.zip
+
 
 ######################
 # Node
