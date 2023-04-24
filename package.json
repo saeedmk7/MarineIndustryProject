@@ -57,7 +57,7 @@
     "rxjs-compat": "^6.3.3",
     "swagger-ui": "2.2.10",
     "tslib": "1.9.3",
-    "xlsx": "^0.14.0",
+    "xlsx": "^0.18.5",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
@@ -118,7 +118,7 @@
     "webpack-visualizer-plugin": "0.1.11",
     "workbox-webpack-plugin": "3.2.0",
     "write-file-webpack-plugin": "4.2.0",
-    "xlsx": "^0.14.0",
+    "xlsx": "^0.18.5",
     "xml2js": "0.4.19"
   },
   "engines": {
